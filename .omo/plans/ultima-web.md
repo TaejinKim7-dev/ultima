@@ -152,7 +152,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 ## Todos
 > Implementation + Test = ONE todo. Never separate.
 <!-- APPEND TASK BATCHES BELOW THIS LINE WITH edit/apply_patch - never rewrite the headers above. -->
-- [ ] 1. Freeze source, create root web project, and add test harness
+- [x] 1. Freeze source, create root web project, and add test harness
   What to do / Must NOT do: initialize the root repository without deleting `engine/.git`; export pinned `engine/`, `.omo/research/boron/`, and `engine/src/faun/` into `vendor/xu4`, `vendor/boron`, and `vendor/faun`; add Node 22/Vite/TypeScript strict/Vitest/Playwright/CMake wrapper scripts; add `.gitignore` for research checkouts, build output, tool caches, and game data. Must not copy `ultima4.zip`, extracted original files, or temp research artifacts into Git or public artifacts.
   Parallelization: Wave 1 | Blocked by: none | Blocks: 2-20
   References (executor has NO interview context - be exhaustive): `.omo/drafts/ultima-web-source-analysis.md`; `handoff.md`; `engine/` at `6a7ee3d0079cfdc1c8fb9ba7a3c710a957155a71`; Boron at `84e7a81f68aa7588419f7b164e94e096a1c3fa07`; Faun at `e175dbfabab468008906e724e9d3872097bdb560`; original ZIP hash `94aa748cfa1d0e7aa2e518abebb994f3c18acf7edb78c3bd37cd0a4404e6ba74`.

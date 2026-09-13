@@ -1,0 +1,36 @@
+{
+  "components": [
+    {
+      "name": "xu4",
+      "path": "vendor/xu4",
+      "upstream": "https://github.com/xu4-engine/u4.git",
+      "revision": "6a7ee3d0079cfdc1c8fb9ba7a3c710a957155a71",
+      "fileCount": 407,
+      "treeSha256": "6c2d75bf0a39c32e790420caec050aac9211d7dba09daa22a2bebeafeaa2b09a"
+    },
+    {
+      "name": "faun",
+      "path": "vendor/faun",
+      "upstream": "https://codeberg.org/wickedsmoke/faun.git",
+      "revision": "e175dbfabab468008906e724e9d3872097bdb560",
+      "fileCount": 67,
+      "treeSha256": "8056d2c9331ca6eff4a9bca2f9a3254a2ed8b9a6d10be4f52279ef3c4201e2d9"
+    },
+    {
+      "name": "glv",
+      "path": "vendor/glv",
+      "upstream": "https://git.code.sf.net/p/outguard/glv",
+      "revision": "20ab75d39ae1ab27c55f1eea09c83b3985738110",
+      "fileCount": 40,
+      "treeSha256": "f7459e908ab009bccd7f02425f7ea5ef4ae71de2123d85bff153583f0395d6cc"
+    },
+    {
+      "name": "boron",
+      "path": "vendor/boron",
+      "upstream": "https://git.code.sf.net/p/urlan/boron/code",
+      "revision": "84e7a81f68aa7588419f7b164e94e096a1c3fa07",
+      "fileCount": 224,
+      "treeSha256": "fea18a164004a84384834c6e3ad551662e64ae61fad706f298ba9e3005134a60"
+    }
+  ]
+}

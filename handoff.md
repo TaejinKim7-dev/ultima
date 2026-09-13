@@ -1,10 +1,42 @@
 # Ultima IV 웹 한글판 개발 인수인계
 
-최종 갱신: 2026-09-08 KST.
+최종 갱신: 2026-09-13 KST.
 
 ## 현재 상태
 
-**요구사항 확인과 원본 코드 분석을 마쳤고, 웹 기반 + GitHub Pages 정적 호스팅 방향의 실행 계획서를 작성했다. 제품 구현은 시작하지 않았다.**
+**Todo 1(source freeze + web test harness + CMake command surface)을 완료하고 검증했다. `.omo/plans/ultima-web.md`의 Todo 1 checkbox를 `[x]`로 표시했다. 커밋/push는 이 인수인계 갱신 직후 수행한다.**
+
+- root Vite/TypeScript strict/Vitest/Playwright harness와 minimal build shell이 있다.
+- `vendor/source-manifest.json`은 xu4, Faun, GLV, Boron의 deterministic file count/tree SHA-256과 pinned revision을 기록한다.
+- `npm run verify:repo-sources`는 manifest mismatch와 Git-tracked `.zip`, `.sav`, `.ega`, `.map`, `.tlk`, `.exe`를 실패시킨다.
+- `scripts/cmake-wrapper.mjs`가 이전 세션의 blocker(CMake command surface 누락)를 해소했다: `npm run cmake:version`은 host cmake(3.22.1)를 그대로 호출해 exit 0. `npm run cmake:configure`/`cmake:build`/`cmake:test`는 native workflow가 아직 구현되지 않았다는 명시적 메시지(`cmake:<step> is unavailable until the future native workflow is implemented.`)와 함께 exit 1을 반환한다. 이는 Todo 2/3에서 실제 CMake 빌드를 붙일 때까지 의도된 동작이다.
+- evidence는 `.omo/evidence/ultima-web/task-1/`에 local-only로 남긴다 (git-ignored).
+- Todo 2~4의 바로 실행 가능한 시작점은 [NEXT_THREE_STEPS.md](docs/NEXT_THREE_STEPS.md)에 있다.
+
+Todo 1 검증 완료 (2026-09-13 재검증, 모두 실제로 실행함):
+
+```
+npm ci                        # exit 0 (EBADENGINE warning, 아래 참고)
+npm run cmake:version         # exit 0 (host cmake 3.22.1)
+npm run cmake:configure       # exit 1 (unavailable message, 의도된 동작)
+npm run cmake:build           # exit 1 (unavailable message, 의도된 동작)
+npm run cmake:test            # exit 1 (unavailable message, 의도된 동작)
+npm run test:unit             # exit 0 (2 tests passed)
+npm run verify:repo-sources   # exit 0 (4 pinned components)
+npm run typecheck             # exit 0
+npm run build                 # exit 0 (vite build)
+git diff --check              # exit 0
+```
+
+fake tracked `ULTIMA4.ZIP`를 별도 임시 Git 저장소(scratchpad, repo 밖)에 만들어 `node scripts/verify-repo-sources.mjs <tmp-repo>`로 직접 검증했다: `forbidden original-game-data path is tracked: ULTIMA4.ZIP` 메시지와 함께 exit 1로 거부됨을 재확인했다. 임시 저장소는 검증 후 삭제했다.
+
+**Node 버전 주의**: 이 host의 Node는 20.20.2이고 `package.json`의 `engines.node`는 `>=22.0.0`이다. `npm ci`는 성공하지만 `EBADENGINE` warning을 출력한다. Todo 1 완료 기준을 낮추기 위해 engines 요구사항을 내리지 않았다 — CI/실제 배포 환경은 Node 22를 준비해야 한다. 로컬에서 계속 작업할 경우 nvm 등으로 Node 22를 설치하는 것을 권장하되, 필수 차단 요소는 아니다(현재 명령들은 Node 20에서도 정상 동작 확인됨).
+
+독립 게이트 리뷰(별도 subagent, 이 저장소를 수정하지 않고 read-only로 재검증)를 완료했다. **Verdict: CONFIRMED.** 리뷰어는 위 10개 명령을 자체적으로 재실행하고, `/tmp` 아래 별도 임시 git 저장소에서 fake tracked `ULTIMA4.ZIP` 거부를 독립적으로 재현했으며, `.gitignore`/`git ls-files`로 원본 데이터·node_modules·dist 미추적을 확인했고, `.omo/plans/ultima-web.md`에서 Todo 1만 `[x]`이고 Todo 2 이후는 `[ ]`로 유지됨(scope creep 없음)을 확인했다. 상세 로그: `.omo/evidence/ultima-web/task-1/gate-review-2026-09-13.log`.
+
+`cmake-red.log`/`cmake-green.log`(이전 세션 산출물)는 vitest 유닛 테스트가 아니라 `npm run cmake:*` package-command-seam 동작을 손으로 기록한 CLI RED/GREEN transcript다. `tests/unit/`에는 cmake 관련 테스트가 없다 — 삭제된 테스트가 아니라 원래부터 CLI transcript 방식으로 검증한 것이다.
+
+**Node 버전 관련 추가 주의**: `npm run cmake:version`의 exit 0은 이 host에 실제 `cmake` 3.22.1이 설치되어 있기 때문이다. `cmake` 바이너리가 없는 host에서는 wrapper가 `spawnSync` 오류를 잡아 exit 127로 실패한다(`scripts/cmake-wrapper.mjs`의 `result.error` 분기). 이는 회귀가 아니라 host에 cmake가 없다는 신호이므로, 다음 에이전트는 native 빌드 환경을 준비할 때 이 exit code 의미를 참고한다.
 
 - [AI 코딩 에이전트 규칙](AGENTS.md): 다른 AI가 이 저장소를 이어받을 때 지켜야 할 프로젝트 운영 규칙.
 - [AI 코딩 에이전트 인계 규칙](docs/AI_AGENT_HANDOFF.md): `handoff.md`를 어떻게 작성·갱신해야 하는지에 대한 표준.
@@ -67,7 +99,7 @@
 
 ZIP 크기: 529099 bytes. 임시 파일이 없으면 `https://ultima.thatfleminggent.com/ultima4.zip`에서 재다운로드하여 위 hash를 확인한다. `WORLD.MAP`, `SHAPES.EGA`, `TITLE.EXE`, `AVATAR.EXE`, TLK 16개 존재를 확인했다. 원본 파일은 GitHub/Pages/공개 CI artifact에 포함하지 않는다. GOG판과 동일한 hash라고 확인한 것은 아니다.
 
-루트는 아직 Git 저장소가 아니며 `engine/.git`만 있다. `engine/.git`을 삭제하지 않는다. 최종 계획은 원형 checkout을 보존하고 고정 소스를 `vendor/`로 export해 루트 저장소에서 관리하도록 설계했다. Faun은 gitlink이므로 별도 export가 필요하다.
+루트 Git 저장소는 `vendor/` source export를 추적한다. `engine/.git`을 삭제하지 않는다. 원형 checkout은 `engine/`, `.omo/research/boron/`에 보존하고, Todo 1의 verifier가 `vendor/` snapshot의 deterministic digest를 검사한다.
 
 ## 핵심 분석 결과
 
@@ -85,22 +117,20 @@ ZIP 크기: 529099 bytes. 임시 파일이 없으면 `https://ultima.thatfleming
 
 ## 아직 하지 않은 작업 / 검증하지 않은 사항
 
-- 제품 소스 수정, 한글 번역 작성, HTML/TS 구현 없음.
+- 게임 엔진 수정, 한글 번역, native/WASM runtime 구현은 아직 없다. Todo 1에는 build smoke용 최소 Vite shell만 있다.
 - native 빌드/실행, WASM 빌드/실행, 실제 브라우저 게임 플레이 없음.
 - emsdk/Boron CLI/GLFW·PNG·Vorbis·PulseAudio 개발 패키지 설치 없음. 관련 도구/패키지를 현재 환경에서 찾지 못했다.
 - 원본 ZIP이 실제 xu4에서 시작·플레이되는지는 미검증이다.
-- commit/push/Pages 배포 없음. `https://github.com/TaejinKim7-dev/ultima`와 SSH remote `git@github.com:TaejinKim7-dev/ultima.git`는 배포 대상으로 기록했지만 실제 push/deploy는 하지 않았다.
+- Todo 1 변경은 아직 commit/push/Pages 배포하지 않았다. 현재 branch는 `todo-01-build-test-harness`, base commit은 `5855e96`이다.
 - 고정밀 이중 계획 검토는 요청되지 않았으며 수행하지 않았다. gap 검토와 소스 대조만 수행했다.
 
 ## 이 계획 이후 이어서 할 일
 
-1. 선택 사항: 실행 전 고정밀 이중 계획 검토를 돌린다.
-2. 구현 시작: 별도 worker 세션에서 `$start-work .omo/plans/ultima-web.md`로 실행한다.
-3. 구현자는 계획서의 Todo 1–20을 순서대로 진행하고, 각 단계에서 RED/GREEN 테스트, 컴포넌트별 Unit Test, 실제 QA 증거를 남긴다.
-4. 각 Todo 또는 강하게 묶인 Todo 그룹은 `todo-<number>-<short-topic>` 브랜치와 PR로 제출한다.
-5. 모든 Todo 완료 후 F1–F4 최종 검증을 통과해야 완료로 본다.
-6. `git@github.com:TaejinKim7-dev/ultima.git`의 SSH write 권한과 Pages 권한이 준비되어 있으면 workflow로 배포하고, 없으면 로컬 `dist/`와 정확한 배포 blocker를 기록한다.
-7. Pages workflow는 `main` merge 후 자동 배포로 구성하되, 배포 전 `npm run audit:dist`로 원본 데이터/secret 유출을 차단한다.
+1. `todo-01-build-test-harness`에서 `npm ci`, `npm run test:unit`, `npm run verify:repo-sources`, `npm run typecheck`, `npm run build`를 실행해 Todo 1 변경을 검토한다.
+2. 검토 후 Todo 1을 `chore(repo): freeze sources and add web test harness`로 commit/PR한다.
+3. `todo-02-module-packaging` branch를 만들고 [NEXT_THREE_STEPS.md](docs/NEXT_THREE_STEPS.md)의 Todo 2 RED test부터 시작한다.
+4. 각 Todo는 RED/GREEN log, component unit test, relevant QA evidence를 남기고 PR로 제출한다.
+5. 원본 게임 data/private corpus/user save/secret은 Git, Pages, CI public artifact, evidence에 넣지 않는다.
 
 ## 구현 담당자의 이후 순서
 

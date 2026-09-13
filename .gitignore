@@ -4,6 +4,8 @@ engine/
 .codegraph
 .local/
 .cache/
+.emsdk/
+.emscripten_cache/
 .tmp/
 tmp/
 
