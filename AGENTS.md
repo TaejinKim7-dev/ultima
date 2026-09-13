@@ -29,8 +29,19 @@
 
 - `main`은 안정 브랜치로 유지한다.
 - 구현은 `todo-<number>-<short-topic>` 형식의 feature branch에서 진행한다.
-- PR에는 Todo 번호, RED/GREEN 로그, Unit Test 결과, QA evidence를 남긴다.
-- PR merge 후 GitHub Pages 배포가 가능해야 한다.
+- 이 프로젝트는 1인 개발이므로 PR 리뷰 절차는 생략한다. GitHub PR을 만들지 않고 feature branch를 `main`에 직접 merge한다.
+- **`main`에 merge(또는 push)하기 전 반드시 로컬에서 아래 검증을 모두 실행하고 전부 성공(exit 0, 또는 해당 스크립트가 의도적으로 실패를 요구하는 경우 그 명시된 실패)해야 한다. 하나라도 통과하지 못하면 merge를 금지한다.**
+  ```bash
+  npm ci
+  npm run test:unit
+  npm run verify:repo-sources
+  npm run typecheck
+  npm run build
+  git diff --check
+  ```
+  - Todo별로 추가된 명령(예: `npm run cmake:*`, `npm run deps:host`, `npm run test:native` 등)이 있으면 그 Todo의 검증 명령도 동일하게 실행한다.
+- 로컬 검증 결과(실행한 명령과 exit code)는 merge 전에 `handoff.md`에 기록한다.
+- merge 후 GitHub Pages 배포가 가능해야 한다.
 
 ## 인계 규칙
 
