@@ -1,0 +1,32 @@
+{
+  "name": "ultima-web",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "test:unit": "vitest run --passWithNoTests=false",
+    "test:e2e": "playwright test",
+    "test:native": "node scripts/future-task-command.mjs test:native 3",
+    "cmake:version": "node scripts/cmake-wrapper.mjs version",
+    "cmake:configure": "node scripts/cmake-wrapper.mjs configure",
+    "cmake:build": "node scripts/cmake-wrapper.mjs build",
+    "cmake:test": "node scripts/cmake-wrapper.mjs test",
+    "typecheck": "tsc --noEmit",
+    "verify:repo-sources": "node scripts/verify-repo-sources.mjs",
+    "deps:host": "node scripts/future-task-command.mjs deps:host 2",
+    "build:modules": "node scripts/future-task-command.mjs build:modules 2"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.52.0",
+    "@types/node": "22.15.3",
+    "typescript": "5.8.3",
+    "vite": "6.3.4",
+    "vitest": "3.1.3"
+  }
+}
