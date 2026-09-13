@@ -1,0 +1,105 @@
+#!/usr/bin/bash
+# Container build script for Faun Linux & Windows SDKs.
+
+TIME=$(date +%H%M%S)
+SCRIPT=build-$TIME
+ID=${SCRIPT}
+HDIR=/tmp
+CDIR=/tmp
+VERS=0.2.3
+ARC_DIR=/tmp/faun_sdk-${VERS}
+
+clean_dir () {
+    if [ -d "$1" ]; then rm -rf "$1"/*; else mkdir -p "$1"; fi
+}
+
+container_build () {
+    if [ ! -s project.tar.gz ]; then
+        copr -a
+    fi
+
+    clean_dir ${ARC_DIR}
+    mkdir -p ${ARC_DIR}/include ${ARC_DIR}/lib
+
+    podman run -d -it --name=$ID $1 /bin/bash || exit
+    podman cp project.tar.gz $ID:$CDIR
+    podman cp $HDIR/${SCRIPT} $ID:$CDIR/${SCRIPT}
+    podman exec -it -u build $ID /bin/bash $CDIR/${SCRIPT}
+}
+
+case $1 in
+windows)
+    echo '
+  mkdir faun
+  cd faun
+  tar xf /tmp/project.tar.gz
+  copr -t mingw static:true flac:2
+' >$HDIR/${SCRIPT}
+
+    #LIB_NAME=libfaun.dll
+    #ARC_NAME=faun-x86_64-w64-mingw32-dynamic-${VERS}.zip
+    LIB_NAME=libfaun.a
+    ARC_NAME=faun-x86_64-w64-mingw32-static-${VERS}.zip
+    DLL_BIN=/usr/x86_64-w64-mingw32/sys-root/mingw/bin
+
+    container_build xu4/f41-mingw
+    podman cp $ID:/home/build/faun/${LIB_NAME} ${ARC_DIR}/lib || exit
+    #podman cp $ID:/home/build/faun/faun_test.exe ${ARC_DIR}
+
+    # Build archive.
+    if [ "$2" != "-b" ]; then
+        mkdir -p ${ARC_DIR}/bin
+        podman cp $ID:${DLL_BIN}/libogg-0.dll ${ARC_DIR}/bin
+        podman cp $ID:${DLL_BIN}/libvorbis-0.dll ${ARC_DIR}/bin
+        podman cp $ID:${DLL_BIN}/libvorbisfile-3.dll ${ARC_DIR}/bin
+        cp faun.h ${ARC_DIR}/include
+        cd ${ARC_DIR}; zip -r ../${ARC_NAME} *
+    fi
+    ;;
+
+linux)
+    echo '
+  mkdir faun
+  cd faun
+  tar xf /tmp/project.tar.gz
+  copr static:true flac:2
+' >$HDIR/${SCRIPT}
+
+    LIB_NAME=libfaun.a
+    ARC_NAME=faun-x86_64-static-${VERS}.tar.bz2
+
+    container_build xu4/f33-gcc
+    podman cp $ID:/home/build/faun/${LIB_NAME} ${ARC_DIR}/lib || exit
+
+    # Build archive.
+    if [ "$2" != "-b" ]; then
+        cp faun.h ${ARC_DIR}/include
+        tar cjf /tmp/${ARC_NAME} -C ${ARC_DIR%/*} ${ARC_DIR##*/}
+    fi
+    ;;
+
+deb)
+    BTOP=/home/build/debbuild
+    SARC=v${VERS}.tar.gz
+    if [ ! -s $HDIR/$SARC ]; then
+        curl -sL https://codeberg.org/wickedsmoke/faun/archive/$SARC -o $HDIR/$SARC
+    fi
+    debspec.b dist/faun.spec >$HDIR/faun.spec
+    podman run -d -it --name=$ID dev/debian12 /bin/bash || exit
+    # podman exec -u root build-122858 apt -y install libflac-dev
+    podman cp $HDIR/faun.spec $ID:$CDIR
+    podman cp $HDIR/v${VERS}.tar.gz $ID:$BTOP/SOURCES
+    podman exec -it $ID debbuild -ba $CDIR/faun.spec
+    podman cp $ID:$BTOP/DEBS/amd64/faun_${VERS}-0debian12_amd64.deb /tmp || exit
+    podman cp $ID:$BTOP/DEBS/amd64/faun-dev_${VERS}-0debian12_amd64.deb /tmp
+    ;;
+
+*)
+    echo "Usage: $0 {deb|linux|windows} [-b]"
+    echo -e '\nOptions:'
+    echo '  -b    Build binary only; do not create archive.'
+    exit 1
+esac
+
+echo "$SCRIPT done!"
+podman stop $ID

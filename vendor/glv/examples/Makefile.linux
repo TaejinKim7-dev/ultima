@@ -1,0 +1,51 @@
+#----------------------------------------------------------------------------
+# GNU Makefile for GLV examples
+#----------------------------------------------------------------------------
+
+
+#------ Compiler and tools
+
+CC		= gcc -Wdeclaration-after-statement
+LINK	= gcc
+
+
+#------ Target settings
+
+CFLAGS	= -pipe -Wall -W -g -DDEBUG -I../x11
+LFLAGS	= -Wl,-z,origin,-rpath,'$$ORIGIN/../x11'
+LIBS	= -L../x11 -lglv -lGL
+
+DOC_OBJECTS			= obj/doc.o
+WINDOW_OBJECTS		= obj/window.o
+COMPLETE_OBJECTS	= obj/complete.o
+ES_PROFILE_OBJECTS	= obj/es_profile.o
+
+
+#------ Build rules
+
+all: doc window complete es_profile
+
+doc: $(DOC_OBJECTS)
+	$(LINK) -o $@ $(LFLAGS) $(DOC_OBJECTS) $(LIBS)
+
+window: $(WINDOW_OBJECTS)
+	$(LINK) -o $@ $(LFLAGS) $(WINDOW_OBJECTS) $(LIBS)
+
+complete: $(COMPLETE_OBJECTS)
+	$(LINK) -o $@ $(LFLAGS) $(COMPLETE_OBJECTS) $(LIBS)
+
+es_profile: $(ES_PROFILE_OBJECTS)
+	$(LINK) -o $@ $(LFLAGS) $(ES_PROFILE_OBJECTS) $(LIBS)
+
+.PHONY: clean
+clean:
+	-rm -f doc $(DOC_OBJECTS)
+	-rm -f window $(WINDOW_OBJECTS)
+	-rm -f complete $(COMPLETE_OBJECTS)
+	-rm -f es_profile $(ES_PROFILE_OBJECTS)
+
+
+#------ Compile rules
+
+obj/%.o: %.c
+	$(CC) -c $(CFLAGS) -o $@ $<

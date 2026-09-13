@@ -1,0 +1,32 @@
+# Local research checkouts and caches
+engine/
+.omo/research/
+.codegraph
+.local/
+.cache/
+.tmp/
+tmp/
+
+# Build outputs
+/build/
+/dist/
+/node_modules/
+/coverage/
+/playwright-report/
+/test-results/
+
+# Original Ultima IV game data must never be committed.
+*.zip
+*.sav
+*.SAV
+*.ega
+*.EGA
+*.map
+*.MAP
+*.tlk
+*.TLK
+*.exe
+*.EXE
+
+# Keep generated evidence local unless a later policy explicitly tracks summaries.
+.omo/evidence/
