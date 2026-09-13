@@ -4,7 +4,7 @@
 
 ## 현재 상태
 
-**Todo 1(source freeze + web test harness + CMake command surface)을 완료하고 검증했다. `.omo/plans/ultima-web.md`의 Todo 1 checkbox를 `[x]`로 표시했다. 커밋/push는 이 인수인계 갱신 직후 수행한다.**
+**Todo 1(source freeze + web test harness + CMake command surface)을 완료하고 검증했다. `.omo/plans/ultima-web.md`의 Todo 1 checkbox를 `[x]`로 표시했다. commit `8f95fb5` (`chore(repo): freeze sources and add web test harness`)로 `todo-01-build-test-harness` 브랜치에 커밋했고 `origin`(`git@github.com:TaejinKim7-dev/ultima.git`)에 push 완료(upstream tracking 설정됨). PR은 아직 생성하지 않았다.**
 
 - root Vite/TypeScript strict/Vitest/Playwright harness와 minimal build shell이 있다.
 - `vendor/source-manifest.json`은 xu4, Faun, GLV, Boron의 deterministic file count/tree SHA-256과 pinned revision을 기록한다.
@@ -121,16 +121,15 @@ ZIP 크기: 529099 bytes. 임시 파일이 없으면 `https://ultima.thatfleming
 - native 빌드/실행, WASM 빌드/실행, 실제 브라우저 게임 플레이 없음.
 - emsdk/Boron CLI/GLFW·PNG·Vorbis·PulseAudio 개발 패키지 설치 없음. 관련 도구/패키지를 현재 환경에서 찾지 못했다.
 - 원본 ZIP이 실제 xu4에서 시작·플레이되는지는 미검증이다.
-- Todo 1 변경은 아직 commit/push/Pages 배포하지 않았다. 현재 branch는 `todo-01-build-test-harness`, base commit은 `5855e96`이다.
+- Todo 1 변경은 commit `8f95fb5`로 `todo-01-build-test-harness` 브랜치에 push 완료했다 (base commit `5855e96` 위). GitHub Pages 배포는 아직 미검증이며 PR도 아직 생성하지 않았다.
 - 고정밀 이중 계획 검토는 요청되지 않았으며 수행하지 않았다. gap 검토와 소스 대조만 수행했다.
 
 ## 이 계획 이후 이어서 할 일
 
-1. `todo-01-build-test-harness`에서 `npm ci`, `npm run test:unit`, `npm run verify:repo-sources`, `npm run typecheck`, `npm run build`를 실행해 Todo 1 변경을 검토한다.
-2. 검토 후 Todo 1을 `chore(repo): freeze sources and add web test harness`로 commit/PR한다.
-3. `todo-02-module-packaging` branch를 만들고 [NEXT_THREE_STEPS.md](docs/NEXT_THREE_STEPS.md)의 Todo 2 RED test부터 시작한다.
-4. 각 Todo는 RED/GREEN log, component unit test, relevant QA evidence를 남기고 PR로 제출한다.
-5. 원본 게임 data/private corpus/user save/secret은 Git, Pages, CI public artifact, evidence에 넣지 않는다.
+1. (완료) `todo-01-build-test-harness`에서 검증 명령을 실행하고 `chore(repo): freeze sources and add web test harness`(commit `8f95fb5`)로 commit/push했다. PR 생성은 다음 담당자 또는 사용자가 원하는 시점에 진행한다.
+2. `todo-02-module-packaging` branch를 만들고 [NEXT_THREE_STEPS.md](docs/NEXT_THREE_STEPS.md)의 Todo 2 RED test부터 시작한다.
+3. 각 Todo는 RED/GREEN log, component unit test, relevant QA evidence를 남기고 PR로 제출한다.
+4. 원본 게임 data/private corpus/user save/secret은 Git, Pages, CI public artifact, evidence에 넣지 않는다.
 
 ## 구현 담당자의 이후 순서
 
