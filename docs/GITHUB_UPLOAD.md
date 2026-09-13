@@ -26,6 +26,14 @@ This initial upload is documentation and open-source source snapshots only:
 - pinned source snapshots in `vendor/`, including xu4, Faun, GLV, and Boron;
 - root README and policy notes.
 
+Public-by-default scope for future work:
+
+- implementation code;
+- Korean translation source JSON;
+- test policy and test harnesses;
+- GitHub Actions workflow files;
+- release documentation.
+
 It intentionally does not include:
 
 - original Ultima IV ZIP/data files;
@@ -39,7 +47,7 @@ The intent is that a future developer can clone this repository and continue fro
 
 ## Future Pages Deployment
 
-The implementation plan requires a GitHub Actions workflow that:
+The implementation plan requires a GitHub Actions workflow that runs after pull requests merge to `main` and:
 
 1. installs pinned build tools;
 2. builds and tests the static web artifact;

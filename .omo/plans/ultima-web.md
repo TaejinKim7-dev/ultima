@@ -34,6 +34,7 @@ Your next move: 이 계획을 실행하려면 별도 worker 세션에서 `$start
 7. 최종 산출물은 실제 배경음악/효과음이 나야 한다. 초기 무음 target은 이식 중간 단계일 뿐 완료 상태가 아니다.
 8. GitHub Pages 정적 배포, GitHub Actions build/test/deploy workflow, TDD, native/web 회귀와 실제 게임 플레이 증거.
 9. 배포 대상 GitHub 저장소는 `https://github.com/TaejinKim7-dev/ultima`다. SSH write remote는 `git@github.com:TaejinKim7-dev/ultima.git`로 사용한다. project site base path는 repo 이름 기준 `/ultima/`로 고정하고, 예상 Pages URL은 `https://taejinkim7-dev.github.io/ultima/`다. 사용자가 공개 키를 등록했다고 밝혔으므로 write 권한은 기대하되, 실행 시 SSH 인증/기본 브랜치/Pages 설정을 실제로 검증한다.
+10. 공개 기본 정책: repo, 계획서, 구현 코드, 오픈소스 vendor snapshot, 테스트 정책, GitHub Actions workflow, 한국어 번역 원천 JSON은 공개한다. `main`에 PR이 merge되면 검증 workflow 통과 후 GitHub Pages에 자동 공개 배포한다. 단, 원본 Ultima IV 게임 데이터, 원본에서 추출한 private corpus, 사용자 save, 비밀 값은 계속 공개 금지다.
 
 **입력 자료와 동결 기준**
 
@@ -55,7 +56,7 @@ Your next move: 이 계획을 실행하려면 별도 worker 세션에서 `$start
 
 - TypeScript로 게임 엔진을 재작성하거나 에뮬레이터/다른 xu4 fork로 바꾸지 않는다. 게임 규칙을 바꾸는 개조는 요청되지 않았다.
 - 로그인, 서버 DB, 클라우드 세이브, 모바일 터치 조작, 실시간 번역/TTS, LLM/API 키 입력 화면을 추가하지 않는다.
-- 원본 ZIP/EXE/TLK/맵/세이브를 Git, Pages, 공개 테스트 fixture, CI artifact에 넣지 않는다. 배포되는 한국어 번역은 사용자 명시 요청에 따른다. 원래 `project.md`의 번역 미배포 방침은 이 요청으로 대체되었다.
+- 원본 ZIP/EXE/TLK/맵/세이브를 Git, Pages, 공개 테스트 fixture, CI artifact에 넣지 않는다. 한국어 번역 원천 JSON과 생성된 번역 lookup은 공개 repo/정적 배포물에 포함한다. 원래 `project.md`의 번역 미배포 방침은 이 요청으로 대체되었다.
 - 원본 TLK의 288-byte record를 한국어로 덮어쓰거나 원본 바이너리를 수정하지 않는다. 표시 번역과 게임 로직의 키를 분리한다.
 - 웹에서 Faun의 native mixer/pthread/PulseAudio를 억지로 링크하지 않는다. SharedArrayBuffer, COOP/COEP 우회 service worker, JSPI 필수화, 서버 proxy는 사용하지 않는다.
 - HTML 패널을 붙이고 인트로/상태/엔딩이 영어 또는 깨진 문자로 남은 상태를 ‘한글화 완료’로 보고하지 않는다.
@@ -117,10 +118,10 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 8. 출력: `message`(UTF-8/control token), `clear`, `prompt`(종류/allowed keys/maxBytes/requestId), `view`(menu/status 위치와 tokens), `save-state`, `runtime-error` 이벤트를 정의한다. 원문 전체를 JS console에 찍지 않는다. HTML은 textContent/Text nodes로 만들고 게임 텍스트를 innerHTML로 해석하지 않는다.
 9. 레이아웃: 게임 world raster 320×200 유지, desktop 기본 최소 2× 표시. status는 원래 x=192,y=8,width=120,height=64 logical rect와 title/summary를 따른다. canvas content rect의 실제 scale/letterbox/DPR를 사용한다. 화면 아래 대화창은 자연스러운 한글 줄바꿈과 history scroll을 제공한다. status는 구조화된 필드/짧은 번역으로 15×8칸에 들어가게 하며 원문 공백 정렬을 그대로 한국어에 적용하지 않는다. 좁은 창은 page scroll을 허용해 폰트를 읽을 수 있게 유지한다.
 10. 한글 renderer: 별도 8×8 Hangul bitmap를 만들지 않는다. 게임 내부 status/menu text는 DOM overlay로, 긴 intro/castle/endgame text는 하단 패널로 표시한다. 원본 rune/avatar 마스크·지도 glyph는 raster로 남긴다. native는 영문 회귀 기준을 유지한다. overlay registry에 TextView 역할/수명/clear/scroll/cursor를 명시하고 stage/reset 때 제거한다.
-11. 번역: `locales/ko/{ui,module,binary,tlk,aliases,glossary}.json`을 source of truth로 둔다. ASCII semantic ID + Korean display text + placeholder signature + 제한된 metadata를 사용한다. source 영어 전문 inventory는 `.local/`에만 두고 배포하지 않는다. build-time 도구가 C++ lookup와 Boron translation overlay를 생성하며 런타임 외부 JSON parser 의존성을 엔진에 추가하지 않는다. TLK 번역 lookup key는 `map:npcIndex:field`; binary는 `resource:table:index`다. 원본 키워드/행동 header는 그대로 둔다.
+11. 번역: `locales/ko/{ui,module,binary,tlk,aliases,glossary}.json`을 공개 source of truth로 둔다. ASCII semantic ID + Korean display text + placeholder signature + 제한된 metadata를 사용한다. source 영어 전문 inventory와 원본에서 추출한 private corpus는 `.local/`에만 두고 배포하지 않는다. build-time 도구가 C++ lookup와 Boron translation overlay를 생성하며 런타임 외부 JSON parser 의존성을 엔진에 추가하지 않는다. TLK 번역 lookup key는 `map:npcIndex:field`; binary는 `resource:table:index`다. 원본 키워드/행동 header는 그대로 둔다.
 12. 입력: JS에서 NFC/trim 후 한국어 alias를 현재 대화 context의 canonical 영문으로 변환한다. 영어는 기존 prefix behavior를 유지한다. `compositionstart/end`, `isComposing`, 조합 확정 Enter 중복을 처리한다. NPC/free-answer, 숫자, 단일키, 이름 prompt를 구별한다. avatar 이름은 기존 최대 12 ASCII bytes와 16-byte save field를 유지한다. 숫자/명령/이름 prompt에 한국어를 억지로 허용하지 않는다.
 13. 오디오: `sound_web.cpp`가 `sound.h` 전체를 구현하고 native Faun은 유지한다. Web Audio로 Ogg/WAV를 디코드하고 RFX만 Faun의 순수 C generator + 별도 seeded RNG로 PCM을 만든다. 임의의 무음 파일로 바꾸지 않는다. 사용 gesture 이후 시작하고 늦게 끝난 decode가 이전 음악을 다시 재생하지 않게 generation ID를 둔다. 한국어 음성 더빙은 요청되지 않았다.
-14. Pages: single static page, project subpath와 root path 둘 다 테스트한다. 대상 repo는 `https://github.com/TaejinKim7-dev/ultima`이고 write remote는 `git@github.com:TaejinKim7-dev/ultima.git`, project-site base는 `/ultima/`다. 원본 파일은 직접 업로드 방식으로만 읽으므로 제3자 CORS proxy가 필요 없다. production staging은 allowlist로 만들고 `--preload-file .`는 금지한다. 이 계획은 구현자가 임의로 다른 원격 repo를 만들라는 지시가 아니다. SSH write 권한/기본 브랜치/Pages 설정이 없으면 Todo 19의 workflow와 로컬 dist까지 완성하고 정확한 배포 blocker를 기록한다.
+14. Pages: single static page, project subpath와 root path 둘 다 테스트한다. 대상 repo는 `https://github.com/TaejinKim7-dev/ultima`이고 write remote는 `git@github.com:TaejinKim7-dev/ultima.git`, project-site base는 `/ultima/`다. PR이 `main`에 merge되면 GitHub Actions가 build/test/audit 후 Pages에 자동 공개 배포한다. 원본 파일은 직접 업로드 방식으로만 읽으므로 제3자 CORS proxy가 필요 없다. production staging은 allowlist로 만들고 `--preload-file .`는 금지한다. 이 계획은 구현자가 임의로 다른 원격 repo를 만들라는 지시가 아니다. SSH write 권한/기본 브랜치/Pages 설정이 없으면 Todo 19의 workflow와 로컬 dist까지 완성하고 정확한 배포 blocker를 기록한다.
 
 계획 단계에서 새로 드러난 런타임 위험은 TDD 작업 안에 포함한다. 컴파일 실패는 해당 pinned source의 최소 수정으로 해결하고, 도구 버전 변경이 꼭 필요하면 실패 로그/새 pin/재검증 근거를 기록한다. 매번 사용자에게 기술 선택을 다시 묻지 않는다.
 
@@ -296,7 +297,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   Commit: Y | test(web): harden browser failure boundaries
 
 - [ ] 19. Build GitHub Pages workflow and project-site release artifact
-  What to do / Must NOT do: configure the release for `https://github.com/TaejinKim7-dev/ultima` with SSH remote `git@github.com:TaejinKim7-dev/ultima.git`; create `.github/workflows/pages.yml` that installs pinned tools, builds/test/audits the site, uploads `dist/`, and deploys with official Pages Actions. Include `.nojekyll`, base `/ultima/`, expected URL `https://taejinkim7-dev.github.io/ultima/`, and clear instructions for setting Pages Source to GitHub Actions. Verify SSH auth with a non-mutating command before the first push. Must not expose original data in Git, Pages, or Actions artifacts.
+  What to do / Must NOT do: configure the release for `https://github.com/TaejinKim7-dev/ultima` with SSH remote `git@github.com:TaejinKim7-dev/ultima.git`; create `.github/workflows/pages.yml` that installs pinned tools, builds/test/audits the site, uploads `dist/`, and deploys with official Pages Actions after PR merge to `main`. Include `.nojekyll`, base `/ultima/`, expected URL `https://taejinkim7-dev.github.io/ultima/`, and clear instructions for setting Pages Source to GitHub Actions. Verify SSH auth with a non-mutating command before the first push. Must not expose original data in Git, Pages, or Actions artifacts.
   Parallelization: Wave 4 | Blocked by: 15,16,18 | Blocks: 20
   References: GitHub Docs `configuring-a-publishing-source-for-your-github-pages-site`, `creating-project-pages-manually`, `using-custom-workflows-with-github-pages`; this plan's Pages guardrails.
   Acceptance criteria: `npm run build:site -- --base=/ultima/`; `npm run audit:dist`; `act` or `npm run verify:workflow` statically validates HTTPS URL, SSH write remote, Pages base `/ultima/`, required permissions `pages: write` and `id-token: write`, artifact root `index.html`, and no original data in artifact.
@@ -335,6 +336,10 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 
 ## Commit strategy
 
+Use feature branches and pull requests. `main` stays the stable integration branch. Do not commit implementation work directly to `main` except repository administration changes explicitly requested by the owner.
+
+Create one branch per Todo or tightly coupled Todo group, named `todo-<number>-<short-topic>` such as `todo-08-input-queue`. Open a PR for each branch with the Todo number, RED/GREEN logs, component Unit Test result, QA evidence path, and risk notes. Merge only after the PR evidence shows the required tests and checks passed.
+
 Use one commit per completed todo, in dependency order, after that todo's RED/GREEN and QA evidence are written. Do not squash across unrelated risk surfaces: build/tooling, native baseline, WASM, renderer, input, save, UI, i18n, audio, QA, Pages, and docs each need reviewable boundaries. Suggested message forms are already listed on each todo.
 
 Before any commit:
@@ -343,6 +348,7 @@ Before any commit:
 - No original ZIP, extracted original DOS files, private English corpus, browser cache, or `.omo/evidence` binary blobs intended to stay local may be staged unless explicitly allowed by docs.
 - Generated lockfiles and workflow files are staged with the code that requires them.
 - A failed verification log may be kept under `.omo/evidence/ultima-web/task-N/` but should not be committed unless the repository policy decides evidence artifacts are tracked. The default is to keep bulky evidence local and commit compact summaries/docs only.
+- Every PR must pass the component-specific Unit Test before e2e/manual QA is accepted as completion evidence.
 
 ## Success criteria
 
@@ -354,5 +360,5 @@ Execution is complete only when all of the following are true:
 - Native GLFW baseline still builds and passes the planned regression checks; browser build passes Chromium e2e plus Firefox/WebKit smoke where environment permits.
 - `npm run verify:release` passes from a clean checkout with user-provided `ULTIMA4_DATA`.
 - `npm run audit:dist` proves the public artifact contains no original game data, private extracted corpus, test hooks, secrets, or unexpected server files.
-- GitHub Actions Pages workflow is present and validated for `https://github.com/TaejinKim7-dev/ultima` and SSH remote `git@github.com:TaejinKim7-dev/ultima.git`; if SSH write/Pages permission/default branch is missing, the exact blocker is recorded and local `dist/` remains deploy-ready for `/ultima/`.
+- GitHub Actions Pages workflow is present and validated for automatic public deployment from `main` on `https://github.com/TaejinKim7-dev/ultima` with SSH remote `git@github.com:TaejinKim7-dev/ultima.git`; if SSH write/Pages permission/default branch is missing, the exact blocker is recorded and local `dist/` remains deploy-ready for `/ultima/`.
 - F1-F4 all APPROVE with evidence paths, and `handoff.md` is updated to point at the finished plan, source pins, build commands, and any remaining external blockers.
