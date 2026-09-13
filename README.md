@@ -43,8 +43,11 @@ Ultima IV를 웹 브라우저에서 실행할 수 있도록 포팅하고, 한국
 - [소스 고정 revision](docs/SOURCE_PINS.md)
 - [GitHub 업로드 및 Pages 대상](docs/GITHUB_UPLOAD.md)
 - [TDD 및 컴포넌트 테스트 정책](docs/TESTING_POLICY.md)
+- [AI 코딩 에이전트 인계 규칙](docs/AI_AGENT_HANDOFF.md)
 - [작업 인수인계](handoff.md)
 - [초기 프로젝트 노트](project.md)
+
+AI 코딩 에이전트가 이 저장소를 이어받을 때는 먼저 [AGENTS.md](AGENTS.md), [작업 인수인계](handoff.md), [웹 포팅 실행 계획](docs/ULTIMA_WEB_PLAN.md), [TDD 및 컴포넌트 테스트 정책](docs/TESTING_POLICY.md)을 읽어야 합니다.
 
 ## 포함된 오픈소스 코드
 
