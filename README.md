@@ -13,6 +13,7 @@ Ultima IV를 웹 브라우저에서 실행할 수 있도록 포팅하고, 한국
 - 한국어 번역, 한국어 NPC 키워드 alias, 영어 원본 명령 입력을 함께 지원합니다.
 - 세이브와 설정은 브라우저 저장소에 영속화합니다.
 - GitHub Pages에서 정적 파일만으로 배포 가능하게 만듭니다.
+- 새로 작성되는 코드는 TDD로 구현하고, 각 컴포넌트는 Unit Test로 독립 검증합니다.
 
 ## 현재 상태
 
@@ -25,6 +26,7 @@ Ultima IV를 웹 브라우저에서 실행할 수 있도록 포팅하고, 한국
 - 웹 포팅 실행 계획 작성
 - GitHub Pages 배포 대상 정리
 - 원본 게임 데이터 미포함 정책 정리
+- TDD와 컴포넌트별 Unit Test 정책 명시
 
 아직 안 된 것:
 
@@ -39,6 +41,7 @@ Ultima IV를 웹 브라우저에서 실행할 수 있도록 포팅하고, 한국
 - [웹 포팅 실행 계획](docs/ULTIMA_WEB_PLAN.md)
 - [소스 고정 revision](docs/SOURCE_PINS.md)
 - [GitHub 업로드 및 Pages 대상](docs/GITHUB_UPLOAD.md)
+- [TDD 및 컴포넌트 테스트 정책](docs/TESTING_POLICY.md)
 - [작업 인수인계](handoff.md)
 - [초기 프로젝트 노트](project.md)
 
@@ -86,6 +89,8 @@ https://taejinkim7-dev.github.io/ultima/
 ## 다음 단계
 
 다음 작업자는 [웹 포팅 실행 계획](docs/ULTIMA_WEB_PLAN.md)을 기준으로 구현을 시작하면 됩니다.
+
+구현은 [TDD 및 컴포넌트 테스트 정책](docs/TESTING_POLICY.md)을 따른다. 모든 새 코드는 실패하는 테스트를 먼저 만들고, 컴포넌트별 Unit Test를 통과시킨 뒤 통합 QA로 넘어간다.
 
 큰 순서는 다음과 같습니다.
 

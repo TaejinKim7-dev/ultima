@@ -22,6 +22,7 @@
 7. TDD + 실제 native/browser QA.
 8. 이번 세션의 요청은 소스를 받고 분석해서 GPT-5가 실행할 상세 Markdown 계획을 만드는 것. 사용자에게 같은 요구사항이나 게임 데이터 경로를 다시 묻지 않는다.
 9. 최종 배포 대상 저장소는 `https://github.com/TaejinKim7-dev/ultima`다. SSH write remote는 `git@github.com:TaejinKim7-dev/ultima.git`로 사용한다. Pages base는 `/ultima/`, 예상 URL은 `https://taejinkim7-dev.github.io/ultima/`다. 사용자가 공개 키 등록을 완료했다고 밝혔다.
+10. 새로 작성되는 코드는 TDD 기반으로 구현한다. 각 컴포넌트는 Unit Test를 먼저 만들고 RED/GREEN 로그와 evidence를 남긴다. 정책 문서는 `docs/TESTING_POLICY.md`다.
 
 ## 지금까지 한 작업
 
@@ -75,7 +76,7 @@ ZIP 크기: 529099 bytes. 임시 파일이 없으면 `https://ultima.thatfleming
 
 1. 선택 사항: 실행 전 고정밀 이중 계획 검토를 돌린다.
 2. 구현 시작: 별도 worker 세션에서 `$start-work .omo/plans/ultima-web.md`로 실행한다.
-3. 구현자는 계획서의 Todo 1–20을 순서대로 진행하고, 각 단계에서 RED/GREEN 테스트와 실제 QA 증거를 남긴다.
+3. 구현자는 계획서의 Todo 1–20을 순서대로 진행하고, 각 단계에서 RED/GREEN 테스트, 컴포넌트별 Unit Test, 실제 QA 증거를 남긴다.
 4. 모든 Todo 완료 후 F1–F4 최종 검증을 통과해야 완료로 본다.
 5. `git@github.com:TaejinKim7-dev/ultima.git`의 SSH write 권한과 Pages 권한이 준비되어 있으면 workflow로 배포하고, 없으면 로컬 `dist/`와 정확한 배포 blocker를 기록한다.
 

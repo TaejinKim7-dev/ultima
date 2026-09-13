@@ -65,6 +65,8 @@ Your next move: 이 계획을 실행하려면 별도 worker 세션에서 `$start
 ## Verification strategy
 > Zero human intervention - all verification is agent-executed.
 - Test decision: **TDD**. Native: CMake + CTest와 작은 C/C++ assertion harness. Web pure logic: Vitest. 실제 WASM 브라우저: Playwright. 구현 대상에서 실패하는 테스트를 먼저 실행하고 원인 메시지를 기록한 뒤 구현한다. 실행 환경 누락 실패를 behavioral RED로 계산하지 않는다.
+- Repository policy: 새로 작성되는 모든 구현 코드는 `docs/TESTING_POLICY.md`를 따른다. 각 컴포넌트는 독립 Unit Test를 가져야 하며, RED 실패 로그 없이 GREEN 구현만 제출할 수 없다. 컴포넌트 Unit Test가 없거나 테스트 수가 0이면 해당 Todo는 완료가 아니다.
+- Component coverage map: source/export tooling, module packaging, WASM bridge, WebGL renderer, input queue, data loader, persistence, message panel, overlay layout, Korean aliases, localization, audio, Pages artifact는 각각 전용 unit/fixture test를 갖는다. 브라우저/e2e QA는 Unit Test를 대체하지 않고 그 위에 추가된다.
 - 도구/패키지 선택은 Node 22 LTS + npm lockfile, TypeScript strict + Vite의 vanilla DOM shell이다. React/Next.js/서버 framework는 필요하지 않다. npm 패키지는 Todo 1에서 설치한 정확한 버전을 package-lock.json에 고정한다.
 - Evidence root: `.omo/evidence/ultima-web/`. 각 `task-N/`에 `red.log`, `green.log`, 필요한 screenshot/trace/요약 JSON을 기록한다. 원본 데이터 및 추출 영어 corpus는 이 디렉터리에도 복사하지 않는다. CI 공개 artifact에는 비공개 게임 화면/본문을 올리지 않고 pass/fail 요약을 올린다.
 - 현재는 계획만 있으므로 아래 `npm run ...`과 scripts는 **구현할 인터페이스**다. 이미 존재하거나 실행했다고 오해하지 않는다. Todo 1에서 harness를 만들고 테스트를 각 todo에서 추가한다. 관련 test 파일이 없거나 테스트 수가 0이면 실패해야 한다.
@@ -76,6 +78,7 @@ Your next move: 이 계획을 실행하려면 별도 worker 세션에서 `$start
 | `npm run build:native` | 별도 build/native 소스/objects로 GLFW native 실행파일과 모듈 생성 |
 | `npm run test:native -- -R <case>` | CMake configure/build 후 CTest regex 실행; 0 tests는 오류 |
 | `npm run test:unit -- tests/unit/<name>.test.ts` | 해당 Vitest 테스트 실행 |
+| `npm run test:unit` | 모든 TypeScript/JS component unit test 실행; 0 tests는 오류 |
 | `npm run build:wasm -- --debug` | 고정 SDK, ASYNCIFY diagnostics, qa hooks 포함 별도 출력 |
 | `npm run build:wasm` | production WASM; qa hooks 제외 |
 | `npm run test:e2e -- tests/e2e/<name>.spec.ts --project=chromium` | 실제 WASM을 static server에서 구동; browser project는 firefox/webkit도 정의 |
