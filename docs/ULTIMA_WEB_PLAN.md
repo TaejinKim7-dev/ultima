@@ -160,7 +160,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios (name the exact tool + invocation): happy: `npm run verify:repo-sources` writes `.omo/evidence/ultima-web/task-1/green.log`; failure: place a fake `ULTIMA4.ZIP` under a tracked candidate path and verify `npm run verify:repo-sources` rejects it, evidence `.omo/evidence/ultima-web/task-1/original-data-rejected.log`.
   Commit: Y | chore(repo): freeze sources and add web test harness
 
-- [ ] 2. Build host Boron/Faun and package xu4 modules reproducibly
+- [x] 2. Build host Boron/Faun and package xu4 modules reproducibly
   What to do / Must NOT do: make host-side Boron v2.0.8 and Faun build scripts that produce `render.pak`, `Ultima-IV.mod`, and optional `U4-Upgrade.mod` in a deterministic build directory. Patch Boron Makefile variable handling only as needed so `cc/ar/ranlib` can be overridden; do not pass nonexistent `--no-thread`; do not use wasm tools for host packaging.
   Parallelization: Wave 1 | Blocked by: 1 | Blocks: 3,6
   References: `engine/Makefile:13-30`; `engine/src/Makefile.common:86-98`; `engine/src/module.c:87-117`; `engine/src/config_boron.cpp:971-1005`; `.omo/research/boron/` v2.0.8 configure behavior.

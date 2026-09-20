@@ -6,10 +6,12 @@
 
 **Todo 1(source freeze + web test harness + CMake command surface)을 완료하고 검증했다. `.omo/plans/ultima-web.md`의 Todo 1 checkbox를 `[x]`로 표시했다. commit `8f95fb5` (`chore(repo): freeze sources and add web test harness`)로 `todo-01-build-test-harness` 브랜치에 커밋했고 `origin`(`git@github.com:TaejinKim7-dev/ultima.git`)에 push, PR #1로 `main`에 merge 완료(merge commit `36a128e`). 이후 Git 정책을 "PR 생략 + `main` merge 전 로컬 검증 필수"로 변경했다(`AGENTS.md` "Git 작업 방식", commit `1e8191b`). `docs/NEXT_FIVE_STEPS.md`를 만들어 Todo 2~6 시작점을 정리했다(commit `44f4bc3`).**
 
+**Todo 2(호스트 Boron 빌드 + xu4 모듈 패키징)를 `todo-02-module-packaging` 브랜치에서 완료했다 — 상세는 아래 "Todo 2 완료 기록" 참고.**
+
 - root Vite/TypeScript strict/Vitest/Playwright harness와 minimal build shell이 있다.
 - `vendor/source-manifest.json`은 xu4, Faun, GLV, Boron의 deterministic file count/tree SHA-256과 pinned revision을 기록한다.
 - `npm run verify:repo-sources`는 manifest mismatch와 Git-tracked `.zip`, `.sav`, `.ega`, `.map`, `.tlk`, `.exe`를 실패시킨다.
-- `scripts/cmake-wrapper.mjs`가 이전 세션의 blocker(CMake command surface 누락)를 해소했다: `npm run cmake:version`은 host cmake(3.22.1)를 그대로 호출해 exit 0. `npm run cmake:configure`/`cmake:build`/`cmake:test`는 native workflow가 아직 구현되지 않았다는 명시적 메시지(`cmake:<step> is unavailable until the future native workflow is implemented.`)와 함께 exit 1을 반환한다. 이는 Todo 2/3에서 실제 CMake 빌드를 붙일 때까지 의도된 동작이다.
+- `scripts/cmake-wrapper.mjs`가 Todo 1의 blocker(CMake command surface 누락)를 해소했다: `npm run cmake:version`은 host cmake(3.22.1)를 그대로 호출해 exit 0. **(Todo 2에서 갱신)** `npm run cmake:configure`/`cmake:build`/`cmake:test`는 더 이상 stub가 아니다 — 실제로 `cmake -S . -B build/native`/`cmake --build build/native`/`ctest --test-dir build/native`를 실행하며, `native/`의 CTest 프로젝트(module-package 테스트)를 빌드·실행한다. `npm run test:native`도 동일한 경로의 별칭이다.
 - evidence는 `.omo/evidence/ultima-web/task-1/`에 local-only로 남긴다 (git-ignored).
 - Todo 2~6의 바로 실행 가능한 시작점은 [NEXT_FIVE_STEPS.md](docs/NEXT_FIVE_STEPS.md)에 있다.
 
@@ -37,6 +39,47 @@ fake tracked `ULTIMA4.ZIP`를 별도 임시 Git 저장소(scratchpad, repo 밖)�
 `cmake-red.log`/`cmake-green.log`(이전 세션 산출물)는 vitest 유닛 테스트가 아니라 `npm run cmake:*` package-command-seam 동작을 손으로 기록한 CLI RED/GREEN transcript다. `tests/unit/`에는 cmake 관련 테스트가 없다 — 삭제된 테스트가 아니라 원래부터 CLI transcript 방식으로 검증한 것이다.
 
 **Node 버전 관련 추가 주의**: `npm run cmake:version`의 exit 0은 이 host에 실제 `cmake` 3.22.1이 설치되어 있기 때문이다. `cmake` 바이너리가 없는 host에서는 wrapper가 `spawnSync` 오류를 잡아 exit 127로 실패한다(`scripts/cmake-wrapper.mjs`의 `result.error` 분기). 이는 회귀가 아니라 host에 cmake가 없다는 신호이므로, 다음 에이전트는 native 빌드 환경을 준비할 때 이 exit code 의미를 참고한다.
+
+## Todo 2 완료 기록 (2026-09-20, branch `todo-02-module-packaging`)
+
+**범위**: Boron 2.0.8 host CLI를 빌드하고, 그걸로 `vendor/xu4/module/{render,Ultima-IV,U4-Upgrade}`를 `render.pak`/`Ultima-IV.mod`/`U4-Upgrade.mod`로 패키징하고, CDI/module loader(`vendor/xu4/src/module.c`)가 정상/빈/손상 파일을 올바르게 구분하는 native CTest를 추가했다.
+
+**Faun 관련 스코프 결정 (명시적 deferral)**: Todo 2 제목은 "Boron/Faun" 둘 다 언급하지만, 실제로 필요한 건 Boron뿐이었다 — `vendor/xu4/tools/pack-xu4.b`는 모듈 패키징 시 오디오 파일을 그대로 CDI chunk로 복사만 하고 Faun 런타임을 호출하지 않는다(`vendor/xu4/Makefile`에도 faun 참조 없음 확인). Faun을 host에서 실제로 빌드하지는 않았다 — `vendor/faun/Makefile`의 `DEP_LIB = -lpulse -lvorbisfile -lpthread -lm` (+`-lFLAC`)이 `libpulse-dev`/`libvorbis-dev`(`libvorbisfile`)/`libflac-dev`를 요구하는데 이 host에는 미설치다(2026-09-20 환경 점검 참고). **Todo 3(native GLFW 기준선, 실제 오디오 포함)이 Faun host 빌드를 실제로 필요로 하는 첫 지점이다** — 그때 `sudo apt-get install libpulse-dev libvorbis-dev libflac-dev`(passwordless sudo 아님, 사용자 직접 실행 필요)를 요청해야 한다.
+
+**구현**:
+- `scripts/deps-host.mjs` (`npm run deps:host`): `cc`/`ar`/`ranlib` 존재를 확인하고, `vendor/boron`을 `build/host/boron`으로 복사한 뒤(원본은 절대 건드리지 않음 — `vendor/`는 `verify:repo-sources`가 물리 디렉터리 트리 해시로 검증하므로 그 안에서 빌드하면 검증이 깨진다) `./configure --static`(bundled linenoise, zlib compress, thread 없음 — 기존 소스 분석 기록과 일치) + `make`로 정적 링크된 `boron` 바이너리를 만든다. `--static`을 쓴 이유는 shared 빌드 시 `build:modules`가 다른 cwd에서 `boron`을 실행할 때 `libboron.so.2`를 못 찾는 문제(LD_LIBRARY_PATH/rpath 필요)를 피하기 위함이다.
+- `scripts/build-modules.mjs` (`npm run build:modules`): `build/host/boron/boron`(env `BORON_BIN`으로 override 가능, 테스트용)이 없으면 "run npm run deps:host first" 메시지와 exit 1. 있으면 `vendor/xu4/tools/pack-xu4.b`를 호출해 `build/host/modules/`에 세 모듈을 생성하고 각각 SHA-256을 출력한다.
+- `CMakeLists.txt`(root) + `native/CMakeLists.txt` + `native/tests/module_package_test.c`: `vendor/xu4/src/module.c` + `support/cdi.c` + `support/stringTable.c` + `vendor/boron/urlan/array.c`를 정적 라이브러리로 묶고, `mod_query()`를 호출하는 `module_package_test` 실행파일을 CTest `module-package`로 등록했다. `module.h`가 요구하는 `<boron/urlan.h>` 레이아웃은 `vendor/boron/include/`에 실제로 없어서(그 레이아웃은 `make install-dev`가 `/usr/local`에 만드는 것) `build/native/boron_shim/boron/*.h` 심볼릭 링크를 CMake configure 시점에 생성해 해결했다(`vendor/` 무수정 유지). `module.c`가 링크 타임에 요구하는 `u4find_pathc`(실제 정의는 `vendor/xu4/src/u4file.cpp`)는 테스트가 부르는 `mod_query()` 경로에서는 호출되지 않으므로(그 경로는 `mod_addLayer()`의 "requires 부모 모듈 찾기"에서만 쓰임) 테스트 파일 안에 스텁을 정의했다 — 코멘트로 왜 안전한지 설명해둠.
+- `scripts/cmake-wrapper.mjs` 갱신: `configure`/`build`/`test`가 이제 실제로 `cmake -S . -B build/native` / `cmake --build build/native` / `ctest --test-dir build/native --output-on-failure`를 실행한다(extra args pass-through 지원, 예: `-R module-package`). `npm run test:native`는 동일 경로의 별칭.
+- `tests/unit/build-modules.test.ts`: `BORON_BIN`을 존재하지 않는 경로로 override했을 때 `build:modules`가 exit 1 + "run npm run deps:host first" 메시지를 내는지 검증하는 vitest 테스트.
+
+**검증 (2026-09-20, 전부 실제 실행, `rm -rf build` 이후 clean 상태에서 전체 파이프라인 1회 포함)**:
+```
+npm run deps:host              # exit 0 — Boron 2.0.8 static 빌드 성공 (pinned revision과 버전 일치)
+npm run build:modules          # exit 0 — render.pak/Ultima-IV.mod/U4-Upgrade.mod 생성
+npm run cmake:configure        # exit 0
+npm run cmake:build            # exit 0 (module.c의 미사용 파라미터 warning 1건, 에러 없음)
+npm run cmake:test             # exit 0 — module-package 1/1 Passed
+npm run test:unit              # exit 0 — 2 files / 3 tests
+npm run verify:repo-sources    # exit 0 — vendor/ 4개 component 모두 무결
+npm run typecheck              # exit 0
+npm run build                  # exit 0
+git diff --check               # exit 0
+```
+재현성: `npm run build:modules`를 두 번 실행해 `sha256sum build/host/modules/*.pak build/host/modules/*.mod`가 완전히 동일함을 확인했다(`.omo/evidence/ultima-web/task-2/reproducible-modules.log`).
+
+**Module SHA-256** (이 소스로 재현 시 반드시 동일해야 함 — `build/` 자체는 git-ignored라 여기 기록):
+| 파일 | SHA-256 | 크기 |
+|---|---|---|
+| `render.pak` | `f175fab6778c07c931b30b463d752f7ba87e3d4825412b354385c7be5dd2ccad` | 305237 bytes |
+| `Ultima-IV.mod` | `145e8786a1cb2291fea8ce7aefd7d9db505737db5fe0fd515b3a7e9f7106fbd4` | 7412174 bytes |
+| `U4-Upgrade.mod` | `b8cd142b1e4309ef16ed67f9763f0cbb64e4c2716b35164e1238ac9f11a090a0` | 130363 bytes |
+
+**부정 케이스가 실질적임을 별도 확인**: `render.pak` 사본의 앞 4바이트(CDI magic)를 뒤집어 `module_package_test <손상된 파일> Ultima-IV.mod`를 직접 실행 → 손상된 인자만 `FAIL`, 정상 `Ultima-IV.mod`는 `ok`로 정확히 구분됨을 확인했다(exit 1). 단순히 항상 통과하는 가짜 테스트가 아님을 증명한다. 로그: `.omo/evidence/ultima-web/task-2/corrupt-module.log`.
+
+**Todo 6(WASM) 확장 지점 메모**: `deps-host.mjs`가 이미 `vendor/boron`을 `build/host/boron`으로 복사한 뒤 그 복사본에서 빌드한다 — emcc/emar로 다시 빌드해야 할 때도 이 복사본(또는 별도 `build/wasm/boron`)에서 `CC=emcc AR=emar ./configure ...`처럼 override하면 되고, `vendor/boron/Makefile` 자체를 고칠 필요는 없었다(고쳤다면 tree hash가 깨져 `vendor/source-manifest.json`도 갱신해야 했을 것). Boron Makefile은 `cc`/`ar`/`ranlib`를 하드코딩하지만 이 host의 `cc`가 이미 시스템 gcc라 문제가 없었다 — emcc로 바꾸려면 그때 가서 Makefile 변수화가 실제로 필요한지 다시 판단한다.
+
+**독립 게이트 리뷰**: 별도 subagent가 read-only로 위 파이프라인을 clean 상태(`rm -rf build`)에서 자체 재실행했다. **Verdict: CONFIRMED.** 재현성(두 번 빌드 후 해시 동일)과 손상 파일 거부(손상된 render.pak만 FAIL, 정상 Ultima-IV.mod는 ok)를 독립적으로 재확인했고, vendor/ 무수정·git 추적 파일 목록도 검증했다. 리뷰어가 자체적으로 손상 파일을 직접 만들어 재현하는 과정에서 이미 손상된 사본을 다시 XOR하여 우연히 원래 magic byte로 되돌아간 경우가 1건 있었는데(리뷰어 본인 재현 스크립트의 아티팩트, 실제 테스트 로직 결함 아님), 이는 이 저장소의 `corrupt-module.log` 증거(매번 원본에서 새로 복사 후 1회만 XOR)에는 해당하지 않는다.
 
 - [AI 코딩 에이전트 규칙](AGENTS.md): 다른 AI가 이 저장소를 이어받을 때 지켜야 할 프로젝트 운영 규칙.
 - [AI 코딩 에이전트 인계 규칙](docs/AI_AGENT_HANDOFF.md): `handoff.md`를 어떻게 작성·갱신해야 하는지에 대한 표준.

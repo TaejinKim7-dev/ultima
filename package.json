@@ -12,15 +12,15 @@
     "preview": "vite preview",
     "test:unit": "vitest run --passWithNoTests=false",
     "test:e2e": "playwright test",
-    "test:native": "node scripts/future-task-command.mjs test:native 3",
+    "test:native": "node scripts/cmake-wrapper.mjs test",
     "cmake:version": "node scripts/cmake-wrapper.mjs version",
     "cmake:configure": "node scripts/cmake-wrapper.mjs configure",
     "cmake:build": "node scripts/cmake-wrapper.mjs build",
     "cmake:test": "node scripts/cmake-wrapper.mjs test",
     "typecheck": "tsc --noEmit",
     "verify:repo-sources": "node scripts/verify-repo-sources.mjs",
-    "deps:host": "node scripts/future-task-command.mjs deps:host 2",
-    "build:modules": "node scripts/future-task-command.mjs build:modules 2"
+    "deps:host": "node scripts/deps-host.mjs",
+    "build:modules": "node scripts/build-modules.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.52.0",
