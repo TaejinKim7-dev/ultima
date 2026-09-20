@@ -1,6 +1,6 @@
 # Ultima IV 웹 한글판 개발 인수인계
 
-최종 갱신: 2026-09-13 KST.
+최종 갱신: 2026-09-20 KST.
 
 ## 현재 상태
 
@@ -11,7 +11,7 @@
 - `npm run verify:repo-sources`는 manifest mismatch와 Git-tracked `.zip`, `.sav`, `.ega`, `.map`, `.tlk`, `.exe`를 실패시킨다.
 - `scripts/cmake-wrapper.mjs`가 이전 세션의 blocker(CMake command surface 누락)를 해소했다: `npm run cmake:version`은 host cmake(3.22.1)를 그대로 호출해 exit 0. `npm run cmake:configure`/`cmake:build`/`cmake:test`는 native workflow가 아직 구현되지 않았다는 명시적 메시지(`cmake:<step> is unavailable until the future native workflow is implemented.`)와 함께 exit 1을 반환한다. 이는 Todo 2/3에서 실제 CMake 빌드를 붙일 때까지 의도된 동작이다.
 - evidence는 `.omo/evidence/ultima-web/task-1/`에 local-only로 남긴다 (git-ignored).
-- Todo 2~4의 바로 실행 가능한 시작점은 [NEXT_THREE_STEPS.md](docs/NEXT_THREE_STEPS.md)에 있다.
+- Todo 2~6의 바로 실행 가능한 시작점은 [NEXT_FIVE_STEPS.md](docs/NEXT_FIVE_STEPS.md)에 있다.
 
 Todo 1 검증 완료 (2026-09-13 재검증, 모두 실제로 실행함):
 
@@ -126,9 +126,9 @@ ZIP 크기: 529099 bytes. 임시 파일이 없으면 `https://ultima.thatfleming
 
 ## 이 계획 이후 이어서 할 일
 
-1. (완료) `todo-01-build-test-harness`에서 검증 명령을 실행하고 `chore(repo): freeze sources and add web test harness`(commit `8f95fb5`)로 commit/push했다. PR 생성은 다음 담당자 또는 사용자가 원하는 시점에 진행한다.
-2. `todo-02-module-packaging` branch를 만들고 [NEXT_THREE_STEPS.md](docs/NEXT_THREE_STEPS.md)의 Todo 2 RED test부터 시작한다.
-3. 각 Todo는 RED/GREEN log, component unit test, relevant QA evidence를 남기고 PR로 제출한다.
+1. (완료) `todo-01-build-test-harness`에서 검증 명령을 실행하고 `chore(repo): freeze sources and add web test harness`(commit `8f95fb5`)로 commit/push했다. PR #1로 `main`에 merge 완료(commit `36a128e`). 이후 Todo부터는 PR 없이 로컬 검증 후 `main`에 직접 merge한다 (`AGENTS.md`의 "Git 작업 방식" 참고).
+2. `todo-02-module-packaging` branch를 만들고 [NEXT_FIVE_STEPS.md](docs/NEXT_FIVE_STEPS.md)의 Todo 2 RED test부터 시작한다. 이어서 Todo 3~6도 같은 문서에 있다.
+3. 각 Todo는 RED/GREEN log, component unit test, relevant QA evidence를 남기고, `main` merge 전 로컬 검증 결과를 `handoff.md`에 기록한다.
 4. 원본 게임 data/private corpus/user save/secret은 Git, Pages, CI public artifact, evidence에 넣지 않는다.
 
 ## 구현 담당자의 이후 순서

@@ -53,7 +53,7 @@
 1. `todo-01-build-test-harness` 브랜치에서 `npm ci`가 통과하는지 확인한다.
 2. `npm run test:unit`으로 repo source 검증 테스트를 실행한다.
 3. `npm run verify:repo-sources`가 원본 게임 데이터 포함 여부를 차단하는지 확인한다.
-4. Todo 2 착수 전 `docs/NEXT_THREE_STEPS.md`의 선행 조건을 확인한다.
+4. Todo 2 착수 전 `docs/NEXT_FIVE_STEPS.md`의 선행 조건을 확인한다.
 
 나쁜 예:
 
