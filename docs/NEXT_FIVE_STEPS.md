@@ -4,13 +4,11 @@
 
 Git 작업 방식은 `AGENTS.md`의 "Git 작업 방식"을 따른다: PR 없이 `todo-<n>-<topic>` 브랜치에서 작업하고, `main` merge 전 로컬 검증(해당 Todo의 검증 명령 전부 exit 0)을 통과해야 하며 결과를 `handoff.md`에 기록한다.
 
-## Todo 2: 호스트 모듈 패키징
+## Todo 2: 호스트 모듈 패키징 — 완료 (2026-09-20, `todo-02-module-packaging`)
 
-- Branch: `todo-02-module-packaging`
-- First test: `tests/native/module-package`에서 빈 또는 손상된 `render.pak`/`Ultima-IV.mod`를 CDI/module loader가 거부하는 RED case를 만든다.
-- First implementation: `vendor/boron`과 `vendor/faun`의 host build dependency를 검사하는 `npm run deps:host`와 deterministic `npm run build:modules`를 만든다.
-- Verification: `npm run deps:host`, `npm run build:modules`, `npm run test:native -- -R module-package`.
-- Blockers: CMake, native compiler, GLFW/PNG/Vorbis/PulseAudio 개발 패키지의 설치 상태를 아직 확인하지 않았다.
+- `npm run deps:host`(Boron 2.0.8 host CLI, static 빌드)와 `npm run build:modules`(render.pak/Ultima-IV.mod/U4-Upgrade.mod)를 구현했고, `native/`의 CTest `module-package`가 CDI/module loader의 정상/빈/손상 파일 구분을 검증한다.
+- Faun은 이 Todo에서 빌드하지 않았다 — 모듈 패키징 자체가 Faun을 쓰지 않기 때문이다(자세한 이유는 `handoff.md`의 "Todo 2 완료 기록" 참고). Faun host 빌드는 Todo 3에서 실제로 필요해지며, 그때 `libpulse-dev`/`libvorbis-dev`/`libflac-dev` 설치가 필요하다.
+- 상세 커맨드/SHA-256/증거는 `handoff.md`를 참고한다.
 
 ## Todo 3: native GLFW 기준선
 
