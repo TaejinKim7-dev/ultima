@@ -20,7 +20,9 @@
     "typecheck": "tsc --noEmit",
     "verify:repo-sources": "node scripts/verify-repo-sources.mjs",
     "deps:host": "node scripts/deps-host.mjs",
-    "build:modules": "node scripts/build-modules.mjs"
+    "build:modules": "node scripts/build-modules.mjs",
+    "build:native": "node scripts/build-native.mjs",
+    "qa:native-baseline": "node scripts/qa-native-baseline.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.52.0",

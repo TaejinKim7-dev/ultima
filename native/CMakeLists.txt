@@ -49,3 +49,13 @@ add_test(NAME module-package COMMAND module_package_test
     ${HOST_MODULES_DIR}/render.pak
     ${HOST_MODULES_DIR}/Ultima-IV.mod
 )
+
+# Todo 3: negative case for the native GLFW+Faun xu4 binary (built
+# separately by `npm run build:native`, scripts/build-native.mjs -- a full
+# engine build does not belong in this CMake project). This test executable
+# itself has no engine dependencies; it only forks/execs the already-built
+# binary and inspects its exit code.
+add_executable(native_baseline_test tests/native_baseline_test.c)
+
+set(NATIVE_XU4_BIN ${CMAKE_SOURCE_DIR}/build/host/xu4-src/src/xu4)
+add_test(NAME native-baseline-negative COMMAND native_baseline_test ${NATIVE_XU4_BIN})

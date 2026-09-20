@@ -8,6 +8,8 @@
 
 **Todo 2(호스트 Boron 빌드 + xu4 모듈 패키징)를 `todo-02-module-packaging` 브랜치에서 완료했다 — 상세는 아래 "Todo 2 완료 기록" 참고.**
 
+**Todo 3(native GLFW+Faun 기준선)를 `todo-03-native-baseline` 브랜치에서 완료했다 — 상세는 아래 "Todo 3 완료 기록" 참고. (참고: 이 handoff.md는 Todo 4/5가 아직 main에 merge되기 전의 base(f84b5f5)에서 분기했으므로 Todo 4/5 관련 섹션은 여기 없다 — main merge 시 병합 필요.)**
+
 - root Vite/TypeScript strict/Vitest/Playwright harness와 minimal build shell이 있다.
 - `vendor/source-manifest.json`은 xu4, Faun, GLV, Boron의 deterministic file count/tree SHA-256과 pinned revision을 기록한다.
 - `npm run verify:repo-sources`는 manifest mismatch와 Git-tracked `.zip`, `.sav`, `.ega`, `.map`, `.tlk`, `.exe`를 실패시킨다.
@@ -80,6 +82,62 @@ git diff --check               # exit 0
 **Todo 6(WASM) 확장 지점 메모**: `deps-host.mjs`가 이미 `vendor/boron`을 `build/host/boron`으로 복사한 뒤 그 복사본에서 빌드한다 — emcc/emar로 다시 빌드해야 할 때도 이 복사본(또는 별도 `build/wasm/boron`)에서 `CC=emcc AR=emar ./configure ...`처럼 override하면 되고, `vendor/boron/Makefile` 자체를 고칠 필요는 없었다(고쳤다면 tree hash가 깨져 `vendor/source-manifest.json`도 갱신해야 했을 것). Boron Makefile은 `cc`/`ar`/`ranlib`를 하드코딩하지만 이 host의 `cc`가 이미 시스템 gcc라 문제가 없었다 — emcc로 바꾸려면 그때 가서 Makefile 변수화가 실제로 필요한지 다시 판단한다.
 
 **독립 게이트 리뷰**: 별도 subagent가 read-only로 위 파이프라인을 clean 상태(`rm -rf build`)에서 자체 재실행했다. **Verdict: CONFIRMED.** 재현성(두 번 빌드 후 해시 동일)과 손상 파일 거부(손상된 render.pak만 FAIL, 정상 Ultima-IV.mod는 ok)를 독립적으로 재확인했고, vendor/ 무수정·git 추적 파일 목록도 검증했다. 리뷰어가 자체적으로 손상 파일을 직접 만들어 재현하는 과정에서 이미 손상된 사본을 다시 XOR하여 우연히 원래 magic byte로 되돌아간 경우가 1건 있었는데(리뷰어 본인 재현 스크립트의 아티팩트, 실제 테스트 로직 결함 아님), 이는 이 저장소의 `corrupt-module.log` 증거(매번 원본에서 새로 복사 후 1회만 XOR)에는 해당하지 않는다.
+
+## Todo 3 완료 기록 (2026-09-20, branch `todo-03-native-baseline`)
+
+**범위**: 실제 GLFW+Faun native xu4 바이너리를 빌드하고, 검증된 원본 `ultima4.zip`을 사용해 title → 캐릭터 생성(이름/성별/미덕 퀴즈) → 게임 월드 진입 → 이동 → talk 명령 → save → quit → 재시작 → load까지 실제로 플레이해서 스크린샷 증거를 남겼다. missing/corrupt 원본 데이터에 대한 native CTest negative case도 추가했다.
+
+**최초 시도가 TDD를 어겼다는 점을 정정 기록**: 처음에는 xu4 CLI 플래그/세이브 경로/캐릭터 생성 흐름을 전혀 몰라서 수동 스파이크(bash로 직접 빌드 + Xvfb/xdotool로 손으로 조작)부터 했다. 사용자가 "모든 개발은 TDD 기반으로 하고 있지?"라고 지적한 뒤, `native/tests/native_baseline_test.c`를 실제 CTest로 등록하기 전에 RED(`ctest -R native-baseline` → "No tests were found!!!", `.omo/evidence/ultima-web/task-3/red-native-baseline-test.log`)를 먼저 남기고 구현 후 GREEN(`green-native-baseline-test.log`)을 확인하는 순서로 바로잡았다.
+
+**Faun host 빌드 (이 Todo에서 실제로 필요해짐)**: `scripts/deps-host.mjs`에 `buildFaun()`을 추가했다. Todo 2 완료 시점에는 미설치였던 `libpulse-dev`/`libvorbis-dev`/`libflac-dev`를 사용자가 직접 설치한 뒤(passwordless sudo 아니라 에이전트가 직접 설치 불가), `vendor/faun`을 `build/host/faun`으로 복사해 `./configure --static && make`로 `libfaun.a`를 만든다. 실패 시 정확히 어떤 apt 패키지가 필요한지 메시지로 안내한다.
+
+**native xu4 빌드 (`scripts/build-native.mjs`, `npm run build:native`)**: `vendor/xu4`를 `build/host/xu4-src`로 복사(원본 무수정, Todo 2와 동일 원칙)하고, `UI=glfw SOUND=faun`으로 `make -C src`를 실행한다. 두 가지 빌드 세부사항이 실제로 막혔던 지점이라 기록한다.
+1. `module.h`의 `#include <boron/urlan.h>`를 해결하려고 symlink shim(`build/host/xu4-src/vendor-shim/boron/*.h`)을 만들었는데, `CPATH`에는 shim의 **부모 디렉터리**(shim 자체가 아니라 `boron/`를 담고 있는 디렉터리)를 넣어야 한다 — 처음에 이걸 반대로 해서 `fatal error: boron/urlan.h: No such file or directory`가 났다.
+2. Faun을 `--static`으로 빌드했기 때문에(`libfaun.a`만 존재, `.so` 없음) `vendor/xu4/src/Makefile`의 `LIBS=$(UILIBS) -lGL -lpng -lz`가 Faun의 전이 의존성(`-lpulse -lvorbisfile -lFLAC`)을 자동으로 끌어오지 못해 링크 에러가 났다. `LIBS`를 command-line에서 완전히 override(`-lglfw -lfaun -lboron -lpthread -lGL -lpng -lz -lpulse -lvorbisfile -lFLAC`)해서 해결했다. `vendor/xu4/src/Makefile` 자체는 고치지 않았다(디스포저블 복사본이라 고쳐도 되지만, command-line override로 충분했다).
+
+**native CTest negative case (`native/tests/native_baseline_test.c`, CTest 이름 `native-baseline-negative`)**: `build/host/xu4-src/src/xu4`가 없으면 "run npm run build:native first" 메시지로 즉시 FAIL(스킵 아님, Todo 2의 `module_package_test` 필수 케이스와 동일 관례). 있으면 fork+exec로 (a) `ultima4.zip`이 전혀 없는 빈 디렉터리, (b) 내용이 깨진 `ultima4.zip`이 있는 디렉터리에서 각각 실행해 **exit code가 0이 아님**을 확인한다. `vendor/xu4/src/xu4.cpp:servicesInit()`가 `u4fsetup()` 실패 시 `errorFatal()`(`exit(1)`)을 호출하는 지점이라, GameController/게임 상태가 생성되기 전에 확실히 막힌다는 걸 소스로 확인했다.
+
+**QA baseline 스크립트 (`scripts/qa-native-baseline.mjs`, `npm run qa:native-baseline`)**: `ULTIMA4_DATA` 절대경로를 받아 해시를 출력하고, `build/native-run/`에 모듈+ZIP symlink를 준비한 뒤, 동적 display 번호로 Xvfb를 띄우고 xdotool로 실제 플레이를 자동화한다.
+- 캐릭터 생성(이름/성별/미덕 퀴즈)은 `vendor/xu4/src/intro.cpp`를 읽고 정확한 키 입력 횟수(showStory 24회 + 8라운드×2 + segue 2회 = 42회)를 계산했지만, 실제로는 몇 차례 짧아서(애니메이션 딜레이 등으로 추정) `party.sav` 파일 생성 여부를 직접 poll하는 방식으로 바꿔 견고하게 만들었다(`finishInitiateGame()`이 퀴즈 종료 즉시 `party.sav`를 쓰는 것을 소스에서 확인함). 최대 90회의 안전 상한을 둔다.
+- 이동, talk 명령(디스패치 확인 — 근처에 실제 대화 가능한 NPC를 찾지 못해 "Funny, no response!" 부정 케이스만 검증됨, 아래 "미검증/부분 구현" 참고), `-p qabaseline` 프로필로 save(quit&save 'q' 키), 프로세스 종료, `-p qabaseline`로 재시작(= `-i`가 자동으로 마지막 save를 로드) 후 상태(F/G 스탯, 좌표) 복원 확인까지 스크린샷 7장을 `.omo/evidence/ultima-web/task-3/native-baseline/`에 남겼다(이 디렉터리는 git-ignored).
+- 세이브는 항상 `build/native-run/profiles/qabaseline/`(repo 안, `-p` 프로필 사용)에만 쓰도록 해서 사용자의 실제 `$HOME/.config/xu4/`를 건드리지 않는다. (최초 수동 스파이크 때는 `-p` 없이 실행해 실제로 `$HOME/.config/xu4/`에 세이브가 생겼었다 — 정리 완료.)
+
+**검증 (2026-09-20, `rm -rf build` 이후 clean 상태에서 전체 파이프라인 1회 포함, 전부 실제 실행)**:
+```
+npm run deps:host                                        # exit 0 (Boron + Faun 둘 다 빌드)
+npm run build:modules                                     # exit 0
+npm run build:native                                      # exit 0 (native GLFW+Faun xu4 바이너리 생성)
+npm run cmake:configure                                   # exit 0
+npm run cmake:build                                        # exit 0
+npm run cmake:test                                         # exit 0 (module-package + native-baseline-negative 2/2 Passed)
+ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run qa:native-baseline   # exit 0
+npm run test:unit                                          # exit 0 (4 files / 6 tests)
+npm run verify:repo-sources                                # exit 0
+npm run typecheck                                          # exit 0
+npm run build                                              # exit 0
+git diff --check                                           # exit 0
+```
+
+**미검증/부분 구현 (솔직히 남김)**:
+- **NPC 대화 전체 흐름은 미검증이다.** 캐릭터 스폰 위치가 마을에서 멀리 떨어진 고립된 숲/해안 지역이라 실제 마을/NPC를 찾지 못했다. `talk` 명령 자체는 방향을 물어보고("Talk: Dir?") 대상이 없으면 "Funny, no response!"를 정확히 출력함을 확인했다 — 디스패치 경로(game.cpp의 talk 핸들러)는 동작하지만, 실제 NPC와의 다중 턴 대화는 아직 증거가 없다. 다음 에이전트가 이어서 할 일: 알려진 마을 좌표(예: Lord British 성이 있는 Britain)로 이동하는 경로를 찾거나, `-p` 프로필로 다른 시작 위치를 유도하는 방법을 조사한다.
+- 자동화 중 우연히 Giant Squid와의 전투에 돌입한 적이 있었다(수동 스파이크 단계, 스크립트에는 포함 안 됨) — combat.cpp 서브시스템이 최소한 부분적으로 동작함을 시사하지만 별도로 검증하지는 않았다.
+- Alt+x(정식 quit 단축키)가 Xvfb+xdotool 조합에서 반응하지 않아(원인 미조사 — modifier 전달 문제로 추정), 스크립트는 대신 프로세스를 kill해서 "종료"를 시뮬레이션한다. 실제 브라우저 이식에는 영향 없는 native-only 이슈다.
+- `qa:native-baseline`의 새 캐릭터 생성 루프는 정확한 키 입력 횟수 대신 `party.sav` 존재를 poll하는 방식이라, xu4 소스가 바뀌면(예: 다른 revision) 여전히 잘 동작해야 하지만 완전히 무관하게 견고한 것은 아니다(예: 세이브를 안 쓰는 변형이 생기면 깨짐).
+
+**독립 게이트 리뷰**: 아직 수행하지 않았다.
+
+### Todo 3 추가 보강 (2026-09-20, 같은 브랜치, advisor 검토 후) — 사용자 지시로 여기서 작업 중지
+
+위 "완료 기록"을 쓴 뒤 독립 게이트 리뷰로 넘어가기 전에 advisor에게 자체 점검을 요청했고, 두 가지 실질적인 gap을 확인했다. **사용자가 "지금까지 작업 중지하고 하던 모든 업무 handoff로 기록해"라고 지시해, 아래 내용까지 기록한 상태에서 작업을 멈췄다.** 다음 에이전트/세션은 여기서부터 이어가면 된다.
+
+1. **잘못된 zip(hash mismatch) 실패 시나리오가 실제로는 구현되어 있지 않았다.** 계획서의 QA 실패 시나리오는 "run with wrong ZIP hash and verify startup blocks before game state mutation, evidence `bad-zip.log`"인데, 기존 스크립트는 `ULTIMA4_DATA`의 해시를 **출력만** 하고 비교하지 않았다. 구조적으로 유효한(하지만 다른) zip이 오면 그대로 xu4를 실행해버리는 상태였다. TDD로 수정함:
+   - RED: `tests/unit/qa-native-baseline.test.ts`에 새 케이스("fails before touching xu4 when ULTIMA4_DATA's hash does not match the pinned original") 추가 후 실행 → 실패 확인(`/tmp/red-hash-mismatch.log`, 92초 소요 — 해시 비교 없이 실제로 캐릭터 생성 루프까지 진입했다가 90회 상한으로 타임아웃난 것이 RED의 증거).
+   - GREEN: `scripts/qa-native-baseline.mjs`에 `expectedSha256`(기본값 `94aa748cfa1d0e7aa2e518abebb994f3c18acf7edb78c3bd37cd0a4404e6ba74` — 검증된 원본 ultima4.zip, `ULTIMA4_DATA_SHA256` env로 override 가능) 상수와 비교 로직을 xu4 실행 이전(`existsSync` 체크 바로 다음, `xu4Bin`/모듈 체크보다도 먼저)에 추가. 불일치 시 `.omo/evidence/ultima-web/task-3/bad-zip.log`를 쓰고 즉시 종료(exit 1, 게임 상태 변경 전에 차단). 재실행 → 3/3 통과(`/tmp/green-hash-mismatch.log`).
+   - 실제 스크립트로도 재현: `ULTIMA4_DATA_SHA256=deadbeef...`로 실제 원본 zip을 일부러 "틀린 해시"로 지정해 실행 → exit 1, `.omo/evidence/ultima-web/task-3/bad-zip.log` 생성 확인. 그리고 override 없이(기본 pinned hash로) 실행하면 해시 비교를 통과하고 정상적으로 긴 QA 플로우로 진입하는 것도 확인(타임아웃 전까지 에러 없음).
+2. **NPC 대화가 여전히 미검증.** advisor가 지적: `npm run build:native`가 `build/host/xu4-src/src/`에 `dumpsavegame`/`dumpmap` 도구도 같이 빌드하고, `vendor/xu4/module/Ultima-IV/config.b`에 마을 좌표(portals 테이블)가 있으니 스폰 좌표를 `dumpsavegame`으로 뽑아 가장 가까운 마을까지의 방향을 역산해서 실제로 NPC에게 도달하라는 조언이었다. **이 작업은 아직 시작하지 못했다** — 사용자의 중지 지시가 들어와 여기서 멈췄다. 다음 단계: `./build/host/xu4-src/src/dumpsavegame build/native-run/profiles/qabaseline/party.sav`로 스폰 좌표 확인 → `config.b`의 portals 테이블과 대조 → 방향 시퀀스 계산 → `qa-native-baseline.mjs`에 실제 NPC 대화(다중 턴, "Funny, no response!"가 아닌 실제 응답) 스크린샷 추가.
+3. 부수적으로, 이전 수동 스파이크에서 남아있던 leaked `Xvfb :99` 프로세스(PID 29861, 이번 세션 시작 시 `pgrep`으로 발견)를 kill했다. 이번 턴 중 다시 백그라운드로 띄운 `npm run qa:native-baseline` 실행도 사용자의 중지 지시에 따라 kill했고, `pgrep -af "xu4|Xvfb"`로 잔여 프로세스 없음을 확인했다.
+
+**현재 git 상태 (이 브랜치, `todo-03-native-baseline`)**: 커밋 전. `git status --short`: `handoff.md`, `native/CMakeLists.txt`, `package.json`, `scripts/deps-host.mjs` 수정, `native/tests/native_baseline_test.c`/`scripts/build-native.mjs`/`scripts/qa-native-baseline.mjs`/`tests/unit/build-native.test.ts`/`tests/unit/qa-native-baseline.test.ts` 신규. **아직 하지 않은 것**: (a) 플랜 체크박스 `- [ ] 3.` → `[x]` 미변경(위 2번 gap이 남아있어 일부러 보류 중), (b) 커밋 안 함, (c) 독립 게이트 리뷰 안 함, (d) `main` 병합 안 함, (e) 이미 CONFIRMED된 Todo 4(`todo-04-i18n-inventory`, 커밋 `2d02653`)도 아직 `main`에 병합 안 됨 — advisor는 Todo 4를 먼저 병합(idle하게 기다리고 있으므로)하고, 그 다음 Todo 3을 병합하라고 조언함. `main`은 현재 `0a1408a`(Todo 1+2+5)이고, `todo-03`/`todo-04` 둘 다 `f84b5f5`(Todo 1+2)에서 분기했으므로 `handoff.md`의 "Todo N 완료 기록" 삽입 지점과 `package.json`의 스크립트 목록에서 3-way 충돌이 예상됨(각자 다른 스크립트 추가) — merge 후 `npm run`으로 6개 스크립트(`build:site`, `check:base-path`, `i18n:inventory`, `i18n:check`, `build:native`, `qa:native-baseline`)가 전부 남아있는지, `npm run test:unit` 테스트 수가 세 브랜치 합계(Todo4 5파일/33개 + Todo5 bridge-contract 11개 + Todo3 3파일)인지 반드시 확인해야 함.
 
 - [AI 코딩 에이전트 규칙](AGENTS.md): 다른 AI가 이 저장소를 이어받을 때 지켜야 할 프로젝트 운영 규칙.
 - [AI 코딩 에이전트 인계 규칙](docs/AI_AGENT_HANDOFF.md): `handoff.md`를 어떻게 작성·갱신해야 하는지에 대한 표준.
