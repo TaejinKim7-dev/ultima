@@ -255,3 +255,14 @@ ZIP 크기: 529099 bytes. 경로가 사라지면 `https://ultima.thatfleminggent
 8. GitHub Pages workflow와 프로젝트 경로 build를 완성하고 최종 검증 기록을 제출.
 
 단계마다 관측한 결과만 완료로 기록한다. 현재 계획 문서의 예정 명령을 이미 존재하는 도구나 실행 증거로 취급하지 않는다.
+
+### Todo 3 추가 조사 (2026-09-20, commit `0c681a1` 이후)
+
+사용자 지시에 따라 위 상태를 먼저 `test(native): lock original gameplay baseline` (`0c681a1`)로 커밋하고 `origin/todo-03-native-baseline`에 push했다. 이후 NPC gap을 실제 실행으로 재조사했지만, 다중 턴 대화 성공으로 판정할 증거는 얻지 못했다.
+
+- 기존 QA를 다시 실행해 `build/native-run/profiles/qabaseline/party.sav`를 재생성했다. `dumpsavegame` 결과는 world map `location: 0x0`, `x: 232 y: 135`이다.
+- `vendor/xu4/module/Ultima-IV/maps.b`의 world portal과 대조했다. 현재 위치에서 가장 가까운 진입 후보는 Moonglow `(232,135) -> map 5, start (1,15)`, Britain은 `(218,107) -> map 6, start (2,15)`이다. 현재 좌표에서 직선 방향 키만 보내면 지형 충돌로 Britain까지 도달하지 못했다.
+- Moonglow 포털 좌표에서 `e`를 보내 실제 도시 화면과 `Enter town! / Moonglow` 표시를 확인했다. 그러나 도시 안에서 이동 후 `t`와 동/서 방향을 보내도 `Funny, no response!`만 확인되었고, `You meet ...`, keyword 응답, 두 번째 keyword 또는 `bye`의 다중 턴 증거는 얻지 못했다.
+- advisor/subagent의 read-only 조사도 같은 결론이다. `game.cpp`/`discourse_tlk.cpp`의 실제 대화 루프와 성공 assertion 형태는 확인했지만, 현재 profile의 일반 이동 경로로 NPC를 찾았다고 주장할 수 없다. debug cheat는 source상 존재하지만 native QA 자동화에서 profile 설정/단축키를 통해 성공적으로 재현하지 못했다.
+
+따라서 **NPC 다중 턴 대화는 여전히 미검증**이며, `.omo/plans/ultima-web.md`와 `docs/ULTIMA_WEB_PLAN.md`의 Todo 3 checkbox는 `[ ]`로 유지한다. 위 실험에서 생성된 세이브, 원본 ZIP, 화면 캡처는 모두 repo 밖 또는 git-ignored build/evidence 영역에만 있었고 커밋하지 않았다.
