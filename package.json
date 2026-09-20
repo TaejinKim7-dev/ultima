@@ -8,6 +8,8 @@
   },
   "scripts": {
     "build": "vite build",
+    "build:site": "node scripts/build-site.mjs",
+    "check:base-path": "node scripts/check-base-path.mjs",
     "dev": "vite",
     "preview": "vite preview",
     "test:unit": "vitest run --passWithNoTests=false",
