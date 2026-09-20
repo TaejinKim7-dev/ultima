@@ -184,7 +184,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: complete schema sample passes `npm run i18n:check`, evidence `.omo/evidence/ultima-web/task-4/i18n-green.log`; failure: remove one required TLK translation and verify nonzero with exact key, evidence `.omo/evidence/ultima-web/task-4/i18n-missing-key.log`.
   Commit: Y | feat(i18n): inventory text and define Korean schema
 
-- [ ] 5. Define the browser shell, bridge ABI, and GitHub Pages asset contract
+- [x] 5. Define the browser shell, bridge ABI, and GitHub Pages asset contract
   What to do / Must NOT do: build the Vite static shell contract: `index.html`, canvas, lower dialogue panel, status overlay layer, file picker for original ZIP, import/export saves, and typed bridge events. Define C ABI version 1 and TS types for `message`, `clear`, `prompt`, `view`, `save-state`, and `runtime-error`. Must not add a server framework, login, cloud storage, or runtime translation API.
   Parallelization: Wave 1 | Blocked by: 1 | Blocks: 9,11,12,13
   References: GitHub Pages docs: `https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site`; `https://docs.github.com/articles/creating-project-pages-manually`; Emscripten modularized/filesystem/OpenGL docs recorded in `.omo/drafts/ultima-web-source-analysis.md`; `engine/src/screen_glfw.cpp:584`; `engine/src/event.cpp:487-943`.

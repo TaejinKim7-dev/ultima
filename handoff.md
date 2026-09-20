@@ -8,6 +8,8 @@
 
 **Todo 2(호스트 Boron 빌드 + xu4 모듈 패키징)를 `todo-02-module-packaging` 브랜치에서 완료했다 — 상세는 아래 "Todo 2 완료 기록" 참고.**
 
+**Todo 5(브라우저 셸/브릿지 ABI/GitHub Pages 자산 계약)를 `todo-05-browser-shell` worktree/브랜치에서 완료했다 — 상세는 아래 "Todo 5 완료 기록" 참고. 이 작업 중 `todo-04-i18n-inventory` worktree는 다른 에이전트가 동시에 사용 중이었고, 이 세션은 그 worktree와 `/home/taejin/ultima`(메인 worktree)를 전혀 건드리지 않았다.**
+
 - root Vite/TypeScript strict/Vitest/Playwright harness와 minimal build shell이 있다.
 - `vendor/source-manifest.json`은 xu4, Faun, GLV, Boron의 deterministic file count/tree SHA-256과 pinned revision을 기록한다.
 - `npm run verify:repo-sources`는 manifest mismatch와 Git-tracked `.zip`, `.sav`, `.ega`, `.map`, `.tlk`, `.exe`를 실패시킨다.
@@ -80,6 +82,55 @@ git diff --check               # exit 0
 **Todo 6(WASM) 확장 지점 메모**: `deps-host.mjs`가 이미 `vendor/boron`을 `build/host/boron`으로 복사한 뒤 그 복사본에서 빌드한다 — emcc/emar로 다시 빌드해야 할 때도 이 복사본(또는 별도 `build/wasm/boron`)에서 `CC=emcc AR=emar ./configure ...`처럼 override하면 되고, `vendor/boron/Makefile` 자체를 고칠 필요는 없었다(고쳤다면 tree hash가 깨져 `vendor/source-manifest.json`도 갱신해야 했을 것). Boron Makefile은 `cc`/`ar`/`ranlib`를 하드코딩하지만 이 host의 `cc`가 이미 시스템 gcc라 문제가 없었다 — emcc로 바꾸려면 그때 가서 Makefile 변수화가 실제로 필요한지 다시 판단한다.
 
 **독립 게이트 리뷰**: 별도 subagent가 read-only로 위 파이프라인을 clean 상태(`rm -rf build`)에서 자체 재실행했다. **Verdict: CONFIRMED.** 재현성(두 번 빌드 후 해시 동일)과 손상 파일 거부(손상된 render.pak만 FAIL, 정상 Ultima-IV.mod는 ok)를 독립적으로 재확인했고, vendor/ 무수정·git 추적 파일 목록도 검증했다. 리뷰어가 자체적으로 손상 파일을 직접 만들어 재현하는 과정에서 이미 손상된 사본을 다시 XOR하여 우연히 원래 magic byte로 되돌아간 경우가 1건 있었는데(리뷰어 본인 재현 스크립트의 아티팩트, 실제 테스트 로직 결함 아님), 이는 이 저장소의 `corrupt-module.log` 증거(매번 원본에서 새로 복사 후 1회만 XOR)에는 해당하지 않는다.
+
+## Todo 5 완료 기록 (2026-09-20, branch `todo-05-browser-shell`)
+
+**범위**: WASM 엔진(Todo 6+)이 아직 없는 상태에서, 그 엔진이 이 웹 셸과 주고받을 브릿지 이벤트의 TypeScript 계약("C ABI version 1")과, 그 계약을 실제로 사용하는 정적 Vite 셸(canvas + 하단 dialogue panel + status overlay + 원본 ZIP file picker + save export/import)을 정의했다. GitHub Pages project-site base(`/ultima/`) 자산 계약을 강제하는 `build:site` 빌드 스크립트와 base-path 검증기도 추가했다. 실제 WASM 엔진, 실제 게임플레이, 실제 GitHub Pages 배포는 이 Todo의 범위가 아니다(각각 Todo 6+, Todo 19).
+
+**구현**:
+- `src/bridge/types.ts`: `BRIDGE_ABI_VERSION = 1`(문서화된 버전 상수)과 계획서가 지정한 정확한 6개 이벤트 이름(`message`/`clear`/`prompt`/`view`/`save-state`/`runtime-error`)의 discriminated union `BridgeEvent`, 그리고 `isBridgeEvent(candidate: unknown): candidate is BridgeEvent` type guard를 정의했다. guard는 abiVersion 불일치, 알려지지 않은 `type`, 각 이벤트별 필수 필드 누락/오타(예: `prompt.kind`가 5개 값 밖, `view.region`이 3개 값 밖, `save-state.status`가 3개 값 밖, `runtime-error.fatal` 누락)를 모두 거부하고, `null`/원시값/배열/빈 객체에도 던지지 않고 `false`를 반환한다. C++/native 브릿지 구현 자체는 아직 작성하지 않았다 — 이 파일은 그 구현이 맞춰야 할 TS 계약이다.
+- `index.html`: `#game-canvas`(320x200 캔버스) 위에 `pointer-events: none`인 `#status-overlay`(원래 게임 화면 위치의 짧은 상태 텍스트용)를 겹치고, 그 아래에 스크롤 가능한 `#dialogue-panel`/`#dialogue-history`(긴 대화용, 캔버스 위에 얹지 않음)를 별도 섹션으로 뒀다. `#rom-picker`(원본 `ultima4.zip` 선택, `accept=".zip"`)와 `#save-export`/`#save-import` 컨트롤도 추가했다. 서버 프레임워크, 로그인, 클라우드 저장, 실시간 번역 API는 추가하지 않았다.
+- `src/shell.ts`: `createShell(document)`가 위 DOM을 찾아 연결하고 `{ abiVersion, dispatch(candidate: unknown): boolean }` 형태의 `UltimaBridgeApi`를 반환한다. `dispatch`는 `isBridgeEvent`로 검증에 실패하면 `console.error`만 남기고 `false`를 반환하며(게임 상태를 바꾸지 않음), 성공하면 이벤트 타입별로 실제 DOM을 갱신한다(`message`/`prompt`→dialogue panel에 `textContent`로만 추가, `clear`→dialogue 비우기, `view`→status overlay 텍스트, `save-state`→저장 상태 문구, `runtime-error`→dialogue에 오류 표시). 이 객체는 `window.ultimaBridge`로 노출되는데, 이는 Todo 6+에서 실제 네이티브 글루가 호출할 의도된 통합 지점이며 "cheat/state-control API"가 아니다(Todo 18의 금지 항목과는 다른 것 — 계약 자체가 통합 지점).
+  - 원본 ZIP 선택(`#rom-picker` change)과 세이브 가져오기(`#save-import` change)는 File API로 파일명/크기 또는 텍스트 내용만 로컬에서 읽고, 어디에도 업로드하지 않는다(실제 ZIP 내용 검증은 Todo 9).
+  - 세이브 내보내기(`#save-export` click)는 placeholder JSON을 `Blob` + `URL.createObjectURL` + `<a download>`로 로컬 다운로드만 트리거한다(실제 영속 엔진은 Todo 10).
+- `src/main.ts`: `createShell(document)`를 호출해 `window.ultimaBridge`에 연결하고, 셸 초기화가 끝나면 `document.body`에 `data-bridge-ready="true"`와 `data-bridge-abi-version="1"` 속성을 설정한다 — Playwright QA와 미래의 엔진 시작 시퀀스가 관찰할 수 있는 "bridge-ready" 신호다.
+- `scripts/check-base-path.mjs`: `dist/index.html`을 읽어 루트-상대(`/`로 시작) `src`/`href` 참조가 모두 지정된 base(정규화 시 trailing slash 포함)로 시작하는지 검사하고, `dist` 트리 전체를 스캔해 `package.json`/`vite.config.*`/`tsconfig.json`/`playwright.config.ts`/`.env*`/`*.ts`/`*.tsx` 같은 "서버 전용/툴링" 파일이 섞여 있지 않은지 검사한다. `checkBasePath(distDir, expectedBase)`를 export해서 CLI(`npm run check:base-path -- --base=/ultima/`)와 `build-site.mjs`가 함께 재사용한다. **자체 리뷰로 발견해 고친 결함**: 루트-상대 참조가 0개인 경우(예: `--base=./`로 빌드해 `src="./assets/..."`처럼 전부 상대 경로가 되는 경우) 원래 코드는 "불일치 0건"으로 통과시켜버리는 vacuous pass였다. `references.length === 0`이면 명시적으로 실패하도록 가드를 추가했고, `/tmp`에 `--base=./`로 만든 사본을 만들어 실제로 "no root-relative asset references to verify" 메시지와 exit 1로 거부됨을 직접 확인했다(이 재현은 evidence에 남기지 않음 — `/tmp` 임시 파일이며 재현 방법 자체가 기록의 핵심). 반대로 "서버 전용 파일 섞임" 분기는 이 세션에서 실제로 실패를 관찰하지 못했다 — `dist/`가 항상 깨끗했기 때문이며, 이 분기 자체가 틀렸을 가능성은 배제되지 않는다.
+- `scripts/build-site.mjs`: `npm run build:site -- --base=/ultima/`가 실제로 동작하도록 만든 wrapper다. **주의**: `--base=...`는 `npm run <script>`가 스크립트 문자열 전체 뒤에 그대로 이어붙이는 인자이기 때문에, `package.json`에 `"build:site": "vite build && node check.mjs"`처럼 compound 커맨드를 넣으면 `--base`가 마지막 명령(checker)에만 붙고 `vite build`에는 전달되지 않는다. 그래서 이 Node 스크립트가 직접 argv에서 `--base`(`--base=X`, `--base X` 둘 다)를 파싱해 `node_modules/vite/bin/vite.js build --base=<base>`를 `spawnSync`로 실행(npx 대신 경로 직접 지정 — 네트워크/버전 해석 변동 없음)하고, 성공하면 곧바로 `checkBasePath("dist", base)`를 호출해 잘못된 base로 조용히 깨진 상대경로가 배포 전에 반드시 실패하도록 만든다.
+- `package.json`: `build:site`(위 wrapper), `check:base-path`(단독 checker CLI) 스크립트를 추가했다.
+- `playwright.config.ts`: `webServer.command`가 `node scripts/build-site.mjs --base=/ultima/ && node node_modules/vite/bin/vite.js preview --base=/ultima/ --port 4173 --strictPort`를 실행한다 — `vite preview`는 `vite build`에 준 `--base`를 자동으로 물려받지 않으므로(빌드 시 CLI flag였고 `vite.config.ts`에는 없음) preview에도 동일한 `--base`를 명시적으로 줘야 `/ultima/` 하위 자산이 실제로 200을 받는다. Playwright의 `webServer.command`는 셸을 통해 실행되므로(자체 인자 forwarding 문제 없음) `&&`가 그대로 동작한다.
+- `tests/unit/bridge-contract.test.ts` (RED 먼저 작성): ABI 버전/이벤트 이름 목록 고정, 6개 이벤트 각각의 정상/비정상 shape, 알려지지 않은 `type`, ABI 버전 불일치, `null`/원시값/배열/빈 객체 거부, 타입 내로잉까지 11개 테스트.
+- `tests/e2e/shell-ready.spec.ts`: `/ultima/`로 이동해 `body[data-bridge-ready="true"]`와 `window.ultimaBridge.abiVersion === 1`을 확인하고, `#rom-picker`/`#save-import`에 **디스크에 없는 메모리 내(in-memory) 가짜 파일**(`page.locator(...).setInputFiles({ name, mimeType, buffer })`)을 주입해 dialogue panel/저장 상태 갱신을 확인하며, `#save-export` 클릭이 실제 다운로드 이벤트를 발생시키는지 확인한다. 테스트 전체에서 발생한 모든 non-GET 네트워크 요청을 기록해 빈 배열임을 단언한다(원본 데이터/세이브가 "어디에도 업로드되지 않는다"는 요구사항의 실제 증거). 통과 시 `.omo/evidence/ultima-web/task-5/shell-ready.json`을 테스트 코드 안에서 직접 기록한다(수기 작성 아님). **이 테스트가 실제로 증명하는 것**: `data-bridge-ready="true"`가 관찰됐다는 것은 `/ultima/assets/index-*.js`가 실제로 로드·실행되어 `main.ts`가 끝까지 돌았다는 뜻이다 — 즉 이 e2e 통과 자체가 GitHub Pages project-site base(`/ultima/`) 하위 자산 해석이 (문자열 검사가 아니라) 실제 브라우저에서 동작함을 보여주는 증거다.
+
+**검증 (2026-09-20, 전부 실제 실행, `check-base-path.mjs`의 vacuous-pass 수정 이후 최종 재실행 기준)**:
+```
+npm ci                                    # exit 0 (기존과 동일한 EBADENGINE warning) — $? 직접 캡처로 재확인(파이프 뒤 tail의 $?를 잘못 읽은 초안 실수를 고쳤음)
+npx playwright install chromium           # exit 0 — 이 worktree에 브라우저 캐시가 없어 새로 설치함(~/.cache/ms-playwright), $? 직접 캡처로 재확인. 별도로 node -e "chromium.launch()"를 실행해 시스템 라이브러리 누락 없이 실제로 브라우저가 뜨는 것까지 확인함(더 강한 증거)
+npm run test:unit -- tests/unit/bridge-contract.test.ts   # RED: exit 1 (모듈 없음, 로그: bridge-contract-red.log) → 구현 후 GREEN: exit 0, 11/11 (bridge-contract-green.log)
+npm run test:unit                         # exit 0 — 3 files / 14 tests (bridge-contract 11 + build-modules 1 + repo-sources 2)
+npm run build:site -- --base=/ultima/     # exit 0 — dist/index.html이 artifact root, 자산이 /ultima/assets/...로 해석됨, 서버 전용 파일 없음
+npm run typecheck                         # exit 0
+npm run test:e2e                          # exit 0 — 1/1 (tests/e2e/shell-ready.spec.ts), shell-ready.json 생성 확인
+npm run verify:repo-sources               # exit 0 — vendor/ 4개 component 무결
+npm run build                             # exit 0 (vite build, base "/")
+git diff --cached --check                 # exit 0 (git diff --check만으로는 이미 add된 뒤라 무의미하므로 --cached로 실제 스테이지된 변경을 검사함)
+```
+
+**base-path 실패 케이스가 실질적임을 별도 확인 (두 가지)**:
+1. `npm run build`(base `/`)로 만든 `dist/`에 대해 `npm run check:base-path -- --base=/ultima/`를 실행 → `dist/index.html has 2 asset reference(s) that do not start with base "/ultima/": /assets/index-*.js, /assets/index-*.css` 메시지와 함께 exit 1로 정확히 거부됨을 확인했다(배포 전에 잡힘). 로그: `.omo/evidence/ultima-web/task-5/base-path-failure.log`.
+2. (자체 리뷰로 발견) `--base=/ultima/`로 빌드한 `dist/index.html`을 복사해 `/ultima/`를 `./`로 치환한(모든 참조를 상대 경로로 만든) 사본에 대해 `check-base-path.mjs --base=/ultima/`를 실행하면, 수정 전 코드는 "불일치 0건"으로 **통과**해버리는 vacuous pass였다. `references.length === 0`이면 명시적으로 실패하도록 가드를 추가한 뒤 동일한 `/tmp` 사본으로 재실행해 `dist/index.html has no root-relative asset references to verify against base "/ultima/"` 메시지와 exit 1로 거부됨을 확인했다(이 `/tmp` 재현 자체는 evidence 디렉터리에 남기지 않았다 — 실제 repo 산출물이 아니기 때문).
+
+**포트 충돌 주의**: `playwright.config.ts`의 `webServer`는 4173(Vite preview 기본 포트)을 `strictPort: true`로 고정한다. 이 worktree 밖의 다른 에이전트가 같은 포트에서 `vite preview`를 띄우고 있는 상태에서 리뷰어가 `npm run test:e2e`를 재실행하면 포트 충돌로 실패할 수 있다 — 이건 이 구현의 회귀가 아니라 환경 충돌이므로, 재실행 전에 4173이 비어 있는지 확인한다.
+
+**Evidence** (`.omo/evidence/ultima-web/task-5/`, 전부 git-ignored, local-only):
+- `bridge-contract-red.log` / `bridge-contract-green.log`: RED→GREEN vitest transcript.
+- `base-path-failure.log`: 잘못된 base로 만든 dist가 checker에 의해 거부되는 실제 로그.
+- `shell-ready.json`: Playwright happy-path QA 산출물(테스트 코드가 직접 기록).
+
+**의도적으로 하지 않은 것 / 다음 Todo로 미룬 것**:
+- 실제 C/C++ 브릿지 글루는 작성하지 않았다 — `src/bridge/types.ts`는 그 글루가 맞춰야 할 TS 쪽 계약일 뿐이다(과제 지시대로).
+- 원본 ZIP 실제 내용 검증(SHA/필수 파일 목록)과 실제 IDBFS 영속화는 각각 Todo 9/10이며, 이 Todo의 file picker/save export/import는 로컬 File API 배선과 bridge 이벤트 계약만 증명한다(export는 placeholder JSON).
+- `npm run build:site -- --base=/ultima/`를 마지막으로 실행한 뒤 `npm run build`(base `/`)를 검증 순서상 나중에 실행했기 때문에, 이 세션 종료 시점의 `dist/`는 base `/`로 빌드된 상태다(`dist/`는 git-ignored이므로 커밋에는 영향 없음) — 실제 GitHub Pages 배포 전에는 반드시 `npm run build:site -- --base=/ultima/`를 다시 실행해야 한다(Todo 19에서 workflow가 이를 수행).
+- 실제 GitHub Pages 배포, Firefox/WebKit에서의 크로스 브라우저 확인은 이 Todo에서 하지 않았다(계획서 Blocker 항목과 일치, Todo 19/F3에서 다룬다).
 
 - [AI 코딩 에이전트 규칙](AGENTS.md): 다른 AI가 이 저장소를 이어받을 때 지켜야 할 프로젝트 운영 규칙.
 - [AI 코딩 에이전트 인계 규칙](docs/AI_AGENT_HANDOFF.md): `handoff.md`를 어떻게 작성·갱신해야 하는지에 대한 표준.
