@@ -176,7 +176,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: Xvfb + xdotool drives title->new game->first save->restart/load, evidence `.omo/evidence/ultima-web/task-3/native-baseline/`; failure: run with wrong ZIP hash and verify startup blocks before game state mutation, evidence `.omo/evidence/ultima-web/task-3/bad-zip.log`.
   Commit: Y | test(native): lock original gameplay baseline
 
-- [ ] 4. Inventory every English source and create Korean localization schema
+- [x] 4. Inventory every English source and create Korean localization schema
   What to do / Must NOT do: extract/inventory all display text from C++ strings, Boron module scripts, TLK records, `TITLE.EXE`, and `AVATAR.EXE`; create `locales/ko/{ui,module,binary,tlk,aliases,glossary}.json` with stable semantic IDs, placeholder signatures, source hashes, and field constraints. Must not overwrite TLK/EXE bytes or store the extracted full English corpus in public artifacts.
   Parallelization: Wave 1 | Blocked by: 1 | Blocks: 14,15
   References: `.omo/drafts/ultima-web-source-analysis.md`; `engine/src/config_boron.cpp:1325-1340`; `engine/src/intro.cpp:24-29`; `engine/src/intro.cpp:130-140`; TLK 16 files in verified original ZIP, each 4608 bytes / 16 records * 288 bytes.
