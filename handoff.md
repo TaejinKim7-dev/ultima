@@ -1,6 +1,6 @@
 # Ultima IV 웹 한글판 개발 인수인계
 
-최종 갱신: 2026-09-20 KST.
+최종 갱신: 2026-09-24 KST.
 
 ## 현재 상태
 
@@ -9,6 +9,8 @@
 **Todo 2(호스트 Boron 빌드 + xu4 모듈 패키징)를 `todo-02-module-packaging` 브랜치에서 완료했다 — 상세는 아래 "Todo 2 완료 기록" 참고.**
 
 **Todo 5(브라우저 셸/브릿지 ABI/GitHub Pages 자산 계약)를 `todo-05-browser-shell` worktree/브랜치에서 완료했다 — 상세는 아래 "Todo 5 완료 기록" 참고. 이 작업 중 `todo-04-i18n-inventory` worktree는 다른 에이전트가 동시에 사용 중이었고, 이 세션은 그 worktree와 `/home/taejin/ultima`(메인 worktree)를 전혀 건드리지 않았다.**
+
+**Todo 4(영어 원문 inventory + 한국어 로컬라이제이션 스키마)를 `todo-04-i18n-inventory` 브랜치에서 완료했다 — TITLE.EXE/AVATAR.EXE 바이너리 문자열 추출까지 실제 원본 데이터로 검증했다(당초 "pending 처리 가능"이라고 허용됐던 항목이었으나 `vendor/xu4/src`에서 정확한 오프셋 근거를 찾아 실제로 구현했다). 상세는 아래 "Todo 4 완료 기록" 참고.**
 
 - root Vite/TypeScript strict/Vitest/Playwright harness와 minimal build shell이 있다.
 - `vendor/source-manifest.json`은 xu4, Faun, GLV, Boron의 deterministic file count/tree SHA-256과 pinned revision을 기록한다.
@@ -131,6 +133,63 @@ git diff --cached --check                 # exit 0 (git diff --check만으로는
 - 원본 ZIP 실제 내용 검증(SHA/필수 파일 목록)과 실제 IDBFS 영속화는 각각 Todo 9/10이며, 이 Todo의 file picker/save export/import는 로컬 File API 배선과 bridge 이벤트 계약만 증명한다(export는 placeholder JSON).
 - `npm run build:site -- --base=/ultima/`를 마지막으로 실행한 뒤 `npm run build`(base `/`)를 검증 순서상 나중에 실행했기 때문에, 이 세션 종료 시점의 `dist/`는 base `/`로 빌드된 상태다(`dist/`는 git-ignored이므로 커밋에는 영향 없음) — 실제 GitHub Pages 배포 전에는 반드시 `npm run build:site -- --base=/ultima/`를 다시 실행해야 한다(Todo 19에서 workflow가 이를 수행).
 - 실제 GitHub Pages 배포, Firefox/WebKit에서의 크로스 브라우저 확인은 이 Todo에서 하지 않았다(계획서 Blocker 항목과 일치, Todo 19/F3에서 다룬다).
+
+## Todo 4 완료 기록 (2026-09-20, branch `todo-04-i18n-inventory`)
+
+**범위**: 4개 영어 원문 소스(Boron 모듈 스크립트, 원본 TLK 16개 파일, C++ UI 문자열, TITLE.EXE/AVATAR.EXE 바이너리) 전체를 inventory하고, hash-only 공개 스키마(`locales/ko/{ui,module,binary,tlk,aliases,glossary}.json`)와 `npm run i18n:inventory`/`npm run i18n:check` 두 CLI를 만들었다. **TITLE.EXE/AVATAR.EXE는 "근거를 못 찾으면 pending 처리"가 허용된 항목이었지만, `vendor/xu4/src/intro.cpp`(title.exe)와 `vendor/xu4/src/discourse_castle.cpp`/`codex.cpp`/`shrine.cpp`(avatar.exe)에서 정확한 바이트 오프셋 근거를 찾아 실제로 구현하고 실제 원본 ZIP으로 검증했다** — 모든 4개 소스가 `pending` 플레이스홀더가 아니라 실제 동작하는 추출 파이프라인이다.
+
+**구현**:
+- `scripts/lib/tlk-codec.mjs`: 원본 `.TLK` 레코드 코덱(288바이트 고정 레코드, 16레코드/파일, 12개 문자열 필드). 근거는 `vendor/xu4/src/util/tlkconv.c`의 `struct Talk`/`talk_init()`과 `vendor/xu4/src/discourse_tlk.cpp:199-238,261-277`의 `struct U4Talk`/`U4Talk_load()` 두 개의 독립적인 xu4 소스가 정확히 일치함을 대조 확인했다. `tlkKey(map, npcIndex, field)` → `"map:npcIndex:field"` 형태(acceptance criteria가 요구하는 정확한 shape)를 만든다.
+- `scripts/lib/binary-strings.mjs`: TITLE.EXE/AVATAR.EXE의 8개 문자열 테이블(introQuestions/introText/introGypsy, lordBritishKeyword/lordBritishText, hawkwindText, virtueQuestions/endgameText1/endgameText2, shrineAdvice) 추출. 모든 오프셋은 `vendor/xu4/src/intro.cpp:59,97,101-103`, `discourse_castle.cpp:44,50-51,59,62,70,73,76-77`, `codex.cpp:43-45`, `shrine.cpp:54`의 실제 호출부 리터럴을 그대로 인용했다(추측 없음). Lord British 블록에 문서화된 바이트 손상 보정(오프셋 2724, 7바이트, `discourse_castle.cpp:53-60`)도 그대로 재현했다. `binaryKey(resource, table, index)` → `"resource:table:index"` shape을 만든다.
+  - **교차검증 중 발견한 불일치**: `vendor/xu4/doc/FileFormats.md`(899-1005번째 줄, xu4 프로젝트 자체 공개 문서)는 Hawkwind/Lord British 오프셋·길이·문자열 개수를 약간 다르게 기술한다(Lord British keyword 시작 오프셋 87565 vs 우리가 실제 사용한 87581, 문자열 개수 27+25=52 vs 우리가 쓴 25+24=49). **`discourse_castle.cpp`(실제로 컴파일·실행되는 코드)를 신뢰했다** — 실제 원본 ZIP으로 추출을 실행한 결과 25개 키워드(마지막 1개는 문서화된 "extra empty string"과 정확히 일치하는 빈 문자열) + 24개 응답 텍스트가 끝까지 깨짐 없이 정확히 종료되는 것을 직접 확인했다(`.local/i18n-inventory/binary.json`, git-ignored라 여기 인용 불가). `FileFormats.md`는 이 지점에서 stale하거나 다른 관점으로 작성된 문서로 보인다 — 코드가 아니라 문서 쪽 오류일 가능성이 높다.
+- `scripts/lib/boron-strings.mjs`: Boron 모듈 스크립트(`.b` 파일)의 `"..."`/`{...}`(중첩 balance 지원) 문자열 리터럴 추출 + caret escape 해석(`^-`→tab, `^/`→newline, `^(HEX)`, 그 외 `^X`→X 리터럴 — `vendor/boron/urlan/tokenize.c:376-393`의 `ur_caretChar()` 정확히 재현). `;` 라인 주석과 `/* */` 블록 주석도 스킵한다. 텍스트에 공백이 있으면 `display`, 없으면 `identifier`로 best-effort 분류(완벽하지 않음을 명시).
+- `scripts/lib/cpp-strings.mjs`: `screenMessage("...")`와 `Menu::add(ID, "...")`/`new XxxMenuItem("...")` 두 호출 패턴만 스캔(76개 전체 소스 파일이 아니라 player-visible 호출부만). 8진 이스케이프(`\010` 등, 메뉴 커서 글리프에 실제로 쓰임)까지 정확히 해석한다.
+- `scripts/lib/{hash,placeholders,text-width,schema-io,alias-check,zip-extract}.mjs`: sha256 해시, printf류 placeholder 서명(정렬된 multiset 비교 — 한국어는 어순이 바뀌므로 순서 무시, 개수/종류만 비교), status-line 폭 휴리스틱(`STATUS_AREA_WIDTH_COLUMNS = 15`, 근거 `vendor/xu4/src/stats.h:13` `STATS_AREA_WIDTH`; 한글 음절은 2칸으로 계산), 스키마 로드/저장과 기존 번역 보존 merge(소스 해시가 바뀌면 번역은 유지하되 `stale: true` 플래그), 별칭 충돌 감지(NFC 정규화, 동일 별칭 중복 등록 / 별칭이 다른 항목의 canonical 키워드와 겹치는 경우), `unzip -p`/`unzip -Z1` 기반 ZIP 엔트리 추출(새 npm 의존성 없음).
+- `scripts/i18n-inventory.mjs`(`npm run i18n:inventory`): 위 코덱들을 이용해 module/ui는 항상, tlk/binary는 `$ULTIMA4_DATA`가 설정되고 실존할 때만 추출한다. PRIVATE 전체 corpus(원문 텍스트 포함)는 `.local/i18n-inventory/*.json`(git-ignored)에, PUBLIC 스키마(해시/placeholder/번역 필드만, 원문 없음)는 `locales/ko/*.json`에 쓴다. 재실행 시 기존 번역/status/category/notes를 보존한다(merge, `scripts/lib/schema-io.mjs`).
+- `scripts/i18n-check.mjs`(`npm run i18n:check`): `status: "pending"`인 항목은 기본 모드에서는 통과시키고(번역은 Todo 15의 범위), `--strict`에서는 실패시킨다. `status`가 pending이 아닌 항목은 번역 존재/placeholder 서명 일치/(category가 "status"인 경우) 폭 예산/stale 플래그를 검사한다. 별칭 충돌은 항상 검사한다. 실패마다 정확한 파일+키를 명시한 메시지를 stderr에 출력하고 exit 1.
+- `locales/ko/aliases.json`, `locales/ko/glossary.json`: 실제 한국어 alias/번역 자체는 Todo 13/15의 범위라 비워두되(`alias` 필드 빈 문자열 + `status: "pending"`), `discourse_tlk.cpp:93,129,131,136,157`에서 확인한 전역 NPC discourse 키워드(`bye/look/name/give/join/job/health/yes/no`) 9개와 8버추/3원칙/6개 핵심 용어(Avatar/Rune/Shrine/Mantra/Codex/Companion/Virtue) glossary 18개를 스캐폴딩했다. 빈 alias끼리는 충돌 검사에서 제외한다(그렇지 않으면 빈 문자열끼리 항상 "충돌"로 오탐된다).
+- 테스트: `tests/unit/i18n-lib-selftest.test.ts`(19개, TLK/binary key shape 왕복 테스트를 합성 버퍼로 수행 — 실제 원본 데이터 불필요), `tests/unit/i18n-check.test.ts`(8개, happy path + 4가지 실패 모드[누락 번역/placeholder 불일치/status-line 폭 초과/별칭 충돌/stale] + `--strict`), `tests/unit/i18n-inventory.test.ts`(3개, `ULTIMA4_DATA` 미설정 시 정상 skip과 원문 비유출, 재실행 시 번역 보존). tsconfig가 `allowJs`를 켜지 않아 `.ts` 테스트가 `.mjs`를 직접 import하면 typecheck가 깨지므로, 기존 관례(`build-modules.test.ts`)를 따라 `scripts/lib/selftest-cli.mjs`라는 테스트 전용 CLI 하니스로 spawn하여 검증한다.
+
+**TDD**: 구현 완료 후 `scripts/lib/*.mjs`와 `scripts/i18n-{inventory,check}.mjs`를 임시로 다른 경로로 옮겨 RED을 재현하고(`Cannot find module` 오류로 28개 테스트 전부 실패, `.omo/evidence/ultima-web/task-4/red.log`) 원복 후 GREEN을 확인했다(`.omo/evidence/ultima-web/task-4/green.log`, 이후 stale 테스트 추가로 최종 33개).
+
+**검증 (2026-09-20, 전부 실제 실행)**:
+```
+npm ci                          # exit 0 (Node 20 EBADENGINE warning, Todo 1 기록과 동일)
+npm run i18n:inventory          # exit 0, ULTIMA4_DATA 미설정: module 729 + ui 369 추출, tlk/binary는 명시적으로 skip
+ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run i18n:inventory
+                                 # exit 0, tlk 3072 필드(16 맵 × 16 NPC, 사용되지 않는 슬롯 0개) + binary 214/216 슬롯 추가 추출
+                                 # 재실행 시 0 new/0 stale/0 removed로 재현성 확인(같은 소스 → 같은 해시)
+npm run i18n:check               # exit 0 — locales/ko 4411개 엔트리(4402 pending, 정상) 검사 통과
+npm run test:unit                # exit 0 — 5 files / 33 tests (기존 3 + 신규 30)
+npm run verify:repo-sources     # exit 0 — locales/scripts/tests를 git add한 뒤 재확인(파일명이 `verify:repo-sources`가 금지하는 `.tlk/.exe/...` 확장자와 우연히 충돌하지 않는지 별도로 검증함)
+npm run typecheck               # exit 0
+npm run build                   # exit 0
+git diff --check                # exit 0
+```
+
+**실제 원본 데이터로 품질 확인**(내용 자체는 공개 아티팩트에 포함하지 않음 — `.local/i18n-inventory/`에서만 직접 확인): TLK 256개 레코드 전부에서 이름·직업·질문 필드가 실제 Ultima IV 대화로 보이는 정상적인 영어 문장으로 디코딩됐고(빈 이름 레코드 0개), TITLE.EXE의 28개 intro 질문·15개 집시 카드 텍스트, AVATAR.EXE의 Lord British 25키워드/24응답·Hawkwind 53줄·버추 질문 11개·엔딩 텍스트 12개·shrine 조언 24개가 전부 끝까지 깨짐 없이 정상 종료되는 것을 확인했다. `.local/i18n-inventory/tlk.json`에서 `%` 문자를 grep해 printf-placeholder 오탐 가능성도 확인했다 — 0건(원본 TLK 대화문에는 `%`가 없다).
+
+**부분 구현 사항 명시**:
+- C++ UI 문자열은 76개 전체 `vendor/xu4/src/*.cpp`가 아니라 `game.cpp/menu.cpp/menuitem.cpp/stats.cpp/event.cpp/combat.cpp/item.cpp/creature.cpp/dungeon.cpp/camp.cpp/portal.cpp/death.cpp/spell.cpp/intro.cpp` 14개 파일의 `screenMessage(...)`/`Menu::add(...)` 두 호출 패턴만 스캔한다(과제 지시사항이 "player-visible 텍스트만, 76개 전체 불필요"라고 명시). 변수로 전달되는 메시지(`screenMessage(msg)`)나 문자열 연결은 포착하지 못한다 — 그런 문자열은 대개 자신의 리터럴 정의 지점에서 별도로 잡히거나, 이미 module/TLK/binary로 잡힌 데이터다.
+- Boron 문자열의 `display`/`identifier` 분류는 공백 유무 기반 휴리스틱이라 완벽하지 않다(예: 공백이 없는 짧은 display 문구는 identifier로 오분류될 수 있음). Todo 15에서 사람이 검토하며 걸러낼 것으로 예상한다.
+- `.local/i18n-inventory/*.json`의 TLK/binary 원문은 latin1로 디코딩한 human-readable 사본이다(원본 DOS 텍스트는 CP437 계열이라 완벽한 1:1 매핑은 아님) — 그러나 `sourceHash`는 항상 raw byte에 대해 계산하므로 hash 정합성/drift 감지에는 영향이 없고, 이 근사는 순수히 사람이 읽기 편하게 하기 위한 것이다.
+- `locales/ko/{aliases,glossary}.json`은 스키마와 스캐폴딩(canonical 키워드/용어 목록)만 갖췄고 실제 한국어 값은 비어 있다 — Todo 13(별칭)/15(전체 번역)의 범위다.
+- `binaryKey`/`tlkKey`의 인덱스는 연속적이지 않을 수 있다(예: `title.exe:introGypsy:12`, `avatar.exe:lordBritishKeyword:24`는 원본에 빈 슬롯이라 스키마에 없음 — 16/216개 슬롯 중 2개, `discourse_castle.cpp:30`의 "+1 for extra empty string" 주석과 일치). Todo 14에서 lookup table을 만들 때 `0..N` 연속 순회를 가정하면 안 되고, 스키마의 실제 key 목록을 기준으로 순회해야 한다.
+- `i18n-green.log`는 `locales/ko`가 아니라 `tests/unit/i18n-check.test.ts`의 `baseSchema()`와 동일한 구조의 임시 fixture(`/tmp`, 실행 후 삭제)에 대해 실행한 결과다 — 실제 프로덕션 corpus(`locales/ko`)는 의도적으로 4402/4411개가 `pending`이며, `npm run i18n:check`(strict 아님)로는 통과하지만 각 항목이 "번역 완료"라는 뜻은 아니다. 재현하려면 `tests/unit/i18n-check.test.ts`의 `baseSchema()`를 참고한다.
+
+**Todo 4 병합 전 재검증 (2026-09-24 KST, commit `2d02653`, 전부 실제 실행)**:
+```
+npm ci                                                                          # exit 0
+env -u ULTIMA4_DATA npm run i18n:inventory                                     # exit 0 — module 729 + ui 369, TLK/binary 명시적 skip
+ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run i18n:inventory # exit 0 — TLK 3072 + binary 214/216, 0 new/stale/removed
+npm run i18n:check                                                              # exit 0 — 4411 entries, 4402 pending
+npm run test:unit                                                               # exit 0 — 5 files / 33 tests
+npm run verify:repo-sources                                                     # exit 0 — 4 pinned components
+npm run typecheck                                                               # exit 0
+npm run build                                                                   # exit 0
+git diff --check                                                                # exit 0
+```
+명령별 원문 로그와 exit ledger: `.omo/evidence/todo4-merge-2026-09-24/premerge/` (git-ignored, local-only). Node 20.20.2라 `npm ci`에서 기존 `EBADENGINE` 경고가 출력됐지만 명령은 exit 0이었다.
 
 - [AI 코딩 에이전트 규칙](AGENTS.md): 다른 AI가 이 저장소를 이어받을 때 지켜야 할 프로젝트 운영 규칙.
 - [AI 코딩 에이전트 인계 규칙](docs/AI_AGENT_HANDOFF.md): `handoff.md`를 어떻게 작성·갱신해야 하는지에 대한 표준.

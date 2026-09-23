@@ -22,7 +22,9 @@
     "typecheck": "tsc --noEmit",
     "verify:repo-sources": "node scripts/verify-repo-sources.mjs",
     "deps:host": "node scripts/deps-host.mjs",
-    "build:modules": "node scripts/build-modules.mjs"
+    "build:modules": "node scripts/build-modules.mjs",
+    "i18n:inventory": "node scripts/i18n-inventory.mjs",
+    "i18n:check": "node scripts/i18n-check.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.52.0",
