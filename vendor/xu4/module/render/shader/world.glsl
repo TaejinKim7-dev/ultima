@@ -16,7 +16,7 @@ void main() {
 	texCoord = uv;
 	gl_Position = transform * vec4(position, 1.0);
 	shadowCoord = (gl_Position.xy + 1.0) * 0.5;
-};
+}
 
 #elif defined(FRAGMENT)
 

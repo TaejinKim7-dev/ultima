@@ -118,7 +118,9 @@ const vec4 eq_threshold  = vec4(15.0, 15.0, 15.0, 15.0);
 
 vec4 delta   = vec4(1.0/XBR_SCALE, 1.0/XBR_SCALE, 1.0/XBR_SCALE, 1.0/XBR_SCALE);
 vec4 delta_l = vec4(0.5/XBR_SCALE, 1.0/XBR_SCALE, 0.5/XBR_SCALE, 1.0/XBR_SCALE);
-vec4 delta_u = delta_l.yxwz;
+// WebGL2/GLES3 requires global initializers to be constant expressions,
+// so spell out delta_l.yxwz literally (identical values, any XBR_SCALE).
+vec4 delta_u = vec4(1.0/XBR_SCALE, 0.5/XBR_SCALE, 1.0/XBR_SCALE, 0.5/XBR_SCALE);
 
 const vec4 Ao = vec4( 1.0, -1.0, -1.0, 1.0 );
 const vec4 Bo = vec4( 1.0,  1.0, -1.0,-1.0 );

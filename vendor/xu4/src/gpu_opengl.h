@@ -2,6 +2,9 @@
 #include <OpenGL/gl.h>
 #elif defined(__ANDROID__)
 #include <GLES3/gl31.h>
+#elif defined(__EMSCRIPTEN__)
+// WebGL2 via Emscripten: GLES3 headers (GLSL ES 3.00, no mapped buffers).
+#include <GLES3/gl3.h>
 #elif defined(_WIN32)
 #include "glad.h"
 #else
@@ -46,6 +49,12 @@ struct DrawList {
     uint8_t  fpv;       // Floats per vertex.
     int     byteSize;
     GLsizei count;      // Number of floats.
+#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)
+    // WebGL2-safe path: CPU-side staging for bufferSubData uploads.
+    // WebGL exposes no mapped-buffer writes, so triangle emission
+    // writes here and gpu_endTris() uploads it.  Unused (NULL) on native.
+    float*  staging;
+#endif
 };
 
 #define CHUNK_FX_LIMIT  8
