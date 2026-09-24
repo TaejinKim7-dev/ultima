@@ -1,80 +1,67 @@
 # HANDOFF
-작성 시각: 2026-09-24 14:15 KST
+작성 시각: 2026-09-24 23:29 KST
 
 ## 1. 목표 (What we're building)
-- xu4 기반 Ultima IV를 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식한다. 전체 진행은 `/home/taejin/ultima/plan.md`의 24단계 기준으로 관리한다.
-- 이번 세션: **Step 7·8 main merge 완료 + merge 게이트 재실행 + plan/handoff 문서 갱신**.
+- xu4 기반 Ultima IV를 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식한다. 진행 기준은 `/home/taejin/ultima/plan.md`(24단계).
+- 이번 세션: Step 9(브라우저 시작/ZIP 검증/가상 FS) 완료+push, 이어서 **Step 10(IDBFS 영속화)을 부분 구현**(Persistence Coordinator + export/import 아카이브, e2e는 구조적 이유로 보류) — 전부 사용자 확인 거쳐 진행.
 
 ## 2. 현재 상태 (Current state)
 
-### 2-0. 진행률 요약
-- **공식 완료: 8 / 24 = 33.3%** (Step 1~8, 모두 main merge됨).
+### 2-0. 진행률
+- **9 / 24 = 37.5%** (Step 10은 🟡 부분 진행이라 진행률에 안 들어감).
+- **local main이 origin보다 2커밋 앞섬**(`6a74288`, `92ebce8` — Step 10 구현+merge). **push 안 함, 사용자 확인 대기.**
+- Step 9까지는 `origin/main`(`695ee76`)에 이미 push 완료.
 
-### 2-1. Step 7 → main
-- merge `874c775 Merge todo-07-webgl2: WebGL2-safe buffers and shaders`, 구현 `90232b9`. WebGL2 CPU staging + shader ANGLE 수정 + e2e `webgl-render.spec.ts`.
+### 2-1. Step 10에서 발견한 구조적 문제와 사용자 결정 (중요, 다음 세션이 꼭 알아야 함)
+- Step 10의 e2e 승인 기준("실제 새 게임 저장→reload→export/import를 브라우저에서 증명")을 만들려고 보니, **Step 9가 남긴 한계** — `scripts/web-main.cpp`의 `main()`이 여전히 placeholder(`return 0` 즉시) — 때문에 지금은 실제 게임 루프가 브라우저에서 안 돈다. `gameSave()`/캐릭터 생성/`Settings::write()`를 실제로 트리거할 방법이 없다.
+- `AskUserQuestion`으로 세 옵션(① Coordinator만 먼저 / ② xu4 부팅부터 이식 / ③ 둘 다 순서대로) 제시 → **사용자가 ①을 선택**: Coordinator+export/import를 유닛 테스트로 완전히 검증하고 merge, e2e는 부팅 이식 이후로 미룸.
+- **이 구조적 문제 자체는 아직 해결 안 됐다.** "web-main.cpp에 실제 xu4 부팅 시퀀스를 이식하는 게 어느 Todo에 속하는지"가 미정 — 다음 세션이 사용자와 정해야 할 가장 중요한 열린 질문. Step 10 e2e, Step 11~13, Step 17이 전부 여기에 실질적으로 막혀 있다.
 
-### 2-2. Step 8 → main
-- merge `6b97d8e Merge todo-08-input-queue: browser-safe input queues`, 구현 `af13814`. `src/bridge/input-queue.ts` + `web_bridge` C ABI + unit/native/e2e.
+### 2-2. Step 10 구현 (branch `todo-10-idbfs-persistence` → main merge `92ebce8`, 이번 세션에서 직접 실행/확인)
+- `src/engine/persistence.ts`: `createPersistenceCoordinator()`(`FS.trackingDelegate.onCloseFile` 훅 1개로 모든 native 저장 write path 관찰, 마이크로태스크 디바운스로 같은 tick의 여러 close를 syncfs 1회로 합침, `idle→saving→saved/error` 상태), `packSaveArchive`/`unpackSaveArchive`(자체 최소 바이너리 포맷, 진짜 ZIP 아님), `exportSaveArchive`/`importSaveArchive`.
+- `tests/unit/persistence.test.ts`: **12 tests, RED→GREEN 확인**(구현 전 "모듈 없음" RED 재현 후 구현).
+- **아직 `src/shell.ts`의 save-export/save-import UI에 연결 안 함** — `startEngine()`이 FS/module 참조를 호출자에게 안 넘겨주고, 실제 세이브 데이터도 없어서 지금 연결해도 빈 아카이브만 오간다. 의도적으로 다음으로 미룸.
+- `FS.trackingDelegate.onCloseFile`이 실제 wasm-release 빌드에서 진짜 발동하는지 **실물로 확인 안 함**(unit test는 fake FS만 사용) — 확인 필요.
 
-### 2-3. source-manifest 충돌 resolve
-- 양 branch 동시 `vendor/source-manifest.json` 수정 → merge 시 treeSha256 충돌 → 합친 vendor tree 재계산.
-- 최종: xu4 **fileCount 409**, treeSha256 `e65f0d9b616f9e28923a5e6dfd61b481848832ac3a5f2ce3b0f2169d73b25b49` (`summarizeSourceTree` match:true).
-
-### 2-4. merge 게이트 (main, 전부 실제 실행 · exit 0)
-| 항목 | 결과 |
-|---|---|
-| `npm ci` | 0 (EBADENGINE warning only) |
-| `npm run test:unit` | 0 — 10 files / **73/73** |
-| `npm run verify:repo-sources` | 0 |
-| `npm run typecheck` | 0 |
-| `npm run build` | 0 |
-| `git diff --check` | 0 |
-| `cmp` 계획서 두 벌 | 0 |
-| `deps:wasm` + `build:wasm -- --debug` | 0 — 33/33 sources, xu4.wasm 3599061 B, Asyncify on |
-| `wasm-symbols` unit | 0 — 8/8 |
-| `input-queue` unit | 0 — 16/16 |
-| full CTest (`cmake:configure`+`build`+test) | 0 — 3/3 (module-package, native-baseline-negative, input-queue) |
-| `test:native -R input-queue` | 0 — Passed |
-| `npx playwright test --project=chromium` | 0 — **3 passed** (shell-ready, input-queue, webgl-render) |
-
-- 환경 복구: `deps:host` 재실행 후 `build:native` exit 0 → full CTest의 `native-baseline-negative` Passed.
-- worktree evidence를 main `.omo/evidence/ultima-web/task-{7,8}/`로 복사(git-ignored local-only).
-- 병렬 `npm ci` 동시 실행 시 unit/e2e가 일시 실패(node_modules 교체 충돌)했으나, npm ci 종료 후 순차 재실행으로 전부 통과 — 위 exit code가 최종 상태.
-
-### 2-5. git 상태
-- Step 8 merge `6b97d8e`, docs로 진행률/게이트 기록 완료, **`git push origin main` 완료 — origin과 동기화**.
-- worktree clean(untracked session 잔여물만: `.claude/`, `.omo/boulder.json`, `.omo/start-work/`, `.omo/lazycodex-executor-verify/` — 커밋 금지).
-- 사용자 승인: Step 7/8 merge + `git push origin main` — 둘 다 완료.
+### 2-3. 검증 (main merge 후 전부 재실행, 이번 세션에서 직접 확인)
+- `npm run test:unit`: **13 files / 99 tests, exit 0**.
+- `npm run typecheck`, `verify:repo-sources`, `npm run build`, `git diff --check`, `cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md`: 전부 exit 0.
+- `ULTIMA4_DATA=... npx playwright test --project=chromium`: 기존 8개 e2e 전부 통과(무회귀). Step 10 전용 e2e는 없음(위 2-1 참고).
 
 ## 3. 변경한 파일 (Files changed)
-- `plan.md` — 진행률 8/24, Step 7·8 ✅, merge 게이트 exit code 기록, "바로 다음 순서"=Step 9.
-- `handoff.md` — Todo 7/8 "merge 대기" → "main merge 완료" 승격 + 게이트 블록.
-- `HANDOFF.md` — 이 파일 갱신.
-- `.omo/plans/ultima-web.md` + `docs/ULTIMA_WEB_PLAN.md` — Todo 7·8 checkbox `[x]` (byte-identical 유지).
+- `src/engine/persistence.ts`, `tests/unit/persistence.test.ts` (신규) — 커밋 `6a74288` → main merge `92ebce8`.
+- `plan.md`, `handoff.md` — Step 10 완료(부분) 기록, 구조적 blocker와 사용자 결정 기록, 다음 순서 갱신. **아직 커밋 안 함**(이 HANDOFF.md와 함께 커밋 예정).
+- `HANDOFF.md`(이 파일).
 
 ## 4. 주요 결정과 근거 (Key decisions)
-- Step 7: `#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)` — native `glMapBufferRange` 경로 보존.
-- Step 8: queue reject-newest(256), prompt epoch로 in-flight 폐기, `emscripten_sleep(0)` per-frame yield.
-- source-manifest 충돌은 재계산 resolve(임의 편집 금지).
+- (사용자 결정, 위 2-1 참고) Step 10을 "Coordinator만 먼저"로 축소하고 e2e는 미룸.
+- `FS.trackingDelegate.onCloseFile` 훅 하나로 모든 write path를 관찰하는 방식을 택함(설계 메모 1안) — write 지점마다 새 C++ 브릿지를 추가하는 2안보다 범위가 작고, "gameSave만이 아니라 모든 write path" 요구를 자연스럽게 만족.
+- 세이브 아카이브를 진짜 ZIP이 아니라 자체 포맷으로 만듦 — 세이브가 고정 바이트 레이아웃이라 그대로 왕복해야 하고, Step 9의 ZIP 리더(`zip.ts`)는 읽기 전용이라 재사용 대상이 아님.
+- export/import를 `shell.ts` UI에 아직 안 연결함 — 연결할 실제 FS 참조도, 실제 데이터도 없는 상태에서 배선만 만드는 건 눈에 보이는 효과가 없는 죽은 코드라 다음(부팅 이식 이후)으로 미룸.
 
 ## 5. 다음 할 일 (Next steps)
-- [x] docs 커밋 → `git push origin main` (완료, origin 동기화).
-- [ ] **Step 9**: 브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행 (plan.md "바로 다음 순서").
-- [ ] 10(IDBFS) → 11~13 → 14 → 15 … 16은 9 이후 병렬 가능.
+- [ ] **아직 commit 안 한 `plan.md`/`handoff.md`를 이 `HANDOFF.md`와 함께 commit한다.**
+- [ ] **사용자 확인 필요**: Step 10 로컬 merge(`92ebce8`)를 `origin/main`에 push해도 되는지.
+- [ ] **판단 필요 (최우선)**: web-main.cpp에 실제 xu4 부팅 시퀀스(servicesInit/config/screen/event loop)를 이식하는 작업의 소속 Todo/범위를 사용자와 정한다. 이게 안 정해지면 Step 10 e2e/11~13/17을 실질적으로 진행할 수 없다.
+- [ ] 위 판단 전에도 진행 가능한 것: Step 11~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`)/16(설계 메모 `.omo/drafts/step-16-web-audio-design.md`) 중 "부팅 없이도 유닛 테스트 가능한 로직" 부분 — 착수 전에 정확한 범위를 사용자와 확인할 것.
+- [ ] `FS.trackingDelegate.onCloseFile`이 실제 wasm 빌드에서 발동하는지 실물 확인.
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
-- host Node 20.20.2(engines ≥22, 경고만). CI는 Node 22 준비 필요.
-- release(非 debug) wasm은 placeholder main DCE로 작아질 수 있음 — acceptance는 `--debug`.
-- Step 9 전 실제 게임 루프 런타임(WebGL2·input 소비) 미검증.
-- `qa:native-baseline` E2E 2회차는 사용자 승인제.
-- `.omo/evidence/`는 git-ignored — 병렬 worktree에서 main으로 evidence 복사 필요할 때가 있음.
-- `npm ci`와 다른 heavy 작업 동시 실행 금지(일시적 unit/e2e 실패 유발).
+- **핵심 blocker**: `web-main.cpp`의 placeholder `main()`. Step 9부터 이어진 문제이고 Step 10에서 다시 부딪힘 — 다음 세션이 반드시 먼저 다뤄야 할 항목.
+- `.emsdk/`는 main worktree에만 있다 — 다른 worktree에서 wasm 빌드 시 `source /home/taejin/ultima/.emsdk/emsdk_env.sh`로 경로를 넘겨써야 한다.
+- worktree `todo-07-webgl2`, `todo-08-input-queue`, `todo-09-startup-data`, `todo-10-idbfs-persistence`는 merge 후에도 삭제하지 않고 남아있다.
+- main worktree의 untracked `.claude/`, `.omo/boulder.json`, `.omo/lazycodex-executor-verify/`, `.omo/start-work/`는 이번 세션도 건드리지 않았다 — 계속 보존.
+- 원본 데이터: `/home/taejin/ultima4-original-data/ultima4.zip`, SHA-256 `94aa748cfa1d0e7aa2e518abebb994f3c18acf7edb78c3bd37cd0a4404e6ba74`. repo에 복사 안 함.
 
 ## 7. 재개 방법 (How to resume)
 ```bash
-cd /home/taejin/ultima && git status -sb && git log --oneline -8
+cd /home/taejin/ultima
+git status -sb && git log --oneline -6
 npm run test:unit && npm run verify:repo-sources && npm run typecheck && npm run build
-npx playwright test --project=chromium
-# 공식 인계: handoff.md "Todo 7/8 main merge 완료 기록" · 진행률: plan.md
-# 운영 규칙: AGENTS.md
+source .emsdk/emsdk_env.sh && npm run build:wasm -- --debug
+ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test --project=chromium
+
+# push 승인 후:
+# git push origin main
 ```
+- 공식 인계: `handoff.md` "Todo 10 main merge 완료 기록(부분)". 진행률: `plan.md`. 운영 규칙: `AGENTS.md`.

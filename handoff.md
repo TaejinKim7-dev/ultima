@@ -595,13 +595,47 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test 
 - `/engine/` 서빙 미들웨어의 URL traversal 방어(`resolveAllowedPath`)는 단위 테스트 없이 코드 리뷰 수준으로만 확인함 — 확인 필요.
 - **`git push origin main` 완료** (2026-09-24, 사용자 승인 "OK", `358a6a2..695ee76`). 이전 Step 6/7/8은 매번 push 전 사용자 승인을 받았는데, 이번 세션은 로컬 merge까지 진행한 뒤에야 확인을 요청하는 순서로 진행됐었음 — AGENTS.md 진행 관리 규칙과 어긋난 처리였음을 다음 세션을 위해 기록해둔다(push 자체는 승인 받고 진행함).
 
+### Todo 10 — IDBFS persistence coordinator + save archive, 부분 (branch `todo-10-idbfs-persistence`, commit `6a74288`, main merge `92ebce8`)
+
+**Commit**: `6a74288 feat(save): add IDBFS persistence coordinator and save archive (partial Todo 10)` (worktree `/home/taejin/ultima-worktrees/todo-10-idbfs-persistence`) → main merge `92ebce8`
+
+**착수 전 발견한 구조적 blocker와 사용자 결정**: `.omo/drafts/step-10-idbfs-design.md`(Step 9와 병렬로 만든 설계 메모)를 읽고 구현을 시작하기 전에, Step 10의 e2e 승인 기준("new game save, manual save, settings write, reload, export, import" 전부 실제 게임으로 증명)이 Step 9가 이미 남긴 한계(`scripts/web-main.cpp`의 `main()`이 아직 placeholder — 실제 xu4 게임 루프가 안 돎) 때문에 지금은 만들 수 없다는 걸 확인했다. `AskUserQuestion`으로 세 가지 선택지(Coordinator만 먼저 / xu4 부팅부터 이식 / 둘 다 순서대로)를 제시했고, 사용자가 **"Persistence Coordinator만 먼저 구현(권장)"**을 선택했다 — e2e는 부팅 이식 이후로 미루고 Step 10은 🟡(부분)로 표시.
+
+**변경 파일 (2 files, +473)**:
+- `src/engine/persistence.ts` 신규(263 lines):
+  - `createPersistenceCoordinator()` — `FS.trackingDelegate.onCloseFile` 훅 **하나만**으로 native의 모든 실제 저장 write path(설계 메모가 소스 추적으로 확인한 `gameSave()`의 quit&save, `intro.cpp`의 신규 캐릭터 생성 시 별도 write, `Settings::write()` — 전부 결국 `fclose()`로 끝남)를 관찰한다. 마이크로태스크로 sync를 스케줄해서 같은 tick의 여러 close(예: `gameSave()`의 PARTY_SAV+MONSTERS_SAV)가 `syncfs` 1번으로 합쳐진다. `status`: `idle→saving→saved/error`, `SaveStateBridgeEvent`로 미러링.
+  - `packSaveArchive`/`unpackSaveArchive` — 이 프로젝트 자체의 최소 바이너리 번들 포맷(magic+version+length-prefixed entries), **진짜 ZIP이 아니다** — 세이브가 고정 바이트 레이아웃이라 그대로 왕복해야 하고, 그러려면 ZIP writer보다 이게 더 적은 machinery다. `src/engine/zip.ts`(Step 9, 원본 데이터 ZIP 리더)와 의도적으로 코드 공유 안 함 — 모양이 다른 아카이브다.
+  - `exportSaveArchive`/`importSaveArchive` — flush 후 bundling / write 후 sync. **`src/shell.ts`의 `save-export`/`save-import` UI에는 아직 연결 안 함** — `startEngine()`이 FS/module 참조를 호출자에게 안 넘겨줘서 연결할 대상이 없고, 실제 세이브 데이터도 없어서(placeholder main) 지금 연결해도 빈 아카이브만 오간다. 다음에 부팅 이식하는 세션이 이어서 할 일로 남김.
+- `tests/unit/persistence.test.ts` 신규(210 lines, **12 tests**): RED(모듈 없음) → GREEN. 설계 메모의 RED 후보 5개 전부 + 아카이브 왕복/손상 케이스 커버: 단일 close→sync 1회, 동시 close 합치기, 무관 경로(`/data/ultima4.zip`) 필터, `saving→saved` 이벤트 순서, sync 실패 시 `status='error'`이고 `'saved'`가 절대 안 나옴, `flush()` 대기 없을 때 즉시 리턴, 아카이브 왕복 정확성, 손상된 아카이브는 throw 대신 `status='error'` 이벤트로 처리.
+
+**테스트/게이트 결과 (worktree 내 + main merge 후 재실행, 전부 실제 실행)**:
+```
+npm run test:unit -- tests/unit/persistence.test.ts   # RED(모듈 없음) exit 1 → GREEN exit 0, 12/12
+npm run typecheck                                      # exit 0
+npm run test:unit                                       # exit 0 — 13 files / 99 tests (main merge 후 재확인)
+npm run verify:repo-sources                             # exit 0
+npm run build                                           # exit 0
+git diff --check                                        # exit 0
+cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md    # exit 0
+ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test --project=chromium  # exit 0 — 기존 8개 무회귀
+```
+- RED evidence: `.omo/evidence/ultima-web/task-10/red.log`. GREEN evidence: `green.log`.
+
+**미검증/known (의도적으로 남김)**:
+- `save-reload.spec.ts` e2e 없음 — 계획서가 요구하는 "실제 새 게임 저장→reload→export/import 증명"은 xu4 부팅 이식 후에나 가능.
+- `src/shell.ts` UI 연결 안 됨(위 참고).
+- `FS.trackingDelegate.onCloseFile`이 이 프로젝트의 실제 wasm-release 빌드에서 실제로 발동하는지는 **아직 실물 wasm으로 확인 안 함**(unit test는 fake FS만 사용) — 설계 메모도 "확인 필요"로 남긴 항목. 실제 게임 루프가 돌기 시작하면 첫 검증 대상.
+- `xu4.settings->getUserPath()`가 Step 9의 IDBFS 마운트 경로(`/persist/profile`)와 정확히 일치하는지 — 이번 세션도 확인 안 함, 확인 필요.
+- **로컬 merge만 완료, `origin/main`에 push 안 함** — 사용자 확인 대기.
+
 ### merge 시 주의 (실제 처리 완료)
 - 양 branch 모두 `vendor/source-manifest.json`을 수정 → main merge 시 `treeSha256` 충돌 발생. 합친 vendor tree로 재계산 후 resolve 완료(fileCount 409, `e65f0d9b…b25b49`, match:true).
 - Step 7은 `playwright.config.ts`에 chromium project 추가, Step 8은 `scripts/build-wasm.mjs`+`src/main.ts`만 공유 파일 건드림 — 충돌은 source-manifest 외 없음.
-- Step 9는 위 세 branch와 공유 파일 충돌 없음(clean merge).
-- 병합 직후 main에서 전체 게이트 재실행 → 전부 exit 0(위 "merge 게이트" 블록). ✅ 승격 완료.
+- Step 9, Step 10은 이전 branch들과 공유 파일 충돌 없음(둘 다 clean merge).
+- 병합 직후 main에서 전체 게이트 재실행 → 전부 exit 0(위 "merge 게이트"/"테스트·게이트 결과" 블록). ✅ 승격 완료(Step 10은 부분 ✅).
 
 ### 남은 작업
-1. ~~`git push origin main`~~ **완료** (2026-09-24, 사용자 승인, `358a6a2..695ee76`).
-2. **Step 10**(IDBFS 세이브/설정 영속 + export/import) — 설계 메모 `.omo/drafts/step-10-idbfs-design.md` 참고(읽기 전용 사전 조사, 코드 미변경) → 11~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) → 14 → 15. 16(설계 메모 `.omo/drafts/step-16-web-audio-design.md`)은 9 이후 언제든 병렬 가능.
-3. web-main.cpp에 실제 xu4 부팅 시퀀스를 이식하는 작업이 어느 Todo에 속하는지 판단이 필요하다 — Step 10~13 구현 중 필요해지면 그때 범위를 사용자와 확인한다.
+1. **사용자 확인 필요**: Step 10 로컬 merge(`92ebce8`)를 `origin/main`에 push해도 되는지.
+2. **판단 필요**: web-main.cpp에 실제 xu4 부팅 시퀀스(servicesInit/config/screen/event loop)를 이식하는 작업을 별도 Todo로 만들지, 기존 Todo(11~13 또는 17)에 포함시킬지 — Step 10 e2e, Step 11~13, Step 17이 전부 이 이식에 막혀 있다.
+3. 그 판단 전에 진행 가능한 것: Step 11~13/16 중 "부팅 없이도 유닛 테스트 가능한 로직" 부분 — 착수 전에 정확한 범위를 사용자와 확인.
+4. 14 → 15(번역 4402건) → 17 → 18 → 19 → 20 → F1~F4.

@@ -1,5 +1,5 @@
 # Ultima IV 웹 한글판 — 진행 계획
-기준 시각: 2026-09-24 KST · 기준 main: `695ee76` (origin과 동기화됨, push 완료)
+기준 시각: 2026-09-24 KST · 기준 main: `92ebce8` (로컬, 아직 미push)
 
 ## 목표
 원본 `ultima4.zip`을 사용자가 브라우저에서 직접 선택해 플레이하는, 한국어 UI/대화/NPC 키워드 alias와
@@ -13,7 +13,7 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률: 9 / 24 = 37.5%
-(Step 1~9 완료. Step 6 main `c836ecc`, Step 7 main `874c775`, Step 8 main `6b97d8e`, Step 9 main `5c28511` — 모두 2026-09-24 merge 게이트 통과. `git push origin main` 완료(`695ee76`, 사용자 승인 2026-09-24).)
+(Step 1~9 완료. Step 10은 🟡 부분 진행 — Persistence Coordinator+export/import 유닛 테스트 통과, e2e는 xu4 부팅 이식 후로 보류(사용자 확인, 2026-09-24). Step 6 main `c836ecc`, Step 7 main `874c775`, Step 8 main `6b97d8e`, Step 9 main `5c28511`, Step 10(partial) main `92ebce8` — 전부 로컬 merge 게이트 통과. `origin/main`은 `695ee76`까지 push됨, Step 10은 아직 미push.)
 
 ## 단계 목록
 
@@ -41,7 +41,7 @@ Step 3 완료 (2026-09-24):
 | 7 | OpenGL → WebGL2 (glMapBufferRange 제거, CPU staging + glBufferSubData) | ✅ | main `874c775` (`90232b9`) |
 | 8 | blocking event loop / 키 입력 → 브라우저 안전 queue (IME, request ID) | ✅ | main `6b97d8e` (`af13814`) |
 | 9 | 브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행 | ✅ | main `5c28511` (`4c878c9`) |
-| 10 | IDBFS 세이브/설정 영속 + export/import | ⬜ | 9 |
+| 10 | IDBFS 세이브/설정 영속 + export/import | 🟡 | main `92ebce8` (`6a74288`) — Coordinator+아카이브만, e2e 보류(아래 참고) |
 
 ### Wave 3 — 한국어화 (11~15)
 | # | 단계 | 상태 | 선행 |
@@ -124,10 +124,20 @@ ctest --test-dir build/native --output-on-failure     # 0 — 3/3 (module-packag
 ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test --project=chromium  # 0 — 8 passed
 ```
 
+Step 10 main merge 완료, 부분 (2026-09-24):
+- 10 🟡 merge `92ebce8 Merge todo-10-idbfs-persistence: IDBFS persistence coordinator + save archive (partial)` (구현 `6a74288`)
+- **사용자 결정 (AskUserQuestion)**: Step 9가 남긴 "web-main.cpp의 main()이 아직 placeholder" 문제 때문에 Step 10의 e2e 승인 기준(실제 새 게임 저장→reload→export/import를 브라우저에서 증명)을 지금 만들 수 없다는 걸 발견 → 사용자가 "Persistence Coordinator만 먼저 구현(유닛 테스트로 완전히 검증), e2e는 xu4 부팅 이식 후로 미루기"를 선택함.
+- `src/engine/persistence.ts`: `createPersistenceCoordinator()`(단일 `FS.trackingDelegate.onCloseFile` 훅으로 gameSave/신규 캐릭터 생성/Settings::write 전부 관찰 — 설계 메모의 1안. 마이크로태스크 디바운스로 같은 틱의 여러 close를 syncfs 1회로 합침), `packSaveArchive`/`unpackSaveArchive`(이 프로젝트 자체의 최소 바이너리 번들 포맷, 진짜 ZIP 아님 — 세이브가 고정 바이트 레이아웃이라 그대로 왕복해야 함), `exportSaveArchive`/`importSaveArchive`.
+- `tests/unit/persistence.test.ts`: RED(모듈 없음) → GREEN, **12 tests**. 설계 메모의 RED 후보 항목(단일/동시 close 합치기, 무관 경로 필터, saving→saved 순서, sync 실패 시 "saved" 오보 안 함, flush 무대기, 아카이브 왕복, 손상 아카이브는 throw 대신 error 상태) 전부 커버.
+- **아직 안 한 것(의도적, 다음 결정 필요)**: `src/shell.ts`의 `save-export`/`save-import` placeholder를 실제 `exportSaveArchive`/`importSaveArchive`로 연결하지 않았다 — `startEngine()`이 FS/module 참조를 호출자에게 안 넘겨줘서 연결할 대상이 없고, 실제 세이브 데이터도 없어서 지금 연결해도 빈 아카이브만 오간다. e2e(`tests/e2e/save-reload.spec.ts`)도 아직 없다.
+- 전체 게이트(main, merge 후 재실행): `npm run test:unit`(13 files/99 tests) · `verify:repo-sources` · `typecheck` · `build` · `git diff --check` · `cmp` 계획서 두 벌 — 전부 exit 0. `npx playwright test --project=chromium`(기존 8개, 무회귀) exit 0.
+- 상세는 `handoff.md` "Todo 10 main merge 완료 기록(부분)" 참고.
+
 ## 바로 다음 순서
-1. ~~`git push origin main`~~ **완료** (2026-09-24, 사용자 승인, `358a6a2..695ee76`).
-2. **Step 10**(IDBFS 세이브/설정 영속 + export/import) — 설계 메모 `.omo/drafts/step-10-idbfs-design.md` 있음. → 11~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md` 있음) → 14 → 15(번역 4402건). 16(설계 메모 `.omo/drafts/step-16-web-audio-design.md` 있음)은 9 이후 언제든 병렬 가능.
-3. 17 → 18 → 19 → 20 → F1~F4.
+1. **Step 10 push 확인 필요**: 지금 로컬 merge(`92ebce8`)까지 됐고 `origin/main`엔 아직 없음 — push 여부를 사용자에게 확인받는다.
+2. **판단 필요**: web-main.cpp에 실제 xu4 부팅 시퀀스(servicesInit/config/screen/event loop)를 이식하는 작업을 별도 Todo로 만들지, 어느 기존 Todo(11~13 또는 17)에 포함시킬지 사용자와 정한다 — Step 10 e2e, Step 11~13, Step 17이 전부 이 이식에 실질적으로 막혀 있다.
+3. 위 판단이 나기 전까지 진행 가능한 것: Step 11~13(한글 UI, 설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) 중 이식 없이도 되는 부분(예: 브릿지 이벤트 토큰화, 오버레이 레이아웃 계산 로직)은 유닛 테스트 수준으로 먼저 만들 수 있다. Step 16(Web Audio, 설계 메모 `.omo/drafts/step-16-web-audio-design.md`)도 비슷하게 "로직은 먼저, 실제 재생 e2e는 나중" 패턴이 적용될 가능성이 큼 — 착수 전에 그 범위도 사용자와 확인.
+4. 14 → 15(번역 4402건) → 17 → 18 → 19 → 20 → F1~F4.
 
 ## 목적 달성 가능성 판단
 - **가능하다고 본다.** 근거: 엔진(xu4)이 원본 데이터로 native에서 실제 새 게임·이동·save/load까지 동작함을 확인했고(3.1),
