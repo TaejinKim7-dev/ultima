@@ -551,11 +551,57 @@ shell-ready e2e 회귀                        # 1 passed
 
 **미검증/known (worktree 시점)**: fresh worktree에 `build/host` 산출물 없어 full `test:native` 일부 gap → **main merge 후 `deps:host`+`build:native` 재실행으로 full CTest 3/3 통과**. 게임 루프 소비 배선(web `handleInputEvents` drain)은 Step 9; e2e는 bridge/shell queue 중심(계획 허용 범위), full gameplay run 아님.
 
+### Todo 9 — browser startup, ZIP validation, virtual FS (branch `todo-09-startup-data`, commit `4c878c9`, main merge `5c28511`)
+
+**Commit**: `4c878c9 feat(web): validate original data and start wasm once` (worktree `/home/taejin/ultima-worktrees/todo-09-startup-data`) → main merge `5c28511`
+
+**변경 파일 (10 files, +938/−1)**:
+- `src/engine/zip.ts` 신규(152 lines): 순수 TS ZIP 중앙 디렉터리 리더(EOCD + Central Directory File Header만 파싱, 압축 해제 없음, npm 의존성 없음 — 브라우저에는 `unzip` 바이너리가 없어서 Node 쪽 `scripts/lib/zip-extract.mjs`와 별도로 새로 작성함). `REQUIRED_ULTIMA4_ENTRIES`(16 TLK map + WORLD.MAP/SHAPES.EGA/TITLE.EXE/AVATAR.EXE, `scripts/i18n-inventory.mjs`의 `TLK_MAPS`를 브라우저 번들에 안 들어가게 의도적으로 복제), `ULTIMA4_PINNED_SHA256`, `validateUltima4Zip()` — 손상된 아카이브/필수 파일 누락은 `ok:false`(진입 전 차단), SHA 불일치는 `ok:true`+`shaMismatch:true`(경고만, GOG 등 다른 정식 배포판이 다른 해시를 가질 수 있어서 차단하지 않음).
+- `src/engine/startup.ts` 신규(157 lines): 계획서 설계 계약 4번 순서 그대로 — factory resolve → FS 준비(`/assets`,`/data`,`/persist/profile`) → IDBFS mount+`syncfs(true)` populate → ZIP 검증/주입(`/data/ultima4.zip`) → 오디오 unlock(best-effort, 실패해도 non-fatal) → `callMain()` 정확히 1회. 순수 함수형 + 의존성 주입(factory/dispatch/unlockAudio 전부 옵션)이라 실제 wasm 없이 unit test 가능. "1회만 호출" 가드는 호출자(main.ts)가 갖는다 — 이 모듈 자체는 상태를 안 갖는다.
+- `vite.config.ts`: `wasmEngineAssets` 플러그인 신규 — `build/wasm-release`(=`build-wasm.mjs`의 컴파일 스테이징 디렉터리이자 결과물 디렉터리)에서 **화이트리스트 4개 항목만**(`xu4.mjs`,`xu4.js`,`xu4.wasm`,`modules/`) `/engine/`에 dev 서빙(middleware) + `vite build`시 `dist/engine/`로 복사(closeBundle). **처음엔 디렉터리 전체를 복사해서 xu4 vendor 소스 트리(Makefile/src/module/android/...)가 통째로 `dist/`에 들어가는 걸 빌드 후 직접 확인하고 화이트리스트로 고쳤다** — RED/GREEN처럼 자체 검증 없이 넘어갔으면 실제로 배포됐을 결함.
+- `src/main.ts`: rom-picker `change` 리스너 추가(shell.ts의 기존 placeholder 메시지 리스너와 별개, 공존) — `import(/* @vite-ignore */ base+"engine/xu4.mjs")` 동적 로드 → `startEngine()` 호출, `engineStartAttempted` 플래그로 페이지당 1회 제한, `data-engine-started`/`data-engine-start-reason` 속성으로 e2e observability 제공.
+- `.gitignore`: `engine/` → `/engine/` (루트 앵커링). 앵커 없는 규칙이 새로 만든 `src/engine/`을 git status에서 완전히 숨기고 있었다 — `git status`가 새 파일을 안 보여줘서 발견, 파일의 "Build outputs" 섹션 다른 항목들은 이미 전부 `/`로 앵커돼 있어서 이 규칙만 예외였던 기존 불일치를 바로잡았다.
+- `tests/lib/test-zip.ts` 신규(111 lines): STORE-only(무압축) ZIP writer, 테스트 전용. 실제 게임 데이터를 전혀 안 건드리고 valid/missing-files/corrupted/sha-mismatch 픽스처를 합성 생성하는 데만 쓴다.
+- `tests/unit/zip-validate.test.ts`(82 lines, 8 tests), `tests/unit/startup-sequence.test.ts`(194 lines, 6 tests): RED(모듈 없음) → GREEN.
+- `tests/e2e/startup-data.spec.ts`(106 lines, 5 tests): happy(실제 `ULTIMA4_DATA`)/missing-files/corrupted/sha-mismatch-allow/reload-without-reselect.
+
+**테스트/게이트 결과 (worktree 내 + main merge 후 재실행, 전부 실제 실행)**:
+```
+npm ci                                      # exit 0
+npm run typecheck                           # exit 0 (src/vite-env.d.ts 추가로 import.meta.env 타입 해결)
+npm run test:unit                           # exit 0 — 12 files / 87 tests (기존 73 + zip-validate 8 + startup-sequence 6)
+npm run build                               # exit 0, dist/engine/{xu4.mjs,xu4.js,xu4.wasm,modules/*}만 존재 확인
+npm run verify:repo-sources                 # exit 0
+git diff --check                            # exit 0
+RED:  npm run test:unit -- tests/unit/zip-validate.test.ts       (src/engine/zip.ts 없을 때)      # exit 1
+GREEN: 동일 커맨드 (구현 후)                                                                        # exit 0 — 8/8
+RED:  npm run test:unit -- tests/unit/startup-sequence.test.ts (src/engine/startup.ts 임시 이동) # exit 1
+GREEN: 동일 커맨드 (파일 복원 후)                                                                    # exit 0 — 6/6
+source .emsdk/emsdk_env.sh && npm run deps:wasm && npm run build:wasm -- --debug  # exit 0 — 33/33 sources
+npm run test:unit -- tests/unit/wasm-symbols.test.ts             # exit 0 — 8/8
+npm run cmake:configure && npm run cmake:build && ctest --test-dir build/native --output-on-failure  # exit 0 — 3/3
+ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test --project=chromium  # exit 0 — 8 passed (기존 3 + startup-data 5)
+```
+- RED evidence: `.omo/evidence/ultima-web/task-9/red.log`(zip), `red-startup.log`(startup)
+- GREEN evidence: `green-zip.log`, `green-startup.log`
+- happy path evidence: `startup-title.png` — **실제 검증된 ULTIMA4_DATA(529099 bytes, 알려진 정확한 크기와 일치)**로 "엔진이 시작되었습니다" 메시지까지 확인. 단, 캔버스는 검은 화면(아래 "미검증/known" 참고).
+- 실패 케이스 evidence: `zip-validation.log` — missing-files(16개 TLK+3개 파일명 전부 정확히 나열), corrupted("end-of-central-directory record not found"), sha-mismatch(경고 메시지+`엔진이 시작되었습니다` 둘 다 출력 — 차단 아님을 실증)
+
+**merge 시 주의**: Step 6/7/8과 공유 파일 충돌 없음(clean fast-forward-style merge, `git merge --no-ff` conflict 0). main merge 후 `deps:wasm`+`build:wasm --debug`+native CTest+전체 e2e(8개) 재실행 전부 exit 0.
+
+**미검증/known**:
+- `scripts/web-main.cpp`의 `main()`은 여전히 Step 6 placeholder(`return 0` 즉시) — 이번 Todo가 만든 "엔진 시작 성공" 신호는 실제 xu4 부팅(servicesInit/config/screen/event loop)이 아니다. `startup-title.png`의 캔버스가 검은 화면인 이유. 실제 xu4.cpp 부팅 시퀀스를 web-main.cpp로 이식하는 작업은 `build-wasm.mjs`가 `src/xu4.cpp`를 의도적으로 제외한다고 이미 주석에 남겨뒀던 대로, 이 Todo의 파일 범위 밖이며 계획서에 정확히 어느 Todo에서 하는지 명시가 없다 — **확인 필요**.
+- 오디오 unlock(`unlockAudio`)은 실제 사용자 제스처/autoplay policy 상황에서 검증 안 함(e2e는 `AudioContext`가 있으면 시도하고 실패해도 non-fatal이라는 것만 확인).
+- `/engine/` 서빙 미들웨어의 URL traversal 방어(`resolveAllowedPath`)는 단위 테스트 없이 코드 리뷰 수준으로만 확인함 — 확인 필요.
+- **로컬 merge만 완료, `git push origin main` 아직 안 함** — 이전 Step 6/7/8은 매번 push 전 사용자 승인을 받았는데, 이번 세션은 로컬 merge까지 진행한 뒤에야 확인을 요청하는 순서로 진행됐다. AGENTS.md 진행 관리 규칙과 어긋난 처리였음을 다음 세션을 위해 정직하게 남긴다.
+
 ### merge 시 주의 (실제 처리 완료)
 - 양 branch 모두 `vendor/source-manifest.json`을 수정 → main merge 시 `treeSha256` 충돌 발생. 합친 vendor tree로 재계산 후 resolve 완료(fileCount 409, `e65f0d9b…b25b49`, match:true).
 - Step 7은 `playwright.config.ts`에 chromium project 추가, Step 8은 `scripts/build-wasm.mjs`+`src/main.ts`만 공유 파일 건드림 — 충돌은 source-manifest 외 없음.
+- Step 9는 위 세 branch와 공유 파일 충돌 없음(clean merge).
 - 병합 직후 main에서 전체 게이트 재실행 → 전부 exit 0(위 "merge 게이트" 블록). ✅ 승격 완료.
 
 ### 남은 작업
-1. ~~docs 커밋 + `git push origin main`~~ **완료** — origin 동기화(tip 해시는 `git log`로 확인).
-2. **Step 9**(브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행) → 10(IDBFS) …
+1. **사용자 확인 필요**: Step 9 로컬 merge(`5c28511`)를 `origin/main`에 push해도 되는지 확인받는다.
+2. **Step 10**(IDBFS 세이브/설정 영속 + export/import) — 설계 메모 `.omo/drafts/step-10-idbfs-design.md` 참고(읽기 전용 사전 조사, 코드 미변경) → 11~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) → 14 → 15. 16(설계 메모 `.omo/drafts/step-16-web-audio-design.md`)은 9 이후 언제든 병렬 가능.
+3. web-main.cpp에 실제 xu4 부팅 시퀀스를 이식하는 작업이 어느 Todo에 속하는지 판단이 필요하다 — Step 10~13 구현 중 필요해지면 그때 범위를 사용자와 확인한다.

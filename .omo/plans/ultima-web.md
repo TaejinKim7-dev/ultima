@@ -216,7 +216,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: Playwright sends movement, command key, NPC text, and IME Korean composition; evidence `.omo/evidence/ultima-web/task-8/input-flow.trace.zip`; failure: stale request ID submission is rejected and logged as a bridge error without game mutation, evidence `.omo/evidence/ultima-web/task-8/stale-request.log`.
   Commit: Y | feat(input): queue browser input safely
 
-- [ ] 9. Implement browser startup, original ZIP validation, and virtual filesystem layout
+- [x] 9. Implement browser startup, original ZIP validation, and virtual filesystem layout
   What to do / Must NOT do: implement `noInitialRun` startup sequence: instantiate wasm, prepare MEMFS/IDBFS, validate user-selected `ultima4.zip`, mount `/assets`, write `/data/ultima4.zip`, populate `/persist/profile`, unlock audio on gesture, then call main exactly once. Must not bundle original data or call main again for restart.
   Parallelization: Wave 2 | Blocked by: 5,7,8 | Blocks: 10-13,16
   References: `engine/src/xu4.cpp:201-264`; `engine/src/config_boron.cpp:1168-1183`; `engine/src/support/cdi.c:50-82`; GitHub Pages `index.html` entry contract from GitHub Docs.
