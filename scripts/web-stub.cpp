@@ -28,21 +28,21 @@ struct UThread* xu4_config_boronThread();
 // RNG (if not using well512)
 extern "C" uint32_t xu4_random(uint32_t n);
 
-// Bridge functions (called from JavaScript)
-extern "C" {
-int u4_web_enqueue_key(int key);
-int u4_web_submit_text(int requestId, const char* text, int byteLength);
-}
+// Bridge functions (called from JavaScript). Queue-backed definitions live
+// in vendor/xu4/src/web_bridge.cpp (Step 8); the declarations below must
+// match web_bridge.h exactly.
+#include "web_bridge.h"
 
-// Internal implementations
+// Internal implementations forward to the browser-safe input queue:
+// DOM callbacks only enqueue; the engine consumes from its input loop.
 int xu4_enqueue_key(int key) {
     // Queue a key press for the engine to consume
-    return 0;
+    return u4_web_enqueue_key(key);
 }
 
 int xu4_submit_text(int requestId, const char* text, int byteLength) {
     // Submit text input (for NPC dialogue, etc.)
-    return 0;
+    return u4_web_submit_text(requestId, text, byteLength);
 }
 
 // Screen stubs (replace native GLFW screen)

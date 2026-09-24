@@ -5,8 +5,8 @@
       "path": "vendor/xu4",
       "upstream": "https://github.com/xu4-engine/u4.git",
       "revision": "6a7ee3d0079cfdc1c8fb9ba7a3c710a957155a71",
-      "fileCount": 407,
-      "treeSha256": "6c2d75bf0a39c32e790420caec050aac9211d7dba09daa22a2bebeafeaa2b09a"
+      "fileCount": 409,
+      "treeSha256": "cfc0db65f95242bc8b16b692e92ed56a64957867dd772cb7f3fd294823693ca9"
     },
     {
       "name": "faun",

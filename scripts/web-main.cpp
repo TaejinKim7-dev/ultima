@@ -1,31 +1,10 @@
-// Minimal web entry point for Step 6.
-// Platform stubs (screen/gpu/sound/savegame/RNG/config) live in web-stub.cpp;
-// this file only provides the JS bridge functions and main().
-
-#include <emscripten.h>
-
-// Bridge functions (called from JavaScript)
-extern "C" {
-
-EMSCRIPTEN_KEEPALIVE
-int u4_web_enqueue_key(int key) {
-    // Queue a key press for the engine to consume
-    // Returns 0 on success, negative on error
-    (void) key;
-    return 0;
-}
-
-EMSCRIPTEN_KEEPALIVE
-int u4_web_submit_text(int requestId, const char* text, int byteLength) {
-    // Submit text input (for NPC dialogue, etc.)
-    // Returns 0 on success, negative on error
-    (void) requestId;
-    (void) text;
-    (void) byteLength;
-    return 0;
-}
-
-} // extern "C"
+// Web entry point (Steps 6+8).
+// Platform stubs (screen/gpu/sound/savegame/RNG/config) live in web-stub.cpp.
+// The JS bridge functions u4_web_enqueue_key / u4_web_submit_text are defined
+// queue-backed in vendor/xu4/src/web_bridge.cpp (Step 8): DOM callbacks only
+// enqueue immutable events; the engine consumes them from its input loop.
+// This TU provides main() only, so the bridge symbols stay singly defined
+// and exported (see EXPORTED_FUNCTIONS in scripts/build-wasm.mjs).
 
 // Minimal main - real game initialization happens in Step 9
 int main() {

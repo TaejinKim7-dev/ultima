@@ -59,3 +59,16 @@ add_executable(native_baseline_test tests/native_baseline_test.c)
 
 set(NATIVE_XU4_BIN ${CMAKE_SOURCE_DIR}/build/host/xu4-src/src/xu4)
 add_test(NAME native-baseline-negative COMMAND native_baseline_test ${NATIVE_XU4_BIN})
+
+# Todo 8: browser-safe input queue. web_bridge.cpp is self-contained (no
+# engine includes), so it compiles here directly against its C ABI. The C
+# test links the C++ object, hence the local C++ language enablement.
+enable_language(CXX)
+add_library(u4_web_bridge STATIC ${XU4_SRC}/web_bridge.cpp)
+target_include_directories(u4_web_bridge PUBLIC ${XU4_SRC})
+target_compile_options(u4_web_bridge PRIVATE -Wall -Wextra)
+
+add_executable(input_queue_test tests/input_queue_test.c)
+target_include_directories(input_queue_test PRIVATE ${XU4_SRC})
+target_link_libraries(input_queue_test PRIVATE u4_web_bridge)
+add_test(NAME input-queue COMMAND input_queue_test)
