@@ -10,6 +10,50 @@ const modulesDir = resolve(repoRoot, "build/host/modules")
 const runDir = resolve(repoRoot, "build/native-run")
 const evidenceDir = resolve(repoRoot, ".omo/evidence/ultima-web/task-3/native-baseline")
 const profile = "qabaseline"
+// Root cause of the earlier movement-based approach's flakiness: overworld/
+// town tiles apply a random "Slow progress!" chance per step
+// (vendor/xu4/src/location.cpp's slowedByTile()), so a fixed key sequence
+// does not reliably land on a specific coordinate. We use xu4's own debug
+// cheat menu instead (vendor/xu4/src/game.cpp's `case 3: /* ctrl-C */`,
+// gated by `settings.debug`) to reach Moonglow deterministically:
+// Ctrl-C -> 'g' (Goto, vendor/xu4/src/cheat.cpp) teleports directly onto a
+// named portal's coordinates with no RNG involved.
+const debugSettingsContents = "debug=1\n"
+const gotoDestination = "moonglow"
+// After entering the town, the NPC (a mage, "Calabrini") is a short walk
+// east along the entrance corridor. In-town movement is RNG-slowed by
+// slowedByTile() (vendor/xu4/src/location.cpp:117-133), so a fixed
+// "walk N steps then talk once" sequence is not reproducible run-to-run:
+// the simplified version failed with "Funny, no response!" on its real run.
+// Instead this replicates the scratchpad probe procedure that genuinely
+// succeeded once: after EVERY single "Right" step, attempt `t`+direction in
+// all 4 directions. Each talk attempt consumes a game turn exactly like the
+// probe, so the timing/RNG profile matches the one observed success.
+const npcApproachSteps = 6
+const npcTalkDirs = ["Right", "Up", "Down", "Left"]
+// Guard against "Your Interest:" buffer pollution (plan.md 3.3): any talk
+// attempt made AFTER a dialogue already opened types its `t` into the open
+// discourse string prompt instead of starting a new talk (observed as
+// "Your Interest: tttttt"). Discourse keyword matching compares the FIRST
+// 4 input chars (vendor/xu4/src/discourse_tlk.cpp inputEq/strncasecmp),
+// so a polluted buffer breaks even a correctly typed keyword. The interest
+// prompt reads at most 16 chars (discourse_tlk.cpp:91 gameGetInput(16)),
+// therefore 16 Backspaces always empty the buffer; on an already-empty
+// buffer Backspace only plays the blocked-input sound
+// (vendor/xu4/src/event.cpp ReadStringController::keyPressed), and at the
+// top-level command prompt an unbound Backspace key is ignored
+// (defaultKeyHandler returns false; game.cpp:1386 `valid && endTurn` gate
+// means no turn is consumed). So the Backspace burst itself is safe in both
+// states (dialogue open or not) and needs no screen feedback the script
+// cannot observe. The KEYWORD typing after it is safe ONLY if a dialogue is
+// actually open: with no dialogue, typed letters become top-level commands
+// -- `h` burns food via holeUpAndCamp, `n` mutates party order via newOrder,
+// `m` opens mixReagents (a nested prompt that desyncs every later key),
+// `a` attacks, `t` opens a direction wait. A run whose screenshots show no
+// `You meet ...` greeting must therefore be DISCARDED (its save ignored),
+// never treated as keyword evidence.
+const interestClearBackspaces = 16
+const npcKeywords = ["name", "health"]
 
 const ultima4Data = process.env.ULTIMA4_DATA
 // The specific verified PC-version zip this project develops against (see
@@ -155,6 +199,17 @@ async function main() {
     // saves never touch the real user's $HOME.
     rmSync(resolve(runDir, "profiles"), { recursive: true, force: true })
 
+    // Enable the debug cheat menu for this profile. Per
+    // vendor/xu4/src/settings.cpp's Settings::init(), passing "-p <profile>"
+    // makes the settings file "./profiles/<profile>/xu4rc" (relative to cwd,
+    // which is runDir below) -- note the filename is "xu4rc" on Linux, NOT
+    // "xu4.cfg" (that name is Windows/Cygwin-only per the
+    // SETTINGS_BASE_FILENAME macro). Writing the wrong filename/path here
+    // silently leaves debug mode off with no error.
+    const profileDir = resolve(runDir, "profiles", profile)
+    mkdirSync(profileDir, { recursive: true })
+    writeFileSync(resolve(profileDir, "xu4rc"), debugSettingsContents)
+
     console.log("Launching xu4 (new game)...")
     const { child, getOutput } = runXu4(display, ["-i", "-q", "-p", profile])
     await sleep(4000)
@@ -207,24 +262,90 @@ async function main() {
     await sleep(1500)
     screenshot(display, resolve(evidenceDir, "03-world-entered.png"))
 
-    console.log("Testing movement...")
-    for (const dir of ["Down", "Down", "Right"]) {
-      xdotool(display, "key", dir)
-      await sleep(800)
-    }
-    screenshot(display, resolve(evidenceDir, "04-movement.png"))
+    console.log("Teleporting to Moonglow via the debug cheat menu (Ctrl-C -> Goto)...")
+    xdotool(display, "key", "ctrl+c")
+    await sleep(1000)
+    xdotool(display, "key", "g")
+    await sleep(1000)
+    xdotool(display, "type", "--delay", "100", gotoDestination)
+    await sleep(500)
+    xdotool(display, "key", "Return")
+    await sleep(1500)
+    screenshot(display, resolve(evidenceDir, "04-goto-moonglow.png"))
 
-    console.log("Testing talk command dispatch...")
-    xdotool(display, "key", "t")
-    await sleep(600)
-    xdotool(display, "key", "Down")
-    await sleep(800)
-    screenshot(display, resolve(evidenceDir, "05-talk-attempt.png"))
+    console.log("Entering Moonglow for NPC dialogue...")
+    xdotool(display, "key", "e")
+    await sleep(2000)
+    screenshot(display, resolve(evidenceDir, "05-moonglow-entered.png"))
+    // Plan.md 3.3 enter-guard, best available without OCR: screenMessage()
+    // output (e.g. "Enter towne! Moonglow" vs "Enter what?") is drawn to the
+    // screen only, never to stdout, so the script cannot fail fast here
+    // programmatically. A human MUST confirm "Enter towne!" in
+    // 05-moonglow-entered.png before trusting any later screenshot; if the
+    // town was not entered, every later input is misinterpreted as a
+    // top-level command and the run's evidence is invalid.
+    console.log("CHECKPOINT: verify 'Enter towne! Moonglow' in 05-moonglow-entered.png")
+
+    console.log("Approaching NPC: one step east + talk in all 4 directions, per step...")
+    for (let i = 0; i < npcApproachSteps; i++) {
+      xdotool(display, "key", "Right")
+      await sleep(900)
+      for (const talkDir of npcTalkDirs) {
+        xdotool(display, "key", "t")
+        await sleep(400)
+        xdotool(display, "key", talkDir)
+        await sleep(900)
+      }
+      screenshot(display, resolve(evidenceDir, `06-approach-step-${i + 1}.png`))
+    }
+    screenshot(display, resolve(evidenceDir, "07-approach-done.png"))
+    // Plan.md 3.3 dialogue-open guard, best available without OCR: the
+    // script cannot detect whether any sweep attempt printed
+    // `You meet ...`. A human MUST confirm the greeting in
+    // 06-approach-step-N.png / 07-approach-done.png before trusting the
+    // keyword screenshots below; with no greeting, the typed keywords below
+    // become top-level commands (see interestClearBackspaces comment) and
+    // this run's evidence AND save must be discarded.
+    console.log("CHECKPOINT: verify 'You meet ...' in 06-approach-step-N/07-approach-done.png")
+
+    // Clear any stray `t` characters typed into an already-open
+    // "Your Interest:" prompt by the sweep above, then submit the keyword.
+    async function clearInterestAndType(word) {
+      for (let i = 0; i < interestClearBackspaces; i++) {
+        xdotool(display, "key", "BackSpace")
+        await sleep(60)
+      }
+      xdotool(display, "type", "--delay", "150", word)
+      xdotool(display, "key", "Return")
+      await sleep(2000)
+    }
+
+    await clearInterestAndType(npcKeywords[0])
+    screenshot(display, resolve(evidenceDir, "08-npc-name.png"))
+
+    await clearInterestAndType(npcKeywords[1])
+    screenshot(display, resolve(evidenceDir, "09-npc-health.png"))
+
+    await clearInterestAndType("bye")
+    screenshot(display, resolve(evidenceDir, "10-npc-bye.png"))
+
+    // Walking back to the exact entrance tile to cross the map edge is just
+    // as RNG-fragile as the original approach movement, so exit the same
+    // deterministic way we entered: the cheat menu's 'x' (Exit Map, see
+    // vendor/xu4/src/cheat.cpp's `case 'x'`) returns to the parent (world)
+    // map from any position, which is also required before 'q' can save
+    // (CTX_CAN_SAVE_GAME excludes CTX_CITY -- see vendor/xu4/src/location.h).
+    console.log("Exiting back to the world map via the debug cheat menu...")
+    xdotool(display, "key", "ctrl+c")
+    await sleep(1000)
+    xdotool(display, "key", "x")
+    await sleep(1500)
+    screenshot(display, resolve(evidenceDir, "11-returned-to-world.png"))
 
     console.log("Saving (quit & save)...")
     xdotool(display, "key", "q")
     await sleep(1000)
-    screenshot(display, resolve(evidenceDir, "06-quit-and-save.png"))
+    screenshot(display, resolve(evidenceDir, "12-quit-and-save.png"))
 
     const savePartyPath = resolve(runDir, "profiles", profile, "party.sav")
     if (!existsSync(savePartyPath) || statSync(savePartyPath).size === 0) {
@@ -245,7 +366,7 @@ async function main() {
     // save is already loaded by the time we could send it.
     const relaunch = runXu4(display, ["-i", "-q", "-p", profile])
     await sleep(3500)
-    screenshot(display, resolve(evidenceDir, "07-reloaded.png"))
+    screenshot(display, resolve(evidenceDir, "13-reloaded.png"))
     await killAndWait(relaunch.child)
     if (relaunch.getOutput().toLowerCase().includes("segmentation")) {
       throw new Error(`xu4 output suggests a crash on reload: ${relaunch.getOutput()}`)
@@ -255,10 +376,18 @@ async function main() {
   console.log(`native baseline QA evidence written to ${evidenceDir}`)
 }
 
-try {
-  await main()
-} catch (error) {
-  const reason = error instanceof Error ? error.message : "unknown qa:native-baseline error"
-  console.error(`qa:native-baseline failed: ${reason}`)
-  process.exitCode = 1
+if (process.argv[2] === "--print-npc-dialogue-plan") {
+  console.log(
+    `goto=${gotoDestination}; enter=e; approachSteps=${npcApproachSteps}; ` +
+    `talkPerStep=${npcTalkDirs.join(",")}; clearInterest=backspace*${interestClearBackspaces}; ` +
+    `keywords=${npcKeywords.join(",")}; exit=bye; exitMap=x`
+  )
+} else {
+  try {
+    await main()
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : "unknown qa:native-baseline error"
+    console.error(`qa:native-baseline failed: ${reason}`)
+    process.exitCode = 1
+  }
 }

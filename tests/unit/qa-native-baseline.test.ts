@@ -14,6 +14,23 @@ function run(env: Record<string, string>) {
 }
 
 describe("qa:native-baseline", () => {
+  it("prints the deterministic Moonglow multi-turn dialogue plan", () => {
+    // Given: the native QA command without original game data.
+    // When: its non-game plan inspection mode is requested.
+    const result = spawnSync("node", [scriptPath, "--print-npc-dialogue-plan"], {
+      cwd: projectRoot,
+      encoding: "utf8"
+    })
+
+    // Then: the exact runtime route, per-step talk sweep, interest-buffer
+    // clear guard, two keywords, and clean exit are exposed.
+    expect(result.status).toBe(0)
+    expect(result.stdout).toBe(
+      "goto=moonglow; enter=e; approachSteps=6; talkPerStep=Right,Up,Down,Left; " +
+      "clearInterest=backspace*16; keywords=name,health; exit=bye; exitMap=x\n"
+    )
+  })
+
   it("fails clearly when ULTIMA4_DATA is unset", () => {
     const result = run({})
 
