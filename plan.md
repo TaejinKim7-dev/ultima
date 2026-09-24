@@ -13,7 +13,7 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률: 6 / 24 = 25.0%
-(Step 6 완료 2026-09-24, main merge `c836ecc` / `todo-06-wasm-build`)
+(Step 6 완료 2026-09-24, main merge `c836ecc`. Step 7·8은 브랜치 구현+게이트 통과=🟡 merge 대기 → 0으로 계산)
 
 ## 단계 목록
 
@@ -38,8 +38,8 @@ Step 3 완료 (2026-09-24):
 | # | 단계 | 상태 | 선행 |
 |---|---|---|---|
 | 6 | 단일 스레드 wasm Boron + xu4 core 빌드 (Emscripten 4.0.23, Asyncify) | ✅ | main `c836ecc` (`26f7164`) |
-| 7 | OpenGL → WebGL2 (glMapBufferRange 제거, CPU staging + glBufferSubData) | ⬜ | 6 |
-| 8 | blocking event loop / 키 입력 → 브라우저 안전 queue (IME, request ID) | ⬜ | 6 |
+| 7 | OpenGL → WebGL2 (glMapBufferRange 제거, CPU staging + glBufferSubData) | 🟡 | branch `todo-07-webgl2` `90232b9` merge 대기 |
+| 8 | blocking event loop / 키 입력 → 브라우저 안전 queue (IME, request ID) | 🟡 | branch `todo-08-input-queue` `af13814` merge 대기 |
 | 9 | 브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행 | ⬜ | 5,7,8 |
 | 10 | IDBFS 세이브/설정 영속 + export/import | ⬜ | 9 |
 
@@ -69,8 +69,24 @@ Step 3 완료 (2026-09-24):
 | F3 | 실제 브라우저 수동 QA (Chromium/Firefox/WebKit) | ⬜ |
 | F4 | 범위 충실도 (정적 호스팅, 원본 데이터 미포함) | ⬜ |
 
+Step 7·8 구현 완료 (2026-09-24, worktree, merge 전 · 진행률 미반영):
+- 7 🟡 `todo-07-webgl2` `90232b9 fix(webgl): replace mapped buffers for WebGL2`
+  - RED `task-7/red.log` 1 failed → GREEN `task-7/green.log` 1 passed (chromium e2e)
+  - `title-render.png` nonblank (title 202,148,32 / status 226,212,178), shader 20 stage logs 0 error
+  - failure QA `bad-shader.log` exit 1 (`runtimeError: shader-compile-error`)
+  - 게이트 exit 0: ci / verify:repo-sources / typecheck / unit 57 / build / diff-check / e2e webgl-render / full e2e (shell-ready 포함)
+  - source-manifest xu4 treeSha256 → `80758478…bbcdc` (fileCount 407)
+- 8 🟡 `todo-08-input-queue` `af13814 feat(input): queue browser input safely`
+  - RED `task-8/red.log` → GREEN `task-8/green.log` unit **16/16**
+  - native `test:native -R input-queue` Passed; wasm-symbols 8/8; e2e input-queue + shell-ready 1 passed
+  - unit 전체 **73/73** (기존 57 + input-queue 16)
+  - failure QA `stale-request.log` (stale requestId 거부, game mutation 없음); `wasm-queue-proof.log` OK/INVALID/FULL/NO_PROMPT
+  - happy QA `input-flow.trace.zip` (movement/command/NPC text/IME 한국어)
+  - source-manifest xu4 fileCount 409, treeSha256 → `cfc0db65…93ca9`
+- 공통 미검증: Step 9 통합 전이라 실제 게임 루프 런타임 미측정; 양 branch 모두 vendor/source-manifest 수정 → merge 시 treeSha256 재계산 필요
+
 ## 바로 다음 순서
-1. Step 7(OpenGL→WebGL2)와 Step 8(blocking event loop→브라우저 queue) — 둘 다 6 완료로 선행 해제, 병렬 가능. 재사용 조사: exp-1(glMapBufferRange 3곳), lib-1(CPU staging+GLSL 300 es).
+1. Step 7·8 **main merge** (source-manifest treeSha256 충돌 재계산 resolve + merge 게이트 재실행) → 사용자 승인 후 push.
 2. Step 9(브라우저 시작 시퀀스 + ZIP 검증) → 10(IDBFS). 11~13 → 14 → 15(번역 4402건). 16은 9 이후 언제든 병렬 가능.
 3. 17 → 18 → 19 → 20 → F1~F4.
 
@@ -78,8 +94,9 @@ Step 3 완료 (2026-09-24):
 - **가능하다고 본다.** 근거: 엔진(xu4)이 원본 데이터로 native에서 실제 새 게임·이동·save/load까지 동작함을 확인했고(3.1),
   모듈 패키징·번역 inventory·웹 셸/브릿지 계약이 이미 main에 있다. 남은 일은 계획서에 기술 설계가 이미 확정돼 있다.
 - 주요 위험 (확인 필요):
-  - Asyncify로 blocking loop를 옮길 때 stack/성능 문제 (Step 8) — wasm 빌드 자체는 Step 6에서 최초 성공, 브라운징 인터랙션 미검증.
-  - WebGL2 버퍼 경로 수정 범위 (Step 7) — 소스 분석만 있고 실측 없음.
+  - Asyncify로 blocking loop를 옮길 때 stack/성능 문제 (Step 8) — queue 구현·단위/e2e 증명 완료, 실제 게임 루프 런타임은 Step 9 이후 미측정.
+  - WebGL2 버퍼 경로 (Step 7) — Chromium e2e 픽셀+셰이더 검증 완료, native 링크/full engine 런타임은 Step 9 통합 후 재확인 필요.
+  - Step 7·8 동시 vendor/source-manifest 수정 — merge 시 treeSha256 충돌 예상(재계산으로 해결).
   - 번역 corpus 4402건의 분량·품질 (Step 15).
   - Web Audio + RFX 동기 `soundDuration` 계약 (Step 16).
   - 환경: host Node 20.20.2(요구 ≥22, 경고만); wasm release 빌드는 main stub이라 DCE로 작아짐(acceptance는 --debug).

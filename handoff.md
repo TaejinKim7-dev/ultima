@@ -16,6 +16,8 @@
 
 **Todo 6(단일 스레드 wasm Boron + xu4 core)를 `todo-06-wasm-build` 브랜치에서 완료하고 사용자 승인 후 `main`에 merge했다(merge commit `c836ecc`, 구현 `26f7164`, 문서 `db512d9`) — 상세는 아래 "Todo 6 완료 기록" 참고. merge 전 재실행 게이트 전부 exit 0. push는 미실시(사용자 확인 전).**
 
+**Todo 7(WebGL2)·Todo 8(입력 queue)를 병렬 worktree에서 구현·커밋했으나 아직 `main` merge 전이다(부분 진행 🟡, 진행률 0으로 계산). 상세 테스트 결과는 아래 "Todo 7/8 구현 기록(merge 대기)" 참고.**
+
 - root Vite/TypeScript strict/Vitest/Playwright harness와 minimal build shell이 있다.
 - `vendor/source-manifest.json`은 xu4, Faun, GLV, Boron의 deterministic file count/tree SHA-256과 pinned revision을 기록한다.
 - `npm run verify:repo-sources`는 manifest mismatch와 Git-tracked `.zip`, `.sav`, `.ega`, `.map`, `.tlk`, `.exe`를 실패시킨다.
@@ -441,3 +443,82 @@ git checkout main && git merge --no-ff todo-06-wasm-build
 # → c836ecc Merge todo-06-wasm-build: single-thread wasm Boron + xu4 core
 ```
 - `origin` push는 미실시 — main이 `origin/main` 대비 ahead 상태이며 push는 사용자 확인 후 별도 수행.
+
+## Todo 7/8 구현 기록(merge 대기) (2026-09-24, 병렬 worktree)
+
+**진행률 영향 없음**: AGENTS.md 규칙상 acceptance + merge 전 게이트 통과 후에도 부분 진행(🟡)은 0으로 센다. 공식 완료는 여전히 **6/24 = 25.0%**(Step 1~6, 모두 main merge됨). Step 7·8은 브랜치 커밋까지 완료·main merge 대기.
+
+### Todo 7 — WebGL2-safe buffers/shaders (branch `todo-07-webgl2`, commit `90232b9`)
+
+**Commit**: `90232b9 fix(webgl): replace mapped buffers for WebGL2` (worktree `/home/taejin/ultima-worktrees/todo-07-webgl2`, main merge 전)
+
+**변경 파일 (7 files, +446/−9)**:
+- `vendor/xu4/src/gpu_opengl.cpp/.h`: `#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)` 분기 — 웹은 CPU staging + `glBufferSubData`, native은 기존 `glMapBufferRange` 유지. Emscripten에서 `#version 300 es` + `precision highp float`, `GLES3/gl3.h` include.
+- `vendor/xu4/module/render/shader/world.glsl`: vertex `main()` 후 stray `};` → `}` (ANGLE syntax error)
+- `vendor/xu4/module/render/shader/xbr-lv2.glsl`: non-constant global init → 상수 expression
+- `tests/e2e/webgl-render.spec.ts` 신규 (346 lines): 셰이더 compile-all, bufferSubData title/status 픽셀 assertion, `U4_BAD_SHADER=1` failure mode
+- `playwright.config.ts`: chromium project 추가 (acceptance `--project=chromium`)
+- `vendor/source-manifest.json`: xu4 `fileCount` 407(유지), `treeSha256` → `80758478952b25abf1c68dc160f749ee7ddd42d14e1fa481c63dd848a16bbcdc`
+
+**테스트/게이트 결과 (worktree 내, 전부 실제 실행)**:
+```
+npm ci                                      # exit 0
+npm run verify:repo-sources                 # exit 0
+npm run typecheck                           # exit 0
+npm run test:unit                           # exit 0 — 9 files / 57 tests
+npm run build                               # exit 0
+git diff --check                            # exit 0
+RED:  npm run test:e2e -- tests/e2e/webgl-render.spec.ts --project=chromium  # exit 1 (의도된 RED)
+GREEN: same command after impl               # exit 0 — 1 passed (454ms)
+full e2e suite (shell-ready 포함)            # exit 0
+failure QA (U4_BAD_SHADER=1)                 # exit 1 as required
+```
+- RED evidence: `.omo/evidence/ultima-web/task-7/red.log` (1 failed — `glMapBufferRange` 미존재 branch)
+- GREEN evidence: `.omo/evidence/ultima-web/task-7/green.log` (1 passed), `title-render.png` (title RGB 202,148,32 / status 226,212,178 / navy 5,8,31), `render-summary.json` (shader 20 stage logs 전부 0 error, glError 0)
+- failure evidence: `.omo/evidence/ultima-web/task-7/bad-shader.log` (`runtimeError: shader-compile-error`, `data-webgl-render=error`)
+- 추가: host g++ / emcc compile matrix (`GPU=scale`, `GPU_RENDER` ±) exit 0 (scratch `/tmp`, vendor 무오염)
+
+**미검증**: full `build:native` 링크(fresh worktree에 `libfaun.a` 없음 — Step 7 게이트 범위 밖); 실제 엔진 런타임의 새 C++ branch는 Step 9 통합 후 재확인; Firefox/WebKit project 미추가(Chromium/SwiftShader만).
+
+### Todo 8 — browser-safe input queues (branch `todo-08-input-queue`, commit `af13814`)
+
+**Commit**: `af13814 feat(input): queue browser input safely` (worktree `/home/taejin/ultima-worktrees/todo-08-input-queue`, main merge 전)
+
+**변경 파일 (13 files, +1228/−38)**:
+- `src/bridge/input-queue.ts` 신규(327 lines): `INPUT_QUEUE_MAX=256` reject-newest, frozen 이벤트, numeric prompt epoch(`beginPrompt` 시 in-flight keys/text 폐기), stale/no-prompt/too-long → non-fatal bridge `runtime-error`, IME guard(`isComposing`/keyCode 229), `yieldToBrowser()`
+- `vendor/xu4/src/web_bridge.{h,cpp}` 신규: C ABI mirror — `u4_web_enqueue_key`/`u4_web_submit_text`(KEEPALIVE/export 유지) + engine-loop drain/begin/end/current/has/take/reset/last_error/frame_yield; Controller 포인터 미보유; web에서 `emscripten_sleep(0)`
+- `vendor/xu4/src/event.cpp`: `__EMSCRIPTEN__` 한정 `frameSleep`의 `fsleep==0` per-frame yield (native 불변)
+- `scripts/web-main.cpp` stub 제거 → queue는 `web_bridge.cpp` 단일 정의; `web-stub.cpp` forward
+- `scripts/build-wasm.mjs`: source list +1행 (`src/web_bridge.cpp`)
+- `src/main.ts`: additive — `window.ultimaInput` + keydown/composition listener (dispatch/preventDefault 없음)
+- `tests/unit/input-queue.test.ts` 신규(204 lines), `native/tests/input_queue_test.c` + `native/CMakeLists.txt` (`input-queue` CTest), `tests/e2e/input-queue.spec.ts`
+- `vendor/source-manifest.json`: xu4 `fileCount` 407→**409**, `treeSha256` → `cfc0db65…823693ca9` (revision/upstream 유지)
+
+**테스트/게이트 결과 (worktree 내, 전부 실제 실행)**:
+```
+npm ci                                      # exit 0
+npm run verify:repo-sources                 # exit 0
+npm run typecheck                           # exit 0
+npm run test:unit                           # exit 0 — 73/73 (기존 57 + input-queue 16)
+npm run build                               # exit 0
+git diff --check                            # exit 0
+npm run test:unit -- tests/unit/input-queue.test.ts   # exit 0 — 16/16
+npm run test:native -- -R input-queue       # Passed exit 0
+source .emsdk/... && npm run build:wasm -- --debug     # exit 0 — sources 33/33
+npm run test:unit -- tests/unit/wasm-symbols.test.ts   # exit 0 — 8/8
+e2e input-queue (chromium)                  # 1 passed
+shell-ready e2e 회귀                        # 1 passed
+```
+- RED evidence: `.omo/evidence/ultima-web/task-8/red.log` (module missing RED)
+- GREEN evidence: `.omo/evidence/ultima-web/task-8/green.log` (16/16)
+- wasm export codes: `wasm-queue-proof.log` — enqueue OK=0 / INVALID=-2 / FULL=-1 / NO_PROMPT=-4 / bad request=-2 / bad length=-2 전부 매칭
+- happy QA: `input-flow.trace.zip` (Playwright — movement, command key, NPC text, IME 한국어 "아바타")
+- failure QA: `stale-request.log` — `requestId=1 while active prompt=2` → `{ok:false,error:"stale",...}` + post-state game mutation 없음
+- native mutant 검증: epoch-clearing 제거 시 native test exit 1 (strength 확인, scratch 삭제)
+
+**미검증/known**: full `test:native`의 `module-package`·`native-baseline-negative`는 fresh worktree에 `build/host` 산출물 없어 기존 환경 gap(diff 미영향, 스코프 밖); 게임 루프 소비 배선(web `handleInputEvents` drain)은 Step 9; e2e는 bridge/shell queue 중심(계획 허용 범위), full gameplay run 아님.
+
+### merge 대기 시 주의
+- 양 branch 모두 `vendor/source-manifest.json`을 수정 → main merge 시 `treeSha256` 충돌 예상. 합친 vendor tree로 재계산 후 resolve 필수.
+- Step 7은 `playwright.config.ts`에 chromium project 추가, Step 8은 `scripts/build-wasm.mjs`+`src/main.ts`만 공유 파일 건드림 — 충돌 위험 낮음.
+- merge 전 각 worktree 게이트는 통과했으나, **병합 직후 main에서 전체 게이트 재실행** 후 handoff에 exit code 기록해야 완료(✅)로 승격.
