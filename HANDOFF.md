@@ -7,7 +7,7 @@
 
 ## 2. 현재 상태 (Current state)
 
-### 2-1. Step 6 완료 (branch `todo-06-wasm-build`, 커밋 예정/미push)
+### 2-1. Step 6 완료 (branch `todo-06-wasm-build`, commit `26f7164`, push/merge 대기)
 - `npm run deps:wasm`: PATH-wrapper emcc로 Boron 정적 라이브러리 WebAssembly 검증.
 - `npm run build:wasm -- --debug`: xu4 core 32소스 + libboron.a → `xu4.mjs`(185KB) + `xu4.wasm`(3.4MB). Asyncify/IDBFS/MODULARIZE/EXPORT_ES6, `-sENVIRONMENT=web,node`(Vitest용).
 - `tests/unit/wasm-symbols.test.ts` 8/8; 전체 `test:unit` 9 files/57 tests exit 0.
@@ -22,7 +22,7 @@
 ### 2-3. 이전 세션 유지
 - Todo 1~5 main 완료 (5/24였음), emsdk 4.0.23 `.emsdk` 설치, Todo 3 native+NPC 대화 merge `13a3969`.
 
-## 3. 변경한 파일 (Files changed, uncommitted on `todo-06-wasm-build`)
+## 3. 변경한 파일 (Files changed, commit `26f7164` on `todo-06-wasm-build`)
 - 신규: `scripts/deps-wasm.mjs`, `scripts/build-wasm.mjs`, `scripts/qa-wasm-instantiate.mjs`, `scripts/web-main.cpp`, `scripts/web-stub.cpp`, `tests/unit/wasm-symbols.test.ts`, `HANDOFF.md`, `plan.md`
 - 수정: `package.json` (`deps:wasm`/`build:wasm`), `.omo/plans/ultima-web.md`·`docs/ULTIMA_WEB_PLAN.md` (Todo 3/6 `[x]`), `AGENTS.md` (진행 관리), `handoff.md`·`docs/NEXT_FIVE_STEPS.md`
 - vendor/ 무수정. evidence는 git-ignored.
@@ -33,7 +33,8 @@
 - placeholder main은 DCE로 release wasm이 작아질 수 있으므로 acceptance는 `--debug`.
 
 ## 5. 다음 할 일 (Next steps)
-- [ ] **user decision**: Step 6 커밋 + `main` merge (AGENTS.md 게이트 이미 exit 0, handoff 기록 완료).
+- [x] Step 6 커밋: `26f7164 build(wasm): compile single-thread xu4 engine` (merge 게이트 exit 0, handoff 기록 완료).
+- [ ] **user decision**: `main` merge (AGENTS.md — 사용자 확인 필요).
 - [ ] merge 후: Step 7·8 병렬 착수 (exp-1/lib-1 조사 재사용) → 9 → 10.
 
 ## 6. 주의사항 (Blockers & gotchas)
