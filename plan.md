@@ -1,5 +1,5 @@
 # Ultima IV 웹 한글판 — 진행 계획
-기준 시각: 2026-09-24 KST · 기준 main: `92ebce8` (로컬, 아직 미push)
+기준 시각: 2026-09-24 KST · 기준 main: `67c4e16` (origin과 동기화됨, push 완료)
 
 ## 목표
 원본 `ultima4.zip`을 사용자가 브라우저에서 직접 선택해 플레이하는, 한국어 UI/대화/NPC 키워드 alias와
@@ -7,13 +7,13 @@
 정적 사이트로 배포한다. 원본 게임 데이터는 절대 배포/커밋하지 않는다.
 
 ## 진행률 계산법
-- 전체 24단계 = 구현 1~20 + 최종 검증 F1~F4. 단계마다 가중치 동일.
-- 진행률 = 완료(✅) 단계 수 ÷ 24. 부분 진행(🟡)은 0으로 계산한다(완료 기준을 통과해야만 1).
+- 전체 25단계 = 구현 1~21 + 최종 검증 F1~F4. **Todo 21은 2026-09-24 신규 추가**(아래 참고). 단계마다 가중치 동일.
+- 진행률 = 완료(✅) 단계 수 ÷ 25. 부분 진행(🟡)은 0으로 계산한다(완료 기준을 통과해야만 1).
 - 완료 기준 = 해당 단계의 acceptance criteria 통과 + `main` merge 전 로컬 검증 게이트 통과(AGENTS.md).
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
-## 현재 진행률: 9 / 24 = 37.5%
-(Step 1~9 완료. Step 10은 🟡 부분 진행 — Persistence Coordinator+export/import 유닛 테스트 통과, e2e는 xu4 부팅 이식 후로 보류(사용자 확인, 2026-09-24). Step 6 main `c836ecc`, Step 7 main `874c775`, Step 8 main `6b97d8e`, Step 9 main `5c28511`, Step 10(partial) main `92ebce8` — 전부 로컬 merge 게이트 통과. `origin/main`은 `695ee76`까지 push됨, Step 10은 아직 미push.)
+## 현재 진행률: 9 / 25 = 36.0%
+(Step 1~9 완료. Step 10은 🟡 부분 진행 — Persistence Coordinator+export/import 유닛 테스트 통과, e2e는 Todo 21 완료 후로 보류(사용자 확인, 2026-09-24). Step 6 main `c836ecc`, Step 7 main `874c775`, Step 8 main `6b97d8e`, Step 9 main `5c28511`, Step 10(partial) main `92ebce8` — 전부 merge 게이트 통과, `origin/main`까지 push 완료(`67c4e16`).)
 
 ## 단계 목록
 
@@ -42,6 +42,7 @@ Step 3 완료 (2026-09-24):
 | 8 | blocking event loop / 키 입력 → 브라우저 안전 queue (IME, request ID) | ✅ | main `6b97d8e` (`af13814`) |
 | 9 | 브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행 | ✅ | main `5c28511` (`4c878c9`) |
 | 10 | IDBFS 세이브/설정 영속 + export/import | 🟡 | main `92ebce8` (`6a74288`) — Coordinator+아카이브만, e2e 보류(아래 참고) |
+| 21 | **[신규]** 실제 xu4 부팅 시퀀스를 web-main.cpp로 이식 | ⬜ | 6,8,9 완료라 착수 가능. `.omo/plans/ultima-web.md` Todo 21 참고 |
 
 ### Wave 3 — 한국어화 (11~15)
 | # | 단계 | 상태 | 선행 |
@@ -61,7 +62,7 @@ Step 3 완료 (2026-09-24):
 | 19 | GitHub Actions Pages workflow + `/ultima/` release artifact | ⬜ | 15,16,18 |
 | 20 | README/사용자 가이드/증거 인덱스/handoff | ⬜ | 19 |
 
-### Final — 독립 검증 (F1~F4 = 진행률 21~24번째)
+### Final — 독립 검증 (F1~F4 = 진행률 22~25번째)
 | # | 단계 | 상태 |
 |---|---|---|
 | F1 | 계획 준수 감사 | ⬜ |
@@ -133,17 +134,22 @@ Step 10 main merge 완료, 부분 (2026-09-24):
 - 전체 게이트(main, merge 후 재실행): `npm run test:unit`(13 files/99 tests) · `verify:repo-sources` · `typecheck` · `build` · `git diff --check` · `cmp` 계획서 두 벌 — 전부 exit 0. `npx playwright test --project=chromium`(기존 8개, 무회귀) exit 0.
 - 상세는 `handoff.md` "Todo 10 main merge 완료 기록(부분)" 참고.
 
+Todo 21 신규 추가 완료 (2026-09-24, 사용자 지시 "main() 이식은 별도 Todo로 새로 만들어"):
+- `.omo/plans/ultima-web.md` + `docs/ULTIMA_WEB_PLAN.md`에 Todo 21("Port the real xu4 boot sequence into the web entry point")을 Todo 20 뒤, Final verification wave 앞에 추가(byte-identical, cmp 확인). 기존 Todo 1~20 번호/내용은 안 건드림(관례상 "헤더 재작성 금지" 유지, append만 함).
+- 의존성 매트릭스에 `21 | 6,8,9 | 10(e2e), 11,12,13,17` 행 추가. `AGENTS.md`의 진행률 산식 설명을 "24" 하드코딩 대신 "`.omo/plans/ultima-web.md`의 Todo 개수 기준"으로 바꿔서 앞으로 Todo가 또 늘어도 다시 안 고쳐도 되게 함.
+- 전체 단계 수 24 → **25**로 갱신(구현 21 + F1~F4).
+
 ## 바로 다음 순서
-1. **Step 10 push 확인 필요**: 지금 로컬 merge(`92ebce8`)까지 됐고 `origin/main`엔 아직 없음 — push 여부를 사용자에게 확인받는다.
-2. **판단 필요**: web-main.cpp에 실제 xu4 부팅 시퀀스(servicesInit/config/screen/event loop)를 이식하는 작업을 별도 Todo로 만들지, 어느 기존 Todo(11~13 또는 17)에 포함시킬지 사용자와 정한다 — Step 10 e2e, Step 11~13, Step 17이 전부 이 이식에 실질적으로 막혀 있다.
-3. 위 판단이 나기 전까지 진행 가능한 것: Step 11~13(한글 UI, 설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) 중 이식 없이도 되는 부분(예: 브릿지 이벤트 토큰화, 오버레이 레이아웃 계산 로직)은 유닛 테스트 수준으로 먼저 만들 수 있다. Step 16(Web Audio, 설계 메모 `.omo/drafts/step-16-web-audio-design.md`)도 비슷하게 "로직은 먼저, 실제 재생 e2e는 나중" 패턴이 적용될 가능성이 큼 — 착수 전에 그 범위도 사용자와 확인.
+1. ~~Step 10 push~~ / ~~Todo 21 신설 판단~~ **둘 다 완료** (2026-09-24, 사용자 지시).
+2. **Todo 21**(web-main.cpp 실제 xu4 부팅 이식) 착수 — 선행조건(6,8,9) 전부 완료 상태. `.omo/plans/ultima-web.md`의 Todo 21 전문(References/Acceptance/QA) 그대로 실행.
+3. Todo 21이 끝나야 Step 10의 e2e(`save-reload.spec.ts`), Step 11~13, Step 17이 실질적으로 열린다. 그전까지는 Step 11~13/16 중 "부팅 없이도 유닛 테스트 가능한 로직"만 병행 가능 — 착수 전 범위를 사용자와 확인.
 4. 14 → 15(번역 4402건) → 17 → 18 → 19 → 20 → F1~F4.
 
 ## 목적 달성 가능성 판단
 - **가능하다고 본다.** 근거: 엔진(xu4)이 원본 데이터로 native에서 실제 새 게임·이동·save/load까지 동작함을 확인했고(3.1),
   모듈 패키징·번역 inventory·웹 셸/브릿지 계약이 이미 main에 있다. 남은 일은 계획서에 기술 설계가 이미 확정돼 있다.
 - 주요 위험 (확인 필요):
-  - **`main()`이 아직 placeholder다 (신규, Step 9에서 확인).** 실제 xu4 부팅 시퀀스(servicesInit/config load/screen init/event loop)를 web-main.cpp로 이식하는 작업이 아직 없다 — Step 11~13(메시지 패널/오버레이/한글 입력)과 Step 17(실제 게임 진행 e2e)은 이 이식이 선행돼야 실질적으로 검증 가능하다. 정확히 어느 Todo에서 이 이식을 하는지 계획서에 명시가 없다 — 확인 필요, 다음 세션에서 판단해야 함.
+  - **`main()`이 아직 placeholder다 (Step 9에서 확인, Todo 21로 추적 중).** 실제 xu4 부팅 시퀀스(servicesInit/config load/screen init/event loop)를 web-main.cpp로 이식하는 작업을 신규 Todo 21로 만들었다(2026-09-24, 사용자 지시) — Step 10 e2e/11~13/17이 전부 여기 막혀 있었던 걸 명시적으로 계획서에 반영함. 아직 착수 전.
   - Asyncify로 blocking loop를 옮길 때 stack/성능 문제 (Step 8) — queue 구현·단위/e2e 증명 완료, 실제 게임 루프(placeholder main이라 아직 못 돌림) 런타임은 위 이식 후 재측정 필요.
   - WebGL2 버퍼 경로 (Step 7) — Chromium e2e 픽셀+셰이더 검증 완료, native 링크/full engine 런타임은 위 이식 후 재확인 필요.
   - Step 7·8 동시 vendor/source-manifest 수정 — merge 시 충돌 예상했으나 재계산 resolve 완료(fileCount 409, treeSha256 `e65f0d9b…b25b49`, match:true).

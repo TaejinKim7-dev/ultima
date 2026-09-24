@@ -18,7 +18,7 @@ Your next move: 이 계획을 실행하려면 별도 worker 세션에서 `$start
 
 ---
 
-> TL;DR (machine): XL / High. 고정 xu4 소스 → native 기준 실행 → single-thread WASM → 한글 UI/전체 번역/영한 입력/오디오/영속 저장 → GitHub Pages. TDD. 구현 20개 + 최종 검증 4개.
+> TL;DR (machine): XL / High. 고정 xu4 소스 → native 기준 실행 → single-thread WASM → 한글 UI/전체 번역/영한 입력/오디오/영속 저장 → GitHub Pages. TDD. 구현 21개(2026-09-24, Todo 21 추가) + 최종 검증 4개.
 
 ## Scope
 ### Must have
@@ -148,6 +148,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 | 18 | 17 | 19 | 없음 |
 | 19 | 15,16,18 | 20 | 없음 |
 | 20 | 19 | F1–F4 | 없음 |
+| 21 | 6,8,9 | 10(e2e), 11,12,13,17 | 없음 (2026-09-24 신규 추가 — web-main.cpp 실제 xu4 부팅 이식, Todo 9/10 진행 중 발견된 blocker) |
 
 ## Todos
 > Implementation + Test = ONE todo. Never separate.
@@ -311,6 +312,14 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   Acceptance criteria: `npm run verify:release-docs` checks commands, pins, evidence links, and no stale placeholder text; README quickstart can be executed locally from a clean clone with user-provided `ULTIMA4_DATA`.
   QA scenarios: happy: follow docs in a fresh temp clone through `npm ci`, `npm run build:site`, static serve smoke, evidence `.omo/evidence/ultima-web/task-20/fresh-clone.log`; failure: remove one required source pin and verify docs verifier fails, evidence `.omo/evidence/ultima-web/task-20/missing-pin.log`.
   Commit: Y | docs(release): document web build and Pages handoff
+
+- [ ] 21. Port the real xu4 boot sequence into the web entry point (replace web-main.cpp's placeholder main())
+  What to do / Must NOT do: replace `scripts/web-main.cpp`'s current placeholder `main()` (it does nothing but `return 0` immediately -- introduced in Todo 6, left unfinished on purpose because the real boot sequence needs the wasm core, the browser-safe input queue, and the Todo 9 startup sequence to all exist first) with the real xu4 boot sequence ported from the native engine's actual startup path: Boron config load, screen/GPU init driven through the existing web stubs (`scripts/web-stub.cpp`) rather than bypassing them, and entering the real event loop so gameplay actually runs and the title screen actually renders. This must be called from inside `src/engine/startup.ts`'s `callMain()` step (Todo 9), not as a second/separate entry point, and must happen exactly once per page life, matching Todo 9's existing "no calling main twice" rule. Must not reintroduce native-only dependencies (GLFW/OpenGL/pthread/Faun mixer) that `scripts/build-wasm.mjs` deliberately excludes from the wasm source list; must not remove or weaken the Todo 8 input-queue contract or the Todo 10 persistence-coordinator contract while wiring the real loop into them -- this Todo is what finally makes both of those observably exercise real gameplay instead of only synthetic/mocked call patterns.
+  Parallelization: Wave 2 | Blocked by: 6,8,9 | Blocks: 10 (its still-missing e2e proof),11,12,13,17
+  References: `engine/src/xu4.cpp:201-264` (`servicesInit`, the real native startup this replaces); `engine/src/config_boron.cpp:1168-1183` (Boron config load); `engine/src/game.cpp` (the real event loop entry point once initialized); `scripts/web-main.cpp` (the placeholder this Todo replaces -- read its current comments first); `scripts/web-stub.cpp` (the platform stubs the real boot sequence must call through, not bypass); `scripts/build-wasm.mjs`'s `sourceFiles` list and its comment explaining why `src/xu4.cpp` is excluded (context for why this was deferred rather than done in Todo 6); `src/engine/startup.ts` (Todo 9 -- the caller of `callMain()`); `.omo/drafts/step-10-idbfs-design.md` and `.omo/drafts/step-11-13-korean-ui-design.md` (both explicitly flagged this same gap during their own design research and are blocked on it).
+  Acceptance criteria: `ULTIMA4_DATA=/absolute/path/to/verified/ultima4.zip npm run test:e2e -- tests/e2e/boot-sequence.spec.ts --project=chromium` proves a real, nonblank rendered title screen (reusing Todo 7's WebGL2 pixel-check pattern, not just a black canvas as Todo 9 currently produces) and proves the Todo 8 input queue is actually drained by a real running controller (at least one real keypress observably changes real game state, not just queue internals); `npm run test:unit -- tests/unit/boot-sequence.test.ts` covers whatever of the init sequence's own logic can be isolated from a full wasm run.
+  QA scenarios: happy: a verified `ULTIMA4_DATA` reaches an actually-rendered (non-black, matching Todo 7's known-good title/status pixel values) title screen and accepts one real keypress, evidence `.omo/evidence/ultima-web/task-21/title-render.png`; failure: a deliberately broken config/module load path fails loudly through a `runtime-error` bridge event rather than silently leaving a black screen (the exact failure mode Todo 9's own evidence currently shows and that must not be mistaken for success going forward), evidence `.omo/evidence/ultima-web/task-21/boot-failure.log`.
+  Commit: Y | feat(web): port real xu4 boot sequence into web entry point
 
 ## Final verification wave
 > Runs in parallel after ALL todos. ALL must APPROVE. Surface results and wait for the user's explicit okay before declaring complete.
