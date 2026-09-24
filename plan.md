@@ -100,7 +100,7 @@ npx playwright test --project=chromium      # 0 — 3 passed (shell-ready, input
 ## 바로 다음 순서
 1. **Step 9**(브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행) → 10(IDBFS). 11~13 → 14 → 15(번역 4402건). 16은 9 이후 언제든 병렬 가능.
 2. 17 → 18 → 19 → 20 → F1~F4.
-3. ~~`git push origin main`~~ **완료** (2026-09-24, tip `118c716`, 사용자 승인 후).
+3. ~~`git push origin main`~~ **완료** (2026-09-24, 사용자 승인 후, origin 동기화).
 
 ## 목적 달성 가능성 판단
 - **가능하다고 본다.** 근거: 엔진(xu4)이 원본 데이터로 native에서 실제 새 게임·이동·save/load까지 동작함을 확인했고(3.1),
