@@ -1,5 +1,11 @@
 # HANDOFF
-작성 시각: 2026-09-24 23:29 KST
+작성 시각: 2026-09-24 23:41 KST — push 완료 + Todo 21 신설 반영 (이전 버전에서 이어씀)
+
+**이 세션의 최신 상태 요약 (아래 본문보다 이 줄을 먼저 믿을 것):**
+- Step 9, Step 10(부분) 전부 `origin/main`에 push 완료(`99f45e5`, main과 origin 동기화됨, `git status -sb`로 확인).
+- 사용자 지시로 **Todo 21**(`web-main.cpp`에 실제 xu4 부팅 시퀀스 이식)을 `.omo/plans/ultima-web.md`/`docs/ULTIMA_WEB_PLAN.md`/`plan.md`에 신규 추가함(byte-identical 유지, cmp 확인). 전체 단계 수 24→**25**, 진행률 **9/25 = 36.0%**.
+- **Todo 21은 아직 착수 전이다** — 계획만 추가했고 구현은 안 함. 다음 세션이 바로 시작할 대상.
+
 
 ## 1. 목표 (What we're building)
 - xu4 기반 Ultima IV를 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식한다. 진행 기준은 `/home/taejin/ultima/plan.md`(24단계).
@@ -30,8 +36,9 @@
 
 ## 3. 변경한 파일 (Files changed)
 - `src/engine/persistence.ts`, `tests/unit/persistence.test.ts` (신규) — 커밋 `6a74288` → main merge `92ebce8`.
-- `plan.md`, `handoff.md` — Step 10 완료(부분) 기록, 구조적 blocker와 사용자 결정 기록, 다음 순서 갱신. **아직 커밋 안 함**(이 HANDOFF.md와 함께 커밋 예정).
-- `HANDOFF.md`(이 파일).
+- `plan.md`, `handoff.md`, `HANDOFF.md` — Step 10 완료(부분) 기록 — 커밋 `67c4e16`.
+- `.omo/plans/ultima-web.md`, `docs/ULTIMA_WEB_PLAN.md`(Todo 21 신규, byte-identical), `plan.md`, `AGENTS.md`(진행률 산식을 "24" 하드코딩 대신 계획서 Todo 개수 참조로 변경) — 커밋 `99f45e5`.
+- 전부 `origin/main`에 push 완료(`99f45e5`).
 
 ## 4. 주요 결정과 근거 (Key decisions)
 - (사용자 결정, 위 2-1 참고) Step 10을 "Coordinator만 먼저"로 축소하고 e2e는 미룸.
@@ -40,11 +47,13 @@
 - export/import를 `shell.ts` UI에 아직 안 연결함 — 연결할 실제 FS 참조도, 실제 데이터도 없는 상태에서 배선만 만드는 건 눈에 보이는 효과가 없는 죽은 코드라 다음(부팅 이식 이후)으로 미룸.
 
 ## 5. 다음 할 일 (Next steps)
-- [ ] **아직 commit 안 한 `plan.md`/`handoff.md`를 이 `HANDOFF.md`와 함께 commit한다.**
-- [ ] **사용자 확인 필요**: Step 10 로컬 merge(`92ebce8`)를 `origin/main`에 push해도 되는지.
-- [ ] **판단 필요 (최우선)**: web-main.cpp에 실제 xu4 부팅 시퀀스(servicesInit/config/screen/event loop)를 이식하는 작업의 소속 Todo/범위를 사용자와 정한다. 이게 안 정해지면 Step 10 e2e/11~13/17을 실질적으로 진행할 수 없다.
-- [ ] 위 판단 전에도 진행 가능한 것: Step 11~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`)/16(설계 메모 `.omo/drafts/step-16-web-audio-design.md`) 중 "부팅 없이도 유닛 테스트 가능한 로직" 부분 — 착수 전에 정확한 범위를 사용자와 확인할 것.
-- [ ] `FS.trackingDelegate.onCloseFile`이 실제 wasm 빌드에서 발동하는지 실물 확인.
+- [x] ~~`plan.md`/`handoff.md` commit~~ — 완료.
+- [x] ~~Step 10 push~~ — 완료 (`origin/main`이 `99f45e5`까지 동기화됨).
+- [x] ~~web-main.cpp 이식을 어느 Todo에 넣을지 판단~~ — **완료**: 사용자가 "별도 Todo로 새로 만들어"라고 지시 → **Todo 21**로 `.omo/plans/ultima-web.md`/`docs/ULTIMA_WEB_PLAN.md`/`plan.md`에 신규 추가함(전체 단계 24→25, 진행률 9/25=36.0%). Todo 21 본문(References/Acceptance/QA)은 그 파일에 있고, 자기완결적으로 작성해서 이 세션 맥락 없이도 실행 가능.
+- [ ] **다음 세션 최우선**: Todo 21 착수(`git worktree add -b todo-21-boot-sequence`). 선행조건(6,8,9) 전부 완료됨.
+- [ ] Todo 21 완료 후에야 Step 10 e2e(`save-reload.spec.ts`), Step 11~13, Step 17 착수가 실질적으로 의미있다.
+- [ ] Todo 21 착수 전 가능한 것: Step 11~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`)/16(설계 메모 `.omo/drafts/step-16-web-audio-design.md`) 중 "부팅 없이도 유닛 테스트 가능한 로직" 부분 — 착수 전에 정확한 범위를 사용자와 확인할 것.
+- [ ] `FS.trackingDelegate.onCloseFile`이 실제 wasm 빌드에서 발동하는지 실물 확인(Todo 21 진행 중 자연스럽게 확인될 가능성 높음).
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
 - **핵심 blocker**: `web-main.cpp`의 placeholder `main()`. Step 9부터 이어진 문제이고 Step 10에서 다시 부딪힘 — 다음 세션이 반드시 먼저 다뤄야 할 항목.
