@@ -51,10 +51,10 @@ Step 3 완료 (2026-09-24):
 | 8 | blocking event loop / 키 입력 → 브라우저 안전 queue (IME, request ID) | ✅ | ⬜ | main `6b97d8e` (`af13814`) — 큐를 소비하는 실제 게임 루프가 아직 없음 |
 | 9 | 브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행 | ✅ | ⬜ | main `5c28511` (`4c878c9`) — `main()`을 부르지만 비어 있음(화면 검은색) |
 | 10 | IDBFS 세이브/설정 영속 + export/import | 🟡 | ⬜ | main `92ebce8` (`6a74288`) — Coordinator+아카이브만, e2e 보류. 세이브 경로가 IDBFS 마운트와 안 맞을 가능성(21.2에서 확인) |
-| 21 | **실제 xu4 엔진을 wasm에 링크·실행** (재작성, 세부 21.1~21.4) | ⬜ | ⬜ | 선행 6,8,9 완료 → **지금 착수 가능, 크리티컬 패스** |
+| 21 | **실제 xu4 엔진을 wasm에 링크·실행** (재작성, 세부 21.1~21.4) | 🟡 | ⬜ | branch `todo-21-real-engine` `542ce34` — 21.1 완료(링크), 21.2(FS/경로) 다음 |
 
 Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완료):
-- 21.1 ⬜ **링크 성공** — 네이티브 `Makefile.common` 소스 목록(UI=glfw → `-sUSE_GLFW=3`, CONF=boron) + 실제 `xu4.cpp` + 무음 `sound.h` 구현으로 기본 `ERROR_ON_UNDEFINED_SYMBOLS` 상태에서 링크. 가짜 `web-stub.cpp`/`web-main.cpp` 제거. `-DVERSION='"DR-1.0"'` 따옴표 버그 수정. 첫 링크의 미정의 심볼 목록을 실제 작업 목록으로 쓴다. (`gpu_opengl.cpp`·`discourse_tlk/castle.cpp`·`config_data.cpp`는 다른 파일이 include하므로 따로 넣지 않는다.)
+- 21.1 ✅ **링크 성공** — branch `todo-21-real-engine` 커밋 `542ce34`. 네이티브 `Makefile.common` 소스 목록(69개, UI=glfw → `screen_glfw.cpp`/`-sUSE_GLFW=3`, CONF=boron) 그대로 + 실제 `xu4.cpp` + 무음 `scripts/web-sound-silent.cpp`(sound.h 전체 no-op)로 링크. `web-stub.cpp`/`web-main.cpp` 삭제. `-DVERSION` 따옴표 버그 수정(spawnSync는 셸을 거치지 않아 싱글쿼트가 그대로 매크로 텍스트에 들어갔었음). 첫 링크에서 실제로 걸린 두 문제: (1) `gpu_opengl.cpp`의 `GPU_RENDER` 맵청크 경로가 `map.h`를 안 받고 있었음(네이티브는 `GPU_RENDER`를 기본으로 안 켜서 한 번도 컴파일된 적이 없던 코드) → `build-wasm.mjs`가 **build-dir 복사본만** 패치(vendor/xu4는 tree-hash pinned라 원본은 안 건드림). (2) `sound.h`가 `uint16_t`를 전방선언 없이 씀 → `web-sound-silent.cpp`에 `<cstdint>` 추가. 검증: `npm run build:wasm -- --debug` exit 0, `xu4.wasm` 7.5MB(이전 스텁 빌드 대비), `llvm-nm --defined-only`로 정의 심볼 2832개(이전 ~251개) 확인, `GameController`/`IntroController`/`EventHandler` 등 실제 엔진 심볼 존재. `npm run test:unit`(13 files/99 tests) · `verify:repo-sources`(4 components) · `typecheck` · `build` · `git diff --check` 전부 exit 0. (`gpu_opengl.cpp`·`discourse_tlk/castle.cpp`·`config_data.cpp`·`script_boron.cpp`는 각각 다른 파일이 `#include`하므로 소스 목록에 따로 안 넣음, 계획대로.)
 - 21.2 ⬜ **FS/경로 해결** — `render.pak`/`Ultima-IV.mod`를 wasm FS에 실제로 쓰기(지금은 HTTP로만 서빙, `/assets`는 비어 있음), `u4fsetup`이 `.`/`u4`에서만 찾는 `ultima4.zip` 경로 맞추기, emcc에서 `Settings` user path가 어디로 가는지 확인하고 Todo 10 IDBFS 마운트와 일치시키기.
 - 21.3 ⬜ **타이틀 화면 렌더** — `Module.canvas`를 `#game-canvas`에 연결, 실제 렌더러로 검은색이 아닌 타이틀 화면(Step 7의 픽셀 검사 방식 재사용).
 - 21.4 ⬜ **실제 입력** — 키 하나가 실제 게임 상태를 바꿈. GLFW 포트의 자체 키 리스너와 `main.ts`의 큐 enqueue 중 정식 경로를 하나로 정해 키가 두 번 들어가지 않게.
@@ -158,8 +158,8 @@ Todo 21 신규 추가 완료 (2026-09-24, 사용자 지시 "main() 이식은 별
 - 전체 단계 수 24 → **25**로 갱신(구현 21 + F1~F4).
 - (정정, 2026-09-24 재계획) 이때 쓴 Todo 21 본문의 "web-stub.cpp를 통해 부팅" 방향은 틀렸다 — 재계획에서 "네이티브 소스 목록 + 실제 xu4.cpp로 링크"로 본문을 다시 썼다(위 "재계획 요약" 참고).
 
-## 바로 다음 순서 (2026-09-24 재계획)
-1. **Todo 21.1 → 21.2 → 21.3 → 21.4** (크리티컬 패스). 착수 전 `.omo/plans/ultima-web.md`의 Todo 21 전문을 읽는다. 브랜치 예: `todo-21-real-engine`.
+## 바로 다음 순서 (2026-09-25 갱신 — 21.1 완료)
+1. **Todo 21.2 (FS/경로 해결) → 21.3 → 21.4** (크리티컬 패스). 21.1(링크)은 브랜치 `todo-21-real-engine` 커밋 `542ce34`로 완료. 착수 전 `.omo/plans/ultima-web.md`의 Todo 21 전문(특히 21.2 항목)을 읽는다.
 2. **병렬 가능**: Todo 19의 workflow 골격(Node 22 CI · `npm ci`/unit/typecheck/build/audit · 현재 셸의 Pages 배포). 엔진과 독립이라 21과 동시에 진행해도 충돌이 적다. 완료 판정은 원래 선행조건(15·16·18) 이후.
 3. 21.4 이후 재검증: Step 7(실제 렌더러), Step 8(실제 컨트롤러), Step 10 e2e(`save-reload.spec.ts`) → 각 행의 "실제 게임에서 확인" 갱신.
 4. 11~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) → 16(설계 메모 `.omo/drafts/step-16-web-audio-design.md`, 21.1의 무음 구현 교체) → 14 → 15(번역 4402건, 워크플로우 병렬 처리 후보).
@@ -168,7 +168,7 @@ Todo 21 신규 추가 완료 (2026-09-24, 사용자 지시 "main() 이식은 별
 ## 목적 달성 가능성 판단
 - **가능하다고 본다, 단 남은 일의 무게중심이 바뀌었다.** 근거: 같은 xu4 소스가 native에서는 원본 데이터로 새 게임·이동·NPC 대화·save/load까지 실제로 돈다(Step 3). 모듈 패키징·번역 inventory·웹 셸/브릿지·시작 시퀀스·영속화 로직도 각각 검증돼 있다. 부족한 건 "이것들을 실제 엔진으로 브라우저에서 한 번에 돌리는 통합"이고, 그게 Todo 21이다.
 - 주요 위험 (확인 필요):
-  - **Todo 21의 실제 규모를 아직 모른다.** 21.1의 첫 링크 결과(미정의 심볼 목록)가 나와야 정해진다. 네이티브 소스 목록을 그대로 쓰는 방식이라 대부분 컴파일은 될 가능성이 높지만, GLFW 포트 차이·파일 경로·Asyncify 스택 크기에서 막힐 수 있다.
+  - (해결, 2026-09-25) Todo 21.1 링크는 예상보다 가벼웠다 — 실제로 걸린 문제는 두 개뿐(GPU_RENDER 맵청크 경로의 누락된 `#include "map.h"`, `-DVERSION` 따옴표 버그). 나머지 21.2~21.4(FS/경로, 실제 렌더, 실제 입력)는 아직 미검증.
   - Asyncify로 blocking loop를 돌릴 때의 stack/성능 (Step 8 큐는 증명됨, 실제 루프는 21.4 이후 측정).
   - WebGL2 경로(Step 7)가 실제 렌더러에서도 동작하는지 — 21.3에서 처음 확인.
   - 세이브/설정 경로와 IDBFS 마운트 불일치 가능성 — 21.2에서 확인.

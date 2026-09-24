@@ -653,8 +653,25 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test 
 - worktree 8개(`todo-01,03,04,05,07,08,09,10`) 제거 — 전부 `git branch --merged main` 확인 후, 추적 파일 미커밋 변경 없음 확인 후 진행. 삭제 전에 각 worktree의 `.omo/evidence/ultima-web/`를 main으로 `cp -rn`(덮어쓰기 없이) 복사해 task-1~10 증거를 전부 main에 보존, todo-03의 옛 `HANDOFF.md`/`.debug-journal.md`는 `.omo/evidence/ultima-web/task-3/*-archive.md`로 보관. **브랜치는 삭제하지 않음**(되돌릴 수 있음). `git worktree list` → main만 남음.
 - Node 22: 시스템 `/usr/bin/node`(v20, apt)는 sudo 없이 못 바꿔서, 공식 v22.23.3 LTS tarball을 SHASUMS256으로 검증 후 `~/.local/opt/node-v22.23.3-linux-x64`에 설치, `~/.local/opt/node22` 심볼릭 링크, `~/.profile`·`~/.bashrc` 끝에 중복 방지 PATH 블록 추가. `bash -lc 'node -v'` → v22.23.3. Node 22에서 `npm ci`(EBADENGINE 경고 없음), `npm run test:unit`(13 files/99 tests), `typecheck`, `build`, `verify:repo-sources`, `npx playwright test --project=chromium`(8 passed) 전부 exit 0, 추적 파일 변경 없음(package-lock 그대로).
 
+### Todo 21.1 완료 기록 (2026-09-25, branch `todo-21-real-engine`, commit `542ce34`, main에는 아직 merge 안 함)
+
+**한 일 (전부 이 세션에서 직접 실행/확인)**:
+- `scripts/build-wasm.mjs`의 `sourceFiles`를 `vendor/xu4/src/Makefile.common`의 CSRCS/CXXSRCS 전체(UI=glfw, CONF=boron 조건부 포함, 69개 파일)로 교체. `screen_$(UI).cpp` → `screen_glfw.cpp`, `sound_$(SOUND).cpp` → 신규 `scripts/web-sound-silent.cpp`(아래), `xu4.cpp`는 실제 `vendor/xu4/src/xu4.cpp` 그대로. `gpu_opengl.cpp`/`discourse_tlk.cpp`/`discourse_castle.cpp`/`config_data.cpp`/`script_boron.cpp`는 각각 다른 파일이 `#include`하므로 목록에 안 넣음(계획대로).
+- `scripts/web-stub.cpp`, `scripts/web-main.cpp` 삭제(`git rm`) — 아무 실제 엔진 코드도 이 두 파일의 이름을 참조하지 않는 것을 `grep -rln "xu4_enqueue_key\|xu4_submit_text\|xu4_config_get\|gpuInit\|gpuBeginFrame\|savegameSave" vendor/xu4/src`로 먼저 확인(결과 0건).
+- 신규 `scripts/web-sound-silent.cpp`: `vendor/xu4/src/sound.h`에 선언된 모든 함수를 헤더의 실제 시그니처(C++ linkage, `Sound`/`uint16_t` 등 실제 타입) 그대로 no-op으로 구현.
+- `-DVERSION='"DR-1.0"'` → `-DVERSION="DR-1.0"`로 수정(JS 문자열 리터럴의 홑따옴표를 없앰). spawnSync는 셸을 안 거치므로 예전 값은 emcc argv에 홑따옴표가 문자 그대로 들어갔었음.
+- 첫 `npm run build:wasm -- --debug` 시도에서 실제로 걸린 컴파일 에러 2건(둘 다 vendor 소스 자체의 버그, tree-hash pinning 때문에 vendor 원본은 안 고치고 `build-wasm.mjs`가 **build-dir 복사본만** 패치):
+  1. `gpu_opengl.cpp`의 `GPU_RENDER` 매크로 분기(`gpu_resetMap`/`gpu_drawMap`, 1300번대/1600번대 줄)가 `Map`/`BlockingGroups`를 역참조하는데 `gpu.h`는 전방선언만 함. 네이티브는 `GPU_RENDER`를 기본으로 안 켜서(`GPU ?= scale`) 이 분기가 이제까지 한 번도 컴파일된 적이 없었음. `build-wasm.mjs`가 복사된 `build/wasm-release/src/gpu_opengl.cpp`에 `#include "map.h"`를 주입.
+  2. `sound.h`가 `uint16_t`를 쓰는데 `<cstdint>`를 안 받음(다른 TU는 항상 그 전에 다른 헤더가 먼저 받아서 안 걸렸던 것) → `web-sound-silent.cpp`에 `#include <cstdint>` 추가.
+- 두 수정 후 링크 성공. `.emsdk/upstream/bin/llvm-nm --defined-only build/wasm-release/xu4.wasm`: 정의 심볼 **2832개**(이전 커밋 기준 ~251개), `GameController::GameController()`/`avatarMoved`/`checkBridgeTrolls` 등 실제 게임 로직 심볼 확인. `xu4.wasm` 7,496,388 bytes(이전 스텁 전용 빌드보다 훨씬 큼).
+- 검증 게이트 전부 실행, 전부 exit 0: `npm run test:unit`(13 files/99 tests, `wasm-symbols.test.ts` 8개 포함 — 새 바이너리로도 그대로 통과), `npm run verify:repo-sources`(4 pinned components — vendor/xu4 tree hash 그대로임을 재확인), `npm run typecheck`, `npm run build`, `git diff --check`. `main` merge는 아직 안 함(21.2~21.4 남음).
+
+**아직 확인 안 한 것 (21.2~21.4 몫)**:
+- 링크만 됐고 브라우저에서 실제로 실행/렌더/입력된 적은 아직 없음. `main()`을 실제로 호출하면 무슨 일이 일어나는지 전혀 모름(모듈/ZIP 경로 문제로 `errorFatal` exit할 가능성이 높음 — Todo 21.2가 다루는 부분).
+- `gpu_opengl.cpp`의 `glMapBufferRange` 호출들은 그대로 남아 있음(vendor 원본 안 고침) — 링크는 됐지만 WebGL2에서 실제로 도는지는 21.3에서 처음 확인.
+
 ### 남은 작업
-1. **Todo 21.1**(실제 엔진 링크)부터 착수 — `.omo/plans/ultima-web.md` Todo 21 전문 참고. 크리티컬 패스.
-2. 병렬 가능: Todo 19 workflow 골격(Node 22 CI, build/test/audit, 현재 셸 Pages 배포).
-3. 21.4 이후: Step 7/8 실제 엔진 재검증, Step 10 e2e(`save-reload.spec.ts`).
+1. **Todo 21.2**(FS/경로 해결)부터 착수 — `.omo/plans/ultima-web.md` Todo 21 본문의 21.2 항목 참고. `render.pak`/`Ultima-IV.mod`를 wasm FS에 실제로 쓰기, `ultima4.zip` 검색 경로(`.`/`u4`) 맞추기, `Settings` user path와 Todo 10 IDBFS 마운트 일치 확인. 브랜치는 `todo-21-real-engine` 계속 사용.
+2. 병렬 가능: Todo 19 workflow 골격(Node 22 CI, build/test/audit, 현재 셸 Pages 배포) — 아직 착수 안 함.
+3. 21.3(타이틀 렌더) → 21.4(실제 입력) → 이후: Step 7/8 실제 엔진 재검증, Step 10 e2e(`save-reload.spec.ts`).
 4. 11~13 → 16 → 14 → 15 → 17 → 18 → 19 완료 → 20 → F1~F4.
