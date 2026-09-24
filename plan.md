@@ -1,30 +1,39 @@
 # Ultima IV 웹 한글판 — 진행 계획
-기준 시각: 2026-09-24 KST · 기준 main: `67c4e16` (origin과 동기화됨, push 완료)
+기준 시각: 2026-09-24 KST · 기준 main: `bf87961` 이후 (origin과 동기화) · **2026-09-24 재계획 반영** (아래 "재계획 요약")
 
 ## 목표
 원본 `ultima4.zip`을 사용자가 브라우저에서 직접 선택해 플레이하는, 한국어 UI/대화/NPC 키워드 alias와
 실제 음악·효과음을 갖춘 Ultima IV(xu4 엔진)를 GitHub Pages(`https://taejinkim7-dev.github.io/ultima/`)
 정적 사이트로 배포한다. 원본 게임 데이터는 절대 배포/커밋하지 않는다.
 
+## 재계획 요약 (2026-09-24)
+- **핵심 발견**: 지금 `build/wasm-release/xu4.wasm`에는 **게임 엔진 코드가 하나도 없다.** `llvm-nm --defined-only`로 확인한 정의 함수는 약 251개이고 전부 libc/libc++ 런타임 + 브릿지 export 2개(`u4_web_enqueue_key`, `u4_web_submit_text`)다. 원인: wasm 빌드가 엔진 소스 74개 중 29개만 컴파일하고, `scripts/web-main.cpp`의 `main()`이 즉시 `return 0`이라 링커가 도달 불가능한 엔진 코드를 전부 제거했다.
+- 그래서 Step 6~9의 ✅는 "각자의 승인 기준(export 존재·별도 셰이더 하네스·큐 유닛 테스트·시작 시퀀스)을 통과했다"는 뜻일 뿐, **실제 엔진이 브라우저에서 돈 적은 없다.** 사용자 결정으로 ✅는 유지하되 아래 표에 **"실제 게임에서 확인" 열을 추가**해 두 수준을 분리 표시한다.
+- Todo 21을 "실제 xu4 엔진을 wasm에 링크·실행"으로 **본문을 다시 썼고**(기존 본문의 "web-stub.cpp를 통해 부팅"은 틀린 방향이었음 — 그 stub 이름 다수가 실제 헤더에 없거나 링크가 다름), 세부 단계 **21.1~21.4**로 쪼갰다. 이게 이제 유일한 크리티컬 패스다.
+- Todo 19(Pages workflow)의 **골격**은 엔진과 무관하므로 Todo 21과 병렬로 먼저 시작할 수 있게 했다(완료 판정은 기존 선행조건 15·16·18 유지).
+- 정리 작업: merge된 worktree 8개 제거(브랜치는 유지, 로컬 evidence는 main의 `.omo/evidence/`로 먼저 복사), Node 22 LTS(v22.23.3)를 사용자 홈에 설치해 전환(`~/.local/opt/node22`, `~/.profile`/`~/.bashrc` PATH) — Node 22에서 유닛 13 files/99 tests·typecheck·build·verify·e2e 8개 전부 통과, EBADENGINE 경고 사라짐.
+
 ## 진행률 계산법
-- 전체 25단계 = 구현 1~21 + 최종 검증 F1~F4. **Todo 21은 2026-09-24 신규 추가**(아래 참고). 단계마다 가중치 동일.
-- 진행률 = 완료(✅) 단계 수 ÷ 25. 부분 진행(🟡)은 0으로 계산한다(완료 기준을 통과해야만 1).
-- 완료 기준 = 해당 단계의 acceptance criteria 통과 + `main` merge 전 로컬 검증 게이트 통과(AGENTS.md).
+- 전체 25단계 = 구현 1~21 + 최종 검증 F1~F4 (Todo 수는 `.omo/plans/ultima-web.md` 기준, 늘어나면 같이 늘어남). 단계마다 가중치 동일.
+- **승인 기준 진행률** = 완료(✅) 단계 수 ÷ 25. 부분 진행(🟡)은 0.
+- **"실제 게임에서 확인"** = 그 단계의 기능이 *브라우저에서 실제 xu4 엔진이 돌 때* 동작함을 확인했는가(✅/⬜, 엔진과 무관한 단계는 —). 진행률 숫자에는 안 들어가고, 현실 체크용이다.
+- 완료 기준 = acceptance criteria 통과 + `main` merge 전 로컬 검증 게이트 통과(AGENTS.md).
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
-## 현재 진행률: 9 / 25 = 36.0%
-(Step 1~9 완료. Step 10은 🟡 부분 진행 — Persistence Coordinator+export/import 유닛 테스트 통과, e2e는 Todo 21 완료 후로 보류(사용자 확인, 2026-09-24). Step 6 main `c836ecc`, Step 7 main `874c775`, Step 8 main `6b97d8e`, Step 9 main `5c28511`, Step 10(partial) main `92ebce8` — 전부 merge 게이트 통과, `origin/main`까지 push 완료(`67c4e16`).)
+## 현재 진행률
+- **승인 기준: 9 / 25 = 36.0%** (Step 1~9 ✅, Step 10 🟡).
+- **실제 게임에서 확인: 브라우저에서 동작 확인된 엔진 기능 0개** — Todo 21(특히 21.3/21.4) 전까지는 0이 정상이다. native 기준선(Step 3)은 native에서 실제 게임으로 확인됨.
 
 ## 단계 목록
 
 ### Wave 1 — 기반 (1~5)
-| # | 단계 | 상태 | 비고 |
-|---|---|---|---|
-| 1 | 소스 동결 + 웹 test harness | ✅ | main `36a128e` |
-| 2 | host Boron 빌드 + xu4 모듈 패키징 | ✅ | main `f84b5f5` |
-| 3 | native GLFW 기준선(원본 데이터로 실제 플레이) | ✅ | main `13a3969` |
-| 4 | 영어 원문 inventory + 한국어 스키마 | ✅ | main `ada0a6d` (4411 entries, 4402 pending) |
-| 5 | 브라우저 셸 + bridge ABI v1 + Pages 자산 계약 | ✅ | main `0a1408a` |
+| # | 단계 | 승인 기준 | 실제 게임에서 확인 | 비고 |
+|---|---|---|---|---|
+| 1 | 소스 동결 + 웹 test harness | ✅ | — | main `36a128e` |
+| 2 | host Boron 빌드 + xu4 모듈 패키징 | ✅ | — | main `f84b5f5` |
+| 3 | native GLFW 기준선(원본 데이터로 실제 플레이) | ✅ | ✅ (native) | main `13a3969` |
+| 4 | 영어 원문 inventory + 한국어 스키마 | ✅ | — | main `ada0a6d` (4411 entries, 4402 pending) |
+| 5 | 브라우저 셸 + bridge ABI v1 + Pages 자산 계약 | ✅ | ⬜ | main `0a1408a` — 셸은 브라우저에서 동작, 엔진이 bridge 이벤트를 실제로 보낸 적은 없음 |
 
 Step 3 완료 (2026-09-24):
 - 3.1 ✅ native 빌드, missing/corrupt ZIP CTest, 잘못된 ZIP hash 차단, 새 게임→이동→save→재시작/load 자동 QA
@@ -34,33 +43,40 @@ Step 3 완료 (2026-09-24):
 - 3.5 ✅ main(Todo 4/5 4커밋) 병합 + 충돌 해결(pacakge.json/handoff.md/계획서)
 - 3.6 ✅ clean 전체 게이트 재실행(rm -rf build 후 전체 파이프라인) + handoff 기록 + 체크박스 동기화
 
-### Wave 2 — WASM 이식 (6~10)
-| # | 단계 | 상태 | 선행 |
-|---|---|---|---|
-| 6 | 단일 스레드 wasm Boron + xu4 core 빌드 (Emscripten 4.0.23, Asyncify) | ✅ | main `c836ecc` (`26f7164`) |
-| 7 | OpenGL → WebGL2 (glMapBufferRange 제거, CPU staging + glBufferSubData) | ✅ | main `874c775` (`90232b9`) |
-| 8 | blocking event loop / 키 입력 → 브라우저 안전 queue (IME, request ID) | ✅ | main `6b97d8e` (`af13814`) |
-| 9 | 브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행 | ✅ | main `5c28511` (`4c878c9`) |
-| 10 | IDBFS 세이브/설정 영속 + export/import | 🟡 | main `92ebce8` (`6a74288`) — Coordinator+아카이브만, e2e 보류(아래 참고) |
-| 21 | **[신규]** 실제 xu4 부팅 시퀀스를 web-main.cpp로 이식 | ⬜ | 6,8,9 완료라 착수 가능. `.omo/plans/ultima-web.md` Todo 21 참고 |
+### Wave 2 — WASM 이식 (6~10, 21)
+| # | 단계 | 승인 기준 | 실제 게임에서 확인 | 비고 |
+|---|---|---|---|---|
+| 6 | 단일 스레드 wasm Boron + xu4 core 빌드 (Emscripten 4.0.23, Asyncify) | ✅ | ⬜ | main `c836ecc` (`26f7164`) — 29/74 소스만 컴파일, 링크된 엔진 코드 0 |
+| 7 | OpenGL → WebGL2 (glMapBufferRange 제거, CPU staging + glBufferSubData) | ✅ | ⬜ | main `874c775` (`90232b9`) — 별도 셰이더 하네스로 검증. `gpu_opengl.cpp`는 `screen_glfw.cpp`가 include하는데 그 파일이 wasm 빌드에 없음 |
+| 8 | blocking event loop / 키 입력 → 브라우저 안전 queue (IME, request ID) | ✅ | ⬜ | main `6b97d8e` (`af13814`) — 큐를 소비하는 실제 게임 루프가 아직 없음 |
+| 9 | 브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행 | ✅ | ⬜ | main `5c28511` (`4c878c9`) — `main()`을 부르지만 비어 있음(화면 검은색) |
+| 10 | IDBFS 세이브/설정 영속 + export/import | 🟡 | ⬜ | main `92ebce8` (`6a74288`) — Coordinator+아카이브만, e2e 보류. 세이브 경로가 IDBFS 마운트와 안 맞을 가능성(21.2에서 확인) |
+| 21 | **실제 xu4 엔진을 wasm에 링크·실행** (재작성, 세부 21.1~21.4) | ⬜ | ⬜ | 선행 6,8,9 완료 → **지금 착수 가능, 크리티컬 패스** |
+
+Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완료):
+- 21.1 ⬜ **링크 성공** — 네이티브 `Makefile.common` 소스 목록(UI=glfw → `-sUSE_GLFW=3`, CONF=boron) + 실제 `xu4.cpp` + 무음 `sound.h` 구현으로 기본 `ERROR_ON_UNDEFINED_SYMBOLS` 상태에서 링크. 가짜 `web-stub.cpp`/`web-main.cpp` 제거. `-DVERSION='"DR-1.0"'` 따옴표 버그 수정. 첫 링크의 미정의 심볼 목록을 실제 작업 목록으로 쓴다. (`gpu_opengl.cpp`·`discourse_tlk/castle.cpp`·`config_data.cpp`는 다른 파일이 include하므로 따로 넣지 않는다.)
+- 21.2 ⬜ **FS/경로 해결** — `render.pak`/`Ultima-IV.mod`를 wasm FS에 실제로 쓰기(지금은 HTTP로만 서빙, `/assets`는 비어 있음), `u4fsetup`이 `.`/`u4`에서만 찾는 `ultima4.zip` 경로 맞추기, emcc에서 `Settings` user path가 어디로 가는지 확인하고 Todo 10 IDBFS 마운트와 일치시키기.
+- 21.3 ⬜ **타이틀 화면 렌더** — `Module.canvas`를 `#game-canvas`에 연결, 실제 렌더러로 검은색이 아닌 타이틀 화면(Step 7의 픽셀 검사 방식 재사용).
+- 21.4 ⬜ **실제 입력** — 키 하나가 실제 게임 상태를 바꿈. GLFW 포트의 자체 키 리스너와 `main.ts`의 큐 enqueue 중 정식 경로를 하나로 정해 키가 두 번 들어가지 않게.
+- 21.4 이후: Step 7(실제 렌더러)·Step 8(실제 컨트롤러) 재검증, Step 10 e2e(`save-reload.spec.ts`) 추가 → 해당 행의 "실제 게임에서 확인"을 ✅로.
 
 ### Wave 3 — 한국어화 (11~15)
-| # | 단계 | 상태 | 선행 |
-|---|---|---|---|
-| 11 | 긴 메시지 → 하단 HTML 대화 패널 (textContent만) | ⬜ | 5,9 |
-| 12 | status/menu → DOM overlay (DPR/letterbox) | ⬜ | 5,9,11 |
-| 13 | 한국어 NPC alias + prompt별 입력 규칙 | ⬜ | 8,9,11 |
-| 14 | C++/Boron/TLK/binary/JS 번역 lookup 런타임 연결 | ⬜ | 4,11,12,13 |
-| 15 | 전체 한국어 번역 corpus + glossary 일관성 (`i18n:check --strict`) | ⬜ | 4,14 |
+| # | 단계 | 승인 기준 | 실제 게임에서 확인 | 선행 |
+|---|---|---|---|---|
+| 11 | 긴 메시지 → 하단 HTML 대화 패널 (textContent만) | ⬜ | ⬜ | 5,9,21 |
+| 12 | status/menu → DOM overlay (DPR/letterbox) | ⬜ | ⬜ | 5,9,11,21 |
+| 13 | 한국어 NPC alias + prompt별 입력 규칙 | ⬜ | ⬜ | 8,9,11,21 |
+| 14 | C++/Boron/TLK/binary/JS 번역 lookup 런타임 연결 | ⬜ | ⬜ | 4,11,12,13 |
+| 15 | 전체 한국어 번역 corpus + glossary 일관성 (`i18n:check --strict`) | ⬜ | ⬜ | 4,14 |
 
 ### Wave 4 — 완성/배포 (16~20)
-| # | 단계 | 상태 | 선행 |
-|---|---|---|---|
-| 16 | Web Audio 음악/효과음 + RFX 생성 | ⬜ | 6,9 |
-| 17 | 브라우저 통합 게임 진행 e2e (새 게임부터) | ⬜ | 10,12,13,15,16 |
-| 18 | 실패/보안/개인정보/회귀 경계 강화 (`audit:dist`) | ⬜ | 17 |
-| 19 | GitHub Actions Pages workflow + `/ultima/` release artifact | ⬜ | 15,16,18 |
-| 20 | README/사용자 가이드/증거 인덱스/handoff | ⬜ | 19 |
+| # | 단계 | 승인 기준 | 실제 게임에서 확인 | 선행 |
+|---|---|---|---|---|
+| 16 | Web Audio 음악/효과음 + RFX 생성 | ⬜ | ⬜ | 6,9,21 (21.1의 무음 구현을 교체) |
+| 17 | 브라우저 통합 게임 진행 e2e (새 게임부터) | ⬜ | ⬜ | 10,12,13,15,16,21 |
+| 18 | 실패/보안/개인정보/회귀 경계 강화 (`audit:dist`) | ⬜ | ⬜ | 17 |
+| 19 | GitHub Actions Pages workflow + `/ultima/` release artifact | ⬜ | — | 15,16,18 (**골격은 지금 병렬 착수 가능**) |
+| 20 | README/사용자 가이드/증거 인덱스/handoff | ⬜ | — | 19 |
 
 ### Final — 독립 검증 (F1~F4 = 진행률 22~25번째)
 | # | 단계 | 상태 |
@@ -69,6 +85,8 @@ Step 3 완료 (2026-09-24):
 | F2 | 코드 품질 리뷰 | ⬜ |
 | F3 | 실제 브라우저 수동 QA (Chromium/Firefox/WebKit) | ⬜ |
 | F4 | 범위 충실도 (정적 호스팅, 원본 데이터 미포함) | ⬜ |
+
+## 완료 기록 (시간순)
 
 Step 7·8 main merge 완료 (2026-09-24):
 - 7 ✅ merge `874c775 Merge todo-07-webgl2: WebGL2-safe buffers and shaders` (구현 `90232b9`)
@@ -138,24 +156,25 @@ Todo 21 신규 추가 완료 (2026-09-24, 사용자 지시 "main() 이식은 별
 - `.omo/plans/ultima-web.md` + `docs/ULTIMA_WEB_PLAN.md`에 Todo 21("Port the real xu4 boot sequence into the web entry point")을 Todo 20 뒤, Final verification wave 앞에 추가(byte-identical, cmp 확인). 기존 Todo 1~20 번호/내용은 안 건드림(관례상 "헤더 재작성 금지" 유지, append만 함).
 - 의존성 매트릭스에 `21 | 6,8,9 | 10(e2e), 11,12,13,17` 행 추가. `AGENTS.md`의 진행률 산식 설명을 "24" 하드코딩 대신 "`.omo/plans/ultima-web.md`의 Todo 개수 기준"으로 바꿔서 앞으로 Todo가 또 늘어도 다시 안 고쳐도 되게 함.
 - 전체 단계 수 24 → **25**로 갱신(구현 21 + F1~F4).
+- (정정, 2026-09-24 재계획) 이때 쓴 Todo 21 본문의 "web-stub.cpp를 통해 부팅" 방향은 틀렸다 — 재계획에서 "네이티브 소스 목록 + 실제 xu4.cpp로 링크"로 본문을 다시 썼다(위 "재계획 요약" 참고).
 
-## 바로 다음 순서
-1. ~~Step 10 push~~ / ~~Todo 21 신설 판단~~ **둘 다 완료** (2026-09-24, 사용자 지시).
-2. **Todo 21**(web-main.cpp 실제 xu4 부팅 이식) 착수 — 선행조건(6,8,9) 전부 완료 상태. `.omo/plans/ultima-web.md`의 Todo 21 전문(References/Acceptance/QA) 그대로 실행.
-3. Todo 21이 끝나야 Step 10의 e2e(`save-reload.spec.ts`), Step 11~13, Step 17이 실질적으로 열린다. 그전까지는 Step 11~13/16 중 "부팅 없이도 유닛 테스트 가능한 로직"만 병행 가능 — 착수 전 범위를 사용자와 확인.
-4. 14 → 15(번역 4402건) → 17 → 18 → 19 → 20 → F1~F4.
+## 바로 다음 순서 (2026-09-24 재계획)
+1. **Todo 21.1 → 21.2 → 21.3 → 21.4** (크리티컬 패스). 착수 전 `.omo/plans/ultima-web.md`의 Todo 21 전문을 읽는다. 브랜치 예: `todo-21-real-engine`.
+2. **병렬 가능**: Todo 19의 workflow 골격(Node 22 CI · `npm ci`/unit/typecheck/build/audit · 현재 셸의 Pages 배포). 엔진과 독립이라 21과 동시에 진행해도 충돌이 적다. 완료 판정은 원래 선행조건(15·16·18) 이후.
+3. 21.4 이후 재검증: Step 7(실제 렌더러), Step 8(실제 컨트롤러), Step 10 e2e(`save-reload.spec.ts`) → 각 행의 "실제 게임에서 확인" 갱신.
+4. 11~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) → 16(설계 메모 `.omo/drafts/step-16-web-audio-design.md`, 21.1의 무음 구현 교체) → 14 → 15(번역 4402건, 워크플로우 병렬 처리 후보).
+5. 17 → 18 → 19 완료 → 20 → F1~F4.
 
 ## 목적 달성 가능성 판단
-- **가능하다고 본다.** 근거: 엔진(xu4)이 원본 데이터로 native에서 실제 새 게임·이동·save/load까지 동작함을 확인했고(3.1),
-  모듈 패키징·번역 inventory·웹 셸/브릿지 계약이 이미 main에 있다. 남은 일은 계획서에 기술 설계가 이미 확정돼 있다.
+- **가능하다고 본다, 단 남은 일의 무게중심이 바뀌었다.** 근거: 같은 xu4 소스가 native에서는 원본 데이터로 새 게임·이동·NPC 대화·save/load까지 실제로 돈다(Step 3). 모듈 패키징·번역 inventory·웹 셸/브릿지·시작 시퀀스·영속화 로직도 각각 검증돼 있다. 부족한 건 "이것들을 실제 엔진으로 브라우저에서 한 번에 돌리는 통합"이고, 그게 Todo 21이다.
 - 주요 위험 (확인 필요):
-  - **`main()`이 아직 placeholder다 (Step 9에서 확인, Todo 21로 추적 중).** 실제 xu4 부팅 시퀀스(servicesInit/config load/screen init/event loop)를 web-main.cpp로 이식하는 작업을 신규 Todo 21로 만들었다(2026-09-24, 사용자 지시) — Step 10 e2e/11~13/17이 전부 여기 막혀 있었던 걸 명시적으로 계획서에 반영함. 아직 착수 전.
-  - Asyncify로 blocking loop를 옮길 때 stack/성능 문제 (Step 8) — queue 구현·단위/e2e 증명 완료, 실제 게임 루프(placeholder main이라 아직 못 돌림) 런타임은 위 이식 후 재측정 필요.
-  - WebGL2 버퍼 경로 (Step 7) — Chromium e2e 픽셀+셰이더 검증 완료, native 링크/full engine 런타임은 위 이식 후 재확인 필요.
-  - Step 7·8 동시 vendor/source-manifest 수정 — merge 시 충돌 예상했으나 재계산 resolve 완료(fileCount 409, treeSha256 `e65f0d9b…b25b49`, match:true).
+  - **Todo 21의 실제 규모를 아직 모른다.** 21.1의 첫 링크 결과(미정의 심볼 목록)가 나와야 정해진다. 네이티브 소스 목록을 그대로 쓰는 방식이라 대부분 컴파일은 될 가능성이 높지만, GLFW 포트 차이·파일 경로·Asyncify 스택 크기에서 막힐 수 있다.
+  - Asyncify로 blocking loop를 돌릴 때의 stack/성능 (Step 8 큐는 증명됨, 실제 루프는 21.4 이후 측정).
+  - WebGL2 경로(Step 7)가 실제 렌더러에서도 동작하는지 — 21.3에서 처음 확인.
+  - 세이브/설정 경로와 IDBFS 마운트 불일치 가능성 — 21.2에서 확인.
   - 번역 corpus 4402건의 분량·품질 (Step 15).
-  - Web Audio + RFX 동기 `soundDuration` 계약 (Step 16) — 설계 메모 작성됨, `.omo/drafts/step-16-web-audio-design.md`.
-  - 환경: host Node 20.20.2(요구 ≥22, 경고만) — emsdk가 번들 설치한 Node 22.16.0(`.emsdk/node/22.16.0_64bit`)으로 해결 가능할지 확인 필요, 아직 미조치; wasm release 빌드는 main stub이라 DCE로 작아짐(acceptance는 --debug).
+  - Web Audio + RFX 동기 `soundDuration` 계약 (Step 16).
+- 해결된 환경 이슈: Node 22 전환 완료(2026-09-24, v22.23.3). host의 `/usr/bin/node`는 여전히 v20이라, 로그인 셸이 아닌 환경에선 `export PATH="$HOME/.local/opt/node22/bin:$PATH"`가 필요할 수 있다. wasm 빌드 시 `source .emsdk/emsdk_env.sh`는 emsdk 자체 Node(22.16)를 PATH 앞에 둔다(둘 다 22라 문제 없음).
 
 ## 공통 규칙 (AGENTS.md 요약)
 - 브랜치 `todo-<n>-<topic>`, PR 없이 main 직접 merge. merge 전 `npm ci`, `npm run test:unit`, `npm run verify:repo-sources`,

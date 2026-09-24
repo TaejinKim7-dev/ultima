@@ -634,8 +634,27 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test 
 - Step 9, Step 10은 이전 branch들과 공유 파일 충돌 없음(둘 다 clean merge).
 - 병합 직후 main에서 전체 게이트 재실행 → 전부 exit 0(위 "merge 게이트"/"테스트·게이트 결과" 블록). ✅ 승격 완료(Step 10은 부분 ✅).
 
+### 2026-09-24 재계획 기록 (사용자 요청 "지금 상황과 조건을 확인하고 앞으로의 plan을 다시 구상해")
+
+**조사로 확인한 사실 (전부 이 세션에서 직접 실행/확인)**:
+- `build/wasm-release/xu4.wasm`에 **게임 엔진 코드가 없다.** `.emsdk/upstream/bin/llvm-nm --defined-only`로 정의 함수 약 251개 — libc/libc++ 런타임 + `u4_web_enqueue_key`/`u4_web_submit_text`뿐, `GameController` 등 엔진 심볼 없음. 원인: `scripts/build-wasm.mjs`가 `vendor/xu4/src` top-level 소스 74개 중 29개만 컴파일(제외: map/maploader/party/person/object/tile*/image*/savegame/screen_glfw/xu4.cpp/module.c/textview/view 등 45개)하고, `scripts/web-main.cpp`의 `main()`이 즉시 `return 0`이라 링커가 전부 제거함. emcc 빌드 로그에 undefined-symbol 경고 0건 — 도달 불가능해서 검사 대상이 아니었던 것.
+- `scripts/web-stub.cpp`: `gpuInit`/`gpuBeginFrame`/`savegameSave`/`xu4_config_get`은 어떤 엔진 헤더에도 없는 이름. `screenInit`/`soundInit`은 이름은 있지만 stub이 `extern "C"`+`void`로 선언해 실제 C++ 함수(`int soundInit(void)` 등)와 링크가 맞지 않음 → 실제 엔진을 링크하면 아무것도 대신 못 함.
+- `gpu_opengl.cpp`(Step 7의 WebGL2 분기)는 `screen_glfw.cpp`가 `#include`하는데 `screen_glfw.cpp`가 wasm 빌드에 없음 → Step 7의 수정은 wasm 안에 없다(검증은 별도 셰이더 하네스로만 됐음). `discourse_tlk/castle.cpp`는 `discourse.cpp`가, `config_data.cpp`는 `config_boron.cpp`가 include.
+- 네이티브 빌드의 실제 소스 목록은 `vendor/xu4/src/Makefile.common`(UI=glfw, CONF=boron)에 있다 — wasm이 따라가야 할 기준.
+- 경로: 엔진은 `ultima4.zip`을 `.`/`u4`에서만 찾음(`u4file.cpp:152-153`), 모듈 파일은 wasm FS에 안 들어감(`/engine/modules/`로 HTTP 서빙만), `Settings` user path는 emcc에서 `__unix__` 분기(`$HOME/...`)로 갈 가능성 — Todo 10의 `/persist/profile` 마운트와 불일치 가능(확인 필요).
+- `-DVERSION='"DR-1.0"'`이 spawnSync로 따옴표째 전달돼 multi-char int가 되고 `game.cpp:1351`이 이를 `%s`로 출력 — 도달하면 크래시.
+
+**사용자 결정 (AskUserQuestion)**:
+1. 상태 표시: **2단계 표시 추가** — ✅는 유지, `plan.md`에 "실제 게임에서 확인" 열 추가(6~10은 ⬜).
+2. 계획 반영: **전부 반영** — 정식 계획서 두 벌의 Todo 21 본문 재작성(네이티브 소스 목록 + 실제 `xu4.cpp`, 가짜 stub 제거, 무음 `sound.h` 구현만 신규) + 세부 21.1~21.4 + 의존성 표(21이 16도 막음, 19 골격과 병렬 가능) + Todo 19 병렬 착수 메모. `cmp` byte-identical 확인. `plan.md` 재구성(재계획 요약, 2단계 표, 21.1~21.4, 새 순서, 위험 갱신 — 기존 완료 기록은 "완료 기록" 섹션에 그대로 보존).
+3. 정리: **merge된 worktree 정리 + Node 22 전환**.
+
+**정리 작업 결과 (실제 실행)**:
+- worktree 8개(`todo-01,03,04,05,07,08,09,10`) 제거 — 전부 `git branch --merged main` 확인 후, 추적 파일 미커밋 변경 없음 확인 후 진행. 삭제 전에 각 worktree의 `.omo/evidence/ultima-web/`를 main으로 `cp -rn`(덮어쓰기 없이) 복사해 task-1~10 증거를 전부 main에 보존, todo-03의 옛 `HANDOFF.md`/`.debug-journal.md`는 `.omo/evidence/ultima-web/task-3/*-archive.md`로 보관. **브랜치는 삭제하지 않음**(되돌릴 수 있음). `git worktree list` → main만 남음.
+- Node 22: 시스템 `/usr/bin/node`(v20, apt)는 sudo 없이 못 바꿔서, 공식 v22.23.3 LTS tarball을 SHASUMS256으로 검증 후 `~/.local/opt/node-v22.23.3-linux-x64`에 설치, `~/.local/opt/node22` 심볼릭 링크, `~/.profile`·`~/.bashrc` 끝에 중복 방지 PATH 블록 추가. `bash -lc 'node -v'` → v22.23.3. Node 22에서 `npm ci`(EBADENGINE 경고 없음), `npm run test:unit`(13 files/99 tests), `typecheck`, `build`, `verify:repo-sources`, `npx playwright test --project=chromium`(8 passed) 전부 exit 0, 추적 파일 변경 없음(package-lock 그대로).
+
 ### 남은 작업
-1. **사용자 확인 필요**: Step 10 로컬 merge(`92ebce8`)를 `origin/main`에 push해도 되는지.
-2. **판단 필요**: web-main.cpp에 실제 xu4 부팅 시퀀스(servicesInit/config/screen/event loop)를 이식하는 작업을 별도 Todo로 만들지, 기존 Todo(11~13 또는 17)에 포함시킬지 — Step 10 e2e, Step 11~13, Step 17이 전부 이 이식에 막혀 있다.
-3. 그 판단 전에 진행 가능한 것: Step 11~13/16 중 "부팅 없이도 유닛 테스트 가능한 로직" 부분 — 착수 전에 정확한 범위를 사용자와 확인.
-4. 14 → 15(번역 4402건) → 17 → 18 → 19 → 20 → F1~F4.
+1. **Todo 21.1**(실제 엔진 링크)부터 착수 — `.omo/plans/ultima-web.md` Todo 21 전문 참고. 크리티컬 패스.
+2. 병렬 가능: Todo 19 workflow 골격(Node 22 CI, build/test/audit, 현재 셸 Pages 배포).
+3. 21.4 이후: Step 7/8 실제 엔진 재검증, Step 10 e2e(`save-reload.spec.ts`).
+4. 11~13 → 16 → 14 → 15 → 17 → 18 → 19 완료 → 20 → F1~F4.
