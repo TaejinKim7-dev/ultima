@@ -19,6 +19,13 @@
 #include "u4.h"
 #include "xu4.h"
 
+#ifdef __EMSCRIPTEN__
+// Step 8 browser-safe input queue (C ABI home). Only the per-frame yield
+// is referenced here; queue drain/snapshot wiring lands in Step 9's web
+// input path. Never retains Controller pointers.
+#include "web_bridge.h"
+#endif
+
 using std::string;
 
 #ifdef DEBUG
@@ -279,6 +286,13 @@ static int frameSleep(FrameSleep* fs, uint32_t waitTime) {
 #endif
     if (fs->fsleep)
         msecSleep(fs->fsleep);
+#ifdef __EMSCRIPTEN__
+    // Step 8: yield to the browser every foreground frame even when
+    // fsleep==0, so DOM input callbacks can run and Asyncify can unwind.
+    // Asyncify-safe sleep(0); never dispatches controllers directly.
+    if (!fs->fsleep)
+        u4_web_frame_yield();
+#endif
     return 0;
 }
 

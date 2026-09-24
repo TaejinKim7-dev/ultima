@@ -157,6 +157,8 @@ async function main() {
     // Support
     "src/support/cdi.c",
     "src/support/stringTable.c",
+    // Step 8 browser-safe input queue (C ABI home for the bridge inputs).
+    "src/web_bridge.cpp",
     // Web stubs
     "scripts/web-stub.cpp",
     // Web main entry point
