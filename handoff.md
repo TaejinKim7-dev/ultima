@@ -16,7 +16,7 @@
 
 **Todo 6(단일 스레드 wasm Boron + xu4 core)를 `todo-06-wasm-build` 브랜치에서 완료하고 사용자 승인 후 `main`에 merge했다(merge commit `c836ecc`, 구현 `26f7164`, 문서 `db512d9`) — 상세는 아래 "Todo 6 완료 기록" 참고. merge 전 재실행 게이트 전부 exit 0. push는 미실시(사용자 확인 전).**
 
-**Todo 7(WebGL2)·Todo 8(입력 queue)를 병렬 worktree에서 구현하고 사용자 승인 후 `main`에 merge했다(merge `874c775`/`6b97d8e`, 게이트 재실행 통과). 공식 진행률 8/24 = 33.3% — 상세는 아래 "Todo 7/8 main merge 완료 기록" 참고. `origin` push는 승인 완료·실행 전일 수 있음(아래 "바로 다음" 확인).**
+**Todo 7(WebGL2)·Todo 8(입력 queue)를 병렬 worktree에서 구현하고 사용자 승인 후 `main`에 merge했다(merge `874c775`/`6b97d8e`, 게이트 재실행 통과). 공식 진행률 8/24 = 33.3% — 상세는 아래 "Todo 7/8 main merge 완료 기록" 참고. `git push origin main` 완료(`ada0a6d..fec94d6`).**
 
 - root Vite/TypeScript strict/Vitest/Playwright harness와 minimal build shell이 있다.
 - `vendor/source-manifest.json`은 xu4, Faun, GLV, Boron의 deterministic file count/tree SHA-256과 pinned revision을 기록한다.
@@ -557,5 +557,5 @@ shell-ready e2e 회귀                        # 1 passed
 - 병합 직후 main에서 전체 게이트 재실행 → 전부 exit 0(위 "merge 게이트" 블록). ✅ 승격 완료.
 
 ### 남은 작업
-1. docs(plan/handoff/HANDOFF + 계획서 checkbox `[x]`) 커밋 → `git push origin main`(사용자 승인 완료).
+1. ~~docs 커밋 + `git push origin main`~~ **완료** — docs `fec94d6`, push `ada0a6d..fec94d6`.
 2. **Step 9**(브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행) → 10(IDBFS) …

@@ -42,9 +42,9 @@
 - 병렬 `npm ci` 동시 실행 시 unit/e2e가 일시 실패(node_modules 교체 충돌)했으나, npm ci 종료 후 순차 재실행으로 전부 통과 — 위 exit code가 최종 상태.
 
 ### 2-5. git 상태
-- main `6b97d8e`, `origin/main` 대비 **ahead 14** (Step 3~8 + docs).
+- main `fec94d6`(docs) / merge tip `6b97d8e`, **push 완료** `ada0a6d..fec94d6` — origin과 동기화.
 - worktree clean(untracked session 잔여물만: `.claude/`, `.omo/boulder.json`, `.omo/start-work/`, `.omo/lazycodex-executor-verify/` — 커밋 금지).
-- 사용자 승인: Step 7/8 merge + `git push origin main`. merge 완료, push는 docs 커밋 후.
+- 사용자 승인: Step 7/8 merge + `git push origin main` — 둘 다 완료.
 
 ## 3. 변경한 파일 (Files changed)
 - `plan.md` — 진행률 8/24, Step 7·8 ✅, merge 게이트 exit code 기록, "바로 다음 순서"=Step 9.
@@ -58,7 +58,7 @@
 - source-manifest 충돌은 재계산 resolve(임의 편집 금지).
 
 ## 5. 다음 할 일 (Next steps)
-- [ ] docs 4파일 커밋 → `git push origin main` (사용자 승인 완료).
+- [x] docs 커밋 → `git push origin main` (완료: `fec94d6`, `ada0a6d..fec94d6`).
 - [ ] **Step 9**: 브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행 (plan.md "바로 다음 순서").
 - [ ] 10(IDBFS) → 11~13 → 14 → 15 … 16은 9 이후 병렬 가능.
 
