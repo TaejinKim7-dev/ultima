@@ -14,5 +14,8 @@ export default defineConfig({
     port: 4173,
     reuseExistingServer: false,
     timeout: 60_000
-  }
+  },
+  // Step 7: the WebGL2 renderer test selects this project explicitly
+  // (`--project=chromium`); headless Chromium renders via SwiftShader.
+  projects: [{ name: "chromium" }],
 })

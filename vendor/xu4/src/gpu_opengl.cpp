@@ -42,6 +42,13 @@ extern uint32_t getTicks();
 #ifdef ANDROID
 #define DVERSION    "#version 310 es\n"
 #define PRECISION_F "precision mediump float;\n"
+#elif defined(__EMSCRIPTEN__)
+// WebGL2/GLES3: Emscripten translates to WebGL2, which requires GLSL ES
+// 3.00 shaders with an explicit fragment precision qualifier.  Native
+// desktop GL keeps "#version 330" below; mapped-buffer uploads are
+// replaced separately (see U4_WEBGL2_SAFE_BUFFERS branches).
+#define DVERSION    "#version 300 es\n"
+#define PRECISION_F "precision highp float;\n"
 #elif defined(USE_GLES)
 #define DVERSION    "#version 310 es\n"
 #define PRECISION_F "precision highp float;\n"
@@ -519,6 +526,11 @@ static void gpu_createVertexArrays(OpenGLResources* gr, const uint16_t* pc)
                 dl->fpv   = stride / sizeof(float);
                 dl->count = 0;
                 assert(bi < GLOB_COUNT);
+#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)
+                // WebGL2-safe path: CPU staging mirrors the GPU buffer so
+                // gpu_beginTris()/gpu_endTris() never need mapped writes.
+                dl->staging = (float*) malloc((size_t) dl->byteSize);
+#endif
 
                 // Reserve buffer data & define its layout.
                 for (int i = 0; i < inc; ++i) {
@@ -769,6 +781,16 @@ void gpu_free(void* res)
         glDeleteTextures(1, &gr->scalerLut);
     }
 
+#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)
+    // Release the CPU staging buffers (sized in gpu_createVertexArrays).
+    {
+        const int dlCount = (int) (sizeof(gr->dl) / sizeof(gr->dl[0]));
+        for (int i = 0; i < dlCount; ++i) {
+            free(gr->dl[i].staging);
+            gr->dl[i].staging = NULL;
+        }
+    }
+#endif
     glDeleteVertexArrays(GLOB_COUNT, gr->vao);
     glDeleteBuffers(GLOB_COUNT, gr->vbo);
     glDeleteProgram(gr->shadeColor);
@@ -910,7 +932,6 @@ void gpu_setScissor(int* box)
 void gpu_updateWorkBuffer(void* res, int list, WorkBuffer* work)
 {
     WorkRegion* reg;
-    float* data;
     int32_t offset = -1;
     int32_t attrEnd = 0;
     uint32_t mod;
@@ -926,13 +947,26 @@ void gpu_updateWorkBuffer(void* res, int list, WorkBuffer* work)
     if (offset < 0)
         return;
 
-    {
     OpenGLResources* gr = (OpenGLResources*) res;
     DrawList* dl = gr->dl + list;
     glBindBuffer(GL_ARRAY_BUFFER, gr->vbo[ dl->bufI ]);
-    }
 
-    data = (float*) glMapBufferRange(GL_ARRAY_BUFFER,
+#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)
+    // WebGL2-safe path: WebGL exposes no mapped-buffer writes, so
+    // each dirty CPU-side region is streamed with glBufferSubData.
+    (void) attrEnd;  // Span end is only needed by the native mapped path.
+    mod = work->dirty;
+    for (reg = work->region; mod; ++reg, mod >>= 1) {
+        if (mod & 1) {
+            glBufferSubData(GL_ARRAY_BUFFER,
+                            (GLintptr) (sizeof(float) * reg->start),
+                            (GLsizeiptr) (sizeof(float) * reg->used),
+                            work->attr + reg->start);
+        }
+    }
+#else
+    // Native desktop GL path: write the dirty span through a mapped range.
+    float* data = (float*) glMapBufferRange(GL_ARRAY_BUFFER,
                                      sizeof(float) * offset,
                                      sizeof(float) * (attrEnd - offset),
                                      GL_MAP_WRITE_BIT);
@@ -947,6 +981,7 @@ void gpu_updateWorkBuffer(void* res, int list, WorkBuffer* work)
         }
         glUnmapBuffer(GL_ARRAY_BUFFER);
     }
+#endif
     work->dirty = 0;
 }
 
@@ -968,9 +1003,19 @@ float* gpu_beginTris(void* res, int list)
     if (dl->dual)
         dl->bufI ^= 1;
     glBindBuffer(GL_ARRAY_BUFFER, gr->vbo[ dl->bufI ]);
+#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)
+    // WebGL2-safe path: emit triangles into the CPU staging buffer (one
+    // per draw list, sized in gpu_createVertexArrays); gpu_endTris()
+    // uploads the used span with glBufferSubData.
+    if (! dl->staging)
+        return NULL;
+    gr->dptr = dl->staging;
+    return gr->dptr;
+#else
     gr->dptr = (GLfloat*) glMapBufferRange(GL_ARRAY_BUFFER, 0, dl->byteSize,
                                            GL_MAP_WRITE_BIT);
     return gr->dptr;
+#endif
 }
 
 /*
@@ -982,11 +1027,21 @@ void gpu_endTris(void* res, int list, float* attr)
 {
     OpenGLResources* gr = (OpenGLResources*) res;
 
+    assert(gr->dptr);
+#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)
+    // WebGL2-safe path: stream the emitted span from CPU staging.
+    // GL_ARRAY_BUFFER is still bound from gpu_beginTris().
+    gr->dl[ list ].count = attr - gr->dptr;
+    glBufferSubData(GL_ARRAY_BUFFER, 0,
+                    (GLsizeiptr) ((attr - gr->dptr) * sizeof(float)),
+                    gr->dptr);
+    gr->dptr = NULL;
+#else
     glUnmapBuffer(GL_ARRAY_BUFFER);
 
-    assert(gr->dptr);
     gr->dl[ list ].count = attr - gr->dptr;
     gr->dptr = NULL;
+#endif
 }
 
 /*
@@ -1369,6 +1424,10 @@ static void _buildChunkGeo(ChunkInfo* ci, int i, const TileId* chunk)
     int stride = gr->mapW;          // Map tile width
     int cdim   = gr->mapChunkDim;   // Chunk tile dimensions
     int fxUsed;
+#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)
+    size_t chunkBytes;
+    float* chunkBase;
+#endif
 
 
 #ifdef MAP_ANIMATOR
@@ -1384,6 +1443,17 @@ static void _buildChunkGeo(ChunkInfo* ci, int i, const TileId* chunk)
 #endif
 
     glBindBuffer(GL_ARRAY_BUFFER, gr->vbo[GLOB_MAP_CHUNK0 + i]);
+#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)
+    // WebGL2-safe path: emit chunk quads into a CPU staging buffer.
+    // WebGL exposes no mapped-buffer writes; the buffer is uploaded below.
+    chunkBytes = (size_t) gr->mapChunkVertCount * ATTR_STRIDE;
+    chunkBase = (float*) malloc(chunkBytes);
+    if (! chunkBase) {
+        fprintf(stderr, "buildChunkGeo: staging alloc failed\n");
+        return;
+    }
+    attr = chunkBase;
+#else
     attr = (float*) glMapBufferRange(GL_ARRAY_BUFFER, 0,
                                      gr->mapChunkVertCount * ATTR_STRIDE,
                                      GL_MAP_WRITE_BIT);
@@ -1391,6 +1461,7 @@ static void _buildChunkGeo(ChunkInfo* ci, int i, const TileId* chunk)
         fprintf(stderr, "buildChunkGeo: glMapBufferRange failed\n");
         return;
     }
+#endif
 
     // Placing center of the top left tile at the origin.
     startX = -0.5f * VIEW_TILE_SIZE;
@@ -1426,7 +1497,13 @@ static void _buildChunkGeo(ChunkInfo* ci, int i, const TileId* chunk)
         chunk += stride;
     }
 
+#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)
+    // WebGL2-safe path: stream the staged chunk geometry in one upload.
+    glBufferSubData(GL_ARRAY_BUFFER, 0, (GLsizeiptr) chunkBytes, chunkBase);
+    free(chunkBase);
+#else
     glUnmapBuffer(GL_ARRAY_BUFFER);
+#endif
     gr->mapChunkFxUsed[i] = fxUsed;
 }
 
