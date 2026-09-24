@@ -1,6 +1,6 @@
 # Ultima IV 웹 한글판 개발 인수인계
 
-최종 갱신: 2026-09-20 KST.
+최종 갱신: 2026-09-24 KST.
 
 ## 현재 상태
 
@@ -8,7 +8,11 @@
 
 **Todo 2(호스트 Boron 빌드 + xu4 모듈 패키징)를 `todo-02-module-packaging` 브랜치에서 완료했다 — 상세는 아래 "Todo 2 완료 기록" 참고.**
 
-**Todo 3(native GLFW+Faun 기준선)를 `todo-03-native-baseline` 브랜치에서 완료했다 — 상세는 아래 "Todo 3 완료 기록" 참고. (참고: 이 handoff.md는 Todo 4/5가 아직 main에 merge되기 전의 base(f84b5f5)에서 분기했으므로 Todo 4/5 관련 섹션은 여기 없다 — main merge 시 병합 필요.)**
+**Todo 3(native GLFW+Faun 기준선)를 `todo-03-native-baseline` 브랜치에서 완료했다 — 상세는 아래 "Todo 3 완료 기록" 참고.**
+
+**Todo 5(브라우저 셸/브릿지 ABI/GitHub Pages 자산 계약)를 `todo-05-browser-shell` worktree/브랜치에서 완료했다 — 상세는 아래 "Todo 5 완료 기록" 참고. 이 작업 중 `todo-04-i18n-inventory` worktree는 다른 에이전트가 동시에 사용 중이었고, 이 세션은 그 worktree와 `/home/taejin/ultima`(메인 worktree)를 전혀 건드리지 않았다.**
+
+**Todo 4(영어 원문 inventory + 한국어 로컬라이제이션 스키마)를 `todo-04-i18n-inventory` 브랜치에서 완료했다 — TITLE.EXE/AVATAR.EXE 바이너리 문자열 추출까지 실제 원본 데이터로 검증했다(당초 "pending 처리 가능"이라고 허용됐던 항목이었으나 `vendor/xu4/src`에서 정확한 오프셋 근거를 찾아 실제로 구현했다). 상세는 아래 "Todo 4 완료 기록" 참고.**
 
 - root Vite/TypeScript strict/Vitest/Playwright harness와 minimal build shell이 있다.
 - `vendor/source-manifest.json`은 xu4, Faun, GLV, Boron의 deterministic file count/tree SHA-256과 pinned revision을 기록한다.
@@ -138,6 +142,116 @@ git diff --check                                           # exit 0
 3. 부수적으로, 이전 수동 스파이크에서 남아있던 leaked `Xvfb :99` 프로세스(PID 29861, 이번 세션 시작 시 `pgrep`으로 발견)를 kill했다. 이번 턴 중 다시 백그라운드로 띄운 `npm run qa:native-baseline` 실행도 사용자의 중지 지시에 따라 kill했고, `pgrep -af "xu4|Xvfb"`로 잔여 프로세스 없음을 확인했다.
 
 **현재 git 상태 (이 브랜치, `todo-03-native-baseline`)**: 커밋 전. `git status --short`: `handoff.md`, `native/CMakeLists.txt`, `package.json`, `scripts/deps-host.mjs` 수정, `native/tests/native_baseline_test.c`/`scripts/build-native.mjs`/`scripts/qa-native-baseline.mjs`/`tests/unit/build-native.test.ts`/`tests/unit/qa-native-baseline.test.ts` 신규. **아직 하지 않은 것**: (a) 플랜 체크박스 `- [ ] 3.` → `[x]` 미변경(위 2번 gap이 남아있어 일부러 보류 중), (b) 커밋 안 함, (c) 독립 게이트 리뷰 안 함, (d) `main` 병합 안 함, (e) 이미 CONFIRMED된 Todo 4(`todo-04-i18n-inventory`, 커밋 `2d02653`)도 아직 `main`에 병합 안 됨 — advisor는 Todo 4를 먼저 병합(idle하게 기다리고 있으므로)하고, 그 다음 Todo 3을 병합하라고 조언함. `main`은 현재 `0a1408a`(Todo 1+2+5)이고, `todo-03`/`todo-04` 둘 다 `f84b5f5`(Todo 1+2)에서 분기했으므로 `handoff.md`의 "Todo N 완료 기록" 삽입 지점과 `package.json`의 스크립트 목록에서 3-way 충돌이 예상됨(각자 다른 스크립트 추가) — merge 후 `npm run`으로 6개 스크립트(`build:site`, `check:base-path`, `i18n:inventory`, `i18n:check`, `build:native`, `qa:native-baseline`)가 전부 남아있는지, `npm run test:unit` 테스트 수가 세 브랜치 합계(Todo4 5파일/33개 + Todo5 bridge-contract 11개 + Todo3 3파일)인지 반드시 확인해야 함.
+## Todo 5 완료 기록 (2026-09-20, branch `todo-05-browser-shell`)
+
+**범위**: WASM 엔진(Todo 6+)이 아직 없는 상태에서, 그 엔진이 이 웹 셸과 주고받을 브릿지 이벤트의 TypeScript 계약("C ABI version 1")과, 그 계약을 실제로 사용하는 정적 Vite 셸(canvas + 하단 dialogue panel + status overlay + 원본 ZIP file picker + save export/import)을 정의했다. GitHub Pages project-site base(`/ultima/`) 자산 계약을 강제하는 `build:site` 빌드 스크립트와 base-path 검증기도 추가했다. 실제 WASM 엔진, 실제 게임플레이, 실제 GitHub Pages 배포는 이 Todo의 범위가 아니다(각각 Todo 6+, Todo 19).
+
+**구현**:
+- `src/bridge/types.ts`: `BRIDGE_ABI_VERSION = 1`(문서화된 버전 상수)과 계획서가 지정한 정확한 6개 이벤트 이름(`message`/`clear`/`prompt`/`view`/`save-state`/`runtime-error`)의 discriminated union `BridgeEvent`, 그리고 `isBridgeEvent(candidate: unknown): candidate is BridgeEvent` type guard를 정의했다. guard는 abiVersion 불일치, 알려지지 않은 `type`, 각 이벤트별 필수 필드 누락/오타(예: `prompt.kind`가 5개 값 밖, `view.region`이 3개 값 밖, `save-state.status`가 3개 값 밖, `runtime-error.fatal` 누락)를 모두 거부하고, `null`/원시값/배열/빈 객체에도 던지지 않고 `false`를 반환한다. C++/native 브릿지 구현 자체는 아직 작성하지 않았다 — 이 파일은 그 구현이 맞춰야 할 TS 계약이다.
+- `index.html`: `#game-canvas`(320x200 캔버스) 위에 `pointer-events: none`인 `#status-overlay`(원래 게임 화면 위치의 짧은 상태 텍스트용)를 겹치고, 그 아래에 스크롤 가능한 `#dialogue-panel`/`#dialogue-history`(긴 대화용, 캔버스 위에 얹지 않음)를 별도 섹션으로 뒀다. `#rom-picker`(원본 `ultima4.zip` 선택, `accept=".zip"`)와 `#save-export`/`#save-import` 컨트롤도 추가했다. 서버 프레임워크, 로그인, 클라우드 저장, 실시간 번역 API는 추가하지 않았다.
+- `src/shell.ts`: `createShell(document)`가 위 DOM을 찾아 연결하고 `{ abiVersion, dispatch(candidate: unknown): boolean }` 형태의 `UltimaBridgeApi`를 반환한다. `dispatch`는 `isBridgeEvent`로 검증에 실패하면 `console.error`만 남기고 `false`를 반환하며(게임 상태를 바꾸지 않음), 성공하면 이벤트 타입별로 실제 DOM을 갱신한다(`message`/`prompt`→dialogue panel에 `textContent`로만 추가, `clear`→dialogue 비우기, `view`→status overlay 텍스트, `save-state`→저장 상태 문구, `runtime-error`→dialogue에 오류 표시). 이 객체는 `window.ultimaBridge`로 노출되는데, 이는 Todo 6+에서 실제 네이티브 글루가 호출할 의도된 통합 지점이며 "cheat/state-control API"가 아니다(Todo 18의 금지 항목과는 다른 것 — 계약 자체가 통합 지점).
+  - 원본 ZIP 선택(`#rom-picker` change)과 세이브 가져오기(`#save-import` change)는 File API로 파일명/크기 또는 텍스트 내용만 로컬에서 읽고, 어디에도 업로드하지 않는다(실제 ZIP 내용 검증은 Todo 9).
+  - 세이브 내보내기(`#save-export` click)는 placeholder JSON을 `Blob` + `URL.createObjectURL` + `<a download>`로 로컬 다운로드만 트리거한다(실제 영속 엔진은 Todo 10).
+- `src/main.ts`: `createShell(document)`를 호출해 `window.ultimaBridge`에 연결하고, 셸 초기화가 끝나면 `document.body`에 `data-bridge-ready="true"`와 `data-bridge-abi-version="1"` 속성을 설정한다 — Playwright QA와 미래의 엔진 시작 시퀀스가 관찰할 수 있는 "bridge-ready" 신호다.
+- `scripts/check-base-path.mjs`: `dist/index.html`을 읽어 루트-상대(`/`로 시작) `src`/`href` 참조가 모두 지정된 base(정규화 시 trailing slash 포함)로 시작하는지 검사하고, `dist` 트리 전체를 스캔해 `package.json`/`vite.config.*`/`tsconfig.json`/`playwright.config.ts`/`.env*`/`*.ts`/`*.tsx` 같은 "서버 전용/툴링" 파일이 섞여 있지 않은지 검사한다. `checkBasePath(distDir, expectedBase)`를 export해서 CLI(`npm run check:base-path -- --base=/ultima/`)와 `build-site.mjs`가 함께 재사용한다. **자체 리뷰로 발견해 고친 결함**: 루트-상대 참조가 0개인 경우(예: `--base=./`로 빌드해 `src="./assets/..."`처럼 전부 상대 경로가 되는 경우) 원래 코드는 "불일치 0건"으로 통과시켜버리는 vacuous pass였다. `references.length === 0`이면 명시적으로 실패하도록 가드를 추가했고, `/tmp`에 `--base=./`로 만든 사본을 만들어 실제로 "no root-relative asset references to verify" 메시지와 exit 1로 거부됨을 직접 확인했다(이 재현은 evidence에 남기지 않음 — `/tmp` 임시 파일이며 재현 방법 자체가 기록의 핵심). 반대로 "서버 전용 파일 섞임" 분기는 이 세션에서 실제로 실패를 관찰하지 못했다 — `dist/`가 항상 깨끗했기 때문이며, 이 분기 자체가 틀렸을 가능성은 배제되지 않는다.
+- `scripts/build-site.mjs`: `npm run build:site -- --base=/ultima/`가 실제로 동작하도록 만든 wrapper다. **주의**: `--base=...`는 `npm run <script>`가 스크립트 문자열 전체 뒤에 그대로 이어붙이는 인자이기 때문에, `package.json`에 `"build:site": "vite build && node check.mjs"`처럼 compound 커맨드를 넣으면 `--base`가 마지막 명령(checker)에만 붙고 `vite build`에는 전달되지 않는다. 그래서 이 Node 스크립트가 직접 argv에서 `--base`(`--base=X`, `--base X` 둘 다)를 파싱해 `node_modules/vite/bin/vite.js build --base=<base>`를 `spawnSync`로 실행(npx 대신 경로 직접 지정 — 네트워크/버전 해석 변동 없음)하고, 성공하면 곧바로 `checkBasePath("dist", base)`를 호출해 잘못된 base로 조용히 깨진 상대경로가 배포 전에 반드시 실패하도록 만든다.
+- `package.json`: `build:site`(위 wrapper), `check:base-path`(단독 checker CLI) 스크립트를 추가했다.
+- `playwright.config.ts`: `webServer.command`가 `node scripts/build-site.mjs --base=/ultima/ && node node_modules/vite/bin/vite.js preview --base=/ultima/ --port 4173 --strictPort`를 실행한다 — `vite preview`는 `vite build`에 준 `--base`를 자동으로 물려받지 않으므로(빌드 시 CLI flag였고 `vite.config.ts`에는 없음) preview에도 동일한 `--base`를 명시적으로 줘야 `/ultima/` 하위 자산이 실제로 200을 받는다. Playwright의 `webServer.command`는 셸을 통해 실행되므로(자체 인자 forwarding 문제 없음) `&&`가 그대로 동작한다.
+- `tests/unit/bridge-contract.test.ts` (RED 먼저 작성): ABI 버전/이벤트 이름 목록 고정, 6개 이벤트 각각의 정상/비정상 shape, 알려지지 않은 `type`, ABI 버전 불일치, `null`/원시값/배열/빈 객체 거부, 타입 내로잉까지 11개 테스트.
+- `tests/e2e/shell-ready.spec.ts`: `/ultima/`로 이동해 `body[data-bridge-ready="true"]`와 `window.ultimaBridge.abiVersion === 1`을 확인하고, `#rom-picker`/`#save-import`에 **디스크에 없는 메모리 내(in-memory) 가짜 파일**(`page.locator(...).setInputFiles({ name, mimeType, buffer })`)을 주입해 dialogue panel/저장 상태 갱신을 확인하며, `#save-export` 클릭이 실제 다운로드 이벤트를 발생시키는지 확인한다. 테스트 전체에서 발생한 모든 non-GET 네트워크 요청을 기록해 빈 배열임을 단언한다(원본 데이터/세이브가 "어디에도 업로드되지 않는다"는 요구사항의 실제 증거). 통과 시 `.omo/evidence/ultima-web/task-5/shell-ready.json`을 테스트 코드 안에서 직접 기록한다(수기 작성 아님). **이 테스트가 실제로 증명하는 것**: `data-bridge-ready="true"`가 관찰됐다는 것은 `/ultima/assets/index-*.js`가 실제로 로드·실행되어 `main.ts`가 끝까지 돌았다는 뜻이다 — 즉 이 e2e 통과 자체가 GitHub Pages project-site base(`/ultima/`) 하위 자산 해석이 (문자열 검사가 아니라) 실제 브라우저에서 동작함을 보여주는 증거다.
+
+**검증 (2026-09-20, 전부 실제 실행, `check-base-path.mjs`의 vacuous-pass 수정 이후 최종 재실행 기준)**:
+```
+npm ci                                    # exit 0 (기존과 동일한 EBADENGINE warning) — $? 직접 캡처로 재확인(파이프 뒤 tail의 $?를 잘못 읽은 초안 실수를 고쳤음)
+npx playwright install chromium           # exit 0 — 이 worktree에 브라우저 캐시가 없어 새로 설치함(~/.cache/ms-playwright), $? 직접 캡처로 재확인. 별도로 node -e "chromium.launch()"를 실행해 시스템 라이브러리 누락 없이 실제로 브라우저가 뜨는 것까지 확인함(더 강한 증거)
+npm run test:unit -- tests/unit/bridge-contract.test.ts   # RED: exit 1 (모듈 없음, 로그: bridge-contract-red.log) → 구현 후 GREEN: exit 0, 11/11 (bridge-contract-green.log)
+npm run test:unit                         # exit 0 — 3 files / 14 tests (bridge-contract 11 + build-modules 1 + repo-sources 2)
+npm run build:site -- --base=/ultima/     # exit 0 — dist/index.html이 artifact root, 자산이 /ultima/assets/...로 해석됨, 서버 전용 파일 없음
+npm run typecheck                         # exit 0
+npm run test:e2e                          # exit 0 — 1/1 (tests/e2e/shell-ready.spec.ts), shell-ready.json 생성 확인
+npm run verify:repo-sources               # exit 0 — vendor/ 4개 component 무결
+npm run build                             # exit 0 (vite build, base "/")
+git diff --cached --check                 # exit 0 (git diff --check만으로는 이미 add된 뒤라 무의미하므로 --cached로 실제 스테이지된 변경을 검사함)
+```
+
+**base-path 실패 케이스가 실질적임을 별도 확인 (두 가지)**:
+1. `npm run build`(base `/`)로 만든 `dist/`에 대해 `npm run check:base-path -- --base=/ultima/`를 실행 → `dist/index.html has 2 asset reference(s) that do not start with base "/ultima/": /assets/index-*.js, /assets/index-*.css` 메시지와 함께 exit 1로 정확히 거부됨을 확인했다(배포 전에 잡힘). 로그: `.omo/evidence/ultima-web/task-5/base-path-failure.log`.
+2. (자체 리뷰로 발견) `--base=/ultima/`로 빌드한 `dist/index.html`을 복사해 `/ultima/`를 `./`로 치환한(모든 참조를 상대 경로로 만든) 사본에 대해 `check-base-path.mjs --base=/ultima/`를 실행하면, 수정 전 코드는 "불일치 0건"으로 **통과**해버리는 vacuous pass였다. `references.length === 0`이면 명시적으로 실패하도록 가드를 추가한 뒤 동일한 `/tmp` 사본으로 재실행해 `dist/index.html has no root-relative asset references to verify against base "/ultima/"` 메시지와 exit 1로 거부됨을 확인했다(이 `/tmp` 재현 자체는 evidence 디렉터리에 남기지 않았다 — 실제 repo 산출물이 아니기 때문).
+
+**포트 충돌 주의**: `playwright.config.ts`의 `webServer`는 4173(Vite preview 기본 포트)을 `strictPort: true`로 고정한다. 이 worktree 밖의 다른 에이전트가 같은 포트에서 `vite preview`를 띄우고 있는 상태에서 리뷰어가 `npm run test:e2e`를 재실행하면 포트 충돌로 실패할 수 있다 — 이건 이 구현의 회귀가 아니라 환경 충돌이므로, 재실행 전에 4173이 비어 있는지 확인한다.
+
+**Evidence** (`.omo/evidence/ultima-web/task-5/`, 전부 git-ignored, local-only):
+- `bridge-contract-red.log` / `bridge-contract-green.log`: RED→GREEN vitest transcript.
+- `base-path-failure.log`: 잘못된 base로 만든 dist가 checker에 의해 거부되는 실제 로그.
+- `shell-ready.json`: Playwright happy-path QA 산출물(테스트 코드가 직접 기록).
+
+**의도적으로 하지 않은 것 / 다음 Todo로 미룬 것**:
+- 실제 C/C++ 브릿지 글루는 작성하지 않았다 — `src/bridge/types.ts`는 그 글루가 맞춰야 할 TS 쪽 계약일 뿐이다(과제 지시대로).
+- 원본 ZIP 실제 내용 검증(SHA/필수 파일 목록)과 실제 IDBFS 영속화는 각각 Todo 9/10이며, 이 Todo의 file picker/save export/import는 로컬 File API 배선과 bridge 이벤트 계약만 증명한다(export는 placeholder JSON).
+- `npm run build:site -- --base=/ultima/`를 마지막으로 실행한 뒤 `npm run build`(base `/`)를 검증 순서상 나중에 실행했기 때문에, 이 세션 종료 시점의 `dist/`는 base `/`로 빌드된 상태다(`dist/`는 git-ignored이므로 커밋에는 영향 없음) — 실제 GitHub Pages 배포 전에는 반드시 `npm run build:site -- --base=/ultima/`를 다시 실행해야 한다(Todo 19에서 workflow가 이를 수행).
+- 실제 GitHub Pages 배포, Firefox/WebKit에서의 크로스 브라우저 확인은 이 Todo에서 하지 않았다(계획서 Blocker 항목과 일치, Todo 19/F3에서 다룬다).
+
+## Todo 4 완료 기록 (2026-09-20, branch `todo-04-i18n-inventory`)
+
+**범위**: 4개 영어 원문 소스(Boron 모듈 스크립트, 원본 TLK 16개 파일, C++ UI 문자열, TITLE.EXE/AVATAR.EXE 바이너리) 전체를 inventory하고, hash-only 공개 스키마(`locales/ko/{ui,module,binary,tlk,aliases,glossary}.json`)와 `npm run i18n:inventory`/`npm run i18n:check` 두 CLI를 만들었다. **TITLE.EXE/AVATAR.EXE는 "근거를 못 찾으면 pending 처리"가 허용된 항목이었지만, `vendor/xu4/src/intro.cpp`(title.exe)와 `vendor/xu4/src/discourse_castle.cpp`/`codex.cpp`/`shrine.cpp`(avatar.exe)에서 정확한 바이트 오프셋 근거를 찾아 실제로 구현하고 실제 원본 ZIP으로 검증했다** — 모든 4개 소스가 `pending` 플레이스홀더가 아니라 실제 동작하는 추출 파이프라인이다.
+
+**구현**:
+- `scripts/lib/tlk-codec.mjs`: 원본 `.TLK` 레코드 코덱(288바이트 고정 레코드, 16레코드/파일, 12개 문자열 필드). 근거는 `vendor/xu4/src/util/tlkconv.c`의 `struct Talk`/`talk_init()`과 `vendor/xu4/src/discourse_tlk.cpp:199-238,261-277`의 `struct U4Talk`/`U4Talk_load()` 두 개의 독립적인 xu4 소스가 정확히 일치함을 대조 확인했다. `tlkKey(map, npcIndex, field)` → `"map:npcIndex:field"` 형태(acceptance criteria가 요구하는 정확한 shape)를 만든다.
+- `scripts/lib/binary-strings.mjs`: TITLE.EXE/AVATAR.EXE의 8개 문자열 테이블(introQuestions/introText/introGypsy, lordBritishKeyword/lordBritishText, hawkwindText, virtueQuestions/endgameText1/endgameText2, shrineAdvice) 추출. 모든 오프셋은 `vendor/xu4/src/intro.cpp:59,97,101-103`, `discourse_castle.cpp:44,50-51,59,62,70,73,76-77`, `codex.cpp:43-45`, `shrine.cpp:54`의 실제 호출부 리터럴을 그대로 인용했다(추측 없음). Lord British 블록에 문서화된 바이트 손상 보정(오프셋 2724, 7바이트, `discourse_castle.cpp:53-60`)도 그대로 재현했다. `binaryKey(resource, table, index)` → `"resource:table:index"` shape을 만든다.
+  - **교차검증 중 발견한 불일치**: `vendor/xu4/doc/FileFormats.md`(899-1005번째 줄, xu4 프로젝트 자체 공개 문서)는 Hawkwind/Lord British 오프셋·길이·문자열 개수를 약간 다르게 기술한다(Lord British keyword 시작 오프셋 87565 vs 우리가 실제 사용한 87581, 문자열 개수 27+25=52 vs 우리가 쓴 25+24=49). **`discourse_castle.cpp`(실제로 컴파일·실행되는 코드)를 신뢰했다** — 실제 원본 ZIP으로 추출을 실행한 결과 25개 키워드(마지막 1개는 문서화된 "extra empty string"과 정확히 일치하는 빈 문자열) + 24개 응답 텍스트가 끝까지 깨짐 없이 정확히 종료되는 것을 직접 확인했다(`.local/i18n-inventory/binary.json`, git-ignored라 여기 인용 불가). `FileFormats.md`는 이 지점에서 stale하거나 다른 관점으로 작성된 문서로 보인다 — 코드가 아니라 문서 쪽 오류일 가능성이 높다.
+- `scripts/lib/boron-strings.mjs`: Boron 모듈 스크립트(`.b` 파일)의 `"..."`/`{...}`(중첩 balance 지원) 문자열 리터럴 추출 + caret escape 해석(`^-`→tab, `^/`→newline, `^(HEX)`, 그 외 `^X`→X 리터럴 — `vendor/boron/urlan/tokenize.c:376-393`의 `ur_caretChar()` 정확히 재현). `;` 라인 주석과 `/* */` 블록 주석도 스킵한다. 텍스트에 공백이 있으면 `display`, 없으면 `identifier`로 best-effort 분류(완벽하지 않음을 명시).
+- `scripts/lib/cpp-strings.mjs`: `screenMessage("...")`와 `Menu::add(ID, "...")`/`new XxxMenuItem("...")` 두 호출 패턴만 스캔(76개 전체 소스 파일이 아니라 player-visible 호출부만). 8진 이스케이프(`\010` 등, 메뉴 커서 글리프에 실제로 쓰임)까지 정확히 해석한다.
+- `scripts/lib/{hash,placeholders,text-width,schema-io,alias-check,zip-extract}.mjs`: sha256 해시, printf류 placeholder 서명(정렬된 multiset 비교 — 한국어는 어순이 바뀌므로 순서 무시, 개수/종류만 비교), status-line 폭 휴리스틱(`STATUS_AREA_WIDTH_COLUMNS = 15`, 근거 `vendor/xu4/src/stats.h:13` `STATS_AREA_WIDTH`; 한글 음절은 2칸으로 계산), 스키마 로드/저장과 기존 번역 보존 merge(소스 해시가 바뀌면 번역은 유지하되 `stale: true` 플래그), 별칭 충돌 감지(NFC 정규화, 동일 별칭 중복 등록 / 별칭이 다른 항목의 canonical 키워드와 겹치는 경우), `unzip -p`/`unzip -Z1` 기반 ZIP 엔트리 추출(새 npm 의존성 없음).
+- `scripts/i18n-inventory.mjs`(`npm run i18n:inventory`): 위 코덱들을 이용해 module/ui는 항상, tlk/binary는 `$ULTIMA4_DATA`가 설정되고 실존할 때만 추출한다. PRIVATE 전체 corpus(원문 텍스트 포함)는 `.local/i18n-inventory/*.json`(git-ignored)에, PUBLIC 스키마(해시/placeholder/번역 필드만, 원문 없음)는 `locales/ko/*.json`에 쓴다. 재실행 시 기존 번역/status/category/notes를 보존한다(merge, `scripts/lib/schema-io.mjs`).
+- `scripts/i18n-check.mjs`(`npm run i18n:check`): `status: "pending"`인 항목은 기본 모드에서는 통과시키고(번역은 Todo 15의 범위), `--strict`에서는 실패시킨다. `status`가 pending이 아닌 항목은 번역 존재/placeholder 서명 일치/(category가 "status"인 경우) 폭 예산/stale 플래그를 검사한다. 별칭 충돌은 항상 검사한다. 실패마다 정확한 파일+키를 명시한 메시지를 stderr에 출력하고 exit 1.
+- `locales/ko/aliases.json`, `locales/ko/glossary.json`: 실제 한국어 alias/번역 자체는 Todo 13/15의 범위라 비워두되(`alias` 필드 빈 문자열 + `status: "pending"`), `discourse_tlk.cpp:93,129,131,136,157`에서 확인한 전역 NPC discourse 키워드(`bye/look/name/give/join/job/health/yes/no`) 9개와 8버추/3원칙/6개 핵심 용어(Avatar/Rune/Shrine/Mantra/Codex/Companion/Virtue) glossary 18개를 스캐폴딩했다. 빈 alias끼리는 충돌 검사에서 제외한다(그렇지 않으면 빈 문자열끼리 항상 "충돌"로 오탐된다).
+- 테스트: `tests/unit/i18n-lib-selftest.test.ts`(19개, TLK/binary key shape 왕복 테스트를 합성 버퍼로 수행 — 실제 원본 데이터 불필요), `tests/unit/i18n-check.test.ts`(8개, happy path + 4가지 실패 모드[누락 번역/placeholder 불일치/status-line 폭 초과/별칭 충돌/stale] + `--strict`), `tests/unit/i18n-inventory.test.ts`(3개, `ULTIMA4_DATA` 미설정 시 정상 skip과 원문 비유출, 재실행 시 번역 보존). tsconfig가 `allowJs`를 켜지 않아 `.ts` 테스트가 `.mjs`를 직접 import하면 typecheck가 깨지므로, 기존 관례(`build-modules.test.ts`)를 따라 `scripts/lib/selftest-cli.mjs`라는 테스트 전용 CLI 하니스로 spawn하여 검증한다.
+
+**TDD**: 구현 완료 후 `scripts/lib/*.mjs`와 `scripts/i18n-{inventory,check}.mjs`를 임시로 다른 경로로 옮겨 RED을 재현하고(`Cannot find module` 오류로 28개 테스트 전부 실패, `.omo/evidence/ultima-web/task-4/red.log`) 원복 후 GREEN을 확인했다(`.omo/evidence/ultima-web/task-4/green.log`, 이후 stale 테스트 추가로 최종 33개).
+
+**검증 (2026-09-20, 전부 실제 실행)**:
+```
+npm ci                          # exit 0 (Node 20 EBADENGINE warning, Todo 1 기록과 동일)
+npm run i18n:inventory          # exit 0, ULTIMA4_DATA 미설정: module 729 + ui 369 추출, tlk/binary는 명시적으로 skip
+ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run i18n:inventory
+                                 # exit 0, tlk 3072 필드(16 맵 × 16 NPC, 사용되지 않는 슬롯 0개) + binary 214/216 슬롯 추가 추출
+                                 # 재실행 시 0 new/0 stale/0 removed로 재현성 확인(같은 소스 → 같은 해시)
+npm run i18n:check               # exit 0 — locales/ko 4411개 엔트리(4402 pending, 정상) 검사 통과
+npm run test:unit                # exit 0 — 5 files / 33 tests (기존 3 + 신규 30)
+npm run verify:repo-sources     # exit 0 — locales/scripts/tests를 git add한 뒤 재확인(파일명이 `verify:repo-sources`가 금지하는 `.tlk/.exe/...` 확장자와 우연히 충돌하지 않는지 별도로 검증함)
+npm run typecheck               # exit 0
+npm run build                   # exit 0
+git diff --check                # exit 0
+```
+
+**실제 원본 데이터로 품질 확인**(내용 자체는 공개 아티팩트에 포함하지 않음 — `.local/i18n-inventory/`에서만 직접 확인): TLK 256개 레코드 전부에서 이름·직업·질문 필드가 실제 Ultima IV 대화로 보이는 정상적인 영어 문장으로 디코딩됐고(빈 이름 레코드 0개), TITLE.EXE의 28개 intro 질문·15개 집시 카드 텍스트, AVATAR.EXE의 Lord British 25키워드/24응답·Hawkwind 53줄·버추 질문 11개·엔딩 텍스트 12개·shrine 조언 24개가 전부 끝까지 깨짐 없이 정상 종료되는 것을 확인했다. `.local/i18n-inventory/tlk.json`에서 `%` 문자를 grep해 printf-placeholder 오탐 가능성도 확인했다 — 0건(원본 TLK 대화문에는 `%`가 없다).
+
+**부분 구현 사항 명시**:
+- C++ UI 문자열은 76개 전체 `vendor/xu4/src/*.cpp`가 아니라 `game.cpp/menu.cpp/menuitem.cpp/stats.cpp/event.cpp/combat.cpp/item.cpp/creature.cpp/dungeon.cpp/camp.cpp/portal.cpp/death.cpp/spell.cpp/intro.cpp` 14개 파일의 `screenMessage(...)`/`Menu::add(...)` 두 호출 패턴만 스캔한다(과제 지시사항이 "player-visible 텍스트만, 76개 전체 불필요"라고 명시). 변수로 전달되는 메시지(`screenMessage(msg)`)나 문자열 연결은 포착하지 못한다 — 그런 문자열은 대개 자신의 리터럴 정의 지점에서 별도로 잡히거나, 이미 module/TLK/binary로 잡힌 데이터다.
+- Boron 문자열의 `display`/`identifier` 분류는 공백 유무 기반 휴리스틱이라 완벽하지 않다(예: 공백이 없는 짧은 display 문구는 identifier로 오분류될 수 있음). Todo 15에서 사람이 검토하며 걸러낼 것으로 예상한다.
+- `.local/i18n-inventory/*.json`의 TLK/binary 원문은 latin1로 디코딩한 human-readable 사본이다(원본 DOS 텍스트는 CP437 계열이라 완벽한 1:1 매핑은 아님) — 그러나 `sourceHash`는 항상 raw byte에 대해 계산하므로 hash 정합성/drift 감지에는 영향이 없고, 이 근사는 순수히 사람이 읽기 편하게 하기 위한 것이다.
+- `locales/ko/{aliases,glossary}.json`은 스키마와 스캐폴딩(canonical 키워드/용어 목록)만 갖췄고 실제 한국어 값은 비어 있다 — Todo 13(별칭)/15(전체 번역)의 범위다.
+- `binaryKey`/`tlkKey`의 인덱스는 연속적이지 않을 수 있다(예: `title.exe:introGypsy:12`, `avatar.exe:lordBritishKeyword:24`는 원본에 빈 슬롯이라 스키마에 없음 — 16/216개 슬롯 중 2개, `discourse_castle.cpp:30`의 "+1 for extra empty string" 주석과 일치). Todo 14에서 lookup table을 만들 때 `0..N` 연속 순회를 가정하면 안 되고, 스키마의 실제 key 목록을 기준으로 순회해야 한다.
+- `i18n-green.log`는 `locales/ko`가 아니라 `tests/unit/i18n-check.test.ts`의 `baseSchema()`와 동일한 구조의 임시 fixture(`/tmp`, 실행 후 삭제)에 대해 실행한 결과다 — 실제 프로덕션 corpus(`locales/ko`)는 의도적으로 4402/4411개가 `pending`이며, `npm run i18n:check`(strict 아님)로는 통과하지만 각 항목이 "번역 완료"라는 뜻은 아니다. 재현하려면 `tests/unit/i18n-check.test.ts`의 `baseSchema()`를 참고한다.
+
+**Todo 4 병합 전 재검증 (2026-09-24 KST, commit `2d02653`, 전부 실제 실행)**:
+```
+npm ci                                                                          # exit 0
+env -u ULTIMA4_DATA npm run i18n:inventory                                     # exit 0 — module 729 + ui 369, TLK/binary 명시적 skip
+ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run i18n:inventory # exit 0 — TLK 3072 + binary 214/216, 0 new/stale/removed
+npm run i18n:check                                                              # exit 0 — 4411 entries, 4402 pending
+npm run test:unit                                                               # exit 0 — 5 files / 33 tests
+npm run verify:repo-sources                                                     # exit 0 — 4 pinned components
+npm run typecheck                                                               # exit 0
+npm run build                                                                   # exit 0
+git diff --check                                                                # exit 0
+```
+명령별 원문 로그와 exit ledger: `.omo/evidence/todo4-merge-2026-09-24/premerge/` (git-ignored, local-only). Node 20.20.2라 `npm ci`에서 기존 `EBADENGINE` 경고가 출력됐지만 명령은 exit 0이었다.
+## Todo 3 E2E 보강 (2026-09-24, 같은 브랜치) — NPC 다중 턴 대화 실제 검증됨
+
+위 "미검증/부분 구현"과 "추가 보강 2번"은 이 실행으로 해소됐다. `scripts/qa-native-baseline.mjs`를 스크래치패드 성공 절차와 동일하게 되돌리고(매 `Right` 스텝 직후 4방향 `t` 시도 + keyword 전 Backspace 16회 clear + CHECKPOINT 로그) TDD RED→GREEN 후, 사용자 승인 하에 `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run qa:native-baseline` 1회 실행 → exit 0.
+스크린샷 직접 판독(같은 날, 실행자 본인): `05` `Enter towne! Moonglow` / `07` `Talk: North` → `You meet a tall mage. / He says: I am Calabrini` (tttttt 오염 관측 — 가드 필요성 입증) / `08` name → "I am Calabrini" / `09` health → "Our healer is one of the best!" / `10` bye → "Bye." / save 502 bytes + relaunch 정상.
+가설 4(매-스텝 talk sweep) CONFIRMED (1/1). 재현성 2회차는 미실시(1회만 승인). 증거: `.omo/evidence/ultima-web/task-3/native-baseline/` (git-ignored, 이 worktree local-only).
 
 - [AI 코딩 에이전트 규칙](AGENTS.md): 다른 AI가 이 저장소를 이어받을 때 지켜야 할 프로젝트 운영 규칙.
 - [AI 코딩 에이전트 인계 규칙](docs/AI_AGENT_HANDOFF.md): `handoff.md`를 어떻게 작성·갱신해야 하는지에 대한 표준.

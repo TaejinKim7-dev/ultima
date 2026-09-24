@@ -26,7 +26,10 @@ Git 작업 방식은 `AGENTS.md`의 "Git 작업 방식"을 따른다: PR 없이 
 - Verification: `npm run i18n:check`와 inventory coverage report를 실행한다.
 - Blockers: C++/Boron/TLK/TITLE.EXE/AVATAR.EXE 표시면을 빠짐없이 inventory하는 방법은 아직 구현되지 않았다. 추출한 영어 corpus나 원본 바이너리를 공개 repo/evidence에 넣지 않는다.
 
-## Todo 5: 브라우저 셸/브릿지 ABI/Pages 자산 계약
+## Todo 5: 브라우저 셸/브릿지 ABI/Pages 자산 계약 — 완료 (2026-09-20, `todo-05-browser-shell`)
+
+- `src/bridge/types.ts`(C ABI version 1 TS 계약 + `isBridgeEvent` guard), `index.html`/`src/shell.ts`(canvas + status overlay + 하단 dialogue panel + rom picker + save export/import), `scripts/build-site.mjs`+`scripts/check-base-path.mjs`(`npm run build:site -- --base=/ultima/`가 base-path/asset 계약을 실제로 강제)를 구현했다.
+- 상세 커맨드/증거는 `handoff.md`의 "Todo 5 완료 기록"을 참고한다.
 
 - Branch: `todo-05-browser-shell`
 - First test: `tests/unit/bridge-contract.test.ts`에서 정의되지 않은 브릿지 이벤트(`message`/`clear`/`prompt`/`view`/`save-state`/`runtime-error` 외) 또는 잘못된 base path 자산이 거부되는 RED case를 만든다.

@@ -1,0 +1,1289 @@
+{
+  "$schema": "ultima-web/i18n-schema/binary/v1",
+  "entries": {
+    "avatar.exe:endgameText1:0": {
+      "sourceHash": "sha256:0bf729f028a5219bcaa37be72820501125cb5e1ab206ddfedd0c6d183f7b489d",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:endgameText1:1": {
+      "sourceHash": "sha256:dd90d2f2192a420ac1aef5b71ea4195538de81087e034e1393cf338148a2db85",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:endgameText1:2": {
+      "sourceHash": "sha256:dd7854a53e27403b0520a6db11606852afb498042ea3a19618c32f265d586e72",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:endgameText1:3": {
+      "sourceHash": "sha256:97ed557fcfd590d33a0c7b3e1072aee23b324f05b54d8b2f040e6fc89c117a6b",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:endgameText1:4": {
+      "sourceHash": "sha256:5afbf9ec7e6a4ce7eeeec1bb3c108fc073b7162d1e9c84f7d1908b9f85b3e527",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:endgameText1:5": {
+      "sourceHash": "sha256:b1ac45efbc6454968a5efd2f6d72088bb5e66ba9817dfba1ab89a93163d072fb",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:endgameText1:6": {
+      "sourceHash": "sha256:2c8a7034c20f1ac501e17a9e35dfdacc8e75ada34df777aa2186baf70d3e3df1",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:endgameText2:0": {
+      "sourceHash": "sha256:b32b2b26dc756389d4e23583bce51149a7f3d3a26bbed06df4057f1903ea38a0",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:endgameText2:1": {
+      "sourceHash": "sha256:af84eb1ce44589a05e136a54216c8446853ec83cbfcbd1fdda8be345f57c5785",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:endgameText2:2": {
+      "sourceHash": "sha256:576116cb1ba76fb5f803ed5ed84e97eb7ec17107ac314f1b3c8706297a892c00",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:endgameText2:3": {
+      "sourceHash": "sha256:cb4b65451b9551b8fc9d3cc69ca5fb891abea0a274f46d1394cb401a77f36a22",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:endgameText2:4": {
+      "sourceHash": "sha256:17c71d8545fce7ef28feb24f65d66e15a94746fae1842bbb55b11da56a5b84bf",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:0": {
+      "sourceHash": "sha256:9c3f9c25064d9e6cd1e6cf0630f0626cf34fefc0606143a7f9f3af86c1b8c5b1",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:1": {
+      "sourceHash": "sha256:86f5ed969dfa6af6e4a1f1ae58491a42ee10378956ee80ffad7331dc65ffc9a6",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:10": {
+      "sourceHash": "sha256:4ab3669b54256ab97f6928c5c138b65f2e1732795484ff794fb5e39c73ef8f80",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:11": {
+      "sourceHash": "sha256:afd3726a231b12bd93905f427467c62b8460df58f6004aeba40e3705545e9450",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:12": {
+      "sourceHash": "sha256:84c06aac9620b7e067f932345d4ed8cd3d467f454432b1c98d74eb7a3c8d980f",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:13": {
+      "sourceHash": "sha256:0370c4979f2951dbadc539b8e1bebda6b52193608496e0fb5d2b0f01c6ca8c0b",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:14": {
+      "sourceHash": "sha256:8fbb8de8489ab1545be3196e24c8a0618d12393b679c1b2649f02c75a154fc8c",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:15": {
+      "sourceHash": "sha256:f246594d3a553672e9aed2ca7539b464052076bdc83d0a80e9647a7befa05826",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:16": {
+      "sourceHash": "sha256:8785d603abc68575e0509eb30c0d28fe37120ae13b43dd3e6f032dc29520a6ee",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:17": {
+      "sourceHash": "sha256:c4ecdfe72da9d303379221c226e08a0285165bdb51ce2dea62336ff89a4635a1",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:18": {
+      "sourceHash": "sha256:955f8dd94024ac74c594ddf99ae8b6301fe00fd8e34172ff3ca5008e9df409f2",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:19": {
+      "sourceHash": "sha256:b1dc25431e1b1be94ec5315ad0752d91c43aaaf113505bbde2b99bacd22863f6",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:2": {
+      "sourceHash": "sha256:995565b9ca9dbd5b40b34e23752a2166065d06bf49954214eb537adb681dc55f",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:20": {
+      "sourceHash": "sha256:9df5e7dfbbb3c585e3701a3048fc1abd448b6104657c56cf56ba869a53618aa2",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:21": {
+      "sourceHash": "sha256:741646734f8a2d7e234dd3843a0fbfed96965b7f893e57a58405bd9f03461e20",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:22": {
+      "sourceHash": "sha256:b63d866c34687c198e6d6143d7eecde8fc62b81344e9dbacafe2352d7676c1f6",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:23": {
+      "sourceHash": "sha256:08bcfbcfe02c0f07345af36f1375afdfb142ebb7b7612b18f67d3de4e38c26aa",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:24": {
+      "sourceHash": "sha256:9fe8a14d5398ff07d385386c4be4a0fd71821b6187893881036900ceec21630d",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:25": {
+      "sourceHash": "sha256:26a501d3474ed626da4523e0f117fa9f83809e555d5ba553a3eea3c80cad1582",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:26": {
+      "sourceHash": "sha256:4a2cfaf2026cdecb5d9f272698e431d9d8dd276076219020c1b6157d563b730f",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:27": {
+      "sourceHash": "sha256:35ec4061d20f5717ef303f55d9443aa8b1619baff1da7faa69f733babbcceb1c",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:28": {
+      "sourceHash": "sha256:180d2295e31cbb356b7f91017a8e5a8a80aca09f497712cc600f5255593a7ec3",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:29": {
+      "sourceHash": "sha256:2c9eedf3b47135e9a605561d22ad8b2024d13bff16c399ea6a874ff43bbcaad6",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:3": {
+      "sourceHash": "sha256:b156750514206e8aa317892927cf5c350718a548a2224b1bb4d980d449176253",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:30": {
+      "sourceHash": "sha256:73cb801605e255a4cabcbc714ac40ce70f9e6939c3a64a214651fd59adc2aec0",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:31": {
+      "sourceHash": "sha256:89148064c2fa8874aa194245b809776f6b9396d0975979c3cf5204b7197d7b04",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:32": {
+      "sourceHash": "sha256:f625b101e713be5e4312d06f8069c17017f9a4f85ceb649edb4b0abed13aa63d",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:33": {
+      "sourceHash": "sha256:90d934abb9b658ed484804b4ea42e07779e941cdd2da5ca3515befb35381e433",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:34": {
+      "sourceHash": "sha256:471ec399a3b5a92a3e090b582b980948b534dadf61c7d50298e2acf4b460ce3d",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:35": {
+      "sourceHash": "sha256:97ba649814c3e95da60b452d84557f596a15f8763963f9d36bfbe13d868cab77",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:36": {
+      "sourceHash": "sha256:98a91c9cfd43823b7d32b3c2bce8516626376144f95cd8cdebae089623c685ed",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:37": {
+      "sourceHash": "sha256:ad2752c1cd8040405482a305a96c908e18965f161fbff59df574c8a072d47a96",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:38": {
+      "sourceHash": "sha256:b44a5942a2bed8592b9a717016a82713bcae149321a2b26984c04f279f417fe6",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:39": {
+      "sourceHash": "sha256:9aabd57e0adcbdc07febedec625068e64b756073c5256aa8f863baa4c26f769b",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:4": {
+      "sourceHash": "sha256:d19e421ce925b0a1bf95aee976dbc9bde692bdae8d675c99533e9d3135479315",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:40": {
+      "sourceHash": "sha256:c62d2b42a1a7a4908230841353d93af0c7ed840fa8d53aed56a2ab8909c3dcfe",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:41": {
+      "sourceHash": "sha256:6af339f1606bf8593d2d9c653dc2eaa9cb547d99a3346f85fecb3f79d094952a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:42": {
+      "sourceHash": "sha256:ade67320c6b42fb19ae95db8c3af102b09986adf4202c7fd2e8c0b1d3dd8de64",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:43": {
+      "sourceHash": "sha256:224b6363caa15e925869c3d24048ce85ebd12075307d767abb07049c6eee97ec",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:44": {
+      "sourceHash": "sha256:415d2019639486c33e1a4dd8fd5dedd6a1736578e0c199e9df9040935167c1c4",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:45": {
+      "sourceHash": "sha256:45e73aef081e36992dcd563c9861825c4b59c9fad0058f25db4b2874959679c0",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:46": {
+      "sourceHash": "sha256:abff0db2ae27c6e05a40ff20e37eaa50a0b7db628fa8c826119c0de2fe4adb2c",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:47": {
+      "sourceHash": "sha256:140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:48": {
+      "sourceHash": "sha256:b49f425a7e1f9cff3856329ada223f2f9d368f15a00cf48df16ca95986137fe8",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:49": {
+      "sourceHash": "sha256:5ad5116e1350bdc40d7fb4ce49830b9d7b77e709e0ec718f0894c12d9448317b",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:5": {
+      "sourceHash": "sha256:c2814377f659d8ee66451e8bd06f77290d96b48351df520d4c7fde30c1c56d97",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:50": {
+      "sourceHash": "sha256:41041e74df694561f6b5a3dd34e55f345ca6f35911532c27ddf4b8ecdb1564a8",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:51": {
+      "sourceHash": "sha256:6a35cbf946cebcd20d22bfbf2010c8032152a81807f6ce21231ab3c351254b9e",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:52": {
+      "sourceHash": "sha256:2424e97bd3b1cea8135fde9e88cc15a455e28b32dabd26417128e25995d3c08a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:6": {
+      "sourceHash": "sha256:95cde1529ac109f8db8db25276e61ab0df2b0815796ae73e44be0ae553fab19e",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:7": {
+      "sourceHash": "sha256:20a098c9a61c4adaceac4b64d05080c1364dd15350f7769e2c997af27a8ad79e",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:8": {
+      "sourceHash": "sha256:bce3cc27f66d6f03a0d3403138429c515bae0478175046b45ea834fde95b10a3",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:hawkwindText:9": {
+      "sourceHash": "sha256:66e47179274fa4f116d5ac9b3399d14438d325419243d112257653b44a1b4c39",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:0": {
+      "sourceHash": "sha256:82a3537ff0dbce7eec35d69edc3a189ee6f17d82f353a553f9aa96cb0be3ce89",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:1": {
+      "sourceHash": "sha256:3c01eba119e00d79c82b6f65d70bc5f1044d568618bf41377e6d1432023fc2b8",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:10": {
+      "sourceHash": "sha256:d17bd922ea9dd14143a1c40cffad198af1314d34b49c819d47454114cb4bc224",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:11": {
+      "sourceHash": "sha256:8ab4ca2f83725a04752af6fed80c77ff6708f20ebd4ee32e95c9a375bd8fc1ed",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:12": {
+      "sourceHash": "sha256:1a28e463423d078a6a036216b5676d2433548221246f281a0ea31064d82d9245",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:13": {
+      "sourceHash": "sha256:68c4ab7357022538deb3d0f49d30f50804f6d464e38bd1468377b680da870feb",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:14": {
+      "sourceHash": "sha256:470664bd59f587f32e6d933f058464084d1810ee2b3a81b0d4d59d6dd9623da2",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:15": {
+      "sourceHash": "sha256:87bbe879c7a5f5784a70384bb49fa9513a6a3fbe4c2d388635e3c87611c03fae",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:16": {
+      "sourceHash": "sha256:ac1a1c7143cb2199eb400993a5db42bc2f6d98f6769bb696d04b48d84c68a56f",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:17": {
+      "sourceHash": "sha256:010aecbff62b5b33298f06d865872febb79a93b5e225f0ce597a015349220269",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:18": {
+      "sourceHash": "sha256:3c1d94691d03f75d3b8951a338c6783e4d065a2c380ee21abef51f03eb301df0",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:19": {
+      "sourceHash": "sha256:0e062e4c2ee475679d9cfd9cd30c295dec2a0eb7a02ffb0c5b239d2617022a8a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:2": {
+      "sourceHash": "sha256:5e8c9902207afaeb7120430c585a445f21e92932081d64bc99f80e4925bcb002",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:20": {
+      "sourceHash": "sha256:5fbec15ecb9de318515e0e5319b1f64fd5ed9969a66a62c27dd806bcd0da0ba6",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:21": {
+      "sourceHash": "sha256:e9270d1503db9d1c042c5dc23555d0ff2938010771d4a9eb4b93822a359c97d8",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:22": {
+      "sourceHash": "sha256:4995baa63e0e2487000039c1a829fadc3e90a69b115a47b2280064292497bbc0",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:23": {
+      "sourceHash": "sha256:3371305232c8dc10ce95c65849946e238a2e518ce770310333d4637ffcba1a51",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:3": {
+      "sourceHash": "sha256:c5c4bad89ee44b4da0321344964f145dd3023fc1ab0d9c2473e2716b788481ae",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:4": {
+      "sourceHash": "sha256:686f746a95b6f836d7d70567c302c3f9ebb5ee0def3d1220ee9d4e9f34f5e131",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:5": {
+      "sourceHash": "sha256:4492aabd733f37cb76fc0ed1fd75a11c5dd05ba8977988e28487739a20975b85",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:6": {
+      "sourceHash": "sha256:203e303a50269f3d533db9f46338da7d8e8d5457a0da2c74ef2c9ccf4784979a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:7": {
+      "sourceHash": "sha256:b260e1abb566eb8b1ea892488a944546c53391e2d0556cd309dd01c804e7558b",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:8": {
+      "sourceHash": "sha256:6adcc016448d707c1d16827459aee1f5c37621a9a747d3c5feb9f80877e3d495",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishKeyword:9": {
+      "sourceHash": "sha256:468c7b6449dd928f2ddad069fbfdb31f59ce214d67a1422c7610efb886ce6aa7",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:0": {
+      "sourceHash": "sha256:8b877a0251b9e8ea525ce08bd3a28dd32a803554a9dedc5f1626f9dab99e8609",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:1": {
+      "sourceHash": "sha256:093085f43d2816a5c6f25e72635a1c6cc111e3498aed3deda009d9c9c62cd8e6",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:10": {
+      "sourceHash": "sha256:24120dd2e0db72b6e52306b817c680f7a20397e10bdffd8eea1b55a33d5bce9b",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:11": {
+      "sourceHash": "sha256:b721e32c35f8f41279036b51cd4ca23716f86316ca2a144b3ff9407dfac62762",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:12": {
+      "sourceHash": "sha256:797f38174984c58859934cbe5ea290e957a32ec726aa40ea90f928d7b155bb60",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:13": {
+      "sourceHash": "sha256:a46615a832b8d10060f168102b0508013edcb6bb84ec6596dfdbc0086d5bd0ca",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:14": {
+      "sourceHash": "sha256:9f1fa77faaa33fcfe5986bd4cef3cfce9563f193bd52888bed3fbfc87fb3630e",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:15": {
+      "sourceHash": "sha256:c56c0bb0bce288d2212d188b376a25368e1c0c20cc59336818fc354d7b4803a4",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:16": {
+      "sourceHash": "sha256:55907a33bf557e4b7f2acd69d7c96073054de68f9a8528792d0c09b67267464e",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:17": {
+      "sourceHash": "sha256:eb10490901bbabbadd88d6af9aca8519a6708222d38cf717ca2ee69812df350a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:18": {
+      "sourceHash": "sha256:2d5c372652d8ee9472e9f65c00c1e1bc7a21f96c06f74675d3d33b0e95b51b1f",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:19": {
+      "sourceHash": "sha256:514c1a32fe41f6e582e6322ffd6cc3652d4808793433a2cbdf15556edc5457a8",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:2": {
+      "sourceHash": "sha256:6c1070fe9df5f12a54481be8324f9bca2ca8d52d0d65ee8a6391f43a010e7d13",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:20": {
+      "sourceHash": "sha256:e4629c24fc89fd6f6956a54fd1b48f461a673e3d4c21de34497be8afc373ca46",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:21": {
+      "sourceHash": "sha256:2471e4906becb350eb2dbe9b92dfa3b673ad665555335ee56a76f2319b63f020",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:22": {
+      "sourceHash": "sha256:1a367c20606711a44cfee981a7e61a402cf65e5a8152bca4db3fd47e7a1408cd",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:23": {
+      "sourceHash": "sha256:72abd56f49a13f42f3e309539f0c2dceb3480d34806fbddcbcc053b302a79f84",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:3": {
+      "sourceHash": "sha256:bad3bb2b96a5200d9f7748e3a445eab603835e5c6f2d3372bc463cb07c6b51ea",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:4": {
+      "sourceHash": "sha256:e0dd0c341bf98e63b0d8d23b0aba4851313cf2e9c878117037cb28f148808bec",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:5": {
+      "sourceHash": "sha256:dc00d5cc64a30e328aa2c7b45c09df3b343fae3817d60eb25c6cc737c779af55",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:6": {
+      "sourceHash": "sha256:699e2388bf2b7713213a0deb338ec770c320a82af3d276fb7fe755ace578f10d",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:7": {
+      "sourceHash": "sha256:b7410e045fa5d6e9d4e0688a32c357a3d72685a9f22437d12abbed74fea65bbb",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:8": {
+      "sourceHash": "sha256:05b16bccfbe9ae5f13742003435475a86061c8a973aeaad14fa6e945a3864969",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:lordBritishText:9": {
+      "sourceHash": "sha256:09e7d1d438119082c1aafa9530ac45e4ce5488909c4fdb732d5c5e9b636a37a7",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:0": {
+      "sourceHash": "sha256:7df708434268d78b775227bc81796583eb17cdb220f33c9b44107a0c2ec46e93",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:1": {
+      "sourceHash": "sha256:6739d7efa88b6171c52ab84030a1e3596edaa55024af6fc26ca31cb4fdc331e5",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:10": {
+      "sourceHash": "sha256:f3aa734cad750db9ceab48863ef2790406f123e0f675a43cf79c28ba2510a24a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:11": {
+      "sourceHash": "sha256:4f5c9efe466e339e5b1e7887a6a8ad993b69b4c8abdc3e38d957cf7f99cf9de6",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:12": {
+      "sourceHash": "sha256:8656acd89c536fb21c247b942b6ab004d6341b33a1e960f348add701e2f1ba81",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:13": {
+      "sourceHash": "sha256:d3c8eeffb378636c9f0e7a8f6ac8153a02b15a906dd63eb8bbbcd91c9a6d2fd8",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:14": {
+      "sourceHash": "sha256:6010d8bcd1170675bd814d2c676057bfdbb565d7640b7b00c6b3671f1109a4f8",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:15": {
+      "sourceHash": "sha256:b4719d4195090e66b23c9980304763f54130594155b4b1f3218556a93244c8a9",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:16": {
+      "sourceHash": "sha256:b46343f5656e2c8dbef36b9db30bcafa9d8d0693e7e77bc9ea3ff5ed0d46f28e",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:17": {
+      "sourceHash": "sha256:c49a1f86bbacb7eb7bff70ba9e86f5e71b9c016780c9c3266c48ee71af9e6b1a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:18": {
+      "sourceHash": "sha256:0257616701a634f3e25443917bc2b84c800c5490b2160a8a593c1ae487a7057b",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:19": {
+      "sourceHash": "sha256:32ac2d28bf0fa3eb56e342597e092057bf9ff71f5197cd014d743ca240f98827",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:2": {
+      "sourceHash": "sha256:2840d03b40d750be23f1cf2bf80df8910e24b5b1bbd509bcbb8ca09b607e52a7",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:20": {
+      "sourceHash": "sha256:7906a7077d05d93af9a49f9146db8bd520eb1d4e5ab9de4585cf5066dd24c949",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:21": {
+      "sourceHash": "sha256:dbe029f4a8f257be7271aee832c3be74ef9359a2d63bd5cf8a8902ae1f02885e",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:22": {
+      "sourceHash": "sha256:721a426dc6619decd5aa3dc09650dedaddbb0c73a3052f451174be02acc2ccef",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:23": {
+      "sourceHash": "sha256:09d2d06b7fbcab28b7a9f372124d4a980fe04c04e4ae14b9d31da3111c7e9bd1",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:3": {
+      "sourceHash": "sha256:7cae9a0ea821091c0ca6e6fd439de730afe70232031fb5fef7f3930973dd7340",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:4": {
+      "sourceHash": "sha256:aab801eb704e8d04807afb05ae4173cb883d9e50642dca3b7a2b7d0a153f146e",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:5": {
+      "sourceHash": "sha256:d18a7d8b69414bb639bacaf03d5d0abd2eb7baf68a2169601ac9fee482a7b3b8",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:6": {
+      "sourceHash": "sha256:e7c40b560589e749a2a9ea16d800c425afd9c83dd6e5d424bb2b7686c283bbc8",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:7": {
+      "sourceHash": "sha256:07a1c8e883743a392e3278ac44683ea721800805a3db77feafb789148b68c525",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:8": {
+      "sourceHash": "sha256:14bfa5d693eef883f46cf3847c37c46e26892104dd848cc7ab54520467cb9259",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:shrineAdvice:9": {
+      "sourceHash": "sha256:253842d5d29a548d00bcca39f0b4a7af6fb9d826863e3c4f57db977d34c383f9",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:virtueQuestions:0": {
+      "sourceHash": "sha256:fad02e50a6eaa21ea98da05a1899e0524cc5024783b6a53cfee74652f48f6ea8",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:virtueQuestions:1": {
+      "sourceHash": "sha256:b4142e862f7526d359dec3e38157b46a6a797e1bdbf16fed9d3e3bcffd084602",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:virtueQuestions:10": {
+      "sourceHash": "sha256:4f774d269b79c63b39580fa933e3972123b4ddeb46d272211af2e9e4c53c4aff",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:virtueQuestions:2": {
+      "sourceHash": "sha256:cb9b6df2a288dcd7f56c499ea4e511e68685eba22a4cb1a1befc9fc81c119591",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:virtueQuestions:3": {
+      "sourceHash": "sha256:3d77058c923424f7d6b543c62688697204d09c51fa0b8d22f5bddbb6bd5874e9",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:virtueQuestions:4": {
+      "sourceHash": "sha256:5d2d8b77486016f5e503e347392cbcef1ea822001ec41f447e5f9e59788db886",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:virtueQuestions:5": {
+      "sourceHash": "sha256:1fc2106069406103facf050b36e4cc9d64d0bae4efd617faabfc28b510662b27",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:virtueQuestions:6": {
+      "sourceHash": "sha256:dc0f9324b8b6080386f508013af92a5c269bbea01213c23e11a9d2be80bf8dd1",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:virtueQuestions:7": {
+      "sourceHash": "sha256:e9da23e3d89960df47a8b71cbfb594677f5079502687c55b1cb612b4fb55f3a4",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:virtueQuestions:8": {
+      "sourceHash": "sha256:d36460a4520ca49c87a70157508e5af211e570f9093873844b1b987a0c33cc40",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "avatar.exe:virtueQuestions:9": {
+      "sourceHash": "sha256:bfe79448d31160c2bd01e477321e7738f3a8a0eb32eb7332a4719cb8428ac6f0",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:0": {
+      "sourceHash": "sha256:41bb7b9a440cd3fa691c60740348a73dfc172ce745af3b2b9106165f6921c8cb",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:1": {
+      "sourceHash": "sha256:6937d7befbc055eda54368e7343f1114f003771628876b470a4799dd1d5e7e82",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:10": {
+      "sourceHash": "sha256:0de3eb7d695d462f7e9b784920cdbec961f79c54914d3a226d6415254b5e1845",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:11": {
+      "sourceHash": "sha256:34916a981a5189221c6d5e3d9d3072f8b109521d8f793cb2a00e02206271c370",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:13": {
+      "sourceHash": "sha256:80d4db6dc361182ba70d42e7555fded8fab27b8c40bcd3c7ab048b1f1263e05b",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:14": {
+      "sourceHash": "sha256:c9fab9bbc0206ec2eb6cf98c94f40ccf9b7d15f15453aebf9c6b453eeecb4cae",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:2": {
+      "sourceHash": "sha256:56ac68affebeb1e1abc45d7aa88ef01aabb65be1ca8b2a17567d29c4e5f616e8",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:3": {
+      "sourceHash": "sha256:b92b09d65ec9c16db5334d14adeb330ca45febe15070debf93f69e27086396a5",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:4": {
+      "sourceHash": "sha256:8c15f1755ae9906da874d715609b4f6cba85f02970e6e72353bd8d5adbe9fb3f",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:5": {
+      "sourceHash": "sha256:7a0055bd55924a1e355ca5d171783eea54fa49d749f6e182476d060c8d063a63",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:6": {
+      "sourceHash": "sha256:b2f530c46991311cd367c992a825763bc55140682c347ad2e24d2fce316cd324",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:7": {
+      "sourceHash": "sha256:5f9740dd7874801f460dfe0f92e5be0cf2cfd04088d7d5ab996c92a428d3ee8b",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:8": {
+      "sourceHash": "sha256:33403d8f77f3caa9aa8f59a1a0290c3e349fe6a5893c3b812340601ac4a0629a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introGypsy:9": {
+      "sourceHash": "sha256:22ea092e7643557ea91b74dea27589acac28a04fce976c577c422cd3ee1c9dc2",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:0": {
+      "sourceHash": "sha256:5e0e6d3848ade762bd777687b66611cefb263da0e5e35e88862ac0bbca24d2ef",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:1": {
+      "sourceHash": "sha256:c8ca47208e4e539e1f4787ecbc3cbdd94145374f851cdd8930f8d8191b91bc9f",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:10": {
+      "sourceHash": "sha256:a3e4a21cebee2348d4dd36ce03e1463fcf6305229d4c360373494ea6db6ed66a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:11": {
+      "sourceHash": "sha256:ce6c0523ca8fadfb43e665184d89049f448f953d389f53e51397a02795adc47f",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:12": {
+      "sourceHash": "sha256:e38d5e8e6614441060485810e68204b655dd54a3f1dd3fac7b72d2f476400e8f",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:13": {
+      "sourceHash": "sha256:faba1e909a7d60ed91e76257bb0a44ea538c1d8162b3acbccee07aefc873684e",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:14": {
+      "sourceHash": "sha256:647700d90e20d069fdddf8faf7705c8cd5b0b9c148d7522c4348f0f092258f81",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:15": {
+      "sourceHash": "sha256:1431b91357045ff2fc78c31b0afdfcffc6a0c22dd7237db35279daf174717791",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:16": {
+      "sourceHash": "sha256:45dbd37bd3b7bbe01064953e4a6831e983769834e744aa5d66f9399d25ffbfc8",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:17": {
+      "sourceHash": "sha256:5dbb1929d3b16cec767c8b169834b14eb79dd078c4f16452f89a9c02384fba87",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:18": {
+      "sourceHash": "sha256:0f0d976dc9be288ae2438400cb0957fe6ee6fb71afed8cbdf6ffcaa7b118ffce",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:19": {
+      "sourceHash": "sha256:bccc93f1cdd4da677bcd2afbd4fb3a68894ce5fb97ddeb89ec878e27697b77e5",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:2": {
+      "sourceHash": "sha256:ef3b25dd236df473681f28a49e2a51a987060adb11af93d2d59787fde4367316",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:20": {
+      "sourceHash": "sha256:8284fab8d1aaca0a78c932e5e3c8ec35e6925dad4def4c6c2ff846fff2ec02e2",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:21": {
+      "sourceHash": "sha256:493da5e8b3ab9c1e6072ecaa8a6bb87407e5276b064692cdbf480a2cf40217f0",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:22": {
+      "sourceHash": "sha256:3a64740c021ddb291c236c1498c704310b691f6c7adc0d2377863a5d2dcb4df7",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:23": {
+      "sourceHash": "sha256:2866bc6333095590afc7248887dd54afed02b43276a2eea7b686612eef689223",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:24": {
+      "sourceHash": "sha256:64dad008e753aace2ecd668303317e964b2074cd759944ed446c6d0420878dcd",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:25": {
+      "sourceHash": "sha256:8a802e82cebe998e390680f4741efbb3ed74b4a615fe41d719664a531421890a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:26": {
+      "sourceHash": "sha256:df709baf164d6b15339317474c8d4fd06b68524267d9ead52449f8d8ab544ee4",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:27": {
+      "sourceHash": "sha256:7c2750dea28140a49035b2456bb8c49faf3e8c1d8632079870e6fa81012222af",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:3": {
+      "sourceHash": "sha256:ca73bcd4393844037f9c50f89246bd3fbcd69efd40dd86c1f3b5264e169bbadb",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:4": {
+      "sourceHash": "sha256:255472c4685254ce414b5377ebfbe8e9d8e1b9c8b3afca1e3e9fe2c5a383343d",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:5": {
+      "sourceHash": "sha256:88323a1b8cab2008fa750ea08b9d0f550753d18c8113bb6f095647805df57736",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:6": {
+      "sourceHash": "sha256:e92c6efaa8b576cb6ce01ba9a9acb70ef38b81210b48e992ece5b320107993a4",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:7": {
+      "sourceHash": "sha256:bcc1dcb1a21cb2df3e64fd8c37a8095574c8fd46c41f8b51df812e404c17b347",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:8": {
+      "sourceHash": "sha256:86af62b12894ac9e05bd1b9ca194bebc9ebd8747cfb1046ab560613e01d1ec80",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introQuestions:9": {
+      "sourceHash": "sha256:1bff01760b34b4c658d4546a48777be234e4f11cd6bf82d779f25a320d67b986",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:0": {
+      "sourceHash": "sha256:671af85bb7da6566ada719a78309919f8f6ea8307deb425443cb773c539bd7ed",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:1": {
+      "sourceHash": "sha256:6cb35850221dc255d57a350d82f263c5bc8565c7e3566989bdc117ff92b705af",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:10": {
+      "sourceHash": "sha256:80581fda4fb27f27a538f85270a73e07e476d8d3afabac364e81f4f70d53e03a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:11": {
+      "sourceHash": "sha256:71d15c00862c9d53cb837528e00475c66826d22b513bdeaf8bd9cdc17396735c",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:12": {
+      "sourceHash": "sha256:fadbd92c1ae81891a3d043a72d394135cca26c75709bbbf4ce5e18436a0faa23",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:13": {
+      "sourceHash": "sha256:ef56edfa7636b3b8fbadf41e0c5caaaa130bf271814a5ffa1508013dfab869e5",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:14": {
+      "sourceHash": "sha256:5e6bd58655b10fd0518049264c2ec07fe2057e81227365b8a525cd9d303e011f",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:15": {
+      "sourceHash": "sha256:b4f4b9da66f11fd7add13d8f5d117df121d24da3ee631a2b33df7565b5227828",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:16": {
+      "sourceHash": "sha256:a7f9f063c6086d767e63469524605402c27cda196d8c19dd2783d673fa65bd6c",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:17": {
+      "sourceHash": "sha256:1825f4bbe7433e4aacf7ccd4eaeb146a2bf09dd15b7918d2532f67f730722541",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:18": {
+      "sourceHash": "sha256:7b1b2927399e4689e8e21794de08d20a5ed3a25000778969ef36bc00fab3815a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:19": {
+      "sourceHash": "sha256:223339ec5c7161db59200fd842f867501f13692fe4ea0476b7e9bf1a5a6f728a",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:2": {
+      "sourceHash": "sha256:38389bf8471f397667851e18bfe5e99820dc2476ba4cdef3820e2b2160898bb2",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:20": {
+      "sourceHash": "sha256:bf6548f8c9171326f3d2c34606831ff95bfd230b7aaa485e792ab2c3af19cd40",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:21": {
+      "sourceHash": "sha256:82e04f87fbcd3c1b22e710d9e5811d6cc4bd81f115ad41f996bfddd231aca0ed",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:22": {
+      "sourceHash": "sha256:d534ce2287b4ce4589b765b4abd9bf7e63c4c1e0664858f1564a5c1f2be4be73",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:23": {
+      "sourceHash": "sha256:f8592d0014a74fd957ea3e82a2eca9f74ddc2c50de8857c5cbdd72c2e1dd69a2",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:3": {
+      "sourceHash": "sha256:35f5b579fbe5a3226cffd36c20855e7bc76912a18086b3b6c4658eeab6f882ff",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:4": {
+      "sourceHash": "sha256:84c140ed9f2bc1606505c4d237a862bb101c659ce325e8761ce9bf4ce86dcbeb",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:5": {
+      "sourceHash": "sha256:b926b50fc82eb6f19f286ee7682a4a0ef1791fc2be5e57ccbfb3e67235fefd85",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:6": {
+      "sourceHash": "sha256:6ccf42e430a8312e813754eb983ccf325fb7e49610fddaa2b4473469683659e2",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:7": {
+      "sourceHash": "sha256:f5a847d7959d1e73e9479d07d94c54ee36a9c8df47b68a0b92a16fa9177caaf9",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:8": {
+      "sourceHash": "sha256:55fe3b9ec9a98837efd4aa9adbd8181c4aff57a4ee7fa56c4d37a4ab4db53d65",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    },
+    "title.exe:introText:9": {
+      "sourceHash": "sha256:e4a8389aeb6de56c1f06f781bba0e893474da469623a1632608b4f49f53b3b0b",
+      "placeholders": [],
+      "translation": "",
+      "status": "pending"
+    }
+  }
+}

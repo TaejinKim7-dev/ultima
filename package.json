@@ -8,6 +8,8 @@
   },
   "scripts": {
     "build": "vite build",
+    "build:site": "node scripts/build-site.mjs",
+    "check:base-path": "node scripts/check-base-path.mjs",
     "dev": "vite",
     "preview": "vite preview",
     "test:unit": "vitest run --passWithNoTests=false",
@@ -22,7 +24,9 @@
     "deps:host": "node scripts/deps-host.mjs",
     "build:modules": "node scripts/build-modules.mjs",
     "build:native": "node scripts/build-native.mjs",
-    "qa:native-baseline": "node scripts/qa-native-baseline.mjs"
+    "qa:native-baseline": "node scripts/qa-native-baseline.mjs",
+    "i18n:inventory": "node scripts/i18n-inventory.mjs",
+    "i18n:check": "node scripts/i18n-check.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.52.0",
