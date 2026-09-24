@@ -14,6 +14,8 @@
 
 **Todo 4(영어 원문 inventory + 한국어 로컬라이제이션 스키마)를 `todo-04-i18n-inventory` 브랜치에서 완료했다 — TITLE.EXE/AVATAR.EXE 바이너리 문자열 추출까지 실제 원본 데이터로 검증했다(당초 "pending 처리 가능"이라고 허용됐던 항목이었으나 `vendor/xu4/src`에서 정확한 오프셋 근거를 찾아 실제로 구현했다). 상세는 아래 "Todo 4 완료 기록" 참고.**
 
+**Todo 6(단일 스레드 wasm Boron + xu4 core)를 `todo-06-wasm-build` 브랜치에서 완료하고 사용자 승인 후 `main`에 merge했다(merge commit `c836ecc`, 구현 `26f7164`, 문서 `db512d9`) — 상세는 아래 "Todo 6 완료 기록" 참고. merge 전 재실행 게이트 전부 exit 0. push는 미실시(사용자 확인 전).**
+
 - root Vite/TypeScript strict/Vitest/Playwright harness와 minimal build shell이 있다.
 - `vendor/source-manifest.json`은 xu4, Faun, GLV, Boron의 deterministic file count/tree SHA-256과 pinned revision을 기록한다.
 - `npm run verify:repo-sources`는 manifest mismatch와 Git-tracked `.zip`, `.sav`, `.ega`, `.map`, `.tlk`, `.exe`를 실패시킨다.
@@ -381,7 +383,7 @@ ZIP 크기: 529099 bytes. 경로가 사라지면 `https://ultima.thatfleminggent
 
 따라서 **NPC 다중 턴 대화는 여전히 미검증**이었으나, 이후 2026-09-24 Todo 3 완료 기록(위 "현재 상태"/plan.md 3.1~3.6)에서 Calabrini 다중 턴 대화까지 검증·merge 완료했다. 계획서 Todo 3 checkbox는 `[x]`다. 위 실험에서 생성된 세이브, 원본 ZIP, 화면 캡처는 모두 repo 밖 또는 git-ignored build/evidence 영역에만 있었고 커밋하지 않았다.
 
-## Todo 6 완료 기록 (2026-09-24, branch `todo-06-wasm-build`)
+## Todo 6 완료 기록 (2026-09-24, branch `todo-06-wasm-build`, main merge `c836ecc`)
 
 **범위**: Emscripten 4.0.23으로 Boron 정적 라이브러리와 xu4 core(플랫폼 비의존 부분집합 + web stub/main)를 단일 스레드 wasm으로 빌드하고, 필수 export 심볼 unit test + Playwright instantiate QA + FORCE_FILESYSTEM 제거 failure QA를 통과시켰다.
 
@@ -420,3 +422,22 @@ node scripts/qa-wasm-instantiate.mjs                  # exit 0
 - release(非 debug) 빌드는 placeholder `main`만 살아 있어 DCE로 wasm이 7KB 수준으로 줄 수 있음 — acceptance는 `--debug` 기준.
 - 브라우저에서 실제 게임 루프/입력/렌더는 Step 7~9 범위. Step 6은 심볼·링크· Asyncify 옵션 존재 증명까지만.
 - `ENVIRONMENT=web,node`로 바꾼 이유: plan 원문은 `web`이나 unit test가 Node(Vitest)에서 import해야 해서 acceptance를 맞추기 위해 node를 추가. 브라우저 QA는 Playwright로 별도 검증.
+
+**main merge (2026-09-24, 사용자 승인 후)**:
+```
+# merge 직전 재실행 (전부 exit 0)
+npm ci
+npm run verify:repo-sources
+npm run typecheck
+npm run test:unit                 # 9 files / 57 tests
+npm run build
+git diff --check
+npm run deps:wasm
+npm run build:wasm -- --debug
+npm run test:unit -- tests/unit/wasm-symbols.test.ts  # 8/8
+cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # exit 0
+# merge
+git checkout main && git merge --no-ff todo-06-wasm-build
+# → c836ecc Merge todo-06-wasm-build: single-thread wasm Boron + xu4 core
+```
+- `origin` push는 미실시 — main이 `origin/main` 대비 ahead 상태이며 push는 사용자 확인 후 별도 수행.

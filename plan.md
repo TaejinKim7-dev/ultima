@@ -1,5 +1,5 @@
 # Ultima IV 웹 한글판 — 진행 계획
-기준 시각: 2026-09-24 KST · 기준 main: `ada0a6d`
+기준 시각: 2026-09-24 KST · 기준 main: `c836ecc`
 
 ## 목표
 원본 `ultima4.zip`을 사용자가 브라우저에서 직접 선택해 플레이하는, 한국어 UI/대화/NPC 키워드 alias와
@@ -13,7 +13,7 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률: 6 / 24 = 25.0%
-(Step 6 완료 2026-09-24, `todo-06-wasm-build`)
+(Step 6 완료 2026-09-24, main merge `c836ecc` / `todo-06-wasm-build`)
 
 ## 단계 목록
 
@@ -22,7 +22,7 @@
 |---|---|---|---|
 | 1 | 소스 동결 + 웹 test harness | ✅ | main `36a128e` |
 | 2 | host Boron 빌드 + xu4 모듈 패키징 | ✅ | main `f84b5f5` |
-| 3 | native GLFW 기준선(원본 데이터로 실제 플레이) | ✅ | main merge 예정 |
+| 3 | native GLFW 기준선(원본 데이터로 실제 플레이) | ✅ | main `13a3969` |
 | 4 | 영어 원문 inventory + 한국어 스키마 | ✅ | main `ada0a6d` (4411 entries, 4402 pending) |
 | 5 | 브라우저 셸 + bridge ABI v1 + Pages 자산 계약 | ✅ | main `0a1408a` |
 
@@ -37,7 +37,7 @@ Step 3 완료 (2026-09-24):
 ### Wave 2 — WASM 이식 (6~10)
 | # | 단계 | 상태 | 선행 |
 |---|---|---|---|
-| 6 | 단일 스레드 wasm Boron + xu4 core 빌드 (Emscripten 4.0.23, Asyncify) | ✅ | todo-06-wasm-build (merge 대기) |
+| 6 | 단일 스레드 wasm Boron + xu4 core 빌드 (Emscripten 4.0.23, Asyncify) | ✅ | main `c836ecc` (`26f7164`) |
 | 7 | OpenGL → WebGL2 (glMapBufferRange 제거, CPU staging + glBufferSubData) | ⬜ | 6 |
 | 8 | blocking event loop / 키 입력 → 브라우저 안전 queue (IME, request ID) | ⬜ | 6 |
 | 9 | 브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행 | ⬜ | 5,7,8 |
