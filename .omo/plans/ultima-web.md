@@ -168,7 +168,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: build twice and compare artifact hashes in `.omo/evidence/ultima-web/task-2/reproducible-modules.log`; failure: corrupt a copied module in an isolated temp build and verify loader test fails with a clear CDI/module error, evidence `.omo/evidence/ultima-web/task-2/corrupt-module.log`.
   Commit: Y | build(modules): package xu4 assets reproducibly
 
-- [ ] 3. Establish native GLFW baseline against the original data
+- [x] 3. Establish native GLFW baseline against the original data
   What to do / Must NOT do: build the pinned xu4 native GLFW target from exported sources, point it at a verified `ULTIMA4_DATA` ZIP, and capture a real baseline: title screen, new game flow, movement, NPC talk, save, quit/restart/load. Must not count compile success or a static screenshot as gameplay verification.
   Parallelization: Wave 1 | Blocked by: 2 | Blocks: 6-10
   References: `engine/src/xu4.cpp:201-264`; `engine/src/config_boron.cpp:1168-1183`; `engine/src/event.cpp:329-357`; `engine/src/game.cpp:298-377`; `engine/src/game.cpp:1162`; `engine/src/intro.cpp:907-912`.
@@ -192,7 +192,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: Playwright loads static shell at `/ultima/`, opens file picker mock, and observes bridge-ready state, evidence `.omo/evidence/ultima-web/task-5/shell-ready.json`; failure: build with a wrong base path and verify route/asset checker fails before deploy, evidence `.omo/evidence/ultima-web/task-5/base-path-failure.log`.
   Commit: Y | feat(web): define static shell and bridge contract
 
-- [ ] 6. Build single-thread wasm Boron and xu4 core
+- [x] 6. Build single-thread wasm Boron and xu4 core
   What to do / Must NOT do: compile Boron library and xu4 core with Emscripten 4.0.23 into modularized ES output; keep host/native/wasm object directories separate; use Asyncify and Emscripten filesystem; do not link native `pthread`, `GL`, PulseAudio, or Faun mixer into wasm.
   Parallelization: Wave 2 | Blocked by: 3 | Blocks: 7,8,9,16
   References: `engine/src/config_boron.cpp:971-1005`; `engine/src/config_boron.cpp:1168-1183`; `engine/src/support/cdi.h:16-87`; `.omo/research/boron/`; Emscripten flags in this plan's Verification strategy.
