@@ -37,10 +37,9 @@ Git 작업 방식은 `AGENTS.md`의 "Git 작업 방식"을 따른다: PR 없이 
 - Verification: `npm run test:unit -- tests/unit/bridge-contract.test.ts`, `npm run build:site -- --base=/ultima/`, `npm run typecheck`.
 - Blockers: 실제 GitHub Pages project-site base(`/ultima/`) 배포 검증은 이 Todo에서 하지 않는다(Todo 19에서 workflow로 완성). Playwright로 정적 셸의 file picker mock 상태만 확인한다.
 
-## Todo 6: 단일 스레드 wasm Boron + xu4 core 빌드
+## Todo 6: 단일 스레드 wasm Boron + xu4 core 빌드 — 완료 (2026-09-24, `todo-06-wasm-build`)
 
-- Branch: `todo-06-wasm-core`
-- First test: `tests/unit/wasm-symbols.test.ts`에서 필수 브릿지/파일시스템 export 심볼이 없으면 실패하는 RED case를 만든다.
-- First implementation: Emscripten 4.0.23으로 Boron 라이브러리와 xu4 core를 modularized ES output으로 컴파일한다. Asyncify와 Emscripten filesystem을 사용하고, native `pthread`/`GL`/PulseAudio/Faun mixer는 wasm에 링크하지 않는다. host/native/wasm object directory를 분리한다.
-- Verification: `npm run build:wasm -- --debug`, `npm run test:unit -- tests/unit/wasm-symbols.test.ts`.
-- Blockers: emsdk 설치 상태를 아직 확인하지 않았다. Todo 3의 native 기준선(빌드/실행 확인)이 선행되어야 한다.
+- `npm run deps:wasm`(PATH-wrapper로 emcc Boron 정적 라이브러리)와 `npm run build:wasm -- --debug`(xu4 core 32 소스 + libboron.a → `xu4.mjs`/`xu4.wasm`)를 구현했다. `tests/unit/wasm-symbols.test.ts` 8/8, Playwright instantiate QA, FORCE_FILESYSTEM 제거 failure QA까지 통과.
+- 상세 게이트/증거는 `handoff.md`의 "Todo 6 완료 기록" 참고.
+- Branch는 `todo-06-wasm-core`가 아니라 실제 사용 브랜치 `todo-06-wasm-build`다.
+- Blockers(emsdk, Todo 3 선행)는 모두 해제 완료.

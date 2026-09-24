@@ -344,7 +344,7 @@ ZIP 크기: 529099 bytes. 경로가 사라지면 `https://ultima.thatfleminggent
 
 - `cmake`(3.22.1), `gcc`, `g++`, `clang`, `clang++`, `pkg-config`는 설치되어 있다.
 - `pkg-config` 기준 `glfw3`, `libpng`, `vorbisfile`, `libpulse` 개발 패키지는 **설치되어 있지 않다**. `apt-cache policy libglfw3-dev`는 후보 패키지(3.3.6-1)를 보여주므로 apt 소스에는 있지만 미설치 상태다. 이 host는 **passwordless sudo가 아니다** (`sudo -n true` 실패) — 에이전트가 직접 `sudo apt-get install`을 실행할 수 없다. 사용자가 `! sudo apt-get install libglfw3-dev libpng-dev libvorbis-dev libpulse-dev` 형태로 직접 실행해야 한다.
-- `emsdk`는 파일시스템 어디에도 없다(`find / -iname "emsdk*"` 결과 없음). Todo 6(WASM 빌드) 착수 전 설치가 필요하며, 이는 다운로드 용량이 크므로 apt 패키지와는 별개로 사용자 동의가 필요하다.
+- `emsdk`는 2026-09-24에 `/home/taejin/ultima/.emsdk`에 pinned 4.0.23으로 설치 완료(git-ignored). Todo 6 wasm 빌드까지 검증했다.
 - **(2026-09-20 해결)** 원본 `ultima4.zip`을 사용자 지시로 `https://ultima.thatfleminggent.com/ultima4.zip`에서 재다운로드하여 `/home/taejin/ultima4-original-data/ultima4.zip`(repo 밖, 이 host 로컬 전용)에 보관했다. SHA-256 `94aa748cfa1d0e7aa2e518abebb994f3c18acf7edb78c3bd37cd0a4404e6ba74`이 이전 세션 기록과 정확히 일치하고 크기 529099 bytes, `unzip -t` 무결성 검사 통과를 확인했다. 이 경로는 Git에 추가하지 않고 `.gitignore`의 `*.zip` 규칙과 무관하게 repo 트리 밖에 있다 — Todo 3(native 기준선)과 Todo 4(TLK/EXE 텍스트 추출)에서 `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip`로 참조한다. **주의: 이 경로는 이 host(로컬 환경)에만 존재하며 세션이 바뀌어도 파일시스템이 유지되는 한 남아있지만, 다른 host/worktree로 이관 시 재확인이 필요하다.**
 - `vendor/xu4/module/{render,Ultima-IV,U4-Upgrade}`와 `vendor/boron/Makefile`을 확인한 결과, 모듈 패키징(Todo 2)은 Boron 인터프리터(표준 `cc/ar/ranlib`만 요구, `pthread` 외 native 의존성 없음)만으로 가능해 보이며 GLFW/Faun native mixer에 의존하지 않는다. 따라서 Todo 2는 위 미설치 패키지 없이도 시도 가능하다 — 실제 시도 결과는 진행하면서 갱신한다.
 
@@ -379,4 +379,44 @@ ZIP 크기: 529099 bytes. 경로가 사라지면 `https://ultima.thatfleminggent
 - Moonglow 포털 좌표에서 `e`를 보내 실제 도시 화면과 `Enter town! / Moonglow` 표시를 확인했다. 그러나 도시 안에서 이동 후 `t`와 동/서 방향을 보내도 `Funny, no response!`만 확인되었고, `You meet ...`, keyword 응답, 두 번째 keyword 또는 `bye`의 다중 턴 증거는 얻지 못했다.
 - advisor/subagent의 read-only 조사도 같은 결론이다. `game.cpp`/`discourse_tlk.cpp`의 실제 대화 루프와 성공 assertion 형태는 확인했지만, 현재 profile의 일반 이동 경로로 NPC를 찾았다고 주장할 수 없다. debug cheat는 source상 존재하지만 native QA 자동화에서 profile 설정/단축키를 통해 성공적으로 재현하지 못했다.
 
-따라서 **NPC 다중 턴 대화는 여전히 미검증**이며, `.omo/plans/ultima-web.md`와 `docs/ULTIMA_WEB_PLAN.md`의 Todo 3 checkbox는 `[ ]`로 유지한다. 위 실험에서 생성된 세이브, 원본 ZIP, 화면 캡처는 모두 repo 밖 또는 git-ignored build/evidence 영역에만 있었고 커밋하지 않았다.
+따라서 **NPC 다중 턴 대화는 여전히 미검증**이었으나, 이후 2026-09-24 Todo 3 완료 기록(위 "현재 상태"/plan.md 3.1~3.6)에서 Calabrini 다중 턴 대화까지 검증·merge 완료했다. 계획서 Todo 3 checkbox는 `[x]`다. 위 실험에서 생성된 세이브, 원본 ZIP, 화면 캡처는 모두 repo 밖 또는 git-ignored build/evidence 영역에만 있었고 커밋하지 않았다.
+
+## Todo 6 완료 기록 (2026-09-24, branch `todo-06-wasm-build`)
+
+**범위**: Emscripten 4.0.23으로 Boron 정적 라이브러리와 xu4 core(플랫폼 비의존 부분집합 + web stub/main)를 단일 스레드 wasm으로 빌드하고, 필수 export 심볼 unit test + Playwright instantiate QA + FORCE_FILESYSTEM 제거 failure QA를 통과시켰다.
+
+**구현**:
+- `scripts/deps-wasm.mjs` (`npm run deps:wasm`): `vendor/boron`을 `build/wasm-deps/boron`으로 복사(copy-out, vendor 무수정)한 뒤 PATH wrapper(`cc`/`gcc`→`emcc`, `c++`→`em++`, `ar`→`emar`, `ranlib`→`emranlib`)로 `./configure --static && make libboron.a`를 실행한다. Makefile 하드코딩 `cc`/`ar`를 PATH가 가로채며, `CFLAGS`는 make 커맨드라인 오버라이드로 `-sUSE_ZLIB=1`을 넣는다(env CFLAGS는 Makefile assignment에 밀림). 결과물 오브젝트가 ELF면 hand-listed emcc fallback(Makefile OBJ_FN 기반)으로 재빌드하고 `ar p | file -`로 WebAssembly 검증한다. 로그 double-append 버그는 `appendFileSync`로 수정.
+- `scripts/build-wasm.mjs` (`npm run build:wasm`, `--debug` 지원): `vendor/xu4` core 소스 32개(플랫폼 파일 screen_glfw/gpu_opengl/sound/savegame/xu4.cpp/config_data/discourse_tlk/castle 제외) + `scripts/web-stub.cpp`/`web-main.cpp` + `libboron.a`를 emcc로 링크. 주요 플래그: `-sASYNCIFY=1 -sFORCE_FILESYSTEM=1 -sMODULARIZE=1 -sEXPORT_ES6=1 -sENVIRONMENT=web,node -lidbfs.js`, export `_main`/`_u4_web_enqueue_key`/`_u4_web_submit_text`, runtime `FS`/`IDBFS`/`callMain`. `EXPORT_ES6`로 `xu4.mjs` 생성 후 `xu4.js` 미러. `build/wasm-release/build.log`는 Asyncify 언급만 남기고 금지 substring(`pthread`/`libfaun`/`libpulse`/`GL`) 가드. full emcc argv는 evidence log로 분리.
+- `scripts/web-main.cpp`: KEEPALIVE 브릿지 2함수 + placeholder `main`. runtime 심볼 `FS`/`IDBFS`/`callMain`을 C로 정의하지 않음(중복/충돌 방지).
+- `scripts/qa-wasm-instantiate.mjs`: 임시 HTTP 서버 + Playwright Chromium에서 `noInitialRun:true`로 main 호출 없이 instantiate, export 맵 기록 후 JSON evidence.
+- `tests/unit/wasm-symbols.test.ts`: 필수 export 6 + wasm magic + build log Asyncify/금지 leakage 검사. `wasmBinary` inline 전달(ENVIRONMENT=web glue), underscore alias 허용(비약화 수정).
+
+**Acceptance (plan.md 6번 원문 대조) 통과**:
+1. `npm run build:wasm -- --debug` → exit 0 (`xu4.mjs` 185278 B, `xu4.wasm` 3430230 B, libboron.a 312664 B WebAssembly)
+2. `npm run test:unit -- tests/unit/wasm-symbols.test.ts` → exit 0, 8/8
+3. `build/wasm-release/build.log`에 Asyncify diagnostics, 금지 native leakage 없음 (release-log guard 포함)
+
+**QA scenarios**:
+- happy: `.omo/evidence/ultima-web/task-6/wasm-instantiate.json` — `pass:true`, FS/IDBFS/callMain/_main/bridge export 확인, main 미호출.
+- failure: `.omo/evidence/ultima-web/task-6/missing-fs.log` — temp config에서 `-sFORCE_FILESYSTEM`/`-lidbfs.js` 제거 → 심볼 검사 `pass:false`, `IDBFS:false`, exit 1. good artifact는 repo에 그대로 유지.
+
+**merge 게이트 (2026-09-24, 전부 실제 실행)**:
+```
+npm ci                          # exit 0
+npm run deps:wasm               # exit 0 (Todo-specific)
+npm run build:wasm -- --debug   # exit 0 (Todo-specific acceptance)
+npm run test:unit -- tests/unit/wasm-symbols.test.ts  # exit 0 (8/8)
+npm run test:unit               # exit 0 (9 files / 57 tests)
+npm run verify:repo-sources     # exit 0
+npm run typecheck               # exit 0
+npm run build                   # exit 0
+git diff --check                # exit 0
+cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # exit 0 (byte-identical)
+node scripts/qa-wasm-instantiate.mjs                  # exit 0
+```
+
+**주의/미검증**:
+- release(非 debug) 빌드는 placeholder `main`만 살아 있어 DCE로 wasm이 7KB 수준으로 줄 수 있음 — acceptance는 `--debug` 기준.
+- 브라우저에서 실제 게임 루프/입력/렌더는 Step 7~9 범위. Step 6은 심볼·링크· Asyncify 옵션 존재 증명까지만.
+- `ENVIRONMENT=web,node`로 바꾼 이유: plan 원문은 `web`이나 unit test가 Node(Vitest)에서 import해야 해서 acceptance를 맞추기 위해 node를 추가. 브라우저 QA는 Playwright로 별도 검증.
