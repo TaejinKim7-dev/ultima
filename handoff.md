@@ -593,7 +593,7 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test 
 - `scripts/web-main.cpp`의 `main()`은 여전히 Step 6 placeholder(`return 0` 즉시) — 이번 Todo가 만든 "엔진 시작 성공" 신호는 실제 xu4 부팅(servicesInit/config/screen/event loop)이 아니다. `startup-title.png`의 캔버스가 검은 화면인 이유. 실제 xu4.cpp 부팅 시퀀스를 web-main.cpp로 이식하는 작업은 `build-wasm.mjs`가 `src/xu4.cpp`를 의도적으로 제외한다고 이미 주석에 남겨뒀던 대로, 이 Todo의 파일 범위 밖이며 계획서에 정확히 어느 Todo에서 하는지 명시가 없다 — **확인 필요**.
 - 오디오 unlock(`unlockAudio`)은 실제 사용자 제스처/autoplay policy 상황에서 검증 안 함(e2e는 `AudioContext`가 있으면 시도하고 실패해도 non-fatal이라는 것만 확인).
 - `/engine/` 서빙 미들웨어의 URL traversal 방어(`resolveAllowedPath`)는 단위 테스트 없이 코드 리뷰 수준으로만 확인함 — 확인 필요.
-- **로컬 merge만 완료, `git push origin main` 아직 안 함** — 이전 Step 6/7/8은 매번 push 전 사용자 승인을 받았는데, 이번 세션은 로컬 merge까지 진행한 뒤에야 확인을 요청하는 순서로 진행됐다. AGENTS.md 진행 관리 규칙과 어긋난 처리였음을 다음 세션을 위해 정직하게 남긴다.
+- **`git push origin main` 완료** (2026-09-24, 사용자 승인 "OK", `358a6a2..695ee76`). 이전 Step 6/7/8은 매번 push 전 사용자 승인을 받았는데, 이번 세션은 로컬 merge까지 진행한 뒤에야 확인을 요청하는 순서로 진행됐었음 — AGENTS.md 진행 관리 규칙과 어긋난 처리였음을 다음 세션을 위해 기록해둔다(push 자체는 승인 받고 진행함).
 
 ### merge 시 주의 (실제 처리 완료)
 - 양 branch 모두 `vendor/source-manifest.json`을 수정 → main merge 시 `treeSha256` 충돌 발생. 합친 vendor tree로 재계산 후 resolve 완료(fileCount 409, `e65f0d9b…b25b49`, match:true).
@@ -602,6 +602,6 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test 
 - 병합 직후 main에서 전체 게이트 재실행 → 전부 exit 0(위 "merge 게이트" 블록). ✅ 승격 완료.
 
 ### 남은 작업
-1. **사용자 확인 필요**: Step 9 로컬 merge(`5c28511`)를 `origin/main`에 push해도 되는지 확인받는다.
+1. ~~`git push origin main`~~ **완료** (2026-09-24, 사용자 승인, `358a6a2..695ee76`).
 2. **Step 10**(IDBFS 세이브/설정 영속 + export/import) — 설계 메모 `.omo/drafts/step-10-idbfs-design.md` 참고(읽기 전용 사전 조사, 코드 미변경) → 11~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) → 14 → 15. 16(설계 메모 `.omo/drafts/step-16-web-audio-design.md`)은 9 이후 언제든 병렬 가능.
 3. web-main.cpp에 실제 xu4 부팅 시퀀스를 이식하는 작업이 어느 Todo에 속하는지 판단이 필요하다 — Step 10~13 구현 중 필요해지면 그때 범위를 사용자와 확인한다.

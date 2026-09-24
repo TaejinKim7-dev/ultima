@@ -1,5 +1,5 @@
 # Ultima IV 웹 한글판 — 진행 계획
-기준 시각: 2026-09-24 KST · 기준 main: `5c28511` (로컬, 아직 미push — 아래 "바로 다음 순서" 참고)
+기준 시각: 2026-09-24 KST · 기준 main: `695ee76` (origin과 동기화됨, push 완료)
 
 ## 목표
 원본 `ultima4.zip`을 사용자가 브라우저에서 직접 선택해 플레이하는, 한국어 UI/대화/NPC 키워드 alias와
@@ -13,7 +13,7 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률: 9 / 24 = 37.5%
-(Step 1~9 완료. Step 6 main `c836ecc`, Step 7 main `874c775`, Step 8 main `6b97d8e`, Step 9 main `5c28511` — 모두 2026-09-24 merge 게이트 통과. **Step 9는 로컬 merge까지만 완료, origin push는 사용자 확인 대기 중.**)
+(Step 1~9 완료. Step 6 main `c836ecc`, Step 7 main `874c775`, Step 8 main `6b97d8e`, Step 9 main `5c28511` — 모두 2026-09-24 merge 게이트 통과. `git push origin main` 완료(`695ee76`, 사용자 승인 2026-09-24).)
 
 ## 단계 목록
 
@@ -125,8 +125,8 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test 
 ```
 
 ## 바로 다음 순서
-1. **사용자 확인 필요**: Step 9 로컬 merge(`5c28511`)를 `origin/main`에 push해도 되는지 확인받는다.
-2. Step 10(IDBFS) — 설계 메모 `.omo/drafts/step-10-idbfs-design.md` 있음. → 11~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md` 있음) → 14 → 15(번역 4402건). 16(설계 메모 `.omo/drafts/step-16-web-audio-design.md` 있음)은 9 이후 언제든 병렬 가능.
+1. ~~`git push origin main`~~ **완료** (2026-09-24, 사용자 승인, `358a6a2..695ee76`).
+2. **Step 10**(IDBFS 세이브/설정 영속 + export/import) — 설계 메모 `.omo/drafts/step-10-idbfs-design.md` 있음. → 11~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md` 있음) → 14 → 15(번역 4402건). 16(설계 메모 `.omo/drafts/step-16-web-audio-design.md` 있음)은 9 이후 언제든 병렬 가능.
 3. 17 → 18 → 19 → 20 → F1~F4.
 
 ## 목적 달성 가능성 판단
