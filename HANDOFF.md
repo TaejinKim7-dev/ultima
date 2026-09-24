@@ -1,76 +1,80 @@
 # HANDOFF
-작성 시각: 2026-09-24 14:00 KST
+작성 시각: 2026-09-24 14:15 KST
 
 ## 1. 목표 (What we're building)
 - xu4 기반 Ultima IV를 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식한다. 전체 진행은 `/home/taejin/ultima/plan.md`의 24단계 기준으로 관리한다.
-- 이번 세션: **Step 6 main merge + Step 7·8 병렬 구현·게이트 완료(merge 대기)**.
+- 이번 세션: **Step 7·8 main merge 완료 + merge 게이트 재실행 + plan/handoff 문서 갱신**.
 
 ## 2. 현재 상태 (Current state)
 
 ### 2-0. 진행률 요약
-- **공식 완료: 6 / 24 = 25.0%** (Step 1~6, 모두 main merge됨).
-- **Step 7·8: 🟡 브랜치 구현+acceptance/게이트 통과, main merge 전 → 진행률 0으로 계산** (AGENTS: 부분 진행은 0).
+- **공식 완료: 8 / 24 = 33.3%** (Step 1~8, 모두 main merge됨).
 
-### 2-1. Step 6 → main merge 완료
-- merge `c836ecc`, 구현 `26f7164`. 게이트 exit 0 (unit 57, wasm-symbols 8/8, QA instantiate/missing-fs). push 미실시.
+### 2-1. Step 7 → main
+- merge `874c775 Merge todo-07-webgl2: WebGL2-safe buffers and shaders`, 구현 `90232b9`. WebGL2 CPU staging + shader ANGLE 수정 + e2e `webgl-render.spec.ts`.
 
-### 2-2. Step 7 WebGL2 (branch `todo-07-webgl2`, commit `90232b9`, merge 대기)
-- 변경: `gpu_opengl.cpp/.h` (Emscripten CPU staging + `glBufferSubData`, native map 경로 `#else` 유지), `world.glsl`/`xbr-lv2.glsl` ANGLE 수정, 신규 `tests/e2e/webgl-render.spec.ts`, `playwright.config.ts` chromium project, source-manifest.
-- **테스트/게이트 (worktree 내 전부 exit 0)**:
-  | 항목 | 결과 |
-  |---|---|
-  | RED e2e | `task-7/red.log` 1 failed (의도된 RED) |
-  | GREEN e2e | `task-7/green.log` 1 passed (454ms) |
-  | unit | 9 files / **57/57** passed |
-  | typecheck / build / verify:repo-sources / diff-check | exit 0 |
-  | full e2e (shell-ready 포함) | exit 0 |
-  | failure QA bad-shader | exit 1, `runtimeError: shader-compile-error` |
-  | 픽셀 | title 202,148,32 / status 226,212,178, shader 20 logs 0 error |
-- evidence: `.omo/evidence/ultima-web/task-7/{red,green,bad-shader}.log`, `title-render.png`, `render-summary.json`
-- manifest: xu4 treeSha256 `80758478…bbcdc` (fileCount 407)
+### 2-2. Step 8 → main
+- merge `6b97d8e Merge todo-08-input-queue: browser-safe input queues`, 구현 `af13814`. `src/bridge/input-queue.ts` + `web_bridge` C ABI + unit/native/e2e.
 
-### 2-3. Step 8 input queue (branch `todo-08-input-queue`, commit `af13814`, merge 대기)
-- 변경: `src/bridge/input-queue.ts` (max 256, prompt epoch, IME guard), `vendor/xu4/src/web_bridge.{h,cpp}`, `event.cpp` fsleep=0 yield, `web-main/stub` 실제 queue 연결, unit+native+e2e 신규, build-wasm 소스 1행, source-manifest.
-- **테스트/게이트 (worktree 내 전부 exit 0)**:
-  | 항목 | 결과 |
-  |---|---|
-  | RED unit | `task-8/red.log` failed (의도된 RED) |
-  | GREEN unit | `task-8/green.log` **16/16** |
-  | unit 전체 | **73/73** (57+16) |
-  | typecheck / build / verify:repo-sources / diff-check | exit 0 |
-  | native `-R input-queue` | Passed |
-  | build:wasm --debug + wasm-symbols | exit 0, **8/8** (sources 33/33) |
-  | e2e input-queue + shell-ready | 1+1 passed |
-  | failure QA stale requestId | `stale-request.log` 거부+무변경 |
-  | wasm export codes | OK/INVALID/FULL/NO_PROMPT 매칭 |
-- evidence: `.omo/evidence/ultima-web/task-8/{red,green,stale-request,wasm-queue-proof}.log`, `input-flow.trace.zip`
-- manifest: xu4 fileCount **409**, treeSha256 `cfc0db65…93ca9`
-- 알려진 제한: full `test:native`의 module-package/native-baseline은 fresh worktree에 build 산출물 없어 기존 환경 gap(스コ프 밖); 게임 루프 소비 배선은 Step 9.
+### 2-3. source-manifest 충돌 resolve
+- 양 branch 동시 `vendor/source-manifest.json` 수정 → merge 시 treeSha256 충돌 → 합친 vendor tree 재계산.
+- 최종: xu4 **fileCount 409**, treeSha256 `e65f0d9b616f9e28923a5e6dfd61b481848832ac3a5f2ce3b0f2169d73b25b49` (`summarizeSourceTree` match:true).
 
-### 2-4. 병렬 레인 · 이전 세션
-- fix-3(Step 7)/fix-4(Step 8) reconcile 완료. exp-1/lib-1/exp-3/fix-1/fix-2 재사용 가능.
-- Todo 1~5 main, emsdk 4.0.23, Todo 3 merge `13a3969`.
+### 2-4. merge 게이트 (main, 전부 실제 실행 · exit 0)
+| 항목 | 결과 |
+|---|---|
+| `npm ci` | 0 (EBADENGINE warning only) |
+| `npm run test:unit` | 0 — 10 files / **73/73** |
+| `npm run verify:repo-sources` | 0 |
+| `npm run typecheck` | 0 |
+| `npm run build` | 0 |
+| `git diff --check` | 0 |
+| `cmp` 계획서 두 벌 | 0 |
+| `deps:wasm` + `build:wasm -- --debug` | 0 — 33/33 sources, xu4.wasm 3599061 B, Asyncify on |
+| `wasm-symbols` unit | 0 — 8/8 |
+| `input-queue` unit | 0 — 16/16 |
+| full CTest (`cmake:configure`+`build`+test) | 0 — 3/3 (module-package, native-baseline-negative, input-queue) |
+| `test:native -R input-queue` | 0 — Passed |
+| `npx playwright test --project=chromium` | 0 — **3 passed** (shell-ready, input-queue, webgl-render) |
 
-## 3. 다음 할 일 (Next steps)
-- [ ] **Step 7·8 main merge** — 양쪽 `vendor/source-manifest.json` treeSha256 충돌 → 합친 vendor로 재계산 후 merge 게이트 재실행, handoff 기록.
-- [ ] **user decision**: `git push origin main` (현재 ahead).
-- [ ] Step 9 → 10 → …
+- 환경 복구: `deps:host` 재실행 후 `build:native` exit 0 → full CTest의 `native-baseline-negative` Passed.
+- worktree evidence를 main `.omo/evidence/ultima-web/task-{7,8}/`로 복사(git-ignored local-only).
+- 병렬 `npm ci` 동시 실행 시 unit/e2e가 일시 실패(node_modules 교체 충돌)했으나, npm ci 종료 후 순차 재실행으로 전부 통과 — 위 exit code가 최종 상태.
 
-## 4. 주요 결정
-- Step 7: `#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)` 분기 — native map 경로 보존.
-- Step 8: queue reject-newest(256), prompt epoch로 in-flight keys 폐기, `emscripten_sleep(0)` per-frame yield.
-- 양 step 모두 vendor 편집 → source-manifest 동기화 필수.
+### 2-5. git 상태
+- main `6b97d8e`, `origin/main` 대비 **ahead 14** (Step 3~8 + docs).
+- worktree clean(untracked session 잔여물만: `.claude/`, `.omo/boulder.json`, `.omo/start-work/`, `.omo/lazycodex-executor-verify/` — 커밋 금지).
+- 사용자 승인: Step 7/8 merge + `git push origin main`. merge 완료, push는 docs 커밋 후.
 
-## 5. 주의사항
-- 원본 데이터/evidence 원문 커밋 금지 유지.
-- merge 전 양 worktree 게이트는 통과했으나 **병합 후 main에서 전체 게이트 재확인 필수**.
-- Step 9 전 실제 게임 런타임(WebGL2·input 소비) 미검증.
-- `qa:native-baseline` E2E 2회차는 사용자 허가제.
+## 3. 변경한 파일 (Files changed)
+- `plan.md` — 진행률 8/24, Step 7·8 ✅, merge 게이트 exit code 기록, "바로 다음 순서"=Step 9.
+- `handoff.md` — Todo 7/8 "merge 대기" → "main merge 완료" 승격 + 게이트 블록.
+- `HANDOFF.md` — 이 파일 갱신.
+- `.omo/plans/ultima-web.md` + `docs/ULTIMA_WEB_PLAN.md` — Todo 7·8 checkbox `[x]` (byte-identical 유지).
 
-## 6. 재개 방법
+## 4. 주요 결정과 근거 (Key decisions)
+- Step 7: `#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)` — native `glMapBufferRange` 경로 보존.
+- Step 8: queue reject-newest(256), prompt epoch로 in-flight 폐기, `emscripten_sleep(0)` per-frame yield.
+- source-manifest 충돌은 재계산 resolve(임의 편집 금지).
+
+## 5. 다음 할 일 (Next steps)
+- [ ] docs 4파일 커밋 → `git push origin main` (사용자 승인 완료).
+- [ ] **Step 9**: 브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행 (plan.md "바로 다음 순서").
+- [ ] 10(IDBFS) → 11~13 → 14 → 15 … 16은 9 이후 병렬 가능.
+
+## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
+- host Node 20.20.2(engines ≥22, 경고만). CI는 Node 22 준비 필요.
+- release(非 debug) wasm은 placeholder main DCE로 작아질 수 있음 — acceptance는 `--debug`.
+- Step 9 전 실제 게임 루프 런타임(WebGL2·input 소비) 미검증.
+- `qa:native-baseline` E2E 2회차는 사용자 승인제.
+- `.omo/evidence/`는 git-ignored — 병렬 worktree에서 main으로 evidence 복사 필요할 때가 있음.
+- `npm ci`와 다른 heavy 작업 동시 실행 금지(일시적 unit/e2e 실패 유발).
+
+## 7. 재개 방법 (How to resume)
 ```bash
-cd /home/taejin/ultima && git status -sb && git log --oneline -5
-git log --oneline main..todo-07-webgl2; git log --oneline main..todo-08-input-queue
-# 공식 인계: handoff.md "Todo 6/7/8" 섹션 · 진행률: plan.md
+cd /home/taejin/ultima && git status -sb && git log --oneline -8
+npm run test:unit && npm run verify:repo-sources && npm run typecheck && npm run build
+npx playwright test --project=chromium
+# 공식 인계: handoff.md "Todo 7/8 main merge 완료 기록" · 진행률: plan.md
+# 운영 규칙: AGENTS.md
 ```
-- 운영 규칙: `AGENTS.md`.

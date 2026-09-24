@@ -200,7 +200,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: instantiate the module in Playwright without running main and inspect exported bridge/FS symbols, evidence `.omo/evidence/ultima-web/task-6/wasm-instantiate.json`; failure: intentionally remove `FORCE_FILESYSTEM` in a temp config and verify symbol/FS test fails, evidence `.omo/evidence/ultima-web/task-6/missing-fs.log`.
   Commit: Y | build(wasm): compile single-thread xu4 engine
 
-- [ ] 7. Port OpenGL renderer to WebGL2-safe buffers and shaders
+- [x] 7. Port OpenGL renderer to WebGL2-safe buffers and shaders
   What to do / Must NOT do: add web-safe GPU paths for dynamic work buffers and triangle lists using CPU staging plus `glBufferSubData`; update shader version/precision for WebGL2/GLES3; preserve native OpenGL behavior through compile-time branching. Must not assume `glMapBufferRange` or `glUnmapBuffer` exists in WebGL.
   Parallelization: Wave 2 | Blocked by: 6 | Blocks: 9
   References: `engine/src/gpu_opengl.cpp:910-948`; `engine/src/gpu_opengl.cpp:963-985`; `engine/src/gpu_opengl.cpp:1387-1429`; `engine/src/gpu_opengl.cpp:1645-1679`; `engine/src/screen_glfw.cpp:425-485`.
@@ -208,7 +208,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: Chromium screenshot and pixel sample saved to `.omo/evidence/ultima-web/task-7/title-render.png`; failure: run with a forced bad shader fixture and verify runtime-error event plus nonzero test, evidence `.omo/evidence/ultima-web/task-7/bad-shader.log`.
   Commit: Y | fix(webgl): replace mapped buffers for WebGL2
 
-- [ ] 8. Convert blocking event loop and keyboard input to browser-safe queues
+- [x] 8. Convert blocking event loop and keyboard input to browser-safe queues
   What to do / Must NOT do: make DOM/GLFW callbacks enqueue immutable key/text events and let the engine consume them only from its normal input loop; add bounded queue, request IDs, prompt epochs, IME composition guards, and per-frame yield even when `fsleep=0`. Must not call controller dispatch directly from JS callbacks or retain stack controller pointers across Asyncify suspension.
   Parallelization: Wave 2 | Blocked by: 6 | Blocks: 9,13
   References: `engine/src/event.cpp:216-357`; `engine/src/event.cpp:487-943`; `engine/src/screen_glfw.cpp:584`; `engine/src/intro.cpp:416-502`.

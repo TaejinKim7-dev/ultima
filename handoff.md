@@ -1,6 +1,6 @@
 # Ultima IV 웹 한글판 개발 인수인계
 
-최종 갱신: 2026-09-24 KST.
+최종 갱신: 2026-09-24 14:15 KST.
 
 ## 현재 상태
 
@@ -16,7 +16,7 @@
 
 **Todo 6(단일 스레드 wasm Boron + xu4 core)를 `todo-06-wasm-build` 브랜치에서 완료하고 사용자 승인 후 `main`에 merge했다(merge commit `c836ecc`, 구현 `26f7164`, 문서 `db512d9`) — 상세는 아래 "Todo 6 완료 기록" 참고. merge 전 재실행 게이트 전부 exit 0. push는 미실시(사용자 확인 전).**
 
-**Todo 7(WebGL2)·Todo 8(입력 queue)를 병렬 worktree에서 구현·커밋했으나 아직 `main` merge 전이다(부분 진행 🟡, 진행률 0으로 계산). 상세 테스트 결과는 아래 "Todo 7/8 구현 기록(merge 대기)" 참고.**
+**Todo 7(WebGL2)·Todo 8(입력 queue)를 병렬 worktree에서 구현하고 사용자 승인 후 `main`에 merge했다(merge `874c775`/`6b97d8e`, 게이트 재실행 통과). 공식 진행률 8/24 = 33.3% — 상세는 아래 "Todo 7/8 main merge 완료 기록" 참고. `origin` push는 승인 완료·실행 전일 수 있음(아래 "바로 다음" 확인).**
 
 - root Vite/TypeScript strict/Vitest/Playwright harness와 minimal build shell이 있다.
 - `vendor/source-manifest.json`은 xu4, Faun, GLV, Boron의 deterministic file count/tree SHA-256과 pinned revision을 기록한다.
@@ -442,15 +442,48 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # exit 0
 git checkout main && git merge --no-ff todo-06-wasm-build
 # → c836ecc Merge todo-06-wasm-build: single-thread wasm Boron + xu4 core
 ```
-- `origin` push는 미실시 — main이 `origin/main` 대비 ahead 상태이며 push는 사용자 확인 후 별도 수행.
+- `origin` push는 미실시 상태에서 Step 7·8 merge까지 진행 — push는 사용자 승인 완료(사용자 결정이었음), docs 커밋 후 별도 수행.
 
-## Todo 7/8 구현 기록(merge 대기) (2026-09-24, 병렬 worktree)
+## Todo 7/8 main merge 완료 기록 (2026-09-24, 병렬 worktree → main)
 
-**진행률 영향 없음**: AGENTS.md 규칙상 acceptance + merge 전 게이트 통과 후에도 부분 진행(🟡)은 0으로 센다. 공식 완료는 여전히 **6/24 = 25.0%**(Step 1~6, 모두 main merge됨). Step 7·8은 브랜치 커밋까지 완료·main merge 대기.
+**진행률**: AGENTS 기준 acceptance + merge 전 게이트 + merge 후 main 재검증까지 끝났으므로 **8/24 = 33.3%**(Step 1~8, 모두 main merge). plan.md 갱신 완료.
 
-### Todo 7 — WebGL2-safe buffers/shaders (branch `todo-07-webgl2`, commit `90232b9`)
+**main merge**:
+```
+git merge --no-ff todo-07-webgl2  # → 874c775 Merge todo-07-webgl2: WebGL2-safe buffers and shaders (무충돌)
+git merge --no-ff todo-08-input-queue
+# vendor/source-manifest.json treeSha256 충돌 → 합친 vendor tree로 재계산 resolve
+# → 6b97d8e Merge todo-08-input-queue: browser-safe input queues
+```
+- manifest 최종: xu4 **fileCount 409**, treeSha256 `e65f0d9b616f9e28923a5e6dfd61b481848832ac3a5f2ce3b0f2169d73b25b49` (`summarizeSourceTree` match:true)
+- worktree evidence를 main `.omo/evidence/ultima-web/task-{7,8}/`로 복사(`.omo/evidence/`는 git-ignored, local-only)
 
-**Commit**: `90232b9 fix(webgl): replace mapped buffers for WebGL2` (worktree `/home/taejin/ultima-worktrees/todo-07-webgl2`, main merge 전)
+**merge 게이트 (2026-09-24, main, 전부 실제 실행)**:
+```
+npm ci                                      # exit 0 (EBADENGINE warning only)
+npm run test:unit                           # exit 0 — 10 files / 73 tests
+npm run verify:repo-sources                 # exit 0 — 4 pinned components
+npm run typecheck                           # exit 0
+npm run build                               # exit 0 (vite)
+git diff --check                            # exit 0
+cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # exit 0
+npm run deps:wasm                           # exit 0
+source .emsdk/emsdk_env.sh && npm run build:wasm -- --debug  # exit 0 — 33/33 sources, xu4.wasm 3599061 B
+npm run test:unit -- tests/unit/wasm-symbols.test.ts  # exit 0 — 8/8
+npm run test:unit -- tests/unit/input-queue.test.ts   # exit 0 — 16/16
+npm run cmake:configure                     # exit 0
+npm run cmake:build                         # exit 0
+ctest --test-dir build/native --output-on-failure     # exit 0 — 3/3 Passed
+npm run test:native -- -R input-queue       # exit 0 — Passed
+npx playwright test --project=chromium      # exit 0 — 3 passed (shell-ready, input-queue, webgl-render)
+```
+- build/wasm-release/build.log: `[xu4-wasm] Asyncify enabled`, 금지어(pthread/libfaun/libpulse/GL) 없음
+- `npm run build:native` 재실행: `deps:host` 재구성 후 exit 0, `build/host/xu4-src/src/xu4` 생성 → full CTest native-baseline-negative Passed
+- 병렬 실행 주의: `npm ci`와 동시에 돌린 unit/e2e는 node_modules 교체 충돌로 일시 실패 → npm ci 종료 후 순차 재실행으로 전부 통과(위 exit code가 최종)
+
+### Todo 7 — WebGL2-safe buffers/shaders (branch `todo-07-webgl2`, commit `90232b9`, main merge `874c775`)
+
+**Commit**: `90232b9 fix(webgl): replace mapped buffers for WebGL2` (worktree `/home/taejin/ultima-worktrees/todo-07-webgl2`) → main merge `874c775`
 
 **변경 파일 (7 files, +446/−9)**:
 - `vendor/xu4/src/gpu_opengl.cpp/.h`: `#if defined(__EMSCRIPTEN__) || defined(U4_WEBGL2_SAFE_BUFFERS)` 분기 — 웹은 CPU staging + `glBufferSubData`, native은 기존 `glMapBufferRange` 유지. Emscripten에서 `#version 300 es` + `precision highp float`, `GLES3/gl3.h` include.
@@ -480,9 +513,9 @@ failure QA (U4_BAD_SHADER=1)                 # exit 1 as required
 
 **미검증**: full `build:native` 링크(fresh worktree에 `libfaun.a` 없음 — Step 7 게이트 범위 밖); 실제 엔진 런타임의 새 C++ branch는 Step 9 통합 후 재확인; Firefox/WebKit project 미추가(Chromium/SwiftShader만).
 
-### Todo 8 — browser-safe input queues (branch `todo-08-input-queue`, commit `af13814`)
+### Todo 8 — browser-safe input queues (branch `todo-08-input-queue`, commit `af13814`, main merge `6b97d8e`)
 
-**Commit**: `af13814 feat(input): queue browser input safely` (worktree `/home/taejin/ultima-worktrees/todo-08-input-queue`, main merge 전)
+**Commit**: `af13814 feat(input): queue browser input safely` (worktree `/home/taejin/ultima-worktrees/todo-08-input-queue`) → main merge `6b97d8e`
 
 **변경 파일 (13 files, +1228/−38)**:
 - `src/bridge/input-queue.ts` 신규(327 lines): `INPUT_QUEUE_MAX=256` reject-newest, frozen 이벤트, numeric prompt epoch(`beginPrompt` 시 in-flight keys/text 폐기), stale/no-prompt/too-long → non-fatal bridge `runtime-error`, IME guard(`isComposing`/keyCode 229), `yieldToBrowser()`
@@ -516,9 +549,13 @@ shell-ready e2e 회귀                        # 1 passed
 - failure QA: `stale-request.log` — `requestId=1 while active prompt=2` → `{ok:false,error:"stale",...}` + post-state game mutation 없음
 - native mutant 검증: epoch-clearing 제거 시 native test exit 1 (strength 확인, scratch 삭제)
 
-**미검증/known**: full `test:native`의 `module-package`·`native-baseline-negative`는 fresh worktree에 `build/host` 산출물 없어 기존 환경 gap(diff 미영향, 스코프 밖); 게임 루프 소비 배선(web `handleInputEvents` drain)은 Step 9; e2e는 bridge/shell queue 중심(계획 허용 범위), full gameplay run 아님.
+**미검증/known (worktree 시점)**: fresh worktree에 `build/host` 산출물 없어 full `test:native` 일부 gap → **main merge 후 `deps:host`+`build:native` 재실행으로 full CTest 3/3 통과**. 게임 루프 소비 배선(web `handleInputEvents` drain)은 Step 9; e2e는 bridge/shell queue 중심(계획 허용 범위), full gameplay run 아님.
 
-### merge 대기 시 주의
-- 양 branch 모두 `vendor/source-manifest.json`을 수정 → main merge 시 `treeSha256` 충돌 예상. 합친 vendor tree로 재계산 후 resolve 필수.
-- Step 7은 `playwright.config.ts`에 chromium project 추가, Step 8은 `scripts/build-wasm.mjs`+`src/main.ts`만 공유 파일 건드림 — 충돌 위험 낮음.
-- merge 전 각 worktree 게이트는 통과했으나, **병합 직후 main에서 전체 게이트 재실행** 후 handoff에 exit code 기록해야 완료(✅)로 승격.
+### merge 시 주의 (실제 처리 완료)
+- 양 branch 모두 `vendor/source-manifest.json`을 수정 → main merge 시 `treeSha256` 충돌 발생. 합친 vendor tree로 재계산 후 resolve 완료(fileCount 409, `e65f0d9b…b25b49`, match:true).
+- Step 7은 `playwright.config.ts`에 chromium project 추가, Step 8은 `scripts/build-wasm.mjs`+`src/main.ts`만 공유 파일 건드림 — 충돌은 source-manifest 외 없음.
+- 병합 직후 main에서 전체 게이트 재실행 → 전부 exit 0(위 "merge 게이트" 블록). ✅ 승격 완료.
+
+### 남은 작업
+1. docs(plan/handoff/HANDOFF + 계획서 checkbox `[x]`) 커밋 → `git push origin main`(사용자 승인 완료).
+2. **Step 9**(브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행) → 10(IDBFS) …
