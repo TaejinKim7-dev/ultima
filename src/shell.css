@@ -107,6 +107,28 @@ body {
   outline-offset: 2px;
 }
 
+/*
+ * Todo 13: Korean NPC-keyword input (see index.html's comment on this
+ * control).
+ */
+.korean-keyword-control {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--ultima-border);
+  font-size: 0.85rem;
+}
+
+#korean-keyword-input {
+  font-family: inherit;
+  background: var(--ultima-bg);
+  color: var(--ultima-text);
+  border: 1px solid var(--ultima-border);
+  padding: 0.25rem 0.4rem;
+}
+
 .data-controls {
   display: flex;
   flex-direction: column;
