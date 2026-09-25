@@ -139,6 +139,20 @@ export interface OverlayEntry {
 }
 
 /**
+ * "menu" and "textview" are mutually exclusive, not just "usually" disjoint:
+ * their default rects (`menuArea`/`extendedMenuArea`) genuinely overlap in
+ * raw geometry (see this module's own overlap test), so the registry itself
+ * enforces the exclusion -- registering one evicts the other -- rather than
+ * relying on callers never registering both. Without this, nothing stops
+ * two bridge `view` events from leaving both roles registered at once,
+ * which WOULD visibly overlap on screen.
+ */
+const MUTUALLY_EXCLUSIVE_ROLES: Partial<Record<OverlayRole, OverlayRole>> = {
+  menu: "textview",
+  textview: "menu"
+}
+
+/**
  * Tracks each overlay role's current content. Pure in-memory state -- no
  * DOM, no rendering; `src/shell.ts` reads it back out to build/position the
  * actual DOM elements. `register` replacing a role's previous entry (rather
@@ -149,8 +163,20 @@ export interface OverlayEntry {
 export class OverlayRegistry {
   private readonly entries = new Map<OverlayRole, OverlayEntry>()
 
-  register(role: OverlayRole, entry: OverlayEntry): void {
+  /**
+   * Stores `entry` under `role`. If `role` is "menu" or "textview", this
+   * also evicts the other one of that pair (see `MUTUALLY_EXCLUSIVE_ROLES`)
+   * -- returns the evicted role so `src/shell.ts` can remove its DOM
+   * element too, or `null` if nothing was evicted.
+   */
+  register(role: OverlayRole, entry: OverlayEntry): OverlayRole | null {
+    const exclusiveWith = MUTUALLY_EXCLUSIVE_ROLES[role]
+    let evicted: OverlayRole | null = null
+    if (exclusiveWith !== undefined && this.entries.delete(exclusiveWith)) {
+      evicted = exclusiveWith
+    }
     this.entries.set(role, entry)
+    return evicted
   }
 
   /** Removes one role's registration, leaving every other role untouched. */
@@ -247,15 +273,37 @@ export function computeContentRect(canvas: ClientRectLike, positioningAncestor: 
   }
 }
 
-/** The overlay text's logical font size in native-pixel units -- deliberately smaller than CHAR_HEIGHT (8) to leave line-height room for multi-line Korean wrapping within the same logical row height. */
+/**
+ * Native TextView rows are always exactly CHAR_HEIGHT (8 logical px) tall
+ * (`vendor/xu4/src/textview.h`/`u4.h`'s `CHAR_HEIGHT`), and every
+ * status/menu/textview rect's height this module cites is an exact
+ * multiple of it (e.g. `STATS_AREA_HEIGHT`=8 rows * 8px = 64px). Sizing
+ * each RENDERED row to exactly this value (scaled) is what guarantees N
+ * rows always fit a box sized for N rows -- not a tuned constant, a
+ * provable identity: `box.height = logical.height*scaleY =
+ * (rows*NATIVE_CELL_HEIGHT_PX)*scaleY = rows*(NATIVE_CELL_HEIGHT_PX*scaleY)
+ * = rows*computeOverlayCellPx(scaleY)` exactly, for any scaleY. An earlier
+ * version of this module sized rows from line-height/row-gap guesswork
+ * instead and silently overflowed an 8-row status box (see this module's
+ * test for the regression this replaced).
+ */
+export const NATIVE_CELL_HEIGHT_PX = 8
+
+/** The CSS px height of exactly one overlay text row at the content rect's vertical scale -- see `NATIVE_CELL_HEIGHT_PX`'s doc comment. `src/shell.ts` applies this as each row's `line-height`/CSS grid `grid-auto-rows`, with zero row-gap. */
+export function computeOverlayCellPx(scaleY: number): number {
+  return NATIVE_CELL_HEIGHT_PX * scaleY
+}
+
+/** The overlay text's logical font size in native-pixel units -- deliberately smaller than `NATIVE_CELL_HEIGHT_PX` so its own row never overflows. */
 export const OVERLAY_BASE_FONT_PX = 7
 
-/** No overlay text ever renders smaller than this, even at a tiny/degenerate scale -- the narrow-viewport QA scenario's readability floor. */
+/** No overlay text renders smaller than this UNLESS the row itself (`computeOverlayCellPx`) is smaller -- the narrow-viewport QA scenario's readability floor. In practice the canvas never goes below 2x (`shell.css`'s `.viewport { min-width: 640px }`), so the cell (>=16px) is always taller than this floor (10px) and the floor always wins; this only yields to the cell cap in a degenerate sub-1.25x scale the app never actually reaches. */
 export const OVERLAY_MIN_FONT_PX = 10
 
-/** Scales `OVERLAY_BASE_FONT_PX` by the content rect's vertical scale factor, never dropping below `OVERLAY_MIN_FONT_PX`. */
+/** Scales `OVERLAY_BASE_FONT_PX` by the content rect's vertical scale factor, applying `OVERLAY_MIN_FONT_PX` as a floor -- but NEVER exceeding one row's own cell height (`computeOverlayCellPx`), since a font taller than its own row would overflow even a correctly-sized row. */
 export function computeOverlayFontPx(scaleY: number): number {
-  return Math.max(OVERLAY_MIN_FONT_PX, OVERLAY_BASE_FONT_PX * scaleY)
+  const cellPx = computeOverlayCellPx(scaleY)
+  return Math.min(cellPx, Math.max(OVERLAY_MIN_FONT_PX, OVERLAY_BASE_FONT_PX * scaleY))
 }
 
 /** True if two logical (or any same-space) rects genuinely overlap on BOTH axes -- rects that only touch at a shared edge are not considered overlapping. */

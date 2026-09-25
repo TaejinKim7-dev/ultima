@@ -83,23 +83,43 @@ body {
   overflow: visible;
   font-family: inherit;
   color: var(--ultima-text);
-  line-height: 1.2;
   white-space: normal;
   word-break: keep-all;
   overflow-wrap: anywhere;
+  /*
+   * Todo 12 (advisor-review fix): `src/shell.ts`'s layoutOverlayElement()
+   * sets this to computeOverlayCellPx(scaleY) -- exactly one native
+   * TextView row's CSS height (see overlay-layout.ts's
+   * NATIVE_CELL_HEIGHT_PX doc comment). `.overlay-rows`/`.overlay-line`
+   * below key their row height/line-height off this SAME custom property
+   * (inherited from this element), which is what guarantees N rows of
+   * rendered text always fit an N-row-tall logical box -- an earlier
+   * version used a flat `line-height: 1.2` + row-gap here instead, which
+   * silently overflowed an 8-row status display (only ever tested with a
+   * 2-3 row fixture, which happened to fit by accident).
+   */
+  --overlay-cell-px: 16px;
 }
 
 /* Structured label/value content (ViewBridgeEvent.rows) -- a CSS grid, not
  * pre-computed character columns: the browser sizes the value column to
  * its own widest cell, so every row's value right-edge lines up regardless
- * of how long each row's (Korean) label is. */
+ * of how long each row's (Korean) label is. Every row is exactly one
+ * `--overlay-cell-px` tall (zero row-gap) -- see `.overlay-role`'s comment
+ * on this custom property. */
 .overlay-rows {
   display: grid;
   grid-template-columns: auto max-content;
+  grid-auto-rows: var(--overlay-cell-px);
   column-gap: 0.6em;
-  row-gap: 0.15em;
+  row-gap: 0;
   margin: 0;
   width: 100%;
+}
+
+.overlay-row-label,
+.overlay-row-value {
+  line-height: var(--overlay-cell-px);
 }
 
 .overlay-row-label {
@@ -121,6 +141,7 @@ body {
 
 .overlay-line {
   margin: 0;
+  line-height: var(--overlay-cell-px);
 }
 
 /*

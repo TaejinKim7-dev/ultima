@@ -4,9 +4,11 @@ import {
   DEFAULT_VIEW_RECTS,
   LOGICAL_SCREEN_HEIGHT,
   LOGICAL_SCREEN_WIDTH,
+  NATIVE_CELL_HEIGHT_PX,
   OVERLAY_MIN_FONT_PX,
   OverlayRegistry,
   computeContentRect,
+  computeOverlayCellPx,
   computeOverlayFontPx,
   computeScale,
   rectsOverlap,
@@ -115,13 +117,43 @@ describe("computeContentRect (Todo 12: canvas box -> content rect relative to th
   })
 })
 
+describe("computeOverlayCellPx (Todo 12: N text rows must exactly fit an N-row logical box)", () => {
+  it("scales NATIVE_CELL_HEIGHT_PX (8, the native CHAR_HEIGHT) by the vertical scale factor", () => {
+    expect(NATIVE_CELL_HEIGHT_PX).toBe(8)
+    expect(computeOverlayCellPx(2)).toBe(16)
+  })
+
+  it("N stacked rows of exactly this height always sum to exactly an N-row logical box's CSS height, at ANY scale -- not just round numbers", () => {
+    // This is the regression this Todo's advisor review caught: an earlier
+    // version sized rows from line-height/row-gap guesswork instead, which
+    // silently overflowed StatsArea::mainArea's real 8-row box (only ever
+    // exercised with a 2-3 row test fixture, which happened to fit).
+    for (const scaleY of [1, 1.98, 2, 2.666_666]) {
+      const rows = 8 // StatsArea's STATS_AREA_HEIGHT
+      const boxHeightAtThisScale = rows * NATIVE_CELL_HEIGHT_PX * scaleY // == DEFAULT_VIEW_RECTS.status.height * scaleY
+      expect(rows * computeOverlayCellPx(scaleY)).toBeCloseTo(boxHeightAtThisScale, 9)
+    }
+  })
+})
+
 describe("computeOverlayFontPx (Todo 12: readable-floor font sizing, not fixed-column English monospace math)", () => {
   it("scales with the content rect's vertical scale factor", () => {
     expect(computeOverlayFontPx(2)).toBeGreaterThan(computeOverlayFontPx(1))
   })
 
-  it("never drops below the readable floor even at a tiny scale", () => {
-    expect(computeOverlayFontPx(0.1)).toBe(OVERLAY_MIN_FONT_PX)
+  it("never exceeds one row's own cell height, so N rows of text never overflow an N-row-tall box", () => {
+    for (const scaleY of [0.5, 1, 2, 5]) {
+      expect(computeOverlayFontPx(scaleY)).toBeLessThanOrEqual(computeOverlayCellPx(scaleY))
+    }
+  })
+
+  it("applies the readable floor at the scale the app actually reaches (canvas never below 2x -- shell.css's min-width:640px keeps the cell, 16px, comfortably above the 10px floor)", () => {
+    expect(computeOverlayFontPx(2)).toBeGreaterThanOrEqual(OVERLAY_MIN_FONT_PX)
+  })
+
+  it("at a degenerate sub-1.25x scale (never reached in the real app) caps to the row's own cell height rather than overflowing it to hit the floor", () => {
+    expect(computeOverlayFontPx(0.1)).toBeCloseTo(computeOverlayCellPx(0.1), 9)
+    expect(computeOverlayFontPx(0.1)).toBeLessThan(OVERLAY_MIN_FONT_PX)
   })
 })
 
@@ -176,7 +208,7 @@ describe("DEFAULT_VIEW_RECTS (Todo 12: fixed native logical rects per overlay ro
     expect(rectsOverlap(DEFAULT_VIEW_RECTS.status, DEFAULT_VIEW_RECTS.textview)).toBe(false)
   })
 
-  it("menu and textview DO overlap by native geometry -- documented and intentional, not a bug: intro.cpp's menuArea/extendedMenuArea are alternate screens of the SAME intro flow (config sub-menu replaces the main options menu), never registered at the same time", () => {
+  it("menu and textview DO overlap by native geometry -- intro.cpp's menuArea/extendedMenuArea are alternate screens of the SAME intro flow (config sub-menu replaces the main options menu). This is exactly why OverlayRegistry enforces mutual exclusion between them below, rather than merely documenting/assuming callers never register both.", () => {
     expect(rectsOverlap(DEFAULT_VIEW_RECTS.menu, DEFAULT_VIEW_RECTS.textview)).toBe(true)
   })
 })
@@ -188,18 +220,45 @@ describe("OverlayRegistry (Todo 12: registration/lifecycle)", () => {
     expect(registry.list()).toEqual([])
   })
 
-  it("register() stores a role's rect (and optional text/rows/selectedIndex), retrievable via get()", () => {
+  it("register() stores a role's rect (and optional text/rows/selectedIndex), retrievable via get(), and returns null when nothing was evicted", () => {
     const registry = new OverlayRegistry()
-    registry.register("status", { rect: DEFAULT_VIEW_RECTS.status, text: "HP 99" })
+    expect(registry.register("status", { rect: DEFAULT_VIEW_RECTS.status, text: "HP 99" })).toBeNull()
     expect(registry.get("status")).toEqual({ rect: DEFAULT_VIEW_RECTS.status, text: "HP 99" })
   })
 
   it("registering the same role again REPLACES the previous entry -- only one active registration per role at a time (matches native: a menu's config sub-screen replaces the options screen, never coexists with it)", () => {
     const registry = new OverlayRegistry()
     registry.register("menu", { rect: DEFAULT_VIEW_RECTS.menu, text: "Options" })
-    registry.register("menu", { rect: DEFAULT_VIEW_RECTS.textview, text: "Video Options" })
-    expect(registry.get("menu")).toEqual({ rect: DEFAULT_VIEW_RECTS.textview, text: "Video Options" })
+    registry.register("menu", { rect: DEFAULT_VIEW_RECTS.menu, text: "Video Options" })
+    expect(registry.get("menu")).toEqual({ rect: DEFAULT_VIEW_RECTS.menu, text: "Video Options" })
     expect(registry.list()).toHaveLength(1)
+  })
+
+  it("registering 'menu' evicts any currently-registered 'textview' (their default rects genuinely overlap -- see the DEFAULT_VIEW_RECTS test above), and returns the evicted role", () => {
+    const registry = new OverlayRegistry()
+    registry.register("textview", { rect: DEFAULT_VIEW_RECTS.textview, text: "About" })
+    const evicted = registry.register("menu", { rect: DEFAULT_VIEW_RECTS.menu, text: "Options" })
+    expect(evicted).toBe("textview")
+    expect(registry.get("textview")).toBeUndefined()
+    expect(registry.get("menu")).toBeDefined()
+    expect(registry.list()).toHaveLength(1)
+  })
+
+  it("registering 'textview' likewise evicts any currently-registered 'menu' (the exclusion is symmetric)", () => {
+    const registry = new OverlayRegistry()
+    registry.register("menu", { rect: DEFAULT_VIEW_RECTS.menu, text: "Options" })
+    const evicted = registry.register("textview", { rect: DEFAULT_VIEW_RECTS.textview, text: "About" })
+    expect(evicted).toBe("menu")
+    expect(registry.get("menu")).toBeUndefined()
+    expect(registry.get("textview")).toBeDefined()
+  })
+
+  it("registering 'menu'/'textview' does NOT evict 'status' -- the exclusion is only between the two mutually-exclusive intro screens", () => {
+    const registry = new OverlayRegistry()
+    registry.register("status", { rect: DEFAULT_VIEW_RECTS.status, text: "HP 99" })
+    const evicted = registry.register("menu", { rect: DEFAULT_VIEW_RECTS.menu, text: "Options" })
+    expect(evicted).toBeNull()
+    expect(registry.get("status")).toBeDefined()
   })
 
   it("clear(role) removes only that role, leaving other registered roles untouched", () => {

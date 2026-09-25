@@ -18,6 +18,7 @@ import {
   DEFAULT_VIEW_RECTS,
   OverlayRegistry,
   computeContentRect,
+  computeOverlayCellPx,
   computeOverlayFontPx,
   computeScale,
   toCssRect,
@@ -236,6 +237,14 @@ export function createShell(doc: Document): UltimaBridgeApi {
     element.style.width = `${cssRect.width}px`
     element.style.height = `${cssRect.height}px`
     element.style.fontSize = `${computeOverlayFontPx(scaleY)}px`
+    // Todo 12 advisor-review fix: every rendered row (see src/shell.css's
+    // `.overlay-rows`/`.overlay-line`, both keyed off this custom property)
+    // is exactly one native TextView row tall -- see
+    // overlay-layout.ts's computeOverlayCellPx doc comment for why this is
+    // what actually guarantees N rows fit an N-row box (an 8-row status
+    // display previously overflowed its box; only 2-3 row test fixtures
+    // existed at the time, which happened to fit by accident).
+    element.style.setProperty("--overlay-cell-px", `${computeOverlayCellPx(scaleY)}px`)
   }
 
   // Repositions every currently-registered overlay -- called after any new
@@ -270,7 +279,15 @@ export function createShell(doc: Document): UltimaBridgeApi {
       ...(event.rows !== undefined ? { rows: event.rows } : {}),
       ...(event.selectedIndex !== undefined ? { selectedIndex: event.selectedIndex } : {})
     }
-    overlayRegistry.register(event.region, entry)
+    // "menu" and "textview" are mutually exclusive (their default rects
+    // genuinely overlap -- see overlay-layout.ts's doc comment): registering
+    // one may silently evict the other from the registry, and the evicted
+    // role's DOM element must be removed too, or a stale, now-unregistered
+    // overlay would keep rendering on screen.
+    const evictedRole = overlayRegistry.register(event.region, entry)
+    if (evictedRole !== null) {
+      removeOverlayElement(evictedRole)
+    }
     const element = ensureOverlayElement(event.region)
     renderOverlayContent(element, entry)
     layoutOverlayElement(element, entry)
