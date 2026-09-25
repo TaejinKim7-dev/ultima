@@ -29,6 +29,15 @@ body {
 .viewport {
   position: relative;
   width: 100%;
+  /*
+   * Todo 12: the plan's own contract is "desktop 기본 최소 2× 표시" (desktop
+   * always displays at least 2x the 320x200 logical raster) -- so the game
+   * area itself never shrinks below a 640px-wide, readable floor. Below
+   * this width the PAGE scrolls horizontally instead (see the narrow-
+   * viewport QA scenario) rather than overlay/dialogue text clipping or
+   * shrinking to illegibility.
+   */
+  min-width: 640px;
   aspect-ratio: 320 / 200;
   background: #000;
   border: 2px solid var(--ultima-border);
@@ -43,16 +52,75 @@ body {
 }
 
 /*
- * Status/menu overlay sits over the original game screen area. It must
- * never intercept pointer input meant for the canvas underneath it.
+ * Todo 12: positioning container for per-role overlay elements
+ * (`src/shell.ts` creates/positions/removes `[data-role]` children here).
+ * It must never intercept pointer input meant for the canvas underneath.
  */
-.status-overlay {
+.overlay-layer {
   position: absolute;
   inset: 0;
   pointer-events: none;
+}
+
+/*
+ * One role's overlay box (status/menu/textview), absolutely positioned by
+ * `src/shell.ts` via inline left/top/width/height/font-size computed from
+ * `src/overlay/overlay-layout.ts`. No background: the native engine's own
+ * raster canvas already draws this area's background (and, for "status",
+ * the avatar-aura glyph just below it) -- painting a second, opaque CSS
+ * background here would be a DOM overlay covering raster art, which this
+ * Todo's "Must NOT do" explicitly rules out.
+ *
+ * `overflow: visible` + `overflow-wrap: anywhere`/`word-break: keep-all`
+ * (the same Korean-safe wrapping as the dialogue panel, Todo 11) instead of
+ * fixed-space/monospace English column math: Korean glyphs are wider than
+ * the native 8x8 bitmap font's cells, so this never silently clips a
+ * translated value that doesn't fit the original English's column count.
+ */
+.overlay-role {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
   font-family: inherit;
-  white-space: pre-wrap;
-  padding: 0.25rem;
+  color: var(--ultima-text);
+  line-height: 1.2;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* Structured label/value content (ViewBridgeEvent.rows) -- a CSS grid, not
+ * pre-computed character columns: the browser sizes the value column to
+ * its own widest cell, so every row's value right-edge lines up regardless
+ * of how long each row's (Korean) label is. */
+.overlay-rows {
+  display: grid;
+  grid-template-columns: auto max-content;
+  column-gap: 0.6em;
+  row-gap: 0.15em;
+  margin: 0;
+  width: 100%;
+}
+
+.overlay-row-label {
+  text-align: left;
+}
+
+.overlay-row-value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* selectedIndex highlight -- an item index (native StatsArea::
+ * highlightPlayer / a selected MenuItem), never a text character offset. */
+.overlay-row-label.selected,
+.overlay-row-value.selected {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.overlay-line {
+  margin: 0;
 }
 
 /*

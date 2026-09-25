@@ -8,15 +8,21 @@
   <body>
     <div id="app">
       <!--
-        Game viewport: a canvas for the (future, Todo 6+) WASM/WebGL2
-        renderer, plus a DOM overlay positioned over the same area for
-        short in-game text (HP/status/menus), matching the original
-        screen layout. Long dialogue is deliberately NOT here -- see
-        the dialogue panel below.
+        Game viewport: a canvas for the WASM/WebGL2 renderer, plus a DOM
+        overlay layer positioned over the same area for short in-game text
+        (HP/status/menus), matching the original screen layout. Long
+        dialogue is deliberately NOT here -- see the dialogue panel below.
+
+        Todo 12: `#overlay-layer` itself carries no content -- it is only
+        the positioning container `src/shell.ts` creates/positions/removes
+        per-role child elements inside (`[data-role="status"|"menu"
+        |"textview"]`), sized/positioned from the canvas's actual displayed
+        box (see `src/overlay/overlay-layout.ts`). Map/runes/avatar sprite
+        masks are never covered by these -- they stay in the raster canvas.
       -->
       <div id="game-viewport" class="viewport">
         <canvas id="game-canvas" width="320" height="200" aria-label="Ultima IV 게임 화면"></canvas>
-        <div id="status-overlay" class="status-overlay" aria-live="polite"></div>
+        <div id="overlay-layer" class="overlay-layer" aria-live="polite"></div>
       </div>
 
       <!--
