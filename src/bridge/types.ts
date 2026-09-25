@@ -81,13 +81,37 @@ export const VIEW_REGIONS = ["status", "menu", "textview"] as const
 export type ViewRegion = (typeof VIEW_REGIONS)[number]
 
 /**
+ * One structured field for status/menu overlay content: a label, and an
+ * optional value (a menu item has only a label; a status field like HP has
+ * both). Todo 12 renders these as CSS grid rows instead of native-style
+ * fixed-space/monospace text -- Korean glyphs are wider than the native 8px
+ * bitmap font's cells, so pre-computed column positions never fit Korean
+ * translations the way they fit the original English.
+ */
+export interface OverlayRow {
+  readonly label: string
+  readonly value?: string
+}
+
+/**
  * Short in-game text (HP/status/menus) rendered as a DOM overlay positioned
  * over the original screen area, as opposed to the dialogue panel below it.
+ *
+ * `rows`/`selectedIndex` are additive to ABI v1 (Todo 12, optional, ignored
+ * by older readers) -- see `OverlayRow`'s doc comment for why structured
+ * rows exist alongside `text`. `selectedIndex` highlights one row by
+ * position (native `StatsArea::highlightPlayer`/a selected `MenuItem`) --
+ * it is an ITEM index, never a text character offset: a character-offset
+ * cursor only makes sense for ASCII text input (the dialogue panel's own
+ * prompt flow, `src/dialogue/message-tokens.ts`'s `PanelState.cursor`), not
+ * for a status field or a menu selection.
  */
 export interface ViewBridgeEvent extends BridgeEventBase {
   readonly type: "view"
   readonly region: ViewRegion
   readonly text: string
+  readonly rows?: readonly OverlayRow[]
+  readonly selectedIndex?: number
 }
 
 /** Persistence lifecycle states the shell surfaces to the user. */
@@ -167,8 +191,34 @@ export function isBridgeEvent(candidate: unknown): candidate is BridgeEvent {
       return true
     case "prompt":
       return isString(candidate["promptId"]) && isOneOf(candidate["kind"], PROMPT_KINDS)
-    case "view":
-      return isOneOf(candidate["region"], VIEW_REGIONS) && isString(candidate["text"])
+    case "view": {
+      if (!isOneOf(candidate["region"], VIEW_REGIONS) || !isString(candidate["text"])) {
+        return false
+      }
+      const rows = candidate["rows"]
+      if (rows !== undefined) {
+        if (!Array.isArray(rows)) {
+          return false
+        }
+        for (const row of rows as unknown[]) {
+          if (!isRecord(row) || !isString(row["label"])) {
+            return false
+          }
+          const value = row["value"]
+          if (value !== undefined && !isString(value)) {
+            return false
+          }
+        }
+      }
+      const selectedIndex = candidate["selectedIndex"]
+      if (
+        selectedIndex !== undefined &&
+        (typeof selectedIndex !== "number" || !Number.isInteger(selectedIndex) || selectedIndex < 0)
+      ) {
+        return false
+      }
+      return true
+    }
     case "save-state": {
       if (!isOneOf(candidate["status"], SAVE_STATE_STATUSES)) {
         return false
