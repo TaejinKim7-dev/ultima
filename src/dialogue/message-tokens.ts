@@ -120,6 +120,12 @@ export function tokenizeMessage(raw: string): MessageToken[] {
     } else if (color !== undefined) {
       flushTextRun()
       tokens.push({ type: "color", code: color })
+    } else if (ch === "\t") {
+      // screenMessageN's switch groups '\t' with ' ' (screen.cpp ~500) --
+      // both just draw a space and advance the column. Normalize to a
+      // literal space so `white-space: pre-wrap` doesn't render a wide
+      // browser tab-stop the native engine never had.
+      textRun += " "
     } else {
       textRun += ch
     }

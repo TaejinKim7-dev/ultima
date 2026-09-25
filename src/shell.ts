@@ -5,6 +5,7 @@
 
 import { BRIDGE_ABI_VERSION, isBridgeEvent, type BridgeEvent } from "./bridge/types.ts"
 import {
+  applyToken,
   applyTokens,
   beginPause,
   createPanelState,
@@ -68,8 +69,17 @@ export function createShell(doc: Document): UltimaBridgeApi {
   // Renders `panelState` into `#dialogue-history` using `createElement` +
   // `textContent` only -- see `tests/unit/message-tokens.test.ts`'s
   // innerHTML safety guard, which greps this file's source for the banned
-  // APIs. Rebuilds the whole history each call; it is small scrolling text,
-  // not a hot per-frame path.
+  // APIs.
+  //
+  // KNOWN LIMITATION (deferred, not fixed here): this rebuilds the *whole*
+  // history on every fragment via `replaceChildren`, so a very long
+  // session is O(n^2) in total history lines, and `#dialogue-panel`'s
+  // `aria-live="polite"` re-announces the entire history to screen readers
+  // on every call instead of just what changed. Acceptable for this
+  // Todo's scope (a talk/intro-length history); revisit as an incremental
+  // append-only render (append newly-committed lines, replace only the
+  // last `<p>`) under Todo 18's memory-growth hardening if real sessions
+  // turn out to need it.
   function renderLine(cells: PanelState["currentLine"]): HTMLParagraphElement {
     const line = doc.createElement("p")
     line.className = "dialogue-line"
@@ -126,6 +136,19 @@ export function createShell(doc: Document): UltimaBridgeApi {
     saveStatus.textContent = text
   }
 
+  // For whole, UI-authored notices (e.g. a runtime-error's "[오류] ..."
+  // prefix) that are never a fragment of the engine's own message stream:
+  // breaks to a fresh line first if one is already in progress, appends
+  // the text, then always ends on a fresh line so nothing else runs onto
+  // it afterward.
+  function appendWholeLine(text: string): void {
+    if (panelState.currentLine.length > 0) {
+      panelState = applyToken(panelState, { type: "newline" })
+    }
+    panelState = applyTokens(panelState, tokenizeMessage(text))
+    panelState = applyToken(panelState, { type: "newline" })
+  }
+
   function applyEvent(event: BridgeEvent): void {
     switch (event.type) {
       case "message": {
@@ -169,7 +192,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
         return
       case "runtime-error":
         hidePromptMarker()
-        panelState = applyTokens(panelState, tokenizeMessage(`[오류] ${event.message}`))
+        appendWholeLine(`[오류] ${event.message}`)
         renderPanel()
         return
     }
@@ -204,7 +227,11 @@ export function createShell(doc: Document): UltimaBridgeApi {
     dispatch({
       abiVersion: BRIDGE_ABI_VERSION,
       type: "message",
-      text: `원본 데이터 선택됨: ${file.name} (${file.size} bytes)`
+      // Trailing newline: this is a whole UI-authored notice, not a
+      // fragment of the engine's own message stream (see PanelState's
+      // fragment-joining comment above) -- without it, this line would
+      // run onto whatever the panel renders next.
+      text: `원본 데이터 선택됨: ${file.name} (${file.size} bytes)\n`
     })
   })
 

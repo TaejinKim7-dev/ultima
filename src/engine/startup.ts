@@ -94,7 +94,12 @@ export type StartEngineResult =
   | { readonly started: false; readonly reason: "corrupted" | "missing-files" | "idbfs-sync-failed" | "engine-error"; readonly detail: string }
 
 function message(text: string): BridgeEvent {
-  return { abiVersion: BRIDGE_ABI_VERSION, type: "message", text }
+  // Todo 11: this is a whole, UI-authored notice, not a fragment of the
+  // native engine's own message-buffer byte stream (which the dialogue
+  // panel otherwise joins across events -- see src/shell.ts's PanelState
+  // comment). A trailing newline keeps it from visually running onto
+  // whatever the panel renders next.
+  return { abiVersion: BRIDGE_ABI_VERSION, type: "message", text: `${text}\n` }
 }
 
 function runtimeError(text: string): BridgeEvent {

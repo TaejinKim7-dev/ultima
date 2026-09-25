@@ -1,4 +1,5 @@
-import { readFileSync } from "node:fs"
+import { readdirSync, readFileSync, statSync } from "node:fs"
+import { join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { describe, expect, it } from "vitest"
 import {
@@ -102,6 +103,10 @@ describe("tokenizeMessage (Todo 11: message -> control tokens)", () => {
       { type: "newline" },
       { type: "text", value: "Who drinks? " }
     ])
+  })
+
+  it("normalizes tab (0x09) to a literal space, matching screenMessageN's '\\t'/' ' switch grouping", () => {
+    expect(tokenizeMessage("a\tb")).toEqual([{ type: "text", value: "a b" }])
   })
 
   it("never interprets an injected script-like string as markup -- it is one literal text token", () => {
@@ -216,18 +221,29 @@ function applyAll2(state: PanelState, tokens: readonly MessageToken[]): PanelSta
   return applyTokens(state, tokens)
 }
 
+function listTsFilesRecursively(dir: string): string[] {
+  const out: string[] = []
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry)
+    if (statSync(full).isDirectory()) {
+      out.push(...listTsFilesRecursively(full))
+    } else if (full.endsWith(".ts")) {
+      out.push(full)
+    }
+  }
+  return out
+}
+
 describe("Todo 11 safety guard: dialogue rendering must never use innerHTML", () => {
-  it("shell.ts and message-tokens.ts source never mention innerHTML/outerHTML/insertAdjacentHTML/document.write", () => {
-    const shellSrc = readFileSync(fileURLToPath(new URL("../../src/shell.ts", import.meta.url)), "utf8")
-    const tokensSrc = readFileSync(
-      fileURLToPath(new URL("../../src/dialogue/message-tokens.ts", import.meta.url)),
-      "utf8"
-    )
+  it("no file under src/ ever assigns innerHTML/outerHTML or calls insertAdjacentHTML/document.write", () => {
+    const srcDir = fileURLToPath(new URL("../../src/", import.meta.url))
+    const files = listTsFilesRecursively(srcDir)
+    expect(files.length).toBeGreaterThan(0) // guards against a typo'd path silently passing
     // Matches actual usage (an assignment or a call), not the word
     // appearing inside an explanatory code comment such as "textContent
     // only -- never innerHTML for game text".
     const banned = /\.innerHTML\s*=|\.outerHTML\s*=|\.insertAdjacentHTML\s*\(|document\.write\s*\(/
-    expect(banned.test(shellSrc)).toBe(false)
-    expect(banned.test(tokensSrc)).toBe(false)
+    const offenders = files.filter((f) => banned.test(readFileSync(f, "utf8")))
+    expect(offenders).toEqual([])
   })
 })
