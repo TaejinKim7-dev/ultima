@@ -3,6 +3,7 @@ import {
   BRIDGE_ABI_VERSION,
   BRIDGE_EVENT_TYPES,
   isBridgeEvent,
+  PROMPT_KINDS,
   type BridgeEvent
 } from "../../src/bridge/types.ts"
 
@@ -70,6 +71,18 @@ describe("bridge ABI contract (C ABI version 1)", () => {
 
     expect(isBridgeEvent(validPrompt)).toBe(true)
     expect(isBridgeEvent(invalidPrompt)).toBe(false)
+  })
+
+  it("recognizes 'command' as a distinct prompt kind (Todo 13: single-key command prompts, e.g. ReadChoiceController/AlphaActionController, are distinct from free-answer 'text' prompts)", () => {
+    const validCommandPrompt: unknown = {
+      abiVersion: 1,
+      type: "prompt",
+      promptId: "req-1",
+      kind: "command"
+    }
+
+    expect(PROMPT_KINDS).toContain("command")
+    expect(isBridgeEvent(validCommandPrompt)).toBe(true)
   })
 
   it("accepts a well-formed view event and rejects an unknown region", () => {

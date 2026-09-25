@@ -44,6 +44,26 @@
       </section>
 
       <!--
+        Todo 13: Korean NPC-keyword input. The real xu4 engine can never
+        receive Korean text directly -- vendor/xu4/src/event.cpp's
+        ReadStringController::keyPressed() only ever accepts key codes
+        below 128 (plain ASCII), for every prompt kind, no exception. This
+        control lets a Korean-speaking player type an aliased Korean word
+        while talking to an NPC; src/shell.ts resolves it
+        (src/i18n/korean-aliases.ts) to the exact canonical English
+        keyword xu4's own prefix matcher already understands, then
+        synthesizes that as real keystrokes toward the same input path a
+        physical keyboard uses (see shell.ts's own comment on the
+        window-capture guard this requires). An unresolved word is
+        rejected with a message in the dialogue panel above; nothing is
+        ever injected in that case.
+      -->
+      <section class="korean-keyword-control">
+        <label for="korean-keyword-input">한글 대화 키워드 입력 (NPC와 대화 중 Enter로 제출)</label>
+        <input type="text" id="korean-keyword-input" autocomplete="off" />
+      </section>
+
+      <!--
         Original game data is never bundled and never uploaded anywhere --
         the user selects their own local ultima4.zip purely through the
         File API. Save export/import are local Blob download/upload only.

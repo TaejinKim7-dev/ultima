@@ -62,8 +62,17 @@ export interface ClearBridgeEvent extends BridgeEventBase {
   readonly type: "clear"
 }
 
-/** The distinct prompt shapes the original input rules distinguish. */
-export const PROMPT_KINDS = ["text", "yesno", "direction", "number", "avatar-name"] as const
+/**
+ * The distinct prompt shapes the original input rules distinguish (Todo 8's
+ * text/yesno/direction/number/avatar-name, plus Todo 13's "command" for a
+ * single-key command/menu-letter prompt -- native `ReadChoiceController`/
+ * `AlphaActionController`, e.g. `vendor/xu4/src/event.cpp`'s
+ * `EventHandler::readChoice`/`readAlphaAction` -- which is a single accepted
+ * keystroke, not a free-answer NPC keyword ("text") or a yes/no answer).
+ * Korean aliasing (`src/i18n/korean-aliases.ts`) only ever applies to
+ * "text"; every other kind rejects non-ASCII input outright.
+ */
+export const PROMPT_KINDS = ["text", "yesno", "direction", "number", "avatar-name", "command"] as const
 export type PromptKind = (typeof PROMPT_KINDS)[number]
 
 /**
