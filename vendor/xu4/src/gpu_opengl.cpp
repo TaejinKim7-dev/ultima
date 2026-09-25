@@ -587,7 +587,13 @@ const char* gpu_init(void* res, int w, int h, int scale, int filter)
     // Create screen, white, noise & shadow textures.
     glGenTextures(TEXTURE_COUNT, &gr->screenTex);
     gpu_defineTex(gr->screenTex, 320, 200, NULL,
-#if defined(ANDROID) || defined(USE_GLES)
+#if defined(ANDROID) || defined(USE_GLES) || defined(__EMSCRIPTEN__)
+                  // Todo 21.2/21.3: WebGL2 (like GLES) rejects the
+                  // GL_RGB/GL_RGBA internalFormat+format mismatch below
+                  // with GL_INVALID_OPERATION ("Level of detail outside
+                  // of range" in Chrome/ANGLE's wording) -- desktop GL
+                  // silently accepts it, so this was never caught before
+                  // Todo 21.1 first compiled this file for wasm.
                   GL_RGBA,  // Must match glTexSubImage2D format.
 #else
                   GL_RGB,

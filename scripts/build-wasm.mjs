@@ -22,6 +22,7 @@ import {
   cpSync,
   existsSync,
   mkdirSync,
+  readFileSync,
   rmSync,
   statSync,
   writeFileSync,
@@ -62,10 +63,29 @@ const EMCC_FLAGS = [
   "-sENVIRONMENT=web,node",
   "-lidbfs.js",
   '-sEXPORTED_FUNCTIONS=["_main","_u4_web_enqueue_key","_u4_web_submit_text"]',
-  '-sEXPORTED_RUNTIME_METHODS=["FS","IDBFS","callMain"]',
+  // FS_DEBUG (Todo 21.2): Todo 10's persistence coordinator depends on
+  // FS.trackingDelegate.onCloseFile, but Emscripten only compiles
+  // trackingDelegate at all -- the field doesn't exist, not just the hook
+  // -- when built with FS_DEBUG (see .emsdk's src/lib/libfs.js: the whole
+  // thing is inside `#if FS_DEBUG`). Discovered because Todo 10's own
+  // tests only ever exercised a hand-written fake FS, never the real
+  // Emscripten build, so this never surfaced before Todo 21.2 wired
+  // startup.ts to a real engine and actually called it.
+  "-sFS_DEBUG=1",
+  // ENV (Todo 21.2): startup.ts sets ENV.HOME before callMain so
+  // Settings::init's $HOME-derived userPath (and therefore every save/
+  // settings file, all fopen'd relative to getUserPath()) lands inside
+  // the Todo 10 IDBFS mount at /persist instead of Emscripten's default
+  // /home/web_user.
+  '-sEXPORTED_RUNTIME_METHODS=["FS","IDBFS","callMain","ENV"]',
   "-DUSE_BORON",
   "-DCONF_MODULE",
-  "-DVERSION='\"DR-1.0\"'",
+  // spawnSync passes argv directly with no shell, so this string reaches
+  // emcc's preprocessor byte-for-byte. A single-quoted form here
+  // (-DVERSION='"DR-1.0"') would embed literal single-quote characters in
+  // the macro text; double quotes only, no shell-style wrapping, is what
+  // makes VERSION expand to the C string literal "DR-1.0".
+  '-DVERSION="DR-1.0"',
   "-D__EMSCRIPTEN__",
   "-DGPU_RENDER",
 ]
@@ -92,6 +112,28 @@ async function main() {
   // Copy all of vendor/xu4 to build dir preserving structure
   cpSync(xu4Src, xu4Build, { recursive: true })
 
+  // Todo 21.1: gpu_opengl.cpp's GPU_RENDER map-chunk path (gpu_resetMap,
+  // gpu_drawMap) dereferences Map/BlockingGroups members but only
+  // forward-declares them (via gpu.h) -- it has always relied on whatever
+  // TU includes it (only screen_glfw.cpp does) to pull in the full
+  // definitions first, which never happened: native builds don't define
+  // GPU_RENDER (GPU defaults to "scale"), so this path was never actually
+  // compiled before Todo 21.1's full-source-list link. vendor/xu4 is a
+  // pinned, tree-hash-verified export (see verify-repo-sources.mjs), so
+  // this patches the build-dir COPY, not vendor/xu4/src itself.
+  const gpuOpenglPath = resolve(xu4Build, "src/gpu_opengl.cpp")
+  const gpuOpenglSrc = readFileSync(gpuOpenglPath, "utf8")
+  const gpuOpenglNeedle = '#include "gpu.h"'
+  if (!gpuOpenglSrc.includes(gpuOpenglNeedle)) {
+    log(`BUILD FAILED: expected to find ${JSON.stringify(gpuOpenglNeedle)} in ${gpuOpenglPath} to patch in a map.h include`)
+    process.exit(1)
+  }
+  writeFileSync(
+    gpuOpenglPath,
+    gpuOpenglSrc.replace(gpuOpenglNeedle, `${gpuOpenglNeedle}\n#include "map.h"`),
+  )
+  log("Patched build-dir copy of gpu_opengl.cpp: added #include \"map.h\" (GPU_RENDER map-chunk path needs the full Map/BlockingGroups definitions)")
+
   // Also copy faun support for well512 (guarded; not fatal if absent when
   // xu4_random is stubbed in web-stub.cpp).
   const faunSupportSrc = resolve(repoRoot, "vendor/faun/support")
@@ -114,55 +156,95 @@ async function main() {
     }
   }
 
-  // Core engine files (platform-independent game logic only).
-  // Platform-specific files EXCLUDED (implemented in later steps):
-  // - src/screen_glfw.cpp (GLFW input/window)
-  // - src/gpu_opengl.cpp (native OpenGL renderer)
-  // - src/sound.cpp (native sound, web audio later)
-  // - src/savegame.cpp (native save, IDBFS later)
-  // - src/xu4.cpp (native main, replaced with web-main.cpp)
-  // - src/config_data.cpp, src/discourse_tlk.cpp, src/discourse_castle.cpp
-  // NOTE: Boron is linked via libboron.a, NOT compiled from source here.
+  // Todo 21.1: the real engine, built from the same source list the native
+  // build uses (vendor/xu4/src/Makefile.common CSRCS/CXXSRCS, UI=glfw,
+  // CONF=boron -- see scripts/build-native.mjs for the native equivalent).
+  // Deliberately NOT listed separately (each is already #include-d by one
+  // of the files below, so listing it too would duplicate-define symbols):
+  //   gpu_opengl.cpp        <- included by screen_glfw.cpp
+  //   discourse_tlk.cpp,
+  //   discourse_castle.cpp  <- included by discourse.cpp
+  //   config_data.cpp,
+  //   script_boron.cpp      <- included by config_boron.cpp
+  // sound_faun.cpp (native SOUND=faun) is replaced by web-sound-silent.cpp:
+  // the real backend pulls in the Faun mixer, PulseAudio, and pthread,
+  // none of which belong in this link (Todo 16 replaces the silent stub
+  // with real Web Audio behind the same sound.h contract).
   const sourceFiles = [
-    "src/game.cpp",
-    "src/event.cpp",
-    "src/intro.cpp",
-    "src/combat.cpp",
-    "src/item.cpp",
-    "src/creature.cpp",
-    "src/dungeon.cpp",
-    "src/camp.cpp",
-    "src/portal.cpp",
-    "src/death.cpp",
-    "src/spell.cpp",
-    "src/stats.cpp",
-    "src/menu.cpp",
-    "src/menuitem.cpp",
-    "src/screen.cpp",
-    "src/cheat.cpp",
-    "src/location.cpp",
-    "src/discourse.cpp",
-    "src/codex.cpp",
-    "src/shrine.cpp",
-    "src/config_boron.cpp",
-    // NOTE: there is no src/config.cpp in vendor/xu4; the config
-    // implementation for this build is config_boron.cpp (above).
+    // CXXSRCS (Makefile.common), in that file's order.
     "src/annotation.cpp",
     "src/aura.cpp",
+    "src/camp.cpp",
+    "src/cheat.cpp",
     "src/city.cpp",
-    "src/context.cpp",
+    "src/codex.cpp",
+    "src/combat.cpp",
     "src/controller.cpp",
-    "src/u4file.cpp",
+    "src/context.cpp",
+    "src/creature.cpp",
+    "src/death.cpp",
+    "src/debug.cpp",
+    "src/direction.cpp",
+    "src/discourse.cpp",
+    "src/dungeon.cpp",
+    "src/dungeonview.cpp",
+    "src/error.cpp",
+    "src/event.cpp",
+    "src/filesystem.cpp",
+    "src/game.cpp",
+    "src/gamebrowser.cpp",
+    "src/gui.cpp",
+    "src/image.cpp",
+    "src/imageloader.cpp",
+    "src/imagemgr.cpp",
+    "src/imageview.cpp",
+    "src/intro.cpp",
+    "src/item.cpp",
+    "src/location.cpp",
+    "src/map.cpp",
+    "src/maploader.cpp",
+    "src/menu.cpp",
+    "src/menuitem.cpp",
+    "src/names.cpp",
+    "src/object.cpp",
+    "src/party.cpp",
+    "src/person.cpp",
+    "src/portal.cpp",
+    "src/progress_bar.cpp",
+    "src/rle.cpp",
+    "src/savegame.cpp",
+    "src/scale.cpp",
+    "src/screen.cpp",
+    "src/screen_glfw.cpp", // screen_$(UI).cpp, UI=glfw (includes gpu_opengl.cpp)
     "src/settings.cpp",
-    // Support
-    "src/support/cdi.c",
+    "src/shrine.cpp",
+    "scripts/web-sound-silent.cpp", // sound_$(SOUND).cpp replacement, see comment above
+    "src/spell.cpp",
+    "src/stats.cpp",
+    "src/textview.cpp",
+    "src/tile.cpp",
+    "src/tileanim.cpp",
+    "src/tileset.cpp",
+    "src/tileview.cpp",
+    "src/u4file.cpp",
+    "src/view.cpp",
+    "src/xu4.cpp", // real main(), NOT scripts/web-main.cpp
+    "src/lzw/u4decode.cpp",
+    "src/lzw/u6decode.cpp",
+    // CONF=boron block (unconditional in Makefile.common despite the
+    // commented-out #ifeq -- see the "#ifeq ($(CONF),boron)" comment there).
+    "src/config_boron.cpp",
+    // CSRCS (Makefile.common).
+    "src/lzw/hash.c",
+    "src/lzw/lzw.c",
+    "src/support/notify.c",
     "src/support/stringTable.c",
+    "src/support/txf_draw.c",
+    "src/support/unzip.c",
+    "src/module.c",
+    "src/support/cdi.c",
     // Step 8 browser-safe input queue (C ABI home for the bridge inputs).
     "src/web_bridge.cpp",
-    // Web stubs
-    "scripts/web-stub.cpp",
-    // Web main entry point
-    "scripts/web-main.cpp",
   ]
 
   // Check which source files exist (scripts/* live at repo root, not in xu4Build)

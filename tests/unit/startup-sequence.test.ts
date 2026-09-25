@@ -10,7 +10,12 @@ function dummyEntries(names: readonly string[]) {
 
 function makeFakeModule(syncfsError: Error | null = null): {
   module: EngineModule
-  calls: { mkdirTree: string[]; mounted: unknown[]; written: { path: string; data: Uint8Array }[]; mainCalled: number }
+  calls: {
+    mkdirTree: string[]
+    mounted: unknown[]
+    written: { path: string; data: Uint8Array }[]
+    mainCalled: number
+  }
 } {
   const calls = {
     mkdirTree: [] as string[],
@@ -20,7 +25,12 @@ function makeFakeModule(syncfsError: Error | null = null): {
   }
   const module: EngineModule = {
     IDBFS: { marker: "idbfs" },
+    // Real Emscripten sets Module.ENV itself during module setup, before
+    // any preRun callback runs (see src/engine/startup.ts's doc comment);
+    // this fake starts empty so the preRun callback is what fills it in.
+    ENV: {},
     FS: {
+      trackingDelegate: {},
       mkdirTree(path: string) {
         calls.mkdirTree.push(path)
       },
@@ -29,6 +39,12 @@ function makeFakeModule(syncfsError: Error | null = null): {
       },
       writeFile(path: string, data: Uint8Array) {
         calls.written.push({ path, data })
+      },
+      readFile() {
+        return new Uint8Array()
+      },
+      readdir() {
+        return []
       },
       syncfs(_populate: boolean, callback: (error: Error | null) => void) {
         callback(syncfsError)
@@ -43,9 +59,20 @@ function makeFakeModule(syncfsError: Error | null = null): {
 
 function makeFactory(fakeModule: EngineModule): { factory: EngineModuleFactory; calls: number[] } {
   const callLog: number[] = []
+  // Mirrors real Emscripten glue closely enough for this suite: preRun
+  // callbacks run against the live module before the factory "resolves".
   const factory: EngineModuleFactory = async (opts) => {
     callLog.push(callLog.length)
     expect(opts["noInitialRun"]).toBe(true)
+    // Real Emscripten's `Module['ENV'] = ENV` assignment happens before
+    // preRun runs, and MODULARIZE reuses `opts` as `Module` -- so the
+    // fake module's ENV must be the *same object* `opts.ENV` for a preRun
+    // callback that mutates `opts.ENV` to be visible on the returned module.
+    opts["ENV"] = fakeModule.ENV
+    const preRun = opts["preRun"]
+    if (Array.isArray(preRun)) {
+      for (const fn of preRun) (fn as () => void)()
+    }
     return fakeModule
   }
   return { factory, calls: callLog }
@@ -56,6 +83,10 @@ function fakeZipFile(names: readonly string[]): Blob {
   return new Blob([bytes])
 }
 
+function fakeModuleAsset(label: string): Blob {
+  return new Blob([new TextEncoder().encode(`fake:${label}`)])
+}
+
 describe("startEngine", () => {
   it("on success: mounts IDBFS, syncs, writes the zip, calls main exactly once, dispatches a success message", async () => {
     const { module, calls } = makeFakeModule()
@@ -64,6 +95,8 @@ describe("startEngine", () => {
 
     const result = await startEngine({
       factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
       zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
       dispatch: (event) => {
         dispatched.push(event)
@@ -73,11 +106,15 @@ describe("startEngine", () => {
     })
 
     expect(result.started).toBe(true)
-    expect(calls.mkdirTree).toEqual(["/assets", "/data", "/persist/profile"])
+    expect(calls.mkdirTree).toEqual(["/persist"])
     expect(calls.mounted).toEqual([{ type: module.IDBFS, opts: {}, mountpoint: "/persist" }])
-    expect(calls.written).toHaveLength(1)
-    expect(calls.written[0]!.path).toBe("/data/ultima4.zip")
+    expect(calls.written.map((w) => w.path)).toEqual(["/render.pak", "/Ultima-IV.mod", "/ultima4.zip"])
     expect(calls.mainCalled).toBe(1)
+    // FS root, not Emscripten's Node/web default -- see the module doc
+    // comment; this is what actually lands userPath under the IDBFS mount.
+    expect(module.ENV["HOME"]).toBe("/persist")
+    // Attached before callMain so no native save write can be missed.
+    expect(typeof module.FS.trackingDelegate.onCloseFile).toBe("function")
     // A shaMismatch warning message plus the final "started" message.
     const messages = dispatched.filter((e) => e.type === "message")
     expect(messages.length).toBeGreaterThanOrEqual(1)
@@ -91,6 +128,8 @@ describe("startEngine", () => {
 
     const result = await startEngine({
       factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
       zipFile: fakeZipFile(["WORLD.MAP"]), // far from complete
       dispatch: (event) => {
         dispatched.push(event)
@@ -120,6 +159,8 @@ describe("startEngine", () => {
 
     const result = await startEngine({
       factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
       zipFile: corrupted,
       dispatch: (event) => {
         dispatched.push(event)
@@ -141,6 +182,8 @@ describe("startEngine", () => {
 
     const result = await startEngine({
       factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
       zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
       dispatch: (event) => {
         dispatched.push(event)
@@ -162,6 +205,8 @@ describe("startEngine", () => {
 
     const result = await startEngine({
       factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
       zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
       dispatch: () => true,
       unlockAudio: async () => {
@@ -179,6 +224,8 @@ describe("startEngine", () => {
       factory: async () => {
         throw new Error("wasm compile failed")
       },
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
       zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
       dispatch: (event) => {
         dispatched.push(event)

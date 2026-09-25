@@ -653,8 +653,52 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test 
 - worktree 8개(`todo-01,03,04,05,07,08,09,10`) 제거 — 전부 `git branch --merged main` 확인 후, 추적 파일 미커밋 변경 없음 확인 후 진행. 삭제 전에 각 worktree의 `.omo/evidence/ultima-web/`를 main으로 `cp -rn`(덮어쓰기 없이) 복사해 task-1~10 증거를 전부 main에 보존, todo-03의 옛 `HANDOFF.md`/`.debug-journal.md`는 `.omo/evidence/ultima-web/task-3/*-archive.md`로 보관. **브랜치는 삭제하지 않음**(되돌릴 수 있음). `git worktree list` → main만 남음.
 - Node 22: 시스템 `/usr/bin/node`(v20, apt)는 sudo 없이 못 바꿔서, 공식 v22.23.3 LTS tarball을 SHASUMS256으로 검증 후 `~/.local/opt/node-v22.23.3-linux-x64`에 설치, `~/.local/opt/node22` 심볼릭 링크, `~/.profile`·`~/.bashrc` 끝에 중복 방지 PATH 블록 추가. `bash -lc 'node -v'` → v22.23.3. Node 22에서 `npm ci`(EBADENGINE 경고 없음), `npm run test:unit`(13 files/99 tests), `typecheck`, `build`, `verify:repo-sources`, `npx playwright test --project=chromium`(8 passed) 전부 exit 0, 추적 파일 변경 없음(package-lock 그대로).
 
+### Todo 21.1 완료 기록 (2026-09-25, branch `todo-21-real-engine`, commit `542ce34`, main에는 아직 merge 안 함)
+
+**한 일 (전부 이 세션에서 직접 실행/확인)**:
+- `scripts/build-wasm.mjs`의 `sourceFiles`를 `vendor/xu4/src/Makefile.common`의 CSRCS/CXXSRCS 전체(UI=glfw, CONF=boron 조건부 포함, 69개 파일)로 교체. `screen_$(UI).cpp` → `screen_glfw.cpp`, `sound_$(SOUND).cpp` → 신규 `scripts/web-sound-silent.cpp`(아래), `xu4.cpp`는 실제 `vendor/xu4/src/xu4.cpp` 그대로. `gpu_opengl.cpp`/`discourse_tlk.cpp`/`discourse_castle.cpp`/`config_data.cpp`/`script_boron.cpp`는 각각 다른 파일이 `#include`하므로 목록에 안 넣음(계획대로).
+- `scripts/web-stub.cpp`, `scripts/web-main.cpp` 삭제(`git rm`) — 아무 실제 엔진 코드도 이 두 파일의 이름을 참조하지 않는 것을 `grep -rln "xu4_enqueue_key\|xu4_submit_text\|xu4_config_get\|gpuInit\|gpuBeginFrame\|savegameSave" vendor/xu4/src`로 먼저 확인(결과 0건).
+- 신규 `scripts/web-sound-silent.cpp`: `vendor/xu4/src/sound.h`에 선언된 모든 함수를 헤더의 실제 시그니처(C++ linkage, `Sound`/`uint16_t` 등 실제 타입) 그대로 no-op으로 구현.
+- `-DVERSION='"DR-1.0"'` → `-DVERSION="DR-1.0"`로 수정(JS 문자열 리터럴의 홑따옴표를 없앰). spawnSync는 셸을 안 거치므로 예전 값은 emcc argv에 홑따옴표가 문자 그대로 들어갔었음.
+- 첫 `npm run build:wasm -- --debug` 시도에서 실제로 걸린 컴파일 에러 2건(둘 다 vendor 소스 자체의 버그, tree-hash pinning 때문에 vendor 원본은 안 고치고 `build-wasm.mjs`가 **build-dir 복사본만** 패치):
+  1. `gpu_opengl.cpp`의 `GPU_RENDER` 매크로 분기(`gpu_resetMap`/`gpu_drawMap`, 1300번대/1600번대 줄)가 `Map`/`BlockingGroups`를 역참조하는데 `gpu.h`는 전방선언만 함. 네이티브는 `GPU_RENDER`를 기본으로 안 켜서(`GPU ?= scale`) 이 분기가 이제까지 한 번도 컴파일된 적이 없었음. `build-wasm.mjs`가 복사된 `build/wasm-release/src/gpu_opengl.cpp`에 `#include "map.h"`를 주입.
+  2. `sound.h`가 `uint16_t`를 쓰는데 `<cstdint>`를 안 받음(다른 TU는 항상 그 전에 다른 헤더가 먼저 받아서 안 걸렸던 것) → `web-sound-silent.cpp`에 `#include <cstdint>` 추가.
+- 두 수정 후 링크 성공. `.emsdk/upstream/bin/llvm-nm --defined-only build/wasm-release/xu4.wasm`: 정의 심볼 **2832개**(이전 커밋 기준 ~251개), `GameController::GameController()`/`avatarMoved`/`checkBridgeTrolls` 등 실제 게임 로직 심볼 확인. `xu4.wasm` 7,496,388 bytes(이전 스텁 전용 빌드보다 훨씬 큼).
+- 검증 게이트 전부 실행, 전부 exit 0: `npm run test:unit`(13 files/99 tests, `wasm-symbols.test.ts` 8개 포함 — 새 바이너리로도 그대로 통과), `npm run verify:repo-sources`(4 pinned components — vendor/xu4 tree hash 그대로임을 재확인), `npm run typecheck`, `npm run build`, `git diff --check`. `main` merge는 아직 안 함(21.2~21.4 남음).
+
+**아직 확인 안 한 것 (21.2~21.4 몫)**:
+- 링크만 됐고 브라우저에서 실제로 실행/렌더/입력된 적은 아직 없음. `main()`을 실제로 호출하면 무슨 일이 일어나는지 전혀 모름(모듈/ZIP 경로 문제로 `errorFatal` exit할 가능성이 높음 — Todo 21.2가 다루는 부분).
+- `gpu_opengl.cpp`의 `glMapBufferRange` 호출들은 그대로 남아 있음(vendor 원본 안 고침) — 링크는 됐지만 WebGL2에서 실제로 도는지는 21.3에서 처음 확인.
+
+### Todo 21 완료 기록 (2026-09-25, branch `todo-21-real-engine`, commit `70d14db`, main에는 아직 merge 안 함)
+
+사용자 지시: "plan.md 기준으로 다음 단계 진행해" → "왜 계속 안하고 멈춘거야?" → "중간에 물어보지 말고 끝까지(Todo 21 끝날 때까지) 진행해!!!" (반복 확인). 21.1 완료 후 멈춘 것에 대한 사용자 지적을 받아, 이후 21.2~21.4를 중간 확인 없이 끝까지 진행함(설치/큰 다운로드/push/main merge가 아닌 한 안 멈추는 것으로 이해하고 실행).
+
+**21.2 FS/경로 해결 — 실측 절차 (전부 이 세션에서 직접 실행)**:
+- Node 스크립트로 실제 빌드된 `xu4.mjs`/`xu4.wasm`을 Node에서 직접 인스턴스화(`noInitialRun:true`)하고 `/ultima4.zip`, `/render.pak`, `/Ultima-IV.mod`를 FS 루트에 쓴 뒤 `callMain(["-v"])`로 verbose 로그를 실측 → `u4find_path`가 절대/상대 경로를 먼저 시도(`u4fexists(fname)`)하고 그다음 `resourcePaths × subPaths` 조합을 시도한다는 것을 실제 로그("ultima4.zip successfully found", "trying to open ./render.pak")로 확인. 추측이 아니라 실제 실행 결과.
+- `Module.ENV.HOME` 설정 타이밍 문제를 실측으로 발견: `await factory(...)` 이후에 설정하면 이미 늦음(`getEnvStrings.strings` 캐시가 먼저 굳음) → `preRun` 콜백 안에서 설정해야 함을 별도 확인 스크립트로 증명(`Reading settings /persist/.xu4/xu4rc` 로그로 확인). 추가로 `factoryOptions`를 `{ ...factoryOptions }`로 spread해서 `options.factory()`에 넘기면 **다른 객체**가 되어 `Module`과 참조가 어긋나는 실제 버그를 유닛 테스트(가짜 factory가 real Emscripten의 `Module['ENV']=ENV` 참조 공유를 재현하도록 고친 뒤)로 잡음 — `factoryOptions` 객체 참조를 그대로 넘기도록 수정.
+- `persistence.attach()`를 처음으로 `startEngine()`에 연결(`saveDir: /persist/.xu4`, `settingsFile: /persist/.xu4/xu4rc` — `Settings::init`의 `__unix__`(비-`__linux__`) 분기와 `game.cpp`/`intro.cpp`/`savegame.cpp`가 전부 `getUserPath()` 기준으로 세이브를 쓰는 것을 소스로 확인).
+- 실제 실행 중 발견한 버그 1: `FS.trackingDelegate`가 `-sFS_DEBUG=1` 없이는 **아예 존재하지 않음**(`.emsdk/upstream/emscripten/src/lib/libfs.js`의 `#if FS_DEBUG` 블록 전체, 필드 선언 포함). Todo 10의 유닛 테스트는 가짜 FS만 써서 이걸 이제까지 못 잡았음. `build-wasm.mjs`에 `-sFS_DEBUG=1` 추가.
+- 발견한 버그 2: `build/host/modules/render.pak`이 Step 2(2026-09-20) 이후로 재빌드된 적이 없어서, 지금 `npm run build:modules`를 다시 돌리면 (같은 pinned 소스인데도) 305237 → 305290 bytes로 다른 결과가 나옴 — 재빌드해서 최신으로 교체.
+
+**21.2→21.3 사이에서 발견한 실제 렌더링 버그들 (Playwright + Chromium, 실제 `ultima4.zip`)**:
+- 첫 실행: `ERROR: 0:16: ';' : syntax error` → `world.glsl` 컴파일 실패 → `errorFatal` → `exit(1)`. `WebGL2RenderingContext.prototype.shaderSource/compileShader`를 몽키패치해 실제 컴파일된 소스를 줄번호와 함께 덤프해 원인 특정: `gpu_opengl.cpp`의 `GPU_RENDER` 맵청크 렌더 경로(`gpu_resetMap`)가 `Map`/`BlockingGroups` 전체 정의가 필요한데 `gpu.h`는 전방선언만 함 — 네이티브는 `GPU_RENDER`를 기본으로 안 켜서 이 코드가 이제까지 한 번도 컴파일된 적이 없었음. `build-wasm.mjs`가 **build-dir 복사본**(`build/wasm-release/src/gpu_opengl.cpp`)에 `#include "map.h"`를 주입하는 패치 단계 추가(vendor 원본은 안 건드림).
+- 둘째: 셰이더는 컴파일됐지만 **브라우저 탭이 완전히 멈춤**(콘솔 로그 0줄, `page.locator(...).getAttribute()`조차 응답 없음). advisor에게 상담: "main-thread spin이지 느린 게 아니다, `event.cpp`의 `msecSleep`을 확인해라"는 조언을 받음. 확인 결과 `support/getTicks.c`의 `msecSleep()`이 `nanosleep()`을 무조건 호출 — 이건 실제 블로킹 syscall이라 Asyncify unwind가 아님. `event.cpp`의 정상 프레임 타이밍 경로(매 프레임, `fs->fsleep`이 0이 아닌 보통 케이스)가 이 함수를 거치기 때문에, Step 8이 추가한 바로 다음 줄의 `u4_web_frame_yield()`(브라우저 yield)에 도달하지 못하고 매 프레임 브라우저를 완전히 멈춤. `#ifdef __EMSCRIPTEN__`에서 `emscripten_sleep(ms)`로 교체(vendor 직접 수정).
+- 셋째(advisor가 같이 지적): `gpu_opengl.cpp`의 `screenTex`가 `#if defined(ANDROID) || defined(USE_GLES)` 조건에 `__EMSCRIPTEN__`이 빠져 있어서 `GL_RGB` internalFormat + `GL_RGBA` format 조합으로 `glTexImage2D`를 호출 — 데스크톱 GL은 조용히 받아주지만 WebGL2/ANGLE은 `GL_INVALID_OPERATION`("Level of detail outside of range"로 표시됨). `page.evaluate`로 `texImage2D`/`getError()`를 몽키패치해 정확한 호출 인자로 원인 특정. `|| defined(__EMSCRIPTEN__)` 추가.
+- 위 세 가지 vendor 수정(`gpu_opengl.cpp` 2건, `support/getTicks.c` 1건)마다 `vendor/source-manifest.json`의 `treeSha256`을 `summarizeSourceTree()`로 재계산해 갱신(Todo 7/8이 event.cpp/web_bridge.*를 수정하며 세운 전례를 그대로 따름 — **advisor가 "vendor/xu4는 못 건드린다는 전제 자체가 틀렸다"고 정정해준 뒤 확인**: `git log --oneline -- vendor/source-manifest.json vendor/xu4/src/event.cpp`로 Step 7/8이 이미 그렇게 했다는 걸 직접 확인).
+
+**21.3/21.4 실측 결과**:
+- `Module.canvas`를 `document.querySelector("#game-canvas")`로 연결(`src/main.ts`의 `factoryOptions`) — 이거 없으면 `Browser.getCanvas()`가 `undefined`를 반환해 `screenInit`에서 크래시.
+- 실제 `ultima4.zip`으로 부팅 → 스크린샷으로 실제 타이틀 화면("Lord British and Origin Systems, Inc. present Ultima IV: Quest of the Avatar" + 애니메이션 월드맵) 렌더 확인. `.omo/evidence/ultima-web/task-21/title-render.png`.
+- 21.4: 코드 변경 없이 실제 입력이 이미 됨을 확인 — `screen_glfw.cpp`가 `glfwSetKeyCallback`으로 자체 DOM 리스너를 붙이고, `intro.cpp`의 `IntroController::keyPressed()`가 진짜 상태 머신을 가짐(`INTRO_TITLES` → 아무 키나 → `skipTitles()` → `INTRO_MAP` → 아무 키나 → `MAP_DISABLE`+`INTRO_MENU`). Playwright로 Enter 2회를 보내 이 정확한 두 전이를 스크린샷으로 실측: 1회째 후 타이틀+애니메이션 맵 전체가 나타나고, 2회째 후 맵이 사라지고 실제 영어 메뉴 텍스트("In another world, in a time to come. / Options: / Return to the view / Journey Onward / Initiate New Game / Configure / About")가 나타남. `grep`으로 Todo 8 큐(`u4_web_drain_keys` 등)를 실제 엔진 어디서도 안 쓰는 것을 확인 — GLFW 경로가 유일한 정식 입력 경로이고, Todo 8 큐는 그대로 두되(Step 8 자체 e2e 계약 + 향후 Todo 13 IME 입력용) main.ts의 배선은 건드리지 않음(중복 전달 문제 없음: 큐가 아무것도 소비 안 해서 게임 상태에 두 번 전달될 일이 없음).
+- 이 과정에서 부수적으로 발견한 버그 2개 추가 수정: (1) `main.ts`의 모듈 자산 `fetch()`가 `response.ok`를 확인 안 해서 404여도 그 에러 페이지 본문을 파일 데이터인 것처럼 조용히 씀 → `fetchModuleAsset()` 헬퍼로 `!r.ok`면 throw하게 수정. (2) `startEngine()`이 `callMain()`이 `exit(1)`/abort로 끝나도 무조건 `{started:true}`를 반환하던 버그(21.2 초반 셰이더 실패 때 실제로 걸림) → `Module.onExit`/`onAbort`를 연결해 종료/중단 시 `runtime-error`를 dispatch하고 `{started:false}`를 반환하도록 수정.
+
+**신규 테스트**: `tests/e2e/boot-sequence.spec.ts` — happy path(비검은색 렌더 + 2회 키 입력으로 실제 상태 전이, evidence `title-render.png`), failure path(`render.pak` 404 → `runtime-error`, evidence `boot-failure.log`). WebGL 캔버스는 `preserveDrawingBuffer`가 없어서 `gl.readPixels()`/`drawImage()+getImageData()` 둘 다 이미 지워진 드로잉 버퍼를 읽어 항상 0을 반환함을 실측으로 확인(advisor 지적) → screenshot 바이트 크기를 같은 실행 안에서 스스로 보정(같은 캔버스의 "손대기 전" 스크린샷과 비교)하는 방식으로 전환.
+
+**검증 게이트 전부 실행, 전부 exit 0**: `npm run test:unit`(13 files/99 tests) · `npm run verify:repo-sources`(4 components) · `npm run typecheck` · `npm run build` · `git diff --check` · 전체 e2e 스위트(`npx playwright test --project=chromium`, 10/10, `ULTIMA4_DATA`로 실제 원본 데이터 사용).
+
 ### 남은 작업
-1. **Todo 21.1**(실제 엔진 링크)부터 착수 — `.omo/plans/ultima-web.md` Todo 21 전문 참고. 크리티컬 패스.
-2. 병렬 가능: Todo 19 workflow 골격(Node 22 CI, build/test/audit, 현재 셸 Pages 배포).
-3. 21.4 이후: Step 7/8 실제 엔진 재검증, Step 10 e2e(`save-reload.spec.ts`).
-4. 11~13 → 16 → 14 → 15 → 17 → 18 → 19 완료 → 20 → F1~F4.
+1. **Todo 10의 `tests/e2e/save-reload.spec.ts`** — persistence coordinator는 이번에 실제 엔진에 연결됐지만(21.2), 실제 저장을 발생시키는 e2e는 아직 없다. 캐릭터 생성(가상 질문 8개 + 이름 입력 등 다수의 키 입력 흐름)을 Playwright로 자동화해야 하는데, 이번 세션에서는 시간 제약으로 보류(정직하게 미완료로 남김 — 데이터 없이 "될 것 같다"고 적지 않음).
+2. 병렬 가능: Todo 19 workflow 골격(Node 22 CI, build/test/audit, 현재 셸 Pages 배포) — 아직 착수 안 함.
+3. 11~13 → 16(21.1의 무음 sound 구현 교체) → 14 → 15 → 17 → 18 → 19 완료 → 20 → F1~F4.
+4. `todo-21-real-engine` 브랜치(커밋 `542ce34`, `70d14db`)의 main merge — AGENTS.md 규칙상 사용자 확인 필요, 아직 안 함.

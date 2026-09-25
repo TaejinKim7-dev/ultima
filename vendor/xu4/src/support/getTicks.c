@@ -11,6 +11,10 @@
 #include <time.h>
 #endif
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 static int64_t getTicks_start = 0;
 
 // Return milliseconds elapsed since first call to getTicks().
@@ -42,7 +46,16 @@ uint32_t getTicks()
 
 void msecSleep(uint32_t ms)
 {
-#ifdef _WIN32
+#ifdef __EMSCRIPTEN__
+    // Todo 21.2: nanosleep() below is a real blocking syscall that does not
+    // unwind the Asyncify stack, so on the normal frame-timing path (called
+    // every frame whenever fs->fsleep is non-zero -- see event.cpp's
+    // waitCycle -- __EMSCRIPTEN__'s browser-yield block right after this
+    // call never runs at all) this permanently starves the browser's event
+    // loop: no repaint, no DOM input, no further console output, ever.
+    // emscripten_sleep() is the Asyncify-safe equivalent.
+    emscripten_sleep(ms);
+#elif defined(_WIN32)
     Sleep(ms);
 #else
    struct timespec stime;
