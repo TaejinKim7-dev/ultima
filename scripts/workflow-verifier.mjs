@@ -65,6 +65,7 @@ const REQUIRED_LINE_PATTERNS = [
   }
 ]
 
+const NAME_LINE = /^\s*-?\s*name:\s*(.*)$/
 const AUDIT_RUN_LINE = /^\s*run:.*npm run audit:dist/
 const UPLOAD_USES_LINE = /^\s*uses:\s*actions\/upload-pages-artifact@/
 const USES_LINE = /uses:\s*([^\s@]+)@(\S+)/g
@@ -121,6 +122,39 @@ function checkNodeVersionIsExact(text) {
   }
 }
 
+function isQuoted(value) {
+  return (
+    (value.startsWith('"') && value.endsWith('"') && value.length >= 2) ||
+    (value.startsWith("'") && value.endsWith("'") && value.length >= 2)
+  )
+}
+
+// A real bug this workflow shipped once: an unquoted YAML plain scalar
+// cannot contain ": " (colon immediately followed by whitespace) -- e.g.
+// `- name: Unit tests: wasm engine suite (...)` is invalid plain-scalar
+// YAML (the second colon+space looks like another mapping key to the
+// parser), and GitHub Actions rejects the *entire* workflow file before
+// any job runs. `verify:workflow` has no YAML parser to catch this via a
+// real parse error, so it checks the one place free-form prose most often
+// leaks into a YAML value: `name:` fields.
+function checkNameValuesAreYamlSafe(lines) {
+  for (const line of lines) {
+    const match = NAME_LINE.exec(line)
+    if (match === null) {
+      continue
+    }
+    const value = (match[1] ?? "").trim()
+    if (value === "" || isQuoted(value)) {
+      continue
+    }
+    if (value.includes(": ")) {
+      throw new WorkflowVerificationError(
+        `workflow has an unquoted "name:" value containing ": ", which is invalid plain YAML and would make GitHub reject the whole file: ${value}`
+      )
+    }
+  }
+}
+
 function checkAuditRunsBeforeUpload(lines) {
   const auditIndex = lines.findIndex((line) => AUDIT_RUN_LINE.test(line))
   const uploadIndex = lines.findIndex((line) => UPLOAD_USES_LINE.test(line))
@@ -172,6 +206,7 @@ export function verifyWorkflow(workflowPath) {
 
   checkRequiredSubstrings(text)
   checkRequiredLinePatterns(lines)
+  checkNameValuesAreYamlSafe(lines)
   checkActionsArePinnedToShas(text)
   checkNodeVersionIsExact(text)
   checkAuditRunsBeforeUpload(lines)

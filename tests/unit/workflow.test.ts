@@ -61,6 +61,25 @@ describe("verify:workflow", () => {
     expect(result.stderr).toContain(".nojekyll")
   })
 
+  it("rejects a workflow with an unquoted step name containing \": \" (invalid plain YAML)", () => {
+    // A real bug this project shipped once: `- name: Foo: bar (baz)` is not
+    // valid plain-scalar YAML (a colon-space inside an unquoted value ends
+    // the mapping early) -- GitHub Actions rejects the whole workflow file
+    // before any job runs. scripts/verify-workflow.mjs has no YAML parser,
+    // so it must catch this specific shape itself.
+    const path = tempWorkflowFrom((source) =>
+      source.replace(
+        /name:\s*"Unit tests: wasm engine suite \(known gap, see header comment\)"/,
+        "name: Unit tests: wasm engine suite (known gap, see header comment)"
+      )
+    )
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("invalid")
+  })
+
   it("rejects an upload artifact root that is not the dist build output", () => {
     const path = tempWorkflowFrom((source) => source.replace(/path:\s*dist\b/, "path: ."))
 

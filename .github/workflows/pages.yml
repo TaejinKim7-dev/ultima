@@ -77,7 +77,7 @@ jobs:
       - name: Unit tests (hard-gated; excludes the known wasm engine gap)
         run: npx vitest run --passWithNoTests=false --exclude tests/unit/wasm-symbols.test.ts
 
-      - name: Unit tests: wasm engine suite (known gap, see header comment)
+      - name: "Unit tests: wasm engine suite (known gap, see header comment)"
         # This suite alone is non-blocking: it needs an emsdk-built engine
         # this workflow does not yet produce. Its failure still shows up
         # as its own (non-fatal) red step, it just doesn't fail the job.
