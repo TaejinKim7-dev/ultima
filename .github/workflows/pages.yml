@@ -24,13 +24,15 @@
 # this repository, not something this workflow runs itself.
 #
 # Known gap (2026-09-25, recorded in plan.md / .omo/plans/ultima-web.md
-# Todo 19): `npm run test:unit`'s `wasm-symbols.test.ts` suite requires a
-# locally built `build/wasm-release/{xu4.js,xu4.wasm}` (Emscripten/emsdk
-# 4.0.23, see docs/SOURCE_PINS.md), which today is a manual, un-automated
-# local setup step -- this workflow does not install emsdk or build the
-# wasm engine, so that suite currently fails on a clean runner. Its step
-# below is marked `continue-on-error` for that reason, tracked separately
-# from Todo 19's own scope (see plan.md).
+# Todo 19): `tests/unit/wasm-symbols.test.ts` requires a locally built
+# `build/wasm-release/{xu4.js,xu4.wasm}` (Emscripten/emsdk 4.0.23, see
+# docs/SOURCE_PINS.md), which today is a manual, un-automated local setup
+# step -- this workflow does not install emsdk or build the wasm engine,
+# so that one suite fails on a clean runner. Only that suite's own step
+# below is `continue-on-error` (with its failure kept visible as its own
+# step); every other unit test still hard-gates this job and `deploy`,
+# so a real regression elsewhere still blocks publishing. Tracked
+# separately from Todo 19's own scope (see plan.md).
 #
 # Todo 19 is only marked done in the plan once Todos 15, 16, and 18 exist
 # too (Korean text, real audio, and the fuller dist-artifact audit that
@@ -49,10 +51,6 @@ on:
 
 permissions:
   contents: read
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
 
 jobs:
   build:
@@ -76,10 +74,14 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Unit tests
-        # See the "Known gap" note above: the wasm-symbols suite needs an
-        # emsdk-built engine this workflow does not yet produce.
-        run: npm run test:unit
+      - name: Unit tests (hard-gated; excludes the known wasm engine gap)
+        run: npx vitest run --passWithNoTests=false --exclude tests/unit/wasm-symbols.test.ts
+
+      - name: Unit tests: wasm engine suite (known gap, see header comment)
+        # This suite alone is non-blocking: it needs an emsdk-built engine
+        # this workflow does not yet produce. Its failure still shows up
+        # as its own (non-fatal) red step, it just doesn't fail the job.
+        run: npx vitest run --passWithNoTests=false tests/unit/wasm-symbols.test.ts
         continue-on-error: true
 
       - name: Build the Pages site (base "/ultima/")
@@ -107,6 +109,11 @@ jobs:
     permissions:
       pages: write
       id-token: write
+    # Scoped to this job (not the whole workflow) so a `build`-only PR run
+    # can't cancel or displace a pending `main` deploy in the same group.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

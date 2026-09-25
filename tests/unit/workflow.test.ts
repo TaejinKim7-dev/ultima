@@ -27,6 +27,18 @@ function tempWorkflowFrom(mutate: (source: string) => string): string {
   return path
 }
 
+// Removes only the line(s) matching `pattern` -- unlike a substring filter,
+// this leaves prose that merely *mentions* the same words (e.g. the header
+// comment's "id-token: write") untouched, so the mutation exercises exactly
+// "the real permission/step is gone" rather than "every trace of the word
+// is gone".
+function removeLinesMatching(source: string, pattern: RegExp): string {
+  return source
+    .split("\n")
+    .filter((line) => !pattern.test(line))
+    .join("\n")
+}
+
 function run(workflowPath: string) {
   return spawnSync("node", [scriptPath, workflowPath], { encoding: "utf8" })
 }
@@ -40,13 +52,8 @@ describe("verify:workflow", () => {
     expect(result.status, result.stderr).toBe(0)
   })
 
-  it("rejects a workflow missing the .nojekyll step", () => {
-    const path = tempWorkflowFrom((source) =>
-      source
-        .split("\n")
-        .filter((line) => !line.includes(".nojekyll"))
-        .join("\n")
-    )
+  it("rejects a workflow missing the .nojekyll run step (even though the step name and header comment still mention it)", () => {
+    const path = tempWorkflowFrom((source) => removeLinesMatching(source, /^\s*run:.*\.nojekyll/))
 
     const result = run(path)
 
@@ -63,13 +70,19 @@ describe("verify:workflow", () => {
     expect(result.stderr).toContain("artifact root")
   })
 
-  it("rejects a workflow missing the id-token: write permission", () => {
+  it("rejects a workflow missing include-hidden-files on the artifact upload (.nojekyll would be silently dropped)", () => {
     const path = tempWorkflowFrom((source) =>
-      source
-        .split("\n")
-        .filter((line) => !line.includes("id-token: write"))
-        .join("\n")
+      removeLinesMatching(source, /^\s*include-hidden-files:\s*"true"\s*$/)
     )
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("include-hidden-files")
+  })
+
+  it("rejects a workflow missing the actual id-token: write permission line (the header comment alone must not satisfy this)", () => {
+    const path = tempWorkflowFrom((source) => removeLinesMatching(source, /^\s*id-token:\s*write\s*$/))
 
     const result = run(path)
 
@@ -77,13 +90,8 @@ describe("verify:workflow", () => {
     expect(result.stderr).toContain("id-token: write")
   })
 
-  it("rejects a workflow missing the pages: write permission", () => {
-    const path = tempWorkflowFrom((source) =>
-      source
-        .split("\n")
-        .filter((line) => !line.includes("pages: write"))
-        .join("\n")
-    )
+  it("rejects a workflow missing the actual pages: write permission line", () => {
+    const path = tempWorkflowFrom((source) => removeLinesMatching(source, /^\s*pages:\s*write\s*$/))
 
     const result = run(path)
 
@@ -146,8 +154,8 @@ describe("verify:workflow", () => {
   it("rejects a workflow that runs audit:dist after the artifact upload", () => {
     const path = tempWorkflowFrom((source) => {
       const lines = source.split("\n")
-      const auditIndex = lines.findIndex((line) => line.includes("audit:dist"))
-      const uploadIndex = lines.findIndex((line) => line.includes("upload-pages-artifact"))
+      const auditIndex = lines.findIndex((line) => /^\s*run:.*npm run audit:dist/.test(line))
+      const uploadIndex = lines.findIndex((line) => /^\s*uses:\s*actions\/upload-pages-artifact@/.test(line))
       if (auditIndex === -1 || uploadIndex === -1) {
         throw new Error("fixture workflow missing expected audit/upload lines")
       }
@@ -156,7 +164,7 @@ describe("verify:workflow", () => {
       if (auditLine === undefined) {
         throw new Error("fixture workflow audit line missing")
       }
-      const newUploadIndex = lines.findIndex((line) => line.includes("upload-pages-artifact"))
+      const newUploadIndex = lines.findIndex((line) => /^\s*uses:\s*actions\/upload-pages-artifact@/.test(line))
       lines.splice(newUploadIndex + 1, 0, auditLine)
       return lines.join("\n")
     })
