@@ -697,8 +697,21 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test 
 
 **검증 게이트 전부 실행, 전부 exit 0**: `npm run test:unit`(13 files/99 tests) · `npm run verify:repo-sources`(4 components) · `npm run typecheck` · `npm run build` · `git diff --check` · 전체 e2e 스위트(`npx playwright test --project=chromium`, 10/10, `ULTIMA4_DATA`로 실제 원본 데이터 사용).
 
+### Todo 21 main merge + Todo 10 저장/재로드 e2e (2026-09-25, main `ce88bc1` 이후)
+
+사용자가 "main merge할까요?" AskUserQuestion에 "지금 merge"로 답한 뒤, 그 질문 자체에 대해 "물어보지 말라고 했는데 왜 물어봐. 앞으로 그냥 권장 방향으로 진행해"라고 명시적으로 정정함 — 이후부터는 merge/push를 포함해 사용자가 멈추라고 한 적 없는 한 확인 없이 진행. (개인 메모리 `feedback_dont_ask_proceed_with_recommended.md`에 기록해 다음 세션에도 유지되게 함.)
+
+- `todo-21-real-engine` → main 병합(`ce88bc1`), origin push 완료. 병합 전 main 기준으로 게이트 전부 재실행(exit 0).
+- 사용자 지시 "다음 단계는 뭐지? 병렬로 구현하자. 최대한"에 따라 Agent 도구로 worktree 격리된 백그라운드 에이전트 3개 launch: Todo 19(Pages workflow 골격), Todo 16(Web Audio), Todo 11(대화 패널). 각자 자기 브랜치에 커밋만 하고 main merge/push는 하지 않도록 지시(조율 세션이 순차 검토·병합). 결과는 아직 안 옴(비동기).
+- 그동안 직접 **Todo 10의 `tests/e2e/save-reload.spec.ts`**를 완료: `vendor/xu4/src/intro.cpp` 실제 캐릭터 생성 흐름(`initiateNewGame`→`finishInitiateGame`→`showStory`(24화면, 매 화면 `waitAnyKey()`)→`startQuestions`(7라운드, 라운드마다 카드 애니메이션 `wait_msecs(1000)` 2회 후 `waitAnyKey()`+`readChoice("ab")`))을 소스로 먼저 읽고, Playwright로 재현.
+  - 실측으로 확인한 타이밍 함정: 너무 빠르게(250~700ms 간격) 연속 입력하면 카드 애니메이션 중에 도착한 키가 씹혀서 라운드가 예상보다(7 대신 15~16회) 더 걸림 — 그래도 언젠가는 끝남(라운드 캡을 20으로 넉넉히 잡아 "언젠가 끝남"을 보장). 초기 진입(Enter 2회로 타이틀→메뉴)도 최소 1.5~2.5초 간격이 필요함(그보다 빠르면 키가 씹히거나 엉뚱한 상태로 감).
+  - `src/shell.ts`가 이미 `save-state` 브릿지 이벤트를 `#save-status` 텍스트로 보여주고 있고, `startEngine()`이 21.2에서 `persistence.attach()`를 진짜로 연결해뒀기 때문에, 실제 `party.sav` fopen/fclose → `FS.trackingDelegate.onCloseFile` → coordinator sync → `#save-status`="저장 완료"까지 **코드 변경 없이** 그대로 관찰됨.
+  - 재로드 검증: 새 페이지 로드(새 wasm 인스턴스) → 같은 zip 재선택 → 타이틀→메뉴(Enter 2회) → 'j'(Journey Onward) → 스크린샷으로 실제 게임 월드(파티명 "avatar", 골드 200, 상태 패널, "Press Alt-h for help") 확인. 처음엔 메뉴 화면과 게임 화면의 스크린샷 바이트 크기를 비교해 "더 크면 성공"으로 가정했다가 실패(게임 화면이 오히려 더 작게 압축됨 — 타일 위주라 로고보다 균일함) → "완전히 검은 캔버스" 기준선과 비교하는 방식(`boot-sequence.spec.ts`와 동일 기법)으로 수정.
+  - IDBFS 실패 경로: 가짜 FS가 아니라 `Object.defineProperty(window, "indexedDB", {value: undefined})`로 브라우저의 진짜 IndexedDB를 제거해 `startEngine`의 `syncfs(true)`가 실제로 실패하는 걸 확인(빠름, 0.4초).
+  - 게이트 전부 exit 0: `test:unit`(99) · `verify:repo-sources` · `typecheck` · `build` · `git diff --check` · `save-reload.spec.ts`(2/2, 실제 `ultima4.zip`).
+  - **남은 것(정직하게 미완료)**: Todo 10의 원래 승인 기준은 "export/import"도 요구하는데, `src/shell.ts`의 세이브 내보내기/가져오기 버튼은 여전히 플레이스홀더 JSON만 다룬다(`persistence.ts`의 실제 `exportSaveArchive`/`importSaveArchive`에 연결 안 됨 — 엔진 시작 후에만 FS/coordinator를 알 수 있어서 `main.ts`↔`shell.ts` 사이에 작은 핸들 전달 인터페이스가 필요, 아직 안 만듦). Step 10은 plan.md에 🟡("저장/재로드만 ✅")로 정직하게 표시.
+
 ### 남은 작업
-1. **Todo 10의 `tests/e2e/save-reload.spec.ts`** — persistence coordinator는 이번에 실제 엔진에 연결됐지만(21.2), 실제 저장을 발생시키는 e2e는 아직 없다. 캐릭터 생성(가상 질문 8개 + 이름 입력 등 다수의 키 입력 흐름)을 Playwright로 자동화해야 하는데, 이번 세션에서는 시간 제약으로 보류(정직하게 미완료로 남김 — 데이터 없이 "될 것 같다"고 적지 않음).
-2. 병렬 가능: Todo 19 workflow 골격(Node 22 CI, build/test/audit, 현재 셸 Pages 배포) — 아직 착수 안 함.
-3. 11~13 → 16(21.1의 무음 sound 구현 교체) → 14 → 15 → 17 → 18 → 19 완료 → 20 → F1~F4.
-4. `todo-21-real-engine` 브랜치(커밋 `542ce34`, `70d14db`)의 main merge — AGENTS.md 규칙상 사용자 확인 필요, 아직 안 함.
+1. **Todo 10 마무리**: export/import를 실제 함수에 연결.
+2. 병렬 진행 중인 백그라운드 에이전트 3개(Todo 19/16/11) 완료 대기 → 검토 후 순차 main merge.
+3. 12~13 → 14 → 15 → 17 → 18 → 19 완료 → 20 → F1~F4.
