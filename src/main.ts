@@ -66,14 +66,38 @@ romPickerElement?.addEventListener("change", () => {
   engineStartAttempted = true
   document.body.setAttribute("data-engine-starting", "true")
 
-  const engineUrl = `${import.meta.env.BASE_URL}engine/xu4.mjs`
-  void import(/* @vite-ignore */ engineUrl)
-    .then((module: { default: EngineModuleFactory }) =>
+  const engineBaseUrl = `${import.meta.env.BASE_URL}engine/`
+  const engineUrl = `${engineBaseUrl}xu4.mjs`
+  const fetchModuleAsset = (name: string) =>
+    fetch(`${engineBaseUrl}modules/${name}`).then((r) => {
+      // fetch() only rejects on a network failure, never on a 4xx/5xx
+      // status -- without this check a missing/renamed module asset
+      // (Todo 21's own "missing module file" failure scenario) would
+      // silently write a 404 error page's body into the wasm FS as if it
+      // were real module data, instead of failing loudly.
+      if (!r.ok) {
+        throw new Error(`${name}: HTTP ${r.status}`)
+      }
+      return r.blob()
+    })
+  void Promise.all([
+    import(/* @vite-ignore */ engineUrl) as Promise<{ default: EngineModuleFactory }>,
+    fetchModuleAsset("render.pak"),
+    fetchModuleAsset("Ultima-IV.mod")
+  ])
+    .then(([module, renderPak, gameModule]) =>
       startEngine({
         factory: module.default,
         factoryOptions: {
-          locateFile: (path: string) => `${import.meta.env.BASE_URL}engine/${path}`
+          locateFile: (path: string) => `${engineBaseUrl}${path}`,
+          // Todo 21.3: Browser.getCanvas() (the GLFW/WebGL2 port's canvas
+          // lookup) just returns Module['canvas'] -- without this, main()
+          // crashes reading properties of undefined the moment screenInit
+          // tries to bind a GL context.
+          canvas: document.querySelector("#game-canvas")
         },
+        renderPak,
+        gameModule,
         zipFile: file,
         dispatch: bridge.dispatch
       })

@@ -1,35 +1,65 @@
-// Browser startup sequence (Todo 9): instantiate the wasm module with
-// `noInitialRun: true`, prepare the virtual filesystem (MEMFS `/assets` +
-// `/data`, IDBFS-backed `/persist/profile`), validate + inject the
-// user-selected original data ZIP, unlock audio, then call `main` exactly
-// once. This module is deliberately stateless and side-effect-free beyond
-// what it's told to do -- the "call main only once per page load, and a
-// restart means a full page reload rather than calling this twice" rule
-// (design contract point 4) is enforced by the *caller* (src/main.ts),
+// Browser startup sequence (Todo 9, FS/paths corrected by Todo 21.2):
+// instantiate the wasm module with `noInitialRun: true`, prepare the virtual
+// filesystem (IDBFS-backed `/persist`), write the module assets and the
+// user-selected original data ZIP where the real engine actually searches
+// for them, validate + inject the ZIP, unlock audio, then call `main`
+// exactly once. This module is deliberately stateless and side-effect-free
+// beyond what it's told to do -- the "call main only once per page load,
+// and a restart means a full page reload rather than calling this twice"
+// rule (design contract point 4) is enforced by the *caller* (src/main.ts),
 // not here, so this function stays trivially unit-testable.
 //
 // Order matches the plan's design contract exactly: factory resolve -> FS
-// prep -> IDBFS populate -> ZIP validate/inject -> audio unlock (best
+// prep -> IDBFS populate -> module/ZIP inject -> audio unlock (best
 // effort) -> call main once. A ZIP validation failure means main is never
 // called, but the module/FS are still brought up first (so, e.g., a
 // missing-files error can still be surfaced through the same bridge
 // events the running engine would use).
+//
+// Todo 21.2 path choices, verified empirically against the real engine
+// (see handoff.md's Todo 21.2 record for the exact probe commands/output),
+// not guessed from reading the source alone:
+//  - u4find_path() (vendor/xu4/src/u4file.cpp) checks the bare filename
+//    relative to the process cwd before anything else, and Emscripten's
+//    default cwd is "/". Writing render.pak/the game module/the original
+//    ZIP at FS root ("/render.pak", "/Ultima-IV.mod", "/ultima4.zip") is
+//    therefore the first (and simplest) path every one of them resolves
+//    against -- no need to replicate xu4's other resourcePaths.
+//  - Settings::init's `__unix__` (but not `__linux__`, which Emscripten's
+//    target does not define) branch builds userPath as "$HOME/.xu4/", and
+//    every save file and the settings file itself are fopen'd relative to
+//    that same userPath. Emscripten's default $HOME is "/home/web_user";
+//    setting it to PERSIST_MOUNT makes every one of those files land
+//    inside the Todo 10 IDBFS mount without touching the mount itself.
+//  - That HOME override must happen in a `preRun` callback, not after
+//    `await factory(...)` resolves: libc's getenv() cache is already built
+//    by the time the factory's returned promise resolves (confirmed by
+//    testing both orderings against the real engine -- the post-resolve
+//    write was silently too late), and MODULARIZE reuses the options
+//    object passed into the factory as the live `Module`, so mutating
+//    `factoryOptions.ENV` from inside a `preRun` entry reaches it in time.
 
 import { BRIDGE_ABI_VERSION, type BridgeEvent } from "../bridge/types.ts"
+import { createPersistenceCoordinator, type PersistenceCoordinator, type PersistenceFS } from "./persistence.ts"
 import { validateUltima4Zip, type ZipValidationResult } from "./zip.ts"
 
+/** Where the Todo 10 IDBFS mount lives, and (via the ENV.HOME override above) where Settings/saves land under it. */
+const PERSIST_MOUNT = "/persist"
+const USER_DATA_DIR = `${PERSIST_MOUNT}/.xu4`
+const PERSISTENCE_PATHS = { saveDir: USER_DATA_DIR, settingsFile: `${USER_DATA_DIR}/xu4rc` }
+
 /** The slice of the Emscripten `FS` API this sequence actually needs. */
-export interface EmscriptenFS {
+export interface EmscriptenFS extends PersistenceFS {
   mkdirTree(path: string): void
   mount(type: unknown, opts: Record<string, unknown>, mountpoint: string): void
-  writeFile(path: string, data: Uint8Array): void
-  syncfs(populate: boolean, callback: (error: Error | null) => void): void
 }
 
 /** The slice of the Emscripten module object this sequence actually needs. */
 export interface EngineModule {
   readonly FS: EmscriptenFS
   readonly IDBFS: unknown
+  /** Exported via EXPORTED_RUNTIME_METHODS; see the ENV.HOME note above. */
+  readonly ENV: Record<string, string>
   callMain(args?: readonly string[]): void
 }
 
@@ -40,6 +70,10 @@ export interface StartEngineOptions {
   readonly factory: EngineModuleFactory
   /** Extra options merged into the factory call (e.g. `wasmBinary`, `locateFile`). */
   readonly factoryOptions?: Record<string, unknown>
+  /** render.pak bytes (Todo 6/build-modules output), written to FS root before main(). */
+  readonly renderPak: Blob
+  /** The game module (Ultima-IV.mod) bytes, written to FS root before main(). */
+  readonly gameModule: Blob
   /** The user-selected original data archive. */
   readonly zipFile: Blob
   /** The shell's bridge dispatch function -- see src/shell.ts. */
@@ -51,6 +85,8 @@ export interface StartEngineOptions {
    * jsdom/test environments without Web Audio, etc.).
    */
   readonly unlockAudio?: () => Promise<void>
+  /** Observes native save/settings writes and flushes IDBFS (Todo 10); defaults to a fresh coordinator. */
+  readonly persistenceCoordinator?: PersistenceCoordinator
 }
 
 export type StartEngineResult =
@@ -105,20 +141,50 @@ function syncfsAsync(fs: EmscriptenFS, populate: boolean): Promise<void> {
  */
 export async function startEngine(options: StartEngineOptions): Promise<StartEngineResult> {
   const unlockAudio = options.unlockAudio ?? defaultUnlockAudio
+  const persistence = options.persistenceCoordinator ?? createPersistenceCoordinator()
+
+  // See the module doc comment: this must run as a preRun callback, not
+  // after the factory promise resolves, or the engine's getenv("HOME")
+  // cache is already built with Emscripten's default. MODULARIZE reuses
+  // this exact object as the live `Module` -- it must stay the same
+  // reference all the way into options.factory(), not get copied through
+  // a `{ ...factoryOptions }` object-literal spread at the call site,
+  // or the preRun closure below ends up mutating an object the glue never
+  // sees.
+  const factoryOptions: Record<string, unknown> = { ...options.factoryOptions, noInitialRun: true }
+  const priorPreRun = Array.isArray(factoryOptions["preRun"]) ? (factoryOptions["preRun"] as unknown[]) : []
+  factoryOptions["preRun"] = [
+    ...priorPreRun,
+    () => {
+      ;(factoryOptions["ENV"] as Record<string, string>)["HOME"] = PERSIST_MOUNT
+    }
+  ]
+
+  // callMain() below is fire-and-forget (Asyncify: it returns at the
+  // program's actual exit OR its first yield, and there is no way to tell
+  // those apart from the return value alone). Without this, a main() that
+  // exits/aborts before ever yielding -- e.g. Todo 21.2's original shader
+  // compile failure -- would still fall through to the success path below
+  // and dispatch "engine started" once it does return.
+  let engineExited: { readonly code: number; readonly detail: string } | null = null
+  factoryOptions["onExit"] = (code: number) => {
+    engineExited = { code, detail: `엔진이 종료되었습니다 (code ${code})` }
+  }
+  factoryOptions["onAbort"] = (reason: unknown) => {
+    engineExited = { code: -1, detail: `엔진이 중단되었습니다: ${String(reason)}` }
+  }
 
   let module: EngineModule
   try {
-    module = await options.factory({ noInitialRun: true, ...options.factoryOptions })
+    module = await options.factory(factoryOptions)
   } catch (error) {
     const detail = error instanceof Error ? error.message : "unknown engine instantiation error"
     options.dispatch(runtimeError(`엔진을 초기화하지 못했습니다: ${detail}`))
     return { started: false, reason: "engine-error", detail }
   }
 
-  module.FS.mkdirTree("/assets")
-  module.FS.mkdirTree("/data")
-  module.FS.mkdirTree("/persist/profile")
-  module.FS.mount(module.IDBFS, {}, "/persist")
+  module.FS.mkdirTree(PERSIST_MOUNT)
+  module.FS.mount(module.IDBFS, {}, PERSIST_MOUNT)
 
   try {
     await syncfsAsync(module.FS, true)
@@ -142,7 +208,17 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
       )
     )
   }
-  module.FS.writeFile("/data/ultima4.zip", new Uint8Array(buffer))
+
+  // FS root, not a sandbox subdirectory: this is where u4find_path/
+  // u4find_pathc actually look first (see the module doc comment).
+  module.FS.writeFile("/render.pak", new Uint8Array(await options.renderPak.arrayBuffer()))
+  module.FS.writeFile("/Ultima-IV.mod", new Uint8Array(await options.gameModule.arrayBuffer()))
+  module.FS.writeFile("/ultima4.zip", new Uint8Array(buffer))
+
+  // Must be attached before callMain(): main() runs the engine's full
+  // blocking event loop under Asyncify, so this is the last point at
+  // which JS code runs before any native save/settings write can happen.
+  persistence.attach(module.FS, PERSISTENCE_PATHS, options.dispatch)
 
   try {
     await unlockAudio()
@@ -152,6 +228,11 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
   }
 
   module.callMain([])
+  if (engineExited) {
+    const detail: string = (engineExited as { readonly code: number; readonly detail: string }).detail
+    options.dispatch(runtimeError(detail))
+    return { started: false, reason: "engine-error", detail }
+  }
   options.dispatch(message("엔진이 시작되었습니다."))
   return { started: true }
 }

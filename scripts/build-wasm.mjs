@@ -63,7 +63,21 @@ const EMCC_FLAGS = [
   "-sENVIRONMENT=web,node",
   "-lidbfs.js",
   '-sEXPORTED_FUNCTIONS=["_main","_u4_web_enqueue_key","_u4_web_submit_text"]',
-  '-sEXPORTED_RUNTIME_METHODS=["FS","IDBFS","callMain"]',
+  // FS_DEBUG (Todo 21.2): Todo 10's persistence coordinator depends on
+  // FS.trackingDelegate.onCloseFile, but Emscripten only compiles
+  // trackingDelegate at all -- the field doesn't exist, not just the hook
+  // -- when built with FS_DEBUG (see .emsdk's src/lib/libfs.js: the whole
+  // thing is inside `#if FS_DEBUG`). Discovered because Todo 10's own
+  // tests only ever exercised a hand-written fake FS, never the real
+  // Emscripten build, so this never surfaced before Todo 21.2 wired
+  // startup.ts to a real engine and actually called it.
+  "-sFS_DEBUG=1",
+  // ENV (Todo 21.2): startup.ts sets ENV.HOME before callMain so
+  // Settings::init's $HOME-derived userPath (and therefore every save/
+  // settings file, all fopen'd relative to getUserPath()) lands inside
+  // the Todo 10 IDBFS mount at /persist instead of Emscripten's default
+  // /home/web_user.
+  '-sEXPORTED_RUNTIME_METHODS=["FS","IDBFS","callMain","ENV"]',
   "-DUSE_BORON",
   "-DCONF_MODULE",
   // spawnSync passes argv directly with no shell, so this string reaches
