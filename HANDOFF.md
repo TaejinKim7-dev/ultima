@@ -19,7 +19,7 @@
 - `scripts/workflow-verifier.mjs` (신규) — 워크플로우 텍스트 검사 로직.
 - `scripts/verify-workflow.mjs` (신규) — 위 로직의 CLI 래퍼, `npm run verify:workflow`.
 - `tests/unit/audit-dist.test.ts` (신규, 4개 테스트).
-- `tests/unit/workflow.test.ts` (신규, 14개 테스트).
+- `tests/unit/workflow.test.ts` (신규, branch tip 기준 15개 테스트 — 처음 13개로 시작해 advisor 리뷰 1차에서 1개, 2차(YAML 안전성 검사)에서 1개 더 추가됨).
 - `scripts/check-base-path.mjs` (수정) — `FORBIDDEN_BASENAMES`/`FORBIDDEN_EXTENSIONS`를 `export`로 바꿔 재사용 가능하게 함.
 - `package.json` (수정) — `"audit:dist"`, `"verify:workflow"` 스크립트 추가.
 - `plan.md` — Wave 4 표의 19번 행 ⬜→🟡, "바로 다음 순서" 갱신, "Todo 19 골격 작업" 완료 기록 절 신규.
@@ -27,12 +27,13 @@
 - `handoff.md` — "Todo 19 골격 완료 기록" 절 추가(공식 인계 기록).
 
 ## 4. 주요 결정과 근거 (Key decisions)
-- **`test:unit`을 통째로 `continue-on-error`로 두지 않은 이유**: 처음엔 `npm run test:unit` 전체를 `continue-on-error`로 뒀는데, advisor 리뷰에서 "그러면 `deploy`가 `needs: build`만 확인하니 persistence/bridge/zip-validate 같은 진짜 회귀도 배포를 막지 못한다"는 지적을 받고 실제로 맞는 말이라 고쳤다. 지금은 `npx vitest run --exclude tests/unit/wasm-symbols.test.ts`로 나머지 108(+workflow 신규 14)개를 하드 게이트하고, `wasm-symbols.test.ts`만 별도 스텝으로 `continue-on-error`(실패는 그 스텝 자체에서 계속 보이되 job을 막지 않음). `--exclude` 플래그가 Vitest 3에서 실제로 동작하는지 직접 실행해 확인(14 files/109 tests, exit 0).
+- **`test:unit`을 통째로 `continue-on-error`로 두지 않은 이유**: 처음엔 `npm run test:unit` 전체를 `continue-on-error`로 뒀는데, advisor 리뷰에서 "그러면 `deploy`가 `needs: build`만 확인하니 persistence/bridge/zip-validate 같은 진짜 회귀도 배포를 막지 못한다"는 지적을 받고 실제로 맞는 말이라 고쳤다. 지금은 `npx vitest run --exclude tests/unit/wasm-symbols.test.ts`로 나머지를 하드 게이트하고, `wasm-symbols.test.ts`만 별도 스텝으로 `continue-on-error`(실패는 그 스텝 자체에서 계속 보이되 job을 막지 않음). `--exclude` 플래그가 Vitest 3에서 실제로 동작하는지 직접 실행해 확인 — 커밋 `205fcec` 시점(workflow.test.ts 14개): 14 files/109 tests, exit 0. branch tip 커밋 `342fe4a`(workflow.test.ts 15개, 클린 clone에서 재확인): **14 files/110 tests**, exit 0.
 - **`test:unit`의 wasm-symbols 스위트가 CI에서 실패하는 이유**: 완전히 새로 clone한 저장소(`build/` 없음)에서 실제로 `npm run test:unit`을 돌려보면 `tests/unit/wasm-symbols.test.ts`만 실패한다 — wasm 엔진 빌드에 필요한 pinned emsdk(4.0.23)를 설치하는 npm 스크립트가 없어서(지금까지 전부 로컬 1회성 수동 설치), CI 러너엔 당연히 없다. 이 세션 자체 worktree도 처음엔 `build/wasm-release`가 없어서 같은 증상을 겪었다 → 메인 체크아웃의 기존 `build/wasm-release`(원본 데이터 없음을 `find`로 먼저 확인)를 복사해서 로컬 게이트만 통과시켰다. **테스트는 고치거나 약화하지 않았다.** emsdk를 CI에 자동 설치하는 일은 Todo 19의 acceptance criteria(`build:site`/`audit:dist`/`verify:workflow` 3개뿐)엔 없는 별도 작업으로 명시적으로 남긴다 — 그 결과 CI가 만드는 `dist/`에는 `/engine/`이 없다(셸만 배포).
-- **advisor 리뷰로 고친 것 (1차 커밋 `5f93788` 이후, 다음 커밋에 반영 예정)**:
+- **advisor 리뷰 1차로 고친 것 (1차 커밋 `5f93788` 이후, 커밋 `205fcec`에 반영됨)**:
   1. `verify:workflow`가 "id-token: write"/"pages: write"/"path: dist"/".nojekyll" 같은 필수 항목을 파일 전체 텍스트에서 찾고 있었는데, 이러면 실제 permission/step 줄이 지워져도 헤더 주석의 설명 문구만으로 통과해버리는 실제 버그가 있었다(실제로 재현: 옛 구현으로 "id-token: write" 실제 줄만 지운 테스트 3개가 정말로 RED였다 — `.nojekyll`, `include-hidden-files`, `id-token: write`). 고친 구현은 주석이 아닌 줄만 걸러서(`nonCommentLines`) 앵커된 정규식(`^\s*id-token:\s*write\s*$` 등)으로 검사하도록 바꿨고, `include-hidden-files: "true"` 검사도 추가했다(이게 없으면 `.nojekyll`이 아티팩트에서 조용히 빠진다는 걸 `upload-pages-artifact`의 실제 `action.yml`을 fetch해서 확인한 사실과 연결).
   2. 워크플로우 레벨 `concurrency: pages`를 `deploy` job으로만 옮겼다 — PR용 `build`가 대기 중인 `main` 배포를 같은 concurrency group에서 취소/치환해버릴 수 있어서.
   3. 계획서 의존성 매트릭스(`### Dependency matrix`)의 19번 행도 갱신 필요했는데 처음에 놓쳤다(Todo 19 항목 본문만 고치고 매트릭스 행은 안 고침) — 두 계획서 사본 모두에 반영, `cmp` 재확인.
+- **advisor 리뷰 2차로 고친 것 (커밋 `342fe4a`)**: `- name: Unit tests: wasm engine suite (known gap, see header comment)`가 인용 안 된 YAML plain scalar 안에 `": "`(콜론+공백)를 포함해 GitHub가 파일 전체를 파싱조차 못 하고 거부했을 실제 문법 오류였다. `verify:workflow`는 YAML 파서가 아니라서 못 잡았고, 시스템의 PyYAML로 실제 재현: 수정 전 파일(`git show 205fcec:...`)을 `yaml.safe_load()`에 넣으면 실제로 `mapping values are not allowed here` (`line 80, column 25`) 에러가 남 — 이름을 인용해서 고치고, 같은 버그 클래스를 잡는 `checkNameValuesAreYamlSafe()`를 RED-먼저로 검증기에 추가.
 - **GitHub Actions를 태그가 아니라 40자 commit SHA로 고정**: GitHub API로 실제 태그→커밋 SHA를 조회해서 박았다(checkout v7.0.1, setup-node v7.0.0, configure-pages v6.0.0, upload-pages-artifact v5.0.0, deploy-pages v5.0.1).
 - **`verify:workflow`를 YAML 파서 없이 구현**: devDependencies에 YAML 파서가 없고 새 패키지 설치는 사용자 확인 없이 하면 안 됨 — `scripts/repo-source-verifier.mjs`/`check-base-path.mjs`와 같은 "텍스트 기반" 관례를 따름.
 
@@ -69,7 +70,8 @@ npm run test:unit                             # 15 files / 118 tests 기대
 npm run verify:repo-sources                   # 4 components 기대
 npm run typecheck
 npm run build
-git diff --check
+git diff --check                              # working tree만 봄; 브랜치 전체를 보려면:
+git diff --check ce88bc1 HEAD                 # main(ce88bc1)부터 이 브랜치 tip까지 전체 diff, 실측 exit 0
 npm run build:site -- --base=/ultima/         # Todo 19 acceptance criteria
 npm run audit:dist                            # Todo 19 acceptance criteria
 npm run verify:workflow                       # Todo 19 acceptance criteria

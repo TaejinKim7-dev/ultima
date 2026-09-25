@@ -721,9 +721,9 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test 
 - 구현 후 GREEN(1차): 같은 명령 → 17/17 통과. 과정에서 실제 버그 1건 발견·수정 — 워크플로우 헤더 주석에 "`audit:dist` hardening" 문구를 썼다가, `checkAuditRunsBeforeUpload`가 `findIndex`로 `"audit:dist"`의 **첫 occurrence**(주석)를 잡아서 실제 순서 변조 테스트가 통과해버리는 위양성을 실측(`expected +0 to be 1`) → 주석 문구를 "the fuller dist-artifact audit"로 바꿔 재통과. 이건 진짜 RED→GREEN 사이클이었다(테스트를 고친 게 아니라 구현/주석의 실제 문제를 고침).
 - **advisor 리뷰(1차 커밋 `5f93788` 직후) → 2차 RED/GREEN**: advisor가 `verify:workflow`의 필수 항목 검사(id-token/pages 권한, `.nojekyll`, artifact root)가 파일 전체 텍스트에 대한 단순 substring 검사라서, 헤더 주석에 같은 단어가 있으면 **실제 permission/step 줄이 지워져도 통과**하는 구조적 약점을 지적. `tests/unit/workflow.test.ts`의 관련 테스트 3개를 "주석은 남기고 실제 줄만 지우는" 정밀한 mutation으로 다시 쓴 뒤, 옛 구현으로 먼저 실행 → **실제로 3개 RED**(`.nojekyll` 스텝, `include-hidden-files`, `id-token: write` — `expected +0 to be 1`, 각각). `nonCommentLines()`로 주석을 걸러내고 앵커된 정규식(`^\s*id-token:\s*write\s*$` 등)으로 검사하도록 `scripts/workflow-verifier.mjs`를 고친 뒤 재실행 → 14/14 GREEN(신규 `include-hidden-files` 테스트 1개 추가로 13→14).
 
-**발견한 문제, 해결 안 하고 명시적으로 남긴 것**: 완전히 새로 clone한 저장소(`build/` 없음)에서 `npm run test:unit`을 실제로 돌려보면 `tests/unit/wasm-symbols.test.ts`만 실패하고 나머지 14개 파일/109개 테스트는 통과한다(`git clone --no-hardlinks --single-branch`로 이 worktree를 scratchpad에 실제로 clone해서 실측). 원인: wasm 엔진 빌드에 필요한 pinned emsdk(4.0.23, `docs/SOURCE_PINS.md`)를 설치하는 npm 스크립트가 없다 — 지금까지 전부 로컬 1회성 수동 설치였다(위 "2026-09-24 재계획 기록"의 "Node 22" 절 참고). 이 세션 자체 worktree(`agent-ab6e90afea7a1db3d`)도 처음엔 `build/wasm-release`가 없어서 똑같이 실패하는 걸 실측(15개 파일 중 1개 실패, 109/117 통과, 8 skipped) → 메인 체크아웃(`/home/taejin/ultima`)의 기존 `build/wasm-release`를 `find`로 원본 데이터 없음을 먼저 확인한 뒤 복사해서 로컬 게이트만 통과시켰다. **테스트를 고치거나 약화하지 않았다.** CI 워크플로우에서는 `wasm-symbols.test.ts`만 별도 스텝으로 분리해 `continue-on-error: true`로 두고(그 이유를 인라인 주석으로 설명), **나머지 109개 유닛 테스트는 그대로 하드 게이트**한다(`build`도 `deploy`도 진짜 회귀가 있으면 막힌다) — 결과적으로 CI가 만드는 `dist/`에는 `/engine/`이 없다(셸만 배포). emsdk를 CI에 자동 설치하는 일은 Todo 19의 acceptance criteria(`build:site`/`audit:dist`/`verify:workflow` 3개뿐)에는 없는 별도 작업으로 남긴다.
+**발견한 문제, 해결 안 하고 명시적으로 남긴 것** (아래 수치는 이 발견 당시, `5f93788` 시점의 실측값 — 그 뒤 `workflow.test.ts`에 테스트가 더 늘어서 지금 수치는 다르다; 브랜치 tip의 최종 실측은 아래 "Todo 19 후속 수정 2"의 클린 clone 결과를 볼 것): 완전히 새로 clone한 저장소(`build/` 없음)에서 `npm run test:unit`을 실제로 돌려보면 `tests/unit/wasm-symbols.test.ts`만 실패하고 나머지 14개 파일/108개 테스트는 통과한다(`git clone --no-hardlinks --single-branch`로 이 worktree를 scratchpad에 실제로 clone해서 실측). 원인: wasm 엔진 빌드에 필요한 pinned emsdk(4.0.23, `docs/SOURCE_PINS.md`)를 설치하는 npm 스크립트가 없다 — 지금까지 전부 로컬 1회성 수동 설치였다(위 "2026-09-24 재계획 기록"의 "Node 22" 절 참고). 이 세션 자체 worktree(`agent-ab6e90afea7a1db3d`)도 처음엔 `build/wasm-release`가 없어서 똑같이 실패하는 걸 실측(15개 파일 중 1개 실패, 108/116 통과, 8 skipped) → 메인 체크아웃(`/home/taejin/ultima`)의 기존 `build/wasm-release`를 `find`로 원본 데이터 없음을 먼저 확인한 뒤 복사해서 로컬 게이트만 통과시켰다. **테스트를 고치거나 약화하지 않았다.** CI 워크플로우에서는 `wasm-symbols.test.ts`만 별도 스텝으로 분리해 `continue-on-error: true`로 두고(그 이유를 인라인 주석으로 설명), **나머지 유닛 테스트는 그대로 하드 게이트**한다(`build`도 `deploy`도 진짜 회귀가 있으면 막힌다) — 결과적으로 CI가 만드는 `dist/`에는 `/engine/`이 없다(셸만 배포). emsdk를 CI에 자동 설치하는 일은 Todo 19의 acceptance criteria(`build:site`/`audit:dist`/`verify:workflow` 3개뿐)에는 없는 별도 작업으로 남긴다.
 
-**merge 게이트 (2026-09-25, branch `todo-19-pages-workflow`, advisor 리뷰 반영 후 최종 재실행 · 전부 exit 0)**:
+**merge 게이트 (2026-09-25, branch `todo-19-pages-workflow`, advisor 리뷰 1차 반영 직후 재실행 — 이 시점 실측값, 2차(YAML 수정) 이후 최종 수치는 아래 "Todo 19 후속 수정 2" 참고 · 전부 exit 0)**:
 ```
 npm ci                                      # 0
 npm run test:unit                           # 0 — 15 files / 117 tests (build/wasm-release를 메인 checkout에서 복사해온 뒤; wasm-symbols 8개 포함)
@@ -736,8 +736,7 @@ npm run audit:dist                          # 0 — 9 files scanned, Todo 19 acc
 npm run verify:workflow                     # 0 — Todo 19 acceptance criteria #3
 cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md   # 0 — byte-identical
 ```
-- CI가 실제로 돌릴 하드 게이트 명령도 별도로 검증: `npx vitest run --passWithNoTests=false --exclude tests/unit/wasm-symbols.test.ts` → exit 0, **14 files / 109 tests**(wasm-symbols 제외, workflow.test.ts는 14개로 증가 반영).
-- 완전히 새로 clone한 저장소(scratchpad, `build/` 없음)에서 커밋된 상태 그대로 `npm ci`·`verify:repo-sources`·`typecheck`·`build:site --base=/ultima/`·`audit:dist`·`verify:workflow`·`touch dist/.nojekyll` 전부 실제 실행해 exit 0 확인, `npm run test:unit`만 15개 중 1개 파일(wasm-symbols) 실패(14/15 통과, 109/117 통과 + 8 skipped)로 위 CI 설계와 정확히 일치함을 재확인.
+- CI가 실제로 돌릴 하드 게이트 명령도 이 worktree에서 직접 실행해 확인(클린 clone은 아님, 그냥 실행): `npx vitest run --passWithNoTests=false --exclude tests/unit/wasm-symbols.test.ts` → exit 0, **14 files / 109 tests**(이 시점의 workflow.test.ts 14개 기준). 클린 clone에서의 최종 확인은 "Todo 19 후속 수정 2"에 별도로 있다(그때 workflow.test.ts가 15개로 늘어 110개).
 
 **놓쳤다가 advisor 지적으로 고친 것**: Todo 19 항목 본문(`.omo/plans/ultima-web.md` 300번 줄대)만 진행 노트를 추가하고, 같은 파일의 `### Dependency matrix` 표(128번 줄대) 19번 행은 처음에 안 고쳤다 — 사용자 원 지시가 "Todo 19 line in the dependency matrix"를 명시적으로 짚었는데 놓친 것. 두 계획서 사본 모두 19번 행에 골격 완료 메모를 추가하고 `cmp` 재확인.
 
@@ -751,7 +750,9 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md   # 0 — byte-identical
 
 두 번째 advisor 리뷰가 지적: `scripts/verify-workflow.mjs`는 YAML 파서가 없는 텍스트 검사기라서 **YAML 구문 자체가 깨져도 통과할 수 있다** — 실제로 `- name: Unit tests: wasm engine suite (known gap, see header comment)` 줄이 정확히 그랬다. 인용 안 된 plain scalar 안에 `": "`(콜론+공백)가 있으면 안 되는데, 이 값이 그 규칙을 어겨서 GitHub Actions가 **파일 전체를 파싱조차 못 하고 거부**했을 것이다(어떤 job도 실행 안 됨).
 
-**실측 확인**: 시스템에 이미 설치된 `python3 -c "import yaml"`(PyYAML, 프로젝트 의존성 아님, 새로 설치 안 함)로 실제 파싱 시도 → 수정 전엔 "mapping values are not allowed here" 같은 파싱 에러가 났을 것(직접 재현은 안 했으나 YAML 1.1 plain-scalar 규칙상 확실). 수정 후(`name: "..."`로 인용) → `yaml.safe_load()`가 실제로 성공, 14개 step 이름 전부 온전하게 나옴을 확인.
+**실측 확인**: 시스템에 이미 설치된 `python3 -c "import yaml"`(PyYAML, 프로젝트 의존성 아님, 새로 설치 안 함)로 양쪽 다 실제로 재현/확인함.
+- 수정 전(`git show 205fcec:.github/workflows/pages.yml`로 그 시점 파일을 꺼내 파싱 시도) → **실제로 파싱 에러 재현**: `yaml.YAMLError: mapping values are not allowed here` (`line 80, column 25`).
+- 수정 후(`name: "..."`로 인용, 현재 branch tip) → `yaml.safe_load()`가 실제로 성공, 14개 step 이름 전부 온전하게 나옴을 확인.
 
 **고친 것**:
 - `.github/workflows/pages.yml`의 그 줄을 `name: "Unit tests: wasm engine suite (known gap, see header comment)"`로 인용.
@@ -770,6 +771,6 @@ npm run verify:workflow -- .github/workflows/pages.yml                    # 0
 touch dist/.nojekyll                                                      # 성공
 python3 -c "import yaml; yaml.safe_load(open('.github/workflows/pages.yml'))"     # 성공, 예외 없음
 ```
-이 worktree(`build/wasm-release` 있음)에서 로컬 게이트 최종 재실행도 전부 exit 0: `npm ci` · `npm run test:unit`(15 files/118 tests) · `npm run verify:repo-sources` · `npm run typecheck` · `npm run build` · `git diff --check` · `npm run build:site -- --base=/ultima/` · `npm run audit:dist`(9 files) · `npm run verify:workflow` · `cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md`.
+이 worktree(`build/wasm-release` 있음)에서 로컬 게이트 최종 재실행도 전부 exit 0: `npm ci` · `npm run test:unit`(15 files/118 tests) · `npm run verify:repo-sources` · `npm run typecheck` · `npm run build` · `git diff --check ce88bc1 HEAD`(브랜치 전체 diff, 단순 `git diff --check`는 이미 커밋된 뒤라 아무것도 안 봄) · `npm run build:site -- --base=/ultima/` · `npm run audit:dist`(9 files) · `npm run verify:workflow` · `cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md`.
 
 **브랜치 최종 상태**: `todo-19-pages-workflow`, 커밋 3개 — `5f93788`(골격) → `205fcec`(advisor 리뷰 1차: 검증기 구조 검사 강화, test:unit 부분 게이트로 축소, concurrency 스코프, 의존성 매트릭스) → `342fe4a`(advisor 리뷰 2차: YAML 인용 오류 수정). main에는 merge/push 안 함 — 조정 세션 결정 대기.
