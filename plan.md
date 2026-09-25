@@ -76,7 +76,7 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 | 16 | Web Audio 음악/효과음 + RFX 생성 | ⬜ | ⬜ | 6,9,21 (21.1의 무음 구현을 교체) |
 | 17 | 브라우저 통합 게임 진행 e2e (새 게임부터) | ⬜ | ⬜ | 10,12,13,15,16,21 |
 | 18 | 실패/보안/개인정보/회귀 경계 강화 (`audit:dist`) | ⬜ | ⬜ | 17 |
-| 19 | GitHub Actions Pages workflow + `/ultima/` release artifact | ⬜ | — | 15,16,18 (**골격은 지금 병렬 착수 가능**) |
+| 19 | GitHub Actions Pages workflow + `/ultima/` release artifact | 🟡 | — | 15,16,18 (골격 완성, 브랜치 `todo-19-pages-workflow`, main 미merge) |
 | 20 | README/사용자 가이드/증거 인덱스/handoff | ⬜ | — | 19 |
 
 ### Final — 독립 검증 (F1~F4 = 진행률 22~25번째)
@@ -167,9 +167,18 @@ Todo 21 완료 (2026-09-25, branch `todo-21-real-engine`, main에는 아직 merg
 - 검증 게이트 전부 exit 0: `npm run test:unit`(13 files/99 tests) · `verify:repo-sources`(4 components) · `typecheck` · `build` · `git diff --check` · 전체 e2e 스위트(10/10, Chromium).
 - 상세 조사 과정(각 버그를 어떻게 찾았는지, advisor 상담 내용 포함)은 `handoff.md` "Todo 21 완료 기록" 참고.
 
+Todo 19 골격 작업 (2026-09-25, branch `todo-19-pages-workflow`, main에는 아직 merge 안 함, 🟡 부분 진행):
+- `.github/workflows/pages.yml` 신규 작성: `build`(push+PR, `npm ci`→`verify:repo-sources`→`typecheck`→`test:unit`(아래 참고, `continue-on-error`)→`build:site -- --base=/ultima/`→`audit:dist`→`verify:workflow`→`.nojekyll`→`upload-pages-artifact`)와 `deploy`(`needs: build`, `push`+`main`일 때만, `configure-pages`→`deploy-pages`) 2-job 구조. 모든 `uses:`를 40자 commit SHA로 고정(체크아웃 v7.0.1/setup-node v7.0.0/configure-pages v6.0.0/upload-pages-artifact v5.0.0/deploy-pages v5.0.1, 전부 GitHub API로 실제 태그→커밋 SHA 조회 후 고정). `node-version: "22.23.3"` 고정(로컬 개발 버전과 동일). 헤더 주석에 HTTPS repo URL·SSH remote·Pages URL·Pages Source="GitHub Actions" 설정 안내·비파괴적 SSH 인증 확인 명령(`ssh -T git@github.com`)을 문서화 — 이 워크플로우 자체는 git push를 전혀 하지 않음(공식 Pages Actions는 OIDC/REST API 기반이라 SSH 불필요)을 명시.
+- 신규 `npm run audit:dist`(`scripts/audit-dist.mjs`): dist artifact에서 원본 게임 데이터 확장자(zip/sav/ega/map/tlk/exe)와 개발용 tooling 파일(`scripts/check-base-path.mjs`의 `FORBIDDEN_BASENAMES`/`FORBIDDEN_EXTENSIONS` 재사용) 유출을 검사. Todo 18이 test-hook/cheat-API/XSS 등으로 이 audit을 더 넓힐 예정임을 주석에 명시.
+- 신규 `npm run verify:workflow`(`scripts/workflow-verifier.mjs` + `scripts/verify-workflow.mjs`): YAML 파서 없이 텍스트 기반으로 HTTPS URL·SSH remote·Pages URL·`--base=/ultima/`·`pages: write`·`id-token: write`·artifact root(`path: dist`)·`.nojekyll`·모든 `uses:`의 SHA 고정 여부·`node-version` 정확한 버전·`audit:dist`가 upload보다 먼저 실행되는지·`git push` 부재·원본 데이터 확장자 부재를 검사.
+- TDD: `tests/unit/audit-dist.test.ts`(4개), `tests/unit/workflow.test.ts`(13개) 전부 RED(스크립트/워크플로우 파일 없음, 17/17 실패) 확인 후 구현 → GREEN(17/17 통과). 과정에서 워크플로우 헤더 주석에 우연히 `audit:dist` 문자열이 두 번 나와(주석+실제 스텝) 순서 검사 테스트가 첫 위양성으로 실패한 것을 실제로 잡아 주석 문구를 고쳐 재통과시킴(진짜 RED→GREEN 사이클).
+- **실제로 발견한, 아직 안 풀린 문제**: 완전히 새로 clone한 저장소(`build/` 없음)에서 `npm run test:unit`을 실제로 실행해보니 `tests/unit/wasm-symbols.test.ts`가 실패한다(다른 14개 파일/108개 테스트는 통과). 원인: wasm 엔진 빌드에 필요한 pinned emsdk(4.0.23, `docs/SOURCE_PINS.md`)가 어떤 npm 스크립트로도 자동 설치되지 않고, 지금까지 전부 로컬 1회성 수동 설치였음(`handoff.md` Node 22 절 참고) — CI 러너는 당연히 이게 없다. 이번 세션 자체 worktree도 처음엔 `build/wasm-release`가 없어서 똑같이 실패하는 것을 실측(클린 clone 시뮬레이션과 동일 증상) → 메인 체크아웃의 기존 빌드 산출물(`build/wasm-release`, 27MB, 원본 데이터 없음 확인 후)을 복사해 로컬 게이트만 통과시킴. **테스트를 고치거나 약화하지 않았고**, CI 워크플로우의 `test:unit` 스텝은 `continue-on-error`로 두고 주석으로 이 사실을 명시 — 그 결과 CI가 만드는 `dist/`에는 `/engine/`이 없다(셸만 배포, 2026-09-24 재계획이 허용한 범위와 일치). emsdk를 CI에 자동 설치하는 일은 Todo 19의 범위 밖으로 남겨둠(별도 결정 필요).
+- 검증 게이트 전부 실제 실행, 전부 exit 0: `npm ci` · `npm run test:unit`(15 files/116 tests) · `npm run verify:repo-sources`(4 components) · `npm run typecheck` · `npm run build` · `git diff --check` · `npm run build:site -- --base=/ultima/` · `npm run audit:dist`(9 files) · `npm run verify:workflow`.
+- 완료 판정: 여전히 15,16,18 이후. 체크박스는 의도적으로 `[ ]` 유지.
+
 ## 바로 다음 순서 (2026-09-25 갱신 — Todo 21 완료, 크리티컬 패스 해소)
 1. **Todo 10의 `tests/e2e/save-reload.spec.ts`** — persistence coordinator는 21.2에서 실제 엔진에 연결됐지만, 실제 저장을 발생시키는 e2e는 아직 없다. 캐릭터 생성(다수의 이름/가상 프롬프트) 흐름을 Playwright로 자동화해 실제 IDBFS write + 페이지 재로드 후 생존을 확인해야 Step 10이 ✅로 바뀐다. Todo 21처럼 크리티컬 패스는 아니지만, 남은 항목 중 가장 먼저 처리하기 좋다(엔진이 이제 실제로 도니까).
-2. **병렬 가능**: Todo 19의 workflow 골격(Node 22 CI · `npm ci`/unit/typecheck/build/audit · 현재 셸의 Pages 배포). 완료 판정은 원래 선행조건(15·16·18) 이후.
+2. Todo 19의 workflow 골격은 이번 세션에서 완성됨(branch `todo-19-pages-workflow`, main 미merge — `.github/workflows/pages.yml`, `npm run audit:dist`, `npm run verify:workflow` 신규). 남은 것: CI에서 emsdk를 설치해 wasm 엔진까지 빌드하는 일(현재는 셸만 배포), 그리고 원래 선행조건(15·16·18) 완료 후 최종 acceptance 재확인.
 3. 11~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) → 16(설계 메모 `.omo/drafts/step-16-web-audio-design.md`, 21.1의 무음 구현 교체) → 14 → 15(번역 4402건, 워크플로우 병렬 처리 후보).
 4. 17 → 18 → 19 완료 → 20 → F1~F4.
 5. `todo-21-real-engine` 브랜치(커밋 `542ce34`, `70d14db`) main merge — AGENTS.md 규칙상 사용자 확인 후 진행.

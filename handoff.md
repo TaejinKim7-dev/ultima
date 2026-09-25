@@ -699,6 +699,45 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test 
 
 ### 남은 작업
 1. **Todo 10의 `tests/e2e/save-reload.spec.ts`** — persistence coordinator는 이번에 실제 엔진에 연결됐지만(21.2), 실제 저장을 발생시키는 e2e는 아직 없다. 캐릭터 생성(가상 질문 8개 + 이름 입력 등 다수의 키 입력 흐름)을 Playwright로 자동화해야 하는데, 이번 세션에서는 시간 제약으로 보류(정직하게 미완료로 남김 — 데이터 없이 "될 것 같다"고 적지 않음).
-2. 병렬 가능: Todo 19 workflow 골격(Node 22 CI, build/test/audit, 현재 셸 Pages 배포) — 아직 착수 안 함.
+2. 병렬 가능: Todo 19 workflow 골격(Node 22 CI, build/test/audit, 현재 셸 Pages 배포) — **아래 "Todo 19 골격 완료 기록" 참고, 이번 세션에서 완료(branch `todo-19-pages-workflow`, main 미merge)**.
 3. 11~13 → 16(21.1의 무음 sound 구현 교체) → 14 → 15 → 17 → 18 → 19 완료 → 20 → F1~F4.
 4. `todo-21-real-engine` 브랜치(커밋 `542ce34`, `70d14db`)의 main merge — AGENTS.md 규칙상 사용자 확인 필요, 아직 안 함.
+
+### Todo 19 골격 완료 기록 (2026-09-25, branch `todo-19-pages-workflow`, main에는 아직 merge/push 안 함)
+
+**목표와 범위**: `.omo/plans/ultima-web.md` Todo 19 전문 참고. 2026-09-24 재계획 메모("Todo 19의 workflow 골격은 지금 병렬 착수 가능, 완료 판정은 15·16·18 이후")에 따라 골격만 구현하고 체크박스는 `[ ]`로 유지.
+
+**만든 것**:
+- `.github/workflows/pages.yml` — 2-job(`build`, `deploy`) 구조.
+  - `build`(push+PR 둘 다 트리거): `actions/checkout` → `actions/setup-node`(`node-version: "22.23.3"`) → `npm ci` → `npm run verify:repo-sources` → `npm run typecheck` → `npm run test:unit`(`continue-on-error: true`, 이유는 아래 "발견한 문제" 참고) → `npm run build:site -- --base=/ultima/` → `npm run audit:dist` → `npm run verify:workflow` → `touch dist/.nojekyll` → `actions/upload-pages-artifact`(`path: dist`, `include-hidden-files: "true"`).
+  - `deploy`(`needs: build`, `if: github.event_name == 'push' && github.ref == 'refs/heads/main'`만): `actions/configure-pages` → `actions/deploy-pages`. `permissions: pages: write, id-token: write`, `environment: github-pages`.
+  - 모든 `uses:`를 40자 commit SHA로 고정(GitHub API `GET /repos/<owner>/<repo>/releases`와 `GET /repos/<owner>/<repo>/commits/<tag>`를 실제로 호출해서 조회): `actions/checkout@3d3c42e...` (v7.0.1), `actions/setup-node@820762...` (v7.0.0), `actions/configure-pages@45bfe01...` (v6.0.0), `actions/upload-pages-artifact@fc324d3...` (v5.0.0), `actions/deploy-pages@368f825...` (v5.0.1). 전체 SHA는 파일 자체에서 확인.
+  - 헤더 주석: HTTPS repo URL(`https://github.com/TaejinKim7-dev/ultima`), SSH write remote(`git@github.com:TaejinKim7-dev/ultima.git`), Pages URL(`https://taejinkim7-dev.github.io/ultima/`), Pages Source를 "GitHub Actions"로 설정하라는 안내, 비파괴적 SSH 인증 확인 명령(`ssh -T git@github.com`, 실제로는 exit 1이지만 "successfully authenticated" 메시지가 뜨면 정상이라는 설명 포함) — 그리고 "이 워크플로우 자체는 git push를 전혀 안 한다(공식 Pages Actions는 OIDC+REST API)"는 설명. `verify:workflow`가 파일 전체에 `git push` 문자열이 없는지 검사해서 이 설명이 거짓이 아님을 강제한다.
+- `scripts/audit-dist.mjs` (`npm run audit:dist`): `dist/` 안에서 (1) 원본 게임 데이터 확장자(zip/sav/ega/map/tlk/exe, 대소문자 무관, `scripts/repo-source-verifier.mjs`와 같은 패턴), (2) dev/build-tooling 파일(`scripts/check-base-path.mjs`의 `FORBIDDEN_BASENAMES`/`FORBIDDEN_EXTENSIONS`를 `export`해서 재사용) 유출을 검사하고, (3) `index.html`이 아티팩트 루트에 있는지 확인. Todo 18이 test-hook/cheat-API/XSS/메모리 검사로 이걸 더 넓힐 것이라고 주석에 명시.
+- `scripts/workflow-verifier.mjs`(로직) + `scripts/verify-workflow.mjs`(CLI, `npm run verify:workflow`): YAML 파서 없이(devDependencies에 없고, 새 패키지 설치는 이 세션 권한 밖) 텍스트/정규식으로 검사: HTTPS URL, SSH remote, Pages URL, `--base=/ultima/`, `pages: write`, `id-token: write`, artifact root(`path: dist`), `.nojekyll`, 모든 `uses:`가 40자 SHA인지, `node-version`이 정확한 버전인지(`22` 같은 floating 거부), `audit:dist` 스텝이 upload 스텝보다 먼저 나오는지, `git push` 부재, 원본 데이터 확장자 부재.
+
+**TDD (RED → GREEN, 전부 이 세션에서 직접 실행)**:
+- RED: `tests/unit/audit-dist.test.ts`(4개) + `tests/unit/workflow.test.ts`(13개)를 스크립트/워크플로우 파일이 존재하지 않는 상태에서 먼저 실행 → `npx vitest run --passWithNoTests=false tests/unit/audit-dist.test.ts tests/unit/workflow.test.ts` → **17/17 전부 실패**(`ENOENT`류, 스크립트/파일 없음).
+- 구현 후 GREEN: 같은 명령 → 17/17 통과. 과정에서 실제 버그 1건 발견·수정 — 워크플로우 헤더 주석에 "`audit:dist` hardening" 문구를 썼다가, `checkAuditRunsBeforeUpload`가 `findIndex`로 `"audit:dist"`의 **첫 occurrence**(주석)를 잡아서 실제 순서 변조 테스트가 통과해버리는 위양성을 실측(`expected +0 to be 1`) → 주석 문구를 "the fuller dist-artifact audit"로 바꿔 재통과. 이건 진짜 RED→GREEN 사이클이었다(테스트를 고친 게 아니라 구현/주석의 실제 문제를 고침).
+
+**발견한 문제, 해결 안 하고 명시적으로 남긴 것**: 완전히 새로 clone한 저장소(`build/` 없음)에서 `npm run test:unit`을 실제로 돌려보면 `tests/unit/wasm-symbols.test.ts`만 실패하고 나머지 14개 파일/108개 테스트는 통과한다(`git clone --no-hardlinks --single-branch`로 이 worktree를 scratchpad에 실제로 clone해서 실측). 원인: wasm 엔진 빌드에 필요한 pinned emsdk(4.0.23, `docs/SOURCE_PINS.md`)를 설치하는 npm 스크립트가 없다 — 지금까지 전부 로컬 1회성 수동 설치였다(위 "2026-09-24 재계획 기록"의 "Node 22" 절 참고). 이 세션 자체 worktree(`agent-ab6e90afea7a1db3d`)도 처음엔 `build/wasm-release`가 없어서 똑같이 실패하는 걸 실측(15개 파일 중 1개 실패, 108/116 통과) → 메인 체크아웃(`/home/taejin/ultima`)의 기존 `build/wasm-release`를 `find`로 원본 데이터 없음을 먼저 확인한 뒤 복사해서 로컬 게이트만 통과시켰다. **테스트를 고치거나 약화하지 않았다.** CI 워크플로우의 `test:unit` 스텝은 `continue-on-error: true`로 두고 그 이유를 인라인 주석으로 설명했다 — 결과적으로 CI가 만드는 `dist/`에는 `/engine/`이 없다(셸만 배포). emsdk를 CI에 자동 설치하는 일은 Todo 19의 acceptance criteria(`build:site`/`audit:dist`/`verify:workflow` 3개뿐)에는 없는 별도 작업으로 남긴다.
+
+**merge 게이트 (2026-09-25, branch `todo-19-pages-workflow`, 전부 실제 실행 · exit 0)**:
+```
+npm ci                                      # 0
+npm run test:unit                           # 0 — 15 files / 116 tests (build/wasm-release를 메인 checkout에서 복사해온 뒤)
+npm run verify:repo-sources                 # 0 — 4 pinned components
+npm run typecheck                           # 0
+npm run build                               # 0
+git diff --check                            # 0
+npm run build:site -- --base=/ultima/       # 0 — Todo 19 acceptance criteria #1
+npm run audit:dist                          # 0 — 9 files scanned, Todo 19 acceptance criteria #2
+npm run verify:workflow                     # 0 — Todo 19 acceptance criteria #3
+cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md   # 0 — byte-identical
+```
+
+**아직 없는 것 / 확인 필요**:
+- `.omo/evidence/ultima-web/task-19/`에 어떤 파일도 쓰지 않았다(gitignored, 이 worktree엔 애초에 다른 task의 evidence도 없었음) — 계획서 QA 시나리오가 언급하는 `pages-static-smoke.json`/`workflow-failure.log` 파일 자체는 없다. RED/GREEN/게이트 기록은 이 절과 `HANDOFF.md`, 대화 로그에만 있다.
+- 실제 `git push`로 이 워크플로우를 GitHub Actions에서 트리거해본 적은 없다(로컬 검증만) — Pages Source를 "GitHub Actions"로 바꾸는 저장소 설정도 아직 안 했을 것이다(확인 필요).
+- Todo 19의 QA 시나리오 중 "`dist/`를 `/ultima/`와 `/` 양쪽에서 Playwright smoke로 서빙" — `/ultima/`는 기존 `playwright.config.ts`의 `webServer`가 이미 상시 이렇게 서빙하고 있어 사실상 매 e2e 테스트가 검증 중이지만, `/` 루트로 서빙하는 별도 스모크는 아직 없다.
+- main merge는 하지 않았다 — 조정 세션의 리뷰/승인 대기.

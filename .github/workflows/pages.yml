@@ -1,0 +1,119 @@
+# Ultima IV Web Korean -- GitHub Pages release workflow (Todo 19).
+#
+# Target repository (HTTPS): https://github.com/TaejinKim7-dev/ultima
+# SSH write remote:          git@github.com:TaejinKim7-dev/ultima.git
+# Expected Pages URL:        https://taejinkim7-dev.github.io/ultima/
+#
+# One-time setup (do this before pushing commits that should deploy):
+#   1. Repository Settings > Pages > Build and deployment > Source:
+#      select "GitHub Actions" (not a branch). Without this, the `deploy`
+#      job below will fail even though `build` succeeds.
+#   2. Before pushing to the SSH remote above, verify SSH auth with a
+#      non-mutating command, e.g. `ssh -T git@github.com`. A successful
+#      response prints a "Hi <user>! You've successfully authenticated"
+#      greeting even though the command's own exit status is 1 -- that is
+#      expected and is not a failure.
+#   3. Pushing (or merging a PR) to `main` triggers `build` + `deploy`;
+#      pushes/PRs against other branches only trigger `build`.
+#
+# Note: this workflow's own jobs never push over git. GitHub Pages
+# deployment below uses the official, OIDC-based Pages Actions
+# (`id-token: write` + `actions/deploy-pages`) through the Pages REST API,
+# not a git-level push -- so there is no in-CI step that could need the SSH
+# credential above. That check is guidance for whoever pushes commits to
+# this repository, not something this workflow runs itself.
+#
+# Known gap (2026-09-25, recorded in plan.md / .omo/plans/ultima-web.md
+# Todo 19): `npm run test:unit`'s `wasm-symbols.test.ts` suite requires a
+# locally built `build/wasm-release/{xu4.js,xu4.wasm}` (Emscripten/emsdk
+# 4.0.23, see docs/SOURCE_PINS.md), which today is a manual, un-automated
+# local setup step -- this workflow does not install emsdk or build the
+# wasm engine, so that suite currently fails on a clean runner. Its step
+# below is marked `continue-on-error` for that reason, tracked separately
+# from Todo 19's own scope (see plan.md).
+#
+# Todo 19 is only marked done in the plan once Todos 15, 16, and 18 exist
+# too (Korean text, real audio, and the fuller dist-artifact audit that
+# Todo 18 adds); this file is the workflow *skeleton* the 2026-09-24
+# re-plan allowed to start early, building and deploying the current
+# browser shell only.
+
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22.23.3"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify pinned vendor sources
+        run: npm run verify:repo-sources
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        # See the "Known gap" note above: the wasm-symbols suite needs an
+        # emsdk-built engine this workflow does not yet produce.
+        run: npm run test:unit
+        continue-on-error: true
+
+      - name: Build the Pages site (base "/ultima/")
+        run: npm run build:site -- --base=/ultima/
+
+      - name: Audit the dist artifact (no original data, no dev tooling)
+        run: npm run audit:dist
+
+      - name: Statically validate this workflow file
+        run: npm run verify:workflow
+
+      - name: Add .nojekyll (Pages must not run Jekyll over dist/)
+        run: touch dist/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist
+          include-hidden-files: "true"
+
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

@@ -1,0 +1,187 @@
+import { spawnSync } from "node:child_process"
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { tmpdir } from "node:os"
+import { join } from "node:path"
+import { fileURLToPath } from "node:url"
+import { afterEach, describe, expect, it } from "vitest"
+
+const projectRoot = fileURLToPath(new URL("../../", import.meta.url))
+const scriptPath = join(projectRoot, "scripts/verify-workflow.mjs")
+const realWorkflowPath = join(projectRoot, ".github/workflows/pages.yml")
+
+const createdDirs: string[] = []
+
+afterEach(() => {
+  while (createdDirs.length > 0) {
+    const dir = createdDirs.pop()
+    if (dir) rmSync(dir, { force: true, recursive: true })
+  }
+})
+
+function tempWorkflowFrom(mutate: (source: string) => string): string {
+  const dir = mkdtempSync(join(tmpdir(), "verify-workflow-"))
+  createdDirs.push(dir)
+  const source = readFileSync(realWorkflowPath, "utf8")
+  const path = join(dir, "pages.yml")
+  writeFileSync(path, mutate(source))
+  return path
+}
+
+function run(workflowPath: string) {
+  return spawnSync("node", [scriptPath, workflowPath], { encoding: "utf8" })
+}
+
+describe("verify:workflow", () => {
+  it("passes for the committed Pages workflow", () => {
+    // Given / When: the real, committed workflow file.
+    const result = run(realWorkflowPath)
+
+    // Then: it satisfies every static check.
+    expect(result.status, result.stderr).toBe(0)
+  })
+
+  it("rejects a workflow missing the .nojekyll step", () => {
+    const path = tempWorkflowFrom((source) =>
+      source
+        .split("\n")
+        .filter((line) => !line.includes(".nojekyll"))
+        .join("\n")
+    )
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain(".nojekyll")
+  })
+
+  it("rejects an upload artifact root that is not the dist build output", () => {
+    const path = tempWorkflowFrom((source) => source.replace(/path:\s*dist\b/, "path: ."))
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("artifact root")
+  })
+
+  it("rejects a workflow missing the id-token: write permission", () => {
+    const path = tempWorkflowFrom((source) =>
+      source
+        .split("\n")
+        .filter((line) => !line.includes("id-token: write"))
+        .join("\n")
+    )
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("id-token: write")
+  })
+
+  it("rejects a workflow missing the pages: write permission", () => {
+    const path = tempWorkflowFrom((source) =>
+      source
+        .split("\n")
+        .filter((line) => !line.includes("pages: write"))
+        .join("\n")
+    )
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("pages: write")
+  })
+
+  it("rejects a workflow missing the HTTPS repository URL", () => {
+    const path = tempWorkflowFrom((source) =>
+      source.replaceAll("https://github.com/TaejinKim7-dev/ultima", "")
+    )
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("https://github.com/TaejinKim7-dev/ultima")
+  })
+
+  it("rejects a workflow missing the SSH write remote", () => {
+    const path = tempWorkflowFrom((source) =>
+      source.replaceAll("git@github.com:TaejinKim7-dev/ultima.git", "")
+    )
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("git@github.com:TaejinKim7-dev/ultima.git")
+  })
+
+  it("rejects a workflow missing the Pages base path", () => {
+    const path = tempWorkflowFrom((source) => source.replaceAll("--base=/ultima/", ""))
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("/ultima/")
+  })
+
+  it("rejects a workflow with an unpinned (non-SHA) action reference", () => {
+    const path = tempWorkflowFrom((source) =>
+      source.replace(/uses:\s*actions\/checkout@[0-9a-f]{40}/, "uses: actions/checkout@v7")
+    )
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("actions/checkout")
+    expect(result.stderr).toContain("pinned")
+  })
+
+  it("rejects a workflow with a floating node-version", () => {
+    const path = tempWorkflowFrom((source) => source.replace(/node-version:\s*"[\d.]+"/, 'node-version: "22"'))
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("node-version")
+  })
+
+  it("rejects a workflow that runs audit:dist after the artifact upload", () => {
+    const path = tempWorkflowFrom((source) => {
+      const lines = source.split("\n")
+      const auditIndex = lines.findIndex((line) => line.includes("audit:dist"))
+      const uploadIndex = lines.findIndex((line) => line.includes("upload-pages-artifact"))
+      if (auditIndex === -1 || uploadIndex === -1) {
+        throw new Error("fixture workflow missing expected audit/upload lines")
+      }
+      // Move the audit:dist line to just after the upload step's `uses:` line.
+      const [auditLine] = lines.splice(auditIndex, 1)
+      if (auditLine === undefined) {
+        throw new Error("fixture workflow audit line missing")
+      }
+      const newUploadIndex = lines.findIndex((line) => line.includes("upload-pages-artifact"))
+      lines.splice(newUploadIndex + 1, 0, auditLine)
+      return lines.join("\n")
+    })
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("audit:dist")
+  })
+
+  it("rejects a workflow that runs a literal git push command", () => {
+    const path = tempWorkflowFrom((source) => `${source}\n# test fixture only\n      - run: git push origin main\n`)
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("git push")
+  })
+
+  it("rejects a workflow that leaks an original-game-data extension reference", () => {
+    const path = tempWorkflowFrom((source) => `${source}\n      - run: cp ultima4.zip dist/\n`)
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("original")
+  })
+})
