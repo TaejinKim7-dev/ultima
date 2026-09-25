@@ -21,10 +21,11 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률
-- **승인 기준: 12 / 25 = 48.0%** (Step 1~11, 21 ✅).
+- **승인 기준: 13 / 25 = 52.0%** (Step 1~12, 21 ✅; branch `todo-12-status-overlay`, main에는 아직 merge 안 함).
 - **실제 게임에서 확인 (2026-09-25 갱신): 브라우저에서 실제 엔진으로 확인됨 — Step 7(WebGL2 렌더), 8(실제 GLFW 입력), 9(브라우저 시작), 10(저장/재로드/export-import), 21(링크·FS·렌더·입력 전부).** 근거: `tests/e2e/boot-sequence.spec.ts`가 실제 `ultima4.zip`으로 실제 타이틀 화면 렌더 + 키 입력 2회로 `IntroController`의 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU)까지 확인(`.omo/evidence/ultima-web/task-21/title-render.png`).
 - **Step 10 완료 (2026-09-25): 저장·재로드·export/import 전부 증명됨.** `tests/e2e/save-reload.spec.ts`가 실제 캐릭터 생성(이름/성별/스토리 24화면/미덕 질문 최대 20라운드)을 Playwright로 끝까지 자동화해 실제 `party.sav` write → IDBFS 동기화(`#save-status`="저장 완료") → 페이지 리로드 → "Journey Onward" → 실제 게임 월드(파티 이름 "avatar", 골드 200 등) 진입을 스크린샷으로 확인(`.omo/evidence/ultima-web/task-10/save-reload-after-journey.png`). IDBFS 실패 시나리오도 실제 `window.indexedDB` 제거로 확인. **Export/import도 이번에 실제로 연결**: `src/shell.ts`에 `attachSaveHandlers()`를 추가해 `main.ts`가 `startEngine()` 성공 시 `persistence.ts`의 실제 `exportSaveArchive`/`importSaveArchive`를 넘겨주고, 다운로드된 아카이브가 실제 "U4SV" 매직 바이트로 시작하며 재가져오기가 라운드트립되는 것까지 e2e로 확인(`.omo/evidence/ultima-web/task-10/export-reimport.dat`).
 - **Step 11 완료 (2026-09-25, 병렬 백그라운드 에이전트)**: 긴 메시지를 HTML 대화 패널로 라우팅. 실제 `screen.cpp` 메시지 바이트(줄바꿈/백스페이스/커서이동/색상)를 `message-tokens.ts`로 토큰화, `PanelState`가 dispatch 호출 간 지속(엔진 출력이 줄 단위가 아니라 조각 단위로 옴), Hawkwind류 pause는 `MessageBridgeEvent.awaitKey`로 별도 전달(ABI v1에 additive). `createElement`/`textContent`만 사용(e2e로 innerHTML 계열 미호출 증명, 악성 `&lt;script&gt;` 주입 텍스트도 무해하게 렌더됨을 확인).
+- **Step 12 완료 (2026-09-26, branch `todo-12-status-overlay`, 백그라운드 에이전트)**: status/menu/textview DOM 오버레이. `src/overlay/overlay-layout.ts`(순수 `OverlayRegistry` + DPR/letterbox 인식 `toCssRect`/`computeContentRect` 수학, `vendor/xu4/src/stats.h`/`stats.cpp`/`intro.cpp`/`u4.h`에서 실측한 고정 logical rect 3개)를 신규 작성, `ViewBridgeEvent`에 `rows`/`selectedIndex`를 ABI v1에 additive로 추가(Korean 값 길이가 달라도 값 열 우측 정렬이 맞도록 CSS grid로 렌더 — 고정폭 monospace 열 계산 금지 요구사항 충족), `src/shell.ts`가 canvas 실측 박스(ResizeObserver)로 오버레이 위치/글자크기를 갱신. 실제 엔진은 여전히 status/menu에 대해 C++→JS bridge 이벤트를 하나도 안 보낸다(Todo 11과 동일하게 재확인: `vendor/xu4/src`·`scripts/`에 `EM_JS`/`EM_ASM`/`ccall`/`ultimaBridge` 0건) — 그래서 e2e도 synthetic dispatch로 검증. **"실제 게임에서 확인"이 ⬜인 이유가 바로 이것**(Todo 11과 동일 사유).
 
 ## 단계 목록
 
@@ -67,7 +68,7 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 | # | 단계 | 승인 기준 | 실제 게임에서 확인 | 선행 |
 |---|---|---|---|---|
 | 11 | 긴 메시지 → 하단 HTML 대화 패널 (textContent만) | ✅ | ⬜ | 5,9,21 |
-| 12 | status/menu → DOM overlay (DPR/letterbox) | ⬜ | ⬜ | 5,9,11,21 |
+| 12 | status/menu → DOM overlay (DPR/letterbox) | ✅ | ⬜ | 5,9,11,21 |
 | 13 | 한국어 NPC alias + prompt별 입력 규칙 | ⬜ | ⬜ | 8,9,11,21 |
 | 14 | C++/Boron/TLK/binary/JS 번역 lookup 런타임 연결 | ⬜ | ⬜ | 4,11,12,13 |
 | 15 | 전체 한국어 번역 corpus + glossary 일관성 (`i18n:check --strict`) | ⬜ | ⬜ | 4,14 |
@@ -201,9 +202,9 @@ Todo 19 골격 작업 (2026-09-25, branch `todo-19-pages-workflow`, 백그라운
 - advisor 리뷰 2회로 추가 발견·수정한 것(전부 커밋 전에 잡음, main엔 한 번도 push 안 됨): (1) `verify:workflow`의 구조 검사(permission/artifact-root/`.nojekyll`)가 헤더 주석 문구만으로도 통과하던 실제 버그 — 주석이 아닌 줄만 앵커된 정규식으로 검사하도록 수정, `include-hidden-files` 검사 추가; (2) workflow-level `concurrency`를 `deploy` job으로 좁힘(PR용 `build`가 대기 중인 main 배포를 치환하지 못하게); (3) 의존성 매트릭스 19번 행을 처음에 빠뜨렸다가 추가 반영; (4) `- name: Unit tests: wasm engine suite (...)`가 인용 안 된 plain YAML scalar에 `: `를 포함해 **GitHub가 워크플로우 파일 전체를 파싱조차 못 하고 거부했을 실제 문법 오류** — `verify:workflow`는 YAML 파서가 아니라서 못 잡았고, 시스템의 PyYAML로 실제 파싱해서 확인/수정, 같은 버그 클래스를 잡는 검사(`checkNameValuesAreYamlSafe`)도 추가.
 - 완료 판정: 여전히 15,16,18 이후. 체크박스는 의도적으로 `[ ]` 유지.
 
-## 바로 다음 순서 (2026-09-25 갱신 — Todo 21·10·11·19(골격) 완료 + main merge, Todo 16 병렬 진행 중)
-1. Todo 16(Web Audio, 백그라운드 에이전트 진행 중) 완료 대기 → diff 리뷰 + 게이트 재실행 → main merge.
-2. **Todo 12~13** (설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) — Todo 11이 세운 `src/dialogue/message-tokens.ts` 토큰/리듀서 패턴과 `MessageBridgeEvent.awaitKey` 관례를 이어서, status/menu DOM 오버레이(12)와 한국어 NPC alias/prompt 규칙(13)을 구현한다.
+## 바로 다음 순서 (2026-09-26 갱신 — Todo 12 완료(브랜치, main 미merge))
+1. Todo 12(branch `todo-12-status-overlay`) 및 (진행 중이면) Todo 16 diff 리뷰 + 게이트 재실행 → main merge.
+2. **Todo 13** (설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) — Todo 12가 세운 오버레이 registry/rows 패턴 위에서 한국어 NPC alias/prompt 규칙을 구현한다.
 3. Todo 19는 골격만 완료(main merge됨) — 남은 것: CI에서 emsdk를 설치해 wasm 엔진까지 빌드하는 일(현재는 셸만 배포), 그리고 원래 선행조건(15·16·18) 완료 후 최종 acceptance 재확인.
 4. 14 → 15(번역 4402건, 워크플로우 병렬 처리 후보) → 17 → 18 → 19 완료 → 20 → F1~F4.
 
