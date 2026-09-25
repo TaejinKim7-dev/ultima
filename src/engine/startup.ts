@@ -40,8 +40,20 @@
 //    `factoryOptions.ENV` from inside a `preRun` entry reaches it in time.
 
 import { BRIDGE_ABI_VERSION, type BridgeEvent } from "../bridge/types.ts"
-import { createPersistenceCoordinator, type PersistenceCoordinator, type PersistenceFS } from "./persistence.ts"
+import {
+  createPersistenceCoordinator,
+  exportSaveArchive,
+  importSaveArchive,
+  type PersistenceCoordinator,
+  type PersistenceFS
+} from "./persistence.ts"
 import { validateUltima4Zip, type ZipValidationResult } from "./zip.ts"
+
+/** Bound to the running engine's real FS/paths/coordinator once startEngine succeeds; see src/shell.ts's attachSaveHandlers. */
+export interface SaveHandlers {
+  export(): Promise<Uint8Array>
+  import(archive: Uint8Array): Promise<void>
+}
 
 /** Where the Todo 10 IDBFS mount lives, and (via the ENV.HOME override above) where Settings/saves land under it. */
 const PERSIST_MOUNT = "/persist"
@@ -90,7 +102,7 @@ export interface StartEngineOptions {
 }
 
 export type StartEngineResult =
-  | { readonly started: true }
+  | { readonly started: true; readonly saveHandlers: SaveHandlers }
   | { readonly started: false; readonly reason: "corrupted" | "missing-files" | "idbfs-sync-failed" | "engine-error"; readonly detail: string }
 
 function message(text: string): BridgeEvent {
@@ -234,5 +246,9 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
     return { started: false, reason: "engine-error", detail }
   }
   options.dispatch(message("엔진이 시작되었습니다."))
-  return { started: true }
+  const saveHandlers: SaveHandlers = {
+    export: () => exportSaveArchive(module.FS, PERSISTENCE_PATHS, persistence),
+    import: (archive) => importSaveArchive(module.FS, PERSISTENCE_PATHS, persistence, archive)
+  }
+  return { started: true, saveHandlers }
 }

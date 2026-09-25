@@ -11,9 +11,22 @@ import { BRIDGE_ABI_VERSION, isBridgeEvent, type BridgeEvent } from "./bridge/ty
  * is not a cheat/state-control API -- it is the documented bridge entry
  * point itself, exposed so native glue code has something to call into.
  */
+/** Real save export/import, bound to the running engine's FS once it starts -- see src/engine/startup.ts's SaveHandlers. */
+export interface ShellSaveHandlers {
+  export(): Promise<Uint8Array>
+  import(archive: Uint8Array): Promise<void>
+}
+
 export interface UltimaBridgeApi {
   readonly abiVersion: typeof BRIDGE_ABI_VERSION
   dispatch(candidate: unknown): boolean
+  /**
+   * Switches the save-export/import buttons from Todo 5's placeholder
+   * (a JSON stub, wired before any engine exists) to the real archive
+   * format once Todo 21's engine has actually started. Call at most once
+   * per engine start.
+   */
+  attachSaveHandlers(handlers: ShellSaveHandlers): void
 }
 
 declare global {
@@ -116,24 +129,40 @@ export function createShell(doc: Document): UltimaBridgeApi {
     })
   })
 
-  // Save export: a local Blob download only, never uploaded. The exported
-  // payload is a placeholder until the persistence engine lands in Todo 10
-  // -- this Todo only wires the download affordance and the save-state
-  // bridge event it produces.
+  let realSaveHandlers: ShellSaveHandlers | null = null
+
+  // Save export: a local Blob download only, never uploaded. Before the
+  // engine has started (or if it fails to), there is nothing real to
+  // export yet, so this stays Todo 5's placeholder JSON; attachSaveHandlers
+  // switches it to the real archive once Todo 21's engine is running.
   saveExportButton.addEventListener("click", () => {
+    if (realSaveHandlers) {
+      dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "save-state", status: "saving" })
+      void realSaveHandlers
+        .export()
+        .then((archive) => {
+          downloadBlob(doc, new Blob([archive], { type: "application/octet-stream" }), "ultima4-save.dat")
+          dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "save-state", status: "saved" })
+        })
+        .catch((error: unknown) => {
+          dispatch({
+            abiVersion: BRIDGE_ABI_VERSION,
+            type: "save-state",
+            status: "error",
+            message: error instanceof Error ? error.message : "세이브를 내보내는 중 오류가 발생했습니다."
+          })
+        })
+      return
+    }
     const placeholder = {
-      note: "placeholder export -- no persistence engine yet (Todo 10)",
+      note: "placeholder export -- engine not started yet",
       exportedAt: new Date().toISOString()
     }
-    const blob = new Blob([JSON.stringify(placeholder, null, 2)], { type: "application/json" })
-    const url = URL.createObjectURL(blob)
-    const anchor = doc.createElement("a")
-    anchor.href = url
-    anchor.download = "ultima4-save-export.json"
-    doc.body.appendChild(anchor)
-    anchor.click()
-    anchor.remove()
-    URL.revokeObjectURL(url)
+    downloadBlob(
+      doc,
+      new Blob([JSON.stringify(placeholder, null, 2)], { type: "application/json" }),
+      "ultima4-save-export.json"
+    )
     dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "save-state", status: "saved" })
   })
 
@@ -141,6 +170,13 @@ export function createShell(doc: Document): UltimaBridgeApi {
   saveImportInput.addEventListener("change", () => {
     const file = saveImportInput.files?.[0]
     if (file === undefined) {
+      return
+    }
+    if (realSaveHandlers) {
+      // importSaveArchive reports its own "saving"/"saved"/"error"
+      // save-state events through the same persistence coordinator that
+      // real native writes go through -- no need to dispatch here too.
+      void file.arrayBuffer().then((buffer) => realSaveHandlers!.import(new Uint8Array(buffer)))
       return
     }
     dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "save-state", status: "saving" })
@@ -170,5 +206,22 @@ export function createShell(doc: Document): UltimaBridgeApi {
     reader.readAsText(file)
   })
 
-  return { abiVersion: BRIDGE_ABI_VERSION, dispatch }
+  return {
+    abiVersion: BRIDGE_ABI_VERSION,
+    dispatch,
+    attachSaveHandlers(handlers) {
+      realSaveHandlers = handlers
+    }
+  }
+}
+
+function downloadBlob(doc: Document, blob: Blob, filename: string): void {
+  const url = URL.createObjectURL(blob)
+  const anchor = doc.createElement("a")
+  anchor.href = url
+  anchor.download = filename
+  doc.body.appendChild(anchor)
+  anchor.click()
+  anchor.remove()
+  URL.revokeObjectURL(url)
 }

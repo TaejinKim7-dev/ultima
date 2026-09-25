@@ -104,7 +104,9 @@ romPickerElement?.addEventListener("change", () => {
     )
     .then((result) => {
       document.body.setAttribute("data-engine-started", String(result.started))
-      if (!result.started) {
+      if (result.started) {
+        bridge.attachSaveHandlers(result.saveHandlers)
+      } else {
         document.body.setAttribute("data-engine-start-reason", result.reason)
       }
     })

@@ -21,9 +21,9 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률
-- **승인 기준: 10 / 25 = 40.0%** (Step 1~9, 21 ✅, Step 10 🟡).
-- **실제 게임에서 확인 (2026-09-25 갱신): 브라우저에서 실제 엔진으로 확인됨 — Step 7(WebGL2 렌더), 8(실제 GLFW 입력), 9(브라우저 시작), 21(링크·FS·렌더·입력 전부).** 근거: `tests/e2e/boot-sequence.spec.ts`가 실제 `ultima4.zip`으로 실제 타이틀 화면 렌더 + 키 입력 2회로 `IntroController`의 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU)까지 확인(`.omo/evidence/ultima-web/task-21/title-render.png`).
-- **Step 10 갱신 (2026-09-25): 실제 저장·재로드는 이제 증명됨, 그러나 완전히 ✅는 아니다.** 신규 `tests/e2e/save-reload.spec.ts`가 실제 캐릭터 생성(이름/성별/스토리 24화면/미덕 질문 7라운드)을 Playwright로 끝까지 자동화해 실제 `party.sav` write → 실제 IDBFS 동기화(`#save-status`="저장 완료") → 페이지 리로드(새 wasm 인스턴스) → "Journey Onward" → 실제 게임 월드(파티 이름 "avatar", 골드 200 등) 로 이어지는 걸 스크린샷으로 확인(`.omo/evidence/ultima-web/task-10/save-reload-after-journey.png`). IDBFS 실패 시나리오도 실제로 `window.indexedDB`를 제거해 확인. 다만 Todo 10의 원래 승인 기준이 요구하는 "export/import"는 아직 미완성 — `src/shell.ts`의 세이브 내보내기/가져오기 버튼은 여전히 플레이스홀더 JSON만 다루고 `persistence.ts`의 실제 `exportSaveArchive`/`importSaveArchive`에 연결돼 있지 않다(확인 필요, 다음에 할 일).
+- **승인 기준: 11 / 25 = 44.0%** (Step 1~10, 21 ✅).
+- **실제 게임에서 확인 (2026-09-25 갱신): 브라우저에서 실제 엔진으로 확인됨 — Step 7(WebGL2 렌더), 8(실제 GLFW 입력), 9(브라우저 시작), 10(저장/재로드/export-import), 21(링크·FS·렌더·입력 전부).** 근거: `tests/e2e/boot-sequence.spec.ts`가 실제 `ultima4.zip`으로 실제 타이틀 화면 렌더 + 키 입력 2회로 `IntroController`의 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU)까지 확인(`.omo/evidence/ultima-web/task-21/title-render.png`).
+- **Step 10 완료 (2026-09-25): 저장·재로드·export/import 전부 증명됨.** `tests/e2e/save-reload.spec.ts`가 실제 캐릭터 생성(이름/성별/스토리 24화면/미덕 질문 최대 20라운드)을 Playwright로 끝까지 자동화해 실제 `party.sav` write → IDBFS 동기화(`#save-status`="저장 완료") → 페이지 리로드 → "Journey Onward" → 실제 게임 월드(파티 이름 "avatar", 골드 200 등) 진입을 스크린샷으로 확인(`.omo/evidence/ultima-web/task-10/save-reload-after-journey.png`). IDBFS 실패 시나리오도 실제 `window.indexedDB` 제거로 확인. **Export/import도 이번에 실제로 연결**: `src/shell.ts`에 `attachSaveHandlers()`를 추가해 `main.ts`가 `startEngine()` 성공 시 `persistence.ts`의 실제 `exportSaveArchive`/`importSaveArchive`를 넘겨주고, 다운로드된 아카이브가 실제 "U4SV" 매직 바이트로 시작하며 재가져오기가 라운드트립되는 것까지 e2e로 확인(`.omo/evidence/ultima-web/task-10/export-reimport.dat`).
 
 ## 단계 목록
 
@@ -51,7 +51,7 @@ Step 3 완료 (2026-09-24):
 | 7 | OpenGL → WebGL2 (glMapBufferRange 제거, CPU staging + glBufferSubData) | ✅ | ✅ | main `874c775` (`90232b9`) — 21.2~21.3에서 실제 엔진의 `gpu_opengl.cpp`(`__EMSCRIPTEN__` 분기)로 실제 렌더 확인. GL_RGB/RGBA 텍스처 포맷 버그(21.2~21.3에서 발견) 수정 포함 |
 | 8 | blocking event loop / 키 입력 → 브라우저 안전 queue (IME, request ID) | ✅ | ✅ | main `6b97d8e` (`af13814`) — 큐 자체는 여전히 실제 엔진이 안 씀(GLFW 자체 리스너가 정식 경로, 21.4 참고). "실제 게임에서 확인"은 큐가 아니라 Step 8이 만든 DOM 키 파이프라인이 실제로 키를 전달한다는 뜻으로 ✅ |
 | 9 | 브라우저 시작 시퀀스 + 원본 ZIP 검증 + 가상 FS, main 1회 실행 | ✅ | ✅ | main `5c28511` (`4c878c9`) — 21.2에서 FS 경로 재작성 후 실제 `main()` 실행 확인(`tests/e2e/startup-data.spec.ts` 전체 통과) |
-| 10 | IDBFS 세이브/설정 영속 + export/import | 🟡 | ✅ (저장/재로드만) | main `92ebce8` (`6a74288`) — `tests/e2e/save-reload.spec.ts`(신규)로 실제 캐릭터 생성→저장→리로드→Journey Onward 로드까지 확인. export/import 버튼은 여전히 플레이스홀더라 승인 기준 미충족(확인 필요, 남은 일) |
+| 10 | IDBFS 세이브/설정 영속 + export/import | ✅ | ✅ | main `92ebce8` (`6a74288`) + 2026-09-25 완료 — `tests/e2e/save-reload.spec.ts`(신규)로 실제 캐릭터 생성→저장→리로드→Journey Onward 로드, `src/shell.ts`에 `attachSaveHandlers()` 추가로 export/import를 실제 `persistence.ts` 함수에 연결(다운로드가 실제 "U4SV" 아카이브, 재가져오기 라운드트립 확인) |
 | 21 | **실제 xu4 엔진을 wasm에 링크·실행** (재작성, 세부 21.1~21.4) | ✅ | ✅ | branch `todo-21-real-engine` `542ce34`, `70d14db` — 21.1~21.4 전부 완료, 실제 `ultima4.zip`으로 타이틀 렌더 + 키 입력 확인 |
 
 Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완료 — **전부 완료**):
@@ -172,15 +172,14 @@ Todo 21 main merge + Todo 10 저장/재로드 증명 (2026-09-25):
 - `todo-21-real-engine`(`542ce34`, `70d14db`, `23cbbd4`) → main `ce88bc1`로 merge, `origin/main`에 push 완료.
 - 사용자 지시("물어보지 말고 권장 방향으로 진행해")에 따라 이후부터는 merge/push 전 확인을 생략하고 진행.
 - 신규 `tests/e2e/save-reload.spec.ts`: 실제 캐릭터 생성(이름 입력 → 성별 선택 → 스토리 24화면 → 미덕 질문 최대 20라운드, 각 waitAnyKey/카드 애니메이션 타이밍에 맞춘 관대한 딜레이 필요함을 실측으로 확인)으로 실제 `party.sav`를 씀 → `#save-status`가 "저장 완료"로 바뀜(persistence coordinator의 실제 IDBFS sync) → 페이지 리로드(새 wasm 인스턴스) → 같은 zip 재선택 → "Journey Onward" → 실제 게임 월드(파티 "avatar", 골드 200, 상태 패널까지) 진입을 스크린샷으로 확인. IDBFS 실패 경로도 `window.indexedDB`를 실제로 제거해(가짜 FS 아님) 확인. 증거: `.omo/evidence/ultima-web/task-10/save-reload-after-journey.png`, `idbfs-failure.log`.
-- 코드 변경 없음(21.2에서 이미 연결된 persistence coordinator가 그대로 동작) — 이번엔 테스트만 추가.
-- 남은 일: export/import 버튼이 아직 플레이스홀더라 Step 10 전체 승인 기준(export/import 포함)은 미충족. 위 "바로 다음 순서" 1번 참고.
-- 검증 게이트 전부 exit 0: `npm run test:unit`(13 files/99 tests) · `verify:repo-sources` · `typecheck` · `build` · `git diff --check` · `tests/e2e/save-reload.spec.ts`(2/2, 실제 ultima4.zip).
+- 첫 커밋은 코드 변경 없이 테스트만(persistence coordinator는 21.2에서 이미 연결돼 있었음). 이어서 export/import도 완성: `src/shell.ts`에 `attachSaveHandlers()` 추가, `src/engine/startup.ts`의 `StartEngineResult`가 성공 시 `saveHandlers`(실제 `exportSaveArchive`/`importSaveArchive`에 바인딩)를 반환, `main.ts`가 엔진 시작 성공 시 연결. `tests/e2e/save-reload.spec.ts`에 export/import 라운드트립 테스트 추가(다운로드가 실제 "U4SV" 아카이브인지, 재가져오기 후 "저장 완료"가 다시 뜨는지).
+- 검증 게이트 전부 exit 0: `npm run test:unit`(13 files/99 tests) · `verify:repo-sources` · `typecheck` · `build` · `git diff --check` · `tests/e2e/save-reload.spec.ts`(3/3, 실제 ultima4.zip).
+- Step 10 승인 기준 전체 충족 — `.omo/plans/ultima-web.md`/`docs/ULTIMA_WEB_PLAN.md`의 Todo 10 체크박스 `[x]`로 변경(byte-identical 확인).
 
-## 바로 다음 순서 (2026-09-25 갱신 — Todo 21 완료 + main merge, Todo 10 저장/재로드 증명 완료)
-1. **Todo 10 마무리**: `src/shell.ts`의 세이브 내보내기/가져오기 버튼을 플레이스홀더 JSON 대신 `persistence.ts`의 실제 `exportSaveArchive`/`importSaveArchive`에 연결(엔진 시작 후에만 FS/coordinator를 알 수 있으므로 `main.ts`↔`shell.ts` 사이에 핸들을 넘기는 작은 인터페이스가 필요). 이게 끝나면 Step 10 승인 기준 전체 충족.
-2. 병렬 진행 중(백그라운드 에이전트, worktree 격리): Todo 19(Pages workflow 골격), Todo 16(Web Audio), Todo 11(대화 패널) — 완료 알림 오는 대로 검토 후 순차 main merge.
-3. 12~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) → 14 → 15(번역 4402건, 워크플로우 병렬 처리 후보).
-4. 17 → 18 → 19 완료 → 20 → F1~F4.
+## 바로 다음 순서 (2026-09-25 갱신 — Todo 21·10 완료, main merge, 병렬 에이전트 진행 중)
+1. 병렬 진행 중(백그라운드 에이전트, worktree 격리): Todo 19(Pages workflow 골격), Todo 16(Web Audio), Todo 11(대화 패널, **완료 알림 수신** — 리뷰 후 merge 대기) — 완료되는 대로 검토 후 순차 main merge.
+2. 12~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`, Todo 11 merge 후) → 14 → 15(번역 4402건, 워크플로우 병렬 처리 후보).
+3. 17 → 18 → 19 완료 → 20 → F1~F4.
 
 ## 목적 달성 가능성 판단
 - **가능하다, 그리고 크리티컬 패스(Todo 21)는 이제 끝났다.** 근거: 같은 xu4 소스가 native에서도(Step 3), 이제 브라우저에서도(Todo 21, 2026-09-25) 원본 데이터로 실제로 돈다 — 실제 타이틀 화면 렌더 + 실제 키 입력으로 `IntroController` 상태 전이까지 확인됨. 남은 일은 대부분 한국어화(11~15)와 배포(17~20)로, 엔진 자체의 미지수는 이제 거의 없다.

@@ -106,6 +106,11 @@ describe("startEngine", () => {
     })
 
     expect(result.started).toBe(true)
+    if (!result.started) throw new Error("unreachable")
+    // Real save export/import (bound to this same FS/paths/coordinator),
+    // not Todo 5's placeholder JSON -- see src/shell.ts's attachSaveHandlers.
+    const archive = await result.saveHandlers.export()
+    expect(new TextDecoder().decode(archive.subarray(0, 4))).toBe("U4SV")
     expect(calls.mkdirTree).toEqual(["/persist"])
     expect(calls.mounted).toEqual([{ type: module.IDBFS, opts: {}, mountpoint: "/persist" }])
     expect(calls.written.map((w) => w.path)).toEqual(["/render.pak", "/Ultima-IV.mod", "/ultima4.zip"])

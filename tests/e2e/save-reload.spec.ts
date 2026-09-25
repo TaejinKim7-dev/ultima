@@ -122,6 +122,28 @@ test.describe("Todo 10: IDBFS save persistence", () => {
     expect(afterJourneyShot.length).toBeGreaterThan(blackBaseline.length)
   })
 
+  test("export/import: the download is a real save archive, and re-importing it round-trips", async ({ page }) => {
+    test.setTimeout(180_000) // real character creation is inherently slow to drive; see the module doc comment
+    const zipPath = process.env["ULTIMA4_DATA"]
+    test.skip(!zipPath || !existsSync(zipPath), "ULTIMA4_DATA not set to a verified original ultima4.zip")
+    const buffer = readFileSync(zipPath!)
+
+    await bootAndSelectZip(page, buffer)
+    const saved = await createCharacterAndWaitForSave(page)
+    expect(saved, "the real engine's own save-state bridge event never reported \"저장 완료\"").toBe(true)
+
+    const [download] = await Promise.all([page.waitForEvent("download"), page.locator("#save-export").click()])
+    const exportPath = await download.path()
+    const exported = readFileSync(exportPath)
+    // persistence.ts's ARCHIVE_MAGIC -- a real packed save archive, not the
+    // old placeholder JSON blob (`{"note": "placeholder export -- ..."}`).
+    expect(exported.subarray(0, 4).toString("utf8")).toBe("U4SV")
+    writeFileSync(join(evidenceDir, "export-reimport.dat"), exported)
+
+    await page.locator("#save-import").setInputFiles(exportPath)
+    await expect(page.locator("#save-status")).toHaveText("저장 완료", { timeout: 10_000 })
+  })
+
   test("failure path: a real IndexedDB failure is reported as a recoverable error, never a false \"saved\"", async ({
     page
   }) => {

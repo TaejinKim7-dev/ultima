@@ -709,9 +709,20 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test 
   - 재로드 검증: 새 페이지 로드(새 wasm 인스턴스) → 같은 zip 재선택 → 타이틀→메뉴(Enter 2회) → 'j'(Journey Onward) → 스크린샷으로 실제 게임 월드(파티명 "avatar", 골드 200, 상태 패널, "Press Alt-h for help") 확인. 처음엔 메뉴 화면과 게임 화면의 스크린샷 바이트 크기를 비교해 "더 크면 성공"으로 가정했다가 실패(게임 화면이 오히려 더 작게 압축됨 — 타일 위주라 로고보다 균일함) → "완전히 검은 캔버스" 기준선과 비교하는 방식(`boot-sequence.spec.ts`와 동일 기법)으로 수정.
   - IDBFS 실패 경로: 가짜 FS가 아니라 `Object.defineProperty(window, "indexedDB", {value: undefined})`로 브라우저의 진짜 IndexedDB를 제거해 `startEngine`의 `syncfs(true)`가 실제로 실패하는 걸 확인(빠름, 0.4초).
   - 게이트 전부 exit 0: `test:unit`(99) · `verify:repo-sources` · `typecheck` · `build` · `git diff --check` · `save-reload.spec.ts`(2/2, 실제 `ultima4.zip`).
-  - **남은 것(정직하게 미완료)**: Todo 10의 원래 승인 기준은 "export/import"도 요구하는데, `src/shell.ts`의 세이브 내보내기/가져오기 버튼은 여전히 플레이스홀더 JSON만 다룬다(`persistence.ts`의 실제 `exportSaveArchive`/`importSaveArchive`에 연결 안 됨 — 엔진 시작 후에만 FS/coordinator를 알 수 있어서 `main.ts`↔`shell.ts` 사이에 작은 핸들 전달 인터페이스가 필요, 아직 안 만듦). Step 10은 plan.md에 🟡("저장/재로드만 ✅")로 정직하게 표시.
+  - **당시 남은 것(export/import)도 바로 이어서 완료**: `src/engine/startup.ts`의 `StartEngineResult` 성공 분기에 `SaveHandlers`(`export()`/`import()`, 실제 `exportSaveArchive`/`importSaveArchive`에 바인딩) 추가. `src/shell.ts`에 `attachSaveHandlers()`를 추가해 버튼이 Todo 5의 플레이스홀더 대신 실제 아카이브를 다루도록 전환(엔진 시작 전엔 여전히 플레이스홀더로 폴백). `main.ts`가 `startEngine()` 성공 시 `bridge.attachSaveHandlers(result.saveHandlers)` 호출.
+  - TDD로 확인: `tests/e2e/save-reload.spec.ts`에 export/import 라운드트립 테스트를 먼저 추가해 RED 확인(다운로드된 JSON이 `{`로 시작 — "U4SV" 매직 기대와 다름), 구현 후 GREEN(다운로드가 실제 4바이트 매직 "U4SV"로 시작, 재가져오기 후 `#save-status`가 다시 "저장 완료"). `tests/unit/startup-sequence.test.ts`에도 `result.saveHandlers.export()`가 실제 아카이브를 반환하는지 확인하는 케이스 추가.
+  - Step 10 승인 기준(저장/재로드 + export/import) 전체 충족 — `.omo/plans/ultima-web.md`/`docs/ULTIMA_WEB_PLAN.md` 체크박스 `[x]`.
+  - 게이트 전부 exit 0: `test:unit`(99) · `verify:repo-sources` · `typecheck` · `build` · `git diff --check` · `save-reload.spec.ts`(3/3, 실제 `ultima4.zip`).
+
+### 병렬 백그라운드 에이전트 (2026-09-25, 사용자 지시 "병렬로 구현하자, 최대한")
+- 3개 launch, 각자 worktree 격리, 각자 브랜치에 커밋만(merge/push 금지 지시):
+  - Todo 19(Pages workflow 골격) — 진행 중.
+  - Todo 16(Web Audio) — 진행 중.
+  - Todo 11(대화 패널) — **완료 알림 수신**. 브랜치 `worktree-agent-aa0efec4017ebae0f`(에이전트가 보고한 이름 `todo-11-dialogue-panel`과 실제 브랜치명이 다름, 확인 필요), 최종 커밋 `0c9e997`. 보고 내용: `message-tokens.ts` 신규(screen.cpp의 실제 메시지 바이트 매핑), `MessageBridgeEvent.awaitKey` 추가, `shell.ts` PanelState 영속화, 게이트 전부 exit 0(14 files/123 tests), plan.md를 자기 worktree에서 11/25로 갱신함(내 main worktree의 plan.md와 병합 시 충돌 예상 — merge 시 주의). 아직 diff 리뷰·merge 안 함.
+- 병합 전 필수: 각 에이전트 브랜치의 실제 diff를 직접 읽고, 게이트를 직접 재실행할 것(에이전트 자체 보고를 그대로 믿지 않는다 — 이 프로젝트에서 "링크만 되고 실행 검증은 안 됨" 패턴이 이미 여러 번 나왔다).
+- 포트 충돌 주의: 병렬 에이전트와 조율 세션이 동시에 `playwright test`/`vite preview`를 돌리면 전부 4173 포트를 써서 `--strictPort`로 인해 충돌한다(이번 세션에서 실제로 여러 번 겪음) — 재시도로 해결됨, 별도 코드 수정 불필요.
 
 ### 남은 작업
-1. **Todo 10 마무리**: export/import를 실제 함수에 연결.
-2. 병렬 진행 중인 백그라운드 에이전트 3개(Todo 19/16/11) 완료 대기 → 검토 후 순차 main merge.
-3. 12~13 → 14 → 15 → 17 → 18 → 19 완료 → 20 → F1~F4.
+1. Todo 11(완료 알림 수신) → diff 리뷰 → 게이트 재실행 → main merge.
+2. Todo 19/16 완료 대기 → 같은 방식으로 리뷰·merge.
+3. 12~13(Todo 11 merge 후) → 14 → 15 → 17 → 18 → 19 완료 → 20 → F1~F4.

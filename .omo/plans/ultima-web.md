@@ -225,7 +225,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: verified ZIP reaches title screen with module assets loaded, evidence `.omo/evidence/ultima-web/task-9/startup-title.png`; failure: corrupt `WORLD.MAP` or missing TLK file is rejected before main, evidence `.omo/evidence/ultima-web/task-9/zip-validation.log`.
   Commit: Y | feat(web): validate original data and start wasm once
 
-- [ ] 10. Persist saves/settings in IDBFS with export/import
+- [x] 10. Persist saves/settings in IDBFS with export/import
   What to do / Must NOT do: add a persistence coordinator that observes all save/settings write paths and flushes IDBFS after file close; expose `saving/saved/error` bridge states; add save backup export/import through the web shell. Must not rely on unload as the primary save path or flush only `gameSave`.
   Parallelization: Wave 2 | Blocked by: 9 | Blocks: 17,18
   References: `engine/src/game.cpp:298-377`; `engine/src/game.cpp:1162`; `engine/src/intro.cpp:907-912`; `engine/src/settings.cpp:406-510`.
