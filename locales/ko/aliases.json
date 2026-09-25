@@ -2,17 +2,17 @@
   "$schema": "ultima-web/i18n-schema/aliases/v1",
   "$notes": [
     "Entries map a Korean input word (`alias`) to the canonical English NPC-discourse keyword xu4 already matches internally (`canonical`). The canonical keyword itself is never renamed -- see vendor/xu4/src/discourse_tlk.cpp:93,129,131,136,157 for where each canonical keyword below is actually matched, plus the per-NPC `topic1`/`topic2` keywords already inventoried per-record in tlk.json (those are NPC-specific, not global, so they are not scaffolded here).",
-    "`alias` is intentionally empty (status: pending) for every entry below -- choosing and translating the actual Korean input word xu4 should accept is Todo 13's job, not Todo 4's. i18n:check (see scripts/lib/alias-check.mjs) skips collision checks for entries with an empty alias so this scaffold passes cleanly until it is filled in."
+    "Todo 13 filled in each `alias` below (status now \"ready\"). `src/i18n/korean-aliases.ts`'s resolveInput() is the runtime consumer: it NFC-normalizes a player's Korean input, exact-matches it against these aliases, and -- on a match -- synthesizes the canonical English keyword as keystrokes toward the real (unmodified) native prefix matcher. It never rewrites, shortens, or bypasses a canonical keyword; see tests/unit/korean-aliases.test.ts's invariant test asserting every canonical here is pure ASCII and fits the native 16-byte interest-prompt buffer (discourse_tlk.cpp's gameGetInput(16))."
   ],
   "entries": {
-    "alias:bye": { "alias": "", "canonical": "bye", "status": "pending" },
-    "alias:look": { "alias": "", "canonical": "look", "status": "pending" },
-    "alias:name": { "alias": "", "canonical": "name", "status": "pending" },
-    "alias:give": { "alias": "", "canonical": "give", "status": "pending" },
-    "alias:join": { "alias": "", "canonical": "join", "status": "pending" },
-    "alias:job": { "alias": "", "canonical": "job", "status": "pending" },
-    "alias:health": { "alias": "", "canonical": "health", "status": "pending" },
-    "alias:yes": { "alias": "", "canonical": "yes", "status": "pending" },
-    "alias:no": { "alias": "", "canonical": "no", "status": "pending" }
+    "alias:bye": { "alias": "안녕", "canonical": "bye", "status": "ready" },
+    "alias:look": { "alias": "외모", "canonical": "look", "status": "ready" },
+    "alias:name": { "alias": "이름", "canonical": "name", "status": "ready" },
+    "alias:give": { "alias": "기부", "canonical": "give", "status": "ready" },
+    "alias:join": { "alias": "합류", "canonical": "join", "status": "ready" },
+    "alias:job": { "alias": "직업", "canonical": "job", "status": "ready" },
+    "alias:health": { "alias": "건강", "canonical": "health", "status": "ready" },
+    "alias:yes": { "alias": "예", "canonical": "yes", "status": "ready" },
+    "alias:no": { "alias": "아니오", "canonical": "no", "status": "ready" }
   }
 }

@@ -77,12 +77,13 @@ describe("korean-aliases: resolveInput for 'text' (NPC free-answer) prompts", ()
     }
   })
 
-  it("treats a scaffolded entry with an empty alias as not-yet-translated -- it must never match", () => {
-    const table = fixtureTable()
-    // "give"'s alias is "" in the fixture (mirrors locales/ko/aliases.json's
-    // own pending-entry convention) -- an empty raw string must not match it.
-    const result = resolveInput("text", "", table)
-    expect(result.ok).toBe(false)
+  it("treats a scaffolded entry with an empty alias as not-yet-translated -- it must never be a matchable table entry", () => {
+    // Mirrors locales/ko/aliases.json's own "pending" scaffold convention
+    // (empty alias, canonical already set): buildAliasTable must not turn
+    // that into a real (normalized-empty-string -> canonical) mapping,
+    // which could otherwise spuriously match on later, unrelated input.
+    const table = buildAliasTable({ "alias:give": { alias: "", canonical: "give" } })
+    expect(table.byNormalizedAlias.size).toBe(0)
   })
 })
 
