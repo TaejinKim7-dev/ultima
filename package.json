@@ -21,6 +21,8 @@
     "cmake:test": "node scripts/cmake-wrapper.mjs test",
     "typecheck": "tsc --noEmit",
     "verify:repo-sources": "node scripts/verify-repo-sources.mjs",
+    "audit:dist": "node scripts/audit-dist.mjs",
+    "verify:workflow": "node scripts/verify-workflow.mjs",
     "deps:host": "node scripts/deps-host.mjs",
     "build:modules": "node scripts/build-modules.mjs",
     "build:native": "node scripts/build-native.mjs",

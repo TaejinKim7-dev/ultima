@@ -78,7 +78,7 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 | 16 | Web Audio 음악/효과음 + RFX 생성 | ⬜ | ⬜ | 6,9,21 (21.1의 무음 구현을 교체) |
 | 17 | 브라우저 통합 게임 진행 e2e (새 게임부터) | ⬜ | ⬜ | 10,12,13,15,16,21 |
 | 18 | 실패/보안/개인정보/회귀 경계 강화 (`audit:dist`) | ⬜ | ⬜ | 17 |
-| 19 | GitHub Actions Pages workflow + `/ultima/` release artifact | ⬜ | — | 15,16,18 (**골격은 지금 병렬 착수 가능**) |
+| 19 | GitHub Actions Pages workflow + `/ultima/` release artifact | 🟡 | — | 15,16,18 (골격 완성, 브랜치 `todo-19-pages-workflow`, main 미merge) |
 | 20 | README/사용자 가이드/증거 인덱스/handoff | ⬜ | — | 19 |
 
 ### Final — 독립 검증 (F1~F4 = 진행률 22~25번째)
@@ -191,11 +191,21 @@ Todo 11 완료 (2026-09-25, branch `todo-11-dialogue-panel`, 백그라운드 에
 - **"실제 게임에서 확인" = ⬜, 의도적으로.** 실제 xu4 엔진은 아직 `screenMessage`를 조각 단위 bridge `message` 이벤트로 내보내지 않는다(engine 쪽 hook이 없음 — `screenMessage`는 게임 context가 없으면(`!c`) 조기 반환하고, intro 단계는 애초에 context가 없다). 이 Todo는 그 엔진 훅 없이도 통과 가능한 acceptance criteria(순수 토크나이저 유닛 테스트 + synthetic bridge 이벤트로 구동하는 Playwright 검증)를 갖고 있어 완료로 인정하되, 실제 엔진이 실제 대화 텍스트를 이 패널로 보내는 것은 아직 아무도 본 적 없다.
 - **알려진, 의도적으로 미룬 한계**: (1) 패널은 매 렌더마다 히스토리 전체를 다시 그림(긴 세션에서 O(n²), `aria-live="polite"`가 매번 전체 재낭독) — Todo 18 메모리 성장 하드닝으로 미룸. (2) backspace는 줄 경계를 넘지 않음(같은 줄 안에서만 커서 이동). (3) 0x01-0x07·0x0B·0x0C·0x0E·0x0F·0x11·0x1A-0x1F 같은 다른 낮은 바이트는 네이티브에서는 charset glyph이지만 이 포트에서는 원본 바이트 그대로 DOM에 텍스트로 들어간다(현재 실제로 이 바이트를 쓰는 텍스트가 없어 위험이 낮음, 그러나 확인 필요). (4) 계획서가 인용하는 `engine/src/event.cpp:909-943`/`config_boron.cpp:1325-1340`은 실제로는 `vendor/xu4/src/event.cpp`(readChoice/readDir/readInt/readString 구현부)와 `vendor/xu4/src/config_boron.cpp`(NpcTalk 로더, Todo 13/14 쪽 관련)다 — Todo 11 자체 구현에 직접 쓰이진 않음.
 
-## 바로 다음 순서 (2026-09-25 갱신 — Todo 21·10·11 완료 + main merge, Todo 19·16 병렬 진행 중)
-1. 병렬 진행 중(백그라운드 에이전트, worktree 격리): Todo 19(Pages workflow 골격), Todo 16(Web Audio) — 완료되는 대로 검토(diff 직접 확인 + 게이트 재실행) 후 순차 main merge.
+Todo 19 골격 작업 (2026-09-25, branch `todo-19-pages-workflow`, 백그라운드 에이전트가 구현, main에 merge됨, 🟡 부분 진행 — 완료 판정은 여전히 15,16,18 이후):
+- `.github/workflows/pages.yml` 신규 작성: `build`(push+PR, `npm ci`→`verify:repo-sources`→`typecheck`→유닛 테스트 2스텝(나머지는 하드 게이트, `wasm-symbols.test.ts`만 `continue-on-error`, 아래 참고)→`build:site -- --base=/ultima/`→`audit:dist`→`verify:workflow`→`.nojekyll`→`upload-pages-artifact`)와 `deploy`(`needs: build`, `push`+`main`일 때만, `configure-pages`→`deploy-pages`) 2-job 구조. 모든 `uses:`를 40자 commit SHA로 고정(체크아웃 v7.0.1/setup-node v7.0.0/configure-pages v6.0.0/upload-pages-artifact v5.0.0/deploy-pages v5.0.1, 전부 GitHub API로 실제 태그→커밋 SHA 조회 후 고정). `node-version: "22.23.3"` 고정(로컬 개발 버전과 동일). 헤더 주석에 HTTPS repo URL·SSH remote·Pages URL·Pages Source="GitHub Actions" 설정 안내·비파괴적 SSH 인증 확인 명령(`ssh -T git@github.com`)을 문서화 — 이 워크플로우 자체는 git push를 전혀 하지 않음(공식 Pages Actions는 OIDC/REST API 기반이라 SSH 불필요)을 명시.
+- 신규 `npm run audit:dist`(`scripts/audit-dist.mjs`): dist artifact에서 원본 게임 데이터 확장자(zip/sav/ega/map/tlk/exe)와 개발용 tooling 파일(`scripts/check-base-path.mjs`의 `FORBIDDEN_BASENAMES`/`FORBIDDEN_EXTENSIONS` 재사용) 유출을 검사. Todo 18이 test-hook/cheat-API/XSS 등으로 이 audit을 더 넓힐 예정임을 주석에 명시.
+- 신규 `npm run verify:workflow`(`scripts/workflow-verifier.mjs` + `scripts/verify-workflow.mjs`): YAML 파서 없이 텍스트 기반으로 HTTPS URL·SSH remote·Pages URL·`--base=/ultima/`·`pages: write`·`id-token: write`·artifact root(`path: dist`)·`.nojekyll`·모든 `uses:`의 SHA 고정 여부·`node-version` 정확한 버전·`audit:dist`가 upload보다 먼저 실행되는지·`git push` 부재·원본 데이터 확장자 부재를 검사.
+- TDD: `tests/unit/audit-dist.test.ts`(4개), `tests/unit/workflow.test.ts`(13개) 전부 RED(스크립트/워크플로우 파일 없음, 17/17 실패) 확인 후 구현 → GREEN(17/17 통과). 과정에서 워크플로우 헤더 주석에 우연히 `audit:dist` 문자열이 두 번 나와(주석+실제 스텝) 순서 검사 테스트가 첫 위양성으로 실패한 것을 실제로 잡아 주석 문구를 고쳐 재통과시킴(진짜 RED→GREEN 사이클).
+- **실제로 발견한, 아직 안 풀린 문제**: 완전히 새로 clone한 저장소(`build/` 없음)에서 `npm run test:unit`을 실제로 실행해보니 `tests/unit/wasm-symbols.test.ts`가 실패한다(다른 14개 파일/108개 테스트는 통과 — 이 수치는 최초 발견 시점 실측값; `workflow.test.ts`가 이후 더 늘어서 브랜치 tip에서는 다른 숫자다, `handoff.md` "Todo 19 후속 수정 2" 참고). 원인: wasm 엔진 빌드에 필요한 pinned emsdk(4.0.23, `docs/SOURCE_PINS.md`)가 어떤 npm 스크립트로도 자동 설치되지 않고, 지금까지 전부 로컬 1회성 수동 설치였음(`handoff.md` Node 22 절 참고) — CI 러너는 당연히 이게 없다. 이번 세션 자체 worktree도 처음엔 `build/wasm-release`가 없어서 똑같이 실패하는 것을 실측(클린 clone 시뮬레이션과 동일 증상) → 메인 체크아웃의 기존 빌드 산출물(`build/wasm-release`, 27MB, 원본 데이터 없음 확인 후)을 복사해 로컬 게이트만 통과시킴. **테스트를 고치거나 약화하지 않았고**, CI 워크플로우는 `wasm-symbols.test.ts`만 별도 스텝으로 분리해 `continue-on-error`로 두고(주석으로 이유 명시), 나머지는 그대로 하드 게이트 — advisor 리뷰에서 "전체를 continue-on-error로 두면 진짜 회귀도 배포를 못 막는다"는 지적을 받고 이렇게 좁혔다. 그 결과 CI가 만드는 `dist/`에는 `/engine/`이 없다(셸만 배포, 2026-09-24 재계획이 허용한 범위와 일치). emsdk를 CI에 자동 설치하는 일은 Todo 19의 범위 밖으로 남겨둠(별도 결정 필요).
+- 검증 게이트 전부 실제 실행, 전부 exit 0: `npm ci` · `npm run test:unit`(15 files/118 tests) · `npm run verify:repo-sources`(4 components) · `npm run typecheck` · `npm run build` · `git diff --check` · `npm run build:site -- --base=/ultima/` · `npm run audit:dist`(9 files) · `npm run verify:workflow` · `cmp` 계획서 2벌. CI가 실제로 돌릴 하드 게이트도 완전히 새로 clone한 저장소에서 직접 실행(계산 아님): `npx vitest run --exclude tests/unit/wasm-symbols.test.ts` → exit 0, 14 files/110 tests; `npx vitest run tests/unit/wasm-symbols.test.ts` → exit 1, 8 skipped(continue-on-error라 job은 안 막힘, 의도된 동작).
+- advisor 리뷰 2회로 추가 발견·수정한 것(전부 커밋 전에 잡음, main엔 한 번도 push 안 됨): (1) `verify:workflow`의 구조 검사(permission/artifact-root/`.nojekyll`)가 헤더 주석 문구만으로도 통과하던 실제 버그 — 주석이 아닌 줄만 앵커된 정규식으로 검사하도록 수정, `include-hidden-files` 검사 추가; (2) workflow-level `concurrency`를 `deploy` job으로 좁힘(PR용 `build`가 대기 중인 main 배포를 치환하지 못하게); (3) 의존성 매트릭스 19번 행을 처음에 빠뜨렸다가 추가 반영; (4) `- name: Unit tests: wasm engine suite (...)`가 인용 안 된 plain YAML scalar에 `: `를 포함해 **GitHub가 워크플로우 파일 전체를 파싱조차 못 하고 거부했을 실제 문법 오류** — `verify:workflow`는 YAML 파서가 아니라서 못 잡았고, 시스템의 PyYAML로 실제 파싱해서 확인/수정, 같은 버그 클래스를 잡는 검사(`checkNameValuesAreYamlSafe`)도 추가.
+- 완료 판정: 여전히 15,16,18 이후. 체크박스는 의도적으로 `[ ]` 유지.
+
+## 바로 다음 순서 (2026-09-25 갱신 — Todo 21·10·11·19(골격) 완료 + main merge, Todo 16 병렬 진행 중)
+1. Todo 16(Web Audio, 백그라운드 에이전트 진행 중) 완료 대기 → diff 리뷰 + 게이트 재실행 → main merge.
 2. **Todo 12~13** (설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) — Todo 11이 세운 `src/dialogue/message-tokens.ts` 토큰/리듀서 패턴과 `MessageBridgeEvent.awaitKey` 관례를 이어서, status/menu DOM 오버레이(12)와 한국어 NPC alias/prompt 규칙(13)을 구현한다.
-3. 14 → 15(번역 4402건, 워크플로우 병렬 처리 후보).
-4. 17 → 18 → 19 완료 → 20 → F1~F4.
+3. Todo 19는 골격만 완료(main merge됨) — 남은 것: CI에서 emsdk를 설치해 wasm 엔진까지 빌드하는 일(현재는 셸만 배포), 그리고 원래 선행조건(15·16·18) 완료 후 최종 acceptance 재확인.
+4. 14 → 15(번역 4402건, 워크플로우 병렬 처리 후보) → 17 → 18 → 19 완료 → 20 → F1~F4.
 
 ## 목적 달성 가능성 판단
 - **가능하다, 그리고 크리티컬 패스(Todo 21)는 이제 끝났다.** 근거: 같은 xu4 소스가 native에서도(Step 3), 이제 브라우저에서도(Todo 21, 2026-09-25) 원본 데이터로 실제로 돈다 — 실제 타이틀 화면 렌더 + 실제 키 입력으로 `IntroController` 상태 전이까지 확인됨. 남은 일은 대부분 한국어화(11~15)와 배포(17~20)로, 엔진 자체의 미지수는 이제 거의 없다.

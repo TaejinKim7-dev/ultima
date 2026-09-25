@@ -3,7 +3,9 @@ import { join, extname, basename } from "node:path"
 
 // Files that must never appear in a static GitHub Pages build artifact --
 // they are development/tooling inputs, not something a static host serves.
-const FORBIDDEN_BASENAMES = new Set([
+// Exported so other Pages-artifact checks (e.g. scripts/audit-dist.mjs) can
+// reuse the same list instead of drifting from it.
+export const FORBIDDEN_BASENAMES = new Set([
   "package.json",
   "package-lock.json",
   "vite.config.ts",
@@ -13,7 +15,7 @@ const FORBIDDEN_BASENAMES = new Set([
   ".env",
   ".env.local"
 ])
-const FORBIDDEN_EXTENSIONS = new Set([".ts", ".tsx"])
+export const FORBIDDEN_EXTENSIONS = new Set([".ts", ".tsx"])
 
 function normalizeBase(base) {
   let normalized = base.startsWith("/") ? base : `/${base}`
