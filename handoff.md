@@ -805,4 +805,83 @@ Todo 19/16 에이전트 둘 다 API rate limit(HTTP 429)로 중단됨. **Todo 19
 
 이 차이를 보고 교훈 반영: 이후 새로 띄운 에이전트(Todo 12 `todo-12-status-overlay`, Todo 13 `todo-13-korean-aliases`)에는 프롬프트에 "작게 자주 커밋하라(RED 뒤, GREEN 뒤, 각 정리 단계 뒤)"를 명시적으로 추가함 — rate limit이나 다른 중단이 다시 나도 진행 상황을 잃지 않게.
 
-현재 백그라운드 진행 중(전부 worktree 격리, main merge/push 금지 지시): Todo 12, Todo 13(신규), Todo 16(재개). main은 Todo 21·10·11·19(골격) 병합 완료 후 `df2b92b`, origin push 완료.
+현재 백그라운드 진행 중(전부 worktree 격리, main merge/push 금지 지시): Todo 12, Todo 13(신규), Todo 16(재개, 완료 후 아래 기록·리뷰·merge 완료). main은 Todo 21·10·11·16·19(골격) 병합 완료 후 `df2b92b` 이후 최신 커밋, origin push 완료.
+
+## Todo 16 완료 기록 (2026-09-26, branch `todo-16-web-audio`, commit `541d6ca`, 조율 세션 리뷰 후 main에 merge됨)
+
+### 목표/범위
+Todo 21.1의 무음 `scripts/web-sound-silent.cpp`(sound.h 전체 no-op 스텁)를 실제 Web Audio 구현으로 교체: 실제 Ogg/WAV 음악·효과음 재생(브라우저 자체 `AudioContext.decodeAudioData()`), 실제 RFX(절차적 합성) 효과음(Faun의 독립형 `sfx_gen.c` 합성기를 wasm에 직접 컴파일), pause/resume, generation 취소(오래된 비동기 decode가 이미 멈춘 음악을 되살리면 안 됨). native `sound_faun.cpp`(Faun 백엔드)는 완전히 무수정.
+
+### 확정된 기술/제품 결정
+- **C++/TS 분업**: `vendor/xu4/src/sound_web.cpp`가 sound.h의 모든 decision state(currentTrack/musicEnabled/volumeFades/동일-트랙 가드/BUFFER_MS_FAILED 캐시)를 native `sound_faun.cpp`와 동일하게 소유한다. `src/engine/audio.ts`(TS)는 "실행만" 담당하는 dumb executor — C++이 EM_JS 트램폴린으로 호출한다(`u4_web_audio_play_music`/`play_effect`/`play_effect_pcm`/`stop_music`/`stop_effects`/`fade_out_music`/`set_*_volume`/`suspend`/`duration_ms`).
+- **`soundDuration()` 동기 계약**: WAV/Ogg는 `src/engine/audio-manifest.ts`가 CDI 컨테이너 헤더만(압축된 오디오 페이로드는 안 건드림) `callMain()` 이전에 TS에서 동기 파싱해 `CDIEntry.offset` 키의 표로 미리 계산해두고, C++은 `u4_web_audio_duration_ms(offset)` EM_JS 동기 호출로 조회한다. RFX는 저장된 duration이 아예 없어서(sfx_generateWave()가 유일한 프레임 수 확인 방법) C++이 그 자리에서 1회 합성해 `bufferMs[]`에 캐시한다(RFX 클립은 전부 1초 미만의 짧은 UI/충돌음이라 성능 문제 없음).
+- **Generation 취소는 TS에만 존재**: `playMusic()`/`playEffect()`가 채널별 monotonic 카운터를 bump하고, `decodeAudioData()`가 resolve될 때 그 시점의 "현재" generation과 비교 — 다르면 버린다(재생 시작도, connect도 안 함). RFX(`playEffectPcm`)는 C++이 이미 동기 합성한 PCM을 받으므로 async gap 자체가 없어 이 체크가 필요 없다.
+- **테스트 전용 엔트리**: `AudioBridge.playMusicFromBytesForTest(data, fadeInMs)` — `playMusic()`과 완전히 같은 generation-guard 경로를 타지만 FS 경로/오프셋 대신 원본 바이트를 직접 받는다. e2e의 generation-race 시나리오가 엔진 내부 FS 경로 문자열을 몰라도 되게 하려고 추가했다(design memo가 제안한 `resetForTest()`류 test-only escape hatch와 같은 성격).
+- **RFX RNG**: `sfx_gen.c`가 요구하는 `sfx_random()`은 독립적인 xorshift32로 구현(vendor/faun의 well512는 `libboron.a`에 이미 링크돼 있어 재컴파일하면 심볼 중복, xu4 자체 게임 RNG는 DEBUG 리플레이 녹화가 소비하므로 오염 금지). `sp->randSeed`로 매 생성마다 reseed(native `faun_generateSfx()`의 `faun_randomSeed(&_rng, sp->randSeed)`와 같은 이유 — RFX 노이즈 텍스처는 저장된 시드마다 재현 가능해야 함).
+
+### 실제로 발견·수정한 버그 (예상 못 했던 것들)
+
+**1) `vendor/xu4/src/module.c`의 CDI 레이어 바이트 덮어쓰기 (가장 큰 발견)**
+
+`mod_addLayer()`가 로드된 모든 CDIEntry에 대해 이렇게 한다:
+```c
+// Replace high 0xDA byte with layer number in all entries.
+layer = (uint8_t*) &it->cdi;
+for (n = 0; n < ml.tocLen; ++it, ++n) {
+    *layer = layerNum;
+    layer += sizeof(CDIEntry);
+    ...
+}
+```
+즉 온디스크 CDIEntry의 `cdi` 필드 최하위 바이트(원래 0xDA 매직 바이트)를 **레이어 인덱스로 덮어써서** `mod_path()`가 나중에 그 바이트로 어느 레이어 파일에서 왔는지 역추적한다(`mod_path()`: `int i = ent->cdi & CDI_MASK_DA; return sst_stringL(&mod->modulePaths, i, &len);`). 상위 2바이트(`CDI_MASK_FORMAT`, 실제 `DA7A_AUDIO_*` 포맷 코드)는 안 건드린다.
+
+Todo 16 이전에는 **아무 코드도** 런타임 CDIEntry의 `cdi`를 `DA7A_*` 상수와 비교한 적이 없었다(native `sound_faun.cpp`는 `ent->offset`/`ent->bytes`만 읽지 포맷을 검사 안 함) — 그래서 이 문제가 지금껏 드러난 적이 없다. Todo 16의 RFX 감지(`ent->cdi == DA7A_AUDIO_RFX`)가 이 저장소에서 처음으로 그 비교를 시도한 코드였다.
+
+**증상**: 실제 `ultima4.zip`으로 부팅 → 실제 메뉴 화살표 키(U4_DOWN)로 Configure 서브메뉴 탐색 → `Menu::next()`가 실제로 `soundPlay(SOUND_UI_TICK)`을 호출(확인됨: `isVisible=1` 로그) → `config_soundFile(SOUND_UI_TICK)`이 올바른 엔트리를 찾음(offset=7350813, bytes=104 — Python으로 `build/host/modules/Ultima-IV.mod`를 직접 파싱해 미리 확인한 값과 일치) → 그런데 `ent->cdi`(807434753 = 0x30207a01)가 기대한 `DA7A_AUDIO_RFX`(807434970 = 0x30207ada)와 **최하위 바이트만** 다름(0x01 vs 0xda) → RFX 분기를 안 타서 `u4_web_audio_play_effect(...)`(WAV/Ogg 경로)로 잘못 감. 그 경로는 실제로 존재하는 파일 바이트 104개를 "rFX ..." 매직으로 시작하는 압축 오디오인 척 `decodeAudioData()`에 넘기니 조용히 실패(reject, catch에서 아무것도 안 함) — 효과음이 하나도 안 남.
+
+**어떻게 실측했는지**: `errorWarning()` 임시 디버그 프린트를 `IntroController::keyPressed`/`MenuController::keyPressed`/`Menu::next`/`soundPlay`에 심고(모두 나중에 원복, `vendor/xu4/src/intro.cpp`·`menu.cpp`는 최종적으로 pinned 원본과 `git diff --stat` 0바이트) 실제 브라우저 콘솔 로그로 key/mode 시퀀스와 `ent->cdi`/`ent->offset`/`ent->bytes` 실측값을 추적. 결정적 증거: `sound_web.cpp`에서 신선한 `fopen`/`fread`로 같은 파일 같은 오프셋을 **독립적으로** 다시 읽으면 정확한 "rFX " + version 200 바이트가 나오고, TOC 엔트리 자체 위치(파일 오프셋 7411518)를 독립적으로 다시 읽으면 `cdi=807434970`(정답)이 나오는데, `mod_findAppId()`를 통해 얻은 `ent->cdi`만 807434753으로 다름 — 즉 파일도 파싱 로직도 문제없고, Boron이 로드 시점에 메모리 상에서 그 필드를 고의로 바꾼다는 것을 확정.
+
+**수정**: `ent->cdi == DA7A_AUDIO_RFX` 대신 `(ent->cdi & CDI_MASK_FORMAT) == (DA7A_AUDIO_RFX & CDI_MASK_FORMAT)`로 비교(`CDI_MASK_FORMAT`은 이미 `cdi.h`에 정의돼 있음). `vendor/xu4/src/module.c`/`menu.cpp`/`intro.cpp`는 전혀 안 고쳤다(버그가 아니라 의도된 동작이므로) — 고친 곳은 오직 신규 파일 `sound_web.cpp`뿐이다.
+
+**2) e2e 타이밍: `IntroController` 모드 전이는 타이머 전용, 키 입력 전용이 아님**
+
+`IntroController::timerFired()`가 `updateTitle()==false`일 때만(즉 타이틀 애니메이션이 실제로 끝났을 때) `mode`를 `INTRO_TITLES`→`INTRO_MAP`으로 바꾸고 `musicPlay(introMusic)`을 호출한다 — **키 입력과 무관**하다. `skipTitles()`(아무 키나 `INTRO_TITLES` 상태에서 누르면 호출됨)는 `bSkipTitles=true`만 세팅할 뿐 모드를 안 바꾼다(다음 애니메이션 프레임 처리를 빠르게 만들 뿐). 반면 `INTRO_MAP`→`INTRO_MENU`는 **오직 키 입력**으로만 일어난다(`case INTRO_MAP: MAP_DISABLE; mode = INTRO_MENU; break;` — 어떤 키든 상관없이).
+
+Todo 21의 `boot-sequence.spec.ts`는 고정된 `waitForTimeout(1000)`으로 이 타이밍을 맞췄지만, Todo 16의 `--debug`(`-sASSERTIONS=2`) wasm 빌드에서는 타이틀 시퀀스가 자연 완료까지 최대 8초 가까이 걸려서 1000ms/500ms 고정 대기로는 두 번째 Enter가 여전히 `INTRO_TITLES`에 도착 → 'c' 키가 `INTRO_MAP`에 도착해 Configure를 여는 대신 그냥 `INTRO_MENU`로의 전이에 소비됨 → 그다음 ArrowDown이 `INTRO_MENU`(화살표를 처리 안 함)에 도착 → 아무 일도 안 남.
+
+**수정**: 고정 타임아웃 대신 `window.ultimaAudio.stats().musicStarts >= 1`(타이머가 실제로 `INTRO_MAP` 전이를 완료했다는 실제 증거)을 기다린 뒤에야 "INTRO_MAP 상태에서 유효한" 키를 보내도록 `tests/e2e/audio.spec.ts`를 작성. 이후 'c'는 확실히 `INTRO_MENU`에 도착.
+
+**3) Playwright/Chromium 자동화 user-activation 특이사항**
+
+`--autoplay-policy=user-gesture-required`를 브라우저 실행 인자로 넘겨도, `page.goto()` 직후(어떤 합성 입력도 보내기 전) `navigator.userActivation.hasBeenActive`가 이미 `true`로 확인됨(직접 실측: `new AudioContext(); await ctx.resume()`이 게스처 없이도 즉시 `"running"`). CDP/Playwright 자동화 고유의 특성으로 보이며 `src/engine/audio.ts`가 통제할 수 있는 부분이 아니다. "제스처 전에는 잠겨 있어야 한다"는 계약의 절반은 이 하네스에서 증명 불가 — 정직하게 F3(수동 QA)로 남기고, `unlockAudioContext()`/`armAutoResumeOnGesture()`의 resume-if-suspended 로직 자체는 `tests/unit/audio-bridge.test.ts`의 suspend/resume 테스트로 커버.
+
+### 실제 검증 (전부 이 세션에서 직접 실행)
+- 신규 TS: `src/engine/audio-manifest.ts`(CDI TOC 파서 + WAV/Ogg 헤더 duration), `src/engine/audio.ts`(AudioContext 싱글턴 + bridge + generation tracker). `src/engine/startup.ts`에 배선(`buildAudioManifest(gameModuleBytes)` → `createAudioBridge()` → `module.u4Audio` — `callMain()` 이전, `persistence.attach()` 직후). `src/main.ts`에 `window.ultimaAudio` 노출(e2e/수동 QA 전용, 어떤 decision logic도 안 봄).
+- 신규 C++: `vendor/xu4/src/sound_web.cpp`(492줄). `scripts/build-wasm.mjs`: `web-sound-silent.cpp` 제거, `src/sound_web.cpp` + `vendor/faun/support/sfx_gen.c` 추가(well512.c는 의도적으로 안 넣음 — `libboron.a`와 심볼 중복).
+- `vendor/source-manifest.json`: xu4 `fileCount` 409→410, `treeSha256` → `0e2263bcf92497f92a9dbcdca0464163d2a59a5a7a74b169dd379dbdd07c3e98`(신규 `sound_web.cpp` 반영).
+- RED→GREEN 순서 실제로 지킴: `audio-manifest.test.ts`(모듈 없음 RED → 15/15 GREEN, Ogg duration 반올림 버그 1건 스스로 발견·수정: BigInt 나눗셈이 truncate라 97 대신 98이 나와야 하는 케이스에서 실패 → round-half-up으로 수정), `audio-bridge.test.ts`(모듈 없음 RED → 12/12 GREEN, 이후 `playMusicFromBytesForTest` 추가분 RED 2개 → 14/14 GREEN), `startup-sequence.test.ts`(+2, 기존 6 → 8).
+- **검증 게이트 전부 실행, 전부 exit 0**:
+  ```
+  npm ci                                                              # 0
+  npm run test:unit                                                   # 0 — 15 files / 130 tests
+  npm run verify:repo-sources                                         # 0 — 4 components
+  npm run typecheck                                                   # 0
+  npm run build                                                       # 0
+  git diff --check                                                    # 0
+  cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md                # 0
+  npm run deps:wasm                                                   # 0
+  npm run build:wasm -- --debug                                       # 0 — 70/70 sources, xu4.wasm 7570060 bytes
+  npm run test:unit -- tests/unit/audio-manifest.test.ts              # 0 — 15/15
+  npm run test:e2e -- tests/e2e/audio.spec.ts --project=chromium      # 0 — 2/2 (ULTIMA4_DATA=실제 원본 zip)
+  npx playwright test --project=chromium                              # 0 — 12/12 (기존 10 + 신규 2, 무회귀)
+  npm run build:native                                                # 0 — sound_faun.o 그대로 링크(무수정 확인)
+  npm run cmake:configure && npm run cmake:build                      # 0
+  ctest --test-dir build/native --output-on-failure                   # 0 — 3/3
+  ```
+- 증거 (git-ignored, 로컬 전용): `.omo/evidence/ultima-web/task-16/red.log`, `green-manifest.log`, `green-unit.log`, `audio-summary.json`(happy path: `musicStarts:1, lastMusicDurationSec:94.14, effectStarts:2, lastEffectDurationSec:0.0716, staleMusicDiscards:0`), `audio-generation-race.log`(failure path: `staleMusicDiscards` 0→1, `musicStarts` 불변 0→0).
+
+### 미검증/의도적으로 남긴 것 (정직하게)
+- **`soundSpeakLine()`의 stream sub-range 재생 미구현** — Faun의 `faun_playStreamPart()`(스트림 내 start/duration 구간만 재생) 상당 기능을 구현 안 함. 이유: 이 모듈(`vendor/xu4/module/Ultima-IV/config.b`)에는 `voice:` 블록이 아예 없어서 `VOICE_LB`/`VOICE_HW`/`VOICE_GYPSY`/`VOICE_SPELL` 전부 `config_musicFile()` 조회가 항상 NULL(실제 빌드된 Ultima-IV.mod의 TOC로 직접 확인, appId 계산도 확인) — 즉 이 게임 데이터로는 이 코드 경로에 절대 도달 못 함. 도달 못 하는 코드를 추측으로 구현해 테스트 없이 배포하기보다 정직하게 guard까지만 구현하고 `errorWarning()`으로 남김.
+- **AudioContext "제스처 전 잠김" 절반** — 위 3번 항목 참고, F3 수동 QA 필요.
+- **WebKit의 실제 Ogg Vorbis `decodeAudioData` 지원 여부** — 이 e2e는 Chromium 전용(`--project=chromium`). WebKit/Firefox 실동작은 F3에서 확인 필요.
+- `SOUND_SPELL_A..Z`(고유 주문 효과음, 26개)는 이 모듈에 CDIEntry 자체가 없어(config.b의 sound: 블록 35개 항목 중 없음) `game.cpp`의 `uniqueSpellSounds = soundDuration(SOUND_SPELL_A) > 0`가 항상 false로 평가됨 — 이건 버그가 아니라 이 게임 데이터의 실제 상태(고유 주문음 없음)이고, 실제로 그 분기(`gameSpellEffect`의 `sound==SOUND_MAGIC && uniqueSpellSounds`)에 도달 안 하는 것도 소스로 확인함.

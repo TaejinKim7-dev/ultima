@@ -1,11 +1,16 @@
 import "./shell.css"
 import { createInputQueue, type InputQueue } from "./bridge/input-queue.ts"
 import { createShell } from "./shell.ts"
+import type { AudioBridge } from "./engine/audio.ts"
 import { startEngine, type EngineModuleFactory } from "./engine/startup.ts"
 
 declare global {
   interface Window {
     ultimaInput?: InputQueue
+    /** Todo 16: e2e/manual-QA observability hook -- never consulted by any
+     *  engine decision logic. See src/engine/audio.ts's AudioBridge for the
+     *  full surface (stats(), suspend(), ...). */
+    ultimaAudio?: AudioBridge | undefined
   }
 }
 
@@ -106,6 +111,8 @@ romPickerElement?.addEventListener("change", () => {
       document.body.setAttribute("data-engine-started", String(result.started))
       if (result.started) {
         bridge.attachSaveHandlers(result.saveHandlers)
+        window.ultimaAudio = result.audioBridge
+        document.body.setAttribute("data-audio-bridge-ready", String(result.audioBridge !== undefined))
       } else {
         document.body.setAttribute("data-engine-start-reason", result.reason)
       }

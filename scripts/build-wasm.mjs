@@ -166,10 +166,14 @@ async function main() {
   //   discourse_castle.cpp  <- included by discourse.cpp
   //   config_data.cpp,
   //   script_boron.cpp      <- included by config_boron.cpp
-  // sound_faun.cpp (native SOUND=faun) is replaced by web-sound-silent.cpp:
-  // the real backend pulls in the Faun mixer, PulseAudio, and pthread,
-  // none of which belong in this link (Todo 16 replaces the silent stub
-  // with real Web Audio behind the same sound.h contract).
+  // sound_faun.cpp (native SOUND=faun) is replaced by sound_web.cpp (Todo
+  // 16): the real Faun backend pulls in the Faun mixer, PulseAudio, and
+  // pthread, none of which belong in this link. sound_web.cpp implements
+  // the same sound.h contract for real (Ogg/WAV via the browser's own Web
+  // Audio decoder, RFX via sfx_gen.c compiled directly into this build --
+  // see that file's header comment) -- it replaces Todo 21.1's silent
+  // web-sound-silent.cpp no-op stub, which only ever existed so the real
+  // engine would link before Todo 16 could implement real audio.
   const sourceFiles = [
     // CXXSRCS (Makefile.common), in that file's order.
     "src/annotation.cpp",
@@ -218,7 +222,7 @@ async function main() {
     "src/screen_glfw.cpp", // screen_$(UI).cpp, UI=glfw (includes gpu_opengl.cpp)
     "src/settings.cpp",
     "src/shrine.cpp",
-    "scripts/web-sound-silent.cpp", // sound_$(SOUND).cpp replacement, see comment above
+    "src/sound_web.cpp", // sound_$(SOUND).cpp replacement, see comment above (Todo 16)
     "src/spell.cpp",
     "src/stats.cpp",
     "src/textview.cpp",
@@ -245,6 +249,12 @@ async function main() {
     "src/support/cdi.c",
     // Step 8 browser-safe input queue (C ABI home for the bridge inputs).
     "src/web_bridge.cpp",
+    // Todo 16: Faun's standalone RFX synthesizer (sfx_gen.c). Pure,
+    // dependency-free C (stdint/assert/math/stdio/stdlib/string only) --
+    // it needs only sound_web.cpp's sfx_random() RNG hookup, never Faun's
+    // own mixer/PulseAudio/pthread machinery, so this does not reintroduce
+    // any of what sound_web.cpp exists to avoid linking.
+    "vendor/faun/support/sfx_gen.c",
   ]
 
   // Check which source files exist (scripts/* live at repo root, not in xu4Build)
@@ -351,7 +361,8 @@ async function main() {
     "[xu4-wasm] persistent filesystem enabled",
     `[xu4-wasm] entry module: ${primaryOut === mjsFile ? "xu4.mjs" : "xu4.js"} (xu4.mjs + xu4.js mirrored)`,
     `[xu4-wasm] binary: xu4.wasm (${wasmSize} bytes)`,
-    "[xu4-wasm] native sound and save backends replaced with web stubs",
+    "[xu4-wasm] native save backend replaced with an IDBFS-backed web stub",
+    "[xu4-wasm] sound backend: Web Audio bridge (real playback, no native audio mixer)",
     "[xu4-wasm] render backend: web canvas path",
   ]
   // Guard: fail loudly rather than writing a log the test would reject.

@@ -243,4 +243,62 @@ describe("startEngine", () => {
     expect(result.reason).toBe("engine-error")
     expect(dispatched.some((e) => e.type === "runtime-error")).toBe(true)
   })
+
+  it("Todo 16: attaches a Web Audio bridge to module.u4Audio before callMain() when an AudioContext is supplied", async () => {
+    const { module, calls } = makeFakeModule()
+    const { factory } = makeFactory(module)
+    let u4AudioAtMainCall: unknown
+    module.callMain = () => {
+      calls.mainCalled += 1
+      u4AudioAtMainCall = module.u4Audio
+    }
+    const fakeContext = {
+      state: "suspended" as const,
+      currentTime: 0,
+      destination: {},
+      resume: async () => {},
+      suspend: async () => {},
+      createGain: () => ({ gain: { value: 1, setValueAtTime() {}, linearRampToValueAtTime() {} }, connect() {}, disconnect() {} }),
+      createBufferSource: () => ({ buffer: null, loop: false, connect() {}, disconnect() {}, start() {}, stop() {} }),
+      createBuffer: () => ({ duration: 0, length: 0 }),
+      decodeAudioData: async () => ({ duration: 0, length: 0 })
+    }
+
+    const result = await startEngine({
+      factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
+      zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
+      dispatch: () => true,
+      unlockAudio: async () => {},
+      audioContext: fakeContext
+    })
+
+    expect(result.started).toBe(true)
+    expect(module.u4Audio).toBeDefined()
+    expect(u4AudioAtMainCall).toBe(module.u4Audio) // attached before callMain(), not after
+    // durationMs() must answer synchronously, with no async work at all
+    // (this fake module asset isn't a real CDI pak, so the manifest is
+    // empty -- the point here is the *call shape*, not a real duration).
+    expect(module.u4Audio?.durationMs(0)).toBe(0)
+  })
+
+  it("Todo 16: attaches no audio bridge when audioContext is explicitly null (mirrors 'no Web Audio at all')", async () => {
+    const { module, calls } = makeFakeModule()
+    const { factory } = makeFactory(module)
+
+    const result = await startEngine({
+      factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
+      zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
+      dispatch: () => true,
+      unlockAudio: async () => {},
+      audioContext: null
+    })
+
+    expect(result.started).toBe(true)
+    expect(calls.mainCalled).toBe(1)
+    expect(module.u4Audio).toBeUndefined()
+  })
 })

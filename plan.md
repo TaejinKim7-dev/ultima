@@ -21,10 +21,11 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률
-- **승인 기준: 12 / 25 = 48.0%** (Step 1~11, 21 ✅).
-- **실제 게임에서 확인 (2026-09-25 갱신): 브라우저에서 실제 엔진으로 확인됨 — Step 7(WebGL2 렌더), 8(실제 GLFW 입력), 9(브라우저 시작), 10(저장/재로드/export-import), 21(링크·FS·렌더·입력 전부).** 근거: `tests/e2e/boot-sequence.spec.ts`가 실제 `ultima4.zip`으로 실제 타이틀 화면 렌더 + 키 입력 2회로 `IntroController`의 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU)까지 확인(`.omo/evidence/ultima-web/task-21/title-render.png`).
+- **승인 기준: 13 / 25 = 52.0%** (Step 1~11, 16, 21 ✅).
+- **실제 게임에서 확인 (2026-09-26 갱신): 브라우저에서 실제 엔진으로 확인됨 — Step 7(WebGL2 렌더), 8(실제 GLFW 입력), 9(브라우저 시작), 10(저장/재로드/export-import), 16(실제 Web Audio 음악/RFX 효과음), 21(링크·FS·렌더·입력 전부).** 근거: `tests/e2e/boot-sequence.spec.ts`가 실제 `ultima4.zip`으로 실제 타이틀 화면 렌더 + 키 입력 2회로 `IntroController`의 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU)까지 확인(`.omo/evidence/ultima-web/task-21/title-render.png`).
 - **Step 10 완료 (2026-09-25): 저장·재로드·export/import 전부 증명됨.** `tests/e2e/save-reload.spec.ts`가 실제 캐릭터 생성(이름/성별/스토리 24화면/미덕 질문 최대 20라운드)을 Playwright로 끝까지 자동화해 실제 `party.sav` write → IDBFS 동기화(`#save-status`="저장 완료") → 페이지 리로드 → "Journey Onward" → 실제 게임 월드(파티 이름 "avatar", 골드 200 등) 진입을 스크린샷으로 확인(`.omo/evidence/ultima-web/task-10/save-reload-after-journey.png`). IDBFS 실패 시나리오도 실제 `window.indexedDB` 제거로 확인. **Export/import도 이번에 실제로 연결**: `src/shell.ts`에 `attachSaveHandlers()`를 추가해 `main.ts`가 `startEngine()` 성공 시 `persistence.ts`의 실제 `exportSaveArchive`/`importSaveArchive`를 넘겨주고, 다운로드된 아카이브가 실제 "U4SV" 매직 바이트로 시작하며 재가져오기가 라운드트립되는 것까지 e2e로 확인(`.omo/evidence/ultima-web/task-10/export-reimport.dat`).
 - **Step 11 완료 (2026-09-25, 병렬 백그라운드 에이전트)**: 긴 메시지를 HTML 대화 패널로 라우팅. 실제 `screen.cpp` 메시지 바이트(줄바꿈/백스페이스/커서이동/색상)를 `message-tokens.ts`로 토큰화, `PanelState`가 dispatch 호출 간 지속(엔진 출력이 줄 단위가 아니라 조각 단위로 옴), Hawkwind류 pause는 `MessageBridgeEvent.awaitKey`로 별도 전달(ABI v1에 additive). `createElement`/`textContent`만 사용(e2e로 innerHTML 계열 미호출 증명, 악성 `&lt;script&gt;` 주입 텍스트도 무해하게 렌더됨을 확인).
+- **Step 16 완료 (2026-09-26, 병렬 백그라운드 에이전트)**: Todo 21.1의 무음 `sound.h` 스텁을 실제 `vendor/xu4/src/sound_web.cpp`(Web Audio 백엔드)로 교체. `tests/e2e/audio.spec.ts`가 실제 `ultima4.zip`으로 AudioContext unlock, 실제 음악 재생(94초 트랙, 자동 트리거), 실제 RFX 합성 효과음(Configure 메뉴 화살표/닫기 키), pause/resume, 생성-취소(stale decode) 경합 시나리오까지 확인(`.omo/evidence/ultima-web/task-16/{audio-summary.json,audio-generation-race.log}`). 실제 버그 발견·수정: `module.c`의 `mod_addLayer()`가 모든 `CDIEntry`의 `cdi` 하위 바이트를 레이어 번호로 덮어써서 RFX 포맷 판별이 깨짐 — `CDI_MASK_FORMAT`로 상위 2바이트만 비교하도록 수정(vendor 원본은 안 건드림, 새 `sound_web.cpp` 안에서만 마스킹).
 
 ## 단계 목록
 
@@ -75,7 +76,7 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 ### Wave 4 — 완성/배포 (16~20)
 | # | 단계 | 승인 기준 | 실제 게임에서 확인 | 선행 |
 |---|---|---|---|---|
-| 16 | Web Audio 음악/효과음 + RFX 생성 | ⬜ | ⬜ | 6,9,21 (21.1의 무음 구현을 교체) |
+| 16 | Web Audio 음악/효과음 + RFX 생성 | ✅ | ✅ | 6,9,21 (21.1의 무음 구현을 교체) — branch `todo-16-web-audio` `541d6ca`, main에는 아직 merge 안 함 |
 | 17 | 브라우저 통합 게임 진행 e2e (새 게임부터) | ⬜ | ⬜ | 10,12,13,15,16,21 |
 | 18 | 실패/보안/개인정보/회귀 경계 강화 (`audit:dist`) | ⬜ | ⬜ | 17 |
 | 19 | GitHub Actions Pages workflow + `/ultima/` release artifact | 🟡 | — | 15,16,18 (골격 완성, 브랜치 `todo-19-pages-workflow`, main 미merge) |
@@ -201,9 +202,21 @@ Todo 19 골격 작업 (2026-09-25, branch `todo-19-pages-workflow`, 백그라운
 - advisor 리뷰 2회로 추가 발견·수정한 것(전부 커밋 전에 잡음, main엔 한 번도 push 안 됨): (1) `verify:workflow`의 구조 검사(permission/artifact-root/`.nojekyll`)가 헤더 주석 문구만으로도 통과하던 실제 버그 — 주석이 아닌 줄만 앵커된 정규식으로 검사하도록 수정, `include-hidden-files` 검사 추가; (2) workflow-level `concurrency`를 `deploy` job으로 좁힘(PR용 `build`가 대기 중인 main 배포를 치환하지 못하게); (3) 의존성 매트릭스 19번 행을 처음에 빠뜨렸다가 추가 반영; (4) `- name: Unit tests: wasm engine suite (...)`가 인용 안 된 plain YAML scalar에 `: `를 포함해 **GitHub가 워크플로우 파일 전체를 파싱조차 못 하고 거부했을 실제 문법 오류** — `verify:workflow`는 YAML 파서가 아니라서 못 잡았고, 시스템의 PyYAML로 실제 파싱해서 확인/수정, 같은 버그 클래스를 잡는 검사(`checkNameValuesAreYamlSafe`)도 추가.
 - 완료 판정: 여전히 15,16,18 이후. 체크박스는 의도적으로 `[ ]` 유지.
 
-## 바로 다음 순서 (2026-09-26 갱신 — Todo 21·10·11·19(골격) 완료 + main merge, Todo 12·13·16 백그라운드 병렬 진행 중)
-1. 병렬 백그라운드 에이전트 3개 진행 중(worktree 격리, 각자 브랜치에 커밋만): Todo 12(status/menu DOM 오버레이, `todo-12-status-overlay`), Todo 13(한국어 NPC alias, `todo-13-korean-aliases`), Todo 16(Web Audio, `todo-16-web-audio` — 1차 시도가 API rate limit로 중단돼 커밋 없이 재개함, 재개 시 점진적 커밋 지시함). 완료되는 대로 diff 리뷰 + 게이트 재실행 후 순차 main merge.
-2. Todo 19는 골격만 완료(main merge됨) — 남은 것: CI에서 emsdk를 설치해 wasm 엔진까지 빌드하는 일(현재는 셸만 배포), 그리고 원래 선행조건(15·16·18) 완료 후 최종 acceptance 재확인.
+Todo 16 완료 (2026-09-26, branch `todo-16-web-audio` 커밋 `541d6ca`, main에 merge됨):
+- 신규 `vendor/xu4/src/sound_web.cpp`: Todo 21.1의 무음 `scripts/web-sound-silent.cpp` 스텁을 실제 Web Audio 구현으로 교체. sound.h 전체 함수를 native `sound_faun.cpp`와 같은 decision state(currentTrack/musicEnabled/volumeFades/동일-트랙 가드/BUFFER_MS_FAILED 캐시)로 구현하고, 실행만 EM_JS 트램폴린 10여 개로 `src/engine/audio.ts`(`Module.u4Audio`)에 위임. native `sound_faun.cpp`는 완전히 무수정(native 빌드가 여전히 `sound_faun.o`를 링크하는 것으로 확인).
+- 신규 `src/engine/audio-manifest.ts`(CDI TOC 파서 + WAV/Ogg 헤더만으로 duration 계산, 실제 `sfx_gen.c` 생성 없이) + `src/engine/audio.ts`(AudioContext 싱글턴, 실제 Web Audio 재생/페이드/볼륨, generation 취소 로직). `soundDuration()`은 WAV/Ogg는 callMain() 이전에 TS에서 미리 계산한 표를 EM_JS로 동기 조회, RFX는 C++이 그 자리에서 1회 합성해 프레임 수를 캐시하는 방식으로 항상 동기 유지.
+- **실제로 발견·수정한 버그(사전 조사에서 예상 못 함)**: `vendor/xu4/src/module.c`의 `mod_addLayer()`가 로드된 모든 CDIEntry의 `cdi` 필드 최하위 바이트(원본 파일의 0xDA 매직 바이트)를 레이어 번호로 **의도적으로 덮어쓴다**("Replace high 0xDA byte with layer number in all entries") — `mod_path()`가 나중에 그 바이트로 레이어를 역추적하기 위해서다. Todo 16 이전에는 아무 코드도 런타임 CDIEntry의 `cdi`를 `DA7A_*` 상수와 비교한 적이 없어서(native는 `ent->offset`/`ent->bytes`만 읽음) 이 문제가 드러난 적이 없었다. 실제 `SOUND_UI_TICK` 엔트리의 온디스크 `cdi`(0x30207ada)가 런타임에는 0x30207a01로 읽히는 것을 실제 엔진 실행 중 직접 확인. `CDI_MASK_FORMAT`(건드리지 않는 상위 2바이트)으로 비교하도록 수정.
+- **e2e 작성 중 발견·수정한 버그**: `IntroController::keyPressed()`는 INTRO_TITLES→INTRO_MAP 전이를 오직 타이머(`timerFired()`)로만 하고 키 입력으로는 안 한다 — 이 타이머가 돌기 전에 보낸 키는 `skipTitles()`에 소비될 뿐이다. 'c'를 너무 일찍 보내면 INTRO_MAP(아무 키나 INTRO_MENU로 전이시킴)에 소비돼 Configure 메뉴가 안 열린다. `musicStarts` 통계(타이머가 실제로 돌았다는 증거)를 기다린 뒤에 키를 보내도록 e2e를 수정해 해결(추측이 아니라 `IntroController::keyPressed`/`MenuController::keyPressed`에 임시 디버그 로그를 심어 실제 key/mode 시퀀스를 확인한 뒤 알아냄).
+- Playwright/Chromium이 `--autoplay-policy=user-gesture-required`를 줘도 `page.goto()` 직후 `navigator.userActivation.hasBeenActive`가 이미 `true`인 것을 확인 — "제스처 전에는 잠겨 있어야 한다" 절반은 이 하네스에서 증명 불가(F3 수동 QA로 남김), resume-if-suspended/`armAutoResumeOnGesture()` 코드 자체는 unit test로 커버.
+- `vendor/source-manifest.json`의 xu4 `treeSha256`/`fileCount`를 같은 커밋에서 재계산(Todo 7/8/21 전례 따름).
+- 신규 테스트: `tests/unit/audio-manifest.test.ts`(15), `tests/unit/audio-bridge.test.ts`(14, generation-race 포함), `tests/unit/startup-sequence.test.ts`(+2), `tests/e2e/audio.spec.ts`(2 시나리오, 실제 `ultima4.zip`) — 전부 RED→GREEN 확인.
+- 검증 게이트 전부 exit 0: `npm ci` · `npm run test:unit`(15 files/130 tests) · `verify:repo-sources`(4 components) · `typecheck` · `build` · `git diff --check` · `npm run deps:wasm` · `npm run build:wasm -- --debug`(70/70 소스) · `npm run test:e2e -- tests/e2e/audio.spec.ts --project=chromium`(2/2) · 전체 e2e 스위트(12/12, Chromium) · `npm run build:native` · `ctest --test-dir build/native`(3/3, native 무회귀).
+- 증거: `.omo/evidence/ultima-web/task-16/{red.log,green-manifest.log,green-unit.log,audio-summary.json,audio-generation-race.log}`.
+- 남은 것: `soundSpeakLine()`의 stream sub-range 재생은 미구현(이 모듈에 `voice:` 데이터가 전혀 없어 실질적으로 도달 불가함을 확인) — 정직하게 문서화만 하고 구현은 보류. 상세는 `handoff.md` "Todo 16 완료 기록" 참고.
+
+## 바로 다음 순서 (2026-09-26 갱신 — Todo 21·10·11·16·19(골격) 완료 + main merge, Todo 12·13 백그라운드 병렬 진행 중)
+1. 병렬 백그라운드 에이전트 2개 진행 중(worktree 격리, 각자 브랜치에 커밋만): Todo 12(status/menu DOM 오버레이, `todo-12-status-overlay`), Todo 13(한국어 NPC alias, `todo-13-korean-aliases`). 완료되는 대로 diff 리뷰(fork point 기준) + 게이트 재실행 후 순차 main merge.
+2. Todo 19는 골격만 완료(main merge됨) — 남은 것: CI에서 emsdk를 설치해 wasm 엔진까지 빌드하는 일(현재는 셸만 배포), 그리고 원래 선행조건(15·16·18) 중 16은 이제 완료, 15·18만 남음.
 3. 14(12·13 merge 후) → 15(번역 4402건) → 17 → 18 → 19 완료 → 20 → F1~F4.
 
 ## 목적 달성 가능성 판단
@@ -213,7 +226,7 @@ Todo 19 골격 작업 (2026-09-25, branch `todo-19-pages-workflow`, 백그라운
   - (해결, 2026-09-25) Asyncify blocking loop: `msecSleep()`이 `nanosleep()`을 그대로 호출해 매 프레임 브라우저를 완전히 멈추는 버그였음 — `emscripten_sleep()`으로 교체해 해결. Step 8 큐의 yield 훅(`u4_web_frame_yield`) 자체는 문제 없었음, 그 훅에 도달하기 전에 이미 멈춰 있었던 것.
   - (남음) Step 10: persistence coordinator가 실제 엔진에 연결은 됐지만(21.2), 실제 저장이 한 번도 안 일어나봤다 — 캐릭터 생성 없이는 세이브 트리거가 없음. IDBFS write가 실제로 브라우저 재로드 후 살아남는지는 아직 확인 안 됨(확인 필요).
   - 번역 corpus 4402건의 분량·품질 (Step 15).
-  - Web Audio + RFX 동기 `soundDuration` 계약 (Step 16) — 21.1의 무음 구현을 실제로 교체할 때 처음 검증됨.
+  - (해결, 2026-09-26) Web Audio + RFX 동기 `soundDuration` 계약 (Step 16) — 실제로 교체·검증 완료. 예상 못 한 진짜 버그: `mod_addLayer()`가 CDIEntry의 `cdi` 필드 최하위 바이트를 레이어 번호로 덮어써서 RFX 포맷 비교가 항상 실패했음(`CDI_MASK_FORMAT`으로 비교하도록 수정) — 자세한 내용은 위 "Todo 16 완료" 참고.
 - 해결된 환경 이슈: Node 22 전환 완료(2026-09-24, v22.23.3). host의 `/usr/bin/node`는 여전히 v20이라, 로그인 셸이 아닌 환경에선 `export PATH="$HOME/.local/opt/node22/bin:$PATH"`가 필요할 수 있다. wasm 빌드 시 `source .emsdk/emsdk_env.sh`는 emsdk 자체 Node(22.16)를 PATH 앞에 둔다(둘 다 22라 문제 없음).
 
 ## 공통 규칙 (AGENTS.md 요약)

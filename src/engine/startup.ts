@@ -41,6 +41,15 @@
 
 import { BRIDGE_ABI_VERSION, type BridgeEvent } from "../bridge/types.ts"
 import {
+  armAutoResumeOnGesture,
+  buildAudioManifest,
+  createAudioBridge,
+  getAudioContext,
+  unlockAudioContext,
+  type AudioBridge,
+  type AudioContextLike
+} from "./audio.ts"
+import {
   createPersistenceCoordinator,
   exportSaveArchive,
   importSaveArchive,
@@ -73,6 +82,13 @@ export interface EngineModule {
   /** Exported via EXPORTED_RUNTIME_METHODS; see the ENV.HOME note above. */
   readonly ENV: Record<string, string>
   callMain(args?: readonly string[]): void
+  /**
+   * Todo 16: the Web Audio bridge vendor/xu4/src/sound_web.cpp's EM_JS
+   * calls reach via `Module.u4Audio.<method>(...)` (see that file's header
+   * comment). Assigned by startEngine() itself, before callMain(); not
+   * part of the real Emscripten Module shape, so it starts undefined.
+   */
+  u4Audio?: AudioBridge
 }
 
 export type EngineModuleFactory = (options: Record<string, unknown>) => Promise<EngineModule>
@@ -99,10 +115,23 @@ export interface StartEngineOptions {
   readonly unlockAudio?: () => Promise<void>
   /** Observes native save/settings writes and flushes IDBFS (Todo 10); defaults to a fresh coordinator. */
   readonly persistenceCoordinator?: PersistenceCoordinator
+  /**
+   * Todo 16: the AudioContext the Web Audio bridge (src/engine/audio.ts)
+   * attaches to `module.u4Audio`. Injected so unit tests can supply a fake
+   * (or `null`, meaning "no bridge attached", exactly like an environment
+   * with no Web Audio at all); defaults to the shared real one
+   * (getAudioContext()), which is `null` outside a browser.
+   */
+  readonly audioContext?: AudioContextLike | null
 }
 
 export type StartEngineResult =
-  | { readonly started: true; readonly saveHandlers: SaveHandlers }
+  | {
+      readonly started: true
+      readonly saveHandlers: SaveHandlers
+      /** Todo 16: undefined when no AudioContext was available (see audioContext's doc comment above). */
+      readonly audioBridge: AudioBridge | undefined
+    }
   | { readonly started: false; readonly reason: "corrupted" | "missing-files" | "idbfs-sync-failed" | "engine-error"; readonly detail: string }
 
 function message(text: string): BridgeEvent {
@@ -125,19 +154,6 @@ function describeValidationFailure(validation: Extract<ZipValidationResult, { ok
   return `원본 데이터에 필요한 파일이 없습니다: ${validation.missing.join(", ")}`
 }
 
-async function defaultUnlockAudio(): Promise<void> {
-  const AudioContextCtor =
-    (globalThis as { AudioContext?: typeof AudioContext; webkitAudioContext?: typeof AudioContext }).AudioContext ??
-    (globalThis as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
-  if (AudioContextCtor === undefined) {
-    return
-  }
-  const context = new AudioContextCtor()
-  if (context.state === "suspended") {
-    await context.resume()
-  }
-}
-
 function syncfsAsync(fs: EmscriptenFS, populate: boolean): Promise<void> {
   return new Promise((resolvePromise, rejectPromise) => {
     fs.syncfs(populate, (error) => {
@@ -157,7 +173,7 @@ function syncfsAsync(fs: EmscriptenFS, populate: boolean): Promise<void> {
  * contract point 4 they mirror.
  */
 export async function startEngine(options: StartEngineOptions): Promise<StartEngineResult> {
-  const unlockAudio = options.unlockAudio ?? defaultUnlockAudio
+  const unlockAudio = options.unlockAudio ?? unlockAudioContext
   const persistence = options.persistenceCoordinator ?? createPersistenceCoordinator()
 
   // See the module doc comment: this must run as a preRun callback, not
@@ -228,8 +244,9 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
 
   // FS root, not a sandbox subdirectory: this is where u4find_path/
   // u4find_pathc actually look first (see the module doc comment).
+  const gameModuleBytes = new Uint8Array(await options.gameModule.arrayBuffer())
   module.FS.writeFile("/render.pak", new Uint8Array(await options.renderPak.arrayBuffer()))
-  module.FS.writeFile("/Ultima-IV.mod", new Uint8Array(await options.gameModule.arrayBuffer()))
+  module.FS.writeFile("/Ultima-IV.mod", gameModuleBytes)
   module.FS.writeFile("/ultima4.zip", new Uint8Array(buffer))
 
   // Must be attached before callMain(): main() runs the engine's full
@@ -237,11 +254,31 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
   // which JS code runs before any native save/settings write can happen.
   persistence.attach(module.FS, PERSISTENCE_PATHS, options.dispatch)
 
+  // Todo 16: predecode WAV/Ogg duration metadata synchronously (see
+  // src/engine/audio-manifest.ts's module doc comment for why this must
+  // happen before callMain()) and attach the Web Audio bridge
+  // vendor/xu4/src/sound_web.cpp's EM_JS calls reach via `Module.u4Audio`.
+  // No bridge is attached when there is no AudioContext at all (outside a
+  // browser, or a test that passes `audioContext: null`) -- every EM_JS
+  // call on the C++ side guards with `Module.u4Audio &&`, so this degrades
+  // to silence rather than throwing.
+  const audioContext = "audioContext" in options ? (options.audioContext ?? null) : getAudioContext()
+  let audioBridge: AudioBridge | undefined
+  if (audioContext !== null) {
+    audioBridge = createAudioBridge({
+      context: audioContext,
+      fs: module.FS,
+      manifest: buildAudioManifest(gameModuleBytes)
+    })
+    module.u4Audio = audioBridge
+  }
+  armAutoResumeOnGesture()
+
   try {
     await unlockAudio()
   } catch {
     // Non-fatal: no user gesture yet, autoplay policy, or no Web Audio
-    // support in this environment. Audio itself is Todo 16's scope.
+    // support in this environment.
   }
 
   module.callMain([])
@@ -255,5 +292,5 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
     export: () => exportSaveArchive(module.FS, PERSISTENCE_PATHS, persistence),
     import: (archive) => importSaveArchive(module.FS, PERSISTENCE_PATHS, persistence, archive)
   }
-  return { started: true, saveHandlers }
+  return { started: true, saveHandlers, audioBridge }
 }
