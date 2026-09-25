@@ -273,7 +273,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: Korean screenshots bundle under `.omo/evidence/ultima-web/task-15/korean-screens/`; failure: insert banned untranslated ASCII display phrase in a test copy and verify strict check fails with semantic ID, evidence `.omo/evidence/ultima-web/task-15/untranslated-detected.log`.
   Commit: Y | feat(i18n): complete Korean translation corpus
 
-- [ ] 16. Implement Web Audio music, sound effects, and RFX generation
+- [x] 16. Implement Web Audio music, sound effects, and RFX generation
   What to do / Must NOT do: implement `sound_web.cpp` and TS Web Audio bridge for Ogg/WAV decode, playback, pause/resume/fade, generation IDs, and Faun RFX PCM generation. Predecode enough metadata before main so `soundDuration` remains synchronous. Keep native Faun backend unchanged. Must not ship fake silence or require SharedArrayBuffer/pthreads.
   Parallelization: Wave 4 | Blocked by: 6,9 | Blocks: 17,19
   References: `engine/src/sound_faun.cpp:91-222`; `engine/src/support/cdi.h:53-63`; `.omo/drafts/ultima-web-source-analysis.md` audio/RFX notes; Faun `sfx_gen.c` and RFX format notes from pinned checkout.

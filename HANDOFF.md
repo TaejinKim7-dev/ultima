@@ -1,58 +1,62 @@
 # HANDOFF
-작성 시각: 2026-09-25 09:50 KST — Todo 21(21.1~21.4) 전부 완료 반영
+작성 시각: 2026-09-26 04:40 KST — Todo 16(Web Audio 음악/효과음/RFX) 완료 반영
 
 ## 1. 목표 (What we're building)
 - xu4 기반 Ultima IV를 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식한다. 진행 기준은 `/home/taejin/ultima/plan.md`(25단계 = Todo 1~21 + F1~F4).
-- 이번 세션: 사용자 요청 "plan.md 기준으로 다음 단계 진행해" + "중간에 물어보지 말고 끝까지(Todo 21 끝날 때까지) 진행해"에 따라 **Todo 21 전체(21.1~21.4)를 끝까지 완료**했다.
+- 이번 세션: Todo 16(Web Audio 음악/효과음/RFX 생성)을 처음부터 끝까지 구현 — Todo 21.1의 무음 `scripts/web-sound-silent.cpp` 스텁을 실제 재생으로 교체.
 
 ## 2. 현재 상태 (Current state)
-- **branch `todo-21-real-engine`, commit `70d14db`** (이전 `542ce34`=21.1 위에 쌓음, main `2f9da51`에서 분기, 아직 main에 merge 안 함).
-- **Todo 21 전부 완료**: 실제 xu4 엔진이 브라우저에서 실제로 링크(21.1)·부팅(21.2)·렌더(21.3)·입력(21.4)까지 전부 확인됐다. 실제 `ultima4.zip`으로 실제 타이틀 화면("Lord British and Origin Systems, Inc. present Ultima IV")이 렌더되고, 키 입력 2회로 `IntroController`의 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU, 실제 영어 메뉴 텍스트까지)를 스크린샷으로 확인했다. 증거: `.omo/evidence/ultima-web/task-21/title-render.png`, `boot-failure.log`.
-- **진행률: 승인 기준 10/25 = 40.0%** (Step 1~9, 21 ✅, Step 10 🟡). "실제 게임에서 확인" 열도 Step 7·8·9·21이 이번에 ✅로 갱신됨(실제 엔진으로 재검증).
-- 이 과정에서 **실제 실행 전엔 전혀 안 보이던 버그 5개**를 실제로 찾아 고쳤다(전부 handoff.md "Todo 21 완료 기록"에 상세 기록): `-sFS_DEBUG=1` 누락(Todo 10 트래킹 자체가 불가능했음), 낡은 `render.pak`, `gpu_opengl.cpp`의 `GPU_RENDER` 경로 `#include "map.h"` 누락, `getTicks.c`의 `msecSleep()`이 `nanosleep()`으로 매 프레임 브라우저를 완전히 멈추던 버그(가장 심각했음, advisor 상담으로 확정), `gpu_opengl.cpp`의 GL_RGB/RGBA 텍스처 포맷 불일치.
-- 검증 게이트 전부 exit 0 (이 브랜치, Node 22, 실제 `ultima4.zip` 사용): `npm run test:unit`(13 files/99 tests) · `npm run verify:repo-sources`(4 pinned components) · `npm run typecheck` · `npm run build` · `git diff --check` · 전체 e2e 스위트(`npx playwright test --project=chromium`, **10/10 통과**, `tests/e2e/boot-sequence.spec.ts` 포함).
+- **branch `todo-16-web-audio`, commit `541d6ca`** (main `ce88bc1`에서 분기, 아직 main에 merge 안 함). 이 브랜치는 지금 `/home/taejin/ultima/.claude/worktrees/agent-a07d0d283bf448a5f` 워크트리에서 만들어졌지만, 같은 저장소이므로 `/home/taejin/ultima`(메인 체크아웃)에서도 `git checkout todo-16-web-audio`로 바로 보인다.
+- **Todo 16 전부 완료, 실제 게임에서 확인**: 실제 `ultima4.zip`으로 부팅 → AudioContext unlock → 자동 트리거되는 실제 음악(94초 트랙) 재생 → 실제 메뉴 조작(Configure 서브메뉴 화살표+닫기)으로 실제 RFX 합성 효과음(UI_TICK/UI_CLICK) 재생 → pause/resume → generation-race(오래된 decode가 이미 멈춘 음악을 되살리지 못함) 전부 `tests/e2e/audio.spec.ts`로 증명.
+- **진행률: 승인 기준 11/25 = 44.0%** (Step 1~9, 16, 21 ✅, Step 10 🟡).
+- 이 과정에서 예상 못 한 **진짜 버그 1개**를 찾아 고쳤다(자세한 근거는 `handoff.md` "Todo 16 완료 기록" 참고): `vendor/xu4/src/module.c`의 `mod_addLayer()`가 로드된 모든 CDIEntry의 `cdi` 필드 최하위 바이트(온디스크 0xDA 매직 바이트)를 **의도적으로 레이어 번호로 덮어쓴다**(`mod_path()`가 나중에 역추적하려고) — Todo 16 이전엔 아무 코드도 런타임 `cdi`를 `DA7A_*` 상수와 비교한 적이 없어서 드러난 적 없던 문제. `CDI_MASK_FORMAT`(안 건드리는 상위 2바이트)으로 비교하도록 `sound_web.cpp`에서 수정.
+- 검증 게이트 전부 exit 0 (이 브랜치, Node 22, 실제 `ultima4.zip` 사용): `npm ci` · `npm run test:unit`(15 files/**130 tests**) · `npm run verify:repo-sources`(4 pinned components) · `npm run typecheck` · `npm run build` · `git diff --check` · `npm run deps:wasm` · `npm run build:wasm -- --debug`(70/70 소스) · `npm run test:e2e -- tests/e2e/audio.spec.ts --project=chromium`(2/2) · 전체 e2e 스위트(`npx playwright test --project=chromium`, **12/12 통과**, 기존 10개 무회귀 + 신규 2개) · `npm run build:native`(sound_faun.o 그대로 링크, native 무수정 확인) · `ctest --test-dir build/native`(3/3).
 
-## 3. 변경한 파일 (Files changed, commit `70d14db`, `542ce34` 위에)
-- `src/engine/startup.ts` — `render.pak`/`Ultima-IV.mod`/`ultima4.zip`을 FS 루트에 쓰기, `ENV.HOME`을 `preRun` 콜백으로 `/persist`로 설정, `persistence.attach()`를 실제로 연결, `Module.onExit`/`onAbort`로 조기 종료를 `runtime-error`로 보고.
-- `src/main.ts` — `Module.canvas`를 `#game-canvas`에 연결, render.pak/Ultima-IV.mod를 fetch(+`response.ok` 검사)해서 `startEngine`에 전달.
-- `scripts/build-wasm.mjs` — `-sFS_DEBUG=1`, `-sEXPORTED_RUNTIME_METHODS`에 `ENV` 추가.
-- `vendor/xu4/src/gpu_opengl.cpp` — `#include "map.h"`는 21.1에서 이미 build-dir 패치로; 이번엔 vendor 원본에 `screenTex`의 `GL_RGB`→`GL_RGBA`(`__EMSCRIPTEN__` 분기 추가).
-- `vendor/xu4/src/support/getTicks.c` — `msecSleep()`에 `__EMSCRIPTEN__` 분기 추가(`emscripten_sleep`).
-- `vendor/source-manifest.json` — 위 두 vendor 수정 반영해 `treeSha256` 갱신(Todo 7/8이 세운 전례를 따름).
-- `tests/unit/startup-sequence.test.ts` — 새 옵션(`renderPak`/`gameModule`)·`ENV`/`preRun`·persistence 배선 반영해 갱신.
-- `tests/e2e/boot-sequence.spec.ts` (신규) — happy/failure 경로.
-- `plan.md`, `handoff.md`, 이 파일 — Todo 21 완료 기록.
-- `.omo/plans/ultima-web.md`/`docs/ULTIMA_WEB_PLAN.md` — Todo 21 체크박스 `[x]`로 변경(byte-identical 확인).
+## 3. 변경한 파일 (Files changed, commit `541d6ca`)
+- `vendor/xu4/src/sound_web.cpp` (신규, 492줄) — sound.h 전체 구현. C++이 decision state(currentTrack/musicEnabled/volumeFades/동일-트랙 가드/BUFFER_MS_FAILED 캐시) 소유, 실행만 EM_JS로 `src/engine/audio.ts`에 위임. RFX(Faun `sfx_gen.c`)는 C++이 동기 합성.
+- `scripts/web-sound-silent.cpp` (삭제) — Todo 21.1의 무음 스텁, 이걸로 교체됨.
+- `scripts/build-wasm.mjs` — 소스 목록에서 `web-sound-silent.cpp` 제거, `src/sound_web.cpp` + `vendor/faun/support/sfx_gen.c` 추가. release log 문구 갱신("sound backend: Web Audio bridge").
+- `src/engine/audio-manifest.ts` (신규) — CDI 컨테이너 TOC 파서 + WAV/Ogg **헤더만으로** duration 계산(압축 페이로드 디코드 안 함). `callMain()` 이전에 동기 계산해두는 표.
+- `src/engine/audio.ts` (신규) — AudioContext 싱글턴, 실제 Web Audio 재생(음악 루프+페이드, 효과음, RFX PCM 직접 재생), 채널별 generation 취소 카운터, `unlockAudioContext()`/`armAutoResumeOnGesture()`.
+- `src/engine/startup.ts` — `buildAudioManifest()` → `createAudioBridge()` → `module.u4Audio` 배선(`callMain()` 이전, `persistence.attach()` 직후). `StartEngineResult`에 `audioBridge` 추가.
+- `src/main.ts` — `window.ultimaAudio` 노출(e2e/수동 QA 전용).
+- `vendor/source-manifest.json` — xu4 `fileCount` 409→410, `treeSha256` 갱신(`sound_web.cpp` 신규 반영).
+- `tests/unit/audio-manifest.test.ts`(신규, 15 tests), `tests/unit/audio-bridge.test.ts`(신규, 14 tests), `tests/unit/startup-sequence.test.ts`(+2), `tests/e2e/audio.spec.ts`(신규, 2 시나리오).
+- `plan.md`, `handoff.md`, 이 파일, `.omo/plans/ultima-web.md`/`docs/ULTIMA_WEB_PLAN.md`(Todo 16 체크박스 `[x]`, byte-identical 확인) — Todo 16 완료 기록.
 
 ## 4. 주요 결정과 근거 (Key decisions)
-- FS 경로(ultima4.zip/render.pak/Ultima-IV.mod)는 전부 **FS 루트**에 쓴다 — `u4find_path`/`u4find_pathc`가 resourcePaths[0]="."과 결합해 가장 먼저 찾는 경로임을 Node에서 실제 엔진을 직접 실행해 verbose 로그로 실측 확인(추측 아님).
-- `Module.ENV.HOME`은 반드시 `preRun` 콜백 안에서 설정 — `await factory(...)` 이후엔 이미 늦다(getenv 캐시가 먼저 굳음). `factoryOptions` 객체는 스프레드로 복사하지 말고 그 참조 그대로 `options.factory()`에 넘겨야 한다(MODULARIZE가 그 객체 자체를 `Module`로 재사용하기 때문) — 이 버그를 유닛 테스트로 잡았다.
-- vendor/xu4 직접 수정(gpu_opengl.cpp, getTicks.c) — "vendor는 tree-hash pinned라 못 건드린다"는 이전 세션의 전제가 **틀렸다**는 걸 advisor가 지적: Todo 7/8이 이미 `event.cpp`/`web_bridge.*`를 수정하고 매니페스트를 갱신한 전례가 있다(`git log`로 확인). 이번에도 같은 방식(수정 + `vendor/source-manifest.json` 재계산, 같은 커밋).
-- WebGL 캔버스의 "검은색 아님" 검증은 `gl.readPixels()`/`drawImage()+getImageData()`가 아니라 **screenshot 바이트 크기 비교**로 한다 — 캔버스가 `preserveDrawingBuffer` 없이 생성되어 있어서 인페이지 픽셀 읽기는 항상 지워진 버퍼를 읽는다(advisor 지적, 실측으로 재확인).
-- 브라우저 hang은 "느림"이 아니라 "메인 스레드 스핀"이었다 — `getAttribute()`조차 응답 없는 걸 보고 advisor에게 물어서 `msecSleep()`의 `nanosleep()` 블로킹을 특정했다. 타임아웃을 늘리는 방향으로 계속 삽질하지 않은 게 시간을 크게 아꼈다.
+- **C++이 decision, TS가 execution**: `sound_web.cpp`가 native `sound_faun.cpp`와 똑같은 상태 머신을 갖고, `src/engine/audio.ts`는 시키는 대로만 실행하는 "dumb executor". 이래야 native와 web이 같은 게임 로직(동일-트랙 가드, 볼륨 fade 분기 등)을 보장한다.
+- **`soundDuration()` 동기 계약을 두 가지 방법으로 지킴**: WAV/Ogg는 TS가 `callMain()` 이전에 CDI 헤더만 파싱해 표로 미리 계산(C++은 `u4_web_audio_duration_ms(offset)` 동기 EM_JS 조회만). RFX는 저장된 duration이 없어서(sfx_generateWave가 유일한 방법) C++이 그 자리에서 1회 합성해 캐시. 왜 TS 매니페스트만으로 안 되냐면: RFX는 매 순간 합성해야 프레임 수를 알 수 있고 그건 C++/sfx_gen.c 쪽에서만 가능하기 때문.
+- **Generation 취소는 TS에만**: 채널별 monotonic 카운터, decode resolve 시점에 비교. RFX는 C++이 이미 동기 합성한 PCM이라 async gap 자체가 없어서 이 체크가 필요 없음.
+- **테스트 전용 엔트리 `playMusicFromBytesForTest`**: `playMusic()`과 완전히 같은 generation-guard 코드 경로를 타지만 FS 경로 대신 원본 바이트를 직접 받음 — e2e의 generation-race 시나리오가 엔진 내부 FS 경로 문자열을 몰라도 되게 하려고 추가.
+- **RFX RNG는 독립 xorshift32** — vendor/faun의 well512는 `libboron.a`에 이미 링크돼 있어(재컴파일하면 심볼 중복), xu4 자체 게임 RNG는 DEBUG 리플레이 녹화가 소비하므로(오염 금지) 재사용 안 함.
 
 ## 5. 다음 할 일 (Next steps)
-- [ ] **Todo 10의 `tests/e2e/save-reload.spec.ts`** — persistence coordinator는 연결됐지만(21.2) 실제 저장 트리거(캐릭터 생성 등)가 아직 자동화 안 됨. 다음으로 하기 좋음(엔진이 이제 실제로 도니까).
-- [ ] 병렬 가능: Todo 19 workflow 골격(Node 22 CI) — 아직 착수 안 함.
-- [ ] Todo 11~13(한국어 UI) → 16(Web Audio, 21.1의 무음 구현 교체) → 14 → 15(번역) → 17 → 18 → 19 완료 → 20 → F1~F4.
-- [ ] **`todo-21-real-engine` 브랜치의 main merge** — AGENTS.md 규칙상 사용자 확인 필요, 아직 안 함(다음 세션 시작 시 먼저 물어볼 것).
+- [ ] **`todo-16-web-audio` 브랜치의 main merge** — AGENTS.md 규칙상 사용자(코디네이팅 세션) 확인 필요, 이 세션에서는 안 함. 커밋 `541d6ca` 하나, diff는 이 파일 3번 섹션 참고.
+- [ ] **Todo 10의 `tests/e2e/save-reload.spec.ts`** — persistence coordinator는 Todo 21.2에서 연결됐지만 실제 저장 트리거(캐릭터 생성 등)가 아직 자동화 안 됨. 남은 항목 중 우선순위 1순위.
+- [ ] 병렬 가능: Todo 19 workflow 골격(Node 22 CI) — 아직 착수 안 함. 완료 판정은 15·16·18 이후지만 16은 이제 완료.
+- [ ] Todo 11~13(한국어 UI, 설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) → 14 → 15(번역 4402건) → 17 → 18 → 19 완료 → 20 → F1~F4.
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
-- Todo 10은 여전히 🟡다 — persistence coordinator 연결은 됐지만 실제 저장이 한 번도 안 일어나봤다. IDBFS write가 페이지 재로드 후 실제로 살아남는지 확인 안 됨(확인 필요).
-- `vendor/xu4/src/gpu_opengl.cpp`/`support/getTicks.c`를 또 고칠 일이 생기면 반드시 `vendor/source-manifest.json`의 `treeSha256`도 같이 갱신할 것 — `node -e "import('./scripts/repo-source-verifier.mjs').then(({summarizeSourceTree}) => console.log(JSON.stringify(summarizeSourceTree('vendor/xu4'))))"`로 재계산.
-- Emscripten의 `Module.ENV`/`preRun` 타이밍은 미묘하다 — `factoryOptions`를 스프레드로 복사해서 넘기면 안 됨(위 4번 참고). 다음에 비슷한 Module 옵션을 추가할 때 같은 함정에 빠지지 말 것.
-- WebGL 캔버스 관련 검증은 screenshot 기반으로만 할 것 — `readPixels`/`drawImage`는 이 프로젝트의 캔버스 설정에서 신뢰 불가.
-- 로그인 셸이 아닌 환경에선 `/usr/bin/node`(v20)가 먼저 잡힌다 — `export PATH="$HOME/.local/opt/node22/bin:$PATH"` 필요. wasm 빌드 시 `source .emsdk/emsdk_env.sh`.
-- 원본 데이터: `/home/taejin/ultima4-original-data/ultima4.zip`, SHA-256 `94aa748cfa1d0e7aa2e518abebb994f3c18acf7edb78c3bd37cd0a4404e6ba74`. repo에 복사 안 함.
+- **`soundSpeakLine()`의 stream sub-range 재생 미구현** — 이 게임 모듈(`config.b`)에 `voice:` 블록이 아예 없어서 `VOICE_*` id 조회가 항상 NULL임을 실제 빌드된 Ultima-IV.mod TOC로 확인. 구현해도 테스트 불가능하니 guard까지만 하고 `errorWarning()`으로 남김 — 다음에 이 모듈에 진짜 음성 데이터가 추가되면 그때 구현할 것.
+- **AudioContext "제스처 전에는 잠겨 있어야 한다"는 계약의 절반이 이 Playwright/Chromium 하네스에서 증명 불가** — `--autoplay-policy=user-gesture-required`를 줘도 `page.goto()` 직후 `navigator.userActivation.hasBeenActive`가 이미 `true`로 나옴(CDP 자동화 특성으로 보임). resume-if-suspended 로직 자체는 유닛 테스트로 커버했지만, "진짜 사용자가 제스처 없이 열면 잠겨 있는지"는 F3(실제 브라우저 수동 QA)에서 확인 필요.
+- **WebKit/Firefox의 실제 Ogg Vorbis `decodeAudioData` 지원 여부 미검증** — e2e는 Chromium 전용. F3 필요.
+- **CDI `cdi` 필드를 다시 만질 일이 생기면**: 런타임에 얻은 `CDIEntry*`의 `cdi` 필드는 절대 원본 파일의 `DA7A_*` 매직/포맷 값 그대로가 아니다 — `mod_addLayer()`가 최하위 바이트를 레이어 인덱스로 덮어쓴다(`vendor/xu4/src/module.c`, "Replace high 0xDA byte with layer number"). 포맷 비교는 반드시 `CDI_MASK_FORMAT`으로 마스킹한 뒤 할 것.
+- `vendor/xu4/src/sound_web.cpp`를 또 고칠 일이 생기면 반드시 `vendor/source-manifest.json`의 `treeSha256`도 같이 갱신할 것 — `node -e "import('./scripts/repo-source-verifier.mjs').then(({summarizeSourceTree}) => console.log(JSON.stringify(summarizeSourceTree('vendor/xu4'))))"`로 재계산.
+- 로그인 셸이 아닌 환경에선 `/usr/bin/node`(v20)가 먼저 잡힌다 — `export PATH="$HOME/.local/opt/node22/bin:$PATH"` 필요. wasm 빌드 시 emsdk PATH도 직접 걸어야 할 수 있다(워크트리 격리 환경에서 `source .emsdk/emsdk_env.sh`가 sandbox에 막힐 수 있음 — 이 세션은 `PATH="$HOME/.local/opt/node22/bin:/home/taejin/ultima/.emsdk:/home/taejin/ultima/.emsdk/upstream/emscripten:/home/taejin/ultima/.emsdk/node/22.16.0_64bit/bin:$PATH" EM_CONFIG="/home/taejin/ultima/.emsdk/.emscripten"`을 명령 앞에 직접 붙이는 방식으로 우회함).
+- 원본 데이터: `/home/taejin/ultima4-original-data/ultima4.zip`. repo에 복사 안 함.
 
 ## 7. 재개 방법 (How to resume)
 ```bash
 cd /home/taejin/ultima
-git checkout todo-21-real-engine   # main에서 분기, 커밋 542ce34 -> 70d14db
+git checkout todo-16-web-audio   # main ce88bc1에서 분기, 커밋 541d6ca
 export PATH="$HOME/.local/opt/node22/bin:$PATH"; node -v   # v22.23.3
 git status -sb && git log --oneline -5
-source .emsdk/emsdk_env.sh && npm run build:wasm -- --debug
-npm run test:unit && npm run verify:repo-sources && npm run typecheck && npm run build
+npm ci
+PATH="$HOME/.local/opt/node22/bin:$HOME/ultima/.emsdk:$HOME/ultima/.emsdk/upstream/emscripten:$HOME/ultima/.emsdk/node/22.16.0_64bit/bin:$PATH" \
+  EM_CONFIG="$HOME/ultima/.emsdk/.emscripten" \
+  npm run deps:wasm && npm run build:wasm -- --debug
+npm run test:unit && npm run verify:repo-sources && npm run typecheck && npm run build && git diff --check
 ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test --project=chromium
 ```
-- 공식 인계: `handoff.md` "Todo 21 완료 기록 (2026-09-25, ...)". 진행률/순서: `plan.md`. Todo 21 전문: `.omo/plans/ultima-web.md`. 운영 규칙: `AGENTS.md`.
+- 공식 인계: `handoff.md` "Todo 16 완료 기록 (2026-09-26, ...)". 진행률/순서: `plan.md`. Todo 16 전문: `.omo/plans/ultima-web.md`. 운영 규칙: `AGENTS.md`.
