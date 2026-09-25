@@ -68,6 +68,11 @@ const REQUIRED_LINE_PATTERNS = [
 const NAME_LINE = /^\s*-?\s*name:\s*(.*)$/
 const AUDIT_RUN_LINE = /^\s*run:.*npm run audit:dist/
 const UPLOAD_USES_LINE = /^\s*uses:\s*actions\/upload-pages-artifact@/
+const EMSDK_USES_LINE = /^\s*uses:\s*emscripten-core\/setup-emsdk@/
+const EMSDK_VERSION_LINE = /^\s*version:\s*["']4\.0\.23["']\s*(#.*)?$/
+const EMSDK_SDK_VERSION_LINE = /^\s*emsdk-version:\s*["']4\.0\.23["']\s*(#.*)?$/
+const WASM_SUITE_LINE = /wasm-symbols/
+const WASM_EXCLUDE_LINE = /--exclude/
 const USES_LINE = /uses:\s*([^\s@]+)@(\S+)/g
 const SHA_PIN = /^[0-9a-f]{40}$/
 const NODE_VERSION_LINE = /node-version:\s*"([^"]*)"/
@@ -171,6 +176,31 @@ function checkAuditRunsBeforeUpload(lines) {
   }
 }
 
+function checkEmsdkSetup(lines) {
+  const emsdkIndex = lines.findIndex((line) => EMSDK_USES_LINE.test(line))
+  if (emsdkIndex === -1) {
+    throw new WorkflowVerificationError(
+      'workflow is missing the "emscripten-core/setup-emsdk" step that installs the pinned emsdk toolchain'
+    )
+  }
+  if (!lines.some((line) => EMSDK_VERSION_LINE.test(line))) {
+    throw new WorkflowVerificationError(
+      'workflow is missing the pinned emsdk "version: \'4.0.23\'" input on the setup-emsdk step (see docs/SOURCE_PINS.md)'
+    )
+  }
+  if (!lines.some((line) => EMSDK_SDK_VERSION_LINE.test(line))) {
+    throw new WorkflowVerificationError(
+      'workflow is missing the pinned emsdk "emsdk-version: \'4.0.23\'" input on the setup-emsdk step (see docs/SOURCE_PINS.md)'
+    )
+  }
+  const wasmIndex = lines.findIndex((line) => WASM_SUITE_LINE.test(line) && !WASM_EXCLUDE_LINE.test(line))
+  if (wasmIndex !== -1 && emsdkIndex > wasmIndex) {
+    throw new WorkflowVerificationError(
+      'the "emscripten-core/setup-emsdk" step must run before the wasm-dependent steps, so the wasm engine can build in CI'
+    )
+  }
+}
+
 function checkNoGitPush(text) {
   if (GIT_PUSH.test(text)) {
     throw new WorkflowVerificationError(
@@ -209,6 +239,7 @@ export function verifyWorkflow(workflowPath) {
   checkNameValuesAreYamlSafe(lines)
   checkActionsArePinnedToShas(text)
   checkNodeVersionIsExact(text)
+  checkEmsdkSetup(lines)
   checkAuditRunsBeforeUpload(lines)
   checkNoGitPush(text)
   checkNoOriginalDataReferences(text)

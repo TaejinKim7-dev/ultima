@@ -77,6 +77,15 @@ jobs:
       - name: Unit tests (hard-gated; excludes the known wasm engine gap)
         run: npx vitest run --passWithNoTests=false --exclude tests/unit/wasm-symbols.test.ts
 
+      - name: Set up Emscripten SDK (pinned to emsdk 4.0.23, see docs/SOURCE_PINS.md)
+        # Pinned to emsdk 4.0.23 to match the toolchain snapshot recorded in
+        # docs/SOURCE_PINS.md; the action itself follows the repo SHA-pin
+        # convention below (commit SHA for v16).
+        uses: emscripten-core/setup-emsdk@4528d102f7230f0e7b276855c01ea1159be0e984 # v16
+        with:
+          version: '4.0.23'
+          emsdk-version: '4.0.23'
+
       - name: "Unit tests: wasm engine suite (known gap, see header comment)"
         # This suite alone is non-blocking: it needs an emsdk-built engine
         # this workflow does not yet produce. Its failure still shows up
