@@ -49,7 +49,7 @@
 - 단계 번호와 세부 정의(References/Acceptance/QA)의 원본은 `.omo/plans/ultima-web.md`다. `docs/ULTIMA_WEB_PLAN.md`는 그와 byte-identical하게 유지한다(`cmp`로 확인).
 - "다음 단계 진행"을 요청받으면 `plan.md`의 "바로 다음 순서"에서 가장 앞에 있는 미완료 단계 하나를 진행한다.
 - 단계가 완료 기준(acceptance criteria + merge 전 검증 게이트)을 통과하면 아래를 함께 갱신한다.
-  1. `plan.md`: 상태(✅), 현재 진행률(n/24), "바로 다음 순서"
+  1. `plan.md`: 상태(✅), 현재 진행률(n/25), "바로 다음 순서"
   2. 계획서 두 벌의 해당 체크박스 `[x]`
   3. `handoff.md`: merge 게이트 명령과 exit code
 - 작은 단계(의미 있는 조사 결론, 테스트 RED/GREEN, 커밋 등)가 끝날 때마다 `handoff` 스킬로 루트 `HANDOFF.md`를 갱신한다. `HANDOFF.md`는 세션 재개용 요약이고, 소문자 `handoff.md`는 공식 인계 기록이다. 둘은 다른 파일이다.
