@@ -21,9 +21,10 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률
-- **승인 기준: 11 / 25 = 44.0%** (Step 1~10, 21 ✅).
+- **승인 기준: 12 / 25 = 48.0%** (Step 1~11, 21 ✅).
 - **실제 게임에서 확인 (2026-09-25 갱신): 브라우저에서 실제 엔진으로 확인됨 — Step 7(WebGL2 렌더), 8(실제 GLFW 입력), 9(브라우저 시작), 10(저장/재로드/export-import), 21(링크·FS·렌더·입력 전부).** 근거: `tests/e2e/boot-sequence.spec.ts`가 실제 `ultima4.zip`으로 실제 타이틀 화면 렌더 + 키 입력 2회로 `IntroController`의 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU)까지 확인(`.omo/evidence/ultima-web/task-21/title-render.png`).
 - **Step 10 완료 (2026-09-25): 저장·재로드·export/import 전부 증명됨.** `tests/e2e/save-reload.spec.ts`가 실제 캐릭터 생성(이름/성별/스토리 24화면/미덕 질문 최대 20라운드)을 Playwright로 끝까지 자동화해 실제 `party.sav` write → IDBFS 동기화(`#save-status`="저장 완료") → 페이지 리로드 → "Journey Onward" → 실제 게임 월드(파티 이름 "avatar", 골드 200 등) 진입을 스크린샷으로 확인(`.omo/evidence/ultima-web/task-10/save-reload-after-journey.png`). IDBFS 실패 시나리오도 실제 `window.indexedDB` 제거로 확인. **Export/import도 이번에 실제로 연결**: `src/shell.ts`에 `attachSaveHandlers()`를 추가해 `main.ts`가 `startEngine()` 성공 시 `persistence.ts`의 실제 `exportSaveArchive`/`importSaveArchive`를 넘겨주고, 다운로드된 아카이브가 실제 "U4SV" 매직 바이트로 시작하며 재가져오기가 라운드트립되는 것까지 e2e로 확인(`.omo/evidence/ultima-web/task-10/export-reimport.dat`).
+- **Step 11 완료 (2026-09-25, 병렬 백그라운드 에이전트)**: 긴 메시지를 HTML 대화 패널로 라우팅. 실제 `screen.cpp` 메시지 바이트(줄바꿈/백스페이스/커서이동/색상)를 `message-tokens.ts`로 토큰화, `PanelState`가 dispatch 호출 간 지속(엔진 출력이 줄 단위가 아니라 조각 단위로 옴), Hawkwind류 pause는 `MessageBridgeEvent.awaitKey`로 별도 전달(ABI v1에 additive). `createElement`/`textContent`만 사용(e2e로 innerHTML 계열 미호출 증명, 악성 `&lt;script&gt;` 주입 텍스트도 무해하게 렌더됨을 확인).
 
 ## 단계 목록
 
@@ -65,7 +66,7 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 ### Wave 3 — 한국어화 (11~15)
 | # | 단계 | 승인 기준 | 실제 게임에서 확인 | 선행 |
 |---|---|---|---|---|
-| 11 | 긴 메시지 → 하단 HTML 대화 패널 (textContent만) | ⬜ | ⬜ | 5,9,21 |
+| 11 | 긴 메시지 → 하단 HTML 대화 패널 (textContent만) | ✅ | ⬜ | 5,9,21 |
 | 12 | status/menu → DOM overlay (DPR/letterbox) | ⬜ | ⬜ | 5,9,11,21 |
 | 13 | 한국어 NPC alias + prompt별 입력 규칙 | ⬜ | ⬜ | 8,9,11,21 |
 | 14 | C++/Boron/TLK/binary/JS 번역 lookup 런타임 연결 | ⬜ | ⬜ | 4,11,12,13 |
@@ -176,10 +177,25 @@ Todo 21 main merge + Todo 10 저장/재로드 증명 (2026-09-25):
 - 검증 게이트 전부 exit 0: `npm run test:unit`(13 files/99 tests) · `verify:repo-sources` · `typecheck` · `build` · `git diff --check` · `tests/e2e/save-reload.spec.ts`(3/3, 실제 ultima4.zip).
 - Step 10 승인 기준 전체 충족 — `.omo/plans/ultima-web.md`/`docs/ULTIMA_WEB_PLAN.md`의 Todo 10 체크박스 `[x]`로 변경(byte-identical 확인).
 
-## 바로 다음 순서 (2026-09-25 갱신 — Todo 21·10 완료, main merge, 병렬 에이전트 진행 중)
-1. 병렬 진행 중(백그라운드 에이전트, worktree 격리): Todo 19(Pages workflow 골격), Todo 16(Web Audio), Todo 11(대화 패널, **완료 알림 수신** — 리뷰 후 merge 대기) — 완료되는 대로 검토 후 순차 main merge.
-2. 12~13(설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`, Todo 11 merge 후) → 14 → 15(번역 4402건, 워크플로우 병렬 처리 후보).
-3. 17 → 18 → 19 완료 → 20 → F1~F4.
+Todo 11 완료 (2026-09-25, branch `todo-11-dialogue-panel`, 백그라운드 에이전트가 구현, main에 merge됨):
+- 커밋 `3c26822`(feat: 대화 패널 구현) + `a9218b2`(fix: advisor 리뷰 반영, UI 알림 줄바꿈 버그 수정).
+- 신규 `src/dialogue/message-tokens.ts`: 순수 `tokenizeMessage()`(제어 바이트 → 토큰) + `PanelState` 리듀서. 바이트 매핑은 `vendor/xu4/src/screen.cpp`의 `screenMessageN()` switch와 `vendor/xu4/src/textview.h`의 `TextColor` enum으로 실제 검증(추측 아님): backspace(0x08, 지우지 않고 커서만 이동 — 네이티브 메시지 영역은 고정 커서 버퍼지 텍스트 편집기가 아님), newline(0x0A), carriage-return(0x0D), cursor-right(0x12 DC2), FG_* 색상 7종(0x13-0x19), `CHARSET_PROMPT`(0x10, `screenPrompt()`의 대기 커서 glyph). ABI 변경 없음 — `MessageBridgeEvent.text` 문자열이 이미 이 바이트들을 그대로 담을 수 있음. "clear"는 in-band 토큰으로 만들지 않음(`vendor/xu4/src/` 전체에서 in-band clear-screen 바이트 증거를 찾지 못함 — 기존 `ClearBridgeEvent`가 이미 이 역할).
+- `src/bridge/types.ts`: `MessageBridgeEvent`에 옵션 필드 `awaitKey?: boolean` 추가(ABI 버전 변경 없음, additive) — Hawkwind식 pause(`EventHandler::waitAnyKey()`, 예: `discourse_castle.cpp`의 `runTalkHawkwind`)는 메시지 버퍼 바이트가 아니라 블로킹 함수 호출이라 `text` 토큰화만으로는 절대 복원할 수 없어서 out-of-band로 실음.
+- `src/shell.ts`: `PanelState`가 `dispatch()` 호출 사이에 유지되도록 변경(매 이벤트마다 새로 만들지 않음) — 네이티브 메시지 출력은 한 줄을 여러 번에 나눠 보내는 조각(fragment)으로 오기 때문(예: `dungeon.cpp`의 `"...\nWho drinks? "` 다음에 완전히 별도의 `screenMessage("%c\n", key)` 호출이 같은 줄을 이어씀). 렌더링은 `createElement`+`textContent`만 사용(동일 색상 셀을 `<span>` run으로 묶음, innerHTML 전혀 안 씀). prompt 이벤트 동안 포커스를 받는 텍스트 없는 마커 엘리먼트(`#dialogue-prompt-marker`) 추가 — GLFW 입력 포트가 DOM 포커스와 무관하게 `window` 캡처 단계에서 리스닝하는 것을 확인해 실제 키 전달과 충돌 없음을 검증. 잘못된 브릿지 이벤트를 콘솔에 dump하던 버그도 수정(이제 `type`만 로그).
+- (advisor 리뷰로 발견한 회귀) UI가 직접 만드는 알림 텍스트(rom-picker 확인 메시지, `startup.ts`의 성공/해시불일치 메시지)에 줄바꿈이 없어서 실제 실행 시 서로 다른 알림이 한 줄에 이어져 보이는 버그 — `startup.ts`의 `message()`와 `shell.ts`의 rom-picker 텍스트에 trailing `\n` 추가, `runtime-error` 케이스는 진행 중이던 줄이 있으면 먼저 줄바꿈하고 항상 새 줄로 끝나는 `appendWholeLine()`으로 교체. 회귀 재발 방지 e2e(`tests/e2e/dialogue-panel.spec.ts`의 "UI-authored notices..." 테스트, 실제 corrupted-zip fixture로 rom-picker 확인 메시지와 `[오류]` 줄이 분리된 두 줄임을 확인)로 검증.
+- 신규 `tests/unit/message-tokens.test.ts`(23 tests, RED→GREEN): 토크나이저/리듀서 전체 커버리지 + 두 개의 별도 dispatch에 걸친 fragment 결합 케이스 + `<script>`류 문자열이 하나의 안전한 text 토큰으로 남는지 + tab(0x09)→space 정규화 + `src/` 전체 `.ts` 파일을 재귀 스캔해 innerHTML/outerHTML/insertAdjacentHTML/document.write 사용이 전혀 없는지 정적 가드.
+- `tests/unit/bridge-contract.test.ts`: `awaitKey` 옵션 필드 RED→GREEN 케이스 추가.
+- 신규 `tests/e2e/dialogue-panel.spec.ts`(happy/실패 경로 + UI 알림 분리 회귀 테스트, 3 tests): synthetic bridge dispatch로 fragment 결합·색상·pause(`awaitKey`)·prompt(`\x10`) 상태·prompt 포커스(실제 키 입력이 여전히 `window.ultimaInput`에 도달함을 확인)·CJK wrapping을 검증하고 `page.addInitScript`로 `Element.prototype.innerHTML`/`outerHTML` setter와 `insertAdjacentHTML`을 계측해 호출 횟수 0임을 실제로 증명(단순 `<script>` 엘리먼트 개수 확인보다 강한 증거 — innerHTML로 삽입된 `<script>`는 어차피 실행되지 않으므로). 증거: `.omo/evidence/ultima-web/task-11/dialogue-panel.png`, `textcontent-safety.log`.
+- 검증 게이트 전부 exit 0: `npm ci` · `npm run test:unit`(14 files/123 tests) · `verify:repo-sources`(4 components) · `typecheck` · `build` · `git diff --check` · `ULTIMA4_DATA=<실제 zip> npx playwright test --project=chromium`(13/13, 기존 스위트 무회귀 포함).
+- RED/GREEN 로그는 실제로 구현 파일을 임시 제거/원복해 재생성(스크롤백 재사용 아님): `.omo/evidence/ultima-web/task-11/message-tokens.{RED,GREEN}.log`, `bridge-contract-awaitkey.{RED,GREEN}.log`.
+- **"실제 게임에서 확인" = ⬜, 의도적으로.** 실제 xu4 엔진은 아직 `screenMessage`를 조각 단위 bridge `message` 이벤트로 내보내지 않는다(engine 쪽 hook이 없음 — `screenMessage`는 게임 context가 없으면(`!c`) 조기 반환하고, intro 단계는 애초에 context가 없다). 이 Todo는 그 엔진 훅 없이도 통과 가능한 acceptance criteria(순수 토크나이저 유닛 테스트 + synthetic bridge 이벤트로 구동하는 Playwright 검증)를 갖고 있어 완료로 인정하되, 실제 엔진이 실제 대화 텍스트를 이 패널로 보내는 것은 아직 아무도 본 적 없다.
+- **알려진, 의도적으로 미룬 한계**: (1) 패널은 매 렌더마다 히스토리 전체를 다시 그림(긴 세션에서 O(n²), `aria-live="polite"`가 매번 전체 재낭독) — Todo 18 메모리 성장 하드닝으로 미룸. (2) backspace는 줄 경계를 넘지 않음(같은 줄 안에서만 커서 이동). (3) 0x01-0x07·0x0B·0x0C·0x0E·0x0F·0x11·0x1A-0x1F 같은 다른 낮은 바이트는 네이티브에서는 charset glyph이지만 이 포트에서는 원본 바이트 그대로 DOM에 텍스트로 들어간다(현재 실제로 이 바이트를 쓰는 텍스트가 없어 위험이 낮음, 그러나 확인 필요). (4) 계획서가 인용하는 `engine/src/event.cpp:909-943`/`config_boron.cpp:1325-1340`은 실제로는 `vendor/xu4/src/event.cpp`(readChoice/readDir/readInt/readString 구현부)와 `vendor/xu4/src/config_boron.cpp`(NpcTalk 로더, Todo 13/14 쪽 관련)다 — Todo 11 자체 구현에 직접 쓰이진 않음.
+
+## 바로 다음 순서 (2026-09-25 갱신 — Todo 21·10·11 완료 + main merge, Todo 19·16 병렬 진행 중)
+1. 병렬 진행 중(백그라운드 에이전트, worktree 격리): Todo 19(Pages workflow 골격), Todo 16(Web Audio) — 완료되는 대로 검토(diff 직접 확인 + 게이트 재실행) 후 순차 main merge.
+2. **Todo 12~13** (설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) — Todo 11이 세운 `src/dialogue/message-tokens.ts` 토큰/리듀서 패턴과 `MessageBridgeEvent.awaitKey` 관례를 이어서, status/menu DOM 오버레이(12)와 한국어 NPC alias/prompt 규칙(13)을 구현한다.
+3. 14 → 15(번역 4402건, 워크플로우 병렬 처리 후보).
+4. 17 → 18 → 19 완료 → 20 → F1~F4.
 
 ## 목적 달성 가능성 판단
 - **가능하다, 그리고 크리티컬 패스(Todo 21)는 이제 끝났다.** 근거: 같은 xu4 소스가 native에서도(Step 3), 이제 브라우저에서도(Todo 21, 2026-09-25) 원본 데이터로 실제로 돈다 — 실제 타이틀 화면 렌더 + 실제 키 입력으로 `IntroController` 상태 전이까지 확인됨. 남은 일은 대부분 한국어화(11~15)와 배포(17~20)로, 엔진 자체의 미지수는 이제 거의 없다.

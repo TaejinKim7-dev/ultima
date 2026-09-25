@@ -233,7 +233,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: create character, save, reload page, reselect ZIP, load saved state, evidence `.omo/evidence/ultima-web/task-10/save-reload.trace.zip`; failure: simulate IDBFS sync failure and verify UI shows recoverable error without claiming saved, evidence `.omo/evidence/ultima-web/task-10/idbfs-failure.log`.
   Commit: Y | feat(save): persist browser saves and settings
 
-- [ ] 11. Route long game messages to the HTML dialogue panel
+- [x] 11. Route long game messages to the HTML dialogue panel
   What to do / Must NOT do: convert screen message output into tokenized bridge events, render Korean/English text in a lower HTML panel with history/scroll/prompt state, and preserve control tokens such as clear, newline, backspace, right, color, prompt, and Hawkwind-style pauses. Must not append raw HTML or dump complete text to console.
   Parallelization: Wave 3 | Blocked by: 5,9 | Blocks: 13,14,17
   References: `.omo/drafts/ultima-web-source-analysis.md` screenMessage/TextView notes; `engine/src/event.cpp:909-943`; `engine/src/intro.cpp` text flow; `engine/src/config_boron.cpp:1325-1340`.
