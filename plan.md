@@ -201,11 +201,10 @@ Todo 19 골격 작업 (2026-09-25, branch `todo-19-pages-workflow`, 백그라운
 - advisor 리뷰 2회로 추가 발견·수정한 것(전부 커밋 전에 잡음, main엔 한 번도 push 안 됨): (1) `verify:workflow`의 구조 검사(permission/artifact-root/`.nojekyll`)가 헤더 주석 문구만으로도 통과하던 실제 버그 — 주석이 아닌 줄만 앵커된 정규식으로 검사하도록 수정, `include-hidden-files` 검사 추가; (2) workflow-level `concurrency`를 `deploy` job으로 좁힘(PR용 `build`가 대기 중인 main 배포를 치환하지 못하게); (3) 의존성 매트릭스 19번 행을 처음에 빠뜨렸다가 추가 반영; (4) `- name: Unit tests: wasm engine suite (...)`가 인용 안 된 plain YAML scalar에 `: `를 포함해 **GitHub가 워크플로우 파일 전체를 파싱조차 못 하고 거부했을 실제 문법 오류** — `verify:workflow`는 YAML 파서가 아니라서 못 잡았고, 시스템의 PyYAML로 실제 파싱해서 확인/수정, 같은 버그 클래스를 잡는 검사(`checkNameValuesAreYamlSafe`)도 추가.
 - 완료 판정: 여전히 15,16,18 이후. 체크박스는 의도적으로 `[ ]` 유지.
 
-## 바로 다음 순서 (2026-09-25 갱신 — Todo 21·10·11·19(골격) 완료 + main merge, Todo 16 병렬 진행 중)
-1. Todo 16(Web Audio, 백그라운드 에이전트 진행 중) 완료 대기 → diff 리뷰 + 게이트 재실행 → main merge.
-2. **Todo 12~13** (설계 메모 `.omo/drafts/step-11-13-korean-ui-design.md`) — Todo 11이 세운 `src/dialogue/message-tokens.ts` 토큰/리듀서 패턴과 `MessageBridgeEvent.awaitKey` 관례를 이어서, status/menu DOM 오버레이(12)와 한국어 NPC alias/prompt 규칙(13)을 구현한다.
-3. Todo 19는 골격만 완료(main merge됨) — 남은 것: CI에서 emsdk를 설치해 wasm 엔진까지 빌드하는 일(현재는 셸만 배포), 그리고 원래 선행조건(15·16·18) 완료 후 최종 acceptance 재확인.
-4. 14 → 15(번역 4402건, 워크플로우 병렬 처리 후보) → 17 → 18 → 19 완료 → 20 → F1~F4.
+## 바로 다음 순서 (2026-09-26 갱신 — Todo 21·10·11·19(골격) 완료 + main merge, Todo 12·13·16 백그라운드 병렬 진행 중)
+1. 병렬 백그라운드 에이전트 3개 진행 중(worktree 격리, 각자 브랜치에 커밋만): Todo 12(status/menu DOM 오버레이, `todo-12-status-overlay`), Todo 13(한국어 NPC alias, `todo-13-korean-aliases`), Todo 16(Web Audio, `todo-16-web-audio` — 1차 시도가 API rate limit로 중단돼 커밋 없이 재개함, 재개 시 점진적 커밋 지시함). 완료되는 대로 diff 리뷰 + 게이트 재실행 후 순차 main merge.
+2. Todo 19는 골격만 완료(main merge됨) — 남은 것: CI에서 emsdk를 설치해 wasm 엔진까지 빌드하는 일(현재는 셸만 배포), 그리고 원래 선행조건(15·16·18) 완료 후 최종 acceptance 재확인.
+3. 14(12·13 merge 후) → 15(번역 4402건) → 17 → 18 → 19 완료 → 20 → F1~F4.
 
 ## 목적 달성 가능성 판단
 - **가능하다, 그리고 크리티컬 패스(Todo 21)는 이제 끝났다.** 근거: 같은 xu4 소스가 native에서도(Step 3), 이제 브라우저에서도(Todo 21, 2026-09-25) 원본 데이터로 실제로 돈다 — 실제 타이틀 화면 렌더 + 실제 키 입력으로 `IntroController` 상태 전이까지 확인됨. 남은 일은 대부분 한국어화(11~15)와 배포(17~20)로, 엔진 자체의 미지수는 이제 거의 없다.

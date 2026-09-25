@@ -798,3 +798,11 @@ python3 -c "import yaml; yaml.safe_load(open('.github/workflows/pages.yml'))"   
 이 worktree(`build/wasm-release` 있음)에서 로컬 게이트 최종 재실행도 전부 exit 0: `npm ci` · `npm run test:unit`(15 files/118 tests) · `npm run verify:repo-sources` · `npm run typecheck` · `npm run build` · `git diff --check ce88bc1 HEAD`(브랜치 전체 diff, 단순 `git diff --check`는 이미 커밋된 뒤라 아무것도 안 봄) · `npm run build:site -- --base=/ultima/` · `npm run audit:dist`(9 files) · `npm run verify:workflow` · `cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md`.
 
 **브랜치 최종 상태**: `todo-19-pages-workflow`, 커밋 5개 — `5f93788`(골격) → `205fcec`(advisor 리뷰 1차) → `342fe4a`(advisor 리뷰 2차: YAML 인용 오류 수정) → `a94a812`/`47b8bf2`(handoff 기록 정리). 조정 세션이 diff 리뷰 + 게이트 재실행 후 main에 merge/push 완료.
+
+### 병렬 에이전트 rate limit 중단 + Todo 12/13 신규 착수 (2026-09-26)
+
+Todo 19/16 에이전트 둘 다 API rate limit(HTTP 429)로 중단됨. **Todo 19는 이미 커밋 5개를 다 마치고 clean 상태에서 중단**(최종 advisor 확인만 못 받고 끝남) — 그대로 diff 리뷰 + 게이트 재실행 후 main merge 완료(위 기록 참고). **Todo 16은 커밋 0개, 작업 파일 다수가 uncommitted 상태로 중단** — `SendMessage`로 같은 에이전트(`a07d0d283bf448a5f`)에 재개 지시(점진적 커밋 강조)를 보내 이어서 진행 중.
+
+이 차이를 보고 교훈 반영: 이후 새로 띄운 에이전트(Todo 12 `todo-12-status-overlay`, Todo 13 `todo-13-korean-aliases`)에는 프롬프트에 "작게 자주 커밋하라(RED 뒤, GREEN 뒤, 각 정리 단계 뒤)"를 명시적으로 추가함 — rate limit이나 다른 중단이 다시 나도 진행 상황을 잃지 않게.
+
+현재 백그라운드 진행 중(전부 worktree 격리, main merge/push 금지 지시): Todo 12, Todo 13(신규), Todo 16(재개). main은 Todo 21·10·11·19(골격) 병합 완료 후 `df2b92b`, origin push 완료.
