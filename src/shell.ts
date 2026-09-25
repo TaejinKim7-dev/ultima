@@ -3,7 +3,7 @@
 // implement any real engine, persistence, or i18n behavior (those are later
 // Todos). It exists to prove the shell + bridge contract hold together.
 
-import { BRIDGE_ABI_VERSION, isBridgeEvent, type BridgeEvent } from "./bridge/types.ts"
+import { BRIDGE_ABI_VERSION, isBridgeEvent, type BridgeEvent, type OverlayRow } from "./bridge/types.ts"
 import {
   applyToken,
   applyTokens,
@@ -14,6 +14,17 @@ import {
   toRuns,
   type PanelState
 } from "./dialogue/message-tokens.ts"
+import {
+  DEFAULT_VIEW_RECTS,
+  OverlayRegistry,
+  computeContentRect,
+  computeOverlayCellPx,
+  computeOverlayFontPx,
+  computeScale,
+  toCssRect,
+  type OverlayEntry,
+  type OverlayRole
+} from "./overlay/overlay-layout.ts"
 
 /**
  * The intended integration seam for the future (Todo 6+) WASM engine: it
@@ -65,7 +76,9 @@ export function createShell(doc: Document): UltimaBridgeApi {
   const dialogueHistory = requireElement<HTMLDivElement>(doc, "#dialogue-history")
   const dialoguePanel = requireElement<HTMLElement>(doc, "#dialogue-panel")
   const promptMarker = requireElement<HTMLElement>(doc, "#dialogue-prompt-marker")
-  const statusOverlay = requireElement<HTMLDivElement>(doc, "#status-overlay")
+  const gameViewport = requireElement<HTMLElement>(doc, "#game-viewport")
+  const gameCanvas = requireElement<HTMLCanvasElement>(doc, "#game-canvas")
+  const overlayLayer = requireElement<HTMLDivElement>(doc, "#overlay-layer")
   const romPicker = requireElement<HTMLInputElement>(doc, "#rom-picker")
   const saveExportButton = requireElement<HTMLButtonElement>(doc, "#save-export")
   const saveImportInput = requireElement<HTMLInputElement>(doc, "#save-import")
@@ -141,8 +154,153 @@ export function createShell(doc: Document): UltimaBridgeApi {
     promptMarker.removeAttribute("data-prompt-id")
   }
 
-  function setStatusText(text: string): void {
-    statusOverlay.textContent = text
+  // Todo 12: status/menu/short in-game text as DOM overlays. The registry
+  // is the pure source of truth (src/overlay/overlay-layout.ts); this
+  // module's only job is turning it into real DOM elements
+  // (createElement/textContent only, per this file's own innerHTML ban)
+  // positioned over the canvas's actual displayed box.
+  const overlayRegistry = new OverlayRegistry()
+  const overlayElements = new Map<OverlayRole, HTMLElement>()
+
+  function ensureOverlayElement(role: OverlayRole): HTMLElement {
+    const existing = overlayElements.get(role)
+    if (existing !== undefined) {
+      return existing
+    }
+    const element = doc.createElement("div")
+    element.className = "overlay-role"
+    element.dataset["role"] = role
+    overlayLayer.appendChild(element)
+    overlayElements.set(role, element)
+    return element
+  }
+
+  function removeOverlayElement(role: OverlayRole): void {
+    const element = overlayElements.get(role)
+    if (element === undefined) {
+      return
+    }
+    element.remove()
+    overlayElements.delete(role)
+  }
+
+  // Structured rows (label + optional value) render as a CSS grid instead
+  // of native fixed-space/monospace text -- see src/shell.css's
+  // `.overlay-rows` comment for why. Falls back to plain, newline-split
+  // text (no rows given) for any role.
+  function renderOverlayContent(element: HTMLElement, entry: OverlayEntry): void {
+    element.replaceChildren()
+    const rows: readonly OverlayRow[] | undefined = entry.rows
+    if (rows !== undefined && rows.length > 0) {
+      const grid = doc.createElement("div")
+      grid.className = "overlay-rows"
+      rows.forEach((row, index) => {
+        const label = doc.createElement("span")
+        label.className = "overlay-row-label"
+        label.textContent = row.label // textContent only -- never innerHTML for game text.
+        const value = doc.createElement("span")
+        value.className = "overlay-row-value"
+        value.textContent = row.value ?? ""
+        if (entry.selectedIndex === index) {
+          label.classList.add("selected")
+          value.classList.add("selected")
+        }
+        grid.appendChild(label)
+        grid.appendChild(value)
+      })
+      element.appendChild(grid)
+      return
+    }
+    for (const line of (entry.text ?? "").split("\n")) {
+      const p = doc.createElement("p")
+      p.className = "overlay-line"
+      p.textContent = line
+      element.appendChild(p)
+    }
+  }
+
+  // Converts the canvas's actual displayed box into the coordinate space
+  // overlay elements are positioned in (relative to #game-viewport's own
+  // padding box -- see overlay-layout.ts's computeContentRect doc comment
+  // for exactly why this isn't simply page-absolute coordinates).
+  function currentContentRect() {
+    return computeContentRect(gameCanvas.getBoundingClientRect(), gameViewport)
+  }
+
+  function layoutOverlayElement(element: HTMLElement, entry: OverlayEntry): void {
+    const content = currentContentRect()
+    const dpr = typeof window !== "undefined" && window.devicePixelRatio > 0 ? window.devicePixelRatio : 1
+    const cssRect = toCssRect(entry.rect, content, dpr)
+    const { scaleY } = computeScale(content)
+    element.style.left = `${cssRect.left}px`
+    element.style.top = `${cssRect.top}px`
+    element.style.width = `${cssRect.width}px`
+    element.style.height = `${cssRect.height}px`
+    element.style.fontSize = `${computeOverlayFontPx(scaleY)}px`
+    // Todo 12 advisor-review fix: every rendered row (see src/shell.css's
+    // `.overlay-rows`/`.overlay-line`, both keyed off this custom property)
+    // is exactly one native TextView row tall -- see
+    // overlay-layout.ts's computeOverlayCellPx doc comment for why this is
+    // what actually guarantees N rows fit an N-row box (an 8-row status
+    // display previously overflowed its box; only 2-3 row test fixtures
+    // existed at the time, which happened to fit by accident).
+    element.style.setProperty("--overlay-cell-px", `${computeOverlayCellPx(scaleY)}px`)
+  }
+
+  // Repositions every currently-registered overlay -- called after any new
+  // registration, and on canvas resize (the canvas's CSS box, hence the
+  // scale factor, changes with the viewport/window size).
+  function layoutAllOverlays(): void {
+    for (const { role, entry } of overlayRegistry.list()) {
+      const element = overlayElements.get(role)
+      if (element !== undefined) {
+        layoutOverlayElement(element, entry)
+      }
+    }
+  }
+
+  if (typeof ResizeObserver !== "undefined") {
+    new ResizeObserver(() => layoutAllOverlays()).observe(gameViewport)
+  }
+  if (typeof window !== "undefined") {
+    window.addEventListener("resize", () => layoutAllOverlays())
+  }
+
+  function applyViewEvent(event: Extract<BridgeEvent, { type: "view" }>): void {
+    const hasContent = event.text !== "" || (event.rows !== undefined && event.rows.length > 0)
+    if (!hasContent) {
+      overlayRegistry.clear(event.region)
+      removeOverlayElement(event.region)
+      return
+    }
+    const entry: OverlayEntry = {
+      rect: DEFAULT_VIEW_RECTS[event.region],
+      text: event.text,
+      ...(event.rows !== undefined ? { rows: event.rows } : {}),
+      ...(event.selectedIndex !== undefined ? { selectedIndex: event.selectedIndex } : {})
+    }
+    // "menu" and "textview" are mutually exclusive (their default rects
+    // genuinely overlap -- see overlay-layout.ts's doc comment): registering
+    // one may silently evict the other from the registry, and the evicted
+    // role's DOM element must be removed too, or a stale, now-unregistered
+    // overlay would keep rendering on screen.
+    const evictedRole = overlayRegistry.register(event.region, entry)
+    if (evictedRole !== null) {
+      removeOverlayElement(evictedRole)
+    }
+    const element = ensureOverlayElement(event.region)
+    renderOverlayContent(element, entry)
+    layoutOverlayElement(element, entry)
+  }
+
+  // A full stage transition (native: intro screen change, or any hard
+  // reset) -- removes every overlay role at once, not just the dialogue
+  // panel's own history/current-line state.
+  function clearAllOverlays(): void {
+    overlayRegistry.resetStage()
+    for (const role of [...overlayElements.keys()]) {
+      removeOverlayElement(role)
+    }
   }
 
   function setSaveStatusText(text: string): void {
@@ -184,6 +342,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
         hidePromptMarker()
         panelState = createPanelState()
         renderPanel()
+        clearAllOverlays()
         return
       case "prompt":
         if (panelState.paused) {
@@ -192,7 +351,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
         showPromptMarker(event.kind, event.promptId)
         return
       case "view":
-        setStatusText(event.text)
+        applyViewEvent(event)
         return
       case "save-state":
         if (event.status === "saving") {

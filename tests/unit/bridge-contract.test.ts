@@ -122,6 +122,65 @@ describe("bridge ABI contract (C ABI version 1)", () => {
     expect(isBridgeEvent(missingFatal)).toBe(false)
   })
 
+  it("accepts a view event with structured rows (Todo 12: label/value fields instead of fixed-space text) and rejects a malformed row", () => {
+    const withRows: unknown = {
+      abiVersion: 1,
+      type: "view",
+      region: "status",
+      text: "",
+      rows: [
+        { label: "체력", value: "99/99" },
+        { label: "정신력", value: "12" }
+      ]
+    }
+    const labelOnlyRow: unknown = {
+      abiVersion: 1,
+      type: "view",
+      region: "menu",
+      text: "",
+      rows: [{ label: "여정 계속" }]
+    }
+    const missingLabel: unknown = {
+      abiVersion: 1,
+      type: "view",
+      region: "status",
+      text: "",
+      rows: [{ value: "99/99" }]
+    }
+    const rowsNotAnArray: unknown = {
+      abiVersion: 1,
+      type: "view",
+      region: "status",
+      text: "",
+      rows: "체력 99/99"
+    }
+    const nonStringValue: unknown = {
+      abiVersion: 1,
+      type: "view",
+      region: "status",
+      text: "",
+      rows: [{ label: "체력", value: 99 }]
+    }
+
+    expect(isBridgeEvent(withRows)).toBe(true)
+    expect(isBridgeEvent(labelOnlyRow)).toBe(true)
+    expect(isBridgeEvent(missingLabel)).toBe(false)
+    expect(isBridgeEvent(rowsNotAnArray)).toBe(false)
+    expect(isBridgeEvent(nonStringValue)).toBe(false)
+  })
+
+  it("accepts a view event with a non-negative integer selectedIndex (Todo 12: row/item highlight, not a text character offset) and rejects a negative/fractional/non-numeric value", () => {
+    const selected: unknown = { abiVersion: 1, type: "view", region: "menu", text: "", selectedIndex: 1 }
+    const negative: unknown = { abiVersion: 1, type: "view", region: "menu", text: "", selectedIndex: -1 }
+    const fractional: unknown = { abiVersion: 1, type: "view", region: "menu", text: "", selectedIndex: 1.5 }
+    const nonNumeric: unknown = { abiVersion: 1, type: "view", region: "menu", text: "", selectedIndex: "1" }
+
+    expect(isBridgeEvent(selected)).toBe(true)
+    expect(isBridgeEvent(negative)).toBe(false)
+    expect(isBridgeEvent(fractional)).toBe(false)
+    expect(isBridgeEvent(nonNumeric)).toBe(false)
+  })
+
   it("rejects an event of an unknown/undefined type instead of silently accepting it", () => {
     const unknownType: unknown = { abiVersion: 1, type: "teleport", x: 1, y: 2 }
     const noType: unknown = { abiVersion: 1 }

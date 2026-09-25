@@ -241,7 +241,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: run a talk/intro sequence and capture panel text layout, evidence `.omo/evidence/ultima-web/task-11/dialogue-panel.png`; failure: inject `<script>`-like translated text in a test locale and prove it renders as text, evidence `.omo/evidence/ultima-web/task-11/textcontent-safety.log`.
   Commit: Y | feat(ui): render dialogue in HTML panel
 
-- [ ] 12. Render status, menu, and short in-game text as DOM overlays
+- [x] 12. Render status, menu, and short in-game text as DOM overlays
   What to do / Must NOT do: add an overlay registry for status/menu/TextView roles with logical rects, lifecycle cleanup, cursor/selection support, and DPR/letterbox scaling; keep map/runes/avatar masks in the raster canvas. Must not build an 8x8 Hangul bitmap font or use English fixed-space layout for Korean status fields.
   Parallelization: Wave 3 | Blocked by: 5,9,11 | Blocks: 14,17
   References: status rect contract in this plan; `engine/src/screen_glfw.cpp:425-485`; `engine/src/event.cpp:487-943`; `.omo/drafts/ultima-web-source-analysis.md` TextView/status notes.

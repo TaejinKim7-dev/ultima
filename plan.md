@@ -21,10 +21,11 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률
-- **승인 기준: 13 / 25 = 52.0%** (Step 1~11, 16, 21 ✅).
-- **실제 게임에서 확인 (2026-09-26 갱신): 브라우저에서 실제 엔진으로 확인됨 — Step 7(WebGL2 렌더), 8(실제 GLFW 입력), 9(브라우저 시작), 10(저장/재로드/export-import), 16(실제 Web Audio 음악/RFX 효과음), 21(링크·FS·렌더·입력 전부).** 근거: `tests/e2e/boot-sequence.spec.ts`가 실제 `ultima4.zip`으로 실제 타이틀 화면 렌더 + 키 입력 2회로 `IntroController`의 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU)까지 확인(`.omo/evidence/ultima-web/task-21/title-render.png`).
+- **승인 기준: 14 / 25 = 56.0%** (Step 1~12, 16, 21 ✅ — Todo 12를 main에 merge함).
+- **실제 게임에서 확인 (2026-09-26 갱신): 브라우저에서 실제 엔진으로 확인됨 — Step 7(WebGL2 렌더), 8(실제 GLFW 입력), 9(브라우저 시작), 10(저장/재로드/export-import), 16(실제 Web Audio 음악/RFX 효과음), 21(링크·FS·렌더·입력 전부).** 근거: `tests/e2e/boot-sequence.spec.ts`가 실제 `ultima4.zip`으로 실제 타이틀 화면 렌더 + 키 입력 2회로 `IntroController`의 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU)까지 확인(`.omo/evidence/ultima-web/task-21/title-render.png`). (Step 12는 Todo 11과 같은 사유로 ⬜: 실제 엔진이 status/menu bridge 이벤트를 아직 안 보냄.)
 - **Step 10 완료 (2026-09-25): 저장·재로드·export/import 전부 증명됨.** `tests/e2e/save-reload.spec.ts`가 실제 캐릭터 생성(이름/성별/스토리 24화면/미덕 질문 최대 20라운드)을 Playwright로 끝까지 자동화해 실제 `party.sav` write → IDBFS 동기화(`#save-status`="저장 완료") → 페이지 리로드 → "Journey Onward" → 실제 게임 월드(파티 이름 "avatar", 골드 200 등) 진입을 스크린샷으로 확인(`.omo/evidence/ultima-web/task-10/save-reload-after-journey.png`). IDBFS 실패 시나리오도 실제 `window.indexedDB` 제거로 확인. **Export/import도 이번에 실제로 연결**: `src/shell.ts`에 `attachSaveHandlers()`를 추가해 `main.ts`가 `startEngine()` 성공 시 `persistence.ts`의 실제 `exportSaveArchive`/`importSaveArchive`를 넘겨주고, 다운로드된 아카이브가 실제 "U4SV" 매직 바이트로 시작하며 재가져오기가 라운드트립되는 것까지 e2e로 확인(`.omo/evidence/ultima-web/task-10/export-reimport.dat`).
 - **Step 11 완료 (2026-09-25, 병렬 백그라운드 에이전트)**: 긴 메시지를 HTML 대화 패널로 라우팅. 실제 `screen.cpp` 메시지 바이트(줄바꿈/백스페이스/커서이동/색상)를 `message-tokens.ts`로 토큰화, `PanelState`가 dispatch 호출 간 지속(엔진 출력이 줄 단위가 아니라 조각 단위로 옴), Hawkwind류 pause는 `MessageBridgeEvent.awaitKey`로 별도 전달(ABI v1에 additive). `createElement`/`textContent`만 사용(e2e로 innerHTML 계열 미호출 증명, 악성 `&lt;script&gt;` 주입 텍스트도 무해하게 렌더됨을 확인).
+- **Step 12 완료 (2026-09-26, branch `todo-12-status-overlay` → main merge)**: status/menu/textview DOM 오버레이. `src/overlay/overlay-layout.ts`(순수 `OverlayRegistry` + DPR/letterbox 인식 수학), `ViewBridgeEvent`에 `rows`/`selectedIndex`를 ABI v1에 additive로 추가, `src/shell.ts`가 canvas 실측 박스(ResizeObserver)로 오버레이 위치/글자크기 갱신. 실제 엔진은 여전히 status/menu bridge 이벤트를 안 보내므로 e2e는 synthetic dispatch로 검증 — "실제 게임에서 확인" ⬜ (Todo 11과 동일 사유).
 - **Step 16 완료 (2026-09-26, 병렬 백그라운드 에이전트)**: Todo 21.1의 무음 `sound.h` 스텁을 실제 `vendor/xu4/src/sound_web.cpp`(Web Audio 백엔드)로 교체. `tests/e2e/audio.spec.ts`가 실제 `ultima4.zip`으로 AudioContext unlock, 실제 음악 재생(94초 트랙, 자동 트리거), 실제 RFX 합성 효과음(Configure 메뉴 화살표/닫기 키), pause/resume, 생성-취소(stale decode) 경합 시나리오까지 확인(`.omo/evidence/ultima-web/task-16/{audio-summary.json,audio-generation-race.log}`). 실제 버그 발견·수정: `module.c`의 `mod_addLayer()`가 모든 `CDIEntry`의 `cdi` 하위 바이트를 레이어 번호로 덮어써서 RFX 포맷 판별이 깨짐 — `CDI_MASK_FORMAT`로 상위 2바이트만 비교하도록 수정(vendor 원본은 안 건드림, 새 `sound_web.cpp` 안에서만 마스킹).
 
 ## 단계 목록
@@ -68,7 +69,7 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 | # | 단계 | 승인 기준 | 실제 게임에서 확인 | 선행 |
 |---|---|---|---|---|
 | 11 | 긴 메시지 → 하단 HTML 대화 패널 (textContent만) | ✅ | ⬜ | 5,9,21 |
-| 12 | status/menu → DOM overlay (DPR/letterbox) | ⬜ | ⬜ | 5,9,11,21 |
+| 12 | status/menu → DOM overlay (DPR/letterbox) | ✅ | ⬜ | 5,9,11,21 |
 | 13 | 한국어 NPC alias + prompt별 입력 규칙 | ⬜ | ⬜ | 8,9,11,21 |
 | 14 | C++/Boron/TLK/binary/JS 번역 lookup 런타임 연결 | ⬜ | ⬜ | 4,11,12,13 |
 | 15 | 전체 한국어 번역 corpus + glossary 일관성 (`i18n:check --strict`) | ⬜ | ⬜ | 4,14 |
@@ -214,9 +215,9 @@ Todo 16 완료 (2026-09-26, branch `todo-16-web-audio` 커밋 `541d6ca`, main에
 - 증거: `.omo/evidence/ultima-web/task-16/{red.log,green-manifest.log,green-unit.log,audio-summary.json,audio-generation-race.log}`.
 - 남은 것: `soundSpeakLine()`의 stream sub-range 재생은 미구현(이 모듈에 `voice:` 데이터가 전혀 없어 실질적으로 도달 불가함을 확인) — 정직하게 문서화만 하고 구현은 보류. 상세는 `handoff.md` "Todo 16 완료 기록" 참고.
 
-## 바로 다음 순서 (2026-09-26 갱신 — Todo 21·10·11·16·19(골격) 완료 + main merge, Todo 12·13 백그라운드 병렬 진행 중)
-1. 병렬 백그라운드 에이전트 2개 진행 중(worktree 격리, 각자 브랜치에 커밋만): Todo 12(status/menu DOM 오버레이, `todo-12-status-overlay`), Todo 13(한국어 NPC alias, `todo-13-korean-aliases`). 완료되는 대로 diff 리뷰(fork point 기준) + 게이트 재실행 후 순차 main merge.
-2. Todo 19는 골격만 완료(main merge됨) — 남은 것: CI에서 emsdk를 설치해 wasm 엔진까지 빌드하는 일(현재는 셸만 배포), 그리고 원래 선행조건(15·16·18) 중 16은 이제 완료, 15·18만 남음.
+## 바로 다음 순서 (2026-09-26 갱신 — Todo 12 main merge, Todo 13·19-emsdk·18-audit 병렬 진행)
+1. Todo 12 merge 게이트+e2e 재실행 → docs 기록 → push (진행 중).
+2. Todo 13 코드 병합 + e2e 복구 → 15/25. Todo 19-emsdk-ci / Todo 18-audit-ext 레인 병렬 진행(둘 다 체크박스 `[ ]` 유지).
 3. 14(12·13 merge 후) → 15(번역 4402건) → 17 → 18 → 19 완료 → 20 → F1~F4.
 
 ## 목적 달성 가능성 판단

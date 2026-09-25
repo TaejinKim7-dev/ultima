@@ -885,3 +885,78 @@ Todo 21의 `boot-sequence.spec.ts`는 고정된 `waitForTimeout(1000)`으로 이
 - **AudioContext "제스처 전 잠김" 절반** — 위 3번 항목 참고, F3 수동 QA 필요.
 - **WebKit의 실제 Ogg Vorbis `decodeAudioData` 지원 여부** — 이 e2e는 Chromium 전용(`--project=chromium`). WebKit/Firefox 실동작은 F3에서 확인 필요.
 - `SOUND_SPELL_A..Z`(고유 주문 효과음, 26개)는 이 모듈에 CDIEntry 자체가 없어(config.b의 sound: 블록 35개 항목 중 없음) `game.cpp`의 `uniqueSpellSounds = soundDuration(SOUND_SPELL_A) > 0`가 항상 false로 평가됨 — 이건 버그가 아니라 이 게임 데이터의 실제 상태(고유 주문음 없음)이고, 실제로 그 분기(`gameSpellEffect`의 `sound==SOUND_MAGIC && uniqueSpellSounds`)에 도달 안 하는 것도 소스로 확인함.
+### Todo 12 완료 기록 (2026-09-26, branch `todo-12-status-overlay` → main merge, 병합 기록은 아래 "main merge" 절)
+
+**목표와 범위**: `.omo/plans/ultima-web.md` Todo 12 전문(status/menu/short in-game text를 DOM overlay로) 참고. `.omo/drafts/step-11-13-korean-ui-design.md`, `.omo/drafts/ultima-web-source-analysis.md`를 먼저 읽고, Todo 11이 세운 `src/dialogue/message-tokens.ts` 패턴(순수 함수/리듀서 + DOM은 `createElement`/`textContent`만)을 그대로 이어감.
+
+**작업 전 재확인(직접 실행, 추측 아님)**: "실제 엔진이 status/menu용 C++→JS bridge 이벤트를 하나도 안 보낸다"는 Todo 11 시점의 전제가 여전히 유효한지 `grep -rn "EM_JS\|EM_ASM\|emscripten_run_script\|ccall\|ultimaBridge" vendor/xu4/src scripts/`로 재확인 → 0건. `web_bridge.{h,cpp}`는 JS→C++ 방향(키/텍스트 입력)만 있고 역방향은 여전히 없다. 그래서 이번에도 synthetic `window.ultimaBridge.dispatch(...)`로 검증(Todo 11과 동일 근거).
+
+**만든 것**:
+- `src/overlay/overlay-layout.ts`(신규, DOM-free 순수 모듈): `LogicalRect`/`ContentRect`/`CssRect`, `LOGICAL_SCREEN_WIDTH/HEIGHT`(320×200), `DEFAULT_VIEW_RECTS`(status/menu/textview 3개, 아래 표), `AVATAR_AURA_GLYPH_RECT`(248,80,8,8, raster 전용), `toCssRect`(스케일+오프셋, 두 edge를 각각 스냅해서 폭 계산 — width/height를 직접 스냅하면 인접 사각형 사이에 1px 틈/겹침이 생길 수 있음), `computeContentRect`(canvas box를 포지셔닝 조상의 padding box 기준 좌표로 변환 — `clientLeft`/`clientTop`으로 border 폭 보정), `computeScale`/`computeOverlayFontPx`(2x 스케일에 비례, 최소 10px 바닥), `rectsOverlap`(logical space geometry), `OverlayRegistry`(register가 같은 role을 교체 — 실제로 `menuArea`/`extendedMenuArea`가 겹치지만 교대로만 쓰이는 것과 일치).
+
+  | role | logical rect | 출처 |
+  |---|---|---|
+  | status | (192,8,120,64) | `stats.cpp:28`(mainArea), `stats.h` STATS_AREA_X/Y/WIDTH/HEIGHT, `u4.h:62` TEXT_AREA_X=24 |
+  | menu | (8,104,304,88) | `intro.cpp:170` menuArea |
+  | textview | (16,80,288,104) | `intro.cpp:171` extendedMenuArea (범용 "textview" role의 대표값으로 채택 — shrine/codex 등은 각자 다른 rect를 써서 단일 상수가 없음, 코드 주석에 명시) |
+
+- `src/bridge/types.ts`: `ViewBridgeEvent`에 ABI v1 additive로 `rows?: readonly OverlayRow[]`(label/value 구조화 필드)와 `selectedIndex?: number`(항목 인덱스 하이라이트 — 텍스트 문자 offset이 아님, avatar-name 같은 ASCII 입력의 커서와는 다른 개념임을 주석에 명시) 추가. `isBridgeEvent`도 두 필드를 검증(rows는 배열+각 원소 label:string 필수/value:string|undefined, selectedIndex는 0 이상 정수).
+- `src/shell.ts`: `#status-overlay`(항상 전체 뷰포트를 덮던 예전 placeholder)를 제거하고 `#overlay-layer` 컨테이너 + role별 `<div data-role="status|menu|textview">` 동적 생성/배치/제거로 교체. `view` 이벤트가 `text===""`이고 `rows`도 없으면 해당 role을 숨김(clear), 있으면 등록+렌더+배치. `clear` 브리지 이벤트는 대화 패널 리셋에 더해 모든 overlay role도 `resetStage()`+DOM 제거(계획의 "stage 전환 시 전체 제거" 요구사항). 배치는 `ResizeObserver`(canvas 실측 박스 변화) + `window resize`로 재계산.
+- `index.html`/`src/shell.css`: `#overlay-layer` 컨테이너(`pointer-events:none`), `.viewport { min-width: 640px }`(plan.md 119번 줄 "desktop 기본 최소 2× 표시" — 좁은 창은 페이지가 스크롤되게), `.overlay-role`(배경 없음 — raster canvas가 이미 그 영역 배경/아바타 아우라 glyph를 그리므로 DOM이 덮지 않음; `word-break:keep-all`+`overflow-wrap:anywhere`로 한국어 줄바꿈, 고정폭 monospace 계산 없음), `.overlay-rows`(CSS grid `auto max-content` — 값 열이 가장 넓은 셀에 맞춰져 한국어 라벨 길이가 달라도 값 우측 정렬이 항상 맞음), `.overlay-row-*.selected`(항목 하이라이트).
+
+**advisor 리뷰 반영(코딩 전에 설계 자체를 검토받음)**: 8개 지적 전부 반영 — (1) `vendor/xu4/src`+`scripts/` 전체로 grep 범위 확장 재확인, (2) `menuArea`/`extendedMenuArea`가 서로 겹친다는 것과 registry가 같은 role을 교체한다는 것 확인 → "겹침 없음" 단언은 실제로 동시에 보이는 (status,menu)/(status,textview) 쌍에만 적용하고 (menu,textview)는 "겹침, 의도된 것"으로 명시적으로 테스트, (3) DPR은 위치 계산에 넣지 않고 edge snap에만 사용 + edge를 독립적으로 스냅(폭이 아니라), (4) 실제 canvas가 `object-fit` 기본값(`fill`)이라 letterbox pillarbox 계산은 불필요함을 CSS로 직접 확인하고 그 대신 "contentRect가 항상 정확히 16:10은 아니다"(border 4px가 aspect-ratio 계산에 안 들어가서 실제로 아주 살짝 어긋남)를 X/Y 스케일 독립 계산으로 흡수, (5) 아바타 아우라 glyph 셀(248,80,8,8)이 `status` rect(y:8~72) 범위 밖이라 자동으로 안 겹침 확인 + 회귀 테스트 추가, (6) `rows`/`selectedIndex` 필드 추가(fixed-space 대신 구조화 필드 — 값 컬럼 정렬은 CSS grid가 담당), (7) `clear` 이벤트가 overlay도 전부 제거하도록 배선, (8) `.viewport { min-width: 640px }`로 좁은 창에서 페이지 스크롤, 오버레이 폰트 최소 10px 바닥 보장.
+
+**TDD(RED→GREEN, 전부 이 세션에서 직접 실행)**:
+- RED 1: `tests/unit/overlay-layout.test.ts`(27개) — 모듈이 아직 없어서 `Cannot find module` 실패(커밋 `71f91d3`).
+- RED 2: `tests/unit/bridge-contract.test.ts`에 `rows`/`selectedIndex` 케이스 2개 추가 — 검증 로직이 없어서 실제로 2개 실패(`expected true to be false`, 커밋 `996ecd0`).
+- GREEN 1: `src/overlay/overlay-layout.ts` + `src/bridge/types.ts` 구현 → `tests/unit/overlay-layout.test.ts`(27/27), `tests/unit/bridge-contract.test.ts`(14/14) 통과, `npm run typecheck` 통과(커밋 `7af4564`).
+- RED 3: `tests/e2e/status-overlay.spec.ts`(신규, 5개 테스트: 1x/2x/1.5x-DPR 정렬+비겹침, lifecycle, narrow-viewport)를 옛 `#status-overlay` 구조 그대로 실행 → 실제로 5개 전부 실패(`[data-role="status"]` locator를 못 찾음, timeout/connection-refused, 커밋 `37c8e3d`).
+- GREEN 2: `src/shell.ts`/`index.html`/`src/shell.css` 구현 → 같은 5개 테스트 전부 통과(커밋 `2f081a8`).
+
+**실제 엔진 회귀 확인(추가로 직접 실행, Todo 12 acceptance criteria에는 없지만 DOM 구조를 바꿨으므로 자체적으로 확인함)**: `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test tests/e2e/boot-sequence.spec.ts tests/e2e/startup-data.spec.ts --project=chromium` → 7/7 통과. 실제 타이틀 화면 렌더 + 실제 키 입력으로 `IntroController` 상태 전이까지 여전히 정상(내가 바꾼 `#status-overlay`→`#overlay-layer`는 이 스펙들이 참조하지 않음, grep으로 사전 확인).
+- **하지 않은 것**: `tests/e2e/save-reload.spec.ts`(실제 캐릭터 생성 20라운드까지 걸려 5분 넘게 걸림 — 이 sandbox에서 1회 시도 중 `timeout 300`에 걸려 중단됨, headless_shell segfault도 이 sandbox에서 반복 관찰됨/무관한 환경 이슈)까지는 재실행하지 않음. Todo 12 acceptance criteria(`overlay-layout.test.ts`+`status-overlay.spec.ts`)에는 원래 없는 범위이고, save-reload 코드 경로는 이번 변경과 무관(overlay DOM을 참조하지 않음)하다고 판단해 생략함 — **확인 필요로 남김**.
+
+**환경 관찰(이 세션에서 실측)**: `--workers>=3` 등 더 높은 병렬도로 전체 e2e 스위트를 돌리면 이 WSL2 sandbox에서 `headless_shell`이 간헐적으로 segfault(`dmesg`로 `signal: 11` 확인)하며 공유 `vite preview` webServer가 죽어 이후 테스트가 `ERR_CONNECTION_REFUSED`로 실패한다 — `--workers=1`/`--workers=2`로는 재현 안 됨(`status-overlay.spec.ts` 단독 실행 2회, 전체 스위트(`ULTIMA4_DATA` 없이) `--workers=1`/`--workers=2` 각 1회 전부 통과). 코드 문제가 아니라 sandbox 리소스/병렬도 이슈로 판단(다음 세션 참고).
+
+**게이트 전부 실행, 전부 exit 0** (2026-09-26, `build/wasm-release`는 main 체크아웃 `/home/taejin/ultima/build/wasm-release`에서 원본 데이터 없음을 먼저 `find`로 확인한 뒤 복사):
+```
+npm ci                                                          # 0
+npm run test:unit                                               # 0 — 17 files / 171 tests
+npm run verify:repo-sources                                     # 0 — 4 components
+npm run typecheck                                                # 0
+npm run build                                                    # 0
+git diff --check                                                 # 0
+cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md              # 0
+npm run test:unit -- tests/unit/overlay-layout.test.ts            # 0 — 27/27 (Todo 12 acceptance #1)
+npm run test:e2e -- tests/e2e/status-overlay.spec.ts --project=chromium   # 0 — 5/5 (Todo 12 acceptance #2, 1x/2x/1.5x-DPR)
+ULTIMA4_DATA=.../ultima4.zip npx playwright test tests/e2e/boot-sequence.spec.ts tests/e2e/startup-data.spec.ts --project=chromium  # 0 — 7/7 (추가 회귀 확인)
+```
+
+**QA 증거**: `.omo/evidence/ultima-web/task-12/status-overlay.png`(happy path, 1x variant), `.omo/evidence/ultima-web/task-12/narrow-viewport.png`(failure path, 360px 폭, `fullPage:true`) — 둘 다 git-ignored, 실제로 파일 존재 확인함.
+
+**커밋**: `71f91d3`(RED overlay-layout) → `996ecd0`(RED bridge rows/selectedIndex) → `7af4564`(GREEN 순수 모듈+ABI) → `37c8e3d`(RED e2e) → `2f081a8`(GREEN DOM 배선) → `8938b9a`(plan.md/canonical plan docs 갱신, 13/25=52.0%).
+
+**아직 없는 것 / 확인 필요**:
+- `save-reload.spec.ts`를 이 변경 이후 재실행하지 않음(위 설명 참고) — 코드상 무관하다고 판단했으나 실측은 아님.
+- 실제 C++ 엔진이 `status`/`menu` 역할에 대해 진짜 bridge 이벤트를 보내는 날이 오면(향후 Todo), `rows`/`selectedIndex`/기본 rect 설계가 실제 데이터와 맞는지 재검증이 필요하다 — 지금은 synthetic 데이터로만 검증됨("실제 게임에서 확인" 열이 ⬜인 이유).
+- `textview` role의 기본 rect(`extendedMenuArea`)는 실제로 이 역할에 쓰인 적이 있는 자리(intro config 화면)를 빌려온 것이지, "일반 textview"를 대표하는 유일한 native 상수는 아니다 — Todo 14/17에서 실제 사용처가 나오면 재검토 필요.
+- main merge는 아래 "Todo 12 main merge" 절에서 조율 세션이 직접 수행(게이트 재실행 포함) — 브랜치 시점 기록은 위 그대로 보존.
+
+### Todo 12 main merge (2026-09-26, 조율 세션 직접 수행)
+
+- `git merge --no-ff todo-12-status-overlay` (구현 tip `b68f28d`). 코드 충돌 없음 — `.omo/plans/ultima-web.md`+`docs/ULTIMA_WEB_PLAN.md`(Todo 12 `[x]`) 자동 병합. 문서 3건(`plan.md`, `handoff.md`, `HANDOFF.md`)만 내용 충돌 → 양쪽 서사 보존 방향으로 수동 병합(진행률 14/25=56.0%, Step 12 ✅ + "실제 게임에서 확인" ⬜ 사유 명시).
+- 에이전트 worktree 미커밋분(`status-overlay.spec.ts` 69+/11-)은 브랜치 tip에 없어 병합 대상 아님 — 브랜치 tip(완료기록 커밋 포함) 그대로 병합. 해당 수정분은 worktree에 보존됨(버리지 않음, **확인 필요**: 마무리 잔재인지 진행 중인지).
+- 증거: 에이전트 worktree `.omo/evidence/ultima-web/task-12/*.png` 2건을 main 동일 경로로 복사(git-ignored). RED/GREEN 로그 파일은 브랜치 기록에는 언급되나 worktree에 실물 없음 — **확인 필요로 남김**. 대신 아래 병합-후 게이트가 GREEN 증거.
+- **병합-후 게이트 (main 병합 트리, 전부 실제 실행 · exit 0)**:
+  ```
+  npm ci                                      # 0
+  npm run test:unit                           # 0 — 19 files / 209 tests
+  npm run verify:repo-sources                 # 0 — 4 components
+  npm run typecheck                           # 0
+  npm run build                               # 0
+  git diff --check                            # 0
+  cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
+  npx playwright test tests/e2e/status-overlay.spec.ts --project=chromium  # 0 — 5/5
+  ULTIMA4_DATA=.../ultima4.zip npx playwright test --project=chromium --workers=2  # 0 — 23/23 (3.2m, save-reload 장기 2건 포함)
+  ```
+  - unit 18→19 files(신규 `overlay-layout` 34 tests), e2e 18→23(신규 status-overlay 5). `save-reload` 장기 테스트까지 포함해 무회귀 — 브랜치 기록의 "save-reload 미재실행" gap 해소됨.
