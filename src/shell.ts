@@ -4,6 +4,15 @@
 // Todos). It exists to prove the shell + bridge contract hold together.
 
 import { BRIDGE_ABI_VERSION, isBridgeEvent, type BridgeEvent } from "./bridge/types.ts"
+import {
+  applyTokens,
+  beginPause,
+  createPanelState,
+  resumePanel,
+  tokenizeMessage,
+  toRuns,
+  type PanelState
+} from "./dialogue/message-tokens.ts"
 
 /**
  * The intended integration seam for the future (Todo 6+) WASM engine: it
@@ -41,17 +50,72 @@ function requireElement<T extends Element>(doc: Document, selector: string): T {
 export function createShell(doc: Document): UltimaBridgeApi {
   const dialogueHistory = requireElement<HTMLDivElement>(doc, "#dialogue-history")
   const dialoguePanel = requireElement<HTMLElement>(doc, "#dialogue-panel")
+  const promptMarker = requireElement<HTMLElement>(doc, "#dialogue-prompt-marker")
   const statusOverlay = requireElement<HTMLDivElement>(doc, "#status-overlay")
   const romPicker = requireElement<HTMLInputElement>(doc, "#rom-picker")
   const saveExportButton = requireElement<HTMLButtonElement>(doc, "#save-export")
   const saveImportInput = requireElement<HTMLInputElement>(doc, "#save-import")
   const saveStatus = requireElement<HTMLElement>(doc, "#save-status")
 
-  function appendDialogueLine(text: string): void {
+  // Todo 11: the dialogue panel's full render state. It persists across
+  // `dispatch` calls (not reset per event) because native message output
+  // arrives as fragments of a shared current line, not whole lines -- e.g.
+  // dungeon.cpp's `screenMessage("...\nWho drinks? ")` is later followed by
+  // a *separate* `screenMessage("%c\n", key)` call that continues the same
+  // line. See `src/dialogue/message-tokens.ts`'s module doc comment.
+  let panelState: PanelState = createPanelState()
+
+  // Renders `panelState` into `#dialogue-history` using `createElement` +
+  // `textContent` only -- see `tests/unit/message-tokens.test.ts`'s
+  // innerHTML safety guard, which greps this file's source for the banned
+  // APIs. Rebuilds the whole history each call; it is small scrolling text,
+  // not a hot per-frame path.
+  function renderLine(cells: PanelState["currentLine"]): HTMLParagraphElement {
     const line = doc.createElement("p")
-    line.textContent = text // textContent only -- never innerHTML for game text.
-    dialogueHistory.appendChild(line)
+    line.className = "dialogue-line"
+    for (const run of toRuns({ cells })) {
+      const span = doc.createElement("span")
+      span.textContent = run.text // textContent only -- never innerHTML for game text.
+      if (run.color !== "default") {
+        span.classList.add(`dialogue-color-${run.color}`)
+      }
+      line.appendChild(span)
+    }
+    return line
+  }
+
+  function renderPanel(): void {
+    const fragment = doc.createDocumentFragment()
+    for (const historyLine of panelState.historyLines) {
+      fragment.appendChild(renderLine(historyLine.cells))
+    }
+    fragment.appendChild(renderLine(panelState.currentLine))
+    dialogueHistory.replaceChildren(fragment)
     dialoguePanel.scrollTop = dialoguePanel.scrollHeight
+    dialoguePanel.dataset["awaitingPrompt"] = String(panelState.awaitingPrompt)
+    dialoguePanel.dataset["paused"] = String(panelState.paused)
+  }
+
+  // Shown/focused while a `prompt` bridge event is outstanding (Todo 11's
+  // "prompt focus" requirement); removed on the next `message`/`clear`.
+  // Focusing this element never competes with real key delivery -- the
+  // GLFW input port listens on `window` at the capture phase regardless of
+  // which element has DOM focus (see index.html's comment on this marker).
+  function showPromptMarker(kind: string, promptId: string): void {
+    promptMarker.hidden = false
+    promptMarker.setAttribute("data-prompt-kind", kind)
+    promptMarker.setAttribute("data-prompt-id", promptId)
+    promptMarker.scrollIntoView({ block: "nearest" })
+    promptMarker.focus()
+  }
+
+  function hidePromptMarker(): void {
+    if (promptMarker.hidden) {
+      return
+    }
+    promptMarker.hidden = true
+    promptMarker.removeAttribute("data-prompt-kind")
+    promptMarker.removeAttribute("data-prompt-id")
   }
 
   function setStatusText(text: string): void {
@@ -64,14 +128,32 @@ export function createShell(doc: Document): UltimaBridgeApi {
 
   function applyEvent(event: BridgeEvent): void {
     switch (event.type) {
-      case "message":
-        appendDialogueLine(event.text)
+      case "message": {
+        hidePromptMarker()
+        // A new message means the engine progressed past any outstanding
+        // Hawkwind-style wait -- there is no separate "any key" bridge
+        // event today, so the next real content is what actually clears a
+        // pause (see message-tokens.ts's `resumePanel` doc comment).
+        if (panelState.paused) {
+          panelState = resumePanel(panelState)
+        }
+        panelState = applyTokens(panelState, tokenizeMessage(event.text))
+        if (event.awaitKey === true) {
+          panelState = beginPause(panelState)
+        }
+        renderPanel()
         return
+      }
       case "clear":
-        dialogueHistory.replaceChildren()
+        hidePromptMarker()
+        panelState = createPanelState()
+        renderPanel()
         return
       case "prompt":
-        appendDialogueLine(`[prompt:${event.kind}] ${event.promptId}`)
+        if (panelState.paused) {
+          panelState = resumePanel(panelState)
+        }
+        showPromptMarker(event.kind, event.promptId)
         return
       case "view":
         setStatusText(event.text)
@@ -86,14 +168,24 @@ export function createShell(doc: Document): UltimaBridgeApi {
         }
         return
       case "runtime-error":
-        appendDialogueLine(`[오류] ${event.message}`)
+        hidePromptMarker()
+        panelState = applyTokens(panelState, tokenizeMessage(`[오류] ${event.message}`))
+        renderPanel()
         return
     }
   }
 
   function dispatch(candidate: unknown): boolean {
     if (!isBridgeEvent(candidate)) {
-      console.error("Rejected malformed or unknown bridge event.", candidate)
+      // Never log the candidate itself: a malformed *translated* game
+      // string is exactly the kind of value that must never reach the
+      // console verbatim (see Todo 11's "Must not... dump complete text to
+      // console").
+      const type =
+        typeof candidate === "object" && candidate !== null && "type" in candidate
+          ? String((candidate as { type: unknown }).type)
+          : typeof candidate
+      console.error(`Rejected malformed or unknown bridge event (type: ${type}).`)
       return false
     }
     applyEvent(candidate)

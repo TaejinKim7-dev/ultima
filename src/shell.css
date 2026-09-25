@@ -72,7 +72,39 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+
+/*
+ * Todo 11: each committed/current line is its own <p>, built from
+ * per-color <span> runs (see src/shell.ts's renderLine/toRuns). Korean
+ * compound words often have no spaces, so a plain `word-break` alone can
+ * overflow the panel -- `overflow-wrap: anywhere` guarantees a long
+ * unbroken Hangul run still wraps inside the panel's width, and
+ * `word-break: keep-all` still prefers breaking at spaces first (the
+ * idiomatic pairing for Korean web text).
+ */
+.dialogue-line {
+  margin: 0;
   white-space: pre-wrap;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.dialogue-color-grey { color: #9a9a9a; }
+.dialogue-color-blue { color: #4a7fd6; }
+.dialogue-color-purple { color: #b06fd6; }
+.dialogue-color-green { color: #4fbf6a; }
+.dialogue-color-red { color: #d65f5f; }
+.dialogue-color-yellow { color: #d6c24a; }
+.dialogue-color-white { color: #ffffff; }
+
+/*
+ * Todo 11 prompt focus marker: no visible box (it carries no text), but
+ * focusing it must not be invisible/confusing when it does receive focus.
+ */
+.dialogue-prompt-marker:focus {
+  outline: 2px dashed var(--ultima-border);
+  outline-offset: 2px;
 }
 
 .data-controls {

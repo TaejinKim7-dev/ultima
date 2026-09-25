@@ -37,12 +37,24 @@ interface BridgeEventBase {
 /**
  * Long-form game text routed to the HTML dialogue panel below the canvas
  * (never overlaid on the game screen -- see the confirmed requirement in
- * `handoff.md`). Control tokens (clear/newline/color/pause, ...) are
- * tokenized separately in Todo 11; this Todo only fixes the envelope shape.
+ * `handoff.md`). Control tokens embedded in `text` (newline/backspace/
+ * right/color/prompt) are parsed client-side by
+ * `src/dialogue/message-tokens.ts`'s `tokenizeMessage` (Todo 11) -- the
+ * native `screenMessageN` buffer already carries these as literal control
+ * bytes (see `vendor/xu4/src/screen.cpp`), so `text` itself is the token
+ * stream and needs no ABI change.
+ *
+ * `awaitKey` carries a Hawkwind-style pause (native
+ * `EventHandler::waitAnyKey()`, e.g. `discourse_castle.cpp`'s
+ * `runTalkHawkwind`) out of band: unlike every other control token, a
+ * native pause is a blocking function call with no message-buffer byte
+ * representation, so it cannot be recovered by tokenizing `text` alone.
+ * This field is additive to ABI v1 (optional, ignored by older readers).
  */
 export interface MessageBridgeEvent extends BridgeEventBase {
   readonly type: "message"
   readonly text: string
+  readonly awaitKey?: boolean
 }
 
 /** Clears the dialogue panel's current line/history state. */
@@ -144,8 +156,13 @@ export function isBridgeEvent(candidate: unknown): candidate is BridgeEvent {
   }
 
   switch (type) {
-    case "message":
-      return isString(candidate["text"])
+    case "message": {
+      if (!isString(candidate["text"])) {
+        return false
+      }
+      const awaitKey = candidate["awaitKey"]
+      return awaitKey === undefined || isBoolean(awaitKey)
+    }
     case "clear":
       return true
     case "prompt":

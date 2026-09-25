@@ -26,6 +26,15 @@
       -->
       <section id="dialogue-panel" class="dialogue-panel" aria-live="polite">
         <div id="dialogue-history" class="dialogue-history"></div>
+        <!--
+          Prompt focus marker (Todo 11): shown/focused when a `prompt`
+          bridge event arrives, so keyboard focus visibly lands in the
+          dialogue panel. It carries no text of its own (nothing to
+          escape) and never intercepts real key delivery -- the GLFW input
+          port listens on `window` at the capture phase regardless of
+          which element has focus (verified in emsdk's library_glfw.js).
+        -->
+        <div id="dialogue-prompt-marker" class="dialogue-prompt-marker" tabindex="-1" hidden></div>
       </section>
 
       <!--

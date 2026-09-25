@@ -38,6 +38,22 @@ describe("bridge ABI contract (C ABI version 1)", () => {
     expect(isBridgeEvent(candidate)).toBe(true)
   })
 
+  it("accepts a message event with an optional awaitKey flag (Todo 11: Hawkwind-style pause) and rejects a non-boolean value", () => {
+    // awaitKey carries the native EventHandler::waitAnyKey() pause out of
+    // band -- it has no message-buffer byte representation (see
+    // discourse_castle.cpp's runTalkHawkwind), so it rides the envelope
+    // instead of being a token inside `text`.
+    const withoutFlag: unknown = { abiVersion: 1, type: "message", text: "hello" }
+    const pausedTrue: unknown = { abiVersion: 1, type: "message", text: "hello", awaitKey: true }
+    const pausedFalse: unknown = { abiVersion: 1, type: "message", text: "hello", awaitKey: false }
+    const malformed: unknown = { abiVersion: 1, type: "message", text: "hello", awaitKey: "yes" }
+
+    expect(isBridgeEvent(withoutFlag)).toBe(true)
+    expect(isBridgeEvent(pausedTrue)).toBe(true)
+    expect(isBridgeEvent(pausedFalse)).toBe(true)
+    expect(isBridgeEvent(malformed)).toBe(false)
+  })
+
   it("accepts a well-formed prompt event and rejects an unknown prompt kind", () => {
     const validPrompt: unknown = {
       abiVersion: 1,
