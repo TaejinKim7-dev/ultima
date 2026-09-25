@@ -1,5 +1,5 @@
 # HANDOFF
-작성 시각: 2026-09-25 23:40 KST (todo-19-pages-workflow 세션, 이전 Todo 21 세션 기록에 이어 갱신)
+작성 시각: 2026-09-25 23:45 KST (todo-19-pages-workflow 세션, 이전 Todo 21 세션 기록에 이어 갱신, advisor 리뷰 2회 반영 후 최종)
 
 ## 1. 목표 (What we're building)
 - xu4 기반 Ultima IV를 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식한다. 진행 기준은 `/home/taejin/ultima/plan.md`(25단계 = Todo 1~21 + F1~F4).
@@ -7,8 +7,8 @@
 - 이번 세션 범위: `.omo/plans/ultima-web.md` Todo 19(GitHub Pages workflow) 하나. 명시적으로 "골격만" — 2026-09-24 재계획 메모가 Todo 15/16/18보다 먼저 병렬 착수를 허용한 범위다.
 
 ## 2. 현재 상태 (Current state)
-- 브랜치 `todo-19-pages-workflow`(main `ce88bc1`에서 분기), 커밋 `5f93788`(1차) 이후 advisor 리뷰로 발견된 결함 3건을 고쳐 **다음 커밋에서 반영 예정**(아래 4번 "advisor 리뷰로 고친 것" 참고). main에는 merge/push 안 함.
-- Todo 19 골격 완료: `.github/workflows/pages.yml`, `npm run audit:dist`, `npm run verify:workflow` 신규. 상세는 아래 3~4번과 `handoff.md`의 "Todo 19 골격 완료 기록" 절.
+- 브랜치 `todo-19-pages-workflow`(main `ce88bc1`에서 분기), 커밋 3개, 전부 이 브랜치 tip: `5f93788`(골격) → `205fcec`(advisor 리뷰 1차: 검증기 구조 검사 강화, test:unit 부분 게이트, concurrency 스코프, 의존성 매트릭스) → **`342fe4a`(advisor 리뷰 2차: YAML 인용 오류 수정, 현재 branch tip)**. main에는 merge/push 안 함.
+- Todo 19 골격 완료: `.github/workflows/pages.yml`, `npm run audit:dist`, `npm run verify:workflow` 신규. 상세는 아래 3~4번과 `handoff.md`의 "Todo 19 골격 완료 기록"/"Todo 19 후속 수정 2" 절.
 - Todo 19는 여전히 🟡(부분 진행) — 계획서 체크박스 `[ ]` 그대로, 완전한 acceptance는 Todo 15·16·18 이후.
 - Todo 21(엔진 자체)은 이미 완료·merge 상태(main `ce88bc1`) — 실제 `ultima4.zip`으로 실제 타이틀 화면 렌더 + 실제 키 입력 상태 전이까지 확인됨(자세한 내용은 `handoff.md`의 "Todo 21 완료 기록" 절, 이번 세션에서 건드리지 않음).
 - Todo 10은 여전히 🟡 — persistence coordinator는 연결됐지만(Todo 21의 21.2) 실제 저장을 발생시키는 e2e(`tests/e2e/save-reload.spec.ts`)가 아직 없다. 이번 세션에서도 손대지 않음.
@@ -37,8 +37,7 @@
 - **`verify:workflow`를 YAML 파서 없이 구현**: devDependencies에 YAML 파서가 없고 새 패키지 설치는 사용자 확인 없이 하면 안 됨 — `scripts/repo-source-verifier.mjs`/`check-base-path.mjs`와 같은 "텍스트 기반" 관례를 따름.
 
 ## 5. 다음 할 일 (Next steps)
-- [ ] 지금 이 worktree의 나머지 변경사항(advisor 리뷰 반영분)을 커밋한다 — 브랜치 `todo-19-pages-workflow`. **main에 merge/push하지 않는다** — 조정 세션의 검토 대기.
-- [ ] (조정 세션 몫) 이 브랜치 리뷰 후 main merge 여부 결정.
+- [ ] (조정 세션 몫) 브랜치 `todo-19-pages-workflow`(커밋 `342fe4a`) 리뷰 후 main merge 여부 결정. **main에 merge/push되지 않은 상태로 남겨뒀다** — 이 세션은 하지 않음.
 - [ ] Todo 11~13(한국어 UI) → 14 → 15(번역) → 16(Web Audio, 21.1의 무음 구현 교체) → 17 → 18(`audit:dist`를 test-hook/cheat-API/XSS 등으로 확장) → **Todo 19 재검토해서 완전히 done으로 바꿀지 결정** → 20 → F1~F4.
 - [ ] **Todo 10의 `tests/e2e/save-reload.spec.ts`** — persistence coordinator는 연결됐지만(21.2) 실제 저장 트리거(캐릭터 생성 등)가 아직 자동화 안 됨.
 - [ ] (별도 결정 필요, Todo 19 범위 밖) CI에서 emsdk 4.0.23을 자동 설치하고 `build:wasm`까지 돌려서 wasm 엔진을 실제로 배포할지, 당분간 "셸만 배포"를 감수할지.
@@ -46,6 +45,7 @@
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
 - **각 git worktree는 `build/`를 따로 가진다(gitignored)** — 이 worktree엔 `build/wasm-release`가 원래 없었다(메인 체크아웃에서 복사해옴). 다른 worktree/클린 clone에서 재개하면 같은 문제를 다시 만난다 — `npm run build:wasm`(emsdk 필요) 또는 이미 빌드된 산출물 복사가 필요하다.
 - **`scripts/workflow-verifier.mjs`의 구조적 검사(permission/artifact-root/`.nojekyll`/순서)는 이제 "주석이 아닌 줄"만 본다** — `.github/workflows/pages.yml`의 헤더 주석에 `id-token: write`, `audit:dist` 같은 정확한 YAML 키 문자열을 그대로 쓰는 건 괜찮다(검사가 주석을 걸러내므로). 다만 실제 실행 줄(`run:`/`uses:`/permission 줄) 자체를 지우면 잡힌다.
+- **`verify:workflow`는 여전히 YAML 파서가 아니다** — 텍스트/정규식 검사라서 문법적으로 유효한지는 원래 못 본다. 이번에 실제로 걸렸던 건 "인용 안 된 `name:` 값에 `: `가 들어가면 안 된다"는 딱 한 가지 케이스뿐이고(`checkNameValuesAreYamlSafe`로 방지), 다른 종류의 YAML 문법 오류(들여쓰기, 잘못된 anchor 등)는 여전히 못 잡는다. `pages.yml`을 크게 고칠 일이 생기면 `python3 -c "import yaml; yaml.safe_load(open('.github/workflows/pages.yml'))"`(시스템에 PyYAML 있음, 새로 설치 안 해도 됨)로 실제 파싱까지 확인할 것 — `verify:workflow` exit 0만으로는 YAML이 유효하다는 증거가 아니다.
 - **CI가 만드는 `dist/`에는 `/engine/`이 없다** — `.github/workflows/pages.yml`은 wasm 엔진을 빌드하지 않는다. 지금 이 워크플로우를 그대로 push해서 배포하면 화면(셸)은 뜨지만 게임 자체는 못 돈다. 알려진, 의도적으로 남겨둔 gap.
 - **`.omo/evidence/ultima-web/task-19/`에는 파일을 안 썼다** — gitignored, 이 worktree엔 다른 task의 evidence도 원래 없었다. RED/GREEN/게이트 기록은 `handoff.md`·`HANDOFF.md`·대화 로그에만 있다.
 - (Todo 21에서 이어짐, 여전히 유효) `vendor/xu4/src/gpu_opengl.cpp`/`support/getTicks.c`를 또 고칠 일이 생기면 반드시 `vendor/source-manifest.json`의 `treeSha256`도 같이 갱신할 것 — `node -e "import('./scripts/repo-source-verifier.mjs').then(({summarizeSourceTree}) => console.log(JSON.stringify(summarizeSourceTree('vendor/xu4'))))"`로 재계산.
@@ -65,7 +65,7 @@ git status -sb && git log --oneline -3
 #   또는 이미 빌드된 build/wasm-release를 다른 checkout에서 복사
 
 npm ci
-npm run test:unit                             # 15 files / 117 tests 기대
+npm run test:unit                             # 15 files / 118 tests 기대
 npm run verify:repo-sources                   # 4 components 기대
 npm run typecheck
 npm run build
@@ -74,6 +74,11 @@ npm run build:site -- --base=/ultima/         # Todo 19 acceptance criteria
 npm run audit:dist                            # Todo 19 acceptance criteria
 npm run verify:workflow                       # Todo 19 acceptance criteria
 cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md   # byte-identical 기대
+python3 -c "import yaml; yaml.safe_load(open('.github/workflows/pages.yml'))"  # 예외 없이 성공 기대 (real YAML parse)
+
+# CI가 실제로 돌릴 하드 게이트(build/wasm-release 없어도 통과해야 함, 클린 clone에서 실측 완료):
+npx vitest run --passWithNoTests=false --exclude tests/unit/wasm-symbols.test.ts   # 14 files / 110 tests, exit 0
+npx vitest run --passWithNoTests=false tests/unit/wasm-symbols.test.ts             # exit 1, 8 skipped (continue-on-error 스텝이라 job은 안 막힘 — 의도된 동작)
 ```
 - 공식 인계: `handoff.md`의 "Todo 19 골격 완료 기록" 절(가장 최근) + "Todo 21 완료 기록" 절(엔진 배경지식). 진행률/순서: `plan.md`. Todo 19 전문: `.omo/plans/ultima-web.md` 300번 줄 부근. 운영 규칙: `AGENTS.md`.
 - 브랜치 `todo-19-pages-workflow`는 main에 병합/push되지 않은 상태 — 병합 여부는 사용자/조정 세션 결정 사항.

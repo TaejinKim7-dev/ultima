@@ -743,6 +743,33 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md   # 0 — byte-identical
 
 **아직 없는 것 / 확인 필요**:
 - `.omo/evidence/ultima-web/task-19/`에 어떤 파일도 쓰지 않았다(gitignored, 이 worktree엔 애초에 다른 task의 evidence도 없었음) — 계획서 QA 시나리오가 언급하는 `pages-static-smoke.json`/`workflow-failure.log` 파일 자체는 없다. RED/GREEN/게이트 기록은 이 절과 `HANDOFF.md`, 대화 로그에만 있다.
-- 실제 `git push`로 이 워크플로우를 GitHub Actions에서 트리거해본 적은 없다(로컬 검증만) — Pages Source를 "GitHub Actions"로 바꾸는 저장소 설정도 아직 안 했을 것이다(확인 필요).
+- 실제 `git push`로 이 워크플로우를 GitHub Actions에서 트리거해본 적은 없다(로컬 검증만) — Pages Source를 "GitHub Actions"로 바꾸는 저장소 설정도 아직 안 했을 것이다(확인 필요, 사용자만 할 수 있음).
 - Todo 19의 QA 시나리오 중 "`dist/`를 `/ultima/`와 `/` 양쪽에서 Playwright smoke로 서빙" — `/ultima/`는 기존 `playwright.config.ts`의 `webServer`가 이미 상시 이렇게 서빙하고 있어 사실상 매 e2e 테스트가 검증 중이지만, `/` 루트로 서빙하는 별도 스모크는 아직 없다.
 - main merge는 하지 않았다 — 조정 세션의 리뷰/승인 대기.
+
+### Todo 19 후속 수정 2 — YAML 구문 오류 (2026-09-25, 같은 branch, 커밋 `342fe4a`)
+
+두 번째 advisor 리뷰가 지적: `scripts/verify-workflow.mjs`는 YAML 파서가 없는 텍스트 검사기라서 **YAML 구문 자체가 깨져도 통과할 수 있다** — 실제로 `- name: Unit tests: wasm engine suite (known gap, see header comment)` 줄이 정확히 그랬다. 인용 안 된 plain scalar 안에 `": "`(콜론+공백)가 있으면 안 되는데, 이 값이 그 규칙을 어겨서 GitHub Actions가 **파일 전체를 파싱조차 못 하고 거부**했을 것이다(어떤 job도 실행 안 됨).
+
+**실측 확인**: 시스템에 이미 설치된 `python3 -c "import yaml"`(PyYAML, 프로젝트 의존성 아님, 새로 설치 안 함)로 실제 파싱 시도 → 수정 전엔 "mapping values are not allowed here" 같은 파싱 에러가 났을 것(직접 재현은 안 했으나 YAML 1.1 plain-scalar 규칙상 확실). 수정 후(`name: "..."`로 인용) → `yaml.safe_load()`가 실제로 성공, 14개 step 이름 전부 온전하게 나옴을 확인.
+
+**고친 것**:
+- `.github/workflows/pages.yml`의 그 줄을 `name: "Unit tests: wasm engine suite (known gap, see header comment)"`로 인용.
+- `scripts/workflow-verifier.mjs`에 `checkNameValuesAreYamlSafe()` 신규 — 인용 안 된 `name:` 값에 `": "`가 있으면 거부(YAML 파서 없이도 이 정확한 버그 클래스는 재발 방지). RED 먼저 확인(기존 검증기로 새 테스트 실행 → 실제로 1개 실패, `expected +0 to be 1`), 구현 후 GREEN(15/15).
+
+**클린 clone 실측(계산이 아니라 직접 실행, scratchpad에 브랜치 tip `342fe4a`를 다시 clone)**:
+```
+npm ci                                                                    # 0
+npm run verify:repo-sources                                               # 0 — 4 components
+npm run typecheck                                                         # 0
+npx vitest run --passWithNoTests=false --exclude tests/unit/wasm-symbols.test.ts   # 0 — 14 files / 110 tests
+npx vitest run --passWithNoTests=false tests/unit/wasm-symbols.test.ts            # 1 — 1 file failed, 8 skipped (continue-on-error 스텝이라 job은 안 막음)
+npm run build:site -- --base=/ultima/                                     # 0
+npm run audit:dist                                                        # 0 — 3 files scanned(엔진 없이는 index.html+assets 2개뿐)
+npm run verify:workflow -- .github/workflows/pages.yml                    # 0
+touch dist/.nojekyll                                                      # 성공
+python3 -c "import yaml; yaml.safe_load(open('.github/workflows/pages.yml'))"     # 성공, 예외 없음
+```
+이 worktree(`build/wasm-release` 있음)에서 로컬 게이트 최종 재실행도 전부 exit 0: `npm ci` · `npm run test:unit`(15 files/118 tests) · `npm run verify:repo-sources` · `npm run typecheck` · `npm run build` · `git diff --check` · `npm run build:site -- --base=/ultima/` · `npm run audit:dist`(9 files) · `npm run verify:workflow` · `cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md`.
+
+**브랜치 최종 상태**: `todo-19-pages-workflow`, 커밋 3개 — `5f93788`(골격) → `205fcec`(advisor 리뷰 1차: 검증기 구조 검사 강화, test:unit 부분 게이트로 축소, concurrency 스코프, 의존성 매트릭스) → `342fe4a`(advisor 리뷰 2차: YAML 인용 오류 수정). main에는 merge/push 안 함 — 조정 세션 결정 대기.
