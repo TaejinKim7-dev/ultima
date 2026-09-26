@@ -156,6 +156,90 @@ static void _setWindowIcon(GLFWwindow* view, const char* filename) {
 #include "gpu_opengl.cpp"
 
 
+#ifdef __EMSCRIPTEN__
+// Web build only: GLFW's Emscripten port invokes these callbacks directly
+// from the browser's own DOM event listeners the instant a key/mouse event
+// arrives, completely independent of when EventHandler::handleInputEvents()
+// (and its glfwPollEvents() call) happens to run. On the native builds this
+// distinction never arises -- GLFW only ever invokes these callbacks
+// synchronously from inside glfwPollEvents() itself, which is always called
+// from a point in EventHandler::run()'s loop that has no C stack frame
+// suspended.
+//
+// Under Emscripten the C "stack" can be suspended mid-frame by Asyncify's
+// unwind/rewind machinery (every call to emscripten_sleep()/frameSleep()
+// unwinds the wasm call stack back out to JS and waits for a setTimeout to
+// resume it). Asyncify supports exactly one such suspended operation at a
+// time, globally. If a callback fires while one is already pending and
+// itself reaches code that opens a nested Controller (Menu/CheatMenu
+// navigation, for example runMenu() -> a fresh EventHandler::run() call),
+// that nested call also suspends via Asyncify -- clobbering the single
+// global unwind/rewind slot the first, still-pending suspension needs to
+// resume correctly. The end result is a orphaned callback resuming with a
+// stale/freed Asyncify.currData and the whole runtime aborting with
+// `Aborted(RuntimeError: unreachable)` -- see handoff.md's "wasm 입력 이벤트
+// 재진입 버그" section for the full diagnostic trail that found this.
+//
+// The fix: never let these callbacks call into controller/game logic
+// directly. They only record the (already-translated) event into a small
+// queue; handleInputEvents() drains that queue right after its
+// glfwPollEvents() call, which is exactly the same place native builds
+// process these events synchronously -- restoring the invariant that
+// controller dispatch only ever happens from a point with no suspended
+// Asyncify operation.
+struct QueuedInputEvent {
+    bool isKey;
+    int key;
+    InputEvent ie;
+};
+
+constexpr int INPUT_QUEUE_CAPACITY = 64;
+static QueuedInputEvent inputQueue[INPUT_QUEUE_CAPACITY];
+static int inputQueueHead = 0;
+static int inputQueueTail = 0;
+
+static void queueKeyEvent(int key) {
+    int next = (inputQueueTail + 1) % INPUT_QUEUE_CAPACITY;
+    if (next == inputQueueHead)
+        return;             // Queue full: drop rather than overwrite.
+    inputQueue[inputQueueTail].isKey = true;
+    inputQueue[inputQueueTail].key = key;
+    inputQueueTail = next;
+}
+
+static void queueInputEvent(const InputEvent* ie) {
+    int next = (inputQueueTail + 1) % INPUT_QUEUE_CAPACITY;
+    if (next == inputQueueHead)
+        return;             // Queue full: drop rather than overwrite.
+    inputQueue[inputQueueTail].isKey = false;
+    inputQueue[inputQueueTail].ie = *ie;
+    inputQueueTail = next;
+}
+
+// Called only from EventHandler::handleInputEvents(), immediately after
+// glfwPollEvents() -- never from a GLFW callback itself.
+static void drainInputQueue() {
+    while (inputQueueHead != inputQueueTail) {
+        QueuedInputEvent qi = inputQueue[inputQueueHead];
+        inputQueueHead = (inputQueueHead + 1) % INPUT_QUEUE_CAPACITY;
+
+        Controller* controller = SGL->waitCon;
+        if (! controller)
+            controller = xu4.eventHandler->getController();
+
+        if (qi.isKey) {
+            if (controller->notifyKeyPressed(qi.key)) {
+                updateScreenCallback updateScreen = SGL->update;
+                if (updateScreen)
+                    (*updateScreen)();
+            }
+        } else {
+            controller->inputEvent(&qi.ie);
+        }
+    }
+}
+#endif
+
 static void keyHandler(GLFWwindow* win, int token, int scancode, int action, int mods)
 {
     static const char shiftNum_US[] = ")!@#$%^&*(";
@@ -235,6 +319,9 @@ static void keyHandler(GLFWwindow* win, int token, int scancode, int action, int
         printf("key event: token %d, mod 0x%x; translated %d\n", token, mods, key);
 
     /* handle the keypress */
+#ifdef __EMSCRIPTEN__
+    queueKeyEvent(key);
+#else
     Controller* controller = SGL->waitCon;
     if (! controller)
         controller = xu4.eventHandler->getController();
@@ -243,14 +330,19 @@ static void keyHandler(GLFWwindow* win, int token, int scancode, int action, int
         if (updateScreen)
             (*updateScreen)();
     }
+#endif
 }
 
 static inline void dispatchEvent(InputEvent* ie)
 {
+#ifdef __EMSCRIPTEN__
+    queueInputEvent(ie);
+#else
     Controller* controller = SGL->waitCon;
     if (! controller)
         controller = xu4.eventHandler->getController();
     controller->inputEvent(ie);
+#endif
 }
 
 static void mouseMotionHandler(GLFWwindow* win, double x, double y)
@@ -597,6 +689,14 @@ void EventHandler::handleInputEvents(Controller* waitCon,
 #endif
 
     glfwPollEvents();
+
+#ifdef __EMSCRIPTEN__
+    // See the queueKeyEvent()/queueInputEvent() doc comment above
+    // keyHandler(): this is the only safe place to actually dispatch events
+    // that arrived via GLFW's web callbacks -- no Asyncify operation can be
+    // suspended here.
+    drainInputQueue();
+#endif
 
     ss->waitCon = prevCon;
     ss->update  = prevUpdate;
