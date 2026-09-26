@@ -3,6 +3,18 @@ import { createInputQueue, type InputQueue } from "./bridge/input-queue.ts"
 import { createShell } from "./shell.ts"
 import type { AudioBridge } from "./engine/audio.ts"
 import { startEngine, type EngineModuleFactory } from "./engine/startup.ts"
+import {
+  resolveDisplayText,
+  translationPlaceholdersMatch
+} from "./i18n/localization.ts"
+
+/** Todo 14: localization runtime boundary observability hook (mirrors
+ *  `window.ultimaAudio`). Read-only display lookup -- never consulted by
+ *  any engine decision logic; command keys always fall back to ASCII. */
+export interface UltimaI18nApi {
+  resolve(id: string, fallback: string): string
+  checkPlaceholders(id: string): boolean
+}
 
 declare global {
   interface Window {
@@ -11,6 +23,8 @@ declare global {
      *  engine decision logic. See src/engine/audio.ts's AudioBridge for the
      *  full surface (stats(), suspend(), ...). */
     ultimaAudio?: AudioBridge | undefined
+    /** Todo 14: localization runtime boundary for e2e/manual QA only. */
+    ultimaI18n?: UltimaI18nApi | undefined
   }
 }
 
@@ -29,6 +43,16 @@ if (applicationRoot === null) {
 
 const bridge = createShell(document)
 window.ultimaBridge = bridge
+
+// Todo 14: expose the static localization table for e2e/manual QA only.
+// Display text resolves to Korean when ready, English fallback otherwise;
+// command-key IDs always return the ASCII fallback (see
+// src/i18n/localization.ts). Available immediately -- not gated on engine
+// start, like the other ultima* QA hooks.
+window.ultimaI18n = {
+  resolve: (id: string, fallback: string) => resolveDisplayText(id, fallback),
+  checkPlaceholders: (id: string) => translationPlaceholdersMatch(id)
+}
 
 // Step 8 browser-safe input queue: DOM callbacks only enqueue immutable
 // events; the engine (Step 9+) drains them from its input loop. These
