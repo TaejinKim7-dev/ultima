@@ -203,6 +203,49 @@ describe("verify:workflow", () => {
     expect(result.stderr).toContain("git push")
   })
 
+  it("rejects a workflow missing the emsdk setup step", () => {
+    const path = tempWorkflowFrom((source) => removeLinesMatching(source, /setup-emsdk/))
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("emsdk")
+  })
+
+  it("rejects a workflow with a wrong emsdk version pin", () => {
+    const path = tempWorkflowFrom((source) => source.replaceAll("4.0.23", "3.1.0"))
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("emsdk")
+  })
+
+  it("rejects a workflow with the emsdk setup step after the wasm-dependent steps", () => {
+    const path = tempWorkflowFrom((source) => {
+      const lines = source.split("\n")
+      const isWasmSuiteStep = (line: string) =>
+        /wasm-symbols/.test(line) && !/--exclude/.test(line) && !line.trim().startsWith("#")
+      const emsdkIndex = lines.findIndex((line) => /setup-emsdk/.test(line))
+      const wasmIndex = lines.findIndex(isWasmSuiteStep)
+      if (emsdkIndex === -1 || wasmIndex === -1) {
+        throw new Error("fixture workflow missing expected emsdk/wasm lines")
+      }
+      const [emsdkLine] = lines.splice(emsdkIndex, 1)
+      if (emsdkLine === undefined) {
+        throw new Error("fixture workflow emsdk line missing")
+      }
+      const newWasmIndex = lines.findIndex(isWasmSuiteStep)
+      lines.splice(newWasmIndex + 1, 0, emsdkLine)
+      return lines.join("\n")
+    })
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("emsdk")
+  })
+
   it("rejects a workflow that leaks an original-game-data extension reference", () => {
     const path = tempWorkflowFrom((source) => `${source}\n      - run: cp ultima4.zip dist/\n`)
 
