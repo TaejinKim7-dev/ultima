@@ -257,7 +257,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: Korean alias for a known NPC keyword maps to canonical answer and dialogue proceeds, evidence `.omo/evidence/ultima-web/task-13/npc-alias.trace.zip`; failure: Korean text in numeric/name prompt is rejected with prompt-specific message and no buffer overflow, evidence `.omo/evidence/ultima-web/task-13/prompt-reject.log`.
   Commit: Y | feat(input): add Korean aliases with prompt rules
 
-- [ ] 14. Integrate localization runtime boundaries in C++ and web UI
+- [x] 14. Integrate localization runtime boundaries in C++ and web UI
   What to do / Must NOT do: generate static lookup tables or compact resources from `locales/ko/*.json`; wire C++ display calls, Boron translation overlay, TLK lookup, binary text lookup, and JS UI labels to the same semantic IDs. Must not add a runtime JSON parser to the C++ engine or localize internal command keys.
   Parallelization: Wave 3 | Blocked by: 4,11,12,13 | Blocks: 15,17
   References: `engine/src/config_boron.cpp:1325-1340`; `engine/src/module.c:210-328`; `engine/src/intro.cpp:24-29`; verified original ZIP file list; `locales/ko/*` from Todo 4.
@@ -265,7 +265,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: intro, status, NPC talk, shrine/codex sample display Korean while logic remains English, evidence `.omo/evidence/ultima-web/task-14/localized-flow.png`; failure: alter one placeholder signature and verify build fails before runtime, evidence `.omo/evidence/ultima-web/task-14/placeholder-mismatch.log`.
   Commit: Y | feat(i18n): connect Korean localization runtime
 
-- [ ] 15. Complete Korean translation corpus and glossary consistency
+- [x] 15. Complete Korean translation corpus and glossary consistency
   What to do / Must NOT do: write the full Korean translation corpus for UI, module text, TLK NPCs, binary intro/castle/shrine/codex/endgame text, aliases, and glossary; run consistency checks for terms, placeholder signatures, width limits, and progression-critical answers. Must not leave English display text in covered gameplay paths or call an external translation API at runtime.
   Parallelization: Wave 3 | Blocked by: 4,14 | Blocks: 17,19
   References: `locales/ko/*`; `.local/` private inventory from Todo 4; `engine/src/intro.cpp`; `engine/src/config_boron.cpp:1325-1340`; verified TLK records.

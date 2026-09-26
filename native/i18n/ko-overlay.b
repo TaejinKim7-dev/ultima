@@ -4,4 +4,8956 @@
 ; its Korean display text. Consumed by the config_boron translation
 ; overlay path; internal command keys are never emitted here.
 ko-translations: [
+  avatar.exe:endgameText1:0: "궁극적 지혜의 코덱스가 지닌 무한한 지식이 그대에게 드러난다."
+  avatar.exe:endgameText1:1: "
+
+목소리가 말한다: 그대는 본성이 참으로 선함을 증명하였다."
+  avatar.exe:endgameText1:2: "
+
+아바타가 되고자 하는 그대의 여정은 일생에 걸친 끝없는 여정임을 알아야 한다."
+  avatar.exe:endgameText1:3: "
+
+아바타의 지위는 살아있는 선물이다.  언제까지나 가꾸어야만 꽃필 수 있다."
+  avatar.exe:endgameText1:4: "
+
+미덕의 길에서 벗어난다면, 그대의 길은 영영 사라질 수도 있다."
+  avatar.exe:endgameText1:5: "
+
+이제 그대의 세계로 돌아가라. 그곳에서 그대 백성들의 본보기로 살라, 우리는 그대의 용맹한 행적을 기억하리라."
+  avatar.exe:endgameText1:6: "
+
+목소리가 잦아들며, 어둠이 그대 주위로 밀려오는 듯하다. 격렬하고 뒤틀리는 현기증의 순간이 찾아온다."
+  avatar.exe:endgameText2:0: "그대는 눈을 뜨고 낯익은 돌의 원을 마주한다.  최근의 모험을 떠올리며 의아해한다."
+  avatar.exe:endgameText2:1: "
+
+아주 멀리 떨어진 시간과 장소처럼 느껴진다.  정말 있었던 일인지 의아해하다가, 손에 앙크를 쥐고 있음을 깨닫는다."
+  avatar.exe:endgameText2:2: "
+
+이제 문의 비밀을 알게 되었기에 언제든 왔던 곳으로 돌아올 수 있음을 알며, 그대는 원을 떠나간다."
+  avatar.exe:endgameText2:3: "
+
+축하합니다!
+   그대는
+   울티마 4:
+  아바타의
+   여정을
+  완수하였다
+  총 "
+  avatar.exe:endgameText2:4: "
+턴 만에! 그대의
+업적을 오리진
+시스템스의
+로드 브리티시께
+보고하라!"
+  avatar.exe:hawkwindText:0: "그대는 도둑이자 악당이다. 결코 아바타가 될 수 없으리라!"
+  avatar.exe:hawkwindText:1: "그대는 차갑고 잔인한 짐승이다.  그 죄로 인해 감옥에 가야 마땅하다!"
+  avatar.exe:hawkwindText:10: "그대는 용맹을 그리 보이지 못한다. 필요할 때 도망치는구나!"
+  avatar.exe:hawkwindText:11: "그대는 잔인하고 불의하다. 언젠가 그 죄로 고통받으리라!"
+  avatar.exe:hawkwindText:12: "그대는 자신보다 남의 삶을 더 헤아려야 한다!"
+  avatar.exe:hawkwindText:13: "그대는 명예롭게 싸우지 않고 악의와 기만으로 싸운다!"
+  avatar.exe:hawkwindText:14: "그대는 내면을 돌보는 데 시간을 들이지 않는구나, 아바타가 되려면 반드시 필요한 일이다!"
+  avatar.exe:hawkwindText:15: "그대는 사소한 행적을 너무 자랑스러워한다. 겸손은 모든 미덕의 근본이다!"
+  avatar.exe:hawkwindText:16: "그대는 정직의 길에서 진전이 거의 없다. 그대의 가치를 증명하도록 힘쓰라!"
+  avatar.exe:hawkwindText:17: "그대는 자비를 제대로 보이지 못했다. 남에게 더 친절하라!"
+  avatar.exe:hawkwindText:18: "그대는 아직 용맹한 전사가 아니다.  악을 물리치며 스스로를 증명하라!"
+  avatar.exe:hawkwindText:19: "그대는 아직 정의로움을 증명하지 못했다. 모든 일에 정의를 행하도록 힘쓰라!"
+  avatar.exe:hawkwindText:2: "그대는 겁쟁이로다, 위험의 낌새만 있어도 도망친다!"
+  avatar.exe:hawkwindText:20: "그대의 희생은 미미하다. 남을 살리기 위해 그대 생명의 피를 바치라."
+  avatar.exe:hawkwindText:21: "그대는 더욱 명예롭게 처신해야 한다.  그 길이 그대 앞에 놓여 있다!"
+  avatar.exe:hawkwindText:22: "그대의 내면을 더 알고 다스리도록 힘쓰라. 명상이 그 길을 밝히리라!"
+  avatar.exe:hawkwindText:23: "이 길에서 그대의 진전은 매우 불확실하다. 겸손 없이는 그대는 공허할 뿐이다!"
+  avatar.exe:hawkwindText:24: "그대는 정직한 영혼인 듯하다.  계속된 정직이 그대에게 보답하리라!"
+  avatar.exe:hawkwindText:25: "그대는 자비를 잘 보이고 있다.  계속된 선의가 그대를 이끌어야 한다!"
+  avatar.exe:hawkwindText:26: "그대는 위험 앞에서 용맹을 보이고 있다. 더욱 그리되도록 힘쓰라!"
+  avatar.exe:hawkwindText:27: "그대는 공정하고 정의로운 듯하다. 정의를 더욱 엄정히 지키도록 힘쓰라!"
+  avatar.exe:hawkwindText:28: "그대는 어느 정도 자신을 내어주고 있다. 이제 더 많이 찾아 나서라!"
+  avatar.exe:hawkwindText:29: "그대는 천성이 명예로운 듯하다.  남에게도 명예를 가져다주도록 힘쓰라!"
+  avatar.exe:hawkwindText:3: "그대는 불의한 비참한 자로다. 역겨운 참견꾼이다!"
+  avatar.exe:hawkwindText:30: "그대는 내면의 통찰로 가는 길을 잘 가고 있다, 계속하여 내면의 빛을 구하라!"
+  avatar.exe:hawkwindText:31: "그대는 겸손한 영혼인 듯하다.  미덕을 쌓아 올릴 굳건한 초석을 놓고 있다!"
+  avatar.exe:hawkwindText:32: "그대는 참으로 정직한 영혼이다. 이제 승화에 이르도록 하라!"
+  avatar.exe:hawkwindText:33: "자비는 그대가 잘 보여온 미덕이다.  이제 승화를 구하라!"
+  avatar.exe:hawkwindText:34: "그대는 참으로 용맹한 전사다. 이제 용맹의 미덕에서 승화를 구하라!"
+  avatar.exe:hawkwindText:35: "그대는 정의롭고 공정하다.  이제 승화를 구하라!"
+  avatar.exe:hawkwindText:36: "그대는 베풀 줄 알고 선하다.  그대의 자기희생은 크도다.  이제 승화를 구하라!"
+  avatar.exe:hawkwindText:37: "그대는 명예로움을 증명하였다. 이제 승화를 구하라!"
+  avatar.exe:hawkwindText:38: "영성이 그대의 천성에 있다. 이제 승화를 구하라!"
+  avatar.exe:hawkwindText:39: "그대의 겸손이 존재 위에 밝게 빛난다. 이제 승화를 구하라!"
+  avatar.exe:hawkwindText:4: "그대는 제 잇속만 챙기는 아첨꾼이다. 내 도움을 받을 자격이 없으나, 그래도 베풀겠다!"
+  avatar.exe:hawkwindText:40: "예언자가 말한다: 나는 오직 "
+  avatar.exe:hawkwindText:41: "하고만 이야기하리라.
+다시 오라, "
+  avatar.exe:hawkwindText:42: "이(가) 회복되었을 때!
+"
+  avatar.exe:hawkwindText:43: "
+
+환영한다, "
+  avatar.exe:hawkwindText:44: "
+나는 호크윈드, 영혼의 예언자다. 나는 그대 안에 있는 것, 그대를 선 또는 악의 행위로 이끄는 것을 보노라...
+"
+  avatar.exe:hawkwindText:45: "
+어떤 길에 대한 깨달음을 구하는가?
+"
+  avatar.exe:hawkwindText:46: "
+호크윈드가 묻는다: 어떤 다른 길에 대한 명료함을 구하는가?
+"
+  avatar.exe:hawkwindText:47: "none"
+  avatar.exe:hawkwindText:48: "bye"
+  avatar.exe:hawkwindText:49: "
+그가 말한다: 그것은 깨달음의 주제가 아니다.
+"
+  avatar.exe:hawkwindText:5: "그대는 비열하고 파렴치한 자다. 그대의 존재 자체가 모욕이다. 그대는 민달팽이만큼 하찮다!"
+  avatar.exe:hawkwindText:50: "그가 말한다:
+그대는 그 자질에서 부분적인 아바타가 되었다. 나의 통찰이 더는 필요치 않다.
+"
+  avatar.exe:hawkwindText:51: "
+신단으로 가서 세 주기 동안 명상하라!
+"
+  avatar.exe:hawkwindText:52: "
+호크윈드가 말한다: 평안하기를, 그대가 아바타의 여정을 완수하기를!
+"
+  avatar.exe:hawkwindText:6: "그대의 정신은 약하고 나약하다. 완전함을 위해 힘쓰지 않는구나!"
+  avatar.exe:hawkwindText:7: "그대는 오만하고 허영에 차 있다. 그대 안의 다른 모든 미덕이 헛되도다!"
+  avatar.exe:hawkwindText:8: "그대는 정직한 영혼이 아니다. 아바타가 되려면 더 정직한 삶을 살아야 한다!"
+  avatar.exe:hawkwindText:9: "그대는 필요 없는 곳에서 살생하고 남에게는 너무 적게 베푼다!"
+  avatar.exe:lordBritishKeyword:0: "name"
+  avatar.exe:lordBritishKeyword:1: "look"
+  avatar.exe:lordBritishKeyword:10: "sacrifice"
+  avatar.exe:lordBritishKeyword:11: "honor"
+  avatar.exe:lordBritishKeyword:12: "spirituality"
+  avatar.exe:lordBritishKeyword:13: "humility"
+  avatar.exe:lordBritishKeyword:14: "pride"
+  avatar.exe:lordBritishKeyword:15: "avatar"
+  avatar.exe:lordBritishKeyword:16: "quest"
+  avatar.exe:lordBritishKeyword:17: "britannia"
+  avatar.exe:lordBritishKeyword:18: "ankh"
+  avatar.exe:lordBritishKeyword:19: "abyss"
+  avatar.exe:lordBritishKeyword:2: "job"
+  avatar.exe:lordBritishKeyword:20: "mondain"
+  avatar.exe:lordBritishKeyword:21: "minax"
+  avatar.exe:lordBritishKeyword:22: "exodus"
+  avatar.exe:lordBritishKeyword:23: "virtue"
+  avatar.exe:lordBritishKeyword:3: "truth"
+  avatar.exe:lordBritishKeyword:4: "love"
+  avatar.exe:lordBritishKeyword:5: "courage"
+  avatar.exe:lordBritishKeyword:6: "honesty"
+  avatar.exe:lordBritishKeyword:7: "compassion"
+  avatar.exe:lordBritishKeyword:8: "valor"
+  avatar.exe:lordBritishKeyword:9: "justice"
+  avatar.exe:lordBritishText:0: "
+
+
+그가 말한다:
+나의 이름은
+로드 브리티시,
+브리타니아
+전역의 군주이다!
+"
+  avatar.exe:lordBritishText:1: "
+
+
+
+
+왕홀을 든
+왕이
+보인다.
+"
+  avatar.exe:lordBritishText:10: "
+그가 말한다:
+자기희생의 마을,
+미녹은
+로스트 호프 만의
+동쪽 해안에
+있다!
+"
+  avatar.exe:lordBritishText:11: "
+그가 말한다:
+명예를 추구하는
+성기사들은
+영웅곶 북쪽의
+트린식에서
+흔히 보인다!
+"
+  avatar.exe:lordBritishText:12: "
+그가 말한다:
+스카라 브레이에서
+영성의 길을
+가르친다.
+스피릿우드
+근처의 섬에서
+찾을 수 있다!
+"
+  avatar.exe:lordBritishText:13: "
+
+
+그가 말한다:
+겸손은 미덕의
+초석이다!  오만했던
+매긴시아의
+폐허가 바로
+겸손의 미덕을
+증언한다!
+
+매긴시아의
+폐허는 브리타니아
+해안에서 멀리
+떨어진, 광대한
+바다의 작은
+섬에서 찾을
+수 있다!
+"
+  avatar.exe:lordBritishText:14: "
+
+
+그가 말한다:
+진실, 사랑,
+용기의 여덟 가지
+조합 중, 진실도
+사랑도 용기도
+담지 않은 것이
+바로 오만이다.
+
+오만은 미덕이
+아니니, 오만과
+정반대되는 미덕인
+겸손을 택하여
+멀리해야 한다!
+"
+  avatar.exe:lordBritishText:15: "
+
+
+
+
+
+로드 브리티시가
+말한다:
+아바타가 된다는
+것은 여덟 미덕의
+화신이 되는
+것이다.
+
+
+그것은 끊임없이,
+영원히 스스로와
+우리가 사는
+세상을 더 낫게
+만들고자 하는
+여정 속에서
+살아가는 것이다.
+"
+  avatar.exe:lordBritishText:16: "
+
+
+로드 브리티시가
+말한다:
+아바타의 여정은
+선의 여덟 미덕을
+알고 그 화신이
+되는 것이다!
+이 여정에 나선
+모든 이는 어비스를
+정복하고 궁극적
+지혜의 코덱스를
+보는 것으로
+스스로를 증명해야
+함이 알려져
+있다!
+"
+  avatar.exe:lordBritishText:17: "
+
+
+
+
+
+
+그가 말한다:
+위대한 악의 군주들이
+물러났음에도
+악은 여전히
+브리타니아에
+남아 있다.
+
+
+
+
+
+단 한 영혼이라도
+아바타의 여정을
+완수한다면, 우리
+백성에게 새로운
+희망이, 삶의
+새로운 목표가
+생기리라.
+
+소유물과 금을
+좇는 끝없는
+투쟁보다 삶에
+더 많은 것이
+있다는 빛나는
+본보기가 되리라!
+"
+  avatar.exe:lordBritishText:18: "그가 말한다:
+앙크는 미덕을
+추구하는 자의
+상징이다.  이
+표식으로 그대가
+알려질 것이니,
+항상 지니고
+다니라!
+"
+  avatar.exe:lordBritishText:19: "
+
+
+
+
+
+그가 말한다:
+위대한
+스티지언
+어비스는 브리타니아에
+남은 가장 어두운
+악의 소굴이다!
+
+
+
+
+
+
+어비스의 가장
+깊은 곳에
+코덱스의 방이
+있다고 전해진다!
+
+
+최고의 미덕을
+지닌 자, 이를테면
+아바타 같은 이만이
+이 방에 들어갈
+수 있다고도
+전해진다!!!
+"
+  avatar.exe:lordBritishText:2: "
+
+
+그가 말한다:
+나는 브리타니아
+전역을 다스리며,
+그대를 돕기 위해
+최선을 다하리라!
+"
+  avatar.exe:lordBritishText:20: "
+
+
+
+
+
+그가 말한다:
+몬데인이 죽었다!
+"
+  avatar.exe:lordBritishText:21: "
+
+
+
+
+
+그가 말한다:
+미낙스가 죽었다!
+"
+  avatar.exe:lordBritishText:22: "
+
+
+
+
+
+그가 말한다:
+엑소더스가 죽었다!
+"
+  avatar.exe:lordBritishText:23: "
+그가 말한다:
+아바타의
+여덟 미덕은:
+정직,
+자비,
+용맹,
+정의,
+희생,
+명예,
+영성,
+그리고 겸손이다!
+"
+  avatar.exe:lordBritishText:3: "그가 말한다:
+많은 진실을
+라이시움에서
+배울 수 있다.
+베리티 섬의
+북서쪽 해안에
+있다!
+"
+  avatar.exe:lordBritishText:4: "그가 말한다:
+사랑의 의미는
+엠패스 수도원에서
+찾으라.
+수도원은 깊은
+숲의 서쪽
+가장자리에
+있다!
+"
+  avatar.exe:lordBritishText:5: "
+
+그가 말한다:
+디즈 섬의
+서펀트 성에서
+용기를 구해야
+한다!
+"
+  avatar.exe:lordBritishText:6: "
+그가 말한다:
+베리티 섬의
+아름다운 마을
+문글로우에서
+정직의 미덕이
+번성한다!
+"
+  avatar.exe:lordBritishText:7: "
+
+그가 말한다:
+브리튼 마을의
+음유시인들은
+자비의 미덕에
+정통하다!
+"
+  avatar.exe:lordBritishText:8: "
+
+그가 말한다:
+많은 용맹한
+전사들이 발라리안
+제도의 젤롬
+출신이다!
+"
+  avatar.exe:lordBritishText:9: "
+
+
+그가 말한다:
+깊은 숲 속
+유 시에서
+정의가
+행해진다!
+"
+  avatar.exe:shrineAdvice:0: "마을과 성에서 발견한 남의 금을 취하지 말라, 그것은 그대의 것이 아니다!
+"
+  avatar.exe:shrineAdvice:1: "상인과 행상을 속이지 말라, 그것은 악한 짓이다!
+"
+  avatar.exe:shrineAdvice:10: "평화로운 시민을 공격하지 말라, 그 행위는 엄한 벌을 받아 마땅하다!
+"
+  avatar.exe:shrineAdvice:11: "악하지 않은 짐승을 죽이지 말라, 그들이 굶주려 그대를 공격하더라도 죽음을 받을 이유가 없다!"
+  avatar.exe:shrineAdvice:12: "그대의 마지막 금화까지 어려운 이에게 베푸는 것은 자기희생의 훌륭한 척도이다!
+"
+  avatar.exe:shrineAdvice:13: "동료를 버리고 도망치는 것은 피해야 할 이기적인 행동이다!
+"
+  avatar.exe:shrineAdvice:14: "남을 살리기 위해 그대 생명의 피를 바치는 것은 크게 칭송받을 미덕이다!
+"
+  avatar.exe:shrineAdvice:15: "남의 금을 취하지 말라, 이는 그대에게 불명예를 가져오리라!
+"
+  avatar.exe:shrineAdvice:16: "악하지 않은 존재를 먼저 공격하는 것은 결코 명예로운 행위가 아니다!
+"
+  avatar.exe:shrineAdvice:17: "그대 앞에 놓인 많은 여정을 풀고자 하라, 명예가 그 보상이 되리라!
+"
+  avatar.exe:shrineAdvice:18: "스스로를 알고자 하라.  예언자를 자주 찾으라, 그는 그대의 내면을 들여다볼 수 있다!
+"
+  avatar.exe:shrineAdvice:19: "명상은 깨달음으로 이어진다 모든 지혜와 지식을 구하라!
+"
+  avatar.exe:shrineAdvice:2: "둘째, 위대한 스티지언 어비스 입구에서 진실의 책을 읽으라!
+"
+  avatar.exe:shrineAdvice:20: "하얀 보석을 구한다면, 땅속이 아니라 서펀트의 등뼈에서 찾으라!
+"
+  avatar.exe:shrineAdvice:21: "그대가 아닌 것을 자처하지 말라.  겸손한 행동이 그대를 잘 말해준다!
+"
+  avatar.exe:shrineAdvice:22: "위대한 악의 힘을 휘두르려 하지 말라, 그 힘이 그대를 압도하리라!
+"
+  avatar.exe:shrineAdvice:23: "검은 보석을 구한다면, 가장 어두운 밤에 문이 열리는 시간과 장소에서 찾으라!
+"
+  avatar.exe:shrineAdvice:3: "땅의 악하지 않은 짐승을 죽이지 말고, 선량한 이들을 공격하지 말라!
+"
+  avatar.exe:shrineAdvice:4: "구걸하는 이에게 그대의 지갑을 베풀라, 그 행위는 잊히지 않으리라!
+"
+  avatar.exe:shrineAdvice:5: "셋째, 위대한 스티지언 어비스 입구에서 사랑의 초에 불을 붙이라!
+"
+  avatar.exe:shrineAdvice:6: "악한 생물을 물리친 승리는 용맹한 영혼을 세우는 데 도움이 된다!
+"
+  avatar.exe:shrineAdvice:7: "심각하지 않은 부상으로 전투에서 도망치는 것은 흔히 겁쟁이의 모습이다!
+"
+  avatar.exe:shrineAdvice:8: "첫째, 위대한 스티지언 어비스 입구에서 용기의 종을 울리라!
+"
+  avatar.exe:shrineAdvice:9: "남의 금을 취하는 것은 쉽게 잊히지 않는 불의이다. 마땅한 몫만 취하라!
+"
+  avatar.exe:virtueQuestions:0: "그대의 모든 말을 모두가 믿을 수 있다면, 그대는 무엇을 지닌 것인가?"
+  avatar.exe:virtueQuestions:1: "남의 여정에 함께하도록 이끄는 자질은 무엇인가?"
+  avatar.exe:virtueQuestions:10: "그 어떤 위험 앞에서도 등 돌리지 않는 것은 무엇인가?"
+  avatar.exe:virtueQuestions:2: "위대한 행위가 필요할 때 응답하는 것은 무엇인가?"
+  avatar.exe:virtueQuestions:3: "군주와 농노에게 똑같이 적용되어야 하는 것은 무엇인가?"
+  avatar.exe:virtueQuestions:4: "자신을 다른 무엇보다 앞세우기를 꺼리는 것은 무엇인가?"
+  avatar.exe:virtueQuestions:5: "그 어떤 의무도 회피하지 않는 것은 무엇인가?"
+  avatar.exe:virtueQuestions:6: "참된 자아를 앎으로써 모든 것을 아는 것은 무엇인가?"
+  avatar.exe:virtueQuestions:7: "농노는 타고나지만 귀족은 애써 얻어야 하는 것은 무엇인가?"
+  avatar.exe:virtueQuestions:8: "다른 모든 것이 상상이라 해도, 이것만은 실재한다..."
+  avatar.exe:virtueQuestions:9: "높이 솟구치는 동시에 깊은 곳으로 떨어지는 것은 무엇인가?"
+  BRITAIN:0:health: "좋다네."
+  BRITAIN:0:job: "나는 사람들을
+위해 연주한다네."
+  BRITAIN:0:look: "매력적인 음유시인"
+  BRITAIN:0:name: "아이올로"
+  BRITAIN:0:no: "아쉽군."
+  BRITAIN:0:pronoun: "그"
+  BRITAIN:0:question: "내 음악이
+마음에 드는가?"
+  BRITAIN:0:response1: "나는 류트를 연주해
+사람들의
+좋은 마음을
+얻는다네."
+  BRITAIN:0:response2: "남을 잘
+대해주면
+그들도 똑같이
+할 이유가 생기지."
+  BRITAIN:0:topic1: "PLAY"
+  BRITAIN:0:topic2: "COMP"
+  BRITAIN:0:yes: "나는 그대와
+함께하고 싶네!"
+  BRITAIN:1:health: "아주 좋아요."
+  BRITAIN:1:job: "나는 아이들을 위해
+춤추고
+노래한다네."
+  BRITAIN:1:look: "매력적인
+광대"
+  BRITAIN:1:name: "그웨노"
+  BRITAIN:1:no: "아쉽네요."
+  BRITAIN:1:pronoun: "그녀"
+  BRITAIN:1:question: "어려운 이에게
+베푸시나요?"
+  BRITAIN:1:response1: "춤은 영혼에
+좋답니다."
+  BRITAIN:1:response2: "거지에게
+베푸는 것은
+자비를 보이는
+것이지요."
+  BRITAIN:1:topic1: "DANC"
+  BRITAIN:1:topic2: "BEGG"
+  BRITAIN:1:yes: "거지들은
+작은 기부에도
+감사해한답니다."
+  BRITAIN:10:health: "좋다네."
+  BRITAIN:10:job: "나는 아이들을
+돌본다네."
+  BRITAIN:10:look: "지친 목자"
+  BRITAIN:10:name: "샬리마"
+  BRITAIN:10:no: "아쉽군."
+  BRITAIN:10:pronoun: "그"
+  BRITAIN:10:question: "아이가
+있는가?"
+  BRITAIN:10:response1: "아이들을
+돌보려면
+상당한
+자비심이
+필요하다네!"
+  BRITAIN:10:response2: "지식이 정신을
+단련시키듯
+자비는
+영혼을
+강하게
+한다네!"
+  BRITAIN:10:topic1: "CHIL"
+  BRITAIN:10:topic2: "COMP"
+  BRITAIN:10:yes: "내 말뜻을
+알겠구먼!"
+  BRITAIN:11:health: "별로 좋지
+않다네."
+  BRITAIN:11:job: "나는 끔찍한
+비밀을 안다네!"
+  BRITAIN:11:look: "부상당한
+사람."
+  BRITAIN:11:name: "세바스찬"
+  BRITAIN:11:no: "오."
+  BRITAIN:11:pronoun: "그"
+  BRITAIN:11:question: "그것을 찾아
+없애겠는가?"
+  BRITAIN:11:response1: "몬데인의
+영향력이 아직
+세상에서
+사라지지
+않았다네!"
+  BRITAIN:11:response2: "유물이
+남아있어! 버커니어즈
+덴에서 들었지!"
+  BRITAIN:11:topic1: "SECR"
+  BRITAIN:11:topic2: "MOND"
+  BRITAIN:11:yes: "그럼 저기 술집에서
+해골에
+대해 물어보게!"
+  BRITAIN:12:health: "괜찮다네."
+  BRITAIN:12:job: "나는 줄리오를
+찾고 있다네."
+  BRITAIN:12:look: "드루이드."
+  BRITAIN:12:name: "샤페로"
+  BRITAIN:12:no: "아쉽군."
+  BRITAIN:12:pronoun: "그"
+  BRITAIN:12:question: "그대는 아바타의
+여정 중에
+있는가?"
+  BRITAIN:12:response1: "그는 자비의
+참된 본질을
+안다네."
+  BRITAIN:12:response2: "줄리오를 찾아
+자비에 대해
+물어보게!"
+  BRITAIN:12:topic1: "JULI"
+  BRITAIN:12:topic2: "COMP"
+  BRITAIN:12:yes: "다리 2개를
+동쪽으로 건너면
+자비의 신단이
+있네!"
+  BRITAIN:13:health: "근엄하다네."
+  BRITAIN:13:job: "나는 만물의
+참된 본질을
+찾는다네!"
+  BRITAIN:13:look: "근엄한
+음유시인."
+  BRITAIN:13:name: "줄리오"
+  BRITAIN:13:no: "그 어떤 인간도
+알 수 없지."
+  BRITAIN:13:pronoun: "그"
+  BRITAIN:13:question: "그대는 만물의
+참된 본질을
+아는가?"
+  BRITAIN:13:response1: "만물에는
+참된 본질이
+있다네!"
+  BRITAIN:13:response2: "자비는
+끝없는
+사랑에서
+비롯된다네!"
+  BRITAIN:13:topic1: "NATU"
+  BRITAIN:13:topic2: "COMP"
+  BRITAIN:13:yes: "그대는 거짓말쟁이에
+허풍쟁이로군."
+  BRITAIN:14:health: "나는 건강하다네."
+  BRITAIN:14:job: "나는 매긴시아에서
+탈출했다네!"
+  BRITAIN:14:look: "지혜로운
+목자."
+  BRITAIN:14:name: "멘토르"
+  BRITAIN:14:no: "오만은 진실도,
+사랑도, 용기도
+없이
+존재한다네!"
+  BRITAIN:14:pronoun: "그"
+  BRITAIN:14:question: "그대는
+오만한가?"
+  BRITAIN:14:response1: "매긴시아에서는
+오만이
+지나쳤다네!"
+  BRITAIN:14:response2: "그 도시는
+오만함 때문에
+데몬들에게
+파괴되었다네!"
+  BRITAIN:14:topic1: "MAGI"
+  BRITAIN:14:topic2: "PRID"
+  BRITAIN:14:yes: "그것은
+미덕이 아닐세!"
+  BRITAIN:15:health: "굶어
+죽을까 두렵다네!"
+  BRITAIN:15:job: "일이 없어
+이제 구걸한다네!"
+  BRITAIN:15:look: "가난한
+거지."
+  BRITAIN:15:name: "스프라이트"
+  BRITAIN:15:no: "나는 굶어
+죽을 걸세!"
+  BRITAIN:15:pronoun: "그녀"
+  BRITAIN:15:question: "나를
+도와주겠는가?"
+  BRITAIN:15:response1: "일주일째
+아무것도
+못 먹었다네!"
+  BRITAIN:15:response2: "제발! 도와주게!"
+  BRITAIN:15:topic1: "STAR"
+  BRITAIN:15:topic2: "BEG "
+  BRITAIN:15:yes: "답례로
+페퍼가 룬을
+안다는 걸
+말해주지!"
+  BRITAIN:2:health: "아주 행복해요."
+  BRITAIN:2:job: "노래하기"
+  BRITAIN:2:look: "어린아이"
+  BRITAIN:2:name: "아이"
+  BRITAIN:2:no: "안타깝네요."
+  BRITAIN:2:pronoun: "그 아이"
+  BRITAIN:2:question: "그 노래가
+마음에 드세요?"
+  BRITAIN:2:response1: "노래 가사는:
+호 에요 헤 험!"
+  BRITAIN:2:response2: "그건 이런 뜻이에요:
+모두에게
+사랑을!"
+  BRITAIN:2:topic1: "SING"
+  BRITAIN:2:topic2: "HO E"
+  BRITAIN:2:yes: "그럼 우리를 도와
+소문내 주세요!"
+  BRITAIN:3:health: "좋다네."
+  BRITAIN:3:job: "나는 다리를
+지킨다네."
+  BRITAIN:3:look: "경비병"
+  BRITAIN:3:name: "경비병"
+  BRITAIN:3:no: "그럼 다리
+건너편에는
+볼일이
+없구먼."
+  BRITAIN:3:pronoun: "그"
+  BRITAIN:3:question: "그들과 함께하고
+싶은가?"
+  BRITAIN:3:response1: "다리 건너편에서
+우리 백성들은
+춤추고
+노래한다네!"
+  BRITAIN:3:response2: "그렇지."
+  BRITAIN:3:topic1: "BRID"
+  BRITAIN:3:topic2: "GUAR"
+  BRITAIN:3:yes: "기억하게, 열린
+마음이
+지혜로 가는
+첫걸음일세!"
+  BRITAIN:4:health: "건강하다네."
+  BRITAIN:4:job: "나는 싸우는
+음유시인이라네."
+  BRITAIN:4:look: "매콤한 여인."
+  BRITAIN:4:name: "페퍼"
+  BRITAIN:4:no: "아쉽군, 내가
+도울 수
+있었을지도
+모르는데."
+  BRITAIN:4:pronoun: "그녀"
+  BRITAIN:4:question: "무언가를 찾고
+있는가?"
+  BRITAIN:4:response1: "음유시인은
+많은 걸 안다네."
+  BRITAIN:4:response2: "자비의 룬은
+이 마을 어딘가
+복도 끝에
+있다네."
+  BRITAIN:4:topic1: "BARD"
+  BRITAIN:4:topic2: "RUNE"
+  BRITAIN:4:yes: "그게 무엇인가?"
+  BRITAIN:5:health: "꽤 좋다네."
+  BRITAIN:5:job: "나는 마법 구슬의
+비밀을 찾고
+있다네."
+  BRITAIN:5:look: "노련한
+전사."
+  BRITAIN:5:name: "테벨"
+  BRITAIN:5:no: "서펀트 성에서
+그를 찾게,
+구슬에 대해
+알고 있으니!"
+  BRITAIN:5:pronoun: "그"
+  BRITAIN:5:question: "그를 본 적
+있는가?"
+  BRITAIN:5:response1: "외팔이 거지가
+그 비밀을
+안다네!"
+  BRITAIN:5:response2: "마법 구슬."
+  BRITAIN:5:topic1: "ORBS"
+  BRITAIN:5:topic2: "MAGI"
+  BRITAIN:5:yes: "오직 그만이
+구슬의 선물을
+안다네!"
+  BRITAIN:6:health: "그리고 럼주
+한 병..."
+  BRITAIN:6:job: "요호호...
+럼주
+한 병...
+힉..."
+  BRITAIN:6:look: "술 취한
+전사"
+  BRITAIN:6:name: "조"
+  BRITAIN:6:no: "아, 좀 되어보게!"
+  BRITAIN:6:pronoun: "그"
+  BRITAIN:6:question: "럼 좀 줄래?..."
+  BRITAIN:6:response1: "노란 보석은
+던전
+경멸에
+있다네..."
+  BRITAIN:6:response2: "럼주... 힉..."
+  BRITAIN:6:topic1: "STON"
+  BRITAIN:6:topic2: "RUM "
+  BRITAIN:6:yes: "고맙...
+내 친구 조가
+보석에 대해
+도와줄 수
+있어...힉..."
+  BRITAIN:7:health: "쉿"
+  BRITAIN:7:job: "쉿, 연주 중
+이라네!"
+  BRITAIN:7:look: "초록옷 입은
+음유시인"
+  BRITAIN:7:name: "크리켓"
+  BRITAIN:7:no: "경비병을
+부를 테다!"
+  BRITAIN:7:pronoun: "그"
+  BRITAIN:7:question: "이제 좀
+조용히 하겠나?"
+  BRITAIN:7:response1: "그래, 쉿!"
+  BRITAIN:7:response2: "자비의 신단
+진언은
+'무'라네!"
+  BRITAIN:7:topic1: "SHHH"
+  BRITAIN:7:topic2: "MANT"
+  BRITAIN:7:yes: "고맙네."
+  BRITAIN:8:health: "완전히
+회복됐다네."
+  BRITAIN:8:job: "물론 나는
+경비병일세!"
+  BRITAIN:8:look: "명랑한
+경비병."
+  BRITAIN:8:name: "경비병"
+  BRITAIN:8:no: "좋군."
+  BRITAIN:8:pronoun: "그"
+  BRITAIN:8:question: "그대는 악하지
+않은 생물을
+죽이는가?"
+  BRITAIN:8:response1: "우리 경비병들은
+자비심이
+많다네."
+  BRITAIN:8:response2: "우리는 항상
+말하지: 남의
+고난을 그대
+자신의 것처럼
+여기라고!"
+  BRITAIN:8:topic1: "GUAR"
+  BRITAIN:8:topic2: "COMP"
+  BRITAIN:8:yes: "그건 자비를
+보이는 게
+아니지!"
+  BRITAIN:9:health: "좋아요."
+  BRITAIN:9:job: "나는 자비를
+배우고 있어요."
+  BRITAIN:9:look: "어린아이"
+  BRITAIN:9:name: "아이"
+  BRITAIN:9:no: "크리켓에게
+물어보세요!"
+  BRITAIN:9:pronoun: "그"
+  BRITAIN:9:question: "자비의
+진언을
+아세요?"
+  BRITAIN:9:response1: "자신의 문제에
+대한 해답은
+흔히 남의 문제를
+푸는 데
+있답니다!"
+  BRITAIN:9:response2: "남을 돌볼 수
+없을 만큼
+자신만
+너무 아끼지
+마세요!"
+  BRITAIN:9:topic1: "LEAR"
+  BRITAIN:9:topic2: "COMP"
+  BRITAIN:9:yes: "좋아요."
+  COVE:0:health: "난 괜찮아요."
+  COVE:0:job: "나는 어비스에
+들어가는 법을
+안다네!"
+  COVE:0:look: "어린 소년."
+  COVE:0:name: "알렌"
+  COVE:0:no: "어비스에 대해선
+블리스풀에게
+물어보세요."
+  COVE:0:pronoun: "그"
+  COVE:0:question: "그런 배가
+있나요?"
+  COVE:0:response1: "어비스는
+오직 배로만
+다가갈 수
+있어요!"
+  COVE:0:response2: "배는 마법으로
+강화된
+선체가
+있어야 해요!"
+  COVE:0:topic1: "ABYS"
+  COVE:0:topic2: "SHIP"
+  COVE:0:yes: "어비스에 대해선
+블리스풀에게
+물어보세요."
+  COVE:1:health: "나는 잘 지낸다네."
+  COVE:1:job: "지혜의 숨은
+도시, 코브에
+오신 것을 환영하네."
+  COVE:1:look: "작은 드루이드."
+  COVE:1:name: "프론티스"
+  COVE:1:no: "우리 치유사들을
+찾아가게, 분명
+도와줄
+걸세!"
+  COVE:1:pronoun: "그"
+  COVE:1:question: "그대는
+건강한가?"
+  COVE:1:response1: "여기서 많은
+지혜와 평화를
+찾을 수
+있다네."
+  COVE:1:response2: "우리 신단에서
+평화를
+찾게."
+  COVE:1:topic1: "WISD"
+  COVE:1:topic2: "PEAC"
+  COVE:1:yes: "아주 좋군."
+  COVE:10:health: "나는 늙었지만
+강하다네!"
+  COVE:10:job: "나는 사랑을
+말한다네."
+  COVE:10:look: "현자."
+  COVE:10:name: "라빈드라나트
+타고르"
+  COVE:10:no: "그대는
+어리석군."
+  COVE:10:pronoun: "그"
+  COVE:10:question: "마음속에
+사랑을 지니고자
+하는가?"
+  COVE:10:response1: "사랑 속에서,
+삶의 모든
+모순은 녹아
+사라진다네."
+  COVE:10:response2: "그 안에
+사랑을
+지니게!"
+  COVE:10:topic1: "LOVE"
+  COVE:10:topic2: "HEAR"
+  COVE:10:yes: "그대는
+선한 영혼이군."
+  COVE:11:health: "나는 잘 지낸다네."
+  COVE:11:job: "나는 앉아서
+강을
+바라본다네."
+  COVE:11:look: "늙은 드루이드."
+  COVE:11:name: "자이르 수사"
+  COVE:11:no: "그렇지."
+  COVE:11:pronoun: "그"
+  COVE:11:question: "동의하는가?"
+  COVE:11:response1: "그것은
+끝없이
+흐른다네."
+  COVE:11:response2: "미덕의 세
+원칙을 상징하는
+성들의 왕들은
+각각 통행의
+말의 한
+음절씩만
+안다네!"
+  COVE:11:topic1: "RIVE"
+  COVE:11:topic2: "WORD"
+  COVE:11:yes: "좋아."
+  COVE:12:health: "아주 잘
+지낸다네."
+  COVE:12:job: "나는 코덱스에
+대해 안다네."
+  COVE:12:look: "날씬한 마법사."
+  COVE:12:name: "스펠바인드"
+  COVE:12:no: "A"
+  COVE:12:pronoun: "그녀"
+  COVE:12:question: "A"
+  COVE:12:response1: "미덕의 세
+원칙의 조합을
+알아야
+한다네!"
+  COVE:12:response2: "미덕의 세
+원칙의 조합은
+시간과 공간의
+척도와
+같다네!"
+  COVE:12:topic1: "CODE"
+  COVE:12:topic2: "COMB"
+  COVE:12:yes: "A"
+  COVE:13:health: "꽤 잘
+지낸다네."
+  COVE:13:job: "나는 코덱스의
+비밀인
+'하나'를
+연구한다네!"
+  COVE:13:look: "키 큰 마법사."
+  COVE:13:name: "샤먼"
+  COVE:13:no: "A"
+  COVE:13:pronoun: "그"
+  COVE:13:question: "A"
+  COVE:13:response1: "나는 코덱스를
+연구한다네!"
+  COVE:13:response2: "그 하나의
+순수 공리는
+변화하는
+조수보다
+끝없고, 밤과
+낮보다
+영원하다네!"
+  COVE:13:topic1: "STUD"
+  COVE:13:topic2: "CODE"
+  COVE:13:yes: "A"
+  COVE:14:health: "꽤 좋다네."
+  COVE:14:job: "나는 공리의
+열쇠를
+숙고한다네."
+  COVE:14:look: "아름다운
+마법사."
+  COVE:14:name: "참"
+  COVE:14:no: "우주의 진실,
+마음의 사랑,
+그리고 영혼의
+용기라네!"
+  COVE:14:pronoun: "그녀"
+  COVE:14:question: "그것들이
+무엇인지
+아는가?"
+  COVE:14:response1: "공리에
+대해."
+  COVE:14:response2: "그 1개의
+순수 공리는
+만물을
+아우른다네."
+  COVE:14:topic1: "KEY "
+  COVE:14:topic2: "AXIO"
+  COVE:14:yes: "좋아."
+  COVE:15:health: "좋다네."
+  COVE:15:job: "나는 공리를
+가르친다네!"
+  COVE:15:look: "지혜로운
+마법사."
+  COVE:15:name: "키르케"
+  COVE:15:no: "A"
+  COVE:15:pronoun: "그"
+  COVE:15:question: "A"
+  COVE:15:response1: "공리의 전체는
+그 모든 부분의
+합보다
+크다네!"
+  COVE:15:response2: "끝없는 사랑의
+척도, 모든
+장애물을
+마주할 무한한
+용기, 만물을
+아우르는
+진실!"
+  COVE:15:topic1: "AXIO"
+  COVE:15:topic2: "PART"
+  COVE:15:yes: "A"
+  COVE:2:health: "나는 잘 지낸다네."
+  COVE:2:job: "나는 은둔자라네."
+  COVE:2:look: "늙은 은둔자."
+  COVE:2:name: "슬로븐"
+  COVE:2:no: "그가 나타날 때까지
+여관에
+머물게!"
+  COVE:2:pronoun: "그"
+  COVE:2:question: "그를 본 적
+있는가?"
+  COVE:2:response1: "나는 사회에서
+물러났다네."
+  COVE:2:response2: "스카라 브레이
+여관에 출몰하는
+아이작의
+유령만이
+그대에게
+말해줄 수
+있다네."
+  COVE:2:topic1: "RECL"
+  COVE:2:topic2: "STON"
+  COVE:2:yes: "그에게
+물어보게!"
+  COVE:3:health: "아주 잘
+지낸다네."
+  COVE:3:job: "나는 마법의
+기술을
+연구한다네."
+  COVE:3:look: "키 큰 마법사."
+  COVE:3:name: "멘토리안"
+  COVE:3:no: "좋아."
+  COVE:3:pronoun: "그"
+  COVE:3:question: "그대는
+동의하지
+않는가?"
+  COVE:3:response1: "마법 속에도
+진실이
+있다네!"
+  COVE:3:response2: "그대가 앙크를
+지녔으니
+말해주지.
+게이트 주문에는
+재, 진주,
+맨드레이크
+뿌리가
+필요하다네!"
+  COVE:3:topic1: "ARTS"
+  COVE:3:topic2: "GATE"
+  COVE:3:yes: "그럼,
+물러가게!"
+  COVE:4:health: "밝다."
+  COVE:4:job: "나는 생각과
+공명한다."
+  COVE:4:look: "빛나는 앙크!"
+  COVE:4:name: "그 앙크"
+  COVE:4:no: "오."
+  COVE:4:pronoun: "그것"
+  COVE:4:question: "도움을
+구하는가?"
+  COVE:4:response1: "코덱스의
+방에 들어가려면."
+  COVE:4:response2: "아바타의 8부분을
+지니고, 3부분의
+열쇠와
+통행의 말,
+그리고 순수
+공리를
+알아야 한다!"
+  COVE:4:topic1: "CODE"
+  COVE:4:topic2: "CHAM"
+  COVE:4:yes: "그대의 생각은
+무엇인가?"
+  COVE:5:health: "나는 잘 지낸다네."
+  COVE:5:job: "나는 사랑을
+연주한다네."
+  COVE:5:look: "묘하게
+낯익은
+음유시인."
+  COVE:5:name: "폴"
+  COVE:5:no: "아쉽군."
+  COVE:5:pronoun: "그"
+  COVE:5:question: "들어
+보겠는가?"
+  COVE:5:response1: "우리 사랑에
+초를 밝히니,
+사랑 속에서
+문제들이
+사라진다네."
+  COVE:5:response2: "하지만 결국
+우리는 곧 알게
+되지, 하나와
+하나가 우리가
+바라던
+전부라는 걸!"
+  COVE:5:topic1: "LOVE"
+  COVE:5:topic2: "PROB"
+  COVE:5:yes: "사랑에
+대해."
+  COVE:6:health: "좋아요."
+  COVE:6:job: "나는 아이들을
+노래한다네."
+  COVE:6:look: "가수."
+  COVE:6:name: "린다"
+  COVE:6:no: "흠."
+  COVE:6:pronoun: "그녀"
+  COVE:6:question: "도와
+주겠어요?"
+  COVE:6:response1: "온 세상에서,
+작은 아이들이
+세상에
+태어난다네."
+  COVE:6:response2: "여정이 끝날
+때까지 우리가
+줄 수 있는
+모든 걸 주어야
+해, 그래야
+할 일이
+끝나지!"
+  COVE:6:topic1: "CHIL"
+  COVE:6:topic2: "WORL"
+  COVE:6:yes: "그들에게
+기쁨의 노래를
+가르쳐주세요!"
+  COVE:7:health: "좋다네."
+  COVE:7:job: "나는 마법을
+쓴다네."
+  COVE:7:look: "신비로운
+마법사."
+  COVE:7:name: "멀린"
+  COVE:7:no: "아쉽군."
+  COVE:7:pronoun: "그"
+  COVE:7:question: "마법을
+공부하는가?"
+  COVE:7:response1: "검은 보석은
+문게이트에
+갇혀있다네!"
+  COVE:7:response2: "두 달이 모두
+어두워지는
+게이트가 나타날
+곳에 서게.
+달이 어두워질 때
+찾아보게!"
+  COVE:7:topic1: "STON"
+  COVE:7:topic2: "GATE"
+  COVE:7:yes: "그대의 공부에
+행운이
+있기를!"
+  COVE:8:health: "나는 잘 지낸다네."
+  COVE:8:job: "나는 그 관계를
+가르친다네."
+  COVE:8:look: "늙은 드루이드."
+  COVE:8:name: "드라코니안"
+  COVE:8:no: "마을과 성들을
+배우게!"
+  COVE:8:pronoun: "그"
+  COVE:8:question: "이걸
+알았는가?"
+  COVE:8:response1: "진실, 사랑,
+용기의
+조합은 여덟
+가지가
+있다네. 여덟
+미덕 각각이
+그 조합
+중 하나라네!"
+  COVE:8:response2: "A"
+  COVE:8:topic1: "RELA"
+  COVE:8:topic2: "A   "
+  COVE:8:yes: "아주 좋아!"
+  COVE:9:health: "나는 잘
+지내고 있어요."
+  COVE:9:job: "나는 코덱스에
+대해 많이
+안다네!"
+  COVE:9:look: "위엄있는
+해마!"
+  COVE:9:name: "블리스풀"
+  COVE:9:no: "A"
+  COVE:9:pronoun: "그녀"
+  COVE:9:question: "A"
+  COVE:9:response1: "신단의 앙크가
+코덱스의
+방에 들어가는
+법을
+안다네!"
+  COVE:9:response2: "정직, 자비,
+용맹의
+신단에서
+3주기 동안
+명상하면
+들어가는 법을
+알게 된다네!"
+  COVE:9:topic1: "CODE"
+  COVE:9:topic2: "ABYS"
+  COVE:9:yes: "A"
+  DEN:0:health: "그게 너랑
+무슨 상관이냐,
+이 쓰레기야!"
+  DEN:0:job: "우리는 다리
+슬라임을
+지킨다네!"
+  DEN:0:look: "험상궂은
+경비병."
+  DEN:0:name: "루퍼스"
+  DEN:0:no: "그럼 꺼져!"
+  DEN:0:pronoun: "그"
+  DEN:0:question: "네놈이 잘난
+체하는
+놈이냐?"
+  DEN:0:response1: "이 다리 말이다,
+이 멍청한
+놈아!"
+  DEN:0:response2: "A"
+  DEN:0:topic1: "BRID"
+  DEN:0:topic2: "A   "
+  DEN:0:yes: "그럼 그거
+갖다 버려라!"
+  DEN:1:health: "아주 배고파!"
+  DEN:1:job: "나는
+경비병이라네."
+  DEN:1:look: "키 크고
+근육질에
+인상적인
+경비병."
+  DEN:1:name: "랭크브레스"
+  DEN:1:no: "그럼 도망치는
+게 좋을
+걸!!!"
+  DEN:1:pronoun: "그"
+  DEN:1:question: "나를 먹여
+주려고 왔나?"
+  DEN:1:response1: "나는 도시를
+지킨다네!"
+  DEN:1:response2: "그래, 나는
+정말
+배고파!"
+  DEN:1:topic1: "GUAR"
+  DEN:1:topic2: "HUNG"
+  DEN:1:yes: "감사하네."
+  DEN:10:health: "잘 지내지,
+냄새도
+나고."
+  DEN:10:job: "나는 암시장
+물건을
+밀수한다네."
+  DEN:10:look: "못생긴 오크!"
+  DEN:10:name: "보리스"
+  DEN:10:no: "아 그래,
+다음에
+하지."
+  DEN:10:pronoun: "그것"
+  DEN:10:question: "그런 물건이
+필요한가?"
+  DEN:10:response1: "마법 열쇠,
+마법 보석,
+그런
+것들이지."
+  DEN:10:response2: "A"
+  DEN:10:topic1: "ITEM"
+  DEN:10:topic2: "A   "
+  DEN:10:yes: "방금 길드
+상점에
+새 물건을
+공급했지!"
+  DEN:11:health: "그럭저럭."
+  DEN:11:job: "그대에게
+경고해야겠네!"
+  DEN:11:look: "우뚝 솟은
+마법사."
+  DEN:11:name: "이그냅"
+  DEN:11:no: "현명한
+결정이군!"
+  DEN:11:pronoun: "그"
+  DEN:11:question: "계속
+가겠는가?"
+  DEN:11:response1: "저 숲으로
+발을 들이면
+그대의 파멸이
+확정될
+걸세!"
+  DEN:11:response2: "저 안에는
+어둠의 편이
+있으니,
+들어가지
+말게!"
+  DEN:11:topic1: "WARN"
+  DEN:11:topic2: "DOOM"
+  DEN:11:yes: "악이 그대를
+집어삼킬
+걸세!"
+  DEN:12:health: "아주 좋다네
+친구!"
+  DEN:12:job: "내 선원들을 위해
+갑옷을
+사고 있다네!"
+  DEN:12:look: "초록 수염을
+기른 키 큰
+해적!"
+  DEN:12:name: "그린 비어드"
+  DEN:12:no: "나도 알았으면
+좋겠네!"
+  DEN:12:pronoun: "그"
+  DEN:12:question: "신비한
+갑옷을
+어디서 사는지
+아는가?"
+  DEN:12:response1: "마법 판금을
+좀 구했으면
+하네!"
+  DEN:12:response2: "오, 그렇군."
+  DEN:12:topic1: "ARMO"
+  DEN:12:topic2: "NOWH"
+  DEN:12:yes: "어디서?"
+  DEN:13:health: "아주 좋아!"
+  DEN:13:job: "나는 와인을
+판다네!"
+  DEN:13:look: "통통한 상인"
+  DEN:13:name: "마르소르"
+  DEN:13:no: "뭘 놓치는지
+모르는군!"
+  DEN:13:pronoun: "그"
+  DEN:13:question: "와인을
+좋아하는가?"
+  DEN:13:response1: "좋은 빈티지가
+좀 있다네."
+  DEN:13:response2: "나는 내
+포도밭을
+소유하고 있지,
+여기서 북동쪽
+섬에
+있다네!"
+  DEN:13:topic1: "WINE"
+  DEN:13:topic2: "VINT"
+  DEN:13:yes: "아, 그럼
+나와 한 잔
+하세!"
+  DEN:14:health: "아주 좋아,
+고맙네."
+  DEN:14:job: "나는 땜장이가
+본업이라네."
+  DEN:14:look: "유쾌한
+노인."
+  DEN:14:name: "댄첵"
+  DEN:14:no: "정말 하나
+장만해야
+하는데!"
+  DEN:14:pronoun: "그"
+  DEN:14:question: "배를
+가지고
+있는가!"
+  DEN:14:response1: "나는 발사체
+기계를
+만든다네."
+  DEN:14:response2: "주로
+배 대포지!"
+  DEN:14:topic1: "TINK"
+  DEN:14:topic2: "MACH"
+  DEN:14:yes: "아마 내가
+그 대포를
+만들었을
+거야!"
+  DEN:15:health: "지금은
+괜찮다네."
+  DEN:15:job: "나는 숨어
+있다네."
+  DEN:15:look: "움츠린 남자."
+  DEN:15:name: "스니플렛"
+  DEN:15:no: "오, 안 돼."
+  DEN:15:pronoun: "그"
+  DEN:15:question: "오직 선의
+힘을 돕는
+데만 쓰겠다고
+약속하겠는가?"
+  DEN:15:response1: "나는 남들이
+원하는 걸
+알고
+있다네!"
+  DEN:15:response2: "나... 나는..."
+  DEN:15:topic1: "HIDE"
+  DEN:15:topic2: "SOME"
+  DEN:15:yes: "도난당한 그
+공기보다
+가벼운 장치는
+히스로스
+던전 근처에
+있다네!"
+  DEN:2:health: "짭짤하지."
+  DEN:2:job: "나는
+선원이라네!"
+  DEN:2:look: "지저분한 선원"
+  DEN:2:name: "뱃사람"
+  DEN:2:no: "오."
+  DEN:2:pronoun: "그"
+  DEN:2:question: "나머지는?"
+  DEN:2:response1: "오, 선원의
+삶이 바로
+내 삶이지,"
+  DEN:2:response2: "넘실대는
+바다를 항해할
+때는!"
+  DEN:2:topic1: "SAIL"
+  DEN:2:topic2: "LIFE"
+  DEN:2:yes: "그리고 나는
+절대, 절대,
+절대 날씨
+걱정을 안 해,
+날씨가 나한테
+해준 게
+하나도
+없거든!"
+  DEN:3:health: "뭐 그럭저럭!"
+  DEN:3:job: "나는 해적이라네,
+친구!"
+  DEN:3:look: "키 큰 선원."
+  DEN:3:name: "실버 존"
+  DEN:3:no: "문제 생기기
+전에
+여기서
+떠나는 게
+좋을 걸!"
+  DEN:3:pronoun: "그"
+  DEN:3:question: "그대는
+해적인가?"
+  DEN:3:response1: "우리는 브리타니아
+해안을
+습격한다네,
+재미있지!"
+  DEN:3:response2: "약탈하고
+불태우지!"
+  DEN:3:topic1: "PIRA"
+  DEN:3:topic2: "RAID"
+  DEN:3:yes: "좋아 친구!"
+  DEN:4:health: "필요한 만큼
+괜찮지!"
+  DEN:4:job: "그게 너랑
+무슨 상관이냐?"
+  DEN:4:look: "날렵한 도둑."
+  DEN:4:name: "슬라이샘"
+  DEN:4:no: "그럴 줄
+알았지"
+  DEN:4:pronoun: "그"
+  DEN:4:question: "그대는
+도둑인가?"
+  DEN:4:response1: "그래, 그리고
+영리하기도
+하지."
+  DEN:4:response2: "질문이 너무
+많군!"
+  DEN:4:topic1: "THIE"
+  DEN:4:topic2: "CLEV"
+  DEN:4:yes: "오, 조심하는
+게 좋겠군!"
+  DEN:5:health: "좋아."
+  DEN:5:job: "나는
+여행한다네."
+  DEN:5:look: "근엄한 레인저"
+  DEN:5:name: "라그나르"
+  DEN:5:no: "그럼 꺼지게."
+  DEN:5:pronoun: "그"
+  DEN:5:question: "정보를
+찾으러
+왔는가?"
+  DEN:5:response1: "브리타니아의
+땅들."
+  DEN:5:response2: "명심하게,
+그 해골을
+파괴하는 것
+외에는 절대
+쓰지 말게,
+그렇지 않으면
+그대의 미덕을
+전부 잃게
+될 걸세!"
+  DEN:5:topic1: "TRAV"
+  DEN:5:topic2: "SKUL"
+  DEN:5:yes: "무엇에
+대해?"
+  DEN:6:health: "나는 잘
+지낸다네."
+  DEN:6:job: "나는
+마법사라네"
+  DEN:6:look: "요염한 마법사."
+  DEN:6:name: "시아나"
+  DEN:6:no: "아"
+  DEN:6:pronoun: "그녀"
+  DEN:6:question: "친애하는 벗이여,
+도와줄까요?"
+  DEN:6:response1: "수면 주문은
+어떨까요...
+자라...
+자라...."
+  DEN:6:response2: "수면 주문은
+비단 한
+조각만
+필요하답니다!
+자라...
+자라...
+자라..."
+  DEN:6:topic1: "MAGI"
+  DEN:6:topic2: "SLEE"
+  DEN:6:yes: "그대의
+마법으로는
+어떨까요?"
+  DEN:7:health: "아주
+좋다네!"
+  DEN:7:job: "분부만
+내리시게!"
+  DEN:7:look: "교활한 도둑!"
+  DEN:7:name: "제레미 제임스
+서를록"
+  DEN:7:no: "도와줄
+수가 없다네."
+  DEN:7:pronoun: "그"
+  DEN:7:question: "특별한
+던전을
+찾는가?"
+  DEN:7:response1: "정보는
+어떤가?"
+  DEN:7:response2: "히스로스 던전은
+오직 대성
+안의 비밀
+입구로만
+갈 수
+있다네."
+  DEN:7:topic1: "SERV"
+  DEN:7:topic2: "HYTH"
+  DEN:7:yes: "어떤 것을?"
+  DEN:8:health: "참으로
+어둡군."
+  DEN:8:job: "나는 흑마법을
+쓴다네!"
+  DEN:8:look: "온통 검은
+옷을 입은
+마법사."
+  DEN:8:name: "스타라이트"
+  DEN:8:no: "아쉽군."
+  DEN:8:pronoun: "그"
+  DEN:8:question: "그대는?"
+  DEN:8:response1: "나는 강력한
+마법 화살
+주문을
+부린다네."
+  DEN:8:response2: "흑진주 하나와
+유황재
+하나를
+시도해보게!"
+  DEN:8:topic1: "MAGI"
+  DEN:8:topic2: "MIX "
+  DEN:8:yes: "내 재료
+혼합법을
+시도해보게!"
+  DEN:9:health: "치워버려!"
+  DEN:9:job: "아, 꺼져!"
+  DEN:9:look: "뚱뚱한
+트롤."
+  DEN:9:name: "브리간트"
+  DEN:9:no: "치우라고
+했잖아!"
+  DEN:9:pronoun: "그것"
+  DEN:9:question: "내 말
+들었나?"
+  DEN:9:response1: "네놈 얼굴이나!"
+  DEN:9:response2: "A"
+  DEN:9:topic1: "IT  "
+  DEN:9:topic2: "A   "
+  DEN:9:yes: "그럼 해!"
+  EMPATH:0:health: "아주 좋다네."
+  EMPATH:0:job: "나는 이 지방을
+다스린다네."
+  EMPATH:0:look: "위엄있는 남작"
+  EMPATH:0:name: "로버트 경"
+  EMPATH:0:no: "다음에
+하지."
+  EMPATH:0:pronoun: "그"
+  EMPATH:0:question: "지금 그것을
+알고 싶은가?"
+  EMPATH:0:response1: "마시 부인이
+더 말해줄
+수 있을
+걸세!"
+  EMPATH:0:response2: "나는 세 음절
+중 하나만
+안다네."
+  EMPATH:0:topic1: "PROV"
+  EMPATH:0:topic2: "WORD"
+  EMPATH:0:yes: "그것은 '아모'라네,
+이제 다른
+부분들을
+찾아보게!"
+  EMPATH:1:health: "좋아요."
+  EMPATH:1:job: "나는 영주님과
+함께
+다스린다네."
+  EMPATH:1:look: "매력적인 여인"
+  EMPATH:1:name: "마시 부인"
+  EMPATH:1:no: "그럼 찾지
+못할 거예요!"
+  EMPATH:1:pronoun: "그녀"
+  EMPATH:1:question: "사랑을
+찾고
+있나요?"
+  EMPATH:1:response1: "이 지방."
+  EMPATH:1:response2: "우리 백성은
+사랑을 삶의
+방식으로
+믿고 최대한
+그렇게
+산답니다!"
+  EMPATH:1:topic1: "RULE"
+  EMPATH:1:topic2: "PROV"
+  EMPATH:1:yes: "그럼 찾기를!"
+  EMPATH:10:health: "좋다네."
+  EMPATH:10:job: "나는 사랑과
+정의를
+숙고한다네."
+  EMPATH:10:look: "생각에 잠긴
+드루이드."
+  EMPATH:10:name: "데어드레"
+  EMPATH:10:no: "그렇군."
+  EMPATH:10:pronoun: "그녀"
+  EMPATH:10:question: "그대는?"
+  EMPATH:10:response1: "셋이 여덟을
+이룰 때, 사랑으로
+다스려진
+진실이
+정의가
+된다네!"
+  EMPATH:10:response2: "정의는 여덟
+아바타 미덕
+중 하나이며
+진실과
+사랑에서
+비롯된다네."
+  EMPATH:10:topic1: "LOVE"
+  EMPATH:10:topic2: "JUST"
+  EMPATH:10:yes: "아주 좋다네."
+  EMPATH:11:health: "좋다네"
+  EMPATH:11:job: "나는 희생 속
+사랑의
+역할을
+생각하고
+있다네."
+  EMPATH:11:look: "건장한
+땜장이."
+  EMPATH:11:name: "토마스"
+  EMPATH:11:no: "아쉽군."
+  EMPATH:11:pronoun: "그"
+  EMPATH:11:question: "그대
+자신은?"
+  EMPATH:11:response1: "타인에 대한
+사랑과
+죽음마저
+마주할 용기가
+자기희생이라네."
+  EMPATH:11:response2: "희생은 사랑의
+동기와
+용기의
+능력 위에
+세워진다네."
+  EMPATH:11:topic1: "LOVE"
+  EMPATH:11:topic2: "SACR"
+  EMPATH:11:yes: "좋다네."
+  EMPATH:12:health: "아주
+좋다네."
+  EMPATH:12:job: "나는 영적인
+길을
+따른다네."
+  EMPATH:12:look: "근엄한
+레인저."
+  EMPATH:12:name: "라스트로"
+  EMPATH:12:no: "참 슬프군."
+  EMPATH:12:pronoun: "그"
+  EMPATH:12:question: "그리고
+그대는?"
+  EMPATH:12:response1: "나의 영성은
+종교가 아니라,
+내 내면을
+알고 향상시키려는
+탐구라네."
+  EMPATH:12:response2: "나의 존재는
+나 자신의
+진실, 사랑,
+용기에
+기반한다네."
+  EMPATH:12:topic1: "SPIR"
+  EMPATH:12:topic2: "BEIN"
+  EMPATH:12:yes: "좋다네."
+  EMPATH:13:health: "별로
+좋지 않다네."
+  EMPATH:13:job: "나는 구원을
+찾는다네"
+  EMPATH:13:look: "중얼거리는
+거지."
+  EMPATH:13:name: "험록"
+  EMPATH:13:no: "하지만 나는
+정말
+절박하다네!"
+  EMPATH:13:pronoun: "그"
+  EMPATH:13:question: "돈을 좀
+주겠는가?"
+  EMPATH:13:response1: "그...앙크가...
+내게
+말했다네!"
+  EMPATH:13:response2: "나는 그저
+가난한 궁핍한
+거지일세, 아무것도
+없다네!"
+  EMPATH:13:topic1: "MUMB"
+  EMPATH:13:topic2: "SALV"
+  EMPATH:13:yes: "정말
+감사할
+걸세...."
+  EMPATH:14:health: "방금
+완전히
+회복됐다네!"
+  EMPATH:14:job: "나는 여정을
+해결한다네"
+  EMPATH:14:look: "대담한 성기사."
+  EMPATH:14:name: "말코르"
+  EMPATH:14:no: "오."
+  EMPATH:14:pronoun: "그"
+  EMPATH:14:question: "그대는
+여정 중인가?"
+  EMPATH:14:response1: "내 마지막 여정은
+스피릿우드
+근처였다네."
+  EMPATH:14:response2: "은나팔은
+스피릿우드
+끝자락의
+작은 섬에
+묻혀
+있다고들
+한다네."
+  EMPATH:14:topic1: "QUES"
+  EMPATH:14:topic2: "HORN"
+  EMPATH:14:yes: "그대에게
+행운이
+있기를!"
+  EMPATH:15:health: "나는 늙고
+허약해지고
+있다네."
+  EMPATH:15:job: "나는 큰
+지혜를
+지녔다네."
+  EMPATH:15:look: "지혜로운
+드루이드."
+  EMPATH:15:name: "안토스 수사"
+  EMPATH:15:no: "우리 신단에서
+사랑에 대해
+명상하게."
+  EMPATH:15:pronoun: "그"
+  EMPATH:15:question: "그것을 어디서
+찾을지
+아는가?"
+  EMPATH:15:response1: "내게 무엇을
+묻고
+싶은가?"
+  EMPATH:15:response2: "그대는 어비스에
+들어가려면
+사랑의 초가
+필요하다네."
+  EMPATH:15:topic1: "WISD"
+  EMPATH:15:topic2: "CAND"
+  EMPATH:15:yes: "아주 좋군."
+  EMPATH:2:health: "과로했어요!"
+  EMPATH:2:job: "나는 시녀랍니다."
+  EMPATH:2:look: "사랑스러운 여인"
+  EMPATH:2:name: "수잔나"
+  EMPATH:2:no: "나가셔야
+해요!"
+  EMPATH:2:pronoun: "그녀"
+  EMPATH:2:question: "여기 들어와도
+되나요?"
+  EMPATH:2:response1: "나는 마시님을
+모신답니다."
+  EMPATH:2:response2: "말코르라는
+성기사가
+있어요.
+그가 은나팔로
+안내해줄
+수 있을
+거예요!"
+  EMPATH:2:topic1: "LADY"
+  EMPATH:2:topic2: "HORN"
+  EMPATH:2:yes: "아닐걸요!
+나가셔야
+해요!"
+  EMPATH:3:health: "나는 존재한다."
+  EMPATH:3:job: "나는 생각과
+공명한다."
+  EMPATH:3:look: "앙크"
+  EMPATH:3:name: "생명."
+  EMPATH:3:no: "비밀 통로
+너머의
+음유시인에게
+물어보라!"
+  EMPATH:3:pronoun: "그것"
+  EMPATH:3:question: "그대는
+그것을
+가졌는가?"
+  EMPATH:3:response1: "그대의 생각은
+무엇인가?"
+  EMPATH:3:response2: "사랑의 초를
+구하라, 그것과
+다른 두
+부분이 있어야만
+어비스에
+들어갈 수
+있다!"
+  EMPATH:3:topic1: "RESO"
+  EMPATH:3:topic2: "LOVE"
+  EMPATH:3:yes: "좋다."
+  EMPATH:4:health: "좋아요."
+  EMPATH:4:job: "나는 통로를
+지킨다네."
+  EMPATH:4:look: "경비병"
+  EMPATH:4:name: "통로 경비병"
+  EMPATH:4:no: "거기서 3부분
+열쇠를
+얻는데, 코덱스의
+방에 들어가는 데
+필요하답니다!"
+  EMPATH:4:pronoun: "그녀"
+  EMPATH:4:question: "제단들을
+풀었나요?"
+  EMPATH:4:response1: "위험은
+없어요."
+  EMPATH:4:response2: "던전 제단실에
+비하면
+그렇죠!"
+  EMPATH:4:topic1: "PASS"
+  EMPATH:4:topic2: "DANG"
+  EMPATH:4:yes: "좋아요."
+  EMPATH:5:health: "최상이라네."
+  EMPATH:5:job: "문 경비병"
+  EMPATH:5:look: "경비병"
+  EMPATH:5:name: "문 경비병"
+  EMPATH:5:no: "수도원 안의
+작은 신단을
+찾아가게!"
+  EMPATH:5:pronoun: "그"
+  EMPATH:5:question: "사랑으로
+충만한가?"
+  EMPATH:5:response1: "수도원으로."
+  EMPATH:5:response2: "여기, 참나무
+숲에서 많은
+이가 평화와
+사랑의 의미를
+찾는다네!"
+  EMPATH:5:topic1: "GATE"
+  EMPATH:5:topic2: "ABBE"
+  EMPATH:5:yes: "그럼 여기
+있을 필요
+없네!"
+  EMPATH:6:health: "꽤 좋다네."
+  EMPATH:6:job: "나는 음유시인,
+노래를
+부른다네."
+  EMPATH:6:look: "류트를 연주하는
+젊은
+음유시인."
+  EMPATH:6:name: "데릭 음유시인"
+  EMPATH:6:no: "아쉽군,
+새 곡이었는데."
+  EMPATH:6:pronoun: "그"
+  EMPATH:6:question: "이 곡이
+마음에
+드는가?"
+  EMPATH:6:response1: "오, 모든
+종류지."
+  EMPATH:6:response2: "사랑의 초는
+락 호수
+너머 숨겨진
+비밀 장소에서
+찾을 수
+있다네!"
+  EMPATH:6:topic1: "SONG"
+  EMPATH:6:topic2: "CAND"
+  EMPATH:6:yes: "고맙네,
+방금
+지었지!"
+  EMPATH:7:health: "아주 좋아요,
+고마워요!"
+  EMPATH:7:job: "수도원에
+온 걸
+환영하네!"
+  EMPATH:7:look: "작지만 위엄있는
+아이."
+  EMPATH:7:name: "친업"
+  EMPATH:7:no: "그럼 참나무
+숲을."
+  EMPATH:7:pronoun: "그"
+  EMPATH:7:question: "사랑을 찾으러
+왔나요?"
+  EMPATH:7:response1: "참나무 숲."
+  EMPATH:7:response2: "거기서 네
+직업군이
+진실을
+찾는다네!"
+  EMPATH:7:topic1: "GROV"
+  EMPATH:7:topic2: "OAK "
+  EMPATH:7:yes: "그럼 참나무
+숲을!"
+  EMPATH:8:health: "좋다네."
+  EMPATH:8:job: "나는 숲에
+들어오는
+이들을
+상담한다네."
+  EMPATH:8:look: "키 큰 여인."
+  EMPATH:8:name: "다이앤"
+  EMPATH:8:no: "사랑을 위해
+힘쓰게!"
+  EMPATH:8:pronoun: "그녀"
+  EMPATH:8:question: "그대가 가장
+사랑이
+넘치는
+사람인가?"
+  EMPATH:8:response1: "여기서 그대는
+사랑에 대한
+통찰을 찾을
+수 있다네,
+그대 자신
+안에서든
+이 숲의
+다른 이들
+안에서든."
+  EMPATH:8:response2: "다른 이들에게
+물어보게."
+  EMPATH:8:topic1: "COUN"
+  EMPATH:8:topic2: "LOVE"
+  EMPATH:8:yes: "의심스럽군!"
+  EMPATH:9:health: "좋다네."
+  EMPATH:9:job: "나는 사랑과
+자비를
+연관 짓는다네."
+  EMPATH:9:look: "근엄한
+음유시인."
+  EMPATH:9:name: "벤자민"
+  EMPATH:9:no: "아쉽군..."
+  EMPATH:9:pronoun: "그"
+  EMPATH:9:question: "그대는
+잘 지내는가?"
+  EMPATH:9:response1: "셋이 여덟
+가지로
+결합할 때,
+사랑 홀로가
+자비라네."
+  EMPATH:9:response2: "여덟 아바타
+속성 중
+자비는
+사랑 홀로
+비롯된다네."
+  EMPATH:9:topic1: "LOVE"
+  EMPATH:9:topic2: "COMP"
+  EMPATH:9:yes: "아주 좋군."
+  JHELOM:0:health: "나는 건강하고
+강하다네!"
+  JHELOM:0:job: "나는 전투를
+이끈다네!"
+  JHELOM:0:look: "195cm의
+위대한 전사."
+  JHELOM:0:name: "제프리"
+  JHELOM:0:no: "전투에서
+도망치는 건
+비겁함을
+보이는
+거지!"
+  JHELOM:0:pronoun: "그"
+  JHELOM:0:question: "그대는
+용맹한가!"
+  JHELOM:0:response1: "위대한 전사는
+용맹한
+전사라네!"
+  JHELOM:0:response2: "나는 다시
+전투에서
+싸우고
+싶다네!"
+  JHELOM:0:topic1: "WARR"
+  JHELOM:0:topic2: "BATT"
+  JHELOM:0:yes: "언젠가
+그대와
+함께할
+수도!"
+  JHELOM:1:health: "뛰어나다네!"
+  JHELOM:1:job: "나는 로드
+브리티시를 위해
+싸운다네!"
+  JHELOM:1:look: "신비로운
+전사."
+  JHELOM:1:name: "로버트 경"
+  JHELOM:1:no: "그대는
+겁쟁이로군!"
+  JHELOM:1:pronoun: "그"
+  JHELOM:1:question: "그대는
+용맹한
+전사인가?"
+  JHELOM:1:response1: "전사가 되려면
+오래도록
+치열하게
+싸워야
+하네."
+  JHELOM:1:response2: "전투는
+적으면서도
+너무 많지!"
+  JHELOM:1:topic1: "WARR"
+  JHELOM:1:topic2: "BATT"
+  JHELOM:1:yes: "그대는
+룬을 받을
+자격이 있네,
+노스트로에게
+물어보게!"
+  JHELOM:10:health: "죽음에
+가깝다네!"
+  JHELOM:10:job: "나는 이 통로들을
+지었는데
+그들이 나를
+가둬버렸다네!"
+  JHELOM:10:look: "쇠약해지는
+영혼"
+  JHELOM:10:name: "노스트로"
+  JHELOM:10:no: "그대는
+비열한 놈이군!
+그래도
+따라가겠네!"
+  JHELOM:10:pronoun: "그"
+  JHELOM:10:question: "나를
+이끌어
+내주겠는가?"
+  JHELOM:10:response1: "이 통로는
+도시를
+둘러
+흐른다네."
+  JHELOM:10:response2: "룬은 탑
+안에
+묻혀
+있다네!"
+  JHELOM:10:topic1: "PASS"
+  JHELOM:10:topic2: "RUNE"
+  JHELOM:10:yes: "나는
+구원받았네!"
+  JHELOM:11:health: "꽤 좋다네."
+  JHELOM:11:job: "나는 내면의
+빛을
+찾는다네!"
+  JHELOM:11:look: "먼 곳을 바라보는
+레인저."
+  JHELOM:11:name: "루크"
+  JHELOM:11:no: "영적인
+도시라네!"
+  JHELOM:11:pronoun: "그"
+  JHELOM:11:question: "스카라
+브레이에
+가봤는가?"
+  JHELOM:11:response1: "나는 스카라
+브레이에서 와서
+유로 가는
+길이라네."
+  JHELOM:11:response2: "정의의
+미덕에
+기반한
+도시라네!"
+  JHELOM:11:topic1: "LIGH"
+  JHELOM:11:topic2: "YEW "
+  JHELOM:11:yes: "훌륭한
+도시지!"
+  JHELOM:12:health: "좋다네!"
+  JHELOM:12:job: "나는
+관리인이라네."
+  JHELOM:12:look: "관리인."
+  JHELOM:12:name: "맥스"
+  JHELOM:12:no: "오, 나를
+걱정시켰군!"
+  JHELOM:12:pronoun: "그"
+  JHELOM:12:question: "방에
+무슨 문제라도
+있나?"
+  JHELOM:12:response1: "나는 방을
+청소한다네."
+  JHELOM:12:response2: "끝쪽에
+이상한 방이
+있다네. 사람들이
+종종
+사라지지."
+  JHELOM:12:topic1: "HOUS"
+  JHELOM:12:topic2: "ROOM"
+  JHELOM:12:yes: "정말 미안하네,
+바로
+고치겠네!"
+  JHELOM:13:health: "좋아."
+  JHELOM:13:job: "나는 보석을
+찾는다네"
+  JHELOM:13:look: "이상한 사람"
+  JHELOM:13:name: "X"
+  JHELOM:13:no: "그럼 열쇠의
+세 번째
+부분을
+얻으려면
+한 제단실의
+붉은 보석이
+필요할
+걸세!"
+  JHELOM:13:pronoun: "그"
+  JHELOM:13:question: "그대는
+아바타인가?"
+  JHELOM:13:response1: "붉은 보석."
+  JHELOM:13:response2: "붉은색은
+아바타의
+미덕인
+용맹을
+뜻한다네!"
+  JHELOM:13:topic1: "STON"
+  JHELOM:13:topic2: "RED "
+  JHELOM:13:yes: "와우!"
+  JHELOM:14:health: "가벼운
+부상뿐일세!"
+  JHELOM:14:job: "나는 전투를
+한다네!"
+  JHELOM:14:look: "용맹한
+전사."
+  JHELOM:14:name: "슬라이스"
+  JHELOM:14:no: "겁쟁이."
+  JHELOM:14:pronoun: "그"
+  JHELOM:14:question: "그대는
+용맹한가?"
+  JHELOM:14:response1: "참된 용맹은
+무력이 아니라
+의지의 힘에서
+드러난다네!"
+  JHELOM:14:response2: "나는 전투에서
+내 용맹을
+보인다네."
+  JHELOM:14:topic1: "BATT"
+  JHELOM:14:topic2: "VALO"
+  JHELOM:14:yes: "그럼 절박한
+상황이
+아니고서는
+절대
+도망치지
+말게!"
+  JHELOM:15:health: "이보다
+좋을 순
+없지!"
+  JHELOM:15:job: "나는 용맹으로
+싸운다네!"
+  JHELOM:15:look: "마른 전사."
+  JHELOM:15:name: "팀로드"
+  JHELOM:15:no: "겁쟁이."
+  JHELOM:15:pronoun: "그"
+  JHELOM:15:question: "그대는
+용감한가?"
+  JHELOM:15:response1: "패배한 용맹이
+누운 곳보다
+신성한 땅은
+없다네."
+  JHELOM:15:response2: "용감해지게,
+감행할 것이
+많으니!"
+  JHELOM:15:topic1: "VALO"
+  JHELOM:15:topic2: "BRAV"
+  JHELOM:15:yes: "행운은
+용감한
+자를
+돕는다네!"
+  JHELOM:2:health: "배 속 혹
+말고는
+다 괜찮아요."
+  JHELOM:2:job: "나는 내 양들을
+돌본다네."
+  JHELOM:2:look: "152cm의
+임신한 여인"
+  JHELOM:2:name: "도나 부인"
+  JHELOM:2:no: "하느님
+감사합니다!"
+  JHELOM:2:pronoun: "그녀"
+  JHELOM:2:question: "왜, 그대가
+아버지인가요?"
+  JHELOM:2:response1: "임신은
+재미없어요."
+  JHELOM:2:response2: "나는 양을
+못 견디겠어요!"
+  JHELOM:2:topic1: "PREG"
+  JHELOM:2:topic2: "SHEE"
+  JHELOM:2:yes: "남편에게
+말할 때까지
+기다려요!"
+  JHELOM:3:health: "좋지
+않다네."
+  JHELOM:3:job: "나는 던전을
+뒤진다네!"
+  JHELOM:3:look: "부상당한
+전사!"
+  JHELOM:3:name: "벤그로드"
+  JHELOM:3:no: "찾아보게!"
+  JHELOM:3:pronoun: "그"
+  JHELOM:3:question: "그 제단실을
+찾았는가?"
+  JHELOM:3:response1: "나는 던전
+'데스타드'에서
+떨어졌다네."
+  JHELOM:3:response2: "그 안에서
+연결된
+던전들에서
+찾은 보석들을
+쓰게!"
+  JHELOM:3:topic1: "DUNG"
+  JHELOM:3:topic2: "ROOM"
+  JHELOM:3:yes: "그건 탐욕,
+수치,
+히스로스와
+연결된다네!"
+  JHELOM:4:health: "아주 좋다네."
+  JHELOM:4:job: "나는 용맹한
+전사들을
+찾는다네!"
+  JHELOM:4:look: "고귀한 전사."
+  JHELOM:4:name: "윌리엄 경"
+  JHELOM:4:no: "그렇군."
+  JHELOM:4:pronoun: "그"
+  JHELOM:4:question: "그대는
+용맹한가?"
+  JHELOM:4:response1: "악하지 않은
+생물을
+죽이지 말되,
+항상 그대의
+자리를
+지키게!"
+  JHELOM:4:response2: "대신 그들이
+도망치게
+두게. 다치지
+않고서는
+절대
+도망치지
+말고!"
+  JHELOM:4:topic1: "EVIL"
+  JHELOM:4:topic2: "KILL"
+  JHELOM:4:yes: "모든 악을
+물리치도록
+힘쓰게!"
+  JHELOM:5:health: "훌륭하다네."
+  JHELOM:5:job: "나는 용맹을 위해
+싸운다네!"
+  JHELOM:5:look: "강력한
+전사!"
+  JHELOM:5:name: "흐로스가 경"
+  JHELOM:5:no: "용맹의 신단을
+찾아가야
+하네!"
+  JHELOM:5:pronoun: "그"
+  JHELOM:5:question: "그대는 가장
+용맹한
+영혼인가?"
+  JHELOM:5:response1: "용맹한 영혼은
+자신의 모습을
+두려워하지
+않는다네!"
+  JHELOM:5:response2: "진언을 알아야
+하네, 이솝에게
+물어보게!"
+  JHELOM:5:topic1: "VALO"
+  JHELOM:5:topic2: "SHRI"
+  JHELOM:5:yes: "그럴 것
+같지
+않은데!"
+  JHELOM:6:health: "좋다네."
+  JHELOM:6:job: "우리는 문과
+이 통로들을
+지킨다네!"
+  JHELOM:6:look: "엄한 경비병."
+  JHELOM:6:name: "경비병"
+  JHELOM:6:no: "A"
+  JHELOM:6:pronoun: "그"
+  JHELOM:6:question: "A"
+  JHELOM:6:response1: "젤롬의
+문들."
+  JHELOM:6:response2: "이 통로들은
+출입 금지라네."
+  JHELOM:6:topic1: "GATE"
+  JHELOM:6:topic2: "PASS"
+  JHELOM:6:yes: "A"
+  JHELOM:7:health: "그럭저럭."
+  JHELOM:7:job: "나는 용맹을
+찾는다네!"
+  JHELOM:7:look: "작은 남자."
+  JHELOM:7:name: "이솝"
+  JHELOM:7:no: "그대는
+용감하군!"
+  JHELOM:7:pronoun: "그"
+  JHELOM:7:question: "무슨 말인지
+아는가?"
+  JHELOM:7:response1: "안전한 거리에서
+용감해지는
+건 쉽다는 걸
+알았다네!"
+  JHELOM:7:response2: "용맹의 진언은
+'라'일세,
+다음 섬의
+신단에서
+쓰게!"
+  JHELOM:7:topic1: "VALO"
+  JHELOM:7:topic2: "MANT"
+  JHELOM:7:yes: "그게 내
+문제라네."
+  JHELOM:8:health: "그저 그렇다네."
+  JHELOM:8:job: "나는 던전을
+뒤진다네."
+  JHELOM:8:look: "근엄한 전사."
+  JHELOM:8:name: "그래브너"
+  JHELOM:8:no: "그건 던전
+데스타드에
+있다네!"
+  JHELOM:8:pronoun: "그"
+  JHELOM:8:question: "그대는
+그것을
+가졌는가?"
+  JHELOM:8:response1: "나는 붉은
+보석을
+찾는다네."
+  JHELOM:8:response2: "제단에서
+찾을 수
+있다네!"
+  JHELOM:8:topic1: "DUNG"
+  JHELOM:8:topic2: "STON"
+  JHELOM:8:yes: "어쩐지
+못 찾겠더라니!"
+  JHELOM:9:health: "그럭저럭."
+  JHELOM:9:job: "나는 이 탑에
+갇혀
+있다네."
+  JHELOM:9:look: "아름다운 마법사"
+  JHELOM:9:name: "세뇨라"
+  JHELOM:9:no: "아쉽군."
+  JHELOM:9:pronoun: "그녀"
+  JHELOM:9:question: "배를
+가지고
+있는가?"
+  JHELOM:9:response1: "나는 내 죄에
+대한 벌을
+받고 있다네."
+  JHELOM:9:response2: "상관없다네,
+내가 그대를
+도울 수
+있으니!"
+  JHELOM:9:topic1: "TOWE"
+  JHELOM:9:topic2: "CRIM"
+  JHELOM:9:yes: "그럼 육분의가
+필요할 걸세,
+술집 주인에게
+물어보게,
+더 많이
+안다네!"
+  LCB:0:health: "좋다네."
+  LCB:0:job: "나는 도울 수
+있다네."
+  LCB:0:look: "지혜로운
+마법사."
+  LCB:0:name: "조슈아"
+  LCB:0:no: "오."
+  LCB:0:pronoun: "그"
+  LCB:0:question: "더?"
+  LCB:0:response1: "그 수수께끼!"
+  LCB:0:response2: "아바타의
+여덟 철학이
+진실, 사랑,
+용기로
+결합되고
+또 거기서
+만들어진다면..."
+  LCB:0:topic1: "HELP"
+  LCB:0:topic2: "RIDD"
+  LCB:0:yes: "모든 진실,
+모든 사랑,
+모든 용기로
+창조되고
+그것들을
+창조하는
+한 가지는
+무엇인가?"
+  LCB:1:health: "좋아요, 고마워요."
+  LCB:1:job: "나는 그대를
+도울 수
+있다네."
+  LCB:1:look: "아름다운 처녀."
+  LCB:1:name: "줄리엣"
+  LCB:1:no: "찾아보게!"
+  LCB:1:pronoun: "그녀"
+  LCB:1:question: "이것을
+아는가?"
+  LCB:1:response1: "여덟 미덕이
+어떻게 세
+원칙으로
+합쳐지는지
+알아보게."
+  LCB:1:response2: "미덕의 세
+원칙이
+결합해
+하나의
+무엇이 되는지
+알아보게!"
+  LCB:1:topic1: "HELP"
+  LCB:1:topic2: "ONE "
+  LCB:1:yes: "이제 그 하나!"
+  LCB:10:health: "좋아요."
+  LCB:10:job: "나는 물을
+지켜본다네."
+  LCB:10:look: "강인하고
+아름다운
+목녀."
+  LCB:10:name: "숀"
+  LCB:10:no: "내 마을은
+그 오만함
+때문에
+파괴되었어요.
+폐허는 위도
+K'J\" 경도
+L'L\"의 섬에
+있답니다!"
+  LCB:10:pronoun: "그녀"
+  LCB:10:question: "그대는
+오만한가?"
+  LCB:10:response1: "그것은 제게
+평화를
+가져다줘요."
+  LCB:10:response2: "나는 오만한
+도시에서
+왔답니다."
+  LCB:10:topic1: "WATE"
+  LCB:10:topic2: "PEAC"
+  LCB:10:yes: "흠."
+  LCB:11:health: "나는 심각한
+부상을
+입었어요."
+  LCB:11:job: "나는 내 나라를
+위해
+싸운다네."
+  LCB:11:look: "부상당한
+전사"
+  LCB:11:name: "시샤"
+  LCB:11:no: "흠."
+  LCB:11:pronoun: "그녀"
+  LCB:11:question: "브리타니아를
+위해
+싸우나요?"
+  LCB:11:response1: "깊군요."
+  LCB:11:response2: "브리타니아."
+  LCB:11:topic1: "WOUN"
+  LCB:11:topic2: "COUN"
+  LCB:11:yes: "그럼 미녹의
+지르콘이라는
+대장장이를
+찾아가세요,
+그가 신비한
+무기를 만들었는데,
+그것만이
+어비스에서
+그대를
+구할
+거예요!"
+  LCB:12:health: "좋아, 고맙네."
+  LCB:12:job: "나는 궁정
+광대라네"
+  LCB:12:look: "방방 뛰는
+광대"
+  LCB:12:name: "척클스"
+  LCB:12:no: "그럼 왜
+여기 있나?"
+  LCB:12:pronoun: "그"
+  LCB:12:question: "앙크를
+가졌는가?"
+  LCB:12:response1: "브리타니아
+성에 온 걸
+환영하네!"
+  LCB:12:response2: "우물의 물에
+말을 걸어
+제단에 대해
+물어보게!"
+  LCB:12:topic1: "JEST"
+  LCB:12:topic2: "CLUE"
+  LCB:12:yes: "그럼 평화로이
+들어오게!"
+  LCB:13:health: "훌륭하다네"
+  LCB:13:job: "경비병"
+  LCB:13:look: "경비병"
+  LCB:13:name: "경비병"
+  LCB:13:no: "그럼 당장
+떠나게!"
+  LCB:13:pronoun: "그"
+  LCB:13:question: "훔칠
+작정인가?"
+  LCB:13:response1: "우리는 성과
+그 보물을
+지킨다네."
+  LCB:13:response2: "그건 그대가
+상관할
+바가
+아니네."
+  LCB:13:topic1: "GUAR"
+  LCB:13:topic2: "TREA"
+  LCB:13:yes: "그건 헛수고가
+될
+거라고
+믿네."
+  LCB:14:health: "나는 잘
+지낸다네."
+  LCB:14:job: "나는 내면의
+빛을
+찾는다네."
+  LCB:14:look: "근엄한 레인저"
+  LCB:14:name: "쉴라"
+  LCB:14:no: "진언은
+명상하는
+동안
+그대의 생각을
+집중시키는 데
+필요한
+구호라네."
+  LCB:14:pronoun: "그녀"
+  LCB:14:question: "진언을
+아는가?"
+  LCB:14:response1: "신단에서
+내면의 빛을
+구하게!"
+  LCB:14:response2: "신단에
+들어가려면
+룬이
+필요하다네!"
+  LCB:14:topic1: "LIGH"
+  LCB:14:topic2: "SHRI"
+  LCB:14:yes: "좋아."
+  LCB:15:health: "나는 괜찮네만,
+그대는
+돌아가야
+하네!"
+  LCB:15:job: "나는 그대에게
+경고하러
+여기 왔다네!"
+  LCB:15:look: "근엄한 목자"
+  LCB:15:name: "랜드리"
+  LCB:15:no: "그거 좋군."
+  LCB:15:pronoun: "그"
+  LCB:15:question: "계속
+가겠는가?"
+  LCB:15:response1: "앞에는
+위험한 곳이
+있다네!"
+  LCB:15:response2: "일단 들어가면
+왔던 곳으로
+돌아올 수
+없을
+걸세!"
+  LCB:15:topic1: "WARN"
+  LCB:15:topic2: "PERI"
+  LCB:15:yes: "그럼 그대는
+파멸했네!"
+  LCB:2:health: "아주 신난다네!"
+  LCB:2:job: "즐겁게
+해드리는 것."
+  LCB:2:look: "춤추는 광대"
+  LCB:2:name: "광대 쌍둥이"
+  LCB:2:no: "아쉽군, 우린
+좋아하는데!"
+  LCB:2:pronoun: "그"
+  LCB:2:question: "음악이
+마음에
+드는가?"
+  LCB:2:response1: "광대에게는
+좋은 음유시인이
+필요하지!"
+  LCB:2:response2: "우리 음유시인은
+아주
+훌륭하다네."
+  LCB:2:topic1: "JEST"
+  LCB:2:topic2: "BARD"
+  LCB:2:yes: "그럼 브리튼으로
+가야지, 거기
+최고가
+산다네!"
+  LCB:3:health: "아주 좋다네!"
+  LCB:3:job: "나는 성과 내
+군주를
+지킨다네!"
+  LCB:3:look: "건장한 경비병"
+  LCB:3:name: "경비병"
+  LCB:3:no: "그래도 전투에서
+도망치지는
+말게!"
+  LCB:3:pronoun: "그"
+  LCB:3:question: "그대가 가장
+용맹한
+전사인가?"
+  LCB:3:response1: "경비병은
+용맹한 전사여야
+한다네!"
+  LCB:3:response2: "나는 로드
+브리티시를
+섬긴다네!"
+  LCB:3:topic1: "GUAR"
+  LCB:3:topic2: "LIEG"
+  LCB:3:yes: "그럼 경비병이
+되어야지!"
+  LCB:4:health: "좋아... 벤
+손가락만
+빼면!"
+  LCB:4:job: "나는 요리사라네."
+  LCB:4:look: "흰 모자를 쓴
+사람."
+  LCB:4:name: "르 셰프"
+  LCB:4:no: "그럼 영성주의자임에
+틀림없군!"
+  LCB:4:pronoun: "그"
+  LCB:4:question: "그대는
+먹는가?"
+  LCB:4:response1: "음식, 영광스러운
+음식, 요리가
+내 인생이지!"
+  LCB:4:response2: "요리는
+연마된
+예술이라네."
+  LCB:4:topic1: "FOOD"
+  LCB:4:topic2: "COOK"
+  LCB:4:yes: "그럼 내 수프를
+먹어보게!"
+  LCB:5:health: "별로 안 좋아,
+여기 먹을
+사람이
+없거든!"
+  LCB:5:job: "나는 모험가들을
+죽인다네!"
+  LCB:5:look: "리퍼"
+  LCB:5:name: "리퍼"
+  LCB:5:no: "그럼 멍청한
+게 틀림없군."
+  LCB:5:pronoun: "그것"
+  LCB:5:question: "이것을
+찾겠는가?"
+  LCB:5:response1: "많은 이를
+죽일 수 있는
+물건이
+있다네!"
+  LCB:5:response2: "그것에 대한
+지식은
+버커니어즈
+덴에서
+찾을 수
+있다네!"
+  LCB:5:topic1: "KILL"
+  LCB:5:topic2: "THIN"
+  LCB:5:yes: "그것은 큰
+힘을
+가져다준다네!"
+  LCB:6:health: "아주
+좋지 않다네."
+  LCB:6:job: "나는 아무것도
+없다네."
+  LCB:6:look: "남루한 영혼."
+  LCB:6:name: "이름 없는
+죄수"
+  LCB:6:no: "그것이 사실이길
+바라네!"
+  LCB:6:pronoun: "그"
+  LCB:6:question: "그대는
+해적인가?"
+  LCB:6:response1: "범죄는
+악한
+것이라네!"
+  LCB:6:response2: "여기서 나는
+내 죄의
+대가를
+치른다네!"
+  LCB:6:topic1: "CRIM"
+  LCB:6:topic2: "PRIS"
+  LCB:6:yes: "그대는 결코
+여정을
+완수하지
+못할 걸세,
+악은 아바타를
+만들지
+않으니까!"
+  LCB:7:health: "나는 늙었네,
+아주
+늙었지...."
+  LCB:7:job: "나는 그대를
+돕기 위해
+여기 있다네."
+  LCB:7:look: "지혜로운 마법사"
+  LCB:7:name: "조린"
+  LCB:7:no: "아쉽군."
+  LCB:7:pronoun: "그"
+  LCB:7:question: "그리로
+가겠는가?"
+  LCB:7:response1: "성들에서
+도움을
+구하게!"
+  LCB:7:response2: "찾아보게:
+라이시움,
+엠패스 수도원,
+서펀트 성!"
+  LCB:7:topic1: "HELP"
+  LCB:7:topic2: "CAST"
+  LCB:7:yes: "그곳에서
+안토스라는
+이름의 모두를
+찾아 종, 책,
+초에 대해
+물어보게!"
+  LCB:8:health: "이보다
+좋을 순
+없지!"
+  LCB:8:job: "나는 성과 그
+안의 모든 것을
+지킨다네."
+  LCB:8:look: "건장한 경비병"
+  LCB:8:name: "경비병"
+  LCB:8:no: "필요하다면
+그분이
+도와주실
+걸세!"
+  LCB:8:pronoun: "그"
+  LCB:8:question: "로드 브리티시를
+찾는가?"
+  LCB:8:response1: "나는 성을
+지킨다네!"
+  LCB:8:response2: "성은 아름답고
+튼튼하다네!"
+  LCB:8:topic1: "GUAR"
+  LCB:8:topic2: "CAST"
+  LCB:8:yes: "그분은 위층
+왕좌의 방에
+계신다네."
+  LCB:9:health: "좋다."
+  LCB:9:job: "나는 비밀을
+지니고 있다."
+  LCB:9:look: "물"
+  LCB:9:name: "물"
+  LCB:9:no: "오."
+  LCB:9:pronoun: "그것"
+  LCB:9:question: "더?"
+  LCB:9:response1: "무엇에?"
+  LCB:9:response2: "여덟 던전
+모두의
+최하층을
+연결하는
+제단실이
+세 개
+있다!"
+  LCB:9:topic1: "SECR"
+  LCB:9:topic2: "ALTA"
+  LCB:9:yes: "제단에
+올바른 색의
+보석을
+쓰면, 3부분의
+열쇠를
+얻을 수
+있다!"
+  LYCAEUM:0:health: "아주 좋다네."
+  LYCAEUM:0:job: "나는 이 지방을
+다스린다네."
+  LYCAEUM:0:look: "위엄있는 남작"
+  LYCAEUM:0:name: "로버트 프레이저"
+  LYCAEUM:0:no: "다음에
+하지."
+  LYCAEUM:0:pronoun: "그"
+  LYCAEUM:0:question: "지금 그것을
+알고 싶은가?"
+  LYCAEUM:0:response1: "내 부인 베스가
+더 말해줄
+수 있을
+걸세!"
+  LYCAEUM:0:response2: "나는 세 음절
+중 하나만
+안다네."
+  LYCAEUM:0:topic1: "PROV"
+  LYCAEUM:0:topic2: "WORD"
+  LYCAEUM:0:yes: "그것은 '베르'라네!
+이제 다른
+부분들을
+찾아보게!"
+  LYCAEUM:1:health: "좋아요."
+  LYCAEUM:1:job: "나는 영주님과
+함께
+다스린다네."
+  LYCAEUM:1:look: "매력적인 여인"
+  LYCAEUM:1:name: "베스 프레이저"
+  LYCAEUM:1:no: "그럼 찾지
+못할 거예요!"
+  LYCAEUM:1:pronoun: "그녀"
+  LYCAEUM:1:question: "진실을
+찾고
+있나요?"
+  LYCAEUM:1:response1: "이 지방."
+  LYCAEUM:1:response2: "우리 백성은
+진실을 삶의
+방식으로
+믿고 최대한
+그렇게
+산답니다!"
+  LYCAEUM:1:topic1: "RULE"
+  LYCAEUM:1:topic2: "PROV"
+  LYCAEUM:1:yes: "그럼 찾기를!"
+  LYCAEUM:10:health: "내 상처가
+심각하다네!"
+  LYCAEUM:10:job: "이젠
+없다네!"
+  LYCAEUM:10:look: "부상당한
+전사."
+  LYCAEUM:10:name: "전사"
+  LYCAEUM:10:no: "그것들은
+던전들을
+서로
+연결한다네!"
+  LYCAEUM:10:pronoun: "그"
+  LYCAEUM:10:question: "하나
+본 적
+있는가?"
+  LYCAEUM:10:response1: "더는
+없다네!"
+  LYCAEUM:10:response2: "나는 던전
+제단실에서
+졌다네!"
+  LYCAEUM:10:topic1: "WARR"
+  LYCAEUM:10:topic2: "WOUN"
+  LYCAEUM:10:yes: "세 개의 방이
+각각 던전
+네 곳씩
+연결된다는
+걸 알아채게!"
+  LYCAEUM:11:health: "나는 잘
+지낸다네."
+  LYCAEUM:11:job: "나는
+사서라네."
+  LYCAEUM:11:look: "키 크고
+민첩한 남자"
+  LYCAEUM:11:name: "테런스 경"
+  LYCAEUM:11:no: "편하게
+둘러보게."
+  LYCAEUM:11:pronoun: "그"
+  LYCAEUM:11:question: "특정한
+책을 찾고
+있는가?"
+  LYCAEUM:11:response1: "여기는 코덱스를
+제외하면
+브리타니아에서
+가장 큰
+지식의
+창고라네!"
+  LYCAEUM:11:response2: "'ㅈ' 항목을
+찾아보게"
+  LYCAEUM:11:topic1: "LIBR"
+  LYCAEUM:11:topic2: "TRUT"
+  LYCAEUM:11:yes: "어떤
+책인가?"
+  LYCAEUM:12:health: "불행하다네."
+  LYCAEUM:12:job: "즐겁게
+해드리려고!"
+  LYCAEUM:12:look: "변덕스러운 광대"
+  LYCAEUM:12:name: "자야크"
+  LYCAEUM:12:no: "그는 브리타니아
+성에
+산다네, 그에게
+단서를
+물어보게!"
+  LYCAEUM:12:pronoun: "그"
+  LYCAEUM:12:question: "척클스를
+아는가?"
+  LYCAEUM:12:response1: "아, 지금은
+아니라네."
+  LYCAEUM:12:response2: "내 친구
+척클스가
+비밀을
+말해주지
+않기
+때문이지!"
+  LYCAEUM:12:topic1: "ENTE"
+  LYCAEUM:12:topic2: "UNHA"
+  LYCAEUM:12:yes: "왜 그에게
+단서를
+물어보지
+않나!"
+  LYCAEUM:13:health: "아주 좋다네."
+  LYCAEUM:13:job: "보물을
+지키는 것."
+  LYCAEUM:13:look: "강인한 경비병."
+  LYCAEUM:13:name: "카트리오나"
+  LYCAEUM:13:no: "좋아, 걱정했잖나!"
+  LYCAEUM:13:pronoun: "그녀"
+  LYCAEUM:13:question: "훔칠
+작정인가?"
+  LYCAEUM:13:response1: "보물들은
+아주 값지다네!"
+  LYCAEUM:13:response2: "그래, 금이
+많지."
+  LYCAEUM:13:topic1: "TREA"
+  LYCAEUM:13:topic2: "VALU"
+  LYCAEUM:13:yes: "말리지는
+않겠네"
+  LYCAEUM:14:health: "그럭저럭."
+  LYCAEUM:14:job: "나는 마법
+주문을
+가르친다네."
+  LYCAEUM:14:look: "고귀한 마법사"
+  LYCAEUM:14:name: "나이젤이라
+하네."
+  LYCAEUM:14:no: "미안하네."
+  LYCAEUM:14:pronoun: "그"
+  LYCAEUM:14:question: "그게 뭔지
+아는가?"
+  LYCAEUM:14:response1: "나만의
+전문 분야가
+있지!"
+  LYCAEUM:14:response2: "그래, 부활에는
+재, 인삼, 마늘,
+거미줄,
+핏빛이끼,
+그리고
+맨드레이크가
+필요하지!"
+  LYCAEUM:14:topic1: "SPEL"
+  LYCAEUM:14:topic2: "RECA"
+  LYCAEUM:14:yes: "그 주문을
+뭐라
+부를까?"
+  LYCAEUM:15:health: "나는 춥고
+아프다네!
+오... 제발..."
+  LYCAEUM:15:job: "나는 앉아서
+구걸한다네
+오... 제발..."
+  LYCAEUM:15:look: "가련한 거지"
+  LYCAEUM:15:name: "온순한
+샤일록."
+  LYCAEUM:15:no: "오... 제발..."
+  LYCAEUM:15:pronoun: "그"
+  LYCAEUM:15:question: "나를
+도와주겠는가?
+오... 제발..."
+  LYCAEUM:15:response1: "그래, 제발
+돈을 좀
+주게!
+오... 제발..."
+  LYCAEUM:15:response2: "나는 흑사병에
+걸렸다네!"
+  LYCAEUM:15:topic1: "BEG "
+  LYCAEUM:15:topic2: "SICK"
+  LYCAEUM:15:yes: "오... 제발..."
+  LYCAEUM:2:health: "아주 졸리다네."
+  LYCAEUM:2:job: "문을 지키고,
+남작을 지키고,
+남작 부인을
+지키고, 탑을
+감시하고...."
+  LYCAEUM:2:look: "졸린 경비병"
+  LYCAEUM:2:name: "경비병"
+  LYCAEUM:2:no: "게으름뱅이!"
+  LYCAEUM:2:pronoun: "그"
+  LYCAEUM:2:question: "내가 왜 피곤한지
+알겠나?"
+  LYCAEUM:2:response1: "나는 여기
+몇 시간째
+있었다네!"
+  LYCAEUM:2:response2: "그래, 몇 시간이나!"
+  LYCAEUM:2:topic1: "GUAR"
+  LYCAEUM:2:topic2: "HOUR"
+  LYCAEUM:2:yes: "남작의 경비대에서
+일하는 건
+고되고
+시간도
+길다네!"
+  LYCAEUM:3:health: "뼈는 쑤시지만
+정신은
+또렷하다네!"
+  LYCAEUM:3:job: "나는 늙은
+마법사지만,
+보여줄 게
+많다네!"
+  LYCAEUM:3:look: "지혜로운
+늙은 현자"
+  LYCAEUM:3:name: "팔라마르"
+  LYCAEUM:3:no: "보게!!!"
+  LYCAEUM:3:pronoun: "그"
+  LYCAEUM:3:question: "어디인지
+보이는가?"
+  LYCAEUM:3:response1: "여기 내
+망원경
+안에!"
+  LYCAEUM:3:response2: "끝쪽을 찾아보게,
+손잡이가
+하나 있을
+걸세."
+  LYCAEUM:3:topic1: "SHOW"
+  LYCAEUM:3:topic2: "TELE"
+  LYCAEUM:3:yes: "눈금을 맞추면
+보일 걸세!"
+  LYCAEUM:4:health: "늙고 허약하지만,
+많은 여정을
+보아왔다네!"
+  LYCAEUM:4:job: "나는 큰
+지식을
+지녔다네."
+  LYCAEUM:4:look: "묘하게
+낯익어 보이는
+늙은 드루이드."
+  LYCAEUM:4:name: "안토스 신부"
+  LYCAEUM:4:no: "오."
+  LYCAEUM:4:pronoun: "그"
+  LYCAEUM:4:question: "그대는
+여정 중인가?"
+  LYCAEUM:4:response1: "무엇을
+찾고
+있는가?"
+  LYCAEUM:4:response2: "다른 책들이
+있는 곳에서
+진실의 책을
+찾아보게."
+  LYCAEUM:4:topic1: "KNOW"
+  LYCAEUM:4:topic2: "BOOK"
+  LYCAEUM:4:yes: "그대가
+성공하기를!"
+  LYCAEUM:5:health: "약간 피곤하군."
+  LYCAEUM:5:job: "나는 왕좌의 방을
+지킨다네."
+  LYCAEUM:5:look: "건장한 경비병."
+  LYCAEUM:5:name: "존"
+  LYCAEUM:5:no: "세 원칙의
+조합은 여덟
+가지가 가능하니,
+도시도 여덟
+곳이라네!"
+  LYCAEUM:5:pronoun: "그"
+  LYCAEUM:5:question: "어느 것인지
+아는가?"
+  LYCAEUM:5:response1: "진실의
+왕좌!"
+  LYCAEUM:5:response2: "진실의
+원칙을 따르는
+마을이
+네 곳
+있다네."
+  LYCAEUM:5:topic1: "THRO"
+  LYCAEUM:5:topic2: "TRUT"
+  LYCAEUM:5:yes: "좋아!"
+  LYCAEUM:6:health: "좋다네!"
+  LYCAEUM:6:job: "나는
+조언한다네."
+  LYCAEUM:6:look: "이상한 갑옷을
+입은 키 큰
+마법사."
+  LYCAEUM:6:name: "스카투"
+  LYCAEUM:6:no: "아쉽군."
+  LYCAEUM:6:pronoun: "그"
+  LYCAEUM:6:question: "그대는
+부분적인
+아바타인가?"
+  LYCAEUM:6:response1: "예언자를
+자주 찾아가는
+게 좋을
+걸세!"
+  LYCAEUM:6:response2: "나는 신비한
+갑옷을
+입는다네."
+  LYCAEUM:6:topic1: "ADVI"
+  LYCAEUM:6:topic2: "ARMO"
+  LYCAEUM:6:yes: "8부분 아바타가
+되면, 미녹의
+지르콘을
+찾아 신비한
+것들에 대해
+물어보게!"
+  LYCAEUM:7:health: "나야 좋지,
+그대도
+그러길
+바라네."
+  LYCAEUM:7:job: "연구"
+  LYCAEUM:7:look: "작은 드루이드"
+  LYCAEUM:7:name: "에스트로"
+  LYCAEUM:7:no: "그럼 유의
+판사에게
+말하게!"
+  LYCAEUM:7:pronoun: "그"
+  LYCAEUM:7:question: "그 어떤
+죄도 저지른
+적이 없다고?!"
+  LYCAEUM:7:response1: "나는 정의의
+책을 찾고
+있다네!"
+  LYCAEUM:7:response2: "분명 여기
+어딘가
+있을 걸세!"
+  LYCAEUM:7:topic1: "REAS"
+  LYCAEUM:7:topic2: "JUST"
+  LYCAEUM:7:yes: "그건 거짓
+자랑이라고
+생각하네!"
+  LYCAEUM:8:health: "아주 좋다네,
+고맙네!"
+  LYCAEUM:8:job: "그대를
+환영하려고!"
+  LYCAEUM:8:look: "위엄있는 마법사"
+  LYCAEUM:8:name: "타이머스"
+  LYCAEUM:8:no: "여행하며
+배우게!"
+  LYCAEUM:8:pronoun: "그"
+  LYCAEUM:8:question: "진실의 원칙을
+따르는 도시가
+몇 곳인지
+아는가?"
+  LYCAEUM:8:response1: "그래, 진실의
+요새, 라이시움에
+온 걸
+환영하네!"
+  LYCAEUM:8:response2: "던전 제단실은
+각각 보석
+4개가
+필요하다네!"
+  LYCAEUM:8:topic1: "WELC"
+  LYCAEUM:8:topic2: "FOUR"
+  LYCAEUM:8:yes: "몇 곳인가?"
+  LYCAEUM:9:health: "나는 명상
+상태에
+있다네."
+  LYCAEUM:9:job: "나는 진실을
+알고자
+한다네."
+  LYCAEUM:9:look: "생각에 잠긴
+사람."
+  LYCAEUM:9:name: "진실을
+구하는 자."
+  LYCAEUM:9:no: "A"
+  LYCAEUM:9:pronoun: "그"
+  LYCAEUM:9:question: "A"
+  LYCAEUM:9:response1: "내가 명상하는
+원칙."
+  LYCAEUM:9:response2: "각 신단에서
+1분, 2분,
+3분씩
+명상하면,
+선의 길을
+알게
+되리라!"
+  LYCAEUM:9:topic1: "TRUT"
+  LYCAEUM:9:topic2: "MEDI"
+  LYCAEUM:9:yes: "A"
+  MAGINCIA:0:health: "좋아요."
+  MAGINCIA:0:job: "생존자."
+  MAGINCIA:0:look: "목자."
+  MAGINCIA:0:name: "카트리나"
+  MAGINCIA:0:no: "겸손은
+오만을
+극복해야 하는
+미덕이다!"
+  MAGINCIA:0:pronoun: "그녀"
+  MAGINCIA:0:question: "그대는
+오만한가?"
+  MAGINCIA:0:response1: "매긴시아는
+그 오만함
+때문에
+파괴되었다."
+  MAGINCIA:0:response2: "오만은 진실,
+사랑, 용기가
+없을 때
+번성한다."
+  MAGINCIA:0:topic1: "SURV"
+  MAGINCIA:0:topic2: "PRID"
+  MAGINCIA:0:yes: "그대의 노력은
+무의미하다."
+  MAGINCIA:1:health: "평화를 찾는
+언데드."
+  MAGINCIA:1:job: "나는 매긴시아에
+출몰한다"
+  MAGINCIA:1:look: "그림자 유령."
+  MAGINCIA:1:name: "고스틀리"
+  MAGINCIA:1:no: "A"
+  MAGINCIA:1:pronoun: "그것"
+  MAGINCIA:1:question: "A"
+  MAGINCIA:1:response1: "나는 결코
+평화를 찾을 수
+없다네, 영원히
+지박령의
+영역으로
+추방되었지."
+  MAGINCIA:1:response2: "사소한 행적을
+자랑스러워하지
+말게, 그대
+또한 빛에서
+떨어질
+테니!"
+  MAGINCIA:1:topic1: "PEAC"
+  MAGINCIA:1:topic2: "SPIR"
+  MAGINCIA:1:yes: "A"
+  MAGINCIA:10:health: "힉..."
+  MAGINCIA:10:job: "나는 한때
+강력한
+상인이었지!"
+  MAGINCIA:10:look: "뚱뚱한 유령."
+  MAGINCIA:10:name: "부저"
+  MAGINCIA:10:no: "세상은
+나 없이도
+돌아가지."
+  MAGINCIA:10:pronoun: "그것"
+  MAGINCIA:10:question: "알겠는가?"
+  MAGINCIA:10:response1: "내 재산은
+끝이 없었고,
+나는 큰
+힘을
+가졌었지!"
+  MAGINCIA:10:response2: "오만한 영혼은
+분명 자신의
+가치를
+모른다네!"
+  MAGINCIA:10:topic1: "MERC"
+  MAGINCIA:10:topic2: "POWE"
+  MAGINCIA:10:yes: "세상은
+나 없이도
+돌아가지."
+  MAGINCIA:11:health: "이보다
+좋을 순
+없지."
+  MAGINCIA:11:job: "나는 이
+상점을
+운영한다네."
+  MAGINCIA:11:look: "뚱뚱한
+해골."
+  MAGINCIA:11:name: "벌버스"
+  MAGINCIA:11:no: "나는 오직
+최고급만
+판다네."
+  MAGINCIA:11:pronoun: "그것"
+  MAGINCIA:11:question: "식량에
+관심
+있는가?"
+  MAGINCIA:11:response1: "왜, 물론
+식량 상점이지."
+  MAGINCIA:11:response2: "뭐, 언제든
+더 들어올
+예정이라네!"
+  MAGINCIA:11:topic1: "SHOP"
+  MAGINCIA:11:topic2: "SPOI"
+  MAGINCIA:11:yes: "흠, 재고가
+상한 것
+같은데...."
+  MAGINCIA:12:health: "나아진
+적도
+있었지."
+  MAGINCIA:12:job: "나는
+후회한다네."
+  MAGINCIA:12:look: "흐느끼는
+해골."
+  MAGINCIA:12:name: "스플롯"
+  MAGINCIA:12:no: "어리석은 놈!"
+  MAGINCIA:12:pronoun: "그것"
+  MAGINCIA:12:question: "그대는
+순수함을
+찾는가?"
+  MAGINCIA:12:response1: "나는 오만했다네,
+허영을
+벗어던지게,
+오직 겸손한
+자만이
+순수하다네!"
+  MAGINCIA:12:response2: "모든 미덕이
+자라나는
+뿌리라네!"
+  MAGINCIA:12:topic1: "REGR"
+  MAGINCIA:12:topic2: "HUMB"
+  MAGINCIA:12:yes: "그럼 룬과 보석의
+뱀에게
+물어보게!"
+  MAGINCIA:13:health: "좋지
+않다네."
+  MAGINCIA:13:job: "나는 이제
+겸손을
+이해하려
+한다네."
+  MAGINCIA:13:look: "파란 유령."
+  MAGINCIA:13:name: "러스킨"
+  MAGINCIA:13:no: "아쉽군."
+  MAGINCIA:13:pronoun: "그것"
+  MAGINCIA:13:question: "그대는
+겸손을
+알고자
+하는가?"
+  MAGINCIA:13:response1: "위대한 영혼의
+첫 시험은
+겸손이라네!"
+  MAGINCIA:13:response2: "룬과 뱀에게
+물어보게,
+그것이 공격하기
+바로 전에!"
+  MAGINCIA:13:topic1: "HUMI"
+  MAGINCIA:13:topic2: "RUNE"
+  MAGINCIA:13:yes: "그대에겐
+룬이
+필요할
+걸세!"
+  MAGINCIA:14:health: "피에
+굶주렸지!"
+  MAGINCIA:14:job: "나는 매긴시아의
+모든 생명에
+죽음을
+가져온다네!"
+  MAGINCIA:14:look: "험상궂은
+독사!"
+  MAGINCIA:14:name: "네이트"
+  MAGINCIA:14:no: "A"
+  MAGINCIA:14:pronoun: "그"
+  MAGINCIA:14:question: "A"
+  MAGINCIA:14:response1: "검은 보석을
+찾는 이들은
+브리튼의
+술집에서
+물어봐야
+한다네!"
+  MAGINCIA:14:response2: "겸손의 신성한
+룬은 이 도시에서
+추방되었다네.
+포즈의
+배런에게
+물어보게!"
+  MAGINCIA:14:topic1: "STON"
+  MAGINCIA:14:topic2: "RUNE"
+  MAGINCIA:14:yes: "A"
+  MAGINCIA:15:health: "악마 같지!"
+  MAGINCIA:15:job: "그대를
+매긴시아에
+환영하네!
+대해의 오만한
+도시로!"
+  MAGINCIA:15:look: "끔찍하고 무시무시한
+악마!"
+  MAGINCIA:15:name: "버추베인"
+  MAGINCIA:15:no: "아."
+  MAGINCIA:15:pronoun: "그것"
+  MAGINCIA:15:question: "그대는
+오만한가?"
+  MAGINCIA:15:response1: "매긴시아는
+어둠의
+영역으로
+떨어졌으니,
+그들 미덕의
+기반이
+오만에
+잘못 놓였기
+때문이다!"
+  MAGINCIA:15:response2: "A"
+  MAGINCIA:15:topic1: "MAGI"
+  MAGINCIA:15:topic2: "A   "
+  MAGINCIA:15:yes: "좋아!"
+  MAGINCIA:2:health: "최상이라네."
+  MAGINCIA:2:job: "나는 고귀한
+혈통의
+귀족이라네."
+  MAGINCIA:2:look: "중얼거리는
+해골."
+  MAGINCIA:2:name: "스컬페이스"
+  MAGINCIA:2:no: "그대는 이
+근처 출신이
+아니로군!"
+  MAGINCIA:2:pronoun: "그것"
+  MAGINCIA:2:question: "우리에 대해
+들어봤겠지,
+그렇지?"
+  MAGINCIA:2:response1: "나와 내 형제는
+위대한 메리디드
+가문의
+마지막
+둘이라네."
+  MAGINCIA:2:response2: "A"
+  MAGINCIA:2:topic1: "NOBL"
+  MAGINCIA:2:topic2: "A   "
+  MAGINCIA:2:yes: "그럴 줄
+알았지."
+  MAGINCIA:3:health: "좀 투명해진
+느낌이라네."
+  MAGINCIA:3:job: "이 상점에
+출몰하는 것."
+  MAGINCIA:3:look: "작은 유령."
+  MAGINCIA:3:name: "캐스퍼린"
+  MAGINCIA:3:no: "오만!"
+  MAGINCIA:3:pronoun: "그것"
+  MAGINCIA:3:question: "왜인지
+아는가?"
+  MAGINCIA:3:response1: "이 근처엔
+출몰이
+많이
+일어난다네."
+  MAGINCIA:3:response2: "겸손의
+진언을
+찾아보게,
+헤이우드에게
+물어보게!"
+  MAGINCIA:3:topic1: "HAUN"
+  MAGINCIA:3:topic2: "PRID"
+  MAGINCIA:3:yes: "오만은
+결코 이루지
+못한 목표의
+가장 확실한
+척도라네!"
+  MAGINCIA:4:health: "나아진
+적도
+있었지."
+  MAGINCIA:4:job: "오, 그냥
+서성일
+뿐이라네!"
+  MAGINCIA:4:look: "키 큰 유령."
+  MAGINCIA:4:name: "폴트리스"
+  MAGINCIA:4:no: "오만은 악이
+가장 좋아하는
+죄라네!"
+  MAGINCIA:4:pronoun: "그것"
+  MAGINCIA:4:question: "그대는
+오만한가?"
+  MAGINCIA:4:response1: "나는 오만죄로
+교수형을
+당했다네!"
+  MAGINCIA:4:response2: "오만의 진언은,
+겸손과
+정반대되니,
+'물'이라네."
+  MAGINCIA:4:topic1: "HANG"
+  MAGINCIA:4:topic2: "MANT"
+  MAGINCIA:4:yes: "중대한
+죄로군!"
+  MAGINCIA:5:health: "그럭저럭
+괜찮다네."
+  MAGINCIA:5:job: "영원히
+출몰하는 것."
+  MAGINCIA:5:look: "키 큰 유령."
+  MAGINCIA:5:name: "헤이우드"
+  MAGINCIA:5:no: "오만한 영혼은
+분명 자신의
+가치를
+모른다네!"
+  MAGINCIA:5:pronoun: "그것"
+  MAGINCIA:5:question: "그대는
+오만한가?"
+  MAGINCIA:5:response1: "오만은 앞에,
+수치는
+뒤에
+따라오지!"
+  MAGINCIA:5:response2: "폴트리스가
+오만의
+진언을
+안다네, 그에게
+물어보게!"
+  MAGINCIA:5:topic1: "HAUN"
+  MAGINCIA:5:topic2: "MANT"
+  MAGINCIA:5:yes: "그대는
+수치를
+찾게 되리라!"
+  MAGINCIA:6:health: "좀 마른
+편이지."
+  MAGINCIA:6:job: "나는 내 뼈를
+덜그럭거린다네."
+  MAGINCIA:6:look: "마른
+해골."
+  MAGINCIA:6:name: "슬림"
+  MAGINCIA:6:no: "겸손을
+자랑스러워하지
+말게, 그러다
+망칠라!"
+  MAGINCIA:6:pronoun: "그것"
+  MAGINCIA:6:question: "그대는
+항상
+겸손한가?"
+  MAGINCIA:6:response1: "나는 내
+자신을 너무
+높게
+평가했고,
+그 오만이
+내 파멸이었지."
+  MAGINCIA:6:response2: "끔찍한
+일이었지!"
+  MAGINCIA:6:topic1: "BONE"
+  MAGINCIA:6:topic2: "PRID"
+  MAGINCIA:6:yes: "의심스럽군."
+  MAGINCIA:7:health: "좀 앙상하지."
+  MAGINCIA:7:job: "나는 한때
+은나팔을
+지녔었지."
+  MAGINCIA:7:look: "부서지는
+해골."
+  MAGINCIA:7:name: "밴터"
+  MAGINCIA:7:no: "오."
+  MAGINCIA:7:pronoun: "그것"
+  MAGINCIA:7:question: "나팔을
+찾는가?"
+  MAGINCIA:7:response1: "은나팔은
+신단을 지키는
+데몬을
+지나려면
+써야
+한다네."
+  MAGINCIA:7:response2: "위어드럼은
+겸손의
+신단에
+가봤다네!"
+  MAGINCIA:7:topic1: "HORN"
+  MAGINCIA:7:topic2: "SHRI"
+  MAGINCIA:7:yes: "데미트리에게
+물어보게!"
+  MAGINCIA:8:health: "어제와
+비슷하다네."
+  MAGINCIA:8:job: "나는 내 뼈를
+덜그럭거린다네."
+  MAGINCIA:8:look: "마른
+해골."
+  MAGINCIA:8:name: "데미트리"
+  MAGINCIA:8:no: "네이트를
+조심하게!"
+  MAGINCIA:8:pronoun: "그것"
+  MAGINCIA:8:question: "그대는
+죽었는가?"
+  MAGINCIA:8:response1: "뼈, 저 뼈들,
+저 마른
+뼈들..."
+  MAGINCIA:8:response2: "사랑의 여왕에게
+시녀가 있는데,
+그녀가 나팔에
+대해 더
+말해줄
+수 있다네!"
+  MAGINCIA:8:topic1: "BONE"
+  MAGINCIA:8:topic2: "HORN"
+  MAGINCIA:8:yes: "아, 아쉽군!"
+  MAGINCIA:9:health: "출몰
+중이지."
+  MAGINCIA:9:job: "나는 출몰하고,
+출몰하고,
+또 출몰한다네!"
+  MAGINCIA:9:look: "덜그럭거리는
+뼈."
+  MAGINCIA:9:name: "위어드럼"
+  MAGINCIA:9:no: "A"
+  MAGINCIA:9:pronoun: "그것"
+  MAGINCIA:9:question: "A"
+  MAGINCIA:9:response1: "출몰하는 일은
+평생보다
+더 걸린다네,
+영원히
+걸리지!"
+  MAGINCIA:9:response2: "그래, 나는
+그 신단에
+가봤다네,
+어비스 섬의
+북쪽 기슭에
+있다네!"
+  MAGINCIA:9:topic1: "HAUN"
+  MAGINCIA:9:topic2: "SHRI"
+  MAGINCIA:9:yes: "A"
+  MINOC:0:health: "좋아요."
+  MINOC:0:job: "나는 가난한
+이들을
+돌본다네."
+  MINOC:0:look: "재빠른
+땜장이."
+  MINOC:0:name: "줄리아"
+  MINOC:0:no: "게으름뱅이."
+  MINOC:0:pronoun: "그녀"
+  MINOC:0:question: "도와
+주겠는가?"
+  MINOC:0:response1: "자기 보존은
+자연의
+첫째 법칙이고,
+자기희생은
+은총의
+최고
+규범이라네."
+  MINOC:0:response2: "이 집 안에는
+가난하고 궁핍한
+영혼이
+많다네."
+  MINOC:0:topic1: "CARE"
+  MINOC:0:topic2: "POOR"
+  MINOC:0:yes: "그대와
+함께하겠네."
+  MINOC:1:health: "아주 좋다네."
+  MINOC:1:job: "나는 무기를
+벼린다네."
+  MINOC:1:look: "노련한
+대장장이."
+  MINOC:1:name: "지르콘"
+  MINOC:1:no: "흠."
+  MINOC:1:pronoun: "그"
+  MINOC:1:question: "무기를
+찾는가?"
+  MINOC:1:response1: "나는 최고를
+만든다네!"
+  MINOC:1:response2: "아, 그래, 신비한
+무기와 갑옷,
+내 최고의
+작품이지!
+그것들은 사이먼
+경과 테사
+부인에게
+주었다네."
+  MINOC:1:topic1: "WEAP"
+  MINOC:1:topic2: "MYST"
+  MINOC:1:yes: "계산대에서
+물어보게!"
+  MINOC:10:health: "아주 좋아요!"
+  MINOC:10:job: "나는 노래를
+부른다네!"
+  MINOC:10:look: "귀여운
+음유시인."
+  MINOC:10:name: "싱송"
+  MINOC:10:no: "아쉽네요..."
+  MINOC:10:pronoun: "그녀"
+  MINOC:10:question: "마음에
+드나요?"
+  MINOC:10:response1: "나는 노래를
+부른답니다!"
+  MINOC:10:response2: "아주 좋아요,
+까마귀가
+노래해요,
+까마귀가
+보고 옥수수
+밭에서
+'카'라고
+말한답니다."
+  MINOC:10:topic1: "SING"
+  MINOC:10:topic2: "SONG"
+  MINOC:10:yes: "고마워요."
+  MINOC:11:health: "좋다네."
+  MINOC:11:job: "나는 여기
+서서
+생각한다네."
+  MINOC:11:look: "온순한 목자."
+  MINOC:11:name: "데이먼"
+  MINOC:11:no: "오, 그럼
+생각할
+수 있지
+이 멍청아!"
+  MINOC:11:pronoun: "그"
+  MINOC:11:question: "남자가
+혼자
+생각도
+못하나?"
+  MINOC:11:response1: "오, 그냥
+이것저것에
+대해."
+  MINOC:11:response2: "음유시인의
+노래를
+들어보게, 그
+가사 속에
+열쇠가
+있다네!"
+  MINOC:11:topic1: "THIN"
+  MINOC:11:topic2: "MANT"
+  MINOC:11:yes: "뭐, 그러길
+바라네!"
+  MINOC:12:health: "뭐 그럭저럭."
+  MINOC:12:job: "이것저것."
+  MINOC:12:look: "행복한
+땜장이."
+  MINOC:12:name: "미스치프"
+  MINOC:12:no: "그것을 찾으면
+돌아오게!"
+  MINOC:12:pronoun: "그녀"
+  MINOC:12:question: "룬을
+가졌는가?"
+  MINOC:12:response1: "그리고
+저것도..."
+  MINOC:12:response2: "희생의 룬은
+구하기
+어렵다네. 그것은
+대장간의
+불 속에
+있다네!"
+  MINOC:12:topic1: "THIS"
+  MINOC:12:topic2: "RUNE"
+  MINOC:12:yes: "그럼 알케리온에게
+그 보석에
+대해
+물어보게!"
+  MINOC:13:health: "그럭저럭."
+  MINOC:13:job: "나는 룬을
+조각한다네."
+  MINOC:13:look: "탁자에 있는
+땜장이."
+  MINOC:13:name: "아주르"
+  MINOC:13:no: "그렇군."
+  MINOC:13:pronoun: "그"
+  MINOC:13:question: "룬을
+찾는가?"
+  MINOC:13:response1: "나는 신단에
+들어가는 데
+필요한
+룬을
+조각한다네!"
+  MINOC:13:response2: "내 여동생
+미스치프에게
+물어보게."
+  MINOC:13:topic1: "RUNE"
+  MINOC:13:topic2: "SACR"
+  MINOC:13:yes: "어느 것을?"
+  MINOC:14:health: "나아진
+적도
+있었지."
+  MINOC:14:job: "나는 희생의
+신단의
+지혜를
+찾는다네."
+  MINOC:14:look: "방랑하는
+땜장이."
+  MINOC:14:name: "메리다"
+  MINOC:14:no: "신단은 동쪽
+호수에
+있다네!"
+  MINOC:14:pronoun: "그"
+  MINOC:14:question: "진언을
+아는가?"
+  MINOC:14:response1: "하지만 우선
+진언이
+필요하다네!"
+  MINOC:14:response2: "숨은 목자가
+그 진언을
+안다고
+들었네."
+  MINOC:14:topic1: "SHRI"
+  MINOC:14:topic2: "MANT"
+  MINOC:14:yes: "좋아!"
+  MINOC:15:health: "꽤."
+  MINOC:15:job: "물론
+지키는 것."
+  MINOC:15:look: "거대한 경비병."
+  MINOC:15:name: "경비병"
+  MINOC:15:no: "아쉽군."
+  MINOC:15:pronoun: "그"
+  MINOC:15:question: "내 딜레마를
+이해하는가?"
+  MINOC:15:response1: "나는 종종
+임무를
+수행하다
+목숨을
+바쳐야 할
+날이 올지
+궁금하다네."
+  MINOC:15:response2: "하나의 목숨으로
+여럿을!"
+  MINOC:15:topic1: "GUAR"
+  MINOC:15:topic2: "LIFE"
+  MINOC:15:yes: "물론이지,
+그런 일이
+생긴다면,
+나도 해낼
+수 있기를
+바라네!"
+  MINOC:2:health: "나는 아주
+아프네, 도와주게!"
+  MINOC:2:job: "나는 아무것도
+없다네, 도와주게."
+  MINOC:2:look: "병약한
+작은
+남자."
+  MINOC:2:name: "거지 밥"
+  MINOC:2:no: "그럼 나와
+함께 구걸
+하세!"
+  MINOC:2:pronoun: "그"
+  MINOC:2:question: "돈이
+좀 있는가?"
+  MINOC:2:response1: "병을 고치려면
+돈이
+필요하다네."
+  MINOC:2:response2: "나는 말기
+다리 부패병에
+걸렸다네."
+  MINOC:2:topic1: "HELP"
+  MINOC:2:topic2: "SICK"
+  MINOC:2:yes: "그럼 나와
+나눠
+주게!"
+  MINOC:3:health: "배고파요."
+  MINOC:3:job: "저는 영양실조에
+걸린
+거지
+소녀예요."
+  MINOC:3:look: "작고
+진흙투성이인
+소녀."
+  MINOC:3:name: "린다 수"
+  MINOC:3:no: "오, 그렇군요."
+  MINOC:3:pronoun: "그녀"
+  MINOC:3:question: "음식 한
+입만
+나눠주실
+수 있나요?"
+  MINOC:3:response1: "며칠째
+아무것도
+못 먹었어요."
+  MINOC:3:response2: "오, 친절한
+분이시네요!"
+  MINOC:3:topic1: "HUNG"
+  MINOC:3:topic2: "FOOD"
+  MINOC:3:yes: "정말
+감사할
+거예요."
+  MINOC:4:health: "나는 거의
+의식이
+없다네."
+  MINOC:4:job: "곧 죽을
+걸세."
+  MINOC:4:look: "스러져가는
+남자."
+  MINOC:4:name: "짐블"
+  MINOC:4:no: "슬프군."
+  MINOC:4:pronoun: "그"
+  MINOC:4:question: "마지막
+술 한 잔을
+살 금화
+한 닢을
+나눠줄
+수 있나?"
+  MINOC:4:response1: "나는 체체파리에
+물렸다네!"
+  MINOC:4:response2: "나는 곧
+영원히
+잠들
+걸세."
+  MINOC:4:topic1: "DIE "
+  MINOC:4:topic2: "CONS"
+  MINOC:4:yes: "아주르가
+룬을 안다는 걸
+기억하게!"
+  MINOC:5:health: "병들었네."
+  MINOC:5:job: "나 자신을
+구원하는 것!"
+  MINOC:5:look: "남루한 영혼."
+  MINOC:5:name: "주드"
+  MINOC:5:no: "오."
+  MINOC:5:pronoun: "그"
+  MINOC:5:question: "내가 그대를
+도우면, 그것을
+어비스 입구에서
+파괴하는 데만
+쓰겠다고
+맹세하겠는가?"
+  MINOC:5:response1: "내 죄에
+대해서는
+말하지
+않겠네!"
+  MINOC:5:response2: "나는 그것을
+사용했다네!"
+  MINOC:5:topic1: "REDE"
+  MINOC:5:topic2: "SKUL"
+  MINOC:5:yes: "가장 어두운
+밤, 위도
+P'F\" 경도
+M'F\"에서
+찾을 수
+있다네!"
+  MINOC:6:health: "나는 늙고
+약하다네."
+  MINOC:6:job: "나는 농부라네,
+많은 걸
+듣지."
+  MINOC:6:look: "늙고
+남루한
+남자."
+  MINOC:6:name: "알케리온"
+  MINOC:6:no: "오."
+  MINOC:6:pronoun: "그"
+  MINOC:6:question: "찾고
+있는가?"
+  MINOC:6:response1: "무엇을
+알고 싶은가?"
+  MINOC:6:response2: "희생의 보석은
+주황색이며
+사랑과 용기의
+제단실에서
+쓰인다네!"
+  MINOC:6:topic1: "HEAR"
+  MINOC:6:topic2: "STON"
+  MINOC:6:yes: "행운을
+비네."
+  MINOC:7:health: "그럭저럭."
+  MINOC:7:job: "나는 방을
+구하려
+한다네."
+  MINOC:7:look: "다부진
+레인저."
+  MINOC:7:name: "마이크 워드"
+  MINOC:7:no: "스카라
+브레이에는
+없다네."
+  MINOC:7:pronoun: "그"
+  MINOC:7:question: "룬에
+대해
+아는가?"
+  MINOC:7:response1: "나는 스카라
+브레이에서
+곧장
+여행해
+왔다네."
+  MINOC:7:response2: "우리 도시의
+룬이
+사라졌다네!"
+  MINOC:7:topic1: "ROOM"
+  MINOC:7:topic2: "SKAR"
+  MINOC:7:yes: "그것은
+영성의
+신단으로
+가는
+열쇠라네!"
+  MINOC:8:health: "좋아요, 고마워요."
+  MINOC:8:job: "나는 꽃을
+나눠준다네.
+여기 있어요!"
+  MINOC:8:look: "십 대 소년."
+  MINOC:8:name: "알렉스"
+  MINOC:8:no: "아쉽군."
+  MINOC:8:pronoun: "그"
+  MINOC:8:question: "주시겠어요?"
+  MINOC:8:response1: "내가 생각하기론,
+남에게 친절하면
+그들도
+보답할 이유가
+생긴다는
+거지!"
+  MINOC:8:response2: "그래, 어려운
+이에게
+할 수 있는
+만큼
+다 주게!"
+  MINOC:8:topic1: "FLOW"
+  MINOC:8:topic2: "KIND"
+  MINOC:8:yes: "좋아."
+  MINOC:9:health: "괜찮다네."
+  MINOC:9:job: "희생의 도시,
+미녹에
+온 걸
+환영하네!"
+  MINOC:9:look: "통통한
+땜장이."
+  MINOC:9:name: "셴티스"
+  MINOC:9:no: "그대는
+아바타가
+아니로군!"
+  MINOC:9:pronoun: "그"
+  MINOC:9:question: "그대는 미덕을
+위해
+힘쓰는가?"
+  MINOC:9:response1: "자기희생은
+필요한
+미덕이라네!"
+  MINOC:9:response2: "아바타는
+미덕을
+갖추려
+힘쓴다네."
+  MINOC:9:topic1: "SACR"
+  MINOC:9:topic2: "VIRT"
+  MINOC:9:yes: "그럼 아마
+아바타가
+될
+걸세!"
+  module:U4-Upgrade:config:0: "{
+        Upgrade 및 Remastered 프로젝트의 향상된 그래픽을 사용하는
+        울티마 4.  http://www.moongates.com/u4/upgrade/Upgrade.htm 에서
+        u4upgrad.zip이 필요합니다.
+    }"
+  module:U4-Upgrade:config:1: "xu4 team"
+  module:U4-Upgrade:config:2: "1.0"
+  module:U4-Upgrade:config:3: "Ultima-IV/1.4"
+  module:U4-Upgrade:Credits:0: "일부 자산은 저작권이 있는 자료를 사용하며, 이에 대해 여기서 밝혀둔다."
+  module:U4-Upgrade:Credits:1: "image/vutne
+    PNG 파일들은 Ultima IV Remastered 프로젝트의 Vanja Utne 작품을
+    변환한 것입니다."
+  module:U4-Upgrade:Credits:2: "저작권: KOA 파일 (C) 2015 by Vanja Utne
+    다운로드:  https://github.com/MagerValp/u4remastered/tree/master/src/charcreate"
+  module:U4-Upgrade:graphics:0: "u4u/shapes.vga"
+  module:U4-Upgrade:graphics:1: "vga/tile_guard.png"
+  module:U4-Upgrade:graphics:10: "vutne/14b-abacus.png"
+  module:U4-Upgrade:graphics:11: "vutne/cards1.png"
+  module:U4-Upgrade:graphics:12: "vutne/cards2.png"
+  module:U4-Upgrade:graphics:13: "u4u/key7.old"
+  module:U4-Upgrade:graphics:14: "u4u/honesty.old"
+  module:U4-Upgrade:graphics:15: "u4u/compassn.old"
+  module:U4-Upgrade:graphics:16: "u4u/valor.old"
+  module:U4-Upgrade:graphics:17: "u4u/justice.old"
+  module:U4-Upgrade:graphics:18: "u4u/sacrific.old"
+  module:U4-Upgrade:graphics:19: "u4u/honor.old"
+  module:U4-Upgrade:graphics:2: "u4u/charset.vga"
+  module:U4-Upgrade:graphics:20: "u4u/spirit.old"
+  module:U4-Upgrade:graphics:21: "u4u/humility.old"
+  module:U4-Upgrade:graphics:22: "u4u/truth.old"
+  module:U4-Upgrade:graphics:23: "u4u/love.old"
+  module:U4-Upgrade:graphics:24: "u4u/courage.old"
+  module:U4-Upgrade:graphics:25: "u4u/stoncrcl.old"
+  module:U4-Upgrade:graphics:26: "u4u/rune_0.old"
+  module:U4-Upgrade:graphics:27: "u4u/rune_1.old"
+  module:U4-Upgrade:graphics:28: "u4u/rune_2.old"
+  module:U4-Upgrade:graphics:29: "u4u/rune_3.old"
+  module:U4-Upgrade:graphics:3: "u4u/start.old"
+  module:U4-Upgrade:graphics:30: "u4u/rune_4.old"
+  module:U4-Upgrade:graphics:31: "u4u/rune_5.old"
+  module:U4-Upgrade:graphics:32: "u4u/rune_6.ega"
+  module:U4-Upgrade:graphics:33: "u4u/rune_7.ega"
+  module:U4-Upgrade:graphics:34: "u4u/rune_8.ega"
+  module:U4-Upgrade:graphics:35: "vga/gem.png"
+  module:U4-Upgrade:graphics:36: "vga/dungeonhall.png"
+  module:U4-Upgrade:graphics:37: "vga/dungeonhall_door.png"
+  module:U4-Upgrade:graphics:38: "vga/dungeonback0.png"
+  module:U4-Upgrade:graphics:39: "vga/dungeonback1.png"
+  module:U4-Upgrade:graphics:4: "vutne/145-tree.png"
+  module:U4-Upgrade:graphics:40: "vga/dungeonback2.png"
+  module:U4-Upgrade:graphics:41: "vga/dungeonback3.png"
+  module:U4-Upgrade:graphics:42: "vga/dungeonback0_door.png"
+  module:U4-Upgrade:graphics:43: "vga/dungeonback0_door.png"
+  module:U4-Upgrade:graphics:44: "vga/dungeonback1_door.png"
+  module:U4-Upgrade:graphics:45: "vga/dungeonback2_door.png"
+  module:U4-Upgrade:graphics:46: "vga/dungeonback3_door.png"
+  module:U4-Upgrade:graphics:47: "vga/ladderup0.png"
+  module:U4-Upgrade:graphics:48: "vga/ladderup0_side.png"
+  module:U4-Upgrade:graphics:49: "vga/ladderup1.png"
+  module:U4-Upgrade:graphics:5: "vutne/146-portal.png"
+  module:U4-Upgrade:graphics:50: "vga/ladderup1_side.png"
+  module:U4-Upgrade:graphics:51: "vga/ladderup2.png"
+  module:U4-Upgrade:graphics:52: "vga/ladderup2_side.png"
+  module:U4-Upgrade:graphics:53: "vga/ladderup3.png"
+  module:U4-Upgrade:graphics:54: "vga/ladderup3_side.png"
+  module:U4-Upgrade:graphics:55: "vga/ladderdown0.png"
+  module:U4-Upgrade:graphics:56: "vga/ladderdown0_side.png"
+  module:U4-Upgrade:graphics:57: "vga/ladderdown1.png"
+  module:U4-Upgrade:graphics:58: "vga/ladderdown1_side.png"
+  module:U4-Upgrade:graphics:59: "vga/ladderdown2.png"
+  module:U4-Upgrade:graphics:6: "vutne/147-outside.png"
+  module:U4-Upgrade:graphics:60: "vga/ladderdown2_side.png"
+  module:U4-Upgrade:graphics:61: "vga/ladderdown3.png"
+  module:U4-Upgrade:graphics:62: "vga/ladderdown3_side.png"
+  module:U4-Upgrade:graphics:63: "vga/ladderupdown0.png"
+  module:U4-Upgrade:graphics:64: "vga/ladderupdown0_side.png"
+  module:U4-Upgrade:graphics:65: "vga/ladderupdown1.png"
+  module:U4-Upgrade:graphics:66: "vga/ladderupdown1_side.png"
+  module:U4-Upgrade:graphics:67: "vga/ladderupdown2.png"
+  module:U4-Upgrade:graphics:68: "vga/ladderupdown2_side.png"
+  module:U4-Upgrade:graphics:69: "vga/ladderupdown3.png"
+  module:U4-Upgrade:graphics:7: "vutne/148-inside.png"
+  module:U4-Upgrade:graphics:70: "vga/ladderupdown3_side.png"
+  module:U4-Upgrade:graphics:71: "vga/traps.png"
+  module:U4-Upgrade:graphics:8: "vutne/149-wagon.png"
+  module:U4-Upgrade:graphics:9: "vutne/14a-gypsy.png"
+  module:Ultima-IV:config:0: "xu4 developers"
+  module:Ultima-IV:config:1: "{
+        Markus Brenner (Minstrel Dragon)의 원작 EGA 그래픽과
+        음악을 사용한 울티마 4.
+    }"
+  module:Ultima-IV:config:10: "비전 로브"
+  module:Ultima-IV:config:100: "물"
+  module:Ultima-IV:config:101: "앙크"
+  module:Ultima-IV:config:102: "팬텀"
+  module:Ultima-IV:config:103: "표준"
+  module:Ultima-IV:config:104: "전체 화면"
+  module:Ultima-IV:config:105: "표준"
+  module:Ultima-IV:config:11: "손"
+  module:Ultima-IV:config:12: "손"
+  module:Ultima-IV:config:13: "지팡"
+  module:Ultima-IV:config:14: "지팡이"
+  module:Ultima-IV:config:15: "단검"
+  module:Ultima-IV:config:16: "단검"
+  module:Ultima-IV:config:17: "슬링"
+  module:Ultima-IV:config:18: "슬링"
+  module:Ultima-IV:config:19: "철퇴"
+  module:Ultima-IV:config:2: "1.4"
+  module:Ultima-IV:config:20: "철퇴"
+  module:Ultima-IV:config:21: "도끼"
+  module:Ultima-IV:config:22: "도끼"
+  module:Ultima-IV:config:23: "검"
+  module:Ultima-IV:config:24: "검"
+  module:Ultima-IV:config:25: "활"
+  module:Ultima-IV:config:26: "활"
+  module:Ultima-IV:config:27: "석궁"
+  module:Ultima-IV:config:28: "석궁"
+  module:Ultima-IV:config:29: "화염유"
+  module:Ultima-IV:config:3: "맨몸"
+  module:Ultima-IV:config:30: "화염 기름"
+  module:Ultima-IV:config:31: "핼버드"
+  module:Ultima-IV:config:32: "핼버드"
+  module:Ultima-IV:config:33: "M도끼"
+  module:Ultima-IV:config:34: "마법 도끼"
+  module:Ultima-IV:config:35: "M검"
+  module:Ultima-IV:config:36: "마법 검"
+  module:Ultima-IV:config:37: "M활"
+  module:Ultima-IV:config:38: "마법 활"
+  module:Ultima-IV:config:39: "완드"
+  module:Ultima-IV:config:4: "천옷"
+  module:Ultima-IV:config:40: "마법 완드"
+  module:Ultima-IV:config:41: "비전검"
+  module:Ultima-IV:config:42: "비전 검"
+  module:Ultima-IV:config:43: "말"
+  module:Ultima-IV:config:44: "말"
+  module:Ultima-IV:config:45: "마법사"
+  module:Ultima-IV:config:46: "음유시인"
+  module:Ultima-IV:config:47: "전사"
+  module:Ultima-IV:config:48: "드루이드"
+  module:Ultima-IV:config:49: "땜장이"
+  module:Ultima-IV:config:5: "가죽 갑옷"
+  module:Ultima-IV:config:50: "성기사"
+  module:Ultima-IV:config:51: "레인저"
+  module:Ultima-IV:config:52: "목자"
+  module:Ultima-IV:config:53: "경비병"
+  module:Ultima-IV:config:54: "상인"
+  module:Ultima-IV:config:55: "음유시인"
+  module:Ultima-IV:config:56: "광대"
+  module:Ultima-IV:config:57: "거지"
+  module:Ultima-IV:config:58: "아이"
+  module:Ultima-IV:config:59: "황소"
+  module:Ultima-IV:config:6: "사슬 갑옷"
+  module:Ultima-IV:config:60: "로드 브리티시"
+  module:Ultima-IV:config:61: "해적선"
+  module:Ultima-IV:config:62: "닉시"
+  module:Ultima-IV:config:63: "대왕오징어"
+  module:Ultima-IV:config:64: "바다뱀"
+  module:Ultima-IV:config:65: "해마"
+  module:Ultima-IV:config:66: "소용돌이"
+  module:Ultima-IV:config:67: "회오리"
+  module:Ultima-IV:config:68: "쥐"
+  module:Ultima-IV:config:69: "박쥐"
+  module:Ultima-IV:config:7: "판금 갑옷"
+  module:Ultima-IV:config:70: "왕거미"
+  module:Ultima-IV:config:71: "유령"
+  module:Ultima-IV:config:72: "슬라임"
+  module:Ultima-IV:config:73: "트롤"
+  module:Ultima-IV:config:74: "그렘린"
+  module:Ultima-IV:config:75: "미믹"
+  module:Ultima-IV:config:76: "리퍼"
+  module:Ultima-IV:config:77: "벌레떼"
+  module:Ultima-IV:config:78: "게이저"
+  module:Ultima-IV:config:79: "팬텀"
+  module:Ultima-IV:config:8: "마법 사슬 갑옷"
+  module:Ultima-IV:config:80: "오크"
+  module:Ultima-IV:config:81: "스켈레톤"
+  module:Ultima-IV:config:82: "도적"
+  module:Ultima-IV:config:83: "비단뱀"
+  module:Ultima-IV:config:84: "에틴"
+  module:Ultima-IV:config:85: "머리 없는 시체"
+  module:Ultima-IV:config:86: "사이클롭스"
+  module:Ultima-IV:config:87: "도깨비불"
+  module:Ultima-IV:config:88: "마법사"
+  module:Ultima-IV:config:89: "리치"
+  module:Ultima-IV:config:9: "마법 판금 갑옷"
+  module:Ultima-IV:config:90: "용암 도마뱀"
+  module:Ultima-IV:config:91: "조른"
+  module:Ultima-IV:config:92: "데몬"
+  module:Ultima-IV:config:93: "히드라"
+  module:Ultima-IV:config:94: "드래곤"
+  module:Ultima-IV:config:95: "발론"
+  module:Ultima-IV:config:96: "팬텀"
+  module:Ultima-IV:config:97: "팬텀"
+  module:Ultima-IV:config:98: "마을 사람"
+  module:Ultima-IV:config:99: "모험가"
+  module:Ultima-IV:Credits:0: "일부 자산은 저작권이 있는 자료를 사용하며, 이에 대해 여기서 밝혀둔다."
+  module:Ultima-IV:Credits:1: "music/minstrel
+    OGG 파일들은 (timidity를 통해) Markus Brenner의 MIDI
+    파일을 변환한 것입니다."
+  module:Ultima-IV:Credits:2: "저작권: MIDI 파일 (C) 1998 by Markus Brenner (Minstrel Dragon)
+    다운로드:  http://markus.brenner.de/ultima/binary/u4-midi.zip"
+  module:Ultima-IV:Credits:3: "sound/stone_falling.ogg
+    저작권: Wav 파일 (C) 2020 by bolkmar
+    라이선스:   CC BY 3.0
+    다운로드:  https://freesound.org/people/bolkmar/sounds/539178/"
+  module:Ultima-IV:graphics:0: "ega/material.png"
+  module:Ultima-IV:graphics:1: "u4/shapes.ega"
+  module:Ultima-IV:graphics:10: "u4/gypsy.ega"
+  module:Ultima-IV:graphics:11: "u4/abacus.ega"
+  module:Ultima-IV:graphics:12: "u4/honcom.ega"
+  module:Ultima-IV:graphics:13: "u4/valjus.ega"
+  module:Ultima-IV:graphics:14: "u4/sachonor.ega"
+  module:Ultima-IV:graphics:15: "u4/spirhum.ega"
+  module:Ultima-IV:graphics:16: "u4/animate.ega"
+  module:Ultima-IV:graphics:17: "u4/key7.ega"
+  module:Ultima-IV:graphics:18: "u4/honesty.ega"
+  module:Ultima-IV:graphics:19: "u4/compassn.ega"
+  module:Ultima-IV:graphics:2: "u4/charset.ega"
+  module:Ultima-IV:graphics:20: "u4/valor.ega"
+  module:Ultima-IV:graphics:21: "u4/justice.ega"
+  module:Ultima-IV:graphics:22: "u4/sacrific.ega"
+  module:Ultima-IV:graphics:23: "u4/honor.ega"
+  module:Ultima-IV:graphics:24: "u4/spirit.ega"
+  module:Ultima-IV:graphics:25: "u4/humility.ega"
+  module:Ultima-IV:graphics:26: "u4/truth.ega"
+  module:Ultima-IV:graphics:27: "u4/love.ega"
+  module:Ultima-IV:graphics:28: "u4/courage.ega"
+  module:Ultima-IV:graphics:29: "u4/stoncrcl.ega"
+  module:Ultima-IV:graphics:3: "u4/start.ega"
+  module:Ultima-IV:graphics:30: "u4/rune_5.ega"
+  module:Ultima-IV:graphics:31: "u4/rune_1.ega"
+  module:Ultima-IV:graphics:32: "u4/rune_2.ega"
+  module:Ultima-IV:graphics:33: "u4/rune_0.ega"
+  module:Ultima-IV:graphics:34: "u4/rune_1.ega"
+  module:Ultima-IV:graphics:35: "u4/rune_2.ega"
+  module:Ultima-IV:graphics:36: "u4/rune_1.ega"
+  module:Ultima-IV:graphics:37: "u4/rune_3.ega"
+  module:Ultima-IV:graphics:38: "u4/rune_4.ega"
+  module:Ultima-IV:graphics:39: "ega/hud.png"
+  module:Ultima-IV:graphics:4: "u4/title.ega"
+  module:Ultima-IV:graphics:40: "ega/gem.png"
+  module:Ultima-IV:graphics:41: "ega/dungeonhall.png"
+  module:Ultima-IV:graphics:42: "ega/dungeonhall.png"
+  module:Ultima-IV:graphics:43: "ega/dungeonhall_door.png"
+  module:Ultima-IV:graphics:44: "ega/dungeonhall_door.png"
+  module:Ultima-IV:graphics:45: "ega/dung0ma.png"
+  module:Ultima-IV:graphics:46: "ega/dung0ma.png"
+  module:Ultima-IV:graphics:47: "ega/dung0ma_door.png"
+  module:Ultima-IV:graphics:48: "ega/dung0ma_door.png"
+  module:Ultima-IV:graphics:49: "ega/dung1ma_door.png"
+  module:Ultima-IV:graphics:5: "u4/tree.ega"
+  module:Ultima-IV:graphics:50: "ega/dung1ma_door.png"
+  module:Ultima-IV:graphics:51: "ega/dung2ma_door.png"
+  module:Ultima-IV:graphics:52: "ega/dung2ma_door.png"
+  module:Ultima-IV:graphics:53: "ega/dung3ma_door.png"
+  module:Ultima-IV:graphics:54: "ega/dung3ma_door.png"
+  module:Ultima-IV:graphics:55: "ega/ladderup0.png"
+  module:Ultima-IV:graphics:56: "ega/ladderup0_side.png"
+  module:Ultima-IV:graphics:57: "ega/ladderup1.png"
+  module:Ultima-IV:graphics:58: "ega/ladderup1_side.png"
+  module:Ultima-IV:graphics:59: "ega/ladderup2.png"
+  module:Ultima-IV:graphics:6: "u4/portal.ega"
+  module:Ultima-IV:graphics:60: "ega/ladderup2_side.png"
+  module:Ultima-IV:graphics:61: "ega/ladderup3.png"
+  module:Ultima-IV:graphics:62: "ega/ladderup3_side.png"
+  module:Ultima-IV:graphics:63: "ega/ladderdown0.png"
+  module:Ultima-IV:graphics:64: "ega/ladderdown0_side.png"
+  module:Ultima-IV:graphics:65: "ega/ladderdown1.png"
+  module:Ultima-IV:graphics:66: "ega/ladderdown1_side.png"
+  module:Ultima-IV:graphics:67: "ega/ladderdown2.png"
+  module:Ultima-IV:graphics:68: "ega/ladderdown2_side.png"
+  module:Ultima-IV:graphics:69: "ega/ladderdown3.png"
+  module:Ultima-IV:graphics:7: "u4/outside.ega"
+  module:Ultima-IV:graphics:70: "ega/ladderdown3_side.png"
+  module:Ultima-IV:graphics:71: "ega/ladderupdown0.png"
+  module:Ultima-IV:graphics:72: "ega/ladderupdown0_side.png"
+  module:Ultima-IV:graphics:73: "ega/ladderupdown1.png"
+  module:Ultima-IV:graphics:74: "ega/ladderupdown1_side.png"
+  module:Ultima-IV:graphics:75: "ega/ladderupdown2.png"
+  module:Ultima-IV:graphics:76: "ega/ladderupdown2_side.png"
+  module:Ultima-IV:graphics:77: "ega/ladderupdown3.png"
+  module:Ultima-IV:graphics:78: "ega/ladderupdown3_side.png"
+  module:Ultima-IV:graphics:79: "ega/traps.png"
+  module:Ultima-IV:graphics:8: "u4/inside.ega"
+  module:Ultima-IV:graphics:9: "u4/wagon.ega"
+  module:Ultima-IV:maps:0: "world.map"
+  module:Ultima-IV:maps:1: "위대한 스티지언 어비스에 들어간다!
+
+"
+  module:Ultima-IV:maps:10: "lcb.tlk"
+  module:Ultima-IV:maps:100: "히스로스 던전으로
+"
+  module:Ultima-IV:maps:101: "그릇됨 던전으로
+"
+  module:Ultima-IV:maps:102: "데스타드 던전으로
+"
+  module:Ultima-IV:maps:103: "탐욕 던전으로
+"
+  module:Ultima-IV:maps:104: "히스로스 던전으로
+"
+  module:Ultima-IV:maps:105: "수치 던전으로
+"
+  module:Ultima-IV:maps:106: "hythloth.dng"
+  module:Ultima-IV:maps:107: "히스로스"
+  module:Ultima-IV:maps:108: "기만 던전으로
+"
+  module:Ultima-IV:maps:109: "수치 던전으로
+"
+  module:Ultima-IV:maps:11: "첫 층으로 내려간다!
+"
+  module:Ultima-IV:maps:110: "히스로스 던전으로
+"
+  module:Ultima-IV:maps:111: "그릇됨 던전으로
+"
+  module:Ultima-IV:maps:112: "경멸 던전으로
+"
+  module:Ultima-IV:maps:113: "그릇됨 던전으로
+"
+  module:Ultima-IV:maps:114: "히스로스 던전으로
+"
+  module:Ultima-IV:maps:115: "탐욕 던전으로
+"
+  module:Ultima-IV:maps:116: "데스타드 던전으로
+"
+  module:Ultima-IV:maps:117: "탐욕 던전으로
+"
+  module:Ultima-IV:maps:118: "히스로스 던전으로
+"
+  module:Ultima-IV:maps:119: "수치 던전으로
+"
+  module:Ultima-IV:maps:12: "첫 층으로 내려간다!
+"
+  module:Ultima-IV:maps:120: "abyss.dng"
+  module:Ultima-IV:maps:121: "위대한 스티지언 어비스"
+  module:Ultima-IV:maps:122: "shrine.con"
+  module:Ultima-IV:maps:123: "정직"
+  module:Ultima-IV:maps:124: "shrine.con"
+  module:Ultima-IV:maps:125: "자비"
+  module:Ultima-IV:maps:126: "shrine.con"
+  module:Ultima-IV:maps:127: "용맹"
+  module:Ultima-IV:maps:128: "shrine.con"
+  module:Ultima-IV:maps:129: "정의"
+  module:Ultima-IV:maps:13: "lycaeum.ult"
+  module:Ultima-IV:maps:130: "shrine.con"
+  module:Ultima-IV:maps:131: "희생"
+  module:Ultima-IV:maps:132: "shrine.con"
+  module:Ultima-IV:maps:133: "명예"
+  module:Ultima-IV:maps:134: "shrine.con"
+  module:Ultima-IV:maps:135: "영성"
+  module:Ultima-IV:maps:136: "shrine.con"
+  module:Ultima-IV:maps:137: "겸손"
+  module:Ultima-IV:maps:138: "brick.con"
+  module:Ultima-IV:maps:139: "bridge.con"
+  module:Ultima-IV:maps:14: "라이시움"
+  module:Ultima-IV:maps:140: "brush.con"
+  module:Ultima-IV:maps:141: "camp.con"
+  module:Ultima-IV:maps:142: "dng0.con"
+  module:Ultima-IV:maps:143: "dng1.con"
+  module:Ultima-IV:maps:144: "dng2.con"
+  module:Ultima-IV:maps:145: "dng3.con"
+  module:Ultima-IV:maps:146: "dng4.con"
+  module:Ultima-IV:maps:147: "dng5.con"
+  module:Ultima-IV:maps:148: "dng6.con"
+  module:Ultima-IV:maps:149: "dungeon.con"
+  module:Ultima-IV:maps:15: "lycaeum.tlk"
+  module:Ultima-IV:maps:150: "forest.con"
+  module:Ultima-IV:maps:151: "grass.con"
+  module:Ultima-IV:maps:152: "hill.con"
+  module:Ultima-IV:maps:153: "inn.con"
+  module:Ultima-IV:maps:154: "marsh.con"
+  module:Ultima-IV:maps:155: "shipsea.con"
+  module:Ultima-IV:maps:156: "shipship.con"
+  module:Ultima-IV:maps:157: "shipshor.con"
+  module:Ultima-IV:maps:158: "shore.con"
+  module:Ultima-IV:maps:159: "shorship.con"
+  module:Ultima-IV:maps:16: "empath.ult"
+  module:Ultima-IV:maps:160: "camp.dng"
+  module:Ultima-IV:maps:17: "엠패스 수도원"
+  module:Ultima-IV:maps:18: "empath.tlk"
+  module:Ultima-IV:maps:19: "serpent.ult"
+  module:Ultima-IV:maps:2: "lcb_1.ult"
+  module:Ultima-IV:maps:20: "서펀트 홀드"
+  module:Ultima-IV:maps:21: "serpent.tlk"
+  module:Ultima-IV:maps:22: "moonglow.ult"
+  module:Ultima-IV:maps:23: "문글로우"
+  module:Ultima-IV:maps:24: "moonglow.tlk"
+  module:Ultima-IV:maps:25: "britain.ult"
+  module:Ultima-IV:maps:26: "브리튼"
+  module:Ultima-IV:maps:27: "britain.tlk"
+  module:Ultima-IV:maps:28: "jhelom.ult"
+  module:Ultima-IV:maps:29: "젤롬"
+  module:Ultima-IV:maps:3: "브리타니아"
+  module:Ultima-IV:maps:30: "jhelom.tlk"
+  module:Ultima-IV:maps:31: "yew.ult"
+  module:Ultima-IV:maps:32: "유"
+  module:Ultima-IV:maps:33: "yew.tlk"
+  module:Ultima-IV:maps:34: "minoc.ult"
+  module:Ultima-IV:maps:35: "미녹"
+  module:Ultima-IV:maps:36: "minoc.tlk"
+  module:Ultima-IV:maps:37: "trinsic.ult"
+  module:Ultima-IV:maps:38: "트린식"
+  module:Ultima-IV:maps:39: "trinsic.tlk"
+  module:Ultima-IV:maps:4: "lcb.tlk"
+  module:Ultima-IV:maps:40: "skara.ult"
+  module:Ultima-IV:maps:41: "스카라 브레이"
+  module:Ultima-IV:maps:42: "skara.tlk"
+  module:Ultima-IV:maps:43: "magincia.ult"
+  module:Ultima-IV:maps:44: "매긴시아"
+  module:Ultima-IV:maps:45: "magincia.tlk"
+  module:Ultima-IV:maps:46: "paws.ult"
+  module:Ultima-IV:maps:47: "포즈"
+  module:Ultima-IV:maps:48: "paws.tlk"
+  module:Ultima-IV:maps:49: "den.ult"
+  module:Ultima-IV:maps:5: "둘째 층으로 오른다!
+"
+  module:Ultima-IV:maps:50: "버커니어즈 덴"
+  module:Ultima-IV:maps:51: "den.tlk"
+  module:Ultima-IV:maps:52: "vesper.ult"
+  module:Ultima-IV:maps:53: "베스퍼"
+  module:Ultima-IV:maps:54: "vesper.tlk"
+  module:Ultima-IV:maps:55: "cove.ult"
+  module:Ultima-IV:maps:56: "코브"
+  module:Ultima-IV:maps:57: "cove.tlk"
+  module:Ultima-IV:maps:58: "deceit.dng"
+  module:Ultima-IV:maps:59: "기만"
+  module:Ultima-IV:maps:6: "둘째 층으로 오른다!
+"
+  module:Ultima-IV:maps:60: "기만 던전으로
+"
+  module:Ultima-IV:maps:61: "수치 던전으로
+"
+  module:Ultima-IV:maps:62: "히스로스 던전으로
+"
+  module:Ultima-IV:maps:63: "그릇됨 던전으로
+"
+  module:Ultima-IV:maps:64: "despise.dng"
+  module:Ultima-IV:maps:65: "경멸"
+  module:Ultima-IV:maps:66: "경멸 던전으로
+"
+  module:Ultima-IV:maps:67: "그릇됨 던전으로
+"
+  module:Ultima-IV:maps:68: "히스로스 던전으로
+"
+  module:Ultima-IV:maps:69: "탐욕 던전으로
+"
+  module:Ultima-IV:maps:7: "깊은 곳으로 내려간다!
+"
+  module:Ultima-IV:maps:70: "destard.dng"
+  module:Ultima-IV:maps:71: "데스타드"
+  module:Ultima-IV:maps:72: "데스타드 던전으로
+"
+  module:Ultima-IV:maps:73: "탐욕 던전으로
+"
+  module:Ultima-IV:maps:74: "히스로스 던전으로
+"
+  module:Ultima-IV:maps:75: "수치 던전으로
+"
+  module:Ultima-IV:maps:76: "wrong.dng"
+  module:Ultima-IV:maps:77: "그릇됨"
+  module:Ultima-IV:maps:78: "기만 던전으로
+"
+  module:Ultima-IV:maps:79: "수치 던전으로
+"
+  module:Ultima-IV:maps:8: "lcb_2.ult"
+  module:Ultima-IV:maps:80: "히스로스 던전으로
+"
+  module:Ultima-IV:maps:81: "그릇됨 던전으로
+"
+  module:Ultima-IV:maps:82: "경멸 던전으로
+"
+  module:Ultima-IV:maps:83: "그릇됨 던전으로
+"
+  module:Ultima-IV:maps:84: "히스로스 던전으로
+"
+  module:Ultima-IV:maps:85: "탐욕 던전으로
+"
+  module:Ultima-IV:maps:86: "covetous.dng"
+  module:Ultima-IV:maps:87: "탐욕"
+  module:Ultima-IV:maps:88: "경멸 던전으로
+"
+  module:Ultima-IV:maps:89: "그릇됨 던전으로
+"
+  module:Ultima-IV:maps:9: "브리타니아"
+  module:Ultima-IV:maps:90: "히스로스 던전으로
+"
+  module:Ultima-IV:maps:91: "탐욕 던전으로
+"
+  module:Ultima-IV:maps:92: "데스타드 던전으로
+"
+  module:Ultima-IV:maps:93: "탐욕 던전으로
+"
+  module:Ultima-IV:maps:94: "히스로스 던전으로
+"
+  module:Ultima-IV:maps:95: "수치 던전으로
+"
+  module:Ultima-IV:maps:96: "shame.dng"
+  module:Ultima-IV:maps:97: "수치"
+  module:Ultima-IV:maps:98: "기만 던전으로
+"
+  module:Ultima-IV:maps:99: "수치 던전으로
+"
+  module:Ultima-IV:vendors:10: "브리타니아에서 지팡이를 만드는 곳은 우리뿐이나, 겨우 $gp에 판다네.
+"
+  module:Ultima-IV:vendors:100: "윈스턴"
+  module:Ultima-IV:vendors:101: "발리언트의 갑옷점"
+  module:Ultima-IV:vendors:102: "발리언트"
+  module:Ultima-IV:vendors:103: "결투용 갑옷점"
+  module:Ultima-IV:vendors:104: "장"
+  module:Ultima-IV:vendors:105: "경갑옷점"
+  module:Ultima-IV:vendors:106: "피에르"
+  module:Ultima-IV:vendors:107: "기본 갑옷점"
+  module:Ultima-IV:vendors:108: "림피"
+  module:Ultima-IV:vendors:109: "@에 오신 것을 환영합니다
+
+%(이)가 말한다: 좋은 하루입니다, 어서 오세요.
+"
+  module:Ultima-IV:vendors:11: "가장 치명적인 단검을 파네, 개당 겨우 $gp인 특가라네.
+"
+  module:Ultima-IV:vendors:110: "
+돈을 좀 마련해서 다시 오게!
+"
+  module:Ultima-IV:vendors:111: "
+식량에 관심 있으신가요? "
+  module:Ultima-IV:vendors:112: "
+안녕히 가세요. 또 오세요!
+"
+  module:Ultima-IV:vendors:113: "
+최고의 모험 식량이 있습니다, #이(가) 겨우 $gp입니다.
+"
+  module:Ultima-IV:vendors:114: "
+#을(를) 몇 팩 드릴까요? "
+  module:Ultima-IV:vendors:115: "
+아쉽네요. 다음에 또 오세요.
+"
+  module:Ultima-IV:vendors:116: "
+감사합니다. "
+  module:Ultima-IV:vendors:117: "또 오세요!
+"
+  module:Ultima-IV:vendors:118: "더 필요한
+것은? "
+  module:Ultima-IV:vendors:119: "
+지불하실 수 있는 건 "
+  module:Ultima-IV:vendors:12: "{
+            우리 슬링은 최고급 밧줄과 가죽으로만 만듭니다,
+            겨우 $gp에 드립니다.
+        }"
+  module:Ultima-IV:vendors:120: " 팩뿐입니다.
+"
+  module:Ultima-IV:vendors:121: "현자의 델리"
+  module:Ultima-IV:vendors:122: "샤먼"
+  module:Ultima-IV:vendors:123: "모험 식량점"
+  module:Ultima-IV:vendors:124: "윈드릭"
+  module:Ultima-IV:vendors:125: "건어물점"
+  module:Ultima-IV:vendors:126: "도나"
+  module:Ultima-IV:vendors:127: "생각할 거리 식당"
+  module:Ultima-IV:vendors:128: "민톨"
+  module:Ultima-IV:vendors:129: "시장"
+  module:Ultima-IV:vendors:13: "이 철퇴들은 단단한 자루에 5파운드짜리 머리가 달려 있고 $gp에 적당히 판다네.
+"
+  module:Ultima-IV:vendors:130: "맥스"
+  module:Ultima-IV:vendors:131: "%(이)가 말한다: @에 오신 것을 환영합니다"
+  module:Ultima-IV:vendors:132: "또 보세, 친구!
+"
+  module:Ultima-IV:vendors:133: "
+%(이)가 말한다: 뭘 드릴까요, 음식이오 에일이오? "
+  module:Ultima-IV:vendors:134: "
+저희 특선은 =이며, 가격은 $gp입니다."
+  module:Ultima-IV:vendors:135: "
+%(이)가 말한다: 미안하지만, 너무 많이 가지신 것 같군요. 안녕히!
+"
+  module:Ultima-IV:vendors:136: "
+저희 최고의 술 한 잔입니다.
+2gp입니다.
+지불하시겠습니까? "
+  module:Ultima-IV:vendors:137: "
+몇 접시나
+드릴까요? "
+  module:Ultima-IV:vendors:138: "자 여기 있수다.
+"
+  module:Ultima-IV:vendors:139: "지불하실 수 있는 건 "
+  module:Ultima-IV:vendors:14: "이 도끼의 훌륭한 솜씨를 보게, $gp면 괜찮은 값이라는 데 동의할 걸세.
+"
+  module:Ultima-IV:vendors:140: " 접시뿐입니다.
+"
+  module:Ultima-IV:vendors:141: "더 필요한
+건? "
+  module:Ultima-IV:vendors:142: "
+돈 안 낼 거야, 응.
+이 쓰레기야, 꺼져
+안 그럼 경비병을
+부를 테다!
+"
+  module:Ultima-IV:vendors:143: "
+뭘 알고 싶은가 친구?
+"
+  module:Ultima-IV:vendors:144: "
+미안하지만 그건 도와줄 수가 없다네 친구!
+"
+  module:Ultima-IV:vendors:145: "
+금이 부족한 것 같군요. 좋은 하루 되세요!
+"
+  module:Ultima-IV:vendors:146: "
+미안하네, 도와줄
+수가 없다네 친구!
+"
+  module:Ultima-IV:vendors:147: "
+그 이야기는 좀 흐릿하군, 금이 좀 더 있으면 기억이 되살아날지도. 얼마나
+주겠나: "
+  module:Ultima-IV:vendors:148: "
+그건 안 가지고 있잖나 친구!
+"
+  module:Ultima-IV:vendors:149: "검은 보석"
+  module:Ultima-IV:vendors:15: "이 검들의 훌륭한 솜씨는 그대 적들의 공포가 될 걸세, $gp라네.
+"
+  module:Ultima-IV:vendors:150: "{
+            %(이)가 말한다: 아, 검은 보석 말이군.
+            그래, 들어본 적 있네. 하지만
+            그것이 어디 있는지 아는 이는
+            마법사 멀린뿐일세.
+            }"
+  module:Ultima-IV:vendors:151: "육분의"
+  module:Ultima-IV:vendors:152: "{
+            %(이)가 말한다: 항해에는 육분의가 필수지... 길드 상점에서 \"D\" 항목을 물어보게!
+            }"
+  module:Ultima-IV:vendors:153: "하얀 보석"
+  module:Ultima-IV:vendors:154: "{
+            어디 보자... 그래, 늙은 은둔자였지...
+            슬로븐! 찾기 어려운 사람인데,
+            락 호수 근처에 산다고 들었네.
+            }"
+  module:Ultima-IV:vendors:155: "맨드레이크"
+  module:Ultima-IV:vendors:156: "{
+            %(이)가 말한다: 맨드레이크를 가진 걸 마지막으로
+            봤던 사람은 칼럼니라는
+            늙은 연금술사였네.
+            }"
+  module:Ultima-IV:vendors:157: "해골"
+  module:Ultima-IV:vendors:158: "{
+            %(이)가 말한다: 그 가장 사악한 물건에 대해 꼭 알아야 한다면...
+            거지 주드를 찾게. 그는 아주아주 가난하다네!
+            }"
+  module:Ultima-IV:vendors:159: "벨라도나"
+  module:Ultima-IV:vendors:16: "우리 활은 최고급 주목으로, 화살은 버드나무로 만든다네, $gp면 거저라네.
+"
+  module:Ultima-IV:vendors:160: "{
+            %(이)가 말한다: 벨라도나에 대해선 이것만 아네...
+            버질을 찾게, 안 그럼 놓칠 걸세! 트린식에서 찾아보게!
+            }"
+  module:Ultima-IV:vendors:161: "검은 보석"
+  module:Ultima-IV:vendors:162: "육분의"
+  module:Ultima-IV:vendors:163: "하얀 보석"
+  module:Ultima-IV:vendors:164: "맨드레이크"
+  module:Ultima-IV:vendors:165: "해골"
+  module:Ultima-IV:vendors:166: "벨라도나"
+  module:Ultima-IV:vendors:167: "명랑한 영혼 술집"
+  module:Ultima-IV:vendors:168: "샘"
+  module:Ultima-IV:vendors:169: "양갈비"
+  module:Ultima-IV:vendors:17: "음유시인 아이올로가 만든 석궁은 세상에서 가장 훌륭하다네, $gp에 드리지.
+"
+  module:Ultima-IV:vendors:170: "피의 술집"
+  module:Ultima-IV:vendors:171: "셀레스티얼"
+  module:Ultima-IV:vendors:172: "드래곤 타르타르"
+  module:Ultima-IV:vendors:173: "술통 탭 술집"
+  module:Ultima-IV:vendors:174: "테란"
+  module:Ultima-IV:vendors:175: "브라운 빈스"
+  module:Ultima-IV:vendors:176: "폴리 선술집"
+  module:Ultima-IV:vendors:177: "그렉 앤 롭"
+  module:Ultima-IV:vendors:178: "폴리 필레"
+  module:Ultima-IV:vendors:179: "블랙 선장 선술집"
+  module:Ultima-IV:vendors:18: "{
+            기름병은 훌륭한 무기이며 불의 벽도 만든다네.
+            개당 $gp일세.
+        }"
+  module:Ultima-IV:vendors:180: "선장 아저씨"
+  module:Ultima-IV:vendors:181: "개고기 파이"
+  module:Ultima-IV:vendors:182: "도끼와 에일"
+  module:Ultima-IV:vendors:183: "아론"
+  module:Ultima-IV:vendors:184: "그린 그라누킷"
+  module:Ultima-IV:vendors:185: "{
+            눈먼 여인이 그대를 향해 돌아서며 말한다: @에 오신 것을 환영합니다
+
+            저는 %입니다
+            재료가 필요하신가요?
+        }"
+  module:Ultima-IV:vendors:186: "
+좋습니다,"
+  module:Ultima-IV:vendors:187: "
+%(이)가 말한다:
+그럼 다음에 오시죠....
+하며 천천히 돌아선다.
+"
+  module:Ultima-IV:vendors:188: "{
+        A-유황재
+        B-인삼
+        C-마늘
+        D-거미줄
+        E-핏빛이끼
+        F-흑진주
+    }"
+  module:Ultima-IV:vendors:189: "유황재"
+  module:Ultima-IV:vendors:19: "핼버드는 장애물 너머로 공격할 수 있는 강력한 무기라네, 필수품이고 겨우 $gp일세.
+"
+  module:Ultima-IV:vendors:190: "인삼"
+  module:Ultima-IV:vendors:191: "마늘"
+  module:Ultima-IV:vendors:192: "거미줄"
+  module:Ultima-IV:vendors:193: "핏빛이끼"
+  module:Ultima-IV:vendors:194: "흑진주"
+  module:Ultima-IV:vendors:195: "
+제게 있는
++그대의
+관심사: "
+  module:Ultima-IV:vendors:196: "
+좋습니다, =을(를) $gp에 팝니다. 몇 개나
+드릴까요? "
+  module:Ultima-IV:vendors:197: "
+좋습니다, $gp입니다.  지불하실 금액: "
+  module:Ultima-IV:vendors:198: "
+좋습니다. "
+  module:Ultima-IV:vendors:199: "
+금이 부족한 것 같군요! "
+  module:Ultima-IV:vendors:2: "{
+            어서 오십시오
+            @
+
+            %(이)가 말한다:
+            환영합니다 친구여!
+            사러 오셨습니까
+            아니면 팔러 오셨습니까?
+        }"
+  module:Ultima-IV:vendors:20: "이 마법 도끼는 적에게 던지면 다시 돌아온다네, 전부 $gp라네.
+"
+  module:Ultima-IV:vendors:200: "
+그렇군요, 그럼 "
+  module:Ultima-IV:vendors:201: "더 필요한
+것은? "
+  module:Ultima-IV:vendors:202: "마법 약초점"
+  module:Ultima-IV:vendors:203: "마고"
+  module:Ultima-IV:vendors:204: "허브와 향신료"
+  module:Ultima-IV:vendors:205: "사샤"
+  module:Ultima-IV:vendors:206: "마법 상점"
+  module:Ultima-IV:vendors:207: "쉴라"
+  module:Ultima-IV:vendors:208: "마법 멘타르"
+  module:Ultima-IV:vendors:209: "섀넌"
+  module:Ultima-IV:vendors:21: "{
+            이런 마법 검은 참으로 희귀하다네
+            $gp에 하나 내드리지.
+        }"
+  module:Ultima-IV:vendors:210: "{
+            어서 오십시오
+            @
+
+            %(이)가 말한다:
+            평화와 기쁨이 함께하기를, 친구여.
+            도움이 필요하십니까?
+        }"
+  module:Ultima-IV:vendors:211: "
+%(이)가 말한다: 선의 힘이 그대의 삶을 지켜주기를.
+"
+  module:Ultima-IV:vendors:212: "
+남을 돕기 위해 그대 피 100포인트를 바칠 의향이 있는가? "
+  module:Ultima-IV:vendors:213: "
+그대는 큰 도움이 되었다. 우리는 절실히 필요했다!
+"
+  module:Ultima-IV:vendors:214: "{
+        A-치료
+        B-회복
+        C-부활
+    }"
+  module:Ultima-IV:vendors:215: "치료"
+  module:Ultima-IV:vendors:216: "회복"
+  module:Ultima-IV:vendors:217: "부활"
+  module:Ultima-IV:vendors:218: "
+%(이)가 말한다: 저희가 할 수 있는 것:
++필요한 것: "
+  module:Ultima-IV:vendors:219: "
+%(이)가 묻는다:
+누가
+필요한가? "
+  module:Ultima-IV:vendors:22: "마법 활은 적을 멀리 물리치거나 죽게 하리라! $gp면 필수라네!
+"
+  module:Ultima-IV:vendors:220: "아무도 없다고?
+"
+  module:Ultima-IV:vendors:221: "
+%(이)가 묻는다: 도움이 더 필요하신가요? "
+  module:Ultima-IV:vendors:222: "
++은(는) $gp가 든다.
+"
+  module:Ultima-IV:vendors:223: "
+그대의 지갑을 보니 금이 부족하구나. 도울 수가 없다.
+"
+  module:Ultima-IV:vendors:224: "
+지불
+하겠는가? "
+  module:Ultima-IV:vendors:225: "그대는 독에 걸리지 않았다!
+"
+  module:Ultima-IV:vendors:226: "그대는 이미 아주 건강하다!
+"
+  module:Ultima-IV:vendors:227: "그대는 죽지 않았다, 어리석은 자여!
+"
+  module:Ultima-IV:vendors:228: "왕실 치유소"
+  module:Ultima-IV:vendors:229: "펜드래곤"
+  module:Ultima-IV:vendors:23: "이 마법 완드는 강력한 푸른 번개를 쏘아 적을 쓰러뜨린다네, $gp일세.
+"
+  module:Ultima-IV:vendors:230: "치유사"
+  module:Ultima-IV:vendors:231: "하모니"
+  module:Ultima-IV:vendors:232: "상처 치유소"
+  module:Ultima-IV:vendors:233: "셀레스트"
+  module:Ultima-IV:vendors:234: "치유와 건강"
+  module:Ultima-IV:vendors:235: "트리플렛"
+  module:Ultima-IV:vendors:236: "정직한 치유소"
+  module:Ultima-IV:vendors:237: "저스틴"
+  module:Ultima-IV:vendors:238: "신비한 치유소"
+  module:Ultima-IV:vendors:239: "스피란"
+  module:Ultima-IV:vendors:24: "
+몇 개나
+드릴까요? "
+  module:Ultima-IV:vendors:240: "진실의 치유사"
+  module:Ultima-IV:vendors:241: "스타파이어"
+  module:Ultima-IV:vendors:242: "사랑의 치유사"
+  module:Ultima-IV:vendors:243: "살레"
+  module:Ultima-IV:vendors:244: "용기의 치유사"
+  module:Ultima-IV:vendors:245: "윈드워커"
+  module:Ultima-IV:vendors:246: "치유소"
+  module:Ultima-IV:vendors:247: "콰트"
+  module:Ultima-IV:vendors:248: "여관 주인이 말한다: "
+  module:Ultima-IV:vendors:249: "그 말을 여기서 치우게!!!
+"
+  module:Ultima-IV:vendors:25: "
+자금이 부족한 듯하군요, 다른 것은 어떨까요."
+  module:Ultima-IV:vendors:250: "@에 오신 것을 환영합니다
+
+저는 %입니다.
+
+숙소가 필요하신가요? "
+  module:Ultima-IV:vendors:251: "
+%(이)가 말한다: 그럼 잘못 찾아오셨군요!
+좋은 하루 되세요.
+"
+  module:Ultima-IV:vendors:252: "
+좋습니다.  편안한
+밤 되세요.
+"
+  module:Ultima-IV:vendors:253: "
+아, 이상한 소리는 신경 쓰지 마세요, 그냥 쥐들이에요!
+"
+  module:Ultima-IV:vendors:254: "
+돈이 없으면 묵을 수 없습니다! 안녕히 가세요.
+"
+  module:Ultima-IV:vendors:255: "
+
+받으시겠습니까? "
+  module:Ultima-IV:vendors:256: "
+이 마을에서 이보다 좋은 거래는 없을 겁니다!
+"
+  module:Ultima-IV:vendors:257: "정직한 여관"
+  module:Ultima-IV:vendors:258: "스카투"
+  module:Ultima-IV:vendors:259: "침대 2개짜리 방이 있고 20gp에 빌려드립니다."
+  module:Ultima-IV:vendors:26: "
+%(이)가 말한다: 훌륭한 선택입니다!
+"
+  module:Ultima-IV:vendors:260: "브리타니아 장원"
+  module:Ultima-IV:vendors:261: "제이슨"
+  module:Ultima-IV:vendors:262: "침대 1개짜리 적당한 방이 있고 15gp입니다."
+  module:Ultima-IV:vendors:263: "끝자락 여관"
+  module:Ultima-IV:vendors:264: "스머크"
+  module:Ultima-IV:vendors:265: "아주 안전한 적당한 크기의 방에 침대 1개, 10gp입니다."
+  module:Ultima-IV:vendors:266: "나그네의 여관"
+  module:Ultima-IV:vendors:267: "에스트로"
+  module:Ultima-IV:vendors:268: "
+방이 세 개 있습니다,
+침대 1개, 2개, 3개짜리로 각각 30, 60,
+90gp입니다.
+침대 1개, 2개, 3개
+중 어느 것을? "
+  module:Ultima-IV:vendors:269: "명예로운 여관"
+  module:Ultima-IV:vendors:27: "
+더 필요한
+것은? "
+  module:Ultima-IV:vendors:270: "자야크"
+  module:Ultima-IV:vendors:271: "뒷문이 있는 침대 1개짜리 방이 15gp입니다."
+  module:Ultima-IV:vendors:272: "영혼의 여관"
+  module:Ultima-IV:vendors:273: "타이론"
+  module:Ultima-IV:vendors:274: "{
+                안타깝게도, 침대 1개짜리 아주 작은 방밖에 없습니다:
+                게다가 귀신이 나온다지요! 그래도 묵으시겠다면 5gp입니다.
+                }"
+  module:Ultima-IV:vendors:275: "잠자리 상점"
+  module:Ultima-IV:vendors:276: "타이머스"
+  module:Ultima-IV:vendors:277: "저기 있는 간이침대뿐입니다. 하지만 편안하고, 겨우 1gp입니다."
+  module:Ultima-IV:vendors:278: "{
+            어이 친구! 늙은
+%한테서 사고 싶은 게로군?
+
+            %(이)가 말한다: @에 온 걸 환영하네.
+내 물건 좀 보겠나?
+        }"
+  module:Ultima-IV:vendors:279: "
+%(이)가 말한다: 또 보세 친구!
+"
+  module:Ultima-IV:vendors:28: "
+판매할 물건: "
+  module:Ultima-IV:vendors:280: "{
+        A-횃불
+        B-마법 보석
+        C-마법 열쇠
+    }"
+  module:Ultima-IV:vendors:281: "
+오래가는 횃불 #을(를) 겨우 $gp에 주겠네."
+  module:Ultima-IV:vendors:282: "
+지도 마법 보석이 있다네, #이(가) 겨우 $gp일세."
+  module:Ultima-IV:vendors:283: "
+마법 열쇠, 1회용, #에 $gp면 적당한 값일세."
+  module:Ultima-IV:vendors:284: "
+그러니까...육분의를 원한다고...흠, 하나 있는데 $ 골드면 넘겨줄 수도 있지!"
+  module:Ultima-IV:vendors:285: "
+
+사겠나? "
+  module:Ultima-IV:vendors:286: "
+흐음...으르렁...
+"
+  module:Ultima-IV:vendors:287: "
+%(이)가 말한다: 좋아 친구!
+내가 가진 건:
++뭘로 하겠나? "
+  module:Ultima-IV:vendors:288: "
+좋아... 좋아...
+"
+  module:Ultima-IV:vendors:289: "
+%(이)가 말한다: 더
+볼 텐가? "
+  module:Ultima-IV:vendors:29: "bcdefghijklmnop"
+  module:Ultima-IV:vendors:290: "
+뭐라고? 돈이 없다고! 꺼져 이 돼지야!
+"
+  module:Ultima-IV:vendors:291: "길드 상점"
+  module:Ultima-IV:vendors:292: "롱 존 리어리"
+  module:Ultima-IV:vendors:293: "해적 길드"
+  module:Ultima-IV:vendors:294: "외눈박이 윌리"
+  module:Ultima-IV:vendors:295: "환영하네 친구!
+말에 관심
+있으신가? "
+  module:Ultima-IV:vendors:296: "
+아쉽군, 좋은 말이 필요해 보이는데!
+"
+  module:Ultima-IV:vendors:297: "
+겨우 $ 골드에
+최고를 가질 수 있다네! 사겠는가? "
+  module:Ultima-IV:vendors:298: "
+자, 이보다 나은 혈통은 결코 찾지 못하리라!
+"
+  module:Ultima-IV:vendors:299: "
+지불할 금이 충분치 않은 듯하다!
+"
+  module:Ultima-IV:vendors:3: "
+아주 좋습니다!"
+  module:Ultima-IV:vendors:30: "
+그것은 소유하지 않았다. 그럼 다른 무엇을"
+  module:Ultima-IV:vendors:31: "
+그 =에 $gp를 드리겠습니다.
+거래하시겠습니까? "
+  module:Ultima-IV:vendors:32: "
+흠. 그럼 다른
+무엇을 "
+  module:Ultima-IV:vendors:33: "
+=을(를) 몇 개나
+파시겠습니까? "
+  module:Ultima-IV:vendors:34: "
+그렇게 많이 가지고 있지 않습니다!
+"
+  module:Ultima-IV:vendors:35: "
+그것들에 $gp를 드리겠습니다.
+거래하시겠습니까? "
+  module:Ultima-IV:vendors:36: "
+좋습니다! 다른 것은?"
+  module:Ultima-IV:vendors:37: "지팡이"
+  module:Ultima-IV:vendors:38: "단검"
+  module:Ultima-IV:vendors:39: "슬링"
+  module:Ultima-IV:vendors:4: "
+훌륭합니다! 어느 것으로
+하시겠"
+  module:Ultima-IV:vendors:40: "철퇴"
+  module:Ultima-IV:vendors:41: "도끼"
+  module:Ultima-IV:vendors:42: "검"
+  module:Ultima-IV:vendors:43: "활"
+  module:Ultima-IV:vendors:44: "석궁"
+  module:Ultima-IV:vendors:45: "화염 기름"
+  module:Ultima-IV:vendors:46: "핼버드"
+  module:Ultima-IV:vendors:47: "마법 도끼"
+  module:Ultima-IV:vendors:48: "마법 검"
+  module:Ultima-IV:vendors:49: "마법 활"
+  module:Ultima-IV:vendors:5: "
+%(이)가 말한다:
+평안히 가시게!
+"
+  module:Ultima-IV:vendors:50: "마법 완드"
+  module:Ultima-IV:vendors:51: "비전 검"
+  module:Ultima-IV:vendors:52: "윈저 무기점"
+  module:Ultima-IV:vendors:53: "윈스턴"
+  module:Ultima-IV:vendors:54: "윌라드의 무기점"
+  module:Ultima-IV:vendors:55: "윌라드"
+  module:Ultima-IV:vendors:56: "철공소"
+  module:Ultima-IV:vendors:57: "피터"
+  module:Ultima-IV:vendors:58: "결투용 무기점"
+  module:Ultima-IV:vendors:59: "주마"
+  module:Ultima-IV:vendors:6: "
+저희가 가진 것:
++무엇에
+관심 있으신가요? "
+  module:Ultima-IV:vendors:60: "훅의 무기점"
+  module:Ultima-IV:vendors:61: "훅"
+  module:Ultima-IV:vendors:62: "마을 무기점"
+  module:Ultima-IV:vendors:63: "웬디"
+  module:Ultima-IV:vendors:65: "{
+            어서 오십시오
+            @
+
+            %(이)가 말한다:
+            환영합니다 친구여!
+            사시겠습니까
+            아니면 파시겠습니까?
+        }"
+  module:Ultima-IV:vendors:66: "
+그럼,"
+  module:Ultima-IV:vendors:67: "
+무엇을"
+  module:Ultima-IV:vendors:68: "
+%(이)가 말한다:
+안녕히 가세요.
+"
+  module:Ultima-IV:vendors:69: "
+저희가 가진 건:
++
+무엇으로
+하시겠어요? "
+  module:Ultima-IV:vendors:7: "
+하나 살 돈도 없으시군요!
+"
+  module:Ultima-IV:vendors:70: "
+하나 살 돈도 없으시군요!
+"
+  module:Ultima-IV:vendors:71: "
+받으시겠습니까? "
+  module:Ultima-IV:vendors:72: "
+아쉽네요."
+  module:Ultima-IV:vendors:73: "천 갑옷은 빠듯한 예산에 좋습니다, $gp면 적당한 가격이죠.
+"
+  module:Ultima-IV:vendors:74: "{
+            가죽 갑옷은 유연하면서도 튼튼하고, 겨우 $gp입니다.
+            거저나 다름없죠!
+        }"
+  module:Ultima-IV:vendors:75: "사슬 갑옷은 다른 어떤 갑옷보다 많은 전사가 착용합니다. 저희 것은 $gp입니다.
+"
+  module:Ultima-IV:vendors:76: "전신 판금 갑옷은 비마법 갑옷의 정점입니다. $gp에 가져가세요.
+"
+  module:Ultima-IV:vendors:77: "마법 갑옷은 희귀하고 비쌉니다. 이 사슬 갑옷은 $gp에 팝니다.
+"
+  module:Ultima-IV:vendors:78: "마법 판금 갑옷은 알려진 최고의 방어구입니다. 저희만 취급합니다.  가격: $gp.
+"
+  module:Ultima-IV:vendors:79: "
+몇 개나
+드릴까요? "
+  module:Ultima-IV:vendors:8: "
+받으시겠습니까? "
+  module:Ultima-IV:vendors:80: "
+금이 부족하시군요. 좀 더 저렴한 걸로 어떠세요?
+"
+  module:Ultima-IV:vendors:81: "
+%(이)가 말한다: 좋은 선택입니다!
+"
+  module:Ultima-IV:vendors:82: "
+더 필요한
+것은? "
+  module:Ultima-IV:vendors:83: "
+판매할 물건: "
+  module:Ultima-IV:vendors:84: "bcdefgh"
+  module:Ultima-IV:vendors:85: "
+에이, 하나도
+안 가지고 계시잖아요."
+  module:Ultima-IV:vendors:86: "
+그 =에 $gp를 드리겠습니다.
+거래하시겠습니까? "
+  module:Ultima-IV:vendors:87: "
+=을(를) 몇 개나
+파시겠습니까? "
+  module:Ultima-IV:vendors:88: "
+그렇게 많이 가지고 있지 않습니다!
+"
+  module:Ultima-IV:vendors:89: "
+그것들에 $gp를 드리겠습니다.
+거래하시겠습니까? "
+  module:Ultima-IV:vendors:9: "
+아쉽네요."
+  module:Ultima-IV:vendors:90: "
+흥. 그럼 다른 무엇을 "
+  module:Ultima-IV:vendors:91: "
+좋습니다! 다른 것은?"
+  module:Ultima-IV:vendors:92: "천옷"
+  module:Ultima-IV:vendors:93: "가죽 갑옷"
+  module:Ultima-IV:vendors:94: "사슬 갑옷"
+  module:Ultima-IV:vendors:95: "판금 갑옷"
+  module:Ultima-IV:vendors:96: "마법 사슬 갑옷"
+  module:Ultima-IV:vendors:97: "마법 판금 갑옷"
+  module:Ultima-IV:vendors:98: "비전 로브"
+  module:Ultima-IV:vendors:99: "윈저 갑옷점"
+  MOONGLOW:0:health: "꽤 좋아요."
+  MOONGLOW:0:job: "나는 모험을
+찾는다네!"
+  MOONGLOW:0:look: "젊은 마법사"
+  MOONGLOW:0:name: "마리아"
+  MOONGLOW:0:no: "그럴 수
+있으면
+좋을 텐데!"
+  MOONGLOW:0:pronoun: "그녀"
+  MOONGLOW:0:question: "그대는
+여정 중인가?"
+  MOONGLOW:0:response1: "그래요, 나도
+큰 여정을
+떠나고
+싶어요!"
+  MOONGLOW:0:response2: "아바타의
+여정은 참으로
+고귀하죠!"
+  MOONGLOW:0:topic1: "ADVE"
+  MOONGLOW:0:topic2: "QUES"
+  MOONGLOW:0:yes: "나도 함께할
+수 있으면
+좋겠어요!"
+  MOONGLOW:1:health: "괜찮아요...
+담배만
+끊을 수
+있다면!"
+  MOONGLOW:1:job: "나는 작가예요."
+  MOONGLOW:1:look: "굶주린
+기자"
+  MOONGLOW:1:name: "트레이시"
+  MOONGLOW:1:no: "시작하지
+마세요!"
+  MOONGLOW:1:pronoun: "그녀"
+  MOONGLOW:1:question: "담배
+피우세요?"
+  MOONGLOW:1:response1: "벌이는 적지만,
+화려하죠!"
+  MOONGLOW:1:response2: "콜록...콜록..."
+  MOONGLOW:1:topic1: "WRIT"
+  MOONGLOW:1:topic2: "SMOK"
+  MOONGLOW:1:yes: "냄새로
+알겠네요!"
+  MOONGLOW:10:health: "건강?"
+  MOONGLOW:10:job: "나는 태양을
+움직인다네!"
+  MOONGLOW:10:look: "등이 굽고
+미친
+듯한 남자!"
+  MOONGLOW:10:name: "다라노르"
+  MOONGLOW:10:no: "멍청아, 내가
+미쳤다고
+생각하는
+게로군!"
+  MOONGLOW:10:pronoun: "그"
+  MOONGLOW:10:question: "내 이야기를
+믿는가?!?!..."
+  MOONGLOW:10:response1: "달들은 내
+적이라네!"
+  MOONGLOW:10:response2: "내가 죽으면
+세상이
+끝난다네!"
+  MOONGLOW:10:topic1: "SUN "
+  MOONGLOW:10:topic2: "MOON"
+  MOONGLOW:10:yes: "그럼 우리는
+달들을 베어야
+한다네!"
+  MOONGLOW:11:health: "오늘은
+괜찮을
+거라고
+예언하지!"
+  MOONGLOW:11:job: "나는 점쟁이라네,
+손금을
+본다네."
+  MOONGLOW:11:look: "늙은 집시."
+  MOONGLOW:11:name: "이누"
+  MOONGLOW:11:no: "현명한
+선택이군."
+  MOONGLOW:11:pronoun: "그녀"
+  MOONGLOW:11:question: "그대의
+운명을
+알고 싶은가?"
+  MOONGLOW:11:response1: "손금이
+운명을
+말해준다네!"
+  MOONGLOW:11:response2: "손을
+내밀게."
+  MOONGLOW:11:topic1: "PALM"
+  MOONGLOW:11:topic2: "FORT"
+  MOONGLOW:11:yes: "위대한 여정이
+그대를 코덱스가
+기다리는
+어비스로
+이끌
+걸세!"
+  MOONGLOW:12:health: "좋다네."
+  MOONGLOW:12:job: "나는 아름다운
+도시 문글로우의
+인사를
+전한다네."
+  MOONGLOW:12:look: "키 큰 마법사."
+  MOONGLOW:12:name: "칼라브리니"
+  MOONGLOW:12:no: "아마도, 북쪽
+섬에 있는
+신단일
+걸세!"
+  MOONGLOW:12:pronoun: "그"
+  MOONGLOW:12:question: "여관이나
+치유를
+찾는가?"
+  MOONGLOW:12:response1: "우리에게는
+훌륭한 여관이
+있다네."
+  MOONGLOW:12:response2: "우리 치유사는
+최고 중
+하나라네!"
+  MOONGLOW:12:topic1: "INN "
+  MOONGLOW:12:topic2: "HEAL"
+  MOONGLOW:12:yes: "어느 것을?"
+  MOONGLOW:13:health: "아주 좋다네."
+  MOONGLOW:13:job: "나는 정직하게
+생계를
+번다네,
+농담으로!"
+  MOONGLOW:13:look: "방방 뛰는 광대"
+  MOONGLOW:13:name: "데커"
+  MOONGLOW:13:no: "그대는 아마
+뚱한 사람일
+걸세!"
+  MOONGLOW:13:pronoun: "그"
+  MOONGLOW:13:question: "그대는?"
+  MOONGLOW:13:response1: "정직한 노동은
+아름다운
+얼굴을
+지닌다네!"
+  MOONGLOW:13:response2: "나는 좋은
+농담을
+좋아한다네."
+  MOONGLOW:13:topic1: "HONE"
+  MOONGLOW:13:topic2: "JEST"
+  MOONGLOW:13:yes: "언젠가
+농담을
+주고받으세!"
+  MOONGLOW:14:health: "꽤 좋아요."
+  MOONGLOW:14:job: "오, 별로."
+  MOONGLOW:14:look: "샌드위치를
+먹는 아이."
+  MOONGLOW:14:name: "윌리엄"
+  MOONGLOW:14:no: "진짜
+맛있어요!"
+  MOONGLOW:14:pronoun: "그"
+  MOONGLOW:14:question: "한 입
+드실래요?"
+  MOONGLOW:14:response1: "땅콩버터와
+포도잼을
+살짝 구운 빵에
+바른
+거예요!"
+  MOONGLOW:14:response2: "마리아의
+금 옆에서
+정직의 룬을
+찾아보세요!"
+  MOONGLOW:14:topic1: "SAND"
+  MOONGLOW:14:topic2: "RUNE"
+  MOONGLOW:14:yes: "맛있죠, 응!"
+  MOONGLOW:15:health: "스러져가는군."
+  MOONGLOW:15:job: "나는 예전에
+파란 보석을
+찾았다네."
+  MOONGLOW:15:look: "지친 마법사."
+  MOONGLOW:15:name: "타이론"
+  MOONGLOW:15:no: "흠."
+  MOONGLOW:15:pronoun: "그"
+  MOONGLOW:15:question: "찾아
+보겠는가?"
+  MOONGLOW:15:response1: "정직의 보석은
+기만 던전의
+제단에서
+찾을 수
+있다네."
+  MOONGLOW:15:response2: "그것은 던전
+제단실과
+어비스
+안에서
+쓰인다네."
+  MOONGLOW:15:topic1: "STON"
+  MOONGLOW:15:topic2: "USE "
+  MOONGLOW:15:yes: "그 용도를
+알아두게!"
+  MOONGLOW:2:health: "아주 좋다네."
+  MOONGLOW:2:job: "나는 정직의
+미덕을
+말한다네!"
+  MOONGLOW:2:look: "위풍당당한
+성기사."
+  MOONGLOW:2:name: "크롬웰"
+  MOONGLOW:2:no: "부끄럽구먼!"
+  MOONGLOW:2:pronoun: "그"
+  MOONGLOW:2:question: "그대는 정직해지려
+힘쓰는가?"
+  MOONGLOW:2:response1: "정직한 소수가
+숫자보다
+낫다네!"
+  MOONGLOW:2:response2: "정직의
+신단
+진언은
+'암'이라네."
+  MOONGLOW:2:topic1: "HONE"
+  MOONGLOW:2:topic2: "MANT"
+  MOONGLOW:2:yes: "그럼 진언이
+필요할
+걸세."
+  MOONGLOW:3:health: "나아진
+적도
+있었지"
+  MOONGLOW:3:job: "나는 정직한
+삶을
+산다네."
+  MOONGLOW:3:look: "신비한 마법사."
+  MOONGLOW:3:name: "레벨리아스"
+  MOONGLOW:3:no: "비참한 놈!"
+  MOONGLOW:3:pronoun: "그"
+  MOONGLOW:3:question: "그대 자신의
+악을 정복하고자
+하는가?"
+  MOONGLOW:3:response1: "진실을 말하여
+악의 세력을
+부끄럽게
+하게!"
+  MOONGLOW:3:response2: "악은 여전히
+우리 마음과
+영혼
+속에
+존재한다네!"
+  MOONGLOW:3:topic1: "HONE"
+  MOONGLOW:3:topic2: "EVIL"
+  MOONGLOW:3:yes: "일생의
+여정이지!"
+  MOONGLOW:4:health: "기분 좋아요."
+  MOONGLOW:4:job: "나는 그대의
+친구예요."
+  MOONGLOW:4:look: "장난기 많은
+아이."
+  MOONGLOW:4:name: "크리스텐"
+  MOONGLOW:4:no: "슬퍼요."
+  MOONGLOW:4:pronoun: "그녀"
+  MOONGLOW:4:question: "그대는 내
+친구인가요?"
+  MOONGLOW:4:response1: "정직한 친구는
+드물어요!"
+  MOONGLOW:4:response2: "내 친구
+윌리엄이
+정직의 룬이
+어디 있는지
+안대요."
+  MOONGLOW:4:topic1: "FRIE"
+  MOONGLOW:4:topic2: "HONE"
+  MOONGLOW:4:yes: "그거 저를
+행복하게
+만드네요."
+  MOONGLOW:5:health: "꽤 좋다네."
+  MOONGLOW:5:job: "나는 목자라네."
+  MOONGLOW:5:look: "온순한 목자."
+  MOONGLOW:5:name: "겸손한 목자
+패트릭"
+  MOONGLOW:5:no: "그러려고
+힘쓰게."
+  MOONGLOW:5:pronoun: "그"
+  MOONGLOW:5:question: "그대는
+완전히
+겸손한가?"
+  MOONGLOW:5:response1: "겸손은 진실,
+사랑, 용기의
+직접적인 조합에서
+비롯되지
+않는다네."
+  MOONGLOW:5:response2: "겸손은
+겸손하게
+행동하고
+존재하는
+것이라네."
+  MOONGLOW:5:topic1: "HUMB"
+  MOONGLOW:5:topic2: "HUMI"
+  MOONGLOW:5:yes: "의심스럽군!"
+  MOONGLOW:6:health: "곧 죽을
+걸세."
+  MOONGLOW:6:job: "나는 위대한
+마법사 나이젤의
+제자라네!"
+  MOONGLOW:6:look: "죽어가는 젊은
+마법사."
+  MOONGLOW:6:name: "셰이좀"
+  MOONGLOW:6:no: "그는 라이시움에
+산다네."
+  MOONGLOW:6:pronoun: "그"
+  MOONGLOW:6:question: "나이젤을
+만나본
+적
+있는가?"
+  MOONGLOW:6:response1: "곧 그가 부르는
+'귀환' 주문을
+써야
+할
+걸세."
+  MOONGLOW:6:response2: "그만."
+  MOONGLOW:6:topic1: "NIGE"
+  MOONGLOW:6:topic2: "DIE "
+  MOONGLOW:6:yes: "그를 찾아가게,
+가르쳐줄
+걸세."
+  MOONGLOW:7:health: "늙어가는군."
+  MOONGLOW:7:job: "나는 정직에
+대한 이야기를
+짓는다네."
+  MOONGLOW:7:look: "지혜로운 마법사."
+  MOONGLOW:7:name: "셰익스피어"
+  MOONGLOW:7:no: "어리석은 놈!"
+  MOONGLOW:7:pronoun: "그"
+  MOONGLOW:7:question: "그대는
+정직해지려
+힘쓰는가?"
+  MOONGLOW:7:response1: "기억하게,
+협박에
+두려움은
+없다네, 나는
+정직함에
+강하니까!"
+  MOONGLOW:7:response2: "부패는
+정직보다
+더 이기지
+못한다네!"
+  MOONGLOW:7:topic1: "HONE"
+  MOONGLOW:7:topic2: "CORR"
+  MOONGLOW:7:yes: "부패를
+조심하게!"
+  MOONGLOW:8:health: "나아진
+적도
+있었지."
+  MOONGLOW:8:job: "나는 정직한
+삶을
+살려고
+힘쓴다네!"
+  MOONGLOW:8:look: "키 큰 마법사."
+  MOONGLOW:8:name: "브라우닝"
+  MOONGLOW:8:no: "진실은 결코
+말하는 이를
+해치지
+않는다네!"
+  MOONGLOW:8:pronoun: "그"
+  MOONGLOW:8:question: "거짓말을
+한 적이
+없는가?"
+  MOONGLOW:8:response1: "정직한 영혼은
+거짓말을
+기억할
+필요가
+없다네!"
+  MOONGLOW:8:response2: "진실은
+정직의
+근본이라네!"
+  MOONGLOW:8:topic1: "HONE"
+  MOONGLOW:8:topic2: "TRUT"
+  MOONGLOW:8:yes: "그럴 것
+같지
+않군!"
+  MOONGLOW:9:health: "피곤해,
+너무
+피곤해."
+  MOONGLOW:9:job: "나는
+연금술사라네."
+  MOONGLOW:9:look: "나이 든 여인"
+  MOONGLOW:9:name: "코시마"
+  MOONGLOW:9:no: "비밀은
+재료에
+있다네!"
+  MOONGLOW:9:pronoun: "그녀"
+  MOONGLOW:9:question: "주문을
+가장 잘
+조합하는 법을
+아는가?"
+  MOONGLOW:9:response1: "나는 재료를
+가장 잘
+조합하는 법을
+안다네!"
+  MOONGLOW:9:response2: "수면 주문은
+사실 거미줄
+한 조각만
+필요하다네!"
+  MOONGLOW:9:topic1: "ALCH"
+  MOONGLOW:9:topic2: "REAG"
+  MOONGLOW:9:yes: "좋아!"
+  PAWS:0:health: "훌륭하다네."
+  PAWS:0:job: "나는 포즈 마을의
+경비대장이라네!"
+  PAWS:0:look: "아주 큰
+경비병."
+  PAWS:0:name: "윌모어"
+  PAWS:0:no: "좋군."
+  PAWS:0:pronoun: "그"
+  PAWS:0:question: "말썽을
+일으킬
+작정인가?"
+  PAWS:0:response1: "포즈는 훌륭한
+마을이라
+우리가
+안전하게
+지킨다네!"
+  PAWS:0:response2: "해적들은 동쪽
+섬에서
+온다네!"
+  PAWS:0:topic1: "GUAR"
+  PAWS:0:topic2: "TROU"
+  PAWS:0:yes: "그럼 떠나는 게
+좋을
+걸세!"
+  PAWS:1:health: "아주 좋아."
+  PAWS:1:job: "나는
+마구간지기라네."
+  PAWS:1:look: "억센 소녀."
+  PAWS:1:name: "프란체스카"
+  PAWS:1:no: "그럼 스미스를
+보러
+왔겠구먼!"
+  PAWS:1:pronoun: "그녀"
+  PAWS:1:question: "말 훔치러
+온 건
+아니겠지?"
+  PAWS:1:response1: "그대가 늙은
+레드 아이를
+다루는 걸
+봤다네!"
+  PAWS:1:response2: "말하는 말이지!"
+  PAWS:1:topic1: "STAB"
+  PAWS:1:topic2: "SMIT"
+  PAWS:1:yes: "뭐, 주인님이
+별로
+안 좋아하실
+텐데!"
+  PAWS:10:health: "좋아요, 고마워요."
+  PAWS:10:job: "일이 뭔데요?"
+  PAWS:10:look: "작은 소녀."
+  PAWS:10:name: "픽스"
+  PAWS:10:no: "아쉽네요."
+  PAWS:10:pronoun: "그녀"
+  PAWS:10:question: "그리고
+그쪽은요?"
+  PAWS:10:response1: "A"
+  PAWS:10:response2: "A"
+  PAWS:10:topic1: "A   "
+  PAWS:10:topic2: "A   "
+  PAWS:10:yes: "좋아요."
+  PAWS:11:health: "나는 좋다네."
+  PAWS:11:job: "나는
+관리자라네."
+  PAWS:11:look: "지혜로운 군주."
+  PAWS:11:name: "사이먼 경"
+  PAWS:11:no: "아쉽군."
+  PAWS:11:pronoun: "그"
+  PAWS:11:question: "여덟 미덕
+모두에서
+깨달음을
+얻었는가?"
+  PAWS:11:response1: "무엇인지는
+말할 수
+없다네!"
+  PAWS:11:response2: "신비한 것들은
+8부분
+아바타만이
+찾을 수
+있다네!"
+  PAWS:11:topic1: "KEEP"
+  PAWS:11:topic2: "MYST"
+  PAWS:11:yes: "신비한 갑옷은
+참나무 숲
+중앙에
+있다네!"
+  PAWS:12:health: "좋아요."
+  PAWS:12:job: "나는
+관리자라네."
+  PAWS:12:look: "지혜로운 부인."
+  PAWS:12:name: "테사 부인"
+  PAWS:12:no: "아쉽네요."
+  PAWS:12:pronoun: "그녀"
+  PAWS:12:question: "여덟 미덕
+모두에서
+깨달음을
+얻었나요?"
+  PAWS:12:response1: "말할 수
+없어요."
+  PAWS:12:response2: "신비한 것들은
+8부분
+아바타만이
+찾을 수
+있어요!"
+  PAWS:12:topic1: "KEEP"
+  PAWS:12:topic2: "MYST"
+  PAWS:12:yes: "신비한 무기는
+서펀트 성의
+훈련실에
+있어요!"
+  PAWS:13:health: "아주 신나."
+  PAWS:13:job: "나는 그대를
+모시러
+왔다네."
+  PAWS:13:look: "작은 광대."
+  PAWS:13:name: "아셈리"
+  PAWS:13:no: "뭐 그럼, 나는
+전혀
+도움이
+안 되겠군."
+  PAWS:13:pronoun: "그"
+  PAWS:13:question: "그것이
+흥미로운가?"
+  PAWS:13:response1: "뭐, 나는
+춤추고
+노래할 수
+있지!"
+  PAWS:13:response2: "그리고 노래도,
+트랄랄라..."
+  PAWS:13:topic1: "SERV"
+  PAWS:13:topic2: "DANC"
+  PAWS:13:yes: "좋아!"
+  PAWS:14:health: "아주
+좋다네!"
+  PAWS:14:job: "나는 브리타니아를
+노래한다네."
+  PAWS:14:look: "노래하는
+음유시인."
+  PAWS:14:name: "리틀 존"
+  PAWS:14:no: "그냥
+소문이라네."
+  PAWS:14:pronoun: "그"
+  PAWS:14:question: "그대가 다른
+세계에서
+왔다고
+들었는데?"
+  PAWS:14:response1: "브리타니아는
+참으로 아름다운
+땅이라, 다른
+땅에는 감히
+가지
+못하겠네!"
+  PAWS:14:response2: "언젠가
+그대가
+돌아가기를
+바라네!"
+  PAWS:14:topic1: "BRIT"
+  PAWS:14:topic2: "EART"
+  PAWS:14:yes: "그게 뭐라고
+불리는가?"
+  PAWS:15:health: "좋아, 좋아."
+  PAWS:15:job: "오, 별로."
+  PAWS:15:look: "흰 종마"
+  PAWS:15:name: "스미스"
+  PAWS:15:no: "A"
+  PAWS:15:pronoun: "그"
+  PAWS:15:question: "A"
+  PAWS:15:response1: "A"
+  PAWS:15:response2: "A"
+  PAWS:15:topic1: "A   "
+  PAWS:15:topic2: "A   "
+  PAWS:15:yes: "A"
+  PAWS:2:health: "좋다네,
+고맙네."
+  PAWS:2:job: "난 나무꾼이라네,
+그려."
+  PAWS:2:look: "키 크고
+건장한
+남자."
+  PAWS:2:name: "스벤"
+  PAWS:2:no: "팔뚝 좀
+키우게,
+그려!"
+  PAWS:2:pronoun: "그"
+  PAWS:2:question: "그대는
+나무꾼인가,
+그려?"
+  PAWS:2:response1: "내 도끼로,
+뚝딱
+베어버리지,
+그려."
+  PAWS:2:response2: "큰 도끼라네,
+그려."
+  PAWS:2:topic1: "LUMB"
+  PAWS:2:topic2: "AXE "
+  PAWS:2:yes: "좋구먼,
+그려."
+  PAWS:3:health: "좋다네."
+  PAWS:3:job: "나는 코덱스
+근처에
+있어봤다네!"
+  PAWS:3:look: "오래
+산 남자."
+  PAWS:3:name: "현자 자이르"
+  PAWS:3:no: "찾아보게!"
+  PAWS:3:pronoun: "그"
+  PAWS:3:question: "그것을
+봤는가?"
+  PAWS:3:response1: "그 비밀은
+끝이
+없다네!"
+  PAWS:3:response2: "그 방에
+들어가려면
+3부분의
+열쇠와
+통행의
+말이
+필요하다네.
+락 호수
+너머의 내
+형제에게
+그 말을
+물어보게!"
+  PAWS:3:topic1: "CODE"
+  PAWS:3:topic2: "WORD"
+  PAWS:3:yes: "와!"
+  PAWS:4:health: "날마다
+더
+강해지지!"
+  PAWS:4:job: "나는 술집
+여급이야, 에일을
+따라준다네!"
+  PAWS:4:look: "아주
+큰 여인."
+  PAWS:4:name: "살"
+  PAWS:4:no: "아쉽군,
+최고인데!"
+  PAWS:4:pronoun: "그녀"
+  PAWS:4:question: "폴리를
+좋아하나?"
+  PAWS:4:response1: "우리에게는
+브리타니아
+최고의
+양조가
+있다네!"
+  PAWS:4:response2: "우리는 오직
+폴리만
+생맥주로
+내온다네!"
+  PAWS:4:topic1: "ALE "
+  PAWS:4:topic2: "BREW"
+  PAWS:4:yes: "정말
+좋은
+맥주지!"
+  PAWS:5:health: "좋다네."
+  PAWS:5:job: "나는 마법의
+지혜를
+찾는다네."
+  PAWS:5:look: "젊은 마법사!"
+  PAWS:5:name: "징글스"
+  PAWS:5:no: "그는 락 호수의
+숨은 마을에
+사는데,
+배로만
+갈 수 있다네,
+게이트 주문에
+대해
+물어보게!"
+  PAWS:5:pronoun: "그"
+  PAWS:5:question: "그를
+아는가?"
+  PAWS:5:response1: "내 스승님은
+게이트 이동
+주문을
+안다네!"
+  PAWS:5:response2: "내 스승님은
+멘토리안일세."
+  PAWS:5:topic1: "MAGI"
+  PAWS:5:topic2: "MAST"
+  PAWS:5:yes: "좋아."
+  PAWS:6:health: "지치고
+배고프지만
+언제나
+충실하다네."
+  PAWS:6:job: "나는 로드
+브리티시를
+섬긴다네."
+  PAWS:6:look: "키 크고
+근육질인
+기사."
+  PAWS:6:name: "호비 경"
+  PAWS:6:no: "아쉬운 일이군!"
+  PAWS:6:pronoun: "그"
+  PAWS:6:question: "그대의
+여정도
+같은가?"
+  PAWS:6:response1: "나는 언제나
+브리타니아를
+위해
+여정을
+떠난다네!"
+  PAWS:6:response2: "내 여정은
+세상의 악을
+물리치는
+것이라네."
+  PAWS:6:topic1: "FAIT"
+  PAWS:6:topic2: "QUES"
+  PAWS:6:yes: "우리는
+하나일세."
+  PAWS:7:health: "좀
+배고프군."
+  PAWS:7:job: "나는 식량을
+사러
+왔다네."
+  PAWS:7:look: "작은 드루이드."
+  PAWS:7:name: "담젤"
+  PAWS:7:no: "아마
+겁쟁이겠지."
+  PAWS:7:pronoun: "그녀"
+  PAWS:7:question: "그대는 깊은
+곳을
+여행하는가?"
+  PAWS:7:response1: "그래, 여기
+최고의 식량이
+있다고
+들었네."
+  PAWS:7:response2: "식량은 던전에서
+쓰인다네."
+  PAWS:7:topic1: "FOOD"
+  PAWS:7:topic2: "RATI"
+  PAWS:7:yes: "대성 안에
+비밀 입구가
+있다네!"
+  PAWS:8:health: "좋다네."
+  PAWS:8:job: "나는 그냥
+여기
+앉아있다네."
+  PAWS:8:look: "온순한 목자."
+  PAWS:8:name: "위트핀"
+  PAWS:8:no: "그렇군."
+  PAWS:8:pronoun: "그"
+  PAWS:8:question: "무언가를
+찾고
+있는가?"
+  PAWS:8:response1: "저기
+산자락
+한쪽에!"
+  PAWS:8:response2: "A"
+  PAWS:8:topic1: "RUNE"
+  PAWS:8:topic2: "A   "
+  PAWS:8:yes: "무엇을?"
+  PAWS:9:health: "나는 잘
+지낸다네."
+  PAWS:9:job: "나는 이 땅을
+여행한다네."
+  PAWS:9:look: "두건 쓴 레인저."
+  PAWS:9:name: "배런"
+  PAWS:9:no: "두고
+보세."
+  PAWS:9:pronoun: "그"
+  PAWS:9:question: "그대는
+둔한가?"
+  PAWS:9:response1: "브리타니아."
+  PAWS:9:response2: "마을 남동쪽
+구석의
+언덕을
+찾아보게!"
+  PAWS:9:topic1: "LAND"
+  PAWS:9:topic2: "RUNE"
+  PAWS:9:yes: "그럴 줄
+알았네."
+  principle-courage: "용기"
+  principle-love: "사랑"
+  principle-truth: "진실"
+  SERPENT:0:health: "아주 좋다네."
+  SERPENT:0:job: "나는 이 지방을
+다스린다네."
+  SERPENT:0:look: "위엄있는 남작"
+  SERPENT:0:name: "센트리"
+  SERPENT:0:no: "젤롬, 미녹,
+트린식,
+스카라
+브레이라네."
+  SERPENT:0:pronoun: "그"
+  SERPENT:0:question: "용기의 네
+도시를
+아는가?"
+  SERPENT:0:response1: "그래, 이 섬들과
+그 이상이지."
+  SERPENT:0:response2: "나는 세 음절
+중 '쿠' 하나만
+안다네."
+  SERPENT:0:topic1: "PROV"
+  SERPENT:0:topic2: "WORD"
+  SERPENT:0:yes: "아주 좋군."
+  SERPENT:1:health: "아주 강하다네!"
+  SERPENT:1:job: "물론
+문을
+지키는 것이지."
+  SERPENT:1:look: "아주 큰
+경비병."
+  SERPENT:1:name: "문 경비병."
+  SERPENT:1:no: "그럼 아마
+경비병이
+되려나!"
+  SERPENT:1:pronoun: "그"
+  SERPENT:1:question: "용기를
+찾으러
+왔는가?"
+  SERPENT:1:response1: "여기는 서펀트
+성의
+문이라네."
+  SERPENT:1:response2: "지키고,
+감시하고,
+보호하지."
+  SERPENT:1:topic1: "GATE"
+  SERPENT:1:topic2: "GUAR"
+  SERPENT:1:yes: "그럼 제대로
+찾아왔군."
+  SERPENT:10:health: "지금까지는
+괜찮다네."
+  SERPENT:10:job: "나는 이 통로를
+지킨다네."
+  SERPENT:10:look: "풍만한 경비병."
+  SERPENT:10:name: "로리"
+  SERPENT:10:no: "그럼 가던
+길을
+가게!"
+  SERPENT:10:pronoun: "그녀"
+  SERPENT:10:question: "누군가를
+찾고
+있는가?"
+  SERPENT:10:response1: "그는 서쪽
+방에
+있다네."
+  SERPENT:10:response2: "그는 동쪽
+방에
+있다네."
+  SERPENT:10:topic1: "GARA"
+  SERPENT:10:topic2: "DURH"
+  SERPENT:10:yes: "누구를?"
+  SERPENT:11:health: "지금까지는
+괜찮다네."
+  SERPENT:11:job: "나는 이 통로를
+지킨다네."
+  SERPENT:11:look: "잘생긴 경비병"
+  SERPENT:11:name: "사무엘"
+  SERPENT:11:no: "그럼 가던
+길을
+가게!"
+  SERPENT:11:pronoun: "그"
+  SERPENT:11:question: "누군가를
+찾고
+있는가?"
+  SERPENT:11:response1: "그는 서쪽
+방에
+있다네."
+  SERPENT:11:response2: "그는 동쪽
+방에
+있다네."
+  SERPENT:11:topic1: "GARA"
+  SERPENT:11:topic2: "DURH"
+  SERPENT:11:yes: "누구를?"
+  SERPENT:12:health: "손을
+하나
+잃었다네!"
+  SERPENT:12:job: "나는 일을 할
+수가 없다네."
+  SERPENT:12:look: "궁핍하고
+악취 나는
+거지."
+  SERPENT:12:name: "로드릭"
+  SERPENT:12:no: "인색하군!"
+  SERPENT:12:pronoun: "그"
+  SERPENT:12:question: "금을
+주겠는가?"
+  SERPENT:12:response1: "조른에게
+먹혔다네."
+  SERPENT:12:response2: "파란 빛의
+구슬은 힘,
+민첩, 지능을
+높여주지만,
+대가가
+따른다네!"
+  SERPENT:12:topic1: "HAND"
+  SERPENT:12:topic2: "ORBS"
+  SERPENT:12:yes: "그대는
+친절하군."
+  SERPENT:13:health: "그럭저럭."
+  SERPENT:13:job: "나는 중요한
+정보를
+가지고
+있다네."
+  SERPENT:13:look: "지혜로운 드루이드."
+  SERPENT:13:name: "안토스 수녀"
+  SERPENT:13:no: "그럼 전사
+개럼에게
+물어보게,
+어디 있는지
+안다네!"
+  SERPENT:13:pronoun: "그녀"
+  SERPENT:13:question: "그것을
+가졌는가?"
+  SERPENT:13:response1: "어떤 주제인가?"
+  SERPENT:13:response2: "용기의 종이
+어비스에
+들어가는 데
+필요하다네."
+  SERPENT:13:topic1: "INFO"
+  SERPENT:13:topic2: "BELL"
+  SERPENT:13:yes: "아주 좋군."
+  SERPENT:14:health: "좋고
+촉촉하지!"
+  SERPENT:14:job: "나는 바다를
+헤엄친다네!"
+  SERPENT:14:look: "가시 돋친 닉시!"
+  SERPENT:14:name: "녹섬"
+  SERPENT:14:no: "위대한
+배였지!"
+  SERPENT:14:pronoun: "그"
+  SERPENT:14:question: "왕립함
+케이프호에
+대해
+들어봤는가?"
+  SERPENT:14:response1: "바다 밑에는
+많은 배가
+있다네!"
+  SERPENT:14:response2: "생존자라면
+어디를 찾아야
+할지
+알
+걸세."
+  SERPENT:14:topic1: "SEAS"
+  SERPENT:14:topic2: "SHIP"
+  SERPENT:14:yes: "그녀에게는
+선체를 강화하는
+마법의 바퀴가
+있었다네!"
+  SERPENT:15:health: "아주 좋아요."
+  SERPENT:15:job: "서펀트 성에
+온 걸
+환영해요!"
+  SERPENT:15:look: "아름다운
+성기사!"
+  SERPENT:15:name: "미셸"
+  SERPENT:15:no: "그럼 우리
+치유사를
+찾아가세요!"
+  SERPENT:15:pronoun: "그녀"
+  SERPENT:15:question: "그대는
+건강한가요?"
+  SERPENT:15:response1: "그분이 여기
+영주님이세요,
+서쪽 통로로
+가세요."
+  SERPENT:15:response2: "동쪽 통로로
+가세요."
+  SERPENT:15:topic1: "SENT"
+  SERPENT:15:topic2: "HEAL"
+  SERPENT:15:yes: "아주 좋아요,
+아마 센트리를
+찾으시겠죠."
+  SERPENT:2:health: "나 혼자
+난파에서
+살아남았다네."
+  SERPENT:2:job: "나는 선원이라네."
+  SERPENT:2:look: "부상당한 선원"
+  SERPENT:2:name: "라손"
+  SERPENT:2:no: "그녀는 강력한
+배였지!"
+  SERPENT:2:pronoun: "그"
+  SERPENT:2:question: "그녀에 대해
+들어봤는가?"
+  SERPENT:2:response1: "왕립함
+케이프호."
+  SERPENT:2:response2: "그녀는
+영웅곶의
+만, 깊은
+바다에서
+침몰했다네!"
+  SERPENT:2:topic1: "SHIP"
+  SERPENT:2:topic2: "WHEE"
+  SERPENT:2:yes: "그녀는 강력한
+배였지!"
+  SERPENT:3:health: "방금
+회복됐다네."
+  SERPENT:3:job: "나는 브리타니아를
+위해
+싸운다네!"
+  SERPENT:3:look: "노련한
+전사."
+  SERPENT:3:name: "로크"
+  SERPENT:3:no: "그대는 제대로
+찾아왔네."
+  SERPENT:3:pronoun: "그"
+  SERPENT:3:question: "그대는
+건강한가?"
+  SERPENT:3:response1: "위대한 스티지언
+어비스에는
+궁극적
+지혜의
+코덱스가
+있다네!"
+  SERPENT:3:response2: "나는 잘
+모른다네."
+  SERPENT:3:topic1: "ABYS"
+  SERPENT:3:topic2: "CODE"
+  SERPENT:3:yes: "그럼 어비스의
+비밀을
+찾도록
+힘쓰게."
+  SERPENT:4:health: "훌륭하다네."
+  SERPENT:4:job: "나는 훈련
+중이라네!"
+  SERPENT:4:look: "훈련에
+몰두한 레인저."
+  SERPENT:4:name: "레인저."
+  SERPENT:4:no: "겁쟁이."
+  SERPENT:4:pronoun: "그"
+  SERPENT:4:question: "그대는?"
+  SERPENT:4:response1: "나는 던전에서
+살아남기 위해
+훈련한다네!"
+  SERPENT:4:response2: "나는 제단실의
+비밀을
+정복할
+계획이라네."
+  SERPENT:4:topic1: "TRAI"
+  SERPENT:4:topic2: "DUNG"
+  SERPENT:4:yes: "그 방에 대해
+우리
+스승님에게
+물어보게,
+많이
+아신다네!"
+  SERPENT:5:health: "최상이라네."
+  SERPENT:5:job: "나는 전사들에게
+용기로
+싸우도록
+훈련시킨다네!"
+  SERPENT:5:look: "훈련 대장."
+  SERPENT:5:name: "시라"
+  SERPENT:5:no: "아쉽군."
+  SERPENT:5:pronoun: "그녀"
+  SERPENT:5:question: "훈련하겠는가?"
+  SERPENT:5:response1: "잘 훈련하면
+그대의 용기도
+자신감과
+함께
+자랄
+걸세."
+  SERPENT:5:response2: "용기의
+제단실에서는
+붉은색, 주황색,
+보라색, 흰색
+보석을
+쓰게!"
+  SERPENT:5:topic1: "TRAI"
+  SERPENT:5:topic2: "ROOM"
+  SERPENT:5:yes: "훌륭해!"
+  SERPENT:6:health: "아주 좋다네."
+  SERPENT:6:job: "나는 우리
+영주를
+지킨다네"
+  SERPENT:6:look: "엄한 경비병."
+  SERPENT:6:name: "남작의 경비병"
+  SERPENT:6:no: "그럼 그를
+방해하지
+말게."
+  SERPENT:6:pronoun: "그녀"
+  SERPENT:6:question: "센트리를
+알현하고
+싶은가?"
+  SERPENT:6:response1: "센트리가
+이 성을
+다스린다네."
+  SERPENT:6:response2: "이 성은 용기
+위에
+세워졌다네."
+  SERPENT:6:topic1: "LORD"
+  SERPENT:6:topic2: "CAST"
+  SERPENT:6:yes: "허락하니,
+들어오게."
+  SERPENT:7:health: "훌륭하다네."
+  SERPENT:7:job: "우리는 우리
+영주의
+보물을
+지킨다네."
+  SERPENT:7:look: "건장한 경비병"
+  SERPENT:7:name: "보물 경비병"
+  SERPENT:7:no: "현명한
+선택이군!"
+  SERPENT:7:pronoun: "그"
+  SERPENT:7:question: "우리 영주의
+보물을
+훔칠
+작정인가?"
+  SERPENT:7:response1: "이 보물은
+그대의
+것이 아니라네"
+  SERPENT:7:response2: "던전에 대한
+지식은
+더럼에게
+찾아가게."
+  SERPENT:7:topic1: "TREA"
+  SERPENT:7:topic2: "DUNG"
+  SERPENT:7:yes: "어리석은 놈!"
+  SERPENT:8:health: "아주
+좋다네."
+  SERPENT:8:job: "나는 용기로
+싸운다네!"
+  SERPENT:8:look: "대담한 전사."
+  SERPENT:8:name: "개럼"
+  SERPENT:8:no: "그럼 훈련하게!"
+  SERPENT:8:pronoun: "그"
+  SERPENT:8:question: "그대는?"
+  SERPENT:8:response1: "용기는
+악당을
+왕으로
+만든다네!"
+  SERPENT:8:response2: "용기의 종은
+바다의 깊은
+우물 바닥에
+있다네, 위도
+N'A\" 경도
+L'A\"에서
+찾을 수
+있다네"
+  SERPENT:8:topic1: "COUR"
+  SERPENT:8:topic2: "BELL"
+  SERPENT:8:yes: "좋아."
+  SERPENT:9:health: "꽤 좋다네."
+  SERPENT:9:job: "나는 영광을
+찾는다네!"
+  SERPENT:9:look: "키 큰 전사."
+  SERPENT:9:name: "더럼"
+  SERPENT:9:no: "안타까운
+일이군."
+  SERPENT:9:pronoun: "그"
+  SERPENT:9:question: "그대는
+여정 중인가?"
+  SERPENT:9:response1: "여정 중일 때
+내 삶에
+목적이
+있다고
+느낀다네!"
+  SERPENT:9:response2: "용기의 제단실은
+열쇠의 세 번째
+부분을
+준다네."
+  SERPENT:9:topic1: "QUES"
+  SERPENT:9:topic2: "DUNG"
+  SERPENT:9:yes: "그럼 그대의
+삶에
+의미가
+있군!"
+  SKARA:0:health: "나는 잘
+지낸다네."
+  SKARA:0:job: "나는 내면의
+빛을
+찾는다네."
+  SKARA:0:look: "근엄한 레인저."
+  SKARA:0:name: "샤미노"
+  SKARA:0:no: "아쉽군."
+  SKARA:0:pronoun: "그"
+  SKARA:0:question: "그대는 이
+\"진실\"을
+찾는가?"
+  SKARA:0:response1: "나는 \"하나의
+위대한 진실\"을
+찾는다네!"
+  SKARA:0:response2: "코덱스
+안에
+있는 것!"
+  SKARA:0:topic1: "LIGH"
+  SKARA:0:topic2: "TRUT"
+  SKARA:0:yes: "어떤 것들은
+영원이
+걸리지만
+벽돌 하나하나로
+산도 쌓을 수
+있다네!"
+  SKARA:1:health: "나는 심각한
+부상을
+입었다네."
+  SKARA:1:job: "나는 영적인
+길을
+찾는다네."
+  SKARA:1:look: "부상당한 남자."
+  SKARA:1:name: "에머슨"
+  SKARA:1:no: "악한 길이군!"
+  SKARA:1:pronoun: "그"
+  SKARA:1:question: "그대는 영혼이
+선한가?"
+  SKARA:1:response1: "영적인 것은
+그 어떤
+물질적 힘보다
+강하다네."
+  SKARA:1:response2: "원칙의
+승리
+외에는
+그 무엇도
+그대에게
+평화를
+가져다줄 수
+없다네!"
+  SKARA:1:topic1: "SPIR"
+  SKARA:1:topic2: "WOUN"
+  SKARA:1:yes: "좋은
+길이군."
+  SKARA:10:health: "그럭저럭."
+  SKARA:10:job: "나는 이야기를
+쓴다네."
+  SKARA:10:look: "지혜로운 음유시인."
+  SKARA:10:name: "디킨스"
+  SKARA:10:no: "그렇군."
+  SKARA:10:pronoun: "그"
+  SKARA:10:question: "그대는 천성이
+선한가?"
+  SKARA:10:response1: "이야기는
+영혼에
+좋다네!"
+  SKARA:10:response2: "기억하게,
+남의 짐을
+덜어주는 이는
+이 세상에서
+쓸모없지
+않다네!"
+  SKARA:10:topic1: "STOR"
+  SKARA:10:topic2: "SPIR"
+  SKARA:10:yes: "그대의 순선이
+순악을
+확실히
+넘어서게
+하게!"
+  SKARA:11:health: "뛰어나다네!"
+  SKARA:11:job: "나는
+여정을
+떠난다네."
+  SKARA:11:look: "늠름한
+전사."
+  SKARA:11:name: "화이트"
+  SKARA:11:no: "위험은
+실재한다네!"
+  SKARA:11:pronoun: "그"
+  SKARA:11:question: "그대는 모든
+일에
+두려움이
+없는가?"
+  SKARA:11:response1: "많은 여정이
+아주
+위험하다네!"
+  SKARA:11:response2: "나는 내일이
+두렵지 않다네;
+어제를 보았고
+오늘을
+사랑하니까."
+  SKARA:11:topic1: "QUES"
+  SKARA:11:topic2: "DANG"
+  SKARA:11:yes: "허풍쟁이
+바보로군!"
+  SKARA:12:health: "강하다."
+  SKARA:12:job: "나는 룬의
+비밀을
+지킨다."
+  SKARA:12:look: "은빛 앙크."
+  SKARA:12:name: "영성의
+앙크"
+  SKARA:12:no: "보름달의
+문으로
+들어가라!"
+  SKARA:12:pronoun: "그것"
+  SKARA:12:question: "신단을
+찾았는가?"
+  SKARA:12:response1: "진언이라고?"
+  SKARA:12:response2: "영성의
+룬을
+브리타니아의
+보물의 방에서
+찾아보라!"
+  SKARA:12:topic1: "RUNE"
+  SKARA:12:topic2: "OM  "
+  SKARA:12:yes: "좋다!"
+  SKARA:13:health: "그럭저럭."
+  SKARA:13:job: "나는 그저 금화
+한 닢을
+구걸한다네!"
+  SKARA:13:look: "꾀죄죄한 거지."
+  SKARA:13:name: "앰뷸"
+  SKARA:13:no: "인색하시네요,
+많이 가지신 거
+다
+알아요!"
+  SKARA:13:pronoun: "그녀"
+  SKARA:13:question: "금화 한 닢만
+주시겠어요?"
+  SKARA:13:response1: "오, 제발...
+오, 제발..."
+  SKARA:13:response2: "배런이라는
+아이에게
+물어보세요."
+  SKARA:13:topic1: "BEG "
+  SKARA:13:topic2: "MANT"
+  SKARA:13:yes: "참으로
+친절한
+분이시군요."
+  SKARA:14:health: "그럭저럭."
+  SKARA:14:job: "직업 없음."
+  SKARA:14:look: "작은 아이."
+  SKARA:14:name: "배런"
+  SKARA:14:no: "A"
+  SKARA:14:pronoun: "그"
+  SKARA:14:question: "A"
+  SKARA:14:response1: "나는 그걸 잘
+안다네,
+'옴'이라네."
+  SKARA:14:response2: "A"
+  SKARA:14:topic1: "MANT"
+  SKARA:14:topic2: "A   "
+  SKARA:14:yes: "A"
+  SKARA:15:health: "나는 죽은 지
+수년째라네."
+  SKARA:15:job: "나는 이 여관에
+출몰한다네!"
+  SKARA:15:look: "유령 같은 형체"
+  SKARA:15:name: "아이작"
+  SKARA:15:no: "아쉽군."
+  SKARA:15:pronoun: "그"
+  SKARA:15:question: "그대는
+여정 중인가?"
+  SKARA:15:response1: "여정은
+끝나지
+않았다네!"
+  SKARA:15:response2: "하얀 보석은
+서펀트의
+등뼈 꼭대기에
+있다네. 구름
+속을 떠다니는
+자만이
+닿을 수
+있다네."
+  SKARA:15:topic1: "HAUN"
+  SKARA:15:topic2: "STON"
+  SKARA:15:yes: "희망을!"
+  SKARA:2:health: "나는 살아
+있다네."
+  SKARA:2:job: "나는 마음속에
+빛을
+지니고
+다닌다네."
+  SKARA:2:look: "키 큰 레인저."
+  SKARA:2:name: "산타야나"
+  SKARA:2:no: "그럴 수 있는
+이는 드물지만,
+그러도록
+힘쓰게!"
+  SKARA:2:pronoun: "그"
+  SKARA:2:question: "그대는 항상
+올바른 길을
+걷는가?"
+  SKARA:2:response1: "철학의 빛."
+  SKARA:2:response2: "철학적인
+마음에서는
+익숙한 것도
+경이로움을
+불러일으킨다네!"
+  SKARA:2:topic1: "LIGH"
+  SKARA:2:topic2: "PHIL"
+  SKARA:2:yes: "의심스럽군!"
+  SKARA:3:health: "뛰어나지!"
+  SKARA:3:job: "나는 거대한
+주문을
+부린다네!"
+  SKARA:3:look: "아주 작은
+마법사."
+  SKARA:3:name: "프레스토"
+  SKARA:3:no: "맞혀보게!"
+  SKARA:3:pronoun: "그"
+  SKARA:3:question: "이 주문들의
+공통점을
+아는가?"
+  SKARA:3:response1: "나는 저주,
+살해, 그리고
+투시를
+부릴
+수 있다네!"
+  SKARA:3:response2: "그래, 베스퍼의
+'도끼와 에일'
+술집 주인에게
+벨라도나에
+대해
+물어보게."
+  SKARA:3:topic1: "SPEL"
+  SKARA:3:topic2: "NIGH"
+  SKARA:3:yes: "무엇인가?"
+  SKARA:4:health: "나는 전혀
+좋지
+않다네."
+  SKARA:4:job: "나는 음식과
+돈을
+구걸한다네."
+  SKARA:4:look: "배고픈 거지."
+  SKARA:4:name: "그랜티드"
+  SKARA:4:no: "밥맛이군!"
+  SKARA:4:pronoun: "그녀"
+  SKARA:4:question: "나에게 음식이나
+돈을
+주겠는가?"
+  SKARA:4:response1: "먹으려고!"
+  SKARA:4:response2: "음식을
+사려고!"
+  SKARA:4:topic1: "FOOD"
+  SKARA:4:topic2: "MONE"
+  SKARA:4:yes: "답례로 앙크가
+룬을 알고
+내 친구
+앰뷸이
+진언을
+안다는 걸
+말해주지!"
+  SKARA:5:health: "나는 괜찮다네."
+  SKARA:5:job: "나는 마법사의
+일지를
+읽고
+있다네."
+  SKARA:5:look: "빛나는
+레인저."
+  SKARA:5:name: "마이터"
+  SKARA:5:no: "아쉽군."
+  SKARA:5:pronoun: "그녀"
+  SKARA:5:question: "그것을
+되찾아
+보겠는가?"
+  SKARA:5:response1: "그것은 하얀
+보석에
+대해
+말해준다네."
+  SKARA:5:response2: "그것은 더
+이상 던전
+히스로스에
+있지 않다네,
+사라졌어!"
+  SKARA:5:topic1: "JOUR"
+  SKARA:5:topic2: "STON"
+  SKARA:5:yes: "트린식의
+술집에서
+그 보석에
+대해
+물어보게!"
+  SKARA:6:health: "나는 잘
+지낸다네."
+  SKARA:6:job: "나는
+가르친다네."
+  SKARA:6:look: "위대한
+철학자."
+  SKARA:6:name: "부처"
+  SKARA:6:no: "A"
+  SKARA:6:pronoun: "그"
+  SKARA:6:question: "A"
+  SKARA:6:response1: "모든 살아있는
+존재를
+가엾이 여길
+때, 그것이
+고귀함이라네."
+  SKARA:6:response2: "순수한 생각으로
+말하고
+행동하면,
+행복은 결코
+떠나지 않는
+그림자처럼
+따라오리라."
+  SKARA:6:topic1: "TEAC"
+  SKARA:6:topic2: "NOBL"
+  SKARA:6:yes: "A"
+  SKARA:7:health: "좋다네."
+  SKARA:7:job: "나는 그 길을
+따라
+힘쓴다네."
+  SKARA:7:look: "숙련된 레인저"
+  SKARA:7:name: "미켈란젤로"
+  SKARA:7:no: "두려워
+말게, 그리
+되리라."
+  SKARA:7:pronoun: "그"
+  SKARA:7:question: "그대는 그 길을
+멀리
+왔는가?"
+  SKARA:7:response1: "성공은
+여정이지,
+목적지가
+아니라네."
+  SKARA:7:response2: "늘 그대가
+이룰 수 있는
+것보다 더
+많이
+바라기를!"
+  SKARA:7:topic1: "PATH"
+  SKARA:7:topic2: "JOUR"
+  SKARA:7:yes: "좋군."
+  SKARA:8:health: "나는 좋다네."
+  SKARA:8:job: "나는 교사라네,
+젊은
+정신을
+풍요롭게
+하지."
+  SKARA:8:look: "책을 든
+작고 통통한
+남자."
+  SKARA:8:name: "로마스코"
+  SKARA:8:no: "배우게!"
+  SKARA:8:pronoun: "그"
+  SKARA:8:question: "어비스를
+아는가?"
+  SKARA:8:response1: "나는 어비스에
+대해
+가르친다네."
+  SKARA:8:response2: "그 말에 대해
+더 알고 싶다면
+포즈의 현자
+자이르를
+찾아가게."
+  SKARA:8:topic1: "TEAC"
+  SKARA:8:topic2: "WORD"
+  SKARA:8:yes: "마지막 문에서는
+통행의 말이
+필요하다네!"
+  SKARA:9:health: "좋다네."
+  SKARA:9:job: "나는 마법을
+적는다네."
+  SKARA:9:look: "지혜로운 마법사."
+  SKARA:9:name: "칼라일"
+  SKARA:9:no: "그렇군."
+  SKARA:9:pronoun: "그"
+  SKARA:9:question: "마법을
+믿는가?"
+  SKARA:9:response1: "사람은 무언가를
+믿음으로써
+살아간다네."
+  SKARA:9:response2: "위대한 발견은
+생각보다
+감정이 앞서는
+이들에
+의해
+이루어진다네."
+  SKARA:9:topic1: "MAGI"
+  SKARA:9:topic2: "BELI"
+  SKARA:9:yes: "마법 화살은
+재 1조각만
+필요하다네!"
+  term-avatar: "아바타"
+  term-codex: "코덱스"
+  term-companion: "동료"
+  term-mantra: "진언"
+  term-rune: "룬"
+  term-shrine: "신단"
+  term-virtue: "미덕"
+  title.exe:introGypsy:0: "집시가 첫 두 장의 카드를 놓는다
+"
+  title.exe:introGypsy:1: "집시가 카드 두 장을 더 놓는다
+"
+  title.exe:introGypsy:10: "영성"
+  title.exe:introGypsy:11: "겸손"
+  title.exe:introGypsy:13: "마지막 선택과 함께, 향내가
+그대 주위로 피어오른다.  집시가
+아주 먼 곳에서인 듯 말하니, 그녀의
+목소리는 한마디마다 희미해져 간다:
+\"그리 될지어다!  그대의 길이 정해졌다!\""
+  title.exe:introGypsy:14: "격렬하고 뒤틀리는 현기증의
+순간이 찾아온다.  눈을 뜨자,
+마음속에서 목소리가 속삭인다, \"그대의
+군주에게 조언을 구하라.\"  잠시 후,
+어지러움이 가라앉고, 그대는
+눈을 떠..."
+  title.exe:introGypsy:2: "집시가 마지막 두 장의 카드를 놓는다
+"
+  title.exe:introGypsy:3: "탁자 위에.  그것은 바로 다음의 카드들이다
+"
+  title.exe:introGypsy:4: "정직"
+  title.exe:introGypsy:5: "자비"
+  title.exe:introGypsy:6: "용맹"
+  title.exe:introGypsy:7: "정의"
+  title.exe:introGypsy:8: "희생"
+  title.exe:introGypsy:9: "명예"
+  title.exe:introQuestions:0: "헤아릴 수 없이 많은 금이 든 지갑을
+전하도록 맡겨졌는데, 가난한 걸인을
+만난다. 그대는 A) 자신에게 놓인 신뢰가
+옳았음을 알며 금을 그대로 전하겠는가,
+아니면 B) 자비를 베풀어, 없어져도
+티 나지 않을 동전 하나를 걸인에게
+주겠는가?"
+  title.exe:introQuestions:1: "자리를 비운 그대의 군주가 치열한
+접전에 벗들과 함께하는 것을 금하였다.
+그대는 A) 자제하여 정직하게 복종을
+주장하겠는가, 아니면 B) 용맹을 보여
+동료를 돕고, 나중에 그것을 부인할
+수 있음을 알면서도 그리하겠는가?"
+  title.exe:introQuestions:10: "그대는 금지된 죄수 고문에 가담하는
+군주를 섬기기로 맹세하였다.  매일 밤
+그들의 고통스러운 비명이 그대에게
+들려온다.  그대는 A) 그 행위를 고발하여
+자비를 보이겠는가, 아니면 B) 맹세를
+지켜 명예롭게 그 행위를 못 본 척
+하겠는가?"
+  title.exe:introQuestions:11: "그대는 모든 생명을 신성히 여기도록
+배웠다. 한 남자가 독사에게 치명적으로
+물려 쓰러져 있다.  그는 자비로운
+죽음을 애원한다.  그대는 A) 자비를
+베풀어 그의 고통을 끝내겠는가, 아니면
+B) 영적 신념을 따라 거부하겠는가?"
+  title.exe:introQuestions:12: "왕의 근위병으로서, 대장이 그대들 중
+한 명이 병원을 찾아 그대의 용맹한
+행적으로 아이들을 기쁘게 해주기를
+청하였다.  그대는 A) 자비를 보이며
+허풍을 떨겠는가, 아니면 B) 겸손히
+다른 이를 보내겠는가?"
+  title.exe:introQuestions:13: "그대는 먼 군주와 필요한 조약을 맺도록
+파견되었다.  그 주인은 제안에 동의하나
+만찬에서 그대의 나라를 모욕한다.
+그대는 A) 용맹하게 그 모욕을 참아내겠는가,
+아니면 B) 정의롭게 일어나 사과를
+요구하겠는가?"
+  title.exe:introQuestions:14: "강력한 기사가 그대를 막아서며 음식을
+요구한다.  그대는 A) 용맹하게 거부하고
+기사와 맞서겠는가, 아니면 B) 굶주린
+기사에게 음식을 희생하겠는가?"
+  title.exe:introQuestions:15: "전투 중 그대는 지휘관의 빈 막사를
+지키라는 명을 받는다.  전투가 불리하게
+흘러가고 그대는 동료를 돕고 싶어
+간절해진다.  그대는 A) 용맹하게
+전투에 뛰어들어 동료를 돕겠는가,
+아니면 B) 파수병의 자리를 명예롭게
+지키겠는가?"
+  title.exe:introQuestions:16: "동네 불량배가 싸움을 걸어온다.  그대는
+A) 용맹하게 그 무뢰한을 쳐부수겠는가,
+아니면 B) 영적으로 그것이 오래갈 선을
+낳지 못함을 알고 거절하겠는가?"
+  title.exe:introQuestions:17: "그대는 음악 교사이지만 뛰어난
+레슬링 선수이기도 하다.  그대는 지역
+선수권 대회에 출전해달라는 요청을
+받았다.  그대는 A) 초청을 받아들여
+용맹하게 승리를 위해 싸우겠는가,
+아니면 B) 반드시 이길 것을 알기에
+겸손히 거절하겠는가?"
+  title.exe:introQuestions:18: "치열한 전투 중, 동료 하나가 자리를
+버려 많은 이를 위험에 빠뜨리는 것을
+본다.  그가 도망치자 여러 적에게
+둘러싸인다. 그대는 A) 정의롭게 그가
+홀로 싸우도록 두겠는가, 아니면 B) 그를
+돕기 위해 스스로 목숨을 희생할
+위험을 감수하겠는가?"
+  title.exe:introQuestions:19: "그대는 모든 일에서 군주의 명을
+따르기로 맹세하였다.  그가 어느 땅을
+탐내어 주인을 쫓아내라 명한다.  그대는
+A) 행하기를 거부하여 정의를 섬기고
+불명예를 감수하겠는가, 아니면 B) 맹세를
+지켜 명예롭게 땅주인을 부당히
+쫓아내겠는가?"
+  title.exe:introQuestions:2: "한 상인이 그대의 벗에게 돈을 빚졌는데,
+이미 오래 지났다.  그대는 그 상인이
+금 지갑을 떨어뜨리는 것을 본다. 그대는
+A) 정직하게 지갑을 온전히 돌려주겠는가,
+아니면 B) 정의롭게 먼저 그 금의
+일부를 벗에게 주겠는가?"
+  title.exe:introQuestions:20: "그대는 모든 이 안에 미덕이 깃들어
+있다고 믿는다.  그대는 무뢰한이 그대의
+군주에게서 도둑질하는 것을 본다.
+그대는 A) 그를 정의로 심판하겠는가,
+아니면 B) 몸소 그를 선한 영적 길로
+되돌리려 하겠는가?"
+  title.exe:introQuestions:21: "목격자 없이, 그대는 정당방위로 거대한
+용을 처치하였다.  가난한 전사가 그
+보상을 자신의 것이라 주장한다.  그대는
+A) 정의롭게 나서서 보상을 청구하겠는가,
+아니면 B) 스스로에 대한 자존감으로
+족하며 겸손히 삶을 이어가겠는가?"
+  title.exe:introQuestions:22: "그대는 살인 혐의자를 데려오기로 맹세한
+현상금 사냥꾼이다.  그를 붙잡은 후
+그대는 그가 무죄라 믿게 된다.  그대는
+A) 그대의 믿음을 위해 상당한 현상금을
+희생하겠는가, 아니면 B) 약속한 대로
+그를 데려가겠다는 맹세를 명예롭게
+지키겠는가?"
+  title.exe:introQuestions:23: "그대는 자선과 올바른 일에 평생을
+바쳤다.  여관 주인인 삼촌이 병들어
+누워 그대에게 여관을 물려받아 달라
+청한다.  그대는 A) 순수한 삶을 희생하여
+친족을 돕겠는가, 아니면 B) 거절하고
+영적 부름을 따르겠는가?"
+  title.exe:introQuestions:24: "그대는 나이 든, 부유한 괴짜다.
+그대의 끝이 가깝다. 그대는 A) 굶주린
+수백 아이들을 먹이려 전 재산을
+기부하고 대중의 찬사를 받겠는가,
+아니면 B) 겸손히 남은 삶을 살며
+재산을 상속자에게 남기겠는가?"
+  title.exe:introQuestions:25: "젊은 시절 그대는 연인과 혼인을
+맹세했다.  이제 그대는 먼 땅에서
+신성한 여정 중이다.  연인이 그 맹세를
+지켜달라 청한다.  그대는 A) 혼인의
+맹세를 명예롭게 지키겠는가, 아니면
+B) 영적 성전을 따르겠는가?"
+  title.exe:introQuestions:26: "그대는 인생의 갈림길에 서 있다.
+그대는 A) 진실과 용기를 추구하는
+성기사의 명예로운 삶을 택하겠는가,
+아니면 B) 소박함과 평화의 세계,
+목자의 겸손한 삶을 택하겠는가?"
+  title.exe:introQuestions:27: "그대의 부모는 그대가 도제가 되기를
+바란다. 두 자리가 있다.
+그대는 A) 영적 교단의 수사가
+되겠는가, 아니면 B) 소박한 마을
+구두장이의 조수가 되겠는가?"
+  title.exe:introQuestions:3: "그대와 벗은 용맹하나 무일푼인
+전사들이다.  둘 다 강력한 용을
+처치하러 나선다.  벗은 자신이 처치했다고
+생각하지만, 실은 그대가 하였다.  질문을
+받으면, 그대는 A) 진실하게 금을
+자신의 것이라 주장하겠는가, 아니면
+B) 벗에게 큰 보상을 양보하겠는가?"
+  title.exe:introQuestions:4: "그대는 어떤 대가를 치르더라도 군주를
+지키기로 맹세하였으나, 그가 죄를
+저질렀음을 안다.  당국이 그 일에
+대해 묻는다.  그대는 A) 정직하게
+말하여 맹세를 깨겠는가, 아니면
+B) 침묵하여 맹세를 지키며 명예를
+지키겠는가?"
+  title.exe:introQuestions:5: "그대의 벗이 그대의 영적 교단에
+입단하고자 한다. 그대는 확신이 서지
+않는 그의 영혼의 순수함을 보증해
+달라는 요청을 받는다.  그대는
+A) 정직하게 의심을 표하겠는가, 아니면
+B) 그의 영적 성장을 바라며 보증해
+주겠는가?"
+  title.exe:introQuestions:6: "그대의 군주는 자신이 용을 처치했다고
+착각한다.  그대는 자신의 창이 그
+짐승을 쓰러뜨렸다는 증거를 지니고
+있다.  질문을 받으면, 그대는 A) 정직하게
+처치와 상을 주장하겠는가, 아니면
+B) 겸손히 군주가 그리 믿도록
+두겠는가?"
+  title.exe:introQuestions:7: "그대는 결투에서 숙적의 무기를
+빼앗는 데 성공한다.  그는 그대의
+자비에 달려 있다.  그대는 A) 자비를
+베풀어 그가 항복하도록 허락하겠는가,
+아니면 B) 용맹한 결투자에게 기대되는
+대로 그를 처치하겠는가?"
+  title.exe:introQuestions:8: "20년 만에 그대는 최고의 벗들을
+죽인 자를 찾아냈다.  그 악인은 한
+어린 소녀의 유일한 부양자임이
+드러난다.  그대는 A) 그 소녀를 위한
+자비로 그를 살려두겠는가, 아니면
+B) 정의의 이름으로 그를 처치하겠는가?"
+  title.exe:introQuestions:9: "그대와 벗들은 패주하여 퇴각하라는
+명을 받는다.  명을 어기고, 그대는
+A) 자비로 멈추어 부상당한 동료를
+돕겠는가, 아니면 B) 스스로를 희생하여
+추격하는 적을 늦춰 다른 이들이
+달아나게 하겠는가?"
+  title.exe:introText:0: "  날은 따뜻하지만, 서늘한 산들바람이
+분다.  연이은 개인적 위기 중 가장
+최근의 것이 극복할 수 없어 보인다.
+그대는 사방으로 갈가리 찢기는
+듯하다."
+  title.exe:introText:1: "그러나 오늘 오후 시골길을 걷다 보니
+지친 마음에 서서히 안식이 찾아온다.
+현대 첨단 기술 생활의 먼지와 긴장이
+한 겹씩 씻겨 내려가기 시작한다.
+개울가의 저 버드나무가 편안하고
+매력적으로 보인다."
+  title.exe:introText:10: "다른 책은 보기에 불편하다.
+작은 표지는 어떤 가죽 같은 것으로
+만들어진 듯하나, 어떤 생물의 것인지는
+알 수 없다.  불그스름한 검은 가죽은
+고대의 힘을 암시하는 강렬한
+기운을 내뿜는다."
+  title.exe:introText:11: "제목의 언어는 그대가 알지 못하는
+것이다.  그대는 감히 책을 열어 그
+안에서 잠든 무언가를 어지럽히지
+못한다.  그대는 역사서를 살펴보기로
+한다.  버드나무 아래 다시 자리를 잡고,
+책을 편다."
+  title.exe:introText:12: "
+
+    (역사의 책을 읽는다)"
+  title.exe:introText:13: "
+
+(아니, 정말로! 역사의 책을 읽으라!)"
+  title.exe:introText:14: "책을 덮고, 그대는 다시 앙크를
+집어 든다.  그것을 쥐자, 근처 언덕
+너머로 실려 오는 묘하게 낯익은,
+류트 같은 소리가 들리기 시작한다.
+낯선 유물들을 여전히 움켜쥔 채,
+그대는 저도 모르게 일어나 비탈을
+오른다."
+  title.exe:introText:15: "아래쪽 골짜기에서 축제처럼 보이는
+것이 눈에 들어온다.  아까 그 길로
+지나왔는데 아무것도 알아채지
+못했다는 것이 이상하게 느껴진다.
+이를 곱씹는 동안, 그대의 발은
+그곳을 향해 내려간다."
+  title.exe:introText:16: "이는 평범한 유랑 카니발이 아니라
+르네상스 축제이다.  천막 꼭대기의
+깃발들이 늦은 오후의 산들바람에
+힘차게 나부낀다."
+  title.exe:introText:17: "르네상스 축제 문 앞의 매표원이
+돈을 요구하려다, 그대의 앙크를
+알아보고는 말한다, \"어서 오시오,
+벗이여.  평화로이 들어와 그대의
+길을 찾으시오.\""
+  title.exe:introText:18: "음악은 상인과 행상들 사이로 그대를
+계속 이끈다.  어스름한 노점 몇 곳에서
+놀라운 보물들이 언뜻언뜻 보인다."
+  title.exe:introText:19: "이 사람들은 매우 행복해 보인다.
+내면의 빛으로 빛나는 듯하다.  일부는
+그대가 지나갈 때 고개를 들어 미소
+짓지만, 그대는 멈출 수 없다 - 음악이
+그대를 군중 사이로 계속 나아가게
+한다."
+  title.exe:introText:2: "잠자리의 웅웅거림과 흔들리는
+버드나무 가지의 속삭임이 깊은
+평온을 가져온다.  내면에서 평온과
+행복을 찾으며, 그대는 눈을 감는다."
+  title.exe:introText:20: "짙어지는 황혼 속에서 숲 한쪽에
+외따로 서 있는 집시 마차가 보인다.
+음악은 그 마차에서 흘러나오는
+듯하다.  가까이 다가가자, 여인의
+목소리가 음악에 섞여 들려온다:
+\"다가와도 좋다, 오 구도자여.\""
+  title.exe:introText:21: "안으로 들어가니 작은 커튼 방에
+늙은 집시가 앉아 있다.  그녀는 목에
+앙크를 걸고 있다. 그녀 앞에는 짙은
+초록 벨벳으로 덮인 둥근 탁자가
+있다.  방 안은 향내가 짙어 어지러울
+지경이다."
+  title.exe:introText:22: "앙크를 본 늙은 집시가 미소 지으며
+그것을 결코 손에서 놓지 말라
+경고한다.  \"우리는 아주 오랫동안
+기다려 왔소, 마침내 그대가 왔구려.
+이리 앉으시오, 내 그대 미래의
+길을 읽어주리다.\""
+  title.exe:introText:23: "탁자 위에 그녀는 주판 같지만 구슬이
+없는 기묘한 나무 물건을 올려놓는다.
+손에는 여덟 장의 기이한 카드를 쥐고
+있다.  \"점을 시작합시다.\""
+  title.exe:introText:3: "수정 풍경 소리처럼 높고 흘러내리는
+소리가 그대의 떠도는 의식을
+두드린다.  눈을 뜨자, 땅에서 아른거리는
+푸른빛이 솟아오르는 것이 보인다.
+그 소리는 이 빛나는 문에서
+흘러나오는 듯하다."
+  title.exe:introText:4: "그 푸른빛을 바라보기가 어렵다.
+빛이 그 주위로 휘어지고 일그러지는
+듯하며, 소리의 파동은 너무 강렬해져
+눈에 보이는 듯하다."
+  title.exe:introText:5: "그 문은 잠시 그대로 떠 있다가;
+이내 진공이 붕괴하듯 밀려들며
+땅속으로 가라앉는다.  무언가가
+잠시 허공에 떠 있다가 육중한
+소리를 내며 땅에 떨어진다."
+  title.exe:introText:6: "이 광경에 다소 놀란 채, 그대는
+일어서서 살펴본다.  거친 돌들의
+원이 문이 나타났던 자리를 둘러싸고
+있다. 풀 속에서 무언가가 반짝인다."
+  title.exe:introText:7: "그대는 위쪽에 고리가 달린 십자
+모양의 부적을 집어 든다.  그것은
+생명과 부활의 신성한 상징인 앙크다.
+하지만 이것이 그 소리를 냈을 리
+없기에, 다시 살펴보니 두꺼운 천에
+싸인 커다란 책이 있다!"
+  title.exe:introText:8: "떨리는 손으로 그대는 책을 풀어
+본다.  보라, 그 천은 지도이며,
+그 안에는 책 한 권이 아니라 두 권이
+들어 있다.  지도는 그대에게 낯선
+땅의 것이며, 그 양식은 고대 지도
+제작술을 말해준다."
+  title.exe:introText:9: "첫 번째 책의 표지에 적힌 문자는
+난해하지만 읽을 수 있다.  제목은
+다음과 같다:
+        브리타니아의 역사
+               전하는 이,
+            소(小) 카일"
+  TRINSIC:0:health: "아주 좋다네."
+  TRINSIC:0:job: "나는 마을
+지도자라네"
+  TRINSIC:0:look: "잘생긴 전사"
+  TRINSIC:0:name: "듀프레"
+  TRINSIC:0:no: "어리석은 놈!"
+  TRINSIC:0:pronoun: "그"
+  TRINSIC:0:question: "그대는 명예롭게
+살고자
+힘쓰는가?"
+  TRINSIC:0:response1: "영광이로군!"
+  TRINSIC:0:response2: "그것이 삶에
+의미를
+준다네!"
+  TRINSIC:0:topic1: "LEAD"
+  TRINSIC:0:topic2: "HONO"
+  TRINSIC:0:yes: "그것은 끊임없는
+여정이라네. 명예는
+잘 닦인
+갑옷과 같다네.
+계속 돌보지
+않으면, 곧
+녹슬고
+말지!"
+  TRINSIC:1:health: "나는 잘
+지낸다네."
+  TRINSIC:1:job: "나는 마법의
+장을
+만든다네."
+  TRINSIC:1:look: "신비한 마법사."
+  TRINSIC:1:name: "버질"
+  TRINSIC:1:no: "뭐, 상관없네!"
+  TRINSIC:1:pronoun: "그"
+  TRINSIC:1:question: "그것이
+그대
+것인가?"
+  TRINSIC:1:response1: "독이 내가
+가장
+좋아하는
+거라네."
+  TRINSIC:1:response2: "벨라도나는
+오직 가장
+어두운 밤,
+위도 J'F\"
+경도 C'O\"
+근처에서만
+찾을 수
+있다네!"
+  TRINSIC:1:topic1: "FIEL"
+  TRINSIC:1:topic2: "NIGH"
+  TRINSIC:1:yes: "훌륭해!"
+  TRINSIC:10:health: "좋다네."
+  TRINSIC:10:job: "나는 명예의
+신단에
+들어가려
+한다네!"
+  TRINSIC:10:look: "무언가를
+찾는
+성기사!"
+  TRINSIC:10:name: "클라인"
+  TRINSIC:10:no: "그대는 뭐라고
+생각하나?"
+  TRINSIC:10:pronoun: "그"
+  TRINSIC:10:question: "신단에
+들어가
+쓰는 데
+필요한
+두 가지를
+아는가?"
+  TRINSIC:10:response1: "진언은
+'섬'이라네."
+  TRINSIC:10:response2: "윈스롭이라는
+사람이
+룬을
+안다네!"
+  TRINSIC:10:topic1: "MANT"
+  TRINSIC:10:topic2: "RUNE"
+  TRINSIC:10:yes: "그것이
+무엇인가?"
+  TRINSIC:11:health: "뛰어나다네."
+  TRINSIC:11:job: "나는 트린식의
+전쟁 지휘관이라네."
+  TRINSIC:11:look: "빛나는
+성기사."
+  TRINSIC:11:name: "렉싱턴"
+  TRINSIC:11:no: "오."
+  TRINSIC:11:pronoun: "그"
+  TRINSIC:11:question: "명예를 위해
+힘쓰는가?"
+  TRINSIC:11:response1: "나는 많은
+여정을
+풀었다네!"
+  TRINSIC:11:response2: "여정을 푸는 것이
+그대에게
+명예를
+가져다준다네!"
+  TRINSIC:11:topic1: "WARL"
+  TRINSIC:11:topic2: "QUES"
+  TRINSIC:11:yes: "그럼 여정을
+풀되
+악하지 않은
+생물을
+공격하지
+말고, 남의
+금을 취하지도
+말게!"
+  TRINSIC:12:health: "피곤하군."
+  TRINSIC:12:job: "나는 쉴 곳을
+찾는다네."
+  TRINSIC:12:look: "심오한
+전사."
+  TRINSIC:12:name: "더진"
+  TRINSIC:12:no: "신단은 늪지대
+너머 남서쪽에
+있다네!"
+  TRINSIC:12:pronoun: "그"
+  TRINSIC:12:question: "그대는 명예에
+대해
+깨달았는가?"
+  TRINSIC:12:response1: "나는 오래도록
+힘겹게
+여정을
+떠났다네."
+  TRINSIC:12:response2: "나는 명예의
+신단에서
+깨달음을
+찾는다네!"
+  TRINSIC:12:topic1: "REST"
+  TRINSIC:12:topic2: "QUES"
+  TRINSIC:12:yes: "좋아."
+  TRINSIC:13:health: "훌륭하다네."
+  TRINSIC:13:job: "우리는 문을
+지킨다네."
+  TRINSIC:13:look: "큰 경비병."
+  TRINSIC:13:name: "경비병"
+  TRINSIC:13:no: "멍청이."
+  TRINSIC:13:pronoun: "그"
+  TRINSIC:13:question: "동료들에게
+명예를
+가져다주려고
+힘쓰는가?"
+  TRINSIC:13:response1: "트린식을
+드나드는
+것이지."
+  TRINSIC:13:response2: "명예로운
+일이지!"
+  TRINSIC:13:topic1: "GATE"
+  TRINSIC:13:topic2: "GUAR"
+  TRINSIC:13:yes: "우리 마을의
+지도자,
+듀프레는 많은
+명예로운
+여정에
+함께한다네!"
+  TRINSIC:14:health: "그럭저럭."
+  TRINSIC:14:job: "나는 해골을
+찾는다네!"
+  TRINSIC:14:look: "방랑하는 마법사"
+  TRINSIC:14:name: "퀵스"
+  TRINSIC:14:no: "아주 유용하니
+찾아보게!"
+  TRINSIC:14:pronoun: "그녀"
+  TRINSIC:14:question: "보라색
+보석을
+가졌는가?"
+  TRINSIC:14:response1: "그것은 위대한
+비밀을
+안다네."
+  TRINSIC:14:response2: "명예의
+보라색
+보석에
+대해서라네!"
+  TRINSIC:14:topic1: "SKEL"
+  TRINSIC:14:topic2: "SECR"
+  TRINSIC:14:yes: "현명하게
+쓰게!"
+  TRINSIC:15:health: "지켜지고
+있다네."
+  TRINSIC:15:job: "지키는 것."
+  TRINSIC:15:look: "강인한 경비병."
+  TRINSIC:15:name: "경비병."
+  TRINSIC:15:no: "A"
+  TRINSIC:15:pronoun: "그녀"
+  TRINSIC:15:question: "A"
+  TRINSIC:15:response1: "지키는 중."
+  TRINSIC:15:response2: "경비"
+  TRINSIC:15:topic1: "GUAR"
+  TRINSIC:15:topic2: "STRO"
+  TRINSIC:15:yes: "A"
+  TRINSIC:2:health: "피곤하군."
+  TRINSIC:2:job: "나는 명예를
+위해
+건배한다네!"
+  TRINSIC:2:look: "졸린 전사"
+  TRINSIC:2:name: "퍼블리우스"
+  TRINSIC:2:no: "명예가
+없다면,
+의미도
+없지!"
+  TRINSIC:2:pronoun: "그"
+  TRINSIC:2:question: "그대는 명예로운
+삶을
+살고자
+힘쓰는가?"
+  TRINSIC:2:response1: "명예를
+잃으면
+무엇이
+남는가?"
+  TRINSIC:2:response2: "맞아, 내게서
+명예를
+앗아가면
+내 삶은
+끝난
+걸세!"
+  TRINSIC:2:topic1: "HONO"
+  TRINSIC:2:topic2: "NOTH"
+  TRINSIC:2:yes: "명예는
+위대함을
+준다네."
+  TRINSIC:3:health: "무슨
+뜻인가?"
+  TRINSIC:3:job: "나는 깊은
+던전
+출신이라네."
+  TRINSIC:3:look: "뼈만 남은
+해골"
+  TRINSIC:3:name: "스키틀"
+  TRINSIC:3:no: "그곳엔 그대에게
+필요한
+물건이
+있다네."
+  TRINSIC:3:pronoun: "그것"
+  TRINSIC:3:question: "거기
+가본 적
+있는가?"
+  TRINSIC:3:response1: "나는 던전
+'수치'에서
+왔다네!"
+  TRINSIC:3:response2: "나는 진실과
+용기의
+제단에서
+쓰이는
+보라색
+보석을
+본 적
+있다네!"
+  TRINSIC:3:topic1: "DUNG"
+  TRINSIC:3:topic2: "STON"
+  TRINSIC:3:yes: "좋아."
+  TRINSIC:4:health: "좀 물에
+젖었지."
+  TRINSIC:4:job: "나는 브리타니아의
+바다를
+항해한다네!"
+  TRINSIC:4:look: "못생긴 선원."
+  TRINSIC:4:name: "뱃사람 샘"
+  TRINSIC:4:no: "육분의가
+없나
+보군?"
+  TRINSIC:4:pronoun: "그"
+  TRINSIC:4:question: "그것이
+그대의
+전문
+분야인가?"
+  TRINSIC:4:response1: "내 전문
+분야는
+항해라네!"
+  TRINSIC:4:response2: "젤롬의
+술집으로 가서
+육분의에
+대해
+물어보게."
+  TRINSIC:4:topic1: "SEAS"
+  TRINSIC:4:topic2: "SEXT"
+  TRINSIC:4:yes: "좋은
+솜씨군!"
+  TRINSIC:5:health: "나는 잘
+지낸다네."
+  TRINSIC:5:job: "나는 명예를
+찾는다네."
+  TRINSIC:5:look: "위엄있는 성기사."
+  TRINSIC:5:name: "아리스토텔레스"
+  TRINSIC:5:no: "그렇게
+되도록
+힘쓰게."
+  TRINSIC:5:pronoun: "그"
+  TRINSIC:5:question: "그대는 항상
+명예로운가?"
+  TRINSIC:5:response1: "존엄은 명예를
+소유하는 데
+있지 않고,
+그것을
+받을 자격이
+있는 데
+있다네."
+  TRINSIC:5:response2: "아무도 아닌
+명예
+그 자체를
+존중하게!"
+  TRINSIC:5:topic1: "HONO"
+  TRINSIC:5:topic2: "DIGN"
+  TRINSIC:5:yes: "그거
+인상적이군."
+  TRINSIC:6:health: "무서워요!"
+  TRINSIC:6:job: "나는 황소에게서
+도망쳤어요!"
+  TRINSIC:6:look: "움츠린 아이"
+  TRINSIC:6:name: "테린"
+  TRINSIC:6:no: "살려주세요!"
+  TRINSIC:6:pronoun: "그"
+  TRINSIC:6:question: "이제
+갔나요?"
+  TRINSIC:6:response1: "크고, 길고
+뾰족한 뿔이
+있었어요!"
+  TRINSIC:6:response2: "마을 남서쪽
+구석에
+묻혀
+있어요."
+  TRINSIC:6:topic1: "BULL"
+  TRINSIC:6:topic2: "RUNE"
+  TRINSIC:6:yes: "휴, 나를
+잡을 줄
+알았어요!"
+  TRINSIC:7:health: "아주
+좋다네."
+  TRINSIC:7:job: "나는
+환영
+담당이라네."
+  TRINSIC:7:look: "강인한
+성기사."
+  TRINSIC:7:name: "리그모어"
+  TRINSIC:7:no: "여기가
+아니라네!"
+  TRINSIC:7:pronoun: "그"
+  TRINSIC:7:question: "이 지혜를
+찾는가?"
+  TRINSIC:7:response1: "그래, 명예의
+도시
+트린식에
+온 걸
+환영하네!"
+  TRINSIC:7:response2: "명예의
+미덕에 대한
+지혜는
+이 마을
+곳곳에서
+찾을 수
+있다네."
+  TRINSIC:7:topic1: "WELC"
+  TRINSIC:7:topic2: "HONO"
+  TRINSIC:7:yes: "들어와서
+그대의 길을
+찾게."
+  TRINSIC:8:health: "좀
+남루하지."
+  TRINSIC:8:job: "소문을
+거래한다네."
+  TRINSIC:8:look: "꾀죄죄한
+상인."
+  TRINSIC:8:name: "윈스롭"
+  TRINSIC:8:no: "그를 찾아
+룬에
+대해
+물어보게!"
+  TRINSIC:8:pronoun: "그"
+  TRINSIC:8:question: "그를
+아는가?"
+  TRINSIC:8:response1: "무엇에
+대해?"
+  TRINSIC:8:response2: "알고 있는
+작은 아이가
+하나 있지...
+테린이라네."
+  TRINSIC:8:topic1: "RUMO"
+  TRINSIC:8:topic2: "RUNE"
+  TRINSIC:8:yes: "그에게
+룬에
+대해
+물어보게."
+  TRINSIC:9:health: "완전히
+회복됐다네."
+  TRINSIC:9:job: "나는 주문을
+부린다네."
+  TRINSIC:9:look: "키 큰 마법사."
+  TRINSIC:9:name: "스윈드릭"
+  TRINSIC:9:no: "그 주
+재료를
+아는가?"
+  TRINSIC:9:pronoun: "그"
+  TRINSIC:9:question: "큰 힘의
+주문을
+부리는가?"
+  TRINSIC:9:response1: "큰 힘의
+주문들."
+  TRINSIC:9:response2: "폴리
+선술집에서
+맨드레이크에
+대해
+물어보게."
+  TRINSIC:9:topic1: "SPEL"
+  TRINSIC:9:topic2: "MAND"
+  TRINSIC:9:yes: "가장 강력한
+재료는
+무엇인가?"
+  ui:camp:0: "휴식 중...
+"
+  ui:camp:1: "기습당함!
+"
+  ui:camp:2: "
+아침!
+"
+  ui:camp:3: "
+한밤중에 산책을 나갔다가...
+
+"
+  ui:combat:0: "
+%s의 제단실
+"
+  ui:combat:1: "
+%c****%c 전투 %c****%c
+"
+  ui:combat:10: "
+%s %c%s 명중%c!
+"
+  ui:combat:11: "
+%s 명중!
+"
+  ui:combat:12: "%s
+"
+  ui:combat:13: "모두 같은 출구를 써야 함!
+"
+  ui:combat:14: "%c막힘!%c
+"
+  ui:combat:15: "%c진행이 느림!%c
+"
+  ui:combat:16: "패스
+"
+  ui:combat:17: "전투 속도:
+보통
+"
+  ui:combat:18: "전투 속도:
+증가 (%d)
+"
+  ui:combat:19: "전투 속도:
+감소 (%d)
+"
+  ui:combat:2: "
+승리!
+
+"
+  ui:combat:20: "전투 속도:
+보통
+"
+  ui:combat:21: "음악: %d%s
+"
+  ui:combat:22: "음악: %d%s
+"
+  ui:combat:23: "효과음: %d%s
+"
+  ui:combat:24: "효과음: %d%s
+"
+  ui:combat:25: "주문 시전!
+"
+  ui:combat:26: "상자 획득!
+"
+  ui:combat:27: "
+위치:
+x:%d
+y:%d
+z:%d
+"
+  ui:combat:28: "여기선 안 됨!
+"
+  ui:combat:29: "발동!
+"
+  ui:combat:3: "
+전투 패배!
+
+"
+  ui:combat:30: "%.1d)xy 타일 xy xy
+"
+  ui:combat:31: "  %.1X%.1X  %.3d %.1X%.1X %.1X%.1X
+"
+  ui:combat:32: "여기선 안 됨!
+"
+  ui:combat:33: "어떤 아이템을 사용?
+"
+  ui:combat:34: "음량 켜짐!
+"
+  ui:combat:35: "음량 꺼짐!
+"
+  ui:combat:36: "XU4 %s
+"
+  ui:combat:37: "상태
+"
+  ui:combat:38: "여기선 안 됨!
+"
+  ui:combat:39: "방향: "
+  ui:combat:4: "방 나가기!
+"
+  ui:combat:40: "%s
+"
+  ui:combat:41: "사거리: "
+  ui:combat:42: "%d
+"
+  ui:combat:43: "빗나감!
+"
+  ui:combat:44: "마지막 하나!
+"
+  ui:combat:45: "빗나감!
+"
+  ui:combat:46: "
+%c%s 처치!%c
+"
+  ui:combat:6: "
+%s, %s로
+"
+  ui:combat:7: "빗나감!
+"
+  ui:combat:8: "실패.
+"
+  ui:combat:9: "실패.
+"
+  ui:creature:0: "
+수면!
+"
+  ui:creature:1: "
+%c%s 도주!%c
+"
+  ui:creature:2: "%s 분열!
+"
+  ui:creature:3: "%c%s 처치!%c
+경험치 %d
+"
+  ui:creature:4: "%c%s 처치!%c
+"
+  ui:creature:5: "%c%s 도주 중!%c
+"
+  ui:creature:6: "%s 위독!
+"
+  ui:creature:7: "%s 심각한 부상!
+"
+  ui:creature:8: "%s 가벼운 부상!
+"
+  ui:creature:9: "%s 경미한 부상!
+"
+  ui:dungeon:0: "수색 중...
+
+"
+  ui:dungeon:1: "아무것도 없음!
+"
+  ui:dungeon:10: "
+흠— 효과 없음!
+"
+  ui:dungeon:11: "
+캬악-켁-헐떡!
+"
+  ui:dungeon:12: "
+흠— 효과 없음!
+"
+  ui:dungeon:13: "마법의 구슬을 발견했다...
+누가 만지겠는가? "
+  ui:dungeon:14: "힘 + 5
+"
+  ui:dungeon:15: "민첩 + 5
+"
+  ui:dungeon:16: "지능 + 5
+"
+  ui:dungeon:17: "
+바람!
+"
+  ui:dungeon:18: "
+낙석!
+"
+  ui:dungeon:19: "
+함정 구덩이!
+"
+  ui:dungeon:2: "발견했다...
+%s!
+"
+  ui:dungeon:3: "아무것도 발견하지 못했다!
+"
+  ui:dungeon:4: "분수를 발견했다.
+누가 마시겠는가? "
+  ui:dungeon:5: "
+흠— 효과 없음!
+"
+  ui:dungeon:6: "
+아— 상쾌하다!
+"
+  ui:dungeon:7: "
+흠— 효과 없음!
+"
+  ui:dungeon:8: "
+으엑— 역겹다!
+"
+  ui:dungeon:9: "
+음— 맛있다!
+"
+  ui:event:0: "%c
+"
+  ui:event:2: "
+%s"
+  ui:game:0: "도움말은 Alt-h
+"
+  ui:game:1: "%s 열기 오류
+"
+  ui:game:10: "%c여기선 안 됨!%c
+"
+  ui:game:100: "%c무엇을 발사?%c
+"
+  ui:game:101: "대포 발사!
+방향: "
+  ui:game:102: "%c현측 포만 가능!%c
+"
+  ui:game:103: "상자 획득!
+"
+  ui:game:104: "%c표류만 가능!%c
+"
+  ui:game:105: "누가 여는가? "
+  ui:game:106: "상자 속: 골드 %d
+"
+  ui:game:107: "%c여기선 안 됨!%c
+"
+  ui:game:108: "%c산성%c 함정!
+"
+  ui:game:109: "%c독%c 함정!
+"
+  ui:game:11: "횃불: %d
+"
+  ui:game:110: "%c수면%c 함정!
+"
+  ui:game:111: "%c폭탄%c 함정!
+"
+  ui:game:112: "회피!
+"
+  ui:game:113: "은신하여 야영!
+"
+  ui:game:114: "%c여기선 안 됨!%c
+"
+  ui:game:115: "%c도보에서만 가능!%c
+"
+  ui:game:116: "%s
+"
+  ui:game:117: "%s로 선회!
+"
+  ui:game:118: "%c진행이 느림!%c
+"
+  ui:game:119: "%s로 항해!
+"
+  ui:game:12: "명령 (h = 도움말):"
+  ui:game:120: "%c표류만 가능!%c
+"
+  ui:game:121: "%c막힘!%c
+"
+  ui:game:122: "%c진행이 느림!%c
+"
+  ui:game:123: "%c떠나는 중...%c
+"
+  ui:game:124: "%c막힘!%c
+"
+  ui:game:125: "%c떠나는 중...%c
+"
+  ui:game:126: "따기: "
+  ui:game:127: "%c무엇을 딸까?%c
+"
+  ui:game:128: "
+잠금 해제!
+"
+  ui:game:129: "%c남은 열쇠 없음!%c
+"
+  ui:game:13: "도움말!
+"
+  ui:game:130: "열기: "
+  ui:game:131: "%c여기선 안 됨!%c
+"
+  ui:game:132: "%c여기선 안 됨!%c
+"
+  ui:game:133: "%c불가능!%c
+"
+  ui:game:134: "
+열렸다!
+"
+  ui:game:135: "무기 장착 대상: "
+  ui:game:136: "무기: "
+  ui:game:138: "%s
+"
+  ui:game:139: "%c남은 것 없음!%c
+"
+  ui:game:14: "3D 시점 %s
+"
+  ui:game:140: "
+%c%s은(는) %s %s을(를) 사용할 수 없다%c
+"
+  ui:game:141: "대화: "
+  ui:game:142: "%c표류만 가능!%c
+"
+  ui:game:143: "이상하게, 반응이 없다!
+"
+  ui:game:144: "재료 조합
+"
+  ui:game:145: "%c남은 것 없음!%c"
+  ui:game:146: "주문 대상: "
+  ui:game:147: "\\b%s
+"
+  ui:game:148: "
+%c그 주문은 더 이상 조합할 수 없다!%c
+"
+  ui:game:15: "패스
+"
+  ui:game:150: "재료: "
+  ui:game:151: "
+
+재료를 조합하니...
+"
+  ui:game:152: "성공!
+
+"
+  ui:game:153: "실패로 흩어진다!
+
+"
+  ui:game:154: "
+%c남은 것 없음!%c
+"
+  ui:game:155: "재료: "
+  ui:game:156: "몇 개? "
+  ui:game:157: "대형 재편성!
+교체 번호 "
+  ui:game:158: "%s, 선두여야 한다!
+"
+  ui:game:159: "    교체 대상 # "
+  ui:game:16: "속도: 보통
+"
+  ui:game:160: "%s, 선두여야 한다!
+"
+  ui:game:161: "%c무엇을?%c
+"
+  ui:game:162: "%c무엇을 들여다볼까?%c
+"
+  ui:game:163: "보석으로 들여다보기!
+"
+  ui:game:164: "이상하게, 반응이 없다!
+"
+  ui:game:165: "방어구 착용
+대상: "
+  ui:game:166: "방어구: "
+  ui:game:168: "%s
+"
+  ui:game:169: "%c남은 것 없음!%c
+"
+  ui:game:17: "속도 증가 (%d)
+"
+  ui:game:170: "
+%c%s은(는) %s을(를) 사용할 수 없다%c
+"
+  ui:game:171: "나가기
+"
+  ui:game:172: "%c어디로 나갈까?%c
+"
+  ui:game:173: "상태 확인 대상: "
+  ui:game:174: "
+%s의 공격을 받았다
+"
+  ui:game:175: "
+그대의 배가 침몰한다!
+
+"
+  ui:game:176: "활성 플레이어 설정: 없음!
+"
+  ui:game:177: "활성 플레이어 설정: %s!
+"
+  ui:game:178: "비활성화됨!
+"
+  ui:game:179: "
+다리의 트롤들!
+"
+  ui:game:18: "속도 감소 (%d)
+"
+  ui:game:180: "재료 조합
+"
+  ui:game:181: "주문 대상: "
+  ui:game:182: "
+완료.
+"
+  ui:game:183: "%s
+"
+  ui:game:184: "%d개를 만들 수 있다.
+"
+  ui:game:185: "몇 개? "
+  ui:game:186: "
+조합하지 않음!
+"
+  ui:game:187: "
+%c그 주문은 그만큼 더 조합할 수 없다!%c
+"
+  ui:game:188: "
+%c주문 %d개를 조합할 재료가 부족하다!%c
+"
+  ui:game:189: "
+성공!
+
+"
+  ui:game:19: "속도: 보통
+"
+  ui:game:2: "%s 열기 오류
+"
+  ui:game:20: "음악: %d%s
+"
+  ui:game:21: "음악: %d%s
+"
+  ui:game:22: "효과음: %d%s
+"
+  ui:game:23: "효과음: %d%s
+"
+  ui:game:24: "기구 착륙
+"
+  ui:game:25: "%c이미 착륙함!%c
+"
+  ui:game:26: "%c여기선 안 됨!%c
+"
+  ui:game:27: "%c무엇을 내려갈까?%c
+"
+  ui:game:28: "%c무엇에 들어갈까?%c
+"
+  ui:game:29: "횃불 점화!
+"
+  ui:game:3: "
+배 없이 바다에 갇혀, 그대는 익사한다!
+
+"
+  ui:game:30: "%c남은 것 없음!%c
+"
+  ui:game:31: "%c여기선 안 됨!%c
+"
+  ui:game:32: "고도 상승
+"
+  ui:game:33: "%c무엇을 오를까?%c
+"
+  ui:game:34: "육분의로
+위치 확인
+ 위도: %c'%c\"
+경도: %c'%c\"
+"
+  ui:game:35: "%c무엇으로 위치를 확인할까?%c
+"
+  ui:game:36: "%c여기선 안 됨!%c
+"
+  ui:game:37: "종료 및 저장...
+%d회 이동
+"
+  ui:game:38: "종료하려면 Alt-x
+"
+  ui:game:39: "%c여기선 안 됨!%c
+"
+  ui:game:4: "쿨쿨
+"
+  ui:game:40: "수색 중...
+%c표류만 가능!%c
+"
+  ui:game:41: "수색 중...
+"
+  ui:game:42: "%c아무것도 없음!%c
+"
+  ui:game:43: "발견했다...
+%s!
+"
+  ui:game:44: "%c아무것도 없음!%c
+"
+  ui:game:45: "어떤 아이템을 사용?
+"
+  ui:game:46: "음량 켜짐!
+"
+  ui:game:47: "음량 꺼짐!
+"
+  ui:game:48: "외치기: "
+  ui:game:49: "이랴!
+"
+  ui:game:5: "어둡다!
+"
+  ui:game:50: "워어!
+"
+  ui:game:51: "%c무엇을?%c
+"
+  ui:game:52: "단축키 안내:
+"
+  ui:game:56: "메뉴로 나갈까?"
+  ui:game:58: "XU4 %s
+"
+  ui:game:59: "효과음 %s!
+"
+  ui:game:6: "
+ %c그대는 8분의 1을
+  잃었다!%c
+"
+  ui:game:60: "없음
+"
+  ui:game:61: "%s
+"
+  ui:game:62: "%c비활성화됨!%c
+"
+  ui:game:63: "방향?"
+  ui:game:64: "\\b\\b\\b\\b"
+  ui:game:66: "%s
+"
+  ui:game:67: "
+조합하지 않음!
+"
+  ui:game:68: "
+%c%d개만 있으면 된다!%c
+"
+  ui:game:69: "
+%d개 조합 중...
+"
+  ui:game:7: "
+%c%s
+그대는 이제 레벨 %d이다%c
+"
+  ui:game:70: "
+%c주문 %d개를 조합할 재료가 부족하다!%c
+"
+  ui:game:71: "
+
+재료를 조합하니...
+"
+  ui:game:72: "성공!
+
+"
+  ui:game:73: "실패로 흩어진다!
+
+"
+  ui:game:74: "물체 파괴
+방향: "
+  ui:game:75: "%c아무것도 없음!%c
+"
+  ui:game:76: "%s 파괴됨!
+"
+  ui:game:77: "%s 파괴됨!
+"
+  ui:game:78: "공격: "
+  ui:game:79: "
+%c표류만 가능!%c
+"
+  ui:game:8: "
+%c굶주림!!!%c
+"
+  ui:game:80: "%c공격할 대상이 없다!%c
+"
+  ui:game:81: "탑승: %c불가능!%c
+"
+  ui:game:82: "%c무엇에 탑승?%c
+"
+  ui:game:83: "범선에 탑승!
+"
+  ui:game:84: "말에 탑승!
+"
+  ui:game:85: "기구에 탑승!
+"
+  ui:game:86: "%c무엇에 탑승?%c
+"
+  ui:game:87: "주문 시전!
+대상: "
+  ui:game:88: "주문: "
+  ui:game:89: "%s!
+"
+  ui:game:9: "%c잘못된 명령%c
+"
+  ui:game:90: "위상 변경: "
+  ui:game:91: "없음
+"
+  ui:game:93: "대상: "
+  ui:game:94: "방향: "
+  ui:game:95: "에너지 유형? "
+  ui:game:97: "방향: "
+  ui:game:98: "실패!
+"
+  ui:game:99: "출발 방향: "
+  ui:intro:0: " 영상 옵션"
+  ui:intro:1: " 음향 옵션"
+  ui:intro:10: "필터                 %s"
+  ui:intro:11: "감마                 %s"
+  ui:intro:12: " 이 설정 사용"
+  ui:intro:13: " 취소"
+  ui:intro:14: "투명 효과          %s"
+  ui:intro:15: "  그림자 크기:     %d"
+  ui:intro:16: "  그림자 불투명도: %d"
+  ui:intro:17: "보석 시야 배치     %s"
+  ui:intro:18: "시야 방식          %s"
+  ui:intro:19: "화면 흔들림        %s"
+  ui:intro:2: " 입력 옵션"
+  ui:intro:20: " 영상 옵션으로 돌아가기"
+  ui:intro:21: "음악 볼륨            %s"
+  ui:intro:22: "효과음 볼륨          %s"
+  ui:intro:23: "페이드              %s"
+  ui:intro:24: " 이 설정 사용"
+  ui:intro:25: " 취소"
+  ui:intro:26: "반복 지연           %4d ms"
+  ui:intro:27: "반복 간격           %4d ms"
+  ui:intro:28: "마우스               %s"
+  ui:intro:29: " 이 설정 사용"
+  ui:intro:3: " 속도 옵션"
+  ui:intro:30: " 취소"
+  ui:intro:31: "초당 게임 주기      %3d"
+  ui:intro:32: "전투 속도           %3d"
+  ui:intro:33: "주문 효과 길이       %s"
+  ui:intro:34: "야영 길이            %3d초"
+  ui:intro:35: "여관 휴식 길이        %3d초"
+  ui:intro:36: "신단 명상 길이        %3d초"
+  ui:intro:37: "화면 흔들림 간격      %3d ms"
+  ui:intro:38: " 이 설정 사용"
+  ui:intro:39: " 취소"
+  ui:intro:4: "게임 개선 기능       %s"
+  ui:intro:40: "전투 난이도          %s"
+  ui:intro:41: "고정 상자 함정       %s"
+  ui:intro:42: "게이저 곤충 소환     %s"
+  ui:intro:43: "보석 시야에 물체 표시 %s"
+  ui:intro:44: "슬라임 분열          %s"
+  ui:intro:45: "디버그 모드 (치트)   %s"
+  ui:intro:46: " 이 설정 사용"
+  ui:intro:47: " 취소"
+  ui:intro:48: "자동 행동            %s"
+  ui:intro:49: "활성 플레이어 설정   %s"
+  ui:intro:5: " 게임플레이 개선 옵션"
+  ui:intro:50: "스마트 'Enter' 키    %s"
+  ui:intro:51: "텍스트 색상 강조     %s"
+  ui:intro:52: "울티마 V식 신단      %s"
+  ui:intro:53: "울티마 V식 주문 조합 %s"
+  ui:intro:54: " 이 설정 사용"
+  ui:intro:55: " 취소"
+  ui:intro:6: " 인터페이스 개선 옵션"
+  ui:intro:7: " 메인 메뉴"
+  ui:intro:8: " 그래픽 옵션"
+  ui:intro:9: "배율                 x%d"
+  ui:item:0: "
+종이 계속해서 울린다!
+"
+  ui:item:1: "
+그 말이 울림과 함께 공명한다!
+"
+  ui:item:10: "
+
+마법사 몬데인의 사악한 해골을 높이 치켜든다...
+"
+  ui:item:11: "
+이미 사용함!
+"
+  ui:item:12: "
+%c:"
+  ui:item:13: "
+삼분된 열쇠의 한 조각을 발견했다!
+"
+  ui:item:14: "
+흠...효과 없음!
+"
+  ui:item:15: "
+
+제단이 눈앞에서 변한다!
+"
+  ui:item:16: "
+흠...효과 없음!
+"
+  ui:item:17: "
+사용할 수 없는 아이템!
+"
+  ui:item:18: "
+
+다가가자 목소리가 울려 퍼진다: %s에서 비롯되는 미덕은 무엇인가?
+
+"
+  ui:item:19: "
+
+목소리가 울려 퍼진다:  진실, 사랑, 용기와 무관하게 존재하는 미덕은 무엇인가?
+
+"
+  ui:item:2: "
+초에 불을 붙이자 대지가 진동한다!
+"
+  ui:item:20: "
+
+목소리가 말한다: 그대의 보석을 사용하라.
+
+색상:
+"
+  ui:item:21: "
+흠...효과 없음!
+"
+  ui:item:22: "
+
+보석 4개를 위한 구멍이 있다.
+어떤 색상:
+A:"
+  ui:item:23: "
+사용할 곳이 없다!
+"
+  ui:item:24: "
+사용할 곳이 없다!
+"
+  ui:item:25: "망원경에서
+A-P로 표시된
+손잡이가 보인다
+선택: "
+  ui:item:26: "일부를 떨어뜨렸다!
+"
+  ui:item:27: "
+사용할 수 없는 아이템!
+"
+  ui:item:28: "
+보유하지 않음!
+"
+  ui:item:29: "
+사용할 수 없는 아이템!
+"
+  ui:item:3: "
+흠...효과 없음!
+"
+  ui:item:30: "입장 불가!
+"
+  ui:item:31: "
+보유하지 않음!
+"
+  ui:item:4: "
+흠...효과 없음!
+"
+  ui:item:5: "
+뿔피리가 으스스한 소리를 낸다!
+"
+  ui:item:6: "
+장착하자, 바퀴가 푸른빛으로 빛난다!
+"
+  ui:item:7: "
+흠...효과 없음!
+"
+  ui:item:8: "
+보유하지 않음!
+"
+  ui:item:9: "
+
+몬데인의 해골을 심연 속으로 던진다!
+"
+  ui:portal:0: "%s도보에서만 가능!
+"
+  ui:portal:1: "%s(으)로 입장!
+
+"
+  ui:portal:2: "%s에 입장!
+
+"
+  ui:portal:3: "던전에 입장!
+
+"
+  ui:portal:4: "도보에서만 가능!
+"
+  ui:spell:0: "떠나는 중...
+"
+  ui:spell:1: "떠나는 중...
+"
+  VESPER:0:health: "좋다네."
+  VESPER:0:job: "베스퍼에
+온 걸
+환영하네."
+  VESPER:0:look: "키 큰 마법사."
+  VESPER:0:name: "트윈 게이츠"
+  VESPER:0:no: "여정 중인 이의
+방문을
+영광으로
+여기네!"
+  VESPER:0:pronoun: "그"
+  VESPER:0:question: "먼 길을
+왔는가?"
+  VESPER:0:response1: "그래, 베스퍼는
+아름다운
+마을이라네."
+  VESPER:0:response2: "베스퍼에
+온 걸
+환영하네!"
+  VESPER:0:topic1: "VESP"
+  VESPER:0:topic2: "WELC"
+  VESPER:0:yes: "여정 중인 이의
+방문을
+영광으로
+여기네!"
+  VESPER:1:health: "우그, 나
+힘세!"
+  VESPER:1:job: "우그, 나
+힘세!"
+  VESPER:1:look: "거구."
+  VESPER:1:name: "경비병"
+  VESPER:1:no: "우그, 나
+힘세!"
+  VESPER:1:pronoun: "그것"
+  VESPER:1:question: "우그, 너
+힘센가?"
+  VESPER:1:response1: "우그, 나
+힘세!"
+  VESPER:1:response2: "나 힘세!"
+  VESPER:1:topic1: "TOUG"
+  VESPER:1:topic2: "UG  "
+  VESPER:1:yes: "우그, 너
+힘세!"
+  VESPER:10:health: "나는 잘
+지낸다네."
+  VESPER:10:job: "나는 신단에
+대해
+가르친다네."
+  VESPER:10:look: "근엄한 레인저."
+  VESPER:10:name: "랜달"
+  VESPER:10:no: "그것을 아바타가
+되는 길의
+첫 목표로
+삼게!"
+  VESPER:10:pronoun: "그"
+  VESPER:10:question: "자주
+찾아가는가?"
+  VESPER:10:response1: "그대의 길이
+분명해지려면
+각 신단을
+1, 2, 3주기씩
+>반드시<
+찾아가야
+한다네!"
+  VESPER:10:response2: "A"
+  VESPER:10:topic1: "SHRI"
+  VESPER:10:topic2: "A   "
+  VESPER:10:yes: "아주 좋군."
+  VESPER:11:health: "좋다네."
+  VESPER:11:job: "나는 현명한
+조언을
+한다네."
+  VESPER:11:look: "현명한 남자."
+  VESPER:11:name: "더전"
+  VESPER:11:no: "그대는 분명
+길에서
+벗어날
+걸세!"
+  VESPER:11:pronoun: "그"
+  VESPER:11:question: "그대는?"
+  VESPER:11:response1: "그대 안의
+미덕을 알고
+발전시키도록
+힘쓰게."
+  VESPER:11:response2: "예언자
+호크윈드를
+>자주< 찾아가
+상담해야
+한다네, 그는
+그대 안을
+볼 수
+있으니!"
+  VESPER:11:topic1: "COUN"
+  VESPER:11:topic2: "VIRT"
+  VESPER:11:yes: "좋아!"
+  VESPER:12:health: "좀 간지러워요!"
+  VESPER:12:job: "내가 웃기다고
+생각하지!"
+  VESPER:12:look: "우스운 광대."
+  VESPER:12:name: "샤즈봇"
+  VESPER:12:no: "아, 아쉽네,
+그런 줄
+알았는데."
+  VESPER:12:pronoun: "그녀"
+  VESPER:12:question: "안
+그런가?"
+  VESPER:12:response1: "뱀 네이트에
+대해
+물어보라고
+권해
+보겠네!"
+  VESPER:12:response2: "뭐, 긴
+이야기고
+시간이
+없다네."
+  VESPER:12:topic1: "FUNN"
+  VESPER:12:topic2: "NATE"
+  VESPER:12:yes: "뭐 좋아, 나도
+그러려고
+노력하지!"
+  VESPER:13:health: "나는 아주
+강력하다네!"
+  VESPER:13:job: "나는 견습
+마법사라네!"
+  VESPER:13:look: "날씬한 청년."
+  VESPER:13:name: "플랫부시"
+  VESPER:13:no: "칼럼니가
+신속 주문을
+안다네! 그를
+찾아가게!"
+  VESPER:13:pronoun: "그"
+  VESPER:13:question: "유에
+가본 적
+있는가?"
+  VESPER:13:response1: "나는 칼럼니가
+가장
+아끼는
+제자라네!"
+  VESPER:13:response2: "그는 유에
+산다네!"
+  VESPER:13:topic1: "MAGE"
+  VESPER:13:topic2: "CALU"
+  VESPER:13:yes: "칼럼니가
+신속 주문을
+안다네!"
+  VESPER:14:health: "나는 완전히
+회복됐다네!"
+  VESPER:14:job: "나는 미덕을
+전파하려
+이 아름다운
+땅을
+여행한다네!"
+  VESPER:14:look: "대담한 성기사."
+  VESPER:14:name: "코크린"
+  VESPER:14:no: "그래야 하네,
+안 그러면
+길에서
+벗어날
+걸세!"
+  VESPER:14:pronoun: "그"
+  VESPER:14:question: "그대는
+이렇게
+하는가?"
+  VESPER:14:response1: "미덕의 길에서
+그대의 진전을
+알려면
+예언자
+호크윈드를
+>자주<
+찾아가야
+한다네!"
+  VESPER:14:response2: "A"
+  VESPER:14:topic1: "VIRT"
+  VESPER:14:topic2: "A   "
+  VESPER:14:yes: "좋아."
+  VESPER:15:health: "나는 아주
+좋다네!"
+  VESPER:15:job: "나는 도둑이라네,
+빌리는 걸
+좋아하지!"
+  VESPER:15:look: "키 크고
+날렵한
+남자."
+  VESPER:15:name: "다이카"
+  VESPER:15:no: "아마, 그대는
+겁쟁이일
+걸세!"
+  VESPER:15:pronoun: "그"
+  VESPER:15:question: "그대는
+도둑인가?"
+  VESPER:15:response1: "내가 가장
+좋아하는
+'빌리는' 것은
+말이라네!"
+  VESPER:15:response2: "포즈
+마을에서
+말을
+훔칠 수
+있다네!"
+  VESPER:15:topic1: "BORR"
+  VESPER:15:topic2: "HORS"
+  VESPER:15:yes: "우리에
+있는 황소를
+조심하게!"
+  VESPER:2:health: "지금은
+괜찮다네."
+  VESPER:2:job: "나는 그대를
+도울 수
+있다네!"
+  VESPER:2:look: "온순한 목자."
+  VESPER:2:name: "서바일"
+  VESPER:2:no: "그것은
+사악한
+유물이라네!"
+  VESPER:2:pronoun: "그"
+  VESPER:2:question: "그것에 대해
+들어본 적
+있는가?"
+  VESPER:2:response1: "나는 마법사
+몬데인의
+해골에
+대해
+안다네!"
+  VESPER:2:response2: "어떤 이유로든
+그것을 쓰는 것은
+큰 악의
+징표이며, 미덕이
+아니라네!"
+  VESPER:2:topic1: "HELP"
+  VESPER:2:topic2: "SKUL"
+  VESPER:2:yes: "그것은
+사악한
+유물이라네!"
+  VESPER:3:health: "나는 좋다네,
+고맙네."
+  VESPER:3:job: "여행자 댄,
+땜장이라네."
+  VESPER:3:look: "모자와 조끼를
+입은 작고
+통통한
+남자."
+  VESPER:3:name: "여행자 댄"
+  VESPER:3:no: "최고의
+가격이라네!"
+  VESPER:3:pronoun: "그"
+  VESPER:3:question: "길드
+상점에
+가봤나?"
+  VESPER:3:response1: "나는 길드
+상점에서
+물건을
+고치러
+왔다네."
+  VESPER:3:response2: "나는 세상이
+둥글다는 걸
+안다네!"
+  VESPER:3:topic1: "TINK"
+  VESPER:3:topic2: "TRAV"
+  VESPER:3:yes: "훌륭한
+선택이지!"
+  VESPER:4:health: "지쳤다네."
+  VESPER:4:job: "나는
+농노라네."
+  VESPER:4:look: "튼튼한
+농노."
+  VESPER:4:name: "발타사르"
+  VESPER:4:no: "그대는
+참으로
+운이
+좋군!"
+  VESPER:4:pronoun: "그"
+  VESPER:4:question: "그대는
+주인이
+있는가?"
+  VESPER:4:response1: "농노는
+적은 돈을 위해
+열심히
+일한다네!"
+  VESPER:4:response2: "나는 주인님을 위해
+밭에서
+일한다네!"
+  VESPER:4:topic1: "SERF"
+  VESPER:4:topic2: "WORK"
+  VESPER:4:yes: "그(녀)가
+친절한 분이길
+바라네!"
+  VESPER:5:health: "나는 완전히
+회복됐다네."
+  VESPER:5:job: "나는 겸손을
+찾는다네."
+  VESPER:5:look: "작은 남자."
+  VESPER:5:name: "플레인"
+  VESPER:5:no: "A"
+  VESPER:5:pronoun: "그"
+  VESPER:5:question: "A"
+  VESPER:5:response1: "미덕의 3원칙이
+여덟 가지로
+결합할 때
+오만은
+미덕이
+아니라네!"
+  VESPER:5:response2: "오만한 것은
+미덕이 아니니,
+그래서
+매긴시아가
+파괴되었지!
+겸손이 남은
+미덕이라네!"
+  VESPER:5:topic1: "HUMI"
+  VESPER:5:topic2: "PRID"
+  VESPER:5:yes: "A"
+  VESPER:6:health: "나는 괜찮다네."
+  VESPER:6:job: "나는 신단을
+찾는다네."
+  VESPER:6:look: "날씬한
+목녀."
+  VESPER:6:name: "심플"
+  VESPER:6:no: "브리타니아
+남동쪽에!"
+  VESPER:6:pronoun: "그녀"
+  VESPER:6:question: "그 섬을
+아는가?"
+  VESPER:6:response1: "겸손의
+신단!"
+  VESPER:6:response2: "그 신단은
+어비스 섬의
+북쪽 기슭에
+있고 끝없는
+데몬 무리가
+지킨다네!"
+  VESPER:6:topic1: "SHRI"
+  VESPER:6:topic2: "HUMI"
+  VESPER:6:yes: "좋아."
+  VESPER:7:health: "나는 잘
+지낸다네."
+  VESPER:7:job: "나는 겸손한
+일을
+한다네."
+  VESPER:7:look: "아름다운 여인."
+  VESPER:7:name: "젬"
+  VESPER:7:no: "그럴 때,
+거꾸로
+뒤집게!"
+  VESPER:7:pronoun: "그녀"
+  VESPER:7:question: "오만의
+진언을
+아는가?"
+  VESPER:7:response1: "진언에 대해
+도와줄 수
+있다네!"
+  VESPER:7:response2: "겸손은
+오만의
+반대이니,
+그 진언도
+그렇다네!"
+  VESPER:7:topic1: "WORK"
+  VESPER:7:topic2: "MANT"
+  VESPER:7:yes: "그럼 겸손을 위해
+거꾸로
+뒤집게!"
+  VESPER:8:health: "나는 잘
+지낸다네."
+  VESPER:8:job: "나는 그저
+겸손한
+목자라네."
+  VESPER:8:look: "지혜로운 목자."
+  VESPER:8:name: "조셉"
+  VESPER:8:no: "오만은
+아바타의
+미덕이
+아니라네!"
+  VESPER:8:pronoun: "그"
+  VESPER:8:question: "오만의
+신단은
+없다는 걸
+알았는가?"
+  VESPER:8:response1: "나는 겸손의
+신단으로
+순례를
+떠난다네."
+  VESPER:8:response2: "그것은 어두운
+섬에
+있다네!"
+  VESPER:8:topic1: "SHEP"
+  VESPER:8:topic2: "SHRI"
+  VESPER:8:yes: "아주 좋군."
+  VESPER:9:health: "나는 꽤
+좋다네!"
+  VESPER:9:job: "이 금을
+가져가지
+말라고
+경고하겠네!"
+  VESPER:9:look: "아름답고
+인상적인
+경비병."
+  VESPER:9:name: "프라이데이"
+  VESPER:9:no: "좋다네."
+  VESPER:9:pronoun: "그녀"
+  VESPER:9:question: "그것을
+가져갈
+작정인가?"
+  VESPER:9:response1: "그건 그대의
+것이
+아니라네!"
+  VESPER:9:response2: "그건 그대의
+것이
+아니라네!"
+  VESPER:9:topic1: "GOLD"
+  VESPER:9:topic2: "WARN"
+  VESPER:9:yes: "그것은 그대의
+미덕을
+잘 비추지
+못할
+걸세!"
+  virtue-compassion: "자비"
+  virtue-honesty: "정직"
+  virtue-honor: "명예"
+  virtue-humility: "겸손"
+  virtue-justice: "정의"
+  virtue-sacrifice: "희생"
+  virtue-spirituality: "영성"
+  virtue-valor: "용맹"
+  YEW:0:health: "나는 잘
+지낸다네."
+  YEW:0:job: "나는 정의를
+이해하려고
+힘쓴다네."
+  YEW:0:look: "조용한 드루이드"
+  YEW:0:name: "자아나"
+  YEW:0:no: "아쉽군."
+  YEW:0:pronoun: "그녀"
+  YEW:0:question: "그대는
+정의로운가?"
+  YEW:0:response1: "참된 정의는
+모두를
+만족시키고,
+거짓 정의는
+아무도
+만족시키지
+못한다네."
+  YEW:0:response2: "정의를
+핑계가 아닌
+소명으로
+삼게!"
+  YEW:0:topic1: "JUST"
+  YEW:0:topic2: "UNDE"
+  YEW:0:yes: "정의의 이름으로
+부당하게
+채워진
+무덤이
+많다네."
+  YEW:1:health: "그렇다네."
+  YEW:1:job: "법정을
+지키는 것."
+  YEW:1:look: "키 큰 경비병"
+  YEW:1:name: "경비병"
+  YEW:1:no: "그럼 절차를
+방해하지
+말게!"
+  YEW:1:pronoun: "그녀"
+  YEW:1:question: "법정에
+볼일이
+있는가?"
+  YEW:1:response1: "좋은 삶은
+사랑에서
+영감을 얻고
+지식이
+인도한다네."
+  YEW:1:response2: "이 방 안에서
+정의가
+행해진다네."
+  YEW:1:topic1: "JUST"
+  YEW:1:topic2: "COUR"
+  YEW:1:yes: "그럼
+들어가게."
+  YEW:10:health: "그럭저럭."
+  YEW:10:job: "나는 안식처를
+찾는다네."
+  YEW:10:look: "날렵한
+레인저."
+  YEW:10:name: "레인저"
+  YEW:10:no: "아, 뭐 하러
+그걸
+망치려
+드나!"
+  YEW:10:pronoun: "그녀"
+  YEW:10:question: "그런 곳에
+대해
+들어본 적
+있는가?"
+  YEW:10:response1: "넓은 초원
+위에서!"
+  YEW:10:response2: "사슴과
+영양이
+뛰노는
+곳에서."
+  YEW:10:topic1: "HOME"
+  YEW:10:topic2: "RANG"
+  YEW:10:yes: "낙담의 말은
+거의 들리지
+않는다네!"
+  YEW:11:health: "나는 좋아요."
+  YEW:11:job: "나는 존스
+밑에서
+일한다네."
+  YEW:11:look: "작은 아이"
+  YEW:11:name: "쇼트 라운드"
+  YEW:11:no: "정말
+미안해요,
+우리 모두
+그러길
+바랐는데!"
+  YEW:11:pronoun: "그"
+  YEW:11:question: "재미
+있나요?"
+  YEW:11:response1: "인디는 여정
+중인 것
+같아요!"
+  YEW:11:response2: "확실친
+않지만,
+재밌을
+거예요!"
+  YEW:11:topic1: "JONE"
+  YEW:11:topic2: "QUES"
+  YEW:11:yes: "로드 브리티시께
+편지 써서
+말씀드리세요!!!"
+  YEW:12:health: "나는 굶주리고
+아파요."
+  YEW:12:job: "내 불쌍한
+아기를
+봐요, 이 애를
+위해
+구걸해요."
+  YEW:12:look: "시든 형체."
+  YEW:12:name: "프리다"
+  YEW:12:no: "사악한 놈,
+저주받아라!"
+  YEW:12:pronoun: "그녀"
+  YEW:12:question: "내 아기를
+치료할 수
+있게
+돈을
+주겠어요?"
+  YEW:12:response1: "오, 안 돼,
+내 아기가
+죽어가요!"
+  YEW:12:response2: "자아나가
+함께해
+줄지도
+몰라요!"
+  YEW:12:topic1: "BABY"
+  YEW:12:topic2: "JUST"
+  YEW:12:yes: "그대는 친절하고
+정의롭군요!"
+  YEW:13:health: "좋다네."
+  YEW:13:job: "나는 조언을
+받는다네."
+  YEW:13:look: "마른 남자."
+  YEW:13:name: "핀로드"
+  YEW:13:no: "비열한 놈."
+  YEW:13:pronoun: "그"
+  YEW:13:question: "정의를 위해
+싸우는가?"
+  YEW:13:response1: "정의에
+대해."
+  YEW:13:response2: "정의는 칼끝에서
+찾기가
+가장 어렵다네,
+강철은 정의의
+도구이고,
+인간이
+그것을
+행하는
+자라네!"
+  YEW:13:topic1: "COUN"
+  YEW:13:topic2: "JUST"
+  YEW:13:yes: "좋아, 드루이드들이
+진언을
+왼다네!"
+  YEW:14:health: "그럭저럭."
+  YEW:14:job: "평화를 지키고
+정의를
+보장하려고!"
+  YEW:14:look: "큰 경비병"
+  YEW:14:name: "경비병"
+  YEW:14:no: "그러도록
+힘쓰게!"
+  YEW:14:pronoun: "그"
+  YEW:14:question: "그대는 항상
+정의로운가?"
+  YEW:14:response1: "좋은 삶은
+사랑에서
+영감을 얻고
+진실이
+인도한다네!"
+  YEW:14:response2: "정의란 악한
+자를 벌하는
+것만이
+아니라 선한
+자에게
+보답하는
+것도
+뜻한다네!"
+  YEW:14:topic1: "PEAC"
+  YEW:14:topic2: "JUST"
+  YEW:14:yes: "그럴 것
+같지
+않군!"
+  YEW:15:health: "좋다네."
+  YEW:15:job: "나는 정의를
+찾는다네."
+  YEW:15:look: "방랑하는
+드루이드."
+  YEW:15:name: "드루이드"
+  YEW:15:no: "탈포드에게
+물어보게,
+그가 룬을
+안다네."
+  YEW:15:pronoun: "그녀"
+  YEW:15:question: "룬을
+가졌는가?"
+  YEW:15:response1: "신단에서
+배우게!"
+  YEW:15:response2: "신단은 동쪽,
+그다음
+북쪽에
+있다네!"
+  YEW:15:topic1: "JUST"
+  YEW:15:topic2: "SHRI"
+  YEW:15:yes: "이제 진언을
+배우고,
+'그릇됨'에서
+녹색
+보석을
+찾아보게!"
+  YEW:2:health: "건강하다네."
+  YEW:2:job: "우리는 감옥을
+지킨다네."
+  YEW:2:look: "큰 경비병."
+  YEW:2:name: "경비병"
+  YEW:2:no: "그냥
+구경
+왔군."
+  YEW:2:pronoun: "그"
+  YEW:2:question: "자수하러
+왔는가?"
+  YEW:2:response1: "그럼 왼쪽
+감방이겠군."
+  YEW:2:response2: "그럼 오른쪽
+감방이겠군.
+거기선
+조심하게!"
+  YEW:2:topic1: "MISD"
+  YEW:2:topic2: "FELO"
+  YEW:2:yes: "어느 감방에
+속하는가,
+중죄인가
+경범죄인가."
+  YEW:3:health: "좋다네."
+  YEW:3:job: "나는 주문을
+만든다네."
+  YEW:3:look: "근엄한 드루이드."
+  YEW:3:name: "칼럼니"
+  YEW:3:no: "숙련자로군."
+  YEW:3:pronoun: "그"
+  YEW:3:question: "그것을
+부릴 수
+있는가?"
+  YEW:3:response1: "나는 신속
+주문을
+발명했다네!"
+  YEW:3:response2: "맨드레이크
+뿌리는 오직
+죽은 자의
+늪지대와
+피의
+평원에서만
+찾을 수
+있다네, 그곳은
+항상
+축축하지."
+  YEW:3:topic1: "SPEL"
+  YEW:3:topic2: "MAND"
+  YEW:3:yes: "핏빛이끼
+하나만
+필요하다네!"
+  YEW:4:health: "좋다네."
+  YEW:4:job: "나는 정의를
+결정한다네."
+  YEW:4:look: "지혜로운 판사."
+  YEW:4:name: "탈포드"
+  YEW:4:no: "그럼 감방에서
+참회하며,
+중죄인과 함께
+잘
+찾아보게."
+  YEW:4:pronoun: "그"
+  YEW:4:question: "정직하게
+단 한 번도
+죄를 짓지
+않았다고
+말할 수
+있는가?"
+  YEW:4:response1: "정의는 행동으로
+나타나는
+진실이라네!"
+  YEW:4:response2: "잘
+숨겨져
+있다네!"
+  YEW:4:topic1: "JUST"
+  YEW:4:topic2: "RUNE"
+  YEW:4:yes: "의심스럽군."
+  YEW:5:health: "밝다."
+  YEW:5:job: "나는 정의의
+참된 본질이
+담긴
+직물을
+지닌다."
+  YEW:5:look: "타오르는 불."
+  YEW:5:name: "플레이미스"
+  YEW:5:no: "적어도
+정직하군."
+  YEW:5:pronoun: "그것"
+  YEW:5:question: "그대는 항상
+정의로웠는가?"
+  YEW:5:response1: "정의의
+미덕은 진실과
+사랑의 원칙에서
+그 본성을
+끌어낸다!"
+  YEW:5:response2: "정의에
+대해서."
+  YEW:5:topic1: "JUST"
+  YEW:5:topic2: "FABR"
+  YEW:5:yes: "그럴 것
+같지
+않다."
+  YEW:6:health: "베... 베..."
+  YEW:6:job: "베... 베..."
+  YEW:6:look: "주문을 외는
+드루이드"
+  YEW:6:name: "사일런트"
+  YEW:6:no: "A"
+  YEW:6:pronoun: "그"
+  YEW:6:question: "A"
+  YEW:6:response1: "베... 베..."
+  YEW:6:response2: "베... 베..."
+  YEW:6:topic1: "BEH."
+  YEW:6:topic2: "BEH "
+  YEW:6:yes: "A"
+  YEW:7:health: "나는 잘
+지낸다네."
+  YEW:7:job: "정의의 도시,
+유에
+온 걸
+환영하네!"
+  YEW:7:look: "지혜로운 드루이드."
+  YEW:7:name: "드웁"
+  YEW:7:no: "안타깝군."
+  YEW:7:pronoun: "그"
+  YEW:7:question: "마음에
+드는가?"
+  YEW:7:response1: "진실보다
+그 무엇도
+더 사랑하지
+말게, 정의는
+호의를 구하지
+않으니까.
+그대의 정의를
+이해로써
+다스리게."
+  YEW:7:response2: "그래, 아름다운
+도시라네!"
+  YEW:7:topic1: "JUST"
+  YEW:7:topic2: "YEW "
+  YEW:7:yes: "그대의
+것이
+되게 하게!"
+  YEW:8:health: "잘
+대우받고
+있다네."
+  YEW:8:job: "나는
+죄를
+지었다네."
+  YEW:8:look: "가난한 거지."
+  YEW:8:name: "가난한 거지."
+  YEW:8:no: "좋군."
+  YEW:8:pronoun: "그"
+  YEW:8:question: "그대는 그 중죄인과
+함께
+있어야
+하는가?"
+  YEW:8:response1: "나는 마을에서
+상자를
+얻고
+악하지 않은
+생물을
+죽였다네."
+  YEW:8:response2: "그는 비열하고
+못되고
+추악한
+악당이라네!"
+  YEW:8:topic1: "SINE"
+  YEW:8:topic2: "FELO"
+  YEW:8:yes: "그대는
+잘못된
+감방에
+있군."
+  YEW:9:health: "배고파!"
+  YEW:9:job: "나는 나를
+귀찮게 하는
+놈들을
+잡아먹지!"
+  YEW:9:look: "비열하고
+못되고
+추악한
+악당!"
+  YEW:9:name: "보팔"
+  YEW:9:no: "그렇겠지!"
+  YEW:9:pronoun: "그"
+  YEW:9:question: "나를
+귀찮게
+하러
+왔나?"
+  YEW:9:response1: "그게 바로
+나지!"
+  YEW:9:response2: "너 같은 놈!"
+  YEW:9:topic1: "VILL"
+  YEW:9:topic2: "PEOP"
+  YEW:9:yes: "죽음을
+맛봐라,
+쓰레기
+같은 놈!"
 ]

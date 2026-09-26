@@ -1,6 +1,6 @@
 # Ultima IV 웹 한글판 개발 인수인계
 
-최종 갱신: 2026-09-26 09:00 KST (헤더만 갱신 — 본문 최신 절은 "Todo 16 완료 기록").
+최종 갱신: 2026-09-26 23:07 KST (본문 최신 절은 "Todo 15 완료 기록").
 
 ## 현재 상태
 
@@ -317,6 +317,48 @@ git diff --check                                                                
 | DOS 원본 ZIP | `/home/taejin/ultima4-original-data/ultima4.zip` (repo 밖, 이 host 로컬) | `94aa748cfa1d0e7aa2e518abebb994f3c18acf7edb78c3bd37cd0a4404e6ba74` |
 
 ZIP 크기: 529099 bytes. 경로가 사라지면 `https://ultima.thatfleminggent.com/ultima4.zip`에서 재다운로드하여 위 hash를 확인한다(2026-09-20 재다운로드로 hash 일치 재확인함). `WORLD.MAP`, `SHAPES.EGA`, `TITLE.EXE`, `AVATAR.EXE`, TLK 16개 존재를 확인했다. 원본 파일은 GitHub/Pages/공개 CI artifact에 포함하지 않는다. GOG판과 동일한 hash라고 확인한 것은 아니다.
+
+## Todo 15 완료 기록 (2026-09-26, main 작업 중, 커밋 전)
+
+**범위**: 전체 한국어 번역 corpus + glossary consistency. `locales/ko/{glossary,ui,binary,module,tlk}.json` 4411개 translatable entry를 pending 0으로 만들고, 생성 테이블(`src/i18n/generated/strings.ts`, `native/i18n/u4_i18n_table.inc`, `native/i18n/ko-overlay.b`)과 브라우저 e2e 승인 기준을 맞췄다.
+
+**마지막 미완료였던 YEW 적용**: `.omo/drafts/tlk-yew-translation-draft.json`의 160개 YEW 번역을 `locales/ko/tlk.json`에 적용했다. 병렬 worker의 독립 검증 결과: draft key 160, target 누락 0, non-YEW 변경 0, changedEntryCount 160, pending 0. 증거: `.omo/evidence/todo-15-yew-apply/reverification-1/report.md` (git-ignored).
+
+**생성 산출물 갱신**: `npm run i18n:generate` 실행 결과 4388 translated entries + 9 aliases가 `src/i18n/generated/strings.ts`, `native/i18n/u4_i18n_table.inc`, `native/i18n/ko-overlay.b`에 생성됐다. 이 과정에서 Boron overlay가 원천 번역의 프롬프트용 말미 공백을 실제 줄 끝 공백으로 방출해 `git diff --check`가 실패하는 문제를 발견했다. `tests/unit/localization-boundaries.test.ts`에 RED를 추가해 정확히 5개 line-ending whitespace를 재현한 뒤, `scripts/i18n-generate.mjs`가 overlay 출력에만 line rstrip을 적용하도록 고쳐 GREEN으로 만들었다. 원천 JSON의 프롬프트용 공백은 유지했다.
+
+**신규 e2e**: `tests/e2e/korean-progression.spec.ts`.
+- happy path: 실제 `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip`로 앱 부팅, `window.ultimaI18n` semantic coverage(인트로, 저장 UI, Moonglow NPC, Lord British, shrine advice, Codex) Hangul + placeholder match 확인, 실제 새 게임 생성으로 `party.sav` 저장, fresh session에서 Journey Onward 재로드 후 intro menu와 다른 canvas 확인.
+- failure path: 임시 `locales/ko` copy에서 `ui:intro:0`을 pending으로 바꿔 `scripts/i18n-check.mjs <tmp>/ko --strict`가 semantic ID를 명시하며 exit 1인지 확인.
+- 한계: 실제 엔진 대화 텍스트는 WebGL canvas에 rasterized되어 DOM/OCR 없이 직접 읽을 수 없으므로, e2e는 user-visible screenshots + semantic runtime assertion 조합으로 검증한다. 이 한계는 테스트 주석과 evidence ledger에 명시했다.
+
+**검증 (전부 실제 실행, exit 0)**:
+```
+npm run i18n:check
+npm run i18n:check -- --strict
+npm run i18n:generate
+npm run test:unit -- tests/unit/localization-boundaries.test.ts   # RED 1회 후 GREEN
+ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run test:e2e -- tests/e2e/korean-progression.spec.ts --project=chromium
+npm run test:unit                                                  # 21 files / 260 tests
+npm run verify:repo-sources
+npm run typecheck
+npm run build
+git diff --check
+cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md
+```
+
+**증거**:
+- `.omo/evidence/ultima-web/task-15/korean-progression-e2e.log` — 2/2 passed, exit 0.
+- `.omo/evidence/ultima-web/task-15/korean-screens/{01-real-intro-title.png,02-real-save-complete.png,03-real-intro-menu.png,04-real-journey-onward-load.png,semantic-runtime.json}`.
+- `.omo/evidence/ultima-web/task-15/untranslated-detected.log` — strict failure fixture가 `ui:intro:0`을 명시.
+- `.omo/evidence/ultima-web/task-15/verification-ledger.txt` — RED/GREEN과 artifact 요약.
+
+**계획서 갱신**: `plan.md` 진행률을 17/25로 올리고 다음 순서를 Todo 17로 갱신했다. `.omo/plans/ultima-web.md`와 `docs/ULTIMA_WEB_PLAN.md`는 byte-identical이며 Todo 15를 `[x]`로 표시했다. 또한 이전 세션에서 실제 완료됐지만 canonical 계획서에 stale `[ ]`로 남아 있던 Todo 14도 `plan.md`의 완료 상태와 맞춰 `[x]`로 보정했다.
+
+**남은 주의**:
+- 아직 커밋 전이다.
+- push/main merge는 사용자 승인 전 금지.
+- 현재 untracked `.claude/`, `.omo/boulder.json`, `.omo/lazycodex-executor-verify/`, `.omo/start-work/`는 임의 삭제하지 말 것.
+- 다음 단계는 Todo 17(브라우저 통합 게임 진행 e2e). Todo 10/13/15/16에서 이미 실제 루트가 있으므로 재사용하되, Todo 13에서 고친 wasm 입력 재진입 버그 클래스가 다른 in-game 흐름에도 남아 있을 수 있음을 특히 확인해야 한다.
 
 **엔진 소스코드(vendor/xu4) 대조 확인 (2026-09-20)**: 사용자가 xu4 GitHub master와 v1.4.3 태그를 비교해 `src/Makefile.common`의 `ifneq ($(UI),glfw)` GLFW 조건 분기가 v1.4.3 이후 master에만 있다고 알려왔다. `engine/`(git 히스토리 보존, branch `master`)에서 확인한 결과 pinned commit `6a7ee3d0079cfdc1c8fb9ba7a3c710a957155a71`의 커밋 메시지가 정확히 "Makefile.common: Fix GLFW build."이고 `vendor/xu4/src/Makefile.common:80`에 해당 분기가 이미 포함되어 있음을 확인했다. 즉 이미 올바른(GLFW fix 포함) master 커밋을 pin하고 있으며 재-clone 불필요.
 

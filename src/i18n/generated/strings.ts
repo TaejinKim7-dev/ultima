@@ -14,7 +14,18012 @@ export interface GeneratedAliasEntry {
   readonly canonical: string
 }
 
-export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {}
+export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
+  "ui:camp:0": {
+    "translation": "휴식 중...\n",
+    "placeholders": []
+  },
+  "ui:camp:1": {
+    "translation": "기습당함!\n",
+    "placeholders": []
+  },
+  "ui:camp:2": {
+    "translation": "\n아침!\n",
+    "placeholders": []
+  },
+  "ui:camp:3": {
+    "translation": "\n한밤중에 산책을 나갔다가...\n\n",
+    "placeholders": []
+  },
+  "ui:combat:0": {
+    "translation": "\n%s의 제단실\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:combat:1": {
+    "translation": "\n%c****%c 전투 %c****%c\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:combat:10": {
+    "translation": "\n%s %c%s 명중%c!\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%s",
+      "%s"
+    ]
+  },
+  "ui:combat:11": {
+    "translation": "\n%s 명중!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:combat:12": {
+    "translation": "%s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:combat:13": {
+    "translation": "모두 같은 출구를 써야 함!\n",
+    "placeholders": []
+  },
+  "ui:combat:14": {
+    "translation": "%c막힘!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:combat:15": {
+    "translation": "%c진행이 느림!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:combat:16": {
+    "translation": "패스\n",
+    "placeholders": []
+  },
+  "ui:combat:17": {
+    "translation": "전투 속도:\n보통\n",
+    "placeholders": []
+  },
+  "ui:combat:18": {
+    "translation": "전투 속도:\n증가 (%d)\n",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:combat:19": {
+    "translation": "전투 속도:\n감소 (%d)\n",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:combat:2": {
+    "translation": "\n승리!\n\n",
+    "placeholders": []
+  },
+  "ui:combat:20": {
+    "translation": "전투 속도:\n보통\n",
+    "placeholders": []
+  },
+  "ui:combat:21": {
+    "translation": "음악: %d%s\n",
+    "placeholders": [
+      "%d",
+      "%s"
+    ]
+  },
+  "ui:combat:22": {
+    "translation": "음악: %d%s\n",
+    "placeholders": [
+      "%d",
+      "%s"
+    ]
+  },
+  "ui:combat:23": {
+    "translation": "효과음: %d%s\n",
+    "placeholders": [
+      "%d",
+      "%s"
+    ]
+  },
+  "ui:combat:24": {
+    "translation": "효과음: %d%s\n",
+    "placeholders": [
+      "%d",
+      "%s"
+    ]
+  },
+  "ui:combat:25": {
+    "translation": "주문 시전!\n",
+    "placeholders": []
+  },
+  "ui:combat:26": {
+    "translation": "상자 획득!\n",
+    "placeholders": []
+  },
+  "ui:combat:27": {
+    "translation": "\n위치:\nx:%d\ny:%d\nz:%d\n",
+    "placeholders": [
+      "%d",
+      "%d",
+      "%d"
+    ]
+  },
+  "ui:combat:28": {
+    "translation": "여기선 안 됨!\n",
+    "placeholders": []
+  },
+  "ui:combat:29": {
+    "translation": "발동!\n",
+    "placeholders": []
+  },
+  "ui:combat:3": {
+    "translation": "\n전투 패배!\n\n",
+    "placeholders": []
+  },
+  "ui:combat:30": {
+    "translation": "%.1d)xy 타일 xy xy\n",
+    "placeholders": [
+      "%.1d"
+    ]
+  },
+  "ui:combat:31": {
+    "translation": "  %.1X%.1X  %.3d %.1X%.1X %.1X%.1X\n",
+    "placeholders": [
+      "%.1X",
+      "%.1X",
+      "%.1X",
+      "%.1X",
+      "%.1X",
+      "%.1X",
+      "%.3d"
+    ]
+  },
+  "ui:combat:32": {
+    "translation": "여기선 안 됨!\n",
+    "placeholders": []
+  },
+  "ui:combat:33": {
+    "translation": "어떤 아이템을 사용?\n",
+    "placeholders": []
+  },
+  "ui:combat:34": {
+    "translation": "음량 켜짐!\n",
+    "placeholders": []
+  },
+  "ui:combat:35": {
+    "translation": "음량 꺼짐!\n",
+    "placeholders": []
+  },
+  "ui:combat:36": {
+    "translation": "XU4 %s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:combat:37": {
+    "translation": "상태\n",
+    "placeholders": []
+  },
+  "ui:combat:38": {
+    "translation": "여기선 안 됨!\n",
+    "placeholders": []
+  },
+  "ui:combat:39": {
+    "translation": "방향: ",
+    "placeholders": []
+  },
+  "ui:combat:4": {
+    "translation": "방 나가기!\n",
+    "placeholders": []
+  },
+  "ui:combat:40": {
+    "translation": "%s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:combat:41": {
+    "translation": "사거리: ",
+    "placeholders": []
+  },
+  "ui:combat:42": {
+    "translation": "%d\n",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:combat:43": {
+    "translation": "빗나감!\n",
+    "placeholders": []
+  },
+  "ui:combat:44": {
+    "translation": "마지막 하나!\n",
+    "placeholders": []
+  },
+  "ui:combat:45": {
+    "translation": "빗나감!\n",
+    "placeholders": []
+  },
+  "ui:combat:46": {
+    "translation": "\n%c%s 처치!%c\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%s"
+    ]
+  },
+  "ui:combat:6": {
+    "translation": "\n%s, %s로\n\u0010",
+    "placeholders": [
+      "%s",
+      "%s"
+    ]
+  },
+  "ui:combat:7": {
+    "translation": "빗나감!\n",
+    "placeholders": []
+  },
+  "ui:combat:8": {
+    "translation": "실패.\n",
+    "placeholders": []
+  },
+  "ui:combat:9": {
+    "translation": "실패.\n",
+    "placeholders": []
+  },
+  "ui:creature:0": {
+    "translation": "\n수면!\n",
+    "placeholders": []
+  },
+  "ui:creature:1": {
+    "translation": "\n%c%s 도주!%c\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%s"
+    ]
+  },
+  "ui:creature:2": {
+    "translation": "%s 분열!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:creature:3": {
+    "translation": "%c%s 처치!%c\n경험치 %d\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%d",
+      "%s"
+    ]
+  },
+  "ui:creature:4": {
+    "translation": "%c%s 처치!%c\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%s"
+    ]
+  },
+  "ui:creature:5": {
+    "translation": "%c%s 도주 중!%c\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%s"
+    ]
+  },
+  "ui:creature:6": {
+    "translation": "%s 위독!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:creature:7": {
+    "translation": "%s 심각한 부상!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:creature:8": {
+    "translation": "%s 가벼운 부상!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:creature:9": {
+    "translation": "%s 경미한 부상!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:dungeon:0": {
+    "translation": "수색 중...\n\n",
+    "placeholders": []
+  },
+  "ui:dungeon:1": {
+    "translation": "아무것도 없음!\n",
+    "placeholders": []
+  },
+  "ui:dungeon:10": {
+    "translation": "\n흠— 효과 없음!\n",
+    "placeholders": []
+  },
+  "ui:dungeon:11": {
+    "translation": "\n캬악-켁-헐떡!\n",
+    "placeholders": []
+  },
+  "ui:dungeon:12": {
+    "translation": "\n흠— 효과 없음!\n",
+    "placeholders": []
+  },
+  "ui:dungeon:13": {
+    "translation": "마법의 구슬을 발견했다...\n누가 만지겠는가? ",
+    "placeholders": []
+  },
+  "ui:dungeon:14": {
+    "translation": "힘 + 5\n",
+    "placeholders": []
+  },
+  "ui:dungeon:15": {
+    "translation": "민첩 + 5\n",
+    "placeholders": []
+  },
+  "ui:dungeon:16": {
+    "translation": "지능 + 5\n",
+    "placeholders": []
+  },
+  "ui:dungeon:17": {
+    "translation": "\n바람!\n",
+    "placeholders": []
+  },
+  "ui:dungeon:18": {
+    "translation": "\n낙석!\n",
+    "placeholders": []
+  },
+  "ui:dungeon:19": {
+    "translation": "\n함정 구덩이!\n",
+    "placeholders": []
+  },
+  "ui:dungeon:2": {
+    "translation": "발견했다...\n%s!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:dungeon:3": {
+    "translation": "아무것도 발견하지 못했다!\n",
+    "placeholders": []
+  },
+  "ui:dungeon:4": {
+    "translation": "분수를 발견했다.\n누가 마시겠는가? ",
+    "placeholders": []
+  },
+  "ui:dungeon:5": {
+    "translation": "\n흠— 효과 없음!\n",
+    "placeholders": []
+  },
+  "ui:dungeon:6": {
+    "translation": "\n아— 상쾌하다!\n",
+    "placeholders": []
+  },
+  "ui:dungeon:7": {
+    "translation": "\n흠— 효과 없음!\n",
+    "placeholders": []
+  },
+  "ui:dungeon:8": {
+    "translation": "\n으엑— 역겹다!\n",
+    "placeholders": []
+  },
+  "ui:dungeon:9": {
+    "translation": "\n음— 맛있다!\n",
+    "placeholders": []
+  },
+  "ui:event:0": {
+    "translation": "%c\n",
+    "placeholders": [
+      "%c"
+    ]
+  },
+  "ui:event:2": {
+    "translation": "\n%s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:0": {
+    "translation": "도움말은 Alt-h\n",
+    "placeholders": []
+  },
+  "ui:game:1": {
+    "translation": "%s 열기 오류\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:10": {
+    "translation": "%c여기선 안 됨!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:100": {
+    "translation": "%c무엇을 발사?%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:101": {
+    "translation": "대포 발사!\n방향: ",
+    "placeholders": []
+  },
+  "ui:game:102": {
+    "translation": "%c현측 포만 가능!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:103": {
+    "translation": "상자 획득!\n",
+    "placeholders": []
+  },
+  "ui:game:104": {
+    "translation": "%c표류만 가능!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:105": {
+    "translation": "누가 여는가? ",
+    "placeholders": []
+  },
+  "ui:game:106": {
+    "translation": "상자 속: 골드 %d\n",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:game:107": {
+    "translation": "%c여기선 안 됨!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:108": {
+    "translation": "%c산성%c 함정!\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:109": {
+    "translation": "%c독%c 함정!\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:11": {
+    "translation": "횃불: %d\n",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:game:110": {
+    "translation": "%c수면%c 함정!\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:111": {
+    "translation": "%c폭탄%c 함정!\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:112": {
+    "translation": "회피!\n",
+    "placeholders": []
+  },
+  "ui:game:113": {
+    "translation": "은신하여 야영!\n",
+    "placeholders": []
+  },
+  "ui:game:114": {
+    "translation": "%c여기선 안 됨!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:115": {
+    "translation": "%c도보에서만 가능!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:116": {
+    "translation": "%s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:117": {
+    "translation": "%s로 선회!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:118": {
+    "translation": "%c진행이 느림!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:119": {
+    "translation": "%s로 항해!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:12": {
+    "translation": "명령 (h = 도움말):",
+    "placeholders": []
+  },
+  "ui:game:120": {
+    "translation": "%c표류만 가능!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:121": {
+    "translation": "%c막힘!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:122": {
+    "translation": "%c진행이 느림!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:123": {
+    "translation": "%c떠나는 중...%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:124": {
+    "translation": "%c막힘!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:125": {
+    "translation": "%c떠나는 중...%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:126": {
+    "translation": "따기: ",
+    "placeholders": []
+  },
+  "ui:game:127": {
+    "translation": "%c무엇을 딸까?%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:128": {
+    "translation": "\n잠금 해제!\n",
+    "placeholders": []
+  },
+  "ui:game:129": {
+    "translation": "%c남은 열쇠 없음!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:13": {
+    "translation": "도움말!\n",
+    "placeholders": []
+  },
+  "ui:game:130": {
+    "translation": "열기: ",
+    "placeholders": []
+  },
+  "ui:game:131": {
+    "translation": "%c여기선 안 됨!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:132": {
+    "translation": "%c여기선 안 됨!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:133": {
+    "translation": "%c불가능!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:134": {
+    "translation": "\n열렸다!\n",
+    "placeholders": []
+  },
+  "ui:game:135": {
+    "translation": "무기 장착 대상: ",
+    "placeholders": []
+  },
+  "ui:game:136": {
+    "translation": "무기: ",
+    "placeholders": []
+  },
+  "ui:game:138": {
+    "translation": "%s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:139": {
+    "translation": "%c남은 것 없음!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:14": {
+    "translation": "3D 시점 %s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:140": {
+    "translation": "\n%c%s은(는) %s %s을(를) 사용할 수 없다%c\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%s",
+      "%s",
+      "%s"
+    ]
+  },
+  "ui:game:141": {
+    "translation": "대화: ",
+    "placeholders": []
+  },
+  "ui:game:142": {
+    "translation": "%c표류만 가능!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:143": {
+    "translation": "이상하게, 반응이 없다!\n",
+    "placeholders": []
+  },
+  "ui:game:144": {
+    "translation": "재료 조합\n",
+    "placeholders": []
+  },
+  "ui:game:145": {
+    "translation": "%c남은 것 없음!%c",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:146": {
+    "translation": "주문 대상: ",
+    "placeholders": []
+  },
+  "ui:game:147": {
+    "translation": "\\b%s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:148": {
+    "translation": "\n%c그 주문은 더 이상 조합할 수 없다!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:15": {
+    "translation": "패스\n",
+    "placeholders": []
+  },
+  "ui:game:150": {
+    "translation": "재료: ",
+    "placeholders": []
+  },
+  "ui:game:151": {
+    "translation": "\n\n재료를 조합하니...\n",
+    "placeholders": []
+  },
+  "ui:game:152": {
+    "translation": "성공!\n\n",
+    "placeholders": []
+  },
+  "ui:game:153": {
+    "translation": "실패로 흩어진다!\n\n",
+    "placeholders": []
+  },
+  "ui:game:154": {
+    "translation": "\n%c남은 것 없음!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:155": {
+    "translation": "재료: ",
+    "placeholders": []
+  },
+  "ui:game:156": {
+    "translation": "몇 개? ",
+    "placeholders": []
+  },
+  "ui:game:157": {
+    "translation": "대형 재편성!\n교체 번호 ",
+    "placeholders": []
+  },
+  "ui:game:158": {
+    "translation": "%s, 선두여야 한다!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:159": {
+    "translation": "    교체 대상 # ",
+    "placeholders": []
+  },
+  "ui:game:16": {
+    "translation": "속도: 보통\n",
+    "placeholders": []
+  },
+  "ui:game:160": {
+    "translation": "%s, 선두여야 한다!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:161": {
+    "translation": "%c무엇을?%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:162": {
+    "translation": "%c무엇을 들여다볼까?%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:163": {
+    "translation": "보석으로 들여다보기!\n",
+    "placeholders": []
+  },
+  "ui:game:164": {
+    "translation": "이상하게, 반응이 없다!\n",
+    "placeholders": []
+  },
+  "ui:game:165": {
+    "translation": "방어구 착용\n대상: ",
+    "placeholders": []
+  },
+  "ui:game:166": {
+    "translation": "방어구: ",
+    "placeholders": []
+  },
+  "ui:game:168": {
+    "translation": "%s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:169": {
+    "translation": "%c남은 것 없음!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:17": {
+    "translation": "속도 증가 (%d)\n",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:game:170": {
+    "translation": "\n%c%s은(는) %s을(를) 사용할 수 없다%c\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%s",
+      "%s"
+    ]
+  },
+  "ui:game:171": {
+    "translation": "나가기\n",
+    "placeholders": []
+  },
+  "ui:game:172": {
+    "translation": "%c어디로 나갈까?%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:173": {
+    "translation": "상태 확인 대상: ",
+    "placeholders": []
+  },
+  "ui:game:174": {
+    "translation": "\n%s의 공격을 받았다\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:175": {
+    "translation": "\n그대의 배가 침몰한다!\n\n",
+    "placeholders": []
+  },
+  "ui:game:176": {
+    "translation": "활성 플레이어 설정: 없음!\n",
+    "placeholders": []
+  },
+  "ui:game:177": {
+    "translation": "활성 플레이어 설정: %s!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:178": {
+    "translation": "비활성화됨!\n",
+    "placeholders": []
+  },
+  "ui:game:179": {
+    "translation": "\n다리의 트롤들!\n",
+    "placeholders": []
+  },
+  "ui:game:18": {
+    "translation": "속도 감소 (%d)\n",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:game:180": {
+    "translation": "재료 조합\n",
+    "placeholders": []
+  },
+  "ui:game:181": {
+    "translation": "주문 대상: ",
+    "placeholders": []
+  },
+  "ui:game:182": {
+    "translation": "\n완료.\n",
+    "placeholders": []
+  },
+  "ui:game:183": {
+    "translation": "%s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:184": {
+    "translation": "%d개를 만들 수 있다.\n",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:game:185": {
+    "translation": "몇 개? ",
+    "placeholders": []
+  },
+  "ui:game:186": {
+    "translation": "\n조합하지 않음!\n",
+    "placeholders": []
+  },
+  "ui:game:187": {
+    "translation": "\n%c그 주문은 그만큼 더 조합할 수 없다!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:188": {
+    "translation": "\n%c주문 %d개를 조합할 재료가 부족하다!%c\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%d"
+    ]
+  },
+  "ui:game:189": {
+    "translation": "\n성공!\n\n",
+    "placeholders": []
+  },
+  "ui:game:19": {
+    "translation": "속도: 보통\n",
+    "placeholders": []
+  },
+  "ui:game:2": {
+    "translation": "%s 열기 오류\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:20": {
+    "translation": "음악: %d%s\n",
+    "placeholders": [
+      "%d",
+      "%s"
+    ]
+  },
+  "ui:game:21": {
+    "translation": "음악: %d%s\n",
+    "placeholders": [
+      "%d",
+      "%s"
+    ]
+  },
+  "ui:game:22": {
+    "translation": "효과음: %d%s\n",
+    "placeholders": [
+      "%d",
+      "%s"
+    ]
+  },
+  "ui:game:23": {
+    "translation": "효과음: %d%s\n",
+    "placeholders": [
+      "%d",
+      "%s"
+    ]
+  },
+  "ui:game:24": {
+    "translation": "기구 착륙\n",
+    "placeholders": []
+  },
+  "ui:game:25": {
+    "translation": "%c이미 착륙함!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:26": {
+    "translation": "%c여기선 안 됨!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:27": {
+    "translation": "%c무엇을 내려갈까?%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:28": {
+    "translation": "%c무엇에 들어갈까?%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:29": {
+    "translation": "횃불 점화!\n",
+    "placeholders": []
+  },
+  "ui:game:3": {
+    "translation": "\n배 없이 바다에 갇혀, 그대는 익사한다!\n\n",
+    "placeholders": []
+  },
+  "ui:game:30": {
+    "translation": "%c남은 것 없음!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:31": {
+    "translation": "%c여기선 안 됨!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:32": {
+    "translation": "고도 상승\n",
+    "placeholders": []
+  },
+  "ui:game:33": {
+    "translation": "%c무엇을 오를까?%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:34": {
+    "translation": "육분의로\n위치 확인\n 위도: %c'%c\"\n경도: %c'%c\"\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:35": {
+    "translation": "%c무엇으로 위치를 확인할까?%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:36": {
+    "translation": "%c여기선 안 됨!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:37": {
+    "translation": "종료 및 저장...\n%d회 이동\n",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:game:38": {
+    "translation": "종료하려면 Alt-x\n",
+    "placeholders": []
+  },
+  "ui:game:39": {
+    "translation": "%c여기선 안 됨!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:4": {
+    "translation": "쿨쿨\n",
+    "placeholders": []
+  },
+  "ui:game:40": {
+    "translation": "수색 중...\n%c표류만 가능!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:41": {
+    "translation": "수색 중...\n",
+    "placeholders": []
+  },
+  "ui:game:42": {
+    "translation": "%c아무것도 없음!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:43": {
+    "translation": "발견했다...\n%s!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:44": {
+    "translation": "%c아무것도 없음!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:45": {
+    "translation": "어떤 아이템을 사용?\n",
+    "placeholders": []
+  },
+  "ui:game:46": {
+    "translation": "음량 켜짐!\n",
+    "placeholders": []
+  },
+  "ui:game:47": {
+    "translation": "음량 꺼짐!\n",
+    "placeholders": []
+  },
+  "ui:game:48": {
+    "translation": "외치기: ",
+    "placeholders": []
+  },
+  "ui:game:49": {
+    "translation": "이랴!\n",
+    "placeholders": []
+  },
+  "ui:game:5": {
+    "translation": "어둡다!\n",
+    "placeholders": []
+  },
+  "ui:game:50": {
+    "translation": "워어!\n",
+    "placeholders": []
+  },
+  "ui:game:51": {
+    "translation": "%c무엇을?%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:52": {
+    "translation": "단축키 안내:\n",
+    "placeholders": []
+  },
+  "ui:game:56": {
+    "translation": "메뉴로 나갈까?",
+    "placeholders": []
+  },
+  "ui:game:58": {
+    "translation": "XU4 %s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:59": {
+    "translation": "효과음 %s!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:6": {
+    "translation": "\n %c그대는 8분의 1을\n  잃었다!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:60": {
+    "translation": "없음\n",
+    "placeholders": []
+  },
+  "ui:game:61": {
+    "translation": "%s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:62": {
+    "translation": "%c비활성화됨!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:63": {
+    "translation": "방향?",
+    "placeholders": []
+  },
+  "ui:game:64": {
+    "translation": "\\b\\b\\b\\b",
+    "placeholders": []
+  },
+  "ui:game:66": {
+    "translation": "%s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:67": {
+    "translation": "\n조합하지 않음!\n",
+    "placeholders": []
+  },
+  "ui:game:68": {
+    "translation": "\n%c%d개만 있으면 된다!%c\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%d"
+    ]
+  },
+  "ui:game:69": {
+    "translation": "\n%d개 조합 중...\n",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:game:7": {
+    "translation": "\n%c%s\n그대는 이제 레벨 %d이다%c\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%d",
+      "%s"
+    ]
+  },
+  "ui:game:70": {
+    "translation": "\n%c주문 %d개를 조합할 재료가 부족하다!%c\n",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%d"
+    ]
+  },
+  "ui:game:71": {
+    "translation": "\n\n재료를 조합하니...\n",
+    "placeholders": []
+  },
+  "ui:game:72": {
+    "translation": "성공!\n\n",
+    "placeholders": []
+  },
+  "ui:game:73": {
+    "translation": "실패로 흩어진다!\n\n",
+    "placeholders": []
+  },
+  "ui:game:74": {
+    "translation": "물체 파괴\n방향: ",
+    "placeholders": []
+  },
+  "ui:game:75": {
+    "translation": "%c아무것도 없음!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:76": {
+    "translation": "%s 파괴됨!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:77": {
+    "translation": "%s 파괴됨!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:78": {
+    "translation": "공격: ",
+    "placeholders": []
+  },
+  "ui:game:79": {
+    "translation": "\n%c표류만 가능!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:8": {
+    "translation": "\n%c굶주림!!!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:80": {
+    "translation": "%c공격할 대상이 없다!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:81": {
+    "translation": "탑승: %c불가능!%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:82": {
+    "translation": "%c무엇에 탑승?%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:83": {
+    "translation": "범선에 탑승!\n",
+    "placeholders": []
+  },
+  "ui:game:84": {
+    "translation": "말에 탑승!\n",
+    "placeholders": []
+  },
+  "ui:game:85": {
+    "translation": "기구에 탑승!\n",
+    "placeholders": []
+  },
+  "ui:game:86": {
+    "translation": "%c무엇에 탑승?%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:87": {
+    "translation": "주문 시전!\n대상: ",
+    "placeholders": []
+  },
+  "ui:game:88": {
+    "translation": "주문: ",
+    "placeholders": []
+  },
+  "ui:game:89": {
+    "translation": "%s!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:game:9": {
+    "translation": "%c잘못된 명령%c\n",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:game:90": {
+    "translation": "위상 변경: ",
+    "placeholders": []
+  },
+  "ui:game:91": {
+    "translation": "없음\n",
+    "placeholders": []
+  },
+  "ui:game:93": {
+    "translation": "대상: ",
+    "placeholders": []
+  },
+  "ui:game:94": {
+    "translation": "방향: ",
+    "placeholders": []
+  },
+  "ui:game:95": {
+    "translation": "에너지 유형? ",
+    "placeholders": []
+  },
+  "ui:game:97": {
+    "translation": "방향: ",
+    "placeholders": []
+  },
+  "ui:game:98": {
+    "translation": "실패!\n",
+    "placeholders": []
+  },
+  "ui:game:99": {
+    "translation": "출발 방향: ",
+    "placeholders": []
+  },
+  "ui:intro:0": {
+    "translation": "\b 영상 옵션",
+    "placeholders": []
+  },
+  "ui:intro:1": {
+    "translation": "\b 음향 옵션",
+    "placeholders": []
+  },
+  "ui:intro:10": {
+    "translation": "필터                 %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:11": {
+    "translation": "감마                 %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:12": {
+    "translation": "\b 이 설정 사용",
+    "placeholders": []
+  },
+  "ui:intro:13": {
+    "translation": "\b 취소",
+    "placeholders": []
+  },
+  "ui:intro:14": {
+    "translation": "투명 효과          %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:15": {
+    "translation": "  그림자 크기:     %d",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:intro:16": {
+    "translation": "  그림자 불투명도: %d",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:intro:17": {
+    "translation": "보석 시야 배치     %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:18": {
+    "translation": "시야 방식          %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:19": {
+    "translation": "화면 흔들림        %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:2": {
+    "translation": "\b 입력 옵션",
+    "placeholders": []
+  },
+  "ui:intro:20": {
+    "translation": "\b 영상 옵션으로 돌아가기",
+    "placeholders": []
+  },
+  "ui:intro:21": {
+    "translation": "음악 볼륨            %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:22": {
+    "translation": "효과음 볼륨          %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:23": {
+    "translation": "페이드              %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:24": {
+    "translation": "\b 이 설정 사용",
+    "placeholders": []
+  },
+  "ui:intro:25": {
+    "translation": "\b 취소",
+    "placeholders": []
+  },
+  "ui:intro:26": {
+    "translation": "반복 지연           %4d ms",
+    "placeholders": [
+      "%4d"
+    ]
+  },
+  "ui:intro:27": {
+    "translation": "반복 간격           %4d ms",
+    "placeholders": [
+      "%4d"
+    ]
+  },
+  "ui:intro:28": {
+    "translation": "마우스               %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:29": {
+    "translation": "\b 이 설정 사용",
+    "placeholders": []
+  },
+  "ui:intro:3": {
+    "translation": "\b 속도 옵션",
+    "placeholders": []
+  },
+  "ui:intro:30": {
+    "translation": "\b 취소",
+    "placeholders": []
+  },
+  "ui:intro:31": {
+    "translation": "초당 게임 주기      %3d",
+    "placeholders": [
+      "%3d"
+    ]
+  },
+  "ui:intro:32": {
+    "translation": "전투 속도           %3d",
+    "placeholders": [
+      "%3d"
+    ]
+  },
+  "ui:intro:33": {
+    "translation": "주문 효과 길이       %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:34": {
+    "translation": "야영 길이            %3d초",
+    "placeholders": [
+      "%3d"
+    ]
+  },
+  "ui:intro:35": {
+    "translation": "여관 휴식 길이        %3d초",
+    "placeholders": [
+      "%3d"
+    ]
+  },
+  "ui:intro:36": {
+    "translation": "신단 명상 길이        %3d초",
+    "placeholders": [
+      "%3d"
+    ]
+  },
+  "ui:intro:37": {
+    "translation": "화면 흔들림 간격      %3d ms",
+    "placeholders": [
+      "%3d"
+    ]
+  },
+  "ui:intro:38": {
+    "translation": "\b 이 설정 사용",
+    "placeholders": []
+  },
+  "ui:intro:39": {
+    "translation": "\b 취소",
+    "placeholders": []
+  },
+  "ui:intro:4": {
+    "translation": "게임 개선 기능       %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:40": {
+    "translation": "전투 난이도          %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:41": {
+    "translation": "고정 상자 함정       %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:42": {
+    "translation": "게이저 곤충 소환     %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:43": {
+    "translation": "보석 시야에 물체 표시 %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:44": {
+    "translation": "슬라임 분열          %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:45": {
+    "translation": "디버그 모드 (치트)   %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:46": {
+    "translation": "\b 이 설정 사용",
+    "placeholders": []
+  },
+  "ui:intro:47": {
+    "translation": "\b 취소",
+    "placeholders": []
+  },
+  "ui:intro:48": {
+    "translation": "자동 행동            %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:49": {
+    "translation": "활성 플레이어 설정   %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:5": {
+    "translation": "\b 게임플레이 개선 옵션",
+    "placeholders": []
+  },
+  "ui:intro:50": {
+    "translation": "스마트 'Enter' 키    %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:51": {
+    "translation": "텍스트 색상 강조     %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:52": {
+    "translation": "울티마 V식 신단      %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:53": {
+    "translation": "울티마 V식 주문 조합 %s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:54": {
+    "translation": "\b 이 설정 사용",
+    "placeholders": []
+  },
+  "ui:intro:55": {
+    "translation": "\b 취소",
+    "placeholders": []
+  },
+  "ui:intro:6": {
+    "translation": "\b 인터페이스 개선 옵션",
+    "placeholders": []
+  },
+  "ui:intro:7": {
+    "translation": "\u000f 메인 메뉴",
+    "placeholders": []
+  },
+  "ui:intro:8": {
+    "translation": "\b 그래픽 옵션",
+    "placeholders": []
+  },
+  "ui:intro:9": {
+    "translation": "배율                 x%d",
+    "placeholders": [
+      "%d"
+    ]
+  },
+  "ui:item:0": {
+    "translation": "\n종이 계속해서 울린다!\n",
+    "placeholders": []
+  },
+  "ui:item:1": {
+    "translation": "\n그 말이 울림과 함께 공명한다!\n",
+    "placeholders": []
+  },
+  "ui:item:10": {
+    "translation": "\n\n마법사 몬데인의 사악한 해골을 높이 치켜든다...\n",
+    "placeholders": []
+  },
+  "ui:item:11": {
+    "translation": "\n이미 사용함!\n",
+    "placeholders": []
+  },
+  "ui:item:12": {
+    "translation": "\n%c:",
+    "placeholders": [
+      "%c"
+    ]
+  },
+  "ui:item:13": {
+    "translation": "\n삼분된 열쇠의 한 조각을 발견했다!\n",
+    "placeholders": []
+  },
+  "ui:item:14": {
+    "translation": "\n흠...효과 없음!\n",
+    "placeholders": []
+  },
+  "ui:item:15": {
+    "translation": "\n\n제단이 눈앞에서 변한다!\n",
+    "placeholders": []
+  },
+  "ui:item:16": {
+    "translation": "\n흠...효과 없음!\n",
+    "placeholders": []
+  },
+  "ui:item:17": {
+    "translation": "\n사용할 수 없는 아이템!\n",
+    "placeholders": []
+  },
+  "ui:item:18": {
+    "translation": "\n\n다가가자 목소리가 울려 퍼진다: %s에서 비롯되는 미덕은 무엇인가?\n\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:item:19": {
+    "translation": "\n\n목소리가 울려 퍼진다:  진실, 사랑, 용기와 무관하게 존재하는 미덕은 무엇인가?\n\n",
+    "placeholders": []
+  },
+  "ui:item:2": {
+    "translation": "\n초에 불을 붙이자 대지가 진동한다!\n",
+    "placeholders": []
+  },
+  "ui:item:20": {
+    "translation": "\n\n목소리가 말한다: 그대의 보석을 사용하라.\n\n색상:\n",
+    "placeholders": []
+  },
+  "ui:item:21": {
+    "translation": "\n흠...효과 없음!\n",
+    "placeholders": []
+  },
+  "ui:item:22": {
+    "translation": "\n\n보석 4개를 위한 구멍이 있다.\n어떤 색상:\nA:",
+    "placeholders": []
+  },
+  "ui:item:23": {
+    "translation": "\n사용할 곳이 없다!\n",
+    "placeholders": []
+  },
+  "ui:item:24": {
+    "translation": "\n사용할 곳이 없다!\n",
+    "placeholders": []
+  },
+  "ui:item:25": {
+    "translation": "망원경에서\nA-P로 표시된\n손잡이가 보인다\n선택: ",
+    "placeholders": []
+  },
+  "ui:item:26": {
+    "translation": "일부를 떨어뜨렸다!\n",
+    "placeholders": []
+  },
+  "ui:item:27": {
+    "translation": "\n사용할 수 없는 아이템!\n",
+    "placeholders": []
+  },
+  "ui:item:28": {
+    "translation": "\n보유하지 않음!\n",
+    "placeholders": []
+  },
+  "ui:item:29": {
+    "translation": "\n사용할 수 없는 아이템!\n",
+    "placeholders": []
+  },
+  "ui:item:3": {
+    "translation": "\n흠...효과 없음!\n",
+    "placeholders": []
+  },
+  "ui:item:30": {
+    "translation": "입장 불가!\n",
+    "placeholders": []
+  },
+  "ui:item:31": {
+    "translation": "\n보유하지 않음!\n",
+    "placeholders": []
+  },
+  "ui:item:4": {
+    "translation": "\n흠...효과 없음!\n",
+    "placeholders": []
+  },
+  "ui:item:5": {
+    "translation": "\n뿔피리가 으스스한 소리를 낸다!\n",
+    "placeholders": []
+  },
+  "ui:item:6": {
+    "translation": "\n장착하자, 바퀴가 푸른빛으로 빛난다!\n",
+    "placeholders": []
+  },
+  "ui:item:7": {
+    "translation": "\n흠...효과 없음!\n",
+    "placeholders": []
+  },
+  "ui:item:8": {
+    "translation": "\n보유하지 않음!\n",
+    "placeholders": []
+  },
+  "ui:item:9": {
+    "translation": "\n\n몬데인의 해골을 심연 속으로 던진다!\n",
+    "placeholders": []
+  },
+  "ui:portal:0": {
+    "translation": "%s도보에서만 가능!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:portal:1": {
+    "translation": "%s(으)로 입장!\n\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:portal:2": {
+    "translation": "%s에 입장!\n\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:portal:3": {
+    "translation": "던전에 입장!\n\n",
+    "placeholders": []
+  },
+  "ui:portal:4": {
+    "translation": "도보에서만 가능!\n",
+    "placeholders": []
+  },
+  "ui:spell:0": {
+    "translation": "떠나는 중...\n",
+    "placeholders": []
+  },
+  "ui:spell:1": {
+    "translation": "떠나는 중...\n",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:config:0": {
+    "translation": "{\n        Upgrade 및 Remastered 프로젝트의 향상된 그래픽을 사용하는\n        울티마 4.  http://www.moongates.com/u4/upgrade/Upgrade.htm 에서\n        u4upgrad.zip이 필요합니다.\n    }",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:config:1": {
+    "translation": "xu4 team",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:config:2": {
+    "translation": "1.0",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:config:3": {
+    "translation": "Ultima-IV/1.4",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:Credits:0": {
+    "translation": "일부 자산은 저작권이 있는 자료를 사용하며, 이에 대해 여기서 밝혀둔다.",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:Credits:1": {
+    "translation": "image/vutne\n    PNG 파일들은 Ultima IV Remastered 프로젝트의 Vanja Utne 작품을\n    변환한 것입니다.",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:Credits:2": {
+    "translation": "저작권: KOA 파일 (C) 2015 by Vanja Utne\n    다운로드:  https://github.com/MagerValp/u4remastered/tree/master/src/charcreate",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:0": {
+    "translation": "u4u/shapes.vga",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:1": {
+    "translation": "vga/tile_guard.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:10": {
+    "translation": "vutne/14b-abacus.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:11": {
+    "translation": "vutne/cards1.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:12": {
+    "translation": "vutne/cards2.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:13": {
+    "translation": "u4u/key7.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:14": {
+    "translation": "u4u/honesty.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:15": {
+    "translation": "u4u/compassn.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:16": {
+    "translation": "u4u/valor.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:17": {
+    "translation": "u4u/justice.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:18": {
+    "translation": "u4u/sacrific.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:19": {
+    "translation": "u4u/honor.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:2": {
+    "translation": "u4u/charset.vga",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:20": {
+    "translation": "u4u/spirit.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:21": {
+    "translation": "u4u/humility.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:22": {
+    "translation": "u4u/truth.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:23": {
+    "translation": "u4u/love.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:24": {
+    "translation": "u4u/courage.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:25": {
+    "translation": "u4u/stoncrcl.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:26": {
+    "translation": "u4u/rune_0.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:27": {
+    "translation": "u4u/rune_1.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:28": {
+    "translation": "u4u/rune_2.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:29": {
+    "translation": "u4u/rune_3.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:3": {
+    "translation": "u4u/start.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:30": {
+    "translation": "u4u/rune_4.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:31": {
+    "translation": "u4u/rune_5.old",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:32": {
+    "translation": "u4u/rune_6.ega",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:33": {
+    "translation": "u4u/rune_7.ega",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:34": {
+    "translation": "u4u/rune_8.ega",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:35": {
+    "translation": "vga/gem.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:36": {
+    "translation": "vga/dungeonhall.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:37": {
+    "translation": "vga/dungeonhall_door.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:38": {
+    "translation": "vga/dungeonback0.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:39": {
+    "translation": "vga/dungeonback1.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:4": {
+    "translation": "vutne/145-tree.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:40": {
+    "translation": "vga/dungeonback2.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:41": {
+    "translation": "vga/dungeonback3.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:42": {
+    "translation": "vga/dungeonback0_door.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:43": {
+    "translation": "vga/dungeonback0_door.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:44": {
+    "translation": "vga/dungeonback1_door.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:45": {
+    "translation": "vga/dungeonback2_door.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:46": {
+    "translation": "vga/dungeonback3_door.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:47": {
+    "translation": "vga/ladderup0.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:48": {
+    "translation": "vga/ladderup0_side.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:49": {
+    "translation": "vga/ladderup1.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:5": {
+    "translation": "vutne/146-portal.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:50": {
+    "translation": "vga/ladderup1_side.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:51": {
+    "translation": "vga/ladderup2.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:52": {
+    "translation": "vga/ladderup2_side.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:53": {
+    "translation": "vga/ladderup3.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:54": {
+    "translation": "vga/ladderup3_side.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:55": {
+    "translation": "vga/ladderdown0.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:56": {
+    "translation": "vga/ladderdown0_side.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:57": {
+    "translation": "vga/ladderdown1.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:58": {
+    "translation": "vga/ladderdown1_side.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:59": {
+    "translation": "vga/ladderdown2.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:6": {
+    "translation": "vutne/147-outside.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:60": {
+    "translation": "vga/ladderdown2_side.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:61": {
+    "translation": "vga/ladderdown3.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:62": {
+    "translation": "vga/ladderdown3_side.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:63": {
+    "translation": "vga/ladderupdown0.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:64": {
+    "translation": "vga/ladderupdown0_side.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:65": {
+    "translation": "vga/ladderupdown1.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:66": {
+    "translation": "vga/ladderupdown1_side.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:67": {
+    "translation": "vga/ladderupdown2.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:68": {
+    "translation": "vga/ladderupdown2_side.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:69": {
+    "translation": "vga/ladderupdown3.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:7": {
+    "translation": "vutne/148-inside.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:70": {
+    "translation": "vga/ladderupdown3_side.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:71": {
+    "translation": "vga/traps.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:8": {
+    "translation": "vutne/149-wagon.png",
+    "placeholders": []
+  },
+  "module:U4-Upgrade:graphics:9": {
+    "translation": "vutne/14a-gypsy.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:0": {
+    "translation": "xu4 developers",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:1": {
+    "translation": "{\n        Markus Brenner (Minstrel Dragon)의 원작 EGA 그래픽과\n        음악을 사용한 울티마 4.\n    }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:10": {
+    "translation": "비전 로브",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:100": {
+    "translation": "물",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:101": {
+    "translation": "앙크",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:102": {
+    "translation": "팬텀",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:103": {
+    "translation": "표준",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:104": {
+    "translation": "전체 화면",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:105": {
+    "translation": "표준",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:11": {
+    "translation": "손",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:12": {
+    "translation": "손",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:13": {
+    "translation": "지팡",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:14": {
+    "translation": "지팡이",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:15": {
+    "translation": "단검",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:16": {
+    "translation": "단검",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:17": {
+    "translation": "슬링",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:18": {
+    "translation": "슬링",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:19": {
+    "translation": "철퇴",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:2": {
+    "translation": "1.4",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:20": {
+    "translation": "철퇴",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:21": {
+    "translation": "도끼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:22": {
+    "translation": "도끼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:23": {
+    "translation": "검",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:24": {
+    "translation": "검",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:25": {
+    "translation": "활",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:26": {
+    "translation": "활",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:27": {
+    "translation": "석궁",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:28": {
+    "translation": "석궁",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:29": {
+    "translation": "화염유",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:3": {
+    "translation": "맨몸",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:30": {
+    "translation": "화염 기름",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:31": {
+    "translation": "핼버드",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:32": {
+    "translation": "핼버드",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:33": {
+    "translation": "M도끼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:34": {
+    "translation": "마법 도끼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:35": {
+    "translation": "M검",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:36": {
+    "translation": "마법 검",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:37": {
+    "translation": "M활",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:38": {
+    "translation": "마법 활",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:39": {
+    "translation": "완드",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:4": {
+    "translation": "천옷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:40": {
+    "translation": "마법 완드",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:41": {
+    "translation": "비전검",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:42": {
+    "translation": "비전 검",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:43": {
+    "translation": "말",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:44": {
+    "translation": "말",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:45": {
+    "translation": "마법사",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:46": {
+    "translation": "음유시인",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:47": {
+    "translation": "전사",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:48": {
+    "translation": "드루이드",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:49": {
+    "translation": "땜장이",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:5": {
+    "translation": "가죽 갑옷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:50": {
+    "translation": "성기사",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:51": {
+    "translation": "레인저",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:52": {
+    "translation": "목자",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:53": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:54": {
+    "translation": "상인",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:55": {
+    "translation": "음유시인",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:56": {
+    "translation": "광대",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:57": {
+    "translation": "거지",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:58": {
+    "translation": "아이",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:59": {
+    "translation": "황소",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:6": {
+    "translation": "사슬 갑옷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:60": {
+    "translation": "로드 브리티시",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:61": {
+    "translation": "해적선",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:62": {
+    "translation": "닉시",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:63": {
+    "translation": "대왕오징어",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:64": {
+    "translation": "바다뱀",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:65": {
+    "translation": "해마",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:66": {
+    "translation": "소용돌이",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:67": {
+    "translation": "회오리",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:68": {
+    "translation": "쥐",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:69": {
+    "translation": "박쥐",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:7": {
+    "translation": "판금 갑옷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:70": {
+    "translation": "왕거미",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:71": {
+    "translation": "유령",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:72": {
+    "translation": "슬라임",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:73": {
+    "translation": "트롤",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:74": {
+    "translation": "그렘린",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:75": {
+    "translation": "미믹",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:76": {
+    "translation": "리퍼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:77": {
+    "translation": "벌레떼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:78": {
+    "translation": "게이저",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:79": {
+    "translation": "팬텀",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:8": {
+    "translation": "마법 사슬 갑옷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:80": {
+    "translation": "오크",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:81": {
+    "translation": "스켈레톤",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:82": {
+    "translation": "도적",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:83": {
+    "translation": "비단뱀",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:84": {
+    "translation": "에틴",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:85": {
+    "translation": "머리 없는 시체",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:86": {
+    "translation": "사이클롭스",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:87": {
+    "translation": "도깨비불",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:88": {
+    "translation": "마법사",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:89": {
+    "translation": "리치",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:9": {
+    "translation": "마법 판금 갑옷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:90": {
+    "translation": "용암 도마뱀",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:91": {
+    "translation": "조른",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:92": {
+    "translation": "데몬",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:93": {
+    "translation": "히드라",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:94": {
+    "translation": "드래곤",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:95": {
+    "translation": "발론",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:96": {
+    "translation": "팬텀",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:97": {
+    "translation": "팬텀",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:98": {
+    "translation": "마을 사람",
+    "placeholders": []
+  },
+  "module:Ultima-IV:config:99": {
+    "translation": "모험가",
+    "placeholders": []
+  },
+  "module:Ultima-IV:Credits:0": {
+    "translation": "일부 자산은 저작권이 있는 자료를 사용하며, 이에 대해 여기서 밝혀둔다.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:Credits:1": {
+    "translation": "music/minstrel\n    OGG 파일들은 (timidity를 통해) Markus Brenner의 MIDI\n    파일을 변환한 것입니다.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:Credits:2": {
+    "translation": "저작권: MIDI 파일 (C) 1998 by Markus Brenner (Minstrel Dragon)\n    다운로드:  http://markus.brenner.de/ultima/binary/u4-midi.zip",
+    "placeholders": []
+  },
+  "module:Ultima-IV:Credits:3": {
+    "translation": "sound/stone_falling.ogg\n    저작권: Wav 파일 (C) 2020 by bolkmar\n    라이선스:   CC BY 3.0\n    다운로드:  https://freesound.org/people/bolkmar/sounds/539178/",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:0": {
+    "translation": "ega/material.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:1": {
+    "translation": "u4/shapes.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:10": {
+    "translation": "u4/gypsy.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:11": {
+    "translation": "u4/abacus.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:12": {
+    "translation": "u4/honcom.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:13": {
+    "translation": "u4/valjus.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:14": {
+    "translation": "u4/sachonor.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:15": {
+    "translation": "u4/spirhum.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:16": {
+    "translation": "u4/animate.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:17": {
+    "translation": "u4/key7.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:18": {
+    "translation": "u4/honesty.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:19": {
+    "translation": "u4/compassn.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:2": {
+    "translation": "u4/charset.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:20": {
+    "translation": "u4/valor.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:21": {
+    "translation": "u4/justice.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:22": {
+    "translation": "u4/sacrific.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:23": {
+    "translation": "u4/honor.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:24": {
+    "translation": "u4/spirit.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:25": {
+    "translation": "u4/humility.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:26": {
+    "translation": "u4/truth.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:27": {
+    "translation": "u4/love.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:28": {
+    "translation": "u4/courage.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:29": {
+    "translation": "u4/stoncrcl.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:3": {
+    "translation": "u4/start.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:30": {
+    "translation": "u4/rune_5.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:31": {
+    "translation": "u4/rune_1.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:32": {
+    "translation": "u4/rune_2.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:33": {
+    "translation": "u4/rune_0.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:34": {
+    "translation": "u4/rune_1.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:35": {
+    "translation": "u4/rune_2.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:36": {
+    "translation": "u4/rune_1.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:37": {
+    "translation": "u4/rune_3.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:38": {
+    "translation": "u4/rune_4.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:39": {
+    "translation": "ega/hud.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:4": {
+    "translation": "u4/title.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:40": {
+    "translation": "ega/gem.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:41": {
+    "translation": "ega/dungeonhall.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:42": {
+    "translation": "ega/dungeonhall.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:43": {
+    "translation": "ega/dungeonhall_door.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:44": {
+    "translation": "ega/dungeonhall_door.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:45": {
+    "translation": "ega/dung0ma.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:46": {
+    "translation": "ega/dung0ma.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:47": {
+    "translation": "ega/dung0ma_door.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:48": {
+    "translation": "ega/dung0ma_door.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:49": {
+    "translation": "ega/dung1ma_door.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:5": {
+    "translation": "u4/tree.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:50": {
+    "translation": "ega/dung1ma_door.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:51": {
+    "translation": "ega/dung2ma_door.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:52": {
+    "translation": "ega/dung2ma_door.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:53": {
+    "translation": "ega/dung3ma_door.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:54": {
+    "translation": "ega/dung3ma_door.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:55": {
+    "translation": "ega/ladderup0.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:56": {
+    "translation": "ega/ladderup0_side.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:57": {
+    "translation": "ega/ladderup1.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:58": {
+    "translation": "ega/ladderup1_side.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:59": {
+    "translation": "ega/ladderup2.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:6": {
+    "translation": "u4/portal.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:60": {
+    "translation": "ega/ladderup2_side.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:61": {
+    "translation": "ega/ladderup3.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:62": {
+    "translation": "ega/ladderup3_side.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:63": {
+    "translation": "ega/ladderdown0.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:64": {
+    "translation": "ega/ladderdown0_side.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:65": {
+    "translation": "ega/ladderdown1.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:66": {
+    "translation": "ega/ladderdown1_side.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:67": {
+    "translation": "ega/ladderdown2.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:68": {
+    "translation": "ega/ladderdown2_side.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:69": {
+    "translation": "ega/ladderdown3.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:7": {
+    "translation": "u4/outside.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:70": {
+    "translation": "ega/ladderdown3_side.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:71": {
+    "translation": "ega/ladderupdown0.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:72": {
+    "translation": "ega/ladderupdown0_side.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:73": {
+    "translation": "ega/ladderupdown1.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:74": {
+    "translation": "ega/ladderupdown1_side.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:75": {
+    "translation": "ega/ladderupdown2.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:76": {
+    "translation": "ega/ladderupdown2_side.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:77": {
+    "translation": "ega/ladderupdown3.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:78": {
+    "translation": "ega/ladderupdown3_side.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:79": {
+    "translation": "ega/traps.png",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:8": {
+    "translation": "u4/inside.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:graphics:9": {
+    "translation": "u4/wagon.ega",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:0": {
+    "translation": "world.map",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:1": {
+    "translation": "위대한 스티지언 어비스에 들어간다!\n\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:10": {
+    "translation": "lcb.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:100": {
+    "translation": "히스로스 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:101": {
+    "translation": "그릇됨 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:102": {
+    "translation": "데스타드 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:103": {
+    "translation": "탐욕 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:104": {
+    "translation": "히스로스 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:105": {
+    "translation": "수치 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:106": {
+    "translation": "hythloth.dng",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:107": {
+    "translation": "히스로스",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:108": {
+    "translation": "기만 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:109": {
+    "translation": "수치 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:11": {
+    "translation": "첫 층으로 내려간다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:110": {
+    "translation": "히스로스 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:111": {
+    "translation": "그릇됨 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:112": {
+    "translation": "경멸 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:113": {
+    "translation": "그릇됨 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:114": {
+    "translation": "히스로스 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:115": {
+    "translation": "탐욕 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:116": {
+    "translation": "데스타드 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:117": {
+    "translation": "탐욕 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:118": {
+    "translation": "히스로스 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:119": {
+    "translation": "수치 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:12": {
+    "translation": "첫 층으로 내려간다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:120": {
+    "translation": "abyss.dng",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:121": {
+    "translation": "위대한 스티지언 어비스",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:122": {
+    "translation": "shrine.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:123": {
+    "translation": "정직",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:124": {
+    "translation": "shrine.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:125": {
+    "translation": "자비",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:126": {
+    "translation": "shrine.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:127": {
+    "translation": "용맹",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:128": {
+    "translation": "shrine.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:129": {
+    "translation": "정의",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:13": {
+    "translation": "lycaeum.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:130": {
+    "translation": "shrine.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:131": {
+    "translation": "희생",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:132": {
+    "translation": "shrine.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:133": {
+    "translation": "명예",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:134": {
+    "translation": "shrine.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:135": {
+    "translation": "영성",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:136": {
+    "translation": "shrine.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:137": {
+    "translation": "겸손",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:138": {
+    "translation": "brick.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:139": {
+    "translation": "bridge.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:14": {
+    "translation": "라이시움",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:140": {
+    "translation": "brush.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:141": {
+    "translation": "camp.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:142": {
+    "translation": "dng0.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:143": {
+    "translation": "dng1.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:144": {
+    "translation": "dng2.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:145": {
+    "translation": "dng3.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:146": {
+    "translation": "dng4.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:147": {
+    "translation": "dng5.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:148": {
+    "translation": "dng6.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:149": {
+    "translation": "dungeon.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:15": {
+    "translation": "lycaeum.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:150": {
+    "translation": "forest.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:151": {
+    "translation": "grass.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:152": {
+    "translation": "hill.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:153": {
+    "translation": "inn.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:154": {
+    "translation": "marsh.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:155": {
+    "translation": "shipsea.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:156": {
+    "translation": "shipship.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:157": {
+    "translation": "shipshor.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:158": {
+    "translation": "shore.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:159": {
+    "translation": "shorship.con",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:16": {
+    "translation": "empath.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:160": {
+    "translation": "camp.dng",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:17": {
+    "translation": "엠패스 수도원",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:18": {
+    "translation": "empath.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:19": {
+    "translation": "serpent.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:2": {
+    "translation": "lcb_1.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:20": {
+    "translation": "서펀트 홀드",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:21": {
+    "translation": "serpent.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:22": {
+    "translation": "moonglow.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:23": {
+    "translation": "문글로우",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:24": {
+    "translation": "moonglow.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:25": {
+    "translation": "britain.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:26": {
+    "translation": "브리튼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:27": {
+    "translation": "britain.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:28": {
+    "translation": "jhelom.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:29": {
+    "translation": "젤롬",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:3": {
+    "translation": "브리타니아",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:30": {
+    "translation": "jhelom.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:31": {
+    "translation": "yew.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:32": {
+    "translation": "유",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:33": {
+    "translation": "yew.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:34": {
+    "translation": "minoc.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:35": {
+    "translation": "미녹",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:36": {
+    "translation": "minoc.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:37": {
+    "translation": "trinsic.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:38": {
+    "translation": "트린식",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:39": {
+    "translation": "trinsic.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:4": {
+    "translation": "lcb.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:40": {
+    "translation": "skara.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:41": {
+    "translation": "스카라 브레이",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:42": {
+    "translation": "skara.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:43": {
+    "translation": "magincia.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:44": {
+    "translation": "매긴시아",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:45": {
+    "translation": "magincia.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:46": {
+    "translation": "paws.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:47": {
+    "translation": "포즈",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:48": {
+    "translation": "paws.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:49": {
+    "translation": "den.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:5": {
+    "translation": "둘째 층으로 오른다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:50": {
+    "translation": "버커니어즈 덴",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:51": {
+    "translation": "den.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:52": {
+    "translation": "vesper.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:53": {
+    "translation": "베스퍼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:54": {
+    "translation": "vesper.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:55": {
+    "translation": "cove.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:56": {
+    "translation": "코브",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:57": {
+    "translation": "cove.tlk",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:58": {
+    "translation": "deceit.dng",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:59": {
+    "translation": "기만",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:6": {
+    "translation": "둘째 층으로 오른다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:60": {
+    "translation": "기만 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:61": {
+    "translation": "수치 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:62": {
+    "translation": "히스로스 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:63": {
+    "translation": "그릇됨 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:64": {
+    "translation": "despise.dng",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:65": {
+    "translation": "경멸",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:66": {
+    "translation": "경멸 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:67": {
+    "translation": "그릇됨 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:68": {
+    "translation": "히스로스 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:69": {
+    "translation": "탐욕 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:7": {
+    "translation": "깊은 곳으로 내려간다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:70": {
+    "translation": "destard.dng",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:71": {
+    "translation": "데스타드",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:72": {
+    "translation": "데스타드 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:73": {
+    "translation": "탐욕 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:74": {
+    "translation": "히스로스 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:75": {
+    "translation": "수치 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:76": {
+    "translation": "wrong.dng",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:77": {
+    "translation": "그릇됨",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:78": {
+    "translation": "기만 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:79": {
+    "translation": "수치 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:8": {
+    "translation": "lcb_2.ult",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:80": {
+    "translation": "히스로스 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:81": {
+    "translation": "그릇됨 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:82": {
+    "translation": "경멸 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:83": {
+    "translation": "그릇됨 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:84": {
+    "translation": "히스로스 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:85": {
+    "translation": "탐욕 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:86": {
+    "translation": "covetous.dng",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:87": {
+    "translation": "탐욕",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:88": {
+    "translation": "경멸 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:89": {
+    "translation": "그릇됨 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:9": {
+    "translation": "브리타니아",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:90": {
+    "translation": "히스로스 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:91": {
+    "translation": "탐욕 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:92": {
+    "translation": "데스타드 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:93": {
+    "translation": "탐욕 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:94": {
+    "translation": "히스로스 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:95": {
+    "translation": "수치 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:96": {
+    "translation": "shame.dng",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:97": {
+    "translation": "수치",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:98": {
+    "translation": "기만 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:maps:99": {
+    "translation": "수치 던전으로\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:10": {
+    "translation": "브리타니아에서 지팡이를 만드는 곳은 우리뿐이나, 겨우 $gp에 판다네.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:100": {
+    "translation": "윈스턴",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:101": {
+    "translation": "발리언트의 갑옷점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:102": {
+    "translation": "발리언트",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:103": {
+    "translation": "결투용 갑옷점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:104": {
+    "translation": "장",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:105": {
+    "translation": "경갑옷점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:106": {
+    "translation": "피에르",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:107": {
+    "translation": "기본 갑옷점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:108": {
+    "translation": "림피",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:109": {
+    "translation": "@에 오신 것을 환영합니다\n\n%(이)가 말한다: 좋은 하루입니다, 어서 오세요.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:11": {
+    "translation": "가장 치명적인 단검을 파네, 개당 겨우 $gp인 특가라네.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:110": {
+    "translation": "\n돈을 좀 마련해서 다시 오게!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:111": {
+    "translation": "\n식량에 관심 있으신가요? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:112": {
+    "translation": "\n안녕히 가세요. 또 오세요!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:113": {
+    "translation": "\n최고의 모험 식량이 있습니다, #이(가) 겨우 $gp입니다.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:114": {
+    "translation": "\n#을(를) 몇 팩 드릴까요? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:115": {
+    "translation": "\n아쉽네요. 다음에 또 오세요.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:116": {
+    "translation": "\n감사합니다. ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:117": {
+    "translation": "또 오세요!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:118": {
+    "translation": "더 필요한\n것은? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:119": {
+    "translation": "\n지불하실 수 있는 건 ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:12": {
+    "translation": "{\n            우리 슬링은 최고급 밧줄과 가죽으로만 만듭니다,\n            겨우 $gp에 드립니다.\n        }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:120": {
+    "translation": " 팩뿐입니다.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:121": {
+    "translation": "현자의 델리",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:122": {
+    "translation": "샤먼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:123": {
+    "translation": "모험 식량점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:124": {
+    "translation": "윈드릭",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:125": {
+    "translation": "건어물점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:126": {
+    "translation": "도나",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:127": {
+    "translation": "생각할 거리 식당",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:128": {
+    "translation": "민톨",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:129": {
+    "translation": "시장",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:13": {
+    "translation": "이 철퇴들은 단단한 자루에 5파운드짜리 머리가 달려 있고 $gp에 적당히 판다네.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:130": {
+    "translation": "맥스",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:131": {
+    "translation": "%(이)가 말한다: @에 오신 것을 환영합니다",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:132": {
+    "translation": "또 보세, 친구!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:133": {
+    "translation": "\n%(이)가 말한다: 뭘 드릴까요, 음식이오 에일이오? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:134": {
+    "translation": "\n저희 특선은 =이며, 가격은 $gp입니다.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:135": {
+    "translation": "\n%(이)가 말한다: 미안하지만, 너무 많이 가지신 것 같군요. 안녕히!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:136": {
+    "translation": "\n저희 최고의 술 한 잔입니다.\n2gp입니다.\n지불하시겠습니까? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:137": {
+    "translation": "\n몇 접시나\n드릴까요? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:138": {
+    "translation": "자 여기 있수다.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:139": {
+    "translation": "지불하실 수 있는 건 ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:14": {
+    "translation": "이 도끼의 훌륭한 솜씨를 보게, $gp면 괜찮은 값이라는 데 동의할 걸세.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:140": {
+    "translation": " 접시뿐입니다.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:141": {
+    "translation": "더 필요한\n건? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:142": {
+    "translation": "\n돈 안 낼 거야, 응.\n이 쓰레기야, 꺼져\n안 그럼 경비병을\n부를 테다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:143": {
+    "translation": "\n뭘 알고 싶은가 친구?\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:144": {
+    "translation": "\n미안하지만 그건 도와줄 수가 없다네 친구!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:145": {
+    "translation": "\n금이 부족한 것 같군요. 좋은 하루 되세요!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:146": {
+    "translation": "\n미안하네, 도와줄\n수가 없다네 친구!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:147": {
+    "translation": "\n그 이야기는 좀 흐릿하군, 금이 좀 더 있으면 기억이 되살아날지도. 얼마나\n주겠나: ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:148": {
+    "translation": "\n그건 안 가지고 있잖나 친구!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:149": {
+    "translation": "검은 보석",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:15": {
+    "translation": "이 검들의 훌륭한 솜씨는 그대 적들의 공포가 될 걸세, $gp라네.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:150": {
+    "translation": "{\n            %(이)가 말한다: 아, 검은 보석 말이군.\n            그래, 들어본 적 있네. 하지만\n            그것이 어디 있는지 아는 이는\n            마법사 멀린뿐일세.\n            }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:151": {
+    "translation": "육분의",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:152": {
+    "translation": "{\n            %(이)가 말한다: 항해에는 육분의가 필수지... 길드 상점에서 \"D\" 항목을 물어보게!\n            }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:153": {
+    "translation": "하얀 보석",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:154": {
+    "translation": "{\n            어디 보자... 그래, 늙은 은둔자였지...\n            슬로븐! 찾기 어려운 사람인데,\n            락 호수 근처에 산다고 들었네.\n            }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:155": {
+    "translation": "맨드레이크",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:156": {
+    "translation": "{\n            %(이)가 말한다: 맨드레이크를 가진 걸 마지막으로\n            봤던 사람은 칼럼니라는\n            늙은 연금술사였네.\n            }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:157": {
+    "translation": "해골",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:158": {
+    "translation": "{\n            %(이)가 말한다: 그 가장 사악한 물건에 대해 꼭 알아야 한다면...\n            거지 주드를 찾게. 그는 아주아주 가난하다네!\n            }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:159": {
+    "translation": "벨라도나",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:16": {
+    "translation": "우리 활은 최고급 주목으로, 화살은 버드나무로 만든다네, $gp면 거저라네.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:160": {
+    "translation": "{\n            %(이)가 말한다: 벨라도나에 대해선 이것만 아네...\n            버질을 찾게, 안 그럼 놓칠 걸세! 트린식에서 찾아보게!\n            }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:161": {
+    "translation": "검은 보석",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:162": {
+    "translation": "육분의",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:163": {
+    "translation": "하얀 보석",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:164": {
+    "translation": "맨드레이크",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:165": {
+    "translation": "해골",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:166": {
+    "translation": "벨라도나",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:167": {
+    "translation": "명랑한 영혼 술집",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:168": {
+    "translation": "샘",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:169": {
+    "translation": "양갈비",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:17": {
+    "translation": "음유시인 아이올로가 만든 석궁은 세상에서 가장 훌륭하다네, $gp에 드리지.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:170": {
+    "translation": "피의 술집",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:171": {
+    "translation": "셀레스티얼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:172": {
+    "translation": "드래곤 타르타르",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:173": {
+    "translation": "술통 탭 술집",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:174": {
+    "translation": "테란",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:175": {
+    "translation": "브라운 빈스",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:176": {
+    "translation": "폴리 선술집",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:177": {
+    "translation": "그렉 앤 롭",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:178": {
+    "translation": "폴리 필레",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:179": {
+    "translation": "블랙 선장 선술집",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:18": {
+    "translation": "{\n            기름병은 훌륭한 무기이며 불의 벽도 만든다네.\n            개당 $gp일세.\n        }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:180": {
+    "translation": "선장 아저씨",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:181": {
+    "translation": "개고기 파이",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:182": {
+    "translation": "도끼와 에일",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:183": {
+    "translation": "아론",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:184": {
+    "translation": "그린 그라누킷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:185": {
+    "translation": "{\n            눈먼 여인이 그대를 향해 돌아서며 말한다: @에 오신 것을 환영합니다\n\n            저는 %입니다\n            재료가 필요하신가요? \n        }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:186": {
+    "translation": "\n좋습니다,",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:187": {
+    "translation": "\n%(이)가 말한다:\n그럼 다음에 오시죠....\n하며 천천히 돌아선다.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:188": {
+    "translation": "{\n        A-유황재\n        B-인삼\n        C-마늘\n        D-거미줄\n        E-핏빛이끼\n        F-흑진주\n    }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:189": {
+    "translation": "유황재",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:19": {
+    "translation": "핼버드는 장애물 너머로 공격할 수 있는 강력한 무기라네, 필수품이고 겨우 $gp일세.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:190": {
+    "translation": "인삼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:191": {
+    "translation": "마늘",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:192": {
+    "translation": "거미줄",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:193": {
+    "translation": "핏빛이끼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:194": {
+    "translation": "흑진주",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:195": {
+    "translation": "\n제게 있는\n+그대의\n관심사: ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:196": {
+    "translation": "\n좋습니다, =을(를) $gp에 팝니다. 몇 개나\n드릴까요? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:197": {
+    "translation": "\n좋습니다, $gp입니다.  지불하실 금액: ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:198": {
+    "translation": "\n좋습니다. ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:199": {
+    "translation": "\n금이 부족한 것 같군요! ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:2": {
+    "translation": "{\n            어서 오십시오\n            @\n\n            %(이)가 말한다:\n            환영합니다 친구여!\n            사러 오셨습니까\n            아니면 팔러 오셨습니까? \n        }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:20": {
+    "translation": "이 마법 도끼는 적에게 던지면 다시 돌아온다네, 전부 $gp라네.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:200": {
+    "translation": "\n그렇군요, 그럼 ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:201": {
+    "translation": "더 필요한\n것은? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:202": {
+    "translation": "마법 약초점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:203": {
+    "translation": "마고",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:204": {
+    "translation": "허브와 향신료",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:205": {
+    "translation": "사샤",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:206": {
+    "translation": "마법 상점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:207": {
+    "translation": "쉴라",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:208": {
+    "translation": "마법 멘타르",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:209": {
+    "translation": "섀넌",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:21": {
+    "translation": "{\n            이런 마법 검은 참으로 희귀하다네\n            $gp에 하나 내드리지.\n        }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:210": {
+    "translation": "{\n            어서 오십시오\n            @\n\n            %(이)가 말한다:\n            평화와 기쁨이 함께하기를, 친구여.\n            도움이 필요하십니까? \n        }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:211": {
+    "translation": "\n%(이)가 말한다: 선의 힘이 그대의 삶을 지켜주기를.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:212": {
+    "translation": "\n남을 돕기 위해 그대 피 100포인트를 바칠 의향이 있는가? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:213": {
+    "translation": "\n그대는 큰 도움이 되었다. 우리는 절실히 필요했다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:214": {
+    "translation": "{\n        A-치료\n        B-회복\n        C-부활\n    }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:215": {
+    "translation": "치료",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:216": {
+    "translation": "회복",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:217": {
+    "translation": "부활",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:218": {
+    "translation": "\n%(이)가 말한다: 저희가 할 수 있는 것:\n+필요한 것: ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:219": {
+    "translation": "\n%(이)가 묻는다:\n누가\n필요한가? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:22": {
+    "translation": "마법 활은 적을 멀리 물리치거나 죽게 하리라! $gp면 필수라네!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:220": {
+    "translation": "아무도 없다고?\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:221": {
+    "translation": "\n%(이)가 묻는다: 도움이 더 필요하신가요? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:222": {
+    "translation": "\n+은(는) $gp가 든다.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:223": {
+    "translation": "\n그대의 지갑을 보니 금이 부족하구나. 도울 수가 없다.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:224": {
+    "translation": "\n지불\n하겠는가? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:225": {
+    "translation": "그대는 독에 걸리지 않았다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:226": {
+    "translation": "그대는 이미 아주 건강하다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:227": {
+    "translation": "그대는 죽지 않았다, 어리석은 자여!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:228": {
+    "translation": "왕실 치유소",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:229": {
+    "translation": "펜드래곤",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:23": {
+    "translation": "이 마법 완드는 강력한 푸른 번개를 쏘아 적을 쓰러뜨린다네, $gp일세.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:230": {
+    "translation": "치유사",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:231": {
+    "translation": "하모니",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:232": {
+    "translation": "상처 치유소",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:233": {
+    "translation": "셀레스트",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:234": {
+    "translation": "치유와 건강",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:235": {
+    "translation": "트리플렛",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:236": {
+    "translation": "정직한 치유소",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:237": {
+    "translation": "저스틴",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:238": {
+    "translation": "신비한 치유소",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:239": {
+    "translation": "스피란",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:24": {
+    "translation": "\n몇 개나\n드릴까요? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:240": {
+    "translation": "진실의 치유사",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:241": {
+    "translation": "스타파이어",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:242": {
+    "translation": "사랑의 치유사",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:243": {
+    "translation": "살레",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:244": {
+    "translation": "용기의 치유사",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:245": {
+    "translation": "윈드워커",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:246": {
+    "translation": "치유소",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:247": {
+    "translation": "콰트",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:248": {
+    "translation": "여관 주인이 말한다: ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:249": {
+    "translation": "그 말을 여기서 치우게!!!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:25": {
+    "translation": "\n자금이 부족한 듯하군요, 다른 것은 어떨까요.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:250": {
+    "translation": "@에 오신 것을 환영합니다\n\n저는 %입니다.\n\n숙소가 필요하신가요? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:251": {
+    "translation": "\n%(이)가 말한다: 그럼 잘못 찾아오셨군요!\n좋은 하루 되세요.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:252": {
+    "translation": "\n좋습니다.  편안한\n밤 되세요.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:253": {
+    "translation": "\n아, 이상한 소리는 신경 쓰지 마세요, 그냥 쥐들이에요!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:254": {
+    "translation": "\n돈이 없으면 묵을 수 없습니다! 안녕히 가세요.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:255": {
+    "translation": "\n\n받으시겠습니까? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:256": {
+    "translation": "\n이 마을에서 이보다 좋은 거래는 없을 겁니다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:257": {
+    "translation": "정직한 여관",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:258": {
+    "translation": "스카투",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:259": {
+    "translation": "침대 2개짜리 방이 있고 20gp에 빌려드립니다.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:26": {
+    "translation": "\n%(이)가 말한다: 훌륭한 선택입니다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:260": {
+    "translation": "브리타니아 장원",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:261": {
+    "translation": "제이슨",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:262": {
+    "translation": "침대 1개짜리 적당한 방이 있고 15gp입니다.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:263": {
+    "translation": "끝자락 여관",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:264": {
+    "translation": "스머크",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:265": {
+    "translation": "아주 안전한 적당한 크기의 방에 침대 1개, 10gp입니다.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:266": {
+    "translation": "나그네의 여관",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:267": {
+    "translation": "에스트로",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:268": {
+    "translation": "\n방이 세 개 있습니다,\n침대 1개, 2개, 3개짜리로 각각 30, 60,\n90gp입니다.\n침대 1개, 2개, 3개\n중 어느 것을? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:269": {
+    "translation": "명예로운 여관",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:27": {
+    "translation": "\n더 필요한\n것은? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:270": {
+    "translation": "자야크",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:271": {
+    "translation": "뒷문이 있는 침대 1개짜리 방이 15gp입니다.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:272": {
+    "translation": "영혼의 여관",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:273": {
+    "translation": "타이론",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:274": {
+    "translation": "{\n                안타깝게도, 침대 1개짜리 아주 작은 방밖에 없습니다:\n                게다가 귀신이 나온다지요! 그래도 묵으시겠다면 5gp입니다.\n                }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:275": {
+    "translation": "잠자리 상점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:276": {
+    "translation": "타이머스",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:277": {
+    "translation": "저기 있는 간이침대뿐입니다. 하지만 편안하고, 겨우 1gp입니다.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:278": {
+    "translation": "{\n            어이 친구! 늙은\n%한테서 사고 싶은 게로군?\n\n            %(이)가 말한다: @에 온 걸 환영하네.\n내 물건 좀 보겠나? \n        }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:279": {
+    "translation": "\n%(이)가 말한다: 또 보세 친구!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:28": {
+    "translation": "\n판매할 물건: ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:280": {
+    "translation": "{\n        A-횃불\n        B-마법 보석\n        C-마법 열쇠\n    }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:281": {
+    "translation": "\n오래가는 횃불 #을(를) 겨우 $gp에 주겠네.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:282": {
+    "translation": "\n지도 마법 보석이 있다네, #이(가) 겨우 $gp일세.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:283": {
+    "translation": "\n마법 열쇠, 1회용, #에 $gp면 적당한 값일세.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:284": {
+    "translation": "\n그러니까...육분의를 원한다고...흠, 하나 있는데 $ 골드면 넘겨줄 수도 있지!",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:285": {
+    "translation": "\n\n사겠나? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:286": {
+    "translation": "\n흐음...으르렁...\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:287": {
+    "translation": "\n%(이)가 말한다: 좋아 친구!\n내가 가진 건:\n+뭘로 하겠나? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:288": {
+    "translation": "\n좋아... 좋아...\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:289": {
+    "translation": "\n%(이)가 말한다: 더\n볼 텐가? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:29": {
+    "translation": "bcdefghijklmnop",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:290": {
+    "translation": "\n뭐라고? 돈이 없다고! 꺼져 이 돼지야!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:291": {
+    "translation": "길드 상점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:292": {
+    "translation": "롱 존 리어리",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:293": {
+    "translation": "해적 길드",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:294": {
+    "translation": "외눈박이 윌리",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:295": {
+    "translation": "환영하네 친구!\n말에 관심\n있으신가? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:296": {
+    "translation": "\n아쉽군, 좋은 말이 필요해 보이는데!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:297": {
+    "translation": "\n겨우 $ 골드에\n최고를 가질 수 있다네! 사겠는가? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:298": {
+    "translation": "\n자, 이보다 나은 혈통은 결코 찾지 못하리라!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:299": {
+    "translation": "\n지불할 금이 충분치 않은 듯하다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:3": {
+    "translation": "\n아주 좋습니다!",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:30": {
+    "translation": "\n그것은 소유하지 않았다. 그럼 다른 무엇을",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:31": {
+    "translation": "\n그 =에 $gp를 드리겠습니다.\n거래하시겠습니까? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:32": {
+    "translation": "\n흠. 그럼 다른\n무엇을 ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:33": {
+    "translation": "\n=을(를) 몇 개나\n파시겠습니까? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:34": {
+    "translation": "\n그렇게 많이 가지고 있지 않습니다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:35": {
+    "translation": "\n그것들에 $gp를 드리겠습니다.\n거래하시겠습니까? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:36": {
+    "translation": "\n좋습니다! 다른 것은?",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:37": {
+    "translation": "지팡이",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:38": {
+    "translation": "단검",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:39": {
+    "translation": "슬링",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:4": {
+    "translation": "\n훌륭합니다! 어느 것으로\n하시겠",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:40": {
+    "translation": "철퇴",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:41": {
+    "translation": "도끼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:42": {
+    "translation": "검",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:43": {
+    "translation": "활",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:44": {
+    "translation": "석궁",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:45": {
+    "translation": "화염 기름",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:46": {
+    "translation": "핼버드",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:47": {
+    "translation": "마법 도끼",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:48": {
+    "translation": "마법 검",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:49": {
+    "translation": "마법 활",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:5": {
+    "translation": "\n%(이)가 말한다:\n평안히 가시게!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:50": {
+    "translation": "마법 완드",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:51": {
+    "translation": "비전 검",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:52": {
+    "translation": "윈저 무기점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:53": {
+    "translation": "윈스턴",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:54": {
+    "translation": "윌라드의 무기점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:55": {
+    "translation": "윌라드",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:56": {
+    "translation": "철공소",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:57": {
+    "translation": "피터",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:58": {
+    "translation": "결투용 무기점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:59": {
+    "translation": "주마",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:6": {
+    "translation": "\n저희가 가진 것:\n+무엇에\n관심 있으신가요? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:60": {
+    "translation": "훅의 무기점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:61": {
+    "translation": "훅",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:62": {
+    "translation": "마을 무기점",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:63": {
+    "translation": "웬디",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:65": {
+    "translation": "{\n            어서 오십시오\n            @\n\n            %(이)가 말한다:\n            환영합니다 친구여!\n            사시겠습니까\n            아니면 파시겠습니까? \n        }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:66": {
+    "translation": "\n그럼,",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:67": {
+    "translation": "\n무엇을",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:68": {
+    "translation": "\n%(이)가 말한다:\n안녕히 가세요.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:69": {
+    "translation": "\n저희가 가진 건:\n+\n무엇으로\n하시겠어요? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:7": {
+    "translation": "\n하나 살 돈도 없으시군요!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:70": {
+    "translation": "\n하나 살 돈도 없으시군요!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:71": {
+    "translation": "\n받으시겠습니까? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:72": {
+    "translation": "\n아쉽네요.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:73": {
+    "translation": "천 갑옷은 빠듯한 예산에 좋습니다, $gp면 적당한 가격이죠.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:74": {
+    "translation": "{\n            가죽 갑옷은 유연하면서도 튼튼하고, 겨우 $gp입니다.\n            거저나 다름없죠!\n        }",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:75": {
+    "translation": "사슬 갑옷은 다른 어떤 갑옷보다 많은 전사가 착용합니다. 저희 것은 $gp입니다.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:76": {
+    "translation": "전신 판금 갑옷은 비마법 갑옷의 정점입니다. $gp에 가져가세요.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:77": {
+    "translation": "마법 갑옷은 희귀하고 비쌉니다. 이 사슬 갑옷은 $gp에 팝니다.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:78": {
+    "translation": "마법 판금 갑옷은 알려진 최고의 방어구입니다. 저희만 취급합니다.  가격: $gp.\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:79": {
+    "translation": "\n몇 개나\n드릴까요? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:8": {
+    "translation": "\n받으시겠습니까? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:80": {
+    "translation": "\n금이 부족하시군요. 좀 더 저렴한 걸로 어떠세요?\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:81": {
+    "translation": "\n%(이)가 말한다: 좋은 선택입니다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:82": {
+    "translation": "\n더 필요한\n것은? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:83": {
+    "translation": "\n판매할 물건: ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:84": {
+    "translation": "bcdefgh",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:85": {
+    "translation": "\n에이, 하나도\n안 가지고 계시잖아요.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:86": {
+    "translation": "\n그 =에 $gp를 드리겠습니다.\n거래하시겠습니까? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:87": {
+    "translation": "\n=을(를) 몇 개나\n파시겠습니까? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:88": {
+    "translation": "\n그렇게 많이 가지고 있지 않습니다!\n",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:89": {
+    "translation": "\n그것들에 $gp를 드리겠습니다.\n거래하시겠습니까? ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:9": {
+    "translation": "\n아쉽네요.",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:90": {
+    "translation": "\n흥. 그럼 다른 무엇을 ",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:91": {
+    "translation": "\n좋습니다! 다른 것은?",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:92": {
+    "translation": "천옷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:93": {
+    "translation": "가죽 갑옷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:94": {
+    "translation": "사슬 갑옷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:95": {
+    "translation": "판금 갑옷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:96": {
+    "translation": "마법 사슬 갑옷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:97": {
+    "translation": "마법 판금 갑옷",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:98": {
+    "translation": "비전 로브",
+    "placeholders": []
+  },
+  "module:Ultima-IV:vendors:99": {
+    "translation": "윈저 갑옷점",
+    "placeholders": []
+  },
+  "avatar.exe:endgameText1:0": {
+    "translation": "궁극적 지혜의 코덱스가 지닌 무한한 지식이 그대에게 드러난다.",
+    "placeholders": []
+  },
+  "avatar.exe:endgameText1:1": {
+    "translation": "\n\n목소리가 말한다: 그대는 본성이 참으로 선함을 증명하였다.",
+    "placeholders": []
+  },
+  "avatar.exe:endgameText1:2": {
+    "translation": "\n\n아바타가 되고자 하는 그대의 여정은 일생에 걸친 끝없는 여정임을 알아야 한다.",
+    "placeholders": []
+  },
+  "avatar.exe:endgameText1:3": {
+    "translation": "\n\n아바타의 지위는 살아있는 선물이다.  언제까지나 가꾸어야만 꽃필 수 있다.",
+    "placeholders": []
+  },
+  "avatar.exe:endgameText1:4": {
+    "translation": "\n\n미덕의 길에서 벗어난다면, 그대의 길은 영영 사라질 수도 있다.",
+    "placeholders": []
+  },
+  "avatar.exe:endgameText1:5": {
+    "translation": "\n\n이제 그대의 세계로 돌아가라. 그곳에서 그대 백성들의 본보기로 살라, 우리는 그대의 용맹한 행적을 기억하리라.",
+    "placeholders": []
+  },
+  "avatar.exe:endgameText1:6": {
+    "translation": "\n\n목소리가 잦아들며, 어둠이 그대 주위로 밀려오는 듯하다. 격렬하고 뒤틀리는 현기증의 순간이 찾아온다.",
+    "placeholders": []
+  },
+  "avatar.exe:endgameText2:0": {
+    "translation": "그대는 눈을 뜨고 낯익은 돌의 원을 마주한다.  최근의 모험을 떠올리며 의아해한다.",
+    "placeholders": []
+  },
+  "avatar.exe:endgameText2:1": {
+    "translation": "\n\n아주 멀리 떨어진 시간과 장소처럼 느껴진다.  정말 있었던 일인지 의아해하다가, 손에 앙크를 쥐고 있음을 깨닫는다.",
+    "placeholders": []
+  },
+  "avatar.exe:endgameText2:2": {
+    "translation": "\n\n이제 문의 비밀을 알게 되었기에 언제든 왔던 곳으로 돌아올 수 있음을 알며, 그대는 원을 떠나간다.",
+    "placeholders": []
+  },
+  "avatar.exe:endgameText2:3": {
+    "translation": "\n\n축하합니다!\n   그대는\n   울티마 4:\n  아바타의\n   여정을\n  완수하였다\n  총 ",
+    "placeholders": []
+  },
+  "avatar.exe:endgameText2:4": {
+    "translation": "\n턴 만에! 그대의\n업적을 오리진\n시스템스의\n로드 브리티시께\n보고하라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:0": {
+    "translation": "그대는 도둑이자 악당이다. 결코 아바타가 될 수 없으리라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:1": {
+    "translation": "그대는 차갑고 잔인한 짐승이다.  그 죄로 인해 감옥에 가야 마땅하다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:10": {
+    "translation": "그대는 용맹을 그리 보이지 못한다. 필요할 때 도망치는구나!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:11": {
+    "translation": "그대는 잔인하고 불의하다. 언젠가 그 죄로 고통받으리라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:12": {
+    "translation": "그대는 자신보다 남의 삶을 더 헤아려야 한다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:13": {
+    "translation": "그대는 명예롭게 싸우지 않고 악의와 기만으로 싸운다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:14": {
+    "translation": "그대는 내면을 돌보는 데 시간을 들이지 않는구나, 아바타가 되려면 반드시 필요한 일이다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:15": {
+    "translation": "그대는 사소한 행적을 너무 자랑스러워한다. 겸손은 모든 미덕의 근본이다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:16": {
+    "translation": "그대는 정직의 길에서 진전이 거의 없다. 그대의 가치를 증명하도록 힘쓰라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:17": {
+    "translation": "그대는 자비를 제대로 보이지 못했다. 남에게 더 친절하라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:18": {
+    "translation": "그대는 아직 용맹한 전사가 아니다.  악을 물리치며 스스로를 증명하라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:19": {
+    "translation": "그대는 아직 정의로움을 증명하지 못했다. 모든 일에 정의를 행하도록 힘쓰라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:2": {
+    "translation": "그대는 겁쟁이로다, 위험의 낌새만 있어도 도망친다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:20": {
+    "translation": "그대의 희생은 미미하다. 남을 살리기 위해 그대 생명의 피를 바치라.",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:21": {
+    "translation": "그대는 더욱 명예롭게 처신해야 한다.  그 길이 그대 앞에 놓여 있다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:22": {
+    "translation": "그대의 내면을 더 알고 다스리도록 힘쓰라. 명상이 그 길을 밝히리라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:23": {
+    "translation": "이 길에서 그대의 진전은 매우 불확실하다. 겸손 없이는 그대는 공허할 뿐이다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:24": {
+    "translation": "그대는 정직한 영혼인 듯하다.  계속된 정직이 그대에게 보답하리라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:25": {
+    "translation": "그대는 자비를 잘 보이고 있다.  계속된 선의가 그대를 이끌어야 한다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:26": {
+    "translation": "그대는 위험 앞에서 용맹을 보이고 있다. 더욱 그리되도록 힘쓰라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:27": {
+    "translation": "그대는 공정하고 정의로운 듯하다. 정의를 더욱 엄정히 지키도록 힘쓰라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:28": {
+    "translation": "그대는 어느 정도 자신을 내어주고 있다. 이제 더 많이 찾아 나서라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:29": {
+    "translation": "그대는 천성이 명예로운 듯하다.  남에게도 명예를 가져다주도록 힘쓰라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:3": {
+    "translation": "그대는 불의한 비참한 자로다. 역겨운 참견꾼이다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:30": {
+    "translation": "그대는 내면의 통찰로 가는 길을 잘 가고 있다, 계속하여 내면의 빛을 구하라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:31": {
+    "translation": "그대는 겸손한 영혼인 듯하다.  미덕을 쌓아 올릴 굳건한 초석을 놓고 있다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:32": {
+    "translation": "그대는 참으로 정직한 영혼이다. 이제 승화에 이르도록 하라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:33": {
+    "translation": "자비는 그대가 잘 보여온 미덕이다.  이제 승화를 구하라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:34": {
+    "translation": "그대는 참으로 용맹한 전사다. 이제 용맹의 미덕에서 승화를 구하라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:35": {
+    "translation": "그대는 정의롭고 공정하다.  이제 승화를 구하라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:36": {
+    "translation": "그대는 베풀 줄 알고 선하다.  그대의 자기희생은 크도다.  이제 승화를 구하라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:37": {
+    "translation": "그대는 명예로움을 증명하였다. 이제 승화를 구하라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:38": {
+    "translation": "영성이 그대의 천성에 있다. 이제 승화를 구하라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:39": {
+    "translation": "그대의 겸손이 존재 위에 밝게 빛난다. 이제 승화를 구하라!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:4": {
+    "translation": "그대는 제 잇속만 챙기는 아첨꾼이다. 내 도움을 받을 자격이 없으나, 그래도 베풀겠다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:40": {
+    "translation": "예언자가 말한다: 나는 오직 ",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:41": {
+    "translation": "하고만 이야기하리라.\n다시 오라, ",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:42": {
+    "translation": "이(가) 회복되었을 때!\n",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:43": {
+    "translation": "\n\n환영한다, ",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:44": {
+    "translation": "\n나는 호크윈드, 영혼의 예언자다. 나는 그대 안에 있는 것, 그대를 선 또는 악의 행위로 이끄는 것을 보노라...\n",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:45": {
+    "translation": "\n어떤 길에 대한 깨달음을 구하는가?\n",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:46": {
+    "translation": "\n호크윈드가 묻는다: 어떤 다른 길에 대한 명료함을 구하는가?\n",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:47": {
+    "translation": "none",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:48": {
+    "translation": "bye",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:49": {
+    "translation": "\n그가 말한다: 그것은 깨달음의 주제가 아니다.\n",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:5": {
+    "translation": "그대는 비열하고 파렴치한 자다. 그대의 존재 자체가 모욕이다. 그대는 민달팽이만큼 하찮다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:50": {
+    "translation": "그가 말한다:\n그대는 그 자질에서 부분적인 아바타가 되었다. 나의 통찰이 더는 필요치 않다.\n",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:51": {
+    "translation": "\n신단으로 가서 세 주기 동안 명상하라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:52": {
+    "translation": "\n호크윈드가 말한다: 평안하기를, 그대가 아바타의 여정을 완수하기를!\n",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:6": {
+    "translation": "그대의 정신은 약하고 나약하다. 완전함을 위해 힘쓰지 않는구나!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:7": {
+    "translation": "그대는 오만하고 허영에 차 있다. 그대 안의 다른 모든 미덕이 헛되도다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:8": {
+    "translation": "그대는 정직한 영혼이 아니다. 아바타가 되려면 더 정직한 삶을 살아야 한다!",
+    "placeholders": []
+  },
+  "avatar.exe:hawkwindText:9": {
+    "translation": "그대는 필요 없는 곳에서 살생하고 남에게는 너무 적게 베푼다!",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:0": {
+    "translation": "name",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:1": {
+    "translation": "look",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:10": {
+    "translation": "sacrifice",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:11": {
+    "translation": "honor",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:12": {
+    "translation": "spirituality",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:13": {
+    "translation": "humility",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:14": {
+    "translation": "pride",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:15": {
+    "translation": "avatar",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:16": {
+    "translation": "quest",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:17": {
+    "translation": "britannia",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:18": {
+    "translation": "ankh",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:19": {
+    "translation": "abyss",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:2": {
+    "translation": "job",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:20": {
+    "translation": "mondain",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:21": {
+    "translation": "minax",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:22": {
+    "translation": "exodus",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:23": {
+    "translation": "virtue",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:3": {
+    "translation": "truth",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:4": {
+    "translation": "love",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:5": {
+    "translation": "courage",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:6": {
+    "translation": "honesty",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:7": {
+    "translation": "compassion",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:8": {
+    "translation": "valor",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishKeyword:9": {
+    "translation": "justice",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:0": {
+    "translation": "\n\n\n그가 말한다:\n나의 이름은\n로드 브리티시,\n브리타니아\n전역의 군주이다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:1": {
+    "translation": "\n\n\n\n\n왕홀을 든\n왕이\n보인다.\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:10": {
+    "translation": "\n그가 말한다:\n자기희생의 마을,\n미녹은\n로스트 호프 만의\n동쪽 해안에\n있다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:11": {
+    "translation": "\n그가 말한다:\n명예를 추구하는\n성기사들은\n영웅곶 북쪽의\n트린식에서\n흔히 보인다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:12": {
+    "translation": "\n그가 말한다:\n스카라 브레이에서\n영성의 길을\n가르친다.\n스피릿우드\n근처의 섬에서\n찾을 수 있다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:13": {
+    "translation": "\n\n\n그가 말한다:\n겸손은 미덕의\n초석이다!  오만했던\n매긴시아의\n폐허가 바로\n겸손의 미덕을\n증언한다!\n\n매긴시아의\n폐허는 브리타니아\n해안에서 멀리\n떨어진, 광대한\n바다의 작은\n섬에서 찾을\n수 있다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:14": {
+    "translation": "\n\n\n그가 말한다:\n진실, 사랑,\n용기의 여덟 가지\n조합 중, 진실도\n사랑도 용기도\n담지 않은 것이\n바로 오만이다.\n\n오만은 미덕이\n아니니, 오만과\n정반대되는 미덕인\n겸손을 택하여\n멀리해야 한다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:15": {
+    "translation": "\n\n\n\n\n\n로드 브리티시가\n말한다:\n아바타가 된다는\n것은 여덟 미덕의\n화신이 되는\n것이다.\n\n\n그것은 끊임없이,\n영원히 스스로와\n우리가 사는\n세상을 더 낫게\n만들고자 하는\n여정 속에서\n살아가는 것이다.\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:16": {
+    "translation": "\n\n\n로드 브리티시가\n말한다:\n아바타의 여정은\n선의 여덟 미덕을\n알고 그 화신이\n되는 것이다!\n이 여정에 나선\n모든 이는 어비스를\n정복하고 궁극적\n지혜의 코덱스를\n보는 것으로\n스스로를 증명해야\n함이 알려져\n있다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:17": {
+    "translation": "\n\n\n\n\n\n\n그가 말한다:\n위대한 악의 군주들이\n물러났음에도\n악은 여전히\n브리타니아에\n남아 있다.\n\n\n\n\n\n단 한 영혼이라도\n아바타의 여정을\n완수한다면, 우리\n백성에게 새로운\n희망이, 삶의\n새로운 목표가\n생기리라.\n\n소유물과 금을\n좇는 끝없는\n투쟁보다 삶에\n더 많은 것이\n있다는 빛나는\n본보기가 되리라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:18": {
+    "translation": "그가 말한다:\n앙크는 미덕을\n추구하는 자의\n상징이다.  이\n표식으로 그대가\n알려질 것이니,\n항상 지니고\n다니라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:19": {
+    "translation": "\n\n\n\n\n\n그가 말한다:\n위대한\n스티지언\n어비스는 브리타니아에\n남은 가장 어두운\n악의 소굴이다!\n\n\n\n\n\n\n어비스의 가장\n깊은 곳에\n코덱스의 방이\n있다고 전해진다!\n\n\n최고의 미덕을\n지닌 자, 이를테면\n아바타 같은 이만이\n이 방에 들어갈\n수 있다고도\n전해진다!!!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:2": {
+    "translation": "\n\n\n그가 말한다:\n나는 브리타니아\n전역을 다스리며,\n그대를 돕기 위해\n최선을 다하리라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:20": {
+    "translation": "\n\n\n\n\n\n그가 말한다:\n몬데인이 죽었다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:21": {
+    "translation": "\n\n\n\n\n\n그가 말한다:\n미낙스가 죽었다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:22": {
+    "translation": "\n\n\n\n\n\n그가 말한다:\n엑소더스가 죽었다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:23": {
+    "translation": "\n그가 말한다:\n아바타의\n여덟 미덕은:\n정직,\n자비,\n용맹,\n정의,\n희생,\n명예,\n영성,\n그리고 겸손이다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:3": {
+    "translation": "그가 말한다:\n많은 진실을\n라이시움에서\n배울 수 있다.\n베리티 섬의\n북서쪽 해안에\n있다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:4": {
+    "translation": "그가 말한다:\n사랑의 의미는\n엠패스 수도원에서\n찾으라.\n수도원은 깊은\n숲의 서쪽\n가장자리에\n있다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:5": {
+    "translation": "\n\n그가 말한다:\n디즈 섬의\n서펀트 성에서\n용기를 구해야\n한다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:6": {
+    "translation": "\n그가 말한다:\n베리티 섬의\n아름다운 마을\n문글로우에서\n정직의 미덕이\n번성한다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:7": {
+    "translation": "\n\n그가 말한다:\n브리튼 마을의\n음유시인들은\n자비의 미덕에\n정통하다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:8": {
+    "translation": "\n\n그가 말한다:\n많은 용맹한\n전사들이 발라리안\n제도의 젤롬\n출신이다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:lordBritishText:9": {
+    "translation": "\n\n\n그가 말한다:\n깊은 숲 속\n유 시에서\n정의가\n행해진다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:0": {
+    "translation": "마을과 성에서 발견한 남의 금을 취하지 말라, 그것은 그대의 것이 아니다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:1": {
+    "translation": "상인과 행상을 속이지 말라, 그것은 악한 짓이다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:10": {
+    "translation": "평화로운 시민을 공격하지 말라, 그 행위는 엄한 벌을 받아 마땅하다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:11": {
+    "translation": "악하지 않은 짐승을 죽이지 말라, 그들이 굶주려 그대를 공격하더라도 죽음을 받을 이유가 없다!",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:12": {
+    "translation": "그대의 마지막 금화까지 어려운 이에게 베푸는 것은 자기희생의 훌륭한 척도이다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:13": {
+    "translation": "동료를 버리고 도망치는 것은 피해야 할 이기적인 행동이다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:14": {
+    "translation": "남을 살리기 위해 그대 생명의 피를 바치는 것은 크게 칭송받을 미덕이다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:15": {
+    "translation": "남의 금을 취하지 말라, 이는 그대에게 불명예를 가져오리라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:16": {
+    "translation": "악하지 않은 존재를 먼저 공격하는 것은 결코 명예로운 행위가 아니다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:17": {
+    "translation": "그대 앞에 놓인 많은 여정을 풀고자 하라, 명예가 그 보상이 되리라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:18": {
+    "translation": "스스로를 알고자 하라.  예언자를 자주 찾으라, 그는 그대의 내면을 들여다볼 수 있다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:19": {
+    "translation": "명상은 깨달음으로 이어진다 모든 지혜와 지식을 구하라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:2": {
+    "translation": "둘째, 위대한 스티지언 어비스 입구에서 진실의 책을 읽으라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:20": {
+    "translation": "하얀 보석을 구한다면, 땅속이 아니라 서펀트의 등뼈에서 찾으라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:21": {
+    "translation": "그대가 아닌 것을 자처하지 말라.  겸손한 행동이 그대를 잘 말해준다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:22": {
+    "translation": "위대한 악의 힘을 휘두르려 하지 말라, 그 힘이 그대를 압도하리라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:23": {
+    "translation": "검은 보석을 구한다면, 가장 어두운 밤에 문이 열리는 시간과 장소에서 찾으라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:3": {
+    "translation": "땅의 악하지 않은 짐승을 죽이지 말고, 선량한 이들을 공격하지 말라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:4": {
+    "translation": "구걸하는 이에게 그대의 지갑을 베풀라, 그 행위는 잊히지 않으리라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:5": {
+    "translation": "셋째, 위대한 스티지언 어비스 입구에서 사랑의 초에 불을 붙이라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:6": {
+    "translation": "악한 생물을 물리친 승리는 용맹한 영혼을 세우는 데 도움이 된다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:7": {
+    "translation": "심각하지 않은 부상으로 전투에서 도망치는 것은 흔히 겁쟁이의 모습이다!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:8": {
+    "translation": "첫째, 위대한 스티지언 어비스 입구에서 용기의 종을 울리라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:shrineAdvice:9": {
+    "translation": "남의 금을 취하는 것은 쉽게 잊히지 않는 불의이다. 마땅한 몫만 취하라!\n",
+    "placeholders": []
+  },
+  "avatar.exe:virtueQuestions:0": {
+    "translation": "그대의 모든 말을 모두가 믿을 수 있다면, 그대는 무엇을 지닌 것인가?",
+    "placeholders": []
+  },
+  "avatar.exe:virtueQuestions:1": {
+    "translation": "남의 여정에 함께하도록 이끄는 자질은 무엇인가?",
+    "placeholders": []
+  },
+  "avatar.exe:virtueQuestions:10": {
+    "translation": "그 어떤 위험 앞에서도 등 돌리지 않는 것은 무엇인가?",
+    "placeholders": []
+  },
+  "avatar.exe:virtueQuestions:2": {
+    "translation": "위대한 행위가 필요할 때 응답하는 것은 무엇인가?",
+    "placeholders": []
+  },
+  "avatar.exe:virtueQuestions:3": {
+    "translation": "군주와 농노에게 똑같이 적용되어야 하는 것은 무엇인가?",
+    "placeholders": []
+  },
+  "avatar.exe:virtueQuestions:4": {
+    "translation": "자신을 다른 무엇보다 앞세우기를 꺼리는 것은 무엇인가?",
+    "placeholders": []
+  },
+  "avatar.exe:virtueQuestions:5": {
+    "translation": "그 어떤 의무도 회피하지 않는 것은 무엇인가?",
+    "placeholders": []
+  },
+  "avatar.exe:virtueQuestions:6": {
+    "translation": "참된 자아를 앎으로써 모든 것을 아는 것은 무엇인가?",
+    "placeholders": []
+  },
+  "avatar.exe:virtueQuestions:7": {
+    "translation": "농노는 타고나지만 귀족은 애써 얻어야 하는 것은 무엇인가?",
+    "placeholders": []
+  },
+  "avatar.exe:virtueQuestions:8": {
+    "translation": "다른 모든 것이 상상이라 해도, 이것만은 실재한다...",
+    "placeholders": []
+  },
+  "avatar.exe:virtueQuestions:9": {
+    "translation": "높이 솟구치는 동시에 깊은 곳으로 떨어지는 것은 무엇인가?",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:0": {
+    "translation": "집시가 첫 두 장의 카드를 놓는다\n",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:1": {
+    "translation": "집시가 카드 두 장을 더 놓는다\n",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:10": {
+    "translation": "영성",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:11": {
+    "translation": "겸손",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:13": {
+    "translation": "마지막 선택과 함께, 향내가\n그대 주위로 피어오른다.  집시가\n아주 먼 곳에서인 듯 말하니, 그녀의\n목소리는 한마디마다 희미해져 간다:\n\"그리 될지어다!  그대의 길이 정해졌다!\"",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:14": {
+    "translation": "격렬하고 뒤틀리는 현기증의\n순간이 찾아온다.  눈을 뜨자,\n마음속에서 목소리가 속삭인다, \"그대의\n군주에게 조언을 구하라.\"  잠시 후,\n어지러움이 가라앉고, 그대는\n눈을 떠...",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:2": {
+    "translation": "집시가 마지막 두 장의 카드를 놓는다\n",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:3": {
+    "translation": "탁자 위에.  그것은 바로 다음의 카드들이다\n",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:4": {
+    "translation": "정직",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:5": {
+    "translation": "자비",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:6": {
+    "translation": "용맹",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:7": {
+    "translation": "정의",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:8": {
+    "translation": "희생",
+    "placeholders": []
+  },
+  "title.exe:introGypsy:9": {
+    "translation": "명예",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:0": {
+    "translation": "헤아릴 수 없이 많은 금이 든 지갑을\n전하도록 맡겨졌는데, 가난한 걸인을\n만난다. 그대는 A) 자신에게 놓인 신뢰가\n옳았음을 알며 금을 그대로 전하겠는가,\n아니면 B) 자비를 베풀어, 없어져도\n티 나지 않을 동전 하나를 걸인에게\n주겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:1": {
+    "translation": "자리를 비운 그대의 군주가 치열한\n접전에 벗들과 함께하는 것을 금하였다.\n그대는 A) 자제하여 정직하게 복종을\n주장하겠는가, 아니면 B) 용맹을 보여\n동료를 돕고, 나중에 그것을 부인할\n수 있음을 알면서도 그리하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:10": {
+    "translation": "그대는 금지된 죄수 고문에 가담하는\n군주를 섬기기로 맹세하였다.  매일 밤\n그들의 고통스러운 비명이 그대에게\n들려온다.  그대는 A) 그 행위를 고발하여\n자비를 보이겠는가, 아니면 B) 맹세를\n지켜 명예롭게 그 행위를 못 본 척\n하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:11": {
+    "translation": "그대는 모든 생명을 신성히 여기도록\n배웠다. 한 남자가 독사에게 치명적으로\n물려 쓰러져 있다.  그는 자비로운\n죽음을 애원한다.  그대는 A) 자비를\n베풀어 그의 고통을 끝내겠는가, 아니면\nB) 영적 신념을 따라 거부하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:12": {
+    "translation": "왕의 근위병으로서, 대장이 그대들 중\n한 명이 병원을 찾아 그대의 용맹한\n행적으로 아이들을 기쁘게 해주기를\n청하였다.  그대는 A) 자비를 보이며\n허풍을 떨겠는가, 아니면 B) 겸손히\n다른 이를 보내겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:13": {
+    "translation": "그대는 먼 군주와 필요한 조약을 맺도록\n파견되었다.  그 주인은 제안에 동의하나\n만찬에서 그대의 나라를 모욕한다.\n그대는 A) 용맹하게 그 모욕을 참아내겠는가,\n아니면 B) 정의롭게 일어나 사과를\n요구하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:14": {
+    "translation": "강력한 기사가 그대를 막아서며 음식을\n요구한다.  그대는 A) 용맹하게 거부하고\n기사와 맞서겠는가, 아니면 B) 굶주린\n기사에게 음식을 희생하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:15": {
+    "translation": "전투 중 그대는 지휘관의 빈 막사를\n지키라는 명을 받는다.  전투가 불리하게\n흘러가고 그대는 동료를 돕고 싶어\n간절해진다.  그대는 A) 용맹하게\n전투에 뛰어들어 동료를 돕겠는가,\n아니면 B) 파수병의 자리를 명예롭게\n지키겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:16": {
+    "translation": "동네 불량배가 싸움을 걸어온다.  그대는\nA) 용맹하게 그 무뢰한을 쳐부수겠는가,\n아니면 B) 영적으로 그것이 오래갈 선을\n낳지 못함을 알고 거절하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:17": {
+    "translation": "그대는 음악 교사이지만 뛰어난\n레슬링 선수이기도 하다.  그대는 지역\n선수권 대회에 출전해달라는 요청을\n받았다.  그대는 A) 초청을 받아들여\n용맹하게 승리를 위해 싸우겠는가,\n아니면 B) 반드시 이길 것을 알기에\n겸손히 거절하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:18": {
+    "translation": "치열한 전투 중, 동료 하나가 자리를\n버려 많은 이를 위험에 빠뜨리는 것을\n본다.  그가 도망치자 여러 적에게\n둘러싸인다. 그대는 A) 정의롭게 그가\n홀로 싸우도록 두겠는가, 아니면 B) 그를\n돕기 위해 스스로 목숨을 희생할\n위험을 감수하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:19": {
+    "translation": "그대는 모든 일에서 군주의 명을\n따르기로 맹세하였다.  그가 어느 땅을\n탐내어 주인을 쫓아내라 명한다.  그대는\nA) 행하기를 거부하여 정의를 섬기고\n불명예를 감수하겠는가, 아니면 B) 맹세를\n지켜 명예롭게 땅주인을 부당히\n쫓아내겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:2": {
+    "translation": "한 상인이 그대의 벗에게 돈을 빚졌는데,\n이미 오래 지났다.  그대는 그 상인이\n금 지갑을 떨어뜨리는 것을 본다. 그대는\nA) 정직하게 지갑을 온전히 돌려주겠는가,\n아니면 B) 정의롭게 먼저 그 금의\n일부를 벗에게 주겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:20": {
+    "translation": "그대는 모든 이 안에 미덕이 깃들어\n있다고 믿는다.  그대는 무뢰한이 그대의\n군주에게서 도둑질하는 것을 본다.\n그대는 A) 그를 정의로 심판하겠는가,\n아니면 B) 몸소 그를 선한 영적 길로\n되돌리려 하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:21": {
+    "translation": "목격자 없이, 그대는 정당방위로 거대한\n용을 처치하였다.  가난한 전사가 그\n보상을 자신의 것이라 주장한다.  그대는\nA) 정의롭게 나서서 보상을 청구하겠는가,\n아니면 B) 스스로에 대한 자존감으로\n족하며 겸손히 삶을 이어가겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:22": {
+    "translation": "그대는 살인 혐의자를 데려오기로 맹세한\n현상금 사냥꾼이다.  그를 붙잡은 후\n그대는 그가 무죄라 믿게 된다.  그대는\nA) 그대의 믿음을 위해 상당한 현상금을\n희생하겠는가, 아니면 B) 약속한 대로\n그를 데려가겠다는 맹세를 명예롭게\n지키겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:23": {
+    "translation": "그대는 자선과 올바른 일에 평생을\n바쳤다.  여관 주인인 삼촌이 병들어\n누워 그대에게 여관을 물려받아 달라\n청한다.  그대는 A) 순수한 삶을 희생하여\n친족을 돕겠는가, 아니면 B) 거절하고\n영적 부름을 따르겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:24": {
+    "translation": "그대는 나이 든, 부유한 괴짜다.\n그대의 끝이 가깝다. 그대는 A) 굶주린\n수백 아이들을 먹이려 전 재산을\n기부하고 대중의 찬사를 받겠는가,\n아니면 B) 겸손히 남은 삶을 살며\n재산을 상속자에게 남기겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:25": {
+    "translation": "젊은 시절 그대는 연인과 혼인을\n맹세했다.  이제 그대는 먼 땅에서\n신성한 여정 중이다.  연인이 그 맹세를\n지켜달라 청한다.  그대는 A) 혼인의\n맹세를 명예롭게 지키겠는가, 아니면\nB) 영적 성전을 따르겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:26": {
+    "translation": "그대는 인생의 갈림길에 서 있다.\n그대는 A) 진실과 용기를 추구하는\n성기사의 명예로운 삶을 택하겠는가,\n아니면 B) 소박함과 평화의 세계,\n목자의 겸손한 삶을 택하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:27": {
+    "translation": "그대의 부모는 그대가 도제가 되기를\n바란다. 두 자리가 있다.\n그대는 A) 영적 교단의 수사가\n되겠는가, 아니면 B) 소박한 마을\n구두장이의 조수가 되겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:3": {
+    "translation": "그대와 벗은 용맹하나 무일푼인\n전사들이다.  둘 다 강력한 용을\n처치하러 나선다.  벗은 자신이 처치했다고\n생각하지만, 실은 그대가 하였다.  질문을\n받으면, 그대는 A) 진실하게 금을\n자신의 것이라 주장하겠는가, 아니면\nB) 벗에게 큰 보상을 양보하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:4": {
+    "translation": "그대는 어떤 대가를 치르더라도 군주를\n지키기로 맹세하였으나, 그가 죄를\n저질렀음을 안다.  당국이 그 일에\n대해 묻는다.  그대는 A) 정직하게\n말하여 맹세를 깨겠는가, 아니면\nB) 침묵하여 맹세를 지키며 명예를\n지키겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:5": {
+    "translation": "그대의 벗이 그대의 영적 교단에\n입단하고자 한다. 그대는 확신이 서지\n않는 그의 영혼의 순수함을 보증해\n달라는 요청을 받는다.  그대는\nA) 정직하게 의심을 표하겠는가, 아니면\nB) 그의 영적 성장을 바라며 보증해\n주겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:6": {
+    "translation": "그대의 군주는 자신이 용을 처치했다고\n착각한다.  그대는 자신의 창이 그\n짐승을 쓰러뜨렸다는 증거를 지니고\n있다.  질문을 받으면, 그대는 A) 정직하게\n처치와 상을 주장하겠는가, 아니면\nB) 겸손히 군주가 그리 믿도록\n두겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:7": {
+    "translation": "그대는 결투에서 숙적의 무기를\n빼앗는 데 성공한다.  그는 그대의\n자비에 달려 있다.  그대는 A) 자비를\n베풀어 그가 항복하도록 허락하겠는가,\n아니면 B) 용맹한 결투자에게 기대되는\n대로 그를 처치하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:8": {
+    "translation": "20년 만에 그대는 최고의 벗들을\n죽인 자를 찾아냈다.  그 악인은 한\n어린 소녀의 유일한 부양자임이\n드러난다.  그대는 A) 그 소녀를 위한\n자비로 그를 살려두겠는가, 아니면\nB) 정의의 이름으로 그를 처치하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introQuestions:9": {
+    "translation": "그대와 벗들은 패주하여 퇴각하라는\n명을 받는다.  명을 어기고, 그대는\nA) 자비로 멈추어 부상당한 동료를\n돕겠는가, 아니면 B) 스스로를 희생하여\n추격하는 적을 늦춰 다른 이들이\n달아나게 하겠는가?",
+    "placeholders": []
+  },
+  "title.exe:introText:0": {
+    "translation": "  날은 따뜻하지만, 서늘한 산들바람이\n분다.  연이은 개인적 위기 중 가장\n최근의 것이 극복할 수 없어 보인다.\n그대는 사방으로 갈가리 찢기는\n듯하다.",
+    "placeholders": []
+  },
+  "title.exe:introText:1": {
+    "translation": "그러나 오늘 오후 시골길을 걷다 보니\n지친 마음에 서서히 안식이 찾아온다.\n현대 첨단 기술 생활의 먼지와 긴장이\n한 겹씩 씻겨 내려가기 시작한다.\n개울가의 저 버드나무가 편안하고\n매력적으로 보인다.",
+    "placeholders": []
+  },
+  "title.exe:introText:10": {
+    "translation": "다른 책은 보기에 불편하다.\n작은 표지는 어떤 가죽 같은 것으로\n만들어진 듯하나, 어떤 생물의 것인지는\n알 수 없다.  불그스름한 검은 가죽은\n고대의 힘을 암시하는 강렬한\n기운을 내뿜는다.",
+    "placeholders": []
+  },
+  "title.exe:introText:11": {
+    "translation": "제목의 언어는 그대가 알지 못하는\n것이다.  그대는 감히 책을 열어 그\n안에서 잠든 무언가를 어지럽히지\n못한다.  그대는 역사서를 살펴보기로\n한다.  버드나무 아래 다시 자리를 잡고,\n책을 편다.",
+    "placeholders": []
+  },
+  "title.exe:introText:12": {
+    "translation": "\n\n    (역사의 책을 읽는다)",
+    "placeholders": []
+  },
+  "title.exe:introText:13": {
+    "translation": "\n\n(아니, 정말로! 역사의 책을 읽으라!)",
+    "placeholders": []
+  },
+  "title.exe:introText:14": {
+    "translation": "책을 덮고, 그대는 다시 앙크를\n집어 든다.  그것을 쥐자, 근처 언덕\n너머로 실려 오는 묘하게 낯익은,\n류트 같은 소리가 들리기 시작한다.\n낯선 유물들을 여전히 움켜쥔 채,\n그대는 저도 모르게 일어나 비탈을\n오른다.",
+    "placeholders": []
+  },
+  "title.exe:introText:15": {
+    "translation": "아래쪽 골짜기에서 축제처럼 보이는\n것이 눈에 들어온다.  아까 그 길로\n지나왔는데 아무것도 알아채지\n못했다는 것이 이상하게 느껴진다.\n이를 곱씹는 동안, 그대의 발은\n그곳을 향해 내려간다.",
+    "placeholders": []
+  },
+  "title.exe:introText:16": {
+    "translation": "이는 평범한 유랑 카니발이 아니라\n르네상스 축제이다.  천막 꼭대기의\n깃발들이 늦은 오후의 산들바람에\n힘차게 나부낀다.",
+    "placeholders": []
+  },
+  "title.exe:introText:17": {
+    "translation": "르네상스 축제 문 앞의 매표원이\n돈을 요구하려다, 그대의 앙크를\n알아보고는 말한다, \"어서 오시오,\n벗이여.  평화로이 들어와 그대의\n길을 찾으시오.\"",
+    "placeholders": []
+  },
+  "title.exe:introText:18": {
+    "translation": "음악은 상인과 행상들 사이로 그대를\n계속 이끈다.  어스름한 노점 몇 곳에서\n놀라운 보물들이 언뜻언뜻 보인다.",
+    "placeholders": []
+  },
+  "title.exe:introText:19": {
+    "translation": "이 사람들은 매우 행복해 보인다.\n내면의 빛으로 빛나는 듯하다.  일부는\n그대가 지나갈 때 고개를 들어 미소\n짓지만, 그대는 멈출 수 없다 - 음악이\n그대를 군중 사이로 계속 나아가게\n한다.",
+    "placeholders": []
+  },
+  "title.exe:introText:2": {
+    "translation": "잠자리의 웅웅거림과 흔들리는\n버드나무 가지의 속삭임이 깊은\n평온을 가져온다.  내면에서 평온과\n행복을 찾으며, 그대는 눈을 감는다.",
+    "placeholders": []
+  },
+  "title.exe:introText:20": {
+    "translation": "짙어지는 황혼 속에서 숲 한쪽에\n외따로 서 있는 집시 마차가 보인다.\n음악은 그 마차에서 흘러나오는\n듯하다.  가까이 다가가자, 여인의\n목소리가 음악에 섞여 들려온다:\n\"다가와도 좋다, 오 구도자여.\"",
+    "placeholders": []
+  },
+  "title.exe:introText:21": {
+    "translation": "안으로 들어가니 작은 커튼 방에\n늙은 집시가 앉아 있다.  그녀는 목에\n앙크를 걸고 있다. 그녀 앞에는 짙은\n초록 벨벳으로 덮인 둥근 탁자가\n있다.  방 안은 향내가 짙어 어지러울\n지경이다.",
+    "placeholders": []
+  },
+  "title.exe:introText:22": {
+    "translation": "앙크를 본 늙은 집시가 미소 지으며\n그것을 결코 손에서 놓지 말라\n경고한다.  \"우리는 아주 오랫동안\n기다려 왔소, 마침내 그대가 왔구려.\n이리 앉으시오, 내 그대 미래의\n길을 읽어주리다.\"",
+    "placeholders": []
+  },
+  "title.exe:introText:23": {
+    "translation": "탁자 위에 그녀는 주판 같지만 구슬이\n없는 기묘한 나무 물건을 올려놓는다.\n손에는 여덟 장의 기이한 카드를 쥐고\n있다.  \"점을 시작합시다.\"",
+    "placeholders": []
+  },
+  "title.exe:introText:3": {
+    "translation": "수정 풍경 소리처럼 높고 흘러내리는\n소리가 그대의 떠도는 의식을\n두드린다.  눈을 뜨자, 땅에서 아른거리는\n푸른빛이 솟아오르는 것이 보인다.\n그 소리는 이 빛나는 문에서\n흘러나오는 듯하다.",
+    "placeholders": []
+  },
+  "title.exe:introText:4": {
+    "translation": "그 푸른빛을 바라보기가 어렵다.\n빛이 그 주위로 휘어지고 일그러지는\n듯하며, 소리의 파동은 너무 강렬해져\n눈에 보이는 듯하다.",
+    "placeholders": []
+  },
+  "title.exe:introText:5": {
+    "translation": "그 문은 잠시 그대로 떠 있다가;\n이내 진공이 붕괴하듯 밀려들며\n땅속으로 가라앉는다.  무언가가\n잠시 허공에 떠 있다가 육중한\n소리를 내며 땅에 떨어진다.",
+    "placeholders": []
+  },
+  "title.exe:introText:6": {
+    "translation": "이 광경에 다소 놀란 채, 그대는\n일어서서 살펴본다.  거친 돌들의\n원이 문이 나타났던 자리를 둘러싸고\n있다. 풀 속에서 무언가가 반짝인다.",
+    "placeholders": []
+  },
+  "title.exe:introText:7": {
+    "translation": "그대는 위쪽에 고리가 달린 십자\n모양의 부적을 집어 든다.  그것은\n생명과 부활의 신성한 상징인 앙크다.\n하지만 이것이 그 소리를 냈을 리\n없기에, 다시 살펴보니 두꺼운 천에\n싸인 커다란 책이 있다!",
+    "placeholders": []
+  },
+  "title.exe:introText:8": {
+    "translation": "떨리는 손으로 그대는 책을 풀어\n본다.  보라, 그 천은 지도이며,\n그 안에는 책 한 권이 아니라 두 권이\n들어 있다.  지도는 그대에게 낯선\n땅의 것이며, 그 양식은 고대 지도\n제작술을 말해준다.",
+    "placeholders": []
+  },
+  "title.exe:introText:9": {
+    "translation": "첫 번째 책의 표지에 적힌 문자는\n난해하지만 읽을 수 있다.  제목은\n다음과 같다:\n        브리타니아의 역사\n               전하는 이,\n            소(小) 카일",
+    "placeholders": []
+  },
+  "BRITAIN:0:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "BRITAIN:0:job": {
+    "translation": "나는 사람들을\n위해 연주한다네.",
+    "placeholders": []
+  },
+  "BRITAIN:0:look": {
+    "translation": "매력적인 음유시인",
+    "placeholders": []
+  },
+  "BRITAIN:0:name": {
+    "translation": "아이올로",
+    "placeholders": []
+  },
+  "BRITAIN:0:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "BRITAIN:0:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "BRITAIN:0:question": {
+    "translation": "내 음악이\n마음에 드는가?",
+    "placeholders": []
+  },
+  "BRITAIN:0:response1": {
+    "translation": "나는 류트를 연주해\n사람들의\n좋은 마음을\n얻는다네.",
+    "placeholders": []
+  },
+  "BRITAIN:0:response2": {
+    "translation": "남을 잘\n대해주면\n그들도 똑같이\n할 이유가 생기지.",
+    "placeholders": []
+  },
+  "BRITAIN:0:topic1": {
+    "translation": "PLAY",
+    "placeholders": []
+  },
+  "BRITAIN:0:topic2": {
+    "translation": "COMP",
+    "placeholders": []
+  },
+  "BRITAIN:0:yes": {
+    "translation": "나는 그대와\n함께하고 싶네!",
+    "placeholders": []
+  },
+  "BRITAIN:1:health": {
+    "translation": "아주 좋아요.",
+    "placeholders": []
+  },
+  "BRITAIN:1:job": {
+    "translation": "나는 아이들을 위해\n춤추고\n노래한다네.",
+    "placeholders": []
+  },
+  "BRITAIN:1:look": {
+    "translation": "매력적인\n광대",
+    "placeholders": []
+  },
+  "BRITAIN:1:name": {
+    "translation": "그웨노",
+    "placeholders": []
+  },
+  "BRITAIN:1:no": {
+    "translation": "아쉽네요.",
+    "placeholders": []
+  },
+  "BRITAIN:1:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "BRITAIN:1:question": {
+    "translation": "어려운 이에게\n베푸시나요?",
+    "placeholders": []
+  },
+  "BRITAIN:1:response1": {
+    "translation": "춤은 영혼에\n좋답니다.",
+    "placeholders": []
+  },
+  "BRITAIN:1:response2": {
+    "translation": "거지에게\n베푸는 것은\n자비를 보이는\n것이지요.",
+    "placeholders": []
+  },
+  "BRITAIN:1:topic1": {
+    "translation": "DANC",
+    "placeholders": []
+  },
+  "BRITAIN:1:topic2": {
+    "translation": "BEGG",
+    "placeholders": []
+  },
+  "BRITAIN:1:yes": {
+    "translation": "거지들은\n작은 기부에도\n감사해한답니다.",
+    "placeholders": []
+  },
+  "BRITAIN:10:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "BRITAIN:10:job": {
+    "translation": "나는 아이들을\n돌본다네.",
+    "placeholders": []
+  },
+  "BRITAIN:10:look": {
+    "translation": "지친 목자",
+    "placeholders": []
+  },
+  "BRITAIN:10:name": {
+    "translation": "샬리마",
+    "placeholders": []
+  },
+  "BRITAIN:10:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "BRITAIN:10:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "BRITAIN:10:question": {
+    "translation": "아이가\n있는가?",
+    "placeholders": []
+  },
+  "BRITAIN:10:response1": {
+    "translation": "아이들을\n돌보려면\n상당한\n자비심이\n필요하다네!",
+    "placeholders": []
+  },
+  "BRITAIN:10:response2": {
+    "translation": "지식이 정신을\n단련시키듯\n자비는\n영혼을\n강하게\n한다네!",
+    "placeholders": []
+  },
+  "BRITAIN:10:topic1": {
+    "translation": "CHIL",
+    "placeholders": []
+  },
+  "BRITAIN:10:topic2": {
+    "translation": "COMP",
+    "placeholders": []
+  },
+  "BRITAIN:10:yes": {
+    "translation": "내 말뜻을\n알겠구먼!",
+    "placeholders": []
+  },
+  "BRITAIN:11:health": {
+    "translation": "별로 좋지\n않다네.",
+    "placeholders": []
+  },
+  "BRITAIN:11:job": {
+    "translation": "나는 끔찍한\n비밀을 안다네!",
+    "placeholders": []
+  },
+  "BRITAIN:11:look": {
+    "translation": "부상당한\n사람.",
+    "placeholders": []
+  },
+  "BRITAIN:11:name": {
+    "translation": "세바스찬",
+    "placeholders": []
+  },
+  "BRITAIN:11:no": {
+    "translation": "오.",
+    "placeholders": []
+  },
+  "BRITAIN:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "BRITAIN:11:question": {
+    "translation": "그것을 찾아\n없애겠는가?",
+    "placeholders": []
+  },
+  "BRITAIN:11:response1": {
+    "translation": "몬데인의\n영향력이 아직\n세상에서\n사라지지\n않았다네!",
+    "placeholders": []
+  },
+  "BRITAIN:11:response2": {
+    "translation": "유물이\n남아있어! 버커니어즈\n덴에서 들었지!",
+    "placeholders": []
+  },
+  "BRITAIN:11:topic1": {
+    "translation": "SECR",
+    "placeholders": []
+  },
+  "BRITAIN:11:topic2": {
+    "translation": "MOND",
+    "placeholders": []
+  },
+  "BRITAIN:11:yes": {
+    "translation": "그럼 저기 술집에서\n해골에\n대해 물어보게!",
+    "placeholders": []
+  },
+  "BRITAIN:12:health": {
+    "translation": "괜찮다네.",
+    "placeholders": []
+  },
+  "BRITAIN:12:job": {
+    "translation": "나는 줄리오를\n찾고 있다네.",
+    "placeholders": []
+  },
+  "BRITAIN:12:look": {
+    "translation": "드루이드.",
+    "placeholders": []
+  },
+  "BRITAIN:12:name": {
+    "translation": "샤페로",
+    "placeholders": []
+  },
+  "BRITAIN:12:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "BRITAIN:12:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "BRITAIN:12:question": {
+    "translation": "그대는 아바타의\n여정 중에\n있는가?",
+    "placeholders": []
+  },
+  "BRITAIN:12:response1": {
+    "translation": "그는 자비의\n참된 본질을\n안다네.",
+    "placeholders": []
+  },
+  "BRITAIN:12:response2": {
+    "translation": "줄리오를 찾아\n자비에 대해\n물어보게!",
+    "placeholders": []
+  },
+  "BRITAIN:12:topic1": {
+    "translation": "JULI",
+    "placeholders": []
+  },
+  "BRITAIN:12:topic2": {
+    "translation": "COMP",
+    "placeholders": []
+  },
+  "BRITAIN:12:yes": {
+    "translation": "다리 2개를\n동쪽으로 건너면\n자비의 신단이\n있네!",
+    "placeholders": []
+  },
+  "BRITAIN:13:health": {
+    "translation": "근엄하다네.",
+    "placeholders": []
+  },
+  "BRITAIN:13:job": {
+    "translation": "나는 만물의\n참된 본질을\n찾는다네!",
+    "placeholders": []
+  },
+  "BRITAIN:13:look": {
+    "translation": "근엄한\n음유시인.",
+    "placeholders": []
+  },
+  "BRITAIN:13:name": {
+    "translation": "줄리오",
+    "placeholders": []
+  },
+  "BRITAIN:13:no": {
+    "translation": "그 어떤 인간도\n알 수 없지.",
+    "placeholders": []
+  },
+  "BRITAIN:13:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "BRITAIN:13:question": {
+    "translation": "그대는 만물의\n참된 본질을\n아는가?",
+    "placeholders": []
+  },
+  "BRITAIN:13:response1": {
+    "translation": "만물에는\n참된 본질이\n있다네!",
+    "placeholders": []
+  },
+  "BRITAIN:13:response2": {
+    "translation": "자비는\n끝없는\n사랑에서\n비롯된다네!",
+    "placeholders": []
+  },
+  "BRITAIN:13:topic1": {
+    "translation": "NATU",
+    "placeholders": []
+  },
+  "BRITAIN:13:topic2": {
+    "translation": "COMP",
+    "placeholders": []
+  },
+  "BRITAIN:13:yes": {
+    "translation": "그대는 거짓말쟁이에\n허풍쟁이로군.",
+    "placeholders": []
+  },
+  "BRITAIN:14:health": {
+    "translation": "나는 건강하다네.",
+    "placeholders": []
+  },
+  "BRITAIN:14:job": {
+    "translation": "나는 매긴시아에서\n탈출했다네!",
+    "placeholders": []
+  },
+  "BRITAIN:14:look": {
+    "translation": "지혜로운\n목자.",
+    "placeholders": []
+  },
+  "BRITAIN:14:name": {
+    "translation": "멘토르",
+    "placeholders": []
+  },
+  "BRITAIN:14:no": {
+    "translation": "오만은 진실도,\n사랑도, 용기도\n없이\n존재한다네!",
+    "placeholders": []
+  },
+  "BRITAIN:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "BRITAIN:14:question": {
+    "translation": "그대는\n오만한가?",
+    "placeholders": []
+  },
+  "BRITAIN:14:response1": {
+    "translation": "매긴시아에서는\n오만이\n지나쳤다네!",
+    "placeholders": []
+  },
+  "BRITAIN:14:response2": {
+    "translation": "그 도시는\n오만함 때문에\n데몬들에게\n파괴되었다네!",
+    "placeholders": []
+  },
+  "BRITAIN:14:topic1": {
+    "translation": "MAGI",
+    "placeholders": []
+  },
+  "BRITAIN:14:topic2": {
+    "translation": "PRID",
+    "placeholders": []
+  },
+  "BRITAIN:14:yes": {
+    "translation": "그것은\n미덕이 아닐세!",
+    "placeholders": []
+  },
+  "BRITAIN:15:health": {
+    "translation": "굶어\n죽을까 두렵다네!",
+    "placeholders": []
+  },
+  "BRITAIN:15:job": {
+    "translation": "일이 없어\n이제 구걸한다네!",
+    "placeholders": []
+  },
+  "BRITAIN:15:look": {
+    "translation": "가난한\n거지.",
+    "placeholders": []
+  },
+  "BRITAIN:15:name": {
+    "translation": "스프라이트",
+    "placeholders": []
+  },
+  "BRITAIN:15:no": {
+    "translation": "나는 굶어\n죽을 걸세!",
+    "placeholders": []
+  },
+  "BRITAIN:15:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "BRITAIN:15:question": {
+    "translation": "나를\n도와주겠는가?",
+    "placeholders": []
+  },
+  "BRITAIN:15:response1": {
+    "translation": "일주일째\n아무것도\n못 먹었다네!",
+    "placeholders": []
+  },
+  "BRITAIN:15:response2": {
+    "translation": "제발! 도와주게!",
+    "placeholders": []
+  },
+  "BRITAIN:15:topic1": {
+    "translation": "STAR",
+    "placeholders": []
+  },
+  "BRITAIN:15:topic2": {
+    "translation": "BEG ",
+    "placeholders": []
+  },
+  "BRITAIN:15:yes": {
+    "translation": "답례로\n페퍼가 룬을\n안다는 걸\n말해주지!",
+    "placeholders": []
+  },
+  "BRITAIN:2:health": {
+    "translation": "아주 행복해요.",
+    "placeholders": []
+  },
+  "BRITAIN:2:job": {
+    "translation": "노래하기",
+    "placeholders": []
+  },
+  "BRITAIN:2:look": {
+    "translation": "어린아이",
+    "placeholders": []
+  },
+  "BRITAIN:2:name": {
+    "translation": "아이",
+    "placeholders": []
+  },
+  "BRITAIN:2:no": {
+    "translation": "안타깝네요.",
+    "placeholders": []
+  },
+  "BRITAIN:2:pronoun": {
+    "translation": "그 아이",
+    "placeholders": []
+  },
+  "BRITAIN:2:question": {
+    "translation": "그 노래가\n마음에 드세요?",
+    "placeholders": []
+  },
+  "BRITAIN:2:response1": {
+    "translation": "노래 가사는:\n호 에요 헤 험!",
+    "placeholders": []
+  },
+  "BRITAIN:2:response2": {
+    "translation": "그건 이런 뜻이에요:\n모두에게\n사랑을!",
+    "placeholders": []
+  },
+  "BRITAIN:2:topic1": {
+    "translation": "SING",
+    "placeholders": []
+  },
+  "BRITAIN:2:topic2": {
+    "translation": "HO E",
+    "placeholders": []
+  },
+  "BRITAIN:2:yes": {
+    "translation": "그럼 우리를 도와\n소문내 주세요!",
+    "placeholders": []
+  },
+  "BRITAIN:3:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "BRITAIN:3:job": {
+    "translation": "나는 다리를\n지킨다네.",
+    "placeholders": []
+  },
+  "BRITAIN:3:look": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "BRITAIN:3:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "BRITAIN:3:no": {
+    "translation": "그럼 다리\n건너편에는\n볼일이\n없구먼.",
+    "placeholders": []
+  },
+  "BRITAIN:3:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "BRITAIN:3:question": {
+    "translation": "그들과 함께하고\n싶은가?",
+    "placeholders": []
+  },
+  "BRITAIN:3:response1": {
+    "translation": "다리 건너편에서\n우리 백성들은\n춤추고\n노래한다네!",
+    "placeholders": []
+  },
+  "BRITAIN:3:response2": {
+    "translation": "그렇지.",
+    "placeholders": []
+  },
+  "BRITAIN:3:topic1": {
+    "translation": "BRID",
+    "placeholders": []
+  },
+  "BRITAIN:3:topic2": {
+    "translation": "GUAR",
+    "placeholders": []
+  },
+  "BRITAIN:3:yes": {
+    "translation": "기억하게, 열린\n마음이\n지혜로 가는\n첫걸음일세!",
+    "placeholders": []
+  },
+  "BRITAIN:4:health": {
+    "translation": "건강하다네.",
+    "placeholders": []
+  },
+  "BRITAIN:4:job": {
+    "translation": "나는 싸우는\n음유시인이라네.",
+    "placeholders": []
+  },
+  "BRITAIN:4:look": {
+    "translation": "매콤한 여인.",
+    "placeholders": []
+  },
+  "BRITAIN:4:name": {
+    "translation": "페퍼",
+    "placeholders": []
+  },
+  "BRITAIN:4:no": {
+    "translation": "아쉽군, 내가\n도울 수\n있었을지도\n모르는데.",
+    "placeholders": []
+  },
+  "BRITAIN:4:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "BRITAIN:4:question": {
+    "translation": "무언가를 찾고\n있는가?",
+    "placeholders": []
+  },
+  "BRITAIN:4:response1": {
+    "translation": "음유시인은\n많은 걸 안다네.",
+    "placeholders": []
+  },
+  "BRITAIN:4:response2": {
+    "translation": "자비의 룬은\n이 마을 어딘가\n복도 끝에\n있다네.",
+    "placeholders": []
+  },
+  "BRITAIN:4:topic1": {
+    "translation": "BARD",
+    "placeholders": []
+  },
+  "BRITAIN:4:topic2": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "BRITAIN:4:yes": {
+    "translation": "그게 무엇인가?",
+    "placeholders": []
+  },
+  "BRITAIN:5:health": {
+    "translation": "꽤 좋다네.",
+    "placeholders": []
+  },
+  "BRITAIN:5:job": {
+    "translation": "나는 마법 구슬의\n비밀을 찾고\n있다네.",
+    "placeholders": []
+  },
+  "BRITAIN:5:look": {
+    "translation": "노련한\n전사.",
+    "placeholders": []
+  },
+  "BRITAIN:5:name": {
+    "translation": "테벨",
+    "placeholders": []
+  },
+  "BRITAIN:5:no": {
+    "translation": "서펀트 성에서\n그를 찾게,\n구슬에 대해\n알고 있으니!",
+    "placeholders": []
+  },
+  "BRITAIN:5:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "BRITAIN:5:question": {
+    "translation": "그를 본 적\n있는가?",
+    "placeholders": []
+  },
+  "BRITAIN:5:response1": {
+    "translation": "외팔이 거지가\n그 비밀을\n안다네!",
+    "placeholders": []
+  },
+  "BRITAIN:5:response2": {
+    "translation": "마법 구슬.",
+    "placeholders": []
+  },
+  "BRITAIN:5:topic1": {
+    "translation": "ORBS",
+    "placeholders": []
+  },
+  "BRITAIN:5:topic2": {
+    "translation": "MAGI",
+    "placeholders": []
+  },
+  "BRITAIN:5:yes": {
+    "translation": "오직 그만이\n구슬의 선물을\n안다네!",
+    "placeholders": []
+  },
+  "BRITAIN:6:health": {
+    "translation": "그리고 럼주\n한 병...",
+    "placeholders": []
+  },
+  "BRITAIN:6:job": {
+    "translation": "요호호...\n럼주\n한 병...\n힉...",
+    "placeholders": []
+  },
+  "BRITAIN:6:look": {
+    "translation": "술 취한\n전사",
+    "placeholders": []
+  },
+  "BRITAIN:6:name": {
+    "translation": "조",
+    "placeholders": []
+  },
+  "BRITAIN:6:no": {
+    "translation": "아, 좀 되어보게!",
+    "placeholders": []
+  },
+  "BRITAIN:6:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "BRITAIN:6:question": {
+    "translation": "럼 좀 줄래?...",
+    "placeholders": []
+  },
+  "BRITAIN:6:response1": {
+    "translation": "노란 보석은\n던전\n경멸에\n있다네...",
+    "placeholders": []
+  },
+  "BRITAIN:6:response2": {
+    "translation": "럼주... 힉...",
+    "placeholders": []
+  },
+  "BRITAIN:6:topic1": {
+    "translation": "STON",
+    "placeholders": []
+  },
+  "BRITAIN:6:topic2": {
+    "translation": "RUM ",
+    "placeholders": []
+  },
+  "BRITAIN:6:yes": {
+    "translation": "고맙...\n내 친구 조가\n보석에 대해\n도와줄 수\n있어...힉...",
+    "placeholders": []
+  },
+  "BRITAIN:7:health": {
+    "translation": "쉿",
+    "placeholders": []
+  },
+  "BRITAIN:7:job": {
+    "translation": "쉿, 연주 중\n이라네!",
+    "placeholders": []
+  },
+  "BRITAIN:7:look": {
+    "translation": "초록옷 입은\n음유시인",
+    "placeholders": []
+  },
+  "BRITAIN:7:name": {
+    "translation": "크리켓",
+    "placeholders": []
+  },
+  "BRITAIN:7:no": {
+    "translation": "경비병을\n부를 테다!",
+    "placeholders": []
+  },
+  "BRITAIN:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "BRITAIN:7:question": {
+    "translation": "이제 좀\n조용히 하겠나?",
+    "placeholders": []
+  },
+  "BRITAIN:7:response1": {
+    "translation": "그래, 쉿!",
+    "placeholders": []
+  },
+  "BRITAIN:7:response2": {
+    "translation": "자비의 신단\n진언은\n'무'라네!",
+    "placeholders": []
+  },
+  "BRITAIN:7:topic1": {
+    "translation": "SHHH",
+    "placeholders": []
+  },
+  "BRITAIN:7:topic2": {
+    "translation": "MANT",
+    "placeholders": []
+  },
+  "BRITAIN:7:yes": {
+    "translation": "고맙네.",
+    "placeholders": []
+  },
+  "BRITAIN:8:health": {
+    "translation": "완전히\n회복됐다네.",
+    "placeholders": []
+  },
+  "BRITAIN:8:job": {
+    "translation": "물론 나는\n경비병일세!",
+    "placeholders": []
+  },
+  "BRITAIN:8:look": {
+    "translation": "명랑한\n경비병.",
+    "placeholders": []
+  },
+  "BRITAIN:8:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "BRITAIN:8:no": {
+    "translation": "좋군.",
+    "placeholders": []
+  },
+  "BRITAIN:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "BRITAIN:8:question": {
+    "translation": "그대는 악하지\n않은 생물을\n죽이는가?",
+    "placeholders": []
+  },
+  "BRITAIN:8:response1": {
+    "translation": "우리 경비병들은\n자비심이\n많다네.",
+    "placeholders": []
+  },
+  "BRITAIN:8:response2": {
+    "translation": "우리는 항상\n말하지: 남의\n고난을 그대\n자신의 것처럼\n여기라고!",
+    "placeholders": []
+  },
+  "BRITAIN:8:topic1": {
+    "translation": "GUAR",
+    "placeholders": []
+  },
+  "BRITAIN:8:topic2": {
+    "translation": "COMP",
+    "placeholders": []
+  },
+  "BRITAIN:8:yes": {
+    "translation": "그건 자비를\n보이는 게\n아니지!",
+    "placeholders": []
+  },
+  "BRITAIN:9:health": {
+    "translation": "좋아요.",
+    "placeholders": []
+  },
+  "BRITAIN:9:job": {
+    "translation": "나는 자비를\n배우고 있어요.",
+    "placeholders": []
+  },
+  "BRITAIN:9:look": {
+    "translation": "어린아이",
+    "placeholders": []
+  },
+  "BRITAIN:9:name": {
+    "translation": "아이",
+    "placeholders": []
+  },
+  "BRITAIN:9:no": {
+    "translation": "크리켓에게\n물어보세요!",
+    "placeholders": []
+  },
+  "BRITAIN:9:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "BRITAIN:9:question": {
+    "translation": "자비의\n진언을\n아세요?",
+    "placeholders": []
+  },
+  "BRITAIN:9:response1": {
+    "translation": "자신의 문제에\n대한 해답은\n흔히 남의 문제를\n푸는 데\n있답니다!",
+    "placeholders": []
+  },
+  "BRITAIN:9:response2": {
+    "translation": "남을 돌볼 수\n없을 만큼\n자신만\n너무 아끼지\n마세요!",
+    "placeholders": []
+  },
+  "BRITAIN:9:topic1": {
+    "translation": "LEAR",
+    "placeholders": []
+  },
+  "BRITAIN:9:topic2": {
+    "translation": "COMP",
+    "placeholders": []
+  },
+  "BRITAIN:9:yes": {
+    "translation": "좋아요.",
+    "placeholders": []
+  },
+  "COVE:0:health": {
+    "translation": "난 괜찮아요.",
+    "placeholders": []
+  },
+  "COVE:0:job": {
+    "translation": "나는 어비스에\n들어가는 법을\n안다네!",
+    "placeholders": []
+  },
+  "COVE:0:look": {
+    "translation": "어린 소년.",
+    "placeholders": []
+  },
+  "COVE:0:name": {
+    "translation": "알렌",
+    "placeholders": []
+  },
+  "COVE:0:no": {
+    "translation": "어비스에 대해선\n블리스풀에게\n물어보세요.",
+    "placeholders": []
+  },
+  "COVE:0:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "COVE:0:question": {
+    "translation": "그런 배가\n있나요?",
+    "placeholders": []
+  },
+  "COVE:0:response1": {
+    "translation": "어비스는\n오직 배로만\n다가갈 수\n있어요!",
+    "placeholders": []
+  },
+  "COVE:0:response2": {
+    "translation": "배는 마법으로\n강화된\n선체가\n있어야 해요!",
+    "placeholders": []
+  },
+  "COVE:0:topic1": {
+    "translation": "ABYS",
+    "placeholders": []
+  },
+  "COVE:0:topic2": {
+    "translation": "SHIP",
+    "placeholders": []
+  },
+  "COVE:0:yes": {
+    "translation": "어비스에 대해선\n블리스풀에게\n물어보세요.",
+    "placeholders": []
+  },
+  "COVE:1:health": {
+    "translation": "나는 잘 지낸다네.",
+    "placeholders": []
+  },
+  "COVE:1:job": {
+    "translation": "지혜의 숨은\n도시, 코브에\n오신 것을 환영하네.",
+    "placeholders": []
+  },
+  "COVE:1:look": {
+    "translation": "작은 드루이드.",
+    "placeholders": []
+  },
+  "COVE:1:name": {
+    "translation": "프론티스",
+    "placeholders": []
+  },
+  "COVE:1:no": {
+    "translation": "우리 치유사들을\n찾아가게, 분명\n도와줄\n걸세!",
+    "placeholders": []
+  },
+  "COVE:1:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "COVE:1:question": {
+    "translation": "그대는\n건강한가?",
+    "placeholders": []
+  },
+  "COVE:1:response1": {
+    "translation": "여기서 많은\n지혜와 평화를\n찾을 수\n있다네.",
+    "placeholders": []
+  },
+  "COVE:1:response2": {
+    "translation": "우리 신단에서\n평화를\n찾게.",
+    "placeholders": []
+  },
+  "COVE:1:topic1": {
+    "translation": "WISD",
+    "placeholders": []
+  },
+  "COVE:1:topic2": {
+    "translation": "PEAC",
+    "placeholders": []
+  },
+  "COVE:1:yes": {
+    "translation": "아주 좋군.",
+    "placeholders": []
+  },
+  "COVE:10:health": {
+    "translation": "나는 늙었지만\n강하다네!",
+    "placeholders": []
+  },
+  "COVE:10:job": {
+    "translation": "나는 사랑을\n말한다네.",
+    "placeholders": []
+  },
+  "COVE:10:look": {
+    "translation": "현자.",
+    "placeholders": []
+  },
+  "COVE:10:name": {
+    "translation": "라빈드라나트\n타고르",
+    "placeholders": []
+  },
+  "COVE:10:no": {
+    "translation": "그대는\n어리석군.",
+    "placeholders": []
+  },
+  "COVE:10:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "COVE:10:question": {
+    "translation": "마음속에\n사랑을 지니고자\n하는가?",
+    "placeholders": []
+  },
+  "COVE:10:response1": {
+    "translation": "사랑 속에서,\n삶의 모든\n모순은 녹아\n사라진다네.",
+    "placeholders": []
+  },
+  "COVE:10:response2": {
+    "translation": "그 안에\n사랑을\n지니게!",
+    "placeholders": []
+  },
+  "COVE:10:topic1": {
+    "translation": "LOVE",
+    "placeholders": []
+  },
+  "COVE:10:topic2": {
+    "translation": "HEAR",
+    "placeholders": []
+  },
+  "COVE:10:yes": {
+    "translation": "그대는\n선한 영혼이군.",
+    "placeholders": []
+  },
+  "COVE:11:health": {
+    "translation": "나는 잘 지낸다네.",
+    "placeholders": []
+  },
+  "COVE:11:job": {
+    "translation": "나는 앉아서\n강을\n바라본다네.",
+    "placeholders": []
+  },
+  "COVE:11:look": {
+    "translation": "늙은 드루이드.",
+    "placeholders": []
+  },
+  "COVE:11:name": {
+    "translation": "자이르 수사",
+    "placeholders": []
+  },
+  "COVE:11:no": {
+    "translation": "그렇지.",
+    "placeholders": []
+  },
+  "COVE:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "COVE:11:question": {
+    "translation": "동의하는가?",
+    "placeholders": []
+  },
+  "COVE:11:response1": {
+    "translation": "그것은\n끝없이\n흐른다네.",
+    "placeholders": []
+  },
+  "COVE:11:response2": {
+    "translation": "미덕의 세\n원칙을 상징하는\n성들의 왕들은\n각각 통행의\n말의 한\n음절씩만\n안다네!",
+    "placeholders": []
+  },
+  "COVE:11:topic1": {
+    "translation": "RIVE",
+    "placeholders": []
+  },
+  "COVE:11:topic2": {
+    "translation": "WORD",
+    "placeholders": []
+  },
+  "COVE:11:yes": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "COVE:12:health": {
+    "translation": "아주 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "COVE:12:job": {
+    "translation": "나는 코덱스에\n대해 안다네.",
+    "placeholders": []
+  },
+  "COVE:12:look": {
+    "translation": "날씬한 마법사.",
+    "placeholders": []
+  },
+  "COVE:12:name": {
+    "translation": "스펠바인드",
+    "placeholders": []
+  },
+  "COVE:12:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "COVE:12:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "COVE:12:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "COVE:12:response1": {
+    "translation": "미덕의 세\n원칙의 조합을\n알아야\n한다네!",
+    "placeholders": []
+  },
+  "COVE:12:response2": {
+    "translation": "미덕의 세\n원칙의 조합은\n시간과 공간의\n척도와\n같다네!",
+    "placeholders": []
+  },
+  "COVE:12:topic1": {
+    "translation": "CODE",
+    "placeholders": []
+  },
+  "COVE:12:topic2": {
+    "translation": "COMB",
+    "placeholders": []
+  },
+  "COVE:12:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "COVE:13:health": {
+    "translation": "꽤 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "COVE:13:job": {
+    "translation": "나는 코덱스의\n비밀인\n'하나'를\n연구한다네!",
+    "placeholders": []
+  },
+  "COVE:13:look": {
+    "translation": "키 큰 마법사.",
+    "placeholders": []
+  },
+  "COVE:13:name": {
+    "translation": "샤먼",
+    "placeholders": []
+  },
+  "COVE:13:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "COVE:13:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "COVE:13:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "COVE:13:response1": {
+    "translation": "나는 코덱스를\n연구한다네!",
+    "placeholders": []
+  },
+  "COVE:13:response2": {
+    "translation": "그 하나의\n순수 공리는\n변화하는\n조수보다\n끝없고, 밤과\n낮보다\n영원하다네!",
+    "placeholders": []
+  },
+  "COVE:13:topic1": {
+    "translation": "STUD",
+    "placeholders": []
+  },
+  "COVE:13:topic2": {
+    "translation": "CODE",
+    "placeholders": []
+  },
+  "COVE:13:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "COVE:14:health": {
+    "translation": "꽤 좋다네.",
+    "placeholders": []
+  },
+  "COVE:14:job": {
+    "translation": "나는 공리의\n열쇠를\n숙고한다네.",
+    "placeholders": []
+  },
+  "COVE:14:look": {
+    "translation": "아름다운\n마법사.",
+    "placeholders": []
+  },
+  "COVE:14:name": {
+    "translation": "참",
+    "placeholders": []
+  },
+  "COVE:14:no": {
+    "translation": "우주의 진실,\n마음의 사랑,\n그리고 영혼의\n용기라네!",
+    "placeholders": []
+  },
+  "COVE:14:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "COVE:14:question": {
+    "translation": "그것들이\n무엇인지\n아는가?",
+    "placeholders": []
+  },
+  "COVE:14:response1": {
+    "translation": "공리에\n대해.",
+    "placeholders": []
+  },
+  "COVE:14:response2": {
+    "translation": "그 1개의\n순수 공리는\n만물을\n아우른다네.",
+    "placeholders": []
+  },
+  "COVE:14:topic1": {
+    "translation": "KEY ",
+    "placeholders": []
+  },
+  "COVE:14:topic2": {
+    "translation": "AXIO",
+    "placeholders": []
+  },
+  "COVE:14:yes": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "COVE:15:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "COVE:15:job": {
+    "translation": "나는 공리를\n가르친다네!",
+    "placeholders": []
+  },
+  "COVE:15:look": {
+    "translation": "지혜로운\n마법사.",
+    "placeholders": []
+  },
+  "COVE:15:name": {
+    "translation": "키르케",
+    "placeholders": []
+  },
+  "COVE:15:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "COVE:15:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "COVE:15:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "COVE:15:response1": {
+    "translation": "공리의 전체는\n그 모든 부분의\n합보다\n크다네!",
+    "placeholders": []
+  },
+  "COVE:15:response2": {
+    "translation": "끝없는 사랑의\n척도, 모든\n장애물을\n마주할 무한한\n용기, 만물을\n아우르는\n진실!",
+    "placeholders": []
+  },
+  "COVE:15:topic1": {
+    "translation": "AXIO",
+    "placeholders": []
+  },
+  "COVE:15:topic2": {
+    "translation": "PART",
+    "placeholders": []
+  },
+  "COVE:15:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "COVE:2:health": {
+    "translation": "나는 잘 지낸다네.",
+    "placeholders": []
+  },
+  "COVE:2:job": {
+    "translation": "나는 은둔자라네.",
+    "placeholders": []
+  },
+  "COVE:2:look": {
+    "translation": "늙은 은둔자.",
+    "placeholders": []
+  },
+  "COVE:2:name": {
+    "translation": "슬로븐",
+    "placeholders": []
+  },
+  "COVE:2:no": {
+    "translation": "그가 나타날 때까지\n여관에\n머물게!",
+    "placeholders": []
+  },
+  "COVE:2:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "COVE:2:question": {
+    "translation": "그를 본 적\n있는가?",
+    "placeholders": []
+  },
+  "COVE:2:response1": {
+    "translation": "나는 사회에서\n물러났다네.",
+    "placeholders": []
+  },
+  "COVE:2:response2": {
+    "translation": "스카라 브레이\n여관에 출몰하는\n아이작의\n유령만이\n그대에게\n말해줄 수\n있다네.",
+    "placeholders": []
+  },
+  "COVE:2:topic1": {
+    "translation": "RECL",
+    "placeholders": []
+  },
+  "COVE:2:topic2": {
+    "translation": "STON",
+    "placeholders": []
+  },
+  "COVE:2:yes": {
+    "translation": "그에게\n물어보게!",
+    "placeholders": []
+  },
+  "COVE:3:health": {
+    "translation": "아주 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "COVE:3:job": {
+    "translation": "나는 마법의\n기술을\n연구한다네.",
+    "placeholders": []
+  },
+  "COVE:3:look": {
+    "translation": "키 큰 마법사.",
+    "placeholders": []
+  },
+  "COVE:3:name": {
+    "translation": "멘토리안",
+    "placeholders": []
+  },
+  "COVE:3:no": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "COVE:3:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "COVE:3:question": {
+    "translation": "그대는\n동의하지\n않는가?",
+    "placeholders": []
+  },
+  "COVE:3:response1": {
+    "translation": "마법 속에도\n진실이\n있다네!",
+    "placeholders": []
+  },
+  "COVE:3:response2": {
+    "translation": "그대가 앙크를\n지녔으니\n말해주지.\n게이트 주문에는\n재, 진주,\n맨드레이크\n뿌리가\n필요하다네!",
+    "placeholders": []
+  },
+  "COVE:3:topic1": {
+    "translation": "ARTS",
+    "placeholders": []
+  },
+  "COVE:3:topic2": {
+    "translation": "GATE",
+    "placeholders": []
+  },
+  "COVE:3:yes": {
+    "translation": "그럼,\n물러가게!",
+    "placeholders": []
+  },
+  "COVE:4:health": {
+    "translation": "밝다.",
+    "placeholders": []
+  },
+  "COVE:4:job": {
+    "translation": "나는 생각과\n공명한다.",
+    "placeholders": []
+  },
+  "COVE:4:look": {
+    "translation": "빛나는 앙크!",
+    "placeholders": []
+  },
+  "COVE:4:name": {
+    "translation": "그 앙크",
+    "placeholders": []
+  },
+  "COVE:4:no": {
+    "translation": "오.",
+    "placeholders": []
+  },
+  "COVE:4:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "COVE:4:question": {
+    "translation": "도움을\n구하는가?",
+    "placeholders": []
+  },
+  "COVE:4:response1": {
+    "translation": "코덱스의\n방에 들어가려면.",
+    "placeholders": []
+  },
+  "COVE:4:response2": {
+    "translation": "아바타의 8부분을\n지니고, 3부분의\n열쇠와\n통행의 말,\n그리고 순수\n공리를\n알아야 한다!",
+    "placeholders": []
+  },
+  "COVE:4:topic1": {
+    "translation": "CODE",
+    "placeholders": []
+  },
+  "COVE:4:topic2": {
+    "translation": "CHAM",
+    "placeholders": []
+  },
+  "COVE:4:yes": {
+    "translation": "그대의 생각은\n무엇인가?",
+    "placeholders": []
+  },
+  "COVE:5:health": {
+    "translation": "나는 잘 지낸다네.",
+    "placeholders": []
+  },
+  "COVE:5:job": {
+    "translation": "나는 사랑을\n연주한다네.",
+    "placeholders": []
+  },
+  "COVE:5:look": {
+    "translation": "묘하게\n낯익은\n음유시인.",
+    "placeholders": []
+  },
+  "COVE:5:name": {
+    "translation": "폴",
+    "placeholders": []
+  },
+  "COVE:5:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "COVE:5:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "COVE:5:question": {
+    "translation": "들어\n보겠는가?",
+    "placeholders": []
+  },
+  "COVE:5:response1": {
+    "translation": "우리 사랑에\n초를 밝히니,\n사랑 속에서\n문제들이\n사라진다네.",
+    "placeholders": []
+  },
+  "COVE:5:response2": {
+    "translation": "하지만 결국\n우리는 곧 알게\n되지, 하나와\n하나가 우리가\n바라던\n전부라는 걸!",
+    "placeholders": []
+  },
+  "COVE:5:topic1": {
+    "translation": "LOVE",
+    "placeholders": []
+  },
+  "COVE:5:topic2": {
+    "translation": "PROB",
+    "placeholders": []
+  },
+  "COVE:5:yes": {
+    "translation": "사랑에\n대해.",
+    "placeholders": []
+  },
+  "COVE:6:health": {
+    "translation": "좋아요.",
+    "placeholders": []
+  },
+  "COVE:6:job": {
+    "translation": "나는 아이들을\n노래한다네.",
+    "placeholders": []
+  },
+  "COVE:6:look": {
+    "translation": "가수.",
+    "placeholders": []
+  },
+  "COVE:6:name": {
+    "translation": "린다",
+    "placeholders": []
+  },
+  "COVE:6:no": {
+    "translation": "흠.",
+    "placeholders": []
+  },
+  "COVE:6:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "COVE:6:question": {
+    "translation": "도와\n주겠어요?",
+    "placeholders": []
+  },
+  "COVE:6:response1": {
+    "translation": "온 세상에서,\n작은 아이들이\n세상에\n태어난다네.",
+    "placeholders": []
+  },
+  "COVE:6:response2": {
+    "translation": "여정이 끝날\n때까지 우리가\n줄 수 있는\n모든 걸 주어야\n해, 그래야\n할 일이\n끝나지!",
+    "placeholders": []
+  },
+  "COVE:6:topic1": {
+    "translation": "CHIL",
+    "placeholders": []
+  },
+  "COVE:6:topic2": {
+    "translation": "WORL",
+    "placeholders": []
+  },
+  "COVE:6:yes": {
+    "translation": "그들에게\n기쁨의 노래를\n가르쳐주세요!",
+    "placeholders": []
+  },
+  "COVE:7:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "COVE:7:job": {
+    "translation": "나는 마법을\n쓴다네.",
+    "placeholders": []
+  },
+  "COVE:7:look": {
+    "translation": "신비로운\n마법사.",
+    "placeholders": []
+  },
+  "COVE:7:name": {
+    "translation": "멀린",
+    "placeholders": []
+  },
+  "COVE:7:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "COVE:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "COVE:7:question": {
+    "translation": "마법을\n공부하는가?",
+    "placeholders": []
+  },
+  "COVE:7:response1": {
+    "translation": "검은 보석은\n문게이트에\n갇혀있다네!",
+    "placeholders": []
+  },
+  "COVE:7:response2": {
+    "translation": "두 달이 모두\n어두워지는\n게이트가 나타날\n곳에 서게.\n달이 어두워질 때\n찾아보게!",
+    "placeholders": []
+  },
+  "COVE:7:topic1": {
+    "translation": "STON",
+    "placeholders": []
+  },
+  "COVE:7:topic2": {
+    "translation": "GATE",
+    "placeholders": []
+  },
+  "COVE:7:yes": {
+    "translation": "그대의 공부에\n행운이\n있기를!",
+    "placeholders": []
+  },
+  "COVE:8:health": {
+    "translation": "나는 잘 지낸다네.",
+    "placeholders": []
+  },
+  "COVE:8:job": {
+    "translation": "나는 그 관계를\n가르친다네.",
+    "placeholders": []
+  },
+  "COVE:8:look": {
+    "translation": "늙은 드루이드.",
+    "placeholders": []
+  },
+  "COVE:8:name": {
+    "translation": "드라코니안",
+    "placeholders": []
+  },
+  "COVE:8:no": {
+    "translation": "마을과 성들을\n배우게!",
+    "placeholders": []
+  },
+  "COVE:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "COVE:8:question": {
+    "translation": "이걸\n알았는가?",
+    "placeholders": []
+  },
+  "COVE:8:response1": {
+    "translation": "진실, 사랑,\n용기의\n조합은 여덟\n가지가\n있다네. 여덟\n미덕 각각이\n그 조합\n중 하나라네!",
+    "placeholders": []
+  },
+  "COVE:8:response2": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "COVE:8:topic1": {
+    "translation": "RELA",
+    "placeholders": []
+  },
+  "COVE:8:topic2": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "COVE:8:yes": {
+    "translation": "아주 좋아!",
+    "placeholders": []
+  },
+  "COVE:9:health": {
+    "translation": "나는 잘\n지내고 있어요.",
+    "placeholders": []
+  },
+  "COVE:9:job": {
+    "translation": "나는 코덱스에\n대해 많이\n안다네!",
+    "placeholders": []
+  },
+  "COVE:9:look": {
+    "translation": "위엄있는\n해마!",
+    "placeholders": []
+  },
+  "COVE:9:name": {
+    "translation": "블리스풀",
+    "placeholders": []
+  },
+  "COVE:9:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "COVE:9:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "COVE:9:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "COVE:9:response1": {
+    "translation": "신단의 앙크가\n코덱스의\n방에 들어가는\n법을\n안다네!",
+    "placeholders": []
+  },
+  "COVE:9:response2": {
+    "translation": "정직, 자비,\n용맹의\n신단에서\n3주기 동안\n명상하면\n들어가는 법을\n알게 된다네!",
+    "placeholders": []
+  },
+  "COVE:9:topic1": {
+    "translation": "CODE",
+    "placeholders": []
+  },
+  "COVE:9:topic2": {
+    "translation": "ABYS",
+    "placeholders": []
+  },
+  "COVE:9:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "DEN:0:health": {
+    "translation": "그게 너랑\n무슨 상관이냐,\n이 쓰레기야!",
+    "placeholders": []
+  },
+  "DEN:0:job": {
+    "translation": "우리는 다리\n슬라임을\n지킨다네!",
+    "placeholders": []
+  },
+  "DEN:0:look": {
+    "translation": "험상궂은\n경비병.",
+    "placeholders": []
+  },
+  "DEN:0:name": {
+    "translation": "루퍼스",
+    "placeholders": []
+  },
+  "DEN:0:no": {
+    "translation": "그럼 꺼져!",
+    "placeholders": []
+  },
+  "DEN:0:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:0:question": {
+    "translation": "네놈이 잘난\n체하는\n놈이냐?",
+    "placeholders": []
+  },
+  "DEN:0:response1": {
+    "translation": "이 다리 말이다,\n이 멍청한\n놈아!",
+    "placeholders": []
+  },
+  "DEN:0:response2": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "DEN:0:topic1": {
+    "translation": "BRID",
+    "placeholders": []
+  },
+  "DEN:0:topic2": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "DEN:0:yes": {
+    "translation": "그럼 그거\n갖다 버려라!",
+    "placeholders": []
+  },
+  "DEN:1:health": {
+    "translation": "아주 배고파!",
+    "placeholders": []
+  },
+  "DEN:1:job": {
+    "translation": "나는\n경비병이라네.",
+    "placeholders": []
+  },
+  "DEN:1:look": {
+    "translation": "키 크고\n근육질에\n인상적인\n경비병.",
+    "placeholders": []
+  },
+  "DEN:1:name": {
+    "translation": "랭크브레스",
+    "placeholders": []
+  },
+  "DEN:1:no": {
+    "translation": "그럼 도망치는\n게 좋을\n걸!!!",
+    "placeholders": []
+  },
+  "DEN:1:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:1:question": {
+    "translation": "나를 먹여\n주려고 왔나?",
+    "placeholders": []
+  },
+  "DEN:1:response1": {
+    "translation": "나는 도시를\n지킨다네!",
+    "placeholders": []
+  },
+  "DEN:1:response2": {
+    "translation": "그래, 나는\n정말\n배고파!",
+    "placeholders": []
+  },
+  "DEN:1:topic1": {
+    "translation": "GUAR",
+    "placeholders": []
+  },
+  "DEN:1:topic2": {
+    "translation": "HUNG",
+    "placeholders": []
+  },
+  "DEN:1:yes": {
+    "translation": "감사하네.",
+    "placeholders": []
+  },
+  "DEN:10:health": {
+    "translation": "잘 지내지,\n냄새도\n나고.",
+    "placeholders": []
+  },
+  "DEN:10:job": {
+    "translation": "나는 암시장\n물건을\n밀수한다네.",
+    "placeholders": []
+  },
+  "DEN:10:look": {
+    "translation": "못생긴 오크!",
+    "placeholders": []
+  },
+  "DEN:10:name": {
+    "translation": "보리스",
+    "placeholders": []
+  },
+  "DEN:10:no": {
+    "translation": "아 그래,\n다음에\n하지.",
+    "placeholders": []
+  },
+  "DEN:10:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "DEN:10:question": {
+    "translation": "그런 물건이\n필요한가?",
+    "placeholders": []
+  },
+  "DEN:10:response1": {
+    "translation": "마법 열쇠,\n마법 보석,\n그런\n것들이지.",
+    "placeholders": []
+  },
+  "DEN:10:response2": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "DEN:10:topic1": {
+    "translation": "ITEM",
+    "placeholders": []
+  },
+  "DEN:10:topic2": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "DEN:10:yes": {
+    "translation": "방금 길드\n상점에\n새 물건을\n공급했지!",
+    "placeholders": []
+  },
+  "DEN:11:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "DEN:11:job": {
+    "translation": "그대에게\n경고해야겠네!",
+    "placeholders": []
+  },
+  "DEN:11:look": {
+    "translation": "우뚝 솟은\n마법사.",
+    "placeholders": []
+  },
+  "DEN:11:name": {
+    "translation": "이그냅",
+    "placeholders": []
+  },
+  "DEN:11:no": {
+    "translation": "현명한\n결정이군!",
+    "placeholders": []
+  },
+  "DEN:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:11:question": {
+    "translation": "계속\n가겠는가?",
+    "placeholders": []
+  },
+  "DEN:11:response1": {
+    "translation": "저 숲으로\n발을 들이면\n그대의 파멸이\n확정될\n걸세!",
+    "placeholders": []
+  },
+  "DEN:11:response2": {
+    "translation": "저 안에는\n어둠의 편이\n있으니,\n들어가지\n말게!",
+    "placeholders": []
+  },
+  "DEN:11:topic1": {
+    "translation": "WARN",
+    "placeholders": []
+  },
+  "DEN:11:topic2": {
+    "translation": "DOOM",
+    "placeholders": []
+  },
+  "DEN:11:yes": {
+    "translation": "악이 그대를\n집어삼킬\n걸세!",
+    "placeholders": []
+  },
+  "DEN:12:health": {
+    "translation": "아주 좋다네\n친구!",
+    "placeholders": []
+  },
+  "DEN:12:job": {
+    "translation": "내 선원들을 위해\n갑옷을\n사고 있다네!",
+    "placeholders": []
+  },
+  "DEN:12:look": {
+    "translation": "초록 수염을\n기른 키 큰\n해적!",
+    "placeholders": []
+  },
+  "DEN:12:name": {
+    "translation": "그린 비어드",
+    "placeholders": []
+  },
+  "DEN:12:no": {
+    "translation": "나도 알았으면\n좋겠네!",
+    "placeholders": []
+  },
+  "DEN:12:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:12:question": {
+    "translation": "신비한\n갑옷을\n어디서 사는지\n아는가?",
+    "placeholders": []
+  },
+  "DEN:12:response1": {
+    "translation": "마법 판금을\n좀 구했으면\n하네!",
+    "placeholders": []
+  },
+  "DEN:12:response2": {
+    "translation": "오, 그렇군.",
+    "placeholders": []
+  },
+  "DEN:12:topic1": {
+    "translation": "ARMO",
+    "placeholders": []
+  },
+  "DEN:12:topic2": {
+    "translation": "NOWH",
+    "placeholders": []
+  },
+  "DEN:12:yes": {
+    "translation": "어디서?",
+    "placeholders": []
+  },
+  "DEN:13:health": {
+    "translation": "아주 좋아!",
+    "placeholders": []
+  },
+  "DEN:13:job": {
+    "translation": "나는 와인을\n판다네!",
+    "placeholders": []
+  },
+  "DEN:13:look": {
+    "translation": "통통한 상인",
+    "placeholders": []
+  },
+  "DEN:13:name": {
+    "translation": "마르소르",
+    "placeholders": []
+  },
+  "DEN:13:no": {
+    "translation": "뭘 놓치는지\n모르는군!",
+    "placeholders": []
+  },
+  "DEN:13:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:13:question": {
+    "translation": "와인을\n좋아하는가?",
+    "placeholders": []
+  },
+  "DEN:13:response1": {
+    "translation": "좋은 빈티지가\n좀 있다네.",
+    "placeholders": []
+  },
+  "DEN:13:response2": {
+    "translation": "나는 내\n포도밭을\n소유하고 있지,\n여기서 북동쪽\n섬에\n있다네!",
+    "placeholders": []
+  },
+  "DEN:13:topic1": {
+    "translation": "WINE",
+    "placeholders": []
+  },
+  "DEN:13:topic2": {
+    "translation": "VINT",
+    "placeholders": []
+  },
+  "DEN:13:yes": {
+    "translation": "아, 그럼\n나와 한 잔\n하세!",
+    "placeholders": []
+  },
+  "DEN:14:health": {
+    "translation": "아주 좋아,\n고맙네.",
+    "placeholders": []
+  },
+  "DEN:14:job": {
+    "translation": "나는 땜장이가\n본업이라네.",
+    "placeholders": []
+  },
+  "DEN:14:look": {
+    "translation": "유쾌한\n노인.",
+    "placeholders": []
+  },
+  "DEN:14:name": {
+    "translation": "댄첵",
+    "placeholders": []
+  },
+  "DEN:14:no": {
+    "translation": "정말 하나\n장만해야\n하는데!",
+    "placeholders": []
+  },
+  "DEN:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:14:question": {
+    "translation": "배를\n가지고\n있는가!",
+    "placeholders": []
+  },
+  "DEN:14:response1": {
+    "translation": "나는 발사체\n기계를\n만든다네.",
+    "placeholders": []
+  },
+  "DEN:14:response2": {
+    "translation": "주로\n배 대포지!",
+    "placeholders": []
+  },
+  "DEN:14:topic1": {
+    "translation": "TINK",
+    "placeholders": []
+  },
+  "DEN:14:topic2": {
+    "translation": "MACH",
+    "placeholders": []
+  },
+  "DEN:14:yes": {
+    "translation": "아마 내가\n그 대포를\n만들었을\n거야!",
+    "placeholders": []
+  },
+  "DEN:15:health": {
+    "translation": "지금은\n괜찮다네.",
+    "placeholders": []
+  },
+  "DEN:15:job": {
+    "translation": "나는 숨어\n있다네.",
+    "placeholders": []
+  },
+  "DEN:15:look": {
+    "translation": "움츠린 남자.",
+    "placeholders": []
+  },
+  "DEN:15:name": {
+    "translation": "스니플렛",
+    "placeholders": []
+  },
+  "DEN:15:no": {
+    "translation": "오, 안 돼.",
+    "placeholders": []
+  },
+  "DEN:15:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:15:question": {
+    "translation": "오직 선의\n힘을 돕는\n데만 쓰겠다고\n약속하겠는가?",
+    "placeholders": []
+  },
+  "DEN:15:response1": {
+    "translation": "나는 남들이\n원하는 걸\n알고\n있다네!",
+    "placeholders": []
+  },
+  "DEN:15:response2": {
+    "translation": "나... 나는...",
+    "placeholders": []
+  },
+  "DEN:15:topic1": {
+    "translation": "HIDE",
+    "placeholders": []
+  },
+  "DEN:15:topic2": {
+    "translation": "SOME",
+    "placeholders": []
+  },
+  "DEN:15:yes": {
+    "translation": "도난당한 그\n공기보다\n가벼운 장치는\n히스로스\n던전 근처에\n있다네!",
+    "placeholders": []
+  },
+  "DEN:2:health": {
+    "translation": "짭짤하지.",
+    "placeholders": []
+  },
+  "DEN:2:job": {
+    "translation": "나는\n선원이라네!",
+    "placeholders": []
+  },
+  "DEN:2:look": {
+    "translation": "지저분한 선원",
+    "placeholders": []
+  },
+  "DEN:2:name": {
+    "translation": "뱃사람",
+    "placeholders": []
+  },
+  "DEN:2:no": {
+    "translation": "오.",
+    "placeholders": []
+  },
+  "DEN:2:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:2:question": {
+    "translation": "나머지는?",
+    "placeholders": []
+  },
+  "DEN:2:response1": {
+    "translation": "오, 선원의\n삶이 바로\n내 삶이지,",
+    "placeholders": []
+  },
+  "DEN:2:response2": {
+    "translation": "넘실대는\n바다를 항해할\n때는!",
+    "placeholders": []
+  },
+  "DEN:2:topic1": {
+    "translation": "SAIL",
+    "placeholders": []
+  },
+  "DEN:2:topic2": {
+    "translation": "LIFE",
+    "placeholders": []
+  },
+  "DEN:2:yes": {
+    "translation": "그리고 나는\n절대, 절대,\n절대 날씨\n걱정을 안 해,\n날씨가 나한테\n해준 게\n하나도\n없거든!",
+    "placeholders": []
+  },
+  "DEN:3:health": {
+    "translation": "뭐 그럭저럭!",
+    "placeholders": []
+  },
+  "DEN:3:job": {
+    "translation": "나는 해적이라네,\n친구!",
+    "placeholders": []
+  },
+  "DEN:3:look": {
+    "translation": "키 큰 선원.",
+    "placeholders": []
+  },
+  "DEN:3:name": {
+    "translation": "실버 존",
+    "placeholders": []
+  },
+  "DEN:3:no": {
+    "translation": "문제 생기기\n전에\n여기서\n떠나는 게\n좋을 걸!",
+    "placeholders": []
+  },
+  "DEN:3:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:3:question": {
+    "translation": "그대는\n해적인가?",
+    "placeholders": []
+  },
+  "DEN:3:response1": {
+    "translation": "우리는 브리타니아\n해안을\n습격한다네,\n재미있지!",
+    "placeholders": []
+  },
+  "DEN:3:response2": {
+    "translation": "약탈하고\n불태우지!",
+    "placeholders": []
+  },
+  "DEN:3:topic1": {
+    "translation": "PIRA",
+    "placeholders": []
+  },
+  "DEN:3:topic2": {
+    "translation": "RAID",
+    "placeholders": []
+  },
+  "DEN:3:yes": {
+    "translation": "좋아 친구!",
+    "placeholders": []
+  },
+  "DEN:4:health": {
+    "translation": "필요한 만큼\n괜찮지!",
+    "placeholders": []
+  },
+  "DEN:4:job": {
+    "translation": "그게 너랑\n무슨 상관이냐?",
+    "placeholders": []
+  },
+  "DEN:4:look": {
+    "translation": "날렵한 도둑.",
+    "placeholders": []
+  },
+  "DEN:4:name": {
+    "translation": "슬라이샘",
+    "placeholders": []
+  },
+  "DEN:4:no": {
+    "translation": "그럴 줄\n알았지",
+    "placeholders": []
+  },
+  "DEN:4:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:4:question": {
+    "translation": "그대는\n도둑인가?",
+    "placeholders": []
+  },
+  "DEN:4:response1": {
+    "translation": "그래, 그리고\n영리하기도\n하지.",
+    "placeholders": []
+  },
+  "DEN:4:response2": {
+    "translation": "질문이 너무\n많군!",
+    "placeholders": []
+  },
+  "DEN:4:topic1": {
+    "translation": "THIE",
+    "placeholders": []
+  },
+  "DEN:4:topic2": {
+    "translation": "CLEV",
+    "placeholders": []
+  },
+  "DEN:4:yes": {
+    "translation": "오, 조심하는\n게 좋겠군!",
+    "placeholders": []
+  },
+  "DEN:5:health": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "DEN:5:job": {
+    "translation": "나는\n여행한다네.",
+    "placeholders": []
+  },
+  "DEN:5:look": {
+    "translation": "근엄한 레인저",
+    "placeholders": []
+  },
+  "DEN:5:name": {
+    "translation": "라그나르",
+    "placeholders": []
+  },
+  "DEN:5:no": {
+    "translation": "그럼 꺼지게.",
+    "placeholders": []
+  },
+  "DEN:5:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:5:question": {
+    "translation": "정보를\n찾으러\n왔는가?",
+    "placeholders": []
+  },
+  "DEN:5:response1": {
+    "translation": "브리타니아의\n땅들.",
+    "placeholders": []
+  },
+  "DEN:5:response2": {
+    "translation": "명심하게,\n그 해골을\n파괴하는 것\n외에는 절대\n쓰지 말게,\n그렇지 않으면\n그대의 미덕을\n전부 잃게\n될 걸세!",
+    "placeholders": []
+  },
+  "DEN:5:topic1": {
+    "translation": "TRAV",
+    "placeholders": []
+  },
+  "DEN:5:topic2": {
+    "translation": "SKUL",
+    "placeholders": []
+  },
+  "DEN:5:yes": {
+    "translation": "무엇에\n대해?",
+    "placeholders": []
+  },
+  "DEN:6:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "DEN:6:job": {
+    "translation": "나는\n마법사라네",
+    "placeholders": []
+  },
+  "DEN:6:look": {
+    "translation": "요염한 마법사.",
+    "placeholders": []
+  },
+  "DEN:6:name": {
+    "translation": "시아나",
+    "placeholders": []
+  },
+  "DEN:6:no": {
+    "translation": "아",
+    "placeholders": []
+  },
+  "DEN:6:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "DEN:6:question": {
+    "translation": "친애하는 벗이여,\n도와줄까요?",
+    "placeholders": []
+  },
+  "DEN:6:response1": {
+    "translation": "수면 주문은\n어떨까요...\n자라...\n자라....",
+    "placeholders": []
+  },
+  "DEN:6:response2": {
+    "translation": "수면 주문은\n비단 한\n조각만\n필요하답니다!\n자라...\n자라...\n자라...",
+    "placeholders": []
+  },
+  "DEN:6:topic1": {
+    "translation": "MAGI",
+    "placeholders": []
+  },
+  "DEN:6:topic2": {
+    "translation": "SLEE",
+    "placeholders": []
+  },
+  "DEN:6:yes": {
+    "translation": "그대의\n마법으로는\n어떨까요?",
+    "placeholders": []
+  },
+  "DEN:7:health": {
+    "translation": "아주\n좋다네!",
+    "placeholders": []
+  },
+  "DEN:7:job": {
+    "translation": "분부만\n내리시게!",
+    "placeholders": []
+  },
+  "DEN:7:look": {
+    "translation": "교활한 도둑!",
+    "placeholders": []
+  },
+  "DEN:7:name": {
+    "translation": "제레미 제임스\n서를록",
+    "placeholders": []
+  },
+  "DEN:7:no": {
+    "translation": "도와줄\n수가 없다네.",
+    "placeholders": []
+  },
+  "DEN:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:7:question": {
+    "translation": "특별한\n던전을\n찾는가?",
+    "placeholders": []
+  },
+  "DEN:7:response1": {
+    "translation": "정보는\n어떤가?",
+    "placeholders": []
+  },
+  "DEN:7:response2": {
+    "translation": "히스로스 던전은\n오직 대성\n안의 비밀\n입구로만\n갈 수\n있다네.",
+    "placeholders": []
+  },
+  "DEN:7:topic1": {
+    "translation": "SERV",
+    "placeholders": []
+  },
+  "DEN:7:topic2": {
+    "translation": "HYTH",
+    "placeholders": []
+  },
+  "DEN:7:yes": {
+    "translation": "어떤 것을?",
+    "placeholders": []
+  },
+  "DEN:8:health": {
+    "translation": "참으로\n어둡군.",
+    "placeholders": []
+  },
+  "DEN:8:job": {
+    "translation": "나는 흑마법을\n쓴다네!",
+    "placeholders": []
+  },
+  "DEN:8:look": {
+    "translation": "온통 검은\n옷을 입은\n마법사.",
+    "placeholders": []
+  },
+  "DEN:8:name": {
+    "translation": "스타라이트",
+    "placeholders": []
+  },
+  "DEN:8:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "DEN:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "DEN:8:question": {
+    "translation": "그대는?",
+    "placeholders": []
+  },
+  "DEN:8:response1": {
+    "translation": "나는 강력한\n마법 화살\n주문을\n부린다네.",
+    "placeholders": []
+  },
+  "DEN:8:response2": {
+    "translation": "흑진주 하나와\n유황재\n하나를\n시도해보게!",
+    "placeholders": []
+  },
+  "DEN:8:topic1": {
+    "translation": "MAGI",
+    "placeholders": []
+  },
+  "DEN:8:topic2": {
+    "translation": "MIX ",
+    "placeholders": []
+  },
+  "DEN:8:yes": {
+    "translation": "내 재료\n혼합법을\n시도해보게!",
+    "placeholders": []
+  },
+  "DEN:9:health": {
+    "translation": "치워버려!",
+    "placeholders": []
+  },
+  "DEN:9:job": {
+    "translation": "아, 꺼져!",
+    "placeholders": []
+  },
+  "DEN:9:look": {
+    "translation": "뚱뚱한\n트롤.",
+    "placeholders": []
+  },
+  "DEN:9:name": {
+    "translation": "브리간트",
+    "placeholders": []
+  },
+  "DEN:9:no": {
+    "translation": "치우라고\n했잖아!",
+    "placeholders": []
+  },
+  "DEN:9:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "DEN:9:question": {
+    "translation": "내 말\n들었나?",
+    "placeholders": []
+  },
+  "DEN:9:response1": {
+    "translation": "네놈 얼굴이나!",
+    "placeholders": []
+  },
+  "DEN:9:response2": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "DEN:9:topic1": {
+    "translation": "IT  ",
+    "placeholders": []
+  },
+  "DEN:9:topic2": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "DEN:9:yes": {
+    "translation": "그럼 해!",
+    "placeholders": []
+  },
+  "EMPATH:0:health": {
+    "translation": "아주 좋다네.",
+    "placeholders": []
+  },
+  "EMPATH:0:job": {
+    "translation": "나는 이 지방을\n다스린다네.",
+    "placeholders": []
+  },
+  "EMPATH:0:look": {
+    "translation": "위엄있는 남작",
+    "placeholders": []
+  },
+  "EMPATH:0:name": {
+    "translation": "로버트 경",
+    "placeholders": []
+  },
+  "EMPATH:0:no": {
+    "translation": "다음에\n하지.",
+    "placeholders": []
+  },
+  "EMPATH:0:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "EMPATH:0:question": {
+    "translation": "지금 그것을\n알고 싶은가?",
+    "placeholders": []
+  },
+  "EMPATH:0:response1": {
+    "translation": "마시 부인이\n더 말해줄\n수 있을\n걸세!",
+    "placeholders": []
+  },
+  "EMPATH:0:response2": {
+    "translation": "나는 세 음절\n중 하나만\n안다네.",
+    "placeholders": []
+  },
+  "EMPATH:0:topic1": {
+    "translation": "PROV",
+    "placeholders": []
+  },
+  "EMPATH:0:topic2": {
+    "translation": "WORD",
+    "placeholders": []
+  },
+  "EMPATH:0:yes": {
+    "translation": "그것은 '아모'라네,\n이제 다른\n부분들을\n찾아보게!",
+    "placeholders": []
+  },
+  "EMPATH:1:health": {
+    "translation": "좋아요.",
+    "placeholders": []
+  },
+  "EMPATH:1:job": {
+    "translation": "나는 영주님과\n함께\n다스린다네.",
+    "placeholders": []
+  },
+  "EMPATH:1:look": {
+    "translation": "매력적인 여인",
+    "placeholders": []
+  },
+  "EMPATH:1:name": {
+    "translation": "마시 부인",
+    "placeholders": []
+  },
+  "EMPATH:1:no": {
+    "translation": "그럼 찾지\n못할 거예요!",
+    "placeholders": []
+  },
+  "EMPATH:1:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "EMPATH:1:question": {
+    "translation": "사랑을\n찾고\n있나요?",
+    "placeholders": []
+  },
+  "EMPATH:1:response1": {
+    "translation": "이 지방.",
+    "placeholders": []
+  },
+  "EMPATH:1:response2": {
+    "translation": "우리 백성은\n사랑을 삶의\n방식으로\n믿고 최대한\n그렇게\n산답니다!",
+    "placeholders": []
+  },
+  "EMPATH:1:topic1": {
+    "translation": "RULE",
+    "placeholders": []
+  },
+  "EMPATH:1:topic2": {
+    "translation": "PROV",
+    "placeholders": []
+  },
+  "EMPATH:1:yes": {
+    "translation": "그럼 찾기를!",
+    "placeholders": []
+  },
+  "EMPATH:10:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "EMPATH:10:job": {
+    "translation": "나는 사랑과\n정의를\n숙고한다네.",
+    "placeholders": []
+  },
+  "EMPATH:10:look": {
+    "translation": "생각에 잠긴\n드루이드.",
+    "placeholders": []
+  },
+  "EMPATH:10:name": {
+    "translation": "데어드레",
+    "placeholders": []
+  },
+  "EMPATH:10:no": {
+    "translation": "그렇군.",
+    "placeholders": []
+  },
+  "EMPATH:10:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "EMPATH:10:question": {
+    "translation": "그대는?",
+    "placeholders": []
+  },
+  "EMPATH:10:response1": {
+    "translation": "셋이 여덟을\n이룰 때, 사랑으로\n다스려진\n진실이\n정의가\n된다네!",
+    "placeholders": []
+  },
+  "EMPATH:10:response2": {
+    "translation": "정의는 여덟\n아바타 미덕\n중 하나이며\n진실과\n사랑에서\n비롯된다네.",
+    "placeholders": []
+  },
+  "EMPATH:10:topic1": {
+    "translation": "LOVE",
+    "placeholders": []
+  },
+  "EMPATH:10:topic2": {
+    "translation": "JUST",
+    "placeholders": []
+  },
+  "EMPATH:10:yes": {
+    "translation": "아주 좋다네.",
+    "placeholders": []
+  },
+  "EMPATH:11:health": {
+    "translation": "좋다네",
+    "placeholders": []
+  },
+  "EMPATH:11:job": {
+    "translation": "나는 희생 속\n사랑의\n역할을\n생각하고\n있다네.",
+    "placeholders": []
+  },
+  "EMPATH:11:look": {
+    "translation": "건장한\n땜장이.",
+    "placeholders": []
+  },
+  "EMPATH:11:name": {
+    "translation": "토마스",
+    "placeholders": []
+  },
+  "EMPATH:11:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "EMPATH:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "EMPATH:11:question": {
+    "translation": "그대\n자신은?",
+    "placeholders": []
+  },
+  "EMPATH:11:response1": {
+    "translation": "타인에 대한\n사랑과\n죽음마저\n마주할 용기가\n자기희생이라네.",
+    "placeholders": []
+  },
+  "EMPATH:11:response2": {
+    "translation": "희생은 사랑의\n동기와\n용기의\n능력 위에\n세워진다네.",
+    "placeholders": []
+  },
+  "EMPATH:11:topic1": {
+    "translation": "LOVE",
+    "placeholders": []
+  },
+  "EMPATH:11:topic2": {
+    "translation": "SACR",
+    "placeholders": []
+  },
+  "EMPATH:11:yes": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "EMPATH:12:health": {
+    "translation": "아주\n좋다네.",
+    "placeholders": []
+  },
+  "EMPATH:12:job": {
+    "translation": "나는 영적인\n길을\n따른다네.",
+    "placeholders": []
+  },
+  "EMPATH:12:look": {
+    "translation": "근엄한\n레인저.",
+    "placeholders": []
+  },
+  "EMPATH:12:name": {
+    "translation": "라스트로",
+    "placeholders": []
+  },
+  "EMPATH:12:no": {
+    "translation": "참 슬프군.",
+    "placeholders": []
+  },
+  "EMPATH:12:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "EMPATH:12:question": {
+    "translation": "그리고\n그대는?",
+    "placeholders": []
+  },
+  "EMPATH:12:response1": {
+    "translation": "나의 영성은\n종교가 아니라,\n내 내면을\n알고 향상시키려는\n탐구라네.",
+    "placeholders": []
+  },
+  "EMPATH:12:response2": {
+    "translation": "나의 존재는\n나 자신의\n진실, 사랑,\n용기에\n기반한다네.",
+    "placeholders": []
+  },
+  "EMPATH:12:topic1": {
+    "translation": "SPIR",
+    "placeholders": []
+  },
+  "EMPATH:12:topic2": {
+    "translation": "BEIN",
+    "placeholders": []
+  },
+  "EMPATH:12:yes": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "EMPATH:13:health": {
+    "translation": "별로\n좋지 않다네.",
+    "placeholders": []
+  },
+  "EMPATH:13:job": {
+    "translation": "나는 구원을\n찾는다네",
+    "placeholders": []
+  },
+  "EMPATH:13:look": {
+    "translation": "중얼거리는\n거지.",
+    "placeholders": []
+  },
+  "EMPATH:13:name": {
+    "translation": "험록",
+    "placeholders": []
+  },
+  "EMPATH:13:no": {
+    "translation": "하지만 나는\n정말\n절박하다네!",
+    "placeholders": []
+  },
+  "EMPATH:13:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "EMPATH:13:question": {
+    "translation": "돈을 좀\n주겠는가?",
+    "placeholders": []
+  },
+  "EMPATH:13:response1": {
+    "translation": "그...앙크가...\n내게\n말했다네!",
+    "placeholders": []
+  },
+  "EMPATH:13:response2": {
+    "translation": "나는 그저\n가난한 궁핍한\n거지일세, 아무것도\n없다네!",
+    "placeholders": []
+  },
+  "EMPATH:13:topic1": {
+    "translation": "MUMB",
+    "placeholders": []
+  },
+  "EMPATH:13:topic2": {
+    "translation": "SALV",
+    "placeholders": []
+  },
+  "EMPATH:13:yes": {
+    "translation": "정말\n감사할\n걸세....",
+    "placeholders": []
+  },
+  "EMPATH:14:health": {
+    "translation": "방금\n완전히\n회복됐다네!",
+    "placeholders": []
+  },
+  "EMPATH:14:job": {
+    "translation": "나는 여정을\n해결한다네",
+    "placeholders": []
+  },
+  "EMPATH:14:look": {
+    "translation": "대담한 성기사.",
+    "placeholders": []
+  },
+  "EMPATH:14:name": {
+    "translation": "말코르",
+    "placeholders": []
+  },
+  "EMPATH:14:no": {
+    "translation": "오.",
+    "placeholders": []
+  },
+  "EMPATH:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "EMPATH:14:question": {
+    "translation": "그대는\n여정 중인가?",
+    "placeholders": []
+  },
+  "EMPATH:14:response1": {
+    "translation": "내 마지막 여정은\n스피릿우드\n근처였다네.",
+    "placeholders": []
+  },
+  "EMPATH:14:response2": {
+    "translation": "은나팔은\n스피릿우드\n끝자락의\n작은 섬에\n묻혀\n있다고들\n한다네.",
+    "placeholders": []
+  },
+  "EMPATH:14:topic1": {
+    "translation": "QUES",
+    "placeholders": []
+  },
+  "EMPATH:14:topic2": {
+    "translation": "HORN",
+    "placeholders": []
+  },
+  "EMPATH:14:yes": {
+    "translation": "그대에게\n행운이\n있기를!",
+    "placeholders": []
+  },
+  "EMPATH:15:health": {
+    "translation": "나는 늙고\n허약해지고\n있다네.",
+    "placeholders": []
+  },
+  "EMPATH:15:job": {
+    "translation": "나는 큰\n지혜를\n지녔다네.",
+    "placeholders": []
+  },
+  "EMPATH:15:look": {
+    "translation": "지혜로운\n드루이드.",
+    "placeholders": []
+  },
+  "EMPATH:15:name": {
+    "translation": "안토스 수사",
+    "placeholders": []
+  },
+  "EMPATH:15:no": {
+    "translation": "우리 신단에서\n사랑에 대해\n명상하게.",
+    "placeholders": []
+  },
+  "EMPATH:15:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "EMPATH:15:question": {
+    "translation": "그것을 어디서\n찾을지\n아는가?",
+    "placeholders": []
+  },
+  "EMPATH:15:response1": {
+    "translation": "내게 무엇을\n묻고\n싶은가?",
+    "placeholders": []
+  },
+  "EMPATH:15:response2": {
+    "translation": "그대는 어비스에\n들어가려면\n사랑의 초가\n필요하다네.",
+    "placeholders": []
+  },
+  "EMPATH:15:topic1": {
+    "translation": "WISD",
+    "placeholders": []
+  },
+  "EMPATH:15:topic2": {
+    "translation": "CAND",
+    "placeholders": []
+  },
+  "EMPATH:15:yes": {
+    "translation": "아주 좋군.",
+    "placeholders": []
+  },
+  "EMPATH:2:health": {
+    "translation": "과로했어요!",
+    "placeholders": []
+  },
+  "EMPATH:2:job": {
+    "translation": "나는 시녀랍니다.",
+    "placeholders": []
+  },
+  "EMPATH:2:look": {
+    "translation": "사랑스러운 여인",
+    "placeholders": []
+  },
+  "EMPATH:2:name": {
+    "translation": "수잔나",
+    "placeholders": []
+  },
+  "EMPATH:2:no": {
+    "translation": "나가셔야\n해요!",
+    "placeholders": []
+  },
+  "EMPATH:2:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "EMPATH:2:question": {
+    "translation": "여기 들어와도\n되나요?",
+    "placeholders": []
+  },
+  "EMPATH:2:response1": {
+    "translation": "나는 마시님을\n모신답니다.",
+    "placeholders": []
+  },
+  "EMPATH:2:response2": {
+    "translation": "말코르라는\n성기사가\n있어요.\n그가 은나팔로\n안내해줄\n수 있을\n거예요!",
+    "placeholders": []
+  },
+  "EMPATH:2:topic1": {
+    "translation": "LADY",
+    "placeholders": []
+  },
+  "EMPATH:2:topic2": {
+    "translation": "HORN",
+    "placeholders": []
+  },
+  "EMPATH:2:yes": {
+    "translation": "아닐걸요!\n나가셔야\n해요!",
+    "placeholders": []
+  },
+  "EMPATH:3:health": {
+    "translation": "나는 존재한다.",
+    "placeholders": []
+  },
+  "EMPATH:3:job": {
+    "translation": "나는 생각과\n공명한다.",
+    "placeholders": []
+  },
+  "EMPATH:3:look": {
+    "translation": "앙크",
+    "placeholders": []
+  },
+  "EMPATH:3:name": {
+    "translation": "생명.",
+    "placeholders": []
+  },
+  "EMPATH:3:no": {
+    "translation": "비밀 통로\n너머의\n음유시인에게\n물어보라!",
+    "placeholders": []
+  },
+  "EMPATH:3:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "EMPATH:3:question": {
+    "translation": "그대는\n그것을\n가졌는가?",
+    "placeholders": []
+  },
+  "EMPATH:3:response1": {
+    "translation": "그대의 생각은\n무엇인가?",
+    "placeholders": []
+  },
+  "EMPATH:3:response2": {
+    "translation": "사랑의 초를\n구하라, 그것과\n다른 두\n부분이 있어야만\n어비스에\n들어갈 수\n있다!",
+    "placeholders": []
+  },
+  "EMPATH:3:topic1": {
+    "translation": "RESO",
+    "placeholders": []
+  },
+  "EMPATH:3:topic2": {
+    "translation": "LOVE",
+    "placeholders": []
+  },
+  "EMPATH:3:yes": {
+    "translation": "좋다.",
+    "placeholders": []
+  },
+  "EMPATH:4:health": {
+    "translation": "좋아요.",
+    "placeholders": []
+  },
+  "EMPATH:4:job": {
+    "translation": "나는 통로를\n지킨다네.",
+    "placeholders": []
+  },
+  "EMPATH:4:look": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "EMPATH:4:name": {
+    "translation": "통로 경비병",
+    "placeholders": []
+  },
+  "EMPATH:4:no": {
+    "translation": "거기서 3부분\n열쇠를\n얻는데, 코덱스의\n방에 들어가는 데\n필요하답니다!",
+    "placeholders": []
+  },
+  "EMPATH:4:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "EMPATH:4:question": {
+    "translation": "제단들을\n풀었나요?",
+    "placeholders": []
+  },
+  "EMPATH:4:response1": {
+    "translation": "위험은\n없어요.",
+    "placeholders": []
+  },
+  "EMPATH:4:response2": {
+    "translation": "던전 제단실에\n비하면\n그렇죠!",
+    "placeholders": []
+  },
+  "EMPATH:4:topic1": {
+    "translation": "PASS",
+    "placeholders": []
+  },
+  "EMPATH:4:topic2": {
+    "translation": "DANG",
+    "placeholders": []
+  },
+  "EMPATH:4:yes": {
+    "translation": "좋아요.",
+    "placeholders": []
+  },
+  "EMPATH:5:health": {
+    "translation": "최상이라네.",
+    "placeholders": []
+  },
+  "EMPATH:5:job": {
+    "translation": "문 경비병",
+    "placeholders": []
+  },
+  "EMPATH:5:look": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "EMPATH:5:name": {
+    "translation": "문 경비병",
+    "placeholders": []
+  },
+  "EMPATH:5:no": {
+    "translation": "수도원 안의\n작은 신단을\n찾아가게!",
+    "placeholders": []
+  },
+  "EMPATH:5:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "EMPATH:5:question": {
+    "translation": "사랑으로\n충만한가?",
+    "placeholders": []
+  },
+  "EMPATH:5:response1": {
+    "translation": "수도원으로.",
+    "placeholders": []
+  },
+  "EMPATH:5:response2": {
+    "translation": "여기, 참나무\n숲에서 많은\n이가 평화와\n사랑의 의미를\n찾는다네!",
+    "placeholders": []
+  },
+  "EMPATH:5:topic1": {
+    "translation": "GATE",
+    "placeholders": []
+  },
+  "EMPATH:5:topic2": {
+    "translation": "ABBE",
+    "placeholders": []
+  },
+  "EMPATH:5:yes": {
+    "translation": "그럼 여기\n있을 필요\n없네!",
+    "placeholders": []
+  },
+  "EMPATH:6:health": {
+    "translation": "꽤 좋다네.",
+    "placeholders": []
+  },
+  "EMPATH:6:job": {
+    "translation": "나는 음유시인,\n노래를\n부른다네.",
+    "placeholders": []
+  },
+  "EMPATH:6:look": {
+    "translation": "류트를 연주하는\n젊은\n음유시인.",
+    "placeholders": []
+  },
+  "EMPATH:6:name": {
+    "translation": "데릭 음유시인",
+    "placeholders": []
+  },
+  "EMPATH:6:no": {
+    "translation": "아쉽군,\n새 곡이었는데.",
+    "placeholders": []
+  },
+  "EMPATH:6:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "EMPATH:6:question": {
+    "translation": "이 곡이\n마음에\n드는가?",
+    "placeholders": []
+  },
+  "EMPATH:6:response1": {
+    "translation": "오, 모든\n종류지.",
+    "placeholders": []
+  },
+  "EMPATH:6:response2": {
+    "translation": "사랑의 초는\n락 호수\n너머 숨겨진\n비밀 장소에서\n찾을 수\n있다네!",
+    "placeholders": []
+  },
+  "EMPATH:6:topic1": {
+    "translation": "SONG",
+    "placeholders": []
+  },
+  "EMPATH:6:topic2": {
+    "translation": "CAND",
+    "placeholders": []
+  },
+  "EMPATH:6:yes": {
+    "translation": "고맙네,\n방금\n지었지!",
+    "placeholders": []
+  },
+  "EMPATH:7:health": {
+    "translation": "아주 좋아요,\n고마워요!",
+    "placeholders": []
+  },
+  "EMPATH:7:job": {
+    "translation": "수도원에\n온 걸\n환영하네!",
+    "placeholders": []
+  },
+  "EMPATH:7:look": {
+    "translation": "작지만 위엄있는\n아이.",
+    "placeholders": []
+  },
+  "EMPATH:7:name": {
+    "translation": "친업",
+    "placeholders": []
+  },
+  "EMPATH:7:no": {
+    "translation": "그럼 참나무\n숲을.",
+    "placeholders": []
+  },
+  "EMPATH:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "EMPATH:7:question": {
+    "translation": "사랑을 찾으러\n왔나요?",
+    "placeholders": []
+  },
+  "EMPATH:7:response1": {
+    "translation": "참나무 숲.",
+    "placeholders": []
+  },
+  "EMPATH:7:response2": {
+    "translation": "거기서 네\n직업군이\n진실을\n찾는다네!",
+    "placeholders": []
+  },
+  "EMPATH:7:topic1": {
+    "translation": "GROV",
+    "placeholders": []
+  },
+  "EMPATH:7:topic2": {
+    "translation": "OAK ",
+    "placeholders": []
+  },
+  "EMPATH:7:yes": {
+    "translation": "그럼 참나무\n숲을!",
+    "placeholders": []
+  },
+  "EMPATH:8:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "EMPATH:8:job": {
+    "translation": "나는 숲에\n들어오는\n이들을\n상담한다네.",
+    "placeholders": []
+  },
+  "EMPATH:8:look": {
+    "translation": "키 큰 여인.",
+    "placeholders": []
+  },
+  "EMPATH:8:name": {
+    "translation": "다이앤",
+    "placeholders": []
+  },
+  "EMPATH:8:no": {
+    "translation": "사랑을 위해\n힘쓰게!",
+    "placeholders": []
+  },
+  "EMPATH:8:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "EMPATH:8:question": {
+    "translation": "그대가 가장\n사랑이\n넘치는\n사람인가?",
+    "placeholders": []
+  },
+  "EMPATH:8:response1": {
+    "translation": "여기서 그대는\n사랑에 대한\n통찰을 찾을\n수 있다네,\n그대 자신\n안에서든\n이 숲의\n다른 이들\n안에서든.",
+    "placeholders": []
+  },
+  "EMPATH:8:response2": {
+    "translation": "다른 이들에게\n물어보게.",
+    "placeholders": []
+  },
+  "EMPATH:8:topic1": {
+    "translation": "COUN",
+    "placeholders": []
+  },
+  "EMPATH:8:topic2": {
+    "translation": "LOVE",
+    "placeholders": []
+  },
+  "EMPATH:8:yes": {
+    "translation": "의심스럽군!",
+    "placeholders": []
+  },
+  "EMPATH:9:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "EMPATH:9:job": {
+    "translation": "나는 사랑과\n자비를\n연관 짓는다네.",
+    "placeholders": []
+  },
+  "EMPATH:9:look": {
+    "translation": "근엄한\n음유시인.",
+    "placeholders": []
+  },
+  "EMPATH:9:name": {
+    "translation": "벤자민",
+    "placeholders": []
+  },
+  "EMPATH:9:no": {
+    "translation": "아쉽군...",
+    "placeholders": []
+  },
+  "EMPATH:9:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "EMPATH:9:question": {
+    "translation": "그대는\n잘 지내는가?",
+    "placeholders": []
+  },
+  "EMPATH:9:response1": {
+    "translation": "셋이 여덟\n가지로\n결합할 때,\n사랑 홀로가\n자비라네.",
+    "placeholders": []
+  },
+  "EMPATH:9:response2": {
+    "translation": "여덟 아바타\n속성 중\n자비는\n사랑 홀로\n비롯된다네.",
+    "placeholders": []
+  },
+  "EMPATH:9:topic1": {
+    "translation": "LOVE",
+    "placeholders": []
+  },
+  "EMPATH:9:topic2": {
+    "translation": "COMP",
+    "placeholders": []
+  },
+  "EMPATH:9:yes": {
+    "translation": "아주 좋군.",
+    "placeholders": []
+  },
+  "JHELOM:0:health": {
+    "translation": "나는 건강하고\n강하다네!",
+    "placeholders": []
+  },
+  "JHELOM:0:job": {
+    "translation": "나는 전투를\n이끈다네!",
+    "placeholders": []
+  },
+  "JHELOM:0:look": {
+    "translation": "195cm의\n위대한 전사.",
+    "placeholders": []
+  },
+  "JHELOM:0:name": {
+    "translation": "제프리",
+    "placeholders": []
+  },
+  "JHELOM:0:no": {
+    "translation": "전투에서\n도망치는 건\n비겁함을\n보이는\n거지!",
+    "placeholders": []
+  },
+  "JHELOM:0:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:0:question": {
+    "translation": "그대는\n용맹한가!",
+    "placeholders": []
+  },
+  "JHELOM:0:response1": {
+    "translation": "위대한 전사는\n용맹한\n전사라네!",
+    "placeholders": []
+  },
+  "JHELOM:0:response2": {
+    "translation": "나는 다시\n전투에서\n싸우고\n싶다네!",
+    "placeholders": []
+  },
+  "JHELOM:0:topic1": {
+    "translation": "WARR",
+    "placeholders": []
+  },
+  "JHELOM:0:topic2": {
+    "translation": "BATT",
+    "placeholders": []
+  },
+  "JHELOM:0:yes": {
+    "translation": "언젠가\n그대와\n함께할\n수도!",
+    "placeholders": []
+  },
+  "JHELOM:1:health": {
+    "translation": "뛰어나다네!",
+    "placeholders": []
+  },
+  "JHELOM:1:job": {
+    "translation": "나는 로드\n브리티시를 위해\n싸운다네!",
+    "placeholders": []
+  },
+  "JHELOM:1:look": {
+    "translation": "신비로운\n전사.",
+    "placeholders": []
+  },
+  "JHELOM:1:name": {
+    "translation": "로버트 경",
+    "placeholders": []
+  },
+  "JHELOM:1:no": {
+    "translation": "그대는\n겁쟁이로군!",
+    "placeholders": []
+  },
+  "JHELOM:1:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:1:question": {
+    "translation": "그대는\n용맹한\n전사인가?",
+    "placeholders": []
+  },
+  "JHELOM:1:response1": {
+    "translation": "전사가 되려면\n오래도록\n치열하게\n싸워야\n하네.",
+    "placeholders": []
+  },
+  "JHELOM:1:response2": {
+    "translation": "전투는\n적으면서도\n너무 많지!",
+    "placeholders": []
+  },
+  "JHELOM:1:topic1": {
+    "translation": "WARR",
+    "placeholders": []
+  },
+  "JHELOM:1:topic2": {
+    "translation": "BATT",
+    "placeholders": []
+  },
+  "JHELOM:1:yes": {
+    "translation": "그대는\n룬을 받을\n자격이 있네,\n노스트로에게\n물어보게!",
+    "placeholders": []
+  },
+  "JHELOM:10:health": {
+    "translation": "죽음에\n가깝다네!",
+    "placeholders": []
+  },
+  "JHELOM:10:job": {
+    "translation": "나는 이 통로들을\n지었는데\n그들이 나를\n가둬버렸다네!",
+    "placeholders": []
+  },
+  "JHELOM:10:look": {
+    "translation": "쇠약해지는\n영혼",
+    "placeholders": []
+  },
+  "JHELOM:10:name": {
+    "translation": "노스트로",
+    "placeholders": []
+  },
+  "JHELOM:10:no": {
+    "translation": "그대는\n비열한 놈이군!\n그래도\n따라가겠네!",
+    "placeholders": []
+  },
+  "JHELOM:10:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:10:question": {
+    "translation": "나를\n이끌어\n내주겠는가?",
+    "placeholders": []
+  },
+  "JHELOM:10:response1": {
+    "translation": "이 통로는\n도시를\n둘러\n흐른다네.",
+    "placeholders": []
+  },
+  "JHELOM:10:response2": {
+    "translation": "룬은 탑\n안에\n묻혀\n있다네!",
+    "placeholders": []
+  },
+  "JHELOM:10:topic1": {
+    "translation": "PASS",
+    "placeholders": []
+  },
+  "JHELOM:10:topic2": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "JHELOM:10:yes": {
+    "translation": "나는\n구원받았네!",
+    "placeholders": []
+  },
+  "JHELOM:11:health": {
+    "translation": "꽤 좋다네.",
+    "placeholders": []
+  },
+  "JHELOM:11:job": {
+    "translation": "나는 내면의\n빛을\n찾는다네!",
+    "placeholders": []
+  },
+  "JHELOM:11:look": {
+    "translation": "먼 곳을 바라보는\n레인저.",
+    "placeholders": []
+  },
+  "JHELOM:11:name": {
+    "translation": "루크",
+    "placeholders": []
+  },
+  "JHELOM:11:no": {
+    "translation": "영적인\n도시라네!",
+    "placeholders": []
+  },
+  "JHELOM:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:11:question": {
+    "translation": "스카라\n브레이에\n가봤는가?",
+    "placeholders": []
+  },
+  "JHELOM:11:response1": {
+    "translation": "나는 스카라\n브레이에서 와서\n유로 가는\n길이라네.",
+    "placeholders": []
+  },
+  "JHELOM:11:response2": {
+    "translation": "정의의\n미덕에\n기반한\n도시라네!",
+    "placeholders": []
+  },
+  "JHELOM:11:topic1": {
+    "translation": "LIGH",
+    "placeholders": []
+  },
+  "JHELOM:11:topic2": {
+    "translation": "YEW ",
+    "placeholders": []
+  },
+  "JHELOM:11:yes": {
+    "translation": "훌륭한\n도시지!",
+    "placeholders": []
+  },
+  "JHELOM:12:health": {
+    "translation": "좋다네!",
+    "placeholders": []
+  },
+  "JHELOM:12:job": {
+    "translation": "나는\n관리인이라네.",
+    "placeholders": []
+  },
+  "JHELOM:12:look": {
+    "translation": "관리인.",
+    "placeholders": []
+  },
+  "JHELOM:12:name": {
+    "translation": "맥스",
+    "placeholders": []
+  },
+  "JHELOM:12:no": {
+    "translation": "오, 나를\n걱정시켰군!",
+    "placeholders": []
+  },
+  "JHELOM:12:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:12:question": {
+    "translation": "방에\n무슨 문제라도\n있나?",
+    "placeholders": []
+  },
+  "JHELOM:12:response1": {
+    "translation": "나는 방을\n청소한다네.",
+    "placeholders": []
+  },
+  "JHELOM:12:response2": {
+    "translation": "끝쪽에\n이상한 방이\n있다네. 사람들이\n종종\n사라지지.",
+    "placeholders": []
+  },
+  "JHELOM:12:topic1": {
+    "translation": "HOUS",
+    "placeholders": []
+  },
+  "JHELOM:12:topic2": {
+    "translation": "ROOM",
+    "placeholders": []
+  },
+  "JHELOM:12:yes": {
+    "translation": "정말 미안하네,\n바로\n고치겠네!",
+    "placeholders": []
+  },
+  "JHELOM:13:health": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "JHELOM:13:job": {
+    "translation": "나는 보석을\n찾는다네",
+    "placeholders": []
+  },
+  "JHELOM:13:look": {
+    "translation": "이상한 사람",
+    "placeholders": []
+  },
+  "JHELOM:13:name": {
+    "translation": "X",
+    "placeholders": []
+  },
+  "JHELOM:13:no": {
+    "translation": "그럼 열쇠의\n세 번째\n부분을\n얻으려면\n한 제단실의\n붉은 보석이\n필요할\n걸세!",
+    "placeholders": []
+  },
+  "JHELOM:13:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:13:question": {
+    "translation": "그대는\n아바타인가?",
+    "placeholders": []
+  },
+  "JHELOM:13:response1": {
+    "translation": "붉은 보석.",
+    "placeholders": []
+  },
+  "JHELOM:13:response2": {
+    "translation": "붉은색은\n아바타의\n미덕인\n용맹을\n뜻한다네!",
+    "placeholders": []
+  },
+  "JHELOM:13:topic1": {
+    "translation": "STON",
+    "placeholders": []
+  },
+  "JHELOM:13:topic2": {
+    "translation": "RED ",
+    "placeholders": []
+  },
+  "JHELOM:13:yes": {
+    "translation": "와우!",
+    "placeholders": []
+  },
+  "JHELOM:14:health": {
+    "translation": "가벼운\n부상뿐일세!",
+    "placeholders": []
+  },
+  "JHELOM:14:job": {
+    "translation": "나는 전투를\n한다네!",
+    "placeholders": []
+  },
+  "JHELOM:14:look": {
+    "translation": "용맹한\n전사.",
+    "placeholders": []
+  },
+  "JHELOM:14:name": {
+    "translation": "슬라이스",
+    "placeholders": []
+  },
+  "JHELOM:14:no": {
+    "translation": "겁쟁이.",
+    "placeholders": []
+  },
+  "JHELOM:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:14:question": {
+    "translation": "그대는\n용맹한가?",
+    "placeholders": []
+  },
+  "JHELOM:14:response1": {
+    "translation": "참된 용맹은\n무력이 아니라\n의지의 힘에서\n드러난다네!",
+    "placeholders": []
+  },
+  "JHELOM:14:response2": {
+    "translation": "나는 전투에서\n내 용맹을\n보인다네.",
+    "placeholders": []
+  },
+  "JHELOM:14:topic1": {
+    "translation": "BATT",
+    "placeholders": []
+  },
+  "JHELOM:14:topic2": {
+    "translation": "VALO",
+    "placeholders": []
+  },
+  "JHELOM:14:yes": {
+    "translation": "그럼 절박한\n상황이\n아니고서는\n절대\n도망치지\n말게!",
+    "placeholders": []
+  },
+  "JHELOM:15:health": {
+    "translation": "이보다\n좋을 순\n없지!",
+    "placeholders": []
+  },
+  "JHELOM:15:job": {
+    "translation": "나는 용맹으로\n싸운다네!",
+    "placeholders": []
+  },
+  "JHELOM:15:look": {
+    "translation": "마른 전사.",
+    "placeholders": []
+  },
+  "JHELOM:15:name": {
+    "translation": "팀로드",
+    "placeholders": []
+  },
+  "JHELOM:15:no": {
+    "translation": "겁쟁이.",
+    "placeholders": []
+  },
+  "JHELOM:15:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:15:question": {
+    "translation": "그대는\n용감한가?",
+    "placeholders": []
+  },
+  "JHELOM:15:response1": {
+    "translation": "패배한 용맹이\n누운 곳보다\n신성한 땅은\n없다네.",
+    "placeholders": []
+  },
+  "JHELOM:15:response2": {
+    "translation": "용감해지게,\n감행할 것이\n많으니!",
+    "placeholders": []
+  },
+  "JHELOM:15:topic1": {
+    "translation": "VALO",
+    "placeholders": []
+  },
+  "JHELOM:15:topic2": {
+    "translation": "BRAV",
+    "placeholders": []
+  },
+  "JHELOM:15:yes": {
+    "translation": "행운은\n용감한\n자를\n돕는다네!",
+    "placeholders": []
+  },
+  "JHELOM:2:health": {
+    "translation": "배 속 혹\n말고는\n다 괜찮아요.",
+    "placeholders": []
+  },
+  "JHELOM:2:job": {
+    "translation": "나는 내 양들을\n돌본다네.",
+    "placeholders": []
+  },
+  "JHELOM:2:look": {
+    "translation": "152cm의\n임신한 여인",
+    "placeholders": []
+  },
+  "JHELOM:2:name": {
+    "translation": "도나 부인",
+    "placeholders": []
+  },
+  "JHELOM:2:no": {
+    "translation": "하느님\n감사합니다!",
+    "placeholders": []
+  },
+  "JHELOM:2:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "JHELOM:2:question": {
+    "translation": "왜, 그대가\n아버지인가요?",
+    "placeholders": []
+  },
+  "JHELOM:2:response1": {
+    "translation": "임신은\n재미없어요.",
+    "placeholders": []
+  },
+  "JHELOM:2:response2": {
+    "translation": "나는 양을\n못 견디겠어요!",
+    "placeholders": []
+  },
+  "JHELOM:2:topic1": {
+    "translation": "PREG",
+    "placeholders": []
+  },
+  "JHELOM:2:topic2": {
+    "translation": "SHEE",
+    "placeholders": []
+  },
+  "JHELOM:2:yes": {
+    "translation": "남편에게\n말할 때까지\n기다려요!",
+    "placeholders": []
+  },
+  "JHELOM:3:health": {
+    "translation": "좋지\n않다네.",
+    "placeholders": []
+  },
+  "JHELOM:3:job": {
+    "translation": "나는 던전을\n뒤진다네!",
+    "placeholders": []
+  },
+  "JHELOM:3:look": {
+    "translation": "부상당한\n전사!",
+    "placeholders": []
+  },
+  "JHELOM:3:name": {
+    "translation": "벤그로드",
+    "placeholders": []
+  },
+  "JHELOM:3:no": {
+    "translation": "찾아보게!",
+    "placeholders": []
+  },
+  "JHELOM:3:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:3:question": {
+    "translation": "그 제단실을\n찾았는가?",
+    "placeholders": []
+  },
+  "JHELOM:3:response1": {
+    "translation": "나는 던전\n'데스타드'에서\n떨어졌다네.",
+    "placeholders": []
+  },
+  "JHELOM:3:response2": {
+    "translation": "그 안에서\n연결된\n던전들에서\n찾은 보석들을\n쓰게!",
+    "placeholders": []
+  },
+  "JHELOM:3:topic1": {
+    "translation": "DUNG",
+    "placeholders": []
+  },
+  "JHELOM:3:topic2": {
+    "translation": "ROOM",
+    "placeholders": []
+  },
+  "JHELOM:3:yes": {
+    "translation": "그건 탐욕,\n수치,\n히스로스와\n연결된다네!",
+    "placeholders": []
+  },
+  "JHELOM:4:health": {
+    "translation": "아주 좋다네.",
+    "placeholders": []
+  },
+  "JHELOM:4:job": {
+    "translation": "나는 용맹한\n전사들을\n찾는다네!",
+    "placeholders": []
+  },
+  "JHELOM:4:look": {
+    "translation": "고귀한 전사.",
+    "placeholders": []
+  },
+  "JHELOM:4:name": {
+    "translation": "윌리엄 경",
+    "placeholders": []
+  },
+  "JHELOM:4:no": {
+    "translation": "그렇군.",
+    "placeholders": []
+  },
+  "JHELOM:4:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:4:question": {
+    "translation": "그대는\n용맹한가?",
+    "placeholders": []
+  },
+  "JHELOM:4:response1": {
+    "translation": "악하지 않은\n생물을\n죽이지 말되,\n항상 그대의\n자리를\n지키게!",
+    "placeholders": []
+  },
+  "JHELOM:4:response2": {
+    "translation": "대신 그들이\n도망치게\n두게. 다치지\n않고서는\n절대\n도망치지\n말고!",
+    "placeholders": []
+  },
+  "JHELOM:4:topic1": {
+    "translation": "EVIL",
+    "placeholders": []
+  },
+  "JHELOM:4:topic2": {
+    "translation": "KILL",
+    "placeholders": []
+  },
+  "JHELOM:4:yes": {
+    "translation": "모든 악을\n물리치도록\n힘쓰게!",
+    "placeholders": []
+  },
+  "JHELOM:5:health": {
+    "translation": "훌륭하다네.",
+    "placeholders": []
+  },
+  "JHELOM:5:job": {
+    "translation": "나는 용맹을 위해\n싸운다네!",
+    "placeholders": []
+  },
+  "JHELOM:5:look": {
+    "translation": "강력한\n전사!",
+    "placeholders": []
+  },
+  "JHELOM:5:name": {
+    "translation": "흐로스가 경",
+    "placeholders": []
+  },
+  "JHELOM:5:no": {
+    "translation": "용맹의 신단을\n찾아가야\n하네!",
+    "placeholders": []
+  },
+  "JHELOM:5:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:5:question": {
+    "translation": "그대는 가장\n용맹한\n영혼인가?",
+    "placeholders": []
+  },
+  "JHELOM:5:response1": {
+    "translation": "용맹한 영혼은\n자신의 모습을\n두려워하지\n않는다네!",
+    "placeholders": []
+  },
+  "JHELOM:5:response2": {
+    "translation": "진언을 알아야\n하네, 이솝에게\n물어보게!",
+    "placeholders": []
+  },
+  "JHELOM:5:topic1": {
+    "translation": "VALO",
+    "placeholders": []
+  },
+  "JHELOM:5:topic2": {
+    "translation": "SHRI",
+    "placeholders": []
+  },
+  "JHELOM:5:yes": {
+    "translation": "그럴 것\n같지\n않은데!",
+    "placeholders": []
+  },
+  "JHELOM:6:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "JHELOM:6:job": {
+    "translation": "우리는 문과\n이 통로들을\n지킨다네!",
+    "placeholders": []
+  },
+  "JHELOM:6:look": {
+    "translation": "엄한 경비병.",
+    "placeholders": []
+  },
+  "JHELOM:6:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "JHELOM:6:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "JHELOM:6:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:6:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "JHELOM:6:response1": {
+    "translation": "젤롬의\n문들.",
+    "placeholders": []
+  },
+  "JHELOM:6:response2": {
+    "translation": "이 통로들은\n출입 금지라네.",
+    "placeholders": []
+  },
+  "JHELOM:6:topic1": {
+    "translation": "GATE",
+    "placeholders": []
+  },
+  "JHELOM:6:topic2": {
+    "translation": "PASS",
+    "placeholders": []
+  },
+  "JHELOM:6:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "JHELOM:7:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "JHELOM:7:job": {
+    "translation": "나는 용맹을\n찾는다네!",
+    "placeholders": []
+  },
+  "JHELOM:7:look": {
+    "translation": "작은 남자.",
+    "placeholders": []
+  },
+  "JHELOM:7:name": {
+    "translation": "이솝",
+    "placeholders": []
+  },
+  "JHELOM:7:no": {
+    "translation": "그대는\n용감하군!",
+    "placeholders": []
+  },
+  "JHELOM:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:7:question": {
+    "translation": "무슨 말인지\n아는가?",
+    "placeholders": []
+  },
+  "JHELOM:7:response1": {
+    "translation": "안전한 거리에서\n용감해지는\n건 쉽다는 걸\n알았다네!",
+    "placeholders": []
+  },
+  "JHELOM:7:response2": {
+    "translation": "용맹의 진언은\n'라'일세,\n다음 섬의\n신단에서\n쓰게!",
+    "placeholders": []
+  },
+  "JHELOM:7:topic1": {
+    "translation": "VALO",
+    "placeholders": []
+  },
+  "JHELOM:7:topic2": {
+    "translation": "MANT",
+    "placeholders": []
+  },
+  "JHELOM:7:yes": {
+    "translation": "그게 내\n문제라네.",
+    "placeholders": []
+  },
+  "JHELOM:8:health": {
+    "translation": "그저 그렇다네.",
+    "placeholders": []
+  },
+  "JHELOM:8:job": {
+    "translation": "나는 던전을\n뒤진다네.",
+    "placeholders": []
+  },
+  "JHELOM:8:look": {
+    "translation": "근엄한 전사.",
+    "placeholders": []
+  },
+  "JHELOM:8:name": {
+    "translation": "그래브너",
+    "placeholders": []
+  },
+  "JHELOM:8:no": {
+    "translation": "그건 던전\n데스타드에\n있다네!",
+    "placeholders": []
+  },
+  "JHELOM:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "JHELOM:8:question": {
+    "translation": "그대는\n그것을\n가졌는가?",
+    "placeholders": []
+  },
+  "JHELOM:8:response1": {
+    "translation": "나는 붉은\n보석을\n찾는다네.",
+    "placeholders": []
+  },
+  "JHELOM:8:response2": {
+    "translation": "제단에서\n찾을 수\n있다네!",
+    "placeholders": []
+  },
+  "JHELOM:8:topic1": {
+    "translation": "DUNG",
+    "placeholders": []
+  },
+  "JHELOM:8:topic2": {
+    "translation": "STON",
+    "placeholders": []
+  },
+  "JHELOM:8:yes": {
+    "translation": "어쩐지\n못 찾겠더라니!",
+    "placeholders": []
+  },
+  "JHELOM:9:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "JHELOM:9:job": {
+    "translation": "나는 이 탑에\n갇혀\n있다네.",
+    "placeholders": []
+  },
+  "JHELOM:9:look": {
+    "translation": "아름다운 마법사",
+    "placeholders": []
+  },
+  "JHELOM:9:name": {
+    "translation": "세뇨라",
+    "placeholders": []
+  },
+  "JHELOM:9:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "JHELOM:9:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "JHELOM:9:question": {
+    "translation": "배를\n가지고\n있는가?",
+    "placeholders": []
+  },
+  "JHELOM:9:response1": {
+    "translation": "나는 내 죄에\n대한 벌을\n받고 있다네.",
+    "placeholders": []
+  },
+  "JHELOM:9:response2": {
+    "translation": "상관없다네,\n내가 그대를\n도울 수\n있으니!",
+    "placeholders": []
+  },
+  "JHELOM:9:topic1": {
+    "translation": "TOWE",
+    "placeholders": []
+  },
+  "JHELOM:9:topic2": {
+    "translation": "CRIM",
+    "placeholders": []
+  },
+  "JHELOM:9:yes": {
+    "translation": "그럼 육분의가\n필요할 걸세,\n술집 주인에게\n물어보게,\n더 많이\n안다네!",
+    "placeholders": []
+  },
+  "LCB:0:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "LCB:0:job": {
+    "translation": "나는 도울 수\n있다네.",
+    "placeholders": []
+  },
+  "LCB:0:look": {
+    "translation": "지혜로운\n마법사.",
+    "placeholders": []
+  },
+  "LCB:0:name": {
+    "translation": "조슈아",
+    "placeholders": []
+  },
+  "LCB:0:no": {
+    "translation": "오.",
+    "placeholders": []
+  },
+  "LCB:0:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LCB:0:question": {
+    "translation": "더?",
+    "placeholders": []
+  },
+  "LCB:0:response1": {
+    "translation": "그 수수께끼!",
+    "placeholders": []
+  },
+  "LCB:0:response2": {
+    "translation": "아바타의\n여덟 철학이\n진실, 사랑,\n용기로\n결합되고\n또 거기서\n만들어진다면...",
+    "placeholders": []
+  },
+  "LCB:0:topic1": {
+    "translation": "HELP",
+    "placeholders": []
+  },
+  "LCB:0:topic2": {
+    "translation": "RIDD",
+    "placeholders": []
+  },
+  "LCB:0:yes": {
+    "translation": "모든 진실,\n모든 사랑,\n모든 용기로\n창조되고\n그것들을\n창조하는\n한 가지는\n무엇인가?",
+    "placeholders": []
+  },
+  "LCB:1:health": {
+    "translation": "좋아요, 고마워요.",
+    "placeholders": []
+  },
+  "LCB:1:job": {
+    "translation": "나는 그대를\n도울 수\n있다네.",
+    "placeholders": []
+  },
+  "LCB:1:look": {
+    "translation": "아름다운 처녀.",
+    "placeholders": []
+  },
+  "LCB:1:name": {
+    "translation": "줄리엣",
+    "placeholders": []
+  },
+  "LCB:1:no": {
+    "translation": "찾아보게!",
+    "placeholders": []
+  },
+  "LCB:1:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "LCB:1:question": {
+    "translation": "이것을\n아는가?",
+    "placeholders": []
+  },
+  "LCB:1:response1": {
+    "translation": "여덟 미덕이\n어떻게 세\n원칙으로\n합쳐지는지\n알아보게.",
+    "placeholders": []
+  },
+  "LCB:1:response2": {
+    "translation": "미덕의 세\n원칙이\n결합해\n하나의\n무엇이 되는지\n알아보게!",
+    "placeholders": []
+  },
+  "LCB:1:topic1": {
+    "translation": "HELP",
+    "placeholders": []
+  },
+  "LCB:1:topic2": {
+    "translation": "ONE ",
+    "placeholders": []
+  },
+  "LCB:1:yes": {
+    "translation": "이제 그 하나!",
+    "placeholders": []
+  },
+  "LCB:10:health": {
+    "translation": "좋아요.",
+    "placeholders": []
+  },
+  "LCB:10:job": {
+    "translation": "나는 물을\n지켜본다네.",
+    "placeholders": []
+  },
+  "LCB:10:look": {
+    "translation": "강인하고\n아름다운\n목녀.",
+    "placeholders": []
+  },
+  "LCB:10:name": {
+    "translation": "숀",
+    "placeholders": []
+  },
+  "LCB:10:no": {
+    "translation": "내 마을은\n그 오만함\n때문에\n파괴되었어요.\n폐허는 위도\nK'J\" 경도\nL'L\"의 섬에\n있답니다!",
+    "placeholders": []
+  },
+  "LCB:10:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "LCB:10:question": {
+    "translation": "그대는\n오만한가?",
+    "placeholders": []
+  },
+  "LCB:10:response1": {
+    "translation": "그것은 제게\n평화를\n가져다줘요.",
+    "placeholders": []
+  },
+  "LCB:10:response2": {
+    "translation": "나는 오만한\n도시에서\n왔답니다.",
+    "placeholders": []
+  },
+  "LCB:10:topic1": {
+    "translation": "WATE",
+    "placeholders": []
+  },
+  "LCB:10:topic2": {
+    "translation": "PEAC",
+    "placeholders": []
+  },
+  "LCB:10:yes": {
+    "translation": "흠.",
+    "placeholders": []
+  },
+  "LCB:11:health": {
+    "translation": "나는 심각한\n부상을\n입었어요.",
+    "placeholders": []
+  },
+  "LCB:11:job": {
+    "translation": "나는 내 나라를\n위해\n싸운다네.",
+    "placeholders": []
+  },
+  "LCB:11:look": {
+    "translation": "부상당한\n전사",
+    "placeholders": []
+  },
+  "LCB:11:name": {
+    "translation": "시샤",
+    "placeholders": []
+  },
+  "LCB:11:no": {
+    "translation": "흠.",
+    "placeholders": []
+  },
+  "LCB:11:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "LCB:11:question": {
+    "translation": "브리타니아를\n위해\n싸우나요?",
+    "placeholders": []
+  },
+  "LCB:11:response1": {
+    "translation": "깊군요.",
+    "placeholders": []
+  },
+  "LCB:11:response2": {
+    "translation": "브리타니아.",
+    "placeholders": []
+  },
+  "LCB:11:topic1": {
+    "translation": "WOUN",
+    "placeholders": []
+  },
+  "LCB:11:topic2": {
+    "translation": "COUN",
+    "placeholders": []
+  },
+  "LCB:11:yes": {
+    "translation": "그럼 미녹의\n지르콘이라는\n대장장이를\n찾아가세요,\n그가 신비한\n무기를 만들었는데,\n그것만이\n어비스에서\n그대를\n구할\n거예요!",
+    "placeholders": []
+  },
+  "LCB:12:health": {
+    "translation": "좋아, 고맙네.",
+    "placeholders": []
+  },
+  "LCB:12:job": {
+    "translation": "나는 궁정\n광대라네",
+    "placeholders": []
+  },
+  "LCB:12:look": {
+    "translation": "방방 뛰는\n광대",
+    "placeholders": []
+  },
+  "LCB:12:name": {
+    "translation": "척클스",
+    "placeholders": []
+  },
+  "LCB:12:no": {
+    "translation": "그럼 왜\n여기 있나?",
+    "placeholders": []
+  },
+  "LCB:12:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LCB:12:question": {
+    "translation": "앙크를\n가졌는가?",
+    "placeholders": []
+  },
+  "LCB:12:response1": {
+    "translation": "브리타니아\n성에 온 걸\n환영하네!",
+    "placeholders": []
+  },
+  "LCB:12:response2": {
+    "translation": "우물의 물에\n말을 걸어\n제단에 대해\n물어보게!",
+    "placeholders": []
+  },
+  "LCB:12:topic1": {
+    "translation": "JEST",
+    "placeholders": []
+  },
+  "LCB:12:topic2": {
+    "translation": "CLUE",
+    "placeholders": []
+  },
+  "LCB:12:yes": {
+    "translation": "그럼 평화로이\n들어오게!",
+    "placeholders": []
+  },
+  "LCB:13:health": {
+    "translation": "훌륭하다네",
+    "placeholders": []
+  },
+  "LCB:13:job": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "LCB:13:look": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "LCB:13:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "LCB:13:no": {
+    "translation": "그럼 당장\n떠나게!",
+    "placeholders": []
+  },
+  "LCB:13:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LCB:13:question": {
+    "translation": "훔칠\n작정인가?",
+    "placeholders": []
+  },
+  "LCB:13:response1": {
+    "translation": "우리는 성과\n그 보물을\n지킨다네.",
+    "placeholders": []
+  },
+  "LCB:13:response2": {
+    "translation": "그건 그대가\n상관할\n바가\n아니네.",
+    "placeholders": []
+  },
+  "LCB:13:topic1": {
+    "translation": "GUAR",
+    "placeholders": []
+  },
+  "LCB:13:topic2": {
+    "translation": "TREA",
+    "placeholders": []
+  },
+  "LCB:13:yes": {
+    "translation": "그건 헛수고가\n될\n거라고\n믿네.",
+    "placeholders": []
+  },
+  "LCB:14:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "LCB:14:job": {
+    "translation": "나는 내면의\n빛을\n찾는다네.",
+    "placeholders": []
+  },
+  "LCB:14:look": {
+    "translation": "근엄한 레인저",
+    "placeholders": []
+  },
+  "LCB:14:name": {
+    "translation": "쉴라",
+    "placeholders": []
+  },
+  "LCB:14:no": {
+    "translation": "진언은\n명상하는\n동안\n그대의 생각을\n집중시키는 데\n필요한\n구호라네.",
+    "placeholders": []
+  },
+  "LCB:14:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "LCB:14:question": {
+    "translation": "진언을\n아는가?",
+    "placeholders": []
+  },
+  "LCB:14:response1": {
+    "translation": "신단에서\n내면의 빛을\n구하게!",
+    "placeholders": []
+  },
+  "LCB:14:response2": {
+    "translation": "신단에\n들어가려면\n룬이\n필요하다네!",
+    "placeholders": []
+  },
+  "LCB:14:topic1": {
+    "translation": "LIGH",
+    "placeholders": []
+  },
+  "LCB:14:topic2": {
+    "translation": "SHRI",
+    "placeholders": []
+  },
+  "LCB:14:yes": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "LCB:15:health": {
+    "translation": "나는 괜찮네만,\n그대는\n돌아가야\n하네!",
+    "placeholders": []
+  },
+  "LCB:15:job": {
+    "translation": "나는 그대에게\n경고하러\n여기 왔다네!",
+    "placeholders": []
+  },
+  "LCB:15:look": {
+    "translation": "근엄한 목자",
+    "placeholders": []
+  },
+  "LCB:15:name": {
+    "translation": "랜드리",
+    "placeholders": []
+  },
+  "LCB:15:no": {
+    "translation": "그거 좋군.",
+    "placeholders": []
+  },
+  "LCB:15:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LCB:15:question": {
+    "translation": "계속\n가겠는가?",
+    "placeholders": []
+  },
+  "LCB:15:response1": {
+    "translation": "앞에는\n위험한 곳이\n있다네!",
+    "placeholders": []
+  },
+  "LCB:15:response2": {
+    "translation": "일단 들어가면\n왔던 곳으로\n돌아올 수\n없을\n걸세!",
+    "placeholders": []
+  },
+  "LCB:15:topic1": {
+    "translation": "WARN",
+    "placeholders": []
+  },
+  "LCB:15:topic2": {
+    "translation": "PERI",
+    "placeholders": []
+  },
+  "LCB:15:yes": {
+    "translation": "그럼 그대는\n파멸했네!",
+    "placeholders": []
+  },
+  "LCB:2:health": {
+    "translation": "아주 신난다네!",
+    "placeholders": []
+  },
+  "LCB:2:job": {
+    "translation": "즐겁게\n해드리는 것.",
+    "placeholders": []
+  },
+  "LCB:2:look": {
+    "translation": "춤추는 광대",
+    "placeholders": []
+  },
+  "LCB:2:name": {
+    "translation": "광대 쌍둥이",
+    "placeholders": []
+  },
+  "LCB:2:no": {
+    "translation": "아쉽군, 우린\n좋아하는데!",
+    "placeholders": []
+  },
+  "LCB:2:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LCB:2:question": {
+    "translation": "음악이\n마음에\n드는가?",
+    "placeholders": []
+  },
+  "LCB:2:response1": {
+    "translation": "광대에게는\n좋은 음유시인이\n필요하지!",
+    "placeholders": []
+  },
+  "LCB:2:response2": {
+    "translation": "우리 음유시인은\n아주\n훌륭하다네.",
+    "placeholders": []
+  },
+  "LCB:2:topic1": {
+    "translation": "JEST",
+    "placeholders": []
+  },
+  "LCB:2:topic2": {
+    "translation": "BARD",
+    "placeholders": []
+  },
+  "LCB:2:yes": {
+    "translation": "그럼 브리튼으로\n가야지, 거기\n최고가\n산다네!",
+    "placeholders": []
+  },
+  "LCB:3:health": {
+    "translation": "아주 좋다네!",
+    "placeholders": []
+  },
+  "LCB:3:job": {
+    "translation": "나는 성과 내\n군주를\n지킨다네!",
+    "placeholders": []
+  },
+  "LCB:3:look": {
+    "translation": "건장한 경비병",
+    "placeholders": []
+  },
+  "LCB:3:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "LCB:3:no": {
+    "translation": "그래도 전투에서\n도망치지는\n말게!",
+    "placeholders": []
+  },
+  "LCB:3:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LCB:3:question": {
+    "translation": "그대가 가장\n용맹한\n전사인가?",
+    "placeholders": []
+  },
+  "LCB:3:response1": {
+    "translation": "경비병은\n용맹한 전사여야\n한다네!",
+    "placeholders": []
+  },
+  "LCB:3:response2": {
+    "translation": "나는 로드\n브리티시를\n섬긴다네!",
+    "placeholders": []
+  },
+  "LCB:3:topic1": {
+    "translation": "GUAR",
+    "placeholders": []
+  },
+  "LCB:3:topic2": {
+    "translation": "LIEG",
+    "placeholders": []
+  },
+  "LCB:3:yes": {
+    "translation": "그럼 경비병이\n되어야지!",
+    "placeholders": []
+  },
+  "LCB:4:health": {
+    "translation": "좋아... 벤\n손가락만\n빼면!",
+    "placeholders": []
+  },
+  "LCB:4:job": {
+    "translation": "나는 요리사라네.",
+    "placeholders": []
+  },
+  "LCB:4:look": {
+    "translation": "흰 모자를 쓴\n사람.",
+    "placeholders": []
+  },
+  "LCB:4:name": {
+    "translation": "르 셰프",
+    "placeholders": []
+  },
+  "LCB:4:no": {
+    "translation": "그럼 영성주의자임에\n틀림없군!",
+    "placeholders": []
+  },
+  "LCB:4:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LCB:4:question": {
+    "translation": "그대는\n먹는가?",
+    "placeholders": []
+  },
+  "LCB:4:response1": {
+    "translation": "음식, 영광스러운\n음식, 요리가\n내 인생이지!",
+    "placeholders": []
+  },
+  "LCB:4:response2": {
+    "translation": "요리는\n연마된\n예술이라네.",
+    "placeholders": []
+  },
+  "LCB:4:topic1": {
+    "translation": "FOOD",
+    "placeholders": []
+  },
+  "LCB:4:topic2": {
+    "translation": "COOK",
+    "placeholders": []
+  },
+  "LCB:4:yes": {
+    "translation": "그럼 내 수프를\n먹어보게!",
+    "placeholders": []
+  },
+  "LCB:5:health": {
+    "translation": "별로 안 좋아,\n여기 먹을\n사람이\n없거든!",
+    "placeholders": []
+  },
+  "LCB:5:job": {
+    "translation": "나는 모험가들을\n죽인다네!",
+    "placeholders": []
+  },
+  "LCB:5:look": {
+    "translation": "리퍼",
+    "placeholders": []
+  },
+  "LCB:5:name": {
+    "translation": "리퍼",
+    "placeholders": []
+  },
+  "LCB:5:no": {
+    "translation": "그럼 멍청한\n게 틀림없군.",
+    "placeholders": []
+  },
+  "LCB:5:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "LCB:5:question": {
+    "translation": "이것을\n찾겠는가?",
+    "placeholders": []
+  },
+  "LCB:5:response1": {
+    "translation": "많은 이를\n죽일 수 있는\n물건이\n있다네!",
+    "placeholders": []
+  },
+  "LCB:5:response2": {
+    "translation": "그것에 대한\n지식은\n버커니어즈\n덴에서\n찾을 수\n있다네!",
+    "placeholders": []
+  },
+  "LCB:5:topic1": {
+    "translation": "KILL",
+    "placeholders": []
+  },
+  "LCB:5:topic2": {
+    "translation": "THIN",
+    "placeholders": []
+  },
+  "LCB:5:yes": {
+    "translation": "그것은 큰\n힘을\n가져다준다네!",
+    "placeholders": []
+  },
+  "LCB:6:health": {
+    "translation": "아주\n좋지 않다네.",
+    "placeholders": []
+  },
+  "LCB:6:job": {
+    "translation": "나는 아무것도\n없다네.",
+    "placeholders": []
+  },
+  "LCB:6:look": {
+    "translation": "남루한 영혼.",
+    "placeholders": []
+  },
+  "LCB:6:name": {
+    "translation": "이름 없는\n죄수",
+    "placeholders": []
+  },
+  "LCB:6:no": {
+    "translation": "그것이 사실이길\n바라네!",
+    "placeholders": []
+  },
+  "LCB:6:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LCB:6:question": {
+    "translation": "그대는\n해적인가?",
+    "placeholders": []
+  },
+  "LCB:6:response1": {
+    "translation": "범죄는\n악한\n것이라네!",
+    "placeholders": []
+  },
+  "LCB:6:response2": {
+    "translation": "여기서 나는\n내 죄의\n대가를\n치른다네!",
+    "placeholders": []
+  },
+  "LCB:6:topic1": {
+    "translation": "CRIM",
+    "placeholders": []
+  },
+  "LCB:6:topic2": {
+    "translation": "PRIS",
+    "placeholders": []
+  },
+  "LCB:6:yes": {
+    "translation": "그대는 결코\n여정을\n완수하지\n못할 걸세,\n악은 아바타를\n만들지\n않으니까!",
+    "placeholders": []
+  },
+  "LCB:7:health": {
+    "translation": "나는 늙었네,\n아주\n늙었지....",
+    "placeholders": []
+  },
+  "LCB:7:job": {
+    "translation": "나는 그대를\n돕기 위해\n여기 있다네.",
+    "placeholders": []
+  },
+  "LCB:7:look": {
+    "translation": "지혜로운 마법사",
+    "placeholders": []
+  },
+  "LCB:7:name": {
+    "translation": "조린",
+    "placeholders": []
+  },
+  "LCB:7:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "LCB:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LCB:7:question": {
+    "translation": "그리로\n가겠는가?",
+    "placeholders": []
+  },
+  "LCB:7:response1": {
+    "translation": "성들에서\n도움을\n구하게!",
+    "placeholders": []
+  },
+  "LCB:7:response2": {
+    "translation": "찾아보게:\n라이시움,\n엠패스 수도원,\n서펀트 성!",
+    "placeholders": []
+  },
+  "LCB:7:topic1": {
+    "translation": "HELP",
+    "placeholders": []
+  },
+  "LCB:7:topic2": {
+    "translation": "CAST",
+    "placeholders": []
+  },
+  "LCB:7:yes": {
+    "translation": "그곳에서\n안토스라는\n이름의 모두를\n찾아 종, 책,\n초에 대해\n물어보게!",
+    "placeholders": []
+  },
+  "LCB:8:health": {
+    "translation": "이보다\n좋을 순\n없지!",
+    "placeholders": []
+  },
+  "LCB:8:job": {
+    "translation": "나는 성과 그\n안의 모든 것을\n지킨다네.",
+    "placeholders": []
+  },
+  "LCB:8:look": {
+    "translation": "건장한 경비병",
+    "placeholders": []
+  },
+  "LCB:8:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "LCB:8:no": {
+    "translation": "필요하다면\n그분이\n도와주실\n걸세!",
+    "placeholders": []
+  },
+  "LCB:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LCB:8:question": {
+    "translation": "로드 브리티시를\n찾는가?",
+    "placeholders": []
+  },
+  "LCB:8:response1": {
+    "translation": "나는 성을\n지킨다네!",
+    "placeholders": []
+  },
+  "LCB:8:response2": {
+    "translation": "성은 아름답고\n튼튼하다네!",
+    "placeholders": []
+  },
+  "LCB:8:topic1": {
+    "translation": "GUAR",
+    "placeholders": []
+  },
+  "LCB:8:topic2": {
+    "translation": "CAST",
+    "placeholders": []
+  },
+  "LCB:8:yes": {
+    "translation": "그분은 위층\n왕좌의 방에\n계신다네.",
+    "placeholders": []
+  },
+  "LCB:9:health": {
+    "translation": "좋다.",
+    "placeholders": []
+  },
+  "LCB:9:job": {
+    "translation": "나는 비밀을\n지니고 있다.",
+    "placeholders": []
+  },
+  "LCB:9:look": {
+    "translation": "물",
+    "placeholders": []
+  },
+  "LCB:9:name": {
+    "translation": "물",
+    "placeholders": []
+  },
+  "LCB:9:no": {
+    "translation": "오.",
+    "placeholders": []
+  },
+  "LCB:9:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "LCB:9:question": {
+    "translation": "더?",
+    "placeholders": []
+  },
+  "LCB:9:response1": {
+    "translation": "무엇에?",
+    "placeholders": []
+  },
+  "LCB:9:response2": {
+    "translation": "여덟 던전\n모두의\n최하층을\n연결하는\n제단실이\n세 개\n있다!",
+    "placeholders": []
+  },
+  "LCB:9:topic1": {
+    "translation": "SECR",
+    "placeholders": []
+  },
+  "LCB:9:topic2": {
+    "translation": "ALTA",
+    "placeholders": []
+  },
+  "LCB:9:yes": {
+    "translation": "제단에\n올바른 색의\n보석을\n쓰면, 3부분의\n열쇠를\n얻을 수\n있다!",
+    "placeholders": []
+  },
+  "LYCAEUM:0:health": {
+    "translation": "아주 좋다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:0:job": {
+    "translation": "나는 이 지방을\n다스린다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:0:look": {
+    "translation": "위엄있는 남작",
+    "placeholders": []
+  },
+  "LYCAEUM:0:name": {
+    "translation": "로버트 프레이저",
+    "placeholders": []
+  },
+  "LYCAEUM:0:no": {
+    "translation": "다음에\n하지.",
+    "placeholders": []
+  },
+  "LYCAEUM:0:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:0:question": {
+    "translation": "지금 그것을\n알고 싶은가?",
+    "placeholders": []
+  },
+  "LYCAEUM:0:response1": {
+    "translation": "내 부인 베스가\n더 말해줄\n수 있을\n걸세!",
+    "placeholders": []
+  },
+  "LYCAEUM:0:response2": {
+    "translation": "나는 세 음절\n중 하나만\n안다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:0:topic1": {
+    "translation": "PROV",
+    "placeholders": []
+  },
+  "LYCAEUM:0:topic2": {
+    "translation": "WORD",
+    "placeholders": []
+  },
+  "LYCAEUM:0:yes": {
+    "translation": "그것은 '베르'라네!\n이제 다른\n부분들을\n찾아보게!",
+    "placeholders": []
+  },
+  "LYCAEUM:1:health": {
+    "translation": "좋아요.",
+    "placeholders": []
+  },
+  "LYCAEUM:1:job": {
+    "translation": "나는 영주님과\n함께\n다스린다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:1:look": {
+    "translation": "매력적인 여인",
+    "placeholders": []
+  },
+  "LYCAEUM:1:name": {
+    "translation": "베스 프레이저",
+    "placeholders": []
+  },
+  "LYCAEUM:1:no": {
+    "translation": "그럼 찾지\n못할 거예요!",
+    "placeholders": []
+  },
+  "LYCAEUM:1:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "LYCAEUM:1:question": {
+    "translation": "진실을\n찾고\n있나요?",
+    "placeholders": []
+  },
+  "LYCAEUM:1:response1": {
+    "translation": "이 지방.",
+    "placeholders": []
+  },
+  "LYCAEUM:1:response2": {
+    "translation": "우리 백성은\n진실을 삶의\n방식으로\n믿고 최대한\n그렇게\n산답니다!",
+    "placeholders": []
+  },
+  "LYCAEUM:1:topic1": {
+    "translation": "RULE",
+    "placeholders": []
+  },
+  "LYCAEUM:1:topic2": {
+    "translation": "PROV",
+    "placeholders": []
+  },
+  "LYCAEUM:1:yes": {
+    "translation": "그럼 찾기를!",
+    "placeholders": []
+  },
+  "LYCAEUM:10:health": {
+    "translation": "내 상처가\n심각하다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:10:job": {
+    "translation": "이젠\n없다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:10:look": {
+    "translation": "부상당한\n전사.",
+    "placeholders": []
+  },
+  "LYCAEUM:10:name": {
+    "translation": "전사",
+    "placeholders": []
+  },
+  "LYCAEUM:10:no": {
+    "translation": "그것들은\n던전들을\n서로\n연결한다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:10:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:10:question": {
+    "translation": "하나\n본 적\n있는가?",
+    "placeholders": []
+  },
+  "LYCAEUM:10:response1": {
+    "translation": "더는\n없다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:10:response2": {
+    "translation": "나는 던전\n제단실에서\n졌다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:10:topic1": {
+    "translation": "WARR",
+    "placeholders": []
+  },
+  "LYCAEUM:10:topic2": {
+    "translation": "WOUN",
+    "placeholders": []
+  },
+  "LYCAEUM:10:yes": {
+    "translation": "세 개의 방이\n각각 던전\n네 곳씩\n연결된다는\n걸 알아채게!",
+    "placeholders": []
+  },
+  "LYCAEUM:11:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:11:job": {
+    "translation": "나는\n사서라네.",
+    "placeholders": []
+  },
+  "LYCAEUM:11:look": {
+    "translation": "키 크고\n민첩한 남자",
+    "placeholders": []
+  },
+  "LYCAEUM:11:name": {
+    "translation": "테런스 경",
+    "placeholders": []
+  },
+  "LYCAEUM:11:no": {
+    "translation": "편하게\n둘러보게.",
+    "placeholders": []
+  },
+  "LYCAEUM:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:11:question": {
+    "translation": "특정한\n책을 찾고\n있는가?",
+    "placeholders": []
+  },
+  "LYCAEUM:11:response1": {
+    "translation": "여기는 코덱스를\n제외하면\n브리타니아에서\n가장 큰\n지식의\n창고라네!",
+    "placeholders": []
+  },
+  "LYCAEUM:11:response2": {
+    "translation": "'ㅈ' 항목을\n찾아보게",
+    "placeholders": []
+  },
+  "LYCAEUM:11:topic1": {
+    "translation": "LIBR",
+    "placeholders": []
+  },
+  "LYCAEUM:11:topic2": {
+    "translation": "TRUT",
+    "placeholders": []
+  },
+  "LYCAEUM:11:yes": {
+    "translation": "어떤\n책인가?",
+    "placeholders": []
+  },
+  "LYCAEUM:12:health": {
+    "translation": "불행하다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:12:job": {
+    "translation": "즐겁게\n해드리려고!",
+    "placeholders": []
+  },
+  "LYCAEUM:12:look": {
+    "translation": "변덕스러운 광대",
+    "placeholders": []
+  },
+  "LYCAEUM:12:name": {
+    "translation": "자야크",
+    "placeholders": []
+  },
+  "LYCAEUM:12:no": {
+    "translation": "그는 브리타니아\n성에\n산다네, 그에게\n단서를\n물어보게!",
+    "placeholders": []
+  },
+  "LYCAEUM:12:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:12:question": {
+    "translation": "척클스를\n아는가?",
+    "placeholders": []
+  },
+  "LYCAEUM:12:response1": {
+    "translation": "아, 지금은\n아니라네.",
+    "placeholders": []
+  },
+  "LYCAEUM:12:response2": {
+    "translation": "내 친구\n척클스가\n비밀을\n말해주지\n않기\n때문이지!",
+    "placeholders": []
+  },
+  "LYCAEUM:12:topic1": {
+    "translation": "ENTE",
+    "placeholders": []
+  },
+  "LYCAEUM:12:topic2": {
+    "translation": "UNHA",
+    "placeholders": []
+  },
+  "LYCAEUM:12:yes": {
+    "translation": "왜 그에게\n단서를\n물어보지\n않나!",
+    "placeholders": []
+  },
+  "LYCAEUM:13:health": {
+    "translation": "아주 좋다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:13:job": {
+    "translation": "보물을\n지키는 것.",
+    "placeholders": []
+  },
+  "LYCAEUM:13:look": {
+    "translation": "강인한 경비병.",
+    "placeholders": []
+  },
+  "LYCAEUM:13:name": {
+    "translation": "카트리오나",
+    "placeholders": []
+  },
+  "LYCAEUM:13:no": {
+    "translation": "좋아, 걱정했잖나!",
+    "placeholders": []
+  },
+  "LYCAEUM:13:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "LYCAEUM:13:question": {
+    "translation": "훔칠\n작정인가?",
+    "placeholders": []
+  },
+  "LYCAEUM:13:response1": {
+    "translation": "보물들은\n아주 값지다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:13:response2": {
+    "translation": "그래, 금이\n많지.",
+    "placeholders": []
+  },
+  "LYCAEUM:13:topic1": {
+    "translation": "TREA",
+    "placeholders": []
+  },
+  "LYCAEUM:13:topic2": {
+    "translation": "VALU",
+    "placeholders": []
+  },
+  "LYCAEUM:13:yes": {
+    "translation": "말리지는\n않겠네",
+    "placeholders": []
+  },
+  "LYCAEUM:14:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "LYCAEUM:14:job": {
+    "translation": "나는 마법\n주문을\n가르친다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:14:look": {
+    "translation": "고귀한 마법사",
+    "placeholders": []
+  },
+  "LYCAEUM:14:name": {
+    "translation": "나이젤이라\n하네.",
+    "placeholders": []
+  },
+  "LYCAEUM:14:no": {
+    "translation": "미안하네.",
+    "placeholders": []
+  },
+  "LYCAEUM:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:14:question": {
+    "translation": "그게 뭔지\n아는가?",
+    "placeholders": []
+  },
+  "LYCAEUM:14:response1": {
+    "translation": "나만의\n전문 분야가\n있지!",
+    "placeholders": []
+  },
+  "LYCAEUM:14:response2": {
+    "translation": "그래, 부활에는\n재, 인삼, 마늘,\n거미줄,\n핏빛이끼,\n그리고\n맨드레이크가\n필요하지!",
+    "placeholders": []
+  },
+  "LYCAEUM:14:topic1": {
+    "translation": "SPEL",
+    "placeholders": []
+  },
+  "LYCAEUM:14:topic2": {
+    "translation": "RECA",
+    "placeholders": []
+  },
+  "LYCAEUM:14:yes": {
+    "translation": "그 주문을\n뭐라\n부를까?",
+    "placeholders": []
+  },
+  "LYCAEUM:15:health": {
+    "translation": "나는 춥고\n아프다네!\n오... 제발...",
+    "placeholders": []
+  },
+  "LYCAEUM:15:job": {
+    "translation": "나는 앉아서\n구걸한다네\n오... 제발...",
+    "placeholders": []
+  },
+  "LYCAEUM:15:look": {
+    "translation": "가련한 거지",
+    "placeholders": []
+  },
+  "LYCAEUM:15:name": {
+    "translation": "온순한\n샤일록.",
+    "placeholders": []
+  },
+  "LYCAEUM:15:no": {
+    "translation": "오... 제발...",
+    "placeholders": []
+  },
+  "LYCAEUM:15:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:15:question": {
+    "translation": "나를\n도와주겠는가?\n오... 제발...",
+    "placeholders": []
+  },
+  "LYCAEUM:15:response1": {
+    "translation": "그래, 제발\n돈을 좀\n주게!\n오... 제발...",
+    "placeholders": []
+  },
+  "LYCAEUM:15:response2": {
+    "translation": "나는 흑사병에\n걸렸다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:15:topic1": {
+    "translation": "BEG ",
+    "placeholders": []
+  },
+  "LYCAEUM:15:topic2": {
+    "translation": "SICK",
+    "placeholders": []
+  },
+  "LYCAEUM:15:yes": {
+    "translation": "오... 제발...",
+    "placeholders": []
+  },
+  "LYCAEUM:2:health": {
+    "translation": "아주 졸리다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:2:job": {
+    "translation": "문을 지키고,\n남작을 지키고,\n남작 부인을\n지키고, 탑을\n감시하고....",
+    "placeholders": []
+  },
+  "LYCAEUM:2:look": {
+    "translation": "졸린 경비병",
+    "placeholders": []
+  },
+  "LYCAEUM:2:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "LYCAEUM:2:no": {
+    "translation": "게으름뱅이!",
+    "placeholders": []
+  },
+  "LYCAEUM:2:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:2:question": {
+    "translation": "내가 왜 피곤한지\n알겠나?",
+    "placeholders": []
+  },
+  "LYCAEUM:2:response1": {
+    "translation": "나는 여기\n몇 시간째\n있었다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:2:response2": {
+    "translation": "그래, 몇 시간이나!",
+    "placeholders": []
+  },
+  "LYCAEUM:2:topic1": {
+    "translation": "GUAR",
+    "placeholders": []
+  },
+  "LYCAEUM:2:topic2": {
+    "translation": "HOUR",
+    "placeholders": []
+  },
+  "LYCAEUM:2:yes": {
+    "translation": "남작의 경비대에서\n일하는 건\n고되고\n시간도\n길다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:3:health": {
+    "translation": "뼈는 쑤시지만\n정신은\n또렷하다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:3:job": {
+    "translation": "나는 늙은\n마법사지만,\n보여줄 게\n많다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:3:look": {
+    "translation": "지혜로운\n늙은 현자",
+    "placeholders": []
+  },
+  "LYCAEUM:3:name": {
+    "translation": "팔라마르",
+    "placeholders": []
+  },
+  "LYCAEUM:3:no": {
+    "translation": "보게!!!",
+    "placeholders": []
+  },
+  "LYCAEUM:3:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:3:question": {
+    "translation": "어디인지\n보이는가?",
+    "placeholders": []
+  },
+  "LYCAEUM:3:response1": {
+    "translation": "여기 내\n망원경\n안에!",
+    "placeholders": []
+  },
+  "LYCAEUM:3:response2": {
+    "translation": "끝쪽을 찾아보게,\n손잡이가\n하나 있을\n걸세.",
+    "placeholders": []
+  },
+  "LYCAEUM:3:topic1": {
+    "translation": "SHOW",
+    "placeholders": []
+  },
+  "LYCAEUM:3:topic2": {
+    "translation": "TELE",
+    "placeholders": []
+  },
+  "LYCAEUM:3:yes": {
+    "translation": "눈금을 맞추면\n보일 걸세!",
+    "placeholders": []
+  },
+  "LYCAEUM:4:health": {
+    "translation": "늙고 허약하지만,\n많은 여정을\n보아왔다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:4:job": {
+    "translation": "나는 큰\n지식을\n지녔다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:4:look": {
+    "translation": "묘하게\n낯익어 보이는\n늙은 드루이드.",
+    "placeholders": []
+  },
+  "LYCAEUM:4:name": {
+    "translation": "안토스 신부",
+    "placeholders": []
+  },
+  "LYCAEUM:4:no": {
+    "translation": "오.",
+    "placeholders": []
+  },
+  "LYCAEUM:4:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:4:question": {
+    "translation": "그대는\n여정 중인가?",
+    "placeholders": []
+  },
+  "LYCAEUM:4:response1": {
+    "translation": "무엇을\n찾고\n있는가?",
+    "placeholders": []
+  },
+  "LYCAEUM:4:response2": {
+    "translation": "다른 책들이\n있는 곳에서\n진실의 책을\n찾아보게.",
+    "placeholders": []
+  },
+  "LYCAEUM:4:topic1": {
+    "translation": "KNOW",
+    "placeholders": []
+  },
+  "LYCAEUM:4:topic2": {
+    "translation": "BOOK",
+    "placeholders": []
+  },
+  "LYCAEUM:4:yes": {
+    "translation": "그대가\n성공하기를!",
+    "placeholders": []
+  },
+  "LYCAEUM:5:health": {
+    "translation": "약간 피곤하군.",
+    "placeholders": []
+  },
+  "LYCAEUM:5:job": {
+    "translation": "나는 왕좌의 방을\n지킨다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:5:look": {
+    "translation": "건장한 경비병.",
+    "placeholders": []
+  },
+  "LYCAEUM:5:name": {
+    "translation": "존",
+    "placeholders": []
+  },
+  "LYCAEUM:5:no": {
+    "translation": "세 원칙의\n조합은 여덟\n가지가 가능하니,\n도시도 여덟\n곳이라네!",
+    "placeholders": []
+  },
+  "LYCAEUM:5:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:5:question": {
+    "translation": "어느 것인지\n아는가?",
+    "placeholders": []
+  },
+  "LYCAEUM:5:response1": {
+    "translation": "진실의\n왕좌!",
+    "placeholders": []
+  },
+  "LYCAEUM:5:response2": {
+    "translation": "진실의\n원칙을 따르는\n마을이\n네 곳\n있다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:5:topic1": {
+    "translation": "THRO",
+    "placeholders": []
+  },
+  "LYCAEUM:5:topic2": {
+    "translation": "TRUT",
+    "placeholders": []
+  },
+  "LYCAEUM:5:yes": {
+    "translation": "좋아!",
+    "placeholders": []
+  },
+  "LYCAEUM:6:health": {
+    "translation": "좋다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:6:job": {
+    "translation": "나는\n조언한다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:6:look": {
+    "translation": "이상한 갑옷을\n입은 키 큰\n마법사.",
+    "placeholders": []
+  },
+  "LYCAEUM:6:name": {
+    "translation": "스카투",
+    "placeholders": []
+  },
+  "LYCAEUM:6:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "LYCAEUM:6:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:6:question": {
+    "translation": "그대는\n부분적인\n아바타인가?",
+    "placeholders": []
+  },
+  "LYCAEUM:6:response1": {
+    "translation": "예언자를\n자주 찾아가는\n게 좋을\n걸세!",
+    "placeholders": []
+  },
+  "LYCAEUM:6:response2": {
+    "translation": "나는 신비한\n갑옷을\n입는다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:6:topic1": {
+    "translation": "ADVI",
+    "placeholders": []
+  },
+  "LYCAEUM:6:topic2": {
+    "translation": "ARMO",
+    "placeholders": []
+  },
+  "LYCAEUM:6:yes": {
+    "translation": "8부분 아바타가\n되면, 미녹의\n지르콘을\n찾아 신비한\n것들에 대해\n물어보게!",
+    "placeholders": []
+  },
+  "LYCAEUM:7:health": {
+    "translation": "나야 좋지,\n그대도\n그러길\n바라네.",
+    "placeholders": []
+  },
+  "LYCAEUM:7:job": {
+    "translation": "연구",
+    "placeholders": []
+  },
+  "LYCAEUM:7:look": {
+    "translation": "작은 드루이드",
+    "placeholders": []
+  },
+  "LYCAEUM:7:name": {
+    "translation": "에스트로",
+    "placeholders": []
+  },
+  "LYCAEUM:7:no": {
+    "translation": "그럼 유의\n판사에게\n말하게!",
+    "placeholders": []
+  },
+  "LYCAEUM:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:7:question": {
+    "translation": "그 어떤\n죄도 저지른\n적이 없다고?!",
+    "placeholders": []
+  },
+  "LYCAEUM:7:response1": {
+    "translation": "나는 정의의\n책을 찾고\n있다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:7:response2": {
+    "translation": "분명 여기\n어딘가\n있을 걸세!",
+    "placeholders": []
+  },
+  "LYCAEUM:7:topic1": {
+    "translation": "REAS",
+    "placeholders": []
+  },
+  "LYCAEUM:7:topic2": {
+    "translation": "JUST",
+    "placeholders": []
+  },
+  "LYCAEUM:7:yes": {
+    "translation": "그건 거짓\n자랑이라고\n생각하네!",
+    "placeholders": []
+  },
+  "LYCAEUM:8:health": {
+    "translation": "아주 좋다네,\n고맙네!",
+    "placeholders": []
+  },
+  "LYCAEUM:8:job": {
+    "translation": "그대를\n환영하려고!",
+    "placeholders": []
+  },
+  "LYCAEUM:8:look": {
+    "translation": "위엄있는 마법사",
+    "placeholders": []
+  },
+  "LYCAEUM:8:name": {
+    "translation": "타이머스",
+    "placeholders": []
+  },
+  "LYCAEUM:8:no": {
+    "translation": "여행하며\n배우게!",
+    "placeholders": []
+  },
+  "LYCAEUM:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:8:question": {
+    "translation": "진실의 원칙을\n따르는 도시가\n몇 곳인지\n아는가?",
+    "placeholders": []
+  },
+  "LYCAEUM:8:response1": {
+    "translation": "그래, 진실의\n요새, 라이시움에\n온 걸\n환영하네!",
+    "placeholders": []
+  },
+  "LYCAEUM:8:response2": {
+    "translation": "던전 제단실은\n각각 보석\n4개가\n필요하다네!",
+    "placeholders": []
+  },
+  "LYCAEUM:8:topic1": {
+    "translation": "WELC",
+    "placeholders": []
+  },
+  "LYCAEUM:8:topic2": {
+    "translation": "FOUR",
+    "placeholders": []
+  },
+  "LYCAEUM:8:yes": {
+    "translation": "몇 곳인가?",
+    "placeholders": []
+  },
+  "LYCAEUM:9:health": {
+    "translation": "나는 명상\n상태에\n있다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:9:job": {
+    "translation": "나는 진실을\n알고자\n한다네.",
+    "placeholders": []
+  },
+  "LYCAEUM:9:look": {
+    "translation": "생각에 잠긴\n사람.",
+    "placeholders": []
+  },
+  "LYCAEUM:9:name": {
+    "translation": "진실을\n구하는 자.",
+    "placeholders": []
+  },
+  "LYCAEUM:9:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "LYCAEUM:9:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "LYCAEUM:9:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "LYCAEUM:9:response1": {
+    "translation": "내가 명상하는\n원칙.",
+    "placeholders": []
+  },
+  "LYCAEUM:9:response2": {
+    "translation": "각 신단에서\n1분, 2분,\n3분씩\n명상하면,\n선의 길을\n알게\n되리라!",
+    "placeholders": []
+  },
+  "LYCAEUM:9:topic1": {
+    "translation": "TRUT",
+    "placeholders": []
+  },
+  "LYCAEUM:9:topic2": {
+    "translation": "MEDI",
+    "placeholders": []
+  },
+  "LYCAEUM:9:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "MAGINCIA:0:health": {
+    "translation": "좋아요.",
+    "placeholders": []
+  },
+  "MAGINCIA:0:job": {
+    "translation": "생존자.",
+    "placeholders": []
+  },
+  "MAGINCIA:0:look": {
+    "translation": "목자.",
+    "placeholders": []
+  },
+  "MAGINCIA:0:name": {
+    "translation": "카트리나",
+    "placeholders": []
+  },
+  "MAGINCIA:0:no": {
+    "translation": "겸손은\n오만을\n극복해야 하는\n미덕이다!",
+    "placeholders": []
+  },
+  "MAGINCIA:0:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "MAGINCIA:0:question": {
+    "translation": "그대는\n오만한가?",
+    "placeholders": []
+  },
+  "MAGINCIA:0:response1": {
+    "translation": "매긴시아는\n그 오만함\n때문에\n파괴되었다.",
+    "placeholders": []
+  },
+  "MAGINCIA:0:response2": {
+    "translation": "오만은 진실,\n사랑, 용기가\n없을 때\n번성한다.",
+    "placeholders": []
+  },
+  "MAGINCIA:0:topic1": {
+    "translation": "SURV",
+    "placeholders": []
+  },
+  "MAGINCIA:0:topic2": {
+    "translation": "PRID",
+    "placeholders": []
+  },
+  "MAGINCIA:0:yes": {
+    "translation": "그대의 노력은\n무의미하다.",
+    "placeholders": []
+  },
+  "MAGINCIA:1:health": {
+    "translation": "평화를 찾는\n언데드.",
+    "placeholders": []
+  },
+  "MAGINCIA:1:job": {
+    "translation": "나는 매긴시아에\n출몰한다",
+    "placeholders": []
+  },
+  "MAGINCIA:1:look": {
+    "translation": "그림자 유령.",
+    "placeholders": []
+  },
+  "MAGINCIA:1:name": {
+    "translation": "고스틀리",
+    "placeholders": []
+  },
+  "MAGINCIA:1:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "MAGINCIA:1:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:1:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "MAGINCIA:1:response1": {
+    "translation": "나는 결코\n평화를 찾을 수\n없다네, 영원히\n지박령의\n영역으로\n추방되었지.",
+    "placeholders": []
+  },
+  "MAGINCIA:1:response2": {
+    "translation": "사소한 행적을\n자랑스러워하지\n말게, 그대\n또한 빛에서\n떨어질\n테니!",
+    "placeholders": []
+  },
+  "MAGINCIA:1:topic1": {
+    "translation": "PEAC",
+    "placeholders": []
+  },
+  "MAGINCIA:1:topic2": {
+    "translation": "SPIR",
+    "placeholders": []
+  },
+  "MAGINCIA:1:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "MAGINCIA:10:health": {
+    "translation": "힉...",
+    "placeholders": []
+  },
+  "MAGINCIA:10:job": {
+    "translation": "나는 한때\n강력한\n상인이었지!",
+    "placeholders": []
+  },
+  "MAGINCIA:10:look": {
+    "translation": "뚱뚱한 유령.",
+    "placeholders": []
+  },
+  "MAGINCIA:10:name": {
+    "translation": "부저",
+    "placeholders": []
+  },
+  "MAGINCIA:10:no": {
+    "translation": "세상은\n나 없이도\n돌아가지.",
+    "placeholders": []
+  },
+  "MAGINCIA:10:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:10:question": {
+    "translation": "알겠는가?",
+    "placeholders": []
+  },
+  "MAGINCIA:10:response1": {
+    "translation": "내 재산은\n끝이 없었고,\n나는 큰\n힘을\n가졌었지!",
+    "placeholders": []
+  },
+  "MAGINCIA:10:response2": {
+    "translation": "오만한 영혼은\n분명 자신의\n가치를\n모른다네!",
+    "placeholders": []
+  },
+  "MAGINCIA:10:topic1": {
+    "translation": "MERC",
+    "placeholders": []
+  },
+  "MAGINCIA:10:topic2": {
+    "translation": "POWE",
+    "placeholders": []
+  },
+  "MAGINCIA:10:yes": {
+    "translation": "세상은\n나 없이도\n돌아가지.",
+    "placeholders": []
+  },
+  "MAGINCIA:11:health": {
+    "translation": "이보다\n좋을 순\n없지.",
+    "placeholders": []
+  },
+  "MAGINCIA:11:job": {
+    "translation": "나는 이\n상점을\n운영한다네.",
+    "placeholders": []
+  },
+  "MAGINCIA:11:look": {
+    "translation": "뚱뚱한\n해골.",
+    "placeholders": []
+  },
+  "MAGINCIA:11:name": {
+    "translation": "벌버스",
+    "placeholders": []
+  },
+  "MAGINCIA:11:no": {
+    "translation": "나는 오직\n최고급만\n판다네.",
+    "placeholders": []
+  },
+  "MAGINCIA:11:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:11:question": {
+    "translation": "식량에\n관심\n있는가?",
+    "placeholders": []
+  },
+  "MAGINCIA:11:response1": {
+    "translation": "왜, 물론\n식량 상점이지.",
+    "placeholders": []
+  },
+  "MAGINCIA:11:response2": {
+    "translation": "뭐, 언제든\n더 들어올\n예정이라네!",
+    "placeholders": []
+  },
+  "MAGINCIA:11:topic1": {
+    "translation": "SHOP",
+    "placeholders": []
+  },
+  "MAGINCIA:11:topic2": {
+    "translation": "SPOI",
+    "placeholders": []
+  },
+  "MAGINCIA:11:yes": {
+    "translation": "흠, 재고가\n상한 것\n같은데....",
+    "placeholders": []
+  },
+  "MAGINCIA:12:health": {
+    "translation": "나아진\n적도\n있었지.",
+    "placeholders": []
+  },
+  "MAGINCIA:12:job": {
+    "translation": "나는\n후회한다네.",
+    "placeholders": []
+  },
+  "MAGINCIA:12:look": {
+    "translation": "흐느끼는\n해골.",
+    "placeholders": []
+  },
+  "MAGINCIA:12:name": {
+    "translation": "스플롯",
+    "placeholders": []
+  },
+  "MAGINCIA:12:no": {
+    "translation": "어리석은 놈!",
+    "placeholders": []
+  },
+  "MAGINCIA:12:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:12:question": {
+    "translation": "그대는\n순수함을\n찾는가?",
+    "placeholders": []
+  },
+  "MAGINCIA:12:response1": {
+    "translation": "나는 오만했다네,\n허영을\n벗어던지게,\n오직 겸손한\n자만이\n순수하다네!",
+    "placeholders": []
+  },
+  "MAGINCIA:12:response2": {
+    "translation": "모든 미덕이\n자라나는\n뿌리라네!",
+    "placeholders": []
+  },
+  "MAGINCIA:12:topic1": {
+    "translation": "REGR",
+    "placeholders": []
+  },
+  "MAGINCIA:12:topic2": {
+    "translation": "HUMB",
+    "placeholders": []
+  },
+  "MAGINCIA:12:yes": {
+    "translation": "그럼 룬과 보석의\n뱀에게\n물어보게!",
+    "placeholders": []
+  },
+  "MAGINCIA:13:health": {
+    "translation": "좋지\n않다네.",
+    "placeholders": []
+  },
+  "MAGINCIA:13:job": {
+    "translation": "나는 이제\n겸손을\n이해하려\n한다네.",
+    "placeholders": []
+  },
+  "MAGINCIA:13:look": {
+    "translation": "파란 유령.",
+    "placeholders": []
+  },
+  "MAGINCIA:13:name": {
+    "translation": "러스킨",
+    "placeholders": []
+  },
+  "MAGINCIA:13:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "MAGINCIA:13:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:13:question": {
+    "translation": "그대는\n겸손을\n알고자\n하는가?",
+    "placeholders": []
+  },
+  "MAGINCIA:13:response1": {
+    "translation": "위대한 영혼의\n첫 시험은\n겸손이라네!",
+    "placeholders": []
+  },
+  "MAGINCIA:13:response2": {
+    "translation": "룬과 뱀에게\n물어보게,\n그것이 공격하기\n바로 전에!",
+    "placeholders": []
+  },
+  "MAGINCIA:13:topic1": {
+    "translation": "HUMI",
+    "placeholders": []
+  },
+  "MAGINCIA:13:topic2": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "MAGINCIA:13:yes": {
+    "translation": "그대에겐\n룬이\n필요할\n걸세!",
+    "placeholders": []
+  },
+  "MAGINCIA:14:health": {
+    "translation": "피에\n굶주렸지!",
+    "placeholders": []
+  },
+  "MAGINCIA:14:job": {
+    "translation": "나는 매긴시아의\n모든 생명에\n죽음을\n가져온다네!",
+    "placeholders": []
+  },
+  "MAGINCIA:14:look": {
+    "translation": "험상궂은\n독사!",
+    "placeholders": []
+  },
+  "MAGINCIA:14:name": {
+    "translation": "네이트",
+    "placeholders": []
+  },
+  "MAGINCIA:14:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "MAGINCIA:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MAGINCIA:14:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "MAGINCIA:14:response1": {
+    "translation": "검은 보석을\n찾는 이들은\n브리튼의\n술집에서\n물어봐야\n한다네!",
+    "placeholders": []
+  },
+  "MAGINCIA:14:response2": {
+    "translation": "겸손의 신성한\n룬은 이 도시에서\n추방되었다네.\n포즈의\n배런에게\n물어보게!",
+    "placeholders": []
+  },
+  "MAGINCIA:14:topic1": {
+    "translation": "STON",
+    "placeholders": []
+  },
+  "MAGINCIA:14:topic2": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "MAGINCIA:14:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "MAGINCIA:15:health": {
+    "translation": "악마 같지!",
+    "placeholders": []
+  },
+  "MAGINCIA:15:job": {
+    "translation": "그대를\n매긴시아에\n환영하네!\n대해의 오만한\n도시로!",
+    "placeholders": []
+  },
+  "MAGINCIA:15:look": {
+    "translation": "끔찍하고 무시무시한\n악마!",
+    "placeholders": []
+  },
+  "MAGINCIA:15:name": {
+    "translation": "버추베인",
+    "placeholders": []
+  },
+  "MAGINCIA:15:no": {
+    "translation": "아.",
+    "placeholders": []
+  },
+  "MAGINCIA:15:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:15:question": {
+    "translation": "그대는\n오만한가?",
+    "placeholders": []
+  },
+  "MAGINCIA:15:response1": {
+    "translation": "매긴시아는\n어둠의\n영역으로\n떨어졌으니,\n그들 미덕의\n기반이\n오만에\n잘못 놓였기\n때문이다!",
+    "placeholders": []
+  },
+  "MAGINCIA:15:response2": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "MAGINCIA:15:topic1": {
+    "translation": "MAGI",
+    "placeholders": []
+  },
+  "MAGINCIA:15:topic2": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "MAGINCIA:15:yes": {
+    "translation": "좋아!",
+    "placeholders": []
+  },
+  "MAGINCIA:2:health": {
+    "translation": "최상이라네.",
+    "placeholders": []
+  },
+  "MAGINCIA:2:job": {
+    "translation": "나는 고귀한\n혈통의\n귀족이라네.",
+    "placeholders": []
+  },
+  "MAGINCIA:2:look": {
+    "translation": "중얼거리는\n해골.",
+    "placeholders": []
+  },
+  "MAGINCIA:2:name": {
+    "translation": "스컬페이스",
+    "placeholders": []
+  },
+  "MAGINCIA:2:no": {
+    "translation": "그대는 이\n근처 출신이\n아니로군!",
+    "placeholders": []
+  },
+  "MAGINCIA:2:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:2:question": {
+    "translation": "우리에 대해\n들어봤겠지,\n그렇지?",
+    "placeholders": []
+  },
+  "MAGINCIA:2:response1": {
+    "translation": "나와 내 형제는\n위대한 메리디드\n가문의\n마지막\n둘이라네.",
+    "placeholders": []
+  },
+  "MAGINCIA:2:response2": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "MAGINCIA:2:topic1": {
+    "translation": "NOBL",
+    "placeholders": []
+  },
+  "MAGINCIA:2:topic2": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "MAGINCIA:2:yes": {
+    "translation": "그럴 줄\n알았지.",
+    "placeholders": []
+  },
+  "MAGINCIA:3:health": {
+    "translation": "좀 투명해진\n느낌이라네.",
+    "placeholders": []
+  },
+  "MAGINCIA:3:job": {
+    "translation": "이 상점에\n출몰하는 것.",
+    "placeholders": []
+  },
+  "MAGINCIA:3:look": {
+    "translation": "작은 유령.",
+    "placeholders": []
+  },
+  "MAGINCIA:3:name": {
+    "translation": "캐스퍼린",
+    "placeholders": []
+  },
+  "MAGINCIA:3:no": {
+    "translation": "오만!",
+    "placeholders": []
+  },
+  "MAGINCIA:3:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:3:question": {
+    "translation": "왜인지\n아는가?",
+    "placeholders": []
+  },
+  "MAGINCIA:3:response1": {
+    "translation": "이 근처엔\n출몰이\n많이\n일어난다네.",
+    "placeholders": []
+  },
+  "MAGINCIA:3:response2": {
+    "translation": "겸손의\n진언을\n찾아보게,\n헤이우드에게\n물어보게!",
+    "placeholders": []
+  },
+  "MAGINCIA:3:topic1": {
+    "translation": "HAUN",
+    "placeholders": []
+  },
+  "MAGINCIA:3:topic2": {
+    "translation": "PRID",
+    "placeholders": []
+  },
+  "MAGINCIA:3:yes": {
+    "translation": "오만은\n결코 이루지\n못한 목표의\n가장 확실한\n척도라네!",
+    "placeholders": []
+  },
+  "MAGINCIA:4:health": {
+    "translation": "나아진\n적도\n있었지.",
+    "placeholders": []
+  },
+  "MAGINCIA:4:job": {
+    "translation": "오, 그냥\n서성일\n뿐이라네!",
+    "placeholders": []
+  },
+  "MAGINCIA:4:look": {
+    "translation": "키 큰 유령.",
+    "placeholders": []
+  },
+  "MAGINCIA:4:name": {
+    "translation": "폴트리스",
+    "placeholders": []
+  },
+  "MAGINCIA:4:no": {
+    "translation": "오만은 악이\n가장 좋아하는\n죄라네!",
+    "placeholders": []
+  },
+  "MAGINCIA:4:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:4:question": {
+    "translation": "그대는\n오만한가?",
+    "placeholders": []
+  },
+  "MAGINCIA:4:response1": {
+    "translation": "나는 오만죄로\n교수형을\n당했다네!",
+    "placeholders": []
+  },
+  "MAGINCIA:4:response2": {
+    "translation": "오만의 진언은,\n겸손과\n정반대되니,\n'물'이라네.",
+    "placeholders": []
+  },
+  "MAGINCIA:4:topic1": {
+    "translation": "HANG",
+    "placeholders": []
+  },
+  "MAGINCIA:4:topic2": {
+    "translation": "MANT",
+    "placeholders": []
+  },
+  "MAGINCIA:4:yes": {
+    "translation": "중대한\n죄로군!",
+    "placeholders": []
+  },
+  "MAGINCIA:5:health": {
+    "translation": "그럭저럭\n괜찮다네.",
+    "placeholders": []
+  },
+  "MAGINCIA:5:job": {
+    "translation": "영원히\n출몰하는 것.",
+    "placeholders": []
+  },
+  "MAGINCIA:5:look": {
+    "translation": "키 큰 유령.",
+    "placeholders": []
+  },
+  "MAGINCIA:5:name": {
+    "translation": "헤이우드",
+    "placeholders": []
+  },
+  "MAGINCIA:5:no": {
+    "translation": "오만한 영혼은\n분명 자신의\n가치를\n모른다네!",
+    "placeholders": []
+  },
+  "MAGINCIA:5:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:5:question": {
+    "translation": "그대는\n오만한가?",
+    "placeholders": []
+  },
+  "MAGINCIA:5:response1": {
+    "translation": "오만은 앞에,\n수치는\n뒤에\n따라오지!",
+    "placeholders": []
+  },
+  "MAGINCIA:5:response2": {
+    "translation": "폴트리스가\n오만의\n진언을\n안다네, 그에게\n물어보게!",
+    "placeholders": []
+  },
+  "MAGINCIA:5:topic1": {
+    "translation": "HAUN",
+    "placeholders": []
+  },
+  "MAGINCIA:5:topic2": {
+    "translation": "MANT",
+    "placeholders": []
+  },
+  "MAGINCIA:5:yes": {
+    "translation": "그대는\n수치를\n찾게 되리라!",
+    "placeholders": []
+  },
+  "MAGINCIA:6:health": {
+    "translation": "좀 마른\n편이지.",
+    "placeholders": []
+  },
+  "MAGINCIA:6:job": {
+    "translation": "나는 내 뼈를\n덜그럭거린다네.",
+    "placeholders": []
+  },
+  "MAGINCIA:6:look": {
+    "translation": "마른\n해골.",
+    "placeholders": []
+  },
+  "MAGINCIA:6:name": {
+    "translation": "슬림",
+    "placeholders": []
+  },
+  "MAGINCIA:6:no": {
+    "translation": "겸손을\n자랑스러워하지\n말게, 그러다\n망칠라!",
+    "placeholders": []
+  },
+  "MAGINCIA:6:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:6:question": {
+    "translation": "그대는\n항상\n겸손한가?",
+    "placeholders": []
+  },
+  "MAGINCIA:6:response1": {
+    "translation": "나는 내\n자신을 너무\n높게\n평가했고,\n그 오만이\n내 파멸이었지.",
+    "placeholders": []
+  },
+  "MAGINCIA:6:response2": {
+    "translation": "끔찍한\n일이었지!",
+    "placeholders": []
+  },
+  "MAGINCIA:6:topic1": {
+    "translation": "BONE",
+    "placeholders": []
+  },
+  "MAGINCIA:6:topic2": {
+    "translation": "PRID",
+    "placeholders": []
+  },
+  "MAGINCIA:6:yes": {
+    "translation": "의심스럽군.",
+    "placeholders": []
+  },
+  "MAGINCIA:7:health": {
+    "translation": "좀 앙상하지.",
+    "placeholders": []
+  },
+  "MAGINCIA:7:job": {
+    "translation": "나는 한때\n은나팔을\n지녔었지.",
+    "placeholders": []
+  },
+  "MAGINCIA:7:look": {
+    "translation": "부서지는\n해골.",
+    "placeholders": []
+  },
+  "MAGINCIA:7:name": {
+    "translation": "밴터",
+    "placeholders": []
+  },
+  "MAGINCIA:7:no": {
+    "translation": "오.",
+    "placeholders": []
+  },
+  "MAGINCIA:7:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:7:question": {
+    "translation": "나팔을\n찾는가?",
+    "placeholders": []
+  },
+  "MAGINCIA:7:response1": {
+    "translation": "은나팔은\n신단을 지키는\n데몬을\n지나려면\n써야\n한다네.",
+    "placeholders": []
+  },
+  "MAGINCIA:7:response2": {
+    "translation": "위어드럼은\n겸손의\n신단에\n가봤다네!",
+    "placeholders": []
+  },
+  "MAGINCIA:7:topic1": {
+    "translation": "HORN",
+    "placeholders": []
+  },
+  "MAGINCIA:7:topic2": {
+    "translation": "SHRI",
+    "placeholders": []
+  },
+  "MAGINCIA:7:yes": {
+    "translation": "데미트리에게\n물어보게!",
+    "placeholders": []
+  },
+  "MAGINCIA:8:health": {
+    "translation": "어제와\n비슷하다네.",
+    "placeholders": []
+  },
+  "MAGINCIA:8:job": {
+    "translation": "나는 내 뼈를\n덜그럭거린다네.",
+    "placeholders": []
+  },
+  "MAGINCIA:8:look": {
+    "translation": "마른\n해골.",
+    "placeholders": []
+  },
+  "MAGINCIA:8:name": {
+    "translation": "데미트리",
+    "placeholders": []
+  },
+  "MAGINCIA:8:no": {
+    "translation": "네이트를\n조심하게!",
+    "placeholders": []
+  },
+  "MAGINCIA:8:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:8:question": {
+    "translation": "그대는\n죽었는가?",
+    "placeholders": []
+  },
+  "MAGINCIA:8:response1": {
+    "translation": "뼈, 저 뼈들,\n저 마른\n뼈들...",
+    "placeholders": []
+  },
+  "MAGINCIA:8:response2": {
+    "translation": "사랑의 여왕에게\n시녀가 있는데,\n그녀가 나팔에\n대해 더\n말해줄\n수 있다네!",
+    "placeholders": []
+  },
+  "MAGINCIA:8:topic1": {
+    "translation": "BONE",
+    "placeholders": []
+  },
+  "MAGINCIA:8:topic2": {
+    "translation": "HORN",
+    "placeholders": []
+  },
+  "MAGINCIA:8:yes": {
+    "translation": "아, 아쉽군!",
+    "placeholders": []
+  },
+  "MAGINCIA:9:health": {
+    "translation": "출몰\n중이지.",
+    "placeholders": []
+  },
+  "MAGINCIA:9:job": {
+    "translation": "나는 출몰하고,\n출몰하고,\n또 출몰한다네!",
+    "placeholders": []
+  },
+  "MAGINCIA:9:look": {
+    "translation": "덜그럭거리는\n뼈.",
+    "placeholders": []
+  },
+  "MAGINCIA:9:name": {
+    "translation": "위어드럼",
+    "placeholders": []
+  },
+  "MAGINCIA:9:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "MAGINCIA:9:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "MAGINCIA:9:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "MAGINCIA:9:response1": {
+    "translation": "출몰하는 일은\n평생보다\n더 걸린다네,\n영원히\n걸리지!",
+    "placeholders": []
+  },
+  "MAGINCIA:9:response2": {
+    "translation": "그래, 나는\n그 신단에\n가봤다네,\n어비스 섬의\n북쪽 기슭에\n있다네!",
+    "placeholders": []
+  },
+  "MAGINCIA:9:topic1": {
+    "translation": "HAUN",
+    "placeholders": []
+  },
+  "MAGINCIA:9:topic2": {
+    "translation": "SHRI",
+    "placeholders": []
+  },
+  "MAGINCIA:9:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "MINOC:0:health": {
+    "translation": "좋아요.",
+    "placeholders": []
+  },
+  "MINOC:0:job": {
+    "translation": "나는 가난한\n이들을\n돌본다네.",
+    "placeholders": []
+  },
+  "MINOC:0:look": {
+    "translation": "재빠른\n땜장이.",
+    "placeholders": []
+  },
+  "MINOC:0:name": {
+    "translation": "줄리아",
+    "placeholders": []
+  },
+  "MINOC:0:no": {
+    "translation": "게으름뱅이.",
+    "placeholders": []
+  },
+  "MINOC:0:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "MINOC:0:question": {
+    "translation": "도와\n주겠는가?",
+    "placeholders": []
+  },
+  "MINOC:0:response1": {
+    "translation": "자기 보존은\n자연의\n첫째 법칙이고,\n자기희생은\n은총의\n최고\n규범이라네.",
+    "placeholders": []
+  },
+  "MINOC:0:response2": {
+    "translation": "이 집 안에는\n가난하고 궁핍한\n영혼이\n많다네.",
+    "placeholders": []
+  },
+  "MINOC:0:topic1": {
+    "translation": "CARE",
+    "placeholders": []
+  },
+  "MINOC:0:topic2": {
+    "translation": "POOR",
+    "placeholders": []
+  },
+  "MINOC:0:yes": {
+    "translation": "그대와\n함께하겠네.",
+    "placeholders": []
+  },
+  "MINOC:1:health": {
+    "translation": "아주 좋다네.",
+    "placeholders": []
+  },
+  "MINOC:1:job": {
+    "translation": "나는 무기를\n벼린다네.",
+    "placeholders": []
+  },
+  "MINOC:1:look": {
+    "translation": "노련한\n대장장이.",
+    "placeholders": []
+  },
+  "MINOC:1:name": {
+    "translation": "지르콘",
+    "placeholders": []
+  },
+  "MINOC:1:no": {
+    "translation": "흠.",
+    "placeholders": []
+  },
+  "MINOC:1:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MINOC:1:question": {
+    "translation": "무기를\n찾는가?",
+    "placeholders": []
+  },
+  "MINOC:1:response1": {
+    "translation": "나는 최고를\n만든다네!",
+    "placeholders": []
+  },
+  "MINOC:1:response2": {
+    "translation": "아, 그래, 신비한\n무기와 갑옷,\n내 최고의\n작품이지!\n그것들은 사이먼\n경과 테사\n부인에게\n주었다네.",
+    "placeholders": []
+  },
+  "MINOC:1:topic1": {
+    "translation": "WEAP",
+    "placeholders": []
+  },
+  "MINOC:1:topic2": {
+    "translation": "MYST",
+    "placeholders": []
+  },
+  "MINOC:1:yes": {
+    "translation": "계산대에서\n물어보게!",
+    "placeholders": []
+  },
+  "MINOC:10:health": {
+    "translation": "아주 좋아요!",
+    "placeholders": []
+  },
+  "MINOC:10:job": {
+    "translation": "나는 노래를\n부른다네!",
+    "placeholders": []
+  },
+  "MINOC:10:look": {
+    "translation": "귀여운\n음유시인.",
+    "placeholders": []
+  },
+  "MINOC:10:name": {
+    "translation": "싱송",
+    "placeholders": []
+  },
+  "MINOC:10:no": {
+    "translation": "아쉽네요...",
+    "placeholders": []
+  },
+  "MINOC:10:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "MINOC:10:question": {
+    "translation": "마음에\n드나요?",
+    "placeholders": []
+  },
+  "MINOC:10:response1": {
+    "translation": "나는 노래를\n부른답니다!",
+    "placeholders": []
+  },
+  "MINOC:10:response2": {
+    "translation": "아주 좋아요,\n까마귀가\n노래해요,\n까마귀가\n보고 옥수수\n밭에서\n'카'라고\n말한답니다.",
+    "placeholders": []
+  },
+  "MINOC:10:topic1": {
+    "translation": "SING",
+    "placeholders": []
+  },
+  "MINOC:10:topic2": {
+    "translation": "SONG",
+    "placeholders": []
+  },
+  "MINOC:10:yes": {
+    "translation": "고마워요.",
+    "placeholders": []
+  },
+  "MINOC:11:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "MINOC:11:job": {
+    "translation": "나는 여기\n서서\n생각한다네.",
+    "placeholders": []
+  },
+  "MINOC:11:look": {
+    "translation": "온순한 목자.",
+    "placeholders": []
+  },
+  "MINOC:11:name": {
+    "translation": "데이먼",
+    "placeholders": []
+  },
+  "MINOC:11:no": {
+    "translation": "오, 그럼\n생각할\n수 있지\n이 멍청아!",
+    "placeholders": []
+  },
+  "MINOC:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MINOC:11:question": {
+    "translation": "남자가\n혼자\n생각도\n못하나?",
+    "placeholders": []
+  },
+  "MINOC:11:response1": {
+    "translation": "오, 그냥\n이것저것에\n대해.",
+    "placeholders": []
+  },
+  "MINOC:11:response2": {
+    "translation": "음유시인의\n노래를\n들어보게, 그\n가사 속에\n열쇠가\n있다네!",
+    "placeholders": []
+  },
+  "MINOC:11:topic1": {
+    "translation": "THIN",
+    "placeholders": []
+  },
+  "MINOC:11:topic2": {
+    "translation": "MANT",
+    "placeholders": []
+  },
+  "MINOC:11:yes": {
+    "translation": "뭐, 그러길\n바라네!",
+    "placeholders": []
+  },
+  "MINOC:12:health": {
+    "translation": "뭐 그럭저럭.",
+    "placeholders": []
+  },
+  "MINOC:12:job": {
+    "translation": "이것저것.",
+    "placeholders": []
+  },
+  "MINOC:12:look": {
+    "translation": "행복한\n땜장이.",
+    "placeholders": []
+  },
+  "MINOC:12:name": {
+    "translation": "미스치프",
+    "placeholders": []
+  },
+  "MINOC:12:no": {
+    "translation": "그것을 찾으면\n돌아오게!",
+    "placeholders": []
+  },
+  "MINOC:12:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "MINOC:12:question": {
+    "translation": "룬을\n가졌는가?",
+    "placeholders": []
+  },
+  "MINOC:12:response1": {
+    "translation": "그리고\n저것도...",
+    "placeholders": []
+  },
+  "MINOC:12:response2": {
+    "translation": "희생의 룬은\n구하기\n어렵다네. 그것은\n대장간의\n불 속에\n있다네!",
+    "placeholders": []
+  },
+  "MINOC:12:topic1": {
+    "translation": "THIS",
+    "placeholders": []
+  },
+  "MINOC:12:topic2": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "MINOC:12:yes": {
+    "translation": "그럼 알케리온에게\n그 보석에\n대해\n물어보게!",
+    "placeholders": []
+  },
+  "MINOC:13:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "MINOC:13:job": {
+    "translation": "나는 룬을\n조각한다네.",
+    "placeholders": []
+  },
+  "MINOC:13:look": {
+    "translation": "탁자에 있는\n땜장이.",
+    "placeholders": []
+  },
+  "MINOC:13:name": {
+    "translation": "아주르",
+    "placeholders": []
+  },
+  "MINOC:13:no": {
+    "translation": "그렇군.",
+    "placeholders": []
+  },
+  "MINOC:13:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MINOC:13:question": {
+    "translation": "룬을\n찾는가?",
+    "placeholders": []
+  },
+  "MINOC:13:response1": {
+    "translation": "나는 신단에\n들어가는 데\n필요한\n룬을\n조각한다네!",
+    "placeholders": []
+  },
+  "MINOC:13:response2": {
+    "translation": "내 여동생\n미스치프에게\n물어보게.",
+    "placeholders": []
+  },
+  "MINOC:13:topic1": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "MINOC:13:topic2": {
+    "translation": "SACR",
+    "placeholders": []
+  },
+  "MINOC:13:yes": {
+    "translation": "어느 것을?",
+    "placeholders": []
+  },
+  "MINOC:14:health": {
+    "translation": "나아진\n적도\n있었지.",
+    "placeholders": []
+  },
+  "MINOC:14:job": {
+    "translation": "나는 희생의\n신단의\n지혜를\n찾는다네.",
+    "placeholders": []
+  },
+  "MINOC:14:look": {
+    "translation": "방랑하는\n땜장이.",
+    "placeholders": []
+  },
+  "MINOC:14:name": {
+    "translation": "메리다",
+    "placeholders": []
+  },
+  "MINOC:14:no": {
+    "translation": "신단은 동쪽\n호수에\n있다네!",
+    "placeholders": []
+  },
+  "MINOC:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MINOC:14:question": {
+    "translation": "진언을\n아는가?",
+    "placeholders": []
+  },
+  "MINOC:14:response1": {
+    "translation": "하지만 우선\n진언이\n필요하다네!",
+    "placeholders": []
+  },
+  "MINOC:14:response2": {
+    "translation": "숨은 목자가\n그 진언을\n안다고\n들었네.",
+    "placeholders": []
+  },
+  "MINOC:14:topic1": {
+    "translation": "SHRI",
+    "placeholders": []
+  },
+  "MINOC:14:topic2": {
+    "translation": "MANT",
+    "placeholders": []
+  },
+  "MINOC:14:yes": {
+    "translation": "좋아!",
+    "placeholders": []
+  },
+  "MINOC:15:health": {
+    "translation": "꽤.",
+    "placeholders": []
+  },
+  "MINOC:15:job": {
+    "translation": "물론\n지키는 것.",
+    "placeholders": []
+  },
+  "MINOC:15:look": {
+    "translation": "거대한 경비병.",
+    "placeholders": []
+  },
+  "MINOC:15:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "MINOC:15:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "MINOC:15:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MINOC:15:question": {
+    "translation": "내 딜레마를\n이해하는가?",
+    "placeholders": []
+  },
+  "MINOC:15:response1": {
+    "translation": "나는 종종\n임무를\n수행하다\n목숨을\n바쳐야 할\n날이 올지\n궁금하다네.",
+    "placeholders": []
+  },
+  "MINOC:15:response2": {
+    "translation": "하나의 목숨으로\n여럿을!",
+    "placeholders": []
+  },
+  "MINOC:15:topic1": {
+    "translation": "GUAR",
+    "placeholders": []
+  },
+  "MINOC:15:topic2": {
+    "translation": "LIFE",
+    "placeholders": []
+  },
+  "MINOC:15:yes": {
+    "translation": "물론이지,\n그런 일이\n생긴다면,\n나도 해낼\n수 있기를\n바라네!",
+    "placeholders": []
+  },
+  "MINOC:2:health": {
+    "translation": "나는 아주\n아프네, 도와주게!",
+    "placeholders": []
+  },
+  "MINOC:2:job": {
+    "translation": "나는 아무것도\n없다네, 도와주게.",
+    "placeholders": []
+  },
+  "MINOC:2:look": {
+    "translation": "병약한\n작은\n남자.",
+    "placeholders": []
+  },
+  "MINOC:2:name": {
+    "translation": "거지 밥",
+    "placeholders": []
+  },
+  "MINOC:2:no": {
+    "translation": "그럼 나와\n함께 구걸\n하세!",
+    "placeholders": []
+  },
+  "MINOC:2:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MINOC:2:question": {
+    "translation": "돈이\n좀 있는가?",
+    "placeholders": []
+  },
+  "MINOC:2:response1": {
+    "translation": "병을 고치려면\n돈이\n필요하다네.",
+    "placeholders": []
+  },
+  "MINOC:2:response2": {
+    "translation": "나는 말기\n다리 부패병에\n걸렸다네.",
+    "placeholders": []
+  },
+  "MINOC:2:topic1": {
+    "translation": "HELP",
+    "placeholders": []
+  },
+  "MINOC:2:topic2": {
+    "translation": "SICK",
+    "placeholders": []
+  },
+  "MINOC:2:yes": {
+    "translation": "그럼 나와\n나눠\n주게!",
+    "placeholders": []
+  },
+  "MINOC:3:health": {
+    "translation": "배고파요.",
+    "placeholders": []
+  },
+  "MINOC:3:job": {
+    "translation": "저는 영양실조에\n걸린\n거지\n소녀예요.",
+    "placeholders": []
+  },
+  "MINOC:3:look": {
+    "translation": "작고\n진흙투성이인\n소녀.",
+    "placeholders": []
+  },
+  "MINOC:3:name": {
+    "translation": "린다 수",
+    "placeholders": []
+  },
+  "MINOC:3:no": {
+    "translation": "오, 그렇군요.",
+    "placeholders": []
+  },
+  "MINOC:3:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "MINOC:3:question": {
+    "translation": "음식 한\n입만\n나눠주실\n수 있나요?",
+    "placeholders": []
+  },
+  "MINOC:3:response1": {
+    "translation": "며칠째\n아무것도\n못 먹었어요.",
+    "placeholders": []
+  },
+  "MINOC:3:response2": {
+    "translation": "오, 친절한\n분이시네요!",
+    "placeholders": []
+  },
+  "MINOC:3:topic1": {
+    "translation": "HUNG",
+    "placeholders": []
+  },
+  "MINOC:3:topic2": {
+    "translation": "FOOD",
+    "placeholders": []
+  },
+  "MINOC:3:yes": {
+    "translation": "정말\n감사할\n거예요.",
+    "placeholders": []
+  },
+  "MINOC:4:health": {
+    "translation": "나는 거의\n의식이\n없다네.",
+    "placeholders": []
+  },
+  "MINOC:4:job": {
+    "translation": "곧 죽을\n걸세.",
+    "placeholders": []
+  },
+  "MINOC:4:look": {
+    "translation": "스러져가는\n남자.",
+    "placeholders": []
+  },
+  "MINOC:4:name": {
+    "translation": "짐블",
+    "placeholders": []
+  },
+  "MINOC:4:no": {
+    "translation": "슬프군.",
+    "placeholders": []
+  },
+  "MINOC:4:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MINOC:4:question": {
+    "translation": "마지막\n술 한 잔을\n살 금화\n한 닢을\n나눠줄\n수 있나?",
+    "placeholders": []
+  },
+  "MINOC:4:response1": {
+    "translation": "나는 체체파리에\n물렸다네!",
+    "placeholders": []
+  },
+  "MINOC:4:response2": {
+    "translation": "나는 곧\n영원히\n잠들\n걸세.",
+    "placeholders": []
+  },
+  "MINOC:4:topic1": {
+    "translation": "DIE ",
+    "placeholders": []
+  },
+  "MINOC:4:topic2": {
+    "translation": "CONS",
+    "placeholders": []
+  },
+  "MINOC:4:yes": {
+    "translation": "아주르가\n룬을 안다는 걸\n기억하게!",
+    "placeholders": []
+  },
+  "MINOC:5:health": {
+    "translation": "병들었네.",
+    "placeholders": []
+  },
+  "MINOC:5:job": {
+    "translation": "나 자신을\n구원하는 것!",
+    "placeholders": []
+  },
+  "MINOC:5:look": {
+    "translation": "남루한 영혼.",
+    "placeholders": []
+  },
+  "MINOC:5:name": {
+    "translation": "주드",
+    "placeholders": []
+  },
+  "MINOC:5:no": {
+    "translation": "오.",
+    "placeholders": []
+  },
+  "MINOC:5:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MINOC:5:question": {
+    "translation": "내가 그대를\n도우면, 그것을\n어비스 입구에서\n파괴하는 데만\n쓰겠다고\n맹세하겠는가?",
+    "placeholders": []
+  },
+  "MINOC:5:response1": {
+    "translation": "내 죄에\n대해서는\n말하지\n않겠네!",
+    "placeholders": []
+  },
+  "MINOC:5:response2": {
+    "translation": "나는 그것을\n사용했다네!",
+    "placeholders": []
+  },
+  "MINOC:5:topic1": {
+    "translation": "REDE",
+    "placeholders": []
+  },
+  "MINOC:5:topic2": {
+    "translation": "SKUL",
+    "placeholders": []
+  },
+  "MINOC:5:yes": {
+    "translation": "가장 어두운\n밤, 위도\nP'F\" 경도\nM'F\"에서\n찾을 수\n있다네!",
+    "placeholders": []
+  },
+  "MINOC:6:health": {
+    "translation": "나는 늙고\n약하다네.",
+    "placeholders": []
+  },
+  "MINOC:6:job": {
+    "translation": "나는 농부라네,\n많은 걸\n듣지.",
+    "placeholders": []
+  },
+  "MINOC:6:look": {
+    "translation": "늙고\n남루한\n남자.",
+    "placeholders": []
+  },
+  "MINOC:6:name": {
+    "translation": "알케리온",
+    "placeholders": []
+  },
+  "MINOC:6:no": {
+    "translation": "오.",
+    "placeholders": []
+  },
+  "MINOC:6:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MINOC:6:question": {
+    "translation": "찾고\n있는가?",
+    "placeholders": []
+  },
+  "MINOC:6:response1": {
+    "translation": "무엇을\n알고 싶은가?",
+    "placeholders": []
+  },
+  "MINOC:6:response2": {
+    "translation": "희생의 보석은\n주황색이며\n사랑과 용기의\n제단실에서\n쓰인다네!",
+    "placeholders": []
+  },
+  "MINOC:6:topic1": {
+    "translation": "HEAR",
+    "placeholders": []
+  },
+  "MINOC:6:topic2": {
+    "translation": "STON",
+    "placeholders": []
+  },
+  "MINOC:6:yes": {
+    "translation": "행운을\n비네.",
+    "placeholders": []
+  },
+  "MINOC:7:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "MINOC:7:job": {
+    "translation": "나는 방을\n구하려\n한다네.",
+    "placeholders": []
+  },
+  "MINOC:7:look": {
+    "translation": "다부진\n레인저.",
+    "placeholders": []
+  },
+  "MINOC:7:name": {
+    "translation": "마이크 워드",
+    "placeholders": []
+  },
+  "MINOC:7:no": {
+    "translation": "스카라\n브레이에는\n없다네.",
+    "placeholders": []
+  },
+  "MINOC:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MINOC:7:question": {
+    "translation": "룬에\n대해\n아는가?",
+    "placeholders": []
+  },
+  "MINOC:7:response1": {
+    "translation": "나는 스카라\n브레이에서\n곧장\n여행해\n왔다네.",
+    "placeholders": []
+  },
+  "MINOC:7:response2": {
+    "translation": "우리 도시의\n룬이\n사라졌다네!",
+    "placeholders": []
+  },
+  "MINOC:7:topic1": {
+    "translation": "ROOM",
+    "placeholders": []
+  },
+  "MINOC:7:topic2": {
+    "translation": "SKAR",
+    "placeholders": []
+  },
+  "MINOC:7:yes": {
+    "translation": "그것은\n영성의\n신단으로\n가는\n열쇠라네!",
+    "placeholders": []
+  },
+  "MINOC:8:health": {
+    "translation": "좋아요, 고마워요.",
+    "placeholders": []
+  },
+  "MINOC:8:job": {
+    "translation": "나는 꽃을\n나눠준다네.\n여기 있어요!",
+    "placeholders": []
+  },
+  "MINOC:8:look": {
+    "translation": "십 대 소년.",
+    "placeholders": []
+  },
+  "MINOC:8:name": {
+    "translation": "알렉스",
+    "placeholders": []
+  },
+  "MINOC:8:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "MINOC:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MINOC:8:question": {
+    "translation": "주시겠어요?",
+    "placeholders": []
+  },
+  "MINOC:8:response1": {
+    "translation": "내가 생각하기론,\n남에게 친절하면\n그들도\n보답할 이유가\n생긴다는\n거지!",
+    "placeholders": []
+  },
+  "MINOC:8:response2": {
+    "translation": "그래, 어려운\n이에게\n할 수 있는\n만큼\n다 주게!",
+    "placeholders": []
+  },
+  "MINOC:8:topic1": {
+    "translation": "FLOW",
+    "placeholders": []
+  },
+  "MINOC:8:topic2": {
+    "translation": "KIND",
+    "placeholders": []
+  },
+  "MINOC:8:yes": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "MINOC:9:health": {
+    "translation": "괜찮다네.",
+    "placeholders": []
+  },
+  "MINOC:9:job": {
+    "translation": "희생의 도시,\n미녹에\n온 걸\n환영하네!",
+    "placeholders": []
+  },
+  "MINOC:9:look": {
+    "translation": "통통한\n땜장이.",
+    "placeholders": []
+  },
+  "MINOC:9:name": {
+    "translation": "셴티스",
+    "placeholders": []
+  },
+  "MINOC:9:no": {
+    "translation": "그대는\n아바타가\n아니로군!",
+    "placeholders": []
+  },
+  "MINOC:9:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MINOC:9:question": {
+    "translation": "그대는 미덕을\n위해\n힘쓰는가?",
+    "placeholders": []
+  },
+  "MINOC:9:response1": {
+    "translation": "자기희생은\n필요한\n미덕이라네!",
+    "placeholders": []
+  },
+  "MINOC:9:response2": {
+    "translation": "아바타는\n미덕을\n갖추려\n힘쓴다네.",
+    "placeholders": []
+  },
+  "MINOC:9:topic1": {
+    "translation": "SACR",
+    "placeholders": []
+  },
+  "MINOC:9:topic2": {
+    "translation": "VIRT",
+    "placeholders": []
+  },
+  "MINOC:9:yes": {
+    "translation": "그럼 아마\n아바타가\n될\n걸세!",
+    "placeholders": []
+  },
+  "MOONGLOW:0:health": {
+    "translation": "꽤 좋아요.",
+    "placeholders": []
+  },
+  "MOONGLOW:0:job": {
+    "translation": "나는 모험을\n찾는다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:0:look": {
+    "translation": "젊은 마법사",
+    "placeholders": []
+  },
+  "MOONGLOW:0:name": {
+    "translation": "마리아",
+    "placeholders": []
+  },
+  "MOONGLOW:0:no": {
+    "translation": "그럴 수\n있으면\n좋을 텐데!",
+    "placeholders": []
+  },
+  "MOONGLOW:0:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "MOONGLOW:0:question": {
+    "translation": "그대는\n여정 중인가?",
+    "placeholders": []
+  },
+  "MOONGLOW:0:response1": {
+    "translation": "그래요, 나도\n큰 여정을\n떠나고\n싶어요!",
+    "placeholders": []
+  },
+  "MOONGLOW:0:response2": {
+    "translation": "아바타의\n여정은 참으로\n고귀하죠!",
+    "placeholders": []
+  },
+  "MOONGLOW:0:topic1": {
+    "translation": "ADVE",
+    "placeholders": []
+  },
+  "MOONGLOW:0:topic2": {
+    "translation": "QUES",
+    "placeholders": []
+  },
+  "MOONGLOW:0:yes": {
+    "translation": "나도 함께할\n수 있으면\n좋겠어요!",
+    "placeholders": []
+  },
+  "MOONGLOW:1:health": {
+    "translation": "괜찮아요...\n담배만\n끊을 수\n있다면!",
+    "placeholders": []
+  },
+  "MOONGLOW:1:job": {
+    "translation": "나는 작가예요.",
+    "placeholders": []
+  },
+  "MOONGLOW:1:look": {
+    "translation": "굶주린\n기자",
+    "placeholders": []
+  },
+  "MOONGLOW:1:name": {
+    "translation": "트레이시",
+    "placeholders": []
+  },
+  "MOONGLOW:1:no": {
+    "translation": "시작하지\n마세요!",
+    "placeholders": []
+  },
+  "MOONGLOW:1:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "MOONGLOW:1:question": {
+    "translation": "담배\n피우세요?",
+    "placeholders": []
+  },
+  "MOONGLOW:1:response1": {
+    "translation": "벌이는 적지만,\n화려하죠!",
+    "placeholders": []
+  },
+  "MOONGLOW:1:response2": {
+    "translation": "콜록...콜록...",
+    "placeholders": []
+  },
+  "MOONGLOW:1:topic1": {
+    "translation": "WRIT",
+    "placeholders": []
+  },
+  "MOONGLOW:1:topic2": {
+    "translation": "SMOK",
+    "placeholders": []
+  },
+  "MOONGLOW:1:yes": {
+    "translation": "냄새로\n알겠네요!",
+    "placeholders": []
+  },
+  "MOONGLOW:10:health": {
+    "translation": "건강?",
+    "placeholders": []
+  },
+  "MOONGLOW:10:job": {
+    "translation": "나는 태양을\n움직인다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:10:look": {
+    "translation": "등이 굽고\n미친\n듯한 남자!",
+    "placeholders": []
+  },
+  "MOONGLOW:10:name": {
+    "translation": "다라노르",
+    "placeholders": []
+  },
+  "MOONGLOW:10:no": {
+    "translation": "멍청아, 내가\n미쳤다고\n생각하는\n게로군!",
+    "placeholders": []
+  },
+  "MOONGLOW:10:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MOONGLOW:10:question": {
+    "translation": "내 이야기를\n믿는가?!?!...",
+    "placeholders": []
+  },
+  "MOONGLOW:10:response1": {
+    "translation": "달들은 내\n적이라네!",
+    "placeholders": []
+  },
+  "MOONGLOW:10:response2": {
+    "translation": "내가 죽으면\n세상이\n끝난다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:10:topic1": {
+    "translation": "SUN ",
+    "placeholders": []
+  },
+  "MOONGLOW:10:topic2": {
+    "translation": "MOON",
+    "placeholders": []
+  },
+  "MOONGLOW:10:yes": {
+    "translation": "그럼 우리는\n달들을 베어야\n한다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:11:health": {
+    "translation": "오늘은\n괜찮을\n거라고\n예언하지!",
+    "placeholders": []
+  },
+  "MOONGLOW:11:job": {
+    "translation": "나는 점쟁이라네,\n손금을\n본다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:11:look": {
+    "translation": "늙은 집시.",
+    "placeholders": []
+  },
+  "MOONGLOW:11:name": {
+    "translation": "이누",
+    "placeholders": []
+  },
+  "MOONGLOW:11:no": {
+    "translation": "현명한\n선택이군.",
+    "placeholders": []
+  },
+  "MOONGLOW:11:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "MOONGLOW:11:question": {
+    "translation": "그대의\n운명을\n알고 싶은가?",
+    "placeholders": []
+  },
+  "MOONGLOW:11:response1": {
+    "translation": "손금이\n운명을\n말해준다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:11:response2": {
+    "translation": "손을\n내밀게.",
+    "placeholders": []
+  },
+  "MOONGLOW:11:topic1": {
+    "translation": "PALM",
+    "placeholders": []
+  },
+  "MOONGLOW:11:topic2": {
+    "translation": "FORT",
+    "placeholders": []
+  },
+  "MOONGLOW:11:yes": {
+    "translation": "위대한 여정이\n그대를 코덱스가\n기다리는\n어비스로\n이끌\n걸세!",
+    "placeholders": []
+  },
+  "MOONGLOW:12:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:12:job": {
+    "translation": "나는 아름다운\n도시 문글로우의\n인사를\n전한다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:12:look": {
+    "translation": "키 큰 마법사.",
+    "placeholders": []
+  },
+  "MOONGLOW:12:name": {
+    "translation": "칼라브리니",
+    "placeholders": []
+  },
+  "MOONGLOW:12:no": {
+    "translation": "아마도, 북쪽\n섬에 있는\n신단일\n걸세!",
+    "placeholders": []
+  },
+  "MOONGLOW:12:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MOONGLOW:12:question": {
+    "translation": "여관이나\n치유를\n찾는가?",
+    "placeholders": []
+  },
+  "MOONGLOW:12:response1": {
+    "translation": "우리에게는\n훌륭한 여관이\n있다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:12:response2": {
+    "translation": "우리 치유사는\n최고 중\n하나라네!",
+    "placeholders": []
+  },
+  "MOONGLOW:12:topic1": {
+    "translation": "INN ",
+    "placeholders": []
+  },
+  "MOONGLOW:12:topic2": {
+    "translation": "HEAL",
+    "placeholders": []
+  },
+  "MOONGLOW:12:yes": {
+    "translation": "어느 것을?",
+    "placeholders": []
+  },
+  "MOONGLOW:13:health": {
+    "translation": "아주 좋다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:13:job": {
+    "translation": "나는 정직하게\n생계를\n번다네,\n농담으로!",
+    "placeholders": []
+  },
+  "MOONGLOW:13:look": {
+    "translation": "방방 뛰는 광대",
+    "placeholders": []
+  },
+  "MOONGLOW:13:name": {
+    "translation": "데커",
+    "placeholders": []
+  },
+  "MOONGLOW:13:no": {
+    "translation": "그대는 아마\n뚱한 사람일\n걸세!",
+    "placeholders": []
+  },
+  "MOONGLOW:13:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MOONGLOW:13:question": {
+    "translation": "그대는?",
+    "placeholders": []
+  },
+  "MOONGLOW:13:response1": {
+    "translation": "정직한 노동은\n아름다운\n얼굴을\n지닌다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:13:response2": {
+    "translation": "나는 좋은\n농담을\n좋아한다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:13:topic1": {
+    "translation": "HONE",
+    "placeholders": []
+  },
+  "MOONGLOW:13:topic2": {
+    "translation": "JEST",
+    "placeholders": []
+  },
+  "MOONGLOW:13:yes": {
+    "translation": "언젠가\n농담을\n주고받으세!",
+    "placeholders": []
+  },
+  "MOONGLOW:14:health": {
+    "translation": "꽤 좋아요.",
+    "placeholders": []
+  },
+  "MOONGLOW:14:job": {
+    "translation": "오, 별로.",
+    "placeholders": []
+  },
+  "MOONGLOW:14:look": {
+    "translation": "샌드위치를\n먹는 아이.",
+    "placeholders": []
+  },
+  "MOONGLOW:14:name": {
+    "translation": "윌리엄",
+    "placeholders": []
+  },
+  "MOONGLOW:14:no": {
+    "translation": "진짜\n맛있어요!",
+    "placeholders": []
+  },
+  "MOONGLOW:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MOONGLOW:14:question": {
+    "translation": "한 입\n드실래요?",
+    "placeholders": []
+  },
+  "MOONGLOW:14:response1": {
+    "translation": "땅콩버터와\n포도잼을\n살짝 구운 빵에\n바른\n거예요!",
+    "placeholders": []
+  },
+  "MOONGLOW:14:response2": {
+    "translation": "마리아의\n금 옆에서\n정직의 룬을\n찾아보세요!",
+    "placeholders": []
+  },
+  "MOONGLOW:14:topic1": {
+    "translation": "SAND",
+    "placeholders": []
+  },
+  "MOONGLOW:14:topic2": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "MOONGLOW:14:yes": {
+    "translation": "맛있죠, 응!",
+    "placeholders": []
+  },
+  "MOONGLOW:15:health": {
+    "translation": "스러져가는군.",
+    "placeholders": []
+  },
+  "MOONGLOW:15:job": {
+    "translation": "나는 예전에\n파란 보석을\n찾았다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:15:look": {
+    "translation": "지친 마법사.",
+    "placeholders": []
+  },
+  "MOONGLOW:15:name": {
+    "translation": "타이론",
+    "placeholders": []
+  },
+  "MOONGLOW:15:no": {
+    "translation": "흠.",
+    "placeholders": []
+  },
+  "MOONGLOW:15:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MOONGLOW:15:question": {
+    "translation": "찾아\n보겠는가?",
+    "placeholders": []
+  },
+  "MOONGLOW:15:response1": {
+    "translation": "정직의 보석은\n기만 던전의\n제단에서\n찾을 수\n있다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:15:response2": {
+    "translation": "그것은 던전\n제단실과\n어비스\n안에서\n쓰인다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:15:topic1": {
+    "translation": "STON",
+    "placeholders": []
+  },
+  "MOONGLOW:15:topic2": {
+    "translation": "USE ",
+    "placeholders": []
+  },
+  "MOONGLOW:15:yes": {
+    "translation": "그 용도를\n알아두게!",
+    "placeholders": []
+  },
+  "MOONGLOW:2:health": {
+    "translation": "아주 좋다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:2:job": {
+    "translation": "나는 정직의\n미덕을\n말한다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:2:look": {
+    "translation": "위풍당당한\n성기사.",
+    "placeholders": []
+  },
+  "MOONGLOW:2:name": {
+    "translation": "크롬웰",
+    "placeholders": []
+  },
+  "MOONGLOW:2:no": {
+    "translation": "부끄럽구먼!",
+    "placeholders": []
+  },
+  "MOONGLOW:2:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MOONGLOW:2:question": {
+    "translation": "그대는 정직해지려\n힘쓰는가?",
+    "placeholders": []
+  },
+  "MOONGLOW:2:response1": {
+    "translation": "정직한 소수가\n숫자보다\n낫다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:2:response2": {
+    "translation": "정직의\n신단\n진언은\n'암'이라네.",
+    "placeholders": []
+  },
+  "MOONGLOW:2:topic1": {
+    "translation": "HONE",
+    "placeholders": []
+  },
+  "MOONGLOW:2:topic2": {
+    "translation": "MANT",
+    "placeholders": []
+  },
+  "MOONGLOW:2:yes": {
+    "translation": "그럼 진언이\n필요할\n걸세.",
+    "placeholders": []
+  },
+  "MOONGLOW:3:health": {
+    "translation": "나아진\n적도\n있었지",
+    "placeholders": []
+  },
+  "MOONGLOW:3:job": {
+    "translation": "나는 정직한\n삶을\n산다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:3:look": {
+    "translation": "신비한 마법사.",
+    "placeholders": []
+  },
+  "MOONGLOW:3:name": {
+    "translation": "레벨리아스",
+    "placeholders": []
+  },
+  "MOONGLOW:3:no": {
+    "translation": "비참한 놈!",
+    "placeholders": []
+  },
+  "MOONGLOW:3:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MOONGLOW:3:question": {
+    "translation": "그대 자신의\n악을 정복하고자\n하는가?",
+    "placeholders": []
+  },
+  "MOONGLOW:3:response1": {
+    "translation": "진실을 말하여\n악의 세력을\n부끄럽게\n하게!",
+    "placeholders": []
+  },
+  "MOONGLOW:3:response2": {
+    "translation": "악은 여전히\n우리 마음과\n영혼\n속에\n존재한다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:3:topic1": {
+    "translation": "HONE",
+    "placeholders": []
+  },
+  "MOONGLOW:3:topic2": {
+    "translation": "EVIL",
+    "placeholders": []
+  },
+  "MOONGLOW:3:yes": {
+    "translation": "일생의\n여정이지!",
+    "placeholders": []
+  },
+  "MOONGLOW:4:health": {
+    "translation": "기분 좋아요.",
+    "placeholders": []
+  },
+  "MOONGLOW:4:job": {
+    "translation": "나는 그대의\n친구예요.",
+    "placeholders": []
+  },
+  "MOONGLOW:4:look": {
+    "translation": "장난기 많은\n아이.",
+    "placeholders": []
+  },
+  "MOONGLOW:4:name": {
+    "translation": "크리스텐",
+    "placeholders": []
+  },
+  "MOONGLOW:4:no": {
+    "translation": "슬퍼요.",
+    "placeholders": []
+  },
+  "MOONGLOW:4:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "MOONGLOW:4:question": {
+    "translation": "그대는 내\n친구인가요?",
+    "placeholders": []
+  },
+  "MOONGLOW:4:response1": {
+    "translation": "정직한 친구는\n드물어요!",
+    "placeholders": []
+  },
+  "MOONGLOW:4:response2": {
+    "translation": "내 친구\n윌리엄이\n정직의 룬이\n어디 있는지\n안대요.",
+    "placeholders": []
+  },
+  "MOONGLOW:4:topic1": {
+    "translation": "FRIE",
+    "placeholders": []
+  },
+  "MOONGLOW:4:topic2": {
+    "translation": "HONE",
+    "placeholders": []
+  },
+  "MOONGLOW:4:yes": {
+    "translation": "그거 저를\n행복하게\n만드네요.",
+    "placeholders": []
+  },
+  "MOONGLOW:5:health": {
+    "translation": "꽤 좋다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:5:job": {
+    "translation": "나는 목자라네.",
+    "placeholders": []
+  },
+  "MOONGLOW:5:look": {
+    "translation": "온순한 목자.",
+    "placeholders": []
+  },
+  "MOONGLOW:5:name": {
+    "translation": "겸손한 목자\n패트릭",
+    "placeholders": []
+  },
+  "MOONGLOW:5:no": {
+    "translation": "그러려고\n힘쓰게.",
+    "placeholders": []
+  },
+  "MOONGLOW:5:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MOONGLOW:5:question": {
+    "translation": "그대는\n완전히\n겸손한가?",
+    "placeholders": []
+  },
+  "MOONGLOW:5:response1": {
+    "translation": "겸손은 진실,\n사랑, 용기의\n직접적인 조합에서\n비롯되지\n않는다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:5:response2": {
+    "translation": "겸손은\n겸손하게\n행동하고\n존재하는\n것이라네.",
+    "placeholders": []
+  },
+  "MOONGLOW:5:topic1": {
+    "translation": "HUMB",
+    "placeholders": []
+  },
+  "MOONGLOW:5:topic2": {
+    "translation": "HUMI",
+    "placeholders": []
+  },
+  "MOONGLOW:5:yes": {
+    "translation": "의심스럽군!",
+    "placeholders": []
+  },
+  "MOONGLOW:6:health": {
+    "translation": "곧 죽을\n걸세.",
+    "placeholders": []
+  },
+  "MOONGLOW:6:job": {
+    "translation": "나는 위대한\n마법사 나이젤의\n제자라네!",
+    "placeholders": []
+  },
+  "MOONGLOW:6:look": {
+    "translation": "죽어가는 젊은\n마법사.",
+    "placeholders": []
+  },
+  "MOONGLOW:6:name": {
+    "translation": "셰이좀",
+    "placeholders": []
+  },
+  "MOONGLOW:6:no": {
+    "translation": "그는 라이시움에\n산다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:6:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MOONGLOW:6:question": {
+    "translation": "나이젤을\n만나본\n적\n있는가?",
+    "placeholders": []
+  },
+  "MOONGLOW:6:response1": {
+    "translation": "곧 그가 부르는\n'귀환' 주문을\n써야\n할\n걸세.",
+    "placeholders": []
+  },
+  "MOONGLOW:6:response2": {
+    "translation": "그만.",
+    "placeholders": []
+  },
+  "MOONGLOW:6:topic1": {
+    "translation": "NIGE",
+    "placeholders": []
+  },
+  "MOONGLOW:6:topic2": {
+    "translation": "DIE ",
+    "placeholders": []
+  },
+  "MOONGLOW:6:yes": {
+    "translation": "그를 찾아가게,\n가르쳐줄\n걸세.",
+    "placeholders": []
+  },
+  "MOONGLOW:7:health": {
+    "translation": "늙어가는군.",
+    "placeholders": []
+  },
+  "MOONGLOW:7:job": {
+    "translation": "나는 정직에\n대한 이야기를\n짓는다네.",
+    "placeholders": []
+  },
+  "MOONGLOW:7:look": {
+    "translation": "지혜로운 마법사.",
+    "placeholders": []
+  },
+  "MOONGLOW:7:name": {
+    "translation": "셰익스피어",
+    "placeholders": []
+  },
+  "MOONGLOW:7:no": {
+    "translation": "어리석은 놈!",
+    "placeholders": []
+  },
+  "MOONGLOW:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MOONGLOW:7:question": {
+    "translation": "그대는\n정직해지려\n힘쓰는가?",
+    "placeholders": []
+  },
+  "MOONGLOW:7:response1": {
+    "translation": "기억하게,\n협박에\n두려움은\n없다네, 나는\n정직함에\n강하니까!",
+    "placeholders": []
+  },
+  "MOONGLOW:7:response2": {
+    "translation": "부패는\n정직보다\n더 이기지\n못한다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:7:topic1": {
+    "translation": "HONE",
+    "placeholders": []
+  },
+  "MOONGLOW:7:topic2": {
+    "translation": "CORR",
+    "placeholders": []
+  },
+  "MOONGLOW:7:yes": {
+    "translation": "부패를\n조심하게!",
+    "placeholders": []
+  },
+  "MOONGLOW:8:health": {
+    "translation": "나아진\n적도\n있었지.",
+    "placeholders": []
+  },
+  "MOONGLOW:8:job": {
+    "translation": "나는 정직한\n삶을\n살려고\n힘쓴다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:8:look": {
+    "translation": "키 큰 마법사.",
+    "placeholders": []
+  },
+  "MOONGLOW:8:name": {
+    "translation": "브라우닝",
+    "placeholders": []
+  },
+  "MOONGLOW:8:no": {
+    "translation": "진실은 결코\n말하는 이를\n해치지\n않는다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "MOONGLOW:8:question": {
+    "translation": "거짓말을\n한 적이\n없는가?",
+    "placeholders": []
+  },
+  "MOONGLOW:8:response1": {
+    "translation": "정직한 영혼은\n거짓말을\n기억할\n필요가\n없다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:8:response2": {
+    "translation": "진실은\n정직의\n근본이라네!",
+    "placeholders": []
+  },
+  "MOONGLOW:8:topic1": {
+    "translation": "HONE",
+    "placeholders": []
+  },
+  "MOONGLOW:8:topic2": {
+    "translation": "TRUT",
+    "placeholders": []
+  },
+  "MOONGLOW:8:yes": {
+    "translation": "그럴 것\n같지\n않군!",
+    "placeholders": []
+  },
+  "MOONGLOW:9:health": {
+    "translation": "피곤해,\n너무\n피곤해.",
+    "placeholders": []
+  },
+  "MOONGLOW:9:job": {
+    "translation": "나는\n연금술사라네.",
+    "placeholders": []
+  },
+  "MOONGLOW:9:look": {
+    "translation": "나이 든 여인",
+    "placeholders": []
+  },
+  "MOONGLOW:9:name": {
+    "translation": "코시마",
+    "placeholders": []
+  },
+  "MOONGLOW:9:no": {
+    "translation": "비밀은\n재료에\n있다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:9:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "MOONGLOW:9:question": {
+    "translation": "주문을\n가장 잘\n조합하는 법을\n아는가?",
+    "placeholders": []
+  },
+  "MOONGLOW:9:response1": {
+    "translation": "나는 재료를\n가장 잘\n조합하는 법을\n안다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:9:response2": {
+    "translation": "수면 주문은\n사실 거미줄\n한 조각만\n필요하다네!",
+    "placeholders": []
+  },
+  "MOONGLOW:9:topic1": {
+    "translation": "ALCH",
+    "placeholders": []
+  },
+  "MOONGLOW:9:topic2": {
+    "translation": "REAG",
+    "placeholders": []
+  },
+  "MOONGLOW:9:yes": {
+    "translation": "좋아!",
+    "placeholders": []
+  },
+  "PAWS:0:health": {
+    "translation": "훌륭하다네.",
+    "placeholders": []
+  },
+  "PAWS:0:job": {
+    "translation": "나는 포즈 마을의\n경비대장이라네!",
+    "placeholders": []
+  },
+  "PAWS:0:look": {
+    "translation": "아주 큰\n경비병.",
+    "placeholders": []
+  },
+  "PAWS:0:name": {
+    "translation": "윌모어",
+    "placeholders": []
+  },
+  "PAWS:0:no": {
+    "translation": "좋군.",
+    "placeholders": []
+  },
+  "PAWS:0:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "PAWS:0:question": {
+    "translation": "말썽을\n일으킬\n작정인가?",
+    "placeholders": []
+  },
+  "PAWS:0:response1": {
+    "translation": "포즈는 훌륭한\n마을이라\n우리가\n안전하게\n지킨다네!",
+    "placeholders": []
+  },
+  "PAWS:0:response2": {
+    "translation": "해적들은 동쪽\n섬에서\n온다네!",
+    "placeholders": []
+  },
+  "PAWS:0:topic1": {
+    "translation": "GUAR",
+    "placeholders": []
+  },
+  "PAWS:0:topic2": {
+    "translation": "TROU",
+    "placeholders": []
+  },
+  "PAWS:0:yes": {
+    "translation": "그럼 떠나는 게\n좋을\n걸세!",
+    "placeholders": []
+  },
+  "PAWS:1:health": {
+    "translation": "아주 좋아.",
+    "placeholders": []
+  },
+  "PAWS:1:job": {
+    "translation": "나는\n마구간지기라네.",
+    "placeholders": []
+  },
+  "PAWS:1:look": {
+    "translation": "억센 소녀.",
+    "placeholders": []
+  },
+  "PAWS:1:name": {
+    "translation": "프란체스카",
+    "placeholders": []
+  },
+  "PAWS:1:no": {
+    "translation": "그럼 스미스를\n보러\n왔겠구먼!",
+    "placeholders": []
+  },
+  "PAWS:1:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "PAWS:1:question": {
+    "translation": "말 훔치러\n온 건\n아니겠지?",
+    "placeholders": []
+  },
+  "PAWS:1:response1": {
+    "translation": "그대가 늙은\n레드 아이를\n다루는 걸\n봤다네!",
+    "placeholders": []
+  },
+  "PAWS:1:response2": {
+    "translation": "말하는 말이지!",
+    "placeholders": []
+  },
+  "PAWS:1:topic1": {
+    "translation": "STAB",
+    "placeholders": []
+  },
+  "PAWS:1:topic2": {
+    "translation": "SMIT",
+    "placeholders": []
+  },
+  "PAWS:1:yes": {
+    "translation": "뭐, 주인님이\n별로\n안 좋아하실\n텐데!",
+    "placeholders": []
+  },
+  "PAWS:10:health": {
+    "translation": "좋아요, 고마워요.",
+    "placeholders": []
+  },
+  "PAWS:10:job": {
+    "translation": "일이 뭔데요?",
+    "placeholders": []
+  },
+  "PAWS:10:look": {
+    "translation": "작은 소녀.",
+    "placeholders": []
+  },
+  "PAWS:10:name": {
+    "translation": "픽스",
+    "placeholders": []
+  },
+  "PAWS:10:no": {
+    "translation": "아쉽네요.",
+    "placeholders": []
+  },
+  "PAWS:10:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "PAWS:10:question": {
+    "translation": "그리고\n그쪽은요?",
+    "placeholders": []
+  },
+  "PAWS:10:response1": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "PAWS:10:response2": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "PAWS:10:topic1": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "PAWS:10:topic2": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "PAWS:10:yes": {
+    "translation": "좋아요.",
+    "placeholders": []
+  },
+  "PAWS:11:health": {
+    "translation": "나는 좋다네.",
+    "placeholders": []
+  },
+  "PAWS:11:job": {
+    "translation": "나는\n관리자라네.",
+    "placeholders": []
+  },
+  "PAWS:11:look": {
+    "translation": "지혜로운 군주.",
+    "placeholders": []
+  },
+  "PAWS:11:name": {
+    "translation": "사이먼 경",
+    "placeholders": []
+  },
+  "PAWS:11:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "PAWS:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "PAWS:11:question": {
+    "translation": "여덟 미덕\n모두에서\n깨달음을\n얻었는가?",
+    "placeholders": []
+  },
+  "PAWS:11:response1": {
+    "translation": "무엇인지는\n말할 수\n없다네!",
+    "placeholders": []
+  },
+  "PAWS:11:response2": {
+    "translation": "신비한 것들은\n8부분\n아바타만이\n찾을 수\n있다네!",
+    "placeholders": []
+  },
+  "PAWS:11:topic1": {
+    "translation": "KEEP",
+    "placeholders": []
+  },
+  "PAWS:11:topic2": {
+    "translation": "MYST",
+    "placeholders": []
+  },
+  "PAWS:11:yes": {
+    "translation": "신비한 갑옷은\n참나무 숲\n중앙에\n있다네!",
+    "placeholders": []
+  },
+  "PAWS:12:health": {
+    "translation": "좋아요.",
+    "placeholders": []
+  },
+  "PAWS:12:job": {
+    "translation": "나는\n관리자라네.",
+    "placeholders": []
+  },
+  "PAWS:12:look": {
+    "translation": "지혜로운 부인.",
+    "placeholders": []
+  },
+  "PAWS:12:name": {
+    "translation": "테사 부인",
+    "placeholders": []
+  },
+  "PAWS:12:no": {
+    "translation": "아쉽네요.",
+    "placeholders": []
+  },
+  "PAWS:12:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "PAWS:12:question": {
+    "translation": "여덟 미덕\n모두에서\n깨달음을\n얻었나요?",
+    "placeholders": []
+  },
+  "PAWS:12:response1": {
+    "translation": "말할 수\n없어요.",
+    "placeholders": []
+  },
+  "PAWS:12:response2": {
+    "translation": "신비한 것들은\n8부분\n아바타만이\n찾을 수\n있어요!",
+    "placeholders": []
+  },
+  "PAWS:12:topic1": {
+    "translation": "KEEP",
+    "placeholders": []
+  },
+  "PAWS:12:topic2": {
+    "translation": "MYST",
+    "placeholders": []
+  },
+  "PAWS:12:yes": {
+    "translation": "신비한 무기는\n서펀트 성의\n훈련실에\n있어요!",
+    "placeholders": []
+  },
+  "PAWS:13:health": {
+    "translation": "아주 신나.",
+    "placeholders": []
+  },
+  "PAWS:13:job": {
+    "translation": "나는 그대를\n모시러\n왔다네.",
+    "placeholders": []
+  },
+  "PAWS:13:look": {
+    "translation": "작은 광대.",
+    "placeholders": []
+  },
+  "PAWS:13:name": {
+    "translation": "아셈리",
+    "placeholders": []
+  },
+  "PAWS:13:no": {
+    "translation": "뭐 그럼, 나는\n전혀\n도움이\n안 되겠군.",
+    "placeholders": []
+  },
+  "PAWS:13:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "PAWS:13:question": {
+    "translation": "그것이\n흥미로운가?",
+    "placeholders": []
+  },
+  "PAWS:13:response1": {
+    "translation": "뭐, 나는\n춤추고\n노래할 수\n있지!",
+    "placeholders": []
+  },
+  "PAWS:13:response2": {
+    "translation": "그리고 노래도,\n트랄랄라...",
+    "placeholders": []
+  },
+  "PAWS:13:topic1": {
+    "translation": "SERV",
+    "placeholders": []
+  },
+  "PAWS:13:topic2": {
+    "translation": "DANC",
+    "placeholders": []
+  },
+  "PAWS:13:yes": {
+    "translation": "좋아!",
+    "placeholders": []
+  },
+  "PAWS:14:health": {
+    "translation": "아주\n좋다네!",
+    "placeholders": []
+  },
+  "PAWS:14:job": {
+    "translation": "나는 브리타니아를\n노래한다네.",
+    "placeholders": []
+  },
+  "PAWS:14:look": {
+    "translation": "노래하는\n음유시인.",
+    "placeholders": []
+  },
+  "PAWS:14:name": {
+    "translation": "리틀 존",
+    "placeholders": []
+  },
+  "PAWS:14:no": {
+    "translation": "그냥\n소문이라네.",
+    "placeholders": []
+  },
+  "PAWS:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "PAWS:14:question": {
+    "translation": "그대가 다른\n세계에서\n왔다고\n들었는데?",
+    "placeholders": []
+  },
+  "PAWS:14:response1": {
+    "translation": "브리타니아는\n참으로 아름다운\n땅이라, 다른\n땅에는 감히\n가지\n못하겠네!",
+    "placeholders": []
+  },
+  "PAWS:14:response2": {
+    "translation": "언젠가\n그대가\n돌아가기를\n바라네!",
+    "placeholders": []
+  },
+  "PAWS:14:topic1": {
+    "translation": "BRIT",
+    "placeholders": []
+  },
+  "PAWS:14:topic2": {
+    "translation": "EART",
+    "placeholders": []
+  },
+  "PAWS:14:yes": {
+    "translation": "그게 뭐라고\n불리는가?",
+    "placeholders": []
+  },
+  "PAWS:15:health": {
+    "translation": "좋아, 좋아.",
+    "placeholders": []
+  },
+  "PAWS:15:job": {
+    "translation": "오, 별로.",
+    "placeholders": []
+  },
+  "PAWS:15:look": {
+    "translation": "흰 종마",
+    "placeholders": []
+  },
+  "PAWS:15:name": {
+    "translation": "스미스",
+    "placeholders": []
+  },
+  "PAWS:15:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "PAWS:15:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "PAWS:15:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "PAWS:15:response1": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "PAWS:15:response2": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "PAWS:15:topic1": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "PAWS:15:topic2": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "PAWS:15:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "PAWS:2:health": {
+    "translation": "좋다네,\n고맙네.",
+    "placeholders": []
+  },
+  "PAWS:2:job": {
+    "translation": "난 나무꾼이라네,\n그려.",
+    "placeholders": []
+  },
+  "PAWS:2:look": {
+    "translation": "키 크고\n건장한\n남자.",
+    "placeholders": []
+  },
+  "PAWS:2:name": {
+    "translation": "스벤",
+    "placeholders": []
+  },
+  "PAWS:2:no": {
+    "translation": "팔뚝 좀\n키우게,\n그려!",
+    "placeholders": []
+  },
+  "PAWS:2:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "PAWS:2:question": {
+    "translation": "그대는\n나무꾼인가,\n그려?",
+    "placeholders": []
+  },
+  "PAWS:2:response1": {
+    "translation": "내 도끼로,\n뚝딱\n베어버리지,\n그려.",
+    "placeholders": []
+  },
+  "PAWS:2:response2": {
+    "translation": "큰 도끼라네,\n그려.",
+    "placeholders": []
+  },
+  "PAWS:2:topic1": {
+    "translation": "LUMB",
+    "placeholders": []
+  },
+  "PAWS:2:topic2": {
+    "translation": "AXE ",
+    "placeholders": []
+  },
+  "PAWS:2:yes": {
+    "translation": "좋구먼,\n그려.",
+    "placeholders": []
+  },
+  "PAWS:3:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "PAWS:3:job": {
+    "translation": "나는 코덱스\n근처에\n있어봤다네!",
+    "placeholders": []
+  },
+  "PAWS:3:look": {
+    "translation": "오래\n산 남자.",
+    "placeholders": []
+  },
+  "PAWS:3:name": {
+    "translation": "현자 자이르",
+    "placeholders": []
+  },
+  "PAWS:3:no": {
+    "translation": "찾아보게!",
+    "placeholders": []
+  },
+  "PAWS:3:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "PAWS:3:question": {
+    "translation": "그것을\n봤는가?",
+    "placeholders": []
+  },
+  "PAWS:3:response1": {
+    "translation": "그 비밀은\n끝이\n없다네!",
+    "placeholders": []
+  },
+  "PAWS:3:response2": {
+    "translation": "그 방에\n들어가려면\n3부분의\n열쇠와\n통행의\n말이\n필요하다네.\n락 호수\n너머의 내\n형제에게\n그 말을\n물어보게!",
+    "placeholders": []
+  },
+  "PAWS:3:topic1": {
+    "translation": "CODE",
+    "placeholders": []
+  },
+  "PAWS:3:topic2": {
+    "translation": "WORD",
+    "placeholders": []
+  },
+  "PAWS:3:yes": {
+    "translation": "와!",
+    "placeholders": []
+  },
+  "PAWS:4:health": {
+    "translation": "날마다\n더\n강해지지!",
+    "placeholders": []
+  },
+  "PAWS:4:job": {
+    "translation": "나는 술집\n여급이야, 에일을\n따라준다네!",
+    "placeholders": []
+  },
+  "PAWS:4:look": {
+    "translation": "아주\n큰 여인.",
+    "placeholders": []
+  },
+  "PAWS:4:name": {
+    "translation": "살",
+    "placeholders": []
+  },
+  "PAWS:4:no": {
+    "translation": "아쉽군,\n최고인데!",
+    "placeholders": []
+  },
+  "PAWS:4:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "PAWS:4:question": {
+    "translation": "폴리를\n좋아하나?",
+    "placeholders": []
+  },
+  "PAWS:4:response1": {
+    "translation": "우리에게는\n브리타니아\n최고의\n양조가\n있다네!",
+    "placeholders": []
+  },
+  "PAWS:4:response2": {
+    "translation": "우리는 오직\n폴리만\n생맥주로\n내온다네!",
+    "placeholders": []
+  },
+  "PAWS:4:topic1": {
+    "translation": "ALE ",
+    "placeholders": []
+  },
+  "PAWS:4:topic2": {
+    "translation": "BREW",
+    "placeholders": []
+  },
+  "PAWS:4:yes": {
+    "translation": "정말\n좋은\n맥주지!",
+    "placeholders": []
+  },
+  "PAWS:5:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "PAWS:5:job": {
+    "translation": "나는 마법의\n지혜를\n찾는다네.",
+    "placeholders": []
+  },
+  "PAWS:5:look": {
+    "translation": "젊은 마법사!",
+    "placeholders": []
+  },
+  "PAWS:5:name": {
+    "translation": "징글스",
+    "placeholders": []
+  },
+  "PAWS:5:no": {
+    "translation": "그는 락 호수의\n숨은 마을에\n사는데,\n배로만\n갈 수 있다네,\n게이트 주문에\n대해\n물어보게!",
+    "placeholders": []
+  },
+  "PAWS:5:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "PAWS:5:question": {
+    "translation": "그를\n아는가?",
+    "placeholders": []
+  },
+  "PAWS:5:response1": {
+    "translation": "내 스승님은\n게이트 이동\n주문을\n안다네!",
+    "placeholders": []
+  },
+  "PAWS:5:response2": {
+    "translation": "내 스승님은\n멘토리안일세.",
+    "placeholders": []
+  },
+  "PAWS:5:topic1": {
+    "translation": "MAGI",
+    "placeholders": []
+  },
+  "PAWS:5:topic2": {
+    "translation": "MAST",
+    "placeholders": []
+  },
+  "PAWS:5:yes": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "PAWS:6:health": {
+    "translation": "지치고\n배고프지만\n언제나\n충실하다네.",
+    "placeholders": []
+  },
+  "PAWS:6:job": {
+    "translation": "나는 로드\n브리티시를\n섬긴다네.",
+    "placeholders": []
+  },
+  "PAWS:6:look": {
+    "translation": "키 크고\n근육질인\n기사.",
+    "placeholders": []
+  },
+  "PAWS:6:name": {
+    "translation": "호비 경",
+    "placeholders": []
+  },
+  "PAWS:6:no": {
+    "translation": "아쉬운 일이군!",
+    "placeholders": []
+  },
+  "PAWS:6:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "PAWS:6:question": {
+    "translation": "그대의\n여정도\n같은가?",
+    "placeholders": []
+  },
+  "PAWS:6:response1": {
+    "translation": "나는 언제나\n브리타니아를\n위해\n여정을\n떠난다네!",
+    "placeholders": []
+  },
+  "PAWS:6:response2": {
+    "translation": "내 여정은\n세상의 악을\n물리치는\n것이라네.",
+    "placeholders": []
+  },
+  "PAWS:6:topic1": {
+    "translation": "FAIT",
+    "placeholders": []
+  },
+  "PAWS:6:topic2": {
+    "translation": "QUES",
+    "placeholders": []
+  },
+  "PAWS:6:yes": {
+    "translation": "우리는\n하나일세.",
+    "placeholders": []
+  },
+  "PAWS:7:health": {
+    "translation": "좀\n배고프군.",
+    "placeholders": []
+  },
+  "PAWS:7:job": {
+    "translation": "나는 식량을\n사러\n왔다네.",
+    "placeholders": []
+  },
+  "PAWS:7:look": {
+    "translation": "작은 드루이드.",
+    "placeholders": []
+  },
+  "PAWS:7:name": {
+    "translation": "담젤",
+    "placeholders": []
+  },
+  "PAWS:7:no": {
+    "translation": "아마\n겁쟁이겠지.",
+    "placeholders": []
+  },
+  "PAWS:7:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "PAWS:7:question": {
+    "translation": "그대는 깊은\n곳을\n여행하는가?",
+    "placeholders": []
+  },
+  "PAWS:7:response1": {
+    "translation": "그래, 여기\n최고의 식량이\n있다고\n들었네.",
+    "placeholders": []
+  },
+  "PAWS:7:response2": {
+    "translation": "식량은 던전에서\n쓰인다네.",
+    "placeholders": []
+  },
+  "PAWS:7:topic1": {
+    "translation": "FOOD",
+    "placeholders": []
+  },
+  "PAWS:7:topic2": {
+    "translation": "RATI",
+    "placeholders": []
+  },
+  "PAWS:7:yes": {
+    "translation": "대성 안에\n비밀 입구가\n있다네!",
+    "placeholders": []
+  },
+  "PAWS:8:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "PAWS:8:job": {
+    "translation": "나는 그냥\n여기\n앉아있다네.",
+    "placeholders": []
+  },
+  "PAWS:8:look": {
+    "translation": "온순한 목자.",
+    "placeholders": []
+  },
+  "PAWS:8:name": {
+    "translation": "위트핀",
+    "placeholders": []
+  },
+  "PAWS:8:no": {
+    "translation": "그렇군.",
+    "placeholders": []
+  },
+  "PAWS:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "PAWS:8:question": {
+    "translation": "무언가를\n찾고\n있는가?",
+    "placeholders": []
+  },
+  "PAWS:8:response1": {
+    "translation": "저기\n산자락\n한쪽에!",
+    "placeholders": []
+  },
+  "PAWS:8:response2": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "PAWS:8:topic1": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "PAWS:8:topic2": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "PAWS:8:yes": {
+    "translation": "무엇을?",
+    "placeholders": []
+  },
+  "PAWS:9:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "PAWS:9:job": {
+    "translation": "나는 이 땅을\n여행한다네.",
+    "placeholders": []
+  },
+  "PAWS:9:look": {
+    "translation": "두건 쓴 레인저.",
+    "placeholders": []
+  },
+  "PAWS:9:name": {
+    "translation": "배런",
+    "placeholders": []
+  },
+  "PAWS:9:no": {
+    "translation": "두고\n보세.",
+    "placeholders": []
+  },
+  "PAWS:9:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "PAWS:9:question": {
+    "translation": "그대는\n둔한가?",
+    "placeholders": []
+  },
+  "PAWS:9:response1": {
+    "translation": "브리타니아.",
+    "placeholders": []
+  },
+  "PAWS:9:response2": {
+    "translation": "마을 남동쪽\n구석의\n언덕을\n찾아보게!",
+    "placeholders": []
+  },
+  "PAWS:9:topic1": {
+    "translation": "LAND",
+    "placeholders": []
+  },
+  "PAWS:9:topic2": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "PAWS:9:yes": {
+    "translation": "그럴 줄\n알았네.",
+    "placeholders": []
+  },
+  "SERPENT:0:health": {
+    "translation": "아주 좋다네.",
+    "placeholders": []
+  },
+  "SERPENT:0:job": {
+    "translation": "나는 이 지방을\n다스린다네.",
+    "placeholders": []
+  },
+  "SERPENT:0:look": {
+    "translation": "위엄있는 남작",
+    "placeholders": []
+  },
+  "SERPENT:0:name": {
+    "translation": "센트리",
+    "placeholders": []
+  },
+  "SERPENT:0:no": {
+    "translation": "젤롬, 미녹,\n트린식,\n스카라\n브레이라네.",
+    "placeholders": []
+  },
+  "SERPENT:0:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SERPENT:0:question": {
+    "translation": "용기의 네\n도시를\n아는가?",
+    "placeholders": []
+  },
+  "SERPENT:0:response1": {
+    "translation": "그래, 이 섬들과\n그 이상이지.",
+    "placeholders": []
+  },
+  "SERPENT:0:response2": {
+    "translation": "나는 세 음절\n중 '쿠' 하나만\n안다네.",
+    "placeholders": []
+  },
+  "SERPENT:0:topic1": {
+    "translation": "PROV",
+    "placeholders": []
+  },
+  "SERPENT:0:topic2": {
+    "translation": "WORD",
+    "placeholders": []
+  },
+  "SERPENT:0:yes": {
+    "translation": "아주 좋군.",
+    "placeholders": []
+  },
+  "SERPENT:1:health": {
+    "translation": "아주 강하다네!",
+    "placeholders": []
+  },
+  "SERPENT:1:job": {
+    "translation": "물론\n문을\n지키는 것이지.",
+    "placeholders": []
+  },
+  "SERPENT:1:look": {
+    "translation": "아주 큰\n경비병.",
+    "placeholders": []
+  },
+  "SERPENT:1:name": {
+    "translation": "문 경비병.",
+    "placeholders": []
+  },
+  "SERPENT:1:no": {
+    "translation": "그럼 아마\n경비병이\n되려나!",
+    "placeholders": []
+  },
+  "SERPENT:1:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SERPENT:1:question": {
+    "translation": "용기를\n찾으러\n왔는가?",
+    "placeholders": []
+  },
+  "SERPENT:1:response1": {
+    "translation": "여기는 서펀트\n성의\n문이라네.",
+    "placeholders": []
+  },
+  "SERPENT:1:response2": {
+    "translation": "지키고,\n감시하고,\n보호하지.",
+    "placeholders": []
+  },
+  "SERPENT:1:topic1": {
+    "translation": "GATE",
+    "placeholders": []
+  },
+  "SERPENT:1:topic2": {
+    "translation": "GUAR",
+    "placeholders": []
+  },
+  "SERPENT:1:yes": {
+    "translation": "그럼 제대로\n찾아왔군.",
+    "placeholders": []
+  },
+  "SERPENT:10:health": {
+    "translation": "지금까지는\n괜찮다네.",
+    "placeholders": []
+  },
+  "SERPENT:10:job": {
+    "translation": "나는 이 통로를\n지킨다네.",
+    "placeholders": []
+  },
+  "SERPENT:10:look": {
+    "translation": "풍만한 경비병.",
+    "placeholders": []
+  },
+  "SERPENT:10:name": {
+    "translation": "로리",
+    "placeholders": []
+  },
+  "SERPENT:10:no": {
+    "translation": "그럼 가던\n길을\n가게!",
+    "placeholders": []
+  },
+  "SERPENT:10:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "SERPENT:10:question": {
+    "translation": "누군가를\n찾고\n있는가?",
+    "placeholders": []
+  },
+  "SERPENT:10:response1": {
+    "translation": "그는 서쪽\n방에\n있다네.",
+    "placeholders": []
+  },
+  "SERPENT:10:response2": {
+    "translation": "그는 동쪽\n방에\n있다네.",
+    "placeholders": []
+  },
+  "SERPENT:10:topic1": {
+    "translation": "GARA",
+    "placeholders": []
+  },
+  "SERPENT:10:topic2": {
+    "translation": "DURH",
+    "placeholders": []
+  },
+  "SERPENT:10:yes": {
+    "translation": "누구를?",
+    "placeholders": []
+  },
+  "SERPENT:11:health": {
+    "translation": "지금까지는\n괜찮다네.",
+    "placeholders": []
+  },
+  "SERPENT:11:job": {
+    "translation": "나는 이 통로를\n지킨다네.",
+    "placeholders": []
+  },
+  "SERPENT:11:look": {
+    "translation": "잘생긴 경비병",
+    "placeholders": []
+  },
+  "SERPENT:11:name": {
+    "translation": "사무엘",
+    "placeholders": []
+  },
+  "SERPENT:11:no": {
+    "translation": "그럼 가던\n길을\n가게!",
+    "placeholders": []
+  },
+  "SERPENT:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SERPENT:11:question": {
+    "translation": "누군가를\n찾고\n있는가?",
+    "placeholders": []
+  },
+  "SERPENT:11:response1": {
+    "translation": "그는 서쪽\n방에\n있다네.",
+    "placeholders": []
+  },
+  "SERPENT:11:response2": {
+    "translation": "그는 동쪽\n방에\n있다네.",
+    "placeholders": []
+  },
+  "SERPENT:11:topic1": {
+    "translation": "GARA",
+    "placeholders": []
+  },
+  "SERPENT:11:topic2": {
+    "translation": "DURH",
+    "placeholders": []
+  },
+  "SERPENT:11:yes": {
+    "translation": "누구를?",
+    "placeholders": []
+  },
+  "SERPENT:12:health": {
+    "translation": "손을\n하나\n잃었다네!",
+    "placeholders": []
+  },
+  "SERPENT:12:job": {
+    "translation": "나는 일을 할\n수가 없다네.",
+    "placeholders": []
+  },
+  "SERPENT:12:look": {
+    "translation": "궁핍하고\n악취 나는\n거지.",
+    "placeholders": []
+  },
+  "SERPENT:12:name": {
+    "translation": "로드릭",
+    "placeholders": []
+  },
+  "SERPENT:12:no": {
+    "translation": "인색하군!",
+    "placeholders": []
+  },
+  "SERPENT:12:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SERPENT:12:question": {
+    "translation": "금을\n주겠는가?",
+    "placeholders": []
+  },
+  "SERPENT:12:response1": {
+    "translation": "조른에게\n먹혔다네.",
+    "placeholders": []
+  },
+  "SERPENT:12:response2": {
+    "translation": "파란 빛의\n구슬은 힘,\n민첩, 지능을\n높여주지만,\n대가가\n따른다네!",
+    "placeholders": []
+  },
+  "SERPENT:12:topic1": {
+    "translation": "HAND",
+    "placeholders": []
+  },
+  "SERPENT:12:topic2": {
+    "translation": "ORBS",
+    "placeholders": []
+  },
+  "SERPENT:12:yes": {
+    "translation": "그대는\n친절하군.",
+    "placeholders": []
+  },
+  "SERPENT:13:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "SERPENT:13:job": {
+    "translation": "나는 중요한\n정보를\n가지고\n있다네.",
+    "placeholders": []
+  },
+  "SERPENT:13:look": {
+    "translation": "지혜로운 드루이드.",
+    "placeholders": []
+  },
+  "SERPENT:13:name": {
+    "translation": "안토스 수녀",
+    "placeholders": []
+  },
+  "SERPENT:13:no": {
+    "translation": "그럼 전사\n개럼에게\n물어보게,\n어디 있는지\n안다네!",
+    "placeholders": []
+  },
+  "SERPENT:13:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "SERPENT:13:question": {
+    "translation": "그것을\n가졌는가?",
+    "placeholders": []
+  },
+  "SERPENT:13:response1": {
+    "translation": "어떤 주제인가?",
+    "placeholders": []
+  },
+  "SERPENT:13:response2": {
+    "translation": "용기의 종이\n어비스에\n들어가는 데\n필요하다네.",
+    "placeholders": []
+  },
+  "SERPENT:13:topic1": {
+    "translation": "INFO",
+    "placeholders": []
+  },
+  "SERPENT:13:topic2": {
+    "translation": "BELL",
+    "placeholders": []
+  },
+  "SERPENT:13:yes": {
+    "translation": "아주 좋군.",
+    "placeholders": []
+  },
+  "SERPENT:14:health": {
+    "translation": "좋고\n촉촉하지!",
+    "placeholders": []
+  },
+  "SERPENT:14:job": {
+    "translation": "나는 바다를\n헤엄친다네!",
+    "placeholders": []
+  },
+  "SERPENT:14:look": {
+    "translation": "가시 돋친 닉시!",
+    "placeholders": []
+  },
+  "SERPENT:14:name": {
+    "translation": "녹섬",
+    "placeholders": []
+  },
+  "SERPENT:14:no": {
+    "translation": "위대한\n배였지!",
+    "placeholders": []
+  },
+  "SERPENT:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SERPENT:14:question": {
+    "translation": "왕립함\n케이프호에\n대해\n들어봤는가?",
+    "placeholders": []
+  },
+  "SERPENT:14:response1": {
+    "translation": "바다 밑에는\n많은 배가\n있다네!",
+    "placeholders": []
+  },
+  "SERPENT:14:response2": {
+    "translation": "생존자라면\n어디를 찾아야\n할지\n알\n걸세.",
+    "placeholders": []
+  },
+  "SERPENT:14:topic1": {
+    "translation": "SEAS",
+    "placeholders": []
+  },
+  "SERPENT:14:topic2": {
+    "translation": "SHIP",
+    "placeholders": []
+  },
+  "SERPENT:14:yes": {
+    "translation": "그녀에게는\n선체를 강화하는\n마법의 바퀴가\n있었다네!",
+    "placeholders": []
+  },
+  "SERPENT:15:health": {
+    "translation": "아주 좋아요.",
+    "placeholders": []
+  },
+  "SERPENT:15:job": {
+    "translation": "서펀트 성에\n온 걸\n환영해요!",
+    "placeholders": []
+  },
+  "SERPENT:15:look": {
+    "translation": "아름다운\n성기사!",
+    "placeholders": []
+  },
+  "SERPENT:15:name": {
+    "translation": "미셸",
+    "placeholders": []
+  },
+  "SERPENT:15:no": {
+    "translation": "그럼 우리\n치유사를\n찾아가세요!",
+    "placeholders": []
+  },
+  "SERPENT:15:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "SERPENT:15:question": {
+    "translation": "그대는\n건강한가요?",
+    "placeholders": []
+  },
+  "SERPENT:15:response1": {
+    "translation": "그분이 여기\n영주님이세요,\n서쪽 통로로\n가세요.",
+    "placeholders": []
+  },
+  "SERPENT:15:response2": {
+    "translation": "동쪽 통로로\n가세요.",
+    "placeholders": []
+  },
+  "SERPENT:15:topic1": {
+    "translation": "SENT",
+    "placeholders": []
+  },
+  "SERPENT:15:topic2": {
+    "translation": "HEAL",
+    "placeholders": []
+  },
+  "SERPENT:15:yes": {
+    "translation": "아주 좋아요,\n아마 센트리를\n찾으시겠죠.",
+    "placeholders": []
+  },
+  "SERPENT:2:health": {
+    "translation": "나 혼자\n난파에서\n살아남았다네.",
+    "placeholders": []
+  },
+  "SERPENT:2:job": {
+    "translation": "나는 선원이라네.",
+    "placeholders": []
+  },
+  "SERPENT:2:look": {
+    "translation": "부상당한 선원",
+    "placeholders": []
+  },
+  "SERPENT:2:name": {
+    "translation": "라손",
+    "placeholders": []
+  },
+  "SERPENT:2:no": {
+    "translation": "그녀는 강력한\n배였지!",
+    "placeholders": []
+  },
+  "SERPENT:2:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SERPENT:2:question": {
+    "translation": "그녀에 대해\n들어봤는가?",
+    "placeholders": []
+  },
+  "SERPENT:2:response1": {
+    "translation": "왕립함\n케이프호.",
+    "placeholders": []
+  },
+  "SERPENT:2:response2": {
+    "translation": "그녀는\n영웅곶의\n만, 깊은\n바다에서\n침몰했다네!",
+    "placeholders": []
+  },
+  "SERPENT:2:topic1": {
+    "translation": "SHIP",
+    "placeholders": []
+  },
+  "SERPENT:2:topic2": {
+    "translation": "WHEE",
+    "placeholders": []
+  },
+  "SERPENT:2:yes": {
+    "translation": "그녀는 강력한\n배였지!",
+    "placeholders": []
+  },
+  "SERPENT:3:health": {
+    "translation": "방금\n회복됐다네.",
+    "placeholders": []
+  },
+  "SERPENT:3:job": {
+    "translation": "나는 브리타니아를\n위해\n싸운다네!",
+    "placeholders": []
+  },
+  "SERPENT:3:look": {
+    "translation": "노련한\n전사.",
+    "placeholders": []
+  },
+  "SERPENT:3:name": {
+    "translation": "로크",
+    "placeholders": []
+  },
+  "SERPENT:3:no": {
+    "translation": "그대는 제대로\n찾아왔네.",
+    "placeholders": []
+  },
+  "SERPENT:3:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SERPENT:3:question": {
+    "translation": "그대는\n건강한가?",
+    "placeholders": []
+  },
+  "SERPENT:3:response1": {
+    "translation": "위대한 스티지언\n어비스에는\n궁극적\n지혜의\n코덱스가\n있다네!",
+    "placeholders": []
+  },
+  "SERPENT:3:response2": {
+    "translation": "나는 잘\n모른다네.",
+    "placeholders": []
+  },
+  "SERPENT:3:topic1": {
+    "translation": "ABYS",
+    "placeholders": []
+  },
+  "SERPENT:3:topic2": {
+    "translation": "CODE",
+    "placeholders": []
+  },
+  "SERPENT:3:yes": {
+    "translation": "그럼 어비스의\n비밀을\n찾도록\n힘쓰게.",
+    "placeholders": []
+  },
+  "SERPENT:4:health": {
+    "translation": "훌륭하다네.",
+    "placeholders": []
+  },
+  "SERPENT:4:job": {
+    "translation": "나는 훈련\n중이라네!",
+    "placeholders": []
+  },
+  "SERPENT:4:look": {
+    "translation": "훈련에\n몰두한 레인저.",
+    "placeholders": []
+  },
+  "SERPENT:4:name": {
+    "translation": "레인저.",
+    "placeholders": []
+  },
+  "SERPENT:4:no": {
+    "translation": "겁쟁이.",
+    "placeholders": []
+  },
+  "SERPENT:4:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SERPENT:4:question": {
+    "translation": "그대는?",
+    "placeholders": []
+  },
+  "SERPENT:4:response1": {
+    "translation": "나는 던전에서\n살아남기 위해\n훈련한다네!",
+    "placeholders": []
+  },
+  "SERPENT:4:response2": {
+    "translation": "나는 제단실의\n비밀을\n정복할\n계획이라네.",
+    "placeholders": []
+  },
+  "SERPENT:4:topic1": {
+    "translation": "TRAI",
+    "placeholders": []
+  },
+  "SERPENT:4:topic2": {
+    "translation": "DUNG",
+    "placeholders": []
+  },
+  "SERPENT:4:yes": {
+    "translation": "그 방에 대해\n우리\n스승님에게\n물어보게,\n많이\n아신다네!",
+    "placeholders": []
+  },
+  "SERPENT:5:health": {
+    "translation": "최상이라네.",
+    "placeholders": []
+  },
+  "SERPENT:5:job": {
+    "translation": "나는 전사들에게\n용기로\n싸우도록\n훈련시킨다네!",
+    "placeholders": []
+  },
+  "SERPENT:5:look": {
+    "translation": "훈련 대장.",
+    "placeholders": []
+  },
+  "SERPENT:5:name": {
+    "translation": "시라",
+    "placeholders": []
+  },
+  "SERPENT:5:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "SERPENT:5:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "SERPENT:5:question": {
+    "translation": "훈련하겠는가?",
+    "placeholders": []
+  },
+  "SERPENT:5:response1": {
+    "translation": "잘 훈련하면\n그대의 용기도\n자신감과\n함께\n자랄\n걸세.",
+    "placeholders": []
+  },
+  "SERPENT:5:response2": {
+    "translation": "용기의\n제단실에서는\n붉은색, 주황색,\n보라색, 흰색\n보석을\n쓰게!",
+    "placeholders": []
+  },
+  "SERPENT:5:topic1": {
+    "translation": "TRAI",
+    "placeholders": []
+  },
+  "SERPENT:5:topic2": {
+    "translation": "ROOM",
+    "placeholders": []
+  },
+  "SERPENT:5:yes": {
+    "translation": "훌륭해!",
+    "placeholders": []
+  },
+  "SERPENT:6:health": {
+    "translation": "아주 좋다네.",
+    "placeholders": []
+  },
+  "SERPENT:6:job": {
+    "translation": "나는 우리\n영주를\n지킨다네",
+    "placeholders": []
+  },
+  "SERPENT:6:look": {
+    "translation": "엄한 경비병.",
+    "placeholders": []
+  },
+  "SERPENT:6:name": {
+    "translation": "남작의 경비병",
+    "placeholders": []
+  },
+  "SERPENT:6:no": {
+    "translation": "그럼 그를\n방해하지\n말게.",
+    "placeholders": []
+  },
+  "SERPENT:6:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "SERPENT:6:question": {
+    "translation": "센트리를\n알현하고\n싶은가?",
+    "placeholders": []
+  },
+  "SERPENT:6:response1": {
+    "translation": "센트리가\n이 성을\n다스린다네.",
+    "placeholders": []
+  },
+  "SERPENT:6:response2": {
+    "translation": "이 성은 용기\n위에\n세워졌다네.",
+    "placeholders": []
+  },
+  "SERPENT:6:topic1": {
+    "translation": "LORD",
+    "placeholders": []
+  },
+  "SERPENT:6:topic2": {
+    "translation": "CAST",
+    "placeholders": []
+  },
+  "SERPENT:6:yes": {
+    "translation": "허락하니,\n들어오게.",
+    "placeholders": []
+  },
+  "SERPENT:7:health": {
+    "translation": "훌륭하다네.",
+    "placeholders": []
+  },
+  "SERPENT:7:job": {
+    "translation": "우리는 우리\n영주의\n보물을\n지킨다네.",
+    "placeholders": []
+  },
+  "SERPENT:7:look": {
+    "translation": "건장한 경비병",
+    "placeholders": []
+  },
+  "SERPENT:7:name": {
+    "translation": "보물 경비병",
+    "placeholders": []
+  },
+  "SERPENT:7:no": {
+    "translation": "현명한\n선택이군!",
+    "placeholders": []
+  },
+  "SERPENT:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SERPENT:7:question": {
+    "translation": "우리 영주의\n보물을\n훔칠\n작정인가?",
+    "placeholders": []
+  },
+  "SERPENT:7:response1": {
+    "translation": "이 보물은\n그대의\n것이 아니라네",
+    "placeholders": []
+  },
+  "SERPENT:7:response2": {
+    "translation": "던전에 대한\n지식은\n더럼에게\n찾아가게.",
+    "placeholders": []
+  },
+  "SERPENT:7:topic1": {
+    "translation": "TREA",
+    "placeholders": []
+  },
+  "SERPENT:7:topic2": {
+    "translation": "DUNG",
+    "placeholders": []
+  },
+  "SERPENT:7:yes": {
+    "translation": "어리석은 놈!",
+    "placeholders": []
+  },
+  "SERPENT:8:health": {
+    "translation": "아주\n좋다네.",
+    "placeholders": []
+  },
+  "SERPENT:8:job": {
+    "translation": "나는 용기로\n싸운다네!",
+    "placeholders": []
+  },
+  "SERPENT:8:look": {
+    "translation": "대담한 전사.",
+    "placeholders": []
+  },
+  "SERPENT:8:name": {
+    "translation": "개럼",
+    "placeholders": []
+  },
+  "SERPENT:8:no": {
+    "translation": "그럼 훈련하게!",
+    "placeholders": []
+  },
+  "SERPENT:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SERPENT:8:question": {
+    "translation": "그대는?",
+    "placeholders": []
+  },
+  "SERPENT:8:response1": {
+    "translation": "용기는\n악당을\n왕으로\n만든다네!",
+    "placeholders": []
+  },
+  "SERPENT:8:response2": {
+    "translation": "용기의 종은\n바다의 깊은\n우물 바닥에\n있다네, 위도\nN'A\" 경도\nL'A\"에서\n찾을 수\n있다네",
+    "placeholders": []
+  },
+  "SERPENT:8:topic1": {
+    "translation": "COUR",
+    "placeholders": []
+  },
+  "SERPENT:8:topic2": {
+    "translation": "BELL",
+    "placeholders": []
+  },
+  "SERPENT:8:yes": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "SERPENT:9:health": {
+    "translation": "꽤 좋다네.",
+    "placeholders": []
+  },
+  "SERPENT:9:job": {
+    "translation": "나는 영광을\n찾는다네!",
+    "placeholders": []
+  },
+  "SERPENT:9:look": {
+    "translation": "키 큰 전사.",
+    "placeholders": []
+  },
+  "SERPENT:9:name": {
+    "translation": "더럼",
+    "placeholders": []
+  },
+  "SERPENT:9:no": {
+    "translation": "안타까운\n일이군.",
+    "placeholders": []
+  },
+  "SERPENT:9:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SERPENT:9:question": {
+    "translation": "그대는\n여정 중인가?",
+    "placeholders": []
+  },
+  "SERPENT:9:response1": {
+    "translation": "여정 중일 때\n내 삶에\n목적이\n있다고\n느낀다네!",
+    "placeholders": []
+  },
+  "SERPENT:9:response2": {
+    "translation": "용기의 제단실은\n열쇠의 세 번째\n부분을\n준다네.",
+    "placeholders": []
+  },
+  "SERPENT:9:topic1": {
+    "translation": "QUES",
+    "placeholders": []
+  },
+  "SERPENT:9:topic2": {
+    "translation": "DUNG",
+    "placeholders": []
+  },
+  "SERPENT:9:yes": {
+    "translation": "그럼 그대의\n삶에\n의미가\n있군!",
+    "placeholders": []
+  },
+  "SKARA:0:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "SKARA:0:job": {
+    "translation": "나는 내면의\n빛을\n찾는다네.",
+    "placeholders": []
+  },
+  "SKARA:0:look": {
+    "translation": "근엄한 레인저.",
+    "placeholders": []
+  },
+  "SKARA:0:name": {
+    "translation": "샤미노",
+    "placeholders": []
+  },
+  "SKARA:0:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "SKARA:0:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SKARA:0:question": {
+    "translation": "그대는 이\n\"진실\"을\n찾는가?",
+    "placeholders": []
+  },
+  "SKARA:0:response1": {
+    "translation": "나는 \"하나의\n위대한 진실\"을\n찾는다네!",
+    "placeholders": []
+  },
+  "SKARA:0:response2": {
+    "translation": "코덱스\n안에\n있는 것!",
+    "placeholders": []
+  },
+  "SKARA:0:topic1": {
+    "translation": "LIGH",
+    "placeholders": []
+  },
+  "SKARA:0:topic2": {
+    "translation": "TRUT",
+    "placeholders": []
+  },
+  "SKARA:0:yes": {
+    "translation": "어떤 것들은\n영원이\n걸리지만\n벽돌 하나하나로\n산도 쌓을 수\n있다네!",
+    "placeholders": []
+  },
+  "SKARA:1:health": {
+    "translation": "나는 심각한\n부상을\n입었다네.",
+    "placeholders": []
+  },
+  "SKARA:1:job": {
+    "translation": "나는 영적인\n길을\n찾는다네.",
+    "placeholders": []
+  },
+  "SKARA:1:look": {
+    "translation": "부상당한 남자.",
+    "placeholders": []
+  },
+  "SKARA:1:name": {
+    "translation": "에머슨",
+    "placeholders": []
+  },
+  "SKARA:1:no": {
+    "translation": "악한 길이군!",
+    "placeholders": []
+  },
+  "SKARA:1:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SKARA:1:question": {
+    "translation": "그대는 영혼이\n선한가?",
+    "placeholders": []
+  },
+  "SKARA:1:response1": {
+    "translation": "영적인 것은\n그 어떤\n물질적 힘보다\n강하다네.",
+    "placeholders": []
+  },
+  "SKARA:1:response2": {
+    "translation": "원칙의\n승리\n외에는\n그 무엇도\n그대에게\n평화를\n가져다줄 수\n없다네!",
+    "placeholders": []
+  },
+  "SKARA:1:topic1": {
+    "translation": "SPIR",
+    "placeholders": []
+  },
+  "SKARA:1:topic2": {
+    "translation": "WOUN",
+    "placeholders": []
+  },
+  "SKARA:1:yes": {
+    "translation": "좋은\n길이군.",
+    "placeholders": []
+  },
+  "SKARA:10:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "SKARA:10:job": {
+    "translation": "나는 이야기를\n쓴다네.",
+    "placeholders": []
+  },
+  "SKARA:10:look": {
+    "translation": "지혜로운 음유시인.",
+    "placeholders": []
+  },
+  "SKARA:10:name": {
+    "translation": "디킨스",
+    "placeholders": []
+  },
+  "SKARA:10:no": {
+    "translation": "그렇군.",
+    "placeholders": []
+  },
+  "SKARA:10:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SKARA:10:question": {
+    "translation": "그대는 천성이\n선한가?",
+    "placeholders": []
+  },
+  "SKARA:10:response1": {
+    "translation": "이야기는\n영혼에\n좋다네!",
+    "placeholders": []
+  },
+  "SKARA:10:response2": {
+    "translation": "기억하게,\n남의 짐을\n덜어주는 이는\n이 세상에서\n쓸모없지\n않다네!",
+    "placeholders": []
+  },
+  "SKARA:10:topic1": {
+    "translation": "STOR",
+    "placeholders": []
+  },
+  "SKARA:10:topic2": {
+    "translation": "SPIR",
+    "placeholders": []
+  },
+  "SKARA:10:yes": {
+    "translation": "그대의 순선이\n순악을\n확실히\n넘어서게\n하게!",
+    "placeholders": []
+  },
+  "SKARA:11:health": {
+    "translation": "뛰어나다네!",
+    "placeholders": []
+  },
+  "SKARA:11:job": {
+    "translation": "나는\n여정을\n떠난다네.",
+    "placeholders": []
+  },
+  "SKARA:11:look": {
+    "translation": "늠름한\n전사.",
+    "placeholders": []
+  },
+  "SKARA:11:name": {
+    "translation": "화이트",
+    "placeholders": []
+  },
+  "SKARA:11:no": {
+    "translation": "위험은\n실재한다네!",
+    "placeholders": []
+  },
+  "SKARA:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SKARA:11:question": {
+    "translation": "그대는 모든\n일에\n두려움이\n없는가?",
+    "placeholders": []
+  },
+  "SKARA:11:response1": {
+    "translation": "많은 여정이\n아주\n위험하다네!",
+    "placeholders": []
+  },
+  "SKARA:11:response2": {
+    "translation": "나는 내일이\n두렵지 않다네;\n어제를 보았고\n오늘을\n사랑하니까.",
+    "placeholders": []
+  },
+  "SKARA:11:topic1": {
+    "translation": "QUES",
+    "placeholders": []
+  },
+  "SKARA:11:topic2": {
+    "translation": "DANG",
+    "placeholders": []
+  },
+  "SKARA:11:yes": {
+    "translation": "허풍쟁이\n바보로군!",
+    "placeholders": []
+  },
+  "SKARA:12:health": {
+    "translation": "강하다.",
+    "placeholders": []
+  },
+  "SKARA:12:job": {
+    "translation": "나는 룬의\n비밀을\n지킨다.",
+    "placeholders": []
+  },
+  "SKARA:12:look": {
+    "translation": "은빛 앙크.",
+    "placeholders": []
+  },
+  "SKARA:12:name": {
+    "translation": "영성의\n앙크",
+    "placeholders": []
+  },
+  "SKARA:12:no": {
+    "translation": "보름달의\n문으로\n들어가라!",
+    "placeholders": []
+  },
+  "SKARA:12:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "SKARA:12:question": {
+    "translation": "신단을\n찾았는가?",
+    "placeholders": []
+  },
+  "SKARA:12:response1": {
+    "translation": "진언이라고?",
+    "placeholders": []
+  },
+  "SKARA:12:response2": {
+    "translation": "영성의\n룬을\n브리타니아의\n보물의 방에서\n찾아보라!",
+    "placeholders": []
+  },
+  "SKARA:12:topic1": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "SKARA:12:topic2": {
+    "translation": "OM  ",
+    "placeholders": []
+  },
+  "SKARA:12:yes": {
+    "translation": "좋다!",
+    "placeholders": []
+  },
+  "SKARA:13:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "SKARA:13:job": {
+    "translation": "나는 그저 금화\n한 닢을\n구걸한다네!",
+    "placeholders": []
+  },
+  "SKARA:13:look": {
+    "translation": "꾀죄죄한 거지.",
+    "placeholders": []
+  },
+  "SKARA:13:name": {
+    "translation": "앰뷸",
+    "placeholders": []
+  },
+  "SKARA:13:no": {
+    "translation": "인색하시네요,\n많이 가지신 거\n다\n알아요!",
+    "placeholders": []
+  },
+  "SKARA:13:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "SKARA:13:question": {
+    "translation": "금화 한 닢만\n주시겠어요?",
+    "placeholders": []
+  },
+  "SKARA:13:response1": {
+    "translation": "오, 제발...\n오, 제발...",
+    "placeholders": []
+  },
+  "SKARA:13:response2": {
+    "translation": "배런이라는\n아이에게\n물어보세요.",
+    "placeholders": []
+  },
+  "SKARA:13:topic1": {
+    "translation": "BEG ",
+    "placeholders": []
+  },
+  "SKARA:13:topic2": {
+    "translation": "MANT",
+    "placeholders": []
+  },
+  "SKARA:13:yes": {
+    "translation": "참으로\n친절한\n분이시군요.",
+    "placeholders": []
+  },
+  "SKARA:14:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "SKARA:14:job": {
+    "translation": "직업 없음.",
+    "placeholders": []
+  },
+  "SKARA:14:look": {
+    "translation": "작은 아이.",
+    "placeholders": []
+  },
+  "SKARA:14:name": {
+    "translation": "배런",
+    "placeholders": []
+  },
+  "SKARA:14:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "SKARA:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SKARA:14:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "SKARA:14:response1": {
+    "translation": "나는 그걸 잘\n안다네,\n'옴'이라네.",
+    "placeholders": []
+  },
+  "SKARA:14:response2": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "SKARA:14:topic1": {
+    "translation": "MANT",
+    "placeholders": []
+  },
+  "SKARA:14:topic2": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "SKARA:14:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "SKARA:15:health": {
+    "translation": "나는 죽은 지\n수년째라네.",
+    "placeholders": []
+  },
+  "SKARA:15:job": {
+    "translation": "나는 이 여관에\n출몰한다네!",
+    "placeholders": []
+  },
+  "SKARA:15:look": {
+    "translation": "유령 같은 형체",
+    "placeholders": []
+  },
+  "SKARA:15:name": {
+    "translation": "아이작",
+    "placeholders": []
+  },
+  "SKARA:15:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "SKARA:15:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SKARA:15:question": {
+    "translation": "그대는\n여정 중인가?",
+    "placeholders": []
+  },
+  "SKARA:15:response1": {
+    "translation": "여정은\n끝나지\n않았다네!",
+    "placeholders": []
+  },
+  "SKARA:15:response2": {
+    "translation": "하얀 보석은\n서펀트의\n등뼈 꼭대기에\n있다네. 구름\n속을 떠다니는\n자만이\n닿을 수\n있다네.",
+    "placeholders": []
+  },
+  "SKARA:15:topic1": {
+    "translation": "HAUN",
+    "placeholders": []
+  },
+  "SKARA:15:topic2": {
+    "translation": "STON",
+    "placeholders": []
+  },
+  "SKARA:15:yes": {
+    "translation": "희망을!",
+    "placeholders": []
+  },
+  "SKARA:2:health": {
+    "translation": "나는 살아\n있다네.",
+    "placeholders": []
+  },
+  "SKARA:2:job": {
+    "translation": "나는 마음속에\n빛을\n지니고\n다닌다네.",
+    "placeholders": []
+  },
+  "SKARA:2:look": {
+    "translation": "키 큰 레인저.",
+    "placeholders": []
+  },
+  "SKARA:2:name": {
+    "translation": "산타야나",
+    "placeholders": []
+  },
+  "SKARA:2:no": {
+    "translation": "그럴 수 있는\n이는 드물지만,\n그러도록\n힘쓰게!",
+    "placeholders": []
+  },
+  "SKARA:2:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SKARA:2:question": {
+    "translation": "그대는 항상\n올바른 길을\n걷는가?",
+    "placeholders": []
+  },
+  "SKARA:2:response1": {
+    "translation": "철학의 빛.",
+    "placeholders": []
+  },
+  "SKARA:2:response2": {
+    "translation": "철학적인\n마음에서는\n익숙한 것도\n경이로움을\n불러일으킨다네!",
+    "placeholders": []
+  },
+  "SKARA:2:topic1": {
+    "translation": "LIGH",
+    "placeholders": []
+  },
+  "SKARA:2:topic2": {
+    "translation": "PHIL",
+    "placeholders": []
+  },
+  "SKARA:2:yes": {
+    "translation": "의심스럽군!",
+    "placeholders": []
+  },
+  "SKARA:3:health": {
+    "translation": "뛰어나지!",
+    "placeholders": []
+  },
+  "SKARA:3:job": {
+    "translation": "나는 거대한\n주문을\n부린다네!",
+    "placeholders": []
+  },
+  "SKARA:3:look": {
+    "translation": "아주 작은\n마법사.",
+    "placeholders": []
+  },
+  "SKARA:3:name": {
+    "translation": "프레스토",
+    "placeholders": []
+  },
+  "SKARA:3:no": {
+    "translation": "맞혀보게!",
+    "placeholders": []
+  },
+  "SKARA:3:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SKARA:3:question": {
+    "translation": "이 주문들의\n공통점을\n아는가?",
+    "placeholders": []
+  },
+  "SKARA:3:response1": {
+    "translation": "나는 저주,\n살해, 그리고\n투시를\n부릴\n수 있다네!",
+    "placeholders": []
+  },
+  "SKARA:3:response2": {
+    "translation": "그래, 베스퍼의\n'도끼와 에일'\n술집 주인에게\n벨라도나에\n대해\n물어보게.",
+    "placeholders": []
+  },
+  "SKARA:3:topic1": {
+    "translation": "SPEL",
+    "placeholders": []
+  },
+  "SKARA:3:topic2": {
+    "translation": "NIGH",
+    "placeholders": []
+  },
+  "SKARA:3:yes": {
+    "translation": "무엇인가?",
+    "placeholders": []
+  },
+  "SKARA:4:health": {
+    "translation": "나는 전혀\n좋지\n않다네.",
+    "placeholders": []
+  },
+  "SKARA:4:job": {
+    "translation": "나는 음식과\n돈을\n구걸한다네.",
+    "placeholders": []
+  },
+  "SKARA:4:look": {
+    "translation": "배고픈 거지.",
+    "placeholders": []
+  },
+  "SKARA:4:name": {
+    "translation": "그랜티드",
+    "placeholders": []
+  },
+  "SKARA:4:no": {
+    "translation": "밥맛이군!",
+    "placeholders": []
+  },
+  "SKARA:4:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "SKARA:4:question": {
+    "translation": "나에게 음식이나\n돈을\n주겠는가?",
+    "placeholders": []
+  },
+  "SKARA:4:response1": {
+    "translation": "먹으려고!",
+    "placeholders": []
+  },
+  "SKARA:4:response2": {
+    "translation": "음식을\n사려고!",
+    "placeholders": []
+  },
+  "SKARA:4:topic1": {
+    "translation": "FOOD",
+    "placeholders": []
+  },
+  "SKARA:4:topic2": {
+    "translation": "MONE",
+    "placeholders": []
+  },
+  "SKARA:4:yes": {
+    "translation": "답례로 앙크가\n룬을 알고\n내 친구\n앰뷸이\n진언을\n안다는 걸\n말해주지!",
+    "placeholders": []
+  },
+  "SKARA:5:health": {
+    "translation": "나는 괜찮다네.",
+    "placeholders": []
+  },
+  "SKARA:5:job": {
+    "translation": "나는 마법사의\n일지를\n읽고\n있다네.",
+    "placeholders": []
+  },
+  "SKARA:5:look": {
+    "translation": "빛나는\n레인저.",
+    "placeholders": []
+  },
+  "SKARA:5:name": {
+    "translation": "마이터",
+    "placeholders": []
+  },
+  "SKARA:5:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "SKARA:5:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "SKARA:5:question": {
+    "translation": "그것을\n되찾아\n보겠는가?",
+    "placeholders": []
+  },
+  "SKARA:5:response1": {
+    "translation": "그것은 하얀\n보석에\n대해\n말해준다네.",
+    "placeholders": []
+  },
+  "SKARA:5:response2": {
+    "translation": "그것은 더\n이상 던전\n히스로스에\n있지 않다네,\n사라졌어!",
+    "placeholders": []
+  },
+  "SKARA:5:topic1": {
+    "translation": "JOUR",
+    "placeholders": []
+  },
+  "SKARA:5:topic2": {
+    "translation": "STON",
+    "placeholders": []
+  },
+  "SKARA:5:yes": {
+    "translation": "트린식의\n술집에서\n그 보석에\n대해\n물어보게!",
+    "placeholders": []
+  },
+  "SKARA:6:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "SKARA:6:job": {
+    "translation": "나는\n가르친다네.",
+    "placeholders": []
+  },
+  "SKARA:6:look": {
+    "translation": "위대한\n철학자.",
+    "placeholders": []
+  },
+  "SKARA:6:name": {
+    "translation": "부처",
+    "placeholders": []
+  },
+  "SKARA:6:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "SKARA:6:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SKARA:6:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "SKARA:6:response1": {
+    "translation": "모든 살아있는\n존재를\n가엾이 여길\n때, 그것이\n고귀함이라네.",
+    "placeholders": []
+  },
+  "SKARA:6:response2": {
+    "translation": "순수한 생각으로\n말하고\n행동하면,\n행복은 결코\n떠나지 않는\n그림자처럼\n따라오리라.",
+    "placeholders": []
+  },
+  "SKARA:6:topic1": {
+    "translation": "TEAC",
+    "placeholders": []
+  },
+  "SKARA:6:topic2": {
+    "translation": "NOBL",
+    "placeholders": []
+  },
+  "SKARA:6:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "SKARA:7:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "SKARA:7:job": {
+    "translation": "나는 그 길을\n따라\n힘쓴다네.",
+    "placeholders": []
+  },
+  "SKARA:7:look": {
+    "translation": "숙련된 레인저",
+    "placeholders": []
+  },
+  "SKARA:7:name": {
+    "translation": "미켈란젤로",
+    "placeholders": []
+  },
+  "SKARA:7:no": {
+    "translation": "두려워\n말게, 그리\n되리라.",
+    "placeholders": []
+  },
+  "SKARA:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SKARA:7:question": {
+    "translation": "그대는 그 길을\n멀리\n왔는가?",
+    "placeholders": []
+  },
+  "SKARA:7:response1": {
+    "translation": "성공은\n여정이지,\n목적지가\n아니라네.",
+    "placeholders": []
+  },
+  "SKARA:7:response2": {
+    "translation": "늘 그대가\n이룰 수 있는\n것보다 더\n많이\n바라기를!",
+    "placeholders": []
+  },
+  "SKARA:7:topic1": {
+    "translation": "PATH",
+    "placeholders": []
+  },
+  "SKARA:7:topic2": {
+    "translation": "JOUR",
+    "placeholders": []
+  },
+  "SKARA:7:yes": {
+    "translation": "좋군.",
+    "placeholders": []
+  },
+  "SKARA:8:health": {
+    "translation": "나는 좋다네.",
+    "placeholders": []
+  },
+  "SKARA:8:job": {
+    "translation": "나는 교사라네,\n젊은\n정신을\n풍요롭게\n하지.",
+    "placeholders": []
+  },
+  "SKARA:8:look": {
+    "translation": "책을 든\n작고 통통한\n남자.",
+    "placeholders": []
+  },
+  "SKARA:8:name": {
+    "translation": "로마스코",
+    "placeholders": []
+  },
+  "SKARA:8:no": {
+    "translation": "배우게!",
+    "placeholders": []
+  },
+  "SKARA:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SKARA:8:question": {
+    "translation": "어비스를\n아는가?",
+    "placeholders": []
+  },
+  "SKARA:8:response1": {
+    "translation": "나는 어비스에\n대해\n가르친다네.",
+    "placeholders": []
+  },
+  "SKARA:8:response2": {
+    "translation": "그 말에 대해\n더 알고 싶다면\n포즈의 현자\n자이르를\n찾아가게.",
+    "placeholders": []
+  },
+  "SKARA:8:topic1": {
+    "translation": "TEAC",
+    "placeholders": []
+  },
+  "SKARA:8:topic2": {
+    "translation": "WORD",
+    "placeholders": []
+  },
+  "SKARA:8:yes": {
+    "translation": "마지막 문에서는\n통행의 말이\n필요하다네!",
+    "placeholders": []
+  },
+  "SKARA:9:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "SKARA:9:job": {
+    "translation": "나는 마법을\n적는다네.",
+    "placeholders": []
+  },
+  "SKARA:9:look": {
+    "translation": "지혜로운 마법사.",
+    "placeholders": []
+  },
+  "SKARA:9:name": {
+    "translation": "칼라일",
+    "placeholders": []
+  },
+  "SKARA:9:no": {
+    "translation": "그렇군.",
+    "placeholders": []
+  },
+  "SKARA:9:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "SKARA:9:question": {
+    "translation": "마법을\n믿는가?",
+    "placeholders": []
+  },
+  "SKARA:9:response1": {
+    "translation": "사람은 무언가를\n믿음으로써\n살아간다네.",
+    "placeholders": []
+  },
+  "SKARA:9:response2": {
+    "translation": "위대한 발견은\n생각보다\n감정이 앞서는\n이들에\n의해\n이루어진다네.",
+    "placeholders": []
+  },
+  "SKARA:9:topic1": {
+    "translation": "MAGI",
+    "placeholders": []
+  },
+  "SKARA:9:topic2": {
+    "translation": "BELI",
+    "placeholders": []
+  },
+  "SKARA:9:yes": {
+    "translation": "마법 화살은\n재 1조각만\n필요하다네!",
+    "placeholders": []
+  },
+  "TRINSIC:0:health": {
+    "translation": "아주 좋다네.",
+    "placeholders": []
+  },
+  "TRINSIC:0:job": {
+    "translation": "나는 마을\n지도자라네",
+    "placeholders": []
+  },
+  "TRINSIC:0:look": {
+    "translation": "잘생긴 전사",
+    "placeholders": []
+  },
+  "TRINSIC:0:name": {
+    "translation": "듀프레",
+    "placeholders": []
+  },
+  "TRINSIC:0:no": {
+    "translation": "어리석은 놈!",
+    "placeholders": []
+  },
+  "TRINSIC:0:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:0:question": {
+    "translation": "그대는 명예롭게\n살고자\n힘쓰는가?",
+    "placeholders": []
+  },
+  "TRINSIC:0:response1": {
+    "translation": "영광이로군!",
+    "placeholders": []
+  },
+  "TRINSIC:0:response2": {
+    "translation": "그것이 삶에\n의미를\n준다네!",
+    "placeholders": []
+  },
+  "TRINSIC:0:topic1": {
+    "translation": "LEAD",
+    "placeholders": []
+  },
+  "TRINSIC:0:topic2": {
+    "translation": "HONO",
+    "placeholders": []
+  },
+  "TRINSIC:0:yes": {
+    "translation": "그것은 끊임없는\n여정이라네. 명예는\n잘 닦인\n갑옷과 같다네.\n계속 돌보지\n않으면, 곧\n녹슬고\n말지!",
+    "placeholders": []
+  },
+  "TRINSIC:1:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "TRINSIC:1:job": {
+    "translation": "나는 마법의\n장을\n만든다네.",
+    "placeholders": []
+  },
+  "TRINSIC:1:look": {
+    "translation": "신비한 마법사.",
+    "placeholders": []
+  },
+  "TRINSIC:1:name": {
+    "translation": "버질",
+    "placeholders": []
+  },
+  "TRINSIC:1:no": {
+    "translation": "뭐, 상관없네!",
+    "placeholders": []
+  },
+  "TRINSIC:1:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:1:question": {
+    "translation": "그것이\n그대\n것인가?",
+    "placeholders": []
+  },
+  "TRINSIC:1:response1": {
+    "translation": "독이 내가\n가장\n좋아하는\n거라네.",
+    "placeholders": []
+  },
+  "TRINSIC:1:response2": {
+    "translation": "벨라도나는\n오직 가장\n어두운 밤,\n위도 J'F\"\n경도 C'O\"\n근처에서만\n찾을 수\n있다네!",
+    "placeholders": []
+  },
+  "TRINSIC:1:topic1": {
+    "translation": "FIEL",
+    "placeholders": []
+  },
+  "TRINSIC:1:topic2": {
+    "translation": "NIGH",
+    "placeholders": []
+  },
+  "TRINSIC:1:yes": {
+    "translation": "훌륭해!",
+    "placeholders": []
+  },
+  "TRINSIC:10:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "TRINSIC:10:job": {
+    "translation": "나는 명예의\n신단에\n들어가려\n한다네!",
+    "placeholders": []
+  },
+  "TRINSIC:10:look": {
+    "translation": "무언가를\n찾는\n성기사!",
+    "placeholders": []
+  },
+  "TRINSIC:10:name": {
+    "translation": "클라인",
+    "placeholders": []
+  },
+  "TRINSIC:10:no": {
+    "translation": "그대는 뭐라고\n생각하나?",
+    "placeholders": []
+  },
+  "TRINSIC:10:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:10:question": {
+    "translation": "신단에\n들어가\n쓰는 데\n필요한\n두 가지를\n아는가?",
+    "placeholders": []
+  },
+  "TRINSIC:10:response1": {
+    "translation": "진언은\n'섬'이라네.",
+    "placeholders": []
+  },
+  "TRINSIC:10:response2": {
+    "translation": "윈스롭이라는\n사람이\n룬을\n안다네!",
+    "placeholders": []
+  },
+  "TRINSIC:10:topic1": {
+    "translation": "MANT",
+    "placeholders": []
+  },
+  "TRINSIC:10:topic2": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "TRINSIC:10:yes": {
+    "translation": "그것이\n무엇인가?",
+    "placeholders": []
+  },
+  "TRINSIC:11:health": {
+    "translation": "뛰어나다네.",
+    "placeholders": []
+  },
+  "TRINSIC:11:job": {
+    "translation": "나는 트린식의\n전쟁 지휘관이라네.",
+    "placeholders": []
+  },
+  "TRINSIC:11:look": {
+    "translation": "빛나는\n성기사.",
+    "placeholders": []
+  },
+  "TRINSIC:11:name": {
+    "translation": "렉싱턴",
+    "placeholders": []
+  },
+  "TRINSIC:11:no": {
+    "translation": "오.",
+    "placeholders": []
+  },
+  "TRINSIC:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:11:question": {
+    "translation": "명예를 위해\n힘쓰는가?",
+    "placeholders": []
+  },
+  "TRINSIC:11:response1": {
+    "translation": "나는 많은\n여정을\n풀었다네!",
+    "placeholders": []
+  },
+  "TRINSIC:11:response2": {
+    "translation": "여정을 푸는 것이\n그대에게\n명예를\n가져다준다네!",
+    "placeholders": []
+  },
+  "TRINSIC:11:topic1": {
+    "translation": "WARL",
+    "placeholders": []
+  },
+  "TRINSIC:11:topic2": {
+    "translation": "QUES",
+    "placeholders": []
+  },
+  "TRINSIC:11:yes": {
+    "translation": "그럼 여정을\n풀되\n악하지 않은\n생물을\n공격하지\n말고, 남의\n금을 취하지도\n말게!",
+    "placeholders": []
+  },
+  "TRINSIC:12:health": {
+    "translation": "피곤하군.",
+    "placeholders": []
+  },
+  "TRINSIC:12:job": {
+    "translation": "나는 쉴 곳을\n찾는다네.",
+    "placeholders": []
+  },
+  "TRINSIC:12:look": {
+    "translation": "심오한\n전사.",
+    "placeholders": []
+  },
+  "TRINSIC:12:name": {
+    "translation": "더진",
+    "placeholders": []
+  },
+  "TRINSIC:12:no": {
+    "translation": "신단은 늪지대\n너머 남서쪽에\n있다네!",
+    "placeholders": []
+  },
+  "TRINSIC:12:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:12:question": {
+    "translation": "그대는 명예에\n대해\n깨달았는가?",
+    "placeholders": []
+  },
+  "TRINSIC:12:response1": {
+    "translation": "나는 오래도록\n힘겹게\n여정을\n떠났다네.",
+    "placeholders": []
+  },
+  "TRINSIC:12:response2": {
+    "translation": "나는 명예의\n신단에서\n깨달음을\n찾는다네!",
+    "placeholders": []
+  },
+  "TRINSIC:12:topic1": {
+    "translation": "REST",
+    "placeholders": []
+  },
+  "TRINSIC:12:topic2": {
+    "translation": "QUES",
+    "placeholders": []
+  },
+  "TRINSIC:12:yes": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "TRINSIC:13:health": {
+    "translation": "훌륭하다네.",
+    "placeholders": []
+  },
+  "TRINSIC:13:job": {
+    "translation": "우리는 문을\n지킨다네.",
+    "placeholders": []
+  },
+  "TRINSIC:13:look": {
+    "translation": "큰 경비병.",
+    "placeholders": []
+  },
+  "TRINSIC:13:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "TRINSIC:13:no": {
+    "translation": "멍청이.",
+    "placeholders": []
+  },
+  "TRINSIC:13:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:13:question": {
+    "translation": "동료들에게\n명예를\n가져다주려고\n힘쓰는가?",
+    "placeholders": []
+  },
+  "TRINSIC:13:response1": {
+    "translation": "트린식을\n드나드는\n것이지.",
+    "placeholders": []
+  },
+  "TRINSIC:13:response2": {
+    "translation": "명예로운\n일이지!",
+    "placeholders": []
+  },
+  "TRINSIC:13:topic1": {
+    "translation": "GATE",
+    "placeholders": []
+  },
+  "TRINSIC:13:topic2": {
+    "translation": "GUAR",
+    "placeholders": []
+  },
+  "TRINSIC:13:yes": {
+    "translation": "우리 마을의\n지도자,\n듀프레는 많은\n명예로운\n여정에\n함께한다네!",
+    "placeholders": []
+  },
+  "TRINSIC:14:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "TRINSIC:14:job": {
+    "translation": "나는 해골을\n찾는다네!",
+    "placeholders": []
+  },
+  "TRINSIC:14:look": {
+    "translation": "방랑하는 마법사",
+    "placeholders": []
+  },
+  "TRINSIC:14:name": {
+    "translation": "퀵스",
+    "placeholders": []
+  },
+  "TRINSIC:14:no": {
+    "translation": "아주 유용하니\n찾아보게!",
+    "placeholders": []
+  },
+  "TRINSIC:14:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "TRINSIC:14:question": {
+    "translation": "보라색\n보석을\n가졌는가?",
+    "placeholders": []
+  },
+  "TRINSIC:14:response1": {
+    "translation": "그것은 위대한\n비밀을\n안다네.",
+    "placeholders": []
+  },
+  "TRINSIC:14:response2": {
+    "translation": "명예의\n보라색\n보석에\n대해서라네!",
+    "placeholders": []
+  },
+  "TRINSIC:14:topic1": {
+    "translation": "SKEL",
+    "placeholders": []
+  },
+  "TRINSIC:14:topic2": {
+    "translation": "SECR",
+    "placeholders": []
+  },
+  "TRINSIC:14:yes": {
+    "translation": "현명하게\n쓰게!",
+    "placeholders": []
+  },
+  "TRINSIC:15:health": {
+    "translation": "지켜지고\n있다네.",
+    "placeholders": []
+  },
+  "TRINSIC:15:job": {
+    "translation": "지키는 것.",
+    "placeholders": []
+  },
+  "TRINSIC:15:look": {
+    "translation": "강인한 경비병.",
+    "placeholders": []
+  },
+  "TRINSIC:15:name": {
+    "translation": "경비병.",
+    "placeholders": []
+  },
+  "TRINSIC:15:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "TRINSIC:15:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "TRINSIC:15:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "TRINSIC:15:response1": {
+    "translation": "지키는 중.",
+    "placeholders": []
+  },
+  "TRINSIC:15:response2": {
+    "translation": "경비",
+    "placeholders": []
+  },
+  "TRINSIC:15:topic1": {
+    "translation": "GUAR",
+    "placeholders": []
+  },
+  "TRINSIC:15:topic2": {
+    "translation": "STRO",
+    "placeholders": []
+  },
+  "TRINSIC:15:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "TRINSIC:2:health": {
+    "translation": "피곤하군.",
+    "placeholders": []
+  },
+  "TRINSIC:2:job": {
+    "translation": "나는 명예를\n위해\n건배한다네!",
+    "placeholders": []
+  },
+  "TRINSIC:2:look": {
+    "translation": "졸린 전사",
+    "placeholders": []
+  },
+  "TRINSIC:2:name": {
+    "translation": "퍼블리우스",
+    "placeholders": []
+  },
+  "TRINSIC:2:no": {
+    "translation": "명예가\n없다면,\n의미도\n없지!",
+    "placeholders": []
+  },
+  "TRINSIC:2:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:2:question": {
+    "translation": "그대는 명예로운\n삶을\n살고자\n힘쓰는가?",
+    "placeholders": []
+  },
+  "TRINSIC:2:response1": {
+    "translation": "명예를\n잃으면\n무엇이\n남는가?",
+    "placeholders": []
+  },
+  "TRINSIC:2:response2": {
+    "translation": "맞아, 내게서\n명예를\n앗아가면\n내 삶은\n끝난\n걸세!",
+    "placeholders": []
+  },
+  "TRINSIC:2:topic1": {
+    "translation": "HONO",
+    "placeholders": []
+  },
+  "TRINSIC:2:topic2": {
+    "translation": "NOTH",
+    "placeholders": []
+  },
+  "TRINSIC:2:yes": {
+    "translation": "명예는\n위대함을\n준다네.",
+    "placeholders": []
+  },
+  "TRINSIC:3:health": {
+    "translation": "무슨\n뜻인가?",
+    "placeholders": []
+  },
+  "TRINSIC:3:job": {
+    "translation": "나는 깊은\n던전\n출신이라네.",
+    "placeholders": []
+  },
+  "TRINSIC:3:look": {
+    "translation": "뼈만 남은\n해골",
+    "placeholders": []
+  },
+  "TRINSIC:3:name": {
+    "translation": "스키틀",
+    "placeholders": []
+  },
+  "TRINSIC:3:no": {
+    "translation": "그곳엔 그대에게\n필요한\n물건이\n있다네.",
+    "placeholders": []
+  },
+  "TRINSIC:3:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "TRINSIC:3:question": {
+    "translation": "거기\n가본 적\n있는가?",
+    "placeholders": []
+  },
+  "TRINSIC:3:response1": {
+    "translation": "나는 던전\n'수치'에서\n왔다네!",
+    "placeholders": []
+  },
+  "TRINSIC:3:response2": {
+    "translation": "나는 진실과\n용기의\n제단에서\n쓰이는\n보라색\n보석을\n본 적\n있다네!",
+    "placeholders": []
+  },
+  "TRINSIC:3:topic1": {
+    "translation": "DUNG",
+    "placeholders": []
+  },
+  "TRINSIC:3:topic2": {
+    "translation": "STON",
+    "placeholders": []
+  },
+  "TRINSIC:3:yes": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "TRINSIC:4:health": {
+    "translation": "좀 물에\n젖었지.",
+    "placeholders": []
+  },
+  "TRINSIC:4:job": {
+    "translation": "나는 브리타니아의\n바다를\n항해한다네!",
+    "placeholders": []
+  },
+  "TRINSIC:4:look": {
+    "translation": "못생긴 선원.",
+    "placeholders": []
+  },
+  "TRINSIC:4:name": {
+    "translation": "뱃사람 샘",
+    "placeholders": []
+  },
+  "TRINSIC:4:no": {
+    "translation": "육분의가\n없나\n보군?",
+    "placeholders": []
+  },
+  "TRINSIC:4:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:4:question": {
+    "translation": "그것이\n그대의\n전문\n분야인가?",
+    "placeholders": []
+  },
+  "TRINSIC:4:response1": {
+    "translation": "내 전문\n분야는\n항해라네!",
+    "placeholders": []
+  },
+  "TRINSIC:4:response2": {
+    "translation": "젤롬의\n술집으로 가서\n육분의에\n대해\n물어보게.",
+    "placeholders": []
+  },
+  "TRINSIC:4:topic1": {
+    "translation": "SEAS",
+    "placeholders": []
+  },
+  "TRINSIC:4:topic2": {
+    "translation": "SEXT",
+    "placeholders": []
+  },
+  "TRINSIC:4:yes": {
+    "translation": "좋은\n솜씨군!",
+    "placeholders": []
+  },
+  "TRINSIC:5:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "TRINSIC:5:job": {
+    "translation": "나는 명예를\n찾는다네.",
+    "placeholders": []
+  },
+  "TRINSIC:5:look": {
+    "translation": "위엄있는 성기사.",
+    "placeholders": []
+  },
+  "TRINSIC:5:name": {
+    "translation": "아리스토텔레스",
+    "placeholders": []
+  },
+  "TRINSIC:5:no": {
+    "translation": "그렇게\n되도록\n힘쓰게.",
+    "placeholders": []
+  },
+  "TRINSIC:5:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:5:question": {
+    "translation": "그대는 항상\n명예로운가?",
+    "placeholders": []
+  },
+  "TRINSIC:5:response1": {
+    "translation": "존엄은 명예를\n소유하는 데\n있지 않고,\n그것을\n받을 자격이\n있는 데\n있다네.",
+    "placeholders": []
+  },
+  "TRINSIC:5:response2": {
+    "translation": "아무도 아닌\n명예\n그 자체를\n존중하게!",
+    "placeholders": []
+  },
+  "TRINSIC:5:topic1": {
+    "translation": "HONO",
+    "placeholders": []
+  },
+  "TRINSIC:5:topic2": {
+    "translation": "DIGN",
+    "placeholders": []
+  },
+  "TRINSIC:5:yes": {
+    "translation": "그거\n인상적이군.",
+    "placeholders": []
+  },
+  "TRINSIC:6:health": {
+    "translation": "무서워요!",
+    "placeholders": []
+  },
+  "TRINSIC:6:job": {
+    "translation": "나는 황소에게서\n도망쳤어요!",
+    "placeholders": []
+  },
+  "TRINSIC:6:look": {
+    "translation": "움츠린 아이",
+    "placeholders": []
+  },
+  "TRINSIC:6:name": {
+    "translation": "테린",
+    "placeholders": []
+  },
+  "TRINSIC:6:no": {
+    "translation": "살려주세요!",
+    "placeholders": []
+  },
+  "TRINSIC:6:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:6:question": {
+    "translation": "이제\n갔나요?",
+    "placeholders": []
+  },
+  "TRINSIC:6:response1": {
+    "translation": "크고, 길고\n뾰족한 뿔이\n있었어요!",
+    "placeholders": []
+  },
+  "TRINSIC:6:response2": {
+    "translation": "마을 남서쪽\n구석에\n묻혀\n있어요.",
+    "placeholders": []
+  },
+  "TRINSIC:6:topic1": {
+    "translation": "BULL",
+    "placeholders": []
+  },
+  "TRINSIC:6:topic2": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "TRINSIC:6:yes": {
+    "translation": "휴, 나를\n잡을 줄\n알았어요!",
+    "placeholders": []
+  },
+  "TRINSIC:7:health": {
+    "translation": "아주\n좋다네.",
+    "placeholders": []
+  },
+  "TRINSIC:7:job": {
+    "translation": "나는\n환영\n담당이라네.",
+    "placeholders": []
+  },
+  "TRINSIC:7:look": {
+    "translation": "강인한\n성기사.",
+    "placeholders": []
+  },
+  "TRINSIC:7:name": {
+    "translation": "리그모어",
+    "placeholders": []
+  },
+  "TRINSIC:7:no": {
+    "translation": "여기가\n아니라네!",
+    "placeholders": []
+  },
+  "TRINSIC:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:7:question": {
+    "translation": "이 지혜를\n찾는가?",
+    "placeholders": []
+  },
+  "TRINSIC:7:response1": {
+    "translation": "그래, 명예의\n도시\n트린식에\n온 걸\n환영하네!",
+    "placeholders": []
+  },
+  "TRINSIC:7:response2": {
+    "translation": "명예의\n미덕에 대한\n지혜는\n이 마을\n곳곳에서\n찾을 수\n있다네.",
+    "placeholders": []
+  },
+  "TRINSIC:7:topic1": {
+    "translation": "WELC",
+    "placeholders": []
+  },
+  "TRINSIC:7:topic2": {
+    "translation": "HONO",
+    "placeholders": []
+  },
+  "TRINSIC:7:yes": {
+    "translation": "들어와서\n그대의 길을\n찾게.",
+    "placeholders": []
+  },
+  "TRINSIC:8:health": {
+    "translation": "좀\n남루하지.",
+    "placeholders": []
+  },
+  "TRINSIC:8:job": {
+    "translation": "소문을\n거래한다네.",
+    "placeholders": []
+  },
+  "TRINSIC:8:look": {
+    "translation": "꾀죄죄한\n상인.",
+    "placeholders": []
+  },
+  "TRINSIC:8:name": {
+    "translation": "윈스롭",
+    "placeholders": []
+  },
+  "TRINSIC:8:no": {
+    "translation": "그를 찾아\n룬에\n대해\n물어보게!",
+    "placeholders": []
+  },
+  "TRINSIC:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:8:question": {
+    "translation": "그를\n아는가?",
+    "placeholders": []
+  },
+  "TRINSIC:8:response1": {
+    "translation": "무엇에\n대해?",
+    "placeholders": []
+  },
+  "TRINSIC:8:response2": {
+    "translation": "알고 있는\n작은 아이가\n하나 있지...\n테린이라네.",
+    "placeholders": []
+  },
+  "TRINSIC:8:topic1": {
+    "translation": "RUMO",
+    "placeholders": []
+  },
+  "TRINSIC:8:topic2": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "TRINSIC:8:yes": {
+    "translation": "그에게\n룬에\n대해\n물어보게.",
+    "placeholders": []
+  },
+  "TRINSIC:9:health": {
+    "translation": "완전히\n회복됐다네.",
+    "placeholders": []
+  },
+  "TRINSIC:9:job": {
+    "translation": "나는 주문을\n부린다네.",
+    "placeholders": []
+  },
+  "TRINSIC:9:look": {
+    "translation": "키 큰 마법사.",
+    "placeholders": []
+  },
+  "TRINSIC:9:name": {
+    "translation": "스윈드릭",
+    "placeholders": []
+  },
+  "TRINSIC:9:no": {
+    "translation": "그 주\n재료를\n아는가?",
+    "placeholders": []
+  },
+  "TRINSIC:9:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "TRINSIC:9:question": {
+    "translation": "큰 힘의\n주문을\n부리는가?",
+    "placeholders": []
+  },
+  "TRINSIC:9:response1": {
+    "translation": "큰 힘의\n주문들.",
+    "placeholders": []
+  },
+  "TRINSIC:9:response2": {
+    "translation": "폴리\n선술집에서\n맨드레이크에\n대해\n물어보게.",
+    "placeholders": []
+  },
+  "TRINSIC:9:topic1": {
+    "translation": "SPEL",
+    "placeholders": []
+  },
+  "TRINSIC:9:topic2": {
+    "translation": "MAND",
+    "placeholders": []
+  },
+  "TRINSIC:9:yes": {
+    "translation": "가장 강력한\n재료는\n무엇인가?",
+    "placeholders": []
+  },
+  "VESPER:0:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "VESPER:0:job": {
+    "translation": "베스퍼에\n온 걸\n환영하네.",
+    "placeholders": []
+  },
+  "VESPER:0:look": {
+    "translation": "키 큰 마법사.",
+    "placeholders": []
+  },
+  "VESPER:0:name": {
+    "translation": "트윈 게이츠",
+    "placeholders": []
+  },
+  "VESPER:0:no": {
+    "translation": "여정 중인 이의\n방문을\n영광으로\n여기네!",
+    "placeholders": []
+  },
+  "VESPER:0:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "VESPER:0:question": {
+    "translation": "먼 길을\n왔는가?",
+    "placeholders": []
+  },
+  "VESPER:0:response1": {
+    "translation": "그래, 베스퍼는\n아름다운\n마을이라네.",
+    "placeholders": []
+  },
+  "VESPER:0:response2": {
+    "translation": "베스퍼에\n온 걸\n환영하네!",
+    "placeholders": []
+  },
+  "VESPER:0:topic1": {
+    "translation": "VESP",
+    "placeholders": []
+  },
+  "VESPER:0:topic2": {
+    "translation": "WELC",
+    "placeholders": []
+  },
+  "VESPER:0:yes": {
+    "translation": "여정 중인 이의\n방문을\n영광으로\n여기네!",
+    "placeholders": []
+  },
+  "VESPER:1:health": {
+    "translation": "우그, 나\n힘세!",
+    "placeholders": []
+  },
+  "VESPER:1:job": {
+    "translation": "우그, 나\n힘세!",
+    "placeholders": []
+  },
+  "VESPER:1:look": {
+    "translation": "거구.",
+    "placeholders": []
+  },
+  "VESPER:1:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "VESPER:1:no": {
+    "translation": "우그, 나\n힘세!",
+    "placeholders": []
+  },
+  "VESPER:1:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "VESPER:1:question": {
+    "translation": "우그, 너\n힘센가?",
+    "placeholders": []
+  },
+  "VESPER:1:response1": {
+    "translation": "우그, 나\n힘세!",
+    "placeholders": []
+  },
+  "VESPER:1:response2": {
+    "translation": "나 힘세!",
+    "placeholders": []
+  },
+  "VESPER:1:topic1": {
+    "translation": "TOUG",
+    "placeholders": []
+  },
+  "VESPER:1:topic2": {
+    "translation": "UG  ",
+    "placeholders": []
+  },
+  "VESPER:1:yes": {
+    "translation": "우그, 너\n힘세!",
+    "placeholders": []
+  },
+  "VESPER:10:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "VESPER:10:job": {
+    "translation": "나는 신단에\n대해\n가르친다네.",
+    "placeholders": []
+  },
+  "VESPER:10:look": {
+    "translation": "근엄한 레인저.",
+    "placeholders": []
+  },
+  "VESPER:10:name": {
+    "translation": "랜달",
+    "placeholders": []
+  },
+  "VESPER:10:no": {
+    "translation": "그것을 아바타가\n되는 길의\n첫 목표로\n삼게!",
+    "placeholders": []
+  },
+  "VESPER:10:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "VESPER:10:question": {
+    "translation": "자주\n찾아가는가?",
+    "placeholders": []
+  },
+  "VESPER:10:response1": {
+    "translation": "그대의 길이\n분명해지려면\n각 신단을\n1, 2, 3주기씩\n>반드시<\n찾아가야\n한다네!",
+    "placeholders": []
+  },
+  "VESPER:10:response2": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "VESPER:10:topic1": {
+    "translation": "SHRI",
+    "placeholders": []
+  },
+  "VESPER:10:topic2": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "VESPER:10:yes": {
+    "translation": "아주 좋군.",
+    "placeholders": []
+  },
+  "VESPER:11:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "VESPER:11:job": {
+    "translation": "나는 현명한\n조언을\n한다네.",
+    "placeholders": []
+  },
+  "VESPER:11:look": {
+    "translation": "현명한 남자.",
+    "placeholders": []
+  },
+  "VESPER:11:name": {
+    "translation": "더전",
+    "placeholders": []
+  },
+  "VESPER:11:no": {
+    "translation": "그대는 분명\n길에서\n벗어날\n걸세!",
+    "placeholders": []
+  },
+  "VESPER:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "VESPER:11:question": {
+    "translation": "그대는?",
+    "placeholders": []
+  },
+  "VESPER:11:response1": {
+    "translation": "그대 안의\n미덕을 알고\n발전시키도록\n힘쓰게.",
+    "placeholders": []
+  },
+  "VESPER:11:response2": {
+    "translation": "예언자\n호크윈드를\n>자주< 찾아가\n상담해야\n한다네, 그는\n그대 안을\n볼 수\n있으니!",
+    "placeholders": []
+  },
+  "VESPER:11:topic1": {
+    "translation": "COUN",
+    "placeholders": []
+  },
+  "VESPER:11:topic2": {
+    "translation": "VIRT",
+    "placeholders": []
+  },
+  "VESPER:11:yes": {
+    "translation": "좋아!",
+    "placeholders": []
+  },
+  "VESPER:12:health": {
+    "translation": "좀 간지러워요!",
+    "placeholders": []
+  },
+  "VESPER:12:job": {
+    "translation": "내가 웃기다고\n생각하지!",
+    "placeholders": []
+  },
+  "VESPER:12:look": {
+    "translation": "우스운 광대.",
+    "placeholders": []
+  },
+  "VESPER:12:name": {
+    "translation": "샤즈봇",
+    "placeholders": []
+  },
+  "VESPER:12:no": {
+    "translation": "아, 아쉽네,\n그런 줄\n알았는데.",
+    "placeholders": []
+  },
+  "VESPER:12:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "VESPER:12:question": {
+    "translation": "안\n그런가?",
+    "placeholders": []
+  },
+  "VESPER:12:response1": {
+    "translation": "뱀 네이트에\n대해\n물어보라고\n권해\n보겠네!",
+    "placeholders": []
+  },
+  "VESPER:12:response2": {
+    "translation": "뭐, 긴\n이야기고\n시간이\n없다네.",
+    "placeholders": []
+  },
+  "VESPER:12:topic1": {
+    "translation": "FUNN",
+    "placeholders": []
+  },
+  "VESPER:12:topic2": {
+    "translation": "NATE",
+    "placeholders": []
+  },
+  "VESPER:12:yes": {
+    "translation": "뭐 좋아, 나도\n그러려고\n노력하지!",
+    "placeholders": []
+  },
+  "VESPER:13:health": {
+    "translation": "나는 아주\n강력하다네!",
+    "placeholders": []
+  },
+  "VESPER:13:job": {
+    "translation": "나는 견습\n마법사라네!",
+    "placeholders": []
+  },
+  "VESPER:13:look": {
+    "translation": "날씬한 청년.",
+    "placeholders": []
+  },
+  "VESPER:13:name": {
+    "translation": "플랫부시",
+    "placeholders": []
+  },
+  "VESPER:13:no": {
+    "translation": "칼럼니가\n신속 주문을\n안다네! 그를\n찾아가게!",
+    "placeholders": []
+  },
+  "VESPER:13:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "VESPER:13:question": {
+    "translation": "유에\n가본 적\n있는가?",
+    "placeholders": []
+  },
+  "VESPER:13:response1": {
+    "translation": "나는 칼럼니가\n가장\n아끼는\n제자라네!",
+    "placeholders": []
+  },
+  "VESPER:13:response2": {
+    "translation": "그는 유에\n산다네!",
+    "placeholders": []
+  },
+  "VESPER:13:topic1": {
+    "translation": "MAGE",
+    "placeholders": []
+  },
+  "VESPER:13:topic2": {
+    "translation": "CALU",
+    "placeholders": []
+  },
+  "VESPER:13:yes": {
+    "translation": "칼럼니가\n신속 주문을\n안다네!",
+    "placeholders": []
+  },
+  "VESPER:14:health": {
+    "translation": "나는 완전히\n회복됐다네!",
+    "placeholders": []
+  },
+  "VESPER:14:job": {
+    "translation": "나는 미덕을\n전파하려\n이 아름다운\n땅을\n여행한다네!",
+    "placeholders": []
+  },
+  "VESPER:14:look": {
+    "translation": "대담한 성기사.",
+    "placeholders": []
+  },
+  "VESPER:14:name": {
+    "translation": "코크린",
+    "placeholders": []
+  },
+  "VESPER:14:no": {
+    "translation": "그래야 하네,\n안 그러면\n길에서\n벗어날\n걸세!",
+    "placeholders": []
+  },
+  "VESPER:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "VESPER:14:question": {
+    "translation": "그대는\n이렇게\n하는가?",
+    "placeholders": []
+  },
+  "VESPER:14:response1": {
+    "translation": "미덕의 길에서\n그대의 진전을\n알려면\n예언자\n호크윈드를\n>자주<\n찾아가야\n한다네!",
+    "placeholders": []
+  },
+  "VESPER:14:response2": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "VESPER:14:topic1": {
+    "translation": "VIRT",
+    "placeholders": []
+  },
+  "VESPER:14:topic2": {
+    "translation": "A   ",
+    "placeholders": []
+  },
+  "VESPER:14:yes": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "VESPER:15:health": {
+    "translation": "나는 아주\n좋다네!",
+    "placeholders": []
+  },
+  "VESPER:15:job": {
+    "translation": "나는 도둑이라네,\n빌리는 걸\n좋아하지!",
+    "placeholders": []
+  },
+  "VESPER:15:look": {
+    "translation": "키 크고\n날렵한\n남자.",
+    "placeholders": []
+  },
+  "VESPER:15:name": {
+    "translation": "다이카",
+    "placeholders": []
+  },
+  "VESPER:15:no": {
+    "translation": "아마, 그대는\n겁쟁이일\n걸세!",
+    "placeholders": []
+  },
+  "VESPER:15:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "VESPER:15:question": {
+    "translation": "그대는\n도둑인가?",
+    "placeholders": []
+  },
+  "VESPER:15:response1": {
+    "translation": "내가 가장\n좋아하는\n'빌리는' 것은\n말이라네!",
+    "placeholders": []
+  },
+  "VESPER:15:response2": {
+    "translation": "포즈\n마을에서\n말을\n훔칠 수\n있다네!",
+    "placeholders": []
+  },
+  "VESPER:15:topic1": {
+    "translation": "BORR",
+    "placeholders": []
+  },
+  "VESPER:15:topic2": {
+    "translation": "HORS",
+    "placeholders": []
+  },
+  "VESPER:15:yes": {
+    "translation": "우리에\n있는 황소를\n조심하게!",
+    "placeholders": []
+  },
+  "VESPER:2:health": {
+    "translation": "지금은\n괜찮다네.",
+    "placeholders": []
+  },
+  "VESPER:2:job": {
+    "translation": "나는 그대를\n도울 수\n있다네!",
+    "placeholders": []
+  },
+  "VESPER:2:look": {
+    "translation": "온순한 목자.",
+    "placeholders": []
+  },
+  "VESPER:2:name": {
+    "translation": "서바일",
+    "placeholders": []
+  },
+  "VESPER:2:no": {
+    "translation": "그것은\n사악한\n유물이라네!",
+    "placeholders": []
+  },
+  "VESPER:2:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "VESPER:2:question": {
+    "translation": "그것에 대해\n들어본 적\n있는가?",
+    "placeholders": []
+  },
+  "VESPER:2:response1": {
+    "translation": "나는 마법사\n몬데인의\n해골에\n대해\n안다네!",
+    "placeholders": []
+  },
+  "VESPER:2:response2": {
+    "translation": "어떤 이유로든\n그것을 쓰는 것은\n큰 악의\n징표이며, 미덕이\n아니라네!",
+    "placeholders": []
+  },
+  "VESPER:2:topic1": {
+    "translation": "HELP",
+    "placeholders": []
+  },
+  "VESPER:2:topic2": {
+    "translation": "SKUL",
+    "placeholders": []
+  },
+  "VESPER:2:yes": {
+    "translation": "그것은\n사악한\n유물이라네!",
+    "placeholders": []
+  },
+  "VESPER:3:health": {
+    "translation": "나는 좋다네,\n고맙네.",
+    "placeholders": []
+  },
+  "VESPER:3:job": {
+    "translation": "여행자 댄,\n땜장이라네.",
+    "placeholders": []
+  },
+  "VESPER:3:look": {
+    "translation": "모자와 조끼를\n입은 작고\n통통한\n남자.",
+    "placeholders": []
+  },
+  "VESPER:3:name": {
+    "translation": "여행자 댄",
+    "placeholders": []
+  },
+  "VESPER:3:no": {
+    "translation": "최고의\n가격이라네!",
+    "placeholders": []
+  },
+  "VESPER:3:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "VESPER:3:question": {
+    "translation": "길드\n상점에\n가봤나?",
+    "placeholders": []
+  },
+  "VESPER:3:response1": {
+    "translation": "나는 길드\n상점에서\n물건을\n고치러\n왔다네.",
+    "placeholders": []
+  },
+  "VESPER:3:response2": {
+    "translation": "나는 세상이\n둥글다는 걸\n안다네!",
+    "placeholders": []
+  },
+  "VESPER:3:topic1": {
+    "translation": "TINK",
+    "placeholders": []
+  },
+  "VESPER:3:topic2": {
+    "translation": "TRAV",
+    "placeholders": []
+  },
+  "VESPER:3:yes": {
+    "translation": "훌륭한\n선택이지!",
+    "placeholders": []
+  },
+  "VESPER:4:health": {
+    "translation": "지쳤다네.",
+    "placeholders": []
+  },
+  "VESPER:4:job": {
+    "translation": "나는\n농노라네.",
+    "placeholders": []
+  },
+  "VESPER:4:look": {
+    "translation": "튼튼한\n농노.",
+    "placeholders": []
+  },
+  "VESPER:4:name": {
+    "translation": "발타사르",
+    "placeholders": []
+  },
+  "VESPER:4:no": {
+    "translation": "그대는\n참으로\n운이\n좋군!",
+    "placeholders": []
+  },
+  "VESPER:4:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "VESPER:4:question": {
+    "translation": "그대는\n주인이\n있는가?",
+    "placeholders": []
+  },
+  "VESPER:4:response1": {
+    "translation": "농노는\n적은 돈을 위해\n열심히\n일한다네!",
+    "placeholders": []
+  },
+  "VESPER:4:response2": {
+    "translation": "나는 주인님을 위해\n밭에서\n일한다네!",
+    "placeholders": []
+  },
+  "VESPER:4:topic1": {
+    "translation": "SERF",
+    "placeholders": []
+  },
+  "VESPER:4:topic2": {
+    "translation": "WORK",
+    "placeholders": []
+  },
+  "VESPER:4:yes": {
+    "translation": "그(녀)가\n친절한 분이길\n바라네!",
+    "placeholders": []
+  },
+  "VESPER:5:health": {
+    "translation": "나는 완전히\n회복됐다네.",
+    "placeholders": []
+  },
+  "VESPER:5:job": {
+    "translation": "나는 겸손을\n찾는다네.",
+    "placeholders": []
+  },
+  "VESPER:5:look": {
+    "translation": "작은 남자.",
+    "placeholders": []
+  },
+  "VESPER:5:name": {
+    "translation": "플레인",
+    "placeholders": []
+  },
+  "VESPER:5:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "VESPER:5:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "VESPER:5:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "VESPER:5:response1": {
+    "translation": "미덕의 3원칙이\n여덟 가지로\n결합할 때\n오만은\n미덕이\n아니라네!",
+    "placeholders": []
+  },
+  "VESPER:5:response2": {
+    "translation": "오만한 것은\n미덕이 아니니,\n그래서\n매긴시아가\n파괴되었지!\n겸손이 남은\n미덕이라네!",
+    "placeholders": []
+  },
+  "VESPER:5:topic1": {
+    "translation": "HUMI",
+    "placeholders": []
+  },
+  "VESPER:5:topic2": {
+    "translation": "PRID",
+    "placeholders": []
+  },
+  "VESPER:5:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "VESPER:6:health": {
+    "translation": "나는 괜찮다네.",
+    "placeholders": []
+  },
+  "VESPER:6:job": {
+    "translation": "나는 신단을\n찾는다네.",
+    "placeholders": []
+  },
+  "VESPER:6:look": {
+    "translation": "날씬한\n목녀.",
+    "placeholders": []
+  },
+  "VESPER:6:name": {
+    "translation": "심플",
+    "placeholders": []
+  },
+  "VESPER:6:no": {
+    "translation": "브리타니아\n남동쪽에!",
+    "placeholders": []
+  },
+  "VESPER:6:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "VESPER:6:question": {
+    "translation": "그 섬을\n아는가?",
+    "placeholders": []
+  },
+  "VESPER:6:response1": {
+    "translation": "겸손의\n신단!",
+    "placeholders": []
+  },
+  "VESPER:6:response2": {
+    "translation": "그 신단은\n어비스 섬의\n북쪽 기슭에\n있고 끝없는\n데몬 무리가\n지킨다네!",
+    "placeholders": []
+  },
+  "VESPER:6:topic1": {
+    "translation": "SHRI",
+    "placeholders": []
+  },
+  "VESPER:6:topic2": {
+    "translation": "HUMI",
+    "placeholders": []
+  },
+  "VESPER:6:yes": {
+    "translation": "좋아.",
+    "placeholders": []
+  },
+  "VESPER:7:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "VESPER:7:job": {
+    "translation": "나는 겸손한\n일을\n한다네.",
+    "placeholders": []
+  },
+  "VESPER:7:look": {
+    "translation": "아름다운 여인.",
+    "placeholders": []
+  },
+  "VESPER:7:name": {
+    "translation": "젬",
+    "placeholders": []
+  },
+  "VESPER:7:no": {
+    "translation": "그럴 때,\n거꾸로\n뒤집게!",
+    "placeholders": []
+  },
+  "VESPER:7:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "VESPER:7:question": {
+    "translation": "오만의\n진언을\n아는가?",
+    "placeholders": []
+  },
+  "VESPER:7:response1": {
+    "translation": "진언에 대해\n도와줄 수\n있다네!",
+    "placeholders": []
+  },
+  "VESPER:7:response2": {
+    "translation": "겸손은\n오만의\n반대이니,\n그 진언도\n그렇다네!",
+    "placeholders": []
+  },
+  "VESPER:7:topic1": {
+    "translation": "WORK",
+    "placeholders": []
+  },
+  "VESPER:7:topic2": {
+    "translation": "MANT",
+    "placeholders": []
+  },
+  "VESPER:7:yes": {
+    "translation": "그럼 겸손을 위해\n거꾸로\n뒤집게!",
+    "placeholders": []
+  },
+  "VESPER:8:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "VESPER:8:job": {
+    "translation": "나는 그저\n겸손한\n목자라네.",
+    "placeholders": []
+  },
+  "VESPER:8:look": {
+    "translation": "지혜로운 목자.",
+    "placeholders": []
+  },
+  "VESPER:8:name": {
+    "translation": "조셉",
+    "placeholders": []
+  },
+  "VESPER:8:no": {
+    "translation": "오만은\n아바타의\n미덕이\n아니라네!",
+    "placeholders": []
+  },
+  "VESPER:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "VESPER:8:question": {
+    "translation": "오만의\n신단은\n없다는 걸\n알았는가?",
+    "placeholders": []
+  },
+  "VESPER:8:response1": {
+    "translation": "나는 겸손의\n신단으로\n순례를\n떠난다네.",
+    "placeholders": []
+  },
+  "VESPER:8:response2": {
+    "translation": "그것은 어두운\n섬에\n있다네!",
+    "placeholders": []
+  },
+  "VESPER:8:topic1": {
+    "translation": "SHEP",
+    "placeholders": []
+  },
+  "VESPER:8:topic2": {
+    "translation": "SHRI",
+    "placeholders": []
+  },
+  "VESPER:8:yes": {
+    "translation": "아주 좋군.",
+    "placeholders": []
+  },
+  "VESPER:9:health": {
+    "translation": "나는 꽤\n좋다네!",
+    "placeholders": []
+  },
+  "VESPER:9:job": {
+    "translation": "이 금을\n가져가지\n말라고\n경고하겠네!",
+    "placeholders": []
+  },
+  "VESPER:9:look": {
+    "translation": "아름답고\n인상적인\n경비병.",
+    "placeholders": []
+  },
+  "VESPER:9:name": {
+    "translation": "프라이데이",
+    "placeholders": []
+  },
+  "VESPER:9:no": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "VESPER:9:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "VESPER:9:question": {
+    "translation": "그것을\n가져갈\n작정인가?",
+    "placeholders": []
+  },
+  "VESPER:9:response1": {
+    "translation": "그건 그대의\n것이\n아니라네!",
+    "placeholders": []
+  },
+  "VESPER:9:response2": {
+    "translation": "그건 그대의\n것이\n아니라네!",
+    "placeholders": []
+  },
+  "VESPER:9:topic1": {
+    "translation": "GOLD",
+    "placeholders": []
+  },
+  "VESPER:9:topic2": {
+    "translation": "WARN",
+    "placeholders": []
+  },
+  "VESPER:9:yes": {
+    "translation": "그것은 그대의\n미덕을\n잘 비추지\n못할\n걸세!",
+    "placeholders": []
+  },
+  "YEW:0:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "YEW:0:job": {
+    "translation": "나는 정의를\n이해하려고\n힘쓴다네.",
+    "placeholders": []
+  },
+  "YEW:0:look": {
+    "translation": "조용한 드루이드",
+    "placeholders": []
+  },
+  "YEW:0:name": {
+    "translation": "자아나",
+    "placeholders": []
+  },
+  "YEW:0:no": {
+    "translation": "아쉽군.",
+    "placeholders": []
+  },
+  "YEW:0:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "YEW:0:question": {
+    "translation": "그대는\n정의로운가?",
+    "placeholders": []
+  },
+  "YEW:0:response1": {
+    "translation": "참된 정의는\n모두를\n만족시키고,\n거짓 정의는\n아무도\n만족시키지\n못한다네.",
+    "placeholders": []
+  },
+  "YEW:0:response2": {
+    "translation": "정의를\n핑계가 아닌\n소명으로\n삼게!",
+    "placeholders": []
+  },
+  "YEW:0:topic1": {
+    "translation": "JUST",
+    "placeholders": []
+  },
+  "YEW:0:topic2": {
+    "translation": "UNDE",
+    "placeholders": []
+  },
+  "YEW:0:yes": {
+    "translation": "정의의 이름으로\n부당하게\n채워진\n무덤이\n많다네.",
+    "placeholders": []
+  },
+  "YEW:1:health": {
+    "translation": "그렇다네.",
+    "placeholders": []
+  },
+  "YEW:1:job": {
+    "translation": "법정을\n지키는 것.",
+    "placeholders": []
+  },
+  "YEW:1:look": {
+    "translation": "키 큰 경비병",
+    "placeholders": []
+  },
+  "YEW:1:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "YEW:1:no": {
+    "translation": "그럼 절차를\n방해하지\n말게!",
+    "placeholders": []
+  },
+  "YEW:1:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "YEW:1:question": {
+    "translation": "법정에\n볼일이\n있는가?",
+    "placeholders": []
+  },
+  "YEW:1:response1": {
+    "translation": "좋은 삶은\n사랑에서\n영감을 얻고\n지식이\n인도한다네.",
+    "placeholders": []
+  },
+  "YEW:1:response2": {
+    "translation": "이 방 안에서\n정의가\n행해진다네.",
+    "placeholders": []
+  },
+  "YEW:1:topic1": {
+    "translation": "JUST",
+    "placeholders": []
+  },
+  "YEW:1:topic2": {
+    "translation": "COUR",
+    "placeholders": []
+  },
+  "YEW:1:yes": {
+    "translation": "그럼\n들어가게.",
+    "placeholders": []
+  },
+  "YEW:10:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "YEW:10:job": {
+    "translation": "나는 안식처를\n찾는다네.",
+    "placeholders": []
+  },
+  "YEW:10:look": {
+    "translation": "날렵한\n레인저.",
+    "placeholders": []
+  },
+  "YEW:10:name": {
+    "translation": "레인저",
+    "placeholders": []
+  },
+  "YEW:10:no": {
+    "translation": "아, 뭐 하러\n그걸\n망치려\n드나!",
+    "placeholders": []
+  },
+  "YEW:10:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "YEW:10:question": {
+    "translation": "그런 곳에\n대해\n들어본 적\n있는가?",
+    "placeholders": []
+  },
+  "YEW:10:response1": {
+    "translation": "넓은 초원\n위에서!",
+    "placeholders": []
+  },
+  "YEW:10:response2": {
+    "translation": "사슴과\n영양이\n뛰노는\n곳에서.",
+    "placeholders": []
+  },
+  "YEW:10:topic1": {
+    "translation": "HOME",
+    "placeholders": []
+  },
+  "YEW:10:topic2": {
+    "translation": "RANG",
+    "placeholders": []
+  },
+  "YEW:10:yes": {
+    "translation": "낙담의 말은\n거의 들리지\n않는다네!",
+    "placeholders": []
+  },
+  "YEW:11:health": {
+    "translation": "나는 좋아요.",
+    "placeholders": []
+  },
+  "YEW:11:job": {
+    "translation": "나는 존스\n밑에서\n일한다네.",
+    "placeholders": []
+  },
+  "YEW:11:look": {
+    "translation": "작은 아이",
+    "placeholders": []
+  },
+  "YEW:11:name": {
+    "translation": "쇼트 라운드",
+    "placeholders": []
+  },
+  "YEW:11:no": {
+    "translation": "정말\n미안해요,\n우리 모두\n그러길\n바랐는데!",
+    "placeholders": []
+  },
+  "YEW:11:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "YEW:11:question": {
+    "translation": "재미\n있나요?",
+    "placeholders": []
+  },
+  "YEW:11:response1": {
+    "translation": "인디는 여정\n중인 것\n같아요!",
+    "placeholders": []
+  },
+  "YEW:11:response2": {
+    "translation": "확실친\n않지만,\n재밌을\n거예요!",
+    "placeholders": []
+  },
+  "YEW:11:topic1": {
+    "translation": "JONE",
+    "placeholders": []
+  },
+  "YEW:11:topic2": {
+    "translation": "QUES",
+    "placeholders": []
+  },
+  "YEW:11:yes": {
+    "translation": "로드 브리티시께\n편지 써서\n말씀드리세요!!!",
+    "placeholders": []
+  },
+  "YEW:12:health": {
+    "translation": "나는 굶주리고\n아파요.",
+    "placeholders": []
+  },
+  "YEW:12:job": {
+    "translation": "내 불쌍한\n아기를\n봐요, 이 애를\n위해\n구걸해요.",
+    "placeholders": []
+  },
+  "YEW:12:look": {
+    "translation": "시든 형체.",
+    "placeholders": []
+  },
+  "YEW:12:name": {
+    "translation": "프리다",
+    "placeholders": []
+  },
+  "YEW:12:no": {
+    "translation": "사악한 놈,\n저주받아라!",
+    "placeholders": []
+  },
+  "YEW:12:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "YEW:12:question": {
+    "translation": "내 아기를\n치료할 수\n있게\n돈을\n주겠어요?",
+    "placeholders": []
+  },
+  "YEW:12:response1": {
+    "translation": "오, 안 돼,\n내 아기가\n죽어가요!",
+    "placeholders": []
+  },
+  "YEW:12:response2": {
+    "translation": "자아나가\n함께해\n줄지도\n몰라요!",
+    "placeholders": []
+  },
+  "YEW:12:topic1": {
+    "translation": "BABY",
+    "placeholders": []
+  },
+  "YEW:12:topic2": {
+    "translation": "JUST",
+    "placeholders": []
+  },
+  "YEW:12:yes": {
+    "translation": "그대는 친절하고\n정의롭군요!",
+    "placeholders": []
+  },
+  "YEW:13:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "YEW:13:job": {
+    "translation": "나는 조언을\n받는다네.",
+    "placeholders": []
+  },
+  "YEW:13:look": {
+    "translation": "마른 남자.",
+    "placeholders": []
+  },
+  "YEW:13:name": {
+    "translation": "핀로드",
+    "placeholders": []
+  },
+  "YEW:13:no": {
+    "translation": "비열한 놈.",
+    "placeholders": []
+  },
+  "YEW:13:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "YEW:13:question": {
+    "translation": "정의를 위해\n싸우는가?",
+    "placeholders": []
+  },
+  "YEW:13:response1": {
+    "translation": "정의에\n대해.",
+    "placeholders": []
+  },
+  "YEW:13:response2": {
+    "translation": "정의는 칼끝에서\n찾기가\n가장 어렵다네,\n강철은 정의의\n도구이고,\n인간이\n그것을\n행하는\n자라네!",
+    "placeholders": []
+  },
+  "YEW:13:topic1": {
+    "translation": "COUN",
+    "placeholders": []
+  },
+  "YEW:13:topic2": {
+    "translation": "JUST",
+    "placeholders": []
+  },
+  "YEW:13:yes": {
+    "translation": "좋아, 드루이드들이\n진언을\n왼다네!",
+    "placeholders": []
+  },
+  "YEW:14:health": {
+    "translation": "그럭저럭.",
+    "placeholders": []
+  },
+  "YEW:14:job": {
+    "translation": "평화를 지키고\n정의를\n보장하려고!",
+    "placeholders": []
+  },
+  "YEW:14:look": {
+    "translation": "큰 경비병",
+    "placeholders": []
+  },
+  "YEW:14:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "YEW:14:no": {
+    "translation": "그러도록\n힘쓰게!",
+    "placeholders": []
+  },
+  "YEW:14:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "YEW:14:question": {
+    "translation": "그대는 항상\n정의로운가?",
+    "placeholders": []
+  },
+  "YEW:14:response1": {
+    "translation": "좋은 삶은\n사랑에서\n영감을 얻고\n진실이\n인도한다네!",
+    "placeholders": []
+  },
+  "YEW:14:response2": {
+    "translation": "정의란 악한\n자를 벌하는\n것만이\n아니라 선한\n자에게\n보답하는\n것도\n뜻한다네!",
+    "placeholders": []
+  },
+  "YEW:14:topic1": {
+    "translation": "PEAC",
+    "placeholders": []
+  },
+  "YEW:14:topic2": {
+    "translation": "JUST",
+    "placeholders": []
+  },
+  "YEW:14:yes": {
+    "translation": "그럴 것\n같지\n않군!",
+    "placeholders": []
+  },
+  "YEW:15:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "YEW:15:job": {
+    "translation": "나는 정의를\n찾는다네.",
+    "placeholders": []
+  },
+  "YEW:15:look": {
+    "translation": "방랑하는\n드루이드.",
+    "placeholders": []
+  },
+  "YEW:15:name": {
+    "translation": "드루이드",
+    "placeholders": []
+  },
+  "YEW:15:no": {
+    "translation": "탈포드에게\n물어보게,\n그가 룬을\n안다네.",
+    "placeholders": []
+  },
+  "YEW:15:pronoun": {
+    "translation": "그녀",
+    "placeholders": []
+  },
+  "YEW:15:question": {
+    "translation": "룬을\n가졌는가?",
+    "placeholders": []
+  },
+  "YEW:15:response1": {
+    "translation": "신단에서\n배우게!",
+    "placeholders": []
+  },
+  "YEW:15:response2": {
+    "translation": "신단은 동쪽,\n그다음\n북쪽에\n있다네!",
+    "placeholders": []
+  },
+  "YEW:15:topic1": {
+    "translation": "JUST",
+    "placeholders": []
+  },
+  "YEW:15:topic2": {
+    "translation": "SHRI",
+    "placeholders": []
+  },
+  "YEW:15:yes": {
+    "translation": "이제 진언을\n배우고,\n'그릇됨'에서\n녹색\n보석을\n찾아보게!",
+    "placeholders": []
+  },
+  "YEW:2:health": {
+    "translation": "건강하다네.",
+    "placeholders": []
+  },
+  "YEW:2:job": {
+    "translation": "우리는 감옥을\n지킨다네.",
+    "placeholders": []
+  },
+  "YEW:2:look": {
+    "translation": "큰 경비병.",
+    "placeholders": []
+  },
+  "YEW:2:name": {
+    "translation": "경비병",
+    "placeholders": []
+  },
+  "YEW:2:no": {
+    "translation": "그냥\n구경\n왔군.",
+    "placeholders": []
+  },
+  "YEW:2:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "YEW:2:question": {
+    "translation": "자수하러\n왔는가?",
+    "placeholders": []
+  },
+  "YEW:2:response1": {
+    "translation": "그럼 왼쪽\n감방이겠군.",
+    "placeholders": []
+  },
+  "YEW:2:response2": {
+    "translation": "그럼 오른쪽\n감방이겠군.\n거기선\n조심하게!",
+    "placeholders": []
+  },
+  "YEW:2:topic1": {
+    "translation": "MISD",
+    "placeholders": []
+  },
+  "YEW:2:topic2": {
+    "translation": "FELO",
+    "placeholders": []
+  },
+  "YEW:2:yes": {
+    "translation": "어느 감방에\n속하는가,\n중죄인가\n경범죄인가.",
+    "placeholders": []
+  },
+  "YEW:3:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "YEW:3:job": {
+    "translation": "나는 주문을\n만든다네.",
+    "placeholders": []
+  },
+  "YEW:3:look": {
+    "translation": "근엄한 드루이드.",
+    "placeholders": []
+  },
+  "YEW:3:name": {
+    "translation": "칼럼니",
+    "placeholders": []
+  },
+  "YEW:3:no": {
+    "translation": "숙련자로군.",
+    "placeholders": []
+  },
+  "YEW:3:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "YEW:3:question": {
+    "translation": "그것을\n부릴 수\n있는가?",
+    "placeholders": []
+  },
+  "YEW:3:response1": {
+    "translation": "나는 신속\n주문을\n발명했다네!",
+    "placeholders": []
+  },
+  "YEW:3:response2": {
+    "translation": "맨드레이크\n뿌리는 오직\n죽은 자의\n늪지대와\n피의\n평원에서만\n찾을 수\n있다네, 그곳은\n항상\n축축하지.",
+    "placeholders": []
+  },
+  "YEW:3:topic1": {
+    "translation": "SPEL",
+    "placeholders": []
+  },
+  "YEW:3:topic2": {
+    "translation": "MAND",
+    "placeholders": []
+  },
+  "YEW:3:yes": {
+    "translation": "핏빛이끼\n하나만\n필요하다네!",
+    "placeholders": []
+  },
+  "YEW:4:health": {
+    "translation": "좋다네.",
+    "placeholders": []
+  },
+  "YEW:4:job": {
+    "translation": "나는 정의를\n결정한다네.",
+    "placeholders": []
+  },
+  "YEW:4:look": {
+    "translation": "지혜로운 판사.",
+    "placeholders": []
+  },
+  "YEW:4:name": {
+    "translation": "탈포드",
+    "placeholders": []
+  },
+  "YEW:4:no": {
+    "translation": "그럼 감방에서\n참회하며,\n중죄인과 함께\n잘\n찾아보게.",
+    "placeholders": []
+  },
+  "YEW:4:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "YEW:4:question": {
+    "translation": "정직하게\n단 한 번도\n죄를 짓지\n않았다고\n말할 수\n있는가?",
+    "placeholders": []
+  },
+  "YEW:4:response1": {
+    "translation": "정의는 행동으로\n나타나는\n진실이라네!",
+    "placeholders": []
+  },
+  "YEW:4:response2": {
+    "translation": "잘\n숨겨져\n있다네!",
+    "placeholders": []
+  },
+  "YEW:4:topic1": {
+    "translation": "JUST",
+    "placeholders": []
+  },
+  "YEW:4:topic2": {
+    "translation": "RUNE",
+    "placeholders": []
+  },
+  "YEW:4:yes": {
+    "translation": "의심스럽군.",
+    "placeholders": []
+  },
+  "YEW:5:health": {
+    "translation": "밝다.",
+    "placeholders": []
+  },
+  "YEW:5:job": {
+    "translation": "나는 정의의\n참된 본질이\n담긴\n직물을\n지닌다.",
+    "placeholders": []
+  },
+  "YEW:5:look": {
+    "translation": "타오르는 불.",
+    "placeholders": []
+  },
+  "YEW:5:name": {
+    "translation": "플레이미스",
+    "placeholders": []
+  },
+  "YEW:5:no": {
+    "translation": "적어도\n정직하군.",
+    "placeholders": []
+  },
+  "YEW:5:pronoun": {
+    "translation": "그것",
+    "placeholders": []
+  },
+  "YEW:5:question": {
+    "translation": "그대는 항상\n정의로웠는가?",
+    "placeholders": []
+  },
+  "YEW:5:response1": {
+    "translation": "정의의\n미덕은 진실과\n사랑의 원칙에서\n그 본성을\n끌어낸다!",
+    "placeholders": []
+  },
+  "YEW:5:response2": {
+    "translation": "정의에\n대해서.",
+    "placeholders": []
+  },
+  "YEW:5:topic1": {
+    "translation": "JUST",
+    "placeholders": []
+  },
+  "YEW:5:topic2": {
+    "translation": "FABR",
+    "placeholders": []
+  },
+  "YEW:5:yes": {
+    "translation": "그럴 것\n같지\n않다.",
+    "placeholders": []
+  },
+  "YEW:6:health": {
+    "translation": "베... 베...",
+    "placeholders": []
+  },
+  "YEW:6:job": {
+    "translation": "베... 베...",
+    "placeholders": []
+  },
+  "YEW:6:look": {
+    "translation": "주문을 외는\n드루이드",
+    "placeholders": []
+  },
+  "YEW:6:name": {
+    "translation": "사일런트",
+    "placeholders": []
+  },
+  "YEW:6:no": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "YEW:6:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "YEW:6:question": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "YEW:6:response1": {
+    "translation": "베... 베...",
+    "placeholders": []
+  },
+  "YEW:6:response2": {
+    "translation": "베... 베...",
+    "placeholders": []
+  },
+  "YEW:6:topic1": {
+    "translation": "BEH.",
+    "placeholders": []
+  },
+  "YEW:6:topic2": {
+    "translation": "BEH ",
+    "placeholders": []
+  },
+  "YEW:6:yes": {
+    "translation": "A",
+    "placeholders": []
+  },
+  "YEW:7:health": {
+    "translation": "나는 잘\n지낸다네.",
+    "placeholders": []
+  },
+  "YEW:7:job": {
+    "translation": "정의의 도시,\n유에\n온 걸\n환영하네!",
+    "placeholders": []
+  },
+  "YEW:7:look": {
+    "translation": "지혜로운 드루이드.",
+    "placeholders": []
+  },
+  "YEW:7:name": {
+    "translation": "드웁",
+    "placeholders": []
+  },
+  "YEW:7:no": {
+    "translation": "안타깝군.",
+    "placeholders": []
+  },
+  "YEW:7:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "YEW:7:question": {
+    "translation": "마음에\n드는가?",
+    "placeholders": []
+  },
+  "YEW:7:response1": {
+    "translation": "진실보다\n그 무엇도\n더 사랑하지\n말게, 정의는\n호의를 구하지\n않으니까.\n그대의 정의를\n이해로써\n다스리게.",
+    "placeholders": []
+  },
+  "YEW:7:response2": {
+    "translation": "그래, 아름다운\n도시라네!",
+    "placeholders": []
+  },
+  "YEW:7:topic1": {
+    "translation": "JUST",
+    "placeholders": []
+  },
+  "YEW:7:topic2": {
+    "translation": "YEW ",
+    "placeholders": []
+  },
+  "YEW:7:yes": {
+    "translation": "그대의\n것이\n되게 하게!",
+    "placeholders": []
+  },
+  "YEW:8:health": {
+    "translation": "잘\n대우받고\n있다네.",
+    "placeholders": []
+  },
+  "YEW:8:job": {
+    "translation": "나는\n죄를\n지었다네.",
+    "placeholders": []
+  },
+  "YEW:8:look": {
+    "translation": "가난한 거지.",
+    "placeholders": []
+  },
+  "YEW:8:name": {
+    "translation": "가난한 거지.",
+    "placeholders": []
+  },
+  "YEW:8:no": {
+    "translation": "좋군.",
+    "placeholders": []
+  },
+  "YEW:8:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "YEW:8:question": {
+    "translation": "그대는 그 중죄인과\n함께\n있어야\n하는가?",
+    "placeholders": []
+  },
+  "YEW:8:response1": {
+    "translation": "나는 마을에서\n상자를\n얻고\n악하지 않은\n생물을\n죽였다네.",
+    "placeholders": []
+  },
+  "YEW:8:response2": {
+    "translation": "그는 비열하고\n못되고\n추악한\n악당이라네!",
+    "placeholders": []
+  },
+  "YEW:8:topic1": {
+    "translation": "SINE",
+    "placeholders": []
+  },
+  "YEW:8:topic2": {
+    "translation": "FELO",
+    "placeholders": []
+  },
+  "YEW:8:yes": {
+    "translation": "그대는\n잘못된\n감방에\n있군.",
+    "placeholders": []
+  },
+  "YEW:9:health": {
+    "translation": "배고파!",
+    "placeholders": []
+  },
+  "YEW:9:job": {
+    "translation": "나는 나를\n귀찮게 하는\n놈들을\n잡아먹지!",
+    "placeholders": []
+  },
+  "YEW:9:look": {
+    "translation": "비열하고\n못되고\n추악한\n악당!",
+    "placeholders": []
+  },
+  "YEW:9:name": {
+    "translation": "보팔",
+    "placeholders": []
+  },
+  "YEW:9:no": {
+    "translation": "그렇겠지!",
+    "placeholders": []
+  },
+  "YEW:9:pronoun": {
+    "translation": "그",
+    "placeholders": []
+  },
+  "YEW:9:question": {
+    "translation": "나를\n귀찮게\n하러\n왔나?",
+    "placeholders": []
+  },
+  "YEW:9:response1": {
+    "translation": "그게 바로\n나지!",
+    "placeholders": []
+  },
+  "YEW:9:response2": {
+    "translation": "너 같은 놈!",
+    "placeholders": []
+  },
+  "YEW:9:topic1": {
+    "translation": "VILL",
+    "placeholders": []
+  },
+  "YEW:9:topic2": {
+    "translation": "PEOP",
+    "placeholders": []
+  },
+  "YEW:9:yes": {
+    "translation": "죽음을\n맛봐라,\n쓰레기\n같은 놈!",
+    "placeholders": []
+  },
+  "principle-courage": {
+    "translation": "용기",
+    "placeholders": []
+  },
+  "principle-love": {
+    "translation": "사랑",
+    "placeholders": []
+  },
+  "principle-truth": {
+    "translation": "진실",
+    "placeholders": []
+  },
+  "term-avatar": {
+    "translation": "아바타",
+    "placeholders": []
+  },
+  "term-codex": {
+    "translation": "코덱스",
+    "placeholders": []
+  },
+  "term-companion": {
+    "translation": "동료",
+    "placeholders": []
+  },
+  "term-mantra": {
+    "translation": "진언",
+    "placeholders": []
+  },
+  "term-rune": {
+    "translation": "룬",
+    "placeholders": []
+  },
+  "term-shrine": {
+    "translation": "신단",
+    "placeholders": []
+  },
+  "term-virtue": {
+    "translation": "미덕",
+    "placeholders": []
+  },
+  "virtue-compassion": {
+    "translation": "자비",
+    "placeholders": []
+  },
+  "virtue-honesty": {
+    "translation": "정직",
+    "placeholders": []
+  },
+  "virtue-honor": {
+    "translation": "명예",
+    "placeholders": []
+  },
+  "virtue-humility": {
+    "translation": "겸손",
+    "placeholders": []
+  },
+  "virtue-justice": {
+    "translation": "정의",
+    "placeholders": []
+  },
+  "virtue-sacrifice": {
+    "translation": "희생",
+    "placeholders": []
+  },
+  "virtue-spirituality": {
+    "translation": "영성",
+    "placeholders": []
+  },
+  "virtue-valor": {
+    "translation": "용맹",
+    "placeholders": []
+  }
+}
 
 export const GENERATED_ALIASES: Record<string, GeneratedAliasEntry> = {
   "alias:bye": {

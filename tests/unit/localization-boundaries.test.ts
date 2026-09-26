@@ -119,3 +119,15 @@ describe("localization boundaries: no runtime JSON parser in the display path", 
     expect(source).not.toMatch(/fetch\s*\(/)
   })
 })
+
+describe("localization boundaries: generated Boron overlay hygiene", () => {
+  it("does not emit line-ending whitespace from translated prompt strings", () => {
+    const overlayPath = fileURLToPath(new URL("../../native/i18n/ko-overlay.b", import.meta.url))
+    const overlay = readFileSync(overlayPath, "utf8")
+    const linesWithTrailingWhitespace = overlay
+      .split("\n")
+      .map((line, index) => ({ line, number: index + 1 }))
+      .filter(({ line }) => /[ \t]+$/.test(line))
+    expect(linesWithTrailingWhitespace).toEqual([])
+  })
+})

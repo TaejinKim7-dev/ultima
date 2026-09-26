@@ -151,7 +151,7 @@ function renderBoronOverlay({ entries }) {
     .filter((id) => !id.startsWith("cmd:") && entries[id].category !== "command")
     .sort((a, b) => a.localeCompare(b))
   const lines = ids.map((id) => `  ${id}: ${boronQuote(entries[id].translation)}`)
-  return `${header}ko-translations: [\n${lines.length > 0 ? `${lines.join("\n")}\n` : ""}]\n`
+  return `${header}ko-translations: [\n${lines.length > 0 ? `${lines.join("\n")}\n` : ""}]\n`.replace(/[ \t]+$/gm, "")
 }
 
 function main() {
