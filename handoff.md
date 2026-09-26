@@ -1007,3 +1007,18 @@ ULTIMA4_DATA=.../ultima4.zip npx playwright test tests/e2e/boot-sequence.spec.ts
 - `vendor/source-manifest.json`의 xu4 `treeSha256` 재계산(Todo 7/8/16/21 전례 따름, 같은 커밋).
 
 **결론적으로 정정**: 이 버그는 "WASM-ONLY라서 감수하고 사는 Emscripten 한계"가 아니라 **이식 과정의 실제 결함**(GLFW 콜백 이벤트 디스패치 순서)이었고, 고쳤다. Todo 17(통합 e2e)·F3(수동 QA)도 같은 재진입 클래스의 다른 트리거를 만날 수 있으니 주의.
+
+### Todo 15 진행 중 — glossary/ui/binary/module 완료, tlk 남음 (2026-09-26, branch `todo-15-i18n-corpus` → main `cd061b4`, 승인 기준 🟡 유지)
+
+**범위와 순서**: `locales/ko/*.json`의 pending 4402건을 파일 크기 순(작은 것부터, 이후 파일이 앞선 용어와 일관되게)으로 번역. 영어 원문은 커밋되지 않는 `.local/i18n-inventory/*.json`(Todo 4가 만든 gitignored 사본)에서만 조회 — `locales/ko/*.json`(공개, 커밋됨)에는 `sourceHash`/`translation`/`status`만 있고 영어 원문 자체는 절대 들어가지 않는다(AGENTS.md의 "추출 원문 corpus 금지" 준수).
+
+- **`glossary.json`(18/18)**: 울티마 4 정경 8미덕(정직·자비·용맹·정의·희생·명예·영성·겸손)·3원칙(진실·사랑·용기)·용어(아바타·룬·신단·진언·코덱스·동료·미덕). 이후 모든 파일이 이 용어를 그대로 재사용 — 가장 먼저 끝냄.
+- **`ui.json`(369/369)**: 전투/던전/게임 상태줄/Configure 메뉴/아이템/포탈 문구. **스키마 결함 발견·수정**: 소스가 순수 공백뿐인 항목(예: `"\n"`, `"    \n"`, 총 12건 — `screenMessage()`의 줄바꿈 구분자일 뿐 실제 표시 문구가 없음)은 `i18n-check.mjs`의 "번역 없음"(trim 후 빈 문자열) 검사를 status `ready`로는 절대 통과할 수 없었다. `category: "passthrough"` 예외를 RED(`tests/unit/i18n-check.test.ts`에 새 테스트, 수정 전 실패 확인)→GREEN(스크립트에 예외 추가)으로 고침.
+- **`binary.json`(214/214)**: 엔딩 텍스트·호크윈드(예언자) 미덕 평가 65종·로드 브리티시의 마을/미덕 설화·신단 조언 24종·미덕-신단 질문 11종·title.exe 캐릭터 생성 내레이션(집시 카드점 14종·꿈 환영 24종·미덕 이분법 질문 28종). **`avatar.exe:lordBritishKeyword:*`(24건)는 의도적으로 영어 그대로 둠** — 파일명 자체가 "키워드"이고, Todo 13의 `aliases.json`/`korean-aliases.ts`가 이미 확립한 것과 같은 이유(discourse 시스템이 이 문자열을 네이티브 ASCII로 정확히 매치하므로, 번역하면 로드 브리티시와의 실제 대화가 조용히 깨진다).
+- **`module.json`(729/729)**: 그래픽/오디오 에셋 경로 229건은 정규식(`.vga/.ega/.png/.old/.map/.tlk/.ult/.dng/.con` 확장자, 버전 문자열 패턴)으로 자동 pass-through 처리(스크립트로, 수작업 아님). Credits는 이름/URL/저작권 표기는 그대로 두고 연결 문장만 번역. 아이템/직업/몬스터 이름, 던전 8종(기만·경멸·데스타드·그릇됨·탐욕·수치·히스로스)·마을 9곳(브리튼·문글로우·트린식·미녹·젤롬·유·스카라 브레이·매긴시아·포즈·버커니어즈 덴·베스퍼·코브·서펀트 홀드·라이시움·엠패스 수도원) 고유명사를 binary.json과 표기 통일. **가장 큰 하위 섹션은 상인(vendor) 대화 시스템(299건)**: 약 30개 상점(무기/방어구/식료품/술집/시약/치유소/여관/마구간/길드)의 NPC 이름·상호명·재사용 대화 템플릿.
+  - **discourse 치환 토큰 보존**: xu4 상인 스크립트는 `%`(상인 이름)·`@`(상점 이름)·`#`(수량/아이템명)·`=`(매매 아이템명)·`+`(메뉴 목록 삽입)·`$gp`(가격)를 실행 시점에 문자열 치환한다. 이들은 printf 스타일이 아니라서 `i18n-check.mjs`의 placeholder 추출기가 전혀 추적하지 않지만, 실제 게임 로직엔 필수라 번역 전체에서 리터럴로 보존했다(체커가 안 잡아준다고 안심하면 안 됨, 직접 확인 필요).
+  - **부수 발견 — 거짓 placeholder 26건**: `vendors:*` 중 "% says"/"% asks" 같은 영어 산문이 printf 정규식의 " " 공백-플래그 규칙(`% ` + 's'/'a' 등)에 우연히 걸려 스키마에 `placeholders: ["% s"]` 식으로 잘못 저장돼 있었다. `src/i18n/localization.ts`가 같은 추출 로직을 런타임에도 쓰므로(`checkAliasFile`과 별개), 이 거짓 placeholder를 그대로 두면 자연스러운 한국어 번역이 전부 "placeholder mismatch"로 막혔을 것 — 해당 26건의 `placeholders`를 `[]`로 직접 수정(다른 소비처 없음을 grep으로 확인 후).
+  - **번역하지 않은 것**: `vendors:29`("bcdefghijklmnop")·`vendors:84`("bcdefgh")는 메뉴 항목을 고르는 실제 키보드 단축키 문자열이라 번역 불가(파서가 그대로 매치).
+- **남음 — `tlk.json`(0/3072)**: 파일 중 가장 크고 유일하게 남은 파일. 실제 원본 `.TLK` 파일에서 추출한 NPC 이름·인사말·`job`/`health`/`name`/`bye` 등 키워드별 응답 전체(사실상 게임의 모든 NPC 대화). 다음 세션에서 이어서 진행.
+- **검증**: 체크포인트마다(각 파일 완료 시) `npm run i18n:check`(비엄격, entryCount/pendingCount 확인) + `npm run test:unit`(259/259 무회귀) + `typecheck`+`build`+`git diff --check` 전부 exit 0 확인 후 커밋. `npm run i18n:check -- --strict`는 tlk.json이 남아 있어 여전히 실패(의도됨, Todo 15 완료 기준).
+- 최종 상태: `4411개 항목 확인, 3072개 미번역`(glossary+ui+binary+module = 1330건 완료). `plan.md` Todo 15 상태는 정직하게 🟡 유지(승인 기준은 `i18n:check -- --strict` GREEN + `korean-progression.spec.ts`이므로 tlk.json 전까지는 완료 아님).
