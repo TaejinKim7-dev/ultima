@@ -959,4 +959,26 @@ ULTIMA4_DATA=.../ultima4.zip npx playwright test tests/e2e/boot-sequence.spec.ts
   npx playwright test tests/e2e/status-overlay.spec.ts --project=chromium  # 0 — 5/5
   ULTIMA4_DATA=.../ultima4.zip npx playwright test --project=chromium --workers=2  # 0 — 23/23 (3.2m, save-reload 장기 2건 포함)
   ```
-  - unit 18→19 files(신규 `overlay-layout` 34 tests), e2e 18→23(신규 status-overlay 5). `save-reload` 장기 테스트까지 포함해 무회귀 — 브랜치 기록의 "save-reload 미재실행" gap 해소됨.
+- unit 18→19 files(신규 `overlay-layout` 34 tests), e2e 18→23(신규 status-overlay 5). `save-reload` 장기 테스트까지 포함해 무회귀 — 브랜치 기록의 "save-reload 미재실행" gap 해소됨.
+
+### Todo 13 코드 병합 (2026-09-26, `80ce1ac`, e2e pending — 체크박스 `[ ]` 유지)
+- `git merge --no-ff todo-13-korean-aliases` (tip `dbb88ef`). `src/shell.ts` import 블록 1 hunk만 충돌 → 양쪽 import 모두 유지로 해소. 나머지(`types.ts` command kind, `shell.css`, `index.html`, bridge-contract)는 자동 병합.
+- 병합-후 게이트: unit 20 files/231 tests · verify · typecheck · build · diff-check 전부 exit 0. e2e는 main에 신규 스펙이 없어 기존 스위트 그대로.
+- e2e spec(379줄)은 에이전트 worktree에 미커밋으로 잔류 → `todo-13-e2e` 브랜치에서 복구 진행.
+
+### 병렬 레인 병합 (2026-09-26, 체크박스 모두 `[ ]` 유지)
+- `todo-19-emsdk-ci` (`dd0b54c`) → main `19dda65`: pages.yml에 `emscripten-core/setup-emsdk@v16` (version+emsdk-version `4.0.23`, SHA `4528d10…`, GitHub API+ls-remote 일치 확인) + verifier `checkEmsdkSetup` + workflow test 3종. TDD RED 3→GREEN 18/18.
+- `todo-18-audit-ext` (`6ae531a`) → main `19e5ec3`: audit:dist에 XSS 7 sink·test-hook allowlist·cheat 토큰·egress·console·storage/secret 6종 검사 추가. TDD RED 6→GREEN 11/11. 발견: 현 dist가 `window.ultima*` hook에 걸리나 의도된 QA 표면이라 명시적 allowlist로 처리.
+- `todo-18-audit-gluefix` (`06c03f6`) → main `216925c`: full-dist에서 Emscripten 글루(`dist/engine/xu4.js`의 sockfs `WebSocketConstructor`/`WebSocketServer` 등 17건)가 egress에 오탐 → `ENGINE_GLUE_ALLOWLIST`로 dist/engine 한정 허용 + `new WebSocket(` 직접 사용은 여전히 실패(테스트로 증명). fails-closed 설계.
+- 병합-후 게이트: unit 20 files/241 tests · verify · typecheck · build · diff-check · cmp · `verify:workflow` · `build:site -- --base=/ultima/` · `audit:dist` 전부 exit 0.
+
+### Todo 13 e2e 차단 — wasm settings-write abort 발견 (2026-09-26, fix-7 조사)
+- 증상: 실제 zip + wasm에서 Configure→gameplay→debug 토글→'u'(USE_SETTINGS→`settings->write()`)가 3/3 `Aborted(RuntimeError: unreachable)`로 탭 사망. 빈 아바타명 Enter/ESC도 4/4 동일 abort. party.sav 저장은 정상.
+- fix-7 결론 **WASM-ONLY**: native 바이너리(Xvfb+실제 zip)에서 두 경로 모두 정상 동작(Configure 저장·빈이름 처리). `settings.cpp:406-515` write/fprintf/fclose + `gs_emit`(리스너 0개라 no-op), 사운드 가드, 키 매핑, Boron — 전부 무죄. FS도 단일 원인 아님(이름 early-return은 I/O 없이 abort).
+- 유력 가설: musl/Emscripten stdio 차이·Asyncify unwind·GLFW reentrancy. 다음 실험: `--debug`(ASSERTIONS=2) 빌드로 named trap+스택 확보 (fix-7 미실행, 조율자 몫).
+- Todo 13 e2e 상태: failure-path는 behavioral 재설계로 GREEN, happy-path는 이 abort 때문에 구조적 차단 → 체크박스 `[ ]` 유지. 미커밋 spec 수정분은 `lane-13-e2e` worktree에 보존.
+
+### Todo 14 main merge (2026-09-26, `c89a0f3`, 15/25 = 60.0%)
+- branch `todo-14-localization-runtime`: RED `fc3dd1b` → GREEN `34a875e` + 배선 수정 `087c266`. 정적 코드젠(`i18n-generate.mjs` → TS/C/Boron 테이블, ready만·pending은 영어 fallback) + TS/C lookup 경계 + native `localization-boundaries` CTest + `localized-flow.spec.ts`.
+- 조율자 직접 수정 1건: lane이 `window.ultimaI18n` 노출 배선을 빠뜨려 e2e 2 failed → `main.ts`에 ultimaAudio 패턴으로 노출 추가 후 GREEN(2/2).
+- **병합-후 게이트 (main, 전부 실제 실행 · exit 0)**: unit 21 files/258 tests · verify:repo-sources · typecheck · build · diff-check · cmp · `i18n:check`(4411 entries, 4402 pending) · cmake configure/build · CTest 4/4(localization-boundaries 포함) · e2e 25/25(3.2m, save-reload 장기 포함).
