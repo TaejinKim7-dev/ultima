@@ -4,1286 +4,1286 @@
     "avatar.exe:endgameText1:0": {
       "sourceHash": "sha256:0bf729f028a5219bcaa37be72820501125cb5e1ab206ddfedd0c6d183f7b489d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "궁극적 지혜의 코덱스가 지닌 무한한 지식이 그대에게 드러난다.",
+      "status": "ready"
     },
     "avatar.exe:endgameText1:1": {
       "sourceHash": "sha256:dd90d2f2192a420ac1aef5b71ea4195538de81087e034e1393cf338148a2db85",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n목소리가 말한다: 그대는 본성이 참으로 선함을 증명하였다.",
+      "status": "ready"
     },
     "avatar.exe:endgameText1:2": {
       "sourceHash": "sha256:dd7854a53e27403b0520a6db11606852afb498042ea3a19618c32f265d586e72",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n아바타가 되고자 하는 그대의 여정은 일생에 걸친 끝없는 여정임을 알아야 한다.",
+      "status": "ready"
     },
     "avatar.exe:endgameText1:3": {
       "sourceHash": "sha256:97ed557fcfd590d33a0c7b3e1072aee23b324f05b54d8b2f040e6fc89c117a6b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n아바타의 지위는 살아있는 선물이다.  언제까지나 가꾸어야만 꽃필 수 있다.",
+      "status": "ready"
     },
     "avatar.exe:endgameText1:4": {
       "sourceHash": "sha256:5afbf9ec7e6a4ce7eeeec1bb3c108fc073b7162d1e9c84f7d1908b9f85b3e527",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n미덕의 길에서 벗어난다면, 그대의 길은 영영 사라질 수도 있다.",
+      "status": "ready"
     },
     "avatar.exe:endgameText1:5": {
       "sourceHash": "sha256:b1ac45efbc6454968a5efd2f6d72088bb5e66ba9817dfba1ab89a93163d072fb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n이제 그대의 세계로 돌아가라. 그곳에서 그대 백성들의 본보기로 살라, 우리는 그대의 용맹한 행적을 기억하리라.",
+      "status": "ready"
     },
     "avatar.exe:endgameText1:6": {
       "sourceHash": "sha256:2c8a7034c20f1ac501e17a9e35dfdacc8e75ada34df777aa2186baf70d3e3df1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n목소리가 잦아들며, 어둠이 그대 주위로 밀려오는 듯하다. 격렬하고 뒤틀리는 현기증의 순간이 찾아온다.",
+      "status": "ready"
     },
     "avatar.exe:endgameText2:0": {
       "sourceHash": "sha256:b32b2b26dc756389d4e23583bce51149a7f3d3a26bbed06df4057f1903ea38a0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 눈을 뜨고 낯익은 돌의 원을 마주한다.  최근의 모험을 떠올리며 의아해한다.",
+      "status": "ready"
     },
     "avatar.exe:endgameText2:1": {
       "sourceHash": "sha256:af84eb1ce44589a05e136a54216c8446853ec83cbfcbd1fdda8be345f57c5785",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n아주 멀리 떨어진 시간과 장소처럼 느껴진다.  정말 있었던 일인지 의아해하다가, 손에 앙크를 쥐고 있음을 깨닫는다.",
+      "status": "ready"
     },
     "avatar.exe:endgameText2:2": {
       "sourceHash": "sha256:576116cb1ba76fb5f803ed5ed84e97eb7ec17107ac314f1b3c8706297a892c00",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n이제 문의 비밀을 알게 되었기에 언제든 왔던 곳으로 돌아올 수 있음을 알며, 그대는 원을 떠나간다.",
+      "status": "ready"
     },
     "avatar.exe:endgameText2:3": {
       "sourceHash": "sha256:cb4b65451b9551b8fc9d3cc69ca5fb891abea0a274f46d1394cb401a77f36a22",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n축하합니다!\n   그대는\n   울티마 4:\n  아바타의\n   여정을\n  완수하였다\n  총 ",
+      "status": "ready"
     },
     "avatar.exe:endgameText2:4": {
       "sourceHash": "sha256:17c71d8545fce7ef28feb24f65d66e15a94746fae1842bbb55b11da56a5b84bf",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n턴 만에! 그대의\n업적을 오리진\n시스템스의\n로드 브리티시께\n보고하라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:0": {
       "sourceHash": "sha256:9c3f9c25064d9e6cd1e6cf0630f0626cf34fefc0606143a7f9f3af86c1b8c5b1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 도둑이자 악당이다. 결코 아바타가 될 수 없으리라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:1": {
       "sourceHash": "sha256:86f5ed969dfa6af6e4a1f1ae58491a42ee10378956ee80ffad7331dc65ffc9a6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 차갑고 잔인한 짐승이다.  그 죄로 인해 감옥에 가야 마땅하다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:10": {
       "sourceHash": "sha256:4ab3669b54256ab97f6928c5c138b65f2e1732795484ff794fb5e39c73ef8f80",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 용맹을 그리 보이지 못한다. 필요할 때 도망치는구나!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:11": {
       "sourceHash": "sha256:afd3726a231b12bd93905f427467c62b8460df58f6004aeba40e3705545e9450",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 잔인하고 불의하다. 언젠가 그 죄로 고통받으리라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:12": {
       "sourceHash": "sha256:84c06aac9620b7e067f932345d4ed8cd3d467f454432b1c98d74eb7a3c8d980f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 자신보다 남의 삶을 더 헤아려야 한다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:13": {
       "sourceHash": "sha256:0370c4979f2951dbadc539b8e1bebda6b52193608496e0fb5d2b0f01c6ca8c0b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 명예롭게 싸우지 않고 악의와 기만으로 싸운다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:14": {
       "sourceHash": "sha256:8fbb8de8489ab1545be3196e24c8a0618d12393b679c1b2649f02c75a154fc8c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 내면을 돌보는 데 시간을 들이지 않는구나, 아바타가 되려면 반드시 필요한 일이다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:15": {
       "sourceHash": "sha256:f246594d3a553672e9aed2ca7539b464052076bdc83d0a80e9647a7befa05826",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 사소한 행적을 너무 자랑스러워한다. 겸손은 모든 미덕의 근본이다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:16": {
       "sourceHash": "sha256:8785d603abc68575e0509eb30c0d28fe37120ae13b43dd3e6f032dc29520a6ee",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 정직의 길에서 진전이 거의 없다. 그대의 가치를 증명하도록 힘쓰라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:17": {
       "sourceHash": "sha256:c4ecdfe72da9d303379221c226e08a0285165bdb51ce2dea62336ff89a4635a1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 자비를 제대로 보이지 못했다. 남에게 더 친절하라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:18": {
       "sourceHash": "sha256:955f8dd94024ac74c594ddf99ae8b6301fe00fd8e34172ff3ca5008e9df409f2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 아직 용맹한 전사가 아니다.  악을 물리치며 스스로를 증명하라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:19": {
       "sourceHash": "sha256:b1dc25431e1b1be94ec5315ad0752d91c43aaaf113505bbde2b99bacd22863f6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 아직 정의로움을 증명하지 못했다. 모든 일에 정의를 행하도록 힘쓰라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:2": {
       "sourceHash": "sha256:995565b9ca9dbd5b40b34e23752a2166065d06bf49954214eb537adb681dc55f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 겁쟁이로다, 위험의 낌새만 있어도 도망친다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:20": {
       "sourceHash": "sha256:9df5e7dfbbb3c585e3701a3048fc1abd448b6104657c56cf56ba869a53618aa2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대의 희생은 미미하다. 남을 살리기 위해 그대 생명의 피를 바치라.",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:21": {
       "sourceHash": "sha256:741646734f8a2d7e234dd3843a0fbfed96965b7f893e57a58405bd9f03461e20",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 더욱 명예롭게 처신해야 한다.  그 길이 그대 앞에 놓여 있다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:22": {
       "sourceHash": "sha256:b63d866c34687c198e6d6143d7eecde8fc62b81344e9dbacafe2352d7676c1f6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대의 내면을 더 알고 다스리도록 힘쓰라. 명상이 그 길을 밝히리라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:23": {
       "sourceHash": "sha256:08bcfbcfe02c0f07345af36f1375afdfb142ebb7b7612b18f67d3de4e38c26aa",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "이 길에서 그대의 진전은 매우 불확실하다. 겸손 없이는 그대는 공허할 뿐이다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:24": {
       "sourceHash": "sha256:9fe8a14d5398ff07d385386c4be4a0fd71821b6187893881036900ceec21630d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 정직한 영혼인 듯하다.  계속된 정직이 그대에게 보답하리라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:25": {
       "sourceHash": "sha256:26a501d3474ed626da4523e0f117fa9f83809e555d5ba553a3eea3c80cad1582",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 자비를 잘 보이고 있다.  계속된 선의가 그대를 이끌어야 한다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:26": {
       "sourceHash": "sha256:4a2cfaf2026cdecb5d9f272698e431d9d8dd276076219020c1b6157d563b730f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 위험 앞에서 용맹을 보이고 있다. 더욱 그리되도록 힘쓰라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:27": {
       "sourceHash": "sha256:35ec4061d20f5717ef303f55d9443aa8b1619baff1da7faa69f733babbcceb1c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 공정하고 정의로운 듯하다. 정의를 더욱 엄정히 지키도록 힘쓰라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:28": {
       "sourceHash": "sha256:180d2295e31cbb356b7f91017a8e5a8a80aca09f497712cc600f5255593a7ec3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 어느 정도 자신을 내어주고 있다. 이제 더 많이 찾아 나서라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:29": {
       "sourceHash": "sha256:2c9eedf3b47135e9a605561d22ad8b2024d13bff16c399ea6a874ff43bbcaad6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 천성이 명예로운 듯하다.  남에게도 명예를 가져다주도록 힘쓰라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:3": {
       "sourceHash": "sha256:b156750514206e8aa317892927cf5c350718a548a2224b1bb4d980d449176253",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 불의한 비참한 자로다. 역겨운 참견꾼이다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:30": {
       "sourceHash": "sha256:73cb801605e255a4cabcbc714ac40ce70f9e6939c3a64a214651fd59adc2aec0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 내면의 통찰로 가는 길을 잘 가고 있다, 계속하여 내면의 빛을 구하라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:31": {
       "sourceHash": "sha256:89148064c2fa8874aa194245b809776f6b9396d0975979c3cf5204b7197d7b04",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 겸손한 영혼인 듯하다.  미덕을 쌓아 올릴 굳건한 초석을 놓고 있다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:32": {
       "sourceHash": "sha256:f625b101e713be5e4312d06f8069c17017f9a4f85ceb649edb4b0abed13aa63d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 참으로 정직한 영혼이다. 이제 승화에 이르도록 하라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:33": {
       "sourceHash": "sha256:90d934abb9b658ed484804b4ea42e07779e941cdd2da5ca3515befb35381e433",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "자비는 그대가 잘 보여온 미덕이다.  이제 승화를 구하라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:34": {
       "sourceHash": "sha256:471ec399a3b5a92a3e090b582b980948b534dadf61c7d50298e2acf4b460ce3d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 참으로 용맹한 전사다. 이제 용맹의 미덕에서 승화를 구하라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:35": {
       "sourceHash": "sha256:97ba649814c3e95da60b452d84557f596a15f8763963f9d36bfbe13d868cab77",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 정의롭고 공정하다.  이제 승화를 구하라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:36": {
       "sourceHash": "sha256:98a91c9cfd43823b7d32b3c2bce8516626376144f95cd8cdebae089623c685ed",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 베풀 줄 알고 선하다.  그대의 자기희생은 크도다.  이제 승화를 구하라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:37": {
       "sourceHash": "sha256:ad2752c1cd8040405482a305a96c908e18965f161fbff59df574c8a072d47a96",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 명예로움을 증명하였다. 이제 승화를 구하라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:38": {
       "sourceHash": "sha256:b44a5942a2bed8592b9a717016a82713bcae149321a2b26984c04f279f417fe6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "영성이 그대의 천성에 있다. 이제 승화를 구하라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:39": {
       "sourceHash": "sha256:9aabd57e0adcbdc07febedec625068e64b756073c5256aa8f863baa4c26f769b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대의 겸손이 존재 위에 밝게 빛난다. 이제 승화를 구하라!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:4": {
       "sourceHash": "sha256:d19e421ce925b0a1bf95aee976dbc9bde692bdae8d675c99533e9d3135479315",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 제 잇속만 챙기는 아첨꾼이다. 내 도움을 받을 자격이 없으나, 그래도 베풀겠다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:40": {
       "sourceHash": "sha256:c62d2b42a1a7a4908230841353d93af0c7ed840fa8d53aed56a2ab8909c3dcfe",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "예언자가 말한다: 나는 오직 ",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:41": {
       "sourceHash": "sha256:6af339f1606bf8593d2d9c653dc2eaa9cb547d99a3346f85fecb3f79d094952a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "하고만 이야기하리라.\n다시 오라, ",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:42": {
       "sourceHash": "sha256:ade67320c6b42fb19ae95db8c3af102b09986adf4202c7fd2e8c0b1d3dd8de64",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "이(가) 회복되었을 때!\n",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:43": {
       "sourceHash": "sha256:224b6363caa15e925869c3d24048ce85ebd12075307d767abb07049c6eee97ec",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n환영한다, ",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:44": {
       "sourceHash": "sha256:415d2019639486c33e1a4dd8fd5dedd6a1736578e0c199e9df9040935167c1c4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n나는 호크윈드, 영혼의 예언자다. 나는 그대 안에 있는 것, 그대를 선 또는 악의 행위로 이끄는 것을 보노라...\n",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:45": {
       "sourceHash": "sha256:45e73aef081e36992dcd563c9861825c4b59c9fad0058f25db4b2874959679c0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n어떤 길에 대한 깨달음을 구하는가?\n",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:46": {
       "sourceHash": "sha256:abff0db2ae27c6e05a40ff20e37eaa50a0b7db628fa8c826119c0de2fe4adb2c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n호크윈드가 묻는다: 어떤 다른 길에 대한 명료함을 구하는가?\n",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:47": {
       "sourceHash": "sha256:140bedbf9c3f6d56a9846d2ba7088798683f4da0c248231336e6a05679e4fdfe",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "none",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:48": {
       "sourceHash": "sha256:b49f425a7e1f9cff3856329ada223f2f9d368f15a00cf48df16ca95986137fe8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "bye",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:49": {
       "sourceHash": "sha256:5ad5116e1350bdc40d7fb4ce49830b9d7b77e709e0ec718f0894c12d9448317b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n그가 말한다: 그것은 깨달음의 주제가 아니다.\n",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:5": {
       "sourceHash": "sha256:c2814377f659d8ee66451e8bd06f77290d96b48351df520d4c7fde30c1c56d97",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 비열하고 파렴치한 자다. 그대의 존재 자체가 모욕이다. 그대는 민달팽이만큼 하찮다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:50": {
       "sourceHash": "sha256:41041e74df694561f6b5a3dd34e55f345ca6f35911532c27ddf4b8ecdb1564a8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그가 말한다:\n그대는 그 자질에서 부분적인 아바타가 되었다. 나의 통찰이 더는 필요치 않다.\n",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:51": {
       "sourceHash": "sha256:6a35cbf946cebcd20d22bfbf2010c8032152a81807f6ce21231ab3c351254b9e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n신단으로 가서 세 주기 동안 명상하라!\n",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:52": {
       "sourceHash": "sha256:2424e97bd3b1cea8135fde9e88cc15a455e28b32dabd26417128e25995d3c08a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n호크윈드가 말한다: 평안하기를, 그대가 아바타의 여정을 완수하기를!\n",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:6": {
       "sourceHash": "sha256:95cde1529ac109f8db8db25276e61ab0df2b0815796ae73e44be0ae553fab19e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대의 정신은 약하고 나약하다. 완전함을 위해 힘쓰지 않는구나!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:7": {
       "sourceHash": "sha256:20a098c9a61c4adaceac4b64d05080c1364dd15350f7769e2c997af27a8ad79e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 오만하고 허영에 차 있다. 그대 안의 다른 모든 미덕이 헛되도다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:8": {
       "sourceHash": "sha256:bce3cc27f66d6f03a0d3403138429c515bae0478175046b45ea834fde95b10a3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 정직한 영혼이 아니다. 아바타가 되려면 더 정직한 삶을 살아야 한다!",
+      "status": "ready"
     },
     "avatar.exe:hawkwindText:9": {
       "sourceHash": "sha256:66e47179274fa4f116d5ac9b3399d14438d325419243d112257653b44a1b4c39",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 필요 없는 곳에서 살생하고 남에게는 너무 적게 베푼다!",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:0": {
       "sourceHash": "sha256:82a3537ff0dbce7eec35d69edc3a189ee6f17d82f353a553f9aa96cb0be3ce89",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "name",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:1": {
       "sourceHash": "sha256:3c01eba119e00d79c82b6f65d70bc5f1044d568618bf41377e6d1432023fc2b8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "look",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:10": {
       "sourceHash": "sha256:d17bd922ea9dd14143a1c40cffad198af1314d34b49c819d47454114cb4bc224",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "sacrifice",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:11": {
       "sourceHash": "sha256:8ab4ca2f83725a04752af6fed80c77ff6708f20ebd4ee32e95c9a375bd8fc1ed",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "honor",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:12": {
       "sourceHash": "sha256:1a28e463423d078a6a036216b5676d2433548221246f281a0ea31064d82d9245",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "spirituality",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:13": {
       "sourceHash": "sha256:68c4ab7357022538deb3d0f49d30f50804f6d464e38bd1468377b680da870feb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "humility",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:14": {
       "sourceHash": "sha256:470664bd59f587f32e6d933f058464084d1810ee2b3a81b0d4d59d6dd9623da2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "pride",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:15": {
       "sourceHash": "sha256:87bbe879c7a5f5784a70384bb49fa9513a6a3fbe4c2d388635e3c87611c03fae",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "avatar",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:16": {
       "sourceHash": "sha256:ac1a1c7143cb2199eb400993a5db42bc2f6d98f6769bb696d04b48d84c68a56f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "quest",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:17": {
       "sourceHash": "sha256:010aecbff62b5b33298f06d865872febb79a93b5e225f0ce597a015349220269",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "britannia",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:18": {
       "sourceHash": "sha256:3c1d94691d03f75d3b8951a338c6783e4d065a2c380ee21abef51f03eb301df0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ankh",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:19": {
       "sourceHash": "sha256:0e062e4c2ee475679d9cfd9cd30c295dec2a0eb7a02ffb0c5b239d2617022a8a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "abyss",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:2": {
       "sourceHash": "sha256:5e8c9902207afaeb7120430c585a445f21e92932081d64bc99f80e4925bcb002",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "job",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:20": {
       "sourceHash": "sha256:5fbec15ecb9de318515e0e5319b1f64fd5ed9969a66a62c27dd806bcd0da0ba6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "mondain",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:21": {
       "sourceHash": "sha256:e9270d1503db9d1c042c5dc23555d0ff2938010771d4a9eb4b93822a359c97d8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "minax",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:22": {
       "sourceHash": "sha256:4995baa63e0e2487000039c1a829fadc3e90a69b115a47b2280064292497bbc0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "exodus",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:23": {
       "sourceHash": "sha256:3371305232c8dc10ce95c65849946e238a2e518ce770310333d4637ffcba1a51",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "virtue",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:3": {
       "sourceHash": "sha256:c5c4bad89ee44b4da0321344964f145dd3023fc1ab0d9c2473e2716b788481ae",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "truth",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:4": {
       "sourceHash": "sha256:686f746a95b6f836d7d70567c302c3f9ebb5ee0def3d1220ee9d4e9f34f5e131",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "love",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:5": {
       "sourceHash": "sha256:4492aabd733f37cb76fc0ed1fd75a11c5dd05ba8977988e28487739a20975b85",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "courage",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:6": {
       "sourceHash": "sha256:203e303a50269f3d533db9f46338da7d8e8d5457a0da2c74ef2c9ccf4784979a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "honesty",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:7": {
       "sourceHash": "sha256:b260e1abb566eb8b1ea892488a944546c53391e2d0556cd309dd01c804e7558b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "compassion",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:8": {
       "sourceHash": "sha256:6adcc016448d707c1d16827459aee1f5c37621a9a747d3c5feb9f80877e3d495",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "valor",
+      "status": "ready"
     },
     "avatar.exe:lordBritishKeyword:9": {
       "sourceHash": "sha256:468c7b6449dd928f2ddad069fbfdb31f59ce214d67a1422c7610efb886ce6aa7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "justice",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:0": {
       "sourceHash": "sha256:8b877a0251b9e8ea525ce08bd3a28dd32a803554a9dedc5f1626f9dab99e8609",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n그가 말한다:\n나의 이름은\n로드 브리티시,\n브리타니아\n전역의 군주이다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:1": {
       "sourceHash": "sha256:093085f43d2816a5c6f25e72635a1c6cc111e3498aed3deda009d9c9c62cd8e6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n\n\n왕홀을 든\n왕이\n보인다.\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:10": {
       "sourceHash": "sha256:24120dd2e0db72b6e52306b817c680f7a20397e10bdffd8eea1b55a33d5bce9b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n그가 말한다:\n자기희생의 마을,\n미녹은\n로스트 호프 만의\n동쪽 해안에\n있다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:11": {
       "sourceHash": "sha256:b721e32c35f8f41279036b51cd4ca23716f86316ca2a144b3ff9407dfac62762",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n그가 말한다:\n명예를 추구하는\n성기사들은\n영웅곶 북쪽의\n트린식에서\n흔히 보인다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:12": {
       "sourceHash": "sha256:797f38174984c58859934cbe5ea290e957a32ec726aa40ea90f928d7b155bb60",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n그가 말한다:\n스카라 브레이에서\n영성의 길을\n가르친다.\n스피릿우드\n근처의 섬에서\n찾을 수 있다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:13": {
       "sourceHash": "sha256:a46615a832b8d10060f168102b0508013edcb6bb84ec6596dfdbc0086d5bd0ca",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n그가 말한다:\n겸손은 미덕의\n초석이다!  오만했던\n매긴시아의\n폐허가 바로\n겸손의 미덕을\n증언한다!\n\n매긴시아의\n폐허는 브리타니아\n해안에서 멀리\n떨어진, 광대한\n바다의 작은\n섬에서 찾을\n수 있다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:14": {
       "sourceHash": "sha256:9f1fa77faaa33fcfe5986bd4cef3cfce9563f193bd52888bed3fbfc87fb3630e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n그가 말한다:\n진실, 사랑,\n용기의 여덟 가지\n조합 중, 진실도\n사랑도 용기도\n담지 않은 것이\n바로 오만이다.\n\n오만은 미덕이\n아니니, 오만과\n정반대되는 미덕인\n겸손을 택하여\n멀리해야 한다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:15": {
       "sourceHash": "sha256:c56c0bb0bce288d2212d188b376a25368e1c0c20cc59336818fc354d7b4803a4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n\n\n\n로드 브리티시가\n말한다:\n아바타가 된다는\n것은 여덟 미덕의\n화신이 되는\n것이다.\n\n\n그것은 끊임없이,\n영원히 스스로와\n우리가 사는\n세상을 더 낫게\n만들고자 하는\n여정 속에서\n살아가는 것이다.\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:16": {
       "sourceHash": "sha256:55907a33bf557e4b7f2acd69d7c96073054de68f9a8528792d0c09b67267464e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n로드 브리티시가\n말한다:\n아바타의 여정은\n선의 여덟 미덕을\n알고 그 화신이\n되는 것이다!\n이 여정에 나선\n모든 이는 어비스를\n정복하고 궁극적\n지혜의 코덱스를\n보는 것으로\n스스로를 증명해야\n함이 알려져\n있다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:17": {
       "sourceHash": "sha256:eb10490901bbabbadd88d6af9aca8519a6708222d38cf717ca2ee69812df350a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n\n\n\n\n그가 말한다:\n위대한 악의 군주들이\n물러났음에도\n악은 여전히\n브리타니아에\n남아 있다.\n\n\n\n\n\n단 한 영혼이라도\n아바타의 여정을\n완수한다면, 우리\n백성에게 새로운\n희망이, 삶의\n새로운 목표가\n생기리라.\n\n소유물과 금을\n좇는 끝없는\n투쟁보다 삶에\n더 많은 것이\n있다는 빛나는\n본보기가 되리라!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:18": {
       "sourceHash": "sha256:2d5c372652d8ee9472e9f65c00c1e1bc7a21f96c06f74675d3d33b0e95b51b1f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그가 말한다:\n앙크는 미덕을\n추구하는 자의\n상징이다.  이\n표식으로 그대가\n알려질 것이니,\n항상 지니고\n다니라!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:19": {
       "sourceHash": "sha256:514c1a32fe41f6e582e6322ffd6cc3652d4808793433a2cbdf15556edc5457a8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n\n\n\n그가 말한다:\n위대한\n스티지언\n어비스는 브리타니아에\n남은 가장 어두운\n악의 소굴이다!\n\n\n\n\n\n\n어비스의 가장\n깊은 곳에\n코덱스의 방이\n있다고 전해진다!\n\n\n최고의 미덕을\n지닌 자, 이를테면\n아바타 같은 이만이\n이 방에 들어갈\n수 있다고도\n전해진다!!!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:2": {
       "sourceHash": "sha256:6c1070fe9df5f12a54481be8324f9bca2ca8d52d0d65ee8a6391f43a010e7d13",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n그가 말한다:\n나는 브리타니아\n전역을 다스리며,\n그대를 돕기 위해\n최선을 다하리라!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:20": {
       "sourceHash": "sha256:e4629c24fc89fd6f6956a54fd1b48f461a673e3d4c21de34497be8afc373ca46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n\n\n\n그가 말한다:\n몬데인이 죽었다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:21": {
       "sourceHash": "sha256:2471e4906becb350eb2dbe9b92dfa3b673ad665555335ee56a76f2319b63f020",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n\n\n\n그가 말한다:\n미낙스가 죽었다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:22": {
       "sourceHash": "sha256:1a367c20606711a44cfee981a7e61a402cf65e5a8152bca4db3fd47e7a1408cd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n\n\n\n그가 말한다:\n엑소더스가 죽었다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:23": {
       "sourceHash": "sha256:72abd56f49a13f42f3e309539f0c2dceb3480d34806fbddcbcc053b302a79f84",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n그가 말한다:\n아바타의\n여덟 미덕은:\n정직,\n자비,\n용맹,\n정의,\n희생,\n명예,\n영성,\n그리고 겸손이다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:3": {
       "sourceHash": "sha256:bad3bb2b96a5200d9f7748e3a445eab603835e5c6f2d3372bc463cb07c6b51ea",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그가 말한다:\n많은 진실을\n라이시움에서\n배울 수 있다.\n베리티 섬의\n북서쪽 해안에\n있다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:4": {
       "sourceHash": "sha256:e0dd0c341bf98e63b0d8d23b0aba4851313cf2e9c878117037cb28f148808bec",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그가 말한다:\n사랑의 의미는\n엠패스 수도원에서\n찾으라.\n수도원은 깊은\n숲의 서쪽\n가장자리에\n있다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:5": {
       "sourceHash": "sha256:dc00d5cc64a30e328aa2c7b45c09df3b343fae3817d60eb25c6cc737c779af55",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n그가 말한다:\n디즈 섬의\n서펀트 성에서\n용기를 구해야\n한다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:6": {
       "sourceHash": "sha256:699e2388bf2b7713213a0deb338ec770c320a82af3d276fb7fe755ace578f10d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n그가 말한다:\n베리티 섬의\n아름다운 마을\n문글로우에서\n정직의 미덕이\n번성한다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:7": {
       "sourceHash": "sha256:b7410e045fa5d6e9d4e0688a32c357a3d72685a9f22437d12abbed74fea65bbb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n그가 말한다:\n브리튼 마을의\n음유시인들은\n자비의 미덕에\n정통하다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:8": {
       "sourceHash": "sha256:05b16bccfbe9ae5f13742003435475a86061c8a973aeaad14fa6e945a3864969",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n그가 말한다:\n많은 용맹한\n전사들이 발라리안\n제도의 젤롬\n출신이다!\n",
+      "status": "ready"
     },
     "avatar.exe:lordBritishText:9": {
       "sourceHash": "sha256:09e7d1d438119082c1aafa9530ac45e4ce5488909c4fdb732d5c5e9b636a37a7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n\n그가 말한다:\n깊은 숲 속\n유 시에서\n정의가\n행해진다!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:0": {
       "sourceHash": "sha256:7df708434268d78b775227bc81796583eb17cdb220f33c9b44107a0c2ec46e93",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "마을과 성에서 발견한 남의 금을 취하지 말라, 그것은 그대의 것이 아니다!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:1": {
       "sourceHash": "sha256:6739d7efa88b6171c52ab84030a1e3596edaa55024af6fc26ca31cb4fdc331e5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "상인과 행상을 속이지 말라, 그것은 악한 짓이다!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:10": {
       "sourceHash": "sha256:f3aa734cad750db9ceab48863ef2790406f123e0f675a43cf79c28ba2510a24a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "평화로운 시민을 공격하지 말라, 그 행위는 엄한 벌을 받아 마땅하다!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:11": {
       "sourceHash": "sha256:4f5c9efe466e339e5b1e7887a6a8ad993b69b4c8abdc3e38d957cf7f99cf9de6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "악하지 않은 짐승을 죽이지 말라, 그들이 굶주려 그대를 공격하더라도 죽음을 받을 이유가 없다!",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:12": {
       "sourceHash": "sha256:8656acd89c536fb21c247b942b6ab004d6341b33a1e960f348add701e2f1ba81",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대의 마지막 금화까지 어려운 이에게 베푸는 것은 자기희생의 훌륭한 척도이다!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:13": {
       "sourceHash": "sha256:d3c8eeffb378636c9f0e7a8f6ac8153a02b15a906dd63eb8bbbcd91c9a6d2fd8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "동료를 버리고 도망치는 것은 피해야 할 이기적인 행동이다!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:14": {
       "sourceHash": "sha256:6010d8bcd1170675bd814d2c676057bfdbb565d7640b7b00c6b3671f1109a4f8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "남을 살리기 위해 그대 생명의 피를 바치는 것은 크게 칭송받을 미덕이다!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:15": {
       "sourceHash": "sha256:b4719d4195090e66b23c9980304763f54130594155b4b1f3218556a93244c8a9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "남의 금을 취하지 말라, 이는 그대에게 불명예를 가져오리라!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:16": {
       "sourceHash": "sha256:b46343f5656e2c8dbef36b9db30bcafa9d8d0693e7e77bc9ea3ff5ed0d46f28e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "악하지 않은 존재를 먼저 공격하는 것은 결코 명예로운 행위가 아니다!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:17": {
       "sourceHash": "sha256:c49a1f86bbacb7eb7bff70ba9e86f5e71b9c016780c9c3266c48ee71af9e6b1a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대 앞에 놓인 많은 여정을 풀고자 하라, 명예가 그 보상이 되리라!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:18": {
       "sourceHash": "sha256:0257616701a634f3e25443917bc2b84c800c5490b2160a8a593c1ae487a7057b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "스스로를 알고자 하라.  예언자를 자주 찾으라, 그는 그대의 내면을 들여다볼 수 있다!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:19": {
       "sourceHash": "sha256:32ac2d28bf0fa3eb56e342597e092057bf9ff71f5197cd014d743ca240f98827",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "명상은 깨달음으로 이어진다 모든 지혜와 지식을 구하라!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:2": {
       "sourceHash": "sha256:2840d03b40d750be23f1cf2bf80df8910e24b5b1bbd509bcbb8ca09b607e52a7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "둘째, 위대한 스티지언 어비스 입구에서 진실의 책을 읽으라!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:20": {
       "sourceHash": "sha256:7906a7077d05d93af9a49f9146db8bd520eb1d4e5ab9de4585cf5066dd24c949",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "하얀 보석을 구한다면, 땅속이 아니라 서펀트의 등뼈에서 찾으라!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:21": {
       "sourceHash": "sha256:dbe029f4a8f257be7271aee832c3be74ef9359a2d63bd5cf8a8902ae1f02885e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대가 아닌 것을 자처하지 말라.  겸손한 행동이 그대를 잘 말해준다!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:22": {
       "sourceHash": "sha256:721a426dc6619decd5aa3dc09650dedaddbb0c73a3052f451174be02acc2ccef",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "위대한 악의 힘을 휘두르려 하지 말라, 그 힘이 그대를 압도하리라!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:23": {
       "sourceHash": "sha256:09d2d06b7fbcab28b7a9f372124d4a980fe04c04e4ae14b9d31da3111c7e9bd1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "검은 보석을 구한다면, 가장 어두운 밤에 문이 열리는 시간과 장소에서 찾으라!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:3": {
       "sourceHash": "sha256:7cae9a0ea821091c0ca6e6fd439de730afe70232031fb5fef7f3930973dd7340",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "땅의 악하지 않은 짐승을 죽이지 말고, 선량한 이들을 공격하지 말라!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:4": {
       "sourceHash": "sha256:aab801eb704e8d04807afb05ae4173cb883d9e50642dca3b7a2b7d0a153f146e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "구걸하는 이에게 그대의 지갑을 베풀라, 그 행위는 잊히지 않으리라!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:5": {
       "sourceHash": "sha256:d18a7d8b69414bb639bacaf03d5d0abd2eb7baf68a2169601ac9fee482a7b3b8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "셋째, 위대한 스티지언 어비스 입구에서 사랑의 초에 불을 붙이라!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:6": {
       "sourceHash": "sha256:e7c40b560589e749a2a9ea16d800c425afd9c83dd6e5d424bb2b7686c283bbc8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "악한 생물을 물리친 승리는 용맹한 영혼을 세우는 데 도움이 된다!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:7": {
       "sourceHash": "sha256:07a1c8e883743a392e3278ac44683ea721800805a3db77feafb789148b68c525",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "심각하지 않은 부상으로 전투에서 도망치는 것은 흔히 겁쟁이의 모습이다!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:8": {
       "sourceHash": "sha256:14bfa5d693eef883f46cf3847c37c46e26892104dd848cc7ab54520467cb9259",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "첫째, 위대한 스티지언 어비스 입구에서 용기의 종을 울리라!\n",
+      "status": "ready"
     },
     "avatar.exe:shrineAdvice:9": {
       "sourceHash": "sha256:253842d5d29a548d00bcca39f0b4a7af6fb9d826863e3c4f57db977d34c383f9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "남의 금을 취하는 것은 쉽게 잊히지 않는 불의이다. 마땅한 몫만 취하라!\n",
+      "status": "ready"
     },
     "avatar.exe:virtueQuestions:0": {
       "sourceHash": "sha256:fad02e50a6eaa21ea98da05a1899e0524cc5024783b6a53cfee74652f48f6ea8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대의 모든 말을 모두가 믿을 수 있다면, 그대는 무엇을 지닌 것인가?",
+      "status": "ready"
     },
     "avatar.exe:virtueQuestions:1": {
       "sourceHash": "sha256:b4142e862f7526d359dec3e38157b46a6a797e1bdbf16fed9d3e3bcffd084602",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "남의 여정에 함께하도록 이끄는 자질은 무엇인가?",
+      "status": "ready"
     },
     "avatar.exe:virtueQuestions:10": {
       "sourceHash": "sha256:4f774d269b79c63b39580fa933e3972123b4ddeb46d272211af2e9e4c53c4aff",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 어떤 위험 앞에서도 등 돌리지 않는 것은 무엇인가?",
+      "status": "ready"
     },
     "avatar.exe:virtueQuestions:2": {
       "sourceHash": "sha256:cb9b6df2a288dcd7f56c499ea4e511e68685eba22a4cb1a1befc9fc81c119591",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "위대한 행위가 필요할 때 응답하는 것은 무엇인가?",
+      "status": "ready"
     },
     "avatar.exe:virtueQuestions:3": {
       "sourceHash": "sha256:3d77058c923424f7d6b543c62688697204d09c51fa0b8d22f5bddbb6bd5874e9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "군주와 농노에게 똑같이 적용되어야 하는 것은 무엇인가?",
+      "status": "ready"
     },
     "avatar.exe:virtueQuestions:4": {
       "sourceHash": "sha256:5d2d8b77486016f5e503e347392cbcef1ea822001ec41f447e5f9e59788db886",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "자신을 다른 무엇보다 앞세우기를 꺼리는 것은 무엇인가?",
+      "status": "ready"
     },
     "avatar.exe:virtueQuestions:5": {
       "sourceHash": "sha256:1fc2106069406103facf050b36e4cc9d64d0bae4efd617faabfc28b510662b27",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 어떤 의무도 회피하지 않는 것은 무엇인가?",
+      "status": "ready"
     },
     "avatar.exe:virtueQuestions:6": {
       "sourceHash": "sha256:dc0f9324b8b6080386f508013af92a5c269bbea01213c23e11a9d2be80bf8dd1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "참된 자아를 앎으로써 모든 것을 아는 것은 무엇인가?",
+      "status": "ready"
     },
     "avatar.exe:virtueQuestions:7": {
       "sourceHash": "sha256:e9da23e3d89960df47a8b71cbfb594677f5079502687c55b1cb612b4fb55f3a4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "농노는 타고나지만 귀족은 애써 얻어야 하는 것은 무엇인가?",
+      "status": "ready"
     },
     "avatar.exe:virtueQuestions:8": {
       "sourceHash": "sha256:d36460a4520ca49c87a70157508e5af211e570f9093873844b1b987a0c33cc40",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "다른 모든 것이 상상이라 해도, 이것만은 실재한다...",
+      "status": "ready"
     },
     "avatar.exe:virtueQuestions:9": {
       "sourceHash": "sha256:bfe79448d31160c2bd01e477321e7738f3a8a0eb32eb7332a4719cb8428ac6f0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "높이 솟구치는 동시에 깊은 곳으로 떨어지는 것은 무엇인가?",
+      "status": "ready"
     },
     "title.exe:introGypsy:0": {
       "sourceHash": "sha256:41bb7b9a440cd3fa691c60740348a73dfc172ce745af3b2b9106165f6921c8cb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "집시가 첫 두 장의 카드를 놓는다\n",
+      "status": "ready"
     },
     "title.exe:introGypsy:1": {
       "sourceHash": "sha256:6937d7befbc055eda54368e7343f1114f003771628876b470a4799dd1d5e7e82",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "집시가 카드 두 장을 더 놓는다\n",
+      "status": "ready"
     },
     "title.exe:introGypsy:10": {
       "sourceHash": "sha256:0de3eb7d695d462f7e9b784920cdbec961f79c54914d3a226d6415254b5e1845",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "영성",
+      "status": "ready"
     },
     "title.exe:introGypsy:11": {
       "sourceHash": "sha256:34916a981a5189221c6d5e3d9d3072f8b109521d8f793cb2a00e02206271c370",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "겸손",
+      "status": "ready"
     },
     "title.exe:introGypsy:13": {
       "sourceHash": "sha256:80d4db6dc361182ba70d42e7555fded8fab27b8c40bcd3c7ab048b1f1263e05b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "마지막 선택과 함께, 향내가\n그대 주위로 피어오른다.  집시가\n아주 먼 곳에서인 듯 말하니, 그녀의\n목소리는 한마디마다 희미해져 간다:\n\"그리 될지어다!  그대의 길이 정해졌다!\"",
+      "status": "ready"
     },
     "title.exe:introGypsy:14": {
       "sourceHash": "sha256:c9fab9bbc0206ec2eb6cf98c94f40ccf9b7d15f15453aebf9c6b453eeecb4cae",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "격렬하고 뒤틀리는 현기증의\n순간이 찾아온다.  눈을 뜨자,\n마음속에서 목소리가 속삭인다, \"그대의\n군주에게 조언을 구하라.\"  잠시 후,\n어지러움이 가라앉고, 그대는\n눈을 떠...",
+      "status": "ready"
     },
     "title.exe:introGypsy:2": {
       "sourceHash": "sha256:56ac68affebeb1e1abc45d7aa88ef01aabb65be1ca8b2a17567d29c4e5f616e8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "집시가 마지막 두 장의 카드를 놓는다\n",
+      "status": "ready"
     },
     "title.exe:introGypsy:3": {
       "sourceHash": "sha256:b92b09d65ec9c16db5334d14adeb330ca45febe15070debf93f69e27086396a5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "탁자 위에.  그것은 바로 다음의 카드들이다\n",
+      "status": "ready"
     },
     "title.exe:introGypsy:4": {
       "sourceHash": "sha256:8c15f1755ae9906da874d715609b4f6cba85f02970e6e72353bd8d5adbe9fb3f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "정직",
+      "status": "ready"
     },
     "title.exe:introGypsy:5": {
       "sourceHash": "sha256:7a0055bd55924a1e355ca5d171783eea54fa49d749f6e182476d060c8d063a63",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "자비",
+      "status": "ready"
     },
     "title.exe:introGypsy:6": {
       "sourceHash": "sha256:b2f530c46991311cd367c992a825763bc55140682c347ad2e24d2fce316cd324",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "용맹",
+      "status": "ready"
     },
     "title.exe:introGypsy:7": {
       "sourceHash": "sha256:5f9740dd7874801f460dfe0f92e5be0cf2cfd04088d7d5ab996c92a428d3ee8b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "정의",
+      "status": "ready"
     },
     "title.exe:introGypsy:8": {
       "sourceHash": "sha256:33403d8f77f3caa9aa8f59a1a0290c3e349fe6a5893c3b812340601ac4a0629a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "희생",
+      "status": "ready"
     },
     "title.exe:introGypsy:9": {
       "sourceHash": "sha256:22ea092e7643557ea91b74dea27589acac28a04fce976c577c422cd3ee1c9dc2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "명예",
+      "status": "ready"
     },
     "title.exe:introQuestions:0": {
       "sourceHash": "sha256:5e0e6d3848ade762bd777687b66611cefb263da0e5e35e88862ac0bbca24d2ef",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "헤아릴 수 없이 많은 금이 든 지갑을\n전하도록 맡겨졌는데, 가난한 걸인을\n만난다. 그대는 A) 자신에게 놓인 신뢰가\n옳았음을 알며 금을 그대로 전하겠는가,\n아니면 B) 자비를 베풀어, 없어져도\n티 나지 않을 동전 하나를 걸인에게\n주겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:1": {
       "sourceHash": "sha256:c8ca47208e4e539e1f4787ecbc3cbdd94145374f851cdd8930f8d8191b91bc9f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "자리를 비운 그대의 군주가 치열한\n접전에 벗들과 함께하는 것을 금하였다.\n그대는 A) 자제하여 정직하게 복종을\n주장하겠는가, 아니면 B) 용맹을 보여\n동료를 돕고, 나중에 그것을 부인할\n수 있음을 알면서도 그리하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:10": {
       "sourceHash": "sha256:a3e4a21cebee2348d4dd36ce03e1463fcf6305229d4c360373494ea6db6ed66a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 금지된 죄수 고문에 가담하는\n군주를 섬기기로 맹세하였다.  매일 밤\n그들의 고통스러운 비명이 그대에게\n들려온다.  그대는 A) 그 행위를 고발하여\n자비를 보이겠는가, 아니면 B) 맹세를\n지켜 명예롭게 그 행위를 못 본 척\n하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:11": {
       "sourceHash": "sha256:ce6c0523ca8fadfb43e665184d89049f448f953d389f53e51397a02795adc47f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 모든 생명을 신성히 여기도록\n배웠다. 한 남자가 독사에게 치명적으로\n물려 쓰러져 있다.  그는 자비로운\n죽음을 애원한다.  그대는 A) 자비를\n베풀어 그의 고통을 끝내겠는가, 아니면\nB) 영적 신념을 따라 거부하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:12": {
       "sourceHash": "sha256:e38d5e8e6614441060485810e68204b655dd54a3f1dd3fac7b72d2f476400e8f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "왕의 근위병으로서, 대장이 그대들 중\n한 명이 병원을 찾아 그대의 용맹한\n행적으로 아이들을 기쁘게 해주기를\n청하였다.  그대는 A) 자비를 보이며\n허풍을 떨겠는가, 아니면 B) 겸손히\n다른 이를 보내겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:13": {
       "sourceHash": "sha256:faba1e909a7d60ed91e76257bb0a44ea538c1d8162b3acbccee07aefc873684e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 먼 군주와 필요한 조약을 맺도록\n파견되었다.  그 주인은 제안에 동의하나\n만찬에서 그대의 나라를 모욕한다.\n그대는 A) 용맹하게 그 모욕을 참아내겠는가,\n아니면 B) 정의롭게 일어나 사과를\n요구하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:14": {
       "sourceHash": "sha256:647700d90e20d069fdddf8faf7705c8cd5b0b9c148d7522c4348f0f092258f81",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "강력한 기사가 그대를 막아서며 음식을\n요구한다.  그대는 A) 용맹하게 거부하고\n기사와 맞서겠는가, 아니면 B) 굶주린\n기사에게 음식을 희생하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:15": {
       "sourceHash": "sha256:1431b91357045ff2fc78c31b0afdfcffc6a0c22dd7237db35279daf174717791",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "전투 중 그대는 지휘관의 빈 막사를\n지키라는 명을 받는다.  전투가 불리하게\n흘러가고 그대는 동료를 돕고 싶어\n간절해진다.  그대는 A) 용맹하게\n전투에 뛰어들어 동료를 돕겠는가,\n아니면 B) 파수병의 자리를 명예롭게\n지키겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:16": {
       "sourceHash": "sha256:45dbd37bd3b7bbe01064953e4a6831e983769834e744aa5d66f9399d25ffbfc8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "동네 불량배가 싸움을 걸어온다.  그대는\nA) 용맹하게 그 무뢰한을 쳐부수겠는가,\n아니면 B) 영적으로 그것이 오래갈 선을\n낳지 못함을 알고 거절하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:17": {
       "sourceHash": "sha256:5dbb1929d3b16cec767c8b169834b14eb79dd078c4f16452f89a9c02384fba87",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 음악 교사이지만 뛰어난\n레슬링 선수이기도 하다.  그대는 지역\n선수권 대회에 출전해달라는 요청을\n받았다.  그대는 A) 초청을 받아들여\n용맹하게 승리를 위해 싸우겠는가,\n아니면 B) 반드시 이길 것을 알기에\n겸손히 거절하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:18": {
       "sourceHash": "sha256:0f0d976dc9be288ae2438400cb0957fe6ee6fb71afed8cbdf6ffcaa7b118ffce",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "치열한 전투 중, 동료 하나가 자리를\n버려 많은 이를 위험에 빠뜨리는 것을\n본다.  그가 도망치자 여러 적에게\n둘러싸인다. 그대는 A) 정의롭게 그가\n홀로 싸우도록 두겠는가, 아니면 B) 그를\n돕기 위해 스스로 목숨을 희생할\n위험을 감수하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:19": {
       "sourceHash": "sha256:bccc93f1cdd4da677bcd2afbd4fb3a68894ce5fb97ddeb89ec878e27697b77e5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 모든 일에서 군주의 명을\n따르기로 맹세하였다.  그가 어느 땅을\n탐내어 주인을 쫓아내라 명한다.  그대는\nA) 행하기를 거부하여 정의를 섬기고\n불명예를 감수하겠는가, 아니면 B) 맹세를\n지켜 명예롭게 땅주인을 부당히\n쫓아내겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:2": {
       "sourceHash": "sha256:ef3b25dd236df473681f28a49e2a51a987060adb11af93d2d59787fde4367316",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "한 상인이 그대의 벗에게 돈을 빚졌는데,\n이미 오래 지났다.  그대는 그 상인이\n금 지갑을 떨어뜨리는 것을 본다. 그대는\nA) 정직하게 지갑을 온전히 돌려주겠는가,\n아니면 B) 정의롭게 먼저 그 금의\n일부를 벗에게 주겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:20": {
       "sourceHash": "sha256:8284fab8d1aaca0a78c932e5e3c8ec35e6925dad4def4c6c2ff846fff2ec02e2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 모든 이 안에 미덕이 깃들어\n있다고 믿는다.  그대는 무뢰한이 그대의\n군주에게서 도둑질하는 것을 본다.\n그대는 A) 그를 정의로 심판하겠는가,\n아니면 B) 몸소 그를 선한 영적 길로\n되돌리려 하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:21": {
       "sourceHash": "sha256:493da5e8b3ab9c1e6072ecaa8a6bb87407e5276b064692cdbf480a2cf40217f0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "목격자 없이, 그대는 정당방위로 거대한\n용을 처치하였다.  가난한 전사가 그\n보상을 자신의 것이라 주장한다.  그대는\nA) 정의롭게 나서서 보상을 청구하겠는가,\n아니면 B) 스스로에 대한 자존감으로\n족하며 겸손히 삶을 이어가겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:22": {
       "sourceHash": "sha256:3a64740c021ddb291c236c1498c704310b691f6c7adc0d2377863a5d2dcb4df7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 살인 혐의자를 데려오기로 맹세한\n현상금 사냥꾼이다.  그를 붙잡은 후\n그대는 그가 무죄라 믿게 된다.  그대는\nA) 그대의 믿음을 위해 상당한 현상금을\n희생하겠는가, 아니면 B) 약속한 대로\n그를 데려가겠다는 맹세를 명예롭게\n지키겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:23": {
       "sourceHash": "sha256:2866bc6333095590afc7248887dd54afed02b43276a2eea7b686612eef689223",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 자선과 올바른 일에 평생을\n바쳤다.  여관 주인인 삼촌이 병들어\n누워 그대에게 여관을 물려받아 달라\n청한다.  그대는 A) 순수한 삶을 희생하여\n친족을 돕겠는가, 아니면 B) 거절하고\n영적 부름을 따르겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:24": {
       "sourceHash": "sha256:64dad008e753aace2ecd668303317e964b2074cd759944ed446c6d0420878dcd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 나이 든, 부유한 괴짜다.\n그대의 끝이 가깝다. 그대는 A) 굶주린\n수백 아이들을 먹이려 전 재산을\n기부하고 대중의 찬사를 받겠는가,\n아니면 B) 겸손히 남은 삶을 살며\n재산을 상속자에게 남기겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:25": {
       "sourceHash": "sha256:8a802e82cebe998e390680f4741efbb3ed74b4a615fe41d719664a531421890a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "젊은 시절 그대는 연인과 혼인을\n맹세했다.  이제 그대는 먼 땅에서\n신성한 여정 중이다.  연인이 그 맹세를\n지켜달라 청한다.  그대는 A) 혼인의\n맹세를 명예롭게 지키겠는가, 아니면\nB) 영적 성전을 따르겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:26": {
       "sourceHash": "sha256:df709baf164d6b15339317474c8d4fd06b68524267d9ead52449f8d8ab544ee4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 인생의 갈림길에 서 있다.\n그대는 A) 진실과 용기를 추구하는\n성기사의 명예로운 삶을 택하겠는가,\n아니면 B) 소박함과 평화의 세계,\n목자의 겸손한 삶을 택하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:27": {
       "sourceHash": "sha256:7c2750dea28140a49035b2456bb8c49faf3e8c1d8632079870e6fa81012222af",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대의 부모는 그대가 도제가 되기를\n바란다. 두 자리가 있다.\n그대는 A) 영적 교단의 수사가\n되겠는가, 아니면 B) 소박한 마을\n구두장이의 조수가 되겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:3": {
       "sourceHash": "sha256:ca73bcd4393844037f9c50f89246bd3fbcd69efd40dd86c1f3b5264e169bbadb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대와 벗은 용맹하나 무일푼인\n전사들이다.  둘 다 강력한 용을\n처치하러 나선다.  벗은 자신이 처치했다고\n생각하지만, 실은 그대가 하였다.  질문을\n받으면, 그대는 A) 진실하게 금을\n자신의 것이라 주장하겠는가, 아니면\nB) 벗에게 큰 보상을 양보하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:4": {
       "sourceHash": "sha256:255472c4685254ce414b5377ebfbe8e9d8e1b9c8b3afca1e3e9fe2c5a383343d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 어떤 대가를 치르더라도 군주를\n지키기로 맹세하였으나, 그가 죄를\n저질렀음을 안다.  당국이 그 일에\n대해 묻는다.  그대는 A) 정직하게\n말하여 맹세를 깨겠는가, 아니면\nB) 침묵하여 맹세를 지키며 명예를\n지키겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:5": {
       "sourceHash": "sha256:88323a1b8cab2008fa750ea08b9d0f550753d18c8113bb6f095647805df57736",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대의 벗이 그대의 영적 교단에\n입단하고자 한다. 그대는 확신이 서지\n않는 그의 영혼의 순수함을 보증해\n달라는 요청을 받는다.  그대는\nA) 정직하게 의심을 표하겠는가, 아니면\nB) 그의 영적 성장을 바라며 보증해\n주겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:6": {
       "sourceHash": "sha256:e92c6efaa8b576cb6ce01ba9a9acb70ef38b81210b48e992ece5b320107993a4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대의 군주는 자신이 용을 처치했다고\n착각한다.  그대는 자신의 창이 그\n짐승을 쓰러뜨렸다는 증거를 지니고\n있다.  질문을 받으면, 그대는 A) 정직하게\n처치와 상을 주장하겠는가, 아니면\nB) 겸손히 군주가 그리 믿도록\n두겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:7": {
       "sourceHash": "sha256:bcc1dcb1a21cb2df3e64fd8c37a8095574c8fd46c41f8b51df812e404c17b347",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 결투에서 숙적의 무기를\n빼앗는 데 성공한다.  그는 그대의\n자비에 달려 있다.  그대는 A) 자비를\n베풀어 그가 항복하도록 허락하겠는가,\n아니면 B) 용맹한 결투자에게 기대되는\n대로 그를 처치하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:8": {
       "sourceHash": "sha256:86af62b12894ac9e05bd1b9ca194bebc9ebd8747cfb1046ab560613e01d1ec80",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "20년 만에 그대는 최고의 벗들을\n죽인 자를 찾아냈다.  그 악인은 한\n어린 소녀의 유일한 부양자임이\n드러난다.  그대는 A) 그 소녀를 위한\n자비로 그를 살려두겠는가, 아니면\nB) 정의의 이름으로 그를 처치하겠는가?",
+      "status": "ready"
     },
     "title.exe:introQuestions:9": {
       "sourceHash": "sha256:1bff01760b34b4c658d4546a48777be234e4f11cd6bf82d779f25a320d67b986",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대와 벗들은 패주하여 퇴각하라는\n명을 받는다.  명을 어기고, 그대는\nA) 자비로 멈추어 부상당한 동료를\n돕겠는가, 아니면 B) 스스로를 희생하여\n추격하는 적을 늦춰 다른 이들이\n달아나게 하겠는가?",
+      "status": "ready"
     },
     "title.exe:introText:0": {
       "sourceHash": "sha256:671af85bb7da6566ada719a78309919f8f6ea8307deb425443cb773c539bd7ed",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "  날은 따뜻하지만, 서늘한 산들바람이\n분다.  연이은 개인적 위기 중 가장\n최근의 것이 극복할 수 없어 보인다.\n그대는 사방으로 갈가리 찢기는\n듯하다.",
+      "status": "ready"
     },
     "title.exe:introText:1": {
       "sourceHash": "sha256:6cb35850221dc255d57a350d82f263c5bc8565c7e3566989bdc117ff92b705af",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그러나 오늘 오후 시골길을 걷다 보니\n지친 마음에 서서히 안식이 찾아온다.\n현대 첨단 기술 생활의 먼지와 긴장이\n한 겹씩 씻겨 내려가기 시작한다.\n개울가의 저 버드나무가 편안하고\n매력적으로 보인다.",
+      "status": "ready"
     },
     "title.exe:introText:10": {
       "sourceHash": "sha256:80581fda4fb27f27a538f85270a73e07e476d8d3afabac364e81f4f70d53e03a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "다른 책은 보기에 불편하다.\n작은 표지는 어떤 가죽 같은 것으로\n만들어진 듯하나, 어떤 생물의 것인지는\n알 수 없다.  불그스름한 검은 가죽은\n고대의 힘을 암시하는 강렬한\n기운을 내뿜는다.",
+      "status": "ready"
     },
     "title.exe:introText:11": {
       "sourceHash": "sha256:71d15c00862c9d53cb837528e00475c66826d22b513bdeaf8bd9cdc17396735c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "제목의 언어는 그대가 알지 못하는\n것이다.  그대는 감히 책을 열어 그\n안에서 잠든 무언가를 어지럽히지\n못한다.  그대는 역사서를 살펴보기로\n한다.  버드나무 아래 다시 자리를 잡고,\n책을 편다.",
+      "status": "ready"
     },
     "title.exe:introText:12": {
       "sourceHash": "sha256:fadbd92c1ae81891a3d043a72d394135cca26c75709bbbf4ce5e18436a0faa23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n    (역사의 책을 읽는다)",
+      "status": "ready"
     },
     "title.exe:introText:13": {
       "sourceHash": "sha256:ef56edfa7636b3b8fbadf41e0c5caaaa130bf271814a5ffa1508013dfab869e5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n(아니, 정말로! 역사의 책을 읽으라!)",
+      "status": "ready"
     },
     "title.exe:introText:14": {
       "sourceHash": "sha256:5e6bd58655b10fd0518049264c2ec07fe2057e81227365b8a525cd9d303e011f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "책을 덮고, 그대는 다시 앙크를\n집어 든다.  그것을 쥐자, 근처 언덕\n너머로 실려 오는 묘하게 낯익은,\n류트 같은 소리가 들리기 시작한다.\n낯선 유물들을 여전히 움켜쥔 채,\n그대는 저도 모르게 일어나 비탈을\n오른다.",
+      "status": "ready"
     },
     "title.exe:introText:15": {
       "sourceHash": "sha256:b4f4b9da66f11fd7add13d8f5d117df121d24da3ee631a2b33df7565b5227828",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아래쪽 골짜기에서 축제처럼 보이는\n것이 눈에 들어온다.  아까 그 길로\n지나왔는데 아무것도 알아채지\n못했다는 것이 이상하게 느껴진다.\n이를 곱씹는 동안, 그대의 발은\n그곳을 향해 내려간다.",
+      "status": "ready"
     },
     "title.exe:introText:16": {
       "sourceHash": "sha256:a7f9f063c6086d767e63469524605402c27cda196d8c19dd2783d673fa65bd6c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "이는 평범한 유랑 카니발이 아니라\n르네상스 축제이다.  천막 꼭대기의\n깃발들이 늦은 오후의 산들바람에\n힘차게 나부낀다.",
+      "status": "ready"
     },
     "title.exe:introText:17": {
       "sourceHash": "sha256:1825f4bbe7433e4aacf7ccd4eaeb146a2bf09dd15b7918d2532f67f730722541",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "르네상스 축제 문 앞의 매표원이\n돈을 요구하려다, 그대의 앙크를\n알아보고는 말한다, \"어서 오시오,\n벗이여.  평화로이 들어와 그대의\n길을 찾으시오.\"",
+      "status": "ready"
     },
     "title.exe:introText:18": {
       "sourceHash": "sha256:7b1b2927399e4689e8e21794de08d20a5ed3a25000778969ef36bc00fab3815a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "음악은 상인과 행상들 사이로 그대를\n계속 이끈다.  어스름한 노점 몇 곳에서\n놀라운 보물들이 언뜻언뜻 보인다.",
+      "status": "ready"
     },
     "title.exe:introText:19": {
       "sourceHash": "sha256:223339ec5c7161db59200fd842f867501f13692fe4ea0476b7e9bf1a5a6f728a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "이 사람들은 매우 행복해 보인다.\n내면의 빛으로 빛나는 듯하다.  일부는\n그대가 지나갈 때 고개를 들어 미소\n짓지만, 그대는 멈출 수 없다 - 음악이\n그대를 군중 사이로 계속 나아가게\n한다.",
+      "status": "ready"
     },
     "title.exe:introText:2": {
       "sourceHash": "sha256:38389bf8471f397667851e18bfe5e99820dc2476ba4cdef3820e2b2160898bb2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "잠자리의 웅웅거림과 흔들리는\n버드나무 가지의 속삭임이 깊은\n평온을 가져온다.  내면에서 평온과\n행복을 찾으며, 그대는 눈을 감는다.",
+      "status": "ready"
     },
     "title.exe:introText:20": {
       "sourceHash": "sha256:bf6548f8c9171326f3d2c34606831ff95bfd230b7aaa485e792ab2c3af19cd40",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "짙어지는 황혼 속에서 숲 한쪽에\n외따로 서 있는 집시 마차가 보인다.\n음악은 그 마차에서 흘러나오는\n듯하다.  가까이 다가가자, 여인의\n목소리가 음악에 섞여 들려온다:\n\"다가와도 좋다, 오 구도자여.\"",
+      "status": "ready"
     },
     "title.exe:introText:21": {
       "sourceHash": "sha256:82e04f87fbcd3c1b22e710d9e5811d6cc4bd81f115ad41f996bfddd231aca0ed",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "안으로 들어가니 작은 커튼 방에\n늙은 집시가 앉아 있다.  그녀는 목에\n앙크를 걸고 있다. 그녀 앞에는 짙은\n초록 벨벳으로 덮인 둥근 탁자가\n있다.  방 안은 향내가 짙어 어지러울\n지경이다.",
+      "status": "ready"
     },
     "title.exe:introText:22": {
       "sourceHash": "sha256:d534ce2287b4ce4589b765b4abd9bf7e63c4c1e0664858f1564a5c1f2be4be73",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "앙크를 본 늙은 집시가 미소 지으며\n그것을 결코 손에서 놓지 말라\n경고한다.  \"우리는 아주 오랫동안\n기다려 왔소, 마침내 그대가 왔구려.\n이리 앉으시오, 내 그대 미래의\n길을 읽어주리다.\"",
+      "status": "ready"
     },
     "title.exe:introText:23": {
       "sourceHash": "sha256:f8592d0014a74fd957ea3e82a2eca9f74ddc2c50de8857c5cbdd72c2e1dd69a2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "탁자 위에 그녀는 주판 같지만 구슬이\n없는 기묘한 나무 물건을 올려놓는다.\n손에는 여덟 장의 기이한 카드를 쥐고\n있다.  \"점을 시작합시다.\"",
+      "status": "ready"
     },
     "title.exe:introText:3": {
       "sourceHash": "sha256:35f5b579fbe5a3226cffd36c20855e7bc76912a18086b3b6c4658eeab6f882ff",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "수정 풍경 소리처럼 높고 흘러내리는\n소리가 그대의 떠도는 의식을\n두드린다.  눈을 뜨자, 땅에서 아른거리는\n푸른빛이 솟아오르는 것이 보인다.\n그 소리는 이 빛나는 문에서\n흘러나오는 듯하다.",
+      "status": "ready"
     },
     "title.exe:introText:4": {
       "sourceHash": "sha256:84c140ed9f2bc1606505c4d237a862bb101c659ce325e8761ce9bf4ce86dcbeb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 푸른빛을 바라보기가 어렵다.\n빛이 그 주위로 휘어지고 일그러지는\n듯하며, 소리의 파동은 너무 강렬해져\n눈에 보이는 듯하다.",
+      "status": "ready"
     },
     "title.exe:introText:5": {
       "sourceHash": "sha256:b926b50fc82eb6f19f286ee7682a4a0ef1791fc2be5e57ccbfb3e67235fefd85",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 문은 잠시 그대로 떠 있다가;\n이내 진공이 붕괴하듯 밀려들며\n땅속으로 가라앉는다.  무언가가\n잠시 허공에 떠 있다가 육중한\n소리를 내며 땅에 떨어진다.",
+      "status": "ready"
     },
     "title.exe:introText:6": {
       "sourceHash": "sha256:6ccf42e430a8312e813754eb983ccf325fb7e49610fddaa2b4473469683659e2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "이 광경에 다소 놀란 채, 그대는\n일어서서 살펴본다.  거친 돌들의\n원이 문이 나타났던 자리를 둘러싸고\n있다. 풀 속에서 무언가가 반짝인다.",
+      "status": "ready"
     },
     "title.exe:introText:7": {
       "sourceHash": "sha256:f5a847d7959d1e73e9479d07d94c54ee36a9c8df47b68a0b92a16fa9177caaf9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 위쪽에 고리가 달린 십자\n모양의 부적을 집어 든다.  그것은\n생명과 부활의 신성한 상징인 앙크다.\n하지만 이것이 그 소리를 냈을 리\n없기에, 다시 살펴보니 두꺼운 천에\n싸인 커다란 책이 있다!",
+      "status": "ready"
     },
     "title.exe:introText:8": {
       "sourceHash": "sha256:55fe3b9ec9a98837efd4aa9adbd8181c4aff57a4ee7fa56c4d37a4ab4db53d65",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "떨리는 손으로 그대는 책을 풀어\n본다.  보라, 그 천은 지도이며,\n그 안에는 책 한 권이 아니라 두 권이\n들어 있다.  지도는 그대에게 낯선\n땅의 것이며, 그 양식은 고대 지도\n제작술을 말해준다.",
+      "status": "ready"
     },
     "title.exe:introText:9": {
       "sourceHash": "sha256:e4a8389aeb6de56c1f06f781bba0e893474da469623a1632608b4f49f53b3b0b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "첫 번째 책의 표지에 적힌 문자는\n난해하지만 읽을 수 있다.  제목은\n다음과 같다:\n        브리타니아의 역사\n               전하는 이,\n            소(小) 카일",
+      "status": "ready"
     }
   }
 }
