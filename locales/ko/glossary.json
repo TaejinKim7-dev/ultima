@@ -1,113 +1,113 @@
 {
   "$schema": "ultima-web/i18n-schema/glossary/v1",
   "entries": {
-    "virtue-honesty": {
-      "sourceHash": "sha256:8c15f1755ae9906da874d715609b4f6cba85f02970e6e72353bd8d5adbe9fb3f",
+    "principle-courage": {
+      "sourceHash": "sha256:c2bd645a5905bf7c47c926982cff59e2d49a592bb0d073c80ee273b9d827ef8c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
-    },
-    "virtue-compassion": {
-      "sourceHash": "sha256:7a0055bd55924a1e355ca5d171783eea54fa49d749f6e182476d060c8d063a63",
-      "placeholders": [],
-      "translation": "",
-      "status": "pending"
-    },
-    "virtue-valor": {
-      "sourceHash": "sha256:b2f530c46991311cd367c992a825763bc55140682c347ad2e24d2fce316cd324",
-      "placeholders": [],
-      "translation": "",
-      "status": "pending"
-    },
-    "virtue-justice": {
-      "sourceHash": "sha256:5f9740dd7874801f460dfe0f92e5be0cf2cfd04088d7d5ab996c92a428d3ee8b",
-      "placeholders": [],
-      "translation": "",
-      "status": "pending"
-    },
-    "virtue-sacrifice": {
-      "sourceHash": "sha256:33403d8f77f3caa9aa8f59a1a0290c3e349fe6a5893c3b812340601ac4a0629a",
-      "placeholders": [],
-      "translation": "",
-      "status": "pending"
-    },
-    "virtue-honor": {
-      "sourceHash": "sha256:22ea092e7643557ea91b74dea27589acac28a04fce976c577c422cd3ee1c9dc2",
-      "placeholders": [],
-      "translation": "",
-      "status": "pending"
-    },
-    "virtue-spirituality": {
-      "sourceHash": "sha256:0de3eb7d695d462f7e9b784920cdbec961f79c54914d3a226d6415254b5e1845",
-      "placeholders": [],
-      "translation": "",
-      "status": "pending"
-    },
-    "virtue-humility": {
-      "sourceHash": "sha256:34916a981a5189221c6d5e3d9d3072f8b109521d8f793cb2a00e02206271c370",
-      "placeholders": [],
-      "translation": "",
-      "status": "pending"
-    },
-    "principle-truth": {
-      "sourceHash": "sha256:cc3a062a97bf2935e0e12e1aee3bed944a81e1f4e4ca21eaa03b07be38628686",
-      "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "용기",
+      "status": "ready"
     },
     "principle-love": {
       "sourceHash": "sha256:9f4024faec10ef6d29aa32d7935d94b1a816fd4fe0359fbf12d49d44b5ff33b8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "사랑",
+      "status": "ready"
     },
-    "principle-courage": {
-      "sourceHash": "sha256:c2bd645a5905bf7c47c926982cff59e2d49a592bb0d073c80ee273b9d827ef8c",
+    "principle-truth": {
+      "sourceHash": "sha256:cc3a062a97bf2935e0e12e1aee3bed944a81e1f4e4ca21eaa03b07be38628686",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "진실",
+      "status": "ready"
     },
     "term-avatar": {
       "sourceHash": "sha256:ca8e826d9c2ec401e9ac82cd0aa710cf234d5cac4e6ee967b3588c63fce9681b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
-    },
-    "term-rune": {
-      "sourceHash": "sha256:f55862c603b61328a43fc57f2655105fe72ba0f6f84320d944c642f0c1f6becd",
-      "placeholders": [],
-      "translation": "",
-      "status": "pending"
-    },
-    "term-shrine": {
-      "sourceHash": "sha256:f28b9ca197d4ee1a817581e733ae75d9c1453ad37e012fe4300f949ff48801bc",
-      "placeholders": [],
-      "translation": "",
-      "status": "pending"
-    },
-    "term-mantra": {
-      "sourceHash": "sha256:39a4918ef5e31791b54fac998321df0672213cd2596d47f4645e1d223c71b980",
-      "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아바타",
+      "status": "ready"
     },
     "term-codex": {
       "sourceHash": "sha256:616efbe96852d8c957d6be5634ed41e871cf1ecf134c9b9693f614daeb15137c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "코덱스",
+      "status": "ready"
     },
     "term-companion": {
       "sourceHash": "sha256:1dadb3284b8b358259ac6c0d3fb12e6884aa8d566282a1277d2a06a026d12c4f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "동료",
+      "status": "ready"
+    },
+    "term-mantra": {
+      "sourceHash": "sha256:39a4918ef5e31791b54fac998321df0672213cd2596d47f4645e1d223c71b980",
+      "placeholders": [],
+      "translation": "진언",
+      "status": "ready"
+    },
+    "term-rune": {
+      "sourceHash": "sha256:f55862c603b61328a43fc57f2655105fe72ba0f6f84320d944c642f0c1f6becd",
+      "placeholders": [],
+      "translation": "룬",
+      "status": "ready"
+    },
+    "term-shrine": {
+      "sourceHash": "sha256:f28b9ca197d4ee1a817581e733ae75d9c1453ad37e012fe4300f949ff48801bc",
+      "placeholders": [],
+      "translation": "신단",
+      "status": "ready"
     },
     "term-virtue": {
       "sourceHash": "sha256:d755c96e2fd4711c78a16d0bdd30ac2e5bc064046b692aca388c7b97ea61fadf",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "미덕",
+      "status": "ready"
+    },
+    "virtue-compassion": {
+      "sourceHash": "sha256:7a0055bd55924a1e355ca5d171783eea54fa49d749f6e182476d060c8d063a63",
+      "placeholders": [],
+      "translation": "자비",
+      "status": "ready"
+    },
+    "virtue-honesty": {
+      "sourceHash": "sha256:8c15f1755ae9906da874d715609b4f6cba85f02970e6e72353bd8d5adbe9fb3f",
+      "placeholders": [],
+      "translation": "정직",
+      "status": "ready"
+    },
+    "virtue-honor": {
+      "sourceHash": "sha256:22ea092e7643557ea91b74dea27589acac28a04fce976c577c422cd3ee1c9dc2",
+      "placeholders": [],
+      "translation": "명예",
+      "status": "ready"
+    },
+    "virtue-humility": {
+      "sourceHash": "sha256:34916a981a5189221c6d5e3d9d3072f8b109521d8f793cb2a00e02206271c370",
+      "placeholders": [],
+      "translation": "겸손",
+      "status": "ready"
+    },
+    "virtue-justice": {
+      "sourceHash": "sha256:5f9740dd7874801f460dfe0f92e5be0cf2cfd04088d7d5ab996c92a428d3ee8b",
+      "placeholders": [],
+      "translation": "정의",
+      "status": "ready"
+    },
+    "virtue-sacrifice": {
+      "sourceHash": "sha256:33403d8f77f3caa9aa8f59a1a0290c3e349fe6a5893c3b812340601ac4a0629a",
+      "placeholders": [],
+      "translation": "희생",
+      "status": "ready"
+    },
+    "virtue-spirituality": {
+      "sourceHash": "sha256:0de3eb7d695d462f7e9b784920cdbec961f79c54914d3a226d6415254b5e1845",
+      "placeholders": [],
+      "translation": "영성",
+      "status": "ready"
+    },
+    "virtue-valor": {
+      "sourceHash": "sha256:b2f530c46991311cd367c992a825763bc55140682c347ad2e24d2fce316cd324",
+      "placeholders": [],
+      "translation": "용맹",
+      "status": "ready"
     }
   }
 }

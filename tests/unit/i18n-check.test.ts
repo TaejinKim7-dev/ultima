@@ -113,6 +113,22 @@ describe("i18n:check failure: missing translation", () => {
   })
 })
 
+describe("i18n:check happy path: passthrough entries", () => {
+  it("accepts a 'ready' entry whose translation is pure whitespace when category is 'passthrough' (source had no translatable text, e.g. a bare newline used only as a screenMessage() separator)", () => {
+    const schema = baseSchema()
+    schema.ui.entries["ui:game:2"] = {
+      sourceHash: "sha256:ffff",
+      placeholders: [],
+      translation: "\n",
+      status: "ready",
+      category: "passthrough"
+    }
+    const dir = writeFixture(schema)
+    const result = runCheck(dir)
+    expect(result.status, result.stderr).toBe(0)
+  })
+})
+
 describe("i18n:check failure: placeholder mismatch", () => {
   it("fails with the exact key when the translation drops a placeholder", () => {
     const schema = baseSchema()

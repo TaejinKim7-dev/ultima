@@ -42,7 +42,12 @@ function checkTranslatableFile(fileId, data, strict, failures) {
     }
 
     const translation = typeof entry.translation === "string" ? entry.translation : ""
-    if (translation.trim().length === 0) {
+    // "passthrough" is for entries whose ENGLISH source itself has no
+    // translatable text (a bare "\n"/"    \n" used only as a
+    // screenMessage() line separator, never displayed as a phrase) --
+    // requiring a non-whitespace translation for these would be
+    // requesting a translation of nothing.
+    if (entry.category !== "passthrough" && translation.trim().length === 0) {
       failures.push(`${label}: is marked "${entry.status}" but has no translation`)
       continue
     }

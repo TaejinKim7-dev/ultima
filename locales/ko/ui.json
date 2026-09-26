@@ -5,29 +5,29 @@
       "sourceHash": "sha256:88f7035cf995e6630f635f33fb5f20a4ed5a7ba7874b9d1198703cfeed1dfb4d",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/camp.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "휴식 중...\n",
+      "status": "ready"
     },
     "ui:camp:1": {
       "sourceHash": "sha256:0ca6d3bfc93ffe511d3f635cc136237873d8a84b0da5b903281ff6f3356ae14c",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/camp.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "기습당함!\n",
+      "status": "ready"
     },
     "ui:camp:2": {
       "sourceHash": "sha256:714da0354157abc470275556e46be09795a37bffcb8a4bb7b26110e28152c2a4",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/camp.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n아침!\n",
+      "status": "ready"
     },
     "ui:camp:3": {
       "sourceHash": "sha256:e2cdb6592d6bb060abdf7a2ab6a7c0f5e7f76a08b38ec0bef6de6551867f7381",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/camp.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n한밤중에 산책을 나갔다가...\n\n",
+      "status": "ready"
     },
     "ui:combat:0": {
       "sourceHash": "sha256:26f79f20bd5227c57a28f9ba2e4918dda1328ab69e8b165b53d9d33fb377361b",
@@ -35,8 +35,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%s의 제단실\n",
+      "status": "ready"
     },
     "ui:combat:1": {
       "sourceHash": "sha256:a29423c2e0980460b7444a4459c2304feebf6da8986d26362d18f3cdfb0d4fe8",
@@ -47,8 +47,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c****%c 전투 %c****%c\n",
+      "status": "ready"
     },
     "ui:combat:10": {
       "sourceHash": "sha256:a487168bf4f5940a2cfcd8dad5bcda66e9f7fa2a3c0d801b5782bf788f8dc160",
@@ -59,8 +59,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%s %c%s 명중%c!\n",
+      "status": "ready"
     },
     "ui:combat:11": {
       "sourceHash": "sha256:718fd1633d795c04c3bfeb8f3499ee45208a08152223c1568051b7e0cf041386",
@@ -68,8 +68,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%s 명중!\n",
+      "status": "ready"
     },
     "ui:combat:12": {
       "sourceHash": "sha256:ff9c156ad09a251a438c223a0d3d7671b00361e0b334aefdd5374d7a4c1e401c",
@@ -77,15 +77,15 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s\n",
+      "status": "ready"
     },
     "ui:combat:13": {
       "sourceHash": "sha256:14cda0b2e26057c68828e6c0fe8821982e755644e8f7a6031aa8f36c34710001",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "모두 같은 출구를 써야 함!\n",
+      "status": "ready"
     },
     "ui:combat:14": {
       "sourceHash": "sha256:afad8bd7e2aa66774fc4a8456d03d1e7f4483e20cb31d120ed50d6c0d05531cc",
@@ -94,8 +94,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c막힘!%c\n",
+      "status": "ready"
     },
     "ui:combat:15": {
       "sourceHash": "sha256:23dd7440219d29bddad081e308fa1e02d5b4342b2f4890edc2a1d400ce1a4eed",
@@ -104,22 +104,22 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c진행이 느림!%c\n",
+      "status": "ready"
     },
     "ui:combat:16": {
       "sourceHash": "sha256:be74f37819ffb11ffad06d49783004b660971ca7970cc3617eefcc96c1b083af",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "패스\n",
+      "status": "ready"
     },
     "ui:combat:17": {
       "sourceHash": "sha256:ac8ef8616d97ac8635542300c7d37e6cf92e021794aad86f2e317a8127d851b8",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "전투 속도:\n보통\n",
+      "status": "ready"
     },
     "ui:combat:18": {
       "sourceHash": "sha256:f1fbf0924c8a8e087d7ad51fe0abd25bd103dfb1524e394fc9e563728d8c29ad",
@@ -127,8 +127,8 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "전투 속도:\n증가 (%d)\n",
+      "status": "ready"
     },
     "ui:combat:19": {
       "sourceHash": "sha256:0d330c30500cec8fa7ed4418573d86a7cc53085333a99d88b4c64cc9474cd5f5",
@@ -136,22 +136,22 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "전투 속도:\n감소 (%d)\n",
+      "status": "ready"
     },
     "ui:combat:2": {
       "sourceHash": "sha256:6fe1705f8250fdbaec635628f3249d9116c71e2a37022ad58b9b7722d9814a2d",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n승리!\n\n",
+      "status": "ready"
     },
     "ui:combat:20": {
       "sourceHash": "sha256:ac8ef8616d97ac8635542300c7d37e6cf92e021794aad86f2e317a8127d851b8",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "전투 속도:\n보통\n",
+      "status": "ready"
     },
     "ui:combat:21": {
       "sourceHash": "sha256:6c96ea90611941dad6f8bba025704eb4f408026dcc00cfe625497720e0b96874",
@@ -160,8 +160,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "음악: %d%s\n",
+      "status": "ready"
     },
     "ui:combat:22": {
       "sourceHash": "sha256:6c96ea90611941dad6f8bba025704eb4f408026dcc00cfe625497720e0b96874",
@@ -170,8 +170,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "음악: %d%s\n",
+      "status": "ready"
     },
     "ui:combat:23": {
       "sourceHash": "sha256:b2ccf02a63f634fabfb0b3f3c218fab8778511f2865f8af13987ec4349b3681a",
@@ -180,8 +180,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "효과음: %d%s\n",
+      "status": "ready"
     },
     "ui:combat:24": {
       "sourceHash": "sha256:b2ccf02a63f634fabfb0b3f3c218fab8778511f2865f8af13987ec4349b3681a",
@@ -190,22 +190,22 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "효과음: %d%s\n",
+      "status": "ready"
     },
     "ui:combat:25": {
       "sourceHash": "sha256:30b52e14d3f313c097c1ae95a95f92aedbee1809cdad12b18a693e466994b798",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "주문 시전!\n",
+      "status": "ready"
     },
     "ui:combat:26": {
       "sourceHash": "sha256:e000c28edf45779c30efc7d5e0ea56b1cbd8f3ab6cc5240c994012dd86a4a3cb",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "상자 획득!\n",
+      "status": "ready"
     },
     "ui:combat:27": {
       "sourceHash": "sha256:275516845fcb252a3f6de96289d341266445df8c47cee26acd5e132c9b7b8e12",
@@ -215,29 +215,29 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n위치:\nx:%d\ny:%d\nz:%d\n",
+      "status": "ready"
     },
     "ui:combat:28": {
       "sourceHash": "sha256:8aa9f18f6461c6cab8f3da10eca5a8d1a159df4ef88a25e2596a961f25ac2895",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "여기선 안 됨!\n",
+      "status": "ready"
     },
     "ui:combat:29": {
       "sourceHash": "sha256:2258e7e354337b120d4ce09f64c5529a3c8c36f5d5fe7aa9d57550ac6f1add11",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "발동!\n",
+      "status": "ready"
     },
     "ui:combat:3": {
       "sourceHash": "sha256:349e4cdca1ca9aeaa55edb687f9fb563d44b8f070a16fe9dec1f99d6fe4b0e7d",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n전투 패배!\n\n",
+      "status": "ready"
     },
     "ui:combat:30": {
       "sourceHash": "sha256:8b88230e68360512427df75e66027f643517a4c6bca14ffd39d7a24aed0428ac",
@@ -245,8 +245,8 @@
         "%.1d"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%.1d)xy 타일 xy xy\n",
+      "status": "ready"
     },
     "ui:combat:31": {
       "sourceHash": "sha256:bd82c7364acf9edd13a074c944b5427c972a0394a988feee0a452c9e0fdc01f5",
@@ -260,36 +260,36 @@
         "%.3d"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "  %.1X%.1X  %.3d %.1X%.1X %.1X%.1X\n",
+      "status": "ready"
     },
     "ui:combat:32": {
       "sourceHash": "sha256:8aa9f18f6461c6cab8f3da10eca5a8d1a159df4ef88a25e2596a961f25ac2895",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "여기선 안 됨!\n",
+      "status": "ready"
     },
     "ui:combat:33": {
       "sourceHash": "sha256:7a235526b734dd9613c6e1d9842e81020baaf4fa6c42a5295e0b89bfaa72bceb",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "어떤 아이템을 사용?\n",
+      "status": "ready"
     },
     "ui:combat:34": {
       "sourceHash": "sha256:e9d5198f267ff84e27e737abb8b8d67d68e700ce48f2e3ca57387c1293aaf6e3",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "음량 켜짐!\n",
+      "status": "ready"
     },
     "ui:combat:35": {
       "sourceHash": "sha256:8533632df34ba87d091d29c9a41c7ab853f67d491ddbb9b0567a58f5b2cc62d6",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "음량 꺼짐!\n",
+      "status": "ready"
     },
     "ui:combat:36": {
       "sourceHash": "sha256:474156530017e2e39d6e73e53ed053d1e51b49fafd090240804f4f6ed3f70eb8",
@@ -297,36 +297,36 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "XU4 %s\n",
+      "status": "ready"
     },
     "ui:combat:37": {
       "sourceHash": "sha256:f82bd88e9c0b1acdc76d55e8b4a5738f39086f842bcaf9c87c8cd4669c99af04",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "상태\n",
+      "status": "ready"
     },
     "ui:combat:38": {
       "sourceHash": "sha256:8aa9f18f6461c6cab8f3da10eca5a8d1a159df4ef88a25e2596a961f25ac2895",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "여기선 안 됨!\n",
+      "status": "ready"
     },
     "ui:combat:39": {
       "sourceHash": "sha256:25e849f65f9ede6f070f63060aefee0e1fa203f250b78ed1ac73e70ee5648ac9",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "방향: ",
+      "status": "ready"
     },
     "ui:combat:4": {
       "sourceHash": "sha256:60d211f88c0d5920a3541dc646af91580a65e9f383ca06e826acf07bf5dcf7c4",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "방 나가기!\n",
+      "status": "ready"
     },
     "ui:combat:40": {
       "sourceHash": "sha256:ff9c156ad09a251a438c223a0d3d7671b00361e0b334aefdd5374d7a4c1e401c",
@@ -334,15 +334,15 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s\n",
+      "status": "ready"
     },
     "ui:combat:41": {
       "sourceHash": "sha256:ce49a5d687fd115b715c36d74f41caa4f3fcdf714b46853e30910c79fa297006",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "사거리: ",
+      "status": "ready"
     },
     "ui:combat:42": {
       "sourceHash": "sha256:9cbc7a50ce1e538a721c4f4bdd091caa985faf466e570481ea7100fbcc3573b6",
@@ -350,29 +350,29 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%d\n",
+      "status": "ready"
     },
     "ui:combat:43": {
       "sourceHash": "sha256:8ea800bea2696d84c20b792e17255fa12577ab346285ace7be29371a827ea36c",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "빗나감!\n",
+      "status": "ready"
     },
     "ui:combat:44": {
       "sourceHash": "sha256:9f41bbb0052e0a78570e6d7ffda147bbe0daf798e81ad237709bdca0426cf064",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "마지막 하나!\n",
+      "status": "ready"
     },
     "ui:combat:45": {
       "sourceHash": "sha256:8ea800bea2696d84c20b792e17255fa12577ab346285ace7be29371a827ea36c",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "빗나감!\n",
+      "status": "ready"
     },
     "ui:combat:46": {
       "sourceHash": "sha256:fd8b82bb2ad6b18567ff1d14093e4f98260df4526cfd42ccf9859e0cbbbbdbb8",
@@ -382,15 +382,16 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c%s 처치!%c\n",
+      "status": "ready"
     },
     "ui:combat:5": {
       "sourceHash": "sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n",
+      "status": "ready",
+      "category": "passthrough"
     },
     "ui:combat:6": {
       "sourceHash": "sha256:0b8bfeae2ff27dd117322b4460be7c53e3f1d69055ba349c134fd23b72f80c1a",
@@ -399,36 +400,36 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%s, %s로\n\u0010",
+      "status": "ready"
     },
     "ui:combat:7": {
       "sourceHash": "sha256:8ea800bea2696d84c20b792e17255fa12577ab346285ace7be29371a827ea36c",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "빗나감!\n",
+      "status": "ready"
     },
     "ui:combat:8": {
       "sourceHash": "sha256:97a151bcb1365efbf747b0902d8a0d9ee92c5f72a4f33de75a16959ac78fb64d",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "실패.\n",
+      "status": "ready"
     },
     "ui:combat:9": {
       "sourceHash": "sha256:97a151bcb1365efbf747b0902d8a0d9ee92c5f72a4f33de75a16959ac78fb64d",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/combat.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "실패.\n",
+      "status": "ready"
     },
     "ui:creature:0": {
       "sourceHash": "sha256:5b4177b42acf25c482958ed66be2de1079dac0ffd37835255cd8d04e0aba23ad",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/creature.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n수면!\n",
+      "status": "ready"
     },
     "ui:creature:1": {
       "sourceHash": "sha256:bc426c71ce869213ae54c4f07ae22899f405c114619dcb6131d9cdc6b139428f",
@@ -438,8 +439,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c%s 도주!%c\n",
+      "status": "ready"
     },
     "ui:creature:2": {
       "sourceHash": "sha256:ce9ed320addf9f2de425e0a66f2aa26f537b2fd2ceecb007e7f797ab6cdbb9f6",
@@ -447,8 +448,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s 분열!\n",
+      "status": "ready"
     },
     "ui:creature:3": {
       "sourceHash": "sha256:2c9b24929486a3de56d13d86c8b9af1ca9671f2534209aae9f8a4d95b5300b4f",
@@ -459,8 +460,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c%s 처치!%c\n경험치 %d\n",
+      "status": "ready"
     },
     "ui:creature:4": {
       "sourceHash": "sha256:72cf40ab9d2f5257174164ec3ed7413e233fe9032e40ef32ff236b1c155e5212",
@@ -470,8 +471,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c%s 처치!%c\n",
+      "status": "ready"
     },
     "ui:creature:5": {
       "sourceHash": "sha256:f6ed654c17b9391d0e60e71c0dd6327304eb885770b5beb2e31d52d783065eb1",
@@ -481,8 +482,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c%s 도주 중!%c\n",
+      "status": "ready"
     },
     "ui:creature:6": {
       "sourceHash": "sha256:223428512cf7b854ccdc183802a95c6e637f0db6fb0c8b8da05dfaef6d0f82f1",
@@ -490,8 +491,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s 위독!\n",
+      "status": "ready"
     },
     "ui:creature:7": {
       "sourceHash": "sha256:9571e0b48621aa1f9b5f40a168b5f0259ec619fe95044cb77458a0c8564e27d7",
@@ -499,8 +500,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s 심각한 부상!\n",
+      "status": "ready"
     },
     "ui:creature:8": {
       "sourceHash": "sha256:92b4c5b39b7ba734f94549cb3a34a06887c43b33bef480a0927540b668b225ac",
@@ -508,8 +509,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s 가벼운 부상!\n",
+      "status": "ready"
     },
     "ui:creature:9": {
       "sourceHash": "sha256:b3911ecc9654a9ad75dce7f58889b7d05543d7dfaaf4af7f010e82b235f5179d",
@@ -517,92 +518,92 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s 경미한 부상!\n",
+      "status": "ready"
     },
     "ui:dungeon:0": {
       "sourceHash": "sha256:53bd886e824c95287b1ca495592d6dbac0eb53315e497445e83003b307a182fa",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "수색 중...\n\n",
+      "status": "ready"
     },
     "ui:dungeon:1": {
       "sourceHash": "sha256:cf8c69ae43d1b60beec1ca56473ec6ff0044a93270a82ae9eb0cefe95c01ec4e",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "아무것도 없음!\n",
+      "status": "ready"
     },
     "ui:dungeon:10": {
       "sourceHash": "sha256:02b9e94efa04ad94a2dc206d64691e9d35d2a2daec3f4d41beee5674b6e64242",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n흠— 효과 없음!\n",
+      "status": "ready"
     },
     "ui:dungeon:11": {
       "sourceHash": "sha256:af845c8f6f633c27eddae3fafd1f10288af72cb2b3603d4db258bf3ca36f2c4d",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n캬악-켁-헐떡!\n",
+      "status": "ready"
     },
     "ui:dungeon:12": {
       "sourceHash": "sha256:ddcab628410dc7a110e5fa786006d4818324709245148aecdf16106d1f56c0be",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n흠— 효과 없음!\n",
+      "status": "ready"
     },
     "ui:dungeon:13": {
       "sourceHash": "sha256:e31bab8ffd65f497ea38436ee26cbe57a8e3c7dd6d139b2d63dd327881a2d12b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "마법의 구슬을 발견했다...\n누가 만지겠는가? ",
+      "status": "ready"
     },
     "ui:dungeon:14": {
       "sourceHash": "sha256:fbd93abf8db22d01aa65f730f56d1035a303ad73f8694afc9420577d6267cefd",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "힘 + 5\n",
+      "status": "ready"
     },
     "ui:dungeon:15": {
       "sourceHash": "sha256:a47401db085936691b76c15da492aa52e40076b9ae8edbc7dfbf8553a576f804",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "민첩 + 5\n",
+      "status": "ready"
     },
     "ui:dungeon:16": {
       "sourceHash": "sha256:5db2e8225a96e9264a57618a5f32c4713d6fd9db85844701fb6ffb79dd9f9263",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "지능 + 5\n",
+      "status": "ready"
     },
     "ui:dungeon:17": {
       "sourceHash": "sha256:4875036d27ccc6cd845ef29227e51d7ba46529329672ee1dfe6234f55e64a97d",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n바람!\n",
+      "status": "ready"
     },
     "ui:dungeon:18": {
       "sourceHash": "sha256:5fa4fa69446b0b0b3f0e3f7074aa3258d8e8b40370e23f64fb496a7dac066e91",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n낙석!\n",
+      "status": "ready"
     },
     "ui:dungeon:19": {
       "sourceHash": "sha256:9c1d998834868788c0c10286b6842ad4f896cb2e67c29a7551ff0438788912af",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n함정 구덩이!\n",
+      "status": "ready"
     },
     "ui:dungeon:2": {
       "sourceHash": "sha256:92b88c29c9a4058fd03a5c45cd664831e69532b9e8f54f5d048b5565678e294f",
@@ -610,57 +611,57 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "발견했다...\n%s!\n",
+      "status": "ready"
     },
     "ui:dungeon:3": {
       "sourceHash": "sha256:b76cdfd32014ba3966a2eb4941d7e8668c724b463bef6d7d8aa2ff535d2aaea5",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "아무것도 발견하지 못했다!\n",
+      "status": "ready"
     },
     "ui:dungeon:4": {
       "sourceHash": "sha256:308bf93f5056e4877c5d6a15e71a4ac8260f608a1233e7efbef1adadedb4a3a1",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "분수를 발견했다.\n누가 마시겠는가? ",
+      "status": "ready"
     },
     "ui:dungeon:5": {
       "sourceHash": "sha256:02b9e94efa04ad94a2dc206d64691e9d35d2a2daec3f4d41beee5674b6e64242",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n흠— 효과 없음!\n",
+      "status": "ready"
     },
     "ui:dungeon:6": {
       "sourceHash": "sha256:3abc58eccc587cca0c0a126becda6597bbb0133311a5dcc2a908ec3ee63a7060",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n아— 상쾌하다!\n",
+      "status": "ready"
     },
     "ui:dungeon:7": {
       "sourceHash": "sha256:02b9e94efa04ad94a2dc206d64691e9d35d2a2daec3f4d41beee5674b6e64242",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n흠— 효과 없음!\n",
+      "status": "ready"
     },
     "ui:dungeon:8": {
       "sourceHash": "sha256:91e7b02a7d3d028f43e9e5740b7032109891cc3886b79f3b472c8e9907229df4",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n으엑— 역겹다!\n",
+      "status": "ready"
     },
     "ui:dungeon:9": {
       "sourceHash": "sha256:d5573fc6997248e74a02f05832db33345d25d88298735e0b1bdf0cf15170b7fe",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/dungeon.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n음— 맛있다!\n",
+      "status": "ready"
     },
     "ui:event:0": {
       "sourceHash": "sha256:10d7c3fe83826ded94e024cdb2041d1cd7c9d3e099c70b8d14b3777583009614",
@@ -668,15 +669,16 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/event.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c\n",
+      "status": "ready"
     },
     "ui:event:1": {
       "sourceHash": "sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/event.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n",
+      "status": "ready",
+      "category": "passthrough"
     },
     "ui:event:2": {
       "sourceHash": "sha256:d3b4d21186e707c9659e2249b712414b99f8c159bb4e77f196e5c24f43581db2",
@@ -684,15 +686,15 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/event.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%s",
+      "status": "ready"
     },
     "ui:game:0": {
       "sourceHash": "sha256:4555ddde1a4a7584b8bcb9a9c6ce303dbb6a42d1364aa9699a3e2093096cbd16",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "도움말은 Alt-h\n",
+      "status": "ready"
     },
     "ui:game:1": {
       "sourceHash": "sha256:8af662dd6e60f3730f65eb633f66237a79667421dd0cfb6c15be5d3233bfa884",
@@ -700,8 +702,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s 열기 오류\n",
+      "status": "ready"
     },
     "ui:game:10": {
       "sourceHash": "sha256:14a93cd3fe2894567fef7c8605d9052b37b598dc10dca1bcc737d6812d45a478",
@@ -710,8 +712,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c여기선 안 됨!%c\n",
+      "status": "ready"
     },
     "ui:game:100": {
       "sourceHash": "sha256:ebe3fc10af93ac1601efb4305b044e16f232bb73d17a4055d77279d6caaeb8cb",
@@ -720,15 +722,15 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c무엇을 발사?%c\n",
+      "status": "ready"
     },
     "ui:game:101": {
       "sourceHash": "sha256:e740ec54832ae87689ab19026cd92d074f04b8a286d3c438f6c2d04bd8b9ddff",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "대포 발사!\n방향: ",
+      "status": "ready"
     },
     "ui:game:102": {
       "sourceHash": "sha256:ff5229df98fb50c8e91bd25977398ffe45b1ee490dfc53b2bc4de7a621115a97",
@@ -737,15 +739,15 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c현측 포만 가능!%c\n",
+      "status": "ready"
     },
     "ui:game:103": {
       "sourceHash": "sha256:e000c28edf45779c30efc7d5e0ea56b1cbd8f3ab6cc5240c994012dd86a4a3cb",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "상자 획득!\n",
+      "status": "ready"
     },
     "ui:game:104": {
       "sourceHash": "sha256:54300a4211780eae5dd53a77c1a1f07405922dca786e785e543c6f19b1b48724",
@@ -754,15 +756,15 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c표류만 가능!%c\n",
+      "status": "ready"
     },
     "ui:game:105": {
       "sourceHash": "sha256:9ac7dd416c608118fa8d41aeff05bcd8930a0a41fc12c9d2b6b94aa0ebf49bd9",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "누가 여는가? ",
+      "status": "ready"
     },
     "ui:game:106": {
       "sourceHash": "sha256:4a7a38e4922f4780d4b10a386bdde814a74c9955f3486ef13240944ff23be11d",
@@ -770,8 +772,8 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "상자 속: 골드 %d\n",
+      "status": "ready"
     },
     "ui:game:107": {
       "sourceHash": "sha256:07f581f52f8eecfd9e4977c7cc42224323382c487ff033a970faf319d0d51c73",
@@ -780,8 +782,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c여기선 안 됨!%c\n",
+      "status": "ready"
     },
     "ui:game:108": {
       "sourceHash": "sha256:907271987a881dfce009ee344d44a2fdee3f68c122138b50e3d2a9a098f6a960",
@@ -790,8 +792,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c산성%c 함정!\n",
+      "status": "ready"
     },
     "ui:game:109": {
       "sourceHash": "sha256:2b5d818f0f3486ef5e1c2123c553b73b03c2f28c53476c661a047ece27754d93",
@@ -800,8 +802,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c독%c 함정!\n",
+      "status": "ready"
     },
     "ui:game:11": {
       "sourceHash": "sha256:293f4619a066cd6cbb6c10fffd446867f71b24924b6151b345c06f8e8efa7599",
@@ -809,8 +811,8 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "횃불: %d\n",
+      "status": "ready"
     },
     "ui:game:110": {
       "sourceHash": "sha256:2ea9a7df541bd422cf3b54e95dcd218ea9ca19ad0d9151aaa536da7dd59253e7",
@@ -819,8 +821,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c수면%c 함정!\n",
+      "status": "ready"
     },
     "ui:game:111": {
       "sourceHash": "sha256:09373bada949671c355de8398947314df7d57dd3f74208e4210d4b754ef858a6",
@@ -829,22 +831,22 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c폭탄%c 함정!\n",
+      "status": "ready"
     },
     "ui:game:112": {
       "sourceHash": "sha256:56fe530827b434bc66e6b25fed94b4cdbbf4b0404d4f5c5fa3afcb537f37e1fd",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "회피!\n",
+      "status": "ready"
     },
     "ui:game:113": {
       "sourceHash": "sha256:caa31aae79752c8466afbdfb4c4ababbd67acd6c54e77267b3c8c876345e186f",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "은신하여 야영!\n",
+      "status": "ready"
     },
     "ui:game:114": {
       "sourceHash": "sha256:14a93cd3fe2894567fef7c8605d9052b37b598dc10dca1bcc737d6812d45a478",
@@ -853,8 +855,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c여기선 안 됨!%c\n",
+      "status": "ready"
     },
     "ui:game:115": {
       "sourceHash": "sha256:1665eaa70aa857eac59c63dd77e60fa13a0399ec005946d544c37fbfaabc27c0",
@@ -863,8 +865,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c도보에서만 가능!%c\n",
+      "status": "ready"
     },
     "ui:game:116": {
       "sourceHash": "sha256:ff9c156ad09a251a438c223a0d3d7671b00361e0b334aefdd5374d7a4c1e401c",
@@ -872,8 +874,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s\n",
+      "status": "ready"
     },
     "ui:game:117": {
       "sourceHash": "sha256:08f3dcec7f87864aa619e814d80c87a487a940d3f973addaa787539680fba2ce",
@@ -881,8 +883,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s로 선회!\n",
+      "status": "ready"
     },
     "ui:game:118": {
       "sourceHash": "sha256:23dd7440219d29bddad081e308fa1e02d5b4342b2f4890edc2a1d400ce1a4eed",
@@ -891,8 +893,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c진행이 느림!%c\n",
+      "status": "ready"
     },
     "ui:game:119": {
       "sourceHash": "sha256:6ce0847ad72e5943aafe8014eaff1a734f7b5823060ca3f30e85067d6b20cc91",
@@ -900,15 +902,15 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s로 항해!\n",
+      "status": "ready"
     },
     "ui:game:12": {
       "sourceHash": "sha256:dd4a2cfb8ae351a25b656e91d89492c2138ef6d035d1a63ada6b69030d393f70",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "명령 (h = 도움말):",
+      "status": "ready"
     },
     "ui:game:120": {
       "sourceHash": "sha256:8e2e2b99d9b4a700e995eee5b5752b8447ef7192bfcbd2fcdcd289b8a7302fec",
@@ -917,8 +919,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c표류만 가능!%c\n",
+      "status": "ready"
     },
     "ui:game:121": {
       "sourceHash": "sha256:afad8bd7e2aa66774fc4a8456d03d1e7f4483e20cb31d120ed50d6c0d05531cc",
@@ -927,8 +929,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c막힘!%c\n",
+      "status": "ready"
     },
     "ui:game:122": {
       "sourceHash": "sha256:23dd7440219d29bddad081e308fa1e02d5b4342b2f4890edc2a1d400ce1a4eed",
@@ -937,8 +939,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c진행이 느림!%c\n",
+      "status": "ready"
     },
     "ui:game:123": {
       "sourceHash": "sha256:32a36bb303e268266e530b5318d3a0431a08607e283ea586eb21b37faaefe88b",
@@ -947,8 +949,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c떠나는 중...%c\n",
+      "status": "ready"
     },
     "ui:game:124": {
       "sourceHash": "sha256:afad8bd7e2aa66774fc4a8456d03d1e7f4483e20cb31d120ed50d6c0d05531cc",
@@ -957,8 +959,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c막힘!%c\n",
+      "status": "ready"
     },
     "ui:game:125": {
       "sourceHash": "sha256:32a36bb303e268266e530b5318d3a0431a08607e283ea586eb21b37faaefe88b",
@@ -967,15 +969,15 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c떠나는 중...%c\n",
+      "status": "ready"
     },
     "ui:game:126": {
       "sourceHash": "sha256:18982df65dc5e07a0514d772e55b4ccb8a5d9eb563681f4950fcbd1d06a25398",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "따기: ",
+      "status": "ready"
     },
     "ui:game:127": {
       "sourceHash": "sha256:472fd38b36bd735acbe6c017515eb850a306c43d267cc2f154aafdfad5c558a0",
@@ -984,15 +986,15 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c무엇을 딸까?%c\n",
+      "status": "ready"
     },
     "ui:game:128": {
       "sourceHash": "sha256:1950bacf954cd4e6e63de09b16d4b33794fa33d7e3898a7269ff6d9bbaabf2ab",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n잠금 해제!\n",
+      "status": "ready"
     },
     "ui:game:129": {
       "sourceHash": "sha256:30878076dd51a7b1f411412c2cb5bea720be850a9293fb7218dc2c435a315909",
@@ -1001,22 +1003,22 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c남은 열쇠 없음!%c\n",
+      "status": "ready"
     },
     "ui:game:13": {
       "sourceHash": "sha256:1388d376840ca91169b12a59e712cb158345b9cfced205d4b2e11b37b1fd687a",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "도움말!\n",
+      "status": "ready"
     },
     "ui:game:130": {
       "sourceHash": "sha256:377de36aed83402230d5070e3d132397f149a63e533a3ab5e6742dadddfbbf57",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "열기: ",
+      "status": "ready"
     },
     "ui:game:131": {
       "sourceHash": "sha256:07f581f52f8eecfd9e4977c7cc42224323382c487ff033a970faf319d0d51c73",
@@ -1025,8 +1027,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c여기선 안 됨!%c\n",
+      "status": "ready"
     },
     "ui:game:132": {
       "sourceHash": "sha256:07f581f52f8eecfd9e4977c7cc42224323382c487ff033a970faf319d0d51c73",
@@ -1035,8 +1037,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c여기선 안 됨!%c\n",
+      "status": "ready"
     },
     "ui:game:133": {
       "sourceHash": "sha256:26c3ef8828c395cb7b4ba975f6e7e865f0374d3b4207d210ed5c74ca9bc3d38c",
@@ -1045,36 +1047,37 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c불가능!%c\n",
+      "status": "ready"
     },
     "ui:game:134": {
       "sourceHash": "sha256:5f0afdc8184493f9d3faf7adf2b092077ba182538e4550ea2196a3426535238f",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n열렸다!\n",
+      "status": "ready"
     },
     "ui:game:135": {
       "sourceHash": "sha256:cd7119d15b5b7d0b42a435cd3b543ac623cf2a5602c2064a280c3e4e7267bf72",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "무기 장착 대상: ",
+      "status": "ready"
     },
     "ui:game:136": {
       "sourceHash": "sha256:f0d7503d78f73df80edb449ce7cdffb9aa325758e042639a72991265322a12bd",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "무기: ",
+      "status": "ready"
     },
     "ui:game:137": {
       "sourceHash": "sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n",
+      "status": "ready",
+      "category": "passthrough"
     },
     "ui:game:138": {
       "sourceHash": "sha256:ff9c156ad09a251a438c223a0d3d7671b00361e0b334aefdd5374d7a4c1e401c",
@@ -1082,8 +1085,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s\n",
+      "status": "ready"
     },
     "ui:game:139": {
       "sourceHash": "sha256:7f67b76876cde692fcb0555459be477749a827f92b9e783da513767945f5a1df",
@@ -1092,8 +1095,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c남은 것 없음!%c\n",
+      "status": "ready"
     },
     "ui:game:14": {
       "sourceHash": "sha256:a157dc897f1fb3dd1c7b8df61b5f08090ba502d4b2105a3b7519392130ac19a8",
@@ -1101,8 +1104,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "3D 시점 %s\n",
+      "status": "ready"
     },
     "ui:game:140": {
       "sourceHash": "sha256:fb28d1c3e4943743caea20f5e71c3ec5283a4072d3b16a9fc1d203aba55c750f",
@@ -1114,15 +1117,15 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c%s은(는) %s %s을(를) 사용할 수 없다%c\n",
+      "status": "ready"
     },
     "ui:game:141": {
       "sourceHash": "sha256:779768d6a353a894d70d5a3bd4f11f13c4869e7197fc7d7a4351d1c9bb09aa6b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "대화: ",
+      "status": "ready"
     },
     "ui:game:142": {
       "sourceHash": "sha256:54300a4211780eae5dd53a77c1a1f07405922dca786e785e543c6f19b1b48724",
@@ -1131,22 +1134,22 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c표류만 가능!%c\n",
+      "status": "ready"
     },
     "ui:game:143": {
       "sourceHash": "sha256:3f3b18dbcc28ebc4c10371aaee39066386de08c73f210f61e186fca54d29a8b7",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "이상하게, 반응이 없다!\n",
+      "status": "ready"
     },
     "ui:game:144": {
       "sourceHash": "sha256:0b9fdfd674f2b90a1b99af44153372b7f47dd3a89cb08ae6a2885542658bc178",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "재료 조합\n",
+      "status": "ready"
     },
     "ui:game:145": {
       "sourceHash": "sha256:3c1e81b6f3ccbde7caef4fb73f03d7dd4ff6d67d0fb64cac203a6b7500deba9a",
@@ -1155,15 +1158,15 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c남은 것 없음!%c",
+      "status": "ready"
     },
     "ui:game:146": {
       "sourceHash": "sha256:e3f8df8c1dca54cb73a684f21ebe9a411e7758b4d24c56906ff90840b1e55844",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "주문 대상: ",
+      "status": "ready"
     },
     "ui:game:147": {
       "sourceHash": "sha256:f13c4ae3a15e192e4d0b714c4a51c9eef1e98b501a1f984b82101060473d2d4a",
@@ -1171,8 +1174,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\\b%s\n",
+      "status": "ready"
     },
     "ui:game:148": {
       "sourceHash": "sha256:9654d087fad316697409385caa8a072247e4b56b310fdfb821a525ce65722bc2",
@@ -1181,50 +1184,51 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c그 주문은 더 이상 조합할 수 없다!%c\n",
+      "status": "ready"
     },
     "ui:game:149": {
       "sourceHash": "sha256:75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n",
+      "status": "ready",
+      "category": "passthrough"
     },
     "ui:game:15": {
       "sourceHash": "sha256:be74f37819ffb11ffad06d49783004b660971ca7970cc3617eefcc96c1b083af",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "패스\n",
+      "status": "ready"
     },
     "ui:game:150": {
       "sourceHash": "sha256:c89f2505e7bb6dccfd87d52fd52dbfcefda976738bb46dbbb80968a5e6b415b9",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "재료: ",
+      "status": "ready"
     },
     "ui:game:151": {
       "sourceHash": "sha256:09072395acfabb5bd9627fa8529c2c4ecebbe878b2e15e11bc4bf311ee49b3e2",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n재료를 조합하니...\n",
+      "status": "ready"
     },
     "ui:game:152": {
       "sourceHash": "sha256:ee135f6fa40e96afa27b756717955bd5a96e7082617861ebe89746c65d6e4060",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "성공!\n\n",
+      "status": "ready"
     },
     "ui:game:153": {
       "sourceHash": "sha256:f885c04c0e09bafaa551f6948cf04b66d3e43a1fd32ffab1cb18cdd982e6921b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "실패로 흩어진다!\n\n",
+      "status": "ready"
     },
     "ui:game:154": {
       "sourceHash": "sha256:90a3b326f56b4cb0a36cdae7d26de8900b417622395deba5f77d8e94dd19c917",
@@ -1233,29 +1237,29 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c남은 것 없음!%c\n",
+      "status": "ready"
     },
     "ui:game:155": {
       "sourceHash": "sha256:c89f2505e7bb6dccfd87d52fd52dbfcefda976738bb46dbbb80968a5e6b415b9",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "재료: ",
+      "status": "ready"
     },
     "ui:game:156": {
       "sourceHash": "sha256:3f2820dfe75757e524bdec0184c9a807c3487a51944a9e3d34b495419d66ee00",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "몇 개? ",
+      "status": "ready"
     },
     "ui:game:157": {
       "sourceHash": "sha256:9d705f1ab68bdba76f9086e4addabf0e5ee903754097aafc5169c99c8960b710",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "대형 재편성!\n교체 번호 ",
+      "status": "ready"
     },
     "ui:game:158": {
       "sourceHash": "sha256:a0fec16fc9f6ad9017cb3dbf6a25ea94048afa8f3dae584f7ee5978452d7739d",
@@ -1263,22 +1267,22 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s, 선두여야 한다!\n",
+      "status": "ready"
     },
     "ui:game:159": {
       "sourceHash": "sha256:e4f9a34a9268bb68d2da99efe6aefa715807598c17a5cd92b25d1791a77ea13a",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "    교체 대상 # ",
+      "status": "ready"
     },
     "ui:game:16": {
       "sourceHash": "sha256:9e893e03149375c6498c385e2585268316efbfbcd7f45b96192ae8ed5ebed7d1",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "속도: 보통\n",
+      "status": "ready"
     },
     "ui:game:160": {
       "sourceHash": "sha256:a0fec16fc9f6ad9017cb3dbf6a25ea94048afa8f3dae584f7ee5978452d7739d",
@@ -1286,8 +1290,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s, 선두여야 한다!\n",
+      "status": "ready"
     },
     "ui:game:161": {
       "sourceHash": "sha256:4f4eef5993b4e7f13192d5f9852269eecaf4fa84855bfee6e57ac052d13887d0",
@@ -1296,8 +1300,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c무엇을?%c\n",
+      "status": "ready"
     },
     "ui:game:162": {
       "sourceHash": "sha256:b651936822241b734d1a9be6db6a290536529f96c10acfafdfaa9f0386da070d",
@@ -1306,43 +1310,44 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c무엇을 들여다볼까?%c\n",
+      "status": "ready"
     },
     "ui:game:163": {
       "sourceHash": "sha256:619cf05e93ee5cd6c9e809863c5a8eef83a9a68b4b5f945227aff0acc2f3fbac",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "보석으로 들여다보기!\n",
+      "status": "ready"
     },
     "ui:game:164": {
       "sourceHash": "sha256:3f3b18dbcc28ebc4c10371aaee39066386de08c73f210f61e186fca54d29a8b7",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "이상하게, 반응이 없다!\n",
+      "status": "ready"
     },
     "ui:game:165": {
       "sourceHash": "sha256:83e4acc3640e6caec3e7d314f543950c3dbc84e642527b7e1cb9b5eba8836821",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "방어구 착용\n대상: ",
+      "status": "ready"
     },
     "ui:game:166": {
       "sourceHash": "sha256:43eeba2f63a588ae34389a6b5afe30047475fbf32385983fc26bb2db3d729c9b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "방어구: ",
+      "status": "ready"
     },
     "ui:game:167": {
       "sourceHash": "sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n",
+      "status": "ready",
+      "category": "passthrough"
     },
     "ui:game:168": {
       "sourceHash": "sha256:ff9c156ad09a251a438c223a0d3d7671b00361e0b334aefdd5374d7a4c1e401c",
@@ -1350,8 +1355,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s\n",
+      "status": "ready"
     },
     "ui:game:169": {
       "sourceHash": "sha256:7f67b76876cde692fcb0555459be477749a827f92b9e783da513767945f5a1df",
@@ -1360,8 +1365,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c남은 것 없음!%c\n",
+      "status": "ready"
     },
     "ui:game:17": {
       "sourceHash": "sha256:927b0941ad1f063a1fcb801a86f06d60d2344e02881411df682bd52bf0efc148",
@@ -1369,8 +1374,8 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "속도 증가 (%d)\n",
+      "status": "ready"
     },
     "ui:game:170": {
       "sourceHash": "sha256:aac648bc878ad7987ce95909124633e5d8137ded49edf37f849225170bf82a30",
@@ -1381,15 +1386,15 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c%s은(는) %s을(를) 사용할 수 없다%c\n",
+      "status": "ready"
     },
     "ui:game:171": {
       "sourceHash": "sha256:b2b1a8cf9e2484e425d5d248ea6ddc442af174a7a3a45a0b12916e4e660e6f9f",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "나가기\n",
+      "status": "ready"
     },
     "ui:game:172": {
       "sourceHash": "sha256:679d1cffb3c60c313f1c31af43f8238cae03d1142fe3d0c4dd6ddfbd74b0ba70",
@@ -1398,15 +1403,15 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c어디로 나갈까?%c\n",
+      "status": "ready"
     },
     "ui:game:173": {
       "sourceHash": "sha256:ce38aa350eed06239081cac086b3abac497ffdcdbe0792cbbc0c8b969866d73d",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "상태 확인 대상: ",
+      "status": "ready"
     },
     "ui:game:174": {
       "sourceHash": "sha256:afa3710baa5391156adcd4b613a61962643012856181b362a599d7127cee9ff4",
@@ -1414,22 +1419,22 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%s의 공격을 받았다\n",
+      "status": "ready"
     },
     "ui:game:175": {
       "sourceHash": "sha256:7503f47fc26aaacc1545a899192cd5b10995b942e31482c0d4c3612ee8b2f944",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n그대의 배가 침몰한다!\n\n",
+      "status": "ready"
     },
     "ui:game:176": {
       "sourceHash": "sha256:65937f494826adf86a374eb9b28a06536c0ea13797f9f251e1a538790f687438",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "활성 플레이어 설정: 없음!\n",
+      "status": "ready"
     },
     "ui:game:177": {
       "sourceHash": "sha256:e899f04325ddb38f4ae92cb6712c639540a25aa0dfdbec73e7a102c00e882013",
@@ -1437,22 +1442,22 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "활성 플레이어 설정: %s!\n",
+      "status": "ready"
     },
     "ui:game:178": {
       "sourceHash": "sha256:60e4deebeeb6d069d424bebdc2c1c9148d38c43ee869311a19353335350e733c",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "비활성화됨!\n",
+      "status": "ready"
     },
     "ui:game:179": {
       "sourceHash": "sha256:0887921888369139b46d73013bf315ec6ecc0a7cff4c84cd6a17167770b0de30",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n다리의 트롤들!\n",
+      "status": "ready"
     },
     "ui:game:18": {
       "sourceHash": "sha256:f0d311b510f5c8022fdef2f41533136f8518b454798fe8ccc3708087c9dd0d88",
@@ -1460,29 +1465,29 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "속도 감소 (%d)\n",
+      "status": "ready"
     },
     "ui:game:180": {
       "sourceHash": "sha256:0b9fdfd674f2b90a1b99af44153372b7f47dd3a89cb08ae6a2885542658bc178",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "재료 조합\n",
+      "status": "ready"
     },
     "ui:game:181": {
       "sourceHash": "sha256:e3f8df8c1dca54cb73a684f21ebe9a411e7758b4d24c56906ff90840b1e55844",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "주문 대상: ",
+      "status": "ready"
     },
     "ui:game:182": {
       "sourceHash": "sha256:781c582378affefe7b7390145cae874971ff5cff93f835684451d4f1eb6e23eb",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n완료.\n",
+      "status": "ready"
     },
     "ui:game:183": {
       "sourceHash": "sha256:ff9c156ad09a251a438c223a0d3d7671b00361e0b334aefdd5374d7a4c1e401c",
@@ -1490,8 +1495,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s\n",
+      "status": "ready"
     },
     "ui:game:184": {
       "sourceHash": "sha256:dcbdb1504db6ba3ca9238dc4eb7e6fe1fe10c8b4ac0f3f1f83f6facb09eff923",
@@ -1499,22 +1504,22 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%d개를 만들 수 있다.\n",
+      "status": "ready"
     },
     "ui:game:185": {
       "sourceHash": "sha256:3f2820dfe75757e524bdec0184c9a807c3487a51944a9e3d34b495419d66ee00",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "몇 개? ",
+      "status": "ready"
     },
     "ui:game:186": {
       "sourceHash": "sha256:b757f94a12b402251d31f726883cdeb28a5db576490d037d8171f143fb458abb",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n조합하지 않음!\n",
+      "status": "ready"
     },
     "ui:game:187": {
       "sourceHash": "sha256:80f04401827ab6195d05edade93499e8529441a928f2c70692e5bc7707318996",
@@ -1523,8 +1528,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c그 주문은 그만큼 더 조합할 수 없다!%c\n",
+      "status": "ready"
     },
     "ui:game:188": {
       "sourceHash": "sha256:087e1685f63f3c6dea0907b3bb3851d5eefe54366868838dc4f5eaa9117f6916",
@@ -1534,22 +1539,22 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c주문 %d개를 조합할 재료가 부족하다!%c\n",
+      "status": "ready"
     },
     "ui:game:189": {
       "sourceHash": "sha256:b3239598d9b2c20a2508039123c722c570dff91f46f9283e41ac3f2f66ec7bca",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n성공!\n\n",
+      "status": "ready"
     },
     "ui:game:19": {
       "sourceHash": "sha256:9e893e03149375c6498c385e2585268316efbfbcd7f45b96192ae8ed5ebed7d1",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "속도: 보통\n",
+      "status": "ready"
     },
     "ui:game:2": {
       "sourceHash": "sha256:7a49a6599e8ec256aef12f50e5901d69b138c15d74d5c4a1b64fcf95375e5c10",
@@ -1557,8 +1562,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s 열기 오류\n",
+      "status": "ready"
     },
     "ui:game:20": {
       "sourceHash": "sha256:6c96ea90611941dad6f8bba025704eb4f408026dcc00cfe625497720e0b96874",
@@ -1567,8 +1572,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "음악: %d%s\n",
+      "status": "ready"
     },
     "ui:game:21": {
       "sourceHash": "sha256:6c96ea90611941dad6f8bba025704eb4f408026dcc00cfe625497720e0b96874",
@@ -1577,8 +1582,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "음악: %d%s\n",
+      "status": "ready"
     },
     "ui:game:22": {
       "sourceHash": "sha256:b2ccf02a63f634fabfb0b3f3c218fab8778511f2865f8af13987ec4349b3681a",
@@ -1587,8 +1592,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "효과음: %d%s\n",
+      "status": "ready"
     },
     "ui:game:23": {
       "sourceHash": "sha256:b2ccf02a63f634fabfb0b3f3c218fab8778511f2865f8af13987ec4349b3681a",
@@ -1597,15 +1602,15 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "효과음: %d%s\n",
+      "status": "ready"
     },
     "ui:game:24": {
       "sourceHash": "sha256:5486ba11e91d9fbe7a543bf3b05fc97928dde9d683dc5ceec24b996640838b48",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "기구 착륙\n",
+      "status": "ready"
     },
     "ui:game:25": {
       "sourceHash": "sha256:d707c9e3798172ec5b5caffcc66e7818f432907ec8904d4d319d2fc699136072",
@@ -1614,8 +1619,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c이미 착륙함!%c\n",
+      "status": "ready"
     },
     "ui:game:26": {
       "sourceHash": "sha256:07f581f52f8eecfd9e4977c7cc42224323382c487ff033a970faf319d0d51c73",
@@ -1624,8 +1629,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c여기선 안 됨!%c\n",
+      "status": "ready"
     },
     "ui:game:27": {
       "sourceHash": "sha256:c12e6262c1dd212e0e2e236973bcb80f9e0f3f6d2b946718e178dad46f7c8217",
@@ -1634,8 +1639,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c무엇을 내려갈까?%c\n",
+      "status": "ready"
     },
     "ui:game:28": {
       "sourceHash": "sha256:c733244133cc705b6217158bdd55464337df6c9ef74ae46a823d87200e8f92a2",
@@ -1644,22 +1649,22 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c무엇에 들어갈까?%c\n",
+      "status": "ready"
     },
     "ui:game:29": {
       "sourceHash": "sha256:47e3e5e8356c667c4bd5d47305f166d3363572f1c061adefe2e6e49ff05d9615",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "횃불 점화!\n",
+      "status": "ready"
     },
     "ui:game:3": {
       "sourceHash": "sha256:394a972629b831eccb9029f753ad5dab160b0be595cb904b57c0fac6b3d1ccf4",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n배 없이 바다에 갇혀, 그대는 익사한다!\n\n",
+      "status": "ready"
     },
     "ui:game:30": {
       "sourceHash": "sha256:7f67b76876cde692fcb0555459be477749a827f92b9e783da513767945f5a1df",
@@ -1668,8 +1673,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c남은 것 없음!%c\n",
+      "status": "ready"
     },
     "ui:game:31": {
       "sourceHash": "sha256:14a93cd3fe2894567fef7c8605d9052b37b598dc10dca1bcc737d6812d45a478",
@@ -1678,15 +1683,15 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c여기선 안 됨!%c\n",
+      "status": "ready"
     },
     "ui:game:32": {
       "sourceHash": "sha256:fc2c6e891261da745745861313fd440b32593c8d465727cf034ac99fa7c4cede",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "고도 상승\n",
+      "status": "ready"
     },
     "ui:game:33": {
       "sourceHash": "sha256:ef6e97019dd3e7f5f57627e59b5155b42ec6485ef245c7db6431251ca21e4132",
@@ -1695,8 +1700,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c무엇을 오를까?%c\n",
+      "status": "ready"
     },
     "ui:game:34": {
       "sourceHash": "sha256:9e86cbb1d520699a1e6d9167481928831e383d17da713e8591c8749c3c860bb0",
@@ -1707,8 +1712,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "육분의로\n위치 확인\n 위도: %c'%c\"\n경도: %c'%c\"\n",
+      "status": "ready"
     },
     "ui:game:35": {
       "sourceHash": "sha256:f7b2908ab9e46d52cf205e56b38fe68de6b5fabc46d66ffd5a5e3d65231cdc02",
@@ -1717,8 +1722,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c무엇으로 위치를 확인할까?%c\n",
+      "status": "ready"
     },
     "ui:game:36": {
       "sourceHash": "sha256:14a93cd3fe2894567fef7c8605d9052b37b598dc10dca1bcc737d6812d45a478",
@@ -1727,8 +1732,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c여기선 안 됨!%c\n",
+      "status": "ready"
     },
     "ui:game:37": {
       "sourceHash": "sha256:31d66cb8552ebbaf3c959ed8544de922c1d73186be0fb76a5ad99e9f03451c7f",
@@ -1736,15 +1741,15 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "종료 및 저장...\n%d회 이동\n",
+      "status": "ready"
     },
     "ui:game:38": {
       "sourceHash": "sha256:9f111699334904ac3144d7c0165e7b95a5b7fdd26ac37199848ec4c7ed4a753d",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "종료하려면 Alt-x\n",
+      "status": "ready"
     },
     "ui:game:39": {
       "sourceHash": "sha256:14a93cd3fe2894567fef7c8605d9052b37b598dc10dca1bcc737d6812d45a478",
@@ -1753,15 +1758,15 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c여기선 안 됨!%c\n",
+      "status": "ready"
     },
     "ui:game:4": {
       "sourceHash": "sha256:3e3e8d86abdc4d2d88ffb0babd42848372f4f20716a37d493769056acb8fd790",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "쿨쿨\n",
+      "status": "ready"
     },
     "ui:game:40": {
       "sourceHash": "sha256:7f5b4f551604514e9ecf9db8b93c5f557a0c6a27ce53f0ca6b87fc188acb409d",
@@ -1770,15 +1775,15 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "수색 중...\n%c표류만 가능!%c\n",
+      "status": "ready"
     },
     "ui:game:41": {
       "sourceHash": "sha256:76c4bdee476664f7236568cfb2e3321d5de9e240c2c0348db6b249e9dc330600",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "수색 중...\n",
+      "status": "ready"
     },
     "ui:game:42": {
       "sourceHash": "sha256:f69e131b44716ebd6616a6051a7e336f2f896f8a91d631530aea3e5df491e145",
@@ -1787,8 +1792,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c아무것도 없음!%c\n",
+      "status": "ready"
     },
     "ui:game:43": {
       "sourceHash": "sha256:92b88c29c9a4058fd03a5c45cd664831e69532b9e8f54f5d048b5565678e294f",
@@ -1796,8 +1801,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "발견했다...\n%s!\n",
+      "status": "ready"
     },
     "ui:game:44": {
       "sourceHash": "sha256:f69e131b44716ebd6616a6051a7e336f2f896f8a91d631530aea3e5df491e145",
@@ -1806,57 +1811,57 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c아무것도 없음!%c\n",
+      "status": "ready"
     },
     "ui:game:45": {
       "sourceHash": "sha256:7a235526b734dd9613c6e1d9842e81020baaf4fa6c42a5295e0b89bfaa72bceb",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "어떤 아이템을 사용?\n",
+      "status": "ready"
     },
     "ui:game:46": {
       "sourceHash": "sha256:e9d5198f267ff84e27e737abb8b8d67d68e700ce48f2e3ca57387c1293aaf6e3",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "음량 켜짐!\n",
+      "status": "ready"
     },
     "ui:game:47": {
       "sourceHash": "sha256:8533632df34ba87d091d29c9a41c7ab853f67d491ddbb9b0567a58f5b2cc62d6",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "음량 꺼짐!\n",
+      "status": "ready"
     },
     "ui:game:48": {
       "sourceHash": "sha256:104b7e4ac60a7a41d940285c55a55dc0b2d32f6e974a1e081f4e26f6fbf2185f",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "외치기: ",
+      "status": "ready"
     },
     "ui:game:49": {
       "sourceHash": "sha256:5729d73e496b95ce22fc3893f31a6b2cbd5d8a6e61ffcf11eef4a1fbfd2678bb",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "이랴!\n",
+      "status": "ready"
     },
     "ui:game:5": {
       "sourceHash": "sha256:97bd5aceaf723b6f1628a2a54b495fede96392ee98a7d971afdb5fa1edfc4850",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "어둡다!\n",
+      "status": "ready"
     },
     "ui:game:50": {
       "sourceHash": "sha256:c6978681b6ad59572560164de53da26c933e7658ab2314facc742b315f7bb712",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "워어!\n",
+      "status": "ready"
     },
     "ui:game:51": {
       "sourceHash": "sha256:4f4eef5993b4e7f13192d5f9852269eecaf4fa84855bfee6e57ac052d13887d0",
@@ -1865,50 +1870,54 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c무엇을?%c\n",
+      "status": "ready"
     },
     "ui:game:52": {
       "sourceHash": "sha256:9df1adba41ff95a222bbaa476edbca8add129d18e6c87d868b77202c13b4cd39",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "단축키 안내:\n",
+      "status": "ready"
     },
     "ui:game:53": {
       "sourceHash": "sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n",
+      "status": "ready",
+      "category": "passthrough"
     },
     "ui:game:54": {
       "sourceHash": "sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n",
+      "status": "ready",
+      "category": "passthrough"
     },
     "ui:game:55": {
       "sourceHash": "sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n",
+      "status": "ready",
+      "category": "passthrough"
     },
     "ui:game:56": {
       "sourceHash": "sha256:17c23f204c92b4b00b3b48388e5de0b982d4c8278b8b83a7610991d9a86acd56",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "메뉴로 나갈까?",
+      "status": "ready"
     },
     "ui:game:57": {
       "sourceHash": "sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n",
+      "status": "ready",
+      "category": "passthrough"
     },
     "ui:game:58": {
       "sourceHash": "sha256:474156530017e2e39d6e73e53ed053d1e51b49fafd090240804f4f6ed3f70eb8",
@@ -1916,8 +1925,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "XU4 %s\n",
+      "status": "ready"
     },
     "ui:game:59": {
       "sourceHash": "sha256:f7edfa9ae3400e8bb726a12291ec7f25a0ac83de3ae5689682fac31204103902",
@@ -1925,8 +1934,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "효과음 %s!\n",
+      "status": "ready"
     },
     "ui:game:6": {
       "sourceHash": "sha256:d22e8c9913b7ee37d715e72e447ba1e65d55f4727d51961c439a7561c772f6ed",
@@ -1935,15 +1944,15 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n %c그대는 8분의 1을\n  잃었다!%c\n",
+      "status": "ready"
     },
     "ui:game:60": {
       "sourceHash": "sha256:af5d8a21858f42808c9bcc17012b77bcc2fd6ab3b071dbd4a05f13f410470541",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "없음\n",
+      "status": "ready"
     },
     "ui:game:61": {
       "sourceHash": "sha256:ff9c156ad09a251a438c223a0d3d7671b00361e0b334aefdd5374d7a4c1e401c",
@@ -1951,8 +1960,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s\n",
+      "status": "ready"
     },
     "ui:game:62": {
       "sourceHash": "sha256:b0b24e5dddfb17baacf30fbc0649c8ea988e4e9a2ee7e75000bb3b765bd4da31",
@@ -1961,29 +1970,30 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c비활성화됨!%c\n",
+      "status": "ready"
     },
     "ui:game:63": {
       "sourceHash": "sha256:abe6f975414e7122b0458b7bea2ac5100daf665154bec777c4fc4fcdeb25f4a8",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "방향?",
+      "status": "ready"
     },
     "ui:game:64": {
       "sourceHash": "sha256:e3b9914b771533276942f698c49fd342e6f4a3dad1cdaef6f6111152f8153989",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\\b\\b\\b\\b",
+      "status": "ready"
     },
     "ui:game:65": {
       "sourceHash": "sha256:63ad8e85349fe11819885976ef96cbe3f6f65c288b290713acadbdf9a9280388",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "    \n",
+      "status": "ready",
+      "category": "passthrough"
     },
     "ui:game:66": {
       "sourceHash": "sha256:ff9c156ad09a251a438c223a0d3d7671b00361e0b334aefdd5374d7a4c1e401c",
@@ -1991,15 +2001,15 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s\n",
+      "status": "ready"
     },
     "ui:game:67": {
       "sourceHash": "sha256:b757f94a12b402251d31f726883cdeb28a5db576490d037d8171f143fb458abb",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n조합하지 않음!\n",
+      "status": "ready"
     },
     "ui:game:68": {
       "sourceHash": "sha256:98dee79b8f35c502363dd454c815017fc172d59255aed1ee36b857c51e346ccf",
@@ -2009,8 +2019,8 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c%d개만 있으면 된다!%c\n",
+      "status": "ready"
     },
     "ui:game:69": {
       "sourceHash": "sha256:ae5453ff848adbb881a56cebfbdac3319371a6086becb104fa98a17d299e679a",
@@ -2018,8 +2028,8 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%d개 조합 중...\n",
+      "status": "ready"
     },
     "ui:game:7": {
       "sourceHash": "sha256:6459ad3ad3002cd6fb9dc99fe914a2d42e407ed05d3075d57fc161158e82a038",
@@ -2030,8 +2040,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c%s\n그대는 이제 레벨 %d이다%c\n",
+      "status": "ready"
     },
     "ui:game:70": {
       "sourceHash": "sha256:087e1685f63f3c6dea0907b3bb3851d5eefe54366868838dc4f5eaa9117f6916",
@@ -2041,36 +2051,36 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c주문 %d개를 조합할 재료가 부족하다!%c\n",
+      "status": "ready"
     },
     "ui:game:71": {
       "sourceHash": "sha256:a8814dff52cf4960baf1d2b9b7f22aa7183940caa8da61a8f718e9bfdce90f92",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n재료를 조합하니...\n",
+      "status": "ready"
     },
     "ui:game:72": {
       "sourceHash": "sha256:ee135f6fa40e96afa27b756717955bd5a96e7082617861ebe89746c65d6e4060",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "성공!\n\n",
+      "status": "ready"
     },
     "ui:game:73": {
       "sourceHash": "sha256:f885c04c0e09bafaa551f6948cf04b66d3e43a1fd32ffab1cb18cdd982e6921b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "실패로 흩어진다!\n\n",
+      "status": "ready"
     },
     "ui:game:74": {
       "sourceHash": "sha256:74dd3382ffa36f93408578d56a9b9b54c8a672cfd180814f9b10e1b7490e236e",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "물체 파괴\n방향: ",
+      "status": "ready"
     },
     "ui:game:75": {
       "sourceHash": "sha256:2fb63383002fd3fbf1564161d2da02c1a56beb25cf2772e45bc9d0d22a3bf88e",
@@ -2079,8 +2089,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c아무것도 없음!%c\n",
+      "status": "ready"
     },
     "ui:game:76": {
       "sourceHash": "sha256:d6261709bceaae38f14e9b8065ae81bfa8924fb0109e58663c64b73f94b96947",
@@ -2088,8 +2098,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s 파괴됨!\n",
+      "status": "ready"
     },
     "ui:game:77": {
       "sourceHash": "sha256:d6261709bceaae38f14e9b8065ae81bfa8924fb0109e58663c64b73f94b96947",
@@ -2097,15 +2107,15 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s 파괴됨!\n",
+      "status": "ready"
     },
     "ui:game:78": {
       "sourceHash": "sha256:63ba6400b3d24b452e8d8e6982bd4e5cafc63aed33c934a1307a8cb0e4dcbdcc",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "공격: ",
+      "status": "ready"
     },
     "ui:game:79": {
       "sourceHash": "sha256:5ce49cca976d5a988baff7ab84113e3d78066d29fe04563e36ab512520297f34",
@@ -2114,8 +2124,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c표류만 가능!%c\n",
+      "status": "ready"
     },
     "ui:game:8": {
       "sourceHash": "sha256:830449de6eb09fbbe76b4e1408d1f63835b53b0b3a540861f542bec7a2929180",
@@ -2124,8 +2134,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c굶주림!!!%c\n",
+      "status": "ready"
     },
     "ui:game:80": {
       "sourceHash": "sha256:0931eb796a3b9bbf60bfcb5c2601a67daa52f7a60439d0ab7419560f2cc191d5",
@@ -2134,8 +2144,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c공격할 대상이 없다!%c\n",
+      "status": "ready"
     },
     "ui:game:81": {
       "sourceHash": "sha256:323c1fba525c1bb447a22df7b4a64f0d457e98ef5c33a05b5d4eb665929731ef",
@@ -2144,8 +2154,8 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "탑승: %c불가능!%c\n",
+      "status": "ready"
     },
     "ui:game:82": {
       "sourceHash": "sha256:1885ec1178ae9f27b50ce8d0cc9781d9547aff1ce619df7ea14f3e5347d0ab07",
@@ -2154,29 +2164,29 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c무엇에 탑승?%c\n",
+      "status": "ready"
     },
     "ui:game:83": {
       "sourceHash": "sha256:01d05ea15031726d36f980d5f0ce1f04d9fdb9a20c088ca6947797b1332e108f",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "범선에 탑승!\n",
+      "status": "ready"
     },
     "ui:game:84": {
       "sourceHash": "sha256:d2d02edb6fa716b4b75db4bb4bd17f8551fdf63690600f0402af407005e8d628",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "말에 탑승!\n",
+      "status": "ready"
     },
     "ui:game:85": {
       "sourceHash": "sha256:ee2786f035ac5f4267d72b65d1e419c97e83c059b781448472eaa14d13d7e9fa",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "기구에 탑승!\n",
+      "status": "ready"
     },
     "ui:game:86": {
       "sourceHash": "sha256:1885ec1178ae9f27b50ce8d0cc9781d9547aff1ce619df7ea14f3e5347d0ab07",
@@ -2185,22 +2195,22 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c무엇에 탑승?%c\n",
+      "status": "ready"
     },
     "ui:game:87": {
       "sourceHash": "sha256:29712ffdc36a494f9f22a291ae41d8a16023955a755810db4123e13b8fdcd947",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "주문 시전!\n대상: ",
+      "status": "ready"
     },
     "ui:game:88": {
       "sourceHash": "sha256:5b00607deb0cec29c0e261f2bcbb4aeb7915077adfeca2ebca822dc5ba809a30",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "주문: ",
+      "status": "ready"
     },
     "ui:game:89": {
       "sourceHash": "sha256:6f24c7dfea88528bb86563bbf43dd4443292ca4650ac0d71b3b9ccce01870aeb",
@@ -2208,8 +2218,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s!\n",
+      "status": "ready"
     },
     "ui:game:9": {
       "sourceHash": "sha256:677420fd8e34447888cc9247485850a3721ccc4f03a43d900a8e616e94833815",
@@ -2218,92 +2228,94 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%c잘못된 명령%c\n",
+      "status": "ready"
     },
     "ui:game:90": {
       "sourceHash": "sha256:fd442d099fa0c354efc7fd002b99b033c88dd8f8b1ecb7fbfa78d6d4cca575da",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "위상 변경: ",
+      "status": "ready"
     },
     "ui:game:91": {
       "sourceHash": "sha256:af5d8a21858f42808c9bcc17012b77bcc2fd6ab3b071dbd4a05f13f410470541",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "없음\n",
+      "status": "ready"
     },
     "ui:game:92": {
       "sourceHash": "sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n",
+      "status": "ready",
+      "category": "passthrough"
     },
     "ui:game:93": {
       "sourceHash": "sha256:f9ce2143436b98166faf4b96d874d75a325cf2c8037e34443e3b8c6341da65ab",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "대상: ",
+      "status": "ready"
     },
     "ui:game:94": {
       "sourceHash": "sha256:25e849f65f9ede6f070f63060aefee0e1fa203f250b78ed1ac73e70ee5648ac9",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "방향: ",
+      "status": "ready"
     },
     "ui:game:95": {
       "sourceHash": "sha256:a4bbaeaf0ed6b34c0b9b979a979fbdd4608debc728e1ccc79303641060cf65ff",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "에너지 유형? ",
+      "status": "ready"
     },
     "ui:game:96": {
       "sourceHash": "sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n",
+      "status": "ready",
+      "category": "passthrough"
     },
     "ui:game:97": {
       "sourceHash": "sha256:25e849f65f9ede6f070f63060aefee0e1fa203f250b78ed1ac73e70ee5648ac9",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "방향: ",
+      "status": "ready"
     },
     "ui:game:98": {
       "sourceHash": "sha256:ac48a2a783e943bce2e7c2b6cd37329927d602f6542d81a8910d8c7720ca3b62",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "실패!\n",
+      "status": "ready"
     },
     "ui:game:99": {
       "sourceHash": "sha256:4aec0cdc90646928cf5a1a5ff9980e589bed10567cf51aadef203a684e6cf2f2",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/game.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "출발 방향: ",
+      "status": "ready"
     },
     "ui:intro:0": {
       "sourceHash": "sha256:43d6759121950c31a5af65d02680b1021c5e9534e2375bda32e94026aea9bacd",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 영상 옵션",
+      "status": "ready"
     },
     "ui:intro:1": {
       "sourceHash": "sha256:6f4aa9601e0634c491c97c633d9b545d8ce6e92d590e3cb0a0705da4660bf686",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 음향 옵션",
+      "status": "ready"
     },
     "ui:intro:10": {
       "sourceHash": "sha256:5ede5ee1d7d4a3bc676985b400903c459fe859aed8f9b349dab55c3f92b69048",
@@ -2311,8 +2323,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "필터                 %s",
+      "status": "ready"
     },
     "ui:intro:11": {
       "sourceHash": "sha256:f12f92e3cbc927203e610bde7ec06cf91e06b9f69e0b67d74b793ec97778fbf4",
@@ -2320,22 +2332,22 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "감마                 %s",
+      "status": "ready"
     },
     "ui:intro:12": {
       "sourceHash": "sha256:453dce9632d83284d81489ffff76bcdc33a35d6011c3fc7b362bbd1eb3a6ef91",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 이 설정 사용",
+      "status": "ready"
     },
     "ui:intro:13": {
       "sourceHash": "sha256:18040b6e70103b7900df9c09bbcdbbbdbeaa14ebd7042f44dfa8636e1f51ef29",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 취소",
+      "status": "ready"
     },
     "ui:intro:14": {
       "sourceHash": "sha256:2bf2c1c5dfe7860994990fd59ee5d9c9a44bc40ea1fdef0c38d291566be9118a",
@@ -2343,8 +2355,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "투명 효과          %s",
+      "status": "ready"
     },
     "ui:intro:15": {
       "sourceHash": "sha256:5d3898a508ee0892a642d2c63b590cfb79ce0914f5ff64db56c9b078a255a29d",
@@ -2352,8 +2364,8 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "  그림자 크기:     %d",
+      "status": "ready"
     },
     "ui:intro:16": {
       "sourceHash": "sha256:72dfae2d90e670d381e6bfe507b76cec0858d3595a605a2f1814232f16ebed54",
@@ -2361,8 +2373,8 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "  그림자 불투명도: %d",
+      "status": "ready"
     },
     "ui:intro:17": {
       "sourceHash": "sha256:612bbbc2bd0b489c6493962cafce7a0f492b0bcba8028aadcd275175abcee0c8",
@@ -2370,8 +2382,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "보석 시야 배치     %s",
+      "status": "ready"
     },
     "ui:intro:18": {
       "sourceHash": "sha256:4445bc39e4d56169376f6406f62cb20f647b158b7a822b505010cf93e148bc61",
@@ -2379,8 +2391,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "시야 방식          %s",
+      "status": "ready"
     },
     "ui:intro:19": {
       "sourceHash": "sha256:2c14821d64be1afef2a90a2b62c0d8d431ca017c268f5d5b92dd917135dcf28c",
@@ -2388,22 +2400,22 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "화면 흔들림        %s",
+      "status": "ready"
     },
     "ui:intro:2": {
       "sourceHash": "sha256:4735cc9922950514442a4b313b4fce97a944024fdc1578a4ec18c411fcd1ceb9",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 입력 옵션",
+      "status": "ready"
     },
     "ui:intro:20": {
       "sourceHash": "sha256:d0c33b6da83af8a67ec6c9dbabf986c5823818e26df3e46923ca348fd44fd43b",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 영상 옵션으로 돌아가기",
+      "status": "ready"
     },
     "ui:intro:21": {
       "sourceHash": "sha256:2face240d6cceecc87c31a1fbf5e91b899b2238d0eb53c93032e09440fe97555",
@@ -2411,8 +2423,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "음악 볼륨            %s",
+      "status": "ready"
     },
     "ui:intro:22": {
       "sourceHash": "sha256:eec72b0acf81204ca3fe0a0290578175bbbeda3252bf75d327a44e6f3d7fbb5b",
@@ -2420,8 +2432,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "효과음 볼륨          %s",
+      "status": "ready"
     },
     "ui:intro:23": {
       "sourceHash": "sha256:c1ce672c5c1a206d8c14dc79367e48333c86dd3356b13a7308bb0f474c73a425",
@@ -2429,22 +2441,22 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "페이드              %s",
+      "status": "ready"
     },
     "ui:intro:24": {
       "sourceHash": "sha256:453dce9632d83284d81489ffff76bcdc33a35d6011c3fc7b362bbd1eb3a6ef91",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 이 설정 사용",
+      "status": "ready"
     },
     "ui:intro:25": {
       "sourceHash": "sha256:18040b6e70103b7900df9c09bbcdbbbdbeaa14ebd7042f44dfa8636e1f51ef29",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 취소",
+      "status": "ready"
     },
     "ui:intro:26": {
       "sourceHash": "sha256:d92deb3a6a86c748dcf0df86f7f0ce2edddf6f4fe77e4289efa1d8a2a60575f2",
@@ -2452,8 +2464,8 @@
         "%4d"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "반복 지연           %4d ms",
+      "status": "ready"
     },
     "ui:intro:27": {
       "sourceHash": "sha256:ebc6797494a8145fd7f206813ac52e502679a219be639e057a429edf40562e43",
@@ -2461,8 +2473,8 @@
         "%4d"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "반복 간격           %4d ms",
+      "status": "ready"
     },
     "ui:intro:28": {
       "sourceHash": "sha256:a2bd31983c5b87f1d6dde62c2c0fb838e36b9ebaa82d9fd03c645e6a17176ea0",
@@ -2470,29 +2482,29 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "마우스               %s",
+      "status": "ready"
     },
     "ui:intro:29": {
       "sourceHash": "sha256:453dce9632d83284d81489ffff76bcdc33a35d6011c3fc7b362bbd1eb3a6ef91",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 이 설정 사용",
+      "status": "ready"
     },
     "ui:intro:3": {
       "sourceHash": "sha256:1f1b03d64ea9dbe6278a0630fa7c30f2888223cc7af7add4e8b08381aff87ba7",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 속도 옵션",
+      "status": "ready"
     },
     "ui:intro:30": {
       "sourceHash": "sha256:18040b6e70103b7900df9c09bbcdbbbdbeaa14ebd7042f44dfa8636e1f51ef29",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 취소",
+      "status": "ready"
     },
     "ui:intro:31": {
       "sourceHash": "sha256:fa6a8765a419f5eb7cbc1fb1a3e11849ebb1a1051c9dcbfce94bd79fc86e2614",
@@ -2500,8 +2512,8 @@
         "%3d"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "초당 게임 주기      %3d",
+      "status": "ready"
     },
     "ui:intro:32": {
       "sourceHash": "sha256:e5e3d5ff22c5d63052ad8a909ceb5749a6e4a1b7b54943fd64886d788b01510c",
@@ -2509,8 +2521,8 @@
         "%3d"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "전투 속도           %3d",
+      "status": "ready"
     },
     "ui:intro:33": {
       "sourceHash": "sha256:02a8668c47bd4fabdaf7c784e1c5df4dc966828421bd3c59e9b8fb1dbf78a2d1",
@@ -2518,8 +2530,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "주문 효과 길이       %s",
+      "status": "ready"
     },
     "ui:intro:34": {
       "sourceHash": "sha256:698f76efbb6c431d60cdd9e6f377c76fffcdded1f081c3c157a5e2f054a056f4",
@@ -2527,8 +2539,8 @@
         "%3d"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "야영 길이            %3d초",
+      "status": "ready"
     },
     "ui:intro:35": {
       "sourceHash": "sha256:94503324f986780f2b7d14f5cbd924ee8cff135cae96a0ebca2376ae09d68590",
@@ -2536,8 +2548,8 @@
         "%3d"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "여관 휴식 길이        %3d초",
+      "status": "ready"
     },
     "ui:intro:36": {
       "sourceHash": "sha256:163e909a56d5b6a13156969cca358edcd05a2e7eaf0c2ed760f6d1630acc632a",
@@ -2545,8 +2557,8 @@
         "%3d"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "신단 명상 길이        %3d초",
+      "status": "ready"
     },
     "ui:intro:37": {
       "sourceHash": "sha256:504f97123954872b6ea0eada35e7d8b67dddb537f6c3051d1274d2cd6d4dc043",
@@ -2554,22 +2566,22 @@
         "%3d"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "화면 흔들림 간격      %3d ms",
+      "status": "ready"
     },
     "ui:intro:38": {
       "sourceHash": "sha256:453dce9632d83284d81489ffff76bcdc33a35d6011c3fc7b362bbd1eb3a6ef91",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 이 설정 사용",
+      "status": "ready"
     },
     "ui:intro:39": {
       "sourceHash": "sha256:18040b6e70103b7900df9c09bbcdbbbdbeaa14ebd7042f44dfa8636e1f51ef29",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 취소",
+      "status": "ready"
     },
     "ui:intro:4": {
       "sourceHash": "sha256:54ffd2ff1f7d29a3f89b982a9aea3092f6603dfa018cea74e5db062e64cc1183",
@@ -2577,8 +2589,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "게임 개선 기능       %s",
+      "status": "ready"
     },
     "ui:intro:40": {
       "sourceHash": "sha256:2ce2c2d8ae5d1ee4d6a8dfc606bdca2b6150b7cf44fc4247f5cb4b329b1d5a2a",
@@ -2586,8 +2598,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "전투 난이도          %s",
+      "status": "ready"
     },
     "ui:intro:41": {
       "sourceHash": "sha256:2a7b639c44edb6a9c55bc957adfd0117454e0e23a640de012c19c3172d5bd08b",
@@ -2595,8 +2607,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "고정 상자 함정       %s",
+      "status": "ready"
     },
     "ui:intro:42": {
       "sourceHash": "sha256:45e7f4e4173aec6f3cce3190055c3e01611278402d05cd27b111e9dce7948828",
@@ -2604,8 +2616,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "게이저 곤충 소환     %s",
+      "status": "ready"
     },
     "ui:intro:43": {
       "sourceHash": "sha256:f75015c09fda5117bcc4134d4cc0af69ef5daf6a84eaa7b436574652f4d79c99",
@@ -2613,8 +2625,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "보석 시야에 물체 표시 %s",
+      "status": "ready"
     },
     "ui:intro:44": {
       "sourceHash": "sha256:8f6f8b195d2ff5926be621d478d6677780c9a25d93f8b58e03db4fafc2282468",
@@ -2622,8 +2634,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "슬라임 분열          %s",
+      "status": "ready"
     },
     "ui:intro:45": {
       "sourceHash": "sha256:01fa0454a4299d68d92f44bd8862eb0737615e55b309b41a049c69cd71891f16",
@@ -2631,22 +2643,22 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "디버그 모드 (치트)   %s",
+      "status": "ready"
     },
     "ui:intro:46": {
       "sourceHash": "sha256:453dce9632d83284d81489ffff76bcdc33a35d6011c3fc7b362bbd1eb3a6ef91",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 이 설정 사용",
+      "status": "ready"
     },
     "ui:intro:47": {
       "sourceHash": "sha256:18040b6e70103b7900df9c09bbcdbbbdbeaa14ebd7042f44dfa8636e1f51ef29",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 취소",
+      "status": "ready"
     },
     "ui:intro:48": {
       "sourceHash": "sha256:b6166eebd0fe0b7241b0de28b5300f10ef5a18cbe44ad5f9a839c2246e604554",
@@ -2654,8 +2666,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "자동 행동            %s",
+      "status": "ready"
     },
     "ui:intro:49": {
       "sourceHash": "sha256:494867b3de28dd69f4dd163017aca59192aff8749add58a0d7fc8c5754952198",
@@ -2663,15 +2675,15 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "활성 플레이어 설정   %s",
+      "status": "ready"
     },
     "ui:intro:5": {
       "sourceHash": "sha256:f7ef2cdbc2eda52a9f3cb02cc82b0dd64f20cb2f0fd4db5dcee35421ffad97f3",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 게임플레이 개선 옵션",
+      "status": "ready"
     },
     "ui:intro:50": {
       "sourceHash": "sha256:981fce8a15cdbbd24e4a031fbe2bf0b7418e1f668ec7caa88fbd8b9c3d38ef9b",
@@ -2679,8 +2691,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "스마트 'Enter' 키    %s",
+      "status": "ready"
     },
     "ui:intro:51": {
       "sourceHash": "sha256:2f94600dea9f06ba8cd5e3d8515558081475f3a410d9c10747529660ae91a0c4",
@@ -2688,8 +2700,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "텍스트 색상 강조     %s",
+      "status": "ready"
     },
     "ui:intro:52": {
       "sourceHash": "sha256:d3ca0401c35f1864053a1769d2740dde13e9603ba3eb3a161e368cb135e6113b",
@@ -2697,8 +2709,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "울티마 V식 신단      %s",
+      "status": "ready"
     },
     "ui:intro:53": {
       "sourceHash": "sha256:4ee9d45cb82ee01f9b6dae76325783e4eb6440a96daf0a3c7a189539ffa1d9c9",
@@ -2706,43 +2718,43 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "울티마 V식 주문 조합 %s",
+      "status": "ready"
     },
     "ui:intro:54": {
       "sourceHash": "sha256:453dce9632d83284d81489ffff76bcdc33a35d6011c3fc7b362bbd1eb3a6ef91",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 이 설정 사용",
+      "status": "ready"
     },
     "ui:intro:55": {
       "sourceHash": "sha256:18040b6e70103b7900df9c09bbcdbbbdbeaa14ebd7042f44dfa8636e1f51ef29",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 취소",
+      "status": "ready"
     },
     "ui:intro:6": {
       "sourceHash": "sha256:c4df0e131bf2267fdb90620a073acb61823f38078f79b74321ec555b05dfcc45",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 인터페이스 개선 옵션",
+      "status": "ready"
     },
     "ui:intro:7": {
       "sourceHash": "sha256:4b5480e1901ab075284e44a69584c3efcf7c2a2e51cadbc4aae93f2a85a2e1db",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\u000f 메인 메뉴",
+      "status": "ready"
     },
     "ui:intro:8": {
       "sourceHash": "sha256:02b6eaa93306e722f3939fd3ebdc2c8f5224b6bb5620fdb506fb326992311b70",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\b 그래픽 옵션",
+      "status": "ready"
     },
     "ui:intro:9": {
       "sourceHash": "sha256:344c6a95b19133e0f3657d5663e2e37fcfad18edaaeebcd8ab009d34374b40c9",
@@ -2750,36 +2762,36 @@
         "%d"
       ],
       "sourceFile": "vendor/xu4/src/intro.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "배율                 x%d",
+      "status": "ready"
     },
     "ui:item:0": {
       "sourceHash": "sha256:5ae87ecd720f420cdecffa4fd33363d16c45e4b4a3ee94fa4a663508232f6ee2",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n종이 계속해서 울린다!\n",
+      "status": "ready"
     },
     "ui:item:1": {
       "sourceHash": "sha256:4998d7ee8b7b0cd4bea02cfd9ae696850da49d1a290988621e1e218f40e84e3f",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n그 말이 울림과 함께 공명한다!\n",
+      "status": "ready"
     },
     "ui:item:10": {
       "sourceHash": "sha256:6e89f07eb681098fdfb7c964767a09fa8ab9db2c2a2a83d28732c20e6a061b89",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n마법사 몬데인의 사악한 해골을 높이 치켜든다...\n",
+      "status": "ready"
     },
     "ui:item:11": {
       "sourceHash": "sha256:e177ecd51dda07dd831bb798d3845ea08092ceada75030245022f55c5fada1a1",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n이미 사용함!\n",
+      "status": "ready"
     },
     "ui:item:12": {
       "sourceHash": "sha256:9dedc0dcffd17922892b8bfc9cbc3e470d8070eb32f6de5ef256fde67c732c6e",
@@ -2787,43 +2799,43 @@
         "%c"
       ],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n%c:",
+      "status": "ready"
     },
     "ui:item:13": {
       "sourceHash": "sha256:433b0f44a52c13fb06ab8d313099e29e225e856d2ebb5d452d6c2e5744578cc1",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n삼분된 열쇠의 한 조각을 발견했다!\n",
+      "status": "ready"
     },
     "ui:item:14": {
       "sourceHash": "sha256:efbeefbcc7f479c9ac622274eee2546890c2e39a8c6458fd6e9164077fe84a98",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n흠...효과 없음!\n",
+      "status": "ready"
     },
     "ui:item:15": {
       "sourceHash": "sha256:e0dd6bc0a3f9cead1b50f1492a8a28778e7de5bf5307511ba1e11c105bd266d6",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n제단이 눈앞에서 변한다!\n",
+      "status": "ready"
     },
     "ui:item:16": {
       "sourceHash": "sha256:efbeefbcc7f479c9ac622274eee2546890c2e39a8c6458fd6e9164077fe84a98",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n흠...효과 없음!\n",
+      "status": "ready"
     },
     "ui:item:17": {
       "sourceHash": "sha256:f70c65b07983e819652a167c2ffba10646677f8e6d27c90ffec877eac776286a",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n사용할 수 없는 아이템!\n",
+      "status": "ready"
     },
     "ui:item:18": {
       "sourceHash": "sha256:a817cf1f995772a278fb3a91d104b00f97c4192211f7324c8ca67237d706e32a",
@@ -2831,155 +2843,155 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n다가가자 목소리가 울려 퍼진다: %s에서 비롯되는 미덕은 무엇인가?\n\n",
+      "status": "ready"
     },
     "ui:item:19": {
       "sourceHash": "sha256:2b39d27d9fe5b9875a75737ab72a0e7c644da3b30fedb7c1197bd9e3e73ef2ef",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n목소리가 울려 퍼진다:  진실, 사랑, 용기와 무관하게 존재하는 미덕은 무엇인가?\n\n",
+      "status": "ready"
     },
     "ui:item:2": {
       "sourceHash": "sha256:950f0fcc3ac04891d815e6d7edacae7d49c53e9b8a0e52049c17caf426419e55",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n초에 불을 붙이자 대지가 진동한다!\n",
+      "status": "ready"
     },
     "ui:item:20": {
       "sourceHash": "sha256:d06f04d0c7ad6b6653de59ce8340529ae8182112d49e4c5d2f79faab3893c1e7",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n목소리가 말한다: 그대의 보석을 사용하라.\n\n색상:\n",
+      "status": "ready"
     },
     "ui:item:21": {
       "sourceHash": "sha256:efbeefbcc7f479c9ac622274eee2546890c2e39a8c6458fd6e9164077fe84a98",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n흠...효과 없음!\n",
+      "status": "ready"
     },
     "ui:item:22": {
       "sourceHash": "sha256:8a67a8221c29d09dbec3b9b33b6d96592d0c655bb3e90e25091bf58434d7c6d8",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n보석 4개를 위한 구멍이 있다.\n어떤 색상:\nA:",
+      "status": "ready"
     },
     "ui:item:23": {
       "sourceHash": "sha256:8f0f769c38351dd72e35ec25fe2a52104f8aa061ea9486e0bc36f2d1a6975148",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n사용할 곳이 없다!\n",
+      "status": "ready"
     },
     "ui:item:24": {
       "sourceHash": "sha256:8f0f769c38351dd72e35ec25fe2a52104f8aa061ea9486e0bc36f2d1a6975148",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n사용할 곳이 없다!\n",
+      "status": "ready"
     },
     "ui:item:25": {
       "sourceHash": "sha256:f67ccb7169e99a0a53fef7e2e95ba770a95c83f93ed467146d07a7c73a49d258",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "망원경에서\nA-P로 표시된\n손잡이가 보인다\n선택: ",
+      "status": "ready"
     },
     "ui:item:26": {
       "sourceHash": "sha256:0af03c3010eb09b492c3df0c0a520e47b25c752971e2e301c8dd08cc94a1710e",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "일부를 떨어뜨렸다!\n",
+      "status": "ready"
     },
     "ui:item:27": {
       "sourceHash": "sha256:bf1fb26e247148f61d05eedae9ed2000f3fd1ea403f083994757f212f6326254",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n사용할 수 없는 아이템!\n",
+      "status": "ready"
     },
     "ui:item:28": {
       "sourceHash": "sha256:9b58cf5c97723816f0b8c4804d2c95007d5f77fc506f3e517de64be174e4b202",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n보유하지 않음!\n",
+      "status": "ready"
     },
     "ui:item:29": {
       "sourceHash": "sha256:bf1fb26e247148f61d05eedae9ed2000f3fd1ea403f083994757f212f6326254",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n사용할 수 없는 아이템!\n",
+      "status": "ready"
     },
     "ui:item:3": {
       "sourceHash": "sha256:efbeefbcc7f479c9ac622274eee2546890c2e39a8c6458fd6e9164077fe84a98",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n흠...효과 없음!\n",
+      "status": "ready"
     },
     "ui:item:30": {
       "sourceHash": "sha256:a32fcd4931fea36825ff260820fbd0a8e2ddc1afb50764aec83fa702ad20d695",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "입장 불가!\n",
+      "status": "ready"
     },
     "ui:item:31": {
       "sourceHash": "sha256:9b58cf5c97723816f0b8c4804d2c95007d5f77fc506f3e517de64be174e4b202",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n보유하지 않음!\n",
+      "status": "ready"
     },
     "ui:item:4": {
       "sourceHash": "sha256:efbeefbcc7f479c9ac622274eee2546890c2e39a8c6458fd6e9164077fe84a98",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n흠...효과 없음!\n",
+      "status": "ready"
     },
     "ui:item:5": {
       "sourceHash": "sha256:b5aad7ff133511ee9030b60d67503abf8f05412e596c551ec675bc317a0cf313",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n뿔피리가 으스스한 소리를 낸다!\n",
+      "status": "ready"
     },
     "ui:item:6": {
       "sourceHash": "sha256:332300c14a29113b17e3acc88037de149bec0bbad656a1dadd688316847b3b8c",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n장착하자, 바퀴가 푸른빛으로 빛난다!\n",
+      "status": "ready"
     },
     "ui:item:7": {
       "sourceHash": "sha256:efbeefbcc7f479c9ac622274eee2546890c2e39a8c6458fd6e9164077fe84a98",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n흠...효과 없음!\n",
+      "status": "ready"
     },
     "ui:item:8": {
       "sourceHash": "sha256:9b58cf5c97723816f0b8c4804d2c95007d5f77fc506f3e517de64be174e4b202",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n보유하지 않음!\n",
+      "status": "ready"
     },
     "ui:item:9": {
       "sourceHash": "sha256:b7e5b48d3d4c14af54cffe83d49fb2a734675223446b67c958dd4d1f755ed47f",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/item.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "\n\n몬데인의 해골을 심연 속으로 던진다!\n",
+      "status": "ready"
     },
     "ui:portal:0": {
       "sourceHash": "sha256:fa0fbb591160ee36fbf56fa67fbec5e88c4c9bcf0ed14e524b27bf9dc27f91aa",
@@ -2987,8 +2999,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/portal.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s도보에서만 가능!\n",
+      "status": "ready"
     },
     "ui:portal:1": {
       "sourceHash": "sha256:a189f1f91804a68878a49f658cd7bcaf337b2fbf6b025bd6eab4721e76877094",
@@ -2996,8 +3008,8 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/portal.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s(으)로 입장!\n\n",
+      "status": "ready"
     },
     "ui:portal:2": {
       "sourceHash": "sha256:8d12bd0ad26d6d09ccf4011b13c503568a4ae386ddf9ed3c2a43a8c3f3d90c97",
@@ -3005,36 +3017,36 @@
         "%s"
       ],
       "sourceFile": "vendor/xu4/src/portal.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "%s에 입장!\n\n",
+      "status": "ready"
     },
     "ui:portal:3": {
       "sourceHash": "sha256:543cad6a9dcf4159a2d779e80560e93069018283be1b8fc8df9defc5fe7e82e1",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/portal.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "던전에 입장!\n\n",
+      "status": "ready"
     },
     "ui:portal:4": {
       "sourceHash": "sha256:f6621f821bb5dc046dca6210046f709e5a34c768c8b4414605e9e4d19af77aef",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/portal.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "도보에서만 가능!\n",
+      "status": "ready"
     },
     "ui:spell:0": {
       "sourceHash": "sha256:abdc6d05edb199473fcb0646e11a23f8f328e9eac8b602c5415f8f494910061f",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/spell.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "떠나는 중...\n",
+      "status": "ready"
     },
     "ui:spell:1": {
       "sourceHash": "sha256:abdc6d05edb199473fcb0646e11a23f8f328e9eac8b602c5415f8f494910061f",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/spell.cpp",
-      "translation": "",
-      "status": "pending"
+      "translation": "떠나는 중...\n",
+      "status": "ready"
     }
   }
 }
