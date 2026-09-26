@@ -116,7 +116,7 @@ describe("i18n:check failure: missing translation", () => {
 describe("i18n:check happy path: passthrough entries", () => {
   it("accepts a 'ready' entry whose translation is pure whitespace when category is 'passthrough' (source had no translatable text, e.g. a bare newline used only as a screenMessage() separator)", () => {
     const schema = baseSchema()
-    schema.ui.entries["ui:game:2"] = {
+    ;(schema.ui.entries as Record<string, unknown>)["ui:game:2"] = {
       sourceHash: "sha256:ffff",
       placeholders: [],
       translation: "\n",
