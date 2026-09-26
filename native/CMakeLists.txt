@@ -72,3 +72,16 @@ add_executable(input_queue_test tests/input_queue_test.c)
 target_include_directories(input_queue_test PRIVATE ${XU4_SRC})
 target_link_libraries(input_queue_test PRIVATE u4_web_bridge)
 add_test(NAME input-queue COMMAND input_queue_test)
+
+# Todo 14: localization runtime boundary. u4_i18n_lookup is self-contained
+# (no engine includes -- vendor/ stays read-only); its static table rows
+# are emitted by `npm run i18n:generate` into i18n/u4_i18n_table.inc, which
+# is compiled in, never parsed at runtime.
+add_library(u4_i18n_lookup STATIC i18n/u4_i18n_lookup.c)
+target_include_directories(u4_i18n_lookup PUBLIC i18n)
+target_compile_options(u4_i18n_lookup PRIVATE -Wall -Wextra)
+
+add_executable(localization_boundaries_test tests/localization_boundaries_test.c)
+target_include_directories(localization_boundaries_test PRIVATE i18n)
+target_link_libraries(localization_boundaries_test PRIVATE u4_i18n_lookup)
+add_test(NAME localization-boundaries COMMAND localization_boundaries_test)
