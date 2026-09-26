@@ -58,14 +58,14 @@
     "BRITAIN:0:topic1": {
       "sourceHash": "sha256:f53a7ab988e2f4624beb96812afd0bc56a8f1743e97d5ac7b33a85c0be131471",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PLAY",
+      "status": "ready"
     },
     "BRITAIN:0:topic2": {
       "sourceHash": "sha256:c1cf93fb1a4683edaa42b12ddabb5459945ad1971730fabb9db9e7978c19ec6c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COMP",
+      "status": "ready"
     },
     "BRITAIN:0:yes": {
       "sourceHash": "sha256:3f1cff38e46ba42f8938d422698d886e7ada93dc834eef3bc20a8592dde245a6",
@@ -130,14 +130,14 @@
     "BRITAIN:1:topic1": {
       "sourceHash": "sha256:dbb882154f408af7e3fe2467765ae7dce18ee3ae6ab137d1f03ae4baf4a1c54f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DANC",
+      "status": "ready"
     },
     "BRITAIN:1:topic2": {
       "sourceHash": "sha256:401cff5f3dc091b6f3d4cb362e75fd95882b22d5ae32e4d2ba3029e9f27adae7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BEGG",
+      "status": "ready"
     },
     "BRITAIN:1:yes": {
       "sourceHash": "sha256:469d72d299f4a30e332aae6aa89cbbcef804b775e9e084e1b004d9271201378e",
@@ -202,14 +202,14 @@
     "BRITAIN:10:topic1": {
       "sourceHash": "sha256:fe3caf1eabfd842adbd62bbe2d37e1585039acc72ff0f9049ca64930df456ef6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CHIL",
+      "status": "ready"
     },
     "BRITAIN:10:topic2": {
       "sourceHash": "sha256:c1cf93fb1a4683edaa42b12ddabb5459945ad1971730fabb9db9e7978c19ec6c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COMP",
+      "status": "ready"
     },
     "BRITAIN:10:yes": {
       "sourceHash": "sha256:8398075f49c1e2ec024b706dc483812298f924309322fbbba1cd3cea876d64da",
@@ -274,14 +274,14 @@
     "BRITAIN:11:topic1": {
       "sourceHash": "sha256:3df48ffb85c2d269613d2ee36c3227c1babdcf8691cb5fb6aad103877cd9236a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SECR",
+      "status": "ready"
     },
     "BRITAIN:11:topic2": {
       "sourceHash": "sha256:ca908b13b427f30fa8b6e118be3eb9cc4290332a142b227edaf36a796448daaf",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MOND",
+      "status": "ready"
     },
     "BRITAIN:11:yes": {
       "sourceHash": "sha256:04537a98ffed4f409a15b31f961e2461397949719efef87eade4b06e068baef7",
@@ -346,14 +346,14 @@
     "BRITAIN:12:topic1": {
       "sourceHash": "sha256:bcb73c5dadb1090654f2763a784cf25c3d51806763f4a7af1246df46fd911c23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JULI",
+      "status": "ready"
     },
     "BRITAIN:12:topic2": {
       "sourceHash": "sha256:c1cf93fb1a4683edaa42b12ddabb5459945ad1971730fabb9db9e7978c19ec6c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COMP",
+      "status": "ready"
     },
     "BRITAIN:12:yes": {
       "sourceHash": "sha256:8735ba1141e48f204b2779d12a32f67bb5426c656567053a1a37faa910ad3b25",
@@ -418,14 +418,14 @@
     "BRITAIN:13:topic1": {
       "sourceHash": "sha256:069ff0abe2a0e8c0668aca1c0965a31f5184fcc39f46c67eea58a9e96a1c2614",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "NATU",
+      "status": "ready"
     },
     "BRITAIN:13:topic2": {
       "sourceHash": "sha256:c1cf93fb1a4683edaa42b12ddabb5459945ad1971730fabb9db9e7978c19ec6c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COMP",
+      "status": "ready"
     },
     "BRITAIN:13:yes": {
       "sourceHash": "sha256:2131b9425bd7122aabc3808ec20e6ce6b26facd4b8f2c0473edcda09a4985ea8",
@@ -490,14 +490,14 @@
     "BRITAIN:14:topic1": {
       "sourceHash": "sha256:717df8504486485ff295eeb50734767b0c0cc1b98a7d3ab8d9f669fc84291c25",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MAGI",
+      "status": "ready"
     },
     "BRITAIN:14:topic2": {
       "sourceHash": "sha256:46b1136f89af1bed417226e373418993066c69c8aa089729af0e46d3c6cc98a7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PRID",
+      "status": "ready"
     },
     "BRITAIN:14:yes": {
       "sourceHash": "sha256:7481b1e42ad5569e5d859e4936c2347f3adb6f9de83e747c02713f633c835f0e",
@@ -562,14 +562,14 @@
     "BRITAIN:15:topic1": {
       "sourceHash": "sha256:8b39ed188dbfe8dc4ae80567aea7e1f18d05845a2d6217492a57583316a194d6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STAR",
+      "status": "ready"
     },
     "BRITAIN:15:topic2": {
       "sourceHash": "sha256:dc2b628bfb4b9d9e8cbec2c12df6b32df5cce05a6cf430569b9f93c9ec4ed8d4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BEG ",
+      "status": "ready"
     },
     "BRITAIN:15:yes": {
       "sourceHash": "sha256:3f5bdab934d827ca3b2ddc15b4ee273ebc1c17858d591f2a5484b6da2235c897",
@@ -634,14 +634,14 @@
     "BRITAIN:2:topic1": {
       "sourceHash": "sha256:4f38a44cd879cbbff175fc6f5146fcc6b6f331a1d104b5b9aabbcda52a526043",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SING",
+      "status": "ready"
     },
     "BRITAIN:2:topic2": {
       "sourceHash": "sha256:a4443d9a3ae48e477f098d6bdb7d7e0b9b42a7f6ddd459ca1c43bf0f11a7e0ce",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HO E",
+      "status": "ready"
     },
     "BRITAIN:2:yes": {
       "sourceHash": "sha256:0e4bf8098e4a1ca9c0f19c7fe05ca5a1819f30eb84d8a7ae10c396f72a22ab02",
@@ -706,14 +706,14 @@
     "BRITAIN:3:topic1": {
       "sourceHash": "sha256:20e3c680e9251987fc0ea4304437b3ed1e110b4704faf4bb8d6f281459502f4b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BRID",
+      "status": "ready"
     },
     "BRITAIN:3:topic2": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GUAR",
+      "status": "ready"
     },
     "BRITAIN:3:yes": {
       "sourceHash": "sha256:124eeafe6def7bf033441d469a19000d460b4f5acafb9db424b9e084ded80cd6",
@@ -778,14 +778,14 @@
     "BRITAIN:4:topic1": {
       "sourceHash": "sha256:a99e817c5479ab3a3d7d3e5444bfcbd410347a437fff40b347dd846c1383dab5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BARD",
+      "status": "ready"
     },
     "BRITAIN:4:topic2": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "BRITAIN:4:yes": {
       "sourceHash": "sha256:e19688e731e075ca7087c738c2cf20edce44b4d46e66b5a57ee99e55366253e8",
@@ -850,14 +850,14 @@
     "BRITAIN:5:topic1": {
       "sourceHash": "sha256:5d71c4df3018c673380a5ad80f3c8f320e61e8c0e4e9afeac65e8cfc776e9e62",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ORBS",
+      "status": "ready"
     },
     "BRITAIN:5:topic2": {
       "sourceHash": "sha256:717df8504486485ff295eeb50734767b0c0cc1b98a7d3ab8d9f669fc84291c25",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MAGI",
+      "status": "ready"
     },
     "BRITAIN:5:yes": {
       "sourceHash": "sha256:492234fe39b37726351b66ff226b37c28b70c43e99f0a419224fbbcf9e9046fc",
@@ -922,14 +922,14 @@
     "BRITAIN:6:topic1": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STON",
+      "status": "ready"
     },
     "BRITAIN:6:topic2": {
       "sourceHash": "sha256:22d67dde4654a06bab07b22eca2f323a0a2ab01134c454139094867f14389ec6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUM ",
+      "status": "ready"
     },
     "BRITAIN:6:yes": {
       "sourceHash": "sha256:fd7cfd91b93c328c15d53b47067aa3750e4bb5675b052e318cd30c3ef3e78ce4",
@@ -994,14 +994,14 @@
     "BRITAIN:7:topic1": {
       "sourceHash": "sha256:ba131337a45adc2041642774e0911ef4067edb3412c95274df9fddb1194677dd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHHH",
+      "status": "ready"
     },
     "BRITAIN:7:topic2": {
       "sourceHash": "sha256:18f0480988aad06db2c3fe0620abb681493f5b2278409599257304714b1d30b4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MANT",
+      "status": "ready"
     },
     "BRITAIN:7:yes": {
       "sourceHash": "sha256:f51bead488e14b656af3a13e33eb1d6fa9580832cbb9d7a20061f84c4b1c160f",
@@ -1066,14 +1066,14 @@
     "BRITAIN:8:topic1": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GUAR",
+      "status": "ready"
     },
     "BRITAIN:8:topic2": {
       "sourceHash": "sha256:c1cf93fb1a4683edaa42b12ddabb5459945ad1971730fabb9db9e7978c19ec6c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COMP",
+      "status": "ready"
     },
     "BRITAIN:8:yes": {
       "sourceHash": "sha256:15a6adc83ea74b516f51de647b2eb43cf70470c1b01a7e6eff5dcb2fb35abce2",
@@ -1138,14 +1138,14 @@
     "BRITAIN:9:topic1": {
       "sourceHash": "sha256:453a5802a6976122812ca8f988ce58fe808cf27cbdc323c725ea1ab18bf228f9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LEAR",
+      "status": "ready"
     },
     "BRITAIN:9:topic2": {
       "sourceHash": "sha256:c1cf93fb1a4683edaa42b12ddabb5459945ad1971730fabb9db9e7978c19ec6c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COMP",
+      "status": "ready"
     },
     "BRITAIN:9:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -1210,14 +1210,14 @@
     "COVE:0:topic1": {
       "sourceHash": "sha256:1dd8a33c917d1e27436508ba1893c4af066da633c98555c5cc946d5e5270555f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ABYS",
+      "status": "ready"
     },
     "COVE:0:topic2": {
       "sourceHash": "sha256:39e1775d82d2eb9cf0d2862d6e2d59c5b7a1e85c543d89a8fe0594b51115f427",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHIP",
+      "status": "ready"
     },
     "COVE:0:yes": {
       "sourceHash": "sha256:8a5e62b5c6d389a680e61e78eba238ba6739709e008f4dc1e02e205f3707c54f",
@@ -1282,14 +1282,14 @@
     "COVE:1:topic1": {
       "sourceHash": "sha256:b0922b0419bc3459bacceb605a95372f3a0e2475f365ace4d20cf66eba5cf915",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WISD",
+      "status": "ready"
     },
     "COVE:1:topic2": {
       "sourceHash": "sha256:beaf3e335fc7f83996f3f2dab670c283c694e8040bfb4b7a196092601dfd0cbc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PEAC",
+      "status": "ready"
     },
     "COVE:1:yes": {
       "sourceHash": "sha256:f990be6289b09bad7c01febdaef7af58c0f38477602c97778044a3a55920837c",
@@ -1354,14 +1354,14 @@
     "COVE:10:topic1": {
       "sourceHash": "sha256:86c019bd75e878270f75b8af41523e1ee789128aa9b188e3f819b3a4ad5011e5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LOVE",
+      "status": "ready"
     },
     "COVE:10:topic2": {
       "sourceHash": "sha256:1f0f6c30d28d4444fbadf37f875a3d690b3b4b8fe1291eb7ba311a98fc05bf83",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HEAR",
+      "status": "ready"
     },
     "COVE:10:yes": {
       "sourceHash": "sha256:bc02fdca15b5c12982679468ca5cf290db6b9729b9a74fcfbc128dc83c4129c1",
@@ -1426,14 +1426,14 @@
     "COVE:11:topic1": {
       "sourceHash": "sha256:fde83e7b84fef451065ad4d2131590b357f36432a6caf520bd1799c60cbc29c9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RIVE",
+      "status": "ready"
     },
     "COVE:11:topic2": {
       "sourceHash": "sha256:cb2df9a0081dc2de50afb86e0bd43752dc6983d13c411271a75302194aba4316",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WORD",
+      "status": "ready"
     },
     "COVE:11:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -1498,14 +1498,14 @@
     "COVE:12:topic1": {
       "sourceHash": "sha256:07a9d7b4a9a23915a61bc89bb0357bf47b348cf4174eb965bb1df8fbfa18b0b5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CODE",
+      "status": "ready"
     },
     "COVE:12:topic2": {
       "sourceHash": "sha256:63cd922cfacd65d4ee4506997ea700d407762ea0c9f6211b304ee5c672e9f361",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COMB",
+      "status": "ready"
     },
     "COVE:12:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -1570,14 +1570,14 @@
     "COVE:13:topic1": {
       "sourceHash": "sha256:a91952b74e72da3f6149d4b25a957c6aa918e9ab6fabaa62484195bd8a674c14",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STUD",
+      "status": "ready"
     },
     "COVE:13:topic2": {
       "sourceHash": "sha256:07a9d7b4a9a23915a61bc89bb0357bf47b348cf4174eb965bb1df8fbfa18b0b5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CODE",
+      "status": "ready"
     },
     "COVE:13:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -1642,14 +1642,14 @@
     "COVE:14:topic1": {
       "sourceHash": "sha256:dd8c19420802444be8fecc95e56ea83bc8465f7a468f47c0c7b6003047d99e92",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "KEY ",
+      "status": "ready"
     },
     "COVE:14:topic2": {
       "sourceHash": "sha256:33dd96fae138d635aafb3d86f11a109f7b03cfa3fa1bd0056ed2fd1e12d38bbd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "AXIO",
+      "status": "ready"
     },
     "COVE:14:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -1714,14 +1714,14 @@
     "COVE:15:topic1": {
       "sourceHash": "sha256:33dd96fae138d635aafb3d86f11a109f7b03cfa3fa1bd0056ed2fd1e12d38bbd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "AXIO",
+      "status": "ready"
     },
     "COVE:15:topic2": {
       "sourceHash": "sha256:05aa3ac8d365559e81f8ad1b62918aedeabeaebab553e7b129ae95d9acdb77cc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PART",
+      "status": "ready"
     },
     "COVE:15:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -1786,14 +1786,14 @@
     "COVE:2:topic1": {
       "sourceHash": "sha256:9e1cd3563ac16c9885eadc143a17157323dfc974d2f042d59f004ecfea2387ce",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RECL",
+      "status": "ready"
     },
     "COVE:2:topic2": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STON",
+      "status": "ready"
     },
     "COVE:2:yes": {
       "sourceHash": "sha256:37dc1877a46507125b54e824dbc9fcff6715c027777c83dbe35cf9e1541d1ef1",
@@ -1858,14 +1858,14 @@
     "COVE:3:topic1": {
       "sourceHash": "sha256:c961b0e0b6d160d011d64624e1ab183715686fd2b4b2a6d3e0d6084ad4124254",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ARTS",
+      "status": "ready"
     },
     "COVE:3:topic2": {
       "sourceHash": "sha256:dd3bfe5f7da1dd252da75ad13a4ec8c5ff78a68aa1677a1adae1e934f1a76057",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GATE",
+      "status": "ready"
     },
     "COVE:3:yes": {
       "sourceHash": "sha256:9a767d0558257a419e280de795071096be6b2b0aa4058cb3616a7b3cbfdd829d",
@@ -1930,14 +1930,14 @@
     "COVE:4:topic1": {
       "sourceHash": "sha256:07a9d7b4a9a23915a61bc89bb0357bf47b348cf4174eb965bb1df8fbfa18b0b5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CODE",
+      "status": "ready"
     },
     "COVE:4:topic2": {
       "sourceHash": "sha256:4a0f0b2706b272f32878e189e3cec2629f7a817344002a2f97c30011e2b66cea",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CHAM",
+      "status": "ready"
     },
     "COVE:4:yes": {
       "sourceHash": "sha256:1f2250c80b201a8b2af3f556144ce0171ae7eb843e855ab7c4cf8069d494650b",
@@ -2002,14 +2002,14 @@
     "COVE:5:topic1": {
       "sourceHash": "sha256:86c019bd75e878270f75b8af41523e1ee789128aa9b188e3f819b3a4ad5011e5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LOVE",
+      "status": "ready"
     },
     "COVE:5:topic2": {
       "sourceHash": "sha256:9b2f9b94d13396a5cb7c00f6a1614e014d070e9d5132378e6091348db6c33970",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PROB",
+      "status": "ready"
     },
     "COVE:5:yes": {
       "sourceHash": "sha256:bd564c16e32c70241232044b7da15fa83f55fdf03eca02120f241b951f4b02fd",
@@ -2074,14 +2074,14 @@
     "COVE:6:topic1": {
       "sourceHash": "sha256:fe3caf1eabfd842adbd62bbe2d37e1585039acc72ff0f9049ca64930df456ef6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CHIL",
+      "status": "ready"
     },
     "COVE:6:topic2": {
       "sourceHash": "sha256:5eec0c99690774144b41927559c3c9a5a94a885a7f97f900466b8d91cf4bcb39",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WORL",
+      "status": "ready"
     },
     "COVE:6:yes": {
       "sourceHash": "sha256:1ffe105918632b598fff4b2819fd8af07215e6aac5f9f585f76cd884aabe3bb6",
@@ -2146,14 +2146,14 @@
     "COVE:7:topic1": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STON",
+      "status": "ready"
     },
     "COVE:7:topic2": {
       "sourceHash": "sha256:dd3bfe5f7da1dd252da75ad13a4ec8c5ff78a68aa1677a1adae1e934f1a76057",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GATE",
+      "status": "ready"
     },
     "COVE:7:yes": {
       "sourceHash": "sha256:f479595541a37f21b8080cfcebc37ca39f9e4c51c12532b20b42415a018df03d",
@@ -2218,14 +2218,14 @@
     "COVE:8:topic1": {
       "sourceHash": "sha256:079fc698414baba399ba1bace9264a566384add5e3b9dbf48f948b0e7a0727b3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RELA",
+      "status": "ready"
     },
     "COVE:8:topic2": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "COVE:8:yes": {
       "sourceHash": "sha256:49f1c1fee040b61b28297bd193fc55dfa77d661004b1ca06a213d0204c2cdf34",
@@ -2290,14 +2290,14 @@
     "COVE:9:topic1": {
       "sourceHash": "sha256:07a9d7b4a9a23915a61bc89bb0357bf47b348cf4174eb965bb1df8fbfa18b0b5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CODE",
+      "status": "ready"
     },
     "COVE:9:topic2": {
       "sourceHash": "sha256:1dd8a33c917d1e27436508ba1893c4af066da633c98555c5cc946d5e5270555f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ABYS",
+      "status": "ready"
     },
     "COVE:9:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -2362,14 +2362,14 @@
     "DEN:0:topic1": {
       "sourceHash": "sha256:20e3c680e9251987fc0ea4304437b3ed1e110b4704faf4bb8d6f281459502f4b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BRID",
+      "status": "ready"
     },
     "DEN:0:topic2": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "DEN:0:yes": {
       "sourceHash": "sha256:cfa9b1f90d1390fa1be224640d3b42574addf0181cd7b9dad58f8de54005b7bb",
@@ -2434,14 +2434,14 @@
     "DEN:1:topic1": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GUAR",
+      "status": "ready"
     },
     "DEN:1:topic2": {
       "sourceHash": "sha256:0b5388034693d5f18d5c91fcc45f4e386043655ac129027aa39204bd3920724f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HUNG",
+      "status": "ready"
     },
     "DEN:1:yes": {
       "sourceHash": "sha256:0f4fb3f7313e28cd682fe1b97e1b078ba8addde34d118dc815eb934815ea1e62",
@@ -2506,14 +2506,14 @@
     "DEN:10:topic1": {
       "sourceHash": "sha256:8550f340539484c0a7d9425bd20e5bfe51e0c49b123d04ca527614b250880953",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ITEM",
+      "status": "ready"
     },
     "DEN:10:topic2": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "DEN:10:yes": {
       "sourceHash": "sha256:080fef4edbffd2cd0d8b1719b2a6f655436317baedfd1c34493f21c00f19a40e",
@@ -2578,14 +2578,14 @@
     "DEN:11:topic1": {
       "sourceHash": "sha256:1440a7f63a8dd416f66e8fad0d5067962f726d9185c237d08401b54d42b56bed",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WARN",
+      "status": "ready"
     },
     "DEN:11:topic2": {
       "sourceHash": "sha256:a0eb3ddfa5807780a562b9c313b2537f1e8dc621e9a524f8c1ffcf07a79e35c7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DOOM",
+      "status": "ready"
     },
     "DEN:11:yes": {
       "sourceHash": "sha256:4d1c2175d2508a278a3bc46c5e5bb5cd4030c6d86fb4960c8f1941182fa4375a",
@@ -2650,14 +2650,14 @@
     "DEN:12:topic1": {
       "sourceHash": "sha256:3bbdaa475d160e496e891e69eba5e8afcefbd827facfcee38772e4600e91a7a7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ARMO",
+      "status": "ready"
     },
     "DEN:12:topic2": {
       "sourceHash": "sha256:32acd5df6b4f9c3980651ba36f9384c711e4cdcf150b81990dee5e63c5c1395c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "NOWH",
+      "status": "ready"
     },
     "DEN:12:yes": {
       "sourceHash": "sha256:91f45115c34f7dcf6eb244ea679ade1f3ff13bf8215b007449b7624d67b19858",
@@ -2722,14 +2722,14 @@
     "DEN:13:topic1": {
       "sourceHash": "sha256:828d1c77fc49e6fbd4879f17fbd13fb2a67eaef6ffdcbb74ec9a6f6db8932c83",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WINE",
+      "status": "ready"
     },
     "DEN:13:topic2": {
       "sourceHash": "sha256:cbb594d311f1844c5292377fef2ef9f8b874ce0614158f743e51a244e7545726",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "VINT",
+      "status": "ready"
     },
     "DEN:13:yes": {
       "sourceHash": "sha256:58c53e786aed2b65ab497cde144d65f61eb9222e6f2485137fcf5c9001e5c912",
@@ -2794,14 +2794,14 @@
     "DEN:14:topic1": {
       "sourceHash": "sha256:2d4811260a34fda4c7e4157da19f2f587eda2cf9ee2727e5cf3bdc3ea128620e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TINK",
+      "status": "ready"
     },
     "DEN:14:topic2": {
       "sourceHash": "sha256:b7eb3d28ff8fa196ac1907ed7f062fdc89e17c272160cf38170f8eb9d2537817",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MACH",
+      "status": "ready"
     },
     "DEN:14:yes": {
       "sourceHash": "sha256:bbf73fb1dcdffa7e64b5d671923b1f3c299fa010eaebe588a6190c2bb0b404b1",
@@ -2866,14 +2866,14 @@
     "DEN:15:topic1": {
       "sourceHash": "sha256:0c944fca9b62a9a163cf17603a8c44c3b7dcd2dd8186fd09e3ba007bb02bba18",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HIDE",
+      "status": "ready"
     },
     "DEN:15:topic2": {
       "sourceHash": "sha256:8f4735353435f2c56ee4ddbf1762be265ef101460d733e894b32e34b726f7eb7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SOME",
+      "status": "ready"
     },
     "DEN:15:yes": {
       "sourceHash": "sha256:85b5a52ba77235ba179f115315ea62e42f2a0edeee713818529863a8b0c91304",
@@ -2938,14 +2938,14 @@
     "DEN:2:topic1": {
       "sourceHash": "sha256:c00a30cc96ef801029a574b700a1a3f9b7d3ea85212d89461f7e757085360252",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SAIL",
+      "status": "ready"
     },
     "DEN:2:topic2": {
       "sourceHash": "sha256:0c23e3138346c4611f1b981f2aeaf658b6130461a53d13dd9a005a88578e7310",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LIFE",
+      "status": "ready"
     },
     "DEN:2:yes": {
       "sourceHash": "sha256:e89f9a0e9df99173cf77e096bf95fd6ff41bd452ba79c2d73320ed1ee7f3ee3b",
@@ -3010,14 +3010,14 @@
     "DEN:3:topic1": {
       "sourceHash": "sha256:e05dcbb897f7809219a0db03d4d960b71467fa9210194ec3a7aadf57661ef2f0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PIRA",
+      "status": "ready"
     },
     "DEN:3:topic2": {
       "sourceHash": "sha256:fc0459fef3893d2fc2d113ed43432ca4176c13e00fe14548a0ad9d5f4b16a6db",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RAID",
+      "status": "ready"
     },
     "DEN:3:yes": {
       "sourceHash": "sha256:bf0dbef36b1d2d1bed58350c6279f28cd6f189d75960746d141812ca21e4256f",
@@ -3082,14 +3082,14 @@
     "DEN:4:topic1": {
       "sourceHash": "sha256:a89e4c291fd9fd1be2e4688b9d5ee41168c8b2f23d8645321b5f7660506af623",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "THIE",
+      "status": "ready"
     },
     "DEN:4:topic2": {
       "sourceHash": "sha256:a4292b7c40810712ef0ffb7d9cc1a2a2ea6ee6c8351c37949398e452de3c6bf5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CLEV",
+      "status": "ready"
     },
     "DEN:4:yes": {
       "sourceHash": "sha256:42737eada91f8664bf8368c3f59ccac628bd82d92cce0cfdcb2cdb067a8e903b",
@@ -3154,14 +3154,14 @@
     "DEN:5:topic1": {
       "sourceHash": "sha256:6ec8f20fd3d779da92e85b518eacfe8aadac031f2f4a683bc65a9f1f36b1e548",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TRAV",
+      "status": "ready"
     },
     "DEN:5:topic2": {
       "sourceHash": "sha256:9e4cab9ad297041ceb025f6e10b3f46c60ac295c340d4b51474eb33542ce8e18",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SKUL",
+      "status": "ready"
     },
     "DEN:5:yes": {
       "sourceHash": "sha256:f5314ec23d14ce216ccea0d598752c217f7bdaa42841f05e97a9c9522d66d9f4",
@@ -3226,14 +3226,14 @@
     "DEN:6:topic1": {
       "sourceHash": "sha256:717df8504486485ff295eeb50734767b0c0cc1b98a7d3ab8d9f669fc84291c25",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MAGI",
+      "status": "ready"
     },
     "DEN:6:topic2": {
       "sourceHash": "sha256:71f2a6dc222040fd91df57b3a0fef5de03d2d964c35c17f52326583e1b292586",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SLEE",
+      "status": "ready"
     },
     "DEN:6:yes": {
       "sourceHash": "sha256:e94c965901fbc0ed4e24fb37495bfc6a541704e9665c764da674d60b3bf0b551",
@@ -3298,14 +3298,14 @@
     "DEN:7:topic1": {
       "sourceHash": "sha256:3712fb058b5672b8f9eb69fdb1ef0a16e80e7013aedc6b2e6920fde28d52e013",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SERV",
+      "status": "ready"
     },
     "DEN:7:topic2": {
       "sourceHash": "sha256:934aa7ad0f95f7604be9d6753d13f98f3068eef574e569b6d74a0f04e708980c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HYTH",
+      "status": "ready"
     },
     "DEN:7:yes": {
       "sourceHash": "sha256:f04329d65effaa07830f4ff30d13cdcad36b43666b07f85dad90f313979b7667",
@@ -3370,14 +3370,14 @@
     "DEN:8:topic1": {
       "sourceHash": "sha256:717df8504486485ff295eeb50734767b0c0cc1b98a7d3ab8d9f669fc84291c25",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MAGI",
+      "status": "ready"
     },
     "DEN:8:topic2": {
       "sourceHash": "sha256:6c800781013da52dfa43d0be46ea81dd56226e3a4723fb58194b2a89c3507999",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MIX ",
+      "status": "ready"
     },
     "DEN:8:yes": {
       "sourceHash": "sha256:1c1848836997a77a1aec5becdb12fb79e865f6c078446efb652d57bbf63f595d",
@@ -3442,14 +3442,14 @@
     "DEN:9:topic1": {
       "sourceHash": "sha256:1dcb86de4e525b320688b4084d369aa7369e30a972afa8f3696134691916ca62",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "IT  ",
+      "status": "ready"
     },
     "DEN:9:topic2": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "DEN:9:yes": {
       "sourceHash": "sha256:fbfad7a1b73adf88b748db734e992b9b312da19d1d199f563497a36b71d9db74",
@@ -3514,14 +3514,14 @@
     "EMPATH:0:topic1": {
       "sourceHash": "sha256:5029af19eafc8e0cf42b8bb6b2d05e7fb8c106e5926a2a03e541916e3f8812aa",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PROV",
+      "status": "ready"
     },
     "EMPATH:0:topic2": {
       "sourceHash": "sha256:cb2df9a0081dc2de50afb86e0bd43752dc6983d13c411271a75302194aba4316",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WORD",
+      "status": "ready"
     },
     "EMPATH:0:yes": {
       "sourceHash": "sha256:9dedbc78e842364720a3105d020a29e10354736c00ddd8e481ae6fd44b053064",
@@ -3586,14 +3586,14 @@
     "EMPATH:1:topic1": {
       "sourceHash": "sha256:44d0ee0fee34f569267cfe8572a56013fa51b2bc5ceb370cde890824cc616919",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RULE",
+      "status": "ready"
     },
     "EMPATH:1:topic2": {
       "sourceHash": "sha256:5029af19eafc8e0cf42b8bb6b2d05e7fb8c106e5926a2a03e541916e3f8812aa",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PROV",
+      "status": "ready"
     },
     "EMPATH:1:yes": {
       "sourceHash": "sha256:cb9afad9cd75b25eed120a420dc638e5a78a3455ee8e7162f1d3c3988650f227",
@@ -3658,14 +3658,14 @@
     "EMPATH:10:topic1": {
       "sourceHash": "sha256:86c019bd75e878270f75b8af41523e1ee789128aa9b188e3f819b3a4ad5011e5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LOVE",
+      "status": "ready"
     },
     "EMPATH:10:topic2": {
       "sourceHash": "sha256:9c80e3e4f07b52561aecc2cf4adeca0303b88103eab354a2a76dcda01183be23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JUST",
+      "status": "ready"
     },
     "EMPATH:10:yes": {
       "sourceHash": "sha256:c4a87cf19a9ae305f55bf4ce91f950416b1be49d4959ecdc6b271c05f5cdceb1",
@@ -3730,14 +3730,14 @@
     "EMPATH:11:topic1": {
       "sourceHash": "sha256:86c019bd75e878270f75b8af41523e1ee789128aa9b188e3f819b3a4ad5011e5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LOVE",
+      "status": "ready"
     },
     "EMPATH:11:topic2": {
       "sourceHash": "sha256:19cf613426ed05f030bf8d50114b7fcdd1533cabc353121fce35e48c5eefa010",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SACR",
+      "status": "ready"
     },
     "EMPATH:11:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -3802,14 +3802,14 @@
     "EMPATH:12:topic1": {
       "sourceHash": "sha256:aa8702b33bca8d7ad34caf59cfff06baff044582a66cb5c1757657fed5d8e5c2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SPIR",
+      "status": "ready"
     },
     "EMPATH:12:topic2": {
       "sourceHash": "sha256:1899b8ff0250deff232fb3678d398173415614afa28a2900dd85a949e1069d2f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BEIN",
+      "status": "ready"
     },
     "EMPATH:12:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -3874,14 +3874,14 @@
     "EMPATH:13:topic1": {
       "sourceHash": "sha256:11594ff643726c409bc44c7f6e71a10dd23dd8eba00b69ceefcce8d74481f6d8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MUMB",
+      "status": "ready"
     },
     "EMPATH:13:topic2": {
       "sourceHash": "sha256:748f41387b5a88a4f13db8c28d9ac03f9f21af6fa09af87530795cf6df4aa9fb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SALV",
+      "status": "ready"
     },
     "EMPATH:13:yes": {
       "sourceHash": "sha256:83009a37a2e7626d2a7873acaecea975c803ce7b7e51e5958d77b18b0c88c180",
@@ -3946,14 +3946,14 @@
     "EMPATH:14:topic1": {
       "sourceHash": "sha256:00029651dce90c33f38ba845807a3b716c85bc81240a889b3b1f85b337e377bc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "QUES",
+      "status": "ready"
     },
     "EMPATH:14:topic2": {
       "sourceHash": "sha256:24f5cf515f93bccc65ac8728c8caa2755f97b0ae426e68aba142ac12a139ceec",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HORN",
+      "status": "ready"
     },
     "EMPATH:14:yes": {
       "sourceHash": "sha256:f8d4375a793553abd99453c066838607f8ec22b59a6de5734f939d4d2823e901",
@@ -4018,14 +4018,14 @@
     "EMPATH:15:topic1": {
       "sourceHash": "sha256:b0922b0419bc3459bacceb605a95372f3a0e2475f365ace4d20cf66eba5cf915",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WISD",
+      "status": "ready"
     },
     "EMPATH:15:topic2": {
       "sourceHash": "sha256:93a7b1fdeb46ee231ff3759c513fff893dc5aba4f2ca6a57de7c0d64654dc4be",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CAND",
+      "status": "ready"
     },
     "EMPATH:15:yes": {
       "sourceHash": "sha256:f990be6289b09bad7c01febdaef7af58c0f38477602c97778044a3a55920837c",
@@ -4090,14 +4090,14 @@
     "EMPATH:2:topic1": {
       "sourceHash": "sha256:334b1555cc81bd28a063197821ec7f755b25f6a0f2ca395473cac4e5a279a9a7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LADY",
+      "status": "ready"
     },
     "EMPATH:2:topic2": {
       "sourceHash": "sha256:24f5cf515f93bccc65ac8728c8caa2755f97b0ae426e68aba142ac12a139ceec",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HORN",
+      "status": "ready"
     },
     "EMPATH:2:yes": {
       "sourceHash": "sha256:0e2c4315a61616aae5694f8638629a483c338fbd92a86e671f89fee1dc163150",
@@ -4162,14 +4162,14 @@
     "EMPATH:3:topic1": {
       "sourceHash": "sha256:13c74334b5243b701a978c1beb5ac0de6a5100bc97dc32a14d3d63089e3d3b36",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RESO",
+      "status": "ready"
     },
     "EMPATH:3:topic2": {
       "sourceHash": "sha256:86c019bd75e878270f75b8af41523e1ee789128aa9b188e3f819b3a4ad5011e5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LOVE",
+      "status": "ready"
     },
     "EMPATH:3:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -4234,14 +4234,14 @@
     "EMPATH:4:topic1": {
       "sourceHash": "sha256:2f9acb02faa121bb2a3621951f57b4c690655337edee2e5ac350be2b3be88ea8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PASS",
+      "status": "ready"
     },
     "EMPATH:4:topic2": {
       "sourceHash": "sha256:3c83e16d04a45dc96728ae917c379eac31c8c167c110dde484357dd8e1141188",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DANG",
+      "status": "ready"
     },
     "EMPATH:4:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -4306,14 +4306,14 @@
     "EMPATH:5:topic1": {
       "sourceHash": "sha256:dd3bfe5f7da1dd252da75ad13a4ec8c5ff78a68aa1677a1adae1e934f1a76057",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GATE",
+      "status": "ready"
     },
     "EMPATH:5:topic2": {
       "sourceHash": "sha256:72db6f588743f15b72609c2944640a195e6058d313c2e7f76287357365a08e24",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ABBE",
+      "status": "ready"
     },
     "EMPATH:5:yes": {
       "sourceHash": "sha256:3ee8a146dc22205f1311afcd54f433774074bbb84514ea8c3198ccb58b04328b",
@@ -4378,14 +4378,14 @@
     "EMPATH:6:topic1": {
       "sourceHash": "sha256:cfc48a68a8f88ffc417a418c4d12cdc04a68a85aaf9bca50dcfbe11b3cfb96b1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SONG",
+      "status": "ready"
     },
     "EMPATH:6:topic2": {
       "sourceHash": "sha256:93a7b1fdeb46ee231ff3759c513fff893dc5aba4f2ca6a57de7c0d64654dc4be",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CAND",
+      "status": "ready"
     },
     "EMPATH:6:yes": {
       "sourceHash": "sha256:f4d14004987fdf061cdeaffb946d4f9f617f727c3f5b92db42160eef60a8cb8d",
@@ -4450,14 +4450,14 @@
     "EMPATH:7:topic1": {
       "sourceHash": "sha256:1b320275a98faf55f6bb99ce53633f6daad35cf176aa6ed72876c510a59c1d81",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GROV",
+      "status": "ready"
     },
     "EMPATH:7:topic2": {
       "sourceHash": "sha256:83f91416862d79a4b0c441458cdbbc97a9c4591973b6ff04e0364224579f5a78",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "OAK ",
+      "status": "ready"
     },
     "EMPATH:7:yes": {
       "sourceHash": "sha256:685859fe5bf0d3480bc80b980826435f82eb1badd25ef0c0eac16ae004189c0e",
@@ -4522,14 +4522,14 @@
     "EMPATH:8:topic1": {
       "sourceHash": "sha256:f4573f4833e6746e927626048d52240c96032a20ec2aceb99f6998b6a4dee555",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COUN",
+      "status": "ready"
     },
     "EMPATH:8:topic2": {
       "sourceHash": "sha256:86c019bd75e878270f75b8af41523e1ee789128aa9b188e3f819b3a4ad5011e5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LOVE",
+      "status": "ready"
     },
     "EMPATH:8:yes": {
       "sourceHash": "sha256:2105052d37425773b3d6531c9061a3f93f6fdf1fa031d1d23390ed1a85aeec62",
@@ -4594,14 +4594,14 @@
     "EMPATH:9:topic1": {
       "sourceHash": "sha256:86c019bd75e878270f75b8af41523e1ee789128aa9b188e3f819b3a4ad5011e5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LOVE",
+      "status": "ready"
     },
     "EMPATH:9:topic2": {
       "sourceHash": "sha256:c1cf93fb1a4683edaa42b12ddabb5459945ad1971730fabb9db9e7978c19ec6c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COMP",
+      "status": "ready"
     },
     "EMPATH:9:yes": {
       "sourceHash": "sha256:f990be6289b09bad7c01febdaef7af58c0f38477602c97778044a3a55920837c",
@@ -4666,14 +4666,14 @@
     "JHELOM:0:topic1": {
       "sourceHash": "sha256:6a9ee329462e9d8dcc78ef44920501ed6fe2b5eb38f65a329c5568f52de9b291",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WARR",
+      "status": "ready"
     },
     "JHELOM:0:topic2": {
       "sourceHash": "sha256:4b79ec2b00f6f06b88d21f08653670e0139ba0da615b03f383c1a55582a1d18a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BATT",
+      "status": "ready"
     },
     "JHELOM:0:yes": {
       "sourceHash": "sha256:5715b9ed61049ce6f048662a7a144e975b0553e8afcb312688be5545a846b8c4",
@@ -4738,14 +4738,14 @@
     "JHELOM:1:topic1": {
       "sourceHash": "sha256:6a9ee329462e9d8dcc78ef44920501ed6fe2b5eb38f65a329c5568f52de9b291",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WARR",
+      "status": "ready"
     },
     "JHELOM:1:topic2": {
       "sourceHash": "sha256:4b79ec2b00f6f06b88d21f08653670e0139ba0da615b03f383c1a55582a1d18a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BATT",
+      "status": "ready"
     },
     "JHELOM:1:yes": {
       "sourceHash": "sha256:3cac15ae62d432514142eb5ed8966a5a9144c32a3c71e5742f26672ed2ac96b1",
@@ -4810,14 +4810,14 @@
     "JHELOM:10:topic1": {
       "sourceHash": "sha256:2f9acb02faa121bb2a3621951f57b4c690655337edee2e5ac350be2b3be88ea8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PASS",
+      "status": "ready"
     },
     "JHELOM:10:topic2": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "JHELOM:10:yes": {
       "sourceHash": "sha256:b2016b3847d1cd6f8447fdacdb8ae94ee8a6811c2e338c92eee89df1519a6e52",
@@ -4882,14 +4882,14 @@
     "JHELOM:11:topic1": {
       "sourceHash": "sha256:72cd4902f6338cba2173834f079837149d698df03ebf20852dd8e8dbd94fe308",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LIGH",
+      "status": "ready"
     },
     "JHELOM:11:topic2": {
       "sourceHash": "sha256:4a3b9d2060c9361c8dafe066df99b314ed46c0e41185dda406740bb9b7d36b5e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "YEW ",
+      "status": "ready"
     },
     "JHELOM:11:yes": {
       "sourceHash": "sha256:525348baff5aca62e35bbadd190a0c5271cd7b88e1e85add0974e06c87cf0107",
@@ -4954,14 +4954,14 @@
     "JHELOM:12:topic1": {
       "sourceHash": "sha256:282ca94ba9c6f598a7c54d7524283aa62a0ca36e78211a25a50ee2173cca57bc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HOUS",
+      "status": "ready"
     },
     "JHELOM:12:topic2": {
       "sourceHash": "sha256:577fba0b80d791636e583ebc868cf72baf53b9c32e18d501355f2a4fca8820cd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ROOM",
+      "status": "ready"
     },
     "JHELOM:12:yes": {
       "sourceHash": "sha256:266ab65d8cf69ca5b36b37ba639116ac210695d68bf38b322107b7ab38c60692",
@@ -5026,14 +5026,14 @@
     "JHELOM:13:topic1": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STON",
+      "status": "ready"
     },
     "JHELOM:13:topic2": {
       "sourceHash": "sha256:e103660a4196db01d5234f705545482b1324b4608769446086402c72f8ed1e05",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RED ",
+      "status": "ready"
     },
     "JHELOM:13:yes": {
       "sourceHash": "sha256:4a7d6d3e8888a86b41c710f1d44c43d9ec7a4f97dce4f1ec3c0fb124ca0188de",
@@ -5098,14 +5098,14 @@
     "JHELOM:14:topic1": {
       "sourceHash": "sha256:4b79ec2b00f6f06b88d21f08653670e0139ba0da615b03f383c1a55582a1d18a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BATT",
+      "status": "ready"
     },
     "JHELOM:14:topic2": {
       "sourceHash": "sha256:edc61772be45be9269c974bc664bb09db8ba18c4e91401408ce7bf51b9d0f51a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "VALO",
+      "status": "ready"
     },
     "JHELOM:14:yes": {
       "sourceHash": "sha256:7bce5859d19a3156889610ecf2520928ad8e593de21f2d4ab002593eba72eb11",
@@ -5170,14 +5170,14 @@
     "JHELOM:15:topic1": {
       "sourceHash": "sha256:edc61772be45be9269c974bc664bb09db8ba18c4e91401408ce7bf51b9d0f51a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "VALO",
+      "status": "ready"
     },
     "JHELOM:15:topic2": {
       "sourceHash": "sha256:0cd99017a680f51ee22b3000f9010f93da4c3930eb5da57c0c4274d41a5de443",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BRAV",
+      "status": "ready"
     },
     "JHELOM:15:yes": {
       "sourceHash": "sha256:8d1d2d7d842477f4ba66363ea2ee47662b0309f7229bd57138c720625a1d6bd0",
@@ -5242,14 +5242,14 @@
     "JHELOM:2:topic1": {
       "sourceHash": "sha256:fdf2a94c3a3e0c9ca3f639a3f8f77378175b65349461ebf98f14d5678c0fc79c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PREG",
+      "status": "ready"
     },
     "JHELOM:2:topic2": {
       "sourceHash": "sha256:38c4c2a04cb28af200da5712ea255ba98ceba1c85ead94578d8ce4ed4c4466cf",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHEE",
+      "status": "ready"
     },
     "JHELOM:2:yes": {
       "sourceHash": "sha256:533d37441e81cb9c2d88feb4101f4e2d21e52e27cfe542c4446e61299b665a58",
@@ -5314,14 +5314,14 @@
     "JHELOM:3:topic1": {
       "sourceHash": "sha256:684fc07dbf5e31802e239f43f4c04e2ecb644c96d4adef3397d67db51cde7dce",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DUNG",
+      "status": "ready"
     },
     "JHELOM:3:topic2": {
       "sourceHash": "sha256:577fba0b80d791636e583ebc868cf72baf53b9c32e18d501355f2a4fca8820cd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ROOM",
+      "status": "ready"
     },
     "JHELOM:3:yes": {
       "sourceHash": "sha256:1a9eb25cc5b72af9541031717b6c52c94006f2967de679f535e1cfb8461c8325",
@@ -5386,14 +5386,14 @@
     "JHELOM:4:topic1": {
       "sourceHash": "sha256:a4cae81b6d0480d3ab6b52a6dfb5eae63346252bd00c4df5e27fcf96851bb84e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "EVIL",
+      "status": "ready"
     },
     "JHELOM:4:topic2": {
       "sourceHash": "sha256:448dd87e377473d5decb412ee66a1bfb6cb5a07051d1978638aafee79af838e0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "KILL",
+      "status": "ready"
     },
     "JHELOM:4:yes": {
       "sourceHash": "sha256:1507cfd79428483a7a1bba77ce2aab419137af8af381782f001f1bc506d8f7f2",
@@ -5458,14 +5458,14 @@
     "JHELOM:5:topic1": {
       "sourceHash": "sha256:edc61772be45be9269c974bc664bb09db8ba18c4e91401408ce7bf51b9d0f51a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "VALO",
+      "status": "ready"
     },
     "JHELOM:5:topic2": {
       "sourceHash": "sha256:fb42dc1af393c2ea7537c1857cc5c590a56e57d3f3d249a018883dc32526d92a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHRI",
+      "status": "ready"
     },
     "JHELOM:5:yes": {
       "sourceHash": "sha256:6f9f3d265fdd0fa2dd285f76a9ba0280b213ec07891cf7546b9aed0866c1574b",
@@ -5530,14 +5530,14 @@
     "JHELOM:6:topic1": {
       "sourceHash": "sha256:dd3bfe5f7da1dd252da75ad13a4ec8c5ff78a68aa1677a1adae1e934f1a76057",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GATE",
+      "status": "ready"
     },
     "JHELOM:6:topic2": {
       "sourceHash": "sha256:2f9acb02faa121bb2a3621951f57b4c690655337edee2e5ac350be2b3be88ea8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PASS",
+      "status": "ready"
     },
     "JHELOM:6:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -5602,14 +5602,14 @@
     "JHELOM:7:topic1": {
       "sourceHash": "sha256:edc61772be45be9269c974bc664bb09db8ba18c4e91401408ce7bf51b9d0f51a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "VALO",
+      "status": "ready"
     },
     "JHELOM:7:topic2": {
       "sourceHash": "sha256:18f0480988aad06db2c3fe0620abb681493f5b2278409599257304714b1d30b4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MANT",
+      "status": "ready"
     },
     "JHELOM:7:yes": {
       "sourceHash": "sha256:2cc6120dd35d5962148f30354f4d11e3b52ee7331cc99e69c8f8da3de9398867",
@@ -5674,14 +5674,14 @@
     "JHELOM:8:topic1": {
       "sourceHash": "sha256:684fc07dbf5e31802e239f43f4c04e2ecb644c96d4adef3397d67db51cde7dce",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DUNG",
+      "status": "ready"
     },
     "JHELOM:8:topic2": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STON",
+      "status": "ready"
     },
     "JHELOM:8:yes": {
       "sourceHash": "sha256:7187c8d25d8041eeb0d0a60888856884517eb9b36fb5d31c29edbd34dbf8851a",
@@ -5746,14 +5746,14 @@
     "JHELOM:9:topic1": {
       "sourceHash": "sha256:b54e4630238e4e7b2fab0447e1eb5ec3113f6aec2d269313e7723b5a9c8e2778",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TOWE",
+      "status": "ready"
     },
     "JHELOM:9:topic2": {
       "sourceHash": "sha256:f3e7a878f5367aff3342b490702903ff231b5693e757c258db9fc1917c8474c0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CRIM",
+      "status": "ready"
     },
     "JHELOM:9:yes": {
       "sourceHash": "sha256:f5c50eb16d2b77869a56efc480ac7e7ff5b956a9668cf46285fc7968ce249b12",
@@ -5818,14 +5818,14 @@
     "LCB:0:topic1": {
       "sourceHash": "sha256:37a6760fa43caf5b1ea02f22251b1456c39e060a4918ba3e963dbde336f16148",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HELP",
+      "status": "ready"
     },
     "LCB:0:topic2": {
       "sourceHash": "sha256:c90ed0af64d71a618b6642d147b1e20c079465c2063eb1019ec3237f9d9d732d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RIDD",
+      "status": "ready"
     },
     "LCB:0:yes": {
       "sourceHash": "sha256:6cc1b5314bff17ec2074f2db8cb7db593fe90f0cd37c0a7736e2d2562c6b89b6",
@@ -5890,14 +5890,14 @@
     "LCB:1:topic1": {
       "sourceHash": "sha256:37a6760fa43caf5b1ea02f22251b1456c39e060a4918ba3e963dbde336f16148",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HELP",
+      "status": "ready"
     },
     "LCB:1:topic2": {
       "sourceHash": "sha256:917f867e78d0d48a7fc2a8a279c1dd526dcd3c5b31b5f89617a89169668bd58c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ONE ",
+      "status": "ready"
     },
     "LCB:1:yes": {
       "sourceHash": "sha256:331209762fbde37d7f73af3b9461b5feed0dc49e407f54e573b5efd1325cf962",
@@ -5962,14 +5962,14 @@
     "LCB:10:topic1": {
       "sourceHash": "sha256:6d37562166b64b4408b83d0a8a46ac30dfce306c84a4d11d3c48587632ce8ac0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WATE",
+      "status": "ready"
     },
     "LCB:10:topic2": {
       "sourceHash": "sha256:beaf3e335fc7f83996f3f2dab670c283c694e8040bfb4b7a196092601dfd0cbc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PEAC",
+      "status": "ready"
     },
     "LCB:10:yes": {
       "sourceHash": "sha256:eb9aac3649f19889fd67f3982c9f913bf19c39df2b9486aa94f8ef09a03134c4",
@@ -6034,14 +6034,14 @@
     "LCB:11:topic1": {
       "sourceHash": "sha256:0993295423957417ff3fef3dbcb1cfe7615462edeb2e9c02d9ca1a6f59c03776",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WOUN",
+      "status": "ready"
     },
     "LCB:11:topic2": {
       "sourceHash": "sha256:f4573f4833e6746e927626048d52240c96032a20ec2aceb99f6998b6a4dee555",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COUN",
+      "status": "ready"
     },
     "LCB:11:yes": {
       "sourceHash": "sha256:634dd2317e8fde66aaea36df16158227ecb0ac9e029efcb53020b22d76a28e7f",
@@ -6106,14 +6106,14 @@
     "LCB:12:topic1": {
       "sourceHash": "sha256:1b5cda4b987daf45875fa9fd9fa4c95022ec5713cfcb527394a0e4cb82a6089c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JEST",
+      "status": "ready"
     },
     "LCB:12:topic2": {
       "sourceHash": "sha256:ccdaeee41b3ee9ccf893828125848952f50b50264af7c75d809b30b929f85e90",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CLUE",
+      "status": "ready"
     },
     "LCB:12:yes": {
       "sourceHash": "sha256:7ba7ba550086230d4d2b6fc0f10272c6c94a02ae14e7da332bd70708dc505369",
@@ -6178,14 +6178,14 @@
     "LCB:13:topic1": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GUAR",
+      "status": "ready"
     },
     "LCB:13:topic2": {
       "sourceHash": "sha256:84e3287553df0e939700be6d49aff5a10afbb5941a51431dad33320b570c2773",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TREA",
+      "status": "ready"
     },
     "LCB:13:yes": {
       "sourceHash": "sha256:e1240ce3d5c884e987e09ba7560c153dd68c772f4ecd9fd0b5b6a65ad3eb9095",
@@ -6250,14 +6250,14 @@
     "LCB:14:topic1": {
       "sourceHash": "sha256:72cd4902f6338cba2173834f079837149d698df03ebf20852dd8e8dbd94fe308",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LIGH",
+      "status": "ready"
     },
     "LCB:14:topic2": {
       "sourceHash": "sha256:fb42dc1af393c2ea7537c1857cc5c590a56e57d3f3d249a018883dc32526d92a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHRI",
+      "status": "ready"
     },
     "LCB:14:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -6322,14 +6322,14 @@
     "LCB:15:topic1": {
       "sourceHash": "sha256:1440a7f63a8dd416f66e8fad0d5067962f726d9185c237d08401b54d42b56bed",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WARN",
+      "status": "ready"
     },
     "LCB:15:topic2": {
       "sourceHash": "sha256:99cea00fbdf4704975bceaf3320e95bbe3acd96c0fd8d7802df5b489b621e411",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PERI",
+      "status": "ready"
     },
     "LCB:15:yes": {
       "sourceHash": "sha256:1bc6277b314d30fd699185f3f966c214272c85a827d01ead9cff870b9152f576",
@@ -6394,14 +6394,14 @@
     "LCB:2:topic1": {
       "sourceHash": "sha256:1b5cda4b987daf45875fa9fd9fa4c95022ec5713cfcb527394a0e4cb82a6089c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JEST",
+      "status": "ready"
     },
     "LCB:2:topic2": {
       "sourceHash": "sha256:a99e817c5479ab3a3d7d3e5444bfcbd410347a437fff40b347dd846c1383dab5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BARD",
+      "status": "ready"
     },
     "LCB:2:yes": {
       "sourceHash": "sha256:b87e79a139aaefe850e7eba32f6aad3562308fd8b518c704d5beecfe3235259e",
@@ -6466,14 +6466,14 @@
     "LCB:3:topic1": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GUAR",
+      "status": "ready"
     },
     "LCB:3:topic2": {
       "sourceHash": "sha256:97252b6cb20ff5d5520705ebddf04aa16af13f8a34ee1690c6b67a7cfc0686ee",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LIEG",
+      "status": "ready"
     },
     "LCB:3:yes": {
       "sourceHash": "sha256:0939430e32e3358a33eebb10ce220ea1837a8e6a5c097d703152ccb650da1949",
@@ -6538,14 +6538,14 @@
     "LCB:4:topic1": {
       "sourceHash": "sha256:c296849c776bc901618fbd756103890ec4a8dd1529bb2bcdeba968ce9b7b93fc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FOOD",
+      "status": "ready"
     },
     "LCB:4:topic2": {
       "sourceHash": "sha256:0ba34cc38ed89e228fcaad11e54d9ade0799bd893b994b36e041e2ac17cc7f6e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COOK",
+      "status": "ready"
     },
     "LCB:4:yes": {
       "sourceHash": "sha256:00279d7ed0e99dafc871d5811b98429a0628c1c846cb75820ba7665b51ebf756",
@@ -6610,14 +6610,14 @@
     "LCB:5:topic1": {
       "sourceHash": "sha256:448dd87e377473d5decb412ee66a1bfb6cb5a07051d1978638aafee79af838e0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "KILL",
+      "status": "ready"
     },
     "LCB:5:topic2": {
       "sourceHash": "sha256:e8755ffb007cbdaffa6c3d4c3bbd5230b97513044e8f8f2aa9adba4f1063707f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "THIN",
+      "status": "ready"
     },
     "LCB:5:yes": {
       "sourceHash": "sha256:fd0c01247766f7d24e4e684816d45e2fc1bc753a79f7ed1f0b4018fe498acf99",
@@ -6682,14 +6682,14 @@
     "LCB:6:topic1": {
       "sourceHash": "sha256:f3e7a878f5367aff3342b490702903ff231b5693e757c258db9fc1917c8474c0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CRIM",
+      "status": "ready"
     },
     "LCB:6:topic2": {
       "sourceHash": "sha256:9e18b00697fe28db46c654e93ee179e2be4aa14aa9bd3ea0018920a4babc29b7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PRIS",
+      "status": "ready"
     },
     "LCB:6:yes": {
       "sourceHash": "sha256:5f8f6afb77669b28f411e2b5a33bcfcbd19a068760a624b55d65ee24554d1cc0",
@@ -6754,14 +6754,14 @@
     "LCB:7:topic1": {
       "sourceHash": "sha256:37a6760fa43caf5b1ea02f22251b1456c39e060a4918ba3e963dbde336f16148",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HELP",
+      "status": "ready"
     },
     "LCB:7:topic2": {
       "sourceHash": "sha256:a27c22d415c22457f26798f87c72ea86380b3a8206a9f9874b1ca15f673c57b3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CAST",
+      "status": "ready"
     },
     "LCB:7:yes": {
       "sourceHash": "sha256:ffc24238f454b552a82649c4eb2541dbd5fa2864d612bb9202dda74f091dbb51",
@@ -6826,14 +6826,14 @@
     "LCB:8:topic1": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GUAR",
+      "status": "ready"
     },
     "LCB:8:topic2": {
       "sourceHash": "sha256:a27c22d415c22457f26798f87c72ea86380b3a8206a9f9874b1ca15f673c57b3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CAST",
+      "status": "ready"
     },
     "LCB:8:yes": {
       "sourceHash": "sha256:a3dcae5321843036ee32ee6fad31dff6cdcf9b45b43f9803c206aec40b5102ec",
@@ -6898,14 +6898,14 @@
     "LCB:9:topic1": {
       "sourceHash": "sha256:3df48ffb85c2d269613d2ee36c3227c1babdcf8691cb5fb6aad103877cd9236a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SECR",
+      "status": "ready"
     },
     "LCB:9:topic2": {
       "sourceHash": "sha256:4bfe72d56f5d38ccb23abbb24fb61357f0940e134cf5946a8c0aea23e412e6d5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ALTA",
+      "status": "ready"
     },
     "LCB:9:yes": {
       "sourceHash": "sha256:67d51712cacbb4fe10d3a63936fa0b00c9ae93e0942a79260a23a47e5c70c5e4",
@@ -6970,14 +6970,14 @@
     "LYCAEUM:0:topic1": {
       "sourceHash": "sha256:5029af19eafc8e0cf42b8bb6b2d05e7fb8c106e5926a2a03e541916e3f8812aa",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PROV",
+      "status": "ready"
     },
     "LYCAEUM:0:topic2": {
       "sourceHash": "sha256:cb2df9a0081dc2de50afb86e0bd43752dc6983d13c411271a75302194aba4316",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WORD",
+      "status": "ready"
     },
     "LYCAEUM:0:yes": {
       "sourceHash": "sha256:386e6aa171d1cfe257fa6a919d0b6f8e66db9e10f816bf4d08369dfe3fc099ab",
@@ -7042,14 +7042,14 @@
     "LYCAEUM:1:topic1": {
       "sourceHash": "sha256:44d0ee0fee34f569267cfe8572a56013fa51b2bc5ceb370cde890824cc616919",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RULE",
+      "status": "ready"
     },
     "LYCAEUM:1:topic2": {
       "sourceHash": "sha256:5029af19eafc8e0cf42b8bb6b2d05e7fb8c106e5926a2a03e541916e3f8812aa",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PROV",
+      "status": "ready"
     },
     "LYCAEUM:1:yes": {
       "sourceHash": "sha256:cb9afad9cd75b25eed120a420dc638e5a78a3455ee8e7162f1d3c3988650f227",
@@ -7114,14 +7114,14 @@
     "LYCAEUM:10:topic1": {
       "sourceHash": "sha256:6a9ee329462e9d8dcc78ef44920501ed6fe2b5eb38f65a329c5568f52de9b291",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WARR",
+      "status": "ready"
     },
     "LYCAEUM:10:topic2": {
       "sourceHash": "sha256:0993295423957417ff3fef3dbcb1cfe7615462edeb2e9c02d9ca1a6f59c03776",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WOUN",
+      "status": "ready"
     },
     "LYCAEUM:10:yes": {
       "sourceHash": "sha256:389c3b2a1352dece80f1c169b62f773347d053f2d86828fa8968aa8758ea2232",
@@ -7186,14 +7186,14 @@
     "LYCAEUM:11:topic1": {
       "sourceHash": "sha256:cf20a86fcb91e67ac73a12c6f4df6f5cdbeb43c68e8bab4c4554af2dc0937a51",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LIBR",
+      "status": "ready"
     },
     "LYCAEUM:11:topic2": {
       "sourceHash": "sha256:e23de1af79db44fb8048563383845a0925b7d1f4cbafa753b9a9f1a9f91bc804",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TRUT",
+      "status": "ready"
     },
     "LYCAEUM:11:yes": {
       "sourceHash": "sha256:b02d4ba14d4d57a748be3eaf8401db3358f414c82269d207b2c4861bcea7afe9",
@@ -7258,14 +7258,14 @@
     "LYCAEUM:12:topic1": {
       "sourceHash": "sha256:9bf937890ae5b51f18f58359c468e6d6df203a6cba28115d1a3f7f90a553e2d9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ENTE",
+      "status": "ready"
     },
     "LYCAEUM:12:topic2": {
       "sourceHash": "sha256:35768dbc6504000b4f2e879b53e70d5740c17b08f19d409911de885c5e86d11a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "UNHA",
+      "status": "ready"
     },
     "LYCAEUM:12:yes": {
       "sourceHash": "sha256:d201cc9c4f4879078088ab3befc61f4f5f800941951898bf047bfa846a7afd57",
@@ -7330,14 +7330,14 @@
     "LYCAEUM:13:topic1": {
       "sourceHash": "sha256:84e3287553df0e939700be6d49aff5a10afbb5941a51431dad33320b570c2773",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TREA",
+      "status": "ready"
     },
     "LYCAEUM:13:topic2": {
       "sourceHash": "sha256:484ca41a955e34375f491e7a8fdb4a3f5dbe61d869040e3eaad416daed5ec9f7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "VALU",
+      "status": "ready"
     },
     "LYCAEUM:13:yes": {
       "sourceHash": "sha256:c4a85256670a285ab8f1dfb07111bf2b7dfe7e483f55cec6cbaa9199bf369ccc",
@@ -7402,14 +7402,14 @@
     "LYCAEUM:14:topic1": {
       "sourceHash": "sha256:60bc44e9ee349cbbfe42fa6c1c3383f26cff006fa4e859dd002245bd1b59fdcb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SPEL",
+      "status": "ready"
     },
     "LYCAEUM:14:topic2": {
       "sourceHash": "sha256:89bbae50345c9d103458385088279e43720e0473a4fe434232df629e429358f4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RECA",
+      "status": "ready"
     },
     "LYCAEUM:14:yes": {
       "sourceHash": "sha256:4f6dac766ee453f9307a4648a18af27a809acc84154dd33e4333206137891940",
@@ -7474,14 +7474,14 @@
     "LYCAEUM:15:topic1": {
       "sourceHash": "sha256:dc2b628bfb4b9d9e8cbec2c12df6b32df5cce05a6cf430569b9f93c9ec4ed8d4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BEG ",
+      "status": "ready"
     },
     "LYCAEUM:15:topic2": {
       "sourceHash": "sha256:06184e6cdf72570c5c598aa50961d0332cb8b265cd1aff5807442986d945e25f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SICK",
+      "status": "ready"
     },
     "LYCAEUM:15:yes": {
       "sourceHash": "sha256:9d301507cad412b49dbf9b4155304bb0cf982605a27e2bae21a1615e10d3fffd",
@@ -7546,14 +7546,14 @@
     "LYCAEUM:2:topic1": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GUAR",
+      "status": "ready"
     },
     "LYCAEUM:2:topic2": {
       "sourceHash": "sha256:faa9decb5dce3d4283a997013e6815abdc80811e9acd23631d126db027653f7e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HOUR",
+      "status": "ready"
     },
     "LYCAEUM:2:yes": {
       "sourceHash": "sha256:963eae06bc33bdbd8903ceaf7f7dbbf81c14697766e06207b00435d4b58298d2",
@@ -7618,14 +7618,14 @@
     "LYCAEUM:3:topic1": {
       "sourceHash": "sha256:45ea7f3cadc6e817e9634eca10c403866a7fdb95d94a7384c154dca588c58f00",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHOW",
+      "status": "ready"
     },
     "LYCAEUM:3:topic2": {
       "sourceHash": "sha256:75eaf0b7d18818087658da7031970d6826a8ad93021741427750612511fd20cc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TELE",
+      "status": "ready"
     },
     "LYCAEUM:3:yes": {
       "sourceHash": "sha256:7744288321aced3b3465fe883033c50be9c932daccf2b93d8eb54ec20f6b5a51",
@@ -7690,14 +7690,14 @@
     "LYCAEUM:4:topic1": {
       "sourceHash": "sha256:9c97a48a4bc18e156ab42229dac74bfa7bf14f221478db0c5486efaa42dceed9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "KNOW",
+      "status": "ready"
     },
     "LYCAEUM:4:topic2": {
       "sourceHash": "sha256:acf179bbd4f8c0becab1c5e0767f22b87d3fb91be4ce02803b5eb5bae2a82aff",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BOOK",
+      "status": "ready"
     },
     "LYCAEUM:4:yes": {
       "sourceHash": "sha256:5bfb0aff715d0a67806a4f7ab538323f65d301ec90fd7f953d32023dc4dfedbe",
@@ -7762,14 +7762,14 @@
     "LYCAEUM:5:topic1": {
       "sourceHash": "sha256:37588a71cdf19886b5e44328c4bba94a6dc5c9e2ac76a55eaaaec940868d90fa",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "THRO",
+      "status": "ready"
     },
     "LYCAEUM:5:topic2": {
       "sourceHash": "sha256:e23de1af79db44fb8048563383845a0925b7d1f4cbafa753b9a9f1a9f91bc804",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TRUT",
+      "status": "ready"
     },
     "LYCAEUM:5:yes": {
       "sourceHash": "sha256:a0d7ce8c360ce42ca16394929f14c0fcb116bae1a05f6f9c23ae7815f6ae7de7",
@@ -7834,14 +7834,14 @@
     "LYCAEUM:6:topic1": {
       "sourceHash": "sha256:8423f854ef1fc1b026cd209b411e8212355755ca80146cc2eebc7bb7c68a9b10",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ADVI",
+      "status": "ready"
     },
     "LYCAEUM:6:topic2": {
       "sourceHash": "sha256:3bbdaa475d160e496e891e69eba5e8afcefbd827facfcee38772e4600e91a7a7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ARMO",
+      "status": "ready"
     },
     "LYCAEUM:6:yes": {
       "sourceHash": "sha256:a87c074a9fca0433c929f6e0c4f345d226d43ca4d7fb59122084811d3801779f",
@@ -7906,14 +7906,14 @@
     "LYCAEUM:7:topic1": {
       "sourceHash": "sha256:1d308eae8465e20f3e687bac032baa0756c791bcc1cbd441546ccf51f94a4373",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "REAS",
+      "status": "ready"
     },
     "LYCAEUM:7:topic2": {
       "sourceHash": "sha256:9c80e3e4f07b52561aecc2cf4adeca0303b88103eab354a2a76dcda01183be23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JUST",
+      "status": "ready"
     },
     "LYCAEUM:7:yes": {
       "sourceHash": "sha256:83ff27e3dd54977aa66b16f4b7fc0f1438082d48bfee3b33cd577883793b4841",
@@ -7978,14 +7978,14 @@
     "LYCAEUM:8:topic1": {
       "sourceHash": "sha256:db707d2f9eea6fc3fc6275f0cc5b47b82c4664b5927b0ac6cf54ac03b0828e3d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WELC",
+      "status": "ready"
     },
     "LYCAEUM:8:topic2": {
       "sourceHash": "sha256:edf9e3630fb7305a562d35bf4cb20afb879c8d4dcf16e2c21fa05107999c7f6c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FOUR",
+      "status": "ready"
     },
     "LYCAEUM:8:yes": {
       "sourceHash": "sha256:ba352e24c64c7137d1e4e1386b99b0eda7332e4e2d47863bbb213763d7ac6d27",
@@ -8050,14 +8050,14 @@
     "LYCAEUM:9:topic1": {
       "sourceHash": "sha256:e23de1af79db44fb8048563383845a0925b7d1f4cbafa753b9a9f1a9f91bc804",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TRUT",
+      "status": "ready"
     },
     "LYCAEUM:9:topic2": {
       "sourceHash": "sha256:0001c4b8f7552a5fb32a5d474996de7b6599ad356d76e20a2a2933105feb7e25",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MEDI",
+      "status": "ready"
     },
     "LYCAEUM:9:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -8122,14 +8122,14 @@
     "MAGINCIA:0:topic1": {
       "sourceHash": "sha256:e704b459f1eec3b1c92ed6af62746111aa18874b7df1711b840d99f2f0e8cfcd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SURV",
+      "status": "ready"
     },
     "MAGINCIA:0:topic2": {
       "sourceHash": "sha256:46b1136f89af1bed417226e373418993066c69c8aa089729af0e46d3c6cc98a7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PRID",
+      "status": "ready"
     },
     "MAGINCIA:0:yes": {
       "sourceHash": "sha256:a1e61824e3835ccf4863c215327fa0ceea17cef226413128cd405f83340156e7",
@@ -8194,14 +8194,14 @@
     "MAGINCIA:1:topic1": {
       "sourceHash": "sha256:beaf3e335fc7f83996f3f2dab670c283c694e8040bfb4b7a196092601dfd0cbc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PEAC",
+      "status": "ready"
     },
     "MAGINCIA:1:topic2": {
       "sourceHash": "sha256:aa8702b33bca8d7ad34caf59cfff06baff044582a66cb5c1757657fed5d8e5c2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SPIR",
+      "status": "ready"
     },
     "MAGINCIA:1:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -8266,14 +8266,14 @@
     "MAGINCIA:10:topic1": {
       "sourceHash": "sha256:e82505a88fabc50a9abd77706a4837e585b1eeb7bf6e3492b08a5dbc35778334",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MERC",
+      "status": "ready"
     },
     "MAGINCIA:10:topic2": {
       "sourceHash": "sha256:9a4b81f9b1babed8fbc9c1484130a916e26ce245691439f3e165db97fbf79209",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "POWE",
+      "status": "ready"
     },
     "MAGINCIA:10:yes": {
       "sourceHash": "sha256:7fe9c3dcf869c4e60584c050b46e9f0907d405363d1be39a32843c98dec9f255",
@@ -8338,14 +8338,14 @@
     "MAGINCIA:11:topic1": {
       "sourceHash": "sha256:1ed8f0748b4186f626eb3a830be164dedfe2e11e11c342d6b4af467c1b48921d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHOP",
+      "status": "ready"
     },
     "MAGINCIA:11:topic2": {
       "sourceHash": "sha256:ee15cc72e74726ccf2a263dce3e2c9d61836e21cb2499b53cb52cda2599c50ce",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SPOI",
+      "status": "ready"
     },
     "MAGINCIA:11:yes": {
       "sourceHash": "sha256:16d199716fc7afd96210c6681d2acf296637cbccf980fdb933201adbebfe5c15",
@@ -8410,14 +8410,14 @@
     "MAGINCIA:12:topic1": {
       "sourceHash": "sha256:389b0bc669e7efdca6e9249aeaa5d9f7e1dd6c18ba0b70057421ca5cb2e2ed10",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "REGR",
+      "status": "ready"
     },
     "MAGINCIA:12:topic2": {
       "sourceHash": "sha256:ab11b05317f3e77956e6901b4fe3a4b78291fa5391fa5129c46b7e7fd5476983",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HUMB",
+      "status": "ready"
     },
     "MAGINCIA:12:yes": {
       "sourceHash": "sha256:cfae03c0d8a3f04825339985bd59da831b8753959887e26a0daddec419c05ca1",
@@ -8482,14 +8482,14 @@
     "MAGINCIA:13:topic1": {
       "sourceHash": "sha256:24f6aeb78d36b2714d40ccc433956028a025616ac02ae907b1faddf60c3656b3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HUMI",
+      "status": "ready"
     },
     "MAGINCIA:13:topic2": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "MAGINCIA:13:yes": {
       "sourceHash": "sha256:7e17e50a05c39f3bcb971b1fde5ff7b4cc716b9b6c870b6c7760e0181883d552",
@@ -8554,14 +8554,14 @@
     "MAGINCIA:14:topic1": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STON",
+      "status": "ready"
     },
     "MAGINCIA:14:topic2": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "MAGINCIA:14:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -8626,14 +8626,14 @@
     "MAGINCIA:15:topic1": {
       "sourceHash": "sha256:717df8504486485ff295eeb50734767b0c0cc1b98a7d3ab8d9f669fc84291c25",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MAGI",
+      "status": "ready"
     },
     "MAGINCIA:15:topic2": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "MAGINCIA:15:yes": {
       "sourceHash": "sha256:a0d7ce8c360ce42ca16394929f14c0fcb116bae1a05f6f9c23ae7815f6ae7de7",
@@ -8698,14 +8698,14 @@
     "MAGINCIA:2:topic1": {
       "sourceHash": "sha256:16ec0e4394ab7cd3a5589f9df671827dd2bb2d8154da5455718d391cc315c9fe",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "NOBL",
+      "status": "ready"
     },
     "MAGINCIA:2:topic2": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "MAGINCIA:2:yes": {
       "sourceHash": "sha256:ded1bbdd6c1ff6486c7a32b187b33e27a3c74daebe1e5c86641a93959041bf8d",
@@ -8770,14 +8770,14 @@
     "MAGINCIA:3:topic1": {
       "sourceHash": "sha256:0c2ecf3fa9d8ad94989f5eb3e371786cf6f529ab539ffaeb348d9b5107d6196e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HAUN",
+      "status": "ready"
     },
     "MAGINCIA:3:topic2": {
       "sourceHash": "sha256:46b1136f89af1bed417226e373418993066c69c8aa089729af0e46d3c6cc98a7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PRID",
+      "status": "ready"
     },
     "MAGINCIA:3:yes": {
       "sourceHash": "sha256:0e54a78d5942316593309e3c955f0fb560bf55787472f74c6d2db0f27e3a5602",
@@ -8842,14 +8842,14 @@
     "MAGINCIA:4:topic1": {
       "sourceHash": "sha256:b1432642907bf9ece49a1ea6cb8c54bebd9f1e5ca2df66bfd995cf6a7a6f73c9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HANG",
+      "status": "ready"
     },
     "MAGINCIA:4:topic2": {
       "sourceHash": "sha256:18f0480988aad06db2c3fe0620abb681493f5b2278409599257304714b1d30b4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MANT",
+      "status": "ready"
     },
     "MAGINCIA:4:yes": {
       "sourceHash": "sha256:3b10aedd322730d2b091f248d5d3d8912e77ef01557c35e25f72240f6066dd5e",
@@ -8914,14 +8914,14 @@
     "MAGINCIA:5:topic1": {
       "sourceHash": "sha256:0c2ecf3fa9d8ad94989f5eb3e371786cf6f529ab539ffaeb348d9b5107d6196e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HAUN",
+      "status": "ready"
     },
     "MAGINCIA:5:topic2": {
       "sourceHash": "sha256:18f0480988aad06db2c3fe0620abb681493f5b2278409599257304714b1d30b4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MANT",
+      "status": "ready"
     },
     "MAGINCIA:5:yes": {
       "sourceHash": "sha256:2350464d7313671091d9818d52d113f7414351d18b5624cc51c587601c4af773",
@@ -8986,14 +8986,14 @@
     "MAGINCIA:6:topic1": {
       "sourceHash": "sha256:68161bb0cf0e08c3dc9012577b1fe10b11124873d7a674b88df5314742bc73d3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BONE",
+      "status": "ready"
     },
     "MAGINCIA:6:topic2": {
       "sourceHash": "sha256:46b1136f89af1bed417226e373418993066c69c8aa089729af0e46d3c6cc98a7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PRID",
+      "status": "ready"
     },
     "MAGINCIA:6:yes": {
       "sourceHash": "sha256:f4f021b9fc58332c3119b0698a896c86c5e3b91e70ef816215d4d647e23ecad2",
@@ -9058,14 +9058,14 @@
     "MAGINCIA:7:topic1": {
       "sourceHash": "sha256:24f5cf515f93bccc65ac8728c8caa2755f97b0ae426e68aba142ac12a139ceec",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HORN",
+      "status": "ready"
     },
     "MAGINCIA:7:topic2": {
       "sourceHash": "sha256:fb42dc1af393c2ea7537c1857cc5c590a56e57d3f3d249a018883dc32526d92a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHRI",
+      "status": "ready"
     },
     "MAGINCIA:7:yes": {
       "sourceHash": "sha256:e8a018c2fbf64906a411183bf6d36962faf3088d4100306e3723b1d7389914db",
@@ -9130,14 +9130,14 @@
     "MAGINCIA:8:topic1": {
       "sourceHash": "sha256:68161bb0cf0e08c3dc9012577b1fe10b11124873d7a674b88df5314742bc73d3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BONE",
+      "status": "ready"
     },
     "MAGINCIA:8:topic2": {
       "sourceHash": "sha256:24f5cf515f93bccc65ac8728c8caa2755f97b0ae426e68aba142ac12a139ceec",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HORN",
+      "status": "ready"
     },
     "MAGINCIA:8:yes": {
       "sourceHash": "sha256:dfae97260e8e1c2d9b684b69934af863828fa0b1d2d477175876b482f16c5d56",
@@ -9202,14 +9202,14 @@
     "MAGINCIA:9:topic1": {
       "sourceHash": "sha256:0c2ecf3fa9d8ad94989f5eb3e371786cf6f529ab539ffaeb348d9b5107d6196e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HAUN",
+      "status": "ready"
     },
     "MAGINCIA:9:topic2": {
       "sourceHash": "sha256:fb42dc1af393c2ea7537c1857cc5c590a56e57d3f3d249a018883dc32526d92a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHRI",
+      "status": "ready"
     },
     "MAGINCIA:9:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -9274,14 +9274,14 @@
     "MINOC:0:topic1": {
       "sourceHash": "sha256:802dd397fc861f077255373747169b759f9d714d2ef5535a8dbe22df5760cb80",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CARE",
+      "status": "ready"
     },
     "MINOC:0:topic2": {
       "sourceHash": "sha256:2d4b35a5867905081458f9bef1959c06dfc473e402329c5d0207ef4526e6563e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "POOR",
+      "status": "ready"
     },
     "MINOC:0:yes": {
       "sourceHash": "sha256:8f3c850e492c10b38d575896e265919c606fe3e48378b42b0a92f2c6551b5247",
@@ -9346,14 +9346,14 @@
     "MINOC:1:topic1": {
       "sourceHash": "sha256:a390d0c9d0db31b1bdfc2b5893d259d85b314f7bab428e293cfc8dcf7df6c05e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WEAP",
+      "status": "ready"
     },
     "MINOC:1:topic2": {
       "sourceHash": "sha256:9c50aee3590cc917d9dd95eb546748040928e958f9f6058ba7310bc4f31d6b66",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MYST",
+      "status": "ready"
     },
     "MINOC:1:yes": {
       "sourceHash": "sha256:b68ccfb6842c58ec1fbecfddd1b3ea89597907ff2aa4e93ace58823e90781c83",
@@ -9418,14 +9418,14 @@
     "MINOC:10:topic1": {
       "sourceHash": "sha256:4f38a44cd879cbbff175fc6f5146fcc6b6f331a1d104b5b9aabbcda52a526043",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SING",
+      "status": "ready"
     },
     "MINOC:10:topic2": {
       "sourceHash": "sha256:cfc48a68a8f88ffc417a418c4d12cdc04a68a85aaf9bca50dcfbe11b3cfb96b1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SONG",
+      "status": "ready"
     },
     "MINOC:10:yes": {
       "sourceHash": "sha256:f51bead488e14b656af3a13e33eb1d6fa9580832cbb9d7a20061f84c4b1c160f",
@@ -9490,14 +9490,14 @@
     "MINOC:11:topic1": {
       "sourceHash": "sha256:e8755ffb007cbdaffa6c3d4c3bbd5230b97513044e8f8f2aa9adba4f1063707f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "THIN",
+      "status": "ready"
     },
     "MINOC:11:topic2": {
       "sourceHash": "sha256:18f0480988aad06db2c3fe0620abb681493f5b2278409599257304714b1d30b4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MANT",
+      "status": "ready"
     },
     "MINOC:11:yes": {
       "sourceHash": "sha256:41fc07fc0868d5ef157373b21f7a32b63b4ccb16edda634e3ffc52f80eb247bc",
@@ -9562,14 +9562,14 @@
     "MINOC:12:topic1": {
       "sourceHash": "sha256:679eaac16659c013675081e715f7ef761bdd183f1d7f55d079eb46ad6e322ac5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "THIS",
+      "status": "ready"
     },
     "MINOC:12:topic2": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "MINOC:12:yes": {
       "sourceHash": "sha256:a075396762c8cb7652b11bb34f522775a249d17fdf4fa918f761d5b17eadaff3",
@@ -9634,14 +9634,14 @@
     "MINOC:13:topic1": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "MINOC:13:topic2": {
       "sourceHash": "sha256:19cf613426ed05f030bf8d50114b7fcdd1533cabc353121fce35e48c5eefa010",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SACR",
+      "status": "ready"
     },
     "MINOC:13:yes": {
       "sourceHash": "sha256:f04329d65effaa07830f4ff30d13cdcad36b43666b07f85dad90f313979b7667",
@@ -9706,14 +9706,14 @@
     "MINOC:14:topic1": {
       "sourceHash": "sha256:fb42dc1af393c2ea7537c1857cc5c590a56e57d3f3d249a018883dc32526d92a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHRI",
+      "status": "ready"
     },
     "MINOC:14:topic2": {
       "sourceHash": "sha256:18f0480988aad06db2c3fe0620abb681493f5b2278409599257304714b1d30b4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MANT",
+      "status": "ready"
     },
     "MINOC:14:yes": {
       "sourceHash": "sha256:a0d7ce8c360ce42ca16394929f14c0fcb116bae1a05f6f9c23ae7815f6ae7de7",
@@ -9778,14 +9778,14 @@
     "MINOC:15:topic1": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GUAR",
+      "status": "ready"
     },
     "MINOC:15:topic2": {
       "sourceHash": "sha256:0c23e3138346c4611f1b981f2aeaf658b6130461a53d13dd9a005a88578e7310",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LIFE",
+      "status": "ready"
     },
     "MINOC:15:yes": {
       "sourceHash": "sha256:d23291f5ec529d827223b8e95c638a638e8ec0fbeae1e5ce8fb8048c5f55649e",
@@ -9850,14 +9850,14 @@
     "MINOC:2:topic1": {
       "sourceHash": "sha256:37a6760fa43caf5b1ea02f22251b1456c39e060a4918ba3e963dbde336f16148",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HELP",
+      "status": "ready"
     },
     "MINOC:2:topic2": {
       "sourceHash": "sha256:06184e6cdf72570c5c598aa50961d0332cb8b265cd1aff5807442986d945e25f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SICK",
+      "status": "ready"
     },
     "MINOC:2:yes": {
       "sourceHash": "sha256:cf521da1bc5224c875d2788cf9a78ddc206f6803a023d419af749a903554cc97",
@@ -9922,14 +9922,14 @@
     "MINOC:3:topic1": {
       "sourceHash": "sha256:0b5388034693d5f18d5c91fcc45f4e386043655ac129027aa39204bd3920724f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HUNG",
+      "status": "ready"
     },
     "MINOC:3:topic2": {
       "sourceHash": "sha256:c296849c776bc901618fbd756103890ec4a8dd1529bb2bcdeba968ce9b7b93fc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FOOD",
+      "status": "ready"
     },
     "MINOC:3:yes": {
       "sourceHash": "sha256:a2e2c6e90c5dd3d0a0fc521a5dd27bb8bd2ae02551178390851fb22e3b22d758",
@@ -9994,14 +9994,14 @@
     "MINOC:4:topic1": {
       "sourceHash": "sha256:43fbe5bed636024f27cf95dd141ad837a356dc88cfbe43439dab39772f4c5b0d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DIE ",
+      "status": "ready"
     },
     "MINOC:4:topic2": {
       "sourceHash": "sha256:1f1be85e3a3c39ef91aa444de0f7d91a5d202fd30a22b564674ed2a02b070270",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CONS",
+      "status": "ready"
     },
     "MINOC:4:yes": {
       "sourceHash": "sha256:4211eae98df1ea3ff4c8e52ca7335fc3bb2a4a949c11c8d35bd002182a0fa2ca",
@@ -10066,14 +10066,14 @@
     "MINOC:5:topic1": {
       "sourceHash": "sha256:84cd62b527977ef65f3789a2a772da8bb268717b5b81028bb99f7bd58846670a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "REDE",
+      "status": "ready"
     },
     "MINOC:5:topic2": {
       "sourceHash": "sha256:9e4cab9ad297041ceb025f6e10b3f46c60ac295c340d4b51474eb33542ce8e18",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SKUL",
+      "status": "ready"
     },
     "MINOC:5:yes": {
       "sourceHash": "sha256:605541a700acfa2657b71df3299572e9c5ee3b9fd58231ccbece1b222b74094d",
@@ -10138,14 +10138,14 @@
     "MINOC:6:topic1": {
       "sourceHash": "sha256:1f0f6c30d28d4444fbadf37f875a3d690b3b4b8fe1291eb7ba311a98fc05bf83",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HEAR",
+      "status": "ready"
     },
     "MINOC:6:topic2": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STON",
+      "status": "ready"
     },
     "MINOC:6:yes": {
       "sourceHash": "sha256:19a6c59f1ca4050d7522a0f07fcd6540a1717bd73483ac37ec919dab28ae4fc8",
@@ -10210,14 +10210,14 @@
     "MINOC:7:topic1": {
       "sourceHash": "sha256:577fba0b80d791636e583ebc868cf72baf53b9c32e18d501355f2a4fca8820cd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ROOM",
+      "status": "ready"
     },
     "MINOC:7:topic2": {
       "sourceHash": "sha256:d7fb7348d2947d769ea5f188221b3d92c60e8adcac0194c13978546c3d1c5eca",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SKAR",
+      "status": "ready"
     },
     "MINOC:7:yes": {
       "sourceHash": "sha256:6a5e00077f71b0f1ccd52547217c616d4f4b6eba3fddeaccf1bc614fbddc84ee",
@@ -10282,14 +10282,14 @@
     "MINOC:8:topic1": {
       "sourceHash": "sha256:59c05f1edb2ba5bb9cb44be3ccd0d081c228bf44480c39ee77c474df7c188e00",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FLOW",
+      "status": "ready"
     },
     "MINOC:8:topic2": {
       "sourceHash": "sha256:ae97bccd529278e7c12624025e56b3034e5afca568f579f6ef5e04f900fef2bb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "KIND",
+      "status": "ready"
     },
     "MINOC:8:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -10354,14 +10354,14 @@
     "MINOC:9:topic1": {
       "sourceHash": "sha256:19cf613426ed05f030bf8d50114b7fcdd1533cabc353121fce35e48c5eefa010",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SACR",
+      "status": "ready"
     },
     "MINOC:9:topic2": {
       "sourceHash": "sha256:b19fdc727e8eec54fd7e1d732a3d8f6a97e72a15b4c5144715b09a9f8fd22731",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "VIRT",
+      "status": "ready"
     },
     "MINOC:9:yes": {
       "sourceHash": "sha256:7b156fa22d1661d41909abbb5fff4a642c359578a22181d094323d64ebcb365c",
@@ -10426,14 +10426,14 @@
     "MOONGLOW:0:topic1": {
       "sourceHash": "sha256:8195a2950156bb74f9aad3031c9a3e9cc5e358435c296403ee5aa2c77a01ea2c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ADVE",
+      "status": "ready"
     },
     "MOONGLOW:0:topic2": {
       "sourceHash": "sha256:00029651dce90c33f38ba845807a3b716c85bc81240a889b3b1f85b337e377bc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "QUES",
+      "status": "ready"
     },
     "MOONGLOW:0:yes": {
       "sourceHash": "sha256:f1ea49445528d392ef475b67b39f33cacc202050e16e45beb0f685c839ab224e",
@@ -10498,14 +10498,14 @@
     "MOONGLOW:1:topic1": {
       "sourceHash": "sha256:f22b5b81b56d5dfd74f98bfad06cfd4b953583e8a8029f8910b73e14af8e6e21",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WRIT",
+      "status": "ready"
     },
     "MOONGLOW:1:topic2": {
       "sourceHash": "sha256:61ca8cafabfa43de768031fb5756019f280b34fa09b9e4a26e957ba3e2ecadd8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SMOK",
+      "status": "ready"
     },
     "MOONGLOW:1:yes": {
       "sourceHash": "sha256:08733e530755679f4e3b8a2d16c345a9222c0f7348222eb859e5cc94b9eb5e02",
@@ -10570,14 +10570,14 @@
     "MOONGLOW:10:topic1": {
       "sourceHash": "sha256:3e6ebfc49a1d63a80a380a95ffffdbf8a7e41c5524bdc369433e6c9f8c672058",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SUN ",
+      "status": "ready"
     },
     "MOONGLOW:10:topic2": {
       "sourceHash": "sha256:addf9430f1392c9bed3315724ca7157afa8bb3dbb59763cf6082328fe2af05d1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MOON",
+      "status": "ready"
     },
     "MOONGLOW:10:yes": {
       "sourceHash": "sha256:2d16c080e2fd86bb3690f6a8bf2ecb5b34d3a7bdb7b466f92d3de911c6ce71ae",
@@ -10642,14 +10642,14 @@
     "MOONGLOW:11:topic1": {
       "sourceHash": "sha256:d0a60d14dfe244f081cac2593f2c1fc83f570822bc8d2dcb7ee5835e312ceef6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PALM",
+      "status": "ready"
     },
     "MOONGLOW:11:topic2": {
       "sourceHash": "sha256:b2fb517ecd3df3a1adccdd04e3b1ece6a2ee2e642f47ec6c82c3159e6ed742fc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FORT",
+      "status": "ready"
     },
     "MOONGLOW:11:yes": {
       "sourceHash": "sha256:f5d94a9ad77adccd52c8057b7ac6e20f3368a2e068619254f8ab7cfce638424b",
@@ -10714,14 +10714,14 @@
     "MOONGLOW:12:topic1": {
       "sourceHash": "sha256:05ee2a21ed6bc4b8d008a81d0de6903f1b539f162c74e778745e688c9c8ed9c3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "INN ",
+      "status": "ready"
     },
     "MOONGLOW:12:topic2": {
       "sourceHash": "sha256:065bfee3ef924d28c3bb3dee839cc631f2f2546056af141d06a0e90b4fd9f99a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HEAL",
+      "status": "ready"
     },
     "MOONGLOW:12:yes": {
       "sourceHash": "sha256:f04329d65effaa07830f4ff30d13cdcad36b43666b07f85dad90f313979b7667",
@@ -10786,14 +10786,14 @@
     "MOONGLOW:13:topic1": {
       "sourceHash": "sha256:3d7ec727a64f9105ec55e61366df78e82763d86cba08cf0b52bdff2117d78c9b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HONE",
+      "status": "ready"
     },
     "MOONGLOW:13:topic2": {
       "sourceHash": "sha256:1b5cda4b987daf45875fa9fd9fa4c95022ec5713cfcb527394a0e4cb82a6089c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JEST",
+      "status": "ready"
     },
     "MOONGLOW:13:yes": {
       "sourceHash": "sha256:ef6bfee8f1b4b1bfbb5c510d8c71a0b97aad2fba5c4cb54a86fd5182634d69c3",
@@ -10858,14 +10858,14 @@
     "MOONGLOW:14:topic1": {
       "sourceHash": "sha256:be5acdb407b32609f15d954571aa3b09afe70ccf0b34d4b63144c3a262ee628d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SAND",
+      "status": "ready"
     },
     "MOONGLOW:14:topic2": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "MOONGLOW:14:yes": {
       "sourceHash": "sha256:3dcbe14ee2f44a86a7af04f1e59b12a6413a9e156c7a0fd4e2cf952103e65ef9",
@@ -10930,14 +10930,14 @@
     "MOONGLOW:15:topic1": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STON",
+      "status": "ready"
     },
     "MOONGLOW:15:topic2": {
       "sourceHash": "sha256:bba23cb65d8096811643430d3bf8e5f1e26f783b14f07665f92ef7c28b7a19b6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "USE ",
+      "status": "ready"
     },
     "MOONGLOW:15:yes": {
       "sourceHash": "sha256:5213f13fc794b21a01a6bce6aaee006b8664bfe63c772313c24ef9003bb501b5",
@@ -11002,14 +11002,14 @@
     "MOONGLOW:2:topic1": {
       "sourceHash": "sha256:3d7ec727a64f9105ec55e61366df78e82763d86cba08cf0b52bdff2117d78c9b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HONE",
+      "status": "ready"
     },
     "MOONGLOW:2:topic2": {
       "sourceHash": "sha256:18f0480988aad06db2c3fe0620abb681493f5b2278409599257304714b1d30b4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MANT",
+      "status": "ready"
     },
     "MOONGLOW:2:yes": {
       "sourceHash": "sha256:04406807044c6accc5fc8161e72b576f8208801803bf31e56cd4661099e098c2",
@@ -11074,14 +11074,14 @@
     "MOONGLOW:3:topic1": {
       "sourceHash": "sha256:3d7ec727a64f9105ec55e61366df78e82763d86cba08cf0b52bdff2117d78c9b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HONE",
+      "status": "ready"
     },
     "MOONGLOW:3:topic2": {
       "sourceHash": "sha256:a4cae81b6d0480d3ab6b52a6dfb5eae63346252bd00c4df5e27fcf96851bb84e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "EVIL",
+      "status": "ready"
     },
     "MOONGLOW:3:yes": {
       "sourceHash": "sha256:4bde27a7516cae18bbb5b9195a1dcf876817418805a44113ef85bddbbc3926d1",
@@ -11146,14 +11146,14 @@
     "MOONGLOW:4:topic1": {
       "sourceHash": "sha256:8fa1335f9f09c05fb699adbef65ae67d09351f12e9509d6cf7f3efa1744a5a74",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FRIE",
+      "status": "ready"
     },
     "MOONGLOW:4:topic2": {
       "sourceHash": "sha256:3d7ec727a64f9105ec55e61366df78e82763d86cba08cf0b52bdff2117d78c9b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HONE",
+      "status": "ready"
     },
     "MOONGLOW:4:yes": {
       "sourceHash": "sha256:8b6d1269984e30f6c2e0e21ca1dd35c6168816f44b0adbff84ee862fe44fb27a",
@@ -11218,14 +11218,14 @@
     "MOONGLOW:5:topic1": {
       "sourceHash": "sha256:ab11b05317f3e77956e6901b4fe3a4b78291fa5391fa5129c46b7e7fd5476983",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HUMB",
+      "status": "ready"
     },
     "MOONGLOW:5:topic2": {
       "sourceHash": "sha256:24f6aeb78d36b2714d40ccc433956028a025616ac02ae907b1faddf60c3656b3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HUMI",
+      "status": "ready"
     },
     "MOONGLOW:5:yes": {
       "sourceHash": "sha256:2105052d37425773b3d6531c9061a3f93f6fdf1fa031d1d23390ed1a85aeec62",
@@ -11290,14 +11290,14 @@
     "MOONGLOW:6:topic1": {
       "sourceHash": "sha256:d9fb60ac2db059c5290f281cea43e2cf743dd010506aaa869f53940f7b4ebed9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "NIGE",
+      "status": "ready"
     },
     "MOONGLOW:6:topic2": {
       "sourceHash": "sha256:43fbe5bed636024f27cf95dd141ad837a356dc88cfbe43439dab39772f4c5b0d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DIE ",
+      "status": "ready"
     },
     "MOONGLOW:6:yes": {
       "sourceHash": "sha256:2a303a9568dbdb2892fbbcd98177c2686912d6e7b4171c4a068c6f4c43707374",
@@ -11362,14 +11362,14 @@
     "MOONGLOW:7:topic1": {
       "sourceHash": "sha256:3d7ec727a64f9105ec55e61366df78e82763d86cba08cf0b52bdff2117d78c9b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HONE",
+      "status": "ready"
     },
     "MOONGLOW:7:topic2": {
       "sourceHash": "sha256:26fc0b6e8217b655b0b15423fc9a84957905800daa1f0383b9ed563d18b37211",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CORR",
+      "status": "ready"
     },
     "MOONGLOW:7:yes": {
       "sourceHash": "sha256:8a63623b64343820214636cb517e5761fdd29a98906679ec02766e0816adfb84",
@@ -11434,14 +11434,14 @@
     "MOONGLOW:8:topic1": {
       "sourceHash": "sha256:3d7ec727a64f9105ec55e61366df78e82763d86cba08cf0b52bdff2117d78c9b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HONE",
+      "status": "ready"
     },
     "MOONGLOW:8:topic2": {
       "sourceHash": "sha256:e23de1af79db44fb8048563383845a0925b7d1f4cbafa753b9a9f1a9f91bc804",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TRUT",
+      "status": "ready"
     },
     "MOONGLOW:8:yes": {
       "sourceHash": "sha256:cad87c81630ebb141a3e15d3635cd559c8fb65005d4a8e5fef1e005aa78cf519",
@@ -11506,14 +11506,14 @@
     "MOONGLOW:9:topic1": {
       "sourceHash": "sha256:04a416747a9a055d1ecef5bfa48543474c208dfe3385974fb5c03add76669b3b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ALCH",
+      "status": "ready"
     },
     "MOONGLOW:9:topic2": {
       "sourceHash": "sha256:5e98b8133f80511dd754493fd836fc6e67bbc040dc5ecf15372db353cbb510b3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "REAG",
+      "status": "ready"
     },
     "MOONGLOW:9:yes": {
       "sourceHash": "sha256:a0d7ce8c360ce42ca16394929f14c0fcb116bae1a05f6f9c23ae7815f6ae7de7",
@@ -11578,14 +11578,14 @@
     "PAWS:0:topic1": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GUAR",
+      "status": "ready"
     },
     "PAWS:0:topic2": {
       "sourceHash": "sha256:3baf6e9cdf3e6ad26570155bda77598735ec015629ca24ba68e1b7ad2513dc18",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TROU",
+      "status": "ready"
     },
     "PAWS:0:yes": {
       "sourceHash": "sha256:050eca087737e0ee25282ddabe210aaeab3e9861bce5122dd9fab9c587f30c7a",
@@ -11650,14 +11650,14 @@
     "PAWS:1:topic1": {
       "sourceHash": "sha256:092e325740f8ba581c114225d8a824287d4293aba46095feec31970909a25651",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STAB",
+      "status": "ready"
     },
     "PAWS:1:topic2": {
       "sourceHash": "sha256:7deee3931255197f3472066a4ac328a7f86b241d0f213be3b23eee121117415e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SMIT",
+      "status": "ready"
     },
     "PAWS:1:yes": {
       "sourceHash": "sha256:61b8ce16bef73e138898105257514db6cc11d3b7f092030c180133686c1d4048",
@@ -11722,14 +11722,14 @@
     "PAWS:10:topic1": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "PAWS:10:topic2": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "PAWS:10:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -11794,14 +11794,14 @@
     "PAWS:11:topic1": {
       "sourceHash": "sha256:1dd17190a2f261044d8e04d099db4ebe2754ff402e5c2b8b759498176ddd343a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "KEEP",
+      "status": "ready"
     },
     "PAWS:11:topic2": {
       "sourceHash": "sha256:9c50aee3590cc917d9dd95eb546748040928e958f9f6058ba7310bc4f31d6b66",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MYST",
+      "status": "ready"
     },
     "PAWS:11:yes": {
       "sourceHash": "sha256:a84f6ff8525d85e437e0bc51e95cfd771f8dda6ab5e9335ca98160693a1a095b",
@@ -11866,14 +11866,14 @@
     "PAWS:12:topic1": {
       "sourceHash": "sha256:1dd17190a2f261044d8e04d099db4ebe2754ff402e5c2b8b759498176ddd343a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "KEEP",
+      "status": "ready"
     },
     "PAWS:12:topic2": {
       "sourceHash": "sha256:9c50aee3590cc917d9dd95eb546748040928e958f9f6058ba7310bc4f31d6b66",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MYST",
+      "status": "ready"
     },
     "PAWS:12:yes": {
       "sourceHash": "sha256:1ebcf599eba3f7642f9191f63589d11cc73e5961adce75e1f6921df816916969",
@@ -11938,14 +11938,14 @@
     "PAWS:13:topic1": {
       "sourceHash": "sha256:3712fb058b5672b8f9eb69fdb1ef0a16e80e7013aedc6b2e6920fde28d52e013",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SERV",
+      "status": "ready"
     },
     "PAWS:13:topic2": {
       "sourceHash": "sha256:dbb882154f408af7e3fe2467765ae7dce18ee3ae6ab137d1f03ae4baf4a1c54f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DANC",
+      "status": "ready"
     },
     "PAWS:13:yes": {
       "sourceHash": "sha256:a0d7ce8c360ce42ca16394929f14c0fcb116bae1a05f6f9c23ae7815f6ae7de7",
@@ -12010,14 +12010,14 @@
     "PAWS:14:topic1": {
       "sourceHash": "sha256:5b0a6467cb7f0e36882c49059aba07ddc8bd653b59def7594f2d05af97cad341",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BRIT",
+      "status": "ready"
     },
     "PAWS:14:topic2": {
       "sourceHash": "sha256:aa4264f669a89d8bafc860eda1b6df54a6ab44f3c0ac2d4b4893d9d5339cecd3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "EART",
+      "status": "ready"
     },
     "PAWS:14:yes": {
       "sourceHash": "sha256:ae423694f1129b602b5ff1df0de189034fd1f6f0f39179db8150b59d2b500d7b",
@@ -12082,14 +12082,14 @@
     "PAWS:15:topic1": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "PAWS:15:topic2": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "PAWS:15:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -12154,14 +12154,14 @@
     "PAWS:2:topic1": {
       "sourceHash": "sha256:fddbbb1f016789d9c08894058dee4befdc70e54e957f30bc76fa969fe2e32aae",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LUMB",
+      "status": "ready"
     },
     "PAWS:2:topic2": {
       "sourceHash": "sha256:9c7cd93c45558990e43023ffbe0b800dd1027e809eaf617958d1775c3ae641ff",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "AXE ",
+      "status": "ready"
     },
     "PAWS:2:yes": {
       "sourceHash": "sha256:65284503d835e97de179476cc2440bbd9e8e7b4e40253ab80827bd2679e8c55a",
@@ -12226,14 +12226,14 @@
     "PAWS:3:topic1": {
       "sourceHash": "sha256:07a9d7b4a9a23915a61bc89bb0357bf47b348cf4174eb965bb1df8fbfa18b0b5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CODE",
+      "status": "ready"
     },
     "PAWS:3:topic2": {
       "sourceHash": "sha256:cb2df9a0081dc2de50afb86e0bd43752dc6983d13c411271a75302194aba4316",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WORD",
+      "status": "ready"
     },
     "PAWS:3:yes": {
       "sourceHash": "sha256:4a7d6d3e8888a86b41c710f1d44c43d9ec7a4f97dce4f1ec3c0fb124ca0188de",
@@ -12298,14 +12298,14 @@
     "PAWS:4:topic1": {
       "sourceHash": "sha256:58fdd6ad84f87605115a3339f3a9d075ca0fbd92fbf872197163f1187b0936ed",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ALE ",
+      "status": "ready"
     },
     "PAWS:4:topic2": {
       "sourceHash": "sha256:e72ba8dd24e3758ed488d837d9ab91102bf20bcd9bd91eb74da9643656a2ef46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BREW",
+      "status": "ready"
     },
     "PAWS:4:yes": {
       "sourceHash": "sha256:6c9753c7f19a232418934615afeeee9c1a1c520c18d5572559fce009593f5239",
@@ -12370,14 +12370,14 @@
     "PAWS:5:topic1": {
       "sourceHash": "sha256:717df8504486485ff295eeb50734767b0c0cc1b98a7d3ab8d9f669fc84291c25",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MAGI",
+      "status": "ready"
     },
     "PAWS:5:topic2": {
       "sourceHash": "sha256:45ff86da72476f32127c097c629e5418092c008cf567f214db848f46bd84301c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MAST",
+      "status": "ready"
     },
     "PAWS:5:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -12442,14 +12442,14 @@
     "PAWS:6:topic1": {
       "sourceHash": "sha256:065710a1d05bb6cdbcdd4f2298fc750c07b61ec17489ff80d8e7837cc7f3780f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FAIT",
+      "status": "ready"
     },
     "PAWS:6:topic2": {
       "sourceHash": "sha256:00029651dce90c33f38ba845807a3b716c85bc81240a889b3b1f85b337e377bc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "QUES",
+      "status": "ready"
     },
     "PAWS:6:yes": {
       "sourceHash": "sha256:0857ae669ff36a419490537a54ebbab98288ba1333bfc723f7d87879000f1125",
@@ -12514,14 +12514,14 @@
     "PAWS:7:topic1": {
       "sourceHash": "sha256:c296849c776bc901618fbd756103890ec4a8dd1529bb2bcdeba968ce9b7b93fc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FOOD",
+      "status": "ready"
     },
     "PAWS:7:topic2": {
       "sourceHash": "sha256:28f0ccff13abe6b20c3ef1beb28311852278d0cd2a160ad5b9bf760bc4884365",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RATI",
+      "status": "ready"
     },
     "PAWS:7:yes": {
       "sourceHash": "sha256:2ecdb869d05c4441ce41f692460e6e39ba0fe30b8ed601439f14f62eb879ddbb",
@@ -12586,14 +12586,14 @@
     "PAWS:8:topic1": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "PAWS:8:topic2": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "PAWS:8:yes": {
       "sourceHash": "sha256:a4949e2c96de26681c9519749e57bfb362bbac2a8f40c89b24c35d1de111336d",
@@ -12658,14 +12658,14 @@
     "PAWS:9:topic1": {
       "sourceHash": "sha256:10d4ae679adf6e1f1835d40be65068ae4c1c0b5bef99522abd8884affcb2a095",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LAND",
+      "status": "ready"
     },
     "PAWS:9:topic2": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "PAWS:9:yes": {
       "sourceHash": "sha256:ded1bbdd6c1ff6486c7a32b187b33e27a3c74daebe1e5c86641a93959041bf8d",
@@ -12730,14 +12730,14 @@
     "SERPENT:0:topic1": {
       "sourceHash": "sha256:5029af19eafc8e0cf42b8bb6b2d05e7fb8c106e5926a2a03e541916e3f8812aa",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PROV",
+      "status": "ready"
     },
     "SERPENT:0:topic2": {
       "sourceHash": "sha256:cb2df9a0081dc2de50afb86e0bd43752dc6983d13c411271a75302194aba4316",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WORD",
+      "status": "ready"
     },
     "SERPENT:0:yes": {
       "sourceHash": "sha256:f990be6289b09bad7c01febdaef7af58c0f38477602c97778044a3a55920837c",
@@ -12802,14 +12802,14 @@
     "SERPENT:1:topic1": {
       "sourceHash": "sha256:dd3bfe5f7da1dd252da75ad13a4ec8c5ff78a68aa1677a1adae1e934f1a76057",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GATE",
+      "status": "ready"
     },
     "SERPENT:1:topic2": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GUAR",
+      "status": "ready"
     },
     "SERPENT:1:yes": {
       "sourceHash": "sha256:1dbce6d090086fe1ac6850ba79b94045ff516f582d4cce4ef7a504567a68342c",
@@ -12874,14 +12874,14 @@
     "SERPENT:10:topic1": {
       "sourceHash": "sha256:57cb69e9b36aa7d9bf8bde2c2da57b854e05e96d4e9d2783311cec3a314d84b0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GARA",
+      "status": "ready"
     },
     "SERPENT:10:topic2": {
       "sourceHash": "sha256:892d6be64890351d30079e64a6254c0d48bd5af445a0fe47aa6044db55b76e02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DURH",
+      "status": "ready"
     },
     "SERPENT:10:yes": {
       "sourceHash": "sha256:d991a24e8e04231cbae0f2b1372ebefd45b169c3855830d33b17fb3e98a68c96",
@@ -12946,14 +12946,14 @@
     "SERPENT:11:topic1": {
       "sourceHash": "sha256:57cb69e9b36aa7d9bf8bde2c2da57b854e05e96d4e9d2783311cec3a314d84b0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GARA",
+      "status": "ready"
     },
     "SERPENT:11:topic2": {
       "sourceHash": "sha256:892d6be64890351d30079e64a6254c0d48bd5af445a0fe47aa6044db55b76e02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DURH",
+      "status": "ready"
     },
     "SERPENT:11:yes": {
       "sourceHash": "sha256:d991a24e8e04231cbae0f2b1372ebefd45b169c3855830d33b17fb3e98a68c96",
@@ -13018,14 +13018,14 @@
     "SERPENT:12:topic1": {
       "sourceHash": "sha256:53c7e3bfe50d2301d0d400141dd17038abff8ab923756afbe2da910c3662f210",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HAND",
+      "status": "ready"
     },
     "SERPENT:12:topic2": {
       "sourceHash": "sha256:5d71c4df3018c673380a5ad80f3c8f320e61e8c0e4e9afeac65e8cfc776e9e62",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ORBS",
+      "status": "ready"
     },
     "SERPENT:12:yes": {
       "sourceHash": "sha256:97d046337c38cf87a61656e5ec0dab918049fe41966fc0b4ca43d22b71132796",
@@ -13090,14 +13090,14 @@
     "SERPENT:13:topic1": {
       "sourceHash": "sha256:cda14d0b2d954643c80cf0a1ee7ea1896bbe27cffc52c0c554eadc5432984d8b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "INFO",
+      "status": "ready"
     },
     "SERPENT:13:topic2": {
       "sourceHash": "sha256:90c80fb505156cc4670475c6859333700983a009140f337d6a7dab7bac832001",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BELL",
+      "status": "ready"
     },
     "SERPENT:13:yes": {
       "sourceHash": "sha256:f990be6289b09bad7c01febdaef7af58c0f38477602c97778044a3a55920837c",
@@ -13162,14 +13162,14 @@
     "SERPENT:14:topic1": {
       "sourceHash": "sha256:43b753c3eabc3b44badda42b1b60cb5337b695694dadbd92b5e62061e3c72884",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SEAS",
+      "status": "ready"
     },
     "SERPENT:14:topic2": {
       "sourceHash": "sha256:39e1775d82d2eb9cf0d2862d6e2d59c5b7a1e85c543d89a8fe0594b51115f427",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHIP",
+      "status": "ready"
     },
     "SERPENT:14:yes": {
       "sourceHash": "sha256:99464cae05558b29a44b6e1a7232d5773f02ca785fa3993719b8a50a17db8a51",
@@ -13234,14 +13234,14 @@
     "SERPENT:15:topic1": {
       "sourceHash": "sha256:608dbf6658949749073a8a81d63ef150997eac28b12e12bcccaecfbc14b802fb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SENT",
+      "status": "ready"
     },
     "SERPENT:15:topic2": {
       "sourceHash": "sha256:065bfee3ef924d28c3bb3dee839cc631f2f2546056af141d06a0e90b4fd9f99a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HEAL",
+      "status": "ready"
     },
     "SERPENT:15:yes": {
       "sourceHash": "sha256:3c26f189d80cabd395c8bc5b4c18ba9c63e97a96244f252aab363a579ada42d6",
@@ -13306,14 +13306,14 @@
     "SERPENT:2:topic1": {
       "sourceHash": "sha256:39e1775d82d2eb9cf0d2862d6e2d59c5b7a1e85c543d89a8fe0594b51115f427",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHIP",
+      "status": "ready"
     },
     "SERPENT:2:topic2": {
       "sourceHash": "sha256:01a466fcaa228cd6cf1c049e182e27457ad34183dc712364b494de8584f11bcf",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WHEE",
+      "status": "ready"
     },
     "SERPENT:2:yes": {
       "sourceHash": "sha256:73065fec42bacacbf9d6a2d974da5c3339aae9950254bb7386dae8e6080ce4f3",
@@ -13378,14 +13378,14 @@
     "SERPENT:3:topic1": {
       "sourceHash": "sha256:1dd8a33c917d1e27436508ba1893c4af066da633c98555c5cc946d5e5270555f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ABYS",
+      "status": "ready"
     },
     "SERPENT:3:topic2": {
       "sourceHash": "sha256:07a9d7b4a9a23915a61bc89bb0357bf47b348cf4174eb965bb1df8fbfa18b0b5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CODE",
+      "status": "ready"
     },
     "SERPENT:3:yes": {
       "sourceHash": "sha256:aa8c6eeda7c81fe5bb3be62639bebf30862776b0980f7cbdb187ecf11de3cc0b",
@@ -13450,14 +13450,14 @@
     "SERPENT:4:topic1": {
       "sourceHash": "sha256:81f4c5e48da569848ea6dc98d348432824b7b5b6dbb72941eb7cfbbf71ad5ff4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TRAI",
+      "status": "ready"
     },
     "SERPENT:4:topic2": {
       "sourceHash": "sha256:684fc07dbf5e31802e239f43f4c04e2ecb644c96d4adef3397d67db51cde7dce",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DUNG",
+      "status": "ready"
     },
     "SERPENT:4:yes": {
       "sourceHash": "sha256:20acca6c765e2e8fa30fb7c36a10a4945061b98e535765844192e7be3fc10a8e",
@@ -13522,14 +13522,14 @@
     "SERPENT:5:topic1": {
       "sourceHash": "sha256:81f4c5e48da569848ea6dc98d348432824b7b5b6dbb72941eb7cfbbf71ad5ff4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TRAI",
+      "status": "ready"
     },
     "SERPENT:5:topic2": {
       "sourceHash": "sha256:577fba0b80d791636e583ebc868cf72baf53b9c32e18d501355f2a4fca8820cd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "ROOM",
+      "status": "ready"
     },
     "SERPENT:5:yes": {
       "sourceHash": "sha256:eda3acf227afbb60e8a52d6657ac66c9f56e7412e9450546d3b8bbae4c2f21c6",
@@ -13594,14 +13594,14 @@
     "SERPENT:6:topic1": {
       "sourceHash": "sha256:ef10a4b296ed8574cc0476d4c93d5727f6a1773bb2b409c3607553c80f4f4931",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LORD",
+      "status": "ready"
     },
     "SERPENT:6:topic2": {
       "sourceHash": "sha256:a27c22d415c22457f26798f87c72ea86380b3a8206a9f9874b1ca15f673c57b3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CAST",
+      "status": "ready"
     },
     "SERPENT:6:yes": {
       "sourceHash": "sha256:a8ae9ff855fb00ce075f2aee8d2ccd78d7a50938e0b466d31d593c9c8fba494d",
@@ -13666,14 +13666,14 @@
     "SERPENT:7:topic1": {
       "sourceHash": "sha256:84e3287553df0e939700be6d49aff5a10afbb5941a51431dad33320b570c2773",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TREA",
+      "status": "ready"
     },
     "SERPENT:7:topic2": {
       "sourceHash": "sha256:684fc07dbf5e31802e239f43f4c04e2ecb644c96d4adef3397d67db51cde7dce",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DUNG",
+      "status": "ready"
     },
     "SERPENT:7:yes": {
       "sourceHash": "sha256:6375431f017e6d2ebb843b86eb290fb190b6bccb3072c5e79e72d32dd83b92c0",
@@ -13738,14 +13738,14 @@
     "SERPENT:8:topic1": {
       "sourceHash": "sha256:8af3ee6a1927cd34f434623462c758299bbc5ba277ef656e473409fcbcefc623",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COUR",
+      "status": "ready"
     },
     "SERPENT:8:topic2": {
       "sourceHash": "sha256:90c80fb505156cc4670475c6859333700983a009140f337d6a7dab7bac832001",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BELL",
+      "status": "ready"
     },
     "SERPENT:8:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -13810,14 +13810,14 @@
     "SERPENT:9:topic1": {
       "sourceHash": "sha256:00029651dce90c33f38ba845807a3b716c85bc81240a889b3b1f85b337e377bc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "QUES",
+      "status": "ready"
     },
     "SERPENT:9:topic2": {
       "sourceHash": "sha256:684fc07dbf5e31802e239f43f4c04e2ecb644c96d4adef3397d67db51cde7dce",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DUNG",
+      "status": "ready"
     },
     "SERPENT:9:yes": {
       "sourceHash": "sha256:e45237e52ac8955b72959bbeadd0521f91c5d6e20eb5c20305f744d7eb4e1db2",
@@ -13882,14 +13882,14 @@
     "SKARA:0:topic1": {
       "sourceHash": "sha256:72cd4902f6338cba2173834f079837149d698df03ebf20852dd8e8dbd94fe308",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LIGH",
+      "status": "ready"
     },
     "SKARA:0:topic2": {
       "sourceHash": "sha256:e23de1af79db44fb8048563383845a0925b7d1f4cbafa753b9a9f1a9f91bc804",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TRUT",
+      "status": "ready"
     },
     "SKARA:0:yes": {
       "sourceHash": "sha256:0aea5f4f5806049c809b11491a0a2ca22e88df2ca2c067dc7ee296fda729850a",
@@ -13954,14 +13954,14 @@
     "SKARA:1:topic1": {
       "sourceHash": "sha256:aa8702b33bca8d7ad34caf59cfff06baff044582a66cb5c1757657fed5d8e5c2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SPIR",
+      "status": "ready"
     },
     "SKARA:1:topic2": {
       "sourceHash": "sha256:0993295423957417ff3fef3dbcb1cfe7615462edeb2e9c02d9ca1a6f59c03776",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WOUN",
+      "status": "ready"
     },
     "SKARA:1:yes": {
       "sourceHash": "sha256:709066978401b476d1705325c2cfa96535bebc27bb09970d48e37c52bd3882e1",
@@ -14026,14 +14026,14 @@
     "SKARA:10:topic1": {
       "sourceHash": "sha256:514bba2c1c76697e1985da62cb6d9ec6855607bb9038475d30f7ae0a6ac61f76",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STOR",
+      "status": "ready"
     },
     "SKARA:10:topic2": {
       "sourceHash": "sha256:aa8702b33bca8d7ad34caf59cfff06baff044582a66cb5c1757657fed5d8e5c2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SPIR",
+      "status": "ready"
     },
     "SKARA:10:yes": {
       "sourceHash": "sha256:361dc9e057337b688e7ca0f3b35d31be16892970aab255b1ad8c6ae713c5fdfc",
@@ -14098,14 +14098,14 @@
     "SKARA:11:topic1": {
       "sourceHash": "sha256:00029651dce90c33f38ba845807a3b716c85bc81240a889b3b1f85b337e377bc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "QUES",
+      "status": "ready"
     },
     "SKARA:11:topic2": {
       "sourceHash": "sha256:3c83e16d04a45dc96728ae917c379eac31c8c167c110dde484357dd8e1141188",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DANG",
+      "status": "ready"
     },
     "SKARA:11:yes": {
       "sourceHash": "sha256:3296e21d5b14d487716d20dee9da5165eab4252b59cd5203ba72f73475be4464",
@@ -14170,14 +14170,14 @@
     "SKARA:12:topic1": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "SKARA:12:topic2": {
       "sourceHash": "sha256:d8b66a9205e5624310f5a5feee90ab4f2ba0ebbed1177eaab6bb5cc582a853ea",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "OM  ",
+      "status": "ready"
     },
     "SKARA:12:yes": {
       "sourceHash": "sha256:a0d7ce8c360ce42ca16394929f14c0fcb116bae1a05f6f9c23ae7815f6ae7de7",
@@ -14242,14 +14242,14 @@
     "SKARA:13:topic1": {
       "sourceHash": "sha256:dc2b628bfb4b9d9e8cbec2c12df6b32df5cce05a6cf430569b9f93c9ec4ed8d4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BEG ",
+      "status": "ready"
     },
     "SKARA:13:topic2": {
       "sourceHash": "sha256:18f0480988aad06db2c3fe0620abb681493f5b2278409599257304714b1d30b4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MANT",
+      "status": "ready"
     },
     "SKARA:13:yes": {
       "sourceHash": "sha256:6a0d49c18b37de5ecc53d1d2834947240bd45fffa79fa5fc29cae88fef34937d",
@@ -14314,14 +14314,14 @@
     "SKARA:14:topic1": {
       "sourceHash": "sha256:18f0480988aad06db2c3fe0620abb681493f5b2278409599257304714b1d30b4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MANT",
+      "status": "ready"
     },
     "SKARA:14:topic2": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "SKARA:14:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -14386,14 +14386,14 @@
     "SKARA:15:topic1": {
       "sourceHash": "sha256:0c2ecf3fa9d8ad94989f5eb3e371786cf6f529ab539ffaeb348d9b5107d6196e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HAUN",
+      "status": "ready"
     },
     "SKARA:15:topic2": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STON",
+      "status": "ready"
     },
     "SKARA:15:yes": {
       "sourceHash": "sha256:d5b77f54374b462585197d92623f7c60d13713dd8f418851b464d649f83d2561",
@@ -14458,14 +14458,14 @@
     "SKARA:2:topic1": {
       "sourceHash": "sha256:72cd4902f6338cba2173834f079837149d698df03ebf20852dd8e8dbd94fe308",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LIGH",
+      "status": "ready"
     },
     "SKARA:2:topic2": {
       "sourceHash": "sha256:bdfe7af9ba29d74b199342b8fead7ef8d5b164c200a811beca45823d564536bb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PHIL",
+      "status": "ready"
     },
     "SKARA:2:yes": {
       "sourceHash": "sha256:2105052d37425773b3d6531c9061a3f93f6fdf1fa031d1d23390ed1a85aeec62",
@@ -14530,14 +14530,14 @@
     "SKARA:3:topic1": {
       "sourceHash": "sha256:60bc44e9ee349cbbfe42fa6c1c3383f26cff006fa4e859dd002245bd1b59fdcb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SPEL",
+      "status": "ready"
     },
     "SKARA:3:topic2": {
       "sourceHash": "sha256:f979fb9a5bcc2f1f25dc713c35d1bcfcb6c78d48e61f96de2049c3c086eca94f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "NIGH",
+      "status": "ready"
     },
     "SKARA:3:yes": {
       "sourceHash": "sha256:a4949e2c96de26681c9519749e57bfb362bbac2a8f40c89b24c35d1de111336d",
@@ -14602,14 +14602,14 @@
     "SKARA:4:topic1": {
       "sourceHash": "sha256:c296849c776bc901618fbd756103890ec4a8dd1529bb2bcdeba968ce9b7b93fc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FOOD",
+      "status": "ready"
     },
     "SKARA:4:topic2": {
       "sourceHash": "sha256:551ba8b5768aa5cb4b458dea76ac932e33216a2732d49937fd01ce91af8a6ead",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MONE",
+      "status": "ready"
     },
     "SKARA:4:yes": {
       "sourceHash": "sha256:d62ee391f64469186d97e793bc04dde3e8db643711320d6aaaeb833c72e34f56",
@@ -14674,14 +14674,14 @@
     "SKARA:5:topic1": {
       "sourceHash": "sha256:8bc390e57f6d074b003945ad085affd0063cce1fe79154d66d21f704d4201a93",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JOUR",
+      "status": "ready"
     },
     "SKARA:5:topic2": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STON",
+      "status": "ready"
     },
     "SKARA:5:yes": {
       "sourceHash": "sha256:dd9ee154df87c4ec9240fe09cb0292f5d54d7f9117a87780e3e04bcd9b40a96c",
@@ -14746,14 +14746,14 @@
     "SKARA:6:topic1": {
       "sourceHash": "sha256:ad9acbbce1309f8d6dbc5fdf36a6b9fc93606c86e585cff9c96cbedb5f651083",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TEAC",
+      "status": "ready"
     },
     "SKARA:6:topic2": {
       "sourceHash": "sha256:16ec0e4394ab7cd3a5589f9df671827dd2bb2d8154da5455718d391cc315c9fe",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "NOBL",
+      "status": "ready"
     },
     "SKARA:6:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -14818,14 +14818,14 @@
     "SKARA:7:topic1": {
       "sourceHash": "sha256:d4db71eecc1adeeae61a48d9a283751048b92e46fa4a99d7aea7228d02cbd523",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PATH",
+      "status": "ready"
     },
     "SKARA:7:topic2": {
       "sourceHash": "sha256:8bc390e57f6d074b003945ad085affd0063cce1fe79154d66d21f704d4201a93",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JOUR",
+      "status": "ready"
     },
     "SKARA:7:yes": {
       "sourceHash": "sha256:bc5bff84ea1a5c84a310811baabf710bed4af57251e71b12872b6bc74a4404e7",
@@ -14890,14 +14890,14 @@
     "SKARA:8:topic1": {
       "sourceHash": "sha256:ad9acbbce1309f8d6dbc5fdf36a6b9fc93606c86e585cff9c96cbedb5f651083",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TEAC",
+      "status": "ready"
     },
     "SKARA:8:topic2": {
       "sourceHash": "sha256:cb2df9a0081dc2de50afb86e0bd43752dc6983d13c411271a75302194aba4316",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WORD",
+      "status": "ready"
     },
     "SKARA:8:yes": {
       "sourceHash": "sha256:9320f914e295b745576707e8de951ebab3723b6987daaf2446cc9ac3e6519b54",
@@ -14962,14 +14962,14 @@
     "SKARA:9:topic1": {
       "sourceHash": "sha256:717df8504486485ff295eeb50734767b0c0cc1b98a7d3ab8d9f669fc84291c25",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MAGI",
+      "status": "ready"
     },
     "SKARA:9:topic2": {
       "sourceHash": "sha256:e2a8a09e14aee97daeab724d54dc88c35337703dcee89b2fbdd13b9369d1fa7b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BELI",
+      "status": "ready"
     },
     "SKARA:9:yes": {
       "sourceHash": "sha256:0eb70d63052eccf685e29752db15b094ecc1febd5ae835c58201924dec772e30",
@@ -15034,14 +15034,14 @@
     "TRINSIC:0:topic1": {
       "sourceHash": "sha256:76db2a917414f2dba5926fcb8d2559bc22b522a03ff3ea2f26cc964b30034e99",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "LEAD",
+      "status": "ready"
     },
     "TRINSIC:0:topic2": {
       "sourceHash": "sha256:1bcf8d34f8887d68ebfd4f5987a77f0e4ca6a785315caa495982a4ee605ef82e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HONO",
+      "status": "ready"
     },
     "TRINSIC:0:yes": {
       "sourceHash": "sha256:ef532c4754efd9694f6cbbd7ffc862b1a06267c1cae0969334368010a51a05df",
@@ -15106,14 +15106,14 @@
     "TRINSIC:1:topic1": {
       "sourceHash": "sha256:f485c139fbe4b8be54ae52752496f6cee633a802566572f61c85d989b7b8cbe7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FIEL",
+      "status": "ready"
     },
     "TRINSIC:1:topic2": {
       "sourceHash": "sha256:f979fb9a5bcc2f1f25dc713c35d1bcfcb6c78d48e61f96de2049c3c086eca94f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "NIGH",
+      "status": "ready"
     },
     "TRINSIC:1:yes": {
       "sourceHash": "sha256:eda3acf227afbb60e8a52d6657ac66c9f56e7412e9450546d3b8bbae4c2f21c6",
@@ -15178,14 +15178,14 @@
     "TRINSIC:10:topic1": {
       "sourceHash": "sha256:18f0480988aad06db2c3fe0620abb681493f5b2278409599257304714b1d30b4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MANT",
+      "status": "ready"
     },
     "TRINSIC:10:topic2": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "TRINSIC:10:yes": {
       "sourceHash": "sha256:00fc4914c10923187067aa2c4a583c0572d6a7d237d1c9424af14af2da263ddd",
@@ -15250,14 +15250,14 @@
     "TRINSIC:11:topic1": {
       "sourceHash": "sha256:e494e031a8698152abe2dba5338d8a62a2c12cc04abbccaea048bd9c70c451f6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WARL",
+      "status": "ready"
     },
     "TRINSIC:11:topic2": {
       "sourceHash": "sha256:00029651dce90c33f38ba845807a3b716c85bc81240a889b3b1f85b337e377bc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "QUES",
+      "status": "ready"
     },
     "TRINSIC:11:yes": {
       "sourceHash": "sha256:ad4bc552bfab27f8b15a9a35798bb7634a70c49ff1f71e3d2fa9a57c3b507aef",
@@ -15322,14 +15322,14 @@
     "TRINSIC:12:topic1": {
       "sourceHash": "sha256:fecd5681dc5dc6e2f413b28ce95e50f6aa2ce9fbef201fa3c11844af5799b2e3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "REST",
+      "status": "ready"
     },
     "TRINSIC:12:topic2": {
       "sourceHash": "sha256:00029651dce90c33f38ba845807a3b716c85bc81240a889b3b1f85b337e377bc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "QUES",
+      "status": "ready"
     },
     "TRINSIC:12:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -15394,14 +15394,14 @@
     "TRINSIC:13:topic1": {
       "sourceHash": "sha256:dd3bfe5f7da1dd252da75ad13a4ec8c5ff78a68aa1677a1adae1e934f1a76057",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GATE",
+      "status": "ready"
     },
     "TRINSIC:13:topic2": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GUAR",
+      "status": "ready"
     },
     "TRINSIC:13:yes": {
       "sourceHash": "sha256:2dddfa2076e86aee918affbc014741e7a82091962578db013adb3de6a52840e9",
@@ -15466,14 +15466,14 @@
     "TRINSIC:14:topic1": {
       "sourceHash": "sha256:8687a9d0e692a2908bc7d2d7fa9ec96bbec96496a46a4373c41a8af0760e1243",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SKEL",
+      "status": "ready"
     },
     "TRINSIC:14:topic2": {
       "sourceHash": "sha256:3df48ffb85c2d269613d2ee36c3227c1babdcf8691cb5fb6aad103877cd9236a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SECR",
+      "status": "ready"
     },
     "TRINSIC:14:yes": {
       "sourceHash": "sha256:fb39a555fdedf9ab91797807620150e3891f45c6f06b4588a296ba8509f42f37",
@@ -15538,14 +15538,14 @@
     "TRINSIC:15:topic1": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GUAR",
+      "status": "ready"
     },
     "TRINSIC:15:topic2": {
       "sourceHash": "sha256:0b9e21fd806d0a8c68ad187f94611594e94dc2edab5a2772cbceaed49604cdae",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STRO",
+      "status": "ready"
     },
     "TRINSIC:15:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -15610,14 +15610,14 @@
     "TRINSIC:2:topic1": {
       "sourceHash": "sha256:1bcf8d34f8887d68ebfd4f5987a77f0e4ca6a785315caa495982a4ee605ef82e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HONO",
+      "status": "ready"
     },
     "TRINSIC:2:topic2": {
       "sourceHash": "sha256:f468dc8cf9a67f19523f21c4e357d56dc42cc8a7a1d3dee7267496853ba00a3d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "NOTH",
+      "status": "ready"
     },
     "TRINSIC:2:yes": {
       "sourceHash": "sha256:1da8b2b66d04580f08ff8b5df110a4b892d81df76c8980b7d6f3f2814c7033db",
@@ -15682,14 +15682,14 @@
     "TRINSIC:3:topic1": {
       "sourceHash": "sha256:684fc07dbf5e31802e239f43f4c04e2ecb644c96d4adef3397d67db51cde7dce",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DUNG",
+      "status": "ready"
     },
     "TRINSIC:3:topic2": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "STON",
+      "status": "ready"
     },
     "TRINSIC:3:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -15754,14 +15754,14 @@
     "TRINSIC:4:topic1": {
       "sourceHash": "sha256:43b753c3eabc3b44badda42b1b60cb5337b695694dadbd92b5e62061e3c72884",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SEAS",
+      "status": "ready"
     },
     "TRINSIC:4:topic2": {
       "sourceHash": "sha256:f666db1a51e4a0a93916e0ce873da458adad9063025d9dcebcf879fdab217a1e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SEXT",
+      "status": "ready"
     },
     "TRINSIC:4:yes": {
       "sourceHash": "sha256:9aa86d2f8fb7587a90cb09a87741a7d5493499aa3ac47dfde8c1c4aef5c8e37c",
@@ -15826,14 +15826,14 @@
     "TRINSIC:5:topic1": {
       "sourceHash": "sha256:1bcf8d34f8887d68ebfd4f5987a77f0e4ca6a785315caa495982a4ee605ef82e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HONO",
+      "status": "ready"
     },
     "TRINSIC:5:topic2": {
       "sourceHash": "sha256:fc9e2d8715a3a3652dc9b18d344bf37a72aeb77a8da7a2e4536fefe802b16bb8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "DIGN",
+      "status": "ready"
     },
     "TRINSIC:5:yes": {
       "sourceHash": "sha256:4fad19ad57ab54fd1156f4cf63ed4a3e82aad1509ba8e685bac32889e9bac49a",
@@ -15898,14 +15898,14 @@
     "TRINSIC:6:topic1": {
       "sourceHash": "sha256:799fb4343489825aa45e50c8b9c1760e2ecac67c0942cfe3626736d2a4d64e62",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BULL",
+      "status": "ready"
     },
     "TRINSIC:6:topic2": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "TRINSIC:6:yes": {
       "sourceHash": "sha256:238ea6da6b41964539b1d151b393159e6d00dbfb74548bdc321d21db1b61861d",
@@ -15970,14 +15970,14 @@
     "TRINSIC:7:topic1": {
       "sourceHash": "sha256:db707d2f9eea6fc3fc6275f0cc5b47b82c4664b5927b0ac6cf54ac03b0828e3d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WELC",
+      "status": "ready"
     },
     "TRINSIC:7:topic2": {
       "sourceHash": "sha256:1bcf8d34f8887d68ebfd4f5987a77f0e4ca6a785315caa495982a4ee605ef82e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HONO",
+      "status": "ready"
     },
     "TRINSIC:7:yes": {
       "sourceHash": "sha256:424cacbf66b7d537051946dbdb36ad36cab3afea53d7d670b00ec16fc2a45739",
@@ -16042,14 +16042,14 @@
     "TRINSIC:8:topic1": {
       "sourceHash": "sha256:243cb5f77605ab8d0caadd2e9d22d1f9e094caf3df1fb16387ddf405e9a13c9a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUMO",
+      "status": "ready"
     },
     "TRINSIC:8:topic2": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "TRINSIC:8:yes": {
       "sourceHash": "sha256:00c9359a32e54ebca3bbd19a148173e8c877da449ba777edad5028b11ddc19c9",
@@ -16114,14 +16114,14 @@
     "TRINSIC:9:topic1": {
       "sourceHash": "sha256:60bc44e9ee349cbbfe42fa6c1c3383f26cff006fa4e859dd002245bd1b59fdcb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SPEL",
+      "status": "ready"
     },
     "TRINSIC:9:topic2": {
       "sourceHash": "sha256:e2736e4d3419e35a359465d8a01f69f64f1897f31f77858f1c36ee9ad230fbb4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MAND",
+      "status": "ready"
     },
     "TRINSIC:9:yes": {
       "sourceHash": "sha256:5903dbd9b7f63219aee9716d4a75da0bf0d2a3aaa79053b90140e69142569ce6",
@@ -16186,14 +16186,14 @@
     "VESPER:0:topic1": {
       "sourceHash": "sha256:1e3514bbbff6526e5361b4f8545bc8afeaf6e234f256ae89a8288e03ce26b93c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "VESP",
+      "status": "ready"
     },
     "VESPER:0:topic2": {
       "sourceHash": "sha256:db707d2f9eea6fc3fc6275f0cc5b47b82c4664b5927b0ac6cf54ac03b0828e3d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WELC",
+      "status": "ready"
     },
     "VESPER:0:yes": {
       "sourceHash": "sha256:71cfc266201baf09d709cc7d8bc3d79d38dce992bd395b1860777419b2840879",
@@ -16258,14 +16258,14 @@
     "VESPER:1:topic1": {
       "sourceHash": "sha256:3c8849371afafbbce6c6067befb357989a5c93ab3ca19a553d6729b9bf181bfe",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TOUG",
+      "status": "ready"
     },
     "VESPER:1:topic2": {
       "sourceHash": "sha256:8235634f3f1729e904774f9a7552c4a0dc755cfdb78a810518b3263b9da90c14",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "UG  ",
+      "status": "ready"
     },
     "VESPER:1:yes": {
       "sourceHash": "sha256:d9dd663fb6ab4a3ac09e84e542459b0febea4ca9db1047494d16e9a1177f5b9e",
@@ -16330,14 +16330,14 @@
     "VESPER:10:topic1": {
       "sourceHash": "sha256:fb42dc1af393c2ea7537c1857cc5c590a56e57d3f3d249a018883dc32526d92a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHRI",
+      "status": "ready"
     },
     "VESPER:10:topic2": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "VESPER:10:yes": {
       "sourceHash": "sha256:f990be6289b09bad7c01febdaef7af58c0f38477602c97778044a3a55920837c",
@@ -16402,14 +16402,14 @@
     "VESPER:11:topic1": {
       "sourceHash": "sha256:f4573f4833e6746e927626048d52240c96032a20ec2aceb99f6998b6a4dee555",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COUN",
+      "status": "ready"
     },
     "VESPER:11:topic2": {
       "sourceHash": "sha256:b19fdc727e8eec54fd7e1d732a3d8f6a97e72a15b4c5144715b09a9f8fd22731",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "VIRT",
+      "status": "ready"
     },
     "VESPER:11:yes": {
       "sourceHash": "sha256:a0d7ce8c360ce42ca16394929f14c0fcb116bae1a05f6f9c23ae7815f6ae7de7",
@@ -16474,14 +16474,14 @@
     "VESPER:12:topic1": {
       "sourceHash": "sha256:ed54ea485cbff06d16d3f16e7f80f103a8941b9402e3eb341f4468dcb00e7cd2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FUNN",
+      "status": "ready"
     },
     "VESPER:12:topic2": {
       "sourceHash": "sha256:f77b2fd9abdf8358de094cbcc1db57f790fba387f1db51ad1ed71beb34e12a0f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "NATE",
+      "status": "ready"
     },
     "VESPER:12:yes": {
       "sourceHash": "sha256:7f3d84e6593258cbba716711a0985515908ffc09d52708503019bea9112f108d",
@@ -16546,14 +16546,14 @@
     "VESPER:13:topic1": {
       "sourceHash": "sha256:ce61ead3f70a7d9091ed75d2fc7c22fbc7b2cc427f2a2fc4fdcc853eabc720ce",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MAGE",
+      "status": "ready"
     },
     "VESPER:13:topic2": {
       "sourceHash": "sha256:83f1da8f59a295413e97baa55e21f6c20c03b1131585a41c1a0565f3d4effff9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "CALU",
+      "status": "ready"
     },
     "VESPER:13:yes": {
       "sourceHash": "sha256:54d91dfc4be166065afaf9aa14e6b501928f324019dbd8b6ddc71513259b5e87",
@@ -16618,14 +16618,14 @@
     "VESPER:14:topic1": {
       "sourceHash": "sha256:b19fdc727e8eec54fd7e1d732a3d8f6a97e72a15b4c5144715b09a9f8fd22731",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "VIRT",
+      "status": "ready"
     },
     "VESPER:14:topic2": {
       "sourceHash": "sha256:8e0aa0079db11efadd738bc079a88929d3006ecbf76b590baad027e18ad1fa46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A   ",
+      "status": "ready"
     },
     "VESPER:14:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -16690,14 +16690,14 @@
     "VESPER:15:topic1": {
       "sourceHash": "sha256:228351f9650ac377f85a62cbe8663906bebdb0e06ca9c3ae09afb0033251e0e4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BORR",
+      "status": "ready"
     },
     "VESPER:15:topic2": {
       "sourceHash": "sha256:1af0cd5e42b48047a556ddbc5498e6b46d68bb7dc3dee358efa8b16b4a9c7ee6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HORS",
+      "status": "ready"
     },
     "VESPER:15:yes": {
       "sourceHash": "sha256:2166ed78a5e43b4997e45460e296f19e1f8f2582f82069928d1917359720968e",
@@ -16762,14 +16762,14 @@
     "VESPER:2:topic1": {
       "sourceHash": "sha256:37a6760fa43caf5b1ea02f22251b1456c39e060a4918ba3e963dbde336f16148",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HELP",
+      "status": "ready"
     },
     "VESPER:2:topic2": {
       "sourceHash": "sha256:9e4cab9ad297041ceb025f6e10b3f46c60ac295c340d4b51474eb33542ce8e18",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SKUL",
+      "status": "ready"
     },
     "VESPER:2:yes": {
       "sourceHash": "sha256:60f5b8c1fb8e458dfa21688ee6e5a3556141f925678a7b9555712792cf5c4df7",
@@ -16834,14 +16834,14 @@
     "VESPER:3:topic1": {
       "sourceHash": "sha256:2d4811260a34fda4c7e4157da19f2f587eda2cf9ee2727e5cf3bdc3ea128620e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TINK",
+      "status": "ready"
     },
     "VESPER:3:topic2": {
       "sourceHash": "sha256:6ec8f20fd3d779da92e85b518eacfe8aadac031f2f4a683bc65a9f1f36b1e548",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "TRAV",
+      "status": "ready"
     },
     "VESPER:3:yes": {
       "sourceHash": "sha256:1a2199b5ea1cbea9a44b085dc478eb1ded872700a76fdb9d6c669521c6771523",
@@ -16906,14 +16906,14 @@
     "VESPER:4:topic1": {
       "sourceHash": "sha256:95f8d02778e98f21635961b09bc6940e108ae1a8d44b85d5099b8c1e1969fed9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SERF",
+      "status": "ready"
     },
     "VESPER:4:topic2": {
       "sourceHash": "sha256:00b82880b6ad692d02575e5f5102601f23ebb2086bbab357bdfeb1ab84b8e95a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WORK",
+      "status": "ready"
     },
     "VESPER:4:yes": {
       "sourceHash": "sha256:5b580973d89c605ef0528562e5634ede10a066d53f991fd2c414a1a5b56c1e8d",
@@ -16978,14 +16978,14 @@
     "VESPER:5:topic1": {
       "sourceHash": "sha256:24f6aeb78d36b2714d40ccc433956028a025616ac02ae907b1faddf60c3656b3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HUMI",
+      "status": "ready"
     },
     "VESPER:5:topic2": {
       "sourceHash": "sha256:46b1136f89af1bed417226e373418993066c69c8aa089729af0e46d3c6cc98a7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PRID",
+      "status": "ready"
     },
     "VESPER:5:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -17050,14 +17050,14 @@
     "VESPER:6:topic1": {
       "sourceHash": "sha256:fb42dc1af393c2ea7537c1857cc5c590a56e57d3f3d249a018883dc32526d92a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHRI",
+      "status": "ready"
     },
     "VESPER:6:topic2": {
       "sourceHash": "sha256:24f6aeb78d36b2714d40ccc433956028a025616ac02ae907b1faddf60c3656b3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HUMI",
+      "status": "ready"
     },
     "VESPER:6:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
@@ -17122,14 +17122,14 @@
     "VESPER:7:topic1": {
       "sourceHash": "sha256:00b82880b6ad692d02575e5f5102601f23ebb2086bbab357bdfeb1ab84b8e95a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WORK",
+      "status": "ready"
     },
     "VESPER:7:topic2": {
       "sourceHash": "sha256:18f0480988aad06db2c3fe0620abb681493f5b2278409599257304714b1d30b4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MANT",
+      "status": "ready"
     },
     "VESPER:7:yes": {
       "sourceHash": "sha256:2153f7fee94694726fb665a4ccdd2de80278fe15f7a261edc701c1a78e63429d",
@@ -17194,14 +17194,14 @@
     "VESPER:8:topic1": {
       "sourceHash": "sha256:05a4f2477e510381f1627d420f1a233005de8173d7ee1522d7d64f45bf0bf21d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHEP",
+      "status": "ready"
     },
     "VESPER:8:topic2": {
       "sourceHash": "sha256:fb42dc1af393c2ea7537c1857cc5c590a56e57d3f3d249a018883dc32526d92a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHRI",
+      "status": "ready"
     },
     "VESPER:8:yes": {
       "sourceHash": "sha256:f990be6289b09bad7c01febdaef7af58c0f38477602c97778044a3a55920837c",
@@ -17266,14 +17266,14 @@
     "VESPER:9:topic1": {
       "sourceHash": "sha256:fb5b8ae0fd37258b8ce25ead2fa261f362b00d861735431a12209aa6d5095cae",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "GOLD",
+      "status": "ready"
     },
     "VESPER:9:topic2": {
       "sourceHash": "sha256:1440a7f63a8dd416f66e8fad0d5067962f726d9185c237d08401b54d42b56bed",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "WARN",
+      "status": "ready"
     },
     "VESPER:9:yes": {
       "sourceHash": "sha256:996edf5bad5603bdd37428f5c7a7ceafdaf3f786beee2656fbe57373954fc585",
@@ -17338,14 +17338,14 @@
     "YEW:0:topic1": {
       "sourceHash": "sha256:9c80e3e4f07b52561aecc2cf4adeca0303b88103eab354a2a76dcda01183be23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JUST",
+      "status": "ready"
     },
     "YEW:0:topic2": {
       "sourceHash": "sha256:692f8f2462dba26c4a63c9679ea624a0b2f39f7e31ea1d26df37dd0226e84f16",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "UNDE",
+      "status": "ready"
     },
     "YEW:0:yes": {
       "sourceHash": "sha256:1e20dda350424c02162a147352cc5e4394a9f562a4790321ce01068c41e4c807",
@@ -17410,14 +17410,14 @@
     "YEW:1:topic1": {
       "sourceHash": "sha256:9c80e3e4f07b52561aecc2cf4adeca0303b88103eab354a2a76dcda01183be23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JUST",
+      "status": "ready"
     },
     "YEW:1:topic2": {
       "sourceHash": "sha256:8af3ee6a1927cd34f434623462c758299bbc5ba277ef656e473409fcbcefc623",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COUR",
+      "status": "ready"
     },
     "YEW:1:yes": {
       "sourceHash": "sha256:2847463010bcbb7383c127e25b2a4c12081e7e1013b330cf79425a56fdd74b99",
@@ -17482,14 +17482,14 @@
     "YEW:10:topic1": {
       "sourceHash": "sha256:36e65c39f83b8df92770b95b8cdad4947ebd58cc410ac6e8bbac7a21e8ce941c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "HOME",
+      "status": "ready"
     },
     "YEW:10:topic2": {
       "sourceHash": "sha256:32934953bc806f01679f94cfad72e29a0480ea907779d391b3eb7a79258679cd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RANG",
+      "status": "ready"
     },
     "YEW:10:yes": {
       "sourceHash": "sha256:52cabe31f5612f9d524de68fe4a9d70268b99e4bff0da6a274c1ce3b54814297",
@@ -17554,14 +17554,14 @@
     "YEW:11:topic1": {
       "sourceHash": "sha256:d3de7321d7c21ab71d9fc1a5ad62c2cba04c897c4c5fafcd47e4648f2f74c524",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JONE",
+      "status": "ready"
     },
     "YEW:11:topic2": {
       "sourceHash": "sha256:00029651dce90c33f38ba845807a3b716c85bc81240a889b3b1f85b337e377bc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "QUES",
+      "status": "ready"
     },
     "YEW:11:yes": {
       "sourceHash": "sha256:5ad85313d68847f5bae439796f42bf4f3acf66e1e141efc76efe5c9e307da9f1",
@@ -17626,14 +17626,14 @@
     "YEW:12:topic1": {
       "sourceHash": "sha256:2f22e15622cd32d7154e0441e0c9dcbf4489aa4e7ba200bbe5e6272e19be0f1e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BABY",
+      "status": "ready"
     },
     "YEW:12:topic2": {
       "sourceHash": "sha256:9c80e3e4f07b52561aecc2cf4adeca0303b88103eab354a2a76dcda01183be23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JUST",
+      "status": "ready"
     },
     "YEW:12:yes": {
       "sourceHash": "sha256:95988240e89293c407f2f8f3cfd5e997b630ad46d502cb185f068482733ef9ca",
@@ -17698,14 +17698,14 @@
     "YEW:13:topic1": {
       "sourceHash": "sha256:f4573f4833e6746e927626048d52240c96032a20ec2aceb99f6998b6a4dee555",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "COUN",
+      "status": "ready"
     },
     "YEW:13:topic2": {
       "sourceHash": "sha256:9c80e3e4f07b52561aecc2cf4adeca0303b88103eab354a2a76dcda01183be23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JUST",
+      "status": "ready"
     },
     "YEW:13:yes": {
       "sourceHash": "sha256:29126522b6630e021c53f73a51cfa72ea2445d1947acee8ef84ec025510aacb1",
@@ -17770,14 +17770,14 @@
     "YEW:14:topic1": {
       "sourceHash": "sha256:beaf3e335fc7f83996f3f2dab670c283c694e8040bfb4b7a196092601dfd0cbc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PEAC",
+      "status": "ready"
     },
     "YEW:14:topic2": {
       "sourceHash": "sha256:9c80e3e4f07b52561aecc2cf4adeca0303b88103eab354a2a76dcda01183be23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JUST",
+      "status": "ready"
     },
     "YEW:14:yes": {
       "sourceHash": "sha256:2076bae5b67054ec7929ca07e5515535268062680d7bb3433f3de49b798bf726",
@@ -17842,14 +17842,14 @@
     "YEW:15:topic1": {
       "sourceHash": "sha256:9c80e3e4f07b52561aecc2cf4adeca0303b88103eab354a2a76dcda01183be23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JUST",
+      "status": "ready"
     },
     "YEW:15:topic2": {
       "sourceHash": "sha256:fb42dc1af393c2ea7537c1857cc5c590a56e57d3f3d249a018883dc32526d92a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SHRI",
+      "status": "ready"
     },
     "YEW:15:yes": {
       "sourceHash": "sha256:f5db9f1bea3f5e1c7a9e22a33d072acbd86f3e53f123b09ee6074ea8fc34139e",
@@ -17914,14 +17914,14 @@
     "YEW:2:topic1": {
       "sourceHash": "sha256:1993e98363b8b13d389496251f9842afdc2f9a93e4d851aa6ed80c4c74727f27",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MISD",
+      "status": "ready"
     },
     "YEW:2:topic2": {
       "sourceHash": "sha256:428ad015e0c9c03b33ba02aaff703d900152bd176d9d326651c5d9ead1017a8a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FELO",
+      "status": "ready"
     },
     "YEW:2:yes": {
       "sourceHash": "sha256:022500b944d73535d25909abbbf24ec78353968b604cd06757e4f9acba1af209",
@@ -17986,14 +17986,14 @@
     "YEW:3:topic1": {
       "sourceHash": "sha256:60bc44e9ee349cbbfe42fa6c1c3383f26cff006fa4e859dd002245bd1b59fdcb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SPEL",
+      "status": "ready"
     },
     "YEW:3:topic2": {
       "sourceHash": "sha256:e2736e4d3419e35a359465d8a01f69f64f1897f31f77858f1c36ee9ad230fbb4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "MAND",
+      "status": "ready"
     },
     "YEW:3:yes": {
       "sourceHash": "sha256:e1601b6f87ed38918037f6c8c05ea139ded11c998e3d489e2d53e614215ffa81",
@@ -18058,14 +18058,14 @@
     "YEW:4:topic1": {
       "sourceHash": "sha256:9c80e3e4f07b52561aecc2cf4adeca0303b88103eab354a2a76dcda01183be23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JUST",
+      "status": "ready"
     },
     "YEW:4:topic2": {
       "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "RUNE",
+      "status": "ready"
     },
     "YEW:4:yes": {
       "sourceHash": "sha256:f4f021b9fc58332c3119b0698a896c86c5e3b91e70ef816215d4d647e23ecad2",
@@ -18130,14 +18130,14 @@
     "YEW:5:topic1": {
       "sourceHash": "sha256:9c80e3e4f07b52561aecc2cf4adeca0303b88103eab354a2a76dcda01183be23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JUST",
+      "status": "ready"
     },
     "YEW:5:topic2": {
       "sourceHash": "sha256:3d21641fa68e6cf6f510c76841038b003146e838d0d0e7df9218a154efcea51c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FABR",
+      "status": "ready"
     },
     "YEW:5:yes": {
       "sourceHash": "sha256:0e0fcf2cf034d015da9f1321f8a8ef4637c1a50df9f742f370c3f2e1c0c0d5d3",
@@ -18202,14 +18202,14 @@
     "YEW:6:topic1": {
       "sourceHash": "sha256:869e20b1c57a95ec32d3e1320f7d9793f7a44c4e1f4bc90819bc08d293881591",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BEH.",
+      "status": "ready"
     },
     "YEW:6:topic2": {
       "sourceHash": "sha256:fab63f1b3e906ec62f238fafd121246c05ee0b588daa11bc09ea952fbdd523d5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "BEH ",
+      "status": "ready"
     },
     "YEW:6:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
@@ -18274,14 +18274,14 @@
     "YEW:7:topic1": {
       "sourceHash": "sha256:9c80e3e4f07b52561aecc2cf4adeca0303b88103eab354a2a76dcda01183be23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "JUST",
+      "status": "ready"
     },
     "YEW:7:topic2": {
       "sourceHash": "sha256:4a3b9d2060c9361c8dafe066df99b314ed46c0e41185dda406740bb9b7d36b5e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "YEW ",
+      "status": "ready"
     },
     "YEW:7:yes": {
       "sourceHash": "sha256:66c0a1da5b0a7cdd33b44af36be9259a4cc9d6e40b0c6fda4c20d397609c1208",
@@ -18346,14 +18346,14 @@
     "YEW:8:topic1": {
       "sourceHash": "sha256:444d64991df7a52d94d5b4e885f7116ac56dafc3fd9406370a40011a97ec4050",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "SINE",
+      "status": "ready"
     },
     "YEW:8:topic2": {
       "sourceHash": "sha256:428ad015e0c9c03b33ba02aaff703d900152bd176d9d326651c5d9ead1017a8a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "FELO",
+      "status": "ready"
     },
     "YEW:8:yes": {
       "sourceHash": "sha256:039f127b8f104ebaaa65b1ad7f63950492d580fafc0b5ee34c288141cd63b9af",
@@ -18418,14 +18418,14 @@
     "YEW:9:topic1": {
       "sourceHash": "sha256:0b18bee654c22bf7f18742813292613c0eba45b51abed984771aef7aec304c09",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "VILL",
+      "status": "ready"
     },
     "YEW:9:topic2": {
       "sourceHash": "sha256:16ff99dc18737fcea8b628b8b51663b51ec93d3ca29c3581eb7df7cdd8e03874",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "PEOP",
+      "status": "ready"
     },
     "YEW:9:yes": {
       "sourceHash": "sha256:440015daea3a577d24b5a1bf771089ab12aff889754d4a65e716d4889b3bb4cd",
