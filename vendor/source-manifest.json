@@ -6,7 +6,7 @@
       "upstream": "https://github.com/xu4-engine/u4.git",
       "revision": "6a7ee3d0079cfdc1c8fb9ba7a3c710a957155a71",
       "fileCount": 410,
-      "treeSha256": "0e2263bcf92497f92a9dbcdca0464163d2a59a5a7a74b169dd379dbdd07c3e98"
+      "treeSha256": "d59660c137ec52a004c62194fc64605fec956cb74f4d369e9fd9223dceb949c7"
     },
     {
       "name": "faun",
