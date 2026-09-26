@@ -249,7 +249,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: capture status/menu overlays at desktop sizes, evidence `.omo/evidence/ultima-web/task-12/status-overlay.png`; failure: shrink viewport to minimum supported width and verify page scroll/readability instead of clipped text, evidence `.omo/evidence/ultima-web/task-12/narrow-viewport.png`.
   Commit: Y | feat(ui): overlay Korean status and menus
 
-- [ ] 13. Support Korean NPC aliases and prompt-specific input rules
+- [x] 13. Support Korean NPC aliases and prompt-specific input rules
   What to do / Must NOT do: implement context-aware Korean alias mapping to canonical English NPC keywords/answers while preserving original English prefix behavior and fixed save formats; distinguish NPC/free-answer, numeric, command, direction, and avatar-name prompts. Must not accept Korean in avatar name save field or change internal comparison IDs.
   Parallelization: Wave 3 | Blocked by: 8,9,11 | Blocks: 14,17
   References: `engine/src/event.cpp:487-943`; `engine/src/discourse.cpp:48`; `engine/src/config_boron.cpp:1325-1340`; `engine/src/savegame.h:256-266`.

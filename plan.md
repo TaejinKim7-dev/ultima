@@ -21,13 +21,14 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률
-- **승인 기준: 15 / 25 = 60.0%** (Step 1~12, 14, 16, 21 ✅ — Todo 14를 main에 merge함).
-- **실제 게임에서 확인 (2026-09-26 갱신): 브라우저에서 실제 엔진으로 확인됨 — Step 7(WebGL2 렌더), 8(실제 GLFW 입력), 9(브라우저 시작), 10(저장/재로드/export-import), 16(실제 Web Audio 음악/RFX 효과음), 21(링크·FS·렌더·입력 전부).** 근거: `tests/e2e/boot-sequence.spec.ts`가 실제 `ultima4.zip`으로 실제 타이틀 화면 렌더 + 키 입력 2회로 `IntroController`의 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU)까지 확인(`.omo/evidence/ultima-web/task-21/title-render.png`). (Step 12·14는 Todo 11과 같은 사유로 ⬜: 실제 엔진이 status/menu/message bridge 이벤트를 아직 안 보냄.)
+- **승인 기준: 16 / 25 = 64.0%** (Step 1~14, 16, 21 ✅ — Todo 13을 main에 merge함).
+- **실제 게임에서 확인 (2026-09-26 갱신): 브라우저에서 실제 엔진으로 확인됨 — Step 7(WebGL2 렌더), 8(실제 GLFW 입력), 9(브라우저 시작), 10(저장/재로드/export-import), 13(실제 NPC 대화 + 한국어 alias), 16(실제 Web Audio 음악/RFX 효과음), 21(링크·FS·렌더·입력 전부).** 근거: `tests/e2e/boot-sequence.spec.ts`가 실제 `ultima4.zip`으로 실제 타이틀 화면 렌더 + 키 입력 2회로 `IntroController`의 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU)까지 확인(`.omo/evidence/ultima-web/task-21/title-render.png`). (Step 12·14는 Todo 11과 같은 사유로 ⬜: 실제 엔진이 status/menu/message bridge 이벤트를 아직 안 보냄.)
 - **Step 10 완료 (2026-09-25): 저장·재로드·export/import 전부 증명됨.** `tests/e2e/save-reload.spec.ts`가 실제 캐릭터 생성(이름/성별/스토리 24화면/미덕 질문 최대 20라운드)을 Playwright로 끝까지 자동화해 실제 `party.sav` write → IDBFS 동기화(`#save-status`="저장 완료") → 페이지 리로드 → "Journey Onward" → 실제 게임 월드(파티 이름 "avatar", 골드 200 등) 진입을 스크린샷으로 확인(`.omo/evidence/ultima-web/task-10/save-reload-after-journey.png`). IDBFS 실패 시나리오도 실제 `window.indexedDB` 제거로 확인. **Export/import도 이번에 실제로 연결**: `src/shell.ts`에 `attachSaveHandlers()`를 추가해 `main.ts`가 `startEngine()` 성공 시 `persistence.ts`의 실제 `exportSaveArchive`/`importSaveArchive`를 넘겨주고, 다운로드된 아카이브가 실제 "U4SV" 매직 바이트로 시작하며 재가져오기가 라운드트립되는 것까지 e2e로 확인(`.omo/evidence/ultima-web/task-10/export-reimport.dat`).
 - **Step 11 완료 (2026-09-25, 병렬 백그라운드 에이전트)**: 긴 메시지를 HTML 대화 패널로 라우팅. 실제 `screen.cpp` 메시지 바이트(줄바꿈/백스페이스/커서이동/색상)를 `message-tokens.ts`로 토큰화, `PanelState`가 dispatch 호출 간 지속(엔진 출력이 줄 단위가 아니라 조각 단위로 옴), Hawkwind류 pause는 `MessageBridgeEvent.awaitKey`로 별도 전달(ABI v1에 additive). `createElement`/`textContent`만 사용(e2e로 innerHTML 계열 미호출 증명, 악성 `&lt;script&gt;` 주입 텍스트도 무해하게 렌더됨을 확인).
 - **Step 12 완료 (2026-09-26, branch `todo-12-status-overlay` → main merge)**: status/menu/textview DOM 오버레이. `src/overlay/overlay-layout.ts`(순수 `OverlayRegistry` + DPR/letterbox 인식 수학), `ViewBridgeEvent`에 `rows`/`selectedIndex`를 ABI v1에 additive로 추가, `src/shell.ts`가 canvas 실측 박스(ResizeObserver)로 오버레이 위치/글자크기 갱신. 실제 엔진은 여전히 status/menu bridge 이벤트를 안 보내므로 e2e는 synthetic dispatch로 검증 — "실제 게임에서 확인" ⬜ (Todo 11과 동일 사유).
 - **Step 14 완료 (2026-09-26, branch `todo-14-localization-runtime` → main merge)**: `scripts/i18n-generate.mjs`가 `locales/ko/*.json`을 정적 테이블(`src/i18n/generated/strings.ts`, `native/i18n/u4_i18n_table.inc`, `native/i18n/ko-overlay.b`)로 변환(ready만, pending은 영어 fallback — corpus는 Todo 15). TS 경계 `src/i18n/localization.ts`(resolveDisplayText/hasTranslation/placeholder-match/width/command-key 판정) + C 경계 `native/i18n/u4_i18n_lookup.{h,c}`(screenMessageN/TLK/binary seam 문서화) + `window.ultimaI18n` 노출. e2e는 synthetic + 실제 wasm 부팅 위에서 한국어 표시/영어 로직/placeholder 불일치 loud-fail 검증 — "실제 게임에서 확인" ⬜ (11·12와 동일 사유).
 - **Step 16 완료 (2026-09-26, 병렬 백그라운드 에이전트)**: Todo 21.1의 무음 `sound.h` 스텁을 실제 `vendor/xu4/src/sound_web.cpp`(Web Audio 백엔드)로 교체. `tests/e2e/audio.spec.ts`가 실제 `ultima4.zip`으로 AudioContext unlock, 실제 음악 재생(94초 트랙, 자동 트리거), 실제 RFX 합성 효과음(Configure 메뉴 화살표/닫기 키), pause/resume, 생성-취소(stale decode) 경합 시나리오까지 확인(`.omo/evidence/ultima-web/task-16/{audio-summary.json,audio-generation-race.log}`). 실제 버그 발견·수정: `module.c`의 `mod_addLayer()`가 모든 `CDIEntry`의 `cdi` 하위 바이트를 레이어 번호로 덮어써서 RFX 포맷 판별이 깨짐 — `CDI_MASK_FORMAT`로 상위 2바이트만 비교하도록 수정(vendor 원본은 안 건드림, 새 `sound_web.cpp` 안에서만 마스킹).
+- **Step 13 완료 (2026-09-26, branch `todo-99-settings-abort` + `todo-13-e2e` → main merge)**: 한국어 NPC alias + prompt별 입력 규칙 코드 자체는 이미 main에 있었으나(`80ce1ac`), e2e happy path가 WASM 전용 `Aborted(RuntimeError: unreachable)` 크래시로 장기간 구조적 차단돼 있었다. **근본 원인을 찾아 고쳤다**: Emscripten의 GLFW 웹 포트가 `screen_glfw.cpp`의 키/마우스 콜백을 브라우저 DOM 이벤트에서 직접·동기적으로 호출하는데, 이게 `EventHandler::run()`의 Asyncify 프레임 루프가 `emscripten_sleep()` 중간에 unwind된 채 대기 중인 시점과 완전히 무관하게 일어난다. 그 콜백이 중첩 Controller(메뉴/치트메뉴 탐색 → `runMenu()`의 재진입 `EventHandler::run()`)를 여는 코드에 도달하면 그 중첩 호출도 Asyncify로 suspend되는데, Asyncify는 전역으로 단 하나의 suspend만 지원한다 — 이미 대기 중이던 메인 루프의 sleep 콜백이 고아가 되고, 그 stale 타이머가 나중에 발화하면 이미 재사용/해제된 `Asyncify.currData`로 재개를 시도해 런타임이 abort된다. 진단: `-sASYNCIFY_STACK_SIZE` 1MB→16MB로도 동일 크래시(스택 크기 무죄), 컴파일된 glue를 패치해 원본 trap을 찍어보니 `asyncify_start_rewind`의 자체 sanity check(`stack_ptr > stack_end`)였고, SLEEP/WAKE 트레이스로 `PENDING-ON-ENTRY`(이미 대기 중인 sleep이 있는데 새 sleep이 또 시작됨)를 실측 확인, 최종적으로 `Asyncify.currData`가 크래시 직전 `null`이었음을 확인(힙 손상이 아니라 orphan 콜백임을 증명). 수정: `keyHandler`/`dispatchEvent`가 이제 이벤트를 큐에만 넣고, `EventHandler::handleInputEvents()`가 자신의 `glfwPollEvents()` 호출 직후(네이티브가 이 콜백들을 동기 처리하는 바로 그 지점)에 큐를 drain — 네이티브 빌드는 `#ifdef __EMSCRIPTEN__`로 완전히 무영향. 신규 회귀 스펙 `tests/e2e/configure-menu-no-abort.spec.ts`(RED로 재현 확인 후 GREEN) + 기존 `korean-npc-alias.spec.ts`의 실제 happy-path(영어 "health" → 한국어 "건강" alias → "bye") 최초로 끝까지 통과(2.8분). `vendor/source-manifest.json` xu4 treeSha256 갱신.
 
 ## 단계 목록
 
@@ -71,7 +72,7 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 |---|---|---|---|---|
 | 11 | 긴 메시지 → 하단 HTML 대화 패널 (textContent만) | ✅ | ⬜ | 5,9,21 |
 | 12 | status/menu → DOM overlay (DPR/letterbox) | ✅ | ⬜ | 5,9,11,21 |
-| 13 | 한국어 NPC alias + prompt별 입력 규칙 | ⬜ | ⬜ | 8,9,11,21 |
+| 13 | 한국어 NPC alias + prompt별 입력 규칙 | ✅ | ✅ | 8,9,11,21 — main `cf0a690`(abort 수정 merge) + `a88d9e4`(e2e spec merge) |
 | 14 | C++/Boron/TLK/binary/JS 번역 lookup 런타임 연결 | ✅ | ⬜ | 4,11,12,13 |
 | 15 | 전체 한국어 번역 corpus + glossary 일관성 (`i18n:check --strict`) | ⬜ | ⬜ | 4,14 |
 
@@ -216,10 +217,10 @@ Todo 16 완료 (2026-09-26, branch `todo-16-web-audio` 커밋 `541d6ca`, main에
 - 증거: `.omo/evidence/ultima-web/task-16/{red.log,green-manifest.log,green-unit.log,audio-summary.json,audio-generation-race.log}`.
 - 남은 것: `soundSpeakLine()`의 stream sub-range 재생은 미구현(이 모듈에 `voice:` 데이터가 전혀 없어 실질적으로 도달 불가함을 확인) — 정직하게 문서화만 하고 구현은 보류. 상세는 `handoff.md` "Todo 16 완료 기록" 참고.
 
-## 바로 다음 순서 (2026-09-26 갱신 — Todo 14까지 완료 15/25, 여기서 멈춤)
-1. **멈춤 상태**: Todo 14 merge·게이트·docs·push까지 완료하고 중단. 다음 재개 시 아래 순서.
-2. Todo 13 e2e 복구 — wasm settings-write abort 수정이 선행 조건. fix-7 조사 결론: WASM-ONLY (native 정상), `Settings::write()`/`gs_emit`/사운드 가드/키 매핑 모두 무죄, 유력 가설은 musl/Emscripten stdio 차이·Asyncify unwind·GLFW reentrancy. 다음 실험: `--debug`(ASSERTIONS=2) 빌드로 named trap + 스택 확보.
-3. 13-e2e GREEN → `[x]` → 15(번역 4402건, 4-chunk 분할안 있음) → 17(QA 갭 분석 있음) → 18 → 19 완료(emsdk CI 스텝·audit 확장 이미 병합됨) → 20 → F1~F4.
+## 바로 다음 순서 (2026-09-26 갱신 — Todo 13 abort 수정 + e2e GREEN, 16/25)
+1. **Todo 13 완료**: wasm 입력 이벤트 재진입 버그를 근본 원인까지 찾아 고치고(`screen_glfw.cpp` 입력 큐), happy-path e2e가 최초로 끝까지 통과했다. 상세는 위 "Step 13 완료" 항목과 `handoff.md`의 "wasm 입력 이벤트 재진입 버그" 절 참고.
+2. 다음: 15(번역 4402건, 4-chunk 분할안 있음) → 17(QA 갭 분석 있음, 이 재진입 버그 클래스가 다른 in-game 흐름에도 잠재했을 수 있으니 통합 e2e에서 특히 주의) → 18 → 19 완료(emsdk CI 스텝·audit 확장 이미 병합됨) → 20 → F1~F4.
+3. Pages Source="GitHub Actions" 저장소 설정은 사용자만 가능 — 계속 대기.
 
 ## 목적 달성 가능성 판단
 - **가능하다, 그리고 크리티컬 패스(Todo 21)는 이제 끝났다.** 근거: 같은 xu4 소스가 native에서도(Step 3), 이제 브라우저에서도(Todo 21, 2026-09-25) 원본 데이터로 실제로 돈다 — 실제 타이틀 화면 렌더 + 실제 키 입력으로 `IntroController` 상태 전이까지 확인됨. 남은 일은 대부분 한국어화(11~15)와 배포(17~20)로, 엔진 자체의 미지수는 이제 거의 없다.

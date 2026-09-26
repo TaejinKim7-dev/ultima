@@ -982,3 +982,28 @@ ULTIMA4_DATA=.../ultima4.zip npx playwright test tests/e2e/boot-sequence.spec.ts
 - branch `todo-14-localization-runtime`: RED `fc3dd1b` → GREEN `34a875e` + 배선 수정 `087c266`. 정적 코드젠(`i18n-generate.mjs` → TS/C/Boron 테이블, ready만·pending은 영어 fallback) + TS/C lookup 경계 + native `localization-boundaries` CTest + `localized-flow.spec.ts`.
 - 조율자 직접 수정 1건: lane이 `window.ultimaI18n` 노출 배선을 빠뜨려 e2e 2 failed → `main.ts`에 ultimaAudio 패턴으로 노출 추가 후 GREEN(2/2).
 - **병합-후 게이트 (main, 전부 실제 실행 · exit 0)**: unit 21 files/258 tests · verify:repo-sources · typecheck · build · diff-check · cmp · `i18n:check`(4411 entries, 4402 pending) · cmake configure/build · CTest 4/4(localization-boundaries 포함) · e2e 25/25(3.2m, save-reload 장기 포함).
+
+### Todo 13 e2e 차단 해소 — wasm 입력 이벤트 재진입 버그, 근본 원인 확정 + 수정 (2026-09-26, branch `todo-99-settings-abort` `b56b415` + `todo-13-e2e` `c42398c`, main `cf0a690`/`a88d9e4`, 16/25 = 64.0%)
+
+**직전 기록 정정**: 위 "Todo 13 e2e 차단 — wasm settings-write abort 발견" 절의 결론 일부가 틀렸다. `Settings::write()`가 무죄라는 판단과 native/wasm 대비는 맞았지만, 그 뒤 이어진 조사에서 나온 "ESC/`c,g,Escape`가 2단계 깊이에서 메뉴를 닫고도 살아남는다"는 비교는 무효였다(`MenuController::keyPressed`엔 ESC 케이스가 아예 없어 메뉴 자체가 안 닫혔다 — advisor 리뷰로 발견). "힙 손상 가설"도 기각됐다(아래 참고). 이 절이 최종 결론이다.
+
+**증상 재확인**: `c,g,u`(Configure→gameplay→Debug 토글→Use These Settings)가 결정론적으로 `Aborted(RuntimeError: unreachable)`. 이후 조사에서 완전히 다른 트리거(치트메뉴 Goto로 town 진입)도 **동일한 abort**를 낸다는 것을 발견 — Configure 메뉴만의 문제가 아니라 더 근본적인 클래스의 버그였다.
+
+**진단 과정 (실제로 실행한 것만)**:
+1. `-sASYNCIFY_STACK_SIZE` 1MB→16MB로 재빌드 후 동일 시퀀스 재현 → 동일 크래시, 동일 지점. 스택 크기 무죄 확정.
+2. 컴파일된 glue(`build/wasm-release/xu4.mjs`)의 `runAndAbortIfError`에 `console.error('ORIG', e.stack)`를 직접 패치해 재빌드 없이 원본 trap 스택 확보 → trap은 `wasm-function[2702]`, `__asyncify_wrapper_2702`를 통해 호출됨. `wasm-dis`로 함수 인덱스(import 144개 오프셋 보정)를 역산해 해당 함수 본문을 직접 디스어셈블한 결과, Binaryen이 생성한 `asyncify_start_rewind`의 **자체 sanity check**(`if (data.cur > data.end) unreachable`)였다 — 앱 코드가 아니었다.
+3. `Asyncify.currData`의 `HEAP32` 값을 매 sleep 사이클마다 로그(SLEEP#id/WAKE#id 계측)한 결과, 크래시 직전 `Asyncify.currData`가 **`null`**이었다(정상 사이클 38회 동안은 매번 같은 유효한 버퍼 주소였음). 힙 손상이 아니라 "이미 완료되어 초기화된 슬롯을 나중에 도착한 고아 콜백이 재사용"하는 패턴임을 확정.
+4. 같은 계측으로 `PENDING-ON-ENTRY`(새 sleep이 시작될 때 이미 다른 sleep이 대기 중)를 실측: 항상 `IntroController::keyPressed → runMenu() → 새 EventHandler::run()`의 재진입 체인에서 발생. 그 체인의 최상단 JS 프레임은 `keyHandler(GLFWwindow*, ...)` — `screen_glfw.cpp`의 `glfwSetKeyCallback` 콜백.
+
+**근본 원인**: Emscripten의 GLFW 웹 포트는 `keyHandler`/`dispatchEvent`(마우스/스크롤)를 브라우저 DOM 이벤트에서 **직접·동기적으로** 호출한다 — 네이티브 GLFW처럼 `glfwPollEvents()` 안에서만 불리는 게 아니라, `EventHandler::run()`의 Asyncify 프레임 루프가 `emscripten_sleep()` 중간에 unwind되어 JS로 완전히 제어를 넘긴 상태에서도 언제든 끼어들 수 있다. 그 콜백이 메뉴/치트메뉴 탐색처럼 새 Controller를 여는 코드에 도달하면(`runMenu()`가 또 하나의 `EventHandler::run()`을 재귀 호출), 그 중첩 호출도 자체적으로 `emscripten_sleep()`을 거쳐 Asyncify로 suspend되는데 — Asyncify는 **전역으로 단 하나의 suspend만** 지원한다(`Asyncify.currData`/`Asyncify.state`는 싱글턴). 이미 대기 중이던 원래 sleep의 `setTimeout` 콜백은 고아가 되고, 나중에(중첩 루프가 자기 사이클을 다 마친 뒤) 그 stale 타이머가 발화하면 이미 재사용/해제된 `Asyncify.currData`로 재개를 시도해 `asyncify_start_rewind`의 sanity check가 실패, 런타임이 abort된다.
+
+**수정**: `vendor/xu4/src/screen_glfw.cpp` — `keyHandler`/`dispatchEvent`(mouseMotionHandler/mouseButtonHandler/scrollHandler가 공유)를 `#ifdef __EMSCRIPTEN__`에서 controller 로직을 직접 호출하지 않고 작은 링 버퍼(`queueKeyEvent`/`queueInputEvent`, 64칸)에 이미 번역된 이벤트만 적재하도록 바꿨다. 실제 dispatch(`notifyKeyPressed`/`inputEvent`)는 `EventHandler::handleInputEvents()`가 자신의 `glfwPollEvents()` 호출 **직후**(네이티브 빌드가 이 콜백들을 동기 처리하는 바로 그 지점)에 `drainInputQueue()`로 옮겼다. 네이티브 빌드는 `#ifdef __EMSCRIPTEN__`로 완전히 무영향(native 빌드 재확인: 경고 없이 컴파일·링크, CTest 3/3 무회귀).
+
+**검증**:
+- 메커니즘 자체: SLEEP/WAKE 계측을 수정된 빌드에 재적용 → 384개 sleep 이벤트 전부 `exportCallStack=[function 1218 (main)]`만(중첩 재진입 0), `PENDING-ON-ENTRY` 0건, `NULL-WAKE` 0건.
+- TDD: 신규 `tests/e2e/configure-menu-no-abort.spec.ts` — 수정 전 빌드로 실행해 RED(`c,g,u` 1분 타임아웃, `keyboard.press` 행 — 탭이 완전히 응답 불능) 확인 후, 수정 적용·재빌드해 GREEN(2/2) 확인.
+- `tests/e2e/korean-npc-alias.spec.ts`의 happy path(영어 "health" → 한국어 alias "건강" → "bye")가 **이번에 처음으로** 끝까지 통과(2.8분) — 이전에는 이 abort 때문에 한 번도 완주한 적이 없었다. failure path(빈 이름/IME 거부)도 함께 재확인(1.6분).
+- 전체 e2e 무회귀(chromium, `--workers=2`, save-reload 분리 실행 3/3 포함) + unit 21 files/258 tests · verify:repo-sources · typecheck · build · diff-check · cmake configure/build/test(3/3) · native 빌드(경고만, 에러 없음) 전부 exit 0.
+- `vendor/source-manifest.json`의 xu4 `treeSha256` 재계산(Todo 7/8/16/21 전례 따름, 같은 커밋).
+
+**결론적으로 정정**: 이 버그는 "WASM-ONLY라서 감수하고 사는 Emscripten 한계"가 아니라 **이식 과정의 실제 결함**(GLFW 콜백 이벤트 디스패치 순서)이었고, 고쳤다. Todo 17(통합 e2e)·F3(수동 QA)도 같은 재진입 클래스의 다른 트리거를 만날 수 있으니 주의.
