@@ -1,5 +1,5 @@
 import { readdirSync, readFileSync, statSync } from "node:fs"
-import { basename, extname, join } from "node:path"
+import { basename, extname, join, relative, sep } from "node:path"
 import { FORBIDDEN_BASENAMES, FORBIDDEN_EXTENSIONS } from "./check-base-path.mjs"
 
 // Todo 19 (`.github/workflows/pages.yml`) scope: catch the two ways a
@@ -144,6 +144,112 @@ export const SAME_ORIGIN_ALLOWLIST = [
   "https://taejinkim7-dev.github.io"
 ]
 
+// Files under `dist/engine/` are EMCC-GENERATED glue (copied by
+// vite.config.ts's wasmEngineAssets from build/wasm-release): Emscripten's
+// SOCKFS backend ships WebSocket helpers, spec-reference comment URLs, and
+// a `file://` diagnostic string that this offline single-player build never
+// invokes (the game issues no socket syscalls). They get a narrowly-scoped
+// reading of the egress check below -- never a skip: every other content
+// check still applies to them in full, and unknown helpers/URLs still fail.
+function isEngineGlueFile(distDir, filePath) {
+  const rel = relative(distDir, filePath)
+  return rel !== "" && !rel.startsWith("..") && rel.split(sep)[0] === "engine"
+}
+
+export const ENGINE_GLUE_ALLOWLIST = [
+  {
+    token: "WebSocketConstructor",
+    kind: "identifier",
+    // Emscripten SOCKFS `createPeer` constructor alias -- `require('ws')`
+    // under Node, the browser `WebSocket` global otherwise
+    // (emscripten src/library_sockfs.js; dist/engine/xu4.js:4250-4257).
+    reason: "Emscripten SOCKFS createPeer constructor alias, dead without socket syscalls"
+  },
+  {
+    token: "WebSocketServer",
+    kind: "identifier",
+    // Emscripten SOCKFS `listen()` helper (`require('ws').Server`;
+    // emscripten src/library_sockfs.js; dist/engine/xu4.js:4530-4532).
+    reason: "Emscripten SOCKFS listen() helper, never reached by the offline game"
+  },
+  {
+    token: "WebSocketConstructor = WebSocket",
+    kind: "statement",
+    // The single browser-fallback assignment inside `createPeer`
+    // (dist/engine/xu4.js:4255), matched whitespace-tolerantly. A bare
+    // `new WebSocket(` anywhere -- app code or glue -- still fails.
+    reason: "Emscripten SOCKFS browser fallback assignment, exact statement only"
+  },
+  {
+    token:
+      "https://emscripten.org/docs/getting_started/FAQ.html#how-do-i-run-a-local-webserver-for-testing-why-does-my-program-stall-in-downloading-or-preparing",
+    kind: "url",
+    // Static `file://` diagnostic text inside preamble's `err(...)` call
+    // (emscripten src/preamble.js; dist/engine/xu4.js:617): displayed, never
+    // fetched.
+    reason: "Emscripten preamble file:// diagnostic string, never fetched"
+  }
+]
+const ENGINE_GLUE_IDENTIFIERS = new Set(
+  ENGINE_GLUE_ALLOWLIST.filter((entry) => entry.kind === "identifier").map((entry) => entry.token)
+)
+const ENGINE_GLUE_URLS = new Set(
+  ENGINE_GLUE_ALLOWLIST.filter((entry) => entry.kind === "url").map((entry) => entry.token)
+)
+const ENGINE_GLUE_FALLBACK_STATEMENT = /\bWebSocketConstructor\s*=\s*WebSocket\b/g
+const WEBSOCKET_IDENTIFIER = /[A-Za-z0-9_$]*WebSocket[A-Za-z0-9_$]*/g
+
+// Splits generated-glue source into two audit views without ever treating
+// string/comment text as code (a naive `//`-strip would eat `'ws://'`
+// literals and the code after them on the same line):
+// - `codeOnly`: comments and string literals removed (a space keeps token
+//   boundaries so removal never fuses adjacent identifiers).
+// - `noComments`: only comments removed (strings kept for URL analysis -- a
+//   raw `https://` cannot appear in JS code outside a string/comment, since
+//   the `//` would start a comment).
+function splitGlueViews(content) {
+  let codeOnly = ""
+  let noComments = ""
+  let index = 0
+  while (index < content.length) {
+    const char = content[index]
+    const two = content.slice(index, index + 2)
+    if (two === "//") {
+      const end = content.indexOf("\n", index + 2)
+      index = end === -1 ? content.length : end
+    } else if (two === "/*") {
+      const end = content.indexOf("*/", index + 2)
+      index = end === -1 ? content.length : end + 2
+    } else if (char === "'" || char === '"' || char === "`") {
+      const end = scanStringEnd(content, index)
+      noComments += content.slice(index, end)
+      codeOnly += " "
+      index = end
+    } else {
+      codeOnly += char
+      noComments += char
+      index += 1
+    }
+  }
+  return { codeOnly, noComments }
+}
+
+function scanStringEnd(content, start) {
+  const quote = content[start]
+  let index = start + 1
+  while (index < content.length) {
+    const char = content[index]
+    if (char === "\\") {
+      index += 2
+    } else if (char === quote) {
+      return index + 1
+    } else {
+      index += 1
+    }
+  }
+  return content.length
+}
+
 // (5) Noisy console methods; `console.error`/`console.warn` stay allowed
 // for the shell's failure-signalling contract.
 const NOISY_CONSOLE = ["log", "debug", "info", "table"].map((method) => ({
@@ -202,31 +308,10 @@ function auditShippedContent(distDir, files) {
       }
     }
 
-    const methodMatch = content.match(EGRESS_FETCH_METHOD)
-    if (methodMatch !== null) {
-      throw new DistAuditError(
-        `dist artifact performs network egress with fetch method "${methodMatch[1].toUpperCase()}" in ${filePath}`
-      )
-    }
-    for (const primitive of EGRESS_PRIMITIVES) {
-      if (primitive.pattern.test(content)) {
-        throw new DistAuditError(
-          `dist artifact contains network egress primitive "${primitive.label}" in ${filePath}`
-        )
-      }
-    }
-    for (const url of content.match(ABSOLUTE_URL) ?? []) {
-      let origin = null
-      try {
-        origin = new URL(url).origin
-      } catch {
-        origin = null
-      }
-      if (origin === null || !SAME_ORIGIN_ALLOWLIST.includes(origin)) {
-        throw new DistAuditError(
-          `dist artifact contains non-same-origin URL "${url}" in ${filePath} (only relative and same-origin URLs are allowed)`
-        )
-      }
+    if (isEngineGlueFile(distDir, filePath)) {
+      auditEngineGlueEgress(filePath, content)
+    } else {
+      auditAppEgress(filePath, content)
     }
 
     for (const noisy of NOISY_CONSOLE) {
@@ -252,6 +337,81 @@ function auditShippedContent(distDir, files) {
       }
     }
   }
+}
+
+function auditAppEgress(filePath, content) {
+  const methodMatch = content.match(EGRESS_FETCH_METHOD)
+  if (methodMatch !== null) {
+    throw new DistAuditError(
+      `dist artifact performs network egress with fetch method "${methodMatch[1].toUpperCase()}" in ${filePath}`
+    )
+  }
+  for (const primitive of EGRESS_PRIMITIVES) {
+    if (primitive.pattern.test(content)) {
+      throw new DistAuditError(
+        `dist artifact contains network egress primitive "${primitive.label}" in ${filePath}`
+      )
+    }
+  }
+  assertAllowedUrls(filePath, content.match(ABSOLUTE_URL) ?? [])
+}
+
+function assertAllowedUrls(filePath, urls) {
+  for (const url of urls) {
+    let origin = null
+    try {
+      origin = new URL(url).origin
+    } catch {
+      origin = null
+    }
+    if (origin === null || !SAME_ORIGIN_ALLOWLIST.includes(origin)) {
+      throw new DistAuditError(
+        `dist artifact contains non-same-origin URL "${url}" in ${filePath} (only relative and same-origin URLs are allowed)`
+      )
+    }
+  }
+}
+
+// Emscripten-glue reading of the egress check: POST/PUT, beacons, and event
+// streams stay strictly banned, but WebSocket-family identifiers are judged
+// against ENGINE_GLUE_ALLOWLIST (comments/strings excluded, so the sockfs
+// spec comments and error-message literals cannot trip it), and absolute
+// URLs are judged with comments excluded (spec-reference comment URLs
+// cannot exfiltrate) plus the exact diagnostic-URL allowlist.
+function auditEngineGlueEgress(filePath, content) {
+  const { codeOnly, noComments } = splitGlueViews(content)
+
+  const methodMatch = codeOnly.match(EGRESS_FETCH_METHOD)
+  if (methodMatch !== null) {
+    throw new DistAuditError(
+      `dist artifact performs network egress with fetch method "${methodMatch[1].toUpperCase()}" in ${filePath}`
+    )
+  }
+  for (const primitive of EGRESS_PRIMITIVES) {
+    if (primitive.label === "WebSocket") {
+      continue
+    }
+    if (primitive.pattern.test(codeOnly)) {
+      throw new DistAuditError(
+        `dist artifact contains network egress primitive "${primitive.label}" in ${filePath}`
+      )
+    }
+  }
+
+  const codeWithoutFallback = codeOnly.replace(ENGINE_GLUE_FALLBACK_STATEMENT, " ")
+  const helpers = new Set(codeWithoutFallback.match(WEBSOCKET_IDENTIFIER) ?? [])
+  for (const helper of helpers) {
+    if (!ENGINE_GLUE_IDENTIFIERS.has(helper)) {
+      throw new DistAuditError(
+        `dist artifact contains non-allowlisted WebSocket helper "${helper}" in ${filePath} (engine glue may only use: ${[...ENGINE_GLUE_IDENTIFIERS].join(", ")})`
+      )
+    }
+  }
+
+  assertAllowedUrls(
+    filePath,
+    (noComments.match(ABSOLUTE_URL) ?? []).filter((url) => !ENGINE_GLUE_URLS.has(url))
+  )
 }
 
 function isMainModule() {

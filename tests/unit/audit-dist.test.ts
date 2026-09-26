@@ -233,4 +233,63 @@ describe("audit:dist", () => {
       expect(result.stderr, `secret ${probe.label}`).toContain(probe.label)
     }
   })
+
+  it("passes for Emscripten-generated glue under dist/engine/", () => {
+    // Given: an engine/ glue file mirroring dist/engine/xu4.js's known
+    // Emscripten markers -- SOCKFS WebSocket helpers, spec-reference
+    // comment URLs, an error-message string, and the file:// diagnostic.
+    const dir = makeCleanDist()
+    mkdirSync(join(dir, "engine"))
+    writeFileSync(
+      join(dir, "engine", "xu4.js"),
+      `// Make the WebSocket subprotocol (Sec-WebSocket-Protocol) default to binary.\n` +
+        `// See http://kripken.github.io/emscripten-site/docs/api_reference/preamble.js.html\n` +
+        `var WebSocketConstructor;\n` +
+        `if (ENVIRONMENT_IS_NODE) {\n` +
+        `  WebSocketConstructor = require('ws');\n` +
+        `} else {\n` +
+        `  WebSocketConstructor = WebSocket;\n` +
+        `}\n` +
+        `ws = new WebSocketConstructor(url, opts);\n` +
+        `var WebSocketServer = require('ws').Server;\n` +
+        `sock.server = new WebSocketServer({ host, port });\n` +
+        `throw new Error('WebSocket URL must be in the format ws(s)://address:port');\n` +
+        "err(`warning: Loading from a file URI (${binaryFile}) is not supported. See https://emscripten.org/docs/getting_started/FAQ.html#how-do-i-run-a-local-webserver-for-testing-why-does-my-program-stall-in-downloading-or-preparing`);\n"
+    )
+
+    // When: the dist artifact audit runs.
+    const result = run(dir)
+
+    // Then: it succeeds -- every marker above is explicitly allowlisted glue.
+    expect(result.status, result.stderr).toBe(0)
+  })
+
+  it("still rejects a bare new WebSocket( inside dist/engine/", () => {
+    // Given: engine glue that constructs a raw WebSocket instead of using
+    // only the known Emscripten helpers.
+    const dir = makeCleanDist()
+    mkdirSync(join(dir, "engine"))
+    writeFileSync(join(dir, "engine", "xu4.js"), `ws = new WebSocket("wss://relay.example/socket")`)
+
+    // When: the dist artifact audit runs.
+    const result = run(dir)
+
+    // Then: it fails -- the glue allowlist covers exact helpers only.
+    expect(result.status, result.stderr).toBe(1)
+    expect(result.stderr).toContain("WebSocket")
+  })
+
+  it("still rejects a non-allowlisted absolute URL inside dist/engine/", () => {
+    // Given: engine glue fetching a cross-origin URL.
+    const dir = makeCleanDist()
+    mkdirSync(join(dir, "engine"))
+    writeFileSync(join(dir, "engine", "xu4.js"), `fetch("https://exfil.example/collect")`)
+
+    // When: the dist artifact audit runs.
+    const result = run(dir)
+
+    // Then: it fails -- only the exact diagnostic URL is allowlisted.
+    expect(result.status, result.stderr).toBe(1)
+    expect(result.stderr).toContain("exfil.example")
+  })
 })
