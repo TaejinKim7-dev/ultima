@@ -4,56 +4,56 @@
     "BRITAIN:0:health": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋다네.",
+      "status": "ready"
     },
     "BRITAIN:0:job": {
       "sourceHash": "sha256:80dd8ae41506269a01a72171dade120b56d13c5a02d5e55aaad8c93eaed5c704",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 사람들을\n위해 연주한다네.",
+      "status": "ready"
     },
     "BRITAIN:0:look": {
       "sourceHash": "sha256:53d24ee1a4cfc477047004b92e15fe5f302170c794d7000ac7a3f9ad2d254bba",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "매력적인 음유시인",
+      "status": "ready"
     },
     "BRITAIN:0:name": {
       "sourceHash": "sha256:6108047024f931c08b709b72279db5a65344b5f479c8c54f9abc072016351d8b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아이올로",
+      "status": "ready"
     },
     "BRITAIN:0:no": {
       "sourceHash": "sha256:a22a000ee5e2716d5239aecd7634a313835db7c154caff9a48942ec0f1f923b0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아쉽군.",
+      "status": "ready"
     },
     "BRITAIN:0:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "BRITAIN:0:question": {
       "sourceHash": "sha256:2148d6405d3c1a46572b90cf5aed258070ec4f7529e86ea48f3c6b06d21ac09e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "내 음악이\n마음에 드는가?",
+      "status": "ready"
     },
     "BRITAIN:0:response1": {
       "sourceHash": "sha256:36a2b2f078be4a58349295ea4794c0c4ba9b799702740f08b2cebd18c5f6766e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 류트를 연주해\n사람들의\n좋은 마음을\n얻는다네.",
+      "status": "ready"
     },
     "BRITAIN:0:response2": {
       "sourceHash": "sha256:3828531400d8cb3e34b68ad15dae5d3b262cf2006ff9d9448a14d4ed85b145ff",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "남을 잘\n대해주면\n그들도 똑같이\n할 이유가 생기지.",
+      "status": "ready"
     },
     "BRITAIN:0:topic1": {
       "sourceHash": "sha256:f53a7ab988e2f4624beb96812afd0bc56a8f1743e97d5ac7b33a85c0be131471",
@@ -70,62 +70,62 @@
     "BRITAIN:0:yes": {
       "sourceHash": "sha256:3f1cff38e46ba42f8938d422698d886e7ada93dc834eef3bc20a8592dde245a6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 그대와\n함께하고 싶네!",
+      "status": "ready"
     },
     "BRITAIN:1:health": {
       "sourceHash": "sha256:eeb30bc5aecdf0ad89ca3621aad2cf20ad8d582d2043be9fb405330d99952ca3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아주 좋아요.",
+      "status": "ready"
     },
     "BRITAIN:1:job": {
       "sourceHash": "sha256:b10e96499ffa8e5a76120d111ce24d59fccb8c835d4fb899e1d72140e92e58d4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 아이들을 위해\n춤추고\n노래한다네.",
+      "status": "ready"
     },
     "BRITAIN:1:look": {
       "sourceHash": "sha256:a14de3814f13bd99526f46de38147cf887c50300ecbc27872fecec4e840fd6c6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "매력적인\n광대",
+      "status": "ready"
     },
     "BRITAIN:1:name": {
       "sourceHash": "sha256:813dde4f5d4260c855e1a4216126adbea270b7f897d2fd6f10952c56ae7ece62",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그웨노",
+      "status": "ready"
     },
     "BRITAIN:1:no": {
       "sourceHash": "sha256:372d2c589ac66e0910969e3630abd9235e9c1d0fa08198948f6b780111b41c48",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아쉽네요.",
+      "status": "ready"
     },
     "BRITAIN:1:pronoun": {
       "sourceHash": "sha256:d602e91d93c835ee2aa640ccffe314c61328ea2c1dbc45bec4277a9e94f91206",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그녀",
+      "status": "ready"
     },
     "BRITAIN:1:question": {
       "sourceHash": "sha256:29df0bbadac7cd3c553238a0a8af67be9294a3645c3a303a902e7f0f2d4347b0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "어려운 이에게\n베푸시나요?",
+      "status": "ready"
     },
     "BRITAIN:1:response1": {
       "sourceHash": "sha256:d259e983de1368d545b3153a3850a02e46560fc8dad9f9958e76ef0f58494762",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "춤은 영혼에\n좋답니다.",
+      "status": "ready"
     },
     "BRITAIN:1:response2": {
       "sourceHash": "sha256:820b3202aaa15c2791641034217afdb5dbf5d2bb8439870b2497b0ec6ec570d3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "거지에게\n베푸는 것은\n자비를 보이는\n것이지요.",
+      "status": "ready"
     },
     "BRITAIN:1:topic1": {
       "sourceHash": "sha256:dbb882154f408af7e3fe2467765ae7dce18ee3ae6ab137d1f03ae4baf4a1c54f",
@@ -142,62 +142,62 @@
     "BRITAIN:1:yes": {
       "sourceHash": "sha256:469d72d299f4a30e332aae6aa89cbbcef804b775e9e084e1b004d9271201378e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "거지들은\n작은 기부에도\n감사해한답니다.",
+      "status": "ready"
     },
     "BRITAIN:10:health": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋다네.",
+      "status": "ready"
     },
     "BRITAIN:10:job": {
       "sourceHash": "sha256:3888bcf54482f4b9b6a53207dcd4729b7fc0ee360d4722cfd971f82694134967",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 아이들을\n돌본다네.",
+      "status": "ready"
     },
     "BRITAIN:10:look": {
       "sourceHash": "sha256:4244030ae8331b9b658ab7398b8b88b12deb812a8121de526b6237e9685b58ec",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "지친 목자",
+      "status": "ready"
     },
     "BRITAIN:10:name": {
       "sourceHash": "sha256:2e32b5b1922669bf52725ba765b872fd9d97c0badef26bd4664159e5d9f881c0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "샬리마",
+      "status": "ready"
     },
     "BRITAIN:10:no": {
       "sourceHash": "sha256:b384674c75c80cada65bccba4a7d3c49fb3f00e05cbf8e2f2de6ab55069c1301",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아쉽군.",
+      "status": "ready"
     },
     "BRITAIN:10:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "BRITAIN:10:question": {
       "sourceHash": "sha256:85027c19034cfe979098e96ea10f6f52335a5e964eac04b287948baa233fa354",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아이가\n있는가?",
+      "status": "ready"
     },
     "BRITAIN:10:response1": {
       "sourceHash": "sha256:f01a4d8705627538d71807531b0e126f14de2e45a19ff0b9a581bc648a188de1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아이들을\n돌보려면\n상당한\n자비심이\n필요하다네!",
+      "status": "ready"
     },
     "BRITAIN:10:response2": {
       "sourceHash": "sha256:96511cbe1d21cef5679dc317b48173b95e677a3b4481c4abc573bc2db2a7ce08",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "지식이 정신을\n단련시키듯\n자비는\n영혼을\n강하게\n한다네!",
+      "status": "ready"
     },
     "BRITAIN:10:topic1": {
       "sourceHash": "sha256:fe3caf1eabfd842adbd62bbe2d37e1585039acc72ff0f9049ca64930df456ef6",
@@ -214,62 +214,62 @@
     "BRITAIN:10:yes": {
       "sourceHash": "sha256:8398075f49c1e2ec024b706dc483812298f924309322fbbba1cd3cea876d64da",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "내 말뜻을\n알겠구먼!",
+      "status": "ready"
     },
     "BRITAIN:11:health": {
       "sourceHash": "sha256:09c4b77b21cadc0aaae61ed53c8aa3046ce8296b9af9c6c176ab970b13141b4f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "별로 좋지\n않다네.",
+      "status": "ready"
     },
     "BRITAIN:11:job": {
       "sourceHash": "sha256:a5eb2c5772e7091992c6d84ec0aa061cc75b47d1957e15d56b96e19811f839fe",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 끔찍한\n비밀을 안다네!",
+      "status": "ready"
     },
     "BRITAIN:11:look": {
       "sourceHash": "sha256:0b3d5b84bf331b732b07a5b96c877e481ceb0bc13c2eef460251e098cda31113",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "부상당한\n사람.",
+      "status": "ready"
     },
     "BRITAIN:11:name": {
       "sourceHash": "sha256:db0284fc80b4881fa545953441a21958470c49d73508714a84a259cb62a5dbb5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "세바스찬",
+      "status": "ready"
     },
     "BRITAIN:11:no": {
       "sourceHash": "sha256:b356a126e4318643dbf54db33635cfdeb6f432960fe14752ab6caeec04b5dbfe",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "오.",
+      "status": "ready"
     },
     "BRITAIN:11:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "BRITAIN:11:question": {
       "sourceHash": "sha256:08a4636568e03e173662d5c4d25ae44534d4c0ba55a345cfba93fee0a0152a2b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것을 찾아\n없애겠는가?",
+      "status": "ready"
     },
     "BRITAIN:11:response1": {
       "sourceHash": "sha256:75a6e5aed3d9239aa6a5476df8d4081c851f3f54ef37af231cf2da54aab7b216",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "몬데인의\n영향력이 아직\n세상에서\n사라지지\n않았다네!",
+      "status": "ready"
     },
     "BRITAIN:11:response2": {
       "sourceHash": "sha256:411d6656269daeda41bcb972355c62d1a7a0ea1a7a03c1547c013cdd47d6e190",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "유물이\n남아있어! 버커니어즈\n덴에서 들었지!",
+      "status": "ready"
     },
     "BRITAIN:11:topic1": {
       "sourceHash": "sha256:3df48ffb85c2d269613d2ee36c3227c1babdcf8691cb5fb6aad103877cd9236a",
@@ -286,62 +286,62 @@
     "BRITAIN:11:yes": {
       "sourceHash": "sha256:04537a98ffed4f409a15b31f961e2461397949719efef87eade4b06e068baef7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그럼 저기 술집에서\n해골에\n대해 물어보게!",
+      "status": "ready"
     },
     "BRITAIN:12:health": {
       "sourceHash": "sha256:6cdbc2f5a8795c92e6c74cd59104e753aacc7fa54ddd6b1e62d2fe630929e6ee",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "괜찮다네.",
+      "status": "ready"
     },
     "BRITAIN:12:job": {
       "sourceHash": "sha256:f143479d7245a1630eb5998a30fa8450329ae0adc99f74df6cec0456f230dafd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 줄리오를\n찾고 있다네.",
+      "status": "ready"
     },
     "BRITAIN:12:look": {
       "sourceHash": "sha256:044fb6dd9639f12db243e29d7af556332b1555356aa9df65b625ef87eadefdec",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "드루이드.",
+      "status": "ready"
     },
     "BRITAIN:12:name": {
       "sourceHash": "sha256:b42888dabee980e58328cab0414549f5e2dec63cc4e21f91405be9cb69fe8590",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "샤페로",
+      "status": "ready"
     },
     "BRITAIN:12:no": {
       "sourceHash": "sha256:b384674c75c80cada65bccba4a7d3c49fb3f00e05cbf8e2f2de6ab55069c1301",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아쉽군.",
+      "status": "ready"
     },
     "BRITAIN:12:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "BRITAIN:12:question": {
       "sourceHash": "sha256:1044a1c86028f3296567375c2adb5c4ba6ec5aa789c3f8a91bad78a4340d583b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 아바타의\n여정 중에\n있는가?",
+      "status": "ready"
     },
     "BRITAIN:12:response1": {
       "sourceHash": "sha256:53266d4ad02a371e48188d713168eb81b20ae540d2e7bc7197cc70837802fbd0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그는 자비의\n참된 본질을\n안다네.",
+      "status": "ready"
     },
     "BRITAIN:12:response2": {
       "sourceHash": "sha256:b2f996b44c9d004efc6e580c2bf0318a939d564e83f1595d72968af9a92228a9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "줄리오를 찾아\n자비에 대해\n물어보게!",
+      "status": "ready"
     },
     "BRITAIN:12:topic1": {
       "sourceHash": "sha256:bcb73c5dadb1090654f2763a784cf25c3d51806763f4a7af1246df46fd911c23",
@@ -358,62 +358,62 @@
     "BRITAIN:12:yes": {
       "sourceHash": "sha256:8735ba1141e48f204b2779d12a32f67bb5426c656567053a1a37faa910ad3b25",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "다리 2개를\n동쪽으로 건너면\n자비의 신단이\n있네!",
+      "status": "ready"
     },
     "BRITAIN:13:health": {
       "sourceHash": "sha256:1a6c94414cdc1e799874cb43b610e2204d1de7957754400a6946b2a2cc3eb0d4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "근엄하다네.",
+      "status": "ready"
     },
     "BRITAIN:13:job": {
       "sourceHash": "sha256:781a34e96803b0a0245abd6f31aae593bb25cb6caff76449ab3caba6061f8dda",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 만물의\n참된 본질을\n찾는다네!",
+      "status": "ready"
     },
     "BRITAIN:13:look": {
       "sourceHash": "sha256:3060d898140761b63950e3b75aff21c184d552cf5b9d6b29f141adb19a13de9c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "근엄한\n음유시인.",
+      "status": "ready"
     },
     "BRITAIN:13:name": {
       "sourceHash": "sha256:da53a96cecabd281faf24f23c162b8eadfe72b58816e7625e76459eefb51743a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "줄리오",
+      "status": "ready"
     },
     "BRITAIN:13:no": {
       "sourceHash": "sha256:c2e3353760e9e59cfe4e785207584117278a91fcd19e0474c5bfdf660f470c66",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 어떤 인간도\n알 수 없지.",
+      "status": "ready"
     },
     "BRITAIN:13:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "BRITAIN:13:question": {
       "sourceHash": "sha256:544180bfae360e29352898bbe9134401066560f726e4ee10da0b1baba0ef3d2e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 만물의\n참된 본질을\n아는가?",
+      "status": "ready"
     },
     "BRITAIN:13:response1": {
       "sourceHash": "sha256:914379339badeea4a6a575984e412e446d5f318a454b1e78ef0ae4f448011310",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "만물에는\n참된 본질이\n있다네!",
+      "status": "ready"
     },
     "BRITAIN:13:response2": {
       "sourceHash": "sha256:44367b1acc8315ae08462a516acfaec23f5186431c2177dae8808173a0c477cc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "자비는\n끝없는\n사랑에서\n비롯된다네!",
+      "status": "ready"
     },
     "BRITAIN:13:topic1": {
       "sourceHash": "sha256:069ff0abe2a0e8c0668aca1c0965a31f5184fcc39f46c67eea58a9e96a1c2614",
@@ -430,62 +430,62 @@
     "BRITAIN:13:yes": {
       "sourceHash": "sha256:2131b9425bd7122aabc3808ec20e6ce6b26facd4b8f2c0473edcda09a4985ea8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 거짓말쟁이에\n허풍쟁이로군.",
+      "status": "ready"
     },
     "BRITAIN:14:health": {
       "sourceHash": "sha256:0918350d02ddd9fb6e84e9bacc0bce04c1e37431263cf34d2b6df35d680dff4e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 건강하다네.",
+      "status": "ready"
     },
     "BRITAIN:14:job": {
       "sourceHash": "sha256:a7e02cff321d72d547d90b17fe9653aa396b4837109f0207cf6be1c6a413d249",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 매긴시아에서\n탈출했다네!",
+      "status": "ready"
     },
     "BRITAIN:14:look": {
       "sourceHash": "sha256:911397fdb27a3b9a4c4658247bb2bd14b1361cd5e528bc1b2507fbc7961b9974",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "지혜로운\n목자.",
+      "status": "ready"
     },
     "BRITAIN:14:name": {
       "sourceHash": "sha256:e067bc30342c315020426ad37e48e02262cc7c80b257774ec69f3e13971e0522",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "멘토르",
+      "status": "ready"
     },
     "BRITAIN:14:no": {
       "sourceHash": "sha256:ceb915c46d1b52d30fb74c01559818c8bbdfd1cafffa3d5d423bb6de0b7ee024",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "오만은 진실도,\n사랑도, 용기도\n없이\n존재한다네!",
+      "status": "ready"
     },
     "BRITAIN:14:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "BRITAIN:14:question": {
       "sourceHash": "sha256:9b0dfe2b8054f5f1775ddbe4d0e0d5055b3cd5e0868d3807afa4b9b932cfcf05",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는\n오만한가?",
+      "status": "ready"
     },
     "BRITAIN:14:response1": {
       "sourceHash": "sha256:85af36449311bc53c58714f3b5d5cc0e10a7170e7cb04a44e6faa9fe068ee537",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "매긴시아에서는\n오만이\n지나쳤다네!",
+      "status": "ready"
     },
     "BRITAIN:14:response2": {
       "sourceHash": "sha256:f363296427e3051e155dfc408f5a186c165560eaced626b7495a9fa7de0fc368",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 도시는\n오만함 때문에\n데몬들에게\n파괴되었다네!",
+      "status": "ready"
     },
     "BRITAIN:14:topic1": {
       "sourceHash": "sha256:717df8504486485ff295eeb50734767b0c0cc1b98a7d3ab8d9f669fc84291c25",
@@ -502,62 +502,62 @@
     "BRITAIN:14:yes": {
       "sourceHash": "sha256:7481b1e42ad5569e5d859e4936c2347f3adb6f9de83e747c02713f633c835f0e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것은\n미덕이 아닐세!",
+      "status": "ready"
     },
     "BRITAIN:15:health": {
       "sourceHash": "sha256:1fec5dc955814b549b58ff84291566d93610f3a7f4c56f80fec3e202211000b4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "굶어\n죽을까 두렵다네!",
+      "status": "ready"
     },
     "BRITAIN:15:job": {
       "sourceHash": "sha256:a1c66fc5df04254426a02df40f52049e7bced90c8d89146fdd720670fe2fbbd2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "일이 없어\n이제 구걸한다네!",
+      "status": "ready"
     },
     "BRITAIN:15:look": {
       "sourceHash": "sha256:708da5303ec7ae5ce4e74740e6d55377a460758281a9f7e4d7801818e99e075a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "가난한\n거지.",
+      "status": "ready"
     },
     "BRITAIN:15:name": {
       "sourceHash": "sha256:610cc33146e5be610b1b548bd327d47a44aba21edb081e7669cba4971753ccef",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "스프라이트",
+      "status": "ready"
     },
     "BRITAIN:15:no": {
       "sourceHash": "sha256:35280d7e1fe28f03a76f8edbac420534ed460daacd9922052d0afe7de783a6ef",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 굶어\n죽을 걸세!",
+      "status": "ready"
     },
     "BRITAIN:15:pronoun": {
       "sourceHash": "sha256:d602e91d93c835ee2aa640ccffe314c61328ea2c1dbc45bec4277a9e94f91206",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그녀",
+      "status": "ready"
     },
     "BRITAIN:15:question": {
       "sourceHash": "sha256:2f4c3a7e48c745e4545b8fdfb1f0edbde057c35f8f44700e3ec18ce4945a89f7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나를\n도와주겠는가?",
+      "status": "ready"
     },
     "BRITAIN:15:response1": {
       "sourceHash": "sha256:dda0bfede3a6c22303b36924bb0eeb087cd7ed5f3af0ddd3782d5f8c8f176f67",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "일주일째\n아무것도\n못 먹었다네!",
+      "status": "ready"
     },
     "BRITAIN:15:response2": {
       "sourceHash": "sha256:c6422491432a03d6ef1cef536f70ca8dd0fbc0562bcc469b4e663bf8f763c7a3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "제발! 도와주게!",
+      "status": "ready"
     },
     "BRITAIN:15:topic1": {
       "sourceHash": "sha256:8b39ed188dbfe8dc4ae80567aea7e1f18d05845a2d6217492a57583316a194d6",
@@ -574,62 +574,62 @@
     "BRITAIN:15:yes": {
       "sourceHash": "sha256:3f5bdab934d827ca3b2ddc15b4ee273ebc1c17858d591f2a5484b6da2235c897",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "답례로\n페퍼가 룬을\n안다는 걸\n말해주지!",
+      "status": "ready"
     },
     "BRITAIN:2:health": {
       "sourceHash": "sha256:28ebb6527fbea8fddcfcd013581780ba7b1414c6ec3cdeca174e19c6dce21a3b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아주 행복해요.",
+      "status": "ready"
     },
     "BRITAIN:2:job": {
       "sourceHash": "sha256:311ab7b6c410ad1883661d7f676ab12927a83634ded22e46d66d662ac40c9528",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "노래하기",
+      "status": "ready"
     },
     "BRITAIN:2:look": {
       "sourceHash": "sha256:174439196e4bf87afc703077788be69d82ca34aff6986d7c6121ca63f954cdb0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "어린아이",
+      "status": "ready"
     },
     "BRITAIN:2:name": {
       "sourceHash": "sha256:343de8de95945f6870980b7002d7170a3ad86381c05fee5dce3c14fa23f1fd7e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아이",
+      "status": "ready"
     },
     "BRITAIN:2:no": {
       "sourceHash": "sha256:b384674c75c80cada65bccba4a7d3c49fb3f00e05cbf8e2f2de6ab55069c1301",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "안타깝네요.",
+      "status": "ready"
     },
     "BRITAIN:2:pronoun": {
       "sourceHash": "sha256:84a9a7036bd82e1ae23ca48513a189e57a4e41021d1f99a5f31e1b6707631132",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 아이",
+      "status": "ready"
     },
     "BRITAIN:2:question": {
       "sourceHash": "sha256:3ec4190be4fb6e5dbfe5a93f12d5cc937b804a831b336fd9fd3b43bc3acd39f6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 노래가\n마음에 드세요?",
+      "status": "ready"
     },
     "BRITAIN:2:response1": {
       "sourceHash": "sha256:64ee43dc603f3a0c8c03adc4224c8c2588505e0fb584cc7b91021e09455ee58a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "노래 가사는:\n호 에요 헤 험!",
+      "status": "ready"
     },
     "BRITAIN:2:response2": {
       "sourceHash": "sha256:b81b41934709663ba1911057f030dd2455032af682ae4e9a4cc39ee33f863e06",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그건 이런 뜻이에요:\n모두에게\n사랑을!",
+      "status": "ready"
     },
     "BRITAIN:2:topic1": {
       "sourceHash": "sha256:4f38a44cd879cbbff175fc6f5146fcc6b6f331a1d104b5b9aabbcda52a526043",
@@ -646,62 +646,62 @@
     "BRITAIN:2:yes": {
       "sourceHash": "sha256:0e4bf8098e4a1ca9c0f19c7fe05ca5a1819f30eb84d8a7ae10c396f72a22ab02",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그럼 우리를 도와\n소문내 주세요!",
+      "status": "ready"
     },
     "BRITAIN:3:health": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋다네.",
+      "status": "ready"
     },
     "BRITAIN:3:job": {
       "sourceHash": "sha256:d6445d251e77fa62a7b2a7c53861055a396d91f8bfd72f427e60e28455f90279",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 다리를\n지킨다네.",
+      "status": "ready"
     },
     "BRITAIN:3:look": {
       "sourceHash": "sha256:1a649ae538d7902ef77abbd033c9d8a813214a947c0f270331eea25037591af7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "경비병",
+      "status": "ready"
     },
     "BRITAIN:3:name": {
       "sourceHash": "sha256:601a2fbb733c2bfc56bd1a373334f7544f29f4748178cc22726a9ced86060ba2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "경비병",
+      "status": "ready"
     },
     "BRITAIN:3:no": {
       "sourceHash": "sha256:e9bc809e357059601159c24c4abbb793528bcdbc0b1f17495a602937338d124a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그럼 다리\n건너편에는\n볼일이\n없구먼.",
+      "status": "ready"
     },
     "BRITAIN:3:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "BRITAIN:3:question": {
       "sourceHash": "sha256:baae432400daf950b9bb77e7688ade534c65f32f6626634c4d3a67394ced74c9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그들과 함께하고\n싶은가?",
+      "status": "ready"
     },
     "BRITAIN:3:response1": {
       "sourceHash": "sha256:2a825ffc44b9b8afd5ee10d4cc100ebefca7ce7184053215234a5523f88d0a78",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "다리 건너편에서\n우리 백성들은\n춤추고\n노래한다네!",
+      "status": "ready"
     },
     "BRITAIN:3:response2": {
       "sourceHash": "sha256:6eaba6ac4f20e504cebb4b04cf388ee07bb17dbcab673b97ba3fc091835b93f5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그렇지.",
+      "status": "ready"
     },
     "BRITAIN:3:topic1": {
       "sourceHash": "sha256:20e3c680e9251987fc0ea4304437b3ed1e110b4704faf4bb8d6f281459502f4b",
@@ -718,62 +718,62 @@
     "BRITAIN:3:yes": {
       "sourceHash": "sha256:124eeafe6def7bf033441d469a19000d460b4f5acafb9db424b9e084ded80cd6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "기억하게, 열린\n마음이\n지혜로 가는\n첫걸음일세!",
+      "status": "ready"
     },
     "BRITAIN:4:health": {
       "sourceHash": "sha256:c0773e4410b5e35ea68525374860b0c5c83280947c136364d000ec582ed63d59",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "건강하다네.",
+      "status": "ready"
     },
     "BRITAIN:4:job": {
       "sourceHash": "sha256:2d0cd178287480518094b3da8a0b284e0c715df6e1d6abaeeff77039e6f2bc69",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 싸우는\n음유시인이라네.",
+      "status": "ready"
     },
     "BRITAIN:4:look": {
       "sourceHash": "sha256:d3359858feb72ed9c0b909de4995d99c71c44347cc8d572548108a1c3bc2815c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "매콤한 여인.",
+      "status": "ready"
     },
     "BRITAIN:4:name": {
       "sourceHash": "sha256:d9538cf97df1f8d5643401d36fc8f15eaad2b490a20cd16ba94c18e8e75ac449",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "페퍼",
+      "status": "ready"
     },
     "BRITAIN:4:no": {
       "sourceHash": "sha256:8279ea5cfa8771e22cd9709794ffa2590af9678cd96dcb57362d83ae84576ff6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아쉽군, 내가\n도울 수\n있었을지도\n모르는데.",
+      "status": "ready"
     },
     "BRITAIN:4:pronoun": {
       "sourceHash": "sha256:d602e91d93c835ee2aa640ccffe314c61328ea2c1dbc45bec4277a9e94f91206",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그녀",
+      "status": "ready"
     },
     "BRITAIN:4:question": {
       "sourceHash": "sha256:1f66692a1cbefed02260edddcf413222eff1d90942230a5b79499c98e316cbbb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "무언가를 찾고\n있는가?",
+      "status": "ready"
     },
     "BRITAIN:4:response1": {
       "sourceHash": "sha256:6cc26d240cb0a8ac612e94ab73802167b1be673e55cc0443ecc16e94488d36a0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "음유시인은\n많은 걸 안다네.",
+      "status": "ready"
     },
     "BRITAIN:4:response2": {
       "sourceHash": "sha256:3b579e64867499c3be14997a045f73d6e2c90088752015ff61a7ae3a99d426a0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "자비의 룬은\n이 마을 어딘가\n복도 끝에\n있다네.",
+      "status": "ready"
     },
     "BRITAIN:4:topic1": {
       "sourceHash": "sha256:a99e817c5479ab3a3d7d3e5444bfcbd410347a437fff40b347dd846c1383dab5",
@@ -790,62 +790,62 @@
     "BRITAIN:4:yes": {
       "sourceHash": "sha256:e19688e731e075ca7087c738c2cf20edce44b4d46e66b5a57ee99e55366253e8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그게 무엇인가?",
+      "status": "ready"
     },
     "BRITAIN:5:health": {
       "sourceHash": "sha256:3d4ed59db8fdfcfe3f65f783f8957ca74456ccf798db886c45865a8fb5710aad",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "꽤 좋다네.",
+      "status": "ready"
     },
     "BRITAIN:5:job": {
       "sourceHash": "sha256:f01394ee22b399fbc86d48f3157c4b7280ddf7e3ec56131c423396a262af4bbf",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 마법 구슬의\n비밀을 찾고\n있다네.",
+      "status": "ready"
     },
     "BRITAIN:5:look": {
       "sourceHash": "sha256:118e620f3b1659563763a5f4c1647fc59646a73017502e252a6b7e00217f6444",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "노련한\n전사.",
+      "status": "ready"
     },
     "BRITAIN:5:name": {
       "sourceHash": "sha256:d8970a65d2d1794d847607cc3c1da9705d2cc5bcbfcd0836d230fef95f7522c7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "테벨",
+      "status": "ready"
     },
     "BRITAIN:5:no": {
       "sourceHash": "sha256:d5d06c453206d9374db0cff407410f08dd79f5c0b5b6c92fb60d0426ea7960d4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "서펀트 성에서\n그를 찾게,\n구슬에 대해\n알고 있으니!",
+      "status": "ready"
     },
     "BRITAIN:5:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "BRITAIN:5:question": {
       "sourceHash": "sha256:262c1a297c51f5f201942f003d58bb32d315518c75d137ccacd10d95ea43bf29",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그를 본 적\n있는가?",
+      "status": "ready"
     },
     "BRITAIN:5:response1": {
       "sourceHash": "sha256:defe883f3d13db776f4a0700a2571e4dfe03428fbdf547a4234d063a56a3eb23",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "외팔이 거지가\n그 비밀을\n안다네!",
+      "status": "ready"
     },
     "BRITAIN:5:response2": {
       "sourceHash": "sha256:28ddf23dbb904f7c96a90fd05ceb834b9e54926e784d43533df40ab669e5a4c0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "마법 구슬.",
+      "status": "ready"
     },
     "BRITAIN:5:topic1": {
       "sourceHash": "sha256:5d71c4df3018c673380a5ad80f3c8f320e61e8c0e4e9afeac65e8cfc776e9e62",
@@ -862,62 +862,62 @@
     "BRITAIN:5:yes": {
       "sourceHash": "sha256:492234fe39b37726351b66ff226b37c28b70c43e99f0a419224fbbcf9e9046fc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "오직 그만이\n구슬의 선물을\n안다네!",
+      "status": "ready"
     },
     "BRITAIN:6:health": {
       "sourceHash": "sha256:dfe531a87701030c92b8d90f8634febb194475956c3c9bf514c872e2982c4e3a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그리고 럼주\n한 병...",
+      "status": "ready"
     },
     "BRITAIN:6:job": {
       "sourceHash": "sha256:52e37927da30f731fe0dfccd39a1e2ebb443f3d389a8596b211524c2a17903b9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "요호호...\n럼주\n한 병...\n힉...",
+      "status": "ready"
     },
     "BRITAIN:6:look": {
       "sourceHash": "sha256:adbaa92674fa1f0d95c0f448c23f3d4499b1e0185cb537a38929ef1b6e57ef77",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "술 취한\n전사",
+      "status": "ready"
     },
     "BRITAIN:6:name": {
       "sourceHash": "sha256:6dd8b7d7d3c5c4689b33e51b9f10bc6a9be89fe8fa2a127c8c6c03cd05d68ace",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "조",
+      "status": "ready"
     },
     "BRITAIN:6:no": {
       "sourceHash": "sha256:deac56beea7781914ed67406edef563e8ac5fe2631a979cbaacfa40b3c24a1e9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아, 좀 되어보게!",
+      "status": "ready"
     },
     "BRITAIN:6:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "BRITAIN:6:question": {
       "sourceHash": "sha256:2c1742c31e901dd0c7c5db9b85310036c70ad8afada5a6e75136b70efdebfd2f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "럼 좀 줄래?...",
+      "status": "ready"
     },
     "BRITAIN:6:response1": {
       "sourceHash": "sha256:9d49256fbd8941c90f5aac328782401952ba43a86151b1db9b842871a3276fb4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "노란 보석은\n던전\n경멸에\n있다네...",
+      "status": "ready"
     },
     "BRITAIN:6:response2": {
       "sourceHash": "sha256:05db068d7029bceda4619f38266d60b603c2f6accf3b84b716ea48709ef62aa6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "럼주... 힉...",
+      "status": "ready"
     },
     "BRITAIN:6:topic1": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
@@ -934,62 +934,62 @@
     "BRITAIN:6:yes": {
       "sourceHash": "sha256:fd7cfd91b93c328c15d53b47067aa3750e4bb5675b052e318cd30c3ef3e78ce4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "고맙...\n내 친구 조가\n보석에 대해\n도와줄 수\n있어...힉...",
+      "status": "ready"
     },
     "BRITAIN:7:health": {
       "sourceHash": "sha256:f334cda47039dc5f6c208ef369e71e5f5693f903567c089bee533d06b8a04917",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "쉿",
+      "status": "ready"
     },
     "BRITAIN:7:job": {
       "sourceHash": "sha256:65e3a8c26be9217c4c1d0ef6da8b4ddc4d2a88b784fdf3e026becaac958d704c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "쉿, 연주 중\n이라네!",
+      "status": "ready"
     },
     "BRITAIN:7:look": {
       "sourceHash": "sha256:96c089dd369b136526a9c6903ed16a9c3284d3002494d0b0f667792d9a8cf240",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "초록옷 입은\n음유시인",
+      "status": "ready"
     },
     "BRITAIN:7:name": {
       "sourceHash": "sha256:9e8c5c157d73495ece3782d26323245511f0fe67cd8c55e139361a7ccc6aed03",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "크리켓",
+      "status": "ready"
     },
     "BRITAIN:7:no": {
       "sourceHash": "sha256:2e2f0de4a9942af0c0f7d1dcac227e6013db5b06c7eeedfcfcc96056fe257b50",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "경비병을\n부를 테다!",
+      "status": "ready"
     },
     "BRITAIN:7:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "BRITAIN:7:question": {
       "sourceHash": "sha256:278be971447f7c8edfae4c4af0059ea8c01657713ced6160336da677bac5d4a7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "이제 좀\n조용히 하겠나?",
+      "status": "ready"
     },
     "BRITAIN:7:response1": {
       "sourceHash": "sha256:3bf66c8c239211779b367b742d3fa6621dc414a1f5383f86012651101b18827c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그래, 쉿!",
+      "status": "ready"
     },
     "BRITAIN:7:response2": {
       "sourceHash": "sha256:2f83f195b491f7c4dc006c8b1cb4003c0a0238c47fcd1d3d52992e7f887fd736",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "자비의 신단\n진언은\n'무'라네!",
+      "status": "ready"
     },
     "BRITAIN:7:topic1": {
       "sourceHash": "sha256:ba131337a45adc2041642774e0911ef4067edb3412c95274df9fddb1194677dd",
@@ -1006,62 +1006,62 @@
     "BRITAIN:7:yes": {
       "sourceHash": "sha256:f51bead488e14b656af3a13e33eb1d6fa9580832cbb9d7a20061f84c4b1c160f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "고맙네.",
+      "status": "ready"
     },
     "BRITAIN:8:health": {
       "sourceHash": "sha256:230cc392bd69c89d299d776ffe920be8318156c6d604212bd3b2d8c76a51c2c0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "완전히\n회복됐다네.",
+      "status": "ready"
     },
     "BRITAIN:8:job": {
       "sourceHash": "sha256:8526e22b4cecf3f476d6e0bca1947b4b3a08e07918eafb1344397db2b97f6727",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "물론 나는\n경비병일세!",
+      "status": "ready"
     },
     "BRITAIN:8:look": {
       "sourceHash": "sha256:cb138ae43733d9767afd213e3353fda49c82ca24e6b54971c0ed59107d619016",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "명랑한\n경비병.",
+      "status": "ready"
     },
     "BRITAIN:8:name": {
       "sourceHash": "sha256:601a2fbb733c2bfc56bd1a373334f7544f29f4748178cc22726a9ced86060ba2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "경비병",
+      "status": "ready"
     },
     "BRITAIN:8:no": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋군.",
+      "status": "ready"
     },
     "BRITAIN:8:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "BRITAIN:8:question": {
       "sourceHash": "sha256:76cafcd670ae246430c1672b846d4b3f18ca04fe6bc1740fcaf0339589353f9e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 악하지\n않은 생물을\n죽이는가?",
+      "status": "ready"
     },
     "BRITAIN:8:response1": {
       "sourceHash": "sha256:27f6d0c925f010f8938728fab24a59ccc21442ad04a8414fc743d465d1e9ff0f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우리 경비병들은\n자비심이\n많다네.",
+      "status": "ready"
     },
     "BRITAIN:8:response2": {
       "sourceHash": "sha256:31cfef9fa3a6f34e5755febb6e8ea0ebe35afcc20743ff78e00ce801e66af9b1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우리는 항상\n말하지: 남의\n고난을 그대\n자신의 것처럼\n여기라고!",
+      "status": "ready"
     },
     "BRITAIN:8:topic1": {
       "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
@@ -1078,62 +1078,62 @@
     "BRITAIN:8:yes": {
       "sourceHash": "sha256:15a6adc83ea74b516f51de647b2eb43cf70470c1b01a7e6eff5dcb2fb35abce2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그건 자비를\n보이는 게\n아니지!",
+      "status": "ready"
     },
     "BRITAIN:9:health": {
       "sourceHash": "sha256:87e58c263f26c696569e0954cda2f4e4ad8e5e1d197f3ee176ec3dec1eb1d3dc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋아요.",
+      "status": "ready"
     },
     "BRITAIN:9:job": {
       "sourceHash": "sha256:0cb4e5f175dfeaeaf25bbd2e4ab026153cfd0086e91aebe076e05ca186399054",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 자비를\n배우고 있어요.",
+      "status": "ready"
     },
     "BRITAIN:9:look": {
       "sourceHash": "sha256:e8327427946ff33216f3a47de8f08122412dd1b37d4a7b8b997d492f589744a6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "어린아이",
+      "status": "ready"
     },
     "BRITAIN:9:name": {
       "sourceHash": "sha256:343de8de95945f6870980b7002d7170a3ad86381c05fee5dce3c14fa23f1fd7e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아이",
+      "status": "ready"
     },
     "BRITAIN:9:no": {
       "sourceHash": "sha256:4e7fde7584c689abf0ea9612a99dcc762395452cd5f601ef2ee53d4e7a97cacc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "크리켓에게\n물어보세요!",
+      "status": "ready"
     },
     "BRITAIN:9:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "BRITAIN:9:question": {
       "sourceHash": "sha256:b0c30c770d58a56776a146b331354f95c581ed3b0d8624c9e7cab78ffe69cc63",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "자비의\n진언을\n아세요?",
+      "status": "ready"
     },
     "BRITAIN:9:response1": {
       "sourceHash": "sha256:1b05d17e3f3201057fff781f906508ed1a2d6be4ca3bb0edc043db59972a65d4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "자신의 문제에\n대한 해답은\n흔히 남의 문제를\n푸는 데\n있답니다!",
+      "status": "ready"
     },
     "BRITAIN:9:response2": {
       "sourceHash": "sha256:4f3b332c3f69bce02e1c9178d42faf3dfdfa0b8d0b061f5b7be0f77318d4960a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "남을 돌볼 수\n없을 만큼\n자신만\n너무 아끼지\n마세요!",
+      "status": "ready"
     },
     "BRITAIN:9:topic1": {
       "sourceHash": "sha256:453a5802a6976122812ca8f988ce58fe808cf27cbdc323c725ea1ab18bf228f9",
@@ -1150,62 +1150,62 @@
     "BRITAIN:9:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋아요.",
+      "status": "ready"
     },
     "COVE:0:health": {
       "sourceHash": "sha256:790516f5ec4778f045cfaf7531205321bc98d7ada497a9a5503994ffc748a74f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "난 괜찮아요.",
+      "status": "ready"
     },
     "COVE:0:job": {
       "sourceHash": "sha256:1ec2c6742088e1d5017783ca3c5b47d13d67d4fc51967739ae55addeaa9f0c9f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 어비스에\n들어가는 법을\n안다네!",
+      "status": "ready"
     },
     "COVE:0:look": {
       "sourceHash": "sha256:a4a737161849859388f706ff6e50b8e1331dfda09887462f84e79af2e3517e08",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "어린 소년.",
+      "status": "ready"
     },
     "COVE:0:name": {
       "sourceHash": "sha256:1670f014790650707eee6c027de573361658cfec15010d58bbc70af14a3ebb8d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "알렌",
+      "status": "ready"
     },
     "COVE:0:no": {
       "sourceHash": "sha256:8a5e62b5c6d389a680e61e78eba238ba6739709e008f4dc1e02e205f3707c54f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "어비스에 대해선\n블리스풀에게\n물어보세요.",
+      "status": "ready"
     },
     "COVE:0:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "COVE:0:question": {
       "sourceHash": "sha256:61f89756be6feafee56a999479d99c21ca1c7b1915e949289c5d5076b4a8d1a4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그런 배가\n있나요?",
+      "status": "ready"
     },
     "COVE:0:response1": {
       "sourceHash": "sha256:81a964863e47dfa8b7424c15e57d13efe875d95f40846e37f470f5a52b8d381c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "어비스는\n오직 배로만\n다가갈 수\n있어요!",
+      "status": "ready"
     },
     "COVE:0:response2": {
       "sourceHash": "sha256:ca4a5df05a5c6867be540f883c314d1eb8866ede4ccf7f4b75e29365e359cf20",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "배는 마법으로\n강화된\n선체가\n있어야 해요!",
+      "status": "ready"
     },
     "COVE:0:topic1": {
       "sourceHash": "sha256:1dd8a33c917d1e27436508ba1893c4af066da633c98555c5cc946d5e5270555f",
@@ -1222,62 +1222,62 @@
     "COVE:0:yes": {
       "sourceHash": "sha256:8a5e62b5c6d389a680e61e78eba238ba6739709e008f4dc1e02e205f3707c54f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "어비스에 대해선\n블리스풀에게\n물어보세요.",
+      "status": "ready"
     },
     "COVE:1:health": {
       "sourceHash": "sha256:0918350d02ddd9fb6e84e9bacc0bce04c1e37431263cf34d2b6df35d680dff4e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 잘 지낸다네.",
+      "status": "ready"
     },
     "COVE:1:job": {
       "sourceHash": "sha256:469cdb9df92210945deea143c10b52e0c1407af92e8132e7ec453841849977bc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "지혜의 숨은\n도시, 코브에\n오신 것을 환영하네.",
+      "status": "ready"
     },
     "COVE:1:look": {
       "sourceHash": "sha256:12af15a2bf5f861067eda052c6e0f7299fdf1e4e5b413fa98e70f824822a0e28",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "작은 드루이드.",
+      "status": "ready"
     },
     "COVE:1:name": {
       "sourceHash": "sha256:7950106635d0559fe35a17a596893c832d58b2f57b4195de4a793279c9cf9ce7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "프론티스",
+      "status": "ready"
     },
     "COVE:1:no": {
       "sourceHash": "sha256:d939d4f5d8f1f0a9e6754c143a565211b8f55e5abf8c46cd4f364afd5490f796",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우리 치유사들을\n찾아가게, 분명\n도와줄\n걸세!",
+      "status": "ready"
     },
     "COVE:1:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "COVE:1:question": {
       "sourceHash": "sha256:cf966a466b5e84095f1bb22988ce6aa567f1fe8481c634a582a5f08a7f887daf",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는\n건강한가?",
+      "status": "ready"
     },
     "COVE:1:response1": {
       "sourceHash": "sha256:0f7de1f8c8d2cdc20f6e05ca8a91064333ae12f65b501d88902aeb9f9b6fde3c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "여기서 많은\n지혜와 평화를\n찾을 수\n있다네.",
+      "status": "ready"
     },
     "COVE:1:response2": {
       "sourceHash": "sha256:5efbd3632d42c436c5afdd76da40818eb3d1967ebed7c6beae922e68a856c14b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우리 신단에서\n평화를\n찾게.",
+      "status": "ready"
     },
     "COVE:1:topic1": {
       "sourceHash": "sha256:b0922b0419bc3459bacceb605a95372f3a0e2475f365ace4d20cf66eba5cf915",
@@ -1294,62 +1294,62 @@
     "COVE:1:yes": {
       "sourceHash": "sha256:f990be6289b09bad7c01febdaef7af58c0f38477602c97778044a3a55920837c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아주 좋군.",
+      "status": "ready"
     },
     "COVE:10:health": {
       "sourceHash": "sha256:1929268b7620e2babcf9934b81b9690df1e7f83c33bc91317f01956a229b773f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 늙었지만\n강하다네!",
+      "status": "ready"
     },
     "COVE:10:job": {
       "sourceHash": "sha256:cc0ce82cda3259a5d02ddd06595b924017ff76690a1c473e1a85e27c9a53dced",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 사랑을\n말한다네.",
+      "status": "ready"
     },
     "COVE:10:look": {
       "sourceHash": "sha256:c0f3786997683b64911ad16a4040a9f274e10fbce658a8413806100321ccb6b8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "현자.",
+      "status": "ready"
     },
     "COVE:10:name": {
       "sourceHash": "sha256:d5f00ab0d76b7fbf2f0d0de8b4e9935d6e2b881a4b12d355aa1c4013920ffc8f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "라빈드라나트\n타고르",
+      "status": "ready"
     },
     "COVE:10:no": {
       "sourceHash": "sha256:a35c21211bf9569090bd86d6171ed537a9d5ccbce6cf855f9749cfe76963bd1a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는\n어리석군.",
+      "status": "ready"
     },
     "COVE:10:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "COVE:10:question": {
       "sourceHash": "sha256:49eb69d1dde49ffcb529cccd3c7de6cf7834b1ea266aaeff423735e2b918c61a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "마음속에\n사랑을 지니고자\n하는가?",
+      "status": "ready"
     },
     "COVE:10:response1": {
       "sourceHash": "sha256:d28b7eaad14b9a9da1eaf1604c95fe93289df631fbaaadda91693f1c7aabf9f5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "사랑 속에서,\n삶의 모든\n모순은 녹아\n사라진다네.",
+      "status": "ready"
     },
     "COVE:10:response2": {
       "sourceHash": "sha256:2850e3d28fef4241a641ba6281ef0164441978101b4a85537b57a0d161494210",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 안에\n사랑을\n지니게!",
+      "status": "ready"
     },
     "COVE:10:topic1": {
       "sourceHash": "sha256:86c019bd75e878270f75b8af41523e1ee789128aa9b188e3f819b3a4ad5011e5",
@@ -1366,62 +1366,62 @@
     "COVE:10:yes": {
       "sourceHash": "sha256:bc02fdca15b5c12982679468ca5cf290db6b9729b9a74fcfbc128dc83c4129c1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는\n선한 영혼이군.",
+      "status": "ready"
     },
     "COVE:11:health": {
       "sourceHash": "sha256:0918350d02ddd9fb6e84e9bacc0bce04c1e37431263cf34d2b6df35d680dff4e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 잘 지낸다네.",
+      "status": "ready"
     },
     "COVE:11:job": {
       "sourceHash": "sha256:c064f14eddcc61f06904ef64c0021c6720dca6abec689caccbee68546f7002a1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 앉아서\n강을\n바라본다네.",
+      "status": "ready"
     },
     "COVE:11:look": {
       "sourceHash": "sha256:d420e651e558d34b5da3532d2327f0a3d4466164e4827cc04b34dfbef7b24e71",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "늙은 드루이드.",
+      "status": "ready"
     },
     "COVE:11:name": {
       "sourceHash": "sha256:e9d61584a3c6e4e00a66fbc76d5ce21255077bdb7c91afc84f1cded3ca084da1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "자이르 수사",
+      "status": "ready"
     },
     "COVE:11:no": {
       "sourceHash": "sha256:f3c093c166d451bbdbe09c96841e9991d4e39241aa4f8c0b33551c37b0dbf6b7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그렇지.",
+      "status": "ready"
     },
     "COVE:11:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "COVE:11:question": {
       "sourceHash": "sha256:f92ed29dae8a01e8fa9c95c1ab2cc3f41e5d8b99ed4767de9ba9a52da85e246e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "동의하는가?",
+      "status": "ready"
     },
     "COVE:11:response1": {
       "sourceHash": "sha256:7c8faf84452ea11f9f102519c7ad6dfba4a9a5c29f95712b54a1fef8c6e7774a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것은\n끝없이\n흐른다네.",
+      "status": "ready"
     },
     "COVE:11:response2": {
       "sourceHash": "sha256:8615323bb837d778063ebfa3649a02dc9ab30722817eff75b1ff3af23ab83de1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "미덕의 세\n원칙을 상징하는\n성들의 왕들은\n각각 통행의\n말의 한\n음절씩만\n안다네!",
+      "status": "ready"
     },
     "COVE:11:topic1": {
       "sourceHash": "sha256:fde83e7b84fef451065ad4d2131590b357f36432a6caf520bd1799c60cbc29c9",
@@ -1438,62 +1438,62 @@
     "COVE:11:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋아.",
+      "status": "ready"
     },
     "COVE:12:health": {
       "sourceHash": "sha256:96e5fb57777cf089276d4d0a8de25d89487e539d1e6c10eb8da733d9e007fb50",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아주 잘\n지낸다네.",
+      "status": "ready"
     },
     "COVE:12:job": {
       "sourceHash": "sha256:2e6e7c5f5542ff5ea0887d62c30015ab5fee56e2e10b426017aa59d69e22e23d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 코덱스에\n대해 안다네.",
+      "status": "ready"
     },
     "COVE:12:look": {
       "sourceHash": "sha256:64f156b572e64aee7c6b03eb9d87e5aa75f669aa9c07c2ab14025a219dc36155",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "날씬한 마법사.",
+      "status": "ready"
     },
     "COVE:12:name": {
       "sourceHash": "sha256:f946b7fdf53c99b81e4cee5fda06c95c4708958b3c6f441317d37e6644d3b234",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "스펠바인드",
+      "status": "ready"
     },
     "COVE:12:no": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "COVE:12:pronoun": {
       "sourceHash": "sha256:d602e91d93c835ee2aa640ccffe314c61328ea2c1dbc45bec4277a9e94f91206",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그녀",
+      "status": "ready"
     },
     "COVE:12:question": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "COVE:12:response1": {
       "sourceHash": "sha256:d2ad5ee2db76d9ae8e3fd3614c14456773ecec5e66bc895de894617a58212d1a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "미덕의 세\n원칙의 조합을\n알아야\n한다네!",
+      "status": "ready"
     },
     "COVE:12:response2": {
       "sourceHash": "sha256:5f07e23f44c5655f51c1db1797e85a75be9230a68519342e38478d04f0d5e9b7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "미덕의 세\n원칙의 조합은\n시간과 공간의\n척도와\n같다네!",
+      "status": "ready"
     },
     "COVE:12:topic1": {
       "sourceHash": "sha256:07a9d7b4a9a23915a61bc89bb0357bf47b348cf4174eb965bb1df8fbfa18b0b5",
@@ -1510,62 +1510,62 @@
     "COVE:12:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "COVE:13:health": {
       "sourceHash": "sha256:b95f9b5c344836d5e4294897535bb18d678acc3d25a109ef3d0410cc682193f2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "꽤 잘\n지낸다네.",
+      "status": "ready"
     },
     "COVE:13:job": {
       "sourceHash": "sha256:025fed9fa96859fff954b431570d4941eb920aec5c4306414b3685c3fcf3c8a7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 코덱스의\n비밀인\n'하나'를\n연구한다네!",
+      "status": "ready"
     },
     "COVE:13:look": {
       "sourceHash": "sha256:d551a1ee12c83102ecea42e9e443bd33f1c37cd99fd584c31f820c0fef4ffba4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "키 큰 마법사.",
+      "status": "ready"
     },
     "COVE:13:name": {
       "sourceHash": "sha256:0953e68a3e85ea3909e6d3786c7afb898713a25d9a66a227e978ffdbf00266e4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "샤먼",
+      "status": "ready"
     },
     "COVE:13:no": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "COVE:13:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "COVE:13:question": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "COVE:13:response1": {
       "sourceHash": "sha256:d86e7c4754511dbe7962e6794b364225adbfe35b9bb9190462b6e981dd04b678",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 코덱스를\n연구한다네!",
+      "status": "ready"
     },
     "COVE:13:response2": {
       "sourceHash": "sha256:1c06e5e29e79e2fb767e570f249404d31d15149d9cfefb6cbbb9104a41c1a003",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 하나의\n순수 공리는\n변화하는\n조수보다\n끝없고, 밤과\n낮보다\n영원하다네!",
+      "status": "ready"
     },
     "COVE:13:topic1": {
       "sourceHash": "sha256:a91952b74e72da3f6149d4b25a957c6aa918e9ab6fabaa62484195bd8a674c14",
@@ -1582,62 +1582,62 @@
     "COVE:13:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "COVE:14:health": {
       "sourceHash": "sha256:9bc4c37a0665c88aee1e152bc887f14e34a82796b4d0f3ff71a4466665df2234",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "꽤 좋다네.",
+      "status": "ready"
     },
     "COVE:14:job": {
       "sourceHash": "sha256:80e00fd3206e8f66a29e6fd776b2fcbd44995a737ab84f36e5189837e9b79654",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 공리의\n열쇠를\n숙고한다네.",
+      "status": "ready"
     },
     "COVE:14:look": {
       "sourceHash": "sha256:93cca1c3cd5094cb1ae6a41be097db2cc61f1429ffcc3a1322eae52511178dd5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아름다운\n마법사.",
+      "status": "ready"
     },
     "COVE:14:name": {
       "sourceHash": "sha256:cb202ce740ea23b09a039a51724a26f05a05cbd44cb1fb5692f72a7c406b4201",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "참",
+      "status": "ready"
     },
     "COVE:14:no": {
       "sourceHash": "sha256:a904fdfdc06014db4e25cddf80782645de268e1319d8c8b1a43ad1ab4772ef85",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우주의 진실,\n마음의 사랑,\n그리고 영혼의\n용기라네!",
+      "status": "ready"
     },
     "COVE:14:pronoun": {
       "sourceHash": "sha256:d602e91d93c835ee2aa640ccffe314c61328ea2c1dbc45bec4277a9e94f91206",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그녀",
+      "status": "ready"
     },
     "COVE:14:question": {
       "sourceHash": "sha256:9f140ee5501a3d6f83d0b09ad70712afd89d0404b47974ff882bd544aef8f612",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것들이\n무엇인지\n아는가?",
+      "status": "ready"
     },
     "COVE:14:response1": {
       "sourceHash": "sha256:edd60bdb0b56cbf03ade2b68f6c8003e7e4486edae3cdd0d1705ec6c12cd752e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "공리에\n대해.",
+      "status": "ready"
     },
     "COVE:14:response2": {
       "sourceHash": "sha256:0e738530244a2268df42a4368764a2fc93b3e10f59af74d4616531318385834c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 1개의\n순수 공리는\n만물을\n아우른다네.",
+      "status": "ready"
     },
     "COVE:14:topic1": {
       "sourceHash": "sha256:dd8c19420802444be8fecc95e56ea83bc8465f7a468f47c0c7b6003047d99e92",
@@ -1654,62 +1654,62 @@
     "COVE:14:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋아.",
+      "status": "ready"
     },
     "COVE:15:health": {
       "sourceHash": "sha256:96730ffc88166cf6dcf4b8a98b4ba9eaa32ba09e1a94921dd9e434f02e566bb7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋다네.",
+      "status": "ready"
     },
     "COVE:15:job": {
       "sourceHash": "sha256:8eb8c0f064fab91a241cbd2c6a033c29e567edc0493ef0edb025d448adad85c2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 공리를\n가르친다네!",
+      "status": "ready"
     },
     "COVE:15:look": {
       "sourceHash": "sha256:ce2794fca5b73472d93e55d77eac86c3482898a916e37a06535a9d5db1247c8c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "지혜로운\n마법사.",
+      "status": "ready"
     },
     "COVE:15:name": {
       "sourceHash": "sha256:8d4d34bbadc776001b6fca00b61aa5e468c0e03ee1ed7f80d11a54b358bbe705",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "키르케",
+      "status": "ready"
     },
     "COVE:15:no": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "COVE:15:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "COVE:15:question": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "COVE:15:response1": {
       "sourceHash": "sha256:7aa087756dd5c51ec66202a71f667f65a87f0e7a907844a0df883a8ca80aa23a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "공리의 전체는\n그 모든 부분의\n합보다\n크다네!",
+      "status": "ready"
     },
     "COVE:15:response2": {
       "sourceHash": "sha256:a2417b17a9049bad1759c83051b188220984c63605802d9a8310f3741cefa250",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "끝없는 사랑의\n척도, 모든\n장애물을\n마주할 무한한\n용기, 만물을\n아우르는\n진실!",
+      "status": "ready"
     },
     "COVE:15:topic1": {
       "sourceHash": "sha256:33dd96fae138d635aafb3d86f11a109f7b03cfa3fa1bd0056ed2fd1e12d38bbd",
@@ -1726,62 +1726,62 @@
     "COVE:15:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "COVE:2:health": {
       "sourceHash": "sha256:0918350d02ddd9fb6e84e9bacc0bce04c1e37431263cf34d2b6df35d680dff4e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 잘 지낸다네.",
+      "status": "ready"
     },
     "COVE:2:job": {
       "sourceHash": "sha256:c1e5ac7a0a975554a4c1dbe3a259ca02e743a5d19246d7646d956c418b7140a6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 은둔자라네.",
+      "status": "ready"
     },
     "COVE:2:look": {
       "sourceHash": "sha256:f2bff09c58c3ccefbf1500cc12e987173638dc213c12c11fc5baad7f3f046a45",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "늙은 은둔자.",
+      "status": "ready"
     },
     "COVE:2:name": {
       "sourceHash": "sha256:e3a891ac8e1fbf3a795c620d710557fc31b91cb2a62030ad321f272606f9b4db",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "슬로븐",
+      "status": "ready"
     },
     "COVE:2:no": {
       "sourceHash": "sha256:c7b04d07158c8eb34a5db643124a57c84241dd8d924b48894babf188da87a8f5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그가 나타날 때까지\n여관에\n머물게!",
+      "status": "ready"
     },
     "COVE:2:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "COVE:2:question": {
       "sourceHash": "sha256:262c1a297c51f5f201942f003d58bb32d315518c75d137ccacd10d95ea43bf29",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그를 본 적\n있는가?",
+      "status": "ready"
     },
     "COVE:2:response1": {
       "sourceHash": "sha256:f6ed9996ad09e25f858fb1447a2601fc0de4bca891835006b73ce8e225f6c70a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 사회에서\n물러났다네.",
+      "status": "ready"
     },
     "COVE:2:response2": {
       "sourceHash": "sha256:38247466967ef10db454461cfd231c642ad99eb0c8eddb39e95288cec1f8adf7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "스카라 브레이\n여관에 출몰하는\n아이작의\n유령만이\n그대에게\n말해줄 수\n있다네.",
+      "status": "ready"
     },
     "COVE:2:topic1": {
       "sourceHash": "sha256:9e1cd3563ac16c9885eadc143a17157323dfc974d2f042d59f004ecfea2387ce",
@@ -1798,62 +1798,62 @@
     "COVE:2:yes": {
       "sourceHash": "sha256:37dc1877a46507125b54e824dbc9fcff6715c027777c83dbe35cf9e1541d1ef1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그에게\n물어보게!",
+      "status": "ready"
     },
     "COVE:3:health": {
       "sourceHash": "sha256:96e5fb57777cf089276d4d0a8de25d89487e539d1e6c10eb8da733d9e007fb50",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아주 잘\n지낸다네.",
+      "status": "ready"
     },
     "COVE:3:job": {
       "sourceHash": "sha256:3c5b15b373d4367272f8637ef587632c55a65b27dd0eb732656ae6dcad58826a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 마법의\n기술을\n연구한다네.",
+      "status": "ready"
     },
     "COVE:3:look": {
       "sourceHash": "sha256:45374f9056708c1b9d9a7c0eaec9016f07cc70efebe235fda88bf894462f98ef",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "키 큰 마법사.",
+      "status": "ready"
     },
     "COVE:3:name": {
       "sourceHash": "sha256:08daab98c0786acd902fd2530cec8a842f5612a17a825c0212b1fcfde59924f9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "멘토리안",
+      "status": "ready"
     },
     "COVE:3:no": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋아.",
+      "status": "ready"
     },
     "COVE:3:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "COVE:3:question": {
       "sourceHash": "sha256:8c47d17d4a07b2a5ae1dbcfbf8ab8e892c8e21ed552dd036ddef547b8b24e89b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는\n동의하지\n않는가?",
+      "status": "ready"
     },
     "COVE:3:response1": {
       "sourceHash": "sha256:7346a94dd01216f4fb4612b4ae745bbb563413c300bfaea1cef33ef1ebfdd3e1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "마법 속에도\n진실이\n있다네!",
+      "status": "ready"
     },
     "COVE:3:response2": {
       "sourceHash": "sha256:f70230530ebb9effe8d33b5f6f11c0392fa9c602fe8df0d408f8fda0872efd13",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대가 앙크를\n지녔으니\n말해주지.\n게이트 주문에는\n재, 진주,\n맨드레이크\n뿌리가\n필요하다네!",
+      "status": "ready"
     },
     "COVE:3:topic1": {
       "sourceHash": "sha256:c961b0e0b6d160d011d64624e1ab183715686fd2b4b2a6d3e0d6084ad4124254",
@@ -1870,62 +1870,62 @@
     "COVE:3:yes": {
       "sourceHash": "sha256:9a767d0558257a419e280de795071096be6b2b0aa4058cb3616a7b3cbfdd829d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그럼,\n물러가게!",
+      "status": "ready"
     },
     "COVE:4:health": {
       "sourceHash": "sha256:1094f90dd52b98646977c8a2b4bf23a317ba132796f80cee4d879a9df95817ad",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "밝다.",
+      "status": "ready"
     },
     "COVE:4:job": {
       "sourceHash": "sha256:0a6be05db17542ac8909d0c95b6747cc1fa18d9f2ba7b4501541ba76f5c9487e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 생각과\n공명한다.",
+      "status": "ready"
     },
     "COVE:4:look": {
       "sourceHash": "sha256:9be9f5bffdea18208e732fa01b1dc62af146a1529075bd4c9154318f3f4f18c2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "빛나는 앙크!",
+      "status": "ready"
     },
     "COVE:4:name": {
       "sourceHash": "sha256:87768afee94e184e3412e231453d543e0975964e2aa3a75187bed678d61ded1e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 앙크",
+      "status": "ready"
     },
     "COVE:4:no": {
       "sourceHash": "sha256:b356a126e4318643dbf54db33635cfdeb6f432960fe14752ab6caeec04b5dbfe",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "오.",
+      "status": "ready"
     },
     "COVE:4:pronoun": {
       "sourceHash": "sha256:555c7b8b3856c5f4e5d6cd2ec93e4fc54678c49fd0d972d02608fab3ee7b37b3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것",
+      "status": "ready"
     },
     "COVE:4:question": {
       "sourceHash": "sha256:924590e3d85ff228c318be14802a7f176827b291ab5b7db96ab3c527c9bd38f6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "도움을\n구하는가?",
+      "status": "ready"
     },
     "COVE:4:response1": {
       "sourceHash": "sha256:b7bf348d31c9e6d3820a588679ad1e16ff1f088ec66dafed4ee810fbd3e48508",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "코덱스의\n방에 들어가려면.",
+      "status": "ready"
     },
     "COVE:4:response2": {
       "sourceHash": "sha256:1aed61b17312cbda5dc6227948e7f18187acae6ba2c0ae89406f91ac29e8e8f7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아바타의 8부분을\n지니고, 3부분의\n열쇠와\n통행의 말,\n그리고 순수\n공리를\n알아야 한다!",
+      "status": "ready"
     },
     "COVE:4:topic1": {
       "sourceHash": "sha256:07a9d7b4a9a23915a61bc89bb0357bf47b348cf4174eb965bb1df8fbfa18b0b5",
@@ -1942,62 +1942,62 @@
     "COVE:4:yes": {
       "sourceHash": "sha256:1f2250c80b201a8b2af3f556144ce0171ae7eb843e855ab7c4cf8069d494650b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대의 생각은\n무엇인가?",
+      "status": "ready"
     },
     "COVE:5:health": {
       "sourceHash": "sha256:0918350d02ddd9fb6e84e9bacc0bce04c1e37431263cf34d2b6df35d680dff4e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 잘 지낸다네.",
+      "status": "ready"
     },
     "COVE:5:job": {
       "sourceHash": "sha256:19422612f7d95c28f7a9edbd9bdfccf00014d736909b365bd68d137628a47df7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 사랑을\n연주한다네.",
+      "status": "ready"
     },
     "COVE:5:look": {
       "sourceHash": "sha256:1a64b5fc1f29d7f084b592634a1760130f5c737baa3e2386386b02aa09f9fa70",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "묘하게\n낯익은\n음유시인.",
+      "status": "ready"
     },
     "COVE:5:name": {
       "sourceHash": "sha256:818b5cc5f21d3e6e4e6071c06294528d44595022218446d8b79304d2b766327a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "폴",
+      "status": "ready"
     },
     "COVE:5:no": {
       "sourceHash": "sha256:b384674c75c80cada65bccba4a7d3c49fb3f00e05cbf8e2f2de6ab55069c1301",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아쉽군.",
+      "status": "ready"
     },
     "COVE:5:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "COVE:5:question": {
       "sourceHash": "sha256:a9c72b2c12735207301c5d6117bccb5bddc591b1648d39d37833dfcb919c2f83",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "들어\n보겠는가?",
+      "status": "ready"
     },
     "COVE:5:response1": {
       "sourceHash": "sha256:278e4416bcebb6e4b26518072be2538d4add480cbca83b39e913322549ba9066",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우리 사랑에\n초를 밝히니,\n사랑 속에서\n문제들이\n사라진다네.",
+      "status": "ready"
     },
     "COVE:5:response2": {
       "sourceHash": "sha256:bb2fd6d5728a75a9d9c9ced6c407237887e0de49c1bfe074abd6168b86f5c3ca",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "하지만 결국\n우리는 곧 알게\n되지, 하나와\n하나가 우리가\n바라던\n전부라는 걸!",
+      "status": "ready"
     },
     "COVE:5:topic1": {
       "sourceHash": "sha256:86c019bd75e878270f75b8af41523e1ee789128aa9b188e3f819b3a4ad5011e5",
@@ -2014,62 +2014,62 @@
     "COVE:5:yes": {
       "sourceHash": "sha256:bd564c16e32c70241232044b7da15fa83f55fdf03eca02120f241b951f4b02fd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "사랑에\n대해.",
+      "status": "ready"
     },
     "COVE:6:health": {
       "sourceHash": "sha256:06ddfbea2f6fd7ed52f3abb5bb3ba71486fe2c9504d7bd7ee1a859a5721a7cae",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋아요.",
+      "status": "ready"
     },
     "COVE:6:job": {
       "sourceHash": "sha256:f9fe51df49f2c3b04f1eb4d247d5ab16353fd3349a4ae9d54b008d46e9bfd69d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 아이들을\n노래한다네.",
+      "status": "ready"
     },
     "COVE:6:look": {
       "sourceHash": "sha256:69e17fdde30da1dd5f0e90fbf7f7f06637d91aa43830e0b9011907b87a9a79b7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "가수.",
+      "status": "ready"
     },
     "COVE:6:name": {
       "sourceHash": "sha256:1bda9e5035725cc6c86d3e4207ae33d8d0509b922bbc44ba163540c455c6d2a8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "린다",
+      "status": "ready"
     },
     "COVE:6:no": {
       "sourceHash": "sha256:7f2302c86d005fed4397eef4134c2c03eb6324268449f5cf97595e6307942c31",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "흠.",
+      "status": "ready"
     },
     "COVE:6:pronoun": {
       "sourceHash": "sha256:d602e91d93c835ee2aa640ccffe314c61328ea2c1dbc45bec4277a9e94f91206",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그녀",
+      "status": "ready"
     },
     "COVE:6:question": {
       "sourceHash": "sha256:e401f2ab749d400129a7a86b90476e12429f75410fd665b422c4e98231a26767",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "도와\n주겠어요?",
+      "status": "ready"
     },
     "COVE:6:response1": {
       "sourceHash": "sha256:2aa66ac7de8bb15cb05fb37b3c657fb5867699d48a7ce06749e608f45c31a011",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "온 세상에서,\n작은 아이들이\n세상에\n태어난다네.",
+      "status": "ready"
     },
     "COVE:6:response2": {
       "sourceHash": "sha256:13a834eefb9a8d5d5cb3cc450151751d3e7eb876ff8c7babbef081f033b19f8d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "여정이 끝날\n때까지 우리가\n줄 수 있는\n모든 걸 주어야\n해, 그래야\n할 일이\n끝나지!",
+      "status": "ready"
     },
     "COVE:6:topic1": {
       "sourceHash": "sha256:fe3caf1eabfd842adbd62bbe2d37e1585039acc72ff0f9049ca64930df456ef6",
@@ -2086,62 +2086,62 @@
     "COVE:6:yes": {
       "sourceHash": "sha256:1ffe105918632b598fff4b2819fd8af07215e6aac5f9f585f76cd884aabe3bb6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그들에게\n기쁨의 노래를\n가르쳐주세요!",
+      "status": "ready"
     },
     "COVE:7:health": {
       "sourceHash": "sha256:06ddfbea2f6fd7ed52f3abb5bb3ba71486fe2c9504d7bd7ee1a859a5721a7cae",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋다네.",
+      "status": "ready"
     },
     "COVE:7:job": {
       "sourceHash": "sha256:2f69760d4b655890ca5c9c853900ebeadb12b01834d70de38a2bbf62c5aedafa",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 마법을\n쓴다네.",
+      "status": "ready"
     },
     "COVE:7:look": {
       "sourceHash": "sha256:7953746319f060758799f45cd9bcf868605119b3ee9a3b09f8248df5bedbe3fc",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "신비로운\n마법사.",
+      "status": "ready"
     },
     "COVE:7:name": {
       "sourceHash": "sha256:74e6fbb572af72246abf610d8e268ae53e6599972c571117503dc4537b982b69",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "멀린",
+      "status": "ready"
     },
     "COVE:7:no": {
       "sourceHash": "sha256:b384674c75c80cada65bccba4a7d3c49fb3f00e05cbf8e2f2de6ab55069c1301",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아쉽군.",
+      "status": "ready"
     },
     "COVE:7:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "COVE:7:question": {
       "sourceHash": "sha256:518b070ce0d38f7101e7fe1507217b9f8e30f3143f755f2d033e34269b584807",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "마법을\n공부하는가?",
+      "status": "ready"
     },
     "COVE:7:response1": {
       "sourceHash": "sha256:6f7b35597966ddd73e68a4fd77f0690e956907ea0a440ea601f0d0d4858d138c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "검은 보석은\n문게이트에\n갇혀있다네!",
+      "status": "ready"
     },
     "COVE:7:response2": {
       "sourceHash": "sha256:be41bdbbf4cb3d50d6a5d2fca305305b09193bf18099e8048b8bfb62c7ad59a4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "두 달이 모두\n어두워지는\n게이트가 나타날\n곳에 서게.\n달이 어두워질 때\n찾아보게!",
+      "status": "ready"
     },
     "COVE:7:topic1": {
       "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
@@ -2158,62 +2158,62 @@
     "COVE:7:yes": {
       "sourceHash": "sha256:f479595541a37f21b8080cfcebc37ca39f9e4c51c12532b20b42415a018df03d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대의 공부에\n행운이\n있기를!",
+      "status": "ready"
     },
     "COVE:8:health": {
       "sourceHash": "sha256:0918350d02ddd9fb6e84e9bacc0bce04c1e37431263cf34d2b6df35d680dff4e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 잘 지낸다네.",
+      "status": "ready"
     },
     "COVE:8:job": {
       "sourceHash": "sha256:d655a52be4b13abd4f14eeb933829eecbccdb22cb08631c44b211620b6ab1b46",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 그 관계를\n가르친다네.",
+      "status": "ready"
     },
     "COVE:8:look": {
       "sourceHash": "sha256:d420e651e558d34b5da3532d2327f0a3d4466164e4827cc04b34dfbef7b24e71",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "늙은 드루이드.",
+      "status": "ready"
     },
     "COVE:8:name": {
       "sourceHash": "sha256:198a38e520b408d20ead66f3428d3dc87a45c0a1673a0e4035e9431e43ba8e31",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "드라코니안",
+      "status": "ready"
     },
     "COVE:8:no": {
       "sourceHash": "sha256:9e813d686a48010552a1b05f7b499f29acd7345ce47b44661fc46a818795b0a0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "마을과 성들을\n배우게!",
+      "status": "ready"
     },
     "COVE:8:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "COVE:8:question": {
       "sourceHash": "sha256:a90f975f8f1f807f06d509f27874424f2e8d399638da7d8a5e0b7cd2f81a0cdf",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "이걸\n알았는가?",
+      "status": "ready"
     },
     "COVE:8:response1": {
       "sourceHash": "sha256:2c31bb540c8889b0534ee789b34b95baa741cdece11934f8725c9deab98dda2f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "진실, 사랑,\n용기의\n조합은 여덟\n가지가\n있다네. 여덟\n미덕 각각이\n그 조합\n중 하나라네!",
+      "status": "ready"
     },
     "COVE:8:response2": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "COVE:8:topic1": {
       "sourceHash": "sha256:079fc698414baba399ba1bace9264a566384add5e3b9dbf48f948b0e7a0727b3",
@@ -2230,62 +2230,62 @@
     "COVE:8:yes": {
       "sourceHash": "sha256:49f1c1fee040b61b28297bd193fc55dfa77d661004b1ca06a213d0204c2cdf34",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아주 좋아!",
+      "status": "ready"
     },
     "COVE:9:health": {
       "sourceHash": "sha256:7b8294c96bee8ad3f8765b4eb8db6c6de476714b74f2ef2090942403a46e5fad",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 잘\n지내고 있어요.",
+      "status": "ready"
     },
     "COVE:9:job": {
       "sourceHash": "sha256:24537a8423198dfc1ab50559020386b08b452a8459e0ea5b0c0df99183d1dbb7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 코덱스에\n대해 많이\n안다네!",
+      "status": "ready"
     },
     "COVE:9:look": {
       "sourceHash": "sha256:006587949929d98fd2c51355062941b4e3e3386065b8e9baf27a6dfb9659f2af",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "위엄있는\n해마!",
+      "status": "ready"
     },
     "COVE:9:name": {
       "sourceHash": "sha256:30b08cf7c7cdc03d4efcd29f2e62a1b75034c3393250db44045dc764146f0ab8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "블리스풀",
+      "status": "ready"
     },
     "COVE:9:no": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "COVE:9:pronoun": {
       "sourceHash": "sha256:d602e91d93c835ee2aa640ccffe314c61328ea2c1dbc45bec4277a9e94f91206",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그녀",
+      "status": "ready"
     },
     "COVE:9:question": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "COVE:9:response1": {
       "sourceHash": "sha256:34212b7837310be4b62bd7ce01f434b3481347710528f509551184f5b38423f0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "신단의 앙크가\n코덱스의\n방에 들어가는\n법을\n안다네!",
+      "status": "ready"
     },
     "COVE:9:response2": {
       "sourceHash": "sha256:95fe95f4570bfc00030be181d93cd098b516e8ede6b125479485576a98b76d57",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "정직, 자비,\n용맹의\n신단에서\n3주기 동안\n명상하면\n들어가는 법을\n알게 된다네!",
+      "status": "ready"
     },
     "COVE:9:topic1": {
       "sourceHash": "sha256:07a9d7b4a9a23915a61bc89bb0357bf47b348cf4174eb965bb1df8fbfa18b0b5",
@@ -2302,8 +2302,8 @@
     "COVE:9:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "DEN:0:health": {
       "sourceHash": "sha256:df85939c798c231a236b1d256a31bab01c0e621696c96811e41fdba3ffcd1f5a",
