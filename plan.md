@@ -74,7 +74,7 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 | 12 | status/menu → DOM overlay (DPR/letterbox) | ✅ | ⬜ | 5,9,11,21 |
 | 13 | 한국어 NPC alias + prompt별 입력 규칙 | ✅ | ✅ | 8,9,11,21 — main `cf0a690`(abort 수정 merge) + `a88d9e4`(e2e spec merge) |
 | 14 | C++/Boron/TLK/binary/JS 번역 lookup 런타임 연결 | ✅ | ⬜ | 4,11,12,13 |
-| 15 | 전체 한국어 번역 corpus + glossary 일관성 (`i18n:check --strict`) | 🟡 | ⬜ | 4,14 — branch `todo-15-i18n-corpus`, 1330/4402 번역 완료(glossary 18·ui 369·binary 214·module 729), tlk 3072건 남음 |
+| 15 | 전체 한국어 번역 corpus + glossary 일관성 (`i18n:check --strict`) | 🟡 | ⬜ | 4,14 — main에 직접 커밋 진행 중, 4242/4402 번역 완료(glossary 18·ui 369·binary 214·module 729·tlk 2912/3072 = topic1/topic2 pass-through 512 + 15/16 마을). tlk의 YEW 마을(160건)만 남음 — 번역은 이미 끝나 `.omo/drafts/tlk-yew-translation-draft.json`에 저장돼 있고 적용만 남음 |
 
 ### Wave 4 — 완성/배포 (16~20)
 | # | 단계 | 승인 기준 | 실제 게임에서 확인 | 선행 |
@@ -222,11 +222,11 @@ Todo 15 진행 중 (2026-09-26, branch `todo-15-i18n-corpus`, main에는 아직 
 - `ui.json`(369) 완료: 전투/던전/게임 상태줄/Configure 메뉴/아이템/포탈 문구. 화이트스페이스뿐인 소스(12건, 예: 순수 `"\n"`)가 기존 i18n:check의 "번역 없음" 검사(trim 후 빈 문자열이면 실패)를 통과할 수 없다는 스키마 결함을 발견 → `category: "passthrough"` 예외를 RED→GREEN으로 추가(`tests/unit/i18n-check.test.ts`).
 - `binary.json`(214) 완료: 엔딩/호크윈드 미덕 평가/로드 브리티시 마을·미덕 설화/신단 조언/미덕 질문/캐릭터 생성 내레이션(집시 카드점·꿈 환영·20개 미덕 이분법 질문). `lordBritishKeyword:*`(24건)는 의도적으로 영어 그대로 둠 — discourse 키워드 매칭 토큰이라 번역하면 실제 대화가 깨짐(Todo 13의 `aliases.json` 설계와 동일한 이유).
 - `module.json`(729) 완료: 그래픽/오디오 파일 경로(229건, 정규식으로 자동 pass-through)·Credits·아이템/직업/몬스터 이름·던전/마을 고유명사(binary.json과 표기 통일)·상인 대화 시스템(약 180개 상점/NPC 이름 + 재사용 대화 템플릿). 상인 대화의 `%`/`@`/`#`/`=`/`+`/`$gp` 같은 discourse 치환 토큰은 printf 플레이스홀더가 아니라서 checker가 추적하지 않지만 실제 게임 로직엔 필수라 번역 전체에서 리터럴로 보존. 부수 발견: "% says"류 영어 산문이 printf `%` 공백-플래그 규칙에 우연히 걸려 스키마에 거짓 placeholder(`"% s"` 등, 26건)로 저장돼 있던 것도 함께 수정(`placeholders: []`).
-- 남음: `tlk.json`(3072, NPC 이름·인사말·job/health/name 등 키워드별 응답 전체) — 파일 중 가장 크고, 실제 원본 TLK에서 추출된 진짜 저작권 대화문(영어 원문은 `.local/i18n-inventory/`에만 있고 커밋 안 됨)이라 세션을 나눠 이어서 진행해야 함.
-- 게이트: `npm run i18n:check`(엄격 모드 아님) 4411/4411 통과, pending 3072 → 0이 되어야 Todo 15 완료. `npm run test:unit`(259/259)·`typecheck`·`build`·`git diff --check` 매 체크포인트마다 실행, 전부 exit 0.
+- `tlk.json`(3072건): `TOWN:NPC번호:필드` 구조, 16개 마을 × NPC 16명 × 12필드(name/pronoun/look/job/health/question/yes/no/response1/response2/topic1/topic2). `topic1`/`topic2`(512건)는 discourse가 대화 주제로 직접 매칭하는 4글자 코드(예: "PLAY","COMP")라 `lordBritishKeyword`와 같은 이유로 영어 그대로 pass-through 처리. 나머지 10필드(2560건)는 마을 단위로 번역 진행: **완료 15/16 마을**(BRITAIN·COVE·DEN·EMPATH·JHELOM·LCB·LYCAEUM·MAGINCIA·MINOC·MOONGLOW·PAWS·SERPENT·SKARA·TRINSIC·VESPER) — 각 마을의 미덕 테마(자비/용기/명예/정의 등)에 맞춰 어조·용어 일관성 유지, 던전·마을 고유명사는 binary.json/module.json과 표기 통일. **남음: YEW 마을(160건, 정의 테마 — 자아나·탈포드 판사·칼럼니·보팔)** — 번역 자체는 이미 끝나 `.omo/drafts/tlk-yew-translation-draft.json`에 저장돼 있음, 다음 세션은 그것을 `locales/ko/tlk.json`에 적용(`node scripts/lib/schema-io.mjs` 기반의 apply 스크립트 재작성 필요, handoff.md 참고)하고 `npm run i18n:check`로 pending 0 확인만 하면 tlk.json 전체 완료.
+- 게이트: `npm run i18n:check`(엄격 모드 아님) 4411/4411 통과, pending 4402 → 160(남은 건 전부 YEW) → 0이 되어야 Todo 15 완료. `npm run test:unit`(259/259)·`typecheck`·`build`·`git diff --check` 매 체크포인트마다 실행, 전부 exit 0.
 
-## 바로 다음 순서 (2026-09-26 갱신 — Todo 13 완료 16/25, Todo 15 진행 중)
-1. **Todo 15 이어서**: `tlk.json`(3072건) 번역 → `npm run i18n:check -- --strict` GREEN → `korean-progression.spec.ts`(계획서 승인 기준) → main merge.
+## 바로 다음 순서 (2026-09-26 갱신 — Todo 13 완료 16/25, Todo 15 진행 중 — tlk.json도 YEW 마을 1곳만 남음)
+1. **Todo 15 이어서 (거의 다 됨)**: `.omo/drafts/tlk-yew-translation-draft.json`(YEW 160건, 번역 완료·미적용)을 `locales/ko/tlk.json`에 적용 → `npm run i18n:check` pending 0 확인 → `npm run i18n:check -- --strict` GREEN → `korean-progression.spec.ts`(계획서 승인 기준, 아직 미작성) → main merge → Todo 15 `[x]` → 17/25.
 2. 이후: 17(QA 갭 분석 있음, wasm 재진입 버그 클래스가 다른 in-game 흐름에도 잠재했을 수 있으니 통합 e2e에서 특히 주의) → 18 → 19 완료(emsdk CI 스텝·audit 확장 이미 병합됨) → 20 → F1~F4.
 3. Pages Source="GitHub Actions" 저장소 설정은 사용자만 가능 — 계속 대기.
 

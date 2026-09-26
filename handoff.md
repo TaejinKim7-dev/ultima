@@ -1021,4 +1021,24 @@ ULTIMA4_DATA=.../ultima4.zip npx playwright test tests/e2e/boot-sequence.spec.ts
   - **번역하지 않은 것**: `vendors:29`("bcdefghijklmnop")·`vendors:84`("bcdefgh")는 메뉴 항목을 고르는 실제 키보드 단축키 문자열이라 번역 불가(파서가 그대로 매치).
 - **남음 — `tlk.json`(0/3072)**: 파일 중 가장 크고 유일하게 남은 파일. 실제 원본 `.TLK` 파일에서 추출한 NPC 이름·인사말·`job`/`health`/`name`/`bye` 등 키워드별 응답 전체(사실상 게임의 모든 NPC 대화). 다음 세션에서 이어서 진행.
 - **검증**: 체크포인트마다(각 파일 완료 시) `npm run i18n:check`(비엄격, entryCount/pendingCount 확인) + `npm run test:unit`(259/259 무회귀) + `typecheck`+`build`+`git diff --check` 전부 exit 0 확인 후 커밋. `npm run i18n:check -- --strict`는 tlk.json이 남아 있어 여전히 실패(의도됨, Todo 15 완료 기준).
-- 최종 상태: `4411개 항목 확인, 3072개 미번역`(glossary+ui+binary+module = 1330건 완료). `plan.md` Todo 15 상태는 정직하게 🟡 유지(승인 기준은 `i18n:check -- --strict` GREEN + `korean-progression.spec.ts`이므로 tlk.json 전까지는 완료 아님).
+- 최종 상태(이 절 작성 시점): `4411개 항목 확인, 3072개 미번역`(glossary+ui+binary+module = 1330건 완료). `plan.md` Todo 15 상태는 정직하게 🟡 유지(승인 기준은 `i18n:check -- --strict` GREEN + `korean-progression.spec.ts`이므로 tlk.json 전까지는 완료 아님).
+
+### Todo 15 계속 — tlk.json 15/16 마을 완료, YEW만 남음 (2026-09-26, main에 직접 커밋, 승인 기준 🟡 유지)
+
+사용자 지시("tlk.json 계속 번역해줘")에 따라 이어서 진행. `tlk.json`의 실제 구조를 확인: `TOWN:NPC번호:필드` 키, **16개 마을 × NPC 16명 × 12필드**(name/pronoun/look/job/health/question/yes/no/response1/response2/topic1/topic2) = 정확히 3072건.
+
+- **`topic1`/`topic2`(512건) 전량 pass-through**: 매 NPC의 이 두 필드는 discourse가 "주제"로 직접 매칭하는 4글자 대문자 코드(예: "PLAY","COMP","SHHH")임을 실제 추출 데이터로 확인(`node -e`로 전 NPC 샘플링). Todo 13의 `aliases.json` 자체 주석이 "per-NPC topic1/topic2 keywords ... not scaffolded here"라고 명시한 바로 그 gap — 번역하면 그 NPC와의 주제 기반 대화가 전부 깨진다. 전량 영어 원문 그대로 pass-through 처리(정규식이 아니라 필드명으로 직접 필터링하는 스크립트).
+- **마을 단위로 순서대로 번역, 완료 15/16**: BRITAIN(자비)→COVE(코덱스/공리)→DEN(버커니어즈 덴, 해적/도둑)→EMPATH(사랑)→JHELOM(용맹)→LCB(로드 브리티시 성)→LYCAEUM(진실)→MAGINCIA(오만/유령 도시)→MINOC(희생)→MOONGLOW(정직)→PAWS(변경 마을)→SERPENT(서펀트 홀드, 용기)→SKARA(스카라 브레이, 철학자들 — 부처·아리스토텔레스·산타야나·미켈란젤로·칼라일·디킨스 등 실제 역사적 인물 인용구 포함)→TRINSIC(명예)→VESPER(겸손). 매 마을 완료마다 `.local/i18n-inventory/tlk.json`에서 그 마을 16 NPC × 10필드를 한 번에 조회해 번역, 별도 JSON에 키:번역 매핑으로 작성(배열-순서 방식은 이전 세션에서 항목 하나를 누락한 실수가 있어 이후 전부 "키가 명시된 객체" 방식으로 전환, 스크립트가 스키마의 실제 키 목록과 자동 대조해 누락/초과 여부를 검증) → `apply-translations.mjs`로 적용 → `npm run i18n:check`로 pending 감소 확인 → `npm run test:unit`(259/259 무회귀) → 커밋.
+- **고유명사 표기는 binary.json/module.json과 통일**: 마을 이름(브리튼·문글로우·트린식·미녹·젤롬·유·스카라 브레이·매긴시아·포즈·버커니어즈 덴·베스퍼·코브·서펀트 홀드·라이시움·엠패스 수도원), 던전 이름(기만·경멸·데스타드·그릇됨·탐욕·수치·히스로스), 8미덕 용어 전부 이전 파일에서 확립한 한국어를 그대로 재사용.
+- **일부 NPC의 question/yes/no/response 필드가 단일 문자 `"A"`**: Blissful·Spellbind·Shaman·Circe(COVE), Draconian의 response2(COVE), 여러 마을의 guard/child류 NPC 등 — 실제 대화 분기가 없는 자리채움 값으로 확인(원문 자체가 의미 없는 단일 문자), 번역하지 않고 그대로 둠.
+- **사투리/말투가 있는 NPC는 한국어 사투리로 재현**: PAWS의 스벤(노르딕 나무꾼 "ya" 말투 → "~그려" 충청도 사투리), VESPER의 Guard(원시인 말투 "Ug, me tough!" → "우그, 나 힘세!") 등 — 원문의 캐릭터성을 최대한 살림.
+- **YEW(정의, 160건)는 번역은 끝났으나 아직 미적용**: 세션 도중 사용자의 "진행 상황 저장" 지시로 중단 — 번역 결과는 유실 방지를 위해 `.omo/drafts/tlk-yew-translation-draft.json`에 커밋해 저장함(`locales/ko/tlk.json`에는 아직 반영 안 됨). 다음 세션은 이 파일을 그대로 적용하면 된다:
+  ```bash
+  # scripts/lib/schema-io.mjs의 loadSchemaFile/saveSchemaFile를 쓰는
+  # apply-translations.mjs를 재작성(간단한 40줄 스크립트, 이전 커밋 메시지들에 로직 설명 있음)한 뒤:
+  node /tmp/apply-translations.mjs tlk .omo/drafts/tlk-yew-translation-draft.json
+  npm run i18n:check   # pending 0 확인
+  ```
+- **검증(각 마을 커밋 전 실행, 전부 exit 0)**: `npm run i18n:check`(entryCount/pendingCount 감소 확인) · `npm run test:unit`(259/259 무회귀, 마을 진행과 무관하게 매번 동일).
+- **현재 상태**: `locales/ko/tlk.json` 2912/3072 완료(topic pass-through 512 + 15개 마을 × 160). 전체 corpus는 `4411개 항목, 160개 미번역`(YEW만) — glossary+ui+binary+module(1330) + tlk 기완료분(2912) = 4242/4402.
+- **다음**: YEW 적용 → `i18n:check` pending 0 → `i18n:check -- --strict` GREEN → Todo 15 승인 기준의 나머지 절반인 `tests/e2e/korean-progression.spec.ts`(intro·마을 NPC 1곳·로드 브리티시/호크윈드·신단/코덱스 답변 샘플·저장 UI 커버, 아직 미작성) → main 게이트 재확인 → 체크박스 `[x]` → 17/25.
