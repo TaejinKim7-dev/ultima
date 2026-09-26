@@ -16132,56 +16132,56 @@
     "VESPER:0:health": {
       "sourceHash": "sha256:96730ffc88166cf6dcf4b8a98b4ba9eaa32ba09e1a94921dd9e434f02e566bb7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋다네.",
+      "status": "ready"
     },
     "VESPER:0:job": {
       "sourceHash": "sha256:296941df619ef4038fe39098f0cc572d3cf9df052303acaae266c24e2c5f09c5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "베스퍼에\n온 걸\n환영하네.",
+      "status": "ready"
     },
     "VESPER:0:look": {
       "sourceHash": "sha256:d551a1ee12c83102ecea42e9e443bd33f1c37cd99fd584c31f820c0fef4ffba4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "키 큰 마법사.",
+      "status": "ready"
     },
     "VESPER:0:name": {
       "sourceHash": "sha256:738d9d31e55bc0b597437c63f55e60b64122da28d0b673a929bbc6c424443864",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "트윈 게이츠",
+      "status": "ready"
     },
     "VESPER:0:no": {
       "sourceHash": "sha256:71cfc266201baf09d709cc7d8bc3d79d38dce992bd395b1860777419b2840879",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "여정 중인 이의\n방문을\n영광으로\n여기네!",
+      "status": "ready"
     },
     "VESPER:0:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "VESPER:0:question": {
       "sourceHash": "sha256:dc6650f94bc3d7ee6500922ac38a24902d38f88c13cb6dd6e55844e92da3bc11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "먼 길을\n왔는가?",
+      "status": "ready"
     },
     "VESPER:0:response1": {
       "sourceHash": "sha256:e9597e9ab11c59866dee98485cf2bdac11d5e50e0f03597c76b6f90deed8146c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그래, 베스퍼는\n아름다운\n마을이라네.",
+      "status": "ready"
     },
     "VESPER:0:response2": {
       "sourceHash": "sha256:fb3d2050fd2315add2abadbc535cef7251cf06417572a66a87c7daf6b6b970e4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "베스퍼에\n온 걸\n환영하네!",
+      "status": "ready"
     },
     "VESPER:0:topic1": {
       "sourceHash": "sha256:1e3514bbbff6526e5361b4f8545bc8afeaf6e234f256ae89a8288e03ce26b93c",
@@ -16198,62 +16198,62 @@
     "VESPER:0:yes": {
       "sourceHash": "sha256:71cfc266201baf09d709cc7d8bc3d79d38dce992bd395b1860777419b2840879",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "여정 중인 이의\n방문을\n영광으로\n여기네!",
+      "status": "ready"
     },
     "VESPER:1:health": {
       "sourceHash": "sha256:a4371f43c2ecf15b44ad39b66beb02a6a6b2e6b3872b080f70f6bd78ab54167b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우그, 나\n힘세!",
+      "status": "ready"
     },
     "VESPER:1:job": {
       "sourceHash": "sha256:a4371f43c2ecf15b44ad39b66beb02a6a6b2e6b3872b080f70f6bd78ab54167b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우그, 나\n힘세!",
+      "status": "ready"
     },
     "VESPER:1:look": {
       "sourceHash": "sha256:4f59ee43667b15f560bb87326afddc6d3a6ae3619913c4bf3aceb75eade2687d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "거구.",
+      "status": "ready"
     },
     "VESPER:1:name": {
       "sourceHash": "sha256:c8d3fc567bbcbf384407a4ca279787fdb6e73932155e962e562507acfbf53094",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "경비병",
+      "status": "ready"
     },
     "VESPER:1:no": {
       "sourceHash": "sha256:a4371f43c2ecf15b44ad39b66beb02a6a6b2e6b3872b080f70f6bd78ab54167b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우그, 나\n힘세!",
+      "status": "ready"
     },
     "VESPER:1:pronoun": {
       "sourceHash": "sha256:555c7b8b3856c5f4e5d6cd2ec93e4fc54678c49fd0d972d02608fab3ee7b37b3",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것",
+      "status": "ready"
     },
     "VESPER:1:question": {
       "sourceHash": "sha256:efe5d87931fc3d30bfb88866237a085e62bcaafe16e4e1398a0d7fa5af17bb20",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우그, 너\n힘센가?",
+      "status": "ready"
     },
     "VESPER:1:response1": {
       "sourceHash": "sha256:a4371f43c2ecf15b44ad39b66beb02a6a6b2e6b3872b080f70f6bd78ab54167b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우그, 나\n힘세!",
+      "status": "ready"
     },
     "VESPER:1:response2": {
       "sourceHash": "sha256:015b7a201aaeacec11295a6ff84028218d80833d6af62259d866e5e4492eb74c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나 힘세!",
+      "status": "ready"
     },
     "VESPER:1:topic1": {
       "sourceHash": "sha256:3c8849371afafbbce6c6067befb357989a5c93ab3ca19a553d6729b9bf181bfe",
@@ -16270,62 +16270,62 @@
     "VESPER:1:yes": {
       "sourceHash": "sha256:d9dd663fb6ab4a3ac09e84e542459b0febea4ca9db1047494d16e9a1177f5b9e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우그, 너\n힘세!",
+      "status": "ready"
     },
     "VESPER:10:health": {
       "sourceHash": "sha256:0918350d02ddd9fb6e84e9bacc0bce04c1e37431263cf34d2b6df35d680dff4e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 잘\n지낸다네.",
+      "status": "ready"
     },
     "VESPER:10:job": {
       "sourceHash": "sha256:07ab92882792bfaa465ccf1b656e3afeda61bf3628fd95f12026240247791855",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 신단에\n대해\n가르친다네.",
+      "status": "ready"
     },
     "VESPER:10:look": {
       "sourceHash": "sha256:eb00cd515c68bacde538227116c00c7cab6b38e9d794943d3da7e2627957e6a5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "근엄한 레인저.",
+      "status": "ready"
     },
     "VESPER:10:name": {
       "sourceHash": "sha256:ab7193a34c8637c0570a8df6dbc8aa92d4db3f28825fa6090c1960f598f26c00",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "랜달",
+      "status": "ready"
     },
     "VESPER:10:no": {
       "sourceHash": "sha256:1de77b01a87bd20938a1bd6bdb5fb0472547a5524d3196d3318f931b81540d95",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것을 아바타가\n되는 길의\n첫 목표로\n삼게!",
+      "status": "ready"
     },
     "VESPER:10:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "VESPER:10:question": {
       "sourceHash": "sha256:f7eaa9add5e144b5787c2df596de546dbaa8bfbd896007911c3bf1a2d0de333a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "자주\n찾아가는가?",
+      "status": "ready"
     },
     "VESPER:10:response1": {
       "sourceHash": "sha256:bc8dcf3ef1f3bbce84ea4642d97d9f17f635b60c50417e0de641df65ed5002f8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대의 길이\n분명해지려면\n각 신단을\n1, 2, 3주기씩\n>반드시<\n찾아가야\n한다네!",
+      "status": "ready"
     },
     "VESPER:10:response2": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "VESPER:10:topic1": {
       "sourceHash": "sha256:fb42dc1af393c2ea7537c1857cc5c590a56e57d3f3d249a018883dc32526d92a",
@@ -16342,62 +16342,62 @@
     "VESPER:10:yes": {
       "sourceHash": "sha256:f990be6289b09bad7c01febdaef7af58c0f38477602c97778044a3a55920837c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아주 좋군.",
+      "status": "ready"
     },
     "VESPER:11:health": {
       "sourceHash": "sha256:96730ffc88166cf6dcf4b8a98b4ba9eaa32ba09e1a94921dd9e434f02e566bb7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋다네.",
+      "status": "ready"
     },
     "VESPER:11:job": {
       "sourceHash": "sha256:707c9f84c616f864c4174ba4448349b77e18d9f5778984a2b5e0e4d7b9b16c86",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 현명한\n조언을\n한다네.",
+      "status": "ready"
     },
     "VESPER:11:look": {
       "sourceHash": "sha256:c0f3786997683b64911ad16a4040a9f274e10fbce658a8413806100321ccb6b8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "현명한 남자.",
+      "status": "ready"
     },
     "VESPER:11:name": {
       "sourceHash": "sha256:6b14127a251769f925c2632ede4779efcff64c70168437c29145c62d2e5f91e4",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "더전",
+      "status": "ready"
     },
     "VESPER:11:no": {
       "sourceHash": "sha256:7dcf45906e470adb6fe5aea24cb95fed6e5c6b7087acfac04b070130553d59f0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는 분명\n길에서\n벗어날\n걸세!",
+      "status": "ready"
     },
     "VESPER:11:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "VESPER:11:question": {
       "sourceHash": "sha256:7201847cba07c8595dc75f25a97e309d1d0ccb9f56eb2c512f51fbde109b8b6d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는?",
+      "status": "ready"
     },
     "VESPER:11:response1": {
       "sourceHash": "sha256:75bcf70c47af6c337bf0e5183e8fa256c5cd0ad915a36bcf4e1b085ba4a9f408",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대 안의\n미덕을 알고\n발전시키도록\n힘쓰게.",
+      "status": "ready"
     },
     "VESPER:11:response2": {
       "sourceHash": "sha256:d7db88b6198d9cb801961d994303e8bc491e6c9b0926da55f3c0e37693ead479",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "예언자\n호크윈드를\n>자주< 찾아가\n상담해야\n한다네, 그는\n그대 안을\n볼 수\n있으니!",
+      "status": "ready"
     },
     "VESPER:11:topic1": {
       "sourceHash": "sha256:f4573f4833e6746e927626048d52240c96032a20ec2aceb99f6998b6a4dee555",
@@ -16414,62 +16414,62 @@
     "VESPER:11:yes": {
       "sourceHash": "sha256:a0d7ce8c360ce42ca16394929f14c0fcb116bae1a05f6f9c23ae7815f6ae7de7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋아!",
+      "status": "ready"
     },
     "VESPER:12:health": {
       "sourceHash": "sha256:1ac776b085605ec11408720d7f63994baac88a6e5d00ff8c100242e0e98a9e14",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좀 간지러워요!",
+      "status": "ready"
     },
     "VESPER:12:job": {
       "sourceHash": "sha256:8be7cf19aad7a6a5e844ace32d5072601e70a5a360c4d24d519b4acc23ef0504",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "내가 웃기다고\n생각하지!",
+      "status": "ready"
     },
     "VESPER:12:look": {
       "sourceHash": "sha256:9ecef0849613efd0bd6a7945ca7d844f787e23c8d4e4bda192f1a537aec8f04e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우스운 광대.",
+      "status": "ready"
     },
     "VESPER:12:name": {
       "sourceHash": "sha256:ba417a972c733ff53d7ba012332ea0e05f1134015704f08213d7e4797a052b22",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "샤즈봇",
+      "status": "ready"
     },
     "VESPER:12:no": {
       "sourceHash": "sha256:e24ade8e8980cd95d10b7eef7d852249541f0e265cc186aefb408c052096e419",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아, 아쉽네,\n그런 줄\n알았는데.",
+      "status": "ready"
     },
     "VESPER:12:pronoun": {
       "sourceHash": "sha256:d602e91d93c835ee2aa640ccffe314c61328ea2c1dbc45bec4277a9e94f91206",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그녀",
+      "status": "ready"
     },
     "VESPER:12:question": {
       "sourceHash": "sha256:88b11a159cf7defe5332bbcb421221d1467242a6d38c371c99b8b51c92d2f333",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "안\n그런가?",
+      "status": "ready"
     },
     "VESPER:12:response1": {
       "sourceHash": "sha256:e33004f1e0cde05302ac3e2ddbe93d3a9fd60d12226c288a46a745b3c8e2253c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "뱀 네이트에\n대해\n물어보라고\n권해\n보겠네!",
+      "status": "ready"
     },
     "VESPER:12:response2": {
       "sourceHash": "sha256:e46b9bef36a9f7269f6744ed509d497899e13c8f87387ccd50e4faf0f9c1e9c7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "뭐, 긴\n이야기고\n시간이\n없다네.",
+      "status": "ready"
     },
     "VESPER:12:topic1": {
       "sourceHash": "sha256:ed54ea485cbff06d16d3f16e7f80f103a8941b9402e3eb341f4468dcb00e7cd2",
@@ -16486,62 +16486,62 @@
     "VESPER:12:yes": {
       "sourceHash": "sha256:7f3d84e6593258cbba716711a0985515908ffc09d52708503019bea9112f108d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "뭐 좋아, 나도\n그러려고\n노력하지!",
+      "status": "ready"
     },
     "VESPER:13:health": {
       "sourceHash": "sha256:dae79a12818f4e744e6e0b479c3ccf6b420f82cac3c984e02ff0d862828610d9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 아주\n강력하다네!",
+      "status": "ready"
     },
     "VESPER:13:job": {
       "sourceHash": "sha256:36a07247ba73a2d8a0d0212398a7362f9facd7603d32cb1cec8071b038f8fc8a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 견습\n마법사라네!",
+      "status": "ready"
     },
     "VESPER:13:look": {
       "sourceHash": "sha256:b4994aa4de66477763315d3fa373551f1f221c87e0e491d013becc2460330b6b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "날씬한 청년.",
+      "status": "ready"
     },
     "VESPER:13:name": {
       "sourceHash": "sha256:97df1fa97e31fcab871d6be4afc6342eac8bf022a98fd6490054c15f2c037da1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "플랫부시",
+      "status": "ready"
     },
     "VESPER:13:no": {
       "sourceHash": "sha256:fe852526912ee9872527d3079ca1d5d9a797813f642829e71a1bf89cec4169e2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "칼럼니가\n신속 주문을\n안다네! 그를\n찾아가게!",
+      "status": "ready"
     },
     "VESPER:13:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "VESPER:13:question": {
       "sourceHash": "sha256:d88412ebcd69980ef645bc73c4a3f3327e032b059dd4c8503fea0d40dc6a6380",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "유에\n가본 적\n있는가?",
+      "status": "ready"
     },
     "VESPER:13:response1": {
       "sourceHash": "sha256:46ba1355653058ce280dfd4b0d8dc37f225a5ac15364d34e507a211f42b0beaa",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 칼럼니가\n가장\n아끼는\n제자라네!",
+      "status": "ready"
     },
     "VESPER:13:response2": {
       "sourceHash": "sha256:2a3be68950442b0929ea88846f60bc5ed7b4ba216592577e3835887824e2e357",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그는 유에\n산다네!",
+      "status": "ready"
     },
     "VESPER:13:topic1": {
       "sourceHash": "sha256:ce61ead3f70a7d9091ed75d2fc7c22fbc7b2cc427f2a2fc4fdcc853eabc720ce",
@@ -16558,62 +16558,62 @@
     "VESPER:13:yes": {
       "sourceHash": "sha256:54d91dfc4be166065afaf9aa14e6b501928f324019dbd8b6ddc71513259b5e87",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "칼럼니가\n신속 주문을\n안다네!",
+      "status": "ready"
     },
     "VESPER:14:health": {
       "sourceHash": "sha256:be2376ea77910a59eb59ab99b6ccfa42017fe07ab2d04132a055cd319d883b2e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 완전히\n회복됐다네!",
+      "status": "ready"
     },
     "VESPER:14:job": {
       "sourceHash": "sha256:1713ba707b71b71c39b5b36574b7ef037642e621732e2e78cdf0c3cc28fa9d58",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 미덕을\n전파하려\n이 아름다운\n땅을\n여행한다네!",
+      "status": "ready"
     },
     "VESPER:14:look": {
       "sourceHash": "sha256:f80cfb726d74710504c600546519f31b330eeec461c29a227ac490eb4f293361",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "대담한 성기사.",
+      "status": "ready"
     },
     "VESPER:14:name": {
       "sourceHash": "sha256:3b515af88e91278d5b006dfd79824497c67337a5f2b473b7e251fe4e029e6f1f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "코크린",
+      "status": "ready"
     },
     "VESPER:14:no": {
       "sourceHash": "sha256:99c0b5c3a680edc06efaf79585d65b65d3e1f207d072a65aa313ba50b9b32171",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그래야 하네,\n안 그러면\n길에서\n벗어날\n걸세!",
+      "status": "ready"
     },
     "VESPER:14:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "VESPER:14:question": {
       "sourceHash": "sha256:0579af2e32594353a3088106c39bb0275c7610528b13e1e8688f55e49d8e897f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는\n이렇게\n하는가?",
+      "status": "ready"
     },
     "VESPER:14:response1": {
       "sourceHash": "sha256:06f50e3c038cbeac1844cc588eb4ffffbc9508406c7b2b9b4d2042218a82cbd9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "미덕의 길에서\n그대의 진전을\n알려면\n예언자\n호크윈드를\n>자주<\n찾아가야\n한다네!",
+      "status": "ready"
     },
     "VESPER:14:response2": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "VESPER:14:topic1": {
       "sourceHash": "sha256:b19fdc727e8eec54fd7e1d732a3d8f6a97e72a15b4c5144715b09a9f8fd22731",
@@ -16630,62 +16630,62 @@
     "VESPER:14:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋아.",
+      "status": "ready"
     },
     "VESPER:15:health": {
       "sourceHash": "sha256:2b5b0f09903ced95a032f46e48ee9c553abdc1be65f809261c65ebf7508ef170",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 아주\n좋다네!",
+      "status": "ready"
     },
     "VESPER:15:job": {
       "sourceHash": "sha256:0a60662b21858213e2c8ac8565d095185dfcd9c37fb7b9f3471c3a82a2918a3d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 도둑이라네,\n빌리는 걸\n좋아하지!",
+      "status": "ready"
     },
     "VESPER:15:look": {
       "sourceHash": "sha256:e1983cf3d8f0a77548d95dcd15c4bf7cbb3978aa43e4c6c277417638d1a41dc8",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "키 크고\n날렵한\n남자.",
+      "status": "ready"
     },
     "VESPER:15:name": {
       "sourceHash": "sha256:ec1a3c546145cb62bd52c637d11a882a3b02e21e898848897dc7e7cab7614132",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "다이카",
+      "status": "ready"
     },
     "VESPER:15:no": {
       "sourceHash": "sha256:6a1096217b16ca31201c51cd9ec28a719e39013c8bd6dedb9bba471ce35b80b2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아마, 그대는\n겁쟁이일\n걸세!",
+      "status": "ready"
     },
     "VESPER:15:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "VESPER:15:question": {
       "sourceHash": "sha256:c3910e9186b965c3a3d01757dc13c090163064d57560330d08376be1e8f941b5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는\n도둑인가?",
+      "status": "ready"
     },
     "VESPER:15:response1": {
       "sourceHash": "sha256:1225b8fb0291d1aa47d351e8a6dfc3295d0c425d187240158fbd1b8edc7c6db2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "내가 가장\n좋아하는\n'빌리는' 것은\n말이라네!",
+      "status": "ready"
     },
     "VESPER:15:response2": {
       "sourceHash": "sha256:7b26858fbd6cdcd94078da9fb57b94f68e014542550f63db869368864b96ab37",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "포즈\n마을에서\n말을\n훔칠 수\n있다네!",
+      "status": "ready"
     },
     "VESPER:15:topic1": {
       "sourceHash": "sha256:228351f9650ac377f85a62cbe8663906bebdb0e06ca9c3ae09afb0033251e0e4",
@@ -16702,62 +16702,62 @@
     "VESPER:15:yes": {
       "sourceHash": "sha256:2166ed78a5e43b4997e45460e296f19e1f8f2582f82069928d1917359720968e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "우리에\n있는 황소를\n조심하게!",
+      "status": "ready"
     },
     "VESPER:2:health": {
       "sourceHash": "sha256:443c69a3dd3bc76b956c47bbcc94fe2bc08aba5d67cb89dc5d8b7d26598fd1db",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "지금은\n괜찮다네.",
+      "status": "ready"
     },
     "VESPER:2:job": {
       "sourceHash": "sha256:cd011afd71f5f4ad4b195669481021fff991c3752b5e9a88f70c7dfb4a8c7ce9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 그대를\n도울 수\n있다네!",
+      "status": "ready"
     },
     "VESPER:2:look": {
       "sourceHash": "sha256:95e363a9dd0eee082ad835718ba0790d27e26350984b797657bc053b0c914be2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "온순한 목자.",
+      "status": "ready"
     },
     "VESPER:2:name": {
       "sourceHash": "sha256:a3e480e6ddb7aec243e33fc88dbbd9ff87f604f70f2df1b6c0870cb0be898cd5",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "서바일",
+      "status": "ready"
     },
     "VESPER:2:no": {
       "sourceHash": "sha256:60f5b8c1fb8e458dfa21688ee6e5a3556141f925678a7b9555712792cf5c4df7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것은\n사악한\n유물이라네!",
+      "status": "ready"
     },
     "VESPER:2:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "VESPER:2:question": {
       "sourceHash": "sha256:a1c02cb87928bd5c18073c1b81d18dd426e0601d37217fa129f14acb7b466d76",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것에 대해\n들어본 적\n있는가?",
+      "status": "ready"
     },
     "VESPER:2:response1": {
       "sourceHash": "sha256:9e25827c340f8ee19d92add2d563fdaaf576fe5272400a14234e1b3089387f5d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 마법사\n몬데인의\n해골에\n대해\n안다네!",
+      "status": "ready"
     },
     "VESPER:2:response2": {
       "sourceHash": "sha256:8991afbbbd36e63a1b646214a7de4d79357d001ff5e9adfcfacee1d63e177436",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "어떤 이유로든\n그것을 쓰는 것은\n큰 악의\n징표이며, 미덕이\n아니라네!",
+      "status": "ready"
     },
     "VESPER:2:topic1": {
       "sourceHash": "sha256:37a6760fa43caf5b1ea02f22251b1456c39e060a4918ba3e963dbde336f16148",
@@ -16774,62 +16774,62 @@
     "VESPER:2:yes": {
       "sourceHash": "sha256:60f5b8c1fb8e458dfa21688ee6e5a3556141f925678a7b9555712792cf5c4df7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것은\n사악한\n유물이라네!",
+      "status": "ready"
     },
     "VESPER:3:health": {
       "sourceHash": "sha256:4b576037dc9f3ddd4a213a0f9a950551baf8167b58a650b8c46569bf1b80addf",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 좋다네,\n고맙네.",
+      "status": "ready"
     },
     "VESPER:3:job": {
       "sourceHash": "sha256:7d75e8a9bf59cb977a146680fd3aaa17a593cad620312b91e6b65d299190ce4c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "여행자 댄,\n땜장이라네.",
+      "status": "ready"
     },
     "VESPER:3:look": {
       "sourceHash": "sha256:85ce5e496b6c0f7a642ca8a82912f2a95182e11afe2f62c00f1d83146b0e56dd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "모자와 조끼를\n입은 작고\n통통한\n남자.",
+      "status": "ready"
     },
     "VESPER:3:name": {
       "sourceHash": "sha256:3dfc8446697024d2f3a465eda88c70b97df1dc15de792bd190b9bf5dc20ccd19",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "여행자 댄",
+      "status": "ready"
     },
     "VESPER:3:no": {
       "sourceHash": "sha256:2d498e5ca67b031f30341288de3d3462daf9bb181177b3086845fa95c07f05b1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "최고의\n가격이라네!",
+      "status": "ready"
     },
     "VESPER:3:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "VESPER:3:question": {
       "sourceHash": "sha256:5c16dfd795aaf6ad64e79dfe8bb75587fdbde30cedb8c14cd55cfe81fdf0b962",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "길드\n상점에\n가봤나?",
+      "status": "ready"
     },
     "VESPER:3:response1": {
       "sourceHash": "sha256:7bd4fbf7d54d6bc96680d2693c34d3d4fe047870a3e590c3b4089b1fc8469118",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 길드\n상점에서\n물건을\n고치러\n왔다네.",
+      "status": "ready"
     },
     "VESPER:3:response2": {
       "sourceHash": "sha256:1081ced6762483c92e1a3a5861c2e0dfd50c73164862bc7e440d82968dd8fe68",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 세상이\n둥글다는 걸\n안다네!",
+      "status": "ready"
     },
     "VESPER:3:topic1": {
       "sourceHash": "sha256:2d4811260a34fda4c7e4157da19f2f587eda2cf9ee2727e5cf3bdc3ea128620e",
@@ -16846,62 +16846,62 @@
     "VESPER:3:yes": {
       "sourceHash": "sha256:1a2199b5ea1cbea9a44b085dc478eb1ded872700a76fdb9d6c669521c6771523",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "훌륭한\n선택이지!",
+      "status": "ready"
     },
     "VESPER:4:health": {
       "sourceHash": "sha256:2e96d775dbdbdb3eadd397ce05fa499bd5e49b7f82467b0ac22ced3103c681c6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "지쳤다네.",
+      "status": "ready"
     },
     "VESPER:4:job": {
       "sourceHash": "sha256:df2c6ba01b70713ee63f344273b1ea3b75de16339558ae1634dc89b62bbaf6ad",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는\n농노라네.",
+      "status": "ready"
     },
     "VESPER:4:look": {
       "sourceHash": "sha256:7ca8add30020a69d5cae6e8f95dcb872b0ff819307782f45ee17a9c8876e8d82",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "튼튼한\n농노.",
+      "status": "ready"
     },
     "VESPER:4:name": {
       "sourceHash": "sha256:d9af293939423303a3dbc504c2e87cf34c0d99d83e8b246760edbfaec21df1da",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "발타사르",
+      "status": "ready"
     },
     "VESPER:4:no": {
       "sourceHash": "sha256:4f21a37fb67d6aae3be6850e1b21968bcc1a011e9b81d98414b5c26d33984142",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는\n참으로\n운이\n좋군!",
+      "status": "ready"
     },
     "VESPER:4:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "VESPER:4:question": {
       "sourceHash": "sha256:45d7ee4dda27874956850102ed9d3c24cdc55e0bbe773bab9d0db2a2b9b63998",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그대는\n주인이\n있는가?",
+      "status": "ready"
     },
     "VESPER:4:response1": {
       "sourceHash": "sha256:21a7720178a92dfe89720ac92246a49e66106dcdfd49ee02c6fc2a31bbc1d9d7",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "농노는\n적은 돈을 위해\n열심히\n일한다네!",
+      "status": "ready"
     },
     "VESPER:4:response2": {
       "sourceHash": "sha256:481bafc87af1478ad7519a5063c5eabbd2ecbd42a4ecb53eb122158c2afd9be6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 주인님을 위해\n밭에서\n일한다네!",
+      "status": "ready"
     },
     "VESPER:4:topic1": {
       "sourceHash": "sha256:95f8d02778e98f21635961b09bc6940e108ae1a8d44b85d5099b8c1e1969fed9",
@@ -16918,62 +16918,62 @@
     "VESPER:4:yes": {
       "sourceHash": "sha256:5b580973d89c605ef0528562e5634ede10a066d53f991fd2c414a1a5b56c1e8d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그(녀)가\n친절한 분이길\n바라네!",
+      "status": "ready"
     },
     "VESPER:5:health": {
       "sourceHash": "sha256:87c4b87d8d2d2cd51978e2f94594c6a4f082457aa8144bf312eb208768b75917",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 완전히\n회복됐다네.",
+      "status": "ready"
     },
     "VESPER:5:job": {
       "sourceHash": "sha256:a7046783632eb23aae27c69cef973f4581759acf607065bff56d8fa0ed7c27f9",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 겸손을\n찾는다네.",
+      "status": "ready"
     },
     "VESPER:5:look": {
       "sourceHash": "sha256:3ca0a9b26ef48f8e2869d25672a2501534bedc015745647d3b35ba1d0a151215",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "작은 남자.",
+      "status": "ready"
     },
     "VESPER:5:name": {
       "sourceHash": "sha256:8b854ade2cd01bdca1aa982f6ecff0086f70e3d2140d7fae2786a2e4150eeb4c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "플레인",
+      "status": "ready"
     },
     "VESPER:5:no": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "VESPER:5:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "VESPER:5:question": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "VESPER:5:response1": {
       "sourceHash": "sha256:14bd1ac52e7dbfc276c6a89aa2ff858adcb134c2e7a33c0e3b0cb5c66117072e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "미덕의 3원칙이\n여덟 가지로\n결합할 때\n오만은\n미덕이\n아니라네!",
+      "status": "ready"
     },
     "VESPER:5:response2": {
       "sourceHash": "sha256:db09090a94f1dab69bd8444ccd044a55ad8033f426ff71568cfac5de43b515cb",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "오만한 것은\n미덕이 아니니,\n그래서\n매긴시아가\n파괴되었지!\n겸손이 남은\n미덕이라네!",
+      "status": "ready"
     },
     "VESPER:5:topic1": {
       "sourceHash": "sha256:24f6aeb78d36b2714d40ccc433956028a025616ac02ae907b1faddf60c3656b3",
@@ -16990,62 +16990,62 @@
     "VESPER:5:yes": {
       "sourceHash": "sha256:559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "A",
+      "status": "ready"
     },
     "VESPER:6:health": {
       "sourceHash": "sha256:790516f5ec4778f045cfaf7531205321bc98d7ada497a9a5503994ffc748a74f",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 괜찮다네.",
+      "status": "ready"
     },
     "VESPER:6:job": {
       "sourceHash": "sha256:1f8d6ff4f4bc8c2ea7d83a8db98392af2edeb1eda238302d8de2c707c54f20a2",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 신단을\n찾는다네.",
+      "status": "ready"
     },
     "VESPER:6:look": {
       "sourceHash": "sha256:799383aaa0bcb893a38eaca5f133302115311d5b702472a4b95b1b6828d23389",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "날씬한\n목녀.",
+      "status": "ready"
     },
     "VESPER:6:name": {
       "sourceHash": "sha256:3fee95da5ab69ebfdc16ec892b754105a11c20203054a6c6bcc0a60176891043",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "심플",
+      "status": "ready"
     },
     "VESPER:6:no": {
       "sourceHash": "sha256:2862a617566745f0b40fbea86f3cb47f2115da4b17fd370f1dd9674ef410e139",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "브리타니아\n남동쪽에!",
+      "status": "ready"
     },
     "VESPER:6:pronoun": {
       "sourceHash": "sha256:d602e91d93c835ee2aa640ccffe314c61328ea2c1dbc45bec4277a9e94f91206",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그녀",
+      "status": "ready"
     },
     "VESPER:6:question": {
       "sourceHash": "sha256:7362a60b9f32d6cc729d40f0f02dc5cbfeebcd5eafbc3e384f7e7ce8ee0a8ddf",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 섬을\n아는가?",
+      "status": "ready"
     },
     "VESPER:6:response1": {
       "sourceHash": "sha256:ee43eaf9bd06c67bf3709ddce6d483fa2d3c84434c3a353097641807841afd3b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "겸손의\n신단!",
+      "status": "ready"
     },
     "VESPER:6:response2": {
       "sourceHash": "sha256:c07d046c3ad2868c50a49e865cf77a4baf1ecc42a979b3c312aa0817e3f14f0c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그 신단은\n어비스 섬의\n북쪽 기슭에\n있고 끝없는\n데몬 무리가\n지킨다네!",
+      "status": "ready"
     },
     "VESPER:6:topic1": {
       "sourceHash": "sha256:fb42dc1af393c2ea7537c1857cc5c590a56e57d3f3d249a018883dc32526d92a",
@@ -17062,62 +17062,62 @@
     "VESPER:6:yes": {
       "sourceHash": "sha256:2c33dcef91e066247cc05cc403f99dcf572e5bb8f45656fec462270e689916b6",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋아.",
+      "status": "ready"
     },
     "VESPER:7:health": {
       "sourceHash": "sha256:7b8294c96bee8ad3f8765b4eb8db6c6de476714b74f2ef2090942403a46e5fad",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 잘\n지낸다네.",
+      "status": "ready"
     },
     "VESPER:7:job": {
       "sourceHash": "sha256:6c849011d8b638205a5f335f59f1b5ed14f8081f36fe3e236b7cc536a3f01f69",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 겸손한\n일을\n한다네.",
+      "status": "ready"
     },
     "VESPER:7:look": {
       "sourceHash": "sha256:89ecada9f1edb9bb5af48b295ab6a7967f8c76731cbcdbdf644f3ccc40867c15",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아름다운 여인.",
+      "status": "ready"
     },
     "VESPER:7:name": {
       "sourceHash": "sha256:5108a0f0dc3622b288239ea17bc08694a7fd0c90649c3256ebf60528f7d53b85",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "젬",
+      "status": "ready"
     },
     "VESPER:7:no": {
       "sourceHash": "sha256:0e2c507b8387825ce3df674f0a47ef04f61dd7ac4c36f9631c6fbdf7259bfb75",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그럴 때,\n거꾸로\n뒤집게!",
+      "status": "ready"
     },
     "VESPER:7:pronoun": {
       "sourceHash": "sha256:d602e91d93c835ee2aa640ccffe314c61328ea2c1dbc45bec4277a9e94f91206",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그녀",
+      "status": "ready"
     },
     "VESPER:7:question": {
       "sourceHash": "sha256:5fb32417daffd831665cf4cc06904f853012ac88665adddcb8b28318ef42a9fa",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "오만의\n진언을\n아는가?",
+      "status": "ready"
     },
     "VESPER:7:response1": {
       "sourceHash": "sha256:3a3a17d7ac1cca6e7a549d2b056bfafa5d2fd115d21ab08041dd026f1e3cccea",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "진언에 대해\n도와줄 수\n있다네!",
+      "status": "ready"
     },
     "VESPER:7:response2": {
       "sourceHash": "sha256:bf5b31989f6d9e228011f250f9297f3f260c9ec06d60b46efd4f76f62cfe377c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "겸손은\n오만의\n반대이니,\n그 진언도\n그렇다네!",
+      "status": "ready"
     },
     "VESPER:7:topic1": {
       "sourceHash": "sha256:00b82880b6ad692d02575e5f5102601f23ebb2086bbab357bdfeb1ab84b8e95a",
@@ -17134,62 +17134,62 @@
     "VESPER:7:yes": {
       "sourceHash": "sha256:2153f7fee94694726fb665a4ccdd2de80278fe15f7a261edc701c1a78e63429d",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그럼 겸손을 위해\n거꾸로\n뒤집게!",
+      "status": "ready"
     },
     "VESPER:8:health": {
       "sourceHash": "sha256:0918350d02ddd9fb6e84e9bacc0bce04c1e37431263cf34d2b6df35d680dff4e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 잘\n지낸다네.",
+      "status": "ready"
     },
     "VESPER:8:job": {
       "sourceHash": "sha256:be2e28b5a15dd35725843dcd8e1d7c5f6e6a94e1999d5d4d8294bdad883b44c0",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 그저\n겸손한\n목자라네.",
+      "status": "ready"
     },
     "VESPER:8:look": {
       "sourceHash": "sha256:911397fdb27a3b9a4c4658247bb2bd14b1361cd5e528bc1b2507fbc7961b9974",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "지혜로운 목자.",
+      "status": "ready"
     },
     "VESPER:8:name": {
       "sourceHash": "sha256:78a1a1dae4e56fb0aba67dadc5ab5ab808f505137efedecfb7c2f12a4195c58b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "조셉",
+      "status": "ready"
     },
     "VESPER:8:no": {
       "sourceHash": "sha256:2d782352942b199edb6b2f2d3abdbed02df6212a82cd824b321c49521b334d8a",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "오만은\n아바타의\n미덕이\n아니라네!",
+      "status": "ready"
     },
     "VESPER:8:pronoun": {
       "sourceHash": "sha256:30efdfb52ff67f80dab7cb89dcfe0eec8412966cfe58324993674b4616d6bd11",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그",
+      "status": "ready"
     },
     "VESPER:8:question": {
       "sourceHash": "sha256:18b60735973f514b51e84f80f9f9d90cf95fe49501a4e5a8042162ec0c615da1",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "오만의\n신단은\n없다는 걸\n알았는가?",
+      "status": "ready"
     },
     "VESPER:8:response1": {
       "sourceHash": "sha256:945f08bb0d40ef70366dc7c83582db83420f325ae230f126669e4b7bad826043",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 겸손의\n신단으로\n순례를\n떠난다네.",
+      "status": "ready"
     },
     "VESPER:8:response2": {
       "sourceHash": "sha256:53c1eb3e6da231a907ac05003b05f51706adaf52eb8cf43ae822d540213d587b",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것은 어두운\n섬에\n있다네!",
+      "status": "ready"
     },
     "VESPER:8:topic1": {
       "sourceHash": "sha256:05a4f2477e510381f1627d420f1a233005de8173d7ee1522d7d64f45bf0bf21d",
@@ -17206,62 +17206,62 @@
     "VESPER:8:yes": {
       "sourceHash": "sha256:f990be6289b09bad7c01febdaef7af58c0f38477602c97778044a3a55920837c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아주 좋군.",
+      "status": "ready"
     },
     "VESPER:9:health": {
       "sourceHash": "sha256:4053418e6cb3ee1d81ceb29e2841afa0cf3d39c7628e1c62d3e3d02d38884f64",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "나는 꽤\n좋다네!",
+      "status": "ready"
     },
     "VESPER:9:job": {
       "sourceHash": "sha256:30aa0ded91049cc893722f7c582341ba89db20f5c777ef9d731f6d7e72bf3b53",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "이 금을\n가져가지\n말라고\n경고하겠네!",
+      "status": "ready"
     },
     "VESPER:9:look": {
       "sourceHash": "sha256:d4955f7b637437cf2f206478490fdfb6db6ed47c00a7798c6feef4e6776e846e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "아름답고\n인상적인\n경비병.",
+      "status": "ready"
     },
     "VESPER:9:name": {
       "sourceHash": "sha256:e21f3f372a46d4be7b49f6809fc91baefeadae004af06485518e124a142c0271",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "프라이데이",
+      "status": "ready"
     },
     "VESPER:9:no": {
       "sourceHash": "sha256:b659b8e81bd8d5769c9d3b48e638810df823b31d2549477052ea7617597d485e",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "좋다네.",
+      "status": "ready"
     },
     "VESPER:9:pronoun": {
       "sourceHash": "sha256:d602e91d93c835ee2aa640ccffe314c61328ea2c1dbc45bec4277a9e94f91206",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그녀",
+      "status": "ready"
     },
     "VESPER:9:question": {
       "sourceHash": "sha256:d2e76265f9daa521392e37282f379238e0b0e156faab6993d861a4403c83aa3c",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것을\n가져갈\n작정인가?",
+      "status": "ready"
     },
     "VESPER:9:response1": {
       "sourceHash": "sha256:1917b625572b48affb99770fd5983e69b23936f4c8b94e5140daf672eb245437",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그건 그대의\n것이\n아니라네!",
+      "status": "ready"
     },
     "VESPER:9:response2": {
       "sourceHash": "sha256:1917b625572b48affb99770fd5983e69b23936f4c8b94e5140daf672eb245437",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그건 그대의\n것이\n아니라네!",
+      "status": "ready"
     },
     "VESPER:9:topic1": {
       "sourceHash": "sha256:fb5b8ae0fd37258b8ce25ead2fa261f362b00d861735431a12209aa6d5095cae",
@@ -17278,8 +17278,8 @@
     "VESPER:9:yes": {
       "sourceHash": "sha256:996edf5bad5603bdd37428f5c7a7ceafdaf3f786beee2656fbe57373954fc585",
       "placeholders": [],
-      "translation": "",
-      "status": "pending"
+      "translation": "그것은 그대의\n미덕을\n잘 비추지\n못할\n걸세!",
+      "status": "ready"
     },
     "YEW:0:health": {
       "sourceHash": "sha256:0918350d02ddd9fb6e84e9bacc0bce04c1e37431263cf34d2b6df35d680dff4e",
