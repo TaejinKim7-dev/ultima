@@ -521,6 +521,153 @@
       "translation": "%s 경미한 부상!\n",
       "status": "ready"
     },
+    "ui:discourse_tlk:0": {
+      "sourceHash": "sha256:7c75a0aedc376d70e80bdaf3a17281b35976eafc74de9a1d372687dd1179f688",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "예 또는 아니오로 답하라!\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:1": {
+      "sourceHash": "sha256:7fb8366e620d7b53fedb243bea1cd7cfc1fb528e2eb9c1f4c107e311ad68ce4a",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "\n만난 이: %s\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:10": {
+      "sourceHash": "sha256:7bf35bf7c3f8535fc0d6c33a946e019c77d6009b2d8e05228b5da6c754015372",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "%s 말하길: 오, 고맙소! 그대의 친절을 결코 잊지 않으리다!\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:11": {
+      "sourceHash": "sha256:f14718e577e05accfe0ee7716d56d414a37a9afe256d63e0f21665b5890156ae",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "\n\n그대에겐 그만한 골드가 없다!\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:12": {
+      "sourceHash": "sha256:5f4780134d84bb0ebff1e2b3184e784018a831696abe7b8793b39d5d134f21d5",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "%s 말하길: 그대의 골드는 필요 없소. 간직하시오!\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:13": {
+      "sourceHash": "sha256:458a6573f8d65386f82bcc52154ba8ccdb8a8c1b00d3755b8875d95cd048150f",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "그대와 함께하게 되어 영광이오!\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:14": {
+      "sourceHash": "sha256:d40a41235746fc9fbcc3b2d72485e85a9a7520c8b9ccc9b0fcb6c7ff6a68727e",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "그대와 함께하기엔 아직 부족하오 (%s).\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:15": {
+      "sourceHash": "sha256:0adc91c3035d31772b9241f4e9958f621af5bfbfa91ca1b4179d0efa3cc6dc43",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "%s 말하길: 나는 그대와 함께할 수 없소.\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:16": {
+      "sourceHash": "sha256:e707fed640f861586f5158a1ce41999ee08e59c9ccba9c57fe2c1a3c8a21267d",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "안녕, 밴조 밥!\n그대의 비밀\n번호는\n4F4A4E0A\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:17": {
+      "sourceHash": "sha256:99b5867f2762257de11b3d0e40ff23959c9dc7d4009774a478dbe92b34cb4f76",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "그 일은\n도울 수 없소.\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:2": {
+      "sourceHash": "sha256:09c824061a51f023fb5445a3f122dca8480ba00ceb0ee999c3572af5628d8416",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "\n무엇이 궁금한가:\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:3": {
+      "sourceHash": "sha256:209c68b255c1e461b2c0142af6ff2e30360eaa6ebecd827e142d84a16e5d9b9d",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "잘 가게.\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:4": {
+      "sourceHash": "sha256:c89edbe0e04c738213e0a31b0a4a37a02398a55e337088792cf8c665a5f99aa8",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "%s, 등을 돌린다!\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:5": {
+      "sourceHash": "sha256:a5fec998ded0c809d925122b87e6ad76a76737ca4ba088c87213d740556c4a58",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "%s 말하길: 덤벼라! 어리석은 자여!\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:6": {
+      "sourceHash": "sha256:094e528609b1db54a79217637d90a4b2ef1309c9285d3251151bd23f61fb5157",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "\n%s\n\n그대의 대답: ",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:7": {
+      "sourceHash": "sha256:3fa54906e21c2ff1d871c23be25494acac236fb132125e416dc48dace64c5c45",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "보이는 것: %s\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:8": {
+      "sourceHash": "sha256:ef62abc526bf295037750ac1757c01242a8c51bdbe8c3a5e3b03c673385bbe80",
+      "placeholders": [
+        "%s",
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "%s 말하길: 내 이름은 %s\n",
+      "status": "ready"
+    },
+    "ui:discourse_tlk:9": {
+      "sourceHash": "sha256:8494df12573bbac399c7505af3eeed6acb79e7cfa2257f31fda63c6f77eacb82",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_tlk.cpp",
+      "translation": "얼마나? ",
+      "status": "ready"
+    },
     "ui:dungeon:0": {
       "sourceHash": "sha256:53bd886e824c95287b1ca495592d6dbac0eb53315e497445e83003b307a182fa",
       "placeholders": [],

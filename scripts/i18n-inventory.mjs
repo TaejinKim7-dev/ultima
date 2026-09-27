@@ -66,8 +66,18 @@ const CPP_UI_FILES = [
   "vendor/xu4/src/portal.cpp",
   "vendor/xu4/src/death.cpp",
   "vendor/xu4/src/spell.cpp",
-  "vendor/xu4/src/intro.cpp"
+  "vendor/xu4/src/intro.cpp",
+  // Todo 22: the U4 talk template lines (runTalkDialogue/talkYNResponse).
+  "vendor/xu4/src/discourse_tlk.cpp"
 ]
+
+// Per-file extractor options (see scripts/lib/cpp-strings.mjs). Only
+// discourse_tlk.cpp opts in: it prints through `#define message
+// screenMessage` and has one compile-time-concatenated literal. Every other
+// file keeps the original extraction so its existing ids/hashes don't move.
+export const CPP_UI_FILE_OPTIONS = {
+  "vendor/xu4/src/discourse_tlk.cpp": { extraCallNames: ["message"], joinAdjacent: true }
+}
 
 const TLK_MAPS = [
   "BRITAIN",
@@ -151,7 +161,7 @@ function extractUiEntries() {
   for (const relativePath of CPP_UI_FILES) {
     const absolutePath = resolve(repoRoot, relativePath)
     const source = readFileSync(absolutePath, "utf8")
-    const literals = extractCppLiterals(source)
+    const literals = extractCppLiterals(source, CPP_UI_FILE_OPTIONS[relativePath])
     const fileId = basename(relativePath, extname(relativePath))
 
     literals.forEach((literal, index) => {
