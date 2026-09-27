@@ -28,11 +28,12 @@ Verified deployment: https://taejinkim7-dev.github.io/ultima/ (Actions run 36316
 - 새 게임(캐릭터 생성), 필드 이동, 마을·NPC 대화, 던전·신단 진입, 저장/재로드, 세이브 export/import
 - Web Audio 음악과 효과음
 - 한국어 셸 UI, 한국어 NPC 키워드 alias 입력(예: `건강` → `health`)
+- 마을 주민 NPC 대사를 대화 패널에 한국어로 표시(Todo 22)
 - 원본 데이터가 배포 산출물에 섞이지 않도록 하는 검사(`npm run audit:dist`)
 
 아직 안 된 것:
 
-- 실제 NPC 대사를 한국어로 표시하기 (Todo 22 진행 중). 지금 게임 화면의 대사는 영어입니다.
+- 마을 주민 외의 게임 텍스트(Lord British, 상점, 인트로, 상태창 등)는 아직 영어입니다. 캔버스의 글자는 모두 영어이고, 한국어 NPC 대사는 아래 대화 패널에 나옵니다.
 - Firefox/WebKit 수동 QA, 최종 독립 검증(F1~F4)
 
 자세한 한계는 [웹 포팅 문서](docs/WEB_PORT.md#알려진-한계)에 있습니다.

@@ -91,8 +91,8 @@ WebGL2와 Web Audio가 필요합니다.
 
 ## 알려진 한계
 
-- **실제 게임 텍스트의 한국어 표시**: 지금 한국어로 보이는 것은 셸 UI 문구와 안내 메시지이고, 한국어 NPC 키워드 alias 입력은 동작합니다. 실제 NPC 대사를 한국어로 대화 패널에 표시하는 작업은 Todo 22(진행 중)입니다. 캔버스에 그려지는 게임 글자는 영어로 남습니다.
-- 번역 corpus는 inventory 기준 4411/4411이지만, 이 inventory가 화면에 나오는 모든 문장을 담지는 않습니다(Todo 22 설명 참고).
+- **실제 게임 텍스트의 한국어 표시 범위**: 마을 주민(U4 .TLK) NPC 대화는 대화 패널(`#dialogue-history`)에 한국어로 나옵니다(Todo 22: 만남·응답·이름·틀 문장). 엔진은 TLK 문장을 `MAP:npcIndex:field` id로만 넘기고 영어 원문은 엔진 밖으로 보내지 않습니다. Lord British·Hawkwind(`discourse_castle.cpp`), 상점, 인트로, 상태창과 그 밖의 게임 메시지는 아직 영어입니다. 캔버스에 그려지는 게임 글자는 모두 영어로 남습니다(두 곳 표시).
+- 번역 corpus는 inventory 기준 4429/4429입니다(Todo 22에서 `discourse_tlk.cpp` 대화 틀 문장 18개 추가). 이 inventory가 화면에 나오는 모든 문장을 담지는 않습니다. `getVirtueAdjective()` 같은 코드 인자는 번역 틀 안에서 영어로 나옵니다.
 - 한국어 입력창을 쓴 뒤에는 포커스가 입력창을 벗어날 때까지 화살표·명령 키가 게임으로 가지 않습니다.
 - 한국어 입력창은 네이티브 텍스트 입력 요청(NPC 대화 등)이 열려 있을 때만 제출됩니다. 요청이 없거나 이미 닫혔으면 거부 메시지를 띄웁니다(Todo 18).
 - 메모리 스모크는 JS heap만 측정하고 wasm linear memory는 포함하지 않습니다.
@@ -121,6 +121,7 @@ WebGL2와 Web Audio가 필요합니다.
 | 9 브라우저 시작 | `.omo/evidence/ultima-web/task-9/startup-title.png` |
 | 10 저장/재로드 | `.omo/evidence/ultima-web/task-10/save-reload-after-journey.png` |
 | 13 한국어 alias | `.omo/evidence/ultima-web/task-13/05-after-korean-health-alias.png` |
+| 22 한국어 NPC 대사 | `.omo/evidence/ultima-web/task-22/korean-npc-output.png` |
 | 15 번역 검사 | `.omo/evidence/ultima-web/task-15/i18n-strict.log` |
 | 16 오디오 | `.omo/evidence/ultima-web/task-16/audio-summary.json` |
 | 17 게임 진행 | `.omo/evidence/ultima-web/task-17/14-shrine-honesty-entered.png` |
