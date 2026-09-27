@@ -26,6 +26,7 @@ import {
   type OverlayRole
 } from "./overlay/overlay-layout.ts"
 import { buildAliasTable, resolveInput, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
+import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
 // Real Korean alias data (Todo 13), never original game data -- just this
 // project's own translation strings. Vite/TS both support importing JSON
 // modules directly; see tsconfig.json's `resolveJsonModule`.
@@ -53,6 +54,12 @@ export interface UltimaBridgeApi {
    * per engine start.
    */
   attachSaveHandlers(handlers: ShellSaveHandlers): void
+  /**
+   * Todo 18: pass to startEngine()'s `textPrompt` option -- the native
+   * ReadStringController open/close lifecycle that gates the Korean
+   * keyword field (see src/i18n/text-prompt-gate.ts).
+   */
+  readonly textPromptReceiver: { opened(id: number): void; closed(id: number): void }
 }
 
 declare global {
@@ -502,14 +509,20 @@ export function createShell(doc: Document): UltimaBridgeApi {
   // real engine doesn't yet emit `prompt` events at all -- see Todo 11's
   // known-limitations note), so there is no live signal this shell could
   // use to gate the box per prompt kind. It is a dedicated "talk to an NPC
-  // in Korean" control, not a general-purpose Korean input method; using
-  // it while no NPC conversation is open synthesizes the resolved keyword
-  // as top-level keystrokes, exactly as if a player had typed English at
-  // the wrong moment (not a new category of risk this box introduces).
+  // in Korean" control, not a general-purpose Korean input method.
+  //
+  // Todo 18: it IS gated on whether a native text prompt is open at all
+  // (any ReadStringController, reported by the real engine through
+  // startEngine()'s `textPrompt` option): submitting while none is open,
+  // or with text last edited while an already-closed prompt was open, is
+  // rejected with a notice instead of being synthesized as top-level
+  // command keystrokes.
   const koreanAliasTable: AliasTable = buildAliasTable(
     (koreanAliasesSchema as { entries: Record<string, AliasSourceEntry> }).entries
   )
   const gameWindow = doc.defaultView ?? window
+  const textPromptGate = createTextPromptGate()
+  koreanKeywordInput.addEventListener("input", () => textPromptGate.noteInput())
 
   function charToKeyCode(ch: string): number {
     if (ch === " ") {
@@ -545,6 +558,11 @@ export function createShell(doc: Document): UltimaBridgeApi {
   function submitKoreanKeyword(): void {
     const raw = koreanKeywordInput.value
     koreanKeywordInput.value = ""
+    const promptDecision = textPromptGate.consumeSubmit()
+    if (!promptDecision.ok) {
+      dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text: `[한글 입력 거부] ${promptDecision.message}\n` })
+      return
+    }
     const result = resolveInput("text", raw, koreanAliasTable)
     if (result.ok) {
       synthesizeKeystrokes(result.text)
@@ -592,6 +610,10 @@ export function createShell(doc: Document): UltimaBridgeApi {
     dispatch,
     attachSaveHandlers(handlers) {
       realSaveHandlers = handlers
+    },
+    textPromptReceiver: {
+      opened: (id) => textPromptGate.opened(id),
+      closed: (id) => textPromptGate.closed(id)
     }
   }
 }

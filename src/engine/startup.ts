@@ -89,6 +89,18 @@ export interface EngineModule {
    * part of the real Emscripten Module shape, so it starts undefined.
    */
   u4Audio?: AudioBridge
+  /**
+   * Todo 18: receiver for vendor/xu4/src/event.cpp's ReadStringController
+   * EM_JS hooks (`Module.u4TextPrompt.opened(id)` / `.closed(id)`).
+   * Assigned by startEngine() before callMain(), like u4Audio.
+   */
+  u4TextPrompt?: TextPromptReceiver
+}
+
+/** Todo 18: native text-prompt lifecycle, see src/i18n/text-prompt-gate.ts. */
+export interface TextPromptReceiver {
+  opened(id: number): void
+  closed(id: number): void
 }
 
 export type EngineModuleFactory = (options: Record<string, unknown>) => Promise<EngineModule>
@@ -123,6 +135,13 @@ export interface StartEngineOptions {
    * (getAudioContext()), which is `null` outside a browser.
    */
   readonly audioContext?: AudioContextLike | null
+  /**
+   * Todo 18: attached to `module.u4TextPrompt` before callMain() so the
+   * shell's Korean keyword field knows which native text prompt is open
+   * (src/shell.ts's textPromptReceiver). Omitted: nothing is attached and
+   * the EM_JS hooks' `Module.u4TextPrompt &&` guard makes them no-ops.
+   */
+  readonly textPrompt?: TextPromptReceiver
 }
 
 export type StartEngineResult =
@@ -286,6 +305,9 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
       manifest: buildAudioManifest(gameModuleBytes)
     })
     module.u4Audio = audioBridge
+  }
+  if (options.textPrompt !== undefined) {
+    module.u4TextPrompt = options.textPrompt
   }
   armAutoResumeOnGesture()
 

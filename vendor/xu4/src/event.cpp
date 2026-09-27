@@ -24,6 +24,18 @@
 // is referenced here; queue drain/snapshot wiring lands in Step 9's web
 // input path. Never retains Controller pointers.
 #include "web_bridge.h"
+#include <emscripten.h>
+
+// Todo 18: the shell's #korean-keyword-input (src/shell.ts) must reject a
+// submission whose native text prompt has already closed. Every
+// readInt/readString/readStringView (intro name prompt, NPC talk, ...)
+// goes through ReadStringController, so its lifetime is the prompt epoch.
+EM_JS(void, u4_web_text_prompt_opened, (int id), {
+    if (Module.u4TextPrompt) Module.u4TextPrompt.opened(id);
+});
+EM_JS(void, u4_web_text_prompt_closed, (int id), {
+    if (Module.u4TextPrompt) Module.u4TextPrompt.closed(id);
+});
 #endif
 
 using std::string;
@@ -505,11 +517,19 @@ public:
                          const char* accepted_chars = NULL);
 
     virtual bool keyPressed(int key);
+#ifdef __EMSCRIPTEN__
+    virtual ~ReadStringController() {
+        u4_web_text_prompt_closed(webPromptId);
+    }
+#endif
 
 protected:
     int maxlen, screenX, screenY;
     TextView *view;
     uint8_t accepted[16];   // Character bitset.
+#ifdef __EMSCRIPTEN__
+    int webPromptId;
+#endif
 
     friend EventHandler;
 };
@@ -548,6 +568,12 @@ ReadStringController::ReadStringController(int maxlen, int screenX, int screenY,
     } else {
         memcpy(accepted, alphaNumBitset, MAX_BITS/8);
     }
+
+#ifdef __EMSCRIPTEN__
+    static int nextWebPromptId = 1;
+    webPromptId = nextWebPromptId++;
+    u4_web_text_prompt_opened(webPromptId);
+#endif
 }
 
 static void soundInvalidInput() {

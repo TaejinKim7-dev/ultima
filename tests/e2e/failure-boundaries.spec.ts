@@ -19,6 +19,7 @@ import { fileURLToPath } from "node:url"
 // requests" scenario (see that test's own doc comment).
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
 const evidenceDir = join(repoRoot, ".omo/evidence/ultima-web/task-18")
+const staleSurfaceEvidenceDir = join(evidenceDir, "stale-real-surface")
 
 async function pressKey(page: Page, key: string, delayMs = 800): Promise<void> {
   await page.keyboard.press(key)
@@ -55,6 +56,74 @@ async function createCharacterAndWaitForSave(page: Page): Promise<boolean> {
 test.describe("Todo 18: failure boundaries (real engine where noted, synthetic ZIP fixtures otherwise)", () => {
   test.beforeAll(() => {
     mkdirSync(evidenceDir, { recursive: true })
+    mkdirSync(staleSurfaceEvidenceDir, { recursive: true })
+  })
+
+  test("stale Korean text: closing a real native text prompt rejects the old shell submission without dispatching alias keys to the game surface", async ({
+    page
+  }) => {
+    test.setTimeout(120_000)
+    const zipPath = process.env["ULTIMA4_DATA"]
+    test.skip(!zipPath || !existsSync(zipPath), "ULTIMA4_DATA not set to a verified original ultima4.zip")
+    const buffer = readFileSync(zipPath!)
+
+    await page.goto("/")
+    await page.locator("#rom-picker").setInputFiles({ name: "ultima4.zip", mimeType: "application/zip", buffer })
+    await page.waitForFunction(() => document.body.dataset["engineStarted"] !== undefined, { timeout: 20_000 })
+    await page.locator("#game-canvas").click()
+    await page.waitForTimeout(2500)
+    await pressKey(page, "Enter")
+    await pressKey(page, "Enter")
+    await pressKey(page, "i") // the real IntroController avatar-name ReadStringController
+
+    await page.evaluate(() => {
+      const syntheticKeydowns: number[] = []
+      window.addEventListener(
+        "keydown",
+        (event) => {
+          if (Reflect.get(event, "__ultimaSynthetic") === true) {
+            syntheticKeydowns.push(Date.now())
+          }
+        },
+        true
+      )
+      Reflect.set(window, "__staleKoreanSyntheticKeydowns", syntheticKeydowns)
+    })
+
+    // Given: Korean alias text captured while the actual native text
+    // controller is open. It must become stale once that controller exits.
+    const koreanInput = page.locator("#korean-keyword-input")
+    await koreanInput.click()
+    await koreanInput.fill("건강")
+    await koreanInput.blur()
+
+    // When: the player completes the real avatar-name prompt through the
+    // normal browser-to-GLFW input path, then presses Enter on the old
+    // Korean field after that epoch has closed.
+    await pressKey(page, "x")
+    await pressKey(page, "Enter")
+    await page.waitForTimeout(500)
+    await koreanInput.click()
+    await koreanInput.press("Enter")
+    await page.waitForTimeout(500)
+
+    const observation = await page.evaluate(() => {
+      const captured = Reflect.get(window, "__staleKoreanSyntheticKeydowns")
+      return Array.isArray(captured) ? captured.length : -1
+    })
+    const dialogueText = await page.locator("#dialogue-history").innerText()
+    writeFileSync(
+      join(staleSurfaceEvidenceDir, "stale-submission-observation.log"),
+      `synthetic keydowns after native prompt closed: ${observation}\n` +
+        `dialogue panel: ${JSON.stringify(dialogueText)}\n`
+    )
+    await page.screenshot({ path: join(staleSurfaceEvidenceDir, "stale-submission.png") })
+
+    // Then: a stale submission must not reach GLFW's actual game-input
+    // surface. The pre-fix shell emits the resolved "health" + Enter key
+    // sequence here, which this listener observes as seven keydowns.
+    expect(observation).toBe(0)
+    expect(dialogueText).toContain("입력 요청이 끝났습니다")
   })
 
   test("oversized ZIP: rejected before the engine ever reads it into memory, with a Korean error message", async ({

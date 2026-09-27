@@ -128,7 +128,8 @@ romPickerElement?.addEventListener("change", () => {
         renderPak,
         gameModule,
         zipFile: file,
-        dispatch: bridge.dispatch
+        dispatch: bridge.dispatch,
+        textPrompt: bridge.textPromptReceiver
       })
     )
     .then((result) => {

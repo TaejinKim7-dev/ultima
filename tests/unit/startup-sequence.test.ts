@@ -335,4 +335,35 @@ describe("startEngine", () => {
     expect(calls.mainCalled).toBe(1)
     expect(module.u4Audio).toBeUndefined()
   })
+  it("Todo 18: attaches the native text-prompt receiver to module.u4TextPrompt before callMain()", async () => {
+    const { module, calls } = makeFakeModule()
+    const { factory } = makeFactory(module)
+    const seen: string[] = []
+    const textPrompt = {
+      opened: (id: number) => seen.push(`open:${id}`),
+      closed: (id: number) => seen.push(`close:${id}`)
+    }
+    let receiverAtMainCall: unknown
+    module.callMain = () => {
+      calls.mainCalled += 1
+      receiverAtMainCall = module.u4TextPrompt
+      module.u4TextPrompt?.opened(1)
+      module.u4TextPrompt?.closed(1)
+    }
+
+    const result = await startEngine({
+      factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
+      zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
+      dispatch: () => true,
+      unlockAudio: async () => {},
+      audioContext: null,
+      textPrompt
+    })
+
+    expect(result.started).toBe(true)
+    expect(receiverAtMainCall).toBe(textPrompt) // attached before callMain(), not after
+    expect(seen).toEqual(["open:1", "close:1"])
+  })
 })
