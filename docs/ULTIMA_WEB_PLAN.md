@@ -281,7 +281,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: title music starts after gesture and effect plays on command, evidence `.omo/evidence/ultima-web/task-16/audio-summary.json`; failure: delayed decode from old generation cannot restart stopped music, evidence `.omo/evidence/ultima-web/task-16/audio-generation-race.log`.
   Commit: Y | feat(audio): add browser music and effects
 
-- [ ] 17. Run integrated gameplay progression QA in the browser
+- [x] 17. Run integrated gameplay progression QA in the browser
   What to do / Must NOT do: create deterministic e2e routes that play through meaningful slices: title/new game, overland movement, town entry, NPC talk with Korean alias, menu/status updates, combat or dungeon sample, shrine/codex sample, save/reload, and audio continuity. Must not bypass the public UI/keyboard surface for the done claim.
   Parallelization: Wave 4 | Blocked by: 10,12,13,15,16 | Blocks: 18,19
   References: all earlier web bridge, input, save, i18n, and audio tests; `engine/src/game.cpp`; `engine/src/intro.cpp`; `.omo/evidence/ultima-web/task-3/native-baseline/`.
