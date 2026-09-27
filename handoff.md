@@ -1126,3 +1126,25 @@ ULTIMA4_DATA=.../ultima4.zip npx playwright test tests/e2e/boot-sequence.spec.ts
 - `npm run audit:dist` 실패는 Todo 17 범위 밖으로 남겨둠(위 참고) — Todo 18에서 반드시 고쳐야 함.
 - `tests/e2e/failure-boundaries.spec.ts`는 존재하지 않음(Todo 18의 acceptance criteria 파일, 새로 작성 필요) — 배경 조사 결과 `npm run audit:dist`/`scripts/audit-dist.mjs`는 이미 상당 부분(XSS-sink·cheat-token·noisy-console·원본데이터 확장자 차단) 구현·병합돼 있으나, 10분 메모리 스모크 테스트 하네스는 전혀 없고 stale-bridge-request/save-sync-failure 같은 런타임 시나리오는 정적 스캔과 별개로 새로 작성해야 함(`tests/e2e/startup-data.spec.ts`와 corrupt-ZIP/missing-files 커버리지 중복 여부 먼저 확인 필요).
 - Todo 3 debug-journal이 경고한 "town 내부 이동도 'Slow progress!' RNG의 영향을 받는다"는 사실 — 이번 e2e의 NPC 접근 스윕(6단계 반복 시도)이 이 RNG를 흡수하도록 설계돼 있어 이번 실행에서는 통과했지만, 재실행 시 낮은 확률로 실패할 수 있음(korean-npc-alias.spec.ts와 동일한 기존 리스크, 새로 생긴 것 아님).
+
+### Todo 18 진행 중 — 세션 중단 기록 (2026-09-27 16:35 KST, branch `todo-18-failure-boundaries`, main 미merge, 체크박스 `[ ]` 유지)
+
+**커밋된 것 (branch)**: `cf1af77` audit:dist allowlist 수정(`window.ultimaI18n` 훅 + vendor/xu4 자체 Credits URL 4개를 exact-string allowlist) · `23cbddf` 과대 ZIP 거부(`MAX_ZIP_BYTES`=200MiB, `startEngine`이 Blob `.size`로 먼저 거부해 메모리에 안 읽음). 둘 다 RED→GREEN 확인.
+
+**미커밋(이번 커밋에 포함)**:
+- `src/engine/persistence.ts` 실제 버그 수정: Emscripten IDBFS의 `db.transaction(...,"readwrite")`는 try/catch 없이 **동기 throw** 가능 → 기존엔 `#save-status`가 "저장 중..."에 영원히 멈춤. `runSync()`에서 동기 throw도 error로 처리(`tests/unit/persistence.test.ts` RED→GREEN).
+- `tests/e2e/failure-boundaries.spec.ts`(신규): 과대 ZIP / 실제 플레이 중 console.log·debug·info·table 0건 / 첫 저장 성공 후 `IDBDatabase.prototype.transaction`을 깨뜨려 `저장 실패: connection is closing` 정상 보고 → **3/3 통과**.
+- `tests/e2e/memory-smoke.spec.ts`(신규) + `npm run test:memory-smoke`: 실제 캐릭터 생성 후 월드맵 이동 1분(기본, `MEMORY_SMOKE_MINUTES`로 조정), `--enable-precise-memory-info`. **1/1 통과**, Chromium 136.0.7103.25, 힙 38.5→39.2MB ratio 1.007. 주의: JS 힙만 측정(wasm 선형 메모리 미포함).
+- `playwright.config.ts`: `PLAYWRIGHT_PORT`(기본 4173)로 포트 지정 + 지정 시 `outputDir=test-results/port-<포트>`. 이유: 같은 포트는 "port already used"로 즉시 실패, 공용 `test-results/`는 나중 run이 앞 run의 trace를 지움(`tracing.stop: ENOENT`) — 둘 다 실제 재현.
+- **Todo 17 거짓 통과 발견·수정**(`gameplay-progression.spec.ts`, 이미 main에 있던 스펙): `askKoreanKeyword`가 `#korean-keyword-input`에 포커스를 남김 → `src/shell.ts`의 capture 가드가 이후 모든 키를 게임에 안 보냄 → Ctrl-C 치트 메뉴 불발, `x`/`g`/`deceit`가 입력창에 쌓였다 한 번에 주입. 결과적으로 **던전·신단·중간 저장 구간이 실제로는 한 번도 실행되지 않았음**(기존 검사는 "화면이 바뀌었나"/"완료 문자열 있나"만 봐서 못 잡음). 임시 진단 로그(`activeElement`, 입력창 값)로 확정 후 로그 스펙 삭제. 수정: helper 끝에 `input.blur()` + 저장 검사를 MutationObserver 기반 "새 저장 전이" 확인으로 강화. 수정 후 **2/2 통과**, 던전(`Enter dungeon! Deceit`, L1)·신단 프롬프트 스크린샷으로 실제 진입 확인, 저장 전이 `["저장 중...","저장 완료"]` 확인. 신단은 새 캐릭터라 명상 쿨타임 규칙("Thy mind is still weary")으로 거절 — 실제 신단 입력·판정 경로는 동작.
+- 제가 처음 세운 가설(신단 컷신 대기 부족)은 틀렸음 — 관련 주석/`q` 재시도는 되돌림(컷신 ~4.4s 대기는 사실이라 유지).
+- `tests/e2e/korean-npc-alias.spec.ts`: 같은 `blur()` 수정 적용(Todo 13의 "bye 후 이동" 검사도 같은 이유로 거짓 통과였을 가능성).
+
+**검증(이 세션 직접 실행, exit 0)**: `npm run test:unit` 265/265 · `typecheck` · `verify:repo-sources` · `build` · `audit:dist`(passed) · `git diff --check`. QA 증거: `.omo/evidence/ultima-web/task-18/{security-audit.log, dist-leak-rejected.log(가짜 AVATAR.EXE → exit 1), oversized-zip.log, console-noise.log, mid-game-save-sync.log, memory-smoke.log}`.
+
+**확인 필요 / 남은 일**:
+1. `korean-npc-alias.spec.ts` 재실행 — blur 수정 후 첫 실행이 3.6분째 진행 중에 사용자 퇴근으로 **중단**(결과 없음). `ULTIMA4_DATA=... PLAYWRIGHT_PORT=4188 npx playwright test tests/e2e/korean-npc-alias.spec.ts --project=chromium --workers=1`.
+2. 통과하면 main merge + push → Todo 18 완료 판단(아래 3·4 결정 후) → 계획서 두 벌 `[x]`(cmp) → 19/25.
+3. Todo 18 "stale bridge requests": `web_bridge.cpp`의 `u4_web_*` epoch ABI는 실제 엔진이 **전혀 사용 안 함**(`src/`는 wasm export를 호출 안 함, 네이티브 컨트롤러도 호출 안 함; 실제 입력은 `screen_glfw.cpp`의 별도 큐). 실제 엔진 기준 e2e 불가 — 미검증 gap으로 남김. 수용 여부 판단 필요.
+4. 메모리 스모크는 1분 기본값("bounded accelerated equivalent"). 10분 실측이 필요하면 `MEMORY_SMOKE_MINUTES=10 npm run test:memory-smoke`.
+5. UX 이슈(수정 안 함): 실제 사용자도 한글 입력창 사용 후 화살표/명령키가 조용히 무시됨(입력창 밖 클릭 필요). F3 수동 QA 또는 제품 결정 필요.

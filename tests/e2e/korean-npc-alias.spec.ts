@@ -208,6 +208,13 @@ async function askKoreanKeyword(page: Page, word: string): Promise<void> {
   await input.fill(word)
   await input.press("Enter")
   await page.waitForTimeout(2000)
+  // src/shell.ts's capture-phase guard swallows EVERY real keydown while
+  // this box has focus (stopImmediatePropagation) -- leaving focus here
+  // silently diverts every later keystroke (Ctrl-C cheat menu, arrows,
+  // command letters) into the box instead of the game, until some later
+  // Enter re-submits the accumulated letters as one synthesized string.
+  // Blur it, exactly as a player clicking away from the box would.
+  await input.blur()
 }
 
 test.describe("Todo 13: Korean NPC alias mapping reaches the real running engine", () => {

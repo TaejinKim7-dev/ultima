@@ -152,6 +152,13 @@ async function askKoreanKeyword(page: Page, word: string): Promise<void> {
   await input.fill(word)
   await input.press("Enter")
   await page.waitForTimeout(2000)
+  // src/shell.ts's capture-phase guard swallows EVERY real keydown while
+  // this box has focus (stopImmediatePropagation) -- leaving focus here
+  // silently diverts every later keystroke (Ctrl-C cheat menu, arrows,
+  // command letters) into the box instead of the game, until some later
+  // Enter re-submits the accumulated letters as one synthesized string.
+  // Blur it, exactly as a player clicking away from the box would.
+  await input.blur()
 }
 
 test.describe("Todo 17: browser gameplay-progression QA (real engine, real ultima4.zip)", () => {
@@ -271,30 +278,61 @@ test.describe("Todo 17: browser gameplay-progression QA (real engine, real ultim
     // answered through the real text-input path, exactly like the NPC
     // interest prompt above. ---
     await gotoAndEnter(page, "honesty")
+    // `enhancementsOptions.u5shrines` defaults to true
+    // (vendor/xu4/src/settings.cpp), so Shrine::enter() first plays a
+    // scripted ~4.4s "approach and kneel" cutscene
+    // (Shrine::enhancedSequence(): 1000+4*400+800+1000ms of wait_msecs)
+    // before the "Upon which virtue dost thou meditate?" prompt opens.
+    await page.waitForTimeout(6000)
     const shrinePromptShot = await page.locator("#game-canvas").screenshot()
     shot("14-shrine-honesty-entered.png", shrinePromptShot)
     await typeAscii(page, "Honesty", 120)
     await pressKey(page, "Enter", 1500) // submit virtue name
-    await pressKey(page, "1", 2000) // meditate for 1 cycle
+    await pressKey(page, "1", 6000) // meditate for 1 cycle -- meditationCycle() runs a real animated sequence, needs more settle time than a single screen redraw before the game is interactive again
     const afterMeditate = await page.locator("#game-canvas").screenshot()
     shot("15-shrine-meditation.png", afterMeditate)
     expect(afterMeditate.equals(shrinePromptShot), "meditating at the Shrine of Honesty produced no visible screen change").toBe(false)
     await cheatExitMap(page)
+    await page.waitForTimeout(1500)
+    const afterShrineExit = await page.locator("#game-canvas").screenshot()
+    shot("15b-back-on-world-map-after-shrine.png", afterShrineExit)
+    expect(afterShrineExit.equals(afterMeditate), "exiting the shrine produced no visible screen change -- likely still inside the meditation cutscene").toBe(false)
 
     // --- Slice 6: in-route save + reload. Real 'q' Quit & Save
     // (vendor/xu4/src/game.cpp case 'q', CTX_CAN_SAVE_GAME on the world
     // map) writes party.sav again at this much-further-progressed state;
-    // a fresh third session's Journey Onward proves the reload path. ---
+    // a fresh third session's Journey Onward proves the reload path.
+    //
+    // #save-status ALREADY reads "저장 완료" at this point (from the
+    // earlier settings write during enableDebugMode's 'u' commit, and/or
+    // the original character-creation save) -- polling for "완료" alone
+    // would pass trivially without 'q' having done anything. A
+    // MutationObserver records every text value #save-status takes AFTER
+    // it's installed (right before 'q' is pressed), so this proves a
+    // FRESH saving->saved cycle actually happened this time, not a
+    // leftover value from earlier in the session (found and fixed during
+    // Todo 18's review of this spec).
+    await page.evaluate(() => {
+      const el = document.querySelector("#save-status")
+      const seen: string[] = []
+      ;(window as unknown as { __saveStatusSeen: string[] }).__saveStatusSeen = seen
+      if (el) {
+        new MutationObserver(() => seen.push(el.textContent ?? "")).observe(el, { childList: true, characterData: true, subtree: true })
+      }
+    })
     await pressKey(page, "q", 1500)
     let savedAgain = false
+    let seen: string[] = []
     for (let i = 0; i < 10; i++) {
-      if ((await saveStatusText(page)).includes("완료")) {
+      seen = await page.evaluate(() => (window as unknown as { __saveStatusSeen: string[] }).__saveStatusSeen)
+      if (seen.includes("저장 완료")) {
         savedAgain = true
         break
       }
       await page.waitForTimeout(500)
     }
-    expect(savedAgain, "the mid-route 'q' Quit & Save must reach the real save-status 저장 완료 event").toBe(true)
+    writeFileSync(join(evidenceDir, "quit-and-save-mutations.log"), `#save-status values observed after installing the MutationObserver: ${JSON.stringify(seen)}\n`)
+    expect(savedAgain, "the mid-route 'q' Quit & Save must produce a FRESH 저장 완료 transition, not a leftover value").toBe(true)
     shot("16-quit-and-saved-mid-route.png", await page.locator("#game-canvas").screenshot())
 
     await bootAndSelectZip(page, buffer) // Session 3: fresh wasm instance

@@ -227,11 +227,14 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 - `tlk.json`(3072건): `TOWN:NPC번호:필드` 구조, 16개 마을 × NPC 16명 × 12필드(name/pronoun/look/job/health/question/yes/no/response1/response2/topic1/topic2). `topic1`/`topic2`(512건)는 discourse가 대화 주제로 직접 매칭하는 4글자 코드(예: "PLAY","COMP")라 `lordBritishKeyword`와 같은 이유로 영어 그대로 pass-through 처리. 나머지 10필드(2560건)도 16/16 마을 전부 완료. 마지막 YEW 160건은 `.omo/drafts/tlk-yew-translation-draft.json`에서 적용했고, worker 독립 검증으로 draft key 누락 0·non-YEW 변경 0·changedEntryCount 160 확인.
 - 게이트: `npm run i18n:check`와 `npm run i18n:check -- --strict` 모두 4411 entries, pending 0, exit 0. `npm run i18n:generate`로 4388 translated entries + 9 aliases를 `src/i18n/generated/strings.ts`, `native/i18n/u4_i18n_table.inc`, `native/i18n/ko-overlay.b`에 반영. 새 `tests/e2e/korean-progression.spec.ts`는 실제 `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip`로 2/2 통과(1.6분): semantic Korean coverage + 실제 저장/재로드, strict failure fixture. Generator가 Boron overlay line-ending whitespace를 내던 문제를 RED→GREEN(`tests/unit/localization-boundaries.test.ts`)로 고치고 `git diff --check` exit 0 확인.
 
-## 바로 다음 순서 (2026-09-27 갱신 — Todo 17 완료 18/25, main 미merge)
-1. **branch `todo-17-gameplay-progression` main merge/push는 사용자 확인 대기 중** — AGENTS.md/이번 세션 지시("merge/push는 멈추고 물어봐")에 따라 아직 진행 안 함. 사용자 승인 시: `npm ci`부터 merge 전 게이트 전부 재확인 후 main으로 fast-forward/merge.
-2. **Todo 18 진행**: 이미 배경 조사 완료(요약 — `npm run audit:dist`/`scripts/audit-dist.mjs`는 이미 상당 부분 구현·병합돼 있음: XSS-sink·cheat-token·noisy-console·원본데이터/개발파일 확장자 차단 전부 존재. 단, main 기준으로 `npm run build` 직후 `npm run audit:dist`를 돌리면 이미 실패 상태 — "window.ultimaI18n" test-hook marker가 allowlist 밖이라 걸림, Todo 17 이전부터 있던 기존 결함(직접 재현·격리 확인). 남은 진짜 gap: `tests/e2e/failure-boundaries.spec.ts`가 아예 없음(새로 작성 필요), 10분 메모리 스모크 테스트 하네스가 전혀 없음(새 스크립트/스펙 필요), stale-bridge-request·save-sync-failure 같은 런타임 시나리오는 정적 `audit:dist` 스캔과 별개로 실제 e2e가 필요. `tests/e2e/startup-data.spec.ts`(Todo 9)와 corrupt-ZIP/missing-files 커버리지가 겹치니 새 스펙 작성 전에 중복 여부부터 확인.
-3. 이후: 19 완료(emsdk CI 스텝·audit 확장 이미 병합됨) → 20 → F1~F4.
-4. Pages Source="GitHub Actions" 저장소 설정은 사용자만 가능 — 계속 대기.
+## 바로 다음 순서 (2026-09-27 16:35 갱신 — 18/25, Todo 18 진행 중, branch `todo-18-failure-boundaries` 미merge)
+1. **`korean-npc-alias.spec.ts` 재실행** (blur 수정 후 첫 실행이 세션 중단으로 결과 없음 — 확인 필요):
+   `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip PLAYWRIGHT_PORT=4188 npx playwright test tests/e2e/korean-npc-alias.spec.ts --project=chromium --workers=1`
+2. 통과 시 `todo-18-failure-boundaries` → main merge + push (게이트는 이 세션에 전부 exit 0 확인: unit 265/265 · typecheck · verify · build · audit:dist · diff-check; e2e gameplay-progression 2/2 · failure-boundaries 3/3 · memory-smoke 1/1).
+3. Todo 18 완료 판단 전 결정할 것: (a) "stale bridge requests"는 `web_bridge.cpp` epoch ABI를 실제 엔진이 안 쓰므로 실제 엔진 e2e 불가 — gap으로 수용할지, (b) 메모리 스모크 1분 기본값을 "bounded accelerated equivalent"로 인정할지(10분은 `MEMORY_SMOKE_MINUTES=10 npm run test:memory-smoke`). 결정 후 계획서 두 벌 `[x]`(cmp) → 19/25.
+4. **Todo 17 거짓 통과 이력 주의**: 한국어 입력창 포커스 때문에 던전·신단·중간 저장 구간이 원래 한 번도 실행되지 않았음 → 이번 브랜치에서 수정·재검증 완료(2/2, 스크린샷으로 실제 진입 확인). 자세한 내용은 handoff.md "Todo 18 진행 중 — 세션 중단 기록".
+5. UX 이슈(미수정): 실제 사용자도 한글 입력창 사용 후 화살표/명령키가 조용히 무시됨 → F3 또는 제품 결정.
+6. 이후: 19 완료(골격·emsdk CI·audit 확장 이미 병합) → 20 → F1~F4. Pages Source="GitHub Actions" 설정은 사용자만 가능.
 
 ## 목적 달성 가능성 판단
 - **가능하다, 그리고 크리티컬 패스(Todo 21)는 이제 끝났다.** 근거: 같은 xu4 소스가 native에서도(Step 3), 이제 브라우저에서도(Todo 21, 2026-09-25) 원본 데이터로 실제로 돈다 — 실제 타이틀 화면 렌더 + 실제 키 입력으로 `IntroController` 상태 전이까지 확인됨. 남은 일은 대부분 한국어화(11~15)와 배포(17~20)로, 엔진 자체의 미지수는 이제 거의 없다.
@@ -249,3 +252,15 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 - TDD: RED 로그 → GREEN. 테스트 삭제/약화 금지.
 - 원본 ZIP/EXE/TLK/MAP/EGA/SAV, 추출 원문 corpus, 사용자 save, secret 커밋 금지.
 - 단계 완료 시 이 파일의 상태·진행률을 갱신한다.
+
+## e2e 병렬 실행 (2026-09-27 추가)
+- **서로 다른 `.spec.ts` 파일을 별도 프로세스(백그라운드 등)로 동시에 돌리려면 반드시 서로 다른 포트를 줘라.** `playwright.config.ts`의 `webServer`가 `reuseExistingServer: false`라, 같은 포트로 두 `npx playwright test`를 동시에 띄우면 두 번째가 "port already used"로 즉시 죽는다(실제로 재현해 확인함).
+- `playwright.config.ts`는 이제 `PLAYWRIGHT_PORT` 환경변수로 포트를 읽는다(기본 4173). 예:
+  ```bash
+  ULTIMA4_DATA=... npx playwright test tests/e2e/a.spec.ts --project=chromium &
+  ULTIMA4_DATA=... PLAYWRIGHT_PORT=4180 npx playwright test tests/e2e/b.spec.ts --project=chromium &
+  ```
+  이렇게 하면 서로 다른 `vite preview` 인스턴스가 뜨므로 진짜로 동시에 돈다(직접 확인함).
+- `PLAYWRIGHT_PORT`를 주면 결과 폴더도 `test-results/port-<포트>`로 분리된다. Playwright는 실행 시작 때 outputDir을 비우므로, 공용 `test-results/`를 쓰면 나중에 시작한 run이 먼저 돌던 run의 trace 파일을 지워버린다(실제로 `tracing.stop: ENOENT`로 재현됨). 기본 포트(환경변수 없음)는 기존대로 `test-results/`.
+- **주의**: 포트 충돌만 없앴을 뿐, 같은 머신에서 여러 실제 엔진(wasm) 세션을 동시에 돌리면 CPU 경합으로 실시간 딜레이 기반 로직(예: NPC 접근 스윕의 "Slow progress!" RNG 회피, `tests/e2e/korean-npc-alias.spec.ts`의 `approachNpc()`)이 흔들릴 수 있다 — 이런 타이밍 민감 스펙끼리는 포트를 나눠도 가급적 동시 실행을 피한다. 순수 검증(오류 메시지, 정적 스크린샷 비교 등) 위주의 스펙은 병렬로 돌려도 안전하다.
+- 같은 파일 안의 여러 테스트를 병렬로 돌리고 싶으면 `--workers=N`으로 충분하다(웹서버 하나를 공유). 이 프로젝트가 지금까지 `--workers=1`을 써온 건 포트 문제가 아니라 위의 타이밍 민감성 때문이다.

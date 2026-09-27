@@ -80,16 +80,32 @@ export function createPersistenceCoordinator(): PersistenceCoordinator {
     status = "saving"
     emitRef(saveStateEvent("saving"))
     return new Promise<void>((resolve) => {
-      fs.syncfs(false, (error) => {
-        if (error) {
-          status = "error"
-          emitRef(saveStateEvent("error", error.message))
-        } else {
-          status = "saved"
-          emitRef(saveStateEvent("saved"))
-        }
+      function finishWithError(error: Error): void {
+        status = "error"
+        emitRef(saveStateEvent("error", error.message))
         resolve()
-      })
+      }
+      // Todo 18: real Emscripten IDBFS can throw SYNCHRONOUSLY out of
+      // fs.syncfs itself (not just via the callback) when the cached
+      // connection (IDBFS.dbs[name]) is broken -- its write path's
+      // `db.transaction([...], "readwrite")` call is not wrapped in a
+      // try/catch in the generated glue. Without this try/catch, that
+      // throw would otherwise reject this Promise and leave `status`
+      // stuck at "saving" forever (confirmed via a RED unit test before
+      // this fix: tests/unit/persistence.test.ts).
+      try {
+        fs.syncfs(false, (error) => {
+          if (error) {
+            finishWithError(error)
+          } else {
+            status = "saved"
+            emitRef(saveStateEvent("saved"))
+            resolve()
+          }
+        })
+      } catch (error) {
+        finishWithError(error instanceof Error ? error : new Error(String(error)))
+      }
     })
   }
 
