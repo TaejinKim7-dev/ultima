@@ -56,7 +56,7 @@ import {
   type PersistenceCoordinator,
   type PersistenceFS
 } from "./persistence.ts"
-import { validateUltima4Zip, type ZipValidationResult } from "./zip.ts"
+import { MAX_ZIP_BYTES, validateUltima4Zip, type ZipValidationResult } from "./zip.ts"
 
 /** Bound to the running engine's real FS/paths/coordinator once startEngine succeeds; see src/shell.ts's attachSaveHandlers. */
 export interface SaveHandlers {
@@ -89,6 +89,18 @@ export interface EngineModule {
    * part of the real Emscripten Module shape, so it starts undefined.
    */
   u4Audio?: AudioBridge
+  /**
+   * Todo 18: receiver for vendor/xu4/src/event.cpp's ReadStringController
+   * EM_JS hooks (`Module.u4TextPrompt.opened(id)` / `.closed(id)`).
+   * Assigned by startEngine() before callMain(), like u4Audio.
+   */
+  u4TextPrompt?: TextPromptReceiver
+}
+
+/** Todo 18: native text-prompt lifecycle, see src/i18n/text-prompt-gate.ts. */
+export interface TextPromptReceiver {
+  opened(id: number): void
+  closed(id: number): void
 }
 
 export type EngineModuleFactory = (options: Record<string, unknown>) => Promise<EngineModule>
@@ -123,6 +135,13 @@ export interface StartEngineOptions {
    * (getAudioContext()), which is `null` outside a browser.
    */
   readonly audioContext?: AudioContextLike | null
+  /**
+   * Todo 18: attached to `module.u4TextPrompt` before callMain() so the
+   * shell's Korean keyword field knows which native text prompt is open
+   * (src/shell.ts's textPromptReceiver). Omitted: nothing is attached and
+   * the EM_JS hooks' `Module.u4TextPrompt &&` guard makes them no-ops.
+   */
+  readonly textPrompt?: TextPromptReceiver
 }
 
 export type StartEngineResult =
@@ -132,7 +151,7 @@ export type StartEngineResult =
       /** Todo 16: undefined when no AudioContext was available (see audioContext's doc comment above). */
       readonly audioBridge: AudioBridge | undefined
     }
-  | { readonly started: false; readonly reason: "corrupted" | "missing-files" | "idbfs-sync-failed" | "engine-error"; readonly detail: string }
+  | { readonly started: false; readonly reason: "corrupted" | "missing-files" | "oversized" | "idbfs-sync-failed" | "engine-error"; readonly detail: string }
 
 function message(text: string): BridgeEvent {
   // Todo 11: this is a whole, UI-authored notice, not a fragment of the
@@ -150,6 +169,9 @@ function runtimeError(text: string): BridgeEvent {
 function describeValidationFailure(validation: Extract<ZipValidationResult, { ok: false }>): string {
   if (validation.reason === "corrupted") {
     return `선택한 파일이 손상되었거나 올바른 ZIP이 아닙니다: ${validation.detail}`
+  }
+  if (validation.reason === "oversized") {
+    return `선택한 파일이 너무 큽니다 (${validation.byteLength.toLocaleString("ko-KR")} 바이트) — 올바른 원본 데이터가 맞는지 확인해 주세요.`
   }
   return `원본 데이터에 필요한 파일이 없습니다: ${validation.missing.join(", ")}`
 }
@@ -227,6 +249,18 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
     return { started: false, reason: "idbfs-sync-failed", detail }
   }
 
+  // Todo 18: check the Blob's own (synchronous, cheap) `.size` before ever
+  // reading it into memory -- a maliciously/accidentally huge selection
+  // is rejected without the browser tab first materializing the whole
+  // thing as an ArrayBuffer. validateUltima4Zip's own byteLength check
+  // (src/engine/zip.ts) still applies too, as a second, buffer-level
+  // guard for any caller that doesn't go through this Blob-level path.
+  if (options.zipFile.size > MAX_ZIP_BYTES) {
+    const detail = describeValidationFailure({ ok: false, reason: "oversized", byteLength: options.zipFile.size })
+    options.dispatch(runtimeError(detail))
+    return { started: false, reason: "oversized", detail }
+  }
+
   const buffer = await options.zipFile.arrayBuffer()
   const validation = await validateUltima4Zip(buffer)
   if (!validation.ok) {
@@ -271,6 +305,9 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
       manifest: buildAudioManifest(gameModuleBytes)
     })
     module.u4Audio = audioBridge
+  }
+  if (options.textPrompt !== undefined) {
+    module.u4TextPrompt = options.textPrompt
   }
   armAutoResumeOnGesture()
 

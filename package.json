@@ -14,6 +14,7 @@
     "preview": "vite preview",
     "test:unit": "vitest run --passWithNoTests=false",
     "test:e2e": "playwright test",
+    "test:memory-smoke": "playwright test tests/e2e/memory-smoke.spec.ts --project=chromium",
     "test:native": "node scripts/cmake-wrapper.mjs test",
     "cmake:version": "node scripts/cmake-wrapper.mjs version",
     "cmake:configure": "node scripts/cmake-wrapper.mjs configure",

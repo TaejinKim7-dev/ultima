@@ -21,7 +21,11 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률
-- **승인 기준: 18 / 25 = 72.0%** (Step 1~17, 21 ✅ — Todo 17 완료, main 미merge).
+- **제품 목표 재확인 (2026-09-27)**: 한국어로 실제 플레이할 수 있는 웹 기반 Ultima IV가 목표다. 아래 수치는 계획 항목 승인률이며 한글판 제품 완성률이 아니다. 이번 NPC alias 재검증 스크린샷의 실제 대화는 영어였다. Step 11/12/14에 기록된 실제 엔진 출력 연결 gap을 해소하고 한국어 인트로·대화·상태/메뉴를 실제 플레이에서 검증하기 전에는 출시 완료로 판정하지 않는다.
+- **정정된 플레이 요구사항**: 플레이어는 영어 keyword 또는 한국어 alias를 입력할 수 있어야 하며, 실제 게임에 표시되는 NPC 응답은 한국어여야 한다. 현재 검증된 것은 한국어 alias 입력 동작뿐이고, Calabrini의 실제 NPC 응답은 영어였다. 따라서 한국어 NPC 출력은 아직 미완료이며 출시를 막는다.
+- **세션 운영 제한**: 이 세션의 한도는 5시간이다. 남은 시간·컨텍스트·예산 중 하나라도 5% 미만이 되면 active work를 중단하고 현재 상태를 `plan.md`와 `handoff.md`에 기록한다.
+- **승인 기준: 19 / 25 = 76.0%** (Step 1~18, 21 ✅ — Todo 18 완료, 2026-09-27 main merge).
+- **Step 18 완료 (2026-09-27, branch `todo-18-failure-boundaries` → main)**: 200MiB 초과 ZIP 거부, IDBFS 동기 throw 복구, audit:dist allowlist, console-noise·mid-game save-sync·memory smoke(10분, Chromium 136.0.7103.25, JS heap만) e2e, 그리고 stale 요청 경계를 실제 엔진 경로로 구현: 네이티브 `ReadStringController` 수명 → EM_JS `Module.u4TextPrompt` → `src/i18n/text-prompt-gate.ts`가 닫힌 prompt에서 입력한 한국어 제출을 거부(`failure-boundaries.spec.ts` 4/4, 합성 keydown 0). 회귀 `korean-npc-alias` 2/2 · `gameplay-progression` 2/2. 게이트 `npm ci`·unit 276/276·verify·typecheck·build·audit:dist·diff-check·cmp 전부 exit 0. 동작 변화: 텍스트 prompt가 없을 때 한국어 입력창 제출은 거부 메시지(F3에서 UX 확인 필요).
 - **Step 17 완료 (2026-09-27, branch `todo-17-gameplay-progression`)**: 실제 `ultima4.zip`으로 새 게임(캐릭터 생성 실제 완료) → 실제 오버랜드 이동 → 실제 마을 진입 + NPC 영어/한국어 alias 대화 → 실제 Ztats 상태 화면 → 실제 던전(Deceit) 진입 → 실제 신단(Honesty) 명상 → 실제 'q' Quit&Save → 실제 3번째 세션 Journey Onward 재로드까지 전 구간을 하나의 연속 e2e로 검증(`tests/e2e/gameplay-progression.spec.ts`, `.omo/evidence/ultima-web/task-17/`). 마을/던전/신단 진입은 전부 실제 Debug Mode(Configure 메뉴에서 실제로 켬) + 실제 cheat 메뉴의 결정론적 Goto(RNG 없음, `vendor/xu4/src/cheat.cpp`)로 도달 — 키보드/UI 경로를 우회하지 않았다(cheat 메뉴 자체가 xu4 원본에 이미 있는 기능이고 Debug Mode를 켜지 않으면 완전히 비활성). 실패 시나리오는 실제 `locales/ko/aliases.json` + 실제 `resolveInput()`으로 alias 하나를 의도적으로 오염시켜, 그 오염이 어떻게 이 스펙의 "영어와 같은 효과" 대화 검증 자체를 무력화하는지 증명(`alias-regression.log`). 게이트: `npm run test:unit`(260/260) · `npm run typecheck` · `npm run verify:repo-sources` · `npm run build` · `git diff --check` 전부 exit 0(모두 직접 실행해 확인) — `npm run audit:dist`는 Todo 17의 범위 밖(Todo 18 자체 acceptance criteria)이고, main 기준으로도 이미 실패 상태임을 확인함("확인 필요" 아님, stash로 직접 재현·격리 확인).
 - **부가 산출물 (로컬 편의, 저장소/배포본에는 없음)**: `vite.config.ts`에 `devAutoLoadOriginalData()` 플러그인 추가 — `apply: "serve"`라 `vite build`에는 아예 포함되지 않고(직접 `npm run build`/`build:site` 후 grep으로 확인), `ULTIMA4_DATA` 환경변수가 가리키는 로컬 zip을 `npm run dev`에서 자동으로 `#rom-picker`에 채워 파일 선택을 생략해준다. `npm run preview`(정적 프리뷰, GitHub Pages와 동일 구조)에서는 의도적으로 동작하지 않음 — 실제 배포 환경과 똑같은 수동 선택 경험을 검증하려면 preview를 쓰라는 뜻.
 - **실제 게임에서 확인 (2026-09-26 갱신): 브라우저에서 실제 엔진으로 확인됨 — Step 7(WebGL2 렌더), 8(실제 GLFW 입력), 9(브라우저 시작), 10(저장/재로드/export-import), 13(실제 NPC 대화 + 한국어 alias), 16(실제 Web Audio 음악/RFX 효과음), 21(링크·FS·렌더·입력 전부).** 근거: `tests/e2e/boot-sequence.spec.ts`가 실제 `ultima4.zip`으로 실제 타이틀 화면 렌더 + 키 입력 2회로 `IntroController`의 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU)까지 확인(`.omo/evidence/ultima-web/task-21/title-render.png`). (Step 12·14는 Todo 11과 같은 사유로 ⬜: 실제 엔진이 status/menu/message bridge 이벤트를 아직 안 보냄.)
@@ -83,7 +87,7 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 |---|---|---|---|---|
 | 16 | Web Audio 음악/효과음 + RFX 생성 | ✅ | ✅ | 6,9,21 (21.1의 무음 구현을 교체) — branch `todo-16-web-audio` `541d6ca`, main에는 아직 merge 안 함 |
 | 17 | 브라우저 통합 게임 진행 e2e (새 게임부터) | ✅ | ✅ | 10,12,13,15,16,21 — branch `todo-17-gameplay-progression`, main 미merge |
-| 18 | 실패/보안/개인정보/회귀 경계 강화 (`audit:dist`) | ⬜ | ⬜ | 17 |
+| 18 | 실패/보안/개인정보/회귀 경계 강화 (`audit:dist`) | ✅ | ✅ | 17 — 실제 엔진 e2e(failure-boundaries 4/4), main merge 2026-09-27 |
 | 19 | GitHub Actions Pages workflow + `/ultima/` release artifact | 🟡 | — | 15,16,18 (골격 완성, 브랜치 `todo-19-pages-workflow`, main 미merge) |
 | 20 | README/사용자 가이드/증거 인덱스/handoff | ⬜ | — | 19 |
 
@@ -227,11 +231,14 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 - `tlk.json`(3072건): `TOWN:NPC번호:필드` 구조, 16개 마을 × NPC 16명 × 12필드(name/pronoun/look/job/health/question/yes/no/response1/response2/topic1/topic2). `topic1`/`topic2`(512건)는 discourse가 대화 주제로 직접 매칭하는 4글자 코드(예: "PLAY","COMP")라 `lordBritishKeyword`와 같은 이유로 영어 그대로 pass-through 처리. 나머지 10필드(2560건)도 16/16 마을 전부 완료. 마지막 YEW 160건은 `.omo/drafts/tlk-yew-translation-draft.json`에서 적용했고, worker 독립 검증으로 draft key 누락 0·non-YEW 변경 0·changedEntryCount 160 확인.
 - 게이트: `npm run i18n:check`와 `npm run i18n:check -- --strict` 모두 4411 entries, pending 0, exit 0. `npm run i18n:generate`로 4388 translated entries + 9 aliases를 `src/i18n/generated/strings.ts`, `native/i18n/u4_i18n_table.inc`, `native/i18n/ko-overlay.b`에 반영. 새 `tests/e2e/korean-progression.spec.ts`는 실제 `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip`로 2/2 통과(1.6분): semantic Korean coverage + 실제 저장/재로드, strict failure fixture. Generator가 Boron overlay line-ending whitespace를 내던 문제를 RED→GREEN(`tests/unit/localization-boundaries.test.ts`)로 고치고 `git diff --check` exit 0 확인.
 
-## 바로 다음 순서 (2026-09-27 갱신 — Todo 17 완료 18/25, main 미merge)
-1. **branch `todo-17-gameplay-progression` main merge/push는 사용자 확인 대기 중** — AGENTS.md/이번 세션 지시("merge/push는 멈추고 물어봐")에 따라 아직 진행 안 함. 사용자 승인 시: `npm ci`부터 merge 전 게이트 전부 재확인 후 main으로 fast-forward/merge.
-2. **Todo 18 진행**: 이미 배경 조사 완료(요약 — `npm run audit:dist`/`scripts/audit-dist.mjs`는 이미 상당 부분 구현·병합돼 있음: XSS-sink·cheat-token·noisy-console·원본데이터/개발파일 확장자 차단 전부 존재. 단, main 기준으로 `npm run build` 직후 `npm run audit:dist`를 돌리면 이미 실패 상태 — "window.ultimaI18n" test-hook marker가 allowlist 밖이라 걸림, Todo 17 이전부터 있던 기존 결함(직접 재현·격리 확인). 남은 진짜 gap: `tests/e2e/failure-boundaries.spec.ts`가 아예 없음(새로 작성 필요), 10분 메모리 스모크 테스트 하네스가 전혀 없음(새 스크립트/스펙 필요), stale-bridge-request·save-sync-failure 같은 런타임 시나리오는 정적 `audit:dist` 스캔과 별개로 실제 e2e가 필요. `tests/e2e/startup-data.spec.ts`(Todo 9)와 corrupt-ZIP/missing-files 커버리지가 겹치니 새 스펙 작성 전에 중복 여부부터 확인.
-3. 이후: 19 완료(emsdk CI 스텝·audit 확장 이미 병합됨) → 20 → F1~F4.
-4. Pages Source="GitHub Actions" 저장소 설정은 사용자만 가능 — 계속 대기.
+## 바로 다음 순서 (2026-09-27 20:20 갱신 — 19/25, Todo 18 ✅ main merge 완료)
+1. **다음 단계: Todo 19** (GitHub Actions Pages workflow + `/ultima/` release artifact). 골격은 branch `todo-19-pages-workflow`에 있음(🟡) — 선행 15·16·18 전부 ✅. Pages Source="GitHub Actions" 설정은 사용자만 가능.
+2. Todo 18 완료 근거: handoff.md "Todo 18 stale real-surface GREEN" + "Todo 18 main merge 게이트".
+3. ✅ **stale real-surface RED → GREEN**: 네이티브 `ReadStringController` 수명을 EM_JS(`Module.u4TextPrompt`)로 셸에 알리고, `src/i18n/text-prompt-gate.ts`가 닫힌 prompt에서 입력한 한국어 제출을 거부. `failure-boundaries.spec.ts` 4/4(합성 keydown 0), 회귀 `korean-npc-alias` 2/2 · `gameplay-progression` 2/2, 유닛 276/276, verify/typecheck/build/audit:dist/diff-check/cmp 전부 exit 0. 상세: handoff.md "Todo 18 stale real-surface GREEN".
+7. **Todo 17 거짓 통과 이력 주의**: 한국어 입력창 포커스 때문에 던전·신단·중간 저장 구간이 원래 한 번도 실행되지 않았음 → 이번 브랜치에서 수정·재검증 완료(2/2, 스크린샷으로 실제 진입 확인). 자세한 내용은 handoff.md "Todo 18 진행 중 — 세션 중단 기록".
+8. UX 이슈(미수정): 실제 사용자도 한글 입력창 사용 후 화살표/명령키가 조용히 무시됨 → F3 또는 제품 결정.
+9. 이후: 19 완료(골격·emsdk CI·audit 확장 이미 병합) → 20 → F1~F4. Pages Source="GitHub Actions" 설정은 사용자만 가능.
+10. **출시 필수 미완료 작업**: 실제 엔진 출력과 한국어 번역/DOM 표시 연결(Step 11/12/14의 실제 게임 확인 ⬜). alias 입력/정적 번역 테이블 통과와 한국어 플레이는 다르다. 현재 계획의 승인 체크박스가 이 연결 완료를 대신하지 않으며, 출시 전에 실제 한국어 화면으로 검증해야 한다.
 
 ## 목적 달성 가능성 판단
 - **가능하다, 그리고 크리티컬 패스(Todo 21)는 이제 끝났다.** 근거: 같은 xu4 소스가 native에서도(Step 3), 이제 브라우저에서도(Todo 21, 2026-09-25) 원본 데이터로 실제로 돈다 — 실제 타이틀 화면 렌더 + 실제 키 입력으로 `IntroController` 상태 전이까지 확인됨. 남은 일은 대부분 한국어화(11~15)와 배포(17~20)로, 엔진 자체의 미지수는 이제 거의 없다.
@@ -249,3 +256,15 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 - TDD: RED 로그 → GREEN. 테스트 삭제/약화 금지.
 - 원본 ZIP/EXE/TLK/MAP/EGA/SAV, 추출 원문 corpus, 사용자 save, secret 커밋 금지.
 - 단계 완료 시 이 파일의 상태·진행률을 갱신한다.
+
+## e2e 병렬 실행 (2026-09-27 추가)
+- **서로 다른 `.spec.ts` 파일을 별도 프로세스(백그라운드 등)로 동시에 돌리려면 반드시 서로 다른 포트를 줘라.** `playwright.config.ts`의 `webServer`가 `reuseExistingServer: false`라, 같은 포트로 두 `npx playwright test`를 동시에 띄우면 두 번째가 "port already used"로 즉시 죽는다(실제로 재현해 확인함).
+- `playwright.config.ts`는 이제 `PLAYWRIGHT_PORT` 환경변수로 포트를 읽는다(기본 4173). 예:
+  ```bash
+  ULTIMA4_DATA=... npx playwright test tests/e2e/a.spec.ts --project=chromium &
+  ULTIMA4_DATA=... PLAYWRIGHT_PORT=4180 npx playwright test tests/e2e/b.spec.ts --project=chromium &
+  ```
+  이렇게 하면 서로 다른 `vite preview` 인스턴스가 뜨므로 진짜로 동시에 돈다(직접 확인함).
+- `PLAYWRIGHT_PORT`를 주면 결과 폴더도 `test-results/port-<포트>`로 분리된다. Playwright는 실행 시작 때 outputDir을 비우므로, 공용 `test-results/`를 쓰면 나중에 시작한 run이 먼저 돌던 run의 trace 파일을 지워버린다(실제로 `tracing.stop: ENOENT`로 재현됨). 기본 포트(환경변수 없음)는 기존대로 `test-results/`.
+- **주의**: 포트 충돌만 없앴을 뿐, 같은 머신에서 여러 실제 엔진(wasm) 세션을 동시에 돌리면 CPU 경합으로 실시간 딜레이 기반 로직(예: NPC 접근 스윕의 "Slow progress!" RNG 회피, `tests/e2e/korean-npc-alias.spec.ts`의 `approachNpc()`)이 흔들릴 수 있다 — 이런 타이밍 민감 스펙끼리는 포트를 나눠도 가급적 동시 실행을 피한다. 순수 검증(오류 메시지, 정적 스크린샷 비교 등) 위주의 스펙은 병렬로 돌려도 안전하다.
+- 같은 파일 안의 여러 테스트를 병렬로 돌리고 싶으면 `--workers=N`으로 충분하다(웹서버 하나를 공유). 이 프로젝트가 지금까지 `--workers=1`을 써온 건 포트 문제가 아니라 위의 타이밍 민감성 때문이다.

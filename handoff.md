@@ -1,6 +1,6 @@
 # Ultima IV 웹 한글판 개발 인수인계
 
-최종 갱신: 2026-09-26 23:07 KST (본문 최신 절은 "Todo 15 완료 기록").
+최종 갱신: 2026-09-27 19:40 KST (본문 최신 절은 "Todo 18 stale real-surface RED 추가 후 사용자 지시로 중단").
 
 ## 현재 상태
 
@@ -1126,3 +1126,120 @@ ULTIMA4_DATA=.../ultima4.zip npx playwright test tests/e2e/boot-sequence.spec.ts
 - `npm run audit:dist` 실패는 Todo 17 범위 밖으로 남겨둠(위 참고) — Todo 18에서 반드시 고쳐야 함.
 - `tests/e2e/failure-boundaries.spec.ts`는 존재하지 않음(Todo 18의 acceptance criteria 파일, 새로 작성 필요) — 배경 조사 결과 `npm run audit:dist`/`scripts/audit-dist.mjs`는 이미 상당 부분(XSS-sink·cheat-token·noisy-console·원본데이터 확장자 차단) 구현·병합돼 있으나, 10분 메모리 스모크 테스트 하네스는 전혀 없고 stale-bridge-request/save-sync-failure 같은 런타임 시나리오는 정적 스캔과 별개로 새로 작성해야 함(`tests/e2e/startup-data.spec.ts`와 corrupt-ZIP/missing-files 커버리지 중복 여부 먼저 확인 필요).
 - Todo 3 debug-journal이 경고한 "town 내부 이동도 'Slow progress!' RNG의 영향을 받는다"는 사실 — 이번 e2e의 NPC 접근 스윕(6단계 반복 시도)이 이 RNG를 흡수하도록 설계돼 있어 이번 실행에서는 통과했지만, 재실행 시 낮은 확률로 실패할 수 있음(korean-npc-alias.spec.ts와 동일한 기존 리스크, 새로 생긴 것 아님).
+
+### Todo 18 진행 중 — 세션 중단 기록 (2026-09-27 16:35 KST, branch `todo-18-failure-boundaries`, main 미merge, 체크박스 `[ ]` 유지)
+
+**커밋된 것 (branch)**: `cf1af77` audit:dist allowlist 수정(`window.ultimaI18n` 훅 + vendor/xu4 자체 Credits URL 4개를 exact-string allowlist) · `23cbddf` 과대 ZIP 거부(`MAX_ZIP_BYTES`=200MiB, `startEngine`이 Blob `.size`로 먼저 거부해 메모리에 안 읽음). 둘 다 RED→GREEN 확인.
+
+**미커밋(이번 커밋에 포함)**:
+- `src/engine/persistence.ts` 실제 버그 수정: Emscripten IDBFS의 `db.transaction(...,"readwrite")`는 try/catch 없이 **동기 throw** 가능 → 기존엔 `#save-status`가 "저장 중..."에 영원히 멈춤. `runSync()`에서 동기 throw도 error로 처리(`tests/unit/persistence.test.ts` RED→GREEN).
+- `tests/e2e/failure-boundaries.spec.ts`(신규): 과대 ZIP / 실제 플레이 중 console.log·debug·info·table 0건 / 첫 저장 성공 후 `IDBDatabase.prototype.transaction`을 깨뜨려 `저장 실패: connection is closing` 정상 보고 → **3/3 통과**.
+- `tests/e2e/memory-smoke.spec.ts`(신규) + `npm run test:memory-smoke`: 실제 캐릭터 생성 후 월드맵 이동 1분(기본, `MEMORY_SMOKE_MINUTES`로 조정), `--enable-precise-memory-info`. **1/1 통과**, Chromium 136.0.7103.25, 힙 38.5→39.2MB ratio 1.007. 주의: JS 힙만 측정(wasm 선형 메모리 미포함).
+- `playwright.config.ts`: `PLAYWRIGHT_PORT`(기본 4173)로 포트 지정 + 지정 시 `outputDir=test-results/port-<포트>`. 이유: 같은 포트는 "port already used"로 즉시 실패, 공용 `test-results/`는 나중 run이 앞 run의 trace를 지움(`tracing.stop: ENOENT`) — 둘 다 실제 재현.
+- **Todo 17 거짓 통과 발견·수정**(`gameplay-progression.spec.ts`, 이미 main에 있던 스펙): `askKoreanKeyword`가 `#korean-keyword-input`에 포커스를 남김 → `src/shell.ts`의 capture 가드가 이후 모든 키를 게임에 안 보냄 → Ctrl-C 치트 메뉴 불발, `x`/`g`/`deceit`가 입력창에 쌓였다 한 번에 주입. 결과적으로 **던전·신단·중간 저장 구간이 실제로는 한 번도 실행되지 않았음**(기존 검사는 "화면이 바뀌었나"/"완료 문자열 있나"만 봐서 못 잡음). 임시 진단 로그(`activeElement`, 입력창 값)로 확정 후 로그 스펙 삭제. 수정: helper 끝에 `input.blur()` + 저장 검사를 MutationObserver 기반 "새 저장 전이" 확인으로 강화. 수정 후 **2/2 통과**, 던전(`Enter dungeon! Deceit`, L1)·신단 프롬프트 스크린샷으로 실제 진입 확인, 저장 전이 `["저장 중...","저장 완료"]` 확인. 신단은 새 캐릭터라 명상 쿨타임 규칙("Thy mind is still weary")으로 거절 — 실제 신단 입력·판정 경로는 동작.
+- 제가 처음 세운 가설(신단 컷신 대기 부족)은 틀렸음 — 관련 주석/`q` 재시도는 되돌림(컷신 ~4.4s 대기는 사실이라 유지).
+- `tests/e2e/korean-npc-alias.spec.ts`: 같은 `blur()` 수정 적용(Todo 13의 "bye 후 이동" 검사도 같은 이유로 거짓 통과였을 가능성).
+
+**검증(이 세션 직접 실행, exit 0)**: `npm run test:unit` 265/265 · `typecheck` · `verify:repo-sources` · `build` · `audit:dist`(passed) · `git diff --check`. QA 증거: `.omo/evidence/ultima-web/task-18/{security-audit.log, dist-leak-rejected.log(가짜 AVATAR.EXE → exit 1), oversized-zip.log, console-noise.log, mid-game-save-sync.log, memory-smoke.log}`.
+
+**확인 필요 / 남은 일**:
+1. `korean-npc-alias.spec.ts` 재실행 — blur 수정 후 첫 실행이 3.6분째 진행 중에 사용자 퇴근으로 **중단**(결과 없음). `ULTIMA4_DATA=... PLAYWRIGHT_PORT=4188 npx playwright test tests/e2e/korean-npc-alias.spec.ts --project=chromium --workers=1`.
+2. 통과하면 main merge + push → Todo 18 완료 판단(아래 3·4 결정 후) → 계획서 두 벌 `[x]`(cmp) → 19/25.
+3. Todo 18 "stale bridge requests": `web_bridge.cpp`의 `u4_web_*` epoch ABI는 실제 엔진이 **전혀 사용 안 함**(`src/`는 wasm export를 호출 안 함, 네이티브 컨트롤러도 호출 안 함; 실제 입력은 `screen_glfw.cpp`의 별도 큐). 실제 엔진 기준 e2e 불가 — 미검증 gap으로 남김. 수용 여부 판단 필요.
+4. 메모리 스모크는 1분 기본값("bounded accelerated equivalent"). 10분 실측이 필요하면 `MEMORY_SMOKE_MINUTES=10 npm run test:memory-smoke`.
+5. UX 이슈(수정 안 함): 실제 사용자도 한글 입력창 사용 후 화살표/명령키가 조용히 무시됨(입력창 밖 클릭 필요). F3 수동 QA 또는 제품 결정 필요.
+
+### Todo 18 재개 — NPC alias 재검증 완료 (2026-09-27 18:51 KST)
+
+- 사용자 목표 재확인: **한국어로 실제 플레이하는 웹 기반 울티마 4**. 이번 alias 테스트 통과는 그 목표 전체 달성이 아니다. 실제 NPC 화면이 영어인 것을 직접 관찰했으므로, Step 11/12/14의 실제 엔진 출력→한국어 표시 연결 gap은 출시를 막는 미완료 작업으로 취급한다. 승인률 18/25를 한글판 완성률로 설명하지 않는다.
+- 정정된 입력/출력 규칙: 플레이어는 영어 keyword 또는 한국어 alias를 입력할 수 있어야 하지만, 실제 게임에 표시되는 NPC 응답은 한국어여야 한다. 현재 확인된 것은 한국어 alias 입력뿐이며, Calabrini의 실제 NPC 응답은 영어였다. 한국어 NPC 출력은 미완료이고 출시 blocker다.
+- 세션 운영 제한: 이 세션의 한도는 5시간이다. 남은 시간·컨텍스트·예산 중 하나라도 5% 미만이 되면 active work를 중단하고 현재 상태를 `plan.md`와 `handoff.md`에 기록한다.
+
+- 범위: `plan.md` 바로 다음 순서의 첫 미완료 세부 항목만 실행. branch `todo-18-failure-boundaries`, HEAD `2ba0b325fc6449485e250e3205685093953a5296`. 기존 제품/테스트 코드는 수정하지 않았으므로 새 RED/GREEN 사이클은 없음. 기존 blur 수정의 재검증이다.
+- 두 worker로 유닛→브라우저 QA와 독립 정적 검증을 병렬 실행. `npm run test:unit` → exit 0(21 files/265 tests); 이후 `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip PLAYWRIGHT_PORT=4188 npm run test:e2e -- tests/e2e/korean-npc-alias.spec.ts --project=chromium --workers=1` → exit 0(2/2, 4.4분).
+- `npm run typecheck`, `npm run verify:repo-sources`(4 components), `git diff --check`, `cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md` → 각각 exit 0.
+- 로그: `.omo/evidence/ultima-web/task-18/resume-npc-alias/{unit,e2e}.log`, `.omo/evidence/ultima-web/task-18/resume-static/independent-static-results.log`. 스크린샷/trace는 기존 spec의 task-13 경로에 새로 생성됨. 주 에이전트가 `03-npc-approached.png`~`06-after-bye.png`를 직접 열어 Calabrini와의 대화 및 두 입력 후 같은 영어 응답, bye 종료를 확인했다. 대화가 한국어로 표시됐다는 증거는 아니다.
+- 전체 단계 수는 21 Todo + F1~F4 = 25. 첫 재검증 항목만 ✅로 갱신하고 전체 18/25(72%) 및 Todo 18 `[ ]`는 유지. stale-request 실제 엔진 경로와 메모리 스모크 범위의 기존 gap은 해결하지 않았다.
+- 이번 변경 파일: `HANDOFF.md`, `handoff.md`, `plan.md`. 원본 데이터/코드/테스트 수정 및 설치/commit/merge/push 없음. `npm ci`, 독립 `npm run build`, `audit:dist`, Todo 18 전체 e2e/메모리 검증은 이번 재개에서 실행하지 않았으므로 merge 게이트 전체 통과로 간주하지 않는다.
+- 다음: 최신 사용자 지시에 따라 설치/merge/push 승인 후 전체 게이트 실행 및 병합. Todo 18 완료 표시는 별도로 남은 acceptance gap을 해결/판단한 뒤에만 한다. 원본 데이터/private corpus/save/secret 및 evidence 커밋 금지, 실패 테스트 약화 금지.
+
+### Todo 18 재개 — 10분 memory smoke 재검증 완료 (2026-09-27 19:19 KST)
+
+- 사용자 추가 지시 반영: 제품 목표는 **플레이어가 영어 keyword 또는 한국어 alias를 입력할 수 있고, 실제 게임 속 NPC 응답은 한국어로 표시되는 웹 기반 울티마 4**다. 이 방향을 `plan.md`/`HANDOFF.md`/이 파일에 반영했다. 세션 한도는 5시간이며, 남은 시간·컨텍스트·예산 중 하나라도 5% 미만이 되면 active work를 멈추고 `plan.md`와 `handoff.md`에 현황을 기록한다.
+- 10분 메모리 스모크를 실제 실행해 Todo 18의 memory duration gap을 해소했다. 명령: `MEMORY_SMOKE_MINUTES=10 PLAYWRIGHT_PORT=4198 npm run test:memory-smoke` (환경: `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip`, Node 22 PATH). 결과: exit 0, 1/1 passed, 11.6분. Browser: Chromium 136.0.7103.25. JS heap verdict: earlyAvg=39308487, lateAvg=38181445, ratio=0.971(threshold 3). caveat: JS heap만 측정하며 wasm linear memory는 미포함.
+- 증거: `.omo/evidence/ultima-web/task-18/resume-memory-10min/memory-smoke-10min.log`, `run-summary.txt`, `cleanup-receipt.txt`. cleanup receipt 기준 PLAYWRIGHT_PORT 4198 listener 없음, test/browser/server process 없음, 별도 정리 필요 없음.
+- Todo 18은 여전히 `[ ]` 유지. 남은 핵심 판단: `stale bridge requests`는 `web_bridge.cpp` epoch ABI가 실제 엔진 입력 경로에서 쓰이지 않아 실제 엔진 e2e 증명이 불가능한 gap으로 남아 있다. 가짜로 통과하는 테스트를 만들지 말고, 이 gap을 수용할지/별도 실제 경로 작업으로 넘길지 판단해야 한다.
+- 이번 19:19 KST 추가 작업에서 코드/테스트는 수정하지 않았다. 변경 파일은 문서(`plan.md`, `handoff.md`, `HANDOFF.md`)와 start-work 상태 추적용 `.omo/boulder.json`뿐이다. 설치/commit/main merge/push는 하지 않았다.
+
+### Todo 18 재개 — 주요 게이트 재실행 완료, npm ci 제외 (2026-09-27 19:26 KST)
+
+- `npm ci`를 제외한 주요 검증을 실제 재실행했다. 전부 exit 0:
+  - `npm run test:unit` — 21 files / 265 tests.
+  - `npm run verify:repo-sources` — 4 pinned components.
+  - `npm run typecheck`.
+  - `npm run build`.
+  - `npm run audit:dist` — dist 9 files scanned, no leaks or shipped-content violations.
+  - `PLAYWRIGHT_PORT=4208 npm run test:e2e -- tests/e2e/failure-boundaries.spec.ts --project=chromium --workers=1` — 3/3, 3.1분.
+  - `git diff --check`.
+  - `cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md`.
+- `npm ci`는 이번 재개에서 아직 실행하지 않았다. 사용자 지시/AGENTS.md에 따라 설치·main merge·push는 사용자 결정 대상이다.
+- Todo 18은 여전히 `[ ]` 유지. 남은 판정 이슈는 동일하다: `stale bridge requests` acceptance를 죽은 ABI gap으로 수용할지, 또는 별도 실제 엔진 입력 경로 작업으로 남길지 결정 필요. 메모리 10분 조건과 failure-boundaries/audit 쪽은 이번 재개에서 재검증 완료.
+
+### Todo 18 stale real-surface RED 추가 후 사용자 지시로 중단 (2026-09-27 19:40 KST)
+
+- 사용자 지시: "지금 작업 멈추고 handoff.md plan.md에 남겨". 이에 따라 진행 중이던 `01a0e26c-655a-7331-a98d-e8e3df4de639` worker를 shutdown했고, Todo 18 완료 처리/계획서 체크박스 변경/main merge/push는 하지 않았다.
+- 중단 직전 작업: stale bridge gap을 죽은 `u4_web_*` ABI로 속이지 않고, 실제 브라우저/게임 입력 표면에서 재현하는 RED e2e를 추가하던 중이었다. 변경 파일: `tests/e2e/failure-boundaries.spec.ts`에 신규 테스트 `stale Korean text: closing a real native text prompt rejects the old shell submission without dispatching alias keys to the game surface` 추가. 아직 구현/GREEN 없음.
+- RED 결과: `PLAYWRIGHT_PORT=4218 ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run test:e2e -- tests/e2e/failure-boundaries.spec.ts --project=chromium --workers=1` → exit 1, 1 failed / 3 passed. 실패 관측: native avatar-name prompt를 닫은 뒤 오래된 `#korean-keyword-input`에서 Enter를 누르면 stale 입력이어야 하는데 synthetic keydown 7개(`health` + Enter)가 게임 표면으로 들어갔다. 기대값 0, 실제값 7.
+- 증거: `.omo/evidence/ultima-web/task-18/stale-real-surface/red.log`, `stale-submission-observation.log`, `stale-submission.png`, `git-status-before.txt`.
+- 현재 worktree 기준 주의: 새 RED 테스트 때문에 `tests/e2e/failure-boundaries.spec.ts` 전체는 현재 실패한다. 19:26 KST에 기록한 3/3 통과는 이 RED 테스트 추가 전의 상태다.
+- 다음 재개 시 우선순위:
+  1. `src/shell.ts`의 실제 한국어 keyword 입력 표면에 prompt/epoch 또는 closed-request guard를 최소 구현해, native text prompt가 종료된 뒤 남은 한국어 입력창 제출이 GLFW keydown으로 합성되지 않게 한다.
+  2. RED 테스트를 GREEN으로 만든 뒤 `PLAYWRIGHT_PORT=4218 ... failure-boundaries.spec.ts`를 4/4로 재실행한다.
+  3. `npm run test:unit`, `npm run typecheck`, `npm run build`, `npm run audit:dist`, `git diff --check`, `cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md`를 재실행한다.
+  4. Todo 18 완료 체크/커밋/main merge/push는 그 뒤 별도 판단. `npm ci`, main merge, push는 아직 미실행이며 사용자 결정 대상이다.
+- 현재 git 상태 요약: `HANDOFF.md`, `handoff.md`, `plan.md`, `tests/e2e/failure-boundaries.spec.ts`가 modified. `.omo/boulder.json`, `.omo/start-work/`, `.omo/lazycodex-executor-verify/`, `.claude/`는 untracked. 원본 데이터/private corpus/save/secret은 커밋 금지.
+
+### Todo 18 stale real-surface GREEN — acceptance 통과, npm ci/merge는 사용자 결정 대기 (2026-09-27 20:10 KST)
+
+- 구현(최소): 실제 엔진이 네이티브 text prompt 수명을 셸에 알린다.
+  - `vendor/xu4/src/event.cpp`(`__EMSCRIPTEN__` 한정): `ReadStringController` 생성자/소멸자 → EM_JS `Module.u4TextPrompt.opened(id)` / `.closed(id)`. readInt/readString/readStringView 전부 이 클래스라 이름 입력·NPC talk 모두 커버. `vendor/source-manifest.json` xu4 treeSha256 `69f8d7e706167ef47a8dd4c29b57ce4924781761cc50a800b9dc8bbeb02b59eb`.
+  - `src/i18n/text-prompt-gate.ts`(신규, 순수): 열린 prompt 스택 + 입력 시점 prompt id 캡처. 제출은 prompt가 열려 있고 캡처 id가 null이거나 현재 id와 같을 때만 허용. 거부 문구 "입력 요청이 끝났습니다…" / "지금은 열린 입력 요청이 없습니다."
+  - `src/engine/startup.ts`: `textPrompt` 옵션을 callMain 전에 `module.u4TextPrompt`로 부착. `src/shell.ts`: `input`마다 `noteInput()`, 제출 시 게이트 판정 후 거부면 `[한글 입력 거부] …` 메시지. `src/main.ts`: `bridge.textPromptReceiver` 전달.
+  - 기존 bridge `prompt` 이벤트는 `showPromptMarker().focus()`가 한국어 입력 포커스를 뺏기 때문에 재사용하지 않았다.
+- RED→GREEN (전부 직접 실행):
+  - unit `tests/unit/text-prompt-gate.test.ts`: 모듈 없음 RED exit 1 → 10/10 GREEN. `tests/unit/startup-sequence.test.ts` Todo 18 케이스: 1 failed/9 passed RED → 10/10 GREEN.
+  - e2e `failure-boundaries.spec.ts`: 이전 RED(합성 keydown 7) → `PLAYWRIGHT_PORT=4228 ... --project=chromium --workers=1` 4/4, exit 0, 3.3분. 관측: stale 제출 뒤 합성 keydown 0, 패널에 "[한글 입력 거부] 입력 요청이 끝났습니다…".
+  - 회귀 e2e(순차): `korean-npc-alias.spec.ts` 2/2 exit 0(4.4분), `gameplay-progression.spec.ts` 2/2 exit 0(3.7분) — 게이트가 정상 NPC talk 중 한국어 제출을 막지 않음.
+  - 증거: `.omo/evidence/ultima-web/task-18/stale-real-surface/{unit-red,unit-green,startup-unit-red,startup-unit-green,green,regress-npc-alias,regress-gameplay,static-gates,build}.log`.
+- 게이트(이번 변경 후, 직접 실행, exit code):
+  ```
+  source .emsdk/emsdk_env.sh && npm run build:wasm   # 0 (background fork 실행/보고, xu4.wasm 1,186,774 B)
+  npm run test:unit -- tests/unit/wasm-symbols.test.ts  # 0 — 8/8 (fork 보고)
+  npm run test:unit                           # 0 — 22 files / 276 tests
+  npm run verify:repo-sources                 # 0
+  npm run typecheck                           # 0
+  npm run build                               # 0
+  npm run audit:dist                          # 0 — security-audit.log 갱신
+  node scripts/audit-dist.mjs --dir=<scratch dist + fake AVATAR.EXE>  # 1 (의도된 거부) — dist-leak-rejected.log 갱신
+  git diff --check                            # 0
+  cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
+  npm ci                                      # 미실행 — 사용자 결정 대상
+  ```
+- memory smoke 10분(19:26 이전 기록, 1/1, Chromium 136.0.7103.25)은 이번 변경 전 실행분이다. 이번 변경(셸 게이트 + 네이티브 훅 2개)으로 재실행하지는 않음.
+- Todo 18 acceptance(audit:dist, failure-boundaries e2e, memory smoke 기록, QA 증거 2종)는 충족. AGENTS.md 완료 기준의 merge 게이트 중 `npm ci`만 남음 → 계획서 체크박스/진행률은 `npm ci` 통과 후 갱신.
+
+### Todo 18 main merge 게이트 (2026-09-27 20:20 KST, 사용자 승인: npm ci + merge + push)
+
+branch `todo-18-failure-boundaries`(`68b1d56` 구현, `a769150` handoff)에서 직접 실행, 전부 exit 0:
+```
+npm ci                                      # 0
+npm run test:unit                           # 0 — 22 files / 276 tests
+npm run verify:repo-sources                 # 0
+npm run typecheck                           # 0
+npm run build                               # 0
+npm run audit:dist                          # 0
+git diff --check                            # 0
+cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
+```
+- Todo 18 추가 acceptance: `failure-boundaries.spec.ts` 4/4, memory smoke 10분 1/1(변경 전 실행분), `security-audit.log` exit 0, `dist-leak-rejected.log` exit 1(의도). 로그: `.omo/evidence/ultima-web/task-18/stale-real-surface/merge-gate.log`.
+- 계획서 두 벌 `[x] 18`, `plan.md` 19/25 = 76.0%. 다음: Todo 19.

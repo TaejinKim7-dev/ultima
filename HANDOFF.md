@@ -1,58 +1,62 @@
 # HANDOFF
-작성 시각: 2026-09-27 15:20 KST
+작성 시각: 2026-09-27 20:12 KST
 
 ## 1. 목표 (What we're building)
-- xu4(Ultima IV C++ 엔진)를 브라우저에서 원본 `ultima4.zip`을 직접 선택해 플레이할 수 있는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식하고, 한국어 UI/대화/NPC 키워드를 제공한다. 진행 기준은 `/home/taejin/ultima/plan.md`(25단계).
-- 이번 세션 범위: Todo 17(브라우저 통합 게임 진행 e2e)을 새로 진행해 완료. 사용자 요청으로 로컬 개발 편의 기능(자동 zip 로드)도 추가.
+- xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식 + 한국어화. 진행 기준 `plan.md`(25단계).
+- 최종 목표는 **한국어로 실제 플레이하는 웹 기반 울티마 4**. 영어 keyword 또는 한국어 alias 입력 가능 + 실제 NPC 응답은 한국어여야 함. 현재 검증된 것은 한국어 alias 입력뿐(Calabrini 실제 응답은 영어) — 한국어 NPC 출력 미완료, 출시 차단. 72%는 계획 승인률이지 한국어 플레이 완성률이 아님.
+- 이번 세션: `plan.md` 바로 다음 순서 5번 — stale 한국어 입력 제출이 실제 게임 표면(GLFW keydown)으로 합성되지 않게 하는 최소 구현(Todo 18 남은 RED).
 
 ## 2. 현재 상태 (Current state)
-- **승인 기준 18/25 = 72.0%** (Step 1~17, 21 ✅). 브랜치 `todo-17-gameplay-progression`, **main에는 아직 merge/push 안 함** (사용자 승인 대기).
-- git: `git status --short --branch` 결과 위 브랜치에서 clean 대비 5개 파일 수정(`.omo/plans/ultima-web.md`, `docs/ULTIMA_WEB_PLAN.md`, `handoff.md`, `plan.md`, `vite.config.ts`) + 1개 신규 파일(`tests/e2e/gameplay-progression.spec.ts`) 미커밋. `.claude/`, `.omo/boulder.json`, `.omo/lazycodex-executor-verify/`, `.omo/start-work/`는 이 세션이 만들지 않은 기존 untracked 항목(harness/환경 관련으로 보임, 손대지 않음).
-- 동작하는 것 (전부 이 세션에서 직접 실행해 확인):
-  - `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test tests/e2e/gameplay-progression.spec.ts --project=chromium --workers=1` → **2 passed (4.1분)**. 실제 새 게임→오버랜드 이동→마을 진입+NPC 영어/한국어 alias 대화→Ztats 상태화면→던전(Deceit) 진입→신단(Honesty) 명상→'q' 저장→3번째 세션 Journey Onward 재로드까지 전 구간 통과. 증거 17장 스크린샷 + trace.zip은 `.omo/evidence/ultima-web/task-17/`.
-  - `npm run test:unit` → 260/260. `npm run typecheck` → exit 0. `npm run verify:repo-sources` → 통과. `npm run build` → exit 0. `git diff --check` → exit 0.
-  - trace.zip 원본데이터 유출 직접 검사 완료(unzip -l, 파일 크기/문자열 grep) — 유출 없음 확인. `.omo/evidence/`는 `.gitignore`로 이미 전체 제외돼 있어 커밋 위험 자체가 없음(재확인함).
-  - 로컬 개발 편의 기능: `npm run dev`에서 `ULTIMA4_DATA` 환경변수의 zip을 자동으로 `#rom-picker`에 주입 — Playwright로 `engineStarted: true` 확인. `npm run build`/`build:site` 산출물에서 관련 문자열 grep 0건으로 프로덕션 비유입 확인.
-- 아직 안 되는 것 / 확인 필요:
-  - **`npm run audit:dist`가 이미 실패 상태** — `"window.ultimaI18n"` test-hook marker가 allowlist 밖. `git stash`로 이 세션 변경분을 걷어내고 재현해 **main 기준으로도 동일하게 실패함을 직접 확인**(이 세션이 만든 문제 아님). Todo 17의 merge 게이트(AGENTS.md 공통 목록)엔 `audit:dist`가 없어 이번 커밋 범위 밖으로 남겨둠 — Todo 18이 고쳐야 할 대상.
-  - Todo 18의 acceptance criteria 파일 `tests/e2e/failure-boundaries.spec.ts`는 존재하지 않음(새로 작성 필요, 아래 5절 참고).
-  - `npm run preview`(정적 프리뷰, GitHub Pages와 동일 서빙 방식)에서는 자동 zip 로드가 의도적으로 동작 안 함 — 의도된 설계(실제 배포 환경과 같은 수동 선택 경험을 검증하려는 목적), 버그 아님.
+- 진행률 **18/25 = 72%** (Todo 18은 아직 `[ ]`). branch `todo-18-failure-boundaries`, 이번 변경은 커밋 `68b1d56`(branch, 미push), main 미merge.
+- 이번 세션 구현(아래 3절): 네이티브 `ReadStringController` 생성/소멸 → `Module.u4TextPrompt.opened(id)/closed(id)` EM_JS 훅, `startEngine({textPrompt})`로 연결, 셸 `#korean-keyword-input`이 순수 게이트(`src/i18n/text-prompt-gate.ts`)로 제출을 판정.
+- 실제로 확인한 결과(모두 직접 실행):
+  - 유닛 RED→GREEN: `text-prompt-gate.test.ts` 모듈 없음으로 RED(exit 1) → 10/10 GREEN. `startup-sequence.test.ts`의 새 Todo 18 케이스 RED(1 failed/9 passed) → 10/10 GREEN. 로그: `.omo/evidence/ultima-web/task-18/stale-real-surface/{unit-red,unit-green,startup-unit-red,startup-unit-green}.log`.
+  - 전체 `npm run test:unit` 22 files/276 tests, `verify:repo-sources`, `typecheck`, `build`, `audit:dist`, `git diff --check`, 계획서 `cmp` 전부 exit 0 (`stale-real-surface/static-gates.log`, `build.log`).
+  - 백그라운드 fork 보고(직접 재현은 grep/diff만): `npm run build:wasm`(release) exit 0, `xu4.wasm` 1,186,774 B, `wasm-symbols.test.ts` 8/8, `verify:repo-sources` 0, `event.cpp` 네이티브 `g++ -fsyntax-only` 0. 내가 직접 확인: `dist/engine/xu4.mjs`에 `u4TextPrompt` 존재, event.cpp diff 검토.
+- e2e(직접 실행): `failure-boundaries` 4/4 exit 0(stale 제출 뒤 합성 keydown 0), 회귀 `korean-npc-alias` 2/2, `gameplay-progression` 2/2 exit 0. QA 증거 `security-audit.log`(exit 0)·`dist-leak-rejected.log`(exit 1, 의도) 현재 빌드로 재생성.
+- 남은 것: `npm ci`(사용자 결정 대상) → 게이트 재통과 시 Todo 18 ✅(19/25) + 계획서 `[x]`. memory smoke 10분은 이번 변경 전 실행분(재실행 안 함).
 
 ## 3. 변경한 파일 (Files changed)
-- `tests/e2e/gameplay-progression.spec.ts` (신규): Todo 17의 happy-path e2e(전체 루트) + failure-path e2e(alias-regression 네거티브 컨트롤).
-- `vite.config.ts`: `devAutoLoadOriginalData()` Vite 플러그인 추가(사용자 요청 로컬 편의 기능, `apply: "serve"`로 프로덕션 빌드에서 구조적으로 배제).
-- `plan.md`: 진행률 17→18/25, Todo 17 행 ✅ 갱신, "바로 다음 순서"를 Todo 18 중심으로 재작성, Todo 17 완료 기록 단락 추가.
-- `.omo/plans/ultima-web.md` / `docs/ULTIMA_WEB_PLAN.md`: Todo 17 체크박스 `[ ]` → `[x]` (두 파일 `cmp` byte-identical 재확인 완료).
-- `handoff.md`: "Todo 15 완료 확인"(이전 세션 기록 누락분 보정) + "Todo 17 완료" 절 추가(기술 결정 근거, 실제 검증 내역, 막힌 부분 전부 기록).
-- `HANDOFF.md` (이 파일): 이번 절 다시 작성.
+- `vendor/xu4/src/event.cpp` — `__EMSCRIPTEN__` 한정: EM_JS `u4_web_text_prompt_opened/closed`, `ReadStringController`에 `webPromptId` + 소멸자. 네이티브 빌드 무영향.
+- `vendor/source-manifest.json` — xu4 treeSha256 `69f8d7e7…59eb` (fileCount 410 유지).
+- `src/i18n/text-prompt-gate.ts`(신규) + `tests/unit/text-prompt-gate.test.ts`(신규) — 열린 prompt 스택, input 시점 prompt id 캡처, 제출 판정(stale/없음 거부 메시지).
+- `src/engine/startup.ts` + `tests/unit/startup-sequence.test.ts` — `TextPromptReceiver`, `textPrompt` 옵션을 callMain 전에 `module.u4TextPrompt`로 부착.
+- `src/shell.ts` — 게이트 생성, `input` 이벤트에서 `noteInput()`, `submitKoreanKeyword()`가 먼저 게이트 판정 후 거부 시 `[한글 입력 거부] …` 메시지; `UltimaBridgeApi.textPromptReceiver` 추가; "대화 밖에서 쓰면 top-level 키 합성" 주석을 새 동작으로 수정.
+- `src/main.ts` — `startEngine`에 `textPrompt: bridge.textPromptReceiver` 전달.
+- `tests/e2e/failure-boundaries.spec.ts` — 이전 세션에서 추가한 stale real-surface RED 테스트(이번엔 수정 안 함).
+- `plan.md`, `handoff.md` — 이전 세션의 미커밋 변경(이번엔 아직 안 건드림).
 
 ## 4. 주요 결정과 근거 (Key decisions)
-- **결정론적 라우팅에 실제 xu4 cheat 메뉴를 재사용**: Todo 3/13이 이미 확립한 "Debug Mode를 실제 Configure 메뉴로 켜면 cheat 메뉴의 Goto가 RNG 없이 순간이동한다" 패턴을 던전/신단까지 확장(치트 'i' Items로 룬 지급 → 신단 입장 가능). cheat 메뉴는 `settings.debug`가 꺼져 있으면 완전히 비활성인 xu4 원본 기능이라, 이 프로젝트가 새로 추가한 cheat API가 아님 — Todo 18의 "cheat API 추가 금지" 규칙과 충돌하지 않는다.
-- **"combat or dungeon"은 던전 쪽으로, "shrine/codex"는 신단 쪽으로 충족**: 전투는 오버랜드 RNG라 결정론적 e2e에 부적합하고, 코덱스는 엔드게임 콘텐츠라 새 캐릭터로 도달 불가능. Acceptance criteria의 "or"를 그대로 활용.
-- **alias-regression 실패 시나리오는 wasm 재빌드 없이 실제 코드(resolveInput/buildAliasTable)를 Node에서 직접 재사용**: `src/shell.ts:548`이 이 함수의 반환값을 그대로 native에 synthesize한다는 사실을 소스로 확인했으므로, 이 값이 오염됐을 때 happy-path 캔버스 델타 비교가 어떻게 몰래 틀려지는지 증명하는 것으로 충분하다고 판단(korean-npc-alias.spec.ts의 기존 원칙 재사용).
-- **로컬 편의 기능은 `apply: "serve"`로 구조적 차단**: 사용자가 "매번 파일 선택이 너무 번거롭다"고 해서 만들었지만, 저장소 정책(원본 데이터 미커밋)과 Todo 18의 "프로덕션 test-hook 금지" 규칙에 저촉되지 않도록 빌드 커맨드 자체에서 훅이 실행되지 않게 설계.
+- 신호원은 네이티브 `ReadStringController` 수명: readInt/readString/readStringView 전부 이 클래스 → 이름 입력(`intro.cpp:823`)과 NPC talk(`game.cpp:1424`) 모두 커버. 셸 쪽엔 prompt 상태 신호가 달리 없었음.
+- 기존 bridge `prompt` 이벤트 재사용 안 함: `showPromptMarker()`가 `focus()`를 빼앗아 한국어 입력 중 포커스가 튐 + bridge 계약 변경 필요.
+- 게이트 규칙: 제출 시 prompt가 열려 있어야 하고, 마지막 입력 시 캡처한 id가 null(열리기 전 입력)이거나 현재 id와 같아야 함 → 기존 alias 헬퍼가 prompt 열리기 전에 fill해도 안 깨지도록.
+- `closed(id)`는 열린 id만 제거(순서 꼬임으로 게이트가 고착되지 않게), 스택으로 중첩 대비.
 
 ## 5. 다음 할 일 (Next steps)
-- [ ] **사용자 승인 후**: `todo-17-gameplay-progression` → `main` merge, 이어서 push (AGENTS.md의 "merge/push는 멈추고 물어봐" 규칙 + 이번 세션 지시에 따라 대기 중).
-- [ ] Todo 18 착수: `tests/e2e/failure-boundaries.spec.ts` 신규 작성(corrupt ZIP/oversized ZIP/missing files/stale bridge requests/save sync failure/XSS-like text — `tests/e2e/startup-data.spec.ts`와 corrupt-ZIP/missing-files 중복 여부 먼저 확인).
-- [ ] Todo 18: 10분 메모리 스모크 테스트 하네스 신규 작성(현재 전혀 없음 — 새 스크립트 또는 스펙, 브라우저/버전 기록 포함).
-- [ ] Todo 18: `npm run audit:dist`의 기존 `"window.ultimaI18n"` allowlist 실패를 고쳐 GREEN으로 만들기(이번 세션이 만든 문제 아님, 이전부터 있던 gap).
-- [ ] Todo 18 완료 후 plan.md/계획서 두 벌 갱신 → 19/25 → Todo 19 마무리(이미 골격은 있음, main merge만 남음) → 20 → F1~F4.
+- [x] failure-boundaries 4/4, 회귀 e2e 2종 통과, 커밋 `68b1d56`, handoff.md 게이트 기록.
+- [ ] (사용자 승인 후) `npm ci` → unit/verify/typecheck/build/diff-check 재실행 → `plan.md` Todo 18 ✅ 19/25, 계획서 두 벌 `[x]` + `cmp`.
+- [ ] `npm ci` + main merge/push는 사용자 결정 대상(이번 세션 지시) — 묻고 진행.
+- [ ] 이후 Todo 19 → 20 → F1~F4. 출시 전 Step 11/12/14 실제 엔진 한국어 출력 연결 gap 해결.
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
-- **merge/push는 사용자 결정 대기 중** — 아직 하지 않았다.
-- `npm run audit:dist`가 이미 실패 상태(main 기준도 동일, 이 세션이 격리 확인함) — Todo 18 전까지는 이게 정상 상태라고 취급해도 된다.
-- Todo 3 debug-journal이 기록한 "town 내부 이동도 'Slow progress!' RNG의 영향을 받는다" 리스크가 `gameplay-progression.spec.ts`의 NPC 접근 스윕에도 그대로 있음(korean-npc-alias.spec.ts와 동일한 기존 리스크) — 재실행 시 낮은 확률로 실패할 수 있음, 새로 생긴 문제 아님.
-- `progression.trace.zip`은 216MB(스크린샷/네트워크/wasm 리소스 포함) — `.omo/evidence/`가 `.gitignore`로 전체 제외돼 있어 커밋 걱정은 없지만, 로컬 디스크 공간은 차지하므로 필요 없어지면 사용자가 직접 정리해도 됨.
-- `npm run preview`용으로 띄워둔 로컬 프리뷰 서버들(포트 4174~4178)은 이 세션 안에서 여러 번 껐다 켰다 했음 — 세션 종료 시 전부 같이 내려감. 계속 쓰려면 재요청 필요.
+- 이번 변경 이후 **stale wasm + 새 셸** 조합이면 모든 한국어 제출이 "열린 입력 요청 없음"으로 거부됨 — e2e 전 `build/wasm-release`가 새 빌드인지(`grep u4TextPrompt dist/engine/xu4.mjs`) 확인.
+- 동작 변화: 이제 NPC/텍스트 prompt 밖에서 한국어 입력창 제출은 키 합성 대신 거부 메시지. 의도된 변화지만 F3 수동 QA에서 UX 확인 필요.
+- e2e 동시 실행 시 반드시 다른 `PLAYWRIGHT_PORT`. NPC 접근 스윕 스펙끼리는 동시 실행 자제.
+- UX 이슈(미수정): 한글 입력창 사용 후 화살표/명령키가 조용히 무시됨(포커스 가드).
+- `memory-smoke`는 JS heap만 측정(wasm linear memory 미포함).
+- `pkill -f "<패턴>"`은 자기 셸까지 죽임 — `"[p]laywright ..."` 대괄호 트릭.
+- 진행률 분모: AGENTS.md/plan.md는 25, 이번 세션 사용자 지시문은 n/24 — 25 유지, 불일치 보고함.
 
 ## 7. 재개 방법 (How to resume)
 ```bash
 cd /home/taejin/ultima
-git status -sb && git log --oneline -5
-export PATH="$HOME/.local/opt/node22/bin:$PATH"; node -v
+git checkout todo-18-failure-boundaries && git status -sb
+export PATH="$HOME/.local/opt/node22/bin:$PATH"
 export ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip
-npx playwright test tests/e2e/gameplay-progression.spec.ts --project=chromium --workers=1   # 재확인용, 4분+ 소요
-npm run dev   # 로컬 편의 기능으로 자동 zip 로드되어 바로 플레이 가능
+# wasm 재빌드가 필요하면: source .emsdk/emsdk_env.sh && npm run build:wasm
+npm run build
+PLAYWRIGHT_PORT=4228 npm run test:e2e -- tests/e2e/failure-boundaries.spec.ts --project=chromium --workers=1
+PLAYWRIGHT_PORT=4188 npm run test:e2e -- tests/e2e/korean-npc-alias.spec.ts --project=chromium --workers=1
+PLAYWRIGHT_PORT=4238 npm run test:e2e -- tests/e2e/gameplay-progression.spec.ts --project=chromium --workers=1
 ```
-- 공식 인계 기록: `handoff.md`의 가장 최근 절 "Todo 17 완료 — 브라우저 통합 게임 진행 e2e". 진행률/다음 순서: `plan.md`. 운영 규칙: `AGENTS.md`.
+- 상세 기록: `handoff.md` 마지막 절, 진행 순서: `plan.md` "바로 다음 순서".

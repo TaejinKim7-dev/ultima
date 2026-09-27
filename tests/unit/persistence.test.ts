@@ -135,6 +135,43 @@ describe("createPersistenceCoordinator", () => {
     }
   })
 
+  it("a syncfs call that THROWS synchronously (not just calls back with an error) also sets status to 'error', never leaves it stuck at 'saving'", async () => {
+    // Real Emscripten IDBFS: getDB() returns an already-cached open
+    // connection synchronously (`IDBFS.dbs[name]`), and the write path's
+    // `db.transaction([...], "readwrite")` call is NOT wrapped in a
+    // try/catch in the generated glue -- if that connection is broken
+    // (e.g. closed, or a real IndexedDB InvalidStateError), `.transaction()`
+    // throws SYNCHRONOUSLY, not via the callback. Verified by reading the
+    // real generated dist/engine/xu4.js during Todo 18's investigation.
+    const events: BridgeEvent[] = []
+    const emit = (event: BridgeEvent) => (events.push(event), true)
+    const fs: PersistenceFS = {
+      trackingDelegate: {},
+      writeFile() {},
+      readFile(): Uint8Array {
+        throw new Error("unused in this test")
+      },
+      readdir(): string[] {
+        return []
+      },
+      syncfs() {
+        throw new DOMException("connection is closing", "InvalidStateError")
+      }
+    }
+    const coordinator = createPersistenceCoordinator()
+    coordinator.attach(fs, PATHS, emit)
+
+    fs.trackingDelegate.onCloseFile?.("/persist/profile/party.sav")
+    await coordinator.flush()
+
+    expect(coordinator.status, "must not be stuck at 'saving' forever after a synchronous throw").toBe("error")
+    const errorEvent = events.find((e) => e.type === "save-state" && e.status === "error")
+    expect(errorEvent, "must dispatch a save-state error event even on a synchronous throw").toBeDefined()
+    if (errorEvent?.type === "save-state") {
+      expect(errorEvent.message).toContain("connection is closing")
+    }
+  })
+
   it("flush() with nothing pending resolves immediately without calling syncfs", async () => {
     const { fs, syncfsCalls } = makeFakeFs()
     const { emit } = collectEvents()
