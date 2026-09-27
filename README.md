@@ -16,49 +16,69 @@ Ultima IV를 웹 브라우저에서 실행할 수 있도록 포팅하고, 한국
 - 새로 작성되는 코드는 TDD로 구현하고, 각 컴포넌트는 Unit Test로 독립 검증합니다.
 - 원본 게임 데이터와 비밀 값만 제외하고, 계획/코드/번역 원천/테스트 정책/배포 workflow는 공개합니다.
 
-## 현재 상태
+## 현재 상태 (2026-09-27)
 
-현재 이 저장소는 구현 전 단계입니다.
+브라우저에서 실제 xu4 엔진이 원본 데이터로 돌아갑니다. GitHub Pages에도 올라가 있습니다.
 
-완료된 것:
+Verified deployment: https://taejinkim7-dev.github.io/ultima/ (Actions run 36316708881)
 
-- 원본 방향과 요구사항 정리
-- xu4, Faun, GLV, Boron 오픈소스 스냅샷 수집
-- 웹 포팅 실행 계획 작성
-- GitHub Pages 배포 대상 정리
-- 원본 게임 데이터 미포함 정책 정리
-- TDD와 컴포넌트별 Unit Test 정책 명시
+동작하는 것:
+
+- 원본 `ultima4.zip` 선택 → 검증 → 실제 엔진 시작 (WebGL2 렌더, 키보드 입력)
+- 새 게임(캐릭터 생성), 필드 이동, 마을·NPC 대화, 던전·신단 진입, 저장/재로드, 세이브 export/import
+- Web Audio 음악과 효과음
+- 한국어 셸 UI, 한국어 NPC 키워드 alias 입력(예: `건강` → `health`)
+- 마을 주민 NPC 대사를 대화 패널에 한국어로 표시(Todo 22)
+- 원본 데이터가 배포 산출물에 섞이지 않도록 하는 검사(`npm run audit:dist`)
 
 아직 안 된 것:
 
-- 실제 WebAssembly 빌드
-- 브라우저 실행
-- 한국어 번역 통합
-- 저장/오디오/입력 구현
-- GitHub Pages 배포
+- 마을 주민 외의 게임 텍스트(Lord British, 상점, 인트로, 상태창 등)는 아직 영어입니다. 캔버스의 글자는 모두 영어이고, 한국어 NPC 대사는 아래 대화 패널에 나옵니다.
+- Firefox/WebKit 수동 QA, 최종 독립 검증(F1~F4)
+
+자세한 한계는 [웹 포팅 문서](docs/WEB_PORT.md#알려진-한계)에 있습니다.
+
+## 빠른 시작
+
+clean clone에서 로컬로 빌드해 실행하는 순서입니다. 필요한 도구(Node 22, emsdk 4.0.23, apt 헤더)는 [웹 포팅 문서](docs/WEB_PORT.md)를 보세요.
+
+```bash
+npm ci
+npm run deps:host
+npm run build:modules
+source .emsdk/emsdk_env.sh
+npm run deps:wasm
+npm run build:wasm
+npm run build:site -- --base=/ultima/
+npm run audit:dist -- --require-engine
+ULTIMA4_DATA=/절대/경로/ultima4.zip npm run dev
+```
 
 ## 문서
 
+- [웹 포팅: 빌드·실행·테스트·한계·증거 인덱스](docs/WEB_PORT.md)
+- [GitHub Pages 설정과 배포](docs/GITHUB_PAGES.md)
 - [웹 포팅 실행 계획](docs/ULTIMA_WEB_PLAN.md)
+- [진행 현황](plan.md)
 - [소스 고정 revision](docs/SOURCE_PINS.md)
 - [GitHub 업로드 및 Pages 대상](docs/GITHUB_UPLOAD.md)
 - [TDD 및 컴포넌트 테스트 정책](docs/TESTING_POLICY.md)
 - [AI 코딩 에이전트 인계 규칙](docs/AI_AGENT_HANDOFF.md)
-- [작업 인수인계](handoff.md)
+- [작업 인수인계 기록](handoff.md) (세션별 누적 기록이라 옛 명령·경로가 남아 있습니다. 현재 방법은 위 문서를 따르세요.)
 - [초기 프로젝트 노트](project.md)
 
 AI 코딩 에이전트가 이 저장소를 이어받을 때는 먼저 [AGENTS.md](AGENTS.md), [작업 인수인계](handoff.md), [웹 포팅 실행 계획](docs/ULTIMA_WEB_PLAN.md), [TDD 및 컴포넌트 테스트 정책](docs/TESTING_POLICY.md)을 읽어야 합니다.
 
 ## 포함된 오픈소스 코드
 
-`vendor/` 아래에 향후 구현에 필요한 오픈소스 스냅샷을 포함합니다.
+`vendor/` 아래에 pinned 오픈소스 스냅샷이 있습니다.
 
-- `vendor/xu4`: Ultima IV 엔진
+- `vendor/xu4`: Ultima IV 엔진 (웹 이식용 수정 포함)
 - `vendor/faun`: 오디오 라이브러리
 - `vendor/glv`: xu4 관련 GLV submodule
 - `vendor/boron`: xu4 모듈 패키징과 설정 처리에 필요한 Boron
 
-각 소스의 revision은 [SOURCE_PINS.md](docs/SOURCE_PINS.md)에 기록되어 있습니다.
+각 소스의 revision은 [SOURCE_PINS.md](docs/SOURCE_PINS.md)에 있고, `npm run verify:repo-sources`가 트리 해시를 검사합니다.
 
 ## 포함하지 않는 것
 
@@ -76,7 +96,7 @@ AI 코딩 에이전트가 이 저장소를 이어받을 때는 먼저 [AGENTS.md
 
 반대로 이 저장소에서 작성되는 구현 코드, 한국어 번역 원천 JSON, 테스트 정책, GitHub Actions workflow, 개발 문서는 공개를 기본값으로 둡니다.
 
-## 배포 목표
+## 배포
 
 대상 GitHub 저장소:
 
@@ -84,29 +104,16 @@ AI 코딩 에이전트가 이 저장소를 이어받을 때는 먼저 [AGENTS.md
 https://github.com/TaejinKim7-dev/ultima
 ```
 
-예상 GitHub Pages URL:
+GitHub Pages URL:
 
 ```text
 https://taejinkim7-dev.github.io/ultima/
 ```
 
-최종 산출물은 `dist/index.html`을 루트로 하는 정적 사이트여야 합니다.
+`main`에 push하면 `.github/workflows/pages.yml`이 엔진까지 빌드·검사한 뒤 `dist/`를 배포합니다. 설정과 확인 방법은 [GITHUB_PAGES.md](docs/GITHUB_PAGES.md)를 보세요.
 
-## 다음 단계
+## 개발 원칙
 
-다음 작업자는 [웹 포팅 실행 계획](docs/ULTIMA_WEB_PLAN.md)을 기준으로 구현을 시작하면 됩니다.
-
-구현은 [TDD 및 컴포넌트 테스트 정책](docs/TESTING_POLICY.md)을 따른다. 모든 새 코드는 실패하는 테스트를 먼저 만들고, 컴포넌트별 Unit Test를 통과시킨 뒤 통합 QA로 넘어간다.
-
-큰 순서는 다음과 같습니다.
-
-1. 빌드/테스트 기반 구성
-2. native xu4 기준선 확보
-3. Emscripten/WASM 포팅
-4. WebGL2 렌더링 이식
-5. 브라우저 입력/세이브/데이터 로딩 구현
-6. 한국어 UI/번역/alias 통합
-7. Web Audio 구현
-8. 통합 QA와 GitHub Pages 배포
+구현은 [TDD 및 컴포넌트 테스트 정책](docs/TESTING_POLICY.md)을 따릅니다. 새 코드는 실패하는 테스트를 먼저 만들고, 컴포넌트별 Unit Test를 통과시킨 뒤 통합 QA로 넘어갑니다. 진행 순서와 남은 단계는 [plan.md](plan.md)에 있습니다.
 
 이 저장소의 첫 번째 원칙은 단순합니다: 원작 데이터는 배포하지 않고, 웹에서 플레이 가능한 한국어 Ultima IV 실행 환경을 만든다.

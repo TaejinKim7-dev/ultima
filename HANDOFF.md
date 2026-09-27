@@ -1,5 +1,5 @@
 # HANDOFF
-작성 시각: 2026-09-27 21:35 KST
+작성 시각: 2026-09-27 22:00 KST
 
 ## 1. 목표 (What we're building)
 - xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식 + 한국어화. 진행 기준 `plan.md`(25단계).
@@ -7,7 +7,7 @@
 - 이번 세션: Todo 18 완료·merge·push(19/25) → Todo 19 진행 중, 병렬로 Todo 20 검증기 준비 + 한국어 출력 gap 조사.
 
 ## 2. 현재 상태 (Current state)
-- 진행률 **21/26 = 80.8%** — Todo 22 ✅ (게이트 `npm ci` 포함 전부 0, 전체 e2e 40/40). main merge + push 진행. main `703919a`까지 origin 동기. Pages 실제 배포 확인 완료(run `36316708881`).
+- 진행률 **22/26 = 84.6%** — Todo 22, Todo 20 ✅ main merge/push. 남은 것 F1~F4(F2 APPROVE, F4 REJECT=사용자 결정 필요, F3 브라우저 준비, F1 대기). main `703919a`까지 origin 동기. Pages 실제 배포 확인 완료(run `36316708881`).
 - **Todo 22 진행 중 (branch `todo-22-korean-npc-output`, 미커밋 작업 + Fork A merge `39730db`)**:
   - 설계: 웹 빌드에서만 `runTalkDialogue`의 모든 출력을 `talkMessage()`로 가로채 EM_JS `Module.u4Text.talk(format, a0, a1)`로 보냄. TLK를 가리키는 인자/응답은 `@MAP:npcIndex:field` id로만 보내므로 영어 TLK 원문은 엔진 밖으로 안 나감. 틀 문장은 xu4 코드 리터럴 그대로 → JS가 `resolveTalkTemplateId`로 id 찾고 `resolveDisplayText`로 한국어. 플레이어 입력은 `u4Text.input` → "> health".
   - `Discourse`에 `webTlkName`(웹 전용, "moonglow.tlk"→"MOONGLOW"), `TalkState`에 web 필드. Boron 대화는 `webStrings=NULL`로 비활성. `discourse_castle.cpp`용으로 `message` 매크로를 `screenMessage`로 복원.
@@ -30,10 +30,10 @@
 - 한국어 출력 구현은 새 Todo(분모 변경)라 착수하지 않고 설계 메모만.
 
 ## 5. 다음 할 일 (Next steps)
-- [x] 실제 배포 확인: run `36316708881` deploy=success, 라이브 사이트에서 실제 엔진 부팅(handoff.md 20:49 기록).
-- [ ] **Todo 22** (다음 단계, 진행률 20/26): `.omo/drafts/korean-output-gap-design.md` §5~6대로. RED e2e `tests/e2e/korean-npc-output.spec.ts` 먼저.
-- [ ] Todo 20: `todo-20-release-docs`(`6a336df`) rebase 후 문서 작성.
-- [ ] F1~F4.
+- [x] Todo 22 ✅ main merge `65569fa` + push (21/26).
+- [ ] **Todo 20 진행 중** (branch `todo-20-release-docs` @ `be813f4` = draft를 main 위로 rebase; 이전 verifier 전용 worktree/브랜치는 cherry-pick돼 제거). `verify:release-docs` main checkout에서 0, `missing-pin.log` exit 1(의도). **진행 중**: fresh-clone QA(`task-20/fresh-clone.log`, emsdk는 기존 설치 symlink — 문서화된 편차).
+- [ ] 병렬 진행 중(결과 미확인): Todo 22 main 배포 감시(run `36319477157`), F2 코드 품질 리뷰 에이전트, F4 범위 충실도 에이전트(둘 다 `.omo/evidence/ultima-web/final/`에만 기록).
+- [ ] Todo 20 게이트 → ✅ 22/26 → merge/push. 이후 F1(계획 준수, Todo 20 이후), F3(Firefox/WebKit 미설치 — `~/.cache/ms-playwright`엔 chromium만; 설치는 큰 다운로드라 사용자 확인 필요).
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
 - Pages Source 설정은 사용자만 가능. 미설정이면 main의 deploy job은 계속 실패.
