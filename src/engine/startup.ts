@@ -95,6 +95,22 @@ export interface EngineModule {
    * Assigned by startEngine() before callMain(), like u4Audio.
    */
   u4TextPrompt?: TextPromptReceiver
+  /**
+   * Todo 22: receiver for vendor/xu4/src/discourse_tlk.cpp's talk-line
+   * EM_JS hooks (`Module.u4Text.talk(...)` / `.input(...)`). Assigned by
+   * startEngine() before callMain(), like u4Audio.
+   */
+  u4Text?: TalkTextReceiver
+}
+
+/**
+ * Todo 22: one real NPC talk line (its printf format literal plus up to two
+ * `%s` arguments, TLK-backed ones as "@MAP:npcIndex:field" ids) or the
+ * player's typed keyword; see src/dialogue/talk-compose.ts.
+ */
+export interface TalkTextReceiver {
+  talk(format: string, arg0: string | null, arg1: string | null): void
+  input(text: string): void
 }
 
 /** Todo 18: native text-prompt lifecycle, see src/i18n/text-prompt-gate.ts. */
@@ -142,6 +158,8 @@ export interface StartEngineOptions {
    * the EM_JS hooks' `Module.u4TextPrompt &&` guard makes them no-ops.
    */
   readonly textPrompt?: TextPromptReceiver
+  /** Todo 22: attached to `module.u4Text` before callMain() (src/shell.ts's talkTextReceiver). */
+  readonly talkText?: TalkTextReceiver
 }
 
 export type StartEngineResult =
@@ -308,6 +326,9 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
   }
   if (options.textPrompt !== undefined) {
     module.u4TextPrompt = options.textPrompt
+  }
+  if (options.talkText !== undefined) {
+    module.u4Text = options.talkText
   }
   armAutoResumeOnGesture()
 
