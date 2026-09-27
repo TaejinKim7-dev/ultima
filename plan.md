@@ -24,7 +24,8 @@
 - **제품 목표 재확인 (2026-09-27)**: 한국어로 실제 플레이할 수 있는 웹 기반 Ultima IV가 목표다. 아래 수치는 계획 항목 승인률이며 한글판 제품 완성률이 아니다. 이번 NPC alias 재검증 스크린샷의 실제 대화는 영어였다. Step 11/12/14에 기록된 실제 엔진 출력 연결 gap을 해소하고 한국어 인트로·대화·상태/메뉴를 실제 플레이에서 검증하기 전에는 출시 완료로 판정하지 않는다.
 - **정정된 플레이 요구사항**: 플레이어는 영어 keyword 또는 한국어 alias를 입력할 수 있어야 하며, 실제 게임에 표시되는 NPC 응답은 한국어여야 한다. 현재 검증된 것은 한국어 alias 입력 동작뿐이고, Calabrini의 실제 NPC 응답은 영어였다. 따라서 한국어 NPC 출력은 아직 미완료이며 출시를 막는다.
 - **세션 운영 제한**: 이 세션의 한도는 5시간이다. 남은 시간·컨텍스트·예산 중 하나라도 5% 미만이 되면 active work를 중단하고 현재 상태를 `plan.md`와 `handoff.md`에 기록한다.
-- **승인 기준: 21 / 26 = 80.8%** (Step 1~19, 21, 22 ✅ — Todo 22 완료, 2026-09-27 main merge).
+- **승인 기준: 22 / 26 = 84.6%** (Step 1~22 ✅ — Todo 20 완료, 2026-09-27 main merge. 남은 것: F1~F4).
+- **Step 20 완료 (2026-09-27, branch `todo-20-release-docs` → main)**: `README.md` 갱신, `docs/WEB_PORT.md`·`docs/GITHUB_PAGES.md` 신규(병렬 Fork가 초안, Todo 22 범위 반영), `npm run verify:release-docs`(TDD, handoff.md는 역사 기록이라 검사 제외). fresh-clone QA: 문서대로 clean clone에서 npm ci → deps:host → build:modules → emsdk → deps:wasm → build:wasm → build:site → audit --require-engine 전부 0, CI와 같은 정적 서버 smoke 통과(`task-20/fresh-clone.log`; emsdk는 기존 4.0.23 설치를 symlink — 재다운로드 생략). 이 QA가 verifier 버그를 찾음: quickstart가 `task-6/` 빌드 로그를 만들어 clean clone에서 verify:release-docs가 실패 → 과제 디렉터리 단위로 검사하도록 수정(RED→GREEN). 실패 QA `missing-pin.log`(exit 1). 게이트 `npm ci`·unit 318/318·verify·typecheck·build·build:site·audit·verify:workflow·verify:release-docs·diff-check·cmp 전부 0.
 - **Step 22 완료 (2026-09-27, branch `todo-22-korean-npc-output` → main)**: 웹 빌드에서 `runTalkDialogue`의 모든 출력을 EM_JS `Module.u4Text`로 보냄(`vendor/xu4/src/discourse_tlk.cpp`, `__EMSCRIPTEN__` 한정). TLK를 가리키는 인자·응답은 `@MAP:npcIndex:field` id로만 전달해 영어 TLK 원문은 엔진 밖으로 안 나감. 셸이 `src/dialogue/talk-compose.ts`로 한국어 줄을 조립해 대화 패널에 표시. 대화 틀 문장 18개 inventory+번역(병렬 Fork A). 증거: `korean-npc-output.spec.ts` RED(패널 한국어 0) → GREEN(Calabrini look·HEAL 응답(response2, 영어 입력+`건강` alias)·이름 한국어), 전체 e2e 40/40(22.0분), 게이트 `npm ci`·unit 300/300·verify·typecheck·i18n strict·build·build:site·audit --require-engine·verify:workflow·diff-check·cmp 전부 exit 0. 범위 밖(영어 유지): Lord British/Hawkwind, 상점, 인트로, 상태창, 기타 screenMessage, 캔버스 글자.
 - **Todo 22 신설 (2026-09-27, 사용자 결정)**: 실제 엔진 NPC 대화를 한국어로 DOM 패널에 표시. 근거는 `.omo/drafts/korean-output-gap-design.md` — 번역 lookup이 wasm에 없고, 엔진→JS 텍스트 경로가 없으며, `korean-progression.spec.ts`는 `ultimaI18n.resolve`만 검사. 범위는 U4 TLK NPC 대화(응답 필드 + 대화 틀 문장). Todo 20은 22에 의존하도록 변경.
 - **Step 19 완료 (2026-09-27, branch `todo-19-pages-release` → main)**: 기존 CI는 wasm 엔진을 빌드하지 않아 Pages artifact가 셸만 담고 있었음(`vite preview`의 `/engine/` 미들웨어가 로컬 e2e에서 이를 가림). `pages.yml`이 이제 apt 오디오 헤더 → `deps:host` → `build:modules` → `deps:wasm` → `build:wasm` → wasm-symbols(hard gate) → `build:site --base=/ultima/` → `audit:dist -- --require-engine` → `.nojekyll` → upload. `verify:workflow`가 엔진 빌드 순서·`--require-engine`·continue-on-error 금지를 강제. 증거: CI run `36315000683`(branch dispatch) build 성공 → 다운로드한 artifact에 `.nojekyll`+`engine/*` 확인 → `tests/e2e/pages-static-smoke.spec.ts`(plain static server `/ultima/`, `/`는 404)가 **CI artifact 자체**로 실제 엔진 부팅(1/1). workflow 변형 3종 실패 로그, SSH 인증 확인. QA의 "`/`에서 서빙" 절반: base `/` 빌드(`npm run build`)를 plain static server `/`에 올려 같은 spec(`PAGES_PREFIX=/`)으로 실제 엔진 부팅 1/1. **실제 배포는 아직 없음**: GitHub Pages 미설정(API 404) — Settings > Pages > Source="GitHub Actions"는 사용자만 가능.
@@ -92,7 +93,7 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 | 17 | 브라우저 통합 게임 진행 e2e (새 게임부터) | ✅ | ✅ | 10,12,13,15,16,21 — branch `todo-17-gameplay-progression`, main 미merge |
 | 18 | 실패/보안/개인정보/회귀 경계 강화 (`audit:dist`) | ✅ | ✅ | 17 — 실제 엔진 e2e(failure-boundaries 4/4), main merge 2026-09-27 |
 | 19 | GitHub Actions Pages workflow + `/ultima/` release artifact | ✅ | — | 15,16,18 — CI가 실제 엔진 포함 artifact 빌드(run `36315000683`), artifact smoke 통과. Pages 미설정으로 실제 배포 미확인 |
-| 20 | README/사용자 가이드/증거 인덱스/handoff | ⬜ | — | 19,22 (검증기는 branch `todo-20-release-docs` `6a336df`에 준비됨) |
+| 20 | README/사용자 가이드/증거 인덱스/handoff | ✅ | — | 19,22 — fresh-clone QA 통과, `verify:release-docs` 0 |
 | 22 | 실제 엔진 NPC 대화 → 한국어 DOM 패널 표시 (2026-09-27 신규) | ✅ | ✅ | 13,14,15,21 — 마을 주민 TLK 대화만(castle/상점/인트로/상태창은 영어). e2e `korean-npc-output` |
 
 ### Final — 독립 검증 (F1~F4 = 진행률 23~26번째)
@@ -235,10 +236,11 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 - `tlk.json`(3072건): `TOWN:NPC번호:필드` 구조, 16개 마을 × NPC 16명 × 12필드(name/pronoun/look/job/health/question/yes/no/response1/response2/topic1/topic2). `topic1`/`topic2`(512건)는 discourse가 대화 주제로 직접 매칭하는 4글자 코드(예: "PLAY","COMP")라 `lordBritishKeyword`와 같은 이유로 영어 그대로 pass-through 처리. 나머지 10필드(2560건)도 16/16 마을 전부 완료. 마지막 YEW 160건은 `.omo/drafts/tlk-yew-translation-draft.json`에서 적용했고, worker 독립 검증으로 draft key 누락 0·non-YEW 변경 0·changedEntryCount 160 확인.
 - 게이트: `npm run i18n:check`와 `npm run i18n:check -- --strict` 모두 4411 entries, pending 0, exit 0. `npm run i18n:generate`로 4388 translated entries + 9 aliases를 `src/i18n/generated/strings.ts`, `native/i18n/u4_i18n_table.inc`, `native/i18n/ko-overlay.b`에 반영. 새 `tests/e2e/korean-progression.spec.ts`는 실제 `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip`로 2/2 통과(1.6분): semantic Korean coverage + 실제 저장/재로드, strict failure fixture. Generator가 Boron overlay line-ending whitespace를 내던 문제를 RED→GREEN(`tests/unit/localization-boundaries.test.ts`)로 고치고 `git diff --check` exit 0 확인.
 
-## 바로 다음 순서 (2026-09-27 21:34 갱신 — 21/26, Todo 22 ✅ main merge)
-1. **다음 단계: Todo 20** (문서). 초안이 branch `todo-20-release-docs-draft`(worktree `.claude/worktrees/agent-ac0eaf00f74c3c95a`, `dcaeebc` verifier, `53adc2d` 문서, `9d6fb03` Todo 22 범위 반영)에 있음 — main 위로 rebase, fresh-clone QA(`task-20/fresh-clone.log`) 실행 후 merge.
-2. 그다음 F1~F4. F3(실제 브라우저 수동 QA)는 Firefox/WebKit 브라우저 설치(큰 다운로드) 필요 여부를 사용자에게 확인.
-3. 후속 후보(계획 밖, 사용자 결정): Lord British/Hawkwind·상점·인트로·상태창 텍스트 한국어화.
+## 바로 다음 순서 (2026-09-27 22:00 갱신 — 22/26, Todo 20 ✅ main merge, 남은 것 F1~F4)
+1. **F2 코드 품질**: 에이전트 리뷰 APPROVE(blocker 0, warning 4 — `.omo/evidence/ultima-web/final/F2-code-quality.md`). 계획상 F1~F4 결과를 모아 사용자에게 보인 뒤 사용자 명시 승인 후 완료 처리.
+2. **F4 범위 충실도**: 에이전트 리뷰 REJECT — 정적 호스팅은 통과, 그러나 사용자 승인이 기록되지 않은 범위 편차(인트로·상태/메뉴·엔딩·Lord British·상점 등은 영어, 상태 오버레이는 실제 엔진 미연결, 캔버스 영어+패널 한국어 이중 표시, TITLE/AVATAR.EXE 번역 미표시) → 사용자 결정 필요(`final/F4-scope-fidelity.md`).
+3. **F3 실제 브라우저 QA**: Firefox/WebKit 설치 완료(사용자 승인). WebKit은 호스트 라이브러리 부족(gtk4/gstreamer 등) — `sudo npx playwright install-deps webkit` 필요(사용자만 가능).
+4. **F1 계획 준수 감사**: Todo 20 이후 진행.
 7. **Todo 17 거짓 통과 이력 주의**: 한국어 입력창 포커스 때문에 던전·신단·중간 저장 구간이 원래 한 번도 실행되지 않았음 → 이번 브랜치에서 수정·재검증 완료(2/2, 스크린샷으로 실제 진입 확인). 자세한 내용은 handoff.md "Todo 18 진행 중 — 세션 중단 기록".
 8. UX 이슈(미수정): 실제 사용자도 한글 입력창 사용 후 화살표/명령키가 조용히 무시됨 → F3 또는 제품 결정.
 9. 이후: 19 완료(골격·emsdk CI·audit 확장 이미 병합) → 20 → F1~F4. Pages Source="GitHub Actions" 설정은 사용자만 가능.

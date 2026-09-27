@@ -1294,3 +1294,10 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
   cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
   ```
 - 계획서 두 벌 `[x] 22`, plan.md 21/26 = 80.8%, Step 11 "실제 게임 확인" ⬜→✅(NPC 대화 한정).
+
+### Todo 20 완료 + main merge 게이트 (2026-09-27 22:00 KST)
+
+- branch `todo-20-release-docs`: `4d8ebe0` verifier(TDD, 병렬 Fork), `13f6e84` 문서 초안(병렬 Fork), `be813f4` Todo 22 범위 반영, `b6245f8` verifier 증거 규칙 수정(fresh-clone QA가 발견: quickstart가 `task-6/` 빌드 로그를 만들어 clean clone에서 실패 → 과제 디렉터리 단위 검사, RED `task-20/evidence-rule-red.log` → GREEN 18/18).
+- fresh-clone QA(`task-20/fresh-clone.log`): `git clone` → 문서의 빌드 순서 전부 exit 0(build:wasm 27s) → 정적 서버 `/ultima/` smoke 1/1(`fresh-clone-smoke.json`) → verify:release-docs 수정 후 0. 편차: emsdk는 기존 4.0.23 설치를 symlink(재다운로드 생략).
+- merge 게이트(전부 exit 0, `task-20/merge-gate.log`): npm ci · test:unit 25 files/318 · verify:repo-sources · typecheck · build · build:site --base=/ultima/ · audit:dist --require-engine · verify:workflow · verify:release-docs · git diff --check · cmp.
+- 병렬 F단계: F2 APPROVE(blocker 0), F4 REJECT(사용자 미승인 범위 편차 — plan.md 바로 다음 순서 2). F3용 Firefox/WebKit 설치 완료, WebKit 호스트 의존성 부족.
