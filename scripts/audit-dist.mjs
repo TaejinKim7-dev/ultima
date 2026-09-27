@@ -117,6 +117,10 @@ export const TEST_HOOK_ALLOWLIST = [
     reason: "src/main.ts deliberate Todo-16 audio observability hook (window.ultimaAudio.stats())"
   },
   {
+    hook: "window.ultimaI18n",
+    reason: "src/main.ts deliberate Todo-14 localization observability hook (resolve/checkPlaceholders), available for e2e/manual QA independent of engine start"
+  },
+  {
     hook: "data-bridge-ready",
     reason: "src/main.ts shell-ready signal consumed by QA/e2e tooling and the engine startup sequence"
   }
@@ -143,6 +147,42 @@ export const SAME_ORIGIN_ALLOWLIST = [
   // links back to the site itself are same-origin by construction.
   "https://taejinkim7-dev.github.io"
 ]
+
+// Exact, known display-only URLs baked into the generated localization
+// table (src/i18n/generated/strings.ts) from the COMMITTED, public
+// locales/ko/*.json translation corpus -- never fetched by any code path,
+// same reasoning as ENGINE_GLUE_ALLOWLIST's inert diagnostic URL below.
+// Matched by exact string (not origin), unlike SAME_ORIGIN_ALLOWLIST,
+// because these are one specific known sentence, not "trust this whole
+// host" -- a different path under the same host still fails.
+export const APP_DISPLAY_URL_ALLOWLIST = [
+  {
+    url: "http://www.moongates.com/u4/upgrade/Upgrade.htm",
+    // locales/ko/module.json's "module:U4-Upgrade:config:0" entry, sourced
+    // from vendor/xu4's OWN open-source module/U4-Upgrade/config.b (not
+    // extracted original Origin game data -- this repo already vendors
+    // that xu4 source file in full). Deliberately kept un-translated
+    // (Todo 15's "이름/URL/저작권 표기는 그대로 두고" rule) inside an
+    // otherwise-Korean display string; never used in a fetch/XHR call.
+    reason: "xu4's own U4-Upgrade module config text, real-world informational URL, display-only"
+  },
+  {
+    url: "https://github.com/MagerValp/u4remastered/tree/master/src/charcreate",
+    // "module:U4-Upgrade:Credits:2", sourceFile vendor/xu4/module/U4-Upgrade/Credits.
+    reason: "xu4's own U4-Upgrade Credits attribution URL, display-only"
+  },
+  {
+    url: "http://markus.brenner.de/ultima/binary/u4-midi.zip",
+    // sourceFile vendor/xu4/module/Ultima-IV/Credits.
+    reason: "xu4's own Ultima-IV Credits attribution URL (MIDI music pack), display-only"
+  },
+  {
+    url: "https://freesound.org/people/bolkmar/sounds/539178/",
+    // sourceFile vendor/xu4/module/Ultima-IV/Credits.
+    reason: "xu4's own Ultima-IV Credits attribution URL (sound effect source), display-only"
+  }
+]
+const APP_DISPLAY_URL_ALLOWED = new Set(APP_DISPLAY_URL_ALLOWLIST.map((entry) => entry.url))
 
 // Files under `dist/engine/` are EMCC-GENERATED glue (copied by
 // vite.config.ts's wasmEngineAssets from build/wasm-release): Emscripten's
@@ -358,6 +398,9 @@ function auditAppEgress(filePath, content) {
 
 function assertAllowedUrls(filePath, urls) {
   for (const url of urls) {
+    if (APP_DISPLAY_URL_ALLOWED.has(url)) {
+      continue
+    }
     let origin = null
     try {
       origin = new URL(url).origin

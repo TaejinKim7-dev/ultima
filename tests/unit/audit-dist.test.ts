@@ -135,12 +135,12 @@ describe("audit:dist", () => {
   })
 
   it("passes for the explicitly allowlisted QA bridge hooks", () => {
-    // Given: a dist bundle using only the deliberate Todo-16 QA/e2e hooks
-    // (src/main.ts's window.ultimaBridge/Input/Audio + data-bridge-ready).
+    // Given: a dist bundle using only the deliberate QA/e2e hooks
+    // (src/main.ts's window.ultimaBridge/Input/Audio/I18n + data-bridge-ready).
     const dir = makeCleanDist()
     writeFileSync(
       join(dir, "assets", "hooks.js"),
-      `window.ultimaBridge = bridge; window.ultimaInput = queue; window.ultimaAudio = audio; document.body.setAttribute("data-bridge-ready", "true")`
+      `window.ultimaBridge = bridge; window.ultimaInput = queue; window.ultimaAudio = audio; window.ultimaI18n = i18n; document.body.setAttribute("data-bridge-ready", "true")`
     )
 
     // When: the dist artifact audit runs.
@@ -194,6 +194,38 @@ describe("audit:dist", () => {
       expect(result.status, `egress ${probe.label}: ${result.stderr}`).toBe(1)
       expect(result.stderr, `egress ${probe.label}`).toContain(probe.label)
     }
+  })
+
+  it("passes the exact allowlisted display-only URLs baked in from vendor/xu4's own module Credits/config text, but not a different path on the same host", () => {
+    // Given: the real, generated Korean display strings embed these exact
+    // URLs verbatim (src/i18n/generated/strings.ts, sourced from
+    // locales/ko/module.json's U4-Upgrade config/Credits and Ultima-IV
+    // Credits entries -- all four traced to vendor/xu4's OWN committed,
+    // open-source module files, never extracted original Origin game
+    // data, and never used in a fetch/XHR call).
+    const allowedUrls = [
+      "http://www.moongates.com/u4/upgrade/Upgrade.htm",
+      "https://github.com/MagerValp/u4remastered/tree/master/src/charcreate",
+      "http://markus.brenner.de/ultima/binary/u4-midi.zip",
+      "https://freesound.org/people/bolkmar/sounds/539178/"
+    ]
+    for (const [index, url] of allowedUrls.entries()) {
+      const dirAllowed = makeCleanDist()
+      writeFileSync(join(dirAllowed, "assets", `display-url-${index}.js`), `const t = "Ultima IV. ${url} 에서"`)
+      const allowedResult = run(dirAllowed)
+      expect(allowedResult.status, `${url}: ${allowedResult.stderr}`).toBe(0)
+    }
+
+    // Then: a different path on the same host is NOT covered by this
+    // exact-string allowlist entry (it is not a host-wide trust grant).
+    const dirOther = makeCleanDist()
+    writeFileSync(
+      join(dirOther, "assets", "other-path.js"),
+      `const t = "http://www.moongates.com/some/other/page.htm"`
+    )
+    const otherResult = run(dirOther)
+    expect(otherResult.status, "a different path on the same host must still fail").toBe(1)
+    expect(otherResult.stderr).toContain("moongates.com")
   })
 
   it("rejects noisy console methods while allowing error/warn", () => {
