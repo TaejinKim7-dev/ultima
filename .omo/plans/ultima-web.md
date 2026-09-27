@@ -289,7 +289,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: full route trace and screenshots, evidence `.omo/evidence/ultima-web/task-17/progression.trace.zip`; failure: intentionally wrong Korean alias fixture fails at exact dialogue assertion, evidence `.omo/evidence/ultima-web/task-17/alias-regression.log`.
   Commit: Y | test(e2e): verify browser gameplay progression
 
-- [ ] 18. Harden failure, privacy, and regression boundaries
+- [x] 18. Harden failure, privacy, and regression boundaries
   What to do / Must NOT do: add tests and checks for corrupt data, oversized ZIP, missing files, stale bridge requests, save sync failure, XSS-like text, memory growth, console leaks, original-data artifact leakage, and production test-hook leakage. Must not add cheat/state-control APIs to production bundles.
   Parallelization: Wave 4 | Blocked by: 17 | Blocks: 19
   References: Must NOT have section; `engine/src/support/cdi.c:50-82`; `engine/src/module.c:87-117`; bridge contracts from Todo 5; save contracts from Todo 10.

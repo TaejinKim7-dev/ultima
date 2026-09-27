@@ -1227,3 +1227,19 @@ ULTIMA4_DATA=.../ultima4.zip npx playwright test tests/e2e/boot-sequence.spec.ts
   ```
 - memory smoke 10분(19:26 이전 기록, 1/1, Chromium 136.0.7103.25)은 이번 변경 전 실행분이다. 이번 변경(셸 게이트 + 네이티브 훅 2개)으로 재실행하지는 않음.
 - Todo 18 acceptance(audit:dist, failure-boundaries e2e, memory smoke 기록, QA 증거 2종)는 충족. AGENTS.md 완료 기준의 merge 게이트 중 `npm ci`만 남음 → 계획서 체크박스/진행률은 `npm ci` 통과 후 갱신.
+
+### Todo 18 main merge 게이트 (2026-09-27 20:20 KST, 사용자 승인: npm ci + merge + push)
+
+branch `todo-18-failure-boundaries`(`68b1d56` 구현, `a769150` handoff)에서 직접 실행, 전부 exit 0:
+```
+npm ci                                      # 0
+npm run test:unit                           # 0 — 22 files / 276 tests
+npm run verify:repo-sources                 # 0
+npm run typecheck                           # 0
+npm run build                               # 0
+npm run audit:dist                          # 0
+git diff --check                            # 0
+cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
+```
+- Todo 18 추가 acceptance: `failure-boundaries.spec.ts` 4/4, memory smoke 10분 1/1(변경 전 실행분), `security-audit.log` exit 0, `dist-leak-rejected.log` exit 1(의도). 로그: `.omo/evidence/ultima-web/task-18/stale-real-surface/merge-gate.log`.
+- 계획서 두 벌 `[x] 18`, `plan.md` 19/25 = 76.0%. 다음: Todo 19.
