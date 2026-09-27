@@ -1267,3 +1267,8 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 - 미확인: 실제 Pages 배포. `gh api repos/TaejinKim7-dev/ultima/pages` → 404(Source 미설정). main push의 deploy job은 설정 전까지 실패할 것(확인 필요).
 - 추가(20:30 KST): `tests/e2e/pages-static-smoke.spec.ts`에 `PAGES_PREFIX` 추가 — base `/` 빌드를 `/`에 서빙해도 실제 엔진 부팅 1/1(`task-19/smoke-green-root.log`, `pages-static-smoke-root.json`), 기본 `/ultima/` 재실행 1/1. plan.md Step 15 "실제 게임에서 확인" ✅→⬜ 정정(korean-progression spec은 `ultimaI18n.resolve`만 검사, 파일 헤더 8~12행 직접 확인). 설계 메모 `.omo/drafts/korean-output-gap-design.md` 커밋(원본 TLK 텍스트 없음, xu4 공개 소스의 틀 문장만 인용).
 - main run `36315663294`(merge `47c8c41`): build=success, deploy=failure — `actions/configure-pages`의 "Get Pages site failed ... Not Found"(Pages 미설정). 실패 원인이 설정 부재뿐임을 로그로 확인. 사용자가 Source="GitHub Actions" 설정 후 `gh workflow run Pages --ref main`으로 재배포하고 `https://taejinkim7-dev.github.io/ultima/` 및 `/ultima/engine/xu4.wasm`(200, application/wasm) 확인 필요.
+
+### Pages 설정 + Todo 22 신설 (2026-09-27 20:44 KST, 사용자 지시)
+
+- Pages: 사용자 요청으로 `gh api -X POST repos/TaejinKim7-dev/ultima/pages -f build_type=workflow` 실행 → `build_type=workflow`, `html_url=https://taejinkim7-dev.github.io/ultima/`(API 응답 확인). 이어 `gh workflow run Pages --ref main` run `36316485338`: build=success, deploy=**skipped** — deploy job 조건이 `github.event_name == 'push'`라 dispatch에서는 배포 안 함(설계대로). 실제 배포는 이 커밋의 main push run으로 확인.
+- Todo 22 신설(사용자 결정): `.omo/plans/ultima-web.md`/`docs/ULTIMA_WEB_PLAN.md`에 22번 추가(cmp 0), 실행 표에 22행, Todo 20 선행에 22 추가. `plan.md` 분모 25→26 → **20/26 = 76.9%**. `AGENTS.md`의 Todo 수(21→22)와 `n/25`→`n/26` 갱신. 다음 순서: Todo 22 → Todo 20 → F1~F4.

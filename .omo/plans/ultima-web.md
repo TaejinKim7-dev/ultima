@@ -18,7 +18,7 @@ Your next move: 이 계획을 실행하려면 별도 worker 세션에서 `$start
 
 ---
 
-> TL;DR (machine): XL / High. 고정 xu4 소스 → native 기준 실행 → single-thread WASM → 한글 UI/전체 번역/영한 입력/오디오/영속 저장 → GitHub Pages. TDD. 구현 21개(2026-09-24, Todo 21 추가) + 최종 검증 4개.
+> TL;DR (machine): XL / High. 고정 xu4 소스 → native 기준 실행 → single-thread WASM → 한글 UI/전체 번역/영한 입력/오디오/영속 저장 → GitHub Pages. TDD. 구현 22개(2026-09-24 Todo 21, 2026-09-27 Todo 22 추가) + 최종 검증 4개.
 
 ## Scope
 ### Must have
@@ -147,8 +147,9 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 | 17 | 10,12,13,15,16 | 18,19 | 없음 |
 | 18 | 17 | 19 | 없음 |
 | 19 | 15,16,18 | 20 | 없음 (2026-09-25: workflow 골격은 branch `todo-19-pages-workflow`에서 이미 완성 -- `.github/workflows/pages.yml`, `npm run audit:dist`, `npm run verify:workflow`; 완전한 acceptance는 여전히 15,16,18 이후) |
-| 20 | 19 | F1–F4 | 없음 |
+| 20 | 19,22 | F1–F4 | 없음 (2026-09-27: 22 추가로 선행에 22 포함 — 문서가 실제 한국어 표시 범위를 기술해야 함) |
 | 21 | 6,8,9 | 10(e2e), 11,12,13,16,17 | 19의 workflow 골격 (2026-09-24 신규 — 실제 xu4 엔진을 wasm에 링크·실행, 세부 21.1~21.4) |
+| 22 | 13,14,15,21 | 20, F1–F4 | 20의 문서 검증기 준비 (2026-09-27 신규 — 실제 엔진 NPC 대화를 한국어로 DOM 패널에 표시) |
 
 ## Todos
 > Implementation + Test = ONE todo. Never separate.
@@ -308,7 +309,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 
 - [ ] 20. Write reproducible handoff, user guide, and release evidence index
   What to do / Must NOT do: update `README.md`, `docs/WEB_PORT.md`, `docs/GITHUB_PAGES.md`, and `handoff.md` with exact build/run/test/deploy instructions, source pins, data handling policy, browser support, known limitations, and evidence index. Must not claim deployment happened unless a Pages URL was actually produced in the execution session.
-  Parallelization: Wave 4 | Blocked by: 19 | Blocks: F1-F4
+  Parallelization: Wave 4 | Blocked by: 19,22 | Blocks: F1-F4
   References: all task evidence roots; `handoff.md`; GitHub Pages docs; final package manifests/workflow.
   Acceptance criteria: `npm run verify:release-docs` checks commands, pins, evidence links, and no stale placeholder text; README quickstart can be executed locally from a clean clone with user-provided `ULTIMA4_DATA`.
   QA scenarios: happy: follow docs in a fresh temp clone through `npm ci`, `npm run build:site`, static serve smoke, evidence `.omo/evidence/ultima-web/task-20/fresh-clone.log`; failure: remove one required source pin and verify docs verifier fails, evidence `.omo/evidence/ultima-web/task-20/missing-pin.log`.
@@ -327,6 +328,14 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   Acceptance criteria: `npm run build:wasm -- --debug` links the full engine, and `llvm-nm --defined-only build/wasm-release/xu4.wasm` shows engine symbols (e.g. `GameController`); `npm run test:unit -- tests/unit/boot-sequence.test.ts` covers whatever init logic can be isolated from a full wasm run (e.g. FS/path preparation); `ULTIMA4_DATA=/absolute/path/to/verified/ultima4.zip npm run test:e2e -- tests/e2e/boot-sequence.spec.ts --project=chromium` proves a non-black rendered title screen and one real keypress changing game state.
   QA scenarios: happy: verified ZIP -> rendered title screen + one real keypress, evidence `.omo/evidence/ultima-web/task-21/title-render.png`; failure: a deliberately missing module file fails loudly through a `runtime-error` bridge event instead of a silent black screen, evidence `.omo/evidence/ultima-web/task-21/boot-failure.log`.
   Commit: Y (one commit per sub-step is fine) | feat(web): link and run the real xu4 engine in the browser
+
+- [ ] 22. Show real in-game NPC dialogue in Korean in the HTML dialogue panel
+  What to do / Must NOT do: (2026-09-27 신규, 사용자 결정) Todos 11-15 built the dialogue panel, the lookup tables, and a 4411-entry Korean corpus, but none of it reaches the running game: `native/i18n/u4_i18n_lookup.c` is not in `scripts/build-wasm.mjs`'s source list, all real engine text is rasterized into the canvas through `screenMessage` -> `screenMessageN` -> `screenShowChar` (`vendor/xu4/src/screen.cpp:399-449`), the engine never emits `message` bridge events (`web_bridge.cpp` is input-only), and `tests/e2e/korean-progression.spec.ts` only queries `window.ultimaI18n.resolve`. Add an engine-to-JS text channel following Todo 18's `Module.u4TextPrompt` pattern (EM_JS under `__EMSCRIPTEN__`, guarded `Module.u4Text &&`, attached by `src/engine/startup.ts` before `callMain()`): emit structured ids for U4 TLK NPC dialogue where `U4Talk_dialogue` returns a field (`MAP:npcIndex:field`, the key `scripts/lib/tlk-codec.mjs`'s `tlkKey` already uses; derive `MAP` from the loaded TLK resource name) and for `runTalkDialogue`'s template lines (`You meet %s`, `%s says: I am %s`, "You see %s", etc. in `discourse_tlk.cpp`), with their argument ids. The shell resolves each id through `resolveDisplayText()` and appends the Korean text to `#dialogue-history` via the existing `PanelState`/`textContent` path. Extend `scripts/i18n-inventory.mjs` to scan `discourse_tlk.cpp` (and the other talk-template sources it touches) so the template lines are in the corpus and translated, keeping `i18n:check --strict` green. Scope: U4 TLK NPC conversations only; Lord British/Hawkwind (`discourse_castle.cpp`), shops, intro TextView, and status/menu text are follow-ups. The canvas keeps showing English (dual display) unless a product decision says otherwise. Must not change any English keyword comparison or game logic (Todo 13); must not ship, log, or console-print original English TLK text beyond what the running engine already holds in memory (no English TLK strings in `dist/`, evidence, or console); must not re-enter native code from the JS side of the channel (Asyncify, see Todo 13's abort fix).
+  Parallelization: Wave 4 | Blocked by: 13,14,15,21 | Blocks: 20, F1-F4 | Can run alongside: Todo 20's verifier prep
+  References: `.omo/drafts/korean-output-gap-design.md` (investigation + design); `vendor/xu4/src/discourse_tlk.cpp` (`U4Talk_load` ~244-323, `U4Talk_dialogue` ~340-397, `runTalkDialogue` template lines ~79-134); `vendor/xu4/src/discourse.cpp:79-97` (`discourse_load`, TLK filename); `vendor/xu4/src/event.cpp` (Todo 18 EM_JS pattern); `scripts/lib/tlk-codec.mjs:48`; `scripts/i18n-inventory.mjs:56-69,193-210`; `src/i18n/localization.ts`; `src/shell.ts`; `src/dialogue/message-tokens.ts`.
+  Acceptance criteria: unit tests for id assembly (map, npcIndex, field), template+argument composition with placeholder order, and `startEngine()` attaching `module.u4Text` before `callMain()`; `npm run i18n:check -- --strict` passes with the template lines included; `ULTIMA4_DATA=/absolute/path/to/verified/ultima4.zip npm run test:e2e -- tests/e2e/korean-npc-output.spec.ts --project=chromium` shows, for a real conversation with Calabrini in Moonglow, the Korean translations of the greeting/template lines and of the `name`, `health` (typed in English and via the Korean alias `건강`), and `bye` responses in `#dialogue-history`; `tests/e2e/korean-npc-alias.spec.ts` and `tests/e2e/gameplay-progression.spec.ts` still pass; `npm run audit:dist` passes.
+  QA scenarios: happy: real Calabrini conversation shows Korean lines in the panel, evidence `.omo/evidence/ultima-web/task-22/korean-npc-output.png`; failure: a TLK id with no ready translation falls back to a clearly marked English-fallback path without crashing and without breaking the conversation, evidence `.omo/evidence/ultima-web/task-22/fallback.log`.
+  Commit: Y | feat(i18n): show real NPC dialogue in Korean
 
 ## Final verification wave
 > Runs in parallel after ALL todos. ALL must APPROVE. Surface results and wait for the user's explicit okay before declaring complete.
