@@ -1117,6 +1117,10 @@ ULTIMA4_DATA=.../ultima4.zip npx playwright test tests/e2e/boot-sequence.spec.ts
 - **구조적으로 프로덕션에 절대 안 들어가게 보장**: 플러그인이 `apply: "serve"`라 `vite build`/`build:site`에서는 이 플러그인의 어떤 훅도 실행되지 않는다(closeBundle 훅 자체가 없음). 직접 `npm run build:site`(ULTIMA4_DATA 설정한 채로) 후 `dist/index.html`·`dist/assets/*.js`를 grep해 `__dev-original-data__`/`dev-auto-load`/`DataTransfer` 문자열이 전혀 없음을 확인했고, `npm run audit:dist`(cheat-token 검사 포함)도 이 플러그인 때문에 새로 실패하지 않음을 확인(위 audit:dist 실패는 무관한 기존 결함).
 - **`npm run preview`(정적 프리뷰, GitHub Pages와 동일 서빙 방식)에서는 의도적으로 동작 안 함** — Vite의 `configureServer`(dev 전용)와 `configurePreviewServer`(preview 전용)가 별도 훅이고 이 플러그인은 전자만 구현했다. 실제 구현 중 처음엔 스크립트 실행 순서 버그로 `npm run dev`에서도 동작 안 했음: 주입한 `<script>`가 module이 아닌 일반 스크립트라 실제 앱의 `type="module"` 엔트리 스크립트(defer 방식)보다 먼저 실행돼, `#rom-picker`의 실제 `change` 리스너가 아직 붙기 전에 이벤트를 dispatch해버렸다(Playwright로 `rom-picker files length: 1`인데 `engine-started`는 계속 null인 것으로 원인 확정) — 주입 스크립트에도 `type: "module"`을 줘서 문서 순서상 엔트리 스크립트 다음에 실행되게 고쳐 해결, Playwright로 `engineStarted: true` 재확인.
 
+### Todo 17 main merge + push (2026-09-27, 사용자 명시 승인 — "테스트 했으면 물어 보지말고 push하고 다음 단계로 넘어가")
+- `main`으로 `git merge todo-17-gameplay-progression --no-ff`(커밋 `dafcb50`) 후 merge 게이트 전부 `main` 위에서 재실행해 확인: `npm run test:unit`(260/260) · `npm run verify:repo-sources`(4 pinned components) · `npm run typecheck` · `npm run build` · `git diff --check` 전부 exit 0. `git push origin main` 완료(`fc88c57..dafcb50 main -> main`).
+- `npm run audit:dist`는 위에서 이미 기록한 대로 이 merge와 무관하게 기존 실패 상태 유지 — Todo 18에서 고칠 것.
+
 **막힌 부분/확인 필요**:
 - **main merge/push는 사용자 승인 대기** — 이번 세션 사용자 지시("사용자 결정이 필요한 것... push, merge... 나오면 멈추고 물어봐")에 따라 아직 진행 안 함.
 - `npm run audit:dist` 실패는 Todo 17 범위 밖으로 남겨둠(위 참고) — Todo 18에서 반드시 고쳐야 함.
