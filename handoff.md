@@ -1273,3 +1273,24 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 - Pages: 사용자 요청으로 `gh api -X POST repos/TaejinKim7-dev/ultima/pages -f build_type=workflow` 실행 → `build_type=workflow`, `html_url=https://taejinkim7-dev.github.io/ultima/`(API 응답 확인). 이어 `gh workflow run Pages --ref main` run `36316485338`: build=success, deploy=**skipped** — deploy job 조건이 `github.event_name == 'push'`라 dispatch에서는 배포 안 함(설계대로). 실제 배포는 이 커밋의 main push run으로 확인.
 - Todo 22 신설(사용자 결정): `.omo/plans/ultima-web.md`/`docs/ULTIMA_WEB_PLAN.md`에 22번 추가(cmp 0), 실행 표에 22행, Todo 20 선행에 22 추가. `plan.md` 분모 25→26 → **20/26 = 76.9%**. `AGENTS.md`의 Todo 수(21→22)와 `n/25`→`n/26` 갱신. 다음 순서: Todo 22 → Todo 20 → F1~F4.
 - **실제 배포 확인 (2026-09-27 20:49 KST)**: main push run `36316708881` build=success, deploy=success. `curl`: `https://taejinkim7-dev.github.io/ultima/` 200 text/html, `/ultima/engine/xu4.wasm` 200 application/wasm 1,186,941 B, `/ultima/engine/modules/Ultima-IV.mod` 200. 실제 사이트에서 Playwright(chromium 136.0.7103.25)로 로컬 `ultima4.zip`을 선택(브라우저 File API만, 업로드 없음) → `engineStarted=true`, 4xx/5xx 응답 0, 실제 "Lord British" 타이틀 렌더 스크린샷. 증거: `.omo/evidence/ultima-web/task-19/{live-pages-smoke.json,live-pages-title.png}`. 한국어 NPC 출력은 여전히 미구현(Todo 22).
+
+### Todo 22 완료 + main merge 게이트 (2026-09-27 21:34 KST)
+
+- branch `todo-22-korean-npc-output`: Fork A `39730db`(틀 문장 inventory/번역/`GENERATED_TALK_TEMPLATES`), `458ef4d`(엔진 EM_JS talk 채널 + 셸 조립 + e2e), `f92aa2f`(inventory 추출기가 `TALK_MSG` 인식 — 게이트 1차에서 talk-templates 유닛 RED로 발견한 회귀, ids/hashes 18/18 불변 확인).
+- RED→GREEN: e2e `korean-npc-output` RED(패널 한국어 0) → 1차 GREEN 실패(health 필드 가정 오류: Calabrini topic2="HEAL"이 먼저 매칭돼 response2로 응답, 캔버스로 확인) → 기대 필드 정정 후 1/1(2.7분). unit `talk-compose` 9/9, `startup-sequence` 11/11, `talk-templates` 7/7.
+- 전체 e2e: `PLAYWRIGHT_PORT=4298 npx playwright test --project=chromium --workers=1` → 40/40 passed(22.0분), exit 0 (`task-22/e2e-full-suite.log`).
+- merge 게이트(전부 exit 0, `task-22/merge-gate.log`; 1차 실패 로그 `merge-gate-run1-talkmsg-regression.log`):
+  ```
+  npm ci                                      # 0
+  npm run test:unit                           # 0 — 24 files / 300 tests
+  npm run verify:repo-sources                 # 0 — xu4 treeSha256 5a864e41…5e88
+  npm run typecheck                           # 0
+  npm run i18n:check -- --strict              # 0
+  npm run build                               # 0
+  npm run build:site -- --base=/ultima/       # 0
+  npm run audit:dist -- --require-engine      # 0 (talk 템플릿 맵이 번들에 포함된 상태)
+  npm run verify:workflow                     # 0
+  git diff --check                            # 0
+  cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
+  ```
+- 계획서 두 벌 `[x] 22`, plan.md 21/26 = 80.8%, Step 11 "실제 게임 확인" ⬜→✅(NPC 대화 한정).

@@ -1,5 +1,5 @@
 # HANDOFF
-작성 시각: 2026-09-27 21:20 KST
+작성 시각: 2026-09-27 21:35 KST
 
 ## 1. 목표 (What we're building)
 - xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식 + 한국어화. 진행 기준 `plan.md`(25단계).
@@ -7,14 +7,14 @@
 - 이번 세션: Todo 18 완료·merge·push(19/25) → Todo 19 진행 중, 병렬로 Todo 20 검증기 준비 + 한국어 출력 gap 조사.
 
 ## 2. 현재 상태 (Current state)
-- 진행률 **20/26 = 76.9%** (Todo 22 추가로 분모 26). main `703919a`까지 origin 동기. Pages 실제 배포 확인 완료(run `36316708881`).
+- 진행률 **21/26 = 80.8%** — Todo 22 ✅ (게이트 `npm ci` 포함 전부 0, 전체 e2e 40/40). main merge + push 진행. main `703919a`까지 origin 동기. Pages 실제 배포 확인 완료(run `36316708881`).
 - **Todo 22 진행 중 (branch `todo-22-korean-npc-output`, 미커밋 작업 + Fork A merge `39730db`)**:
   - 설계: 웹 빌드에서만 `runTalkDialogue`의 모든 출력을 `talkMessage()`로 가로채 EM_JS `Module.u4Text.talk(format, a0, a1)`로 보냄. TLK를 가리키는 인자/응답은 `@MAP:npcIndex:field` id로만 보내므로 영어 TLK 원문은 엔진 밖으로 안 나감. 틀 문장은 xu4 코드 리터럴 그대로 → JS가 `resolveTalkTemplateId`로 id 찾고 `resolveDisplayText`로 한국어. 플레이어 입력은 `u4Text.input` → "> health".
   - `Discourse`에 `webTlkName`(웹 전용, "moonglow.tlk"→"MOONGLOW"), `TalkState`에 web 필드. Boron 대화는 `webStrings=NULL`로 비활성. `discourse_castle.cpp`용으로 `message` 매크로를 `screenMessage`로 복원.
   - 확인(직접 실행): e2e RED `korean-npc-output.spec.ts` exit 1(패널에 Calabrini look/health/name 한국어 0건, `task-22/e2e-red.log`, `panel-observation.log`); unit `talk-compose` RED(모듈 없음)→9/9, `startup-sequence` Todo 22 RED 1 failed→11/11; `g++`/`em++ -fsyntax-only` discourse.cpp 0; `verify:repo-sources` 0(xu4 treeSha256 `5a864e41…5e88`); `npm run build:wasm` 0, `wasm-symbols` 8/8; `npm run build` 0; typecheck 0.
   - Fork A(`39730db`, merge됨): `discourse_tlk.cpp` 틀 문장 18개 inventory+번역(`ui:discourse_tlk:0..17`), `GENERATED_TALK_TEMPLATES`, `resolveTalkTemplateId`, i18n:check --strict 0(4429 entries, fork 보고).
   - e2e GREEN(커밋 `458ef4d`): 1차 실행은 health 응답 0건으로 실패 → 스크린샷 확인 결과 Calabrini의 topic2가 "HEAL"이라 `U4Talk_dialogue`가 health 필드보다 먼저 response2로 응답(캔버스도 동일). 테스트 기대 필드를 response2로 정정(주석에 근거) → 2차 1/1 통과 2.7분: look 한국어, response2 영어 입력 1회→alias 후 2회, name 한국어(`task-22/e2e-green.log`, `panel-observation.log`, `korean-npc-output.png`, 1차 로그 `e2e-green-run1-wrong-field.log`). fallback 증거 `task-22/fallback.log`(unit).
-  - **진행 중(결과 미확인)**: 전체 e2e suite 순차 실행(port 4298, `task-22/e2e-full-suite.log`). 실행 중엔 src/빌드 변경 금지(preview가 build/wasm-release를 직접 서빙).
+  - 전체 e2e 40/40(22.0분). 게이트 1차에서 talk-templates 유닛 RED(추출기가 `TALK_MSG` 미인식) → `f92aa2f`로 수정, 2차 게이트 전부 0.
   - Fork B 문서 초안(worktree)에 Todo 22 범위 반영(미커밋): 마을 주민 NPC 대사 한국어, castle/상점/인트로/상태창은 영어, corpus 4429.
 - **Todo 20 초안 (Fork B)**: worktree `.claude/worktrees/agent-ac0eaf00f74c3c95a`, branch `todo-20-release-docs-draft` (`dcaeebc` verifier cherry-pick, `53adc2d` 문서). README/docs/WEB_PORT.md/docs/GITHUB_PAGES.md 작성, `verify:release-docs` 0, unit 300/300(fork 보고). handoff.md는 검사 대상에서 제외(역사 기록). 미확인: fresh-clone QA, emsdk 설치 명령 실행. Todo 22 완료 후 한계 절 갱신 필요.
 
