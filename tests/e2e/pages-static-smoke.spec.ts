@@ -16,11 +16,13 @@ import { fileURLToPath } from "node:url"
 //
 // PAGES_DIST points at the artifact to smoke (default: the local dist/,
 // which the webServer's `build-site --base=/ultima/` just rebuilt); CI's
-// downloaded Pages artifact can be smoked the same way.
+// downloaded Pages artifact can be smoked the same way. PAGES_PREFIX
+// (default "/ultima/") mounts it elsewhere -- e.g. "/" for a base-"/"
+// `npm run build` output, the plan's "serve at `/`" half of Todo 19's QA.
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
 const evidenceDir = join(repoRoot, ".omo/evidence/ultima-web/task-19")
 const artifactDir = resolve(process.env["PAGES_DIST"] ?? join(repoRoot, "dist"))
-const PREFIX = "/ultima/"
+const PREFIX = process.env["PAGES_PREFIX"] ?? "/ultima/"
 
 const CONTENT_TYPES: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
@@ -58,7 +60,7 @@ function startStaticPagesServer(): Promise<Server> {
   return new Promise((resolveServer) => server.listen(0, "127.0.0.1", () => resolveServer(server)))
 }
 
-test.describe("Todo 19: Pages artifact static smoke (plain static server at /ultima/)", () => {
+test.describe(`Todo 19: Pages artifact static smoke (plain static server at ${PREFIX})`, () => {
   let server: Server
   let origin: string
 
@@ -72,7 +74,7 @@ test.describe("Todo 19: Pages artifact static smoke (plain static server at /ult
     await new Promise((resolveClose) => server.close(resolveClose))
   })
 
-  test("happy path: the real engine boots from the artifact under /ultima/, and nothing is requested outside the prefix", async ({
+  test("happy path: the real engine boots from the artifact under its prefix, and nothing is requested outside it", async ({
     page,
     browser
   }) => {
@@ -128,10 +130,12 @@ test.describe("Todo 19: Pages artifact static smoke (plain static server at /ult
       )}\n`
     )
 
-    // Then: `/` is not ours (Pages project site), every request stayed
-    // under /ultima/ and succeeded, and the real engine loaded from the
+    // Then: `/` is not ours when mounted under a project-site prefix,
+    // every request stayed under the prefix and succeeded, and the real engine loaded from the
     // artifact's own engine/ directory and started.
-    expect(rootResponse.status()).toBe(404)
+    if (PREFIX !== "/") {
+      expect(rootResponse.status()).toBe(404)
+    }
     expect(outsidePrefix).toEqual([])
     expect(failed).toEqual([])
     for (const file of ["xu4.mjs", "xu4.wasm", "modules/render.pak", "modules/Ultima-IV.mod"]) {
