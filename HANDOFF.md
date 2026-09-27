@@ -1,57 +1,55 @@
 # HANDOFF
-작성 시각: 2026-09-27 20:25 KST
+작성 시각: 2026-09-27 20:15 KST (시스템 시계 기준 — 이전 판의 "20:25"는 수기 추정값이라 이 값이 맞음)
 
 ## 1. 목표 (What we're building)
 - xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식 + 한국어화. 진행 기준 `plan.md`(25단계).
-- 최종 목표는 **한국어로 실제 플레이하는 웹 기반 울티마 4**. 영어 keyword 또는 한국어 alias 입력 가능 + 실제 NPC 응답은 한국어여야 함. 현재 검증된 것은 한국어 alias 입력뿐(Calabrini 실제 응답은 영어) — 한국어 NPC 출력 미완료, 출시 차단. 72%는 계획 승인률이지 한국어 플레이 완성률이 아님.
-- 이번 세션: `plan.md` 바로 다음 순서 5번 — stale 한국어 입력 제출이 실제 게임 표면(GLFW keydown)으로 합성되지 않게 하는 최소 구현(Todo 18 남은 RED).
+- 최종 목표는 **한국어로 실제 플레이하는 웹 기반 울티마 4**. 실제 NPC 응답이 한국어여야 하는데 아직 영어 — 출시 차단(아래 6절, `.omo/drafts/korean-output-gap-design.md`).
+- 이번 세션: Todo 18 완료·merge·push(19/25) → Todo 19 진행 중, 병렬로 Todo 20 검증기 준비 + 한국어 출력 gap 조사.
 
 ## 2. 현재 상태 (Current state)
-- 진행률 **19/25 = 76.0%** — Todo 18 ✅. main merge `f936e74`(no-ff, 브랜치와 tree 동일 확인) + origin push 완료(main, `todo-18-failure-boundaries` 둘 다, exit 0). `git status -sb`: `main...origin/main` 동기.
-- merge 게이트(직접 실행, 전부 exit 0): `npm ci`, `npm run test:unit`(22 files/276), `verify:repo-sources`, `typecheck`, `build`, `audit:dist`, `git diff --check`, 계획서 `cmp`. 로그 `.omo/evidence/ultima-web/task-18/stale-real-surface/merge-gate.log`.
-- Todo 18 acceptance e2e: `failure-boundaries` 4/4(stale 한국어 제출 뒤 합성 keydown 0), 회귀 `korean-npc-alias` 2/2, `gameplay-progression` 2/2. QA 증거 `security-audit.log`(0)·`dist-leak-rejected.log`(1, 의도) 재생성. memory smoke 10분은 이번 변경 전 실행분.
-- 한국어 NPC 출력(실제 엔진 → 한국어 표시)은 여전히 미완료 — 출시 차단 요소 그대로.
+- 진행률 **20/25 = 80.0%** — Todo 19 ✅ (merge 게이트 `npm ci` 포함 전부 exit 0, handoff.md 기록). main merge + push 진행.
+- **Todo 19 (branch `todo-19-pages-release`, 커밋 `0b0ea35`, origin push 완료, main 미merge, 체크박스 `[ ]`)**:
+  - 발견: 기존 CI는 wasm 엔진을 빌드하지 않아 Pages artifact에 `dist/engine/`이 없었음(셸만 배포). `vite preview`의 `/engine/` 미들웨어가 `build/wasm-release`에서 직접 서빙해 로컬 e2e는 이 gap을 가렸음.
+  - 수정: `pages.yml`에 apt 오디오 헤더 → `deps:host` → `build:modules` → `deps:wasm` → `build:wasm` → wasm-symbols 유닛(hard gate, continue-on-error 제거) → `build:site` → `audit:dist -- --require-engine`. `audit-dist.mjs --require-engine`, `workflow-verifier.mjs`(build:wasm 존재·순서, audit --require-engine, continue-on-error 금지) 추가.
+  - 확인한 것(직접 실행): unit RED 6 failed → GREEN 40/40(`task-19/unit-{red,green}.log`); clean clone에서 CI 순서 전체 exit 0(build:wasm 27s, dist/engine에 xu4.mjs/wasm/modules 생성); `pages-static-smoke.spec.ts` RED(엔진 없는 artifact → 404, module-load-failed) → GREEN 1/1(plain static server `/ultima/`, `/`는 404, prefix 밖 요청 0, 실제 타이틀 애니메이션 스크린샷); `workflow-failure.log`(.nojekyll 제거/잘못된 root/--require-engine 제거 각각 exit 1); `ssh-auth.log`(인증 greeting, exit 1 정상); 로컬 게이트 unit 283/283·verify·typecheck·build·build:site·audit --require-engine·verify:workflow·diff-check·cmp·YAML parse 전부 0(`task-19/local-gates.log`).
+  - CI run `36315000683`(branch dispatch): build=success, deploy=skipped. 다운로드한 artifact에 `.nojekyll`+`engine/*` 있고 `audit:dist --require-engine` 통과, `pages-static-smoke`가 CI artifact로 실제 엔진 부팅 1/1.
+  - GitHub Pages 설정: 20:12 KST 기준 `gh api repos/TaejinKim7-dev/ultima/pages` → 404(아직 미설정). 사용자가 Source="GitHub Actions" 설정하겠다고 답함. main 배포 run 2개(`36314583813`, `36314599335`)는 build 성공/deploy 실패(이 설정 부재 때문으로 추정 — 확인 필요).
+- **Todo 20 준비 (Fork A, worktree `/home/taejin/ultima/.claude/worktrees/agent-a382177c7dfd2d8a1`, branch `todo-20-release-docs`, 커밋 `6a336df`, 미push)**: `verify:release-docs` 검증기 + 16 unit test(RED→GREEN, fork 보고). 실제 repo 대상 실행은 exit 1(81건: WEB_PORT.md/GITHUB_PAGES.md 없음, handoff.md 경로/placeholder) — Todo 20 본 작업 대상.
+- **한국어 출력 gap 조사 (Fork B, 코드 무변경)**: `.omo/drafts/korean-output-gap-design.md`. 요지: i18n lookup이 wasm에 링크조차 안 됨, 엔진→JS 텍스트 경로 없음, `korean-progression.spec.ts`는 `ultimaI18n.resolve`만 검사. 새 Todo 22 제안(분모 25→26, 사용자 결정 필요).
 
 ## 3. 변경한 파일 (Files changed)
-- `vendor/xu4/src/event.cpp` — `__EMSCRIPTEN__` 한정: EM_JS `u4_web_text_prompt_opened/closed`, `ReadStringController`에 `webPromptId` + 소멸자. 네이티브 빌드 무영향.
-- `vendor/source-manifest.json` — xu4 treeSha256 `69f8d7e7…59eb` (fileCount 410 유지).
-- `src/i18n/text-prompt-gate.ts`(신규) + `tests/unit/text-prompt-gate.test.ts`(신규) — 열린 prompt 스택, input 시점 prompt id 캡처, 제출 판정(stale/없음 거부 메시지).
-- `src/engine/startup.ts` + `tests/unit/startup-sequence.test.ts` — `TextPromptReceiver`, `textPrompt` 옵션을 callMain 전에 `module.u4TextPrompt`로 부착.
-- `src/shell.ts` — 게이트 생성, `input` 이벤트에서 `noteInput()`, `submitKoreanKeyword()`가 먼저 게이트 판정 후 거부 시 `[한글 입력 거부] …` 메시지; `UltimaBridgeApi.textPromptReceiver` 추가; "대화 밖에서 쓰면 top-level 키 합성" 주석을 새 동작으로 수정.
-- `src/main.ts` — `startEngine`에 `textPrompt: bridge.textPromptReceiver` 전달.
-- `tests/e2e/failure-boundaries.spec.ts` — 이전 세션에서 추가한 stale real-surface RED 테스트(이번엔 수정 안 함).
-- `plan.md`, `handoff.md` — 이전 세션의 미커밋 변경(이번엔 아직 안 건드림).
+- (Todo 19, `0b0ea35`) `.github/workflows/pages.yml`, `scripts/audit-dist.mjs`, `scripts/workflow-verifier.mjs`, `tests/unit/audit-dist.test.ts`, `tests/unit/workflow.test.ts`(기존 YAML-name 테스트 fixture를 바뀐 step 이름으로 갱신, 변형 로직 동일), `tests/e2e/pages-static-smoke.spec.ts`(신규).
+- (Todo 18, main merge `f936e74`) 이전 판 참고: `event.cpp` prompt 훅, `text-prompt-gate.ts`, `startup.ts`, `shell.ts`, `main.ts` 등.
+- untracked: `.omo/drafts/korean-output-gap-design.md`(Fork B), `.omo/boulder.json`, `.omo/start-work/`, `.omo/lazycodex-executor-verify/`, `.claude/`(worktree 포함).
 
 ## 4. 주요 결정과 근거 (Key decisions)
-- 신호원은 네이티브 `ReadStringController` 수명: readInt/readString/readStringView 전부 이 클래스 → 이름 입력(`intro.cpp:823`)과 NPC talk(`game.cpp:1424`) 모두 커버. 셸 쪽엔 prompt 상태 신호가 달리 없었음.
-- 기존 bridge `prompt` 이벤트 재사용 안 함: `showPromptMarker()`가 `focus()`를 빼앗아 한국어 입력 중 포커스가 튐 + bridge 계약 변경 필요.
-- 게이트 규칙: 제출 시 prompt가 열려 있어야 하고, 마지막 입력 시 캡처한 id가 null(열리기 전 입력)이거나 현재 id와 같아야 함 → 기존 alias 헬퍼가 prompt 열리기 전에 fill해도 안 깨지도록.
-- `closed(id)`는 열린 id만 제거(순서 꼬임으로 게이트가 고착되지 않게), 스택으로 중첩 대비.
+- Pages smoke는 `vite preview`가 아닌 plain static server(`/ultima/`만 서빙, SPA fallback 없음) — preview 미들웨어가 dist/engine 누락을 가리기 때문.
+- `--require-engine`은 opt-in 플래그: 엔진 없이 빌드한 로컬 dist도 leak audit은 가능해야 해서. CI에서는 verify:workflow가 플래그 사용을 강제.
+- CI 엔진 빌드를 위해 apt(`libpulse-dev libvorbis-dev libflac-dev`) 설치: `deps:host`가 faun도 빌드하고 faun 링크에 필요.
+- 한국어 출력 구현은 새 Todo(분모 변경)라 착수하지 않고 설계 메모만.
 
 ## 5. 다음 할 일 (Next steps)
-- [ ] Todo 19: branch `todo-19-pages-workflow` 골격을 main 기준으로 이어받아 완료 기준(`.omo/plans/ultima-web.md` 19번) 확인. Pages Source="GitHub Actions" 설정은 사용자만 가능.
-- [ ] 이후 Todo 20 → F1~F4.
-- [ ] 출시 전 Step 11/12/14 실제 엔진 한국어 출력 연결 gap 해결, 실제 한국어 화면으로 검증.
+- [x] CI run 확인, CI artifact smoke, 게이트, Todo 19 ✅, 계획서 `[x]`.
+- [ ] (사용자) Pages Source="GitHub Actions" 설정 → main deploy 재실행 → 실제 URL 확인.
+- [ ] Todo 20: `todo-20-release-docs`를 main 위로 rebase 후 README/WEB_PORT/GITHUB_PAGES 작성, handoff.md를 검사 대상에 둘지 결정.
+- [ ] 사용자에게 Todo 22(한국어 출력) 신설 여부 결정 요청.
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
-- 이번 변경 이후 **stale wasm + 새 셸** 조합이면 모든 한국어 제출이 "열린 입력 요청 없음"으로 거부됨 — e2e 전 `build/wasm-release`가 새 빌드인지(`grep u4TextPrompt dist/engine/xu4.mjs`) 확인.
-- 동작 변화: 이제 NPC/텍스트 prompt 밖에서 한국어 입력창 제출은 키 합성 대신 거부 메시지. 의도된 변화지만 F3 수동 QA에서 UX 확인 필요.
-- e2e 동시 실행 시 반드시 다른 `PLAYWRIGHT_PORT`. NPC 접근 스윕 스펙끼리는 동시 실행 자제.
-- UX 이슈(미수정): 한글 입력창 사용 후 화살표/명령키가 조용히 무시됨(포커스 가드).
-- `memory-smoke`는 JS heap만 측정(wasm linear memory 미포함).
+- Pages Source 설정은 사용자만 가능. 미설정이면 main의 deploy job은 계속 실패.
+- 한국어 NPC 출력 미구현 — 출시 차단. 계획 체크박스 ✅가 이를 대신하지 않음.
+- 이번 세션 작업 디렉터리가 실수로 Fork A worktree로 바뀜(`cd` 부작용). 메인 저장소 작업은 절대경로/`git -C /home/taejin/ultima` 사용.
+- e2e 동시 실행 시 다른 `PLAYWRIGHT_PORT` 필수. NPC 접근 스펙끼리는 동시 실행 자제.
+- `memory-smoke`는 JS heap만 측정.
 - `pkill -f "<패턴>"`은 자기 셸까지 죽임 — `"[p]laywright ..."` 대괄호 트릭.
-- 진행률 분모: AGENTS.md/plan.md는 25, 이번 세션 사용자 지시문은 n/24 — 25 유지, 불일치 보고함.
 
 ## 7. 재개 방법 (How to resume)
 ```bash
 cd /home/taejin/ultima
-git checkout main && git status -sb
+git checkout todo-19-pages-release && git status -sb
 export PATH="$HOME/.local/opt/node22/bin:$PATH"
 export ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip
-# wasm 재빌드가 필요하면: source .emsdk/emsdk_env.sh && npm run build:wasm
-npm run build
-PLAYWRIGHT_PORT=4228 npm run test:e2e -- tests/e2e/failure-boundaries.spec.ts --project=chromium --workers=1
-PLAYWRIGHT_PORT=4188 npm run test:e2e -- tests/e2e/korean-npc-alias.spec.ts --project=chromium --workers=1
-PLAYWRIGHT_PORT=4238 npm run test:e2e -- tests/e2e/gameplay-progression.spec.ts --project=chromium --workers=1
+gh run view 36315000683
+npm run build:site -- --base=/ultima/ && npm run audit:dist -- --require-engine && npm run verify:workflow
+PLAYWRIGHT_PORT=4248 npx playwright test tests/e2e/pages-static-smoke.spec.ts --project=chromium --workers=1
 ```
-- 상세 기록: `handoff.md` 마지막 절, 진행 순서: `plan.md` "바로 다음 순서".
+- 상세: `handoff.md`, 진행 순서 `plan.md` "바로 다음 순서".
