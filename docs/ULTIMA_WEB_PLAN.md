@@ -297,7 +297,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: production build has no original data/test hooks and failure states are recoverable, evidence `.omo/evidence/ultima-web/task-18/security-audit.log`; failure: add a fake original-data fixture to `dist` in temp and verify audit rejects it, evidence `.omo/evidence/ultima-web/task-18/dist-leak-rejected.log`.
   Commit: Y | test(web): harden browser failure boundaries
 
-- [ ] 19. Build GitHub Pages workflow and project-site release artifact
+- [x] 19. Build GitHub Pages workflow and project-site release artifact
   What to do / Must NOT do: configure the release for `https://github.com/TaejinKim7-dev/ultima` with SSH remote `git@github.com:TaejinKim7-dev/ultima.git`; create `.github/workflows/pages.yml` that installs pinned tools, builds/test/audits the site, uploads `dist/`, and deploys with official Pages Actions after PR merge to `main`. Include `.nojekyll`, base `/ultima/`, expected URL `https://taejinkim7-dev.github.io/ultima/`, and clear instructions for setting Pages Source to GitHub Actions. Verify SSH auth with a non-mutating command before the first push. Must not expose original data in Git, Pages, or Actions artifacts.
   Parallelization: Wave 4 | Blocked by: 15,16,18 | Blocks: 20 | (2026-09-24 re-plan: the workflow skeleton -- Node 22 CI, build/test/audit, Pages deploy of the current shell -- may start early, in parallel with Todo 21; Todo 19 is only marked done after its full acceptance, which still requires 15,16,18)
   References: GitHub Docs `configuring-a-publishing-source-for-your-github-pages-site`, `creating-project-pages-manually`, `using-custom-workflows-with-github-pages`; this plan's Pages guardrails.

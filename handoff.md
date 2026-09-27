@@ -1243,3 +1243,25 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 ```
 - Todo 18 추가 acceptance: `failure-boundaries.spec.ts` 4/4, memory smoke 10분 1/1(변경 전 실행분), `security-audit.log` exit 0, `dist-leak-rejected.log` exit 1(의도). 로그: `.omo/evidence/ultima-web/task-18/stale-real-surface/merge-gate.log`.
 - 계획서 두 벌 `[x] 18`, `plan.md` 19/25 = 76.0%. 다음: Todo 19.
+
+### Todo 19 완료 + main merge 게이트 (2026-09-27 20:25 KST)
+
+- branch `todo-19-pages-release` 구현 커밋 `0b0ea35` (origin push, 사용자 승인). 내용은 plan.md "Step 19 완료" 참고.
+- RED→GREEN: unit 6 failed → 40/40(`task-19/unit-{red,green}.log`); pages smoke RED(엔진 없는 artifact: engine 404, module-load-failed, `smoke-red-shell-only.log`) → GREEN local dist 1/1, **CI artifact** 1/1(`smoke-green-{local,ci-artifact}.log`, `pages-static-smoke*.json`, 브라우저 chromium 136.0.7103.25).
+- QA: `workflow-failure.log`(.nojekyll 제거·root=build·--require-engine 제거 각각 exit 1, 커밋본 exit 0), `ssh-auth.log`(greeting, exit 1 정상), `ci-run.log`(run `36315000683` build=success deploy=skipped).
+- clean clone에서 CI 순서 재현: npm ci → deps:host → build:modules → deps:wasm → build:wasm(27s) → wasm-symbols → build:site → audit:dist 전부 exit 0.
+- merge 게이트(직접 실행, 전부 exit 0):
+  ```
+  npm ci                                      # 0
+  npm run test:unit                           # 0 — 22 files / 283 tests
+  npm run verify:repo-sources                 # 0
+  npm run typecheck                           # 0
+  npm run build                               # 0
+  npm run build:site -- --base=/ultima/       # 0
+  npm run audit:dist -- --require-engine      # 0
+  npm run verify:workflow                     # 0
+  git diff --check                            # 0
+  cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
+  python3 yaml.safe_load(pages.yml)           # ok
+  ```
+- 미확인: 실제 Pages 배포. `gh api repos/TaejinKim7-dev/ultima/pages` → 404(Source 미설정). main push의 deploy job은 설정 전까지 실패할 것(확인 필요).

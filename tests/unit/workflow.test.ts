@@ -69,8 +69,8 @@ describe("verify:workflow", () => {
     // so it must catch this specific shape itself.
     const path = tempWorkflowFrom((source) =>
       source.replace(
-        /name:\s*"Unit tests: wasm engine suite \(known gap, see header comment\)"/,
-        "name: Unit tests: wasm engine suite (known gap, see header comment)"
+        /name:\s*"Unit tests: wasm engine suite \(needs the engine built above\)"/,
+        "name: Unit tests: wasm engine suite (needs the engine built above)"
       )
     )
 
@@ -253,5 +253,52 @@ describe("verify:workflow", () => {
 
     expect(result.status).toBe(1)
     expect(result.stderr).toContain("original")
+  })
+  it("Todo 19: rejects a workflow whose audit:dist step does not require the engine files", () => {
+    const path = tempWorkflowFrom((source) => source.replaceAll("npm run audit:dist -- --require-engine", "npm run audit:dist"))
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("--require-engine")
+  })
+
+  it("Todo 19: rejects a workflow that never builds the wasm engine before the site build", () => {
+    const path = tempWorkflowFrom((source) => removeLinesMatching(source, /^\s*run:\s*npm run build:wasm/))
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("build:wasm")
+  })
+
+  it("Todo 19: rejects a workflow that builds the wasm engine after the site build", () => {
+    const path = tempWorkflowFrom((source) => {
+      const lines = source.split("\n")
+      const wasmIndex = lines.findIndex((line) => /^\s*run:\s*npm run build:wasm/.test(line))
+      if (wasmIndex === -1) {
+        throw new Error("fixture workflow missing build:wasm run line")
+      }
+      const [wasmLine] = lines.splice(wasmIndex, 1)
+      const siteIndex = lines.findIndex((line) => /^\s*run:\s*npm run build:site/.test(line))
+      lines.splice(siteIndex + 1, 0, wasmLine!)
+      return lines.join("\n")
+    })
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("build:wasm")
+  })
+
+  it("Todo 19: rejects any continue-on-error step (every check must hard-gate publishing)", () => {
+    const path = tempWorkflowFrom((source) =>
+      source.replace("      - name: Typecheck\n", "      - name: Typecheck\n        continue-on-error: true\n")
+    )
+
+    const result = run(path)
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("continue-on-error")
   })
 })

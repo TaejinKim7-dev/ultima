@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, statSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs"
 import { basename, extname, join, relative, sep } from "node:path"
 import { FORBIDDEN_BASENAMES, FORBIDDEN_EXTENSIONS } from "./check-base-path.mjs"
 
@@ -461,11 +461,34 @@ function isMainModule() {
   return process.argv[1] !== undefined && import.meta.url === new URL(process.argv[1], "file:").href
 }
 
+// Todo 19: the real engine files a playable Pages release must ship
+// (vite.config.ts's wasmEngineAssets() copies them from build/wasm-release
+// into dist/engine/ only when that build exists -- otherwise it silently
+// emits a shell-only site). Opt-in via --require-engine so a local dist
+// built without the wasm engine can still be audited for leaks.
+export const REQUIRED_ENGINE_FILES = ["xu4.mjs", "xu4.wasm", "modules/render.pak", "modules/Ultima-IV.mod"]
+
+/** Throws a `DistAuditError` listing every required engine file missing under `distDir/engine/`. */
+export function auditEngineAssets(distDir) {
+  const missing = REQUIRED_ENGINE_FILES.map((file) => `engine/${file}`).filter(
+    (rel) => !existsSync(join(distDir, rel))
+  )
+  if (missing.length > 0) {
+    throw new DistAuditError(
+      `dist artifact is missing the real engine file(s): ${missing.join(", ")} -- run "npm run build:wasm" before building the site`
+    )
+  }
+}
+
 if (isMainModule()) {
-  const dirArg = process.argv.slice(2).find((arg) => arg.startsWith("--dir="))
+  const args = process.argv.slice(2)
+  const dirArg = args.find((arg) => arg.startsWith("--dir="))
   const dir = dirArg !== undefined ? dirArg.slice("--dir=".length) : "dist"
 
   try {
+    if (args.includes("--require-engine")) {
+      auditEngineAssets(dir)
+    }
     const fileCount = auditDist(dir)
     console.log(`audit:dist passed for "${dir}" (${fileCount} file(s) scanned, no leaks or shipped-content violations).`)
   } catch (error) {
