@@ -1,5 +1,5 @@
 # HANDOFF
-작성 시각: 2026-09-27 20:45 KST
+작성 시각: 2026-09-27 21:35 KST
 
 ## 1. 목표 (What we're building)
 - xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식 + 한국어화. 진행 기준 `plan.md`(25단계).
@@ -7,15 +7,16 @@
 - 이번 세션: Todo 18 완료·merge·push(19/25) → Todo 19 진행 중, 병렬로 Todo 20 검증기 준비 + 한국어 출력 gap 조사.
 
 ## 2. 현재 상태 (Current state)
-- 진행률 **20/26 = 76.9%** (2026-09-27 Todo 22 추가로 분모 25→26) — Todo 19 ✅ (merge 게이트 `npm ci` 포함 전부 exit 0, handoff.md 기록). main merge `47c8c41` + push 완료. main run `36315663294`: build=success, deploy=failure(Pages 미설정 "Get Pages site failed ... Not Found" — 로그 확인). 후속 커밋 `5b7773c`: `/` 서빙 smoke 1/1, Step 15 "실제 게임 확인" ✅→⬜ 정정, 설계 메모 커밋.
-- **Todo 19 (branch `todo-19-pages-release`, 커밋 `0b0ea35`, origin push 완료, main 미merge, 체크박스 `[ ]`)**:
-  - 발견: 기존 CI는 wasm 엔진을 빌드하지 않아 Pages artifact에 `dist/engine/`이 없었음(셸만 배포). `vite preview`의 `/engine/` 미들웨어가 `build/wasm-release`에서 직접 서빙해 로컬 e2e는 이 gap을 가렸음.
-  - 수정: `pages.yml`에 apt 오디오 헤더 → `deps:host` → `build:modules` → `deps:wasm` → `build:wasm` → wasm-symbols 유닛(hard gate, continue-on-error 제거) → `build:site` → `audit:dist -- --require-engine`. `audit-dist.mjs --require-engine`, `workflow-verifier.mjs`(build:wasm 존재·순서, audit --require-engine, continue-on-error 금지) 추가.
-  - 확인한 것(직접 실행): unit RED 6 failed → GREEN 40/40(`task-19/unit-{red,green}.log`); clean clone에서 CI 순서 전체 exit 0(build:wasm 27s, dist/engine에 xu4.mjs/wasm/modules 생성); `pages-static-smoke.spec.ts` RED(엔진 없는 artifact → 404, module-load-failed) → GREEN 1/1(plain static server `/ultima/`, `/`는 404, prefix 밖 요청 0, 실제 타이틀 애니메이션 스크린샷); `workflow-failure.log`(.nojekyll 제거/잘못된 root/--require-engine 제거 각각 exit 1); `ssh-auth.log`(인증 greeting, exit 1 정상); 로컬 게이트 unit 283/283·verify·typecheck·build·build:site·audit --require-engine·verify:workflow·diff-check·cmp·YAML parse 전부 0(`task-19/local-gates.log`).
-  - CI run `36315000683`(branch dispatch): build=success, deploy=skipped. 다운로드한 artifact에 `.nojekyll`+`engine/*` 있고 `audit:dist --require-engine` 통과, `pages-static-smoke`가 CI artifact로 실제 엔진 부팅 1/1.
-  - GitHub Pages 설정: 20:12 KST 기준 `gh api repos/TaejinKim7-dev/ultima/pages` → 404(아직 미설정). 사용자가 Source="GitHub Actions" 설정하겠다고 답함. main 배포 run 2개(`36314583813`, `36314599335`)는 build 성공/deploy 실패(이 설정 부재 때문으로 추정 — 확인 필요).
-- **Todo 20 준비 (Fork A, worktree `/home/taejin/ultima/.claude/worktrees/agent-a382177c7dfd2d8a1`, branch `todo-20-release-docs`, 커밋 `6a336df`, 미push)**: `verify:release-docs` 검증기 + 16 unit test(RED→GREEN, fork 보고). 실제 repo 대상 실행은 exit 1(81건: WEB_PORT.md/GITHUB_PAGES.md 없음, handoff.md 경로/placeholder) — Todo 20 본 작업 대상.
-- **한국어 출력 gap 조사 (Fork B, 코드 무변경)**: `.omo/drafts/korean-output-gap-design.md`. 요지: i18n lookup이 wasm에 링크조차 안 됨, 엔진→JS 텍스트 경로 없음, `korean-progression.spec.ts`는 `ultimaI18n.resolve`만 검사. 새 Todo 22 제안(분모 25→26, 사용자 결정 필요).
+- 진행률 **21/26 = 80.8%** — Todo 22 ✅ (게이트 `npm ci` 포함 전부 0, 전체 e2e 40/40). main merge + push 진행. main `703919a`까지 origin 동기. Pages 실제 배포 확인 완료(run `36316708881`).
+- **Todo 22 진행 중 (branch `todo-22-korean-npc-output`, 미커밋 작업 + Fork A merge `39730db`)**:
+  - 설계: 웹 빌드에서만 `runTalkDialogue`의 모든 출력을 `talkMessage()`로 가로채 EM_JS `Module.u4Text.talk(format, a0, a1)`로 보냄. TLK를 가리키는 인자/응답은 `@MAP:npcIndex:field` id로만 보내므로 영어 TLK 원문은 엔진 밖으로 안 나감. 틀 문장은 xu4 코드 리터럴 그대로 → JS가 `resolveTalkTemplateId`로 id 찾고 `resolveDisplayText`로 한국어. 플레이어 입력은 `u4Text.input` → "> health".
+  - `Discourse`에 `webTlkName`(웹 전용, "moonglow.tlk"→"MOONGLOW"), `TalkState`에 web 필드. Boron 대화는 `webStrings=NULL`로 비활성. `discourse_castle.cpp`용으로 `message` 매크로를 `screenMessage`로 복원.
+  - 확인(직접 실행): e2e RED `korean-npc-output.spec.ts` exit 1(패널에 Calabrini look/health/name 한국어 0건, `task-22/e2e-red.log`, `panel-observation.log`); unit `talk-compose` RED(모듈 없음)→9/9, `startup-sequence` Todo 22 RED 1 failed→11/11; `g++`/`em++ -fsyntax-only` discourse.cpp 0; `verify:repo-sources` 0(xu4 treeSha256 `5a864e41…5e88`); `npm run build:wasm` 0, `wasm-symbols` 8/8; `npm run build` 0; typecheck 0.
+  - Fork A(`39730db`, merge됨): `discourse_tlk.cpp` 틀 문장 18개 inventory+번역(`ui:discourse_tlk:0..17`), `GENERATED_TALK_TEMPLATES`, `resolveTalkTemplateId`, i18n:check --strict 0(4429 entries, fork 보고).
+  - e2e GREEN(커밋 `458ef4d`): 1차 실행은 health 응답 0건으로 실패 → 스크린샷 확인 결과 Calabrini의 topic2가 "HEAL"이라 `U4Talk_dialogue`가 health 필드보다 먼저 response2로 응답(캔버스도 동일). 테스트 기대 필드를 response2로 정정(주석에 근거) → 2차 1/1 통과 2.7분: look 한국어, response2 영어 입력 1회→alias 후 2회, name 한국어(`task-22/e2e-green.log`, `panel-observation.log`, `korean-npc-output.png`, 1차 로그 `e2e-green-run1-wrong-field.log`). fallback 증거 `task-22/fallback.log`(unit).
+  - 전체 e2e 40/40(22.0분). 게이트 1차에서 talk-templates 유닛 RED(추출기가 `TALK_MSG` 미인식) → `f92aa2f`로 수정, 2차 게이트 전부 0.
+  - Fork B 문서 초안(worktree)에 Todo 22 범위 반영(미커밋): 마을 주민 NPC 대사 한국어, castle/상점/인트로/상태창은 영어, corpus 4429.
+- **Todo 20 초안 (Fork B)**: worktree `.claude/worktrees/agent-ac0eaf00f74c3c95a`, branch `todo-20-release-docs-draft` (`dcaeebc` verifier cherry-pick, `53adc2d` 문서). README/docs/WEB_PORT.md/docs/GITHUB_PAGES.md 작성, `verify:release-docs` 0, unit 300/300(fork 보고). handoff.md는 검사 대상에서 제외(역사 기록). 미확인: fresh-clone QA, emsdk 설치 명령 실행. Todo 22 완료 후 한계 절 갱신 필요.
 
 ## 3. 변경한 파일 (Files changed)
 - (Todo 19, `0b0ea35`) `.github/workflows/pages.yml`, `scripts/audit-dist.mjs`, `scripts/workflow-verifier.mjs`, `tests/unit/audit-dist.test.ts`, `tests/unit/workflow.test.ts`(기존 YAML-name 테스트 fixture를 바뀐 step 이름으로 갱신, 변형 로직 동일), `tests/e2e/pages-static-smoke.spec.ts`(신규).

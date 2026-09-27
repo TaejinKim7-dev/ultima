@@ -366,4 +366,35 @@ describe("startEngine", () => {
     expect(receiverAtMainCall).toBe(textPrompt) // attached before callMain(), not after
     expect(seen).toEqual(["open:1", "close:1"])
   })
+  it("Todo 22: attaches the native talk-line receiver to module.u4Text before callMain()", async () => {
+    const { module, calls } = makeFakeModule()
+    const { factory } = makeFactory(module)
+    const seen: string[] = []
+    const talkText = {
+      talk: (format: string, a0: string | null, a1: string | null) => seen.push(`talk:${format}|${a0}|${a1}`),
+      input: (text: string) => seen.push(`input:${text}`)
+    }
+    let receiverAtMainCall: unknown
+    module.callMain = () => {
+      calls.mainCalled += 1
+      receiverAtMainCall = module.u4Text
+      module.u4Text?.talk("%s", "@MOONGLOW:12:health", null)
+      module.u4Text?.input("health")
+    }
+
+    const result = await startEngine({
+      factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
+      zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
+      dispatch: () => true,
+      unlockAudio: async () => {},
+      audioContext: null,
+      talkText
+    })
+
+    expect(result.started).toBe(true)
+    expect(receiverAtMainCall).toBe(talkText)
+    expect(seen).toEqual(["talk:%s|@MOONGLOW:12:health|null", "input:health"])
+  })
 })

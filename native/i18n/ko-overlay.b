@@ -7513,6 +7513,51 @@ z:%d
 "
   ui:creature:9: "%s 경미한 부상!
 "
+  ui:discourse_tlk:0: "예 또는 아니오로 답하라!
+"
+  ui:discourse_tlk:1: "
+만난 이: %s
+"
+  ui:discourse_tlk:10: "%s 말하길: 오, 고맙소! 그대의 친절을 결코 잊지 않으리다!
+"
+  ui:discourse_tlk:11: "
+
+그대에겐 그만한 골드가 없다!
+"
+  ui:discourse_tlk:12: "%s 말하길: 그대의 골드는 필요 없소. 간직하시오!
+"
+  ui:discourse_tlk:13: "그대와 함께하게 되어 영광이오!
+"
+  ui:discourse_tlk:14: "그대와 함께하기엔 아직 부족하오 (%s).
+"
+  ui:discourse_tlk:15: "%s 말하길: 나는 그대와 함께할 수 없소.
+"
+  ui:discourse_tlk:16: "안녕, 밴조 밥!
+그대의 비밀
+번호는
+4F4A4E0A
+"
+  ui:discourse_tlk:17: "그 일은
+도울 수 없소.
+"
+  ui:discourse_tlk:2: "
+무엇이 궁금한가:
+"
+  ui:discourse_tlk:3: "잘 가게.
+"
+  ui:discourse_tlk:4: "%s, 등을 돌린다!
+"
+  ui:discourse_tlk:5: "%s 말하길: 덤벼라! 어리석은 자여!
+"
+  ui:discourse_tlk:6: "
+%s
+
+그대의 대답: "
+  ui:discourse_tlk:7: "보이는 것: %s
+"
+  ui:discourse_tlk:8: "%s 말하길: 내 이름은 %s
+"
+  ui:discourse_tlk:9: "얼마나? "
   ui:dungeon:0: "수색 중...
 
 "

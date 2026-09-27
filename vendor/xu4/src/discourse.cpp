@@ -84,6 +84,19 @@ const char* discourse_load(Discourse* dis, const char* resource)
             return "Unable to open .TLK file";
 
         dis->system = DISCOURSE_U4_TLK;
+#ifdef __EMSCRIPTEN__
+        {
+        // "moonglow.tlk" -> "MOONGLOW" (see discourse.h).
+        const char* base = strrchr(resource, '/');
+        base = base ? base + 1 : resource;
+        size_t n = 0;
+        while (base[n] && base[n] != '.' && n < sizeof(dis->webTlkName) - 1) {
+            dis->webTlkName[n] = toupper((unsigned char) base[n]);
+            ++n;
+        }
+        dis->webTlkName[n] = '\0';
+        }
+#endif
         dis->conv.table = malloc(convLimit * (sizeof(U4Talk) + 288));
         U4Talk* tlk = (U4Talk*) dis->conv.table;
         char* strings = (char*) (tlk + convLimit);

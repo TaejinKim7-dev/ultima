@@ -22,7 +22,7 @@
 // `char name[16]`).
 
 import type { GeneratedI18nEntry } from "./generated/strings.ts"
-import { GENERATED_ALIASES, GENERATED_I18N_ENTRIES } from "./generated/strings.ts"
+import { GENERATED_ALIASES, GENERATED_I18N_ENTRIES, GENERATED_TALK_TEMPLATES } from "./generated/strings.ts"
 
 /** One localization table entry as seen by this runtime (generated rows share this shape). */
 export interface LocalizationEntry {
@@ -76,6 +76,19 @@ export function resolveDisplayText(
   const entry = tableEntry(id, table)
   if (entry === undefined || entry.translation.trim().length === 0) return fallback
   return entry.translation
+}
+
+/**
+ * Todo 22: maps the exact format-string literal the native talk channel
+ * sends (the one runTalkDialogue() passes to screenMessage in
+ * vendor/xu4/src/discourse_tlk.cpp) to its `ui:discourse_tlk:<n>` semantic
+ * ID, or `undefined` when it is not a known talk template.
+ */
+export function resolveTalkTemplateId(
+  literal: string,
+  table: Readonly<Record<string, string>> = GENERATED_TALK_TEMPLATES
+): string | undefined {
+  return Object.hasOwn(table, literal) ? table[literal] : undefined
 }
 
 const PLACEHOLDER_PATTERN = /%[-+ 0#]*\d*(?:\.\d+)?[a-zA-Z%]|\{\d+\}/g

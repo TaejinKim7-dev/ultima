@@ -129,7 +129,8 @@ romPickerElement?.addEventListener("change", () => {
         gameModule,
         zipFile: file,
         dispatch: bridge.dispatch,
-        textPrompt: bridge.textPromptReceiver
+        textPrompt: bridge.textPromptReceiver,
+        talkText: bridge.talkTextReceiver
       })
     )
     .then((result) => {

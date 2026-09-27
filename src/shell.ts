@@ -27,6 +27,8 @@ import {
 } from "./overlay/overlay-layout.ts"
 import { buildAliasTable, resolveInput, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
 import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
+import { resolveDisplayText, resolveTalkTemplateId } from "./i18n/localization.ts"
+import { composeTalkInput, composeTalkLine, type TalkComposeDeps } from "./dialogue/talk-compose.ts"
 // Real Korean alias data (Todo 13), never original game data -- just this
 // project's own translation strings. Vite/TS both support importing JSON
 // modules directly; see tsconfig.json's `resolveJsonModule`.
@@ -60,6 +62,15 @@ export interface UltimaBridgeApi {
    * keyword field (see src/i18n/text-prompt-gate.ts).
    */
   readonly textPromptReceiver: { opened(id: number): void; closed(id: number): void }
+  /**
+   * Todo 22: pass to startEngine()'s `talkText` option -- real NPC talk
+   * lines from vendor/xu4/src/discourse_tlk.cpp, shown in Korean in the
+   * dialogue panel (see src/dialogue/talk-compose.ts).
+   */
+  readonly talkTextReceiver: {
+    talk(format: string, arg0: string | null, arg1: string | null): void
+    input(text: string): void
+  }
 }
 
 declare global {
@@ -605,6 +616,15 @@ export function createShell(doc: Document): UltimaBridgeApi {
     true
   )
 
+  // Todo 22: real engine talk lines -> Korean panel lines. These arrive as
+  // fragments of the engine's own message stream (a TLK reply has no
+  // trailing newline; the separate "\n" line event supplies it), so they
+  // go through the normal "message" event path, not appendWholeLine.
+  const talkDeps: TalkComposeDeps = {
+    templateId: (literal) => resolveTalkTemplateId(literal),
+    resolve: (id, fallback) => resolveDisplayText(id, fallback)
+  }
+
   return {
     abiVersion: BRIDGE_ABI_VERSION,
     dispatch,
@@ -614,6 +634,17 @@ export function createShell(doc: Document): UltimaBridgeApi {
     textPromptReceiver: {
       opened: (id) => textPromptGate.opened(id),
       closed: (id) => textPromptGate.closed(id)
+    },
+    talkTextReceiver: {
+      talk: (format, arg0, arg1) => {
+        const text = composeTalkLine(format, [arg0, arg1], talkDeps)
+        if (text !== "") {
+          dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text })
+        }
+      },
+      input: (text) => {
+        dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text: composeTalkInput(text) })
+      }
     }
   }
 }

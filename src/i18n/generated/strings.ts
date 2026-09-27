@@ -347,6 +347,99 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
       "%s"
     ]
   },
+  "ui:discourse_tlk:0": {
+    "translation": "예 또는 아니오로 답하라!\n",
+    "placeholders": []
+  },
+  "ui:discourse_tlk:1": {
+    "translation": "\n만난 이: %s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:discourse_tlk:10": {
+    "translation": "%s 말하길: 오, 고맙소! 그대의 친절을 결코 잊지 않으리다!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:discourse_tlk:11": {
+    "translation": "\n\n그대에겐 그만한 골드가 없다!\n",
+    "placeholders": []
+  },
+  "ui:discourse_tlk:12": {
+    "translation": "%s 말하길: 그대의 골드는 필요 없소. 간직하시오!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:discourse_tlk:13": {
+    "translation": "그대와 함께하게 되어 영광이오!\n",
+    "placeholders": []
+  },
+  "ui:discourse_tlk:14": {
+    "translation": "그대와 함께하기엔 아직 부족하오 (%s).\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:discourse_tlk:15": {
+    "translation": "%s 말하길: 나는 그대와 함께할 수 없소.\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:discourse_tlk:16": {
+    "translation": "안녕, 밴조 밥!\n그대의 비밀\n번호는\n4F4A4E0A\n",
+    "placeholders": []
+  },
+  "ui:discourse_tlk:17": {
+    "translation": "그 일은\n도울 수 없소.\n",
+    "placeholders": []
+  },
+  "ui:discourse_tlk:2": {
+    "translation": "\n무엇이 궁금한가:\n",
+    "placeholders": []
+  },
+  "ui:discourse_tlk:3": {
+    "translation": "잘 가게.\n",
+    "placeholders": []
+  },
+  "ui:discourse_tlk:4": {
+    "translation": "%s, 등을 돌린다!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:discourse_tlk:5": {
+    "translation": "%s 말하길: 덤벼라! 어리석은 자여!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:discourse_tlk:6": {
+    "translation": "\n%s\n\n그대의 대답: ",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:discourse_tlk:7": {
+    "translation": "보이는 것: %s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:discourse_tlk:8": {
+    "translation": "%s 말하길: 내 이름은 %s\n",
+    "placeholders": [
+      "%s",
+      "%s"
+    ]
+  },
+  "ui:discourse_tlk:9": {
+    "translation": "얼마나? ",
+    "placeholders": []
+  },
   "ui:dungeon:0": {
     "translation": "수색 중...\n\n",
     "placeholders": []
@@ -18058,6 +18151,28 @@ export const GENERATED_ALIASES: Record<string, GeneratedAliasEntry> = {
     "alias": "아니오",
     "canonical": "no"
   }
+}
+
+// Todo 22: exact screenMessage format literal (vendor/xu4/src/discourse_tlk.cpp) -> ui id.
+export const GENERATED_TALK_TEMPLATES: Readonly<Record<string, string>> = {
+  "Yes or no!\n": "ui:discourse_tlk:0",
+  "\nYou meet %s\n": "ui:discourse_tlk:1",
+  "\nYour Interest:\n": "ui:discourse_tlk:2",
+  "Bye.\n": "ui:discourse_tlk:3",
+  "%s turns away!\n": "ui:discourse_tlk:4",
+  "%s says: On guard! Fool!\n": "ui:discourse_tlk:5",
+  "\n%s\n\nYou say: ": "ui:discourse_tlk:6",
+  "You see %s\n": "ui:discourse_tlk:7",
+  "%s says: I am %s\n": "ui:discourse_tlk:8",
+  "How much? ": "ui:discourse_tlk:9",
+  "%s says: Oh Thank thee! I shall never forget thy kindness!\n": "ui:discourse_tlk:10",
+  "\n\nThou hast not that much gold!\n": "ui:discourse_tlk:11",
+  "%s says: I do not need thy gold.  Keep it!\n": "ui:discourse_tlk:12",
+  "I am honored to join thee!\n": "ui:discourse_tlk:13",
+  "Thou art not %s enough for me to join thee.\n": "ui:discourse_tlk:14",
+  "%s says: I cannot join thee.\n": "ui:discourse_tlk:15",
+  "Hi Banjo Bob!\nYour secret\nnumber is\n4F4A4E0A\n": "ui:discourse_tlk:16",
+  "That I cannot\nhelp thee with.\n": "ui:discourse_tlk:17"
 }
 
 export const GENERATED_I18N_META = "ultima-web/i18n-generated/v1" as const

@@ -35,9 +35,132 @@ struct TalkState {
     uint16_t voiceStream;
     uint16_t startVoiceLn;
     uint16_t askVoiceLn;
+#ifdef __EMSCRIPTEN__
+    // Todo 22: set only for U4 .TLK conversations (talkRunU4Tlk); NULL
+    // webStrings disables the web talk channel (e.g. Boron dialogue).
+    const char* webStrings;         // U4Talk::strings
+    const uint16_t* webOffsets;     // &U4Talk::name .. &U4Talk::topic2
+    const char* webMap;             // Discourse::webTlkName
+    int webConv;                    // .TLK record index
+#endif
 };
 
 typedef const char* (*TalkFunc)(TalkState*, int, const char*);
+
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#include <stdarg.h>
+
+/*
+ * Todo 22: the web shell shows each talk line in Korean in its HTML
+ * dialogue panel (src/dialogue/talk-compose.ts). Every line is sent as its
+ * printf format literal (xu4's own code string) plus its %s arguments;
+ * arguments that point into the loaded .TLK record are sent as
+ * "@MAP:npcIndex:field" ids, so the original English TLK text never leaves
+ * the engine. The canvas output is unchanged.
+ */
+EM_JS(void, u4_web_talk_line, (const char* fmt, const char* a0, const char* a1), {
+    if (Module.u4Text)
+        Module.u4Text.talk(UTF8ToString(fmt), a0 ? UTF8ToString(a0) : null,
+                           a1 ? UTF8ToString(a1) : null);
+});
+EM_JS(void, u4_web_talk_input, (const char* text), {
+    if (Module.u4Text)
+        Module.u4Text.input(UTF8ToString(text));
+});
+
+static const char* const webTlkFields[12] = {
+    "name", "pronoun", "look", "job", "health", "response1", "response2",
+    "question", "yes", "no", "topic1", "topic2"
+};
+
+/*
+ * Return "@MAP:conv:field" in out if str is one of the conversation's TLK
+ * fields, "?" if it points elsewhere into the record, or str itself.
+ */
+static const char* webTalkArg(const TalkState* ts, const char* str, char* out,
+                              size_t outLen) {
+    const int tlkRecordSize = 288;
+    if (str >= ts->webStrings && str < ts->webStrings + tlkRecordSize) {
+        for (int i = 0; i < 12; ++i) {
+            if (ts->webOffsets[i] && str == ts->webStrings + ts->webOffsets[i]) {
+                snprintf(out, outLen, "@%s:%d:%s", ts->webMap, ts->webConv,
+                         webTlkFields[i]);
+                return out;
+            }
+        }
+        return "?";
+    }
+    return str;
+}
+
+static void webTalkEmit(const TalkState* ts, const char* fmt, va_list args) {
+    char id0[40], id1[40];
+    const char* arg[2] = { NULL, NULL };
+    int argc = 0;
+
+    if (! ts->webStrings)
+        return;
+    if (fmt >= ts->webStrings && fmt < ts->webStrings + 288) {
+        // A TLK reply printed directly as the format (message(reply)).
+        u4_web_talk_line("%s", webTalkArg(ts, fmt, id0, sizeof(id0)), NULL);
+        return;
+    }
+    for (const char* cp = fmt; *cp; ++cp) {
+        if (cp[0] != '%')
+            continue;
+        if (cp[1] == '%') {
+            ++cp;
+        } else if (cp[1] == 's' && argc < 2) {
+            arg[argc] = va_arg(args, const char*);
+            ++argc;
+            ++cp;
+        } else {
+            // No other conversions occur in these talk lines; send the
+            // literal alone rather than misread the arguments.
+            u4_web_talk_line(fmt, NULL, NULL);
+            return;
+        }
+    }
+    u4_web_talk_line(fmt,
+        arg[0] ? webTalkArg(ts, arg[0], id0, sizeof(id0)) : NULL,
+        arg[1] ? webTalkArg(ts, arg[1], id1, sizeof(id1)) : NULL);
+}
+
+static void talkMessage(const TalkState* ts, const char* fmt, ...) {
+    char buffer[1024];     // screen.cpp MsgBufferSize
+    va_list args;
+
+    va_start(args, fmt);
+    va_list webArgs;
+    va_copy(webArgs, args);
+    webTalkEmit(ts, fmt, webArgs);
+    va_end(webArgs);
+    int len = vsnprintf(buffer, sizeof(buffer), fmt, args);
+    va_end(args);
+    if (len > 0)
+        screenMessageN(buffer, len < (int) sizeof(buffer) ? len : (int) sizeof(buffer) - 1);
+}
+
+static void talkCrLf(const TalkState* ts) {
+    screenCrLf();
+    if (ts->webStrings)
+        u4_web_talk_line("\n", NULL, NULL);
+}
+
+static void talkInputEcho(const TalkState* ts, const std::string& input) {
+    if (ts->webStrings && ! input.empty())
+        u4_web_talk_input(input.c_str());
+}
+
+#define TALK_MSG(...)       talkMessage(ts, __VA_ARGS__)
+#define TALK_CRLF()         talkCrLf(ts)
+#define TALK_INPUT(IN)      talkInputEcho(ts, IN)
+#else
+#define TALK_MSG            screenMessage
+#define TALK_CRLF           screenCrLf
+#define TALK_INPUT(IN)
+#endif
 
 static void talkYNResponse(TalkFunc func, TalkState* ts)
 {
@@ -46,7 +169,8 @@ static void talkYNResponse(TalkFunc func, TalkState* ts)
 
     while (1) {
         input = gameGetInput(3);
-        screenCrLf();
+        TALK_INPUT(input);
+        TALK_CRLF();
         if (input.empty())
             return;
         ans = input[0];
@@ -58,12 +182,12 @@ static void talkYNResponse(TalkFunc func, TalkState* ts)
             ans = DS_ANSWER_N;
             break;
         }
-        screenMessage("Yes or no!\n");
+        TALK_MSG("Yes or no!\n");
     }
 
     const char* reply = func(ts, ans, NULL);
-    screenMessage(reply);
-    screenCrLf();
+    TALK_MSG(reply);
+    TALK_CRLF();
 }
 
 static void runTalkDialogue(TalkFunc func, TalkState* ts)
@@ -73,22 +197,23 @@ static void runTalkDialogue(TalkFunc func, TalkState* ts)
     const char* reply;
 
 #define DSTRING(V)  func(ts, V, NULL)
-#define message     screenMessage
+#define message     TALK_MSG
 #define inputEq(K)  (strncasecmp(K, in, 4) == 0)
 
     message("\nYou meet %s\n", DSTRING(DS_LOOK));
 
     // 50% of the time they introduce themselves.
     if (xu4_random(2)) {
-        screenCrLf();
+        TALK_CRLF();
         goto tell_name;
     }
 
     while (xu4.stage == StagePlay) {
         message("\nYour Interest:\n");
         input = gameGetInput(16);
-        screenCrLf();
-        screenCrLf();
+        TALK_INPUT(input);
+        TALK_CRLF();
+        TALK_CRLF();
         in = input.c_str();
         if (input.empty() || strncasecmp("bye", in, 3) == 0) {
             soundSpeakLine(ts->voiceStream, ts->startVoiceLn + VP_BYE);
@@ -113,7 +238,7 @@ static void runTalkDialogue(TalkFunc func, TalkState* ts)
         reply = func(ts, DS_KEYWORD, input.c_str());
         if (reply) {
             message(reply);
-            screenCrLf();
+            TALK_CRLF();
 
             if (ts->nextOp == OP_PAUSE_ASK) {
                 ts->nextOp = OP_NOP;
@@ -137,7 +262,7 @@ tell_name:
                 if (ts->person->getNpcType() == NPC_TALKER_BEGGAR) {
                     message("How much? ");
                     int gold = EventHandler::readInt(2);
-                    screenCrLf();
+                    TALK_CRLF();
                     if (gold > 0) {
                         if (c->party->donate(gold)) {
                             soundSpeakLine(ts->voiceStream,
@@ -193,6 +318,10 @@ tell_name:
         }
     }
 }
+
+// discourse_castle.cpp (included after this file) keeps the original meaning.
+#undef message
+#define message     screenMessage
 
 //---------------------------------------------------------------------------
 
@@ -406,6 +535,12 @@ void talkRunU4Tlk(const Discourse* disc, int conv, Person* person)
     ts.state.nextOp = OP_NOP;
     ts.state.voiceStream = 0;
     ts.state.startVoiceLn = 0;
+#ifdef __EMSCRIPTEN__
+    ts.state.webStrings = ts.tlk->strings;
+    ts.state.webOffsets = &ts.tlk->name;
+    ts.state.webMap = disc->webTlkName;
+    ts.state.webConv = conv;
+#endif
 
     runTalkDialogue(U4Talk_dialogue, &ts.state);
 }
@@ -533,6 +668,9 @@ void talkRunBoron(int32_t discBlkN, int conv, Person* person)
     if (ts->voiceStream)
         ts->voiceStream++;       // Config::musicFile() id is one based.
     ts->startVoiceLn = data->coord.n[2];
+#ifdef __EMSCRIPTEN__
+    ts->webStrings = NULL;      // Boron dialogue: no web talk channel yet.
+#endif
     }
 
     runTalkDialogue(dialogueBoron, &bd.state);

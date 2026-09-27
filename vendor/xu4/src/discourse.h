@@ -23,6 +23,11 @@ struct Discourse {
     uint8_t  system;
     uint8_t  _pad;
     uint16_t convCount;
+#ifdef __EMSCRIPTEN__
+    // Todo 22: the loaded .TLK resource's uppercase basename ("MOONGLOW"),
+    // the MAP part of locales/ko/tlk.json's MAP:npcIndex:field ids.
+    char     webTlkName[12];
+#endif
 };
 
 class Person;
