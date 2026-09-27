@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { startEngine, type EngineModule, type EngineModuleFactory } from "../../src/engine/startup.ts"
-import { REQUIRED_ULTIMA4_ENTRIES } from "../../src/engine/zip.ts"
+import { MAX_ZIP_BYTES, REQUIRED_ULTIMA4_ENTRIES } from "../../src/engine/zip.ts"
 import { buildStoreZip } from "../lib/test-zip.ts"
 import type { BridgeEvent } from "../../src/bridge/types.ts"
 
@@ -178,6 +178,40 @@ describe("startEngine", () => {
     if (result.started) return
     expect(result.reason).toBe("corrupted")
     expect(calls.mainCalled).toBe(0)
+  })
+
+  it("on an oversized zip: rejects from the Blob's own .size, never reads it into memory, never calls main", async () => {
+    const { module, calls } = makeFakeModule()
+    const { factory } = makeFactory(module)
+    const dispatched: BridgeEvent[] = []
+    // A fake Blob that reports an oversized `.size` but throws if anything
+    // ever tries to actually read its bytes -- proves startEngine rejects
+    // from `.size` alone, before ever calling `.arrayBuffer()`.
+    const oversizedZip = {
+      size: MAX_ZIP_BYTES + 1,
+      arrayBuffer: () => {
+        throw new Error("must not be read: startEngine should reject from .size alone")
+      }
+    } as unknown as Blob
+
+    const result = await startEngine({
+      factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
+      zipFile: oversizedZip,
+      dispatch: (event) => {
+        dispatched.push(event)
+        return true
+      },
+      unlockAudio: async () => {}
+    })
+
+    expect(result.started).toBe(false)
+    if (result.started) return
+    expect(result.reason).toBe("oversized")
+    expect(calls.mainCalled).toBe(0)
+    const runtimeError = dispatched.find((event) => event.type === "runtime-error")
+    expect(runtimeError).toBeDefined()
   })
 
   it("on an IDBFS sync failure: never reads/validates the zip, never calls main, dispatches a fatal runtime-error", async () => {

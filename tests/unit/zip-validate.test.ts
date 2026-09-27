@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { buildStoreZip } from "../lib/test-zip.ts"
-import { REQUIRED_ULTIMA4_ENTRIES, ULTIMA4_PINNED_SHA256, parseZipEntries, validateUltima4Zip } from "../../src/engine/zip.ts"
+import { MAX_ZIP_BYTES, REQUIRED_ULTIMA4_ENTRIES, ULTIMA4_PINNED_SHA256, parseZipEntries, validateUltima4Zip } from "../../src/engine/zip.ts"
 
 function dummyEntries(names: readonly string[]): { name: string; data: Uint8Array }[] {
   return names.map((name) => ({ name, data: new TextEncoder().encode(`dummy:${name}`) }))
@@ -42,6 +42,26 @@ describe("validateUltima4Zip", () => {
     }
     expect(result.missing).toEqual(expect.arrayContaining(["SHAPES.EGA", "TITLE.EXE", "AVATAR.EXE", "BRITAIN.TLK"]))
     expect(result.missing).not.toContain("WORLD.MAP")
+  })
+
+  it("rejects with reason 'oversized' before ever parsing the archive, for a buffer larger than MAX_ZIP_BYTES", async () => {
+    // Real ultima4.zip is ~529KB; MAX_ZIP_BYTES leaves generous headroom
+    // for other legitimate DOS-release variants while still rejecting a
+    // maliciously/accidentally huge file before it ever reaches
+    // parseZipEntries/sha256Hex (which would otherwise burn CPU/memory on
+    // an oversized buffer the browser tab has no business holding at all).
+    const oversized = new Uint8Array(MAX_ZIP_BYTES + 1)
+    const result = await validateUltima4Zip(oversized.buffer as ArrayBuffer)
+    expect(result.ok).toBe(false)
+    if (result.ok) return
+    expect(result.reason).toBe("oversized")
+  })
+
+  it("accepts a real-sized zip right at MAX_ZIP_BYTES (boundary is inclusive)", async () => {
+    const zip = buildStoreZip(dummyEntries(REQUIRED_ULTIMA4_ENTRIES))
+    expect(zip.byteLength).toBeLessThan(MAX_ZIP_BYTES) // sanity: our fixture is nowhere near the cap
+    const result = await validateUltima4Zip(zip.buffer as ArrayBuffer)
+    expect(result.ok).toBe(true)
   })
 
   it("rejects with reason 'corrupted' before checking required files at all", async () => {

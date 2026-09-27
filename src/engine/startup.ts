@@ -56,7 +56,7 @@ import {
   type PersistenceCoordinator,
   type PersistenceFS
 } from "./persistence.ts"
-import { validateUltima4Zip, type ZipValidationResult } from "./zip.ts"
+import { MAX_ZIP_BYTES, validateUltima4Zip, type ZipValidationResult } from "./zip.ts"
 
 /** Bound to the running engine's real FS/paths/coordinator once startEngine succeeds; see src/shell.ts's attachSaveHandlers. */
 export interface SaveHandlers {
@@ -132,7 +132,7 @@ export type StartEngineResult =
       /** Todo 16: undefined when no AudioContext was available (see audioContext's doc comment above). */
       readonly audioBridge: AudioBridge | undefined
     }
-  | { readonly started: false; readonly reason: "corrupted" | "missing-files" | "idbfs-sync-failed" | "engine-error"; readonly detail: string }
+  | { readonly started: false; readonly reason: "corrupted" | "missing-files" | "oversized" | "idbfs-sync-failed" | "engine-error"; readonly detail: string }
 
 function message(text: string): BridgeEvent {
   // Todo 11: this is a whole, UI-authored notice, not a fragment of the
@@ -150,6 +150,9 @@ function runtimeError(text: string): BridgeEvent {
 function describeValidationFailure(validation: Extract<ZipValidationResult, { ok: false }>): string {
   if (validation.reason === "corrupted") {
     return `선택한 파일이 손상되었거나 올바른 ZIP이 아닙니다: ${validation.detail}`
+  }
+  if (validation.reason === "oversized") {
+    return `선택한 파일이 너무 큽니다 (${validation.byteLength.toLocaleString("ko-KR")} 바이트) — 올바른 원본 데이터가 맞는지 확인해 주세요.`
   }
   return `원본 데이터에 필요한 파일이 없습니다: ${validation.missing.join(", ")}`
 }
@@ -225,6 +228,18 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
     const detail = error instanceof Error ? error.message : "unknown IDBFS sync error"
     options.dispatch(runtimeError(`저장된 설정을 불러오지 못했습니다: ${detail}`))
     return { started: false, reason: "idbfs-sync-failed", detail }
+  }
+
+  // Todo 18: check the Blob's own (synchronous, cheap) `.size` before ever
+  // reading it into memory -- a maliciously/accidentally huge selection
+  // is rejected without the browser tab first materializing the whole
+  // thing as an ArrayBuffer. validateUltima4Zip's own byteLength check
+  // (src/engine/zip.ts) still applies too, as a second, buffer-level
+  // guard for any caller that doesn't go through this Blob-level path.
+  if (options.zipFile.size > MAX_ZIP_BYTES) {
+    const detail = describeValidationFailure({ ok: false, reason: "oversized", byteLength: options.zipFile.size })
+    options.dispatch(runtimeError(detail))
+    return { started: false, reason: "oversized", detail }
   }
 
   const buffer = await options.zipFile.arrayBuffer()

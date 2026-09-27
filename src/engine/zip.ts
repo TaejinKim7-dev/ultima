@@ -112,10 +112,21 @@ export const REQUIRED_ULTIMA4_ENTRIES: readonly string[] = [
  */
 export const ULTIMA4_PINNED_SHA256 = "94aa748cfa1d0e7aa2e518abebb994f3c18acf7edb78c3bd37cd0a4404e6ba74"
 
+/**
+ * Todo 18: a hard cap on the candidate archive's byte size, enforced
+ * BEFORE any parsing/hashing work. Real ultima4.zip is ~529KB; 200 MiB
+ * leaves generous headroom for any legitimate DOS-release variant while
+ * still rejecting a maliciously or accidentally huge file before it can
+ * burn CPU/memory (or hang the tab) inside parseZipEntries/sha256Hex or
+ * the later `FS.writeFile`/IDBFS sync of a buffer this large.
+ */
+export const MAX_ZIP_BYTES = 200 * 1024 * 1024
+
 export type ZipValidationResult =
   | { readonly ok: true; readonly sha256: string; readonly shaMismatch: boolean }
   | { readonly ok: false; readonly reason: "corrupted"; readonly detail: string }
   | { readonly ok: false; readonly reason: "missing-files"; readonly missing: readonly string[] }
+  | { readonly ok: false; readonly reason: "oversized"; readonly byteLength: number }
 
 async function sha256Hex(buffer: ArrayBuffer): Promise<string> {
   const digest = await crypto.subtle.digest("SHA-256", buffer)
@@ -133,6 +144,10 @@ async function sha256Hex(buffer: ArrayBuffer): Promise<string> {
  * hash is only ever a warning.
  */
 export async function validateUltima4Zip(buffer: ArrayBuffer): Promise<ZipValidationResult> {
+  if (buffer.byteLength > MAX_ZIP_BYTES) {
+    return { ok: false, reason: "oversized", byteLength: buffer.byteLength }
+  }
+
   let entries: ZipEntry[]
   try {
     entries = parseZipEntries(buffer)
