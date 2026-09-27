@@ -1,5 +1,5 @@
 # HANDOFF
-작성 시각: 2026-09-27 19:48 KST
+작성 시각: 2026-09-27 20:12 KST
 
 ## 1. 목표 (What we're building)
 - xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식 + 한국어화. 진행 기준 `plan.md`(25단계).
@@ -7,14 +7,14 @@
 - 이번 세션: `plan.md` 바로 다음 순서 5번 — stale 한국어 입력 제출이 실제 게임 표면(GLFW keydown)으로 합성되지 않게 하는 최소 구현(Todo 18 남은 RED).
 
 ## 2. 현재 상태 (Current state)
-- 진행률 **18/25 = 72%** (Todo 18은 아직 `[ ]`). branch `todo-18-failure-boundaries`, HEAD `2ba0b32`, 이번 변경 전부 **미커밋**, main 미merge.
+- 진행률 **18/25 = 72%** (Todo 18은 아직 `[ ]`). branch `todo-18-failure-boundaries`, 이번 변경은 커밋 `68b1d56`(branch, 미push), main 미merge.
 - 이번 세션 구현(아래 3절): 네이티브 `ReadStringController` 생성/소멸 → `Module.u4TextPrompt.opened(id)/closed(id)` EM_JS 훅, `startEngine({textPrompt})`로 연결, 셸 `#korean-keyword-input`이 순수 게이트(`src/i18n/text-prompt-gate.ts`)로 제출을 판정.
 - 실제로 확인한 결과(모두 직접 실행):
   - 유닛 RED→GREEN: `text-prompt-gate.test.ts` 모듈 없음으로 RED(exit 1) → 10/10 GREEN. `startup-sequence.test.ts`의 새 Todo 18 케이스 RED(1 failed/9 passed) → 10/10 GREEN. 로그: `.omo/evidence/ultima-web/task-18/stale-real-surface/{unit-red,unit-green,startup-unit-red,startup-unit-green}.log`.
   - 전체 `npm run test:unit` 22 files/276 tests, `verify:repo-sources`, `typecheck`, `build`, `audit:dist`, `git diff --check`, 계획서 `cmp` 전부 exit 0 (`stale-real-surface/static-gates.log`, `build.log`).
   - 백그라운드 fork 보고(직접 재현은 grep/diff만): `npm run build:wasm`(release) exit 0, `xu4.wasm` 1,186,774 B, `wasm-symbols.test.ts` 8/8, `verify:repo-sources` 0, `event.cpp` 네이티브 `g++ -fsyntax-only` 0. 내가 직접 확인: `dist/engine/xu4.mjs`에 `u4TextPrompt` 존재, event.cpp diff 검토.
-- **진행 중(결과 미확인)**: `failure-boundaries.spec.ts` e2e GREEN 실행(port 4228, 4/4 기대). 결과는 `stale-real-surface/green.log`. **확인 필요**.
-- 아직 안 돌림: 회귀 확인용 `korean-npc-alias.spec.ts`, `gameplay-progression.spec.ts`(게이트가 제출을 막지 않는지), `npm ci`.
+- e2e(직접 실행): `failure-boundaries` 4/4 exit 0(stale 제출 뒤 합성 keydown 0), 회귀 `korean-npc-alias` 2/2, `gameplay-progression` 2/2 exit 0. QA 증거 `security-audit.log`(exit 0)·`dist-leak-rejected.log`(exit 1, 의도) 현재 빌드로 재생성.
+- 남은 것: `npm ci`(사용자 결정 대상) → 게이트 재통과 시 Todo 18 ✅(19/25) + 계획서 `[x]`. memory smoke 10분은 이번 변경 전 실행분(재실행 안 함).
 
 ## 3. 변경한 파일 (Files changed)
 - `vendor/xu4/src/event.cpp` — `__EMSCRIPTEN__` 한정: EM_JS `u4_web_text_prompt_opened/closed`, `ReadStringController`에 `webPromptId` + 소멸자. 네이티브 빌드 무영향.
@@ -33,9 +33,8 @@
 - `closed(id)`는 열린 id만 제거(순서 꼬임으로 게이트가 고착되지 않게), 스택으로 중첩 대비.
 
 ## 5. 다음 할 일 (Next steps)
-- [ ] `stale-real-surface/green.log` 확인: `failure-boundaries` 4/4 + exit 0인지. 실패면 스크린샷/관측 로그 보고 수정.
-- [ ] 회귀: `korean-npc-alias.spec.ts`, 그다음 `gameplay-progression.spec.ts`를 **순차로**(타이밍 민감) 실행해 게이트가 정상 제출을 막지 않는지 확인.
-- [ ] 통과 시 커밋(`test(web): harden browser failure boundaries` 계열), `plan.md` Todo 18 ✅/19/25, 계획서 두 벌 `[x]` + `cmp`, `handoff.md`에 게이트 명령·exit code 기록.
+- [x] failure-boundaries 4/4, 회귀 e2e 2종 통과, 커밋 `68b1d56`, handoff.md 게이트 기록.
+- [ ] (사용자 승인 후) `npm ci` → unit/verify/typecheck/build/diff-check 재실행 → `plan.md` Todo 18 ✅ 19/25, 계획서 두 벌 `[x]` + `cmp`.
 - [ ] `npm ci` + main merge/push는 사용자 결정 대상(이번 세션 지시) — 묻고 진행.
 - [ ] 이후 Todo 19 → 20 → F1~F4. 출시 전 Step 11/12/14 실제 엔진 한국어 출력 연결 gap 해결.
 
