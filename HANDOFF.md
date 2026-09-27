@@ -29,7 +29,7 @@
 - 한국어 출력 구현은 새 Todo(분모 변경)라 착수하지 않고 설계 메모만.
 
 ## 5. 다음 할 일 (Next steps)
-- [ ] main push run(Todo 22 계획 커밋)의 deploy 결과 확인 → `https://taejinkim7-dev.github.io/ultima/`, `/ultima/engine/xu4.wasm`(200, application/wasm) curl 확인 후 handoff.md 기록.
+- [x] 실제 배포 확인: run `36316708881` deploy=success, 라이브 사이트에서 실제 엔진 부팅(handoff.md 20:49 기록).
 - [ ] **Todo 22** (다음 단계, 진행률 20/26): `.omo/drafts/korean-output-gap-design.md` §5~6대로. RED e2e `tests/e2e/korean-npc-output.spec.ts` 먼저.
 - [ ] Todo 20: `todo-20-release-docs`(`6a336df`) rebase 후 문서 작성.
 - [ ] F1~F4.
