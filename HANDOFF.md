@@ -1,5 +1,5 @@
 # HANDOFF
-작성 시각: 2026-09-27 20:15 KST (시스템 시계 기준 — 이전 판의 "20:25"는 수기 추정값이라 이 값이 맞음)
+작성 시각: 2026-09-27 20:33 KST
 
 ## 1. 목표 (What we're building)
 - xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식 + 한국어화. 진행 기준 `plan.md`(25단계).
@@ -7,7 +7,7 @@
 - 이번 세션: Todo 18 완료·merge·push(19/25) → Todo 19 진행 중, 병렬로 Todo 20 검증기 준비 + 한국어 출력 gap 조사.
 
 ## 2. 현재 상태 (Current state)
-- 진행률 **20/25 = 80.0%** — Todo 19 ✅ (merge 게이트 `npm ci` 포함 전부 exit 0, handoff.md 기록). main merge + push 진행.
+- 진행률 **20/25 = 80.0%** — Todo 19 ✅ (merge 게이트 `npm ci` 포함 전부 exit 0, handoff.md 기록). main merge `47c8c41` + push 완료. main run `36315663294`: build=success, deploy=failure(Pages 미설정 "Get Pages site failed ... Not Found" — 로그 확인). 후속 커밋 `5b7773c`: `/` 서빙 smoke 1/1, Step 15 "실제 게임 확인" ✅→⬜ 정정, 설계 메모 커밋.
 - **Todo 19 (branch `todo-19-pages-release`, 커밋 `0b0ea35`, origin push 완료, main 미merge, 체크박스 `[ ]`)**:
   - 발견: 기존 CI는 wasm 엔진을 빌드하지 않아 Pages artifact에 `dist/engine/`이 없었음(셸만 배포). `vite preview`의 `/engine/` 미들웨어가 `build/wasm-release`에서 직접 서빙해 로컬 e2e는 이 gap을 가렸음.
   - 수정: `pages.yml`에 apt 오디오 헤더 → `deps:host` → `build:modules` → `deps:wasm` → `build:wasm` → wasm-symbols 유닛(hard gate, continue-on-error 제거) → `build:site` → `audit:dist -- --require-engine`. `audit-dist.mjs --require-engine`, `workflow-verifier.mjs`(build:wasm 존재·순서, audit --require-engine, continue-on-error 금지) 추가.
