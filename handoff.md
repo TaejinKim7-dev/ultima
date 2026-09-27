@@ -1301,3 +1301,10 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 - fresh-clone QA(`task-20/fresh-clone.log`): `git clone` → 문서의 빌드 순서 전부 exit 0(build:wasm 27s) → 정적 서버 `/ultima/` smoke 1/1(`fresh-clone-smoke.json`) → verify:release-docs 수정 후 0. 편차: emsdk는 기존 4.0.23 설치를 symlink(재다운로드 생략).
 - merge 게이트(전부 exit 0, `task-20/merge-gate.log`): npm ci · test:unit 25 files/318 · verify:repo-sources · typecheck · build · build:site --base=/ultima/ · audit:dist --require-engine · verify:workflow · verify:release-docs · git diff --check · cmp.
 - 병렬 F단계: F2 APPROVE(blocker 0), F4 REJECT(사용자 미승인 범위 편차 — plan.md 바로 다음 순서 2). F3용 Firefox/WebKit 설치 완료, WebKit 호스트 의존성 부족.
+
+### Todo 23~27 신설 + 제품 결정 (2026-09-27 22:31 KST, 사용자 결정)
+
+- 사용자 결정: F4 REJECT 편차 → "후속 Todo로 추가". 읽기 전용 조사 에이전트 3개의 설계 메모(`.omo/drafts/korean-surface-castle-ending.md`, `korean-surface-shops-messages.md`, `korean-surface-intro-status.md`)를 바탕으로 Todo 23(게임 내 screenMessage)·24(Lord British/Hawkwind/Codex·엔딩)·25(상점)·26(인트로 오버레이)·27(상태창·메뉴 오버레이)을 계획서 두 벌에 추가(cmp 0). 분모 26→31, 진행률 22/31 = 71.0%. AGENTS.md Todo 수 22→27, n/31.
+- 제품 결정: 한국어 오버레이 표시 중 해당 영역 불투명 배경; 긴 대사는 패널에 문단 전체 표시.
+- F3 중간: Firefox 1차 8/10, 실패 2건은 내가 준 `--trace on`이 스펙 자체 `context.tracing.start`와 충돌("Tracing has been already started") — Firefox 문제 아님, 옵션 없이 재실행 중.
+- `verify:release`: branch `todo-release-verify` `ddef2a2`(병렬 fork, unit 6/6 TDD, dry-run 0, ULTIMA4_DATA 없으면 exit 2). 남은 문제: fresh clone에서 unit test(qa-native-baseline)가 `task-3/bad-zip.log`를 만들어 verify:release-docs가 `task-3/full-qa-native-baseline.log` 부재로 실패.
