@@ -32,8 +32,19 @@ function makeCleanDist(): string {
   return dir
 }
 
-function run(distDir: string) {
-  return spawnSync("node", [scriptPath, `--dir=${distDir}`], { encoding: "utf8" })
+function run(distDir: string, ...extraArgs: string[]) {
+  return spawnSync("node", [scriptPath, `--dir=${distDir}`, ...extraArgs], { encoding: "utf8" })
+}
+
+// Todo 19: the real engine files the Pages release must ship (vite.config.ts's
+// wasmEngineAssets() copies them from build/wasm-release into dist/engine/).
+const REQUIRED_ENGINE_FILES = ["xu4.mjs", "xu4.wasm", "modules/render.pak", "modules/Ultima-IV.mod"]
+
+function addEngineFiles(dir: string, files: readonly string[] = REQUIRED_ENGINE_FILES): void {
+  mkdirSync(join(dir, "engine", "modules"), { recursive: true })
+  for (const file of files) {
+    writeFileSync(join(dir, "engine", file), file.endsWith(".mjs") ? "export default function f() {}" : "fixture")
+  }
 }
 
 describe("audit:dist", () => {
@@ -323,5 +334,32 @@ describe("audit:dist", () => {
     // Then: it fails -- only the exact diagnostic URL is allowlisted.
     expect(result.status, result.stderr).toBe(1)
     expect(result.stderr).toContain("exfil.example")
+  })
+  it("Todo 19: --require-engine rejects a shell-only artifact with no dist/engine files", () => {
+    const dir = makeCleanDist()
+
+    const result = run(dir, "--require-engine")
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("engine/xu4.mjs")
+  })
+
+  it("Todo 19: --require-engine names each missing engine file (e.g. the game module)", () => {
+    const dir = makeCleanDist()
+    addEngineFiles(dir, ["xu4.mjs", "xu4.wasm", "modules/render.pak"])
+
+    const result = run(dir, "--require-engine")
+
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("engine/modules/Ultima-IV.mod")
+  })
+
+  it("Todo 19: --require-engine passes when every real engine file is present", () => {
+    const dir = makeCleanDist()
+    addEngineFiles(dir)
+
+    const result = run(dir, "--require-engine")
+
+    expect(result.status, result.stderr).toBe(0)
   })
 })

@@ -67,6 +67,10 @@ const REQUIRED_LINE_PATTERNS = [
 
 const NAME_LINE = /^\s*-?\s*name:\s*(.*)$/
 const AUDIT_RUN_LINE = /^\s*run:.*npm run audit:dist/
+const AUDIT_REQUIRES_ENGINE = /--require-engine\b/
+const BUILD_WASM_RUN_LINE = /^\s*run:.*npm run build:wasm\b/
+const BUILD_SITE_RUN_LINE = /^\s*run:.*npm run build:site\b/
+const CONTINUE_ON_ERROR_LINE = /^\s*continue-on-error:/
 const UPLOAD_USES_LINE = /^\s*uses:\s*actions\/upload-pages-artifact@/
 const EMSDK_USES_LINE = /^\s*uses:\s*emscripten-core\/setup-emsdk@/
 const EMSDK_VERSION_LINE = /^\s*version:\s*["']4\.0\.23["']\s*(#.*)?$/
@@ -176,6 +180,39 @@ function checkAuditRunsBeforeUpload(lines) {
   }
 }
 
+// Todo 19: a Pages release without dist/engine/ is a shell nobody can play
+// (vite.config.ts silently skips the engine copy when build/wasm-release is
+// absent), so CI must build the engine before the site and audit for it.
+function checkEngineIsBuiltAndAudited(lines) {
+  const wasmIndex = lines.findIndex((line) => BUILD_WASM_RUN_LINE.test(line))
+  const siteIndex = lines.findIndex((line) => BUILD_SITE_RUN_LINE.test(line))
+  if (wasmIndex === -1) {
+    throw new WorkflowVerificationError(
+      'workflow is missing an "npm run build:wasm" run step, so the Pages artifact would ship without the real engine'
+    )
+  }
+  if (siteIndex !== -1 && wasmIndex > siteIndex) {
+    throw new WorkflowVerificationError(
+      '"npm run build:wasm" must run before "npm run build:site", which copies build/wasm-release into dist/engine/'
+    )
+  }
+  const auditLines = lines.filter((line) => AUDIT_RUN_LINE.test(line))
+  if (!auditLines.some((line) => AUDIT_REQUIRES_ENGINE.test(line))) {
+    throw new WorkflowVerificationError(
+      'workflow\'s "npm run audit:dist" step must pass "--require-engine" so a shell-only artifact can never be published'
+    )
+  }
+}
+
+function checkNoContinueOnError(lines) {
+  const line = lines.find((candidate) => CONTINUE_ON_ERROR_LINE.test(candidate))
+  if (line !== undefined) {
+    throw new WorkflowVerificationError(
+      `workflow has a "continue-on-error" step (${line.trim()}); every check must hard-gate the Pages deploy`
+    )
+  }
+}
+
 function checkEmsdkSetup(lines) {
   const emsdkIndex = lines.findIndex((line) => EMSDK_USES_LINE.test(line))
   if (emsdkIndex === -1) {
@@ -240,6 +277,8 @@ export function verifyWorkflow(workflowPath) {
   checkActionsArePinnedToShas(text)
   checkNodeVersionIsExact(text)
   checkEmsdkSetup(lines)
+  checkEngineIsBuiltAndAudited(lines)
+  checkNoContinueOnError(lines)
   checkAuditRunsBeforeUpload(lines)
   checkNoGitPush(text)
   checkNoOriginalDataReferences(text)

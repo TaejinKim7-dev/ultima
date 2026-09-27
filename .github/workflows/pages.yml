@@ -23,22 +23,17 @@
 # credential above. That check is guidance for whoever pushes commits to
 # this repository, not something this workflow runs itself.
 #
-# Known gap (2026-09-25, recorded in plan.md / .omo/plans/ultima-web.md
-# Todo 19): `tests/unit/wasm-symbols.test.ts` requires a locally built
-# `build/wasm-release/{xu4.js,xu4.wasm}` (Emscripten/emsdk 4.0.23, see
-# docs/SOURCE_PINS.md), which today is a manual, un-automated local setup
-# step -- this workflow does not install emsdk or build the wasm engine,
-# so that one suite fails on a clean runner. Only that suite's own step
-# below is `continue-on-error` (with its failure kept visible as its own
-# step); every other unit test still hard-gates this job and `deploy`,
-# so a real regression elsewhere still blocks publishing. Tracked
-# separately from Todo 19's own scope (see plan.md).
-#
-# Todo 19 is only marked done in the plan once Todos 15, 16, and 18 exist
-# too (Korean text, real audio, and the fuller dist-artifact audit that
-# Todo 18 adds); this file is the workflow *skeleton* the 2026-09-24
-# re-plan allowed to start early, building and deploying the current
-# browser shell only.
+# Engine build (Todo 19, 2026-09-27): the Pages artifact must ship the
+# real xu4 engine -- vite.config.ts copies build/wasm-release/{xu4.mjs,
+# xu4.wasm,modules/*} into dist/engine/ only when that build exists and
+# otherwise silently emits a shell nobody can play. So this job builds
+# host Boron/Faun (`deps:host`, needs the apt audio headers below), the
+# xu4 modules (`build:modules`), wasm Boron (`deps:wasm`) and the engine
+# (`build:wasm`) with the pinned emsdk before `build:site`, and
+# `audit:dist -- --require-engine` fails the job if any engine file is
+# missing. The modules are built from pinned xu4 sources; the user's
+# own original game data archive is never part of this build or artifact.
+# Every step hard-gates `deploy` (no continue-on-error).
 
 name: Pages
 
@@ -74,7 +69,7 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Unit tests (hard-gated; excludes the known wasm engine gap)
+      - name: Unit tests (all but the wasm engine suite, which runs after the engine build)
         run: npx vitest run --passWithNoTests=false --exclude tests/unit/wasm-symbols.test.ts
 
       - name: Set up Emscripten SDK (pinned to emsdk 4.0.23, see docs/SOURCE_PINS.md)
@@ -86,18 +81,29 @@ jobs:
           version: '4.0.23'
           emsdk-version: '4.0.23'
 
-      - name: "Unit tests: wasm engine suite (known gap, see header comment)"
-        # This suite alone is non-blocking: it needs an emsdk-built engine
-        # this workflow does not yet produce. Its failure still shows up
-        # as its own (non-fatal) red step, it just doesn't fail the job.
+      - name: Install host audio headers (Faun, built by deps:host)
+        run: sudo apt-get update && sudo apt-get install -y libpulse-dev libvorbis-dev libflac-dev
+
+      - name: Build host Boron and Faun
+        run: npm run deps:host
+
+      - name: Build xu4 modules (render.pak, Ultima-IV.mod)
+        run: npm run build:modules
+
+      - name: Build wasm Boron
+        run: npm run deps:wasm
+
+      - name: Build the wasm engine
+        run: npm run build:wasm
+
+      - name: "Unit tests: wasm engine suite (needs the engine built above)"
         run: npx vitest run --passWithNoTests=false tests/unit/wasm-symbols.test.ts
-        continue-on-error: true
 
       - name: Build the Pages site (base "/ultima/")
         run: npm run build:site -- --base=/ultima/
 
-      - name: Audit the dist artifact (no original data, no dev tooling)
-        run: npm run audit:dist
+      - name: Audit the dist artifact (real engine present, no original data, no dev tooling)
+        run: npm run audit:dist -- --require-engine
 
       - name: Statically validate this workflow file
         run: npm run verify:workflow
