@@ -18,10 +18,13 @@ import { dirname, join, normalize } from "node:path"
 //     skipped). Backticked repo paths (`docs/...`, `scripts/...`, `src/...`,
 //     `tests/...`, `locales/...`, `vendor/...`, `.github/...`) must exist
 //     from the repo root.
-//   - Evidence: `.omo/evidence/` is git-ignored and local-only. Backticked
-//     evidence paths are checked only when the repo root has a local
-//     `.omo/evidence/` tree; in a fresh clone (no tree at all) they are
-//     skipped, so the fresh-clone QA can still run this verifier.
+//   - Evidence: `.omo/evidence/` is git-ignored and local-only. A backticked
+//     evidence path is checked only when its task directory
+//     (`.omo/evidence/<project>/<task>/`) exists locally, i.e. that task's
+//     evidence was produced on this machine. A fresh clone has none of them
+//     -- except build logs the documented quickstart itself writes (e.g.
+//     `deps:wasm`/`build:wasm` -> `task-6/`), which is why "any local
+//     evidence tree" is not the switch (found by Todo 20's fresh-clone QA).
 //   - Paths containing glob/template characters (`*`, `{`, `<`, `$`) are
 //     never checked.
 //   - Placeholders: TODO/TBD/FIXME (upper-case words, so the project's own
@@ -64,8 +67,7 @@ const VERIFIED_DEPLOY_PATTERN =
  *   pinDocs: { path: string, text: string }[],
  *   scripts: string[],
  *   components: { name: string, revision: string }[],
- *   pathExists: (repoRelativePath: string) => boolean,
- *   evidenceTreeExists: boolean
+ *   pathExists: (repoRelativePath: string) => boolean
  * }} input
  * @returns {string[]}
  */
@@ -98,7 +100,8 @@ export function checkReleaseDocs(input) {
       if (/\s/.test(candidate) || TEMPLATE_CHARS.test(candidate)) continue
       const path = candidate.replace(/[.,;:]+$/, "")
       if (EVIDENCE_PREFIX.test(path)) {
-        if (input.evidenceTreeExists && !input.pathExists(path)) {
+        const taskDir = path.split("/").slice(0, 4).join("/")
+        if (input.pathExists(taskDir) && !input.pathExists(path)) {
           problems.push(`${doc.path}: evidence path "${path}" does not exist in the local .omo/evidence tree`)
         }
         continue
@@ -160,8 +163,7 @@ export function verifyReleaseDocs(root, { docPaths = RELEASE_DOCS, pinDocPaths =
       pinDocs,
       scripts: Object.keys(packageJson.scripts ?? {}),
       components: manifest.components ?? [],
-      pathExists: (path) => existsSync(join(root, path)),
-      evidenceTreeExists: existsSync(join(root, ".omo/evidence"))
+      pathExists: (path) => existsSync(join(root, path))
     })
   )
 

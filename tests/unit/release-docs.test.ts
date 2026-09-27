@@ -135,20 +135,38 @@ describe("verify:release-docs", () => {
     expect(result.stderr).toContain(".github/workflows/pages.yml")
   })
 
-  it("checks .omo/evidence paths only when a local evidence tree exists (git-ignored; absent in a fresh clone)", () => {
+  it("checks .omo/evidence paths only when that task's local evidence directory exists (git-ignored; absent in a fresh clone)", () => {
     const doc = "# Handoff\n\nEvidence: `.omo/evidence/ultima-web/task-19/pages-static-smoke.json`.\n"
 
     const freshClone = run(fixtureRoot({ "docs/GITHUB_PAGES.md": doc }))
     expect(freshClone.status, freshClone.stderr).toBe(0)
 
-    const withEvidenceTree = run(fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/README": "" }))
-    expect(withEvidenceTree.status).toBe(1)
-    expect(withEvidenceTree.stderr).toContain("pages-static-smoke.json")
+    const withTaskDir = run(fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/task-19/README": "" }))
+    expect(withTaskDir.status).toBe(1)
+    expect(withTaskDir.stderr).toContain("pages-static-smoke.json")
 
     const present = run(
       fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/task-19/pages-static-smoke.json": "{}" })
     )
     expect(present.status, present.stderr).toBe(0)
+  })
+
+  it("Todo 20 fresh-clone QA: a clean clone that ran the quickstart (deps:wasm/build:wasm write only task-6 build logs) still passes", () => {
+    // Found by the real fresh-clone QA (.omo/evidence/ultima-web/task-20/fresh-clone.log):
+    // the documented build writes .omo/evidence/ultima-web/task-6/*.log, so an
+    // evidence tree exists even though none of the documented evidence does.
+    const doc = "# Pages\n\nEvidence: `.omo/evidence/ultima-web/task-19/pages-static-smoke.json`.\n"
+    const afterQuickstart = run(
+      fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/task-6/build.log": "build" })
+    )
+    expect(afterQuickstart.status, afterQuickstart.stderr).toBe(0)
+
+    // A task directory that exists locally is still checked file by file.
+    const taskDirWithoutFile = run(
+      fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/task-19/other.log": "" })
+    )
+    expect(taskDirWithoutFile.status).toBe(1)
+    expect(taskDirWithoutFile.stderr).toContain("pages-static-smoke.json")
   })
 
   it("rejects stale placeholder text (TODO / TBD / FIXME / placeholder / <fill / lorem)", () => {
