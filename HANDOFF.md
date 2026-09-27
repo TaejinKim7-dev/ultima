@@ -1,5 +1,5 @@
 # HANDOFF
-작성 시각: 2026-09-27 20:12 KST
+작성 시각: 2026-09-27 20:25 KST
 
 ## 1. 목표 (What we're building)
 - xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식 + 한국어화. 진행 기준 `plan.md`(25단계).
@@ -7,14 +7,10 @@
 - 이번 세션: `plan.md` 바로 다음 순서 5번 — stale 한국어 입력 제출이 실제 게임 표면(GLFW keydown)으로 합성되지 않게 하는 최소 구현(Todo 18 남은 RED).
 
 ## 2. 현재 상태 (Current state)
-- 진행률 **18/25 = 72%** (Todo 18은 아직 `[ ]`). branch `todo-18-failure-boundaries`, 이번 변경은 커밋 `68b1d56`(branch, 미push), main 미merge.
-- 이번 세션 구현(아래 3절): 네이티브 `ReadStringController` 생성/소멸 → `Module.u4TextPrompt.opened(id)/closed(id)` EM_JS 훅, `startEngine({textPrompt})`로 연결, 셸 `#korean-keyword-input`이 순수 게이트(`src/i18n/text-prompt-gate.ts`)로 제출을 판정.
-- 실제로 확인한 결과(모두 직접 실행):
-  - 유닛 RED→GREEN: `text-prompt-gate.test.ts` 모듈 없음으로 RED(exit 1) → 10/10 GREEN. `startup-sequence.test.ts`의 새 Todo 18 케이스 RED(1 failed/9 passed) → 10/10 GREEN. 로그: `.omo/evidence/ultima-web/task-18/stale-real-surface/{unit-red,unit-green,startup-unit-red,startup-unit-green}.log`.
-  - 전체 `npm run test:unit` 22 files/276 tests, `verify:repo-sources`, `typecheck`, `build`, `audit:dist`, `git diff --check`, 계획서 `cmp` 전부 exit 0 (`stale-real-surface/static-gates.log`, `build.log`).
-  - 백그라운드 fork 보고(직접 재현은 grep/diff만): `npm run build:wasm`(release) exit 0, `xu4.wasm` 1,186,774 B, `wasm-symbols.test.ts` 8/8, `verify:repo-sources` 0, `event.cpp` 네이티브 `g++ -fsyntax-only` 0. 내가 직접 확인: `dist/engine/xu4.mjs`에 `u4TextPrompt` 존재, event.cpp diff 검토.
-- e2e(직접 실행): `failure-boundaries` 4/4 exit 0(stale 제출 뒤 합성 keydown 0), 회귀 `korean-npc-alias` 2/2, `gameplay-progression` 2/2 exit 0. QA 증거 `security-audit.log`(exit 0)·`dist-leak-rejected.log`(exit 1, 의도) 현재 빌드로 재생성.
-- 남은 것: `npm ci`(사용자 결정 대상) → 게이트 재통과 시 Todo 18 ✅(19/25) + 계획서 `[x]`. memory smoke 10분은 이번 변경 전 실행분(재실행 안 함).
+- 진행률 **19/25 = 76.0%** — Todo 18 ✅. main merge `f936e74`(no-ff, 브랜치와 tree 동일 확인) + origin push 완료(main, `todo-18-failure-boundaries` 둘 다, exit 0). `git status -sb`: `main...origin/main` 동기.
+- merge 게이트(직접 실행, 전부 exit 0): `npm ci`, `npm run test:unit`(22 files/276), `verify:repo-sources`, `typecheck`, `build`, `audit:dist`, `git diff --check`, 계획서 `cmp`. 로그 `.omo/evidence/ultima-web/task-18/stale-real-surface/merge-gate.log`.
+- Todo 18 acceptance e2e: `failure-boundaries` 4/4(stale 한국어 제출 뒤 합성 keydown 0), 회귀 `korean-npc-alias` 2/2, `gameplay-progression` 2/2. QA 증거 `security-audit.log`(0)·`dist-leak-rejected.log`(1, 의도) 재생성. memory smoke 10분은 이번 변경 전 실행분.
+- 한국어 NPC 출력(실제 엔진 → 한국어 표시)은 여전히 미완료 — 출시 차단 요소 그대로.
 
 ## 3. 변경한 파일 (Files changed)
 - `vendor/xu4/src/event.cpp` — `__EMSCRIPTEN__` 한정: EM_JS `u4_web_text_prompt_opened/closed`, `ReadStringController`에 `webPromptId` + 소멸자. 네이티브 빌드 무영향.
@@ -33,10 +29,9 @@
 - `closed(id)`는 열린 id만 제거(순서 꼬임으로 게이트가 고착되지 않게), 스택으로 중첩 대비.
 
 ## 5. 다음 할 일 (Next steps)
-- [x] failure-boundaries 4/4, 회귀 e2e 2종 통과, 커밋 `68b1d56`, handoff.md 게이트 기록.
-- [ ] (사용자 승인 후) `npm ci` → unit/verify/typecheck/build/diff-check 재실행 → `plan.md` Todo 18 ✅ 19/25, 계획서 두 벌 `[x]` + `cmp`.
-- [ ] `npm ci` + main merge/push는 사용자 결정 대상(이번 세션 지시) — 묻고 진행.
-- [ ] 이후 Todo 19 → 20 → F1~F4. 출시 전 Step 11/12/14 실제 엔진 한국어 출력 연결 gap 해결.
+- [ ] Todo 19: branch `todo-19-pages-workflow` 골격을 main 기준으로 이어받아 완료 기준(`.omo/plans/ultima-web.md` 19번) 확인. Pages Source="GitHub Actions" 설정은 사용자만 가능.
+- [ ] 이후 Todo 20 → F1~F4.
+- [ ] 출시 전 Step 11/12/14 실제 엔진 한국어 출력 연결 gap 해결, 실제 한국어 화면으로 검증.
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
 - 이번 변경 이후 **stale wasm + 새 셸** 조합이면 모든 한국어 제출이 "열린 입력 요청 없음"으로 거부됨 — e2e 전 `build/wasm-release`가 새 빌드인지(`grep u4TextPrompt dist/engine/xu4.mjs`) 확인.
@@ -50,7 +45,7 @@
 ## 7. 재개 방법 (How to resume)
 ```bash
 cd /home/taejin/ultima
-git checkout todo-18-failure-boundaries && git status -sb
+git checkout main && git status -sb
 export PATH="$HOME/.local/opt/node22/bin:$PATH"
 export ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip
 # wasm 재빌드가 필요하면: source .emsdk/emsdk_env.sh && npm run build:wasm
