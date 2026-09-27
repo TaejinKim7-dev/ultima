@@ -1084,3 +1084,41 @@ ULTIMA4_DATA=.../ultima4.zip npx playwright test tests/e2e/boot-sequence.spec.ts
 - **검증(각 마을 커밋 전 실행, 전부 exit 0)**: `npm run i18n:check`(entryCount/pendingCount 감소 확인) · `npm run test:unit`(259/259 무회귀, 마을 진행과 무관하게 매번 동일).
 - **현재 상태**: `locales/ko/tlk.json` 2912/3072 완료(topic pass-through 512 + 15개 마을 × 160). 전체 corpus는 `4411개 항목, 160개 미번역`(YEW만) — glossary+ui+binary+module(1330) + tlk 기완료분(2912) = 4242/4402.
 - **다음**: YEW 적용 → `i18n:check` pending 0 → `i18n:check -- --strict` GREEN → Todo 15 승인 기준의 나머지 절반인 `tests/e2e/korean-progression.spec.ts`(intro·마을 NPC 1곳·로드 브리티시/호크윈드·신단/코덱스 답변 샘플·저장 UI 커버, 아직 미작성) → main 게이트 재확인 → 체크박스 `[x]` → 17/25.
+
+### Todo 15 완료 확인 (2026-09-27, 이 세션에서 뒤늦게 기록 — 실제 작업은 이전 세션에서 커밋 `fc88c57` "feat(i18n): complete Todo 15 Korean corpus"로 이미 완료돼 있었음, handoff.md에 그 완료 사실을 적는 절이 누락돼 있었던 것을 이번 세션에서 발견해 보정)
+- `git show --stat fc88c57`로 확인: YEW 160건 적용, `tests/e2e/korean-progression.spec.ts`(152줄) 신규 작성, `native/i18n/ko-overlay.b`/`u4_i18n_table.inc`/`src/i18n/generated/strings.ts` 재생성 포함.
+- 이 세션에서 직접 재실행해 확인: `npm run i18n:check`(비엄격) → `4411 entries checked, 0 still pending` / `npm run i18n:check -- --strict` → 동일하게 pending 0으로 exit 0. `plan.md`는 이미 17/25(Todo 15 완료 반영)로 갱신돼 있었음.
+- `main`은 이 시점 origin과 완전히 동기화(clean, ahead/behind 0) 상태였음(`git fetch origin` 후 `git log --oneline origin/main -3`로 확인).
+
+### Todo 17 완료 — 브라우저 통합 게임 진행 e2e (2026-09-27, branch `todo-17-gameplay-progression`, main 미merge, 사용자 merge/push 승인 대기 중)
+
+**목표/범위**: plan.md의 "바로 다음 순서"를 따라 Todo 17(`.omo/plans/ultima-web.md`의 전체 정의) 진행. 실제 `ultima4.zip`으로 새 게임→오버랜드 이동→마을 진입+NPC 대화(영어+한국어 alias)→상태화면→전투/던전 샘플→신단/코덱스 샘플→저장/재로드→오디오 연속성까지 한 번의 연속 e2e 루트로 검증하는 것이 acceptance criteria.
+
+**확정한 기술 결정**:
+- **결정론적 라우팅은 실제 xu4 cheat 메뉴로 해결**: Todo 3 native baseline 조사(이 파일의 이전 절, `.omo/evidence/ultima-web/task-3/debug-journal-archive.md`)에서 이미 "Debug Mode를 Configure 메뉴에서 실제로 켜면 Ctrl-C 치트 메뉴의 'g' Goto가 RNG 없이 포탈 좌표로 순간이동한다"는 사실이 확인돼 있었고, `tests/e2e/korean-npc-alias.spec.ts`가 이미 이 패턴(`enableDebugMode`/`gotoMoonglowAndApproachNpc`)을 실제로 쓰고 있었다. Todo 17은 이 패턴을 그대로 재사용하고, 던전(`vendor/xu4/src/cheat.cpp` Goto는 현재 맵의 portals 목록만 매칭하므로 던전/신단도 같은 방식으로 도달 가능함을 소스로 확인 후) + 신단(치트 'i' Items로 룬 전량 지급 → `shrineCanEnter`의 rune-of-entry 체크 통과)까지 확장했다. **cheat 메뉴 자체는 xu4 원본에 이미 있는 기능이고 Debug Mode를 켜지 않으면 `settings.debug` 게이트(`engine/src/game.cpp:952` 등)에 막혀 완전히 비활성** — 이 프로젝트가 새로 추가한 cheat/state-control API가 아니므로 Todo 18의 "must not add cheat/state-control APIs to production bundles" 규칙과 충돌하지 않는다(cheat 메뉴는 실제 wasm 바이너리에도 항상 들어있고, Debug Mode를 켤 수 있는 것도 실제 Configure 메뉴 UI를 통해서일 뿐, 새 진입점을 추가하지 않았다).
+- **"combat or dungeon sample"은 던전 진입 자체로 충족**: 실제 오버랜드에서 몬스터 조우는 RNG라 결정론적 e2e에 부적합. 대신 결정론적 Goto로 던전(Deceit) 진입 → 3D 던전 뷰 렌더 전환을 캔버스 델타로 증명하는 쪽을 택함(전투까지는 요구하지 않음, acceptance criteria의 "combat OR dungeon" 중 dungeon 쪽으로 충족).
+- **"shrine/codex sample"은 신단(Honesty)만 구현, 코덱스는 스킵**: 코덱스는 8룬+8스톤+3파트 열쇠+어비스 완주가 필요한 엔드게임 콘텐츠라 새 캐릭터로 결정론적 도달이 사실상 불가능. Acceptance criteria가 "shrine OR codex"이므로 신단 쪽으로 충족.
+- **"failure: 의도적으로 틀린 한국어 alias fixture가 정확한 대화 검증에서 실패"는 Node 레벨 실제 코드 재사용으로 구현**: `src/shell.ts:548`이 실제로 `resolveInput("text", raw, koreanAliasTable)`을 호출하고 그 반환값을 그대로 네이티브에 synthesize한다는 사실을 소스로 확인. 그래서 실제 `locales/ko/aliases.json` + 실제 `resolveInput()`/`buildAliasTable()`(둘 다 `src/i18n/korean-aliases.ts`에서 직접 import, 목이나 재구현 아님)을 그대로 써서, "health" 정규 키워드 하나를 "bye"로 오염시킨 테이블에서 `resolveInput("text","건강",...)`이 실제로 다른 값을 반환함을 증명 — 이 값이 바로 happy path의 "건강 alias가 영어 health와 같은 화면 변화를 낸다" 캔버스 델타 비교가 몰래 틀려질 수 있는 지점임을 로그로 설명(`.omo/evidence/ultima-web/task-17/alias-regression.log`). wasm 재빌드 없이 실제 코드 경로만으로 증명 가능해서 이 방식을 택함(korean-npc-alias.spec.ts 자체 주석의 선례 — "wiring은 이미 e2e로 증명됐으니 string 계산 자체는 unit 레벨에서 재확인하는 게 맞다"는 원칙을 그대로 따름).
+
+**실제로 만든 파일**:
+- `tests/e2e/gameplay-progression.spec.ts`(신규): happy path 1개(전체 루트, 4분 소요) + failure path 1개(alias 오염 증명, 4ms). 기존 spec들(`korean-npc-alias.spec.ts`, `save-reload.spec.ts`, `audio.spec.ts`)의 헬퍼를 프로젝트 관례대로 각 파일에 중복 구현(공유 안 함 — 기존 관례).
+- `vite.config.ts`: `devAutoLoadOriginalData()` 플러그인 추가(아래 "부가 산출물" 참고, Todo 17 acceptance와 무관한 사용자 편의 기능).
+- `plan.md`/`.omo/plans/ultima-web.md`/`docs/ULTIMA_WEB_PLAN.md`: Todo 17 체크박스 `[x]`, 진행률 18/25, "바로 다음 순서" Todo 18로 갱신(두 계획서 `cmp` byte-identical 재확인 완료).
+
+**실제 검증(전부 이 세션에서 직접 실행, exit code 확인)**:
+- `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npx playwright test tests/e2e/gameplay-progression.spec.ts --project=chromium --workers=1` → **2 passed (4.1분)**.
+- 증거: `.omo/evidence/ultima-web/task-17/`에 스크린샷 17장(01~17, 부팅→디버그모드→월드진입→이동→Ztats→아이템치트→문글로우진입→NPC접근→영어health→한국어건강→bye→월드복귀→던전진입→월드복귀→신단진입→명상→저장→재로드), `progression-route.log`, `alias-regression.log`, `progression.trace.zip`(playwright trace).
+- **trace.zip 원본데이터 유출 검사 직접 수행**: `unzip -l`로 2827개 파일 목록 확인, 정확히 529099바이트(zip 원본 크기)인 리소스 없음, `resources/*.dat` 전부 확인(0바이트 sha1 해시 파일 하나뿐), `AVATAR.EXE`/`.TLK`/`.EGA`/`.SAV` 문자열 grep 0건, `trace.network`/`trace.trace` 최대 줄 길이 ~2.5KB(거대 base64 블롭 없음) — Playwright의 `setInputFiles({buffer})`는 CDP 레벨 주입이라 네트워크 리소스로 캡처되지 않음을 확인. **다만 `.omo/evidence/`는 `.gitignore:34`로 이미 통째로 제외돼 있어(재확인함) 이 216MB trace 파일이 커밋될 위험 자체가 없다.**
+- `npm run test:unit` → 260/260 · `npm run typecheck` → exit 0 · `npm run verify:repo-sources` → "4 pinned components" 통과 · `npm run build` → exit 0 · `git diff --check` → exit 0.
+- `npm run audit:dist`는 **이미 실패 상태**(main 기준으로도 동일 — `git stash` 후 재현해 이 세션이 만든 변경과 무관함을 직접 격리 확인): `"window.ultimaI18n"` test-hook marker가 allowlist 밖. Todo 17의 merge 게이트에는 `audit:dist`가 없고(AGENTS.md 공통 게이트 목록에 없음, Todo 18 자체의 acceptance criteria일 뿐) 이 실패는 Todo 18이 고칠 대상이므로 이번 커밋 범위 밖으로 남겨둠.
+
+**부가 산출물 — 로컬 개발 편의 기능(사용자 요청, Todo 17 acceptance와 무관, 저장소/배포본에는 미포함)**:
+- 사용자가 "매번 브라우저에서 zip을 직접 고르는 게 너무 번거롭다"고 해서, `vite.config.ts`에 `devAutoLoadOriginalData()` Vite 플러그인을 추가. `ULTIMA4_DATA` 환경변수(기존 e2e 컨벤션과 동일)가 가리키는 로컬 zip을 `/__dev-original-data__.zip`으로 서빙하고, `npm run dev`에서 페이지 로드 시 그 파일을 자동 fetch해 실제 `#rom-picker` `<input>`에 `DataTransfer`로 주입 + 실제 `change` 이벤트를 dispatch — `src/shell.ts`/`src/main.ts`의 실제 리스너를 그대로 타므로 엔진 진입 경로에 별도 shortcut이 없다.
+- **구조적으로 프로덕션에 절대 안 들어가게 보장**: 플러그인이 `apply: "serve"`라 `vite build`/`build:site`에서는 이 플러그인의 어떤 훅도 실행되지 않는다(closeBundle 훅 자체가 없음). 직접 `npm run build:site`(ULTIMA4_DATA 설정한 채로) 후 `dist/index.html`·`dist/assets/*.js`를 grep해 `__dev-original-data__`/`dev-auto-load`/`DataTransfer` 문자열이 전혀 없음을 확인했고, `npm run audit:dist`(cheat-token 검사 포함)도 이 플러그인 때문에 새로 실패하지 않음을 확인(위 audit:dist 실패는 무관한 기존 결함).
+- **`npm run preview`(정적 프리뷰, GitHub Pages와 동일 서빙 방식)에서는 의도적으로 동작 안 함** — Vite의 `configureServer`(dev 전용)와 `configurePreviewServer`(preview 전용)가 별도 훅이고 이 플러그인은 전자만 구현했다. 실제 구현 중 처음엔 스크립트 실행 순서 버그로 `npm run dev`에서도 동작 안 했음: 주입한 `<script>`가 module이 아닌 일반 스크립트라 실제 앱의 `type="module"` 엔트리 스크립트(defer 방식)보다 먼저 실행돼, `#rom-picker`의 실제 `change` 리스너가 아직 붙기 전에 이벤트를 dispatch해버렸다(Playwright로 `rom-picker files length: 1`인데 `engine-started`는 계속 null인 것으로 원인 확정) — 주입 스크립트에도 `type: "module"`을 줘서 문서 순서상 엔트리 스크립트 다음에 실행되게 고쳐 해결, Playwright로 `engineStarted: true` 재확인.
+
+**막힌 부분/확인 필요**:
+- **main merge/push는 사용자 승인 대기** — 이번 세션 사용자 지시("사용자 결정이 필요한 것... push, merge... 나오면 멈추고 물어봐")에 따라 아직 진행 안 함.
+- `npm run audit:dist` 실패는 Todo 17 범위 밖으로 남겨둠(위 참고) — Todo 18에서 반드시 고쳐야 함.
+- `tests/e2e/failure-boundaries.spec.ts`는 존재하지 않음(Todo 18의 acceptance criteria 파일, 새로 작성 필요) — 배경 조사 결과 `npm run audit:dist`/`scripts/audit-dist.mjs`는 이미 상당 부분(XSS-sink·cheat-token·noisy-console·원본데이터 확장자 차단) 구현·병합돼 있으나, 10분 메모리 스모크 테스트 하네스는 전혀 없고 stale-bridge-request/save-sync-failure 같은 런타임 시나리오는 정적 스캔과 별개로 새로 작성해야 함(`tests/e2e/startup-data.spec.ts`와 corrupt-ZIP/missing-files 커버리지 중복 여부 먼저 확인 필요).
+- Todo 3 debug-journal이 경고한 "town 내부 이동도 'Slow progress!' RNG의 영향을 받는다"는 사실 — 이번 e2e의 NPC 접근 스윕(6단계 반복 시도)이 이 RNG를 흡수하도록 설계돼 있어 이번 실행에서는 통과했지만, 재실행 시 낮은 확률로 실패할 수 있음(korean-npc-alias.spec.ts와 동일한 기존 리스크, 새로 생긴 것 아님).
