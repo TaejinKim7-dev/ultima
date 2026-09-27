@@ -6,7 +6,8 @@ import { fileURLToPath } from "node:url"
 import { afterEach, describe, expect, it } from "vitest"
 
 // Todo 20: `npm run verify:release-docs` checks the release docs (README.md,
-// docs/WEB_PORT.md, docs/GITHUB_PAGES.md, handoff.md) for commands that
+// docs/WEB_PORT.md, docs/GITHUB_PAGES.md -- not the append-only handoff.md
+// session log, see the last test) for commands that
 // don't exist, missing source pins, dead evidence/repo links, stale
 // placeholder text, and deployment claims nobody verified. Every case here
 // runs against a throwaway fixture repo root, never the real docs (those
@@ -77,14 +78,14 @@ describe("verify:release-docs", () => {
   })
 
   it("rejects an `npm run` command that package.json does not define", () => {
-    const result = run(fixtureRoot({ "handoff.md": "# Handoff\n\nRun `npm run verify:everything` first.\n" }))
+    const result = run(fixtureRoot({ "docs/GITHUB_PAGES.md": "# Pages\n\nRun `npm run verify:everything` first.\n" }))
 
     expect(result.status).toBe(1)
     expect(result.stderr).toContain("verify:everything")
   })
 
   it("does not treat a glob like `npm run cmake:*` as a concrete script name", () => {
-    const result = run(fixtureRoot({ "handoff.md": "# Handoff\n\nAlso run the `npm run cmake:*` commands.\n" }))
+    const result = run(fixtureRoot({ "docs/GITHUB_PAGES.md": "# Pages\n\nAlso run the `npm run cmake:*` commands.\n" }))
 
     expect(result.status, result.stderr).toBe(0)
   })
@@ -137,15 +138,15 @@ describe("verify:release-docs", () => {
   it("checks .omo/evidence paths only when a local evidence tree exists (git-ignored; absent in a fresh clone)", () => {
     const doc = "# Handoff\n\nEvidence: `.omo/evidence/ultima-web/task-19/pages-static-smoke.json`.\n"
 
-    const freshClone = run(fixtureRoot({ "handoff.md": doc }))
+    const freshClone = run(fixtureRoot({ "docs/GITHUB_PAGES.md": doc }))
     expect(freshClone.status, freshClone.stderr).toBe(0)
 
-    const withEvidenceTree = run(fixtureRoot({ "handoff.md": doc, ".omo/evidence/ultima-web/README": "" }))
+    const withEvidenceTree = run(fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/README": "" }))
     expect(withEvidenceTree.status).toBe(1)
     expect(withEvidenceTree.stderr).toContain("pages-static-smoke.json")
 
     const present = run(
-      fixtureRoot({ "handoff.md": doc, ".omo/evidence/ultima-web/task-19/pages-static-smoke.json": "{}" })
+      fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/task-19/pages-static-smoke.json": "{}" })
     )
     expect(present.status, present.stderr).toBe(0)
   })
@@ -159,7 +160,7 @@ describe("verify:release-docs", () => {
   })
 
   it("does not mistake the project's own 'Todo 19' step names for TODO placeholders", () => {
-    const result = run(fixtureRoot({ "handoff.md": "# Handoff\n\nTodo 19 finished; Todo 20 is next.\n" }))
+    const result = run(fixtureRoot({ "docs/GITHUB_PAGES.md": "# Pages\n\nTodo 19 finished; Todo 20 is next.\n" }))
 
     expect(result.status, result.stderr).toBe(0)
   })
@@ -167,7 +168,7 @@ describe("verify:release-docs", () => {
   it("allows a line to opt out of the placeholder check with an explicit marker", () => {
     const result = run(
       fixtureRoot({
-        "handoff.md": "# Handoff\n\nTodo 5's save export was a placeholder JSON stub. <!-- release-docs:allow-placeholder -->\n"
+        "docs/GITHUB_PAGES.md": "# Pages\n\nTodo 5's save export was a placeholder JSON stub. <!-- release-docs:allow-placeholder -->\n"
       })
     )
 
@@ -201,5 +202,12 @@ describe("verify:release-docs", () => {
     expect(result.stderr).toContain("nope")
     expect(result.stderr).toContain("missing.md")
     expect(result.stderr).toContain("placeholder")
+  })
+  it("does not scan handoff.md: it is an append-only historical log whose old paths/placeholders are history, not release docs", () => {
+    const result = run(
+      fixtureRoot({ "handoff.md": "# Handoff\n\nOld run: `npm run verify:gone`, `scripts/removed.mjs`, TODO from 2026-09-24.\n" })
+    )
+
+    expect(result.status, result.stderr).toBe(0)
   })
 })

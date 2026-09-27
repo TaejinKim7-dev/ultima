@@ -35,7 +35,12 @@ import { dirname, join, normalize } from "node:path"
 
 export class ReleaseDocsVerificationError extends Error {}
 
-export const RELEASE_DOCS = ["README.md", "docs/WEB_PORT.md", "docs/GITHUB_PAGES.md", "handoff.md"]
+//   - handoff.md is NOT a release doc for this check: it is the project's
+//     append-only session log (AGENTS.md), so its old commands, removed
+//     paths and quoted placeholders are accurate history, not stale docs.
+//     Current instructions live in README.md / docs/WEB_PORT.md /
+//     docs/GITHUB_PAGES.md, which README links handoff.md from.
+export const RELEASE_DOCS = ["README.md", "docs/WEB_PORT.md", "docs/GITHUB_PAGES.md"]
 export const PIN_DOCS = ["docs/SOURCE_PINS.md", "docs/WEB_PORT.md"]
 
 const NPM_RUN_PATTERN = /npm run ([A-Za-z0-9:_-]+)([*<{]?)/g
