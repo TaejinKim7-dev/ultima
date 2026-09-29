@@ -1322,6 +1322,11 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 - 게이트(exit): test:unit 0, verify:repo-sources 0, typecheck 0, build 0, build:site 0, audit:dist --require-engine 0, i18n:check --strict 0, build:wasm 0, wasm-symbols 8/8, git diff --check 0.
 - 미실행: 전체 e2e 스위트(Chromium 40개), merge. shrine.cpp 18건 번역 추가(4447 entries). 순서 변경으로 제외된 항목은 전부 vendors(module) 26건 — Todo 25 대상.
 
+## Todo 25 진행 기록 (branch todo-25-korean-shop, 2026-09-29, 미merge)
+- 구현: `web-say msg data` cfunc(native no-op) + `vendors.b` `=>`/`input-shop` 호출, 템플릿 런타임 바이트의 FNV-1a 해시 + (기호,값) 쌍을 `Module.u4Text.vendor`로 전송, 셸이 한국어 템플릿(`GENERATED_VENDOR_TEMPLATES`)에 기호를 치환(`GENERATED_VENDOR_NAMES`로 상점/주인/품목 번역, 조사 처리). 코드 리뷰 반영: 억제 플래그를 cf_webSay 시작·bail-out·`discourse.cpp` 대화 종료 시 해제, ㄹ받침+(으)로→로, 중복 기호는 첫 쌍 사용(construct와 동일).
+- **의도적 편차**: 미매핑/미번역 상점 템플릿은 패널에서 조용히 폐기(Todo 23과 동일, 영어 원문은 엔진 밖으로 나가지 않음 — 프로토콜이 해시만 보냄). 계획의 "영어 module 텍스트로 fallback"은 적용하지 않음. 캔버스에는 영어가 그대로 출력되고 구매 흐름은 영향 없음(`task-25/fallback.log`, 유닛 테스트로 명시).
+- 게이트 exit(수정 후 재실행, `task-25/gates2.log`): test:unit 0, verify:repo-sources 0, typecheck 0, build 0, i18n:check --strict 0, build:native 0, test:native 0 (4/4), qa:native-baseline 0 (ULTIMA4_DATA), audit:dist --require-engine 0, git diff --check 0. e2e `korean-shop.spec.ts` 2/2 통과(`e2e-shop-run11.log`; 복도 끝 앵커가 NPC에 막혀 1회 flake → 재시도 로직 추가). RED 로그: `red-unit.log`, `red-review-fixes.log`.
+- 미실행: 전체 e2e 스위트, 무기/방어구/시약/여관 상점 e2e(생성기 테스트로 `{{ }}` 템플릿 전체만 검증), merge.
 ### Todo 23 main merge 게이트 (2026-09-29, worktree agent-ad52…, 전부 exit 0)
 npm run test:unit / verify:repo-sources / typecheck / build / build:site / audit:dist --require-engine / i18n:check --strict / build:wasm / wasm-symbols 8/8 / git diff --check = 0; 전체 e2e Chromium 41 passed (27.2분, `task-23/e2e-full.log`); cmp 계획서 두 벌 0. merge `1f7dfd0`.
 
@@ -1335,3 +1340,7 @@ merge 후 충돌(inventory 옵션 병합, generated 재생성, manifest fileCoun
 
 ### Todo 26 main merge (2026-09-29)
 merge 60c1004 (코드 트리는 26 브랜치 53bd3aa와 동일, handoff.md만 충돌 해결). 에이전트 보고 게이트: unit 381, verify, typecheck, build, i18n strict, audit, diff-check 전부 0; e2e korean-intro-overlay/game-messages/castle-output/npc-output 통과. 리뷰 지적(네이티브 ifdef, 오버레이 안전장치) 수정 반영. 전체 e2e는 통합 1회 예정.
+
+### Todo 25: main(dc5764d) 병합 후 게이트 (2026-09-29, branch todo-25-korean-shop)
+- 충돌 해소: `scripts/i18n-generate.mjs`(Todo 26 intro 템플릿 + Todo 25 vendor 표 양쪽 유지), `handoff.md`(양쪽), `vendor/source-manifest.json`(main 값 취한 뒤 summarizeSourceTree로 재계산: fileCount 412). `i18n:inventory` 후 `module.json`은 '% s' placeholder churn뿐이라 되돌림, `i18n:generate` 재생성. Todo 23 screenMessage 훅·억제 플래그·Todo 24 castle 채널(`u4_web_talk_line`)은 별개 경로라 이중 방출 없음(억제 플래그는 web_hash 훅만 건너뜀).
+- exit: build:wasm 0, test:unit 0, verify:repo-sources 0, typecheck 0, build 0, i18n:check --strict 0, build:native 0, test:native 0, audit:dist --require-engine 0, git diff --check 0. e2e(PLAYWRIGHT_PORT=4425): korean-shop 0, korean-game-messages 0, korean-castle-output 0, korean-intro-overlay 0. (`task-25/gates-merge.log`)

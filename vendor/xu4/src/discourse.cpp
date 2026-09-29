@@ -182,6 +182,11 @@ bool discourse_run(const Discourse* dis, uint16_t entry, Person* npc)
         replace(word.begin(), word.end(), ' ', '-');
 
         xu4.config->scriptEvalArg("talk-to %s '%s", goods[entry], word.c_str());
+#ifdef __EMSCRIPTEN__
+        // A script error between web-say and its >> must not leave the shell
+        // hook suppressed for every later screenMessage().
+        screenWebSuppress(false);
+#endif
 #else
         // Load and run the appropriate script.
         std::string ugood(goods[entry]);

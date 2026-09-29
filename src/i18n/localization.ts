@@ -28,7 +28,9 @@ import {
   GENERATED_INTRO_TEMPLATES,
   GENERATED_MODULE_NAMES,
   GENERATED_TALK_TEMPLATES,
-  GENERATED_UI_TEMPLATES
+  GENERATED_UI_TEMPLATES,
+  GENERATED_VENDOR_NAMES,
+  GENERATED_VENDOR_TEMPLATES
 } from "./generated/strings.ts"
 
 /** One localization table entry as seen by this runtime (generated rows share this shape). */
@@ -127,6 +129,22 @@ export function resolveUiTemplateId(
 export function resolveModuleNameId(
   text: string,
   table: Readonly<Record<string, string>> = GENERATED_MODULE_NAMES
+): string | undefined {
+  return Object.hasOwn(table, text) ? table[text] : undefined
+}
+
+/** Todo 25: Korean runtime template for a vendors.b template hash (`web-say`), or `undefined`. */
+export function resolveVendorTemplate(
+  hash: string,
+  table: Readonly<Record<string, string>> = GENERATED_VENDOR_TEMPLATES
+): string | undefined {
+  return Object.hasOwn(table, hash) ? table[hash] : undefined
+}
+
+/** Todo 25: maps an English shop/owner/item name (a `web-say` symbol value) to its `module:*` ID. */
+export function resolveVendorNameId(
+  text: string,
+  table: Readonly<Record<string, string>> = GENERATED_VENDOR_NAMES
 ): string | undefined {
   return Object.hasOwn(table, text) ? table[text] : undefined
 }

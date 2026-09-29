@@ -29,9 +29,17 @@ import {
 import { buildAliasTable, resolveInput, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
 import { createIntroViewReceiver, type IntroViewReceiver } from "./overlay/intro-view.ts"
 import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
-import { resolveDisplayText, resolveModuleNameId, resolveTalkTemplateId, resolveUiTemplateId } from "./i18n/localization.ts"
+import {
+  resolveDisplayText,
+  resolveModuleNameId,
+  resolveTalkTemplateId,
+  resolveUiTemplateId,
+  resolveVendorNameId,
+  resolveVendorTemplate
+} from "./i18n/localization.ts"
 import { composeTalkInput, composeTalkLine, type TalkComposeDeps } from "./dialogue/talk-compose.ts"
 import { createUiMessageHandler } from "./dialogue/ui-message-compose.ts"
+import { createVendorHandler } from "./dialogue/vendor-compose.ts"
 // Real Korean alias data (Todo 13), never original game data -- just this
 // project's own translation strings. Vite/TS both support importing JSON
 // modules directly; see tsconfig.json's `resolveJsonModule`.
@@ -75,6 +83,8 @@ export interface UltimaBridgeApi {
     input(text: string): void
     /** Todo 23: in-game screenMessage() calls (format hash + pre-formatted args). */
     message(hash: string, args: string[]): void
+    /** Todo 25: vendors.b web-say calls (template hash + symbol/value pairs). */
+    vendor(hash: string, pairs: string[]): void
   }
   /**
    * Todo 26: pass to startEngine()'s `introView` option -- the intro's
@@ -660,6 +670,20 @@ export function createShell(doc: Document): UltimaBridgeApi {
     (error) => console.error("[ultima] screenMessage hook failed:", error instanceof Error ? error.message : "unknown")
   )
 
+  // Todo 25: vendors.b's web-say -- the unsubstituted template's hash plus the
+  // symbol/value pairs; unmapped hashes are dropped silently like Todo 23's.
+  const handleVendorLine = createVendorHandler(
+    {
+      template: resolveVendorTemplate,
+      nameId: resolveVendorNameId,
+      resolve: (id, fallback) => resolveDisplayText(id, fallback)
+    },
+    (text) => {
+      dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text })
+    },
+    (error) => console.error("[ultima] vendor hook failed:", error instanceof Error ? error.message : "unknown")
+  )
+
   return {
     abiVersion: BRIDGE_ABI_VERSION,
     dispatch,
@@ -681,7 +705,8 @@ export function createShell(doc: Document): UltimaBridgeApi {
       input: (text) => {
         dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text: composeTalkInput(text) })
       },
-      message: handleUiMessage
+      message: handleUiMessage,
+      vendor: handleVendorLine
     }
   }
 }
