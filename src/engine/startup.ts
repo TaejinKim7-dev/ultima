@@ -56,6 +56,7 @@ import {
   type PersistenceCoordinator,
   type PersistenceFS
 } from "./persistence.ts"
+import type { IntroViewReceiver } from "../overlay/intro-view.ts"
 import { MAX_ZIP_BYTES, validateUltima4Zip, type ZipValidationResult } from "./zip.ts"
 
 /** Bound to the running engine's real FS/paths/coordinator once startEngine succeeds; see src/shell.ts's attachSaveHandlers. */
@@ -101,6 +102,12 @@ export interface EngineModule {
    * startEngine() before callMain(), like u4Audio.
    */
   u4Text?: TalkTextReceiver
+  /**
+   * Todo 26: receiver for vendor/xu4/src/intro.cpp's intro view EM_JS hooks
+   * (`Module.u4View.show(...)` / `.hide(...)`). Assigned by startEngine()
+   * before callMain(), like u4Audio.
+   */
+  u4View?: IntroViewReceiver
 }
 
 /**
@@ -160,6 +167,8 @@ export interface StartEngineOptions {
   readonly textPrompt?: TextPromptReceiver
   /** Todo 22: attached to `module.u4Text` before callMain() (src/shell.ts's talkTextReceiver). */
   readonly talkText?: TalkTextReceiver
+  /** Todo 26: attached to `module.u4View` before callMain() (src/shell.ts's introViewReceiver). */
+  readonly introView?: IntroViewReceiver
 }
 
 export type StartEngineResult =
@@ -329,6 +338,9 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
   }
   if (options.talkText !== undefined) {
     module.u4Text = options.talkText
+  }
+  if (options.introView !== undefined) {
+    module.u4View = options.introView
   }
   armAutoResumeOnGesture()
 

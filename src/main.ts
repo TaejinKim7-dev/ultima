@@ -130,7 +130,8 @@ romPickerElement?.addEventListener("change", () => {
         zipFile: file,
         dispatch: bridge.dispatch,
         textPrompt: bridge.textPromptReceiver,
-        talkText: bridge.talkTextReceiver
+        talkText: bridge.talkTextReceiver,
+        introView: bridge.introViewReceiver
       })
     )
     .then((result) => {

@@ -101,6 +101,18 @@ body {
   --overlay-cell-px: 16px;
 }
 
+/*
+ * Todo 26 (user decision, 2026-09-27): an intro menu/text overlay shows a
+ * Korean translation of text the native engine still rasterizes in English
+ * underneath, so while such an overlay has content it is opaque. The
+ * "status" role never gets this class (its avatar-aura glyph stays
+ * visible); see overlay-layout.ts's hasOpaqueBacking.
+ */
+.overlay-role.overlay-backed {
+  background: #000;
+  color: #f2f2f2;
+}
+
 /* Structured label/value content (ViewBridgeEvent.rows) -- a CSS grid, not
  * pre-computed character columns: the browser sizes the value column to
  * its own widest cell, so every row's value right-edge lines up regardless
