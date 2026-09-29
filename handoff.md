@@ -1352,3 +1352,20 @@ merge 60c1004 (코드 트리는 26 브랜치 53bd3aa와 동일, handoff.md만 �
 - 중단한 작업: 통합 전체 e2e(백그라운드, 종료), Todo 27 에이전트(branch `todo-27-korean-status` `8023dce`, main 합류 후 검증 전). 잔여 Chromium/vite 프로세스 종료 확인(0개).
 - 리뷰(superpowers:requesting-code-review) 결과 반영: 26 네이티브 ifdef·오버레이 안전장치 수정, 25 억제 플래그·ㄹ받침·중복 기호 수정. 미처리 항목은 plan.md '중단 기록' 참고.
 - 재개: plan.md '재개 순서' ①~④.
+
+## 2026-09-30: 통합 게이트 + 전체 e2e 실행 (Todo 24·25·26 ✅ 보류, 진행률 23/31 유지)
+
+- 작업 위치: `main`(`fb583a6`)은 worktree `/home/taejin/ultima/.claude/worktrees/agent-ad52af6bd293aab90`에 체크아웃돼 있다. **저장소 루트 `/home/taejin/ultima`는 stale 브랜치 `f3-real-browser-qa`(`6462af3`)이다** — 그쪽 `git diff`/`HEAD`를 기준으로 비교하면 잘못된 결론이 나온다(이번 세션에 실제로 한 번 그 함정에 빠짐). main 작업은 반드시 위 worktree에서.
+- merge 게이트 전부 실제 실행, **전부 exit 0** (`integration/gate-2026-09-30.log`): `npm run build:wasm` 0 · `test:unit` 0 (34 files/408 tests) · `verify:repo-sources` 0 · `typecheck` 0 · `build` 0 · `i18n:check -- --strict` 0 (4523 entries) · `build:site -- --base=/ultima/` 0 · `audit:dist -- --require-engine` 0 · `git diff --check` 0 · 계획서 두 벌 `cmp` 0.
+- **전체 e2e 실행(중단 지점이었던 것)**: Chromium, 실제 `ultima4.zip`, `--workers=1`, `PLAYWRIGHT_PORT=4470` → **43 passed / 2 failed, 40.0분** (`integration/e2e-full-2026-09-30.log`).
+- 실패 2건 = `tests/e2e/korean-shop.spec.ts`(Todo 25)의 `healer (input-shop)`(spec:250), `food vendor (=>)`(spec:288). 둘 다 `talkAcrossCounter`가 `nobody answered across the counter`로 throw(spec:201).
+- **격리 재실행으로 재현 확인**(spec 단독, `PLAYWRIGHT_PORT=4471`): 동일 2건 실패(`integration/e2e-shop-rerun-2026-09-30.log`). **flake 아님.** AGENTS.md의 "실패 테스트 삭제·약화 금지"에 따라 Todo 24·25·26은 ✅ 처리하지 않고 진행률 23/31 유지, 계획서 체크박스도 `[ ]` 유지.
+- **원인 조사(읽기 전용 병렬 에이전트 2개: 리뷰 finding 역추적 + F1 증거 인벤토리, 이후 동일 세션으로 원인 진단)**
+  - 기각: **wasm 불일치**. main `04286f2f…`와 23:28 통과 브랜치 `ef025658…`는 **정확히 2바이트**만 다르고 값이 빌드 날짜 문자열(`'3''0'` vs `'2''9'`)이다. `playwright.config.ts:31`이 매 invocation마다 `build:site`를 돌려 `dist/engine/`이 항상 `build/wasm-release/`에서 재복사되므로 staleness 경로 없음.
+  - 기각: **merge/생성 손실**. healer/food 템플릿 6개(`vendors:210/218/109/113/112/115`)·이름 4개(`The Healer`/`Harmony`/`The Sage Deli`/`Shaman`)가 main 생성 테이블에 모두 존재하고 번역이 비어있지 않다.
+  - 기각(강함): **vendor 훅 배선**. `cf_webSay`(`script_boron.cpp:313-377`) → `screenWebVendorSay` → `u4_web_vendor` → `src/shell.ts` talkText receiver → `vendor-compose.ts`. healer 4쌍/food 2~4쌍은 bail-out 한도(>8쌍, UCS-2, pool 1024) 미달.
+  - **유력 1순위(미확정)**: **vendor NPC 타일 접근 실패**. `scripts/qa-native-baseline.mjs:23-31`이 **같은 실패 모드("Funny, no response!")**를 이미 문서화하며 해법으로 "매 스텝 4방향 전부 시도"를 기록. 통과한 `korean-npc-output.spec.ts:106-113`은 그 4방향 패턴(`npcTalkDirs`)을 쓰고, 실패한 이 스펙은 **단일 방향만** 시도한다(spec:185-202). `location.cpp:223-228` + `xu4.cpp:293`(seed=time)이면 NPC가 `MOVEMENT_WANDER`인 한 위치가 실행마다 다르다.
+  - **확인 필요**: (a) healer/food vendor의 실제 `movement` 값 — 브라우저가 사용자 zip에서 추출하는 원본 데이터라 repo에 검사할 artifact가 없고 커밋도 금지. (b) 실패 시 패널에 `"대화: "`(`game.cpp:2492`→`ui:game:141`)가 있었는지, `"이상하게, 반응이 없다!"`(`game.cpp:2513`→`ui:game:143`)가 있었는지 — **현재 스펙은 실패 지점의 패널을 전혀 기록하지 않는다**(성공 뒤에만 `shop-observation.log` 작성). 이 둘이 구분하는 판별 근거가 디스크에 없다.
+- **다음 액션**: ① `korean-shop.spec.ts`의 `talkAcrossCounter`에 실패 지점 진단 캡처(패널 덤프+스크린샷)를 추가하고 4방향 전부 시도 패턴으로 확장 → ② spec 단독 재실행 → ③ 통과 시 **전체 e2e 1회 재실행**(약 40분) → ④ 그때 Todo 24·25·26 ✅ → 26/31, 계획서 두 벌 `[x]` + `cmp` 0. Todo 27(`.claude/worktrees/todo-27-status` `8023dce`, main 합류 후 검증 미완)은 그 뒤.
+- **F1 신규 발견(읽기 전용 조사, exp-1)**: HANDOFF.md가 지목한 3개 갭(task-10 trace·task-14 증거·Y/N)은 `verify:release-docs`를 깨지 않는다. 대신 **worktree에 evidence 6개 파일이 없어 지금 `verify:release-docs`는 실제로 실패한다** — task-3 `full-qa-native-baseline.log`, task-15 `i18n-strict.log`, task-18 `security-audit.log`·`dist-leak-rejected.log`, task-19 `live-pages-smoke.json`·`pages-static-smoke-ci-artifact.json`. 6개 모두 상위 트리 `/home/taejin/ultima/.omo/evidence/`에는 존재하므로 복사로 해결된다. 또 **Y/N 한국어 답은 증거 공백이 아니라 런타임 배선 부재**다 — `src/shell.ts:603`이 유일한 호출부이고 `resolveInput("text", …)`로 하드코딩, 프롬프트 종류를 알리는 bridge 이벤트가 없다(shell.ts:544-548). 문서화로 닫히지 않으므로 신규 Todo가 필요할 수 있다(사용자 결정).
+- **미해결/미실행**: `git push origin main`은 **하지 않았다**(사용자 승인 필요 — 이번 세션에서 승인 요청 안 함). Todo 27 검증, F1~F4 재검토, F3 WebKit은 미실행.
