@@ -29,8 +29,9 @@ import {
 import { buildAliasTable, resolveInput, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
 import { createIntroViewReceiver, type IntroViewReceiver } from "./overlay/intro-view.ts"
 import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
-import { resolveDisplayText, resolveTalkTemplateId } from "./i18n/localization.ts"
+import { resolveDisplayText, resolveModuleNameId, resolveTalkTemplateId, resolveUiTemplateId } from "./i18n/localization.ts"
 import { composeTalkInput, composeTalkLine, type TalkComposeDeps } from "./dialogue/talk-compose.ts"
+import { createUiMessageHandler } from "./dialogue/ui-message-compose.ts"
 // Real Korean alias data (Todo 13), never original game data -- just this
 // project's own translation strings. Vite/TS both support importing JSON
 // modules directly; see tsconfig.json's `resolveJsonModule`.
@@ -72,6 +73,8 @@ export interface UltimaBridgeApi {
   readonly talkTextReceiver: {
     talk(format: string, arg0: string | null, arg1: string | null): void
     input(text: string): void
+    /** Todo 23: in-game screenMessage() calls (format hash + pre-formatted args). */
+    message(hash: string, args: string[]): void
   }
   /**
    * Todo 26: pass to startEngine()'s `introView` option -- the intro's
@@ -398,6 +401,9 @@ export function createShell(doc: Document): UltimaBridgeApi {
         return
       case "runtime-error":
         hidePromptMarker()
+        if (event.fatal) {
+          clearAllOverlays() // Todo 26: no stale intro overlay over a dead engine
+        }
         appendWholeLine(`[오류] ${event.message}`)
         renderPanel()
         return
@@ -635,6 +641,25 @@ export function createShell(doc: Document): UltimaBridgeApi {
     resolve: (id, fallback) => resolveDisplayText(id, fallback)
   }
 
+  // Todo 23: every screenMessage() the engine makes arrives as a format hash
+  // plus pre-formatted arguments; only hashes in GENERATED_UI_TEMPLATES are
+  // shown (in Korean), everything else -- including castle/codex lines built
+  // from original game data -- is dropped without a trace (no console
+  // output: Todo 18's console-noise spec, and the dropped args may be
+  // original data).
+  const handleUiMessage = createUiMessageHandler(
+    {
+      templateId: resolveUiTemplateId,
+      resolve: (id, fallback) => resolveDisplayText(id, fallback),
+      moduleNameId: resolveModuleNameId
+    },
+    (text) => {
+      dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text })
+    },
+    // A genuine failure (not a dropped, unmapped call): never rethrow into the wasm loop.
+    (error) => console.error("[ultima] screenMessage hook failed:", error instanceof Error ? error.message : "unknown")
+  )
+
   return {
     abiVersion: BRIDGE_ABI_VERSION,
     dispatch,
@@ -655,7 +680,8 @@ export function createShell(doc: Document): UltimaBridgeApi {
       },
       input: (text) => {
         dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text: composeTalkInput(text) })
-      }
+      },
+      message: handleUiMessage
     }
   }
 }

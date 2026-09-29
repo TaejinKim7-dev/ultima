@@ -32,7 +32,8 @@ function unescapeCLiteral(raw) {
     .replace(/\\\\/g, "\\")
 }
 
-const ADJACENT_LITERAL = /^\s*"((?:[^"\\]|\\.)*)"/
+// (backslash-newline: a literal continued across a #define line)
+const ADJACENT_LITERAL = /^(?:\s|\\\n)*"((?:[^"\\]|\\.)*)"/
 
 // Todo 22: C concatenates adjacent string literals at compile time, so the
 // format string screenMessage actually receives for e.g.
@@ -60,10 +61,24 @@ function joinAdjacentLiterals(source, endIndex, raw) {
 const TEXT_AT_ARG = String.raw`(?:[^,()"]|\([^()]*\))+`
 const TEXT_AT_PATTERN = String.raw`\.textAt(?:Key|Fmt)?\s*\(\s*${TEXT_AT_ARG},\s*${TEXT_AT_ARG},\s*"((?:[^"\\]|\\.)*)"`
 
-function callPatterns(extraCallNames, textAtCalls) {
-  const extra = extraCallNames.map((name) => new RegExp(`\\b${name}\\s*\\(\\s*"((?:[^"\\\\]|\\\\.)*)"`, "g"))
+const LITERAL = String.raw`"((?:[^"\\]|\\.)*)"`
+
+function callPatterns({ extraCallNames, secondArgCallNames, assignNames, markerComments, textAtCalls }) {
+  const extra = extraCallNames.map((name) => new RegExp(`\\b${name}\\s*\\(\\s*${LITERAL}`, "g"))
+  // Todo 24 (all opt-in): pausedMessage(sec, "msg"), text = "msg", and an i18n marker comment before a literal.
+  const second = secondArgCallNames.map(
+    (name) => new RegExp(`\\b${name}\\s*\\(\\s*[^,()"]*,\\s*${LITERAL}`, "g")
+  )
+  const assign = assignNames.map((name) => new RegExp(`\\b${name}\\s*=\\s*${LITERAL}`, "g"))
+  const marker = markerComments ? [new RegExp(String.raw`/\*i18n\*/\s*${LITERAL}`, "g")] : []
   const textAt = textAtCalls ? [new RegExp(TEXT_AT_PATTERN, "g")] : []
-  return [...CALL_PATTERNS, ...extra, ...textAt]
+  return [...CALL_PATTERNS, ...extra, ...second, ...assign, ...marker, ...textAt]
+}
+
+// A literal with no letters outside printf conversions ("%s%s", "\n\n%s\n")
+// carries nothing to translate.
+function isFormatOnly(text) {
+  return !/[A-Za-z]/.test(text.replace(/%[-+ #0-9.]*[a-zA-Z%]/g, ""))
 }
 
 // Todo 26: `menu.setTitle("XU4 Configuration:", 0, 0)` -- the Configure
@@ -85,15 +100,29 @@ const TRAILING_GROUP_OFFSET = 1e9
  *   - `extraCallNames`: extra call names whose first literal argument is
  *     display text (discourse_tlk.cpp's `#define message screenMessage`).
  *   - `joinAdjacent`: join compile-time-concatenated adjacent literals.
+ * Todo 24 options (discourse_castle.cpp, codex.cpp only): `secondArgCallNames`,
+ * `assignNames`, `markerComments` (a literal right after an i18n marker comment) and
+ * `skipFormatOnly`.
  *   - `textAtCalls` (Todo 26): also capture TextView textAt/textAtKey/
  *     textAtFmt literals (intro.cpp).
  *   - `setTitleCalls` (Todo 26): also capture Menu::setTitle literals,
  *     listed after all other literals so earlier ids don't move.
  */
 export function extractCppLiterals(source, options = {}) {
-  const { extraCallNames = [], joinAdjacent = false, textAtCalls = false, setTitleCalls = false } = options ?? {}
+  const {
+    extraCallNames = [],
+    joinAdjacent = false,
+    secondArgCallNames = [],
+    assignNames = [],
+    markerComments = false,
+    skipFormatOnly = false,
+    textAtCalls = false,
+    setTitleCalls = false
+  } = options ?? {}
   const literals = []
-  const groups = callPatterns(extraCallNames, textAtCalls).map((pattern) => ({ pattern, base: 0 }))
+  const groups = callPatterns({ extraCallNames, secondArgCallNames, assignNames, markerComments, textAtCalls }).map(
+    (pattern) => ({ pattern, base: 0 })
+  )
   if (setTitleCalls) groups.push({ pattern: new RegExp(SET_TITLE_PATTERN.source, "g"), base: TRAILING_GROUP_OFFSET })
   for (const { pattern, base } of groups) {
     pattern.lastIndex = 0
@@ -102,6 +131,7 @@ export function extractCppLiterals(source, options = {}) {
       const raw = joinAdjacent ? joinAdjacentLiterals(source, pattern.lastIndex, match[1]) : match[1]
       const text = unescapeCLiteral(raw)
       if (text.length === 0) continue
+      if (skipFormatOnly && isFormatOnly(text)) continue
       literals.push({ offset: base + match.index, text })
     }
   }

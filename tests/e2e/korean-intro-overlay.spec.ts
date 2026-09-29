@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url"
 // `title.exe:introText:<n>` id in locales/ko/binary.json -- never from the
 // original English data.
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
-const evidenceDir = "/home/taejin/ultima/.omo/evidence/ultima-web/task-26"
+const evidenceDir = join(repoRoot, ".omo/evidence/ultima-web/task-26")
 
 type Entry = { sourceHash?: string; sourceFile?: string; translation: string }
 function entries(file: string): Record<string, Entry> {

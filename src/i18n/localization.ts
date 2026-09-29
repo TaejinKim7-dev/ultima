@@ -22,7 +22,16 @@
 // `char name[16]`).
 
 import type { GeneratedI18nEntry } from "./generated/strings.ts"
-import { GENERATED_ALIASES, GENERATED_I18N_ENTRIES, GENERATED_INTRO_TEMPLATES, GENERATED_STATUS_NAMES, GENERATED_STATUS_TEMPLATES, GENERATED_TALK_TEMPLATES } from "./generated/strings.ts"
+import {
+  GENERATED_ALIASES,
+  GENERATED_I18N_ENTRIES,
+  GENERATED_INTRO_TEMPLATES,
+  GENERATED_MODULE_NAMES,
+  GENERATED_STATUS_NAMES,
+  GENERATED_STATUS_TEMPLATES,
+  GENERATED_TALK_TEMPLATES,
+  GENERATED_UI_TEMPLATES
+} from "./generated/strings.ts"
 
 /** One localization table entry as seen by this runtime (generated rows share this shape). */
 export interface LocalizationEntry {
@@ -101,6 +110,27 @@ export function resolveIntroTemplateId(
   table: Readonly<Record<string, string>> = GENERATED_INTRO_TEMPLATES
 ): string | undefined {
   return Object.hasOwn(table, literal) ? table[literal] : undefined
+}
+
+/**
+ * Todo 23: maps the FNV-1a hash (8 lowercase hex digits) of a screenMessage
+ * format -- what vendor/xu4/src/screen.cpp's web hook sends instead of the
+ * format text -- to its `ui:*` / `module:*` semantic ID, or `undefined` when
+ * that format is not one we translate.
+ */
+export function resolveUiTemplateId(
+  hash: string,
+  table: Readonly<Record<string, string>> = GENERATED_UI_TEMPLATES
+): string | undefined {
+  return Object.hasOwn(table, hash) ? table[hash] : undefined
+}
+
+/** Todo 23: maps an English module config name (a screenMessage `%s` argument) to its `module:*` ID. */
+export function resolveModuleNameId(
+  text: string,
+  table: Readonly<Record<string, string>> = GENERATED_MODULE_NAMES
+): string | undefined {
+  return Object.hasOwn(table, text) ? table[text] : undefined
 }
 
 /**

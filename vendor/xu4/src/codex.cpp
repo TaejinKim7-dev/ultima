@@ -18,6 +18,36 @@
 #include "u4.h"
 #include "u4file.h"
 #include "xu4.h"
+#include "web_talk.h"
+
+#ifdef __EMSCRIPTEN__
+#include <stdarg.h>
+/*
+ * Todo 24: web dialogue-panel channel (see web_talk.h). Literal-only
+ * screenMessage calls are also sent to the panel as their code literal;
+ * calls with a conversion print original AVATAR.EXE text and are sent by id
+ * explicitly at their call site (u4WebTalkId), never as text.
+ */
+static void codexScreenMessage(const char* fmt, ...) {
+    char buffer[1024];     // screen.cpp MsgBufferSize
+    va_list args;
+
+    if (! strchr(fmt, '%'))
+        u4WebTalkText(fmt);
+    va_start(args, fmt);
+    int len = vsnprintf(buffer, sizeof(buffer), fmt, args);
+    va_end(args);
+    if (len > 0)
+        screenMessageN(buffer, len < (int) sizeof(buffer) ? len : (int) sizeof(buffer) - 1);
+}
+#define screenMessage   codexScreenMessage
+#endif
+
+// The replacement for endgameText2[4] (disabled below); printed and sent
+// to the panel as this same literal.
+#define CODEX_XU4_ENDING \
+    /*i18n*/ "\n turns! Report\n thy feat unto\n" \
+    "the XU4 team at\nSourceForge.net!"
 
 struct Codex {
     vector<std::string> virtueQuestions;
@@ -264,6 +294,7 @@ static bool codexHandleVirtues(Codex* codex) {
 ask_next:
     codexSlightPause();
     pausedMessage(2, "\n\nThe voice asks:\n");
+    u4WebTalkId("\n%s\n\n", "avatar.exe:virtueQuestions", current);
     screenMessage("\n%s\n\n", codex->virtueQuestions[current].c_str());
     codex->word = gameGetInput();
     screenHideCursor();
@@ -308,6 +339,7 @@ ask_next:
         /* give them 3 tries to enter the correct virtue, then eject them! */
 
         codexImpureThoughts();
+        u4WebTalkId("%s\n\n", "avatar.exe:virtueQuestions", current);
         screenMessage("%s\n\n", codex->virtueQuestions[current].c_str());
         goto ask_next;
     }
@@ -384,20 +416,24 @@ static void codexHandleEndgame(Codex* codex) {
 
     for (i = 0; i < 10; ++i) {
         if (i == 0) {
+            u4WebTalkId("\n\n%s", "avatar.exe:endgameText1", 0);
             screenMessage("\n\n%s", codex->endgameText1[0].c_str());
         } else if (i < 7) {
             if (i == 6) {
                 screenEraseMapArea();
                 screenRedrawMapArea();
             }
+            u4WebTalkId("%s", "avatar.exe:endgameText1", i);
             screenMessage("%s", codex->endgameText1[i].c_str());
         }
         else if (i == 7) {
             screenDrawImageInMapArea(BKGD_STONCRCL);
             screenRedrawMapArea();
+            u4WebTalkId("\n\n%s", "avatar.exe:endgameText2", 0);
             screenMessage("\n\n%s", codex->endgameText2[0].c_str());
         }
         else if (i > 7) {
+            u4WebTalkId("%s", "avatar.exe:endgameText2", i - 7);
             screenMessage("%s", codex->endgameText2[i-7].c_str());
         }
         screenUploadToGPU();
@@ -408,13 +444,15 @@ static void codexHandleEndgame(Codex* codex) {
     /* CONGRATULATIONS!... you have completed the game in x turns */
     screenHideCursor();
     // Note: This text has leading spaces & should be centered.
+    u4WebTalkId("%s", "avatar.exe:endgameText2", 3);
+    u4WebTalkNumber(c->saveGame->moves);
+    u4WebTalkText(CODEX_XU4_ENDING);
     screenMessage("%s%d%s", codex->endgameText2[3].c_str(),
                   c->saveGame->moves,
 #if 0
                   codex->endgameText2[4].c_str()
 #else
-                  "\n turns! Report\n thy feat unto\n"
-                  "the XU4 team at\nSourceForge.net!"
+                  CODEX_XU4_ENDING
 #endif
                             );
     screenUploadToGPU();

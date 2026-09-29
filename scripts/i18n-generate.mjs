@@ -25,13 +25,14 @@
  * Usage: node scripts/i18n-generate.mjs [schemaDir] (defaults to locales/ko)
  */
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs"
-import { dirname, resolve } from "node:path"
+import { basename, dirname, extname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
-import { CPP_UI_FILE_OPTIONS } from "./i18n-inventory.mjs"
+import { CPP_UI_FILE_OPTIONS, CPP_UI_FILES, MODULE_BORON_FILES } from "./i18n-inventory.mjs"
 import { extractBoronLiterals } from "./lib/boron-strings.mjs"
 import { extractCppLiterals } from "./lib/cpp-strings.mjs"
 import { sourceHash } from "./lib/hash.mjs"
 import { loadSchemaFile } from "./lib/schema-io.mjs"
+import { buildModuleNameMap, buildUiTemplateMap } from "./lib/ui-templates.mjs"
 
 // Todo 22: the native talk channel sends the exact format-string literal
 // runTalkDialogue() hands to screenMessage (open-source xu4 code, not
@@ -39,7 +40,16 @@ import { loadSchemaFile } from "./lib/schema-io.mjs"
 // `ui:discourse_tlk:<n>` id. Re-extracted with the same options
 // i18n:inventory used, and only kept when the literal still hashes to the
 // id's recorded sourceHash (a drifted/stale id is skipped, not mis-mapped).
-const TALK_TEMPLATE_SOURCE = "vendor/xu4/src/discourse_tlk.cpp"
+// Todo 24 adds discourse_castle.cpp and codex.cpp (Lord British, Hawkwind, Codex).
+const TALK_TEMPLATE_SOURCES = [
+  "vendor/xu4/src/discourse_tlk.cpp",
+  "vendor/xu4/src/discourse_castle.cpp",
+  "vendor/xu4/src/codex.cpp"
+]
+
+// Todo 23: module config names used as screenMessage `%s` arguments
+// (weapon/armour/creature names), see scripts/lib/ui-templates.mjs.
+const MODULE_NAME_SOURCE = "vendor/xu4/module/Ultima-IV/config.b"
 
 // Todo 26: the intro's own literals (Configure-menu labels/titles, main
 // menu, name/sex prompts, gypsy glue lines -- open-source xu4 code, not
@@ -59,6 +69,31 @@ const STATUS_NAME_SOURCE = "vendor/xu4/module/Ultima-IV/config.b"
 const TRANSLATABLE_FILES = ["ui", "module", "binary", "tlk", "glossary"]
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
+
+function fileIdOf(relativePath) {
+  return relativePath.slice(relativePath.lastIndexOf("/") + 1).replace(/\.[^.]+$/, "")
+}
+
+// Same id scheme (and extractor options) as i18n-inventory.mjs's
+// extractUiEntries(): `ui:<file>:<literal index>`.
+function cppUiSources() {
+  return CPP_UI_FILES.map((relativePath) => ({
+    idPrefix: `ui:${fileIdOf(relativePath)}`,
+    literals: extractCppLiterals(
+      readFileSync(resolve(repoRoot, relativePath), "utf8"),
+      CPP_UI_FILE_OPTIONS[relativePath]
+    ).map((literal) => literal.text)
+  }))
+}
+
+// Same id scheme as i18n-inventory.mjs's extractModuleEntries():
+// `module:<module>:<file>:<literal index>` (empty literals keep their index).
+function moduleSources(files) {
+  return files.map((relativePath) => ({
+    idPrefix: `module:${relativePath.includes("U4-Upgrade") ? "U4-Upgrade" : "Ultima-IV"}:${fileIdOf(relativePath)}`,
+    literals: extractBoronLiterals(readFileSync(resolve(repoRoot, relativePath), "utf8")).map((literal) => literal.text)
+  }))
+}
 
 function isReady(entry) {
   return (
@@ -111,13 +146,16 @@ export function generateI18nTables(schemaDir) {
 
   const uiEntries = loadSchemaFile(resolve(schemaDir, "ui.json"), "ui").entries
   const talkTemplates = {}
-  const talkSource = readFileSync(resolve(repoRoot, TALK_TEMPLATE_SOURCE), "utf8")
-  extractCppLiterals(talkSource, CPP_UI_FILE_OPTIONS[TALK_TEMPLATE_SOURCE]).forEach((literal, index) => {
-    const id = `ui:discourse_tlk:${index}`
-    if (uiEntries[id]?.sourceHash === sourceHash(literal.text)) {
-      talkTemplates[literal.text] = id
-    }
-  })
+  for (const relativePath of TALK_TEMPLATE_SOURCES) {
+    const fileId = basename(relativePath, extname(relativePath))
+    const talkSource = readFileSync(resolve(repoRoot, relativePath), "utf8")
+    extractCppLiterals(talkSource, CPP_UI_FILE_OPTIONS[relativePath]).forEach((literal, index) => {
+      const id = `ui:${fileId}:${index}`
+      if (uiEntries[id]?.sourceHash === sourceHash(literal.text)) {
+        talkTemplates[literal.text] = id
+      }
+    })
+  }
 
   const introTemplates = {}
   const introSource = readFileSync(resolve(repoRoot, INTRO_TEMPLATE_SOURCE), "utf8")
@@ -138,9 +176,14 @@ export function generateI18nTables(schemaDir) {
   })
 
   const moduleEntries = loadSchemaFile(resolve(schemaDir, "module.json"), "module").entries
+  const { templates: uiTemplates, excluded: uiTemplateExclusions } = buildUiTemplateMap(
+    [...cppUiSources(), ...moduleSources(MODULE_BORON_FILES)],
+    { ...uiEntries, ...moduleEntries }
+  )
+  const moduleNames = buildModuleNameMap(moduleSources([MODULE_NAME_SOURCE]), moduleEntries)
   const statusNames = extractStatusNames(moduleEntries)
 
-  return { entries, aliases, talkTemplates, introTemplates, statusTemplates, statusNames }
+  return { entries, aliases, talkTemplates, introTemplates, uiTemplates, uiTemplateExclusions, moduleNames, statusTemplates, statusNames }
 }
 
 /**
@@ -182,7 +225,8 @@ export function extractStatusNames(moduleEntries) {
   return names
 }
 
-function renderTypeScript({ entries, aliases, talkTemplates, introTemplates, statusTemplates, statusNames }) {
+
+function renderTypeScript({ entries, aliases, talkTemplates, introTemplates, uiTemplates, moduleNames, statusTemplates, statusNames }) {
   const header =
     "// DO NOT EDIT -- generated by `npm run i18n:generate` (scripts/i18n-generate.mjs)\n" +
     "// Source of truth: locales/ko/*.json. Only ready (translated) entries are emitted;\n" +
@@ -220,6 +264,12 @@ function renderTypeScript({ entries, aliases, talkTemplates, introTemplates, sta
     `// Todo 27: field (armor/weapon/weaponAbbrev/class) -> English name -> module config id.\n` +
     `export const GENERATED_STATUS_NAMES: Readonly<Record<string, Readonly<Record<string, string>>>> = ` +
     `${JSON.stringify(statusNames, null, 2)}\n\n` +
+    `// Todo 23: FNV-1a hash of a screenMessage format (vendor/xu4/src/screen.cpp web hook) -> ui/module id.\n` +
+    `export const GENERATED_UI_TEMPLATES: Readonly<Record<string, string>> = ` +
+    `${JSON.stringify(uiTemplates, null, 2)}\n\n` +
+    `// Todo 23: English module config name (a screenMessage %s argument) -> module id.\n` +
+    `export const GENERATED_MODULE_NAMES: Readonly<Record<string, string>> = ` +
+    `${JSON.stringify(moduleNames, null, 2)}\n\n` +
     `export const GENERATED_I18N_META = ${JSON.stringify(body.$schema)} as const\n`
   )
 }

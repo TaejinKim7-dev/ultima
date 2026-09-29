@@ -98,7 +98,7 @@ export interface EngineModule {
   u4TextPrompt?: TextPromptReceiver
   /**
    * Todo 22: receiver for vendor/xu4/src/discourse_tlk.cpp's talk-line
-   * EM_JS hooks (`Module.u4Text.talk(...)` / `.input(...)`). Assigned by
+   * EM_JS hooks (`Module.u4Text.talk(...)` / `.input(...)`; Todo 23 adds `.message(...)` from screen.cpp). Assigned by
    * startEngine() before callMain(), like u4Audio.
    */
   u4Text?: TalkTextReceiver
@@ -118,6 +118,13 @@ export interface EngineModule {
 export interface TalkTextReceiver {
   talk(format: string, arg0: string | null, arg1: string | null): void
   input(text: string): void
+  /**
+   * Todo 23: one screenMessage() call from vendor/xu4/src/screen.cpp -- the
+   * FNV-1a hash of its format (never the text) and the engine's own
+   * pre-formatted string for each printf conversion; see
+   * src/dialogue/ui-message-compose.ts.
+   */
+  message(hash: string, args: string[]): void
 }
 
 /** Todo 18: native text-prompt lifecycle, see src/i18n/text-prompt-gate.ts. */
@@ -249,10 +256,19 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
   // compile failure -- would still fall through to the success path below
   // and dispatch "engine started" once it does return.
   let engineExited: { readonly code: number; readonly detail: string } | null = null
+  // Todo 26 safety net: whatever ends the engine, no Korean intro overlay
+  // may stay on screen over a dead canvas (the C++ side clears them in
+  // IntroController::conclude(), but an abort/exit never gets there).
+  const clearIntroOverlays = () => {
+    options.introView?.hide("menu")
+    options.introView?.hide("textview")
+  }
   factoryOptions["onExit"] = (code: number) => {
+    clearIntroOverlays()
     engineExited = { code, detail: `엔진이 종료되었습니다 (code ${code})` }
   }
   factoryOptions["onAbort"] = (reason: unknown) => {
+    clearIntroOverlays()
     engineExited = { code: -1, detail: `엔진이 중단되었습니다: ${String(reason)}` }
   }
 

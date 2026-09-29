@@ -93,9 +93,11 @@ string BoolMenuItem::getText() const {
     return buffer;
 }
 
+#ifdef __EMSCRIPTEN__
 string BoolMenuItem::getWebValue() const {
     return *val ? on : off;
 }
+#endif
 
 void BoolMenuItem::activate(MenuEvent &event) {
     if (event.type == MenuEvent::DECREMENT ||
@@ -124,9 +126,11 @@ string EnumMenuItem::getText() const {
     return buffer;
 }
 
+#ifdef __EMSCRIPTEN__
 string EnumMenuItem::getWebValue() const {
     return stringList[ *val ];
 }
+#endif
 
 void EnumMenuItem::activate(MenuEvent &event) {
     int current = *val;
@@ -172,9 +176,11 @@ string StringMenuItem::getText() const {
     return buffer;
 }
 
+#ifdef __EMSCRIPTEN__
 string StringMenuItem::getWebValue() const {
     return *val;
 }
+#endif
 
 void StringMenuItem::activate(MenuEvent &event) {
     vector<string>::const_iterator current = find(validSettings.begin(), validSettings.end(), *val);
@@ -273,6 +279,7 @@ string IntMenuItem::getText() const {
     return buffer;
 }
 
+#ifdef __EMSCRIPTEN__
 // Todo 26: the value string getText() substitutes for the label's single
 // %s / %d token, for the web overlay's Korean rendering.
 string IntMenuItem::getWebValue() const {
@@ -308,6 +315,7 @@ string IntMenuItem::getWebValue() const {
     }
     return outputBuffer;
 }
+#endif
 
 void IntMenuItem::activate(MenuEvent &event) {
     if (event.type == MenuEvent::INCREMENT || event.type == MenuEvent::ACTIVATE) {

@@ -372,7 +372,8 @@ describe("startEngine", () => {
     const seen: string[] = []
     const talkText = {
       talk: (format: string, a0: string | null, a1: string | null) => seen.push(`talk:${format}|${a0}|${a1}`),
-      input: (text: string) => seen.push(`input:${text}`)
+      input: (text: string) => seen.push(`input:${text}`),
+      message: (hash: string, args: string[]) => seen.push(`message:${hash}|${args.join(",")}`)
     }
     let receiverAtMainCall: unknown
     module.callMain = () => {
@@ -380,6 +381,7 @@ describe("startEngine", () => {
       receiverAtMainCall = module.u4Text
       module.u4Text?.talk("%s", "@MOONGLOW:12:health", null)
       module.u4Text?.input("health")
+      module.u4Text?.message("deadbeef", ["a", "b"])
     }
 
     const result = await startEngine({
@@ -395,7 +397,7 @@ describe("startEngine", () => {
 
     expect(result.started).toBe(true)
     expect(receiverAtMainCall).toBe(talkText)
-    expect(seen).toEqual(["talk:%s|@MOONGLOW:12:health|null", "input:health"])
+    expect(seen).toEqual(["talk:%s|@MOONGLOW:12:health|null", "input:health", "message:deadbeef|a,b"])
   })
   it("Todo 26: attaches the intro view receiver to module.u4View before callMain()", async () => {
     const { module, calls } = makeFakeModule()
@@ -428,5 +430,35 @@ describe("startEngine", () => {
     expect(result.started).toBe(true)
     expect(receiverAtMainCall).toBe(introView)
     expect(seen).toEqual(["show:menu|8,104,304,88|2|Journey Onward", "hide:menu"])
+  })
+  it("Todo 26: hides the intro overlays when the engine exits or aborts", async () => {
+    const { module, calls } = makeFakeModule()
+    const { factory } = makeFactory(module)
+    const captured: Record<string, unknown>[] = []
+    const seen: string[] = []
+    const introView = {
+      show: () => {},
+      hide: (region: string) => seen.push(`hide:${region}`)
+    }
+    module.callMain = () => {
+      calls.mainCalled += 1
+    }
+    await startEngine({
+      factory: (opts) => {
+        captured.push(opts)
+        return factory(opts)
+      },
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
+      zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
+      dispatch: () => true,
+      unlockAudio: async () => {},
+      audioContext: null,
+      introView
+    })
+    const opts = captured[0] as { onExit: (code: number) => void; onAbort: (reason: unknown) => void }
+    opts.onExit(0)
+    opts.onAbort("boom")
+    expect(seen).toEqual(["hide:menu", "hide:textview", "hide:menu", "hide:textview"])
   })
 })
