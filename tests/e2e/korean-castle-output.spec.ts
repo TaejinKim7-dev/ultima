@@ -168,7 +168,16 @@ test.describe("Todo 24: Lord British and Hawkwind shown in Korean in the dialogu
     await walk(page, "ArrowDown", 23)
     await walk(page, "ArrowRight", 6)
     await page.screenshot({ path: join(evidenceDir, "hawkwind-approach.png") })
-    await talk(page, "ArrowDown")
+    // Hawkwind wanders inside the SEER room, so sweep all four directions
+    // until his welcome reaches the panel (RNG-dependent, like
+    // korean-npc-alias.spec.ts's approachNpc()).
+    const hw43 = squash(binaryKorean("avatar.exe:hawkwindText:43"))
+    for (let round = 0; round < 12 && !(await panelText(page)).includes(hw43); round++) {
+      for (const dir of ["ArrowDown", "ArrowLeft", "ArrowRight", "ArrowUp"]) {
+        await talk(page, dir)
+        if ((await panelText(page)).includes(hw43)) break
+      }
+    }
     await pressKey(page, "Enter", 1500) // greeting waitAnyKey
     const afterHawkwind = await panelText(page)
     await page.screenshot({ path: join(evidenceDir, "hawkwind-greeting.png") })
@@ -193,7 +202,6 @@ test.describe("Todo 24: Lord British and Hawkwind shown in Korean in the dialogu
     await askEnglishKeyword(page, "bye")
     const afterBye = await panelText(page)
 
-    const hw43 = squash(binaryKorean("avatar.exe:hawkwindText:43"))
     const hw44 = squash(binaryKorean("avatar.exe:hawkwindText:44")).slice(0, 12)
     const hw52 = squash(binaryKorean("avatar.exe:hawkwindText:52")).slice(0, 12)
     const lbName = squash(binaryKorean("avatar.exe:lordBritishText:0")).slice(0, 14)
