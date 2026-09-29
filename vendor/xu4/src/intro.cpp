@@ -1258,26 +1258,10 @@ void IntroController::startQuestions() {
     }
 }
 
-/**
- * Get the text for the question giving a choice between virtue v1 and
- * virtue v2 (zero based virtue index, starting at honesty).
- */
-#ifdef __EMSCRIPTEN__
-// Todo 26: the introQuestions index getQuestion() picks, for the web overlay.
+// Index into introQuestions of the question offering virtues v1 < v2
+// (zero based, starting at honesty). Shared by getQuestion() and the web
+// overlay (Todo 26) so both always agree.
 static int questionIndex(int v1, int v2) {
-    int i = 0;
-    int d = 7;
-    while (v1 > 0) {
-        i += d;
-        d--;
-        v1--;
-        v2--;
-    }
-    return i + v2 - 1;
-}
-#endif
-
-string IntroController::getQuestion(int v1, int v2) {
     int i = 0;
     int d = 7;
 
@@ -1292,7 +1276,15 @@ string IntroController::getQuestion(int v1, int v2) {
 
     ASSERT((i + v2 - 1) < 28, "calculation failed");
 
-    return binData->introQuestions[i + v2 - 1];
+    return i + v2 - 1;
+}
+
+/**
+ * Get the text for the question giving a choice between virtue v1 and
+ * virtue v2 (zero based virtue index, starting at honesty).
+ */
+string IntroController::getQuestion(int v1, int v2) {
+    return binData->introQuestions[questionIndex(v1, v2)];
 }
 
 /**

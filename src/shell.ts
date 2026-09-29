@@ -398,6 +398,9 @@ export function createShell(doc: Document): UltimaBridgeApi {
         return
       case "runtime-error":
         hidePromptMarker()
+        if (event.fatal) {
+          clearAllOverlays() // Todo 26: no stale intro overlay over a dead engine
+        }
         appendWholeLine(`[오류] ${event.message}`)
         renderPanel()
         return

@@ -429,4 +429,34 @@ describe("startEngine", () => {
     expect(receiverAtMainCall).toBe(introView)
     expect(seen).toEqual(["show:menu|8,104,304,88|2|Journey Onward", "hide:menu"])
   })
+  it("Todo 26: hides the intro overlays when the engine exits or aborts", async () => {
+    const { module, calls } = makeFakeModule()
+    const { factory } = makeFactory(module)
+    const captured: Record<string, unknown>[] = []
+    const seen: string[] = []
+    const introView = {
+      show: () => {},
+      hide: (region: string) => seen.push(`hide:${region}`)
+    }
+    module.callMain = () => {
+      calls.mainCalled += 1
+    }
+    await startEngine({
+      factory: (opts) => {
+        captured.push(opts)
+        return factory(opts)
+      },
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
+      zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
+      dispatch: () => true,
+      unlockAudio: async () => {},
+      audioContext: null,
+      introView
+    })
+    const opts = captured[0] as { onExit: (code: number) => void; onAbort: (reason: unknown) => void }
+    opts.onExit(0)
+    opts.onAbort("boom")
+    expect(seen).toEqual(["hide:menu", "hide:textview", "hide:menu", "hide:textview"])
+  })
 })

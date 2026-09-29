@@ -69,9 +69,11 @@ public:
     bool                    getClosed() const;
     void                    setClosed(bool closed);
     void                    setTitle(const char* text, int x, int y);
+#ifdef __EMSCRIPTEN__
     const char*             getTitle() const { return title; }
     int                     getTitleX() const { return titleX; }
     int                     getTitleY() const { return titleY; }
+#endif
 
 private:
     MenuItemList items;

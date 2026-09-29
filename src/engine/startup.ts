@@ -249,10 +249,19 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
   // compile failure -- would still fall through to the success path below
   // and dispatch "engine started" once it does return.
   let engineExited: { readonly code: number; readonly detail: string } | null = null
+  // Todo 26 safety net: whatever ends the engine, no Korean intro overlay
+  // may stay on screen over a dead canvas (the C++ side clears them in
+  // IntroController::conclude(), but an abort/exit never gets there).
+  const clearIntroOverlays = () => {
+    options.introView?.hide("menu")
+    options.introView?.hide("textview")
+  }
   factoryOptions["onExit"] = (code: number) => {
+    clearIntroOverlays()
     engineExited = { code, detail: `엔진이 종료되었습니다 (code ${code})` }
   }
   factoryOptions["onAbort"] = (reason: unknown) => {
+    clearIntroOverlays()
     engineExited = { code: -1, detail: `엔진이 중단되었습니다: ${String(reason)}` }
   }
 
