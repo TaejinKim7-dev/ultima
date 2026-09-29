@@ -32,7 +32,8 @@ function unescapeCLiteral(raw) {
     .replace(/\\\\/g, "\\")
 }
 
-const ADJACENT_LITERAL = /^\s*"((?:[^"\\]|\\.)*)"/
+// (backslash-newline: a literal continued across a #define line)
+const ADJACENT_LITERAL = /^(?:\s|\\\n)*"((?:[^"\\]|\\.)*)"/
 
 // Todo 22: C concatenates adjacent string literals at compile time, so the
 // format string screenMessage actually receives for e.g.
@@ -52,9 +53,23 @@ function joinAdjacentLiterals(source, endIndex, raw) {
   return text
 }
 
-function callPatterns(extraCallNames) {
-  const extra = extraCallNames.map((name) => new RegExp(`\\b${name}\\s*\\(\\s*"((?:[^"\\\\]|\\\\.)*)"`, "g"))
-  return [...CALL_PATTERNS, ...extra]
+const LITERAL = String.raw`"((?:[^"\\]|\\.)*)"`
+
+function callPatterns({ extraCallNames, secondArgCallNames, assignNames, markerComments }) {
+  const extra = extraCallNames.map((name) => new RegExp(`\\b${name}\\s*\\(\\s*${LITERAL}`, "g"))
+  // Todo 24 (all opt-in): pausedMessage(sec, "msg"), text = "msg", and an i18n marker comment before a literal.
+  const second = secondArgCallNames.map(
+    (name) => new RegExp(`\\b${name}\\s*\\(\\s*[^,()"]*,\\s*${LITERAL}`, "g")
+  )
+  const assign = assignNames.map((name) => new RegExp(`\\b${name}\\s*=\\s*${LITERAL}`, "g"))
+  const marker = markerComments ? [new RegExp(String.raw`/\*i18n\*/\s*${LITERAL}`, "g")] : []
+  return [...CALL_PATTERNS, ...extra, ...second, ...assign, ...marker]
+}
+
+// A literal with no letters outside printf conversions ("%s%s", "\n\n%s\n")
+// carries nothing to translate.
+function isFormatOnly(text) {
+  return !/[A-Za-z]/.test(text.replace(/%[-+ #0-9.]*[a-zA-Z%]/g, ""))
 }
 
 /**
@@ -68,17 +83,28 @@ function callPatterns(extraCallNames) {
  *   - `extraCallNames`: extra call names whose first literal argument is
  *     display text (discourse_tlk.cpp's `#define message screenMessage`).
  *   - `joinAdjacent`: join compile-time-concatenated adjacent literals.
+ * Todo 24 options (discourse_castle.cpp, codex.cpp only): `secondArgCallNames`,
+ * `assignNames`, `markerComments` (a literal right after an i18n marker comment) and
+ * `skipFormatOnly`.
  */
 export function extractCppLiterals(source, options = {}) {
-  const { extraCallNames = [], joinAdjacent = false } = options ?? {}
+  const {
+    extraCallNames = [],
+    joinAdjacent = false,
+    secondArgCallNames = [],
+    assignNames = [],
+    markerComments = false,
+    skipFormatOnly = false
+  } = options ?? {}
   const literals = []
-  for (const pattern of callPatterns(extraCallNames)) {
+  for (const pattern of callPatterns({ extraCallNames, secondArgCallNames, assignNames, markerComments })) {
     pattern.lastIndex = 0
     let match
     while ((match = pattern.exec(source)) !== null) {
       const raw = joinAdjacent ? joinAdjacentLiterals(source, pattern.lastIndex, match[1]) : match[1]
       const text = unescapeCLiteral(raw)
       if (text.length === 0) continue
+      if (skipFormatOnly && isFormatOnly(text)) continue
       literals.push({ offset: match.index, text })
     }
   }

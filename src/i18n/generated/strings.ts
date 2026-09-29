@@ -31,6 +31,90 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "\n한밤중에 산책을 나갔다가...\n\n",
     "placeholders": []
   },
+  "ui:codex:0": {
+    "translation": "\n 턴 만에 끝냈다! 이 공적을\n XU4 팀에게\nSourceForge.net에서\n알려라!",
+    "placeholders": []
+  },
+  "ui:codex:1": {
+    "translation": "\n\n\n\n갑자기 어둠이 내리더니, 그대는 텅 빈 방에 홀로 서 있다.\n",
+    "placeholders": []
+  },
+  "ui:codex:10": {
+    "translation": "\n그대는 우주의 참된 본질을 알지 못한다.\n\n",
+    "placeholders": []
+  },
+  "ui:codex:11": {
+    "translation": "\n이런, 게임을 거의 끝낼 뻔했군요.\n나쁜 아바타!\n",
+    "placeholders": []
+  },
+  "ui:codex:12": {
+    "translation": "\n그대의 생각은 순수하지 않다.\n다시 묻겠다.\n",
+    "placeholders": []
+  },
+  "ui:codex:13": {
+    "translation": "\n어떤 목소리가 울려 퍼진다:\n",
+    "placeholders": []
+  },
+  "ui:codex:14": {
+    "translation": "\"통행의 말은 무엇인가?\"\n\n",
+    "placeholders": []
+  },
+  "ui:codex:15": {
+    "translation": "\n통행이 허락되었다.\n",
+    "placeholders": []
+  },
+  "ui:codex:16": {
+    "translation": "\n\n목소리가 묻는다:\n",
+    "placeholders": []
+  },
+  "ui:codex:17": {
+    "translation": "\n\n그대는 아바타의 덕목에 통달했다.\n",
+    "placeholders": []
+  },
+  "ui:codex:18": {
+    "translation": "\n\n발밑에서 땅이 울린다.\n",
+    "placeholders": []
+  },
+  "ui:codex:19": {
+    "translation": "\n소음 너머로 목소리가 묻는다:\n\n아바타의 여덟 덕목이 진실, 사랑, 용기라는 세 원리로 합쳐지고 그로부터 비롯된다면...",
+    "placeholders": []
+  },
+  "ui:codex:2": {
+    "translation": "\n그대는 세 조각의 열쇠를 사용한다.\n",
+    "placeholders": []
+  },
+  "ui:codex:20": {
+    "translation": "\n\n그렇다면 부인할 수 없는 진실, 끝없는 사랑, 굽히지 않는 용기의 전부를 아우르며 그 모두인 단 하나는 무엇인가?\n\n",
+    "placeholders": []
+  },
+  "ui:codex:3": {
+    "translation": "\n그대에게는 세 조각의 열쇠가 없다.\n\n",
+    "placeholders": []
+  },
+  "ui:codex:4": {
+    "translation": "\n그대는 여덟 덕목 모두에서 지도력을 증명하지 못했다.\n\n",
+    "placeholders": []
+  },
+  "ui:codex:5": {
+    "translation": "\n통행은 허락되지 않는다.\n\n",
+    "placeholders": []
+  },
+  "ui:codex:6": {
+    "translation": "\n그대는 준비되지 않았다.\n",
+    "placeholders": []
+  },
+  "ui:codex:7": {
+    "translation": "\n통행은 허락되지 않는다.\n\n",
+    "placeholders": []
+  },
+  "ui:codex:8": {
+    "translation": "\n통행은 허락되지 않는다.\n\n",
+    "placeholders": []
+  },
+  "ui:codex:9": {
+    "translation": "\n그대의 여정은 아직 끝나지 않았다.\n\n",
+    "placeholders": []
+  },
   "ui:combat:0": {
     "translation": "\n%s의 제단실\n",
     "placeholders": [
@@ -346,6 +430,115 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "placeholders": [
       "%s"
     ]
+  },
+  "ui:discourse_castle:0": {
+    "translation": "이 험난한 땅에서 살아남으려면 먼저 그대 자신을 알아야 한다! 무기와 마법 능력을 갈고닦도록 하라!\n\n브리타니아에서의 첫 여행길에서는 각별히 조심하라.\n\n자신을 충분히 알기 전에는 마을의 안전한 곳에서 멀리 떠나지 말라!\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:1": {
+    "translation": "열린 땅을 홀로 여행하지 말라. 여러 마을에는 그대와 함께할 만한 훌륭한 이들이 많으니 합류를 청하는 것이 현명하다!\n\n일행을 여덟 명의 여행자로 채우라. 참된 지도자만이 이 여정을 이룰 수 있다!\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:10": {
+    "translation": "\n\n그가 말한다: 잘되었군.\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:11": {
+    "translation": "\n\n그가 말한다: 그대의 상처를 치유해 주겠다!\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:12": {
+    "translation": "%s, 그대는 다시 살아날 것이다!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:discourse_castle:13": {
+    "translation": "\n\n\n로드 브리티시가 말한다:  환영하오 ",
+    "placeholders": []
+  },
+  "ui:discourse_castle:14": {
+    "translation": "%s님, 그리고 %s님도 함께 오셨구려!\n",
+    "placeholders": [
+      "%s",
+      "%s"
+    ]
+  },
+  "ui:discourse_castle:15": {
+    "translation": "%s님과 그대의 훌륭한 모험가들이여!\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:discourse_castle:16": {
+    "translation": "\n나에게 무엇을 묻고 싶은가?\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:17": {
+    "translation": "\n\n\n로드 브리티시가 일어나 말한다: 마침내!\n%s여, 그대가 왔구나!  우리는 아주 오랫동안 기다렸노라...\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:discourse_castle:18": {
+    "translation": "\n\n로드 브리티시가 앉으며 말한다: 브리타니아에 새 시대가 열렸다. 위대한 악의 군주들은 사라졌으나 백성에게는 방향과 삶의 목적이 없구나...\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:19": {
+    "translation": "덕의 챔피언이 필요하다. 그대가 그 챔피언일 수도 있으나 그것은 시간만이 알려줄 것이다.  내 힘이 닿는 한 그대를 돕겠노라!\n무엇을 도와줄까?\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:2": {
+    "translation": "덕목의 길을 배우라. 여덟 사원에 들어가도록 힘쓰라!\n\n각 사원에 들어가는 데 필요한 룬을 찾고, 명상을 모으는 데 쓰는 진언, 곧 \"만트라\"를 익히라.\n\n사원 안에서 그대의 내면의 덕 또는 악을 드러내는 행위가 무엇인지 배우게 될 것이다!\n\n길을 현명하게 택하라. 그대의 선악 모든 행위는 기억되며 그대를 가로막으러 돌아올 수 있다!\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:20": {
+    "translation": "\n로드 브리티시가 말한다: 잘 가시게, 벗들이여!\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:21": {
+    "translation": "\n로드 브리티시가 말한다: 잘 가시게, 벗이여!\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:22": {
+    "translation": "\n\n\n\n\n\n그가 말한다: 나는\n잘 지내네, 고맙군.\n\n그가 묻는다: 그대는 건강한가? ",
+    "placeholders": []
+  },
+  "ui:discourse_castle:23": {
+    "translation": "\n그가 말한다: 그것은 도와줄 수 없구나.\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:24": {
+    "translation": "\n그밖에 또 무엇이 있는가?\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:3": {
+    "translation": "예언자 호크윈드를 자주 찾아가 그의 지혜로 그대의 덕을 증명하라.\n\n준비가 되면 호크윈드가 한 덕목에서 부분 아바타의 경지에 오르도록 권할 것이다.\n\n여덟 덕목 모두에서 부분 아바타가 되도록 힘쓰라. 그때에야 비로소 코덱스를 찾을 준비가 될 것이다!\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:4": {
+    "translation": "이제 던전 깊은 곳으로 들어가라. 그곳 홀의 제단 받침대에서 8개의 색 돌을 되찾으라.\n\n이 돌들의 쓰임을 찾으라. 심연에서 그대를 도울 것이다!\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:5": {
+    "translation": "그대는 아바타의 길에서 아주 잘하고 있다! 여덟 덕목 모두에서 승격을 이루도록 힘쓰라!\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:6": {
+    "translation": "종, 책, 촛불을 찾으라! 이 세 가지가 있어야 거대한 스티지아 심연에 들어갈 수 있다!\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:7": {
+    "translation": "심연에 들어가기 전에 그대에게는 세 조각의 열쇠와 통행의 말이 필요하다.\n\n그러면 궁극의 지혜의 코덱스가 있는 방에 들어갈 수 있을 것이다!\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:8": {
+    "translation": "그대는 이제 어두운 심연으로의 마지막 여정을 떠날 준비가 된 듯하다! 여덟 명의 일행과 함께 가라!\n\n행운을 빈다. 선의 힘이 이 위험천만한 과업에서 그대를 지켜주기를!\n\n브리타니아 모든 이의 마음과 영혼이 이제 그대와 함께한다. 몸조심하게, 나의 벗이여.\n",
+    "placeholders": []
+  },
+  "ui:discourse_castle:9": {
+    "translation": "\n그가 말한다: ",
+    "placeholders": []
   },
   "ui:discourse_tlk:0": {
     "translation": "예 또는 아니오로 답하라!\n",
@@ -18242,7 +18435,51 @@ export const GENERATED_TALK_TEMPLATES: Readonly<Record<string, string>> = {
   "Thou art not %s enough for me to join thee.\n": "ui:discourse_tlk:14",
   "%s says: I cannot join thee.\n": "ui:discourse_tlk:15",
   "Hi Banjo Bob!\nYour secret\nnumber is\n4F4A4E0A\n": "ui:discourse_tlk:16",
-  "That I cannot\nhelp thee with.\n": "ui:discourse_tlk:17"
+  "That I cannot\nhelp thee with.\n": "ui:discourse_tlk:17",
+  "To survive in this hostile land thou must first know thyself! Seek ye to master thy weapons and thy magical ability!\n\nTake great care in these thy first travels in Britannia.\n\nUntil thou dost well know thyself, travel not far from the safety of the townes!\n": "ui:discourse_castle:0",
+  "Travel not the open lands alone. There are many worthy people in the diverse townes whom it would be wise to ask to Join thee!\n\nBuild thy party unto eight travellers, for only a true leader can win the Quest!\n": "ui:discourse_castle:1",
+  "Learn ye the paths of virtue. Seek to gain entry unto the eight shrines!\n\nFind ye the Runes, needed for entry into each shrine, and learn each chant or \"Mantra\" used to focus thy meditations.\n\nWithin the Shrines thou shalt learn of the deeds which show thy inner virtue or vice!\n\nChoose thy path wisely for all thy deeds of good and evil are remembered and can return to hinder thee!\n": "ui:discourse_castle:2",
+  "Visit the Seer Hawkwind often and use his wisdom to help thee prove thy virtue.\n\nWhen thou art ready, Hawkwind will advise thee to seek the Elevation unto partial Avatarhood in a virtue.\n\nSeek ye to become a partial Avatar in all eight virtues, for only then shalt thou be ready to seek the codex!\n": "ui:discourse_castle:3",
+  "Go ye now into the depths of the dungeons. Therein recover the 8 colored stones from the altar pedestals in the halls of the dungeons.\n\nFind the uses of these stones for they can help thee in the Abyss!\n": "ui:discourse_castle:4",
+  "Thou art doing very well indeed on the path to Avatarhood! Strive ye to achieve the Elevation in all eight virtues!\n": "ui:discourse_castle:5",
+  "Find ye the Bell, Book and Candle!  With these three things, one may enter the Great Stygian Abyss!\n": "ui:discourse_castle:6",
+  "Before thou dost enter the Abyss thou shalt need the Key of Three Parts, and the Word of Passage.\n\nThen might thou enter the Chamber of the Codex of Ultimate Wisdom!\n": "ui:discourse_castle:7",
+  "Thou dost now seem ready to make the final journey into the dark Abyss! Go only with a party of eight!\n\nGood Luck, and may the powers of good watch over thee on this thy most perilous endeavor!\n\nThe hearts and souls of all Britannia go with thee now. Take care, my friend.\n": "ui:discourse_castle:8",
+  "\nHe says: ": "ui:discourse_castle:9",
+  "\n\nHe says: That is good.\n": "ui:discourse_castle:10",
+  "\n\nHe says: Let me heal thy wounds!\n": "ui:discourse_castle:11",
+  "%s, Thou shalt live again!\n": "ui:discourse_castle:12",
+  "\n\n\nLord British says:  Welcome ": "ui:discourse_castle:13",
+  "%s and thee also %s!\n": "ui:discourse_castle:14",
+  "%s and thy worthy Adventurers!\n": "ui:discourse_castle:15",
+  "\nWhat would thou ask of me?\n": "ui:discourse_castle:16",
+  "\n\n\nLord British rises and says: At long last!\n%s thou hast come!  We have waited such a long, long time...\n": "ui:discourse_castle:17",
+  "\n\nLord British sits and says: A new age is upon Britannia. The great evil Lords are gone but our people lack direction and purpose in their lives...\n": "ui:discourse_castle:18",
+  "A champion of virtue is called for. Thou may be this champion, but only time shall tell.  I will aid thee any way that I can!\nHow may I help thee?\n": "ui:discourse_castle:19",
+  "\nLord British says: Fare thee well my friends!\n": "ui:discourse_castle:20",
+  "\nLord British says: Fare thee well my friend!\n": "ui:discourse_castle:21",
+  "\n\n\n\n\n\nHe says: I am\nwell, thank ye.\n\nHe asks: Art thou well? ": "ui:discourse_castle:22",
+  "\nHe says: I cannot help thee with that.\n": "ui:discourse_castle:23",
+  "\nWhat else?\n": "ui:discourse_castle:24",
+  "\n turns! Report\n thy feat unto\nthe XU4 team at\nSourceForge.net!": "ui:codex:0",
+  "\n\n\n\nThere is a sudden darkness, and you find yourself alone in an empty chamber.\n": "ui:codex:1",
+  "\nYou use your key of Three Parts.\n": "ui:codex:2",
+  "\nThou dost not have the Key of Three Parts.\n\n": "ui:codex:3",
+  "\nThou hast not proved thy leadership in all eight virtues.\n\n": "ui:codex:4",
+  "\nPassage is not granted.\n\n": "ui:codex:8",
+  "\nThou art not ready.\n": "ui:codex:6",
+  "\nThy quest is not yet complete.\n\n": "ui:codex:9",
+  "\nThou dost not know the true nature of the Universe.\n\n": "ui:codex:10",
+  "\nOops, you just got too close to beating the game.\nBAD AVATAR!\n": "ui:codex:11",
+  "\nThy thoughts are not pure.\nI ask again.\n": "ui:codex:12",
+  "\nA voice rings out:\n": "ui:codex:13",
+  "\"What is the Word of Passage?\"\n\n": "ui:codex:14",
+  "\nPassage is granted.\n": "ui:codex:15",
+  "\n\nThe voice asks:\n": "ui:codex:16",
+  "\n\nThou art well versed in the virtues of the Avatar.\n": "ui:codex:17",
+  "\n\nThe ground rumbles beneath your feet.\n": "ui:codex:18",
+  "\nAbove the din, the voice asks:\n\nIf all eight virtues of the Avatar combine into and are derived from the Three Principles of Truth, Love and Courage...": "ui:codex:19",
+  "\n\nThen what is the one thing which encompasses and is the whole of all undeniable Truth, unending Love, and unyielding Courage?\n\n": "ui:codex:20"
 }
 
 // Todo 23: FNV-1a hash of a screenMessage format (vendor/xu4/src/screen.cpp web hook) -> ui/module id.
@@ -18258,6 +18495,8 @@ export const GENERATED_UI_TEMPLATES: Readonly<Record<string, string>> = {
   "50260266": "module:U4-Upgrade:graphics:28",
   "55045373": "ui:camp:1",
   "58701741": "module:Ultima-IV:graphics:0",
+  "72300805": "ui:codex:13",
+  "88653764": "ui:discourse_castle:19",
   "90561204": "module:U4-Upgrade:graphics:46",
   "98208595": "module:Ultima-IV:config:42",
   "c518fb92": "ui:game:0",
@@ -18559,6 +18798,48 @@ export const GENERATED_UI_TEMPLATES: Readonly<Record<string, string>> = {
   "5710a230": "ui:shrine:14",
   "b3cfc70c": "ui:shrine:15",
   "905ff20b": "ui:shrine:16",
+  "02bd18e4": "ui:discourse_castle:0",
+  "98a9ef84": "ui:discourse_castle:1",
+  "c8021674": "ui:discourse_castle:2",
+  "350c9543": "ui:discourse_castle:3",
+  "d4c29f1d": "ui:discourse_castle:4",
+  "34ac2c67": "ui:discourse_castle:5",
+  "891136fb": "ui:discourse_castle:6",
+  "14cb18ef": "ui:discourse_castle:7",
+  "9ab4dd8e": "ui:discourse_castle:8",
+  "023ef5b8": "ui:discourse_castle:9",
+  "5e439580": "ui:discourse_castle:10",
+  "cc9459e5": "ui:discourse_castle:11",
+  "c7e5aad8": "ui:discourse_castle:12",
+  "bbdfe5e7": "ui:discourse_castle:13",
+  "ee36a334": "ui:discourse_castle:14",
+  "2edb03e2": "ui:discourse_castle:15",
+  "991e8a3b": "ui:discourse_castle:16",
+  "886643d6": "ui:discourse_castle:17",
+  "a6a073dd": "ui:discourse_castle:18",
+  "f2efe451": "ui:discourse_castle:20",
+  "b3b3006a": "ui:discourse_castle:21",
+  "b96ddb50": "ui:discourse_castle:22",
+  "58bb5184": "ui:discourse_castle:23",
+  "717b8925": "ui:discourse_castle:24",
+  "fbdfa053": "ui:codex:0",
+  "efb4a832": "ui:codex:1",
+  "6d489100": "ui:codex:2",
+  "25b99005": "ui:codex:3",
+  "3ad4a453": "ui:codex:4",
+  "7dbb6af7": "ui:codex:5",
+  "f36d50a6": "ui:codex:6",
+  "4ed788c6": "ui:codex:9",
+  "98103d1c": "ui:codex:10",
+  "ecef8ef6": "ui:codex:11",
+  "fabed855": "ui:codex:12",
+  "f06724d6": "ui:codex:14",
+  "3ce89062": "ui:codex:15",
+  "071bcda8": "ui:codex:16",
+  "76aaa61c": "ui:codex:17",
+  "eb36e0df": "ui:codex:18",
+  "b64ec8a9": "ui:codex:19",
+  "c7d5e718": "ui:codex:20",
   "7fa04b85": "module:Ultima-IV:config:0",
   "9b6a4f99": "module:Ultima-IV:config:1",
   "b397b1d8": "module:Ultima-IV:config:3",

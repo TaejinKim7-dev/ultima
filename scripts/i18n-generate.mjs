@@ -25,7 +25,7 @@
  * Usage: node scripts/i18n-generate.mjs [schemaDir] (defaults to locales/ko)
  */
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs"
-import { dirname, resolve } from "node:path"
+import { basename, dirname, extname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { CPP_UI_FILE_OPTIONS, CPP_UI_FILES, MODULE_BORON_FILES } from "./i18n-inventory.mjs"
 import { extractBoronLiterals } from "./lib/boron-strings.mjs"
@@ -40,7 +40,12 @@ import { buildModuleNameMap, buildUiTemplateMap } from "./lib/ui-templates.mjs"
 // `ui:discourse_tlk:<n>` id. Re-extracted with the same options
 // i18n:inventory used, and only kept when the literal still hashes to the
 // id's recorded sourceHash (a drifted/stale id is skipped, not mis-mapped).
-const TALK_TEMPLATE_SOURCE = "vendor/xu4/src/discourse_tlk.cpp"
+// Todo 24 adds discourse_castle.cpp and codex.cpp (Lord British, Hawkwind, Codex).
+const TALK_TEMPLATE_SOURCES = [
+  "vendor/xu4/src/discourse_tlk.cpp",
+  "vendor/xu4/src/discourse_castle.cpp",
+  "vendor/xu4/src/codex.cpp"
+]
 
 // Todo 23: module config names used as screenMessage `%s` arguments
 // (weapon/armour/creature names), see scripts/lib/ui-templates.mjs.
@@ -126,13 +131,16 @@ export function generateI18nTables(schemaDir) {
 
   const uiEntries = loadSchemaFile(resolve(schemaDir, "ui.json"), "ui").entries
   const talkTemplates = {}
-  const talkSource = readFileSync(resolve(repoRoot, TALK_TEMPLATE_SOURCE), "utf8")
-  extractCppLiterals(talkSource, CPP_UI_FILE_OPTIONS[TALK_TEMPLATE_SOURCE]).forEach((literal, index) => {
-    const id = `ui:discourse_tlk:${index}`
-    if (uiEntries[id]?.sourceHash === sourceHash(literal.text)) {
-      talkTemplates[literal.text] = id
-    }
-  })
+  for (const relativePath of TALK_TEMPLATE_SOURCES) {
+    const fileId = basename(relativePath, extname(relativePath))
+    const talkSource = readFileSync(resolve(repoRoot, relativePath), "utf8")
+    extractCppLiterals(talkSource, CPP_UI_FILE_OPTIONS[relativePath]).forEach((literal, index) => {
+      const id = `ui:${fileId}:${index}`
+      if (uiEntries[id]?.sourceHash === sourceHash(literal.text)) {
+        talkTemplates[literal.text] = id
+      }
+    })
+  }
 
   const moduleEntries = loadSchemaFile(resolve(schemaDir, "module.json"), "module").entries
   const { templates: uiTemplates, excluded: uiTemplateExclusions } = buildUiTemplateMap(
