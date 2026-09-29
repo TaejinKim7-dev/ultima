@@ -53,9 +53,17 @@ function joinAdjacentLiterals(source, endIndex, raw) {
   return text
 }
 
+// Todo 26: TextView::textAt/textAtKey/textAtFmt(x, y, "literal", ...) --
+// the intro's own screens (vendor/xu4/src/intro.cpp) draw through these,
+// not screenMessage. The x/y arguments may be expressions such as
+// `virtue1.size() + 4` (one level of parentheses, no commas). Opt-in only,
+// like the Todo 22 options, so no other file's ids move.
+const TEXT_AT_ARG = String.raw`(?:[^,()"]|\([^()]*\))+`
+const TEXT_AT_PATTERN = String.raw`\.textAt(?:Key|Fmt)?\s*\(\s*${TEXT_AT_ARG},\s*${TEXT_AT_ARG},\s*"((?:[^"\\]|\\.)*)"`
+
 const LITERAL = String.raw`"((?:[^"\\]|\\.)*)"`
 
-function callPatterns({ extraCallNames, secondArgCallNames, assignNames, markerComments }) {
+function callPatterns({ extraCallNames, secondArgCallNames, assignNames, markerComments, textAtCalls }) {
   const extra = extraCallNames.map((name) => new RegExp(`\\b${name}\\s*\\(\\s*${LITERAL}`, "g"))
   // Todo 24 (all opt-in): pausedMessage(sec, "msg"), text = "msg", and an i18n marker comment before a literal.
   const second = secondArgCallNames.map(
@@ -63,7 +71,8 @@ function callPatterns({ extraCallNames, secondArgCallNames, assignNames, markerC
   )
   const assign = assignNames.map((name) => new RegExp(`\\b${name}\\s*=\\s*${LITERAL}`, "g"))
   const marker = markerComments ? [new RegExp(String.raw`/\*i18n\*/\s*${LITERAL}`, "g")] : []
-  return [...CALL_PATTERNS, ...extra, ...second, ...assign, ...marker]
+  const textAt = textAtCalls ? [new RegExp(TEXT_AT_PATTERN, "g")] : []
+  return [...CALL_PATTERNS, ...extra, ...second, ...assign, ...marker, ...textAt]
 }
 
 // A literal with no letters outside printf conversions ("%s%s", "\n\n%s\n")
@@ -71,6 +80,14 @@ function callPatterns({ extraCallNames, secondArgCallNames, assignNames, markerC
 function isFormatOnly(text) {
   return !/[A-Za-z]/.test(text.replace(/%[-+ #0-9.]*[a-zA-Z%]/g, ""))
 }
+
+// Todo 26: `menu.setTitle("XU4 Configuration:", 0, 0)` -- the Configure
+// menus' heading lines. They sit between the `.add(...)` calls in file
+// order, so extracting them in file order would shift the existing
+// ui:intro:0..55 ids; opt-in `setTitleCalls` therefore lists them AFTER
+// every other literal of the file (see the base offset below).
+const SET_TITLE_PATTERN = /\.setTitle\s*\(\s*"((?:[^"\\]|\\.)*)"/g
+const TRAILING_GROUP_OFFSET = 1e9
 
 /**
  * Extract candidate display strings from one C++ source file's text.
@@ -86,6 +103,10 @@ function isFormatOnly(text) {
  * Todo 24 options (discourse_castle.cpp, codex.cpp only): `secondArgCallNames`,
  * `assignNames`, `markerComments` (a literal right after an i18n marker comment) and
  * `skipFormatOnly`.
+ *   - `textAtCalls` (Todo 26): also capture TextView textAt/textAtKey/
+ *     textAtFmt literals (intro.cpp).
+ *   - `setTitleCalls` (Todo 26): also capture Menu::setTitle literals,
+ *     listed after all other literals so earlier ids don't move.
  */
 export function extractCppLiterals(source, options = {}) {
   const {
@@ -94,10 +115,16 @@ export function extractCppLiterals(source, options = {}) {
     secondArgCallNames = [],
     assignNames = [],
     markerComments = false,
-    skipFormatOnly = false
+    skipFormatOnly = false,
+    textAtCalls = false,
+    setTitleCalls = false
   } = options ?? {}
   const literals = []
-  for (const pattern of callPatterns({ extraCallNames, secondArgCallNames, assignNames, markerComments })) {
+  const groups = callPatterns({ extraCallNames, secondArgCallNames, assignNames, markerComments, textAtCalls }).map(
+    (pattern) => ({ pattern, base: 0 })
+  )
+  if (setTitleCalls) groups.push({ pattern: new RegExp(SET_TITLE_PATTERN.source, "g"), base: TRAILING_GROUP_OFFSET })
+  for (const { pattern, base } of groups) {
     pattern.lastIndex = 0
     let match
     while ((match = pattern.exec(source)) !== null) {
@@ -105,7 +132,7 @@ export function extractCppLiterals(source, options = {}) {
       const text = unescapeCLiteral(raw)
       if (text.length === 0) continue
       if (skipFormatOnly && isFormatOnly(text)) continue
-      literals.push({ offset: match.index, text })
+      literals.push({ offset: base + match.index, text })
     }
   }
   literals.sort((left, right) => left.offset - right.offset)

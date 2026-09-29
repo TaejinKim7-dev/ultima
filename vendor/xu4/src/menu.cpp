@@ -83,6 +83,10 @@ void Menu::setCurrent(int id) {
     setCurrent(getById(id));
 }
 
+#ifdef __EMSCRIPTEN__
+MenuWebShowHook menuWebShowHook = NULL;
+#endif
+
 void Menu::show(TextView *view)
 {
     if (title)
@@ -116,6 +120,11 @@ void Menu::show(TextView *view)
             }
         }
     }
+
+#ifdef __EMSCRIPTEN__
+    if (menuWebShowHook)
+        menuWebShowHook(this, view);
+#endif
 }
 
 /**

@@ -1309,6 +1309,13 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 - F3 중간: Firefox 1차 8/10, 실패 2건은 내가 준 `--trace on`이 스펙 자체 `context.tracing.start`와 충돌("Tracing has been already started") — Firefox 문제 아님, 옵션 없이 재실행 중.
 - `verify:release`: branch `todo-release-verify` `ddef2a2`(병렬 fork, unit 6/6 TDD, dry-run 0, ULTIMA4_DATA 없으면 exit 2). 남은 문제: fresh clone에서 unit test(qa-native-baseline)가 `task-3/bad-zip.log`를 만들어 verify:release-docs가 `task-3/full-qa-native-baseline.log` 부재로 실패.
 
+## Todo 26 진행 기록 (브랜치 todo-26-korean-intro-overlay, main 미병합)
+
+- 구현: `Module.u4View.show/hide` 웹 전용 view 채널(`vendor/xu4/src/intro.cpp`, `menu.cpp` 후크, `menuitem.*` `getFormat/getWebValue`), JS 수신기 `src/overlay/intro-view.ts`, `ViewBridgeEvent.rect`(선택), 불투명 배경 규칙 `hasOpaqueBacking`(menu/textview만; status 제외), `ui:intro:56..85` 인벤토리+번역(기존 0..55 해시 불변), `GENERATED_INTRO_TEMPLATES`.
+- 게이트(worktree, exit code): `npm ci` 0, `npm run test:unit` 0, `verify:repo-sources` 0, `typecheck` 0, `build` 0, `i18n:check -- --strict` 0, `audit:dist -- --require-engine` 0, `git diff --check` 0. 증거: `.omo/evidence/ultima-web/task-26/`(gates.log 등).
+- e2e(chromium, 실제 ultima4.zip): `korean-intro-overlay` 0, `configure-menu-no-abort` 0, `save-reload` 0, `korean-npc-alias` 0.
+- 미검증: 네이티브 빌드(`npm run test:native`는 이 worktree에 build/native가 없어 실행 못 함; 변경은 `__EMSCRIPTEN__` 밖에서는 menuitem 접근자뿐), enum 값(Normal 등)과 About 화면 오버레이의 육안 확인.
+
 ## Todo 23 진행 기록 (branch todo-23-korean-game-messages, 2026-09-29, 미merge)
 - 프로토콜: 계획의 "format 리터럴 전송"과 달리 **format의 FNV-1a 해시만** 전송(castle/codex가 AVATAR.EXE 문장을 format으로 넘기므로 원본 유출 방지). 의도적 편차. JS는 미매핑 해시를 조용히 폐기(console 출력 없음).
 - RED→GREEN: ui-message-compose 유닛(모듈 없음→10/10), screen-hash-parity(호스트 cc로 web_hash.h 컴파일, JS fnv1a32와 일치), e2e korean-game-messages RED(Pass 0건)→GREEN 1/1 2.3분(`task-23/e2e-green.log`).
@@ -1320,3 +1327,8 @@ npm run test:unit / verify:repo-sources / typecheck / build / build:site / audit
 
 ### Todo 24 main merge (2026-09-29)
 merge 후 충돌(inventory 옵션 병합, generated 재생성, manifest fileCount 412) 해결. unit 355/355, verify:repo-sources, typecheck, build, build:site, audit:dist --require-engine, i18n:check --strict(4493), git diff --check 전부 0. e2e korean-castle-output + korean-game-messages + korean-npc-output 3/3 (8.8분, 중복 출력 없음, `task-24/e2e-merged.log`). 전체 스위트는 24/26/25 통합 후 1회 예정 → 그때 ✅.
+### Todo 26 main 병합(23/24 반영) 후 게이트
+- 충돌 해소: cpp-strings/inventory/generate/localization은 양쪽 기능 유지, `u4_i18n_table.inc`·`strings.ts`는 `i18n:generate`로 재생성, xu4 매니페스트(fileCount 412)는 `summarizeSourceTree`로 재계산.
+- exit code: `build:wasm` 0, `test:unit` 0(381), `verify:repo-sources` 0, `typecheck` 0, `build` 0, `i18n:check --strict` 0, `audit:dist --require-engine` 0.
+- e2e(PLAYWRIGHT_PORT=4426): `korean-intro-overlay` 0, `korean-game-messages` 0, `korean-castle-output` 0, `korean-npc-output` 0.
+- Todo 23 screenMessage 후크는 `if (!c) return;` 뒤에 있어 인트로(c 없음)에서는 발화하지 않는다 -> 인트로 오버레이와 이중 출력 없음(코드 확인 + 위 e2e 통과).

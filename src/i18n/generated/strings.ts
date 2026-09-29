@@ -1997,16 +1997,142 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "\b 취소",
     "placeholders": []
   },
+  "ui:intro:56": {
+    "translation": "다른 세계, 다가올 시대에.",
+    "placeholders": []
+  },
+  "ui:intro:57": {
+    "translation": "선택:",
+    "placeholders": []
+  },
+  "ui:intro:58": {
+    "translation": "풍경으로 돌아가기",
+    "placeholders": []
+  },
+  "ui:intro:59": {
+    "translation": "여정을 계속하다",
+    "placeholders": []
+  },
   "ui:intro:6": {
     "translation": "\b 인터페이스 개선 옵션",
     "placeholders": []
+  },
+  "ui:intro:60": {
+    "translation": "새 게임 시작",
+    "placeholders": []
+  },
+  "ui:intro:61": {
+    "translation": "설정",
+    "placeholders": []
+  },
+  "ui:intro:62": {
+    "translation": "정보",
+    "placeholders": []
+  },
+  "ui:intro:63": {
+    "translation": "그대는 어떤 이름으로 불리려는가",
+    "placeholders": []
+  },
+  "ui:intro:64": {
+    "translation": "이 세계, 이 시대에서?",
+    "placeholders": []
+  },
+  "ui:intro:65": {
+    "translation": "그대는 남성인가, 여성인가?",
+    "placeholders": []
+  },
+  "ui:intro:66": {
+    "translation": "%s, 그리고",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:67": {
+    "translation": " %s. 그녀가 말한다",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:intro:68": {
+    "translation": "\"이것을 생각해 보라:\"",
+    "placeholders": []
+  },
+  "ui:intro:69": {
+    "translation": "XU4 %s",
+    "placeholders": [
+      "%s"
+    ]
   },
   "ui:intro:7": {
     "translation": "\u000f 메인 메뉴",
     "placeholders": []
   },
+  "ui:intro:70": {
+    "translation": "xu4는 자유 소프트웨어입니다. 자유 소프트웨어",
+    "placeholders": []
+  },
+  "ui:intro:71": {
+    "translation": "재단이 발행한 GNU GPL 조건에 따라",
+    "placeholders": []
+  },
+  "ui:intro:72": {
+    "translation": "재배포하거나 수정할 수 있습니다.",
+    "placeholders": []
+  },
+  "ui:intro:73": {
+    "translation": "COPYING 파일을 참조하십시오.",
+    "placeholders": []
+  },
+  "ui:intro:74": {
+    "translation": "저작권 \t 2002-2025, xu4 팀",
+    "placeholders": []
+  },
+  "ui:intro:75": {
+    "translation": "저작권 \t 1987, 로드 브리티시",
+    "placeholders": []
+  },
+  "ui:intro:76": {
+    "translation": "마우스 옵션:",
+    "placeholders": []
+  },
+  "ui:intro:77": {
+    "translation": "  (열기, 자물쇠 따기 등)",
+    "placeholders": []
+  },
+  "ui:intro:78": {
+    "translation": "XU4 설정:",
+    "placeholders": []
+  },
+  "ui:intro:79": {
+    "translation": "영상 옵션:",
+    "placeholders": []
+  },
   "ui:intro:8": {
     "translation": "\b 그래픽 옵션",
+    "placeholders": []
+  },
+  "ui:intro:80": {
+    "translation": "게임 그래픽 옵션",
+    "placeholders": []
+  },
+  "ui:intro:81": {
+    "translation": "음향 옵션:",
+    "placeholders": []
+  },
+  "ui:intro:82": {
+    "translation": "키보드 옵션:",
+    "placeholders": []
+  },
+  "ui:intro:83": {
+    "translation": "속도 옵션:",
+    "placeholders": []
+  },
+  "ui:intro:84": {
+    "translation": "게임플레이 개선 옵션:",
+    "placeholders": []
+  },
+  "ui:intro:85": {
+    "translation": "인터페이스 개선 옵션:",
     "placeholders": []
   },
   "ui:intro:9": {
@@ -18482,6 +18608,86 @@ export const GENERATED_TALK_TEMPLATES: Readonly<Record<string, string>> = {
   "\n\nThen what is the one thing which encompasses and is the whole of all undeniable Truth, unending Love, and unyielding Courage?\n\n": "ui:codex:20"
 }
 
+// Todo 26: exact intro.cpp literal (menu labels/titles, prompts) -> ui id.
+export const GENERATED_INTRO_TEMPLATES: Readonly<Record<string, string>> = {
+  "\b Video Options": "ui:intro:0",
+  "\b Sound Options": "ui:intro:1",
+  "\b Input Options": "ui:intro:2",
+  "\b Speed Options": "ui:intro:3",
+  "Game Enhancements         %s": "ui:intro:4",
+  "\b Enhanced Gameplay Options": "ui:intro:5",
+  "\b Enhanced Interface Options": "ui:intro:6",
+  "\u000f Main Menu": "ui:intro:7",
+  "\b Game Graphics Options": "ui:intro:8",
+  "Scale                x%d": "ui:intro:9",
+  "Filter               %s": "ui:intro:10",
+  "Gamma                %s": "ui:intro:11",
+  "\b Use These Settings": "ui:intro:12",
+  "\b Cancel": "ui:intro:13",
+  "Transparency Hack  %s": "ui:intro:14",
+  "  Shadow Size:     %d": "ui:intro:15",
+  "  Shadow Opacity:  %d": "ui:intro:16",
+  "Gem Layout         %s": "ui:intro:17",
+  "Line Of Sight      %s": "ui:intro:18",
+  "Screen Shaking     %s": "ui:intro:19",
+  "\b Return to Video Options": "ui:intro:20",
+  "Music Volume         %s": "ui:intro:21",
+  "Sound Effect Volume  %s": "ui:intro:22",
+  "Fading               %s": "ui:intro:23",
+  "Repeat Delay        %4d msec": "ui:intro:26",
+  "Repeat Interval     %4d msec": "ui:intro:27",
+  "Mouse                %s": "ui:intro:28",
+  "Game Cycles per Second    %3d": "ui:intro:31",
+  "Battle Speed              %3d": "ui:intro:32",
+  "Spell Effect Length       %s": "ui:intro:33",
+  "Camping Length            %3d sec": "ui:intro:34",
+  "Inn Rest Length           %3d sec": "ui:intro:35",
+  "Shrine Meditation Length  %3d sec": "ui:intro:36",
+  "Screen Shake Interval     %3d msec": "ui:intro:37",
+  "Battle Difficulty          %s": "ui:intro:40",
+  "Fixed Chest Traps          %s": "ui:intro:41",
+  "Gazer Spawns Insects       %s": "ui:intro:42",
+  "Gem View Shows Objects     %s": "ui:intro:43",
+  "Slime Divides              %s": "ui:intro:44",
+  "Debug Mode (Cheats)        %s": "ui:intro:45",
+  "Automatic Actions          %s": "ui:intro:48",
+  "Set Active Player          %s": "ui:intro:49",
+  "Smart 'Enter' Key          %s": "ui:intro:50",
+  "Text Colorization          %s": "ui:intro:51",
+  "Ultima V Shrines           %s": "ui:intro:52",
+  "Ultima V Spell Mixing      %s": "ui:intro:53",
+  "In another world, in a time to come.": "ui:intro:56",
+  "Options:": "ui:intro:57",
+  "Return to the view": "ui:intro:58",
+  "Journey Onward": "ui:intro:59",
+  "Initiate New Game": "ui:intro:60",
+  "Configure": "ui:intro:61",
+  "About": "ui:intro:62",
+  "By what name shalt thou be known": "ui:intro:63",
+  "in this world and time?": "ui:intro:64",
+  "Art thou Male or Female?": "ui:intro:65",
+  "%s and": "ui:intro:66",
+  " %s.  She says": "ui:intro:67",
+  "\"Consider this:\"": "ui:intro:68",
+  "XU4 %s": "ui:intro:69",
+  "xu4 is free software; you can redist-": "ui:intro:70",
+  "ribute it and/or modify it under the": "ui:intro:71",
+  "terms of the GNU GPL as published by": "ui:intro:72",
+  "the FSF.  See COPYING.": "ui:intro:73",
+  "Copyright \t 2002-2025, xu4 Team": "ui:intro:74",
+  "Copyright \t 1987, Lord British": "ui:intro:75",
+  "Mouse Options:": "ui:intro:76",
+  "  (Open, Jimmy, etc.)": "ui:intro:77",
+  "XU4 Configuration:": "ui:intro:78",
+  "Video Options:": "ui:intro:79",
+  "Game Graphics Options": "ui:intro:80",
+  "Sound Options:": "ui:intro:81",
+  "Keyboard Options:": "ui:intro:82",
+  "Speed Options:": "ui:intro:83",
+  "Enhanced Gameplay Options:": "ui:intro:84",
+  "Enhanced Interface Options:": "ui:intro:85"
+}
+
 // Todo 23: FNV-1a hash of a screenMessage format (vendor/xu4/src/screen.cpp web hook) -> ui/module id.
 export const GENERATED_UI_TEMPLATES: Readonly<Record<string, string>> = {
   "11846271": "module:Ultima-IV:maps:123",
@@ -18766,6 +18972,36 @@ export const GENERATED_UI_TEMPLATES: Readonly<Record<string, string>> = {
   "5e600b9b": "ui:intro:51",
   "1d710085": "ui:intro:52",
   "6f612739": "ui:intro:53",
+  "4ee23915": "ui:intro:56",
+  "4faf3eed": "ui:intro:57",
+  "d4df3938": "ui:intro:58",
+  "6c70cbde": "ui:intro:59",
+  "bff93daa": "ui:intro:60",
+  "163e25eb": "ui:intro:61",
+  "58e096de": "ui:intro:62",
+  "f621a335": "ui:intro:63",
+  "c4a53c49": "ui:intro:64",
+  "4c348a41": "ui:intro:65",
+  "97336e3c": "ui:intro:66",
+  "d1b06ab9": "ui:intro:67",
+  "69d9241e": "ui:intro:68",
+  "adf4c7b2": "ui:intro:69",
+  "3fba121f": "ui:intro:70",
+  "5693e610": "ui:intro:71",
+  "d81feb50": "ui:intro:72",
+  "7dc7bc41": "ui:intro:73",
+  "245aa383": "ui:intro:74",
+  "4510bcbc": "ui:intro:75",
+  "d75fb4d8": "ui:intro:76",
+  "b6a1402e": "ui:intro:77",
+  "08cb10fe": "ui:intro:78",
+  "d82075e0": "ui:intro:79",
+  "69355e06": "ui:intro:80",
+  "0fd47248": "ui:intro:81",
+  "75d65668": "ui:intro:82",
+  "a6483a4c": "ui:intro:83",
+  "90d5fcf3": "ui:intro:84",
+  "7c7c352c": "ui:intro:85",
   "f9bcf4f7": "ui:discourse_tlk:0",
   "47cf7c1d": "ui:discourse_tlk:1",
   "475ffa30": "ui:discourse_tlk:2",

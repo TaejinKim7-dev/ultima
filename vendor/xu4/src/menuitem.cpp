@@ -93,6 +93,12 @@ string BoolMenuItem::getText() const {
     return buffer;
 }
 
+#ifdef __EMSCRIPTEN__
+string BoolMenuItem::getWebValue() const {
+    return *val ? on : off;
+}
+#endif
+
 void BoolMenuItem::activate(MenuEvent &event) {
     if (event.type == MenuEvent::DECREMENT ||
         event.type == MenuEvent::INCREMENT ||
@@ -119,6 +125,12 @@ string EnumMenuItem::getText() const {
     snprintf(buffer, sizeof(buffer), text.c_str(), stringList[ *val ]);
     return buffer;
 }
+
+#ifdef __EMSCRIPTEN__
+string EnumMenuItem::getWebValue() const {
+    return stringList[ *val ];
+}
+#endif
 
 void EnumMenuItem::activate(MenuEvent &event) {
     int current = *val;
@@ -163,6 +175,12 @@ string StringMenuItem::getText() const {
     snprintf(buffer, sizeof(buffer), text.c_str(), val->c_str());
     return buffer;
 }
+
+#ifdef __EMSCRIPTEN__
+string StringMenuItem::getWebValue() const {
+    return *val;
+}
+#endif
 
 void StringMenuItem::activate(MenuEvent &event) {
     vector<string>::const_iterator current = find(validSettings.begin(), validSettings.end(), *val);
@@ -260,6 +278,44 @@ string IntMenuItem::getText() const {
         snprintf(buffer, sizeof(buffer), text.c_str(), *val);
     return buffer;
 }
+
+#ifdef __EMSCRIPTEN__
+// Todo 26: the value string getText() substitutes for the label's single
+// %s / %d token, for the web overlay's Korean rendering.
+string IntMenuItem::getWebValue() const {
+    char outputBuffer[18];
+    if (output == MENU_OUTPUT_INT) {
+        snprintf(outputBuffer, sizeof(outputBuffer), "%d", *val);
+        return outputBuffer;
+    }
+    switch (output){
+        case MENU_OUTPUT_REAGENT:
+            snprintf(outputBuffer, sizeof(outputBuffer), "%2d", static_cast<short>(*val));
+            break;
+        case MENU_OUTPUT_GAMMA:
+            snprintf(outputBuffer, sizeof(outputBuffer), "%.1f", static_cast<float>(*val) / 100);
+            break;
+        case MENU_OUTPUT_SHRINE:
+            snprintf(outputBuffer, sizeof(outputBuffer), "%d sec", *val);
+            break;
+        case MENU_OUTPUT_SPELL:
+            snprintf(outputBuffer, sizeof(outputBuffer), "%3g sec", static_cast<double>(*val) / 5);
+            break;
+        case MENU_OUTPUT_VOLUME:
+            if (*val == 0)
+                snprintf(outputBuffer, sizeof(outputBuffer), "Disabled");
+            else if (*val == MAX_VOLUME)
+                snprintf(outputBuffer, sizeof(outputBuffer), "Full");
+            else
+                snprintf(outputBuffer, sizeof(outputBuffer), "%d%%", *val * 10);
+            break;
+        default:
+            outputBuffer[0] = '\0';
+            break;
+    }
+    return outputBuffer;
+}
+#endif
 
 void IntMenuItem::activate(MenuEvent &event) {
     if (event.type == MenuEvent::INCREMENT || event.type == MenuEvent::ACTIVATE) {

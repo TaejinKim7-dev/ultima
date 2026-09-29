@@ -56,6 +56,7 @@ import {
   type PersistenceCoordinator,
   type PersistenceFS
 } from "./persistence.ts"
+import type { IntroViewReceiver } from "../overlay/intro-view.ts"
 import { MAX_ZIP_BYTES, validateUltima4Zip, type ZipValidationResult } from "./zip.ts"
 
 /** Bound to the running engine's real FS/paths/coordinator once startEngine succeeds; see src/shell.ts's attachSaveHandlers. */
@@ -101,6 +102,12 @@ export interface EngineModule {
    * startEngine() before callMain(), like u4Audio.
    */
   u4Text?: TalkTextReceiver
+  /**
+   * Todo 26: receiver for vendor/xu4/src/intro.cpp's intro view EM_JS hooks
+   * (`Module.u4View.show(...)` / `.hide(...)`). Assigned by startEngine()
+   * before callMain(), like u4Audio.
+   */
+  u4View?: IntroViewReceiver
 }
 
 /**
@@ -167,6 +174,8 @@ export interface StartEngineOptions {
   readonly textPrompt?: TextPromptReceiver
   /** Todo 22: attached to `module.u4Text` before callMain() (src/shell.ts's talkTextReceiver). */
   readonly talkText?: TalkTextReceiver
+  /** Todo 26: attached to `module.u4View` before callMain() (src/shell.ts's introViewReceiver). */
+  readonly introView?: IntroViewReceiver
 }
 
 export type StartEngineResult =
@@ -247,10 +256,19 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
   // compile failure -- would still fall through to the success path below
   // and dispatch "engine started" once it does return.
   let engineExited: { readonly code: number; readonly detail: string } | null = null
+  // Todo 26 safety net: whatever ends the engine, no Korean intro overlay
+  // may stay on screen over a dead canvas (the C++ side clears them in
+  // IntroController::conclude(), but an abort/exit never gets there).
+  const clearIntroOverlays = () => {
+    options.introView?.hide("menu")
+    options.introView?.hide("textview")
+  }
   factoryOptions["onExit"] = (code: number) => {
+    clearIntroOverlays()
     engineExited = { code, detail: `엔진이 종료되었습니다 (code ${code})` }
   }
   factoryOptions["onAbort"] = (reason: unknown) => {
+    clearIntroOverlays()
     engineExited = { code: -1, detail: `엔진이 중단되었습니다: ${String(reason)}` }
   }
 
@@ -336,6 +354,9 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
   }
   if (options.talkText !== undefined) {
     module.u4Text = options.talkText
+  }
+  if (options.introView !== undefined) {
+    module.u4View = options.introView
   }
   armAutoResumeOnGesture()
 

@@ -3213,11 +3213,115 @@
       "translation": "\b 취소",
       "status": "ready"
     },
+    "ui:intro:56": {
+      "sourceHash": "sha256:baf8054c4e2ee2950a005dc4298970ecf52475ce6902f21f71069b88af4ae145",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "다른 세계, 다가올 시대에.",
+      "status": "ready"
+    },
+    "ui:intro:57": {
+      "sourceHash": "sha256:367431fd664bb686d9ffd213339b1382fd8e1509c21fcdc87fabf68bd16f1333",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "선택:",
+      "status": "ready"
+    },
+    "ui:intro:58": {
+      "sourceHash": "sha256:6d4077db687a068fe6a29b8541eaecdb1967367b8f67bee0d6ee71f7c2cb9a16",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "풍경으로 돌아가기",
+      "status": "ready"
+    },
+    "ui:intro:59": {
+      "sourceHash": "sha256:1d82c29de624600a89bc3a52d3a406d98e6607849dff30c464388b05eff90c2e",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "여정을 계속하다",
+      "status": "ready"
+    },
     "ui:intro:6": {
       "sourceHash": "sha256:c4df0e131bf2267fdb90620a073acb61823f38078f79b74321ec555b05dfcc45",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
       "translation": "\b 인터페이스 개선 옵션",
+      "status": "ready"
+    },
+    "ui:intro:60": {
+      "sourceHash": "sha256:e21a1ec394309bc6686e102a88a08848fc0edd6acad633b4fb5e446bfbee74c2",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "새 게임 시작",
+      "status": "ready"
+    },
+    "ui:intro:61": {
+      "sourceHash": "sha256:6defafa2caa65304173956e3fbc26b6947c50bc769c08c3da32c1032fa6519d4",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "설정",
+      "status": "ready"
+    },
+    "ui:intro:62": {
+      "sourceHash": "sha256:4efca0d10c5feb8e9b35eb1d994f2905bb71714e6a271f511d713b539ea5faa1",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "정보",
+      "status": "ready"
+    },
+    "ui:intro:63": {
+      "sourceHash": "sha256:6bda084ff84287f8a302bffec83dc4e28767c69bb8724b9fa9332d6ac570de02",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "그대는 어떤 이름으로 불리려는가",
+      "status": "ready"
+    },
+    "ui:intro:64": {
+      "sourceHash": "sha256:31d107dd4713edcbb4e87318d960f30d02739e5fa6b865bc5a0f4dd391372b60",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "이 세계, 이 시대에서?",
+      "status": "ready"
+    },
+    "ui:intro:65": {
+      "sourceHash": "sha256:f39e4f7b0ef76074614c7cf52f7306380110024fb2e152b9f18dcbb46610f5d1",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "그대는 남성인가, 여성인가?",
+      "status": "ready"
+    },
+    "ui:intro:66": {
+      "sourceHash": "sha256:9fe319d893f28053a640b95a948f026db5419737e0cc0d900821478fb8171801",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "%s, 그리고",
+      "status": "ready"
+    },
+    "ui:intro:67": {
+      "sourceHash": "sha256:bfb2bf2882d5763e2c17d858f972c4c3b10f6a5bb03c2504e31436c5a2e89759",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": " %s. 그녀가 말한다",
+      "status": "ready"
+    },
+    "ui:intro:68": {
+      "sourceHash": "sha256:2c92d09d477fcc51c46a8269937a0d9841c09251ea9bbb71fa6e8133435dd34b",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "\"이것을 생각해 보라:\"",
+      "status": "ready"
+    },
+    "ui:intro:69": {
+      "sourceHash": "sha256:f86767b47773639debbb32d9dbf6dad32019c22ef03b048e735190f1cc172525",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "XU4 %s",
       "status": "ready"
     },
     "ui:intro:7": {
@@ -3227,11 +3331,123 @@
       "translation": "\u000f 메인 메뉴",
       "status": "ready"
     },
+    "ui:intro:70": {
+      "sourceHash": "sha256:36b0fb3d7e99f61ff4691ed62b4d8d94217f4921873e075a048faa6280692aae",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "xu4는 자유 소프트웨어입니다. 자유 소프트웨어",
+      "status": "ready"
+    },
+    "ui:intro:71": {
+      "sourceHash": "sha256:6a4c507d00050e145c6c8878b12314246664c11ec5b7247099e84db5b53179db",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "재단이 발행한 GNU GPL 조건에 따라",
+      "status": "ready"
+    },
+    "ui:intro:72": {
+      "sourceHash": "sha256:af7594bb451224a8707642ddd190381e371c855988013e3570746ab929467aee",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "재배포하거나 수정할 수 있습니다.",
+      "status": "ready"
+    },
+    "ui:intro:73": {
+      "sourceHash": "sha256:c02e7acf8d2dd4daab77bcc57d3f3724e1872b636da95875f5211a4203b972ec",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "COPYING 파일을 참조하십시오.",
+      "status": "ready"
+    },
+    "ui:intro:74": {
+      "sourceHash": "sha256:c305a8303a0c2ef680d969488ef92b53265ca4c3021ad531492d8ab69d34dd94",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "저작권 \t 2002-2025, xu4 팀",
+      "status": "ready"
+    },
+    "ui:intro:75": {
+      "sourceHash": "sha256:42aa1c7c51317c274d02b2097e8b9efb5ef51e3a1a84d0fc0bacd09266e01177",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "저작권 \t 1987, 로드 브리티시",
+      "status": "ready"
+    },
+    "ui:intro:76": {
+      "sourceHash": "sha256:230dbb745d3993f649dfa9ec4a1b10bc6779f08b2aae890d0b91bc358fb4392b",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "마우스 옵션:",
+      "status": "ready"
+    },
+    "ui:intro:77": {
+      "sourceHash": "sha256:f99a94cafd61a20fc2efbe11559eb352873af9b21dee1fc8eaa694498bb2ef16",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "  (열기, 자물쇠 따기 등)",
+      "status": "ready"
+    },
+    "ui:intro:78": {
+      "sourceHash": "sha256:ab804661fba848cf72b40107e77a4c3cb33f451b358f472a24a99ae835971b22",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "XU4 설정:",
+      "status": "ready"
+    },
+    "ui:intro:79": {
+      "sourceHash": "sha256:05622211a4e371fd5cb4c96d0eb331360726affd4455ce3d2641b814068d00b9",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "영상 옵션:",
+      "status": "ready"
+    },
     "ui:intro:8": {
       "sourceHash": "sha256:02b6eaa93306e722f3939fd3ebdc2c8f5224b6bb5620fdb506fb326992311b70",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
       "translation": "\b 그래픽 옵션",
+      "status": "ready"
+    },
+    "ui:intro:80": {
+      "sourceHash": "sha256:3550a3c89e739e2845c149fd4037ff3df8fc656cb69a776c5e52df40b7757112",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "게임 그래픽 옵션",
+      "status": "ready"
+    },
+    "ui:intro:81": {
+      "sourceHash": "sha256:9129ff98e8da02f77e4d63e39645557cf33df9e066dd8ed1f09d9f4a63b7c138",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "음향 옵션:",
+      "status": "ready"
+    },
+    "ui:intro:82": {
+      "sourceHash": "sha256:c4d6ff16a37c716f4b3ff28b2cf27802a2448eb9b628b2c81c16380aea7c188d",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "키보드 옵션:",
+      "status": "ready"
+    },
+    "ui:intro:83": {
+      "sourceHash": "sha256:fe7221c4bbf615892f76d2ec5ed64db6c3e4f86a676f9473cce0af23803f4245",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "속도 옵션:",
+      "status": "ready"
+    },
+    "ui:intro:84": {
+      "sourceHash": "sha256:e7fc69d8bc7832d9036fcb56f327e2b086d8078f7a0dfee5fe4c47e65ebf5c8e",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "게임플레이 개선 옵션:",
+      "status": "ready"
+    },
+    "ui:intro:85": {
+      "sourceHash": "sha256:5dfaa942edae2e4a87b1392fcf786d99b287ed976f92893fa0cece6115e1d317",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "인터페이스 개선 옵션:",
       "status": "ready"
     },
     "ui:intro:9": {

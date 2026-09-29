@@ -83,6 +83,10 @@ export const CPP_UI_FILES = [
 // file keeps the original extraction so its existing ids/hashes don't move.
 export const CPP_UI_FILE_OPTIONS = {
   "vendor/xu4/src/discourse_tlk.cpp": { extraCallNames: ["message", "TALK_MSG"], joinAdjacent: true },
+  // Todo 26: the intro's own screens draw through TextView::textAt*; every
+  // such literal comes after the last Configure-menu `.add(...)`, so the
+  // existing ui:intro:0..55 ids keep their positions.
+  "vendor/xu4/src/intro.cpp": { textAtCalls: true, setTitleCalls: true },
   // shrine.cpp is new to the inventory, so joining its one two-literal
   // "Thy thoughts are pure. " "Thou art granted a vision!" call moves no
   // existing hash.
