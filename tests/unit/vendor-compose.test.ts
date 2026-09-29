@@ -10,7 +10,8 @@ const TEMPLATES: Record<string, string> = {
   aaaa0002: "어서 오십시오\n@\n%이(가) 반깁니다\n",
   aaaa0003: "\n#을(를) $gp에 팝니다. =이(가) 좋소\n",
   aaaa0004: "$ 골드\n",
-  aaaa0005: "가진 것:\n+"
+  aaaa0005: "가진 것:\n+",
+  aaaa0006: "@(으)로 가라\n"
 }
 const NAMES: Record<string, string> = { "The Sage Deli": "n:1", Shaman: "n:2", Dagger: "n:3" }
 const KO: Record<string, string> = { "n:1": "현자의 델리", "n:2": "샤먼", "n:3": "단검" }
@@ -54,6 +55,31 @@ describe("composeVendorLine", () => {
 
   it("does not rescan substituted values and ignores unpaired trailing entries", () => {
     expect(composeVendorLine("aaaa0004", ["$", "$", "@"], deps)).toBe("$ 골드\n")
+  })
+})
+
+describe("composeVendorLine details", () => {
+  it("uses 로 (not 으로) after a ㄹ-final syllable or digit, 으로 after other final consonants, 로 after vowels", () => {
+    const say = (value: string) => composeVendorLine("aaaa0006", ["@", value], { ...deps, nameId: () => undefined })
+    expect(say("얼")).toBe("얼로 가라\n")
+    expect(say("7")).toBe("7로 가라\n")
+    expect(say("삼")).toBe("삼으로 가라\n")
+    expect(say("3")).toBe("3으로 가라\n")
+    expect(say("나")).toBe("나로 가라\n")
+  })
+
+  it("uses the FIRST pair for a duplicated symbol, like Boron construct", () => {
+    expect(composeVendorLine("aaaa0004", ["$", "1", "$", "2"], deps)).toBe("1 골드\n")
+  })
+
+  it("silently drops an untranslated or unmapped template: null, no emit, no error (English original never leaves the engine)", () => {
+    const emit = vi.fn()
+    const onError = vi.fn()
+    const handle = createVendorHandler({ ...deps, template: (hash) => (hash === "aaaa0009" ? "" : TEMPLATES[hash]) }, emit, onError)
+    handle("aaaa0009", ["%", "Shaman"])
+    handle("00000000", ["%", "Shaman"])
+    expect(emit).not.toHaveBeenCalled()
+    expect(onError).not.toHaveBeenCalled()
   })
 })
 

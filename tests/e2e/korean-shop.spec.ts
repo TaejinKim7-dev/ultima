@@ -157,13 +157,19 @@ async function walk(page: Page, key: string, steps: number): Promise<void> {
 /** Walks until the engine reports "Blocked!" (a wall), returning how many tiles were really walked. */
 async function walkUntilBlocked(page: Page, key: string, maxSteps: number): Promise<number> {
   let moved = 0
+  let blockedInARow = 0
   for (let attempt = 0; attempt < maxSteps * 3; attempt++) {
     const before = await panelText(page)
     await pressKey(page, key, 650)
     const after = await panelText(page)
     if (occurrences(after, BLOCKED) > occurrences(before, BLOCKED)) {
-      return moved
+      // A wandering townsperson can block the corridor too: only a wall blocks repeatedly.
+      if (++blockedInARow >= 4) {
+        return moved
+      }
+      continue
     }
+    blockedInARow = 0
     if (occurrences(after, SLOW) === occurrences(before, SLOW)) {
       moved++
     }
@@ -228,7 +234,16 @@ test.describe("Todo 25: shop conversations shown in Korean in the dialogue panel
   async function reachMoonglowCorridorEnd(page: Page, buffer: Buffer): Promise<void> {
     await startRealGame(page, buffer)
     await enterMoonglow(page)
-    const walked = await walkUntilBlocked(page, "ArrowRight", 40)
+    // A townsperson standing in the corridor also reports "Blocked!": if the
+    // walk stopped far short of the wall, wait for it to move and continue.
+    let walked = 0
+    for (let round = 0; round < 6 && walked <= 20; round++) {
+      walked += await walkUntilBlocked(page, "ArrowRight", 40)
+      if (walked <= 20) {
+        await page.waitForTimeout(5000)
+      }
+    }
+    await page.screenshot({ path: join(evidenceDir, "corridor-end.png") })
     expect(walked, "the corridor should be long").toBeGreaterThan(20)
   }
 

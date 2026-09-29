@@ -34,3 +34,18 @@ describe("vendors.b web-say call sites", () => {
     expect(vendors).toMatch(/web-say msg reduce shop-vars\s+>> construct msg shop-vars\s+input-choice choices/)
   })
 })
+
+describe("suppression flag can never stay set", () => {
+  it("cf_webSay clears the flag first, and only sets it after a fully successful announce", () => {
+    const body = script.slice(script.indexOf("CFUNC(cf_webSay)"), script.indexOf("/*-cf-\n    input-choice"))
+    const first = body.indexOf("screenWebSuppress(false)")
+    expect(first).toBeGreaterThan(-1)
+    expect(first).toBeLessThan(body.indexOf("ur_seriesSlice"))
+    expect(body.indexOf("screenWebSuppress(true)")).toBeGreaterThan(body.indexOf("if (ok"))
+  })
+
+  it("the vendor conversation entry clears it after the script returns (a throwing construct skips the >> that would)", () => {
+    const discourse = readFileSync("vendor/xu4/src/discourse.cpp", "utf8")
+    expect(discourse).toMatch(/scriptEvalArg\("talk-to[^;]*;\s*#ifdef __EMSCRIPTEN__(?:\s*\/\/[^\n]*)*\s*screenWebSuppress\(false\);\s*#endif/)
+  })
+})

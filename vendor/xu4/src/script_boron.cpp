@@ -322,6 +322,9 @@ CFUNC(cf_webSay)
     size_t used = 0;
     bool ok = true;
 
+    // Never leave a stale suppression behind (any bail-out below leaves it clear).
+    screenWebSuppress(false);
+
     ur_seriesSlice(ut, &si, a1);
     if (ur_strIsUcs2(si.buf))
         ok = false;

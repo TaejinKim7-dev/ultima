@@ -18,6 +18,19 @@ export interface VendorComposeDeps {
   resolve(id: string, fallback: string): string
 }
 
+/** True when the last syllable of `text` ends in ㄹ (which takes 로, not 으로). */
+function endsWithRieul(text: string): boolean {
+  const last = text.at(-1)
+  if (last === undefined) {
+    return false
+  }
+  const code = last.charCodeAt(0)
+  if (code >= 0xac00 && code <= 0xd7a3) {
+    return (code - 0xac00) % 28 === 8
+  }
+  return "178".includes(last)
+}
+
 /** True when the last syllable of `text` ends in a final consonant; undefined if unknown. */
 function hasBatchim(text: string): boolean | undefined {
   const last = text.at(-1)
@@ -54,7 +67,8 @@ function resolveParticle(rest: string, value: string): { text: string; consumed:
       if (batchim === undefined) {
         return undefined
       }
-      return { text: batchim ? withBatchim : without, consumed: written.length }
+      const rieul = written === "(으)로" && endsWithRieul(value)
+      return { text: batchim && !rieul ? withBatchim : without, consumed: written.length }
     }
   }
   return undefined
@@ -94,7 +108,10 @@ export function composeVendorLine(hash: string, pairs: readonly string[], deps: 
   for (let index = 0; index + 1 < pairs.length; index += 2) {
     const symbol = pairs[index] ?? ""
     const raw = pairs[index + 1] ?? ""
-    values.set(symbol, translateValue(raw, deps))
+    // Boron construct matches the first pair for a duplicated symbol.
+    if (!values.has(symbol)) {
+      values.set(symbol, translateValue(raw, deps))
+    }
   }
 
   let out = ""
