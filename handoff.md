@@ -1317,3 +1317,6 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 
 ### Todo 23 main merge 게이트 (2026-09-29, worktree agent-ad52…, 전부 exit 0)
 npm run test:unit / verify:repo-sources / typecheck / build / build:site / audit:dist --require-engine / i18n:check --strict / build:wasm / wasm-symbols 8/8 / git diff --check = 0; 전체 e2e Chromium 41 passed (27.2분, `task-23/e2e-full.log`); cmp 계획서 두 벌 0. merge `1f7dfd0`.
+
+### Todo 24 main merge (2026-09-29)
+merge 후 충돌(inventory 옵션 병합, generated 재생성, manifest fileCount 412) 해결. unit 355/355, verify:repo-sources, typecheck, build, build:site, audit:dist --require-engine, i18n:check --strict(4493), git diff --check 전부 0. e2e korean-castle-output + korean-game-messages + korean-npc-output 3/3 (8.8분, 중복 출력 없음, `task-24/e2e-merged.log`). 전체 스위트는 24/26/25 통합 후 1회 예정 → 그때 ✅.
