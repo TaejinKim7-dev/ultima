@@ -300,7 +300,15 @@ describe("hasOpaqueBacking (Todo 26: opaque overlay backing rule, user decision 
     expect(hasOpaqueBacking("menu", { rect: DEFAULT_VIEW_RECTS.menu, text: "", rows: [] })).toBe(false)
   })
 
-  it("the status overlay stays transparent so the avatar-aura glyph beneath it remains visible (Todo 27 owns its backing)", () => {
-    expect(hasOpaqueBacking("status", { rect: DEFAULT_VIEW_RECTS.status, rows: [{ label: "x" }] })).toBe(false)
+  // Todo 27 (spec change, not a weakened test): Todo 26 left "status" transparent
+  // and deferred the decision. The status column now follows the same opaque
+  // rule, which is safe because the avatar-aura glyph lives in the summary row
+  // BELOW the status box (y=80) -- asserted here so the two can never overlap.
+  it("the status overlay with content is opaque like menu/textview (Todo 27), and never reaches the avatar-aura glyph", () => {
+    expect(hasOpaqueBacking("status", { rect: DEFAULT_VIEW_RECTS.status, rows: [{ label: "x" }] })).toBe(true)
+    expect(hasOpaqueBacking("status", { rect: DEFAULT_VIEW_RECTS.status, text: "", rows: [] })).toBe(false)
+    const titled = { x: 192, y: 0, width: 120, height: 72 } // title row + 8 main rows, as stats.cpp sends it
+    expect(DEFAULT_VIEW_RECTS.status.y + DEFAULT_VIEW_RECTS.status.height).toBeLessThanOrEqual(AVATAR_AURA_GLYPH_RECT.y)
+    expect(titled.y + titled.height).toBeLessThanOrEqual(AVATAR_AURA_GLYPH_RECT.y)
   })
 })
