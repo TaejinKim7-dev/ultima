@@ -28,6 +28,122 @@ extern bool loadMapData(Map *map, U4FILE *uf, Symbol borderTile);
 
 extern uint32_t getTicks();
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#include <map>
+#include "menu.h"
+#include "menuitem.h"
+
+/*
+ * Todo 26: web view channel. The intro draws every screen through
+ * TextView::textAt*, which rasterizes English into the canvas; the web shell
+ * (src/overlay/intro-view.ts) overlays a Korean rendering on the same
+ * TextView rectangle. Each redraw sends the screen as rows of "template
+ * [+ args]": xu4's own literals verbatim, TITLE.EXE text only as
+ * "@title.exe:<table>:<index>" ids (the original English never leaves the
+ * engine). Keys still go through GLFW; this channel is output only.
+ * Wire format: rows joined by '\n'; a row is segments joined by 0x1E; a
+ * segment is fields joined by 0x1F = [template, args...]; a segment of only
+ * spaces is an x indent (one native cell each).
+ */
+EM_JS(void, u4_web_view_show, (const char* region, int x, int y, int w, int h,
+                               int selected, const char* payload), {
+    if (Module.u4View)
+        Module.u4View.show(UTF8ToString(region), x, y, w, h, selected,
+                           UTF8ToString(payload));
+});
+EM_JS(void, u4_web_view_hide, (const char* region), {
+    if (Module.u4View)
+        Module.u4View.hide(UTF8ToString(region));
+});
+
+class WebRows {
+public:
+    // Adds a segment to row y, indented x cells when it starts the row.
+    void add(int y, int x, const string& segment) {
+        string& row = rows[y];
+        if (row.empty()) {
+            if (x > 0) {
+                row.append(x, ' ');
+                row += '\x1e';
+            }
+        } else {
+            row += '\x1e';
+        }
+        row += segment;
+    }
+    void addFmt(int y, int x, const string& tmpl, const string& arg) {
+        add(y, x, tmpl + '\x1f' + arg);
+    }
+    string payload() const {
+        string out;
+        int last = rows.empty() ? -1 : rows.rbegin()->first;
+        for (int y = 0; y <= last; ++y) {
+            if (y)
+                out += '\n';
+            std::map<int, string>::const_iterator it = rows.find(y);
+            if (it != rows.end())
+                out += it->second;
+        }
+        return out;
+    }
+private:
+    std::map<int, string> rows;
+};
+
+static void webViewShow(const char* region, const TextView& v, int rowOffset,
+                        int selected, const WebRows& rows) {
+    int rowCount = v.height / CHAR_HEIGHT - rowOffset;
+    if (rowCount < 1)
+        rowCount = 1;
+    u4_web_view_show(region, v.x, v.y + rowOffset * CHAR_HEIGHT, v.width,
+                     rowCount * CHAR_HEIGHT, selected, rows.payload().c_str());
+}
+
+static void webViewHideAll() {
+    u4_web_view_hide("menu");
+    u4_web_view_hide("textview");
+}
+
+static int questionIndex(int v1, int v2);
+
+// A whole TITLE.EXE text block (story page, gypsy segue, question).
+static void webViewText(const TextView& v, const char* table, int index) {
+    char id[48];
+    snprintf(id, sizeof(id), "@title.exe:%s:%d", table, index);
+    WebRows rows;
+    rows.add(0, 0, id);
+    webViewShow("textview", v, 0, -1, rows);
+}
+
+// Menu::show observer: the Configure menus, in the extended menu area.
+static void webIntroMenuShown(Menu* menu, TextView* view) {
+    WebRows rows;
+    int selected = -1;
+    const char* title = menu->getTitle();
+    if (title)
+        rows.add(menu->getTitleY(), menu->getTitleX(), title);
+    for (Menu::MenuItemList::iterator it = menu->begin(); it != menu->end(); ++it) {
+        MenuItem* mi = *it;
+        if (! mi->isVisible())
+            continue;
+        string seg = mi->getFormat();
+        string value = mi->getWebValue();
+        if (! value.empty())
+            seg += '\x1f' + value;
+        rows.add(mi->getY(), mi->getX(), seg);
+        if (mi->isHighlighted())
+            selected = mi->getY();
+    }
+    // Extra lines the updateXxxMenu() handlers draw beside the items.
+    if (title && strcmp(title, "Keyboard Options:") == 0)
+        rows.add(5, 0, "Mouse Options:");
+    else if (title && strcmp(title, "Enhanced Interface Options:") == 0)
+        rows.add(3, 2, "  (Open, Jimmy, etc.)");
+    webViewShow("textview", *view, 0, selected, rows);
+}
+#endif
+
 using namespace std;
 
 #define INTRO_MAP_HEIGHT 5
@@ -295,6 +411,9 @@ bool IntroController::present() {
 }
 
 void IntroController::conclude() {
+#ifdef __EMSCRIPTEN__
+    webViewHideAll();       // Todo 26: no intro overlay may outlive the intro
+#endif
     gs_unplug(listenerId);
     deleteIntro();
 }
@@ -750,6 +869,9 @@ void IntroController::updateScreen() {
 
     switch (mode) {
     case INTRO_MAP:
+#ifdef __EMSCRIPTEN__
+        webViewHideAll();
+#endif
         backgroundArea.draw(BKGD_INTRO);
         drawMap();
         drawBeasties();
@@ -790,6 +912,19 @@ void IntroController::updateScreen() {
         menuArea.textAtKey(10, 7, "Initiate New Game", 0);
         menuArea.textAtKey(10, 8, "Configure", 0);
         menuArea.textAtKey(10, 9, "About", 0);
+#ifdef __EMSCRIPTEN__
+        {
+            WebRows rows;
+            rows.add(1, 1, "In another world, in a time to come.");
+            rows.add(3, 14, "Options:");
+            rows.add(5, 10, "Return to the view");
+            rows.add(6, 10, "Journey Onward");
+            rows.add(7, 10, "Initiate New Game");
+            rows.add(8, 10, "Configure");
+            rows.add(9, 10, "About");
+            webViewShow("menu", menuArea, 0, -1, rows);
+        }
+#endif
         drawBeasties();
 
         // draw the cursor last
@@ -813,6 +948,16 @@ void IntroController::initiateNewGame() {
     // display name prompt and read name from keyboard
     menuArea.textAt(3, 3, "By what name shalt thou be known");
     menuArea.textAt(3, 4, "in this world and time?");
+#ifdef __EMSCRIPTEN__
+    {
+        // Rows 3-4 only: the typed name (row 7) must stay visible.
+        WebRows rows;
+        rows.add(0, 3, "By what name shalt thou be known");
+        rows.add(1, 3, "in this world and time?");
+        u4_web_view_show("menu", menuArea.x, menuArea.y + 3 * CHAR_HEIGHT,
+                         menuArea.width, 2 * CHAR_HEIGHT, -1, rows.payload().c_str());
+    }
+#endif
 
     // enable the text cursor after setting it's initial position
     // this will avoid drawing in undesirable areas like 0,0
@@ -835,6 +980,14 @@ void IntroController::initiateNewGame() {
 
     // display sex prompt and read sex from keyboard
     menuArea.textAt(3, 3, "Art thou Male or Female?");
+#ifdef __EMSCRIPTEN__
+    {
+        WebRows rows;
+        rows.add(0, 3, "Art thou Male or Female?");
+        u4_web_view_show("menu", menuArea.x, menuArea.y + 3 * CHAR_HEIGHT,
+                         menuArea.width, CHAR_HEIGHT, -1, rows.payload().c_str());
+    }
+#endif
 
     // the cursor is already enabled, just change its position
     menuArea.setCursorPos(28, 3);
@@ -915,10 +1068,16 @@ void IntroController::finishInitiateGame(const string &nameBuffer, SexType sex)
 
     // show the text thats segues into the main game
     showText(binData->introGypsy[GYP_SEGUE1]);
+#ifdef __EMSCRIPTEN__
+    webViewText(questionArea, "introGypsy", GYP_SEGUE1);
+#endif
     soundSpeakLine(VOICE_GYPSY, 4);
     EventHandler::waitAnyKey();
 
     showText(binData->introGypsy[GYP_SEGUE2]);
+#ifdef __EMSCRIPTEN__
+    webViewText(questionArea, "introGypsy", GYP_SEGUE2);
+#endif
     EventHandler::waitAnyKey();
 
     // done: exit intro and let game begin
@@ -962,6 +1121,9 @@ void IntroController::showStory() {
             backgroundArea.draw(BKGD_ABACUS);
 
         showText(binData->introText[storyInd]);
+#ifdef __EMSCRIPTEN__
+        webViewText(questionArea, "introText", storyInd);
+#endif
 
         switch (storyInd) {
             case 3:
@@ -1033,10 +1195,31 @@ void IntroController::startQuestions() {
         questionArea.clear();
         questionArea.textAt(0, 0, gypsyText[n].c_str());
         questionArea.textAt(0, 1, gypsyText[GYP_UPON_TABLE].c_str());
+#ifdef __EMSCRIPTEN__
+        // Todo 26: the card scene is built up line by line; the overlay
+        // mirrors each step, sending TITLE.EXE lines only as ids.
+        WebRows gypsyRows;
+        {
+            char id[48];
+            snprintf(id, sizeof(id), "@title.exe:introGypsy:%d", n);
+            gypsyRows.add(0, 0, id);
+            snprintf(id, sizeof(id), "@title.exe:introGypsy:%d", GYP_UPON_TABLE);
+            gypsyRows.add(1, 0, id);
+            webViewShow("textview", questionArea, 0, -1, gypsyRows);
+        }
+#endif
         EventHandler::wait_msecs(1000);
 
         const string& virtue1 = gypsyText[questionTree[i1] + 4];
         questionArea.textAtFmt(0, 2, "%s and", virtue1.c_str());
+#ifdef __EMSCRIPTEN__
+        {
+            char id[48];
+            snprintf(id, sizeof(id), "@title.exe:introGypsy:%d", questionTree[i1] + 4);
+            gypsyRows.addFmt(2, 0, "%s and", id);
+            webViewShow("textview", questionArea, 0, -1, gypsyRows);
+        }
+#endif
         drawCard(questionTree[i1], cardPos->x, cardPos->y);
         EventHandler::wait_msecs(1000);
 
@@ -1045,6 +1228,15 @@ void IntroController::startQuestions() {
                                gypsyText[questionTree[i2] + 4].c_str());
         drawCard(questionTree[i2], cardPos->x + cardPos->width, cardPos->y);
         questionArea.textAt(0, 3, "\"Consider this:\"");
+#ifdef __EMSCRIPTEN__
+        {
+            char id[48];
+            snprintf(id, sizeof(id), "@title.exe:introGypsy:%d", questionTree[i2] + 4);
+            gypsyRows.addFmt(2, 0, " %s.  She says", id);
+            gypsyRows.add(3, 0, "\"Consider this:\"");
+            webViewShow("textview", questionArea, 0, -1, gypsyRows);
+        }
+#endif
         questionArea.showCursor();
 
         // wait for a key
@@ -1052,6 +1244,10 @@ void IntroController::startQuestions() {
 
         // show the question to choose between virtues
         showText(getQuestion(questionTree[i1], questionTree[i2]));
+#ifdef __EMSCRIPTEN__
+        webViewText(questionArea, "introQuestions",
+                    questionIndex(questionTree[i1], questionTree[i2]));
+#endif
 
         // wait for an answer
         int choice = EventHandler::readChoice("ab");
@@ -1066,6 +1262,21 @@ void IntroController::startQuestions() {
  * Get the text for the question giving a choice between virtue v1 and
  * virtue v2 (zero based virtue index, starting at honesty).
  */
+#ifdef __EMSCRIPTEN__
+// Todo 26: the introQuestions index getQuestion() picks, for the web overlay.
+static int questionIndex(int v1, int v2) {
+    int i = 0;
+    int d = 7;
+    while (v1 > 0) {
+        i += d;
+        d--;
+        v1--;
+        v2--;
+    }
+    return i + v2 - 1;
+}
+#endif
+
 string IntroController::getQuestion(int v1, int v2) {
     int i = 0;
     int d = 7;
@@ -1113,6 +1324,19 @@ void IntroController::about() {
     menuArea.textAt(1, 6, "the FSF.  See COPYING.");
     menuArea.textAt(4, 8, "Copyright \011 2002-2025, xu4 Team");
     menuArea.textAt(4, 9, "Copyright \011 1987, Lord British");
+#ifdef __EMSCRIPTEN__
+    {
+        WebRows rows;
+        rows.addFmt(1, 14, "XU4 %s", VERSION);
+        rows.add(3, 1, "xu4 is free software; you can redist-");
+        rows.add(4, 1, "ribute it and/or modify it under the");
+        rows.add(5, 1, "terms of the GNU GPL as published by");
+        rows.add(6, 1, "the FSF.  See COPYING.");
+        rows.add(8, 4, "Copyright \011 2002-2025, xu4 Team");
+        rows.add(9, 4, "Copyright \011 1987, Lord British");
+        webViewShow("menu", menuArea, 0, -1, rows);
+    }
+#endif
     drawBeasties();
 
     EventHandler::waitAnyKey();
@@ -1146,6 +1370,13 @@ void IntroController::showText(const string &text) {
  * updates are handled by observing the menu.
  */
 void IntroController::runMenu(Menu *menu, TextView *view, bool withBeasties) {
+#ifdef __EMSCRIPTEN__
+    // Todo 26: mirror this menu into the Korean overlay for as long as it
+    // runs; restored (not cleared) on exit so a nested submenu hands the
+    // parent menu's redraw back to the parent.
+    MenuWebShowHook prevWebHook = menuWebShowHook;
+    menuWebShowHook = webIntroMenuShown;
+#endif
     menu->reset();
 
     // if the menu has an extended height, fill the menu background, otherwise reset the display
@@ -1156,6 +1387,9 @@ void IntroController::runMenu(Menu *menu, TextView *view, bool withBeasties) {
     MenuController menuController(menu, view);
     xu4.eventHandler->pushController(&menuController);
     menuController.waitFor();
+#ifdef __EMSCRIPTEN__
+    menuWebShowHook = prevWebHook;
+#endif
 
     // enable the cursor here, after the menu has been established
     view->hideCursor();

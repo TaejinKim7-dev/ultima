@@ -33,6 +33,7 @@ const SEGMENT_SEPARATOR = "\x1e"
 const FIELD_SEPARATOR = "\x1f"
 const ID_PREFIX = "@"
 const FORMAT_TOKEN = /%[-+ 0#]*\d*[sd]/g
+const INDENT_CELL = "\u2003"
 
 export interface IntroViewDeps {
   /** Maps an intro.cpp literal to its `ui:intro:<n>` id, if inventoried. */
@@ -84,6 +85,11 @@ function resolveFieldText(field: string, deps: IntroViewDeps): string {
 function composeSegment(segment: string, deps: IntroViewDeps): string {
   if (segment === "") {
     return ""
+  }
+  // A segment of only spaces is the engine's x indent: one native TextView
+  // cell each, which is exactly one em at the overlay's font size.
+  if (/^ +$/.test(segment)) {
+    return INDENT_CELL.repeat(segment.length)
   }
   const [template = "", ...args] = segment.split(FIELD_SEPARATOR)
   let text: string

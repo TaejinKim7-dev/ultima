@@ -43,6 +43,10 @@ public:
     int getScOffset() const;
 
     virtual string getText() const;
+    // Todo 26 (web overlay): the unformatted label (printf template) and the
+    // string substituted for its single %s / %d token ("" when it has none).
+    const string& getFormat() const { return text; }
+    virtual string getWebValue() const { return string(); }
     bool isHighlighted() const;
     bool isSelected() const;
     bool isVisible() const;
@@ -82,6 +86,7 @@ public:
 
     virtual void activate(MenuEvent &event);
     virtual string getText() const;
+    virtual string getWebValue() const;
 
 protected:
     bool *val;
@@ -98,6 +103,7 @@ public:
 
     virtual void activate(MenuEvent &event);
     virtual string getText() const;
+    virtual string getWebValue() const;
 
 protected:
     uint8_t *val;
@@ -116,6 +122,7 @@ public:
 
     virtual void activate(MenuEvent &event);
     virtual string getText() const;
+    virtual string getWebValue() const;
 
 protected:
     string *val;
@@ -132,6 +139,7 @@ public:
 
     virtual void activate(MenuEvent &event);
     virtual string getText() const;
+    virtual string getWebValue() const;
 
 protected:
     int *val;

@@ -76,6 +76,10 @@ describe("composeIntroRows", () => {
     ])
   })
 
+  it("turns the engine's x indent (a spaces-only segment) into one em space per native cell", () => {
+    expect(composeIntroRows("  \x1eJourney Onward", deps)).toEqual([{ label: "\u2003\u2003여정을 계속하다" }])
+  })
+
   it("joins the segments of one row (the gypsy 'A and B. She says' line) and resolves @id arguments", () => {
     const payload = "%s and\x1f@title.exe:introGypsy:5\x1e %s.  She says\x1f@title.exe:introGypsy:6"
     expect(composeIntroRows(payload, deps)).toEqual([{ label: "자비, 그리고 용맹. 그녀가 말한다" }])

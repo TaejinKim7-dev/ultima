@@ -52,8 +52,8 @@ async function overlayText(page: Page, role: string): Promise<string> {
   return squash(await locator.innerText())
 }
 
-async function selectedRow(page: Page): Promise<string> {
-  const locator = page.locator('#overlay-layer [data-role="menu"] .overlay-row-label.selected')
+async function selectedRow(page: Page, role: string): Promise<string> {
+  const locator = page.locator(`#overlay-layer [data-role="${role}"] .overlay-row-label.selected`)
   if ((await locator.count()) === 0) return ""
   return squash(await locator.first().innerText())
 }
@@ -106,15 +106,19 @@ test.describe("Todo 26: the intro in Korean via DOM overlays", () => {
 
     // Configure -> Enhanced Gameplay Options, then move the selection.
     await pressKey(page, "c", 2000)
-    const confMenu = await overlayText(page, "menu")
+    // The Configure menus draw in the extended menu area -> the "textview" role.
+    const confMenu = await overlayText(page, "textview")
+    expect(confMenu).toContain(squash(koreanForIntroLiteral("XU4 Configuration:")))
     expect(confMenu).toContain(squash(koreanForIntroLiteral("\x08 Video Options")))
+    expect(await isOpaque(page, "textview"), "the Korean Configure overlay must hide the English canvas text").toBe(true)
+    expect(await overlayText(page, "menu"), "the main-menu overlay must be gone under Configure").toBe("")
     await pressKey(page, "g", 2000)
-    const gameplayMenu = await overlayText(page, "menu")
+    const gameplayMenu = await overlayText(page, "textview")
     await page.screenshot({ path: join(evidenceDir, "intro-gameplay-menu.png") })
     expect(gameplayMenu).toContain(squash(koreanForIntroLiteral("Debug Mode (Cheats)        %s").replace("%s", "")))
-    const before = await selectedRow(page)
+    const before = await selectedRow(page, "textview")
     await pressKey(page, "ArrowDown", 1200)
-    const after = await selectedRow(page)
+    const after = await selectedRow(page, "textview")
     log.push(`gameplay menu selection: ${JSON.stringify(before)} -> ${JSON.stringify(after)}`)
     expect(before).not.toBe("")
     expect(after).not.toBe("")
@@ -126,6 +130,15 @@ test.describe("Todo 26: the intro in Korean via DOM overlays", () => {
     await pressKey(page, "i", 1500)
     const namePrompt = await overlayText(page, "menu")
     expect(namePrompt).toContain(squash(koreanForIntroLiteral("By what name shalt thou be known")))
+    // The opaque name-prompt overlay must not cover the typed name (native
+    // row 7 = logical y 160): its bottom edge has to sit above that row.
+    const geometry = await page.evaluate(() => {
+      const overlay = document.querySelector('#overlay-layer [data-role="menu"]')!.getBoundingClientRect()
+      const canvas = document.querySelector("#game-canvas")!.getBoundingClientRect()
+      return { overlayBottom: overlay.bottom - canvas.top, rowSevenTop: (160 * canvas.height) / 200 }
+    })
+    log.push(`name prompt overlay bottom ${geometry.overlayBottom.toFixed(1)}px < typed-name row top ${geometry.rowSevenTop.toFixed(1)}px`)
+    expect(geometry.overlayBottom).toBeLessThanOrEqual(geometry.rowSevenTop)
     for (const ch of "Avatar") await pressKey(page, ch, 150)
     await pressKey(page, "Enter", 1200)
     const sexPrompt = await overlayText(page, "menu")
@@ -137,18 +150,48 @@ test.describe("Todo 26: the intro in Korean via DOM overlays", () => {
     expect(story).toContain(squash(binaryEntries["title.exe:introText:0"]!.translation))
     expect(await overlayText(page, "menu"), "the name/sex menu overlay must be gone during the story").toBe("")
 
-    // Finish character creation; once the game starts no intro overlay may remain.
+    // Finish character creation. "#save-status" already reads 저장 완료 from
+    // the Configure menu's settings write, so count FRESH saved transitions.
+    await page.evaluate(() => {
+      const w = window as unknown as { __freshSaves: number }
+      w.__freshSaves = 0
+      new MutationObserver(() => {
+        if (document.querySelector("#save-status")!.textContent!.includes("완료")) w.__freshSaves += 1
+      }).observe(document.querySelector("#save-status")!, { childList: true, characterData: true, subtree: true })
+    })
+    const freshSaves = () => page.evaluate(() => (window as unknown as { __freshSaves: number }).__freshSaves)
     let saved = false
+    let sawCards = false
+    let sawQuestion = false
+    const observeScene = async () => {
+      const text = await overlayText(page, "textview")
+      if (!sawCards && text.includes(squash(koreanForIntroLiteral('"Consider this:"')))) {
+        sawCards = true
+        await page.screenshot({ path: join(evidenceDir, "intro-gypsy-cards.png") })
+        log.push(`gypsy card scene overlay: ${text.length} chars`)
+      }
+      if (!sawQuestion && text.includes("A)") && text.includes("B)")) {
+        sawQuestion = true
+        await page.screenshot({ path: join(evidenceDir, "intro-gypsy-question.png") })
+        log.push(`gypsy question overlay: ${text.length} chars`)
+      }
+    }
     for (let i = 0; i < 26 && !saved; i++) {
       await pressKey(page, "Enter", 700)
-      saved = (await page.locator("#save-status").innerText()).includes("완료")
+      await observeScene()
+      saved = (await freshSaves()) > 0
     }
     for (let i = 0; i < 20 && !saved; i++) {
       await pressKey(page, "Enter", 2600)
+      await observeScene()
       await pressKey(page, "a", 1500)
-      saved = (await page.locator("#save-status").innerText()).includes("완료")
+      await observeScene()
+      saved = (await freshSaves()) > 0
     }
-    expect(saved, "character creation never reported 저장 완료").toBe(true)
+    expect(sawCards, "the gypsy card scene never showed its Korean overlay").toBe(true)
+    expect(sawQuestion, "no gypsy virtue question showed its Korean overlay").toBe(true)
+    expect(saved, "character creation never produced a fresh 저장 완료").toBe(true)
+    // Somewhere in the gypsy card scene the overlay showed the virtue cards' Korean text.
     await pressKey(page, "Enter", 2000) // segue 1
     await pressKey(page, "Enter", 3000) // segue 2 -> StagePlay
     const leftover = await page.locator('#overlay-layer [data-role="menu"], #overlay-layer [data-role="textview"]').count()

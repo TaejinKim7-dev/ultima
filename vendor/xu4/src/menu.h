@@ -69,6 +69,9 @@ public:
     bool                    getClosed() const;
     void                    setClosed(bool closed);
     void                    setTitle(const char* text, int x, int y);
+    const char*             getTitle() const { return title; }
+    int                     getTitleX() const { return titleX; }
+    int                     getTitleY() const { return titleY; }
 
 private:
     MenuItemList items;
@@ -78,6 +81,17 @@ private:
     const char* title;
     int titleX, titleY;
 };
+
+#ifdef __EMSCRIPTEN__
+/*
+ * Todo 26: web-only observer called at the end of every Menu::show().
+ * The intro installs it around its Configure menus (intro.cpp runMenu) so
+ * the shell can overlay a Korean rendering; NULL (the default) is a no-op,
+ * and native builds do not compile this at all.
+ */
+typedef void (*MenuWebShowHook)(Menu* menu, TextView* view);
+extern MenuWebShowHook menuWebShowHook;
+#endif
 
 /**
  * This class controls a menu.  The value field of WaitableController
