@@ -68,7 +68,10 @@ const CPP_UI_FILES = [
   "vendor/xu4/src/spell.cpp",
   "vendor/xu4/src/intro.cpp",
   // Todo 22: the U4 talk template lines (runTalkDialogue/talkYNResponse).
-  "vendor/xu4/src/discourse_tlk.cpp"
+  "vendor/xu4/src/discourse_tlk.cpp",
+  // Todo 24: Lord British / Hawkwind and the Codex / endgame code literals.
+  "vendor/xu4/src/discourse_castle.cpp",
+  "vendor/xu4/src/codex.cpp"
 ]
 
 // Per-file extractor options (see scripts/lib/cpp-strings.mjs). Only
@@ -77,7 +80,23 @@ const CPP_UI_FILES = [
 // wrapper) and has one compile-time-concatenated literal. Every other
 // file keeps the original extraction so its existing ids/hashes don't move.
 export const CPP_UI_FILE_OPTIONS = {
-  "vendor/xu4/src/discourse_tlk.cpp": { extraCallNames: ["message", "TALK_MSG"], joinAdjacent: true }
+  "vendor/xu4/src/discourse_tlk.cpp": { extraCallNames: ["message", "TALK_MSG"], joinAdjacent: true },
+  // Todo 24: `message` (castleMessage), the nine lordBritishHelp() `text =`
+  // assignments and the `welcome` literal; codex.cpp's pausedMessage(sec, msg)
+  // literals and its /*i18n*/-marked xu4 ending. Format-only strings
+  // ("%s%s%s", "\n\n%s\n") carry nothing to translate.
+  "vendor/xu4/src/discourse_castle.cpp": {
+    extraCallNames: ["message"],
+    assignNames: ["text", "welcome"],
+    joinAdjacent: true,
+    skipFormatOnly: true
+  },
+  "vendor/xu4/src/codex.cpp": {
+    secondArgCallNames: ["pausedMessage"],
+    markerComments: true,
+    joinAdjacent: true,
+    skipFormatOnly: true
+  }
 }
 
 const TLK_MAPS = [
