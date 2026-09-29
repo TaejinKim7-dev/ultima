@@ -6,6 +6,10 @@
 #include "context.h"
 #include "party.h"
 #include "u4.h"
+#include "web_talk.h"
+#ifdef __EMSCRIPTEN__
+#include <stdarg.h>
+#endif
 
 /* Lord British text indexes */
 //#define LB_JOB          2
@@ -35,6 +39,118 @@ struct U4TalkHawkwind {
     char* strings;
     uint16_t text[53];
 };
+
+
+#ifdef __EMSCRIPTEN__
+/*
+ * Todo 24: web dialogue-panel channel (see web_talk.h). castleMessage() is
+ * `message` for this file: it sends the same line to the panel, replacing
+ * every %s argument that points into the loaded AVATAR.EXE Lord British /
+ * Hawkwind text with its "@avatar.exe:<table>:<index>" id (so the original
+ * English never leaves the engine), then prints exactly as screenMessage.
+ */
+static const U4TalkLordBritish* webLb = NULL;
+static const U4TalkHawkwind* webHw = NULL;
+
+static const char* castleWebArg(const char* str, char* out, size_t outLen) {
+    if (webHw && str >= webHw->strings && str < webHw->strings + 3485) {
+        for (int v = 0; v < 53; ++v) {
+            if (str == webHw->strings + webHw->text[v]) {
+                snprintf(out, outLen, "@avatar.exe:hawkwindText:%d", v);
+                return out;
+            }
+        }
+        return "?";
+    }
+    if (webLb && str >= webLb->strings && str < webLb->strings + 3140) {
+        for (int k = 0; k < LB_KEY_COUNT; ++k) {
+            if (str == webLb->strings + webLb->text[k]) {
+                snprintf(out, outLen, "@avatar.exe:lordBritishText:%d", k);
+                return out;
+            }
+        }
+        return "?";
+    }
+    return str;
+}
+
+static void castleWebEmit(const char* fmt, va_list args) {
+    char id[8][48];
+    const char* arg[8];
+    int argc = 0;
+
+    const char* direct = castleWebArg(fmt, id[0], sizeof(id[0]));
+    if (direct != fmt) {
+        // A loaded text printed directly as the format (message(HW_STRING(n))).
+        u4_web_talk_line("%s", direct, NULL);
+        return;
+    }
+    for (const char* cp = fmt; *cp; ++cp) {
+        if (cp[0] != '%')
+            continue;
+        if (cp[1] == '%') {
+            ++cp;
+        } else if (cp[1] == 's' && argc < 8) {
+            const char* str = va_arg(args, const char*);
+            arg[argc] = castleWebArg(str, id[argc], sizeof(id[argc]));
+            ++argc;
+            ++cp;
+        } else {
+            // No other conversion occurs in these lines.
+            u4_web_talk_line(fmt, NULL, NULL);
+            return;
+        }
+    }
+    if (argc <= 2) {
+        u4_web_talk_line(fmt, argc > 0 ? arg[0] : NULL,
+                              argc > 1 ? arg[1] : NULL);
+        return;
+    }
+
+    // Three or more %s (Hawkwind's "%s%s%s%s%s"): one panel fragment per
+    // literal run / argument, in order.
+    char run[64];
+    int used = 0, next = 0;
+    for (const char* cp = fmt;; ++cp) {
+        if (*cp == '\0' || cp[0] == '%') {
+            if (used) {
+                run[used] = '\0';
+                u4_web_talk_line(run, NULL, NULL);
+                used = 0;
+            }
+            if (*cp == '\0')
+                break;
+            if (cp[1] == 's') {
+                u4_web_talk_line("%s", arg[next++], NULL);
+                ++cp;
+                continue;
+            }
+            // "%%"
+            ++cp;
+        }
+        if (used < (int) sizeof(run) - 1)
+            run[used++] = *cp;
+    }
+}
+
+static void castleMessage(const char* fmt, ...) {
+    char buffer[1024];     // screen.cpp MsgBufferSize
+    va_list args, webArgs;
+
+    va_start(args, fmt);
+    va_copy(webArgs, args);
+    castleWebEmit(fmt, webArgs);
+    va_end(webArgs);
+    int len = vsnprintf(buffer, sizeof(buffer), fmt, args);
+    va_end(args);
+    if (len > 0)
+        screenMessageN(buffer, len < (int) sizeof(buffer) ? len : (int) sizeof(buffer) - 1);
+}
+#else
+#define castleMessage   screenMessage
+#endif
+#undef message
+#define message         castleMessage
 
 /*
  * A special case dialogue loader for Lord British.  Loads most of the
@@ -261,7 +377,8 @@ static void lordBritishHelp() {
                " Take care, my friend.\n";
     }
 
-    screenMessageN("\nHe says: ", 10);
+    message("\nHe says: ");
+    u4WebTalkText(text);
     messageParts(text);
 }
 
@@ -296,10 +413,15 @@ static void runTalkLordBritish(const U4TalkLordBritish* lb)
     std::string pcName( p0->getName() );
     int k;
 
+#ifdef __EMSCRIPTEN__
+    webLb = lb;
+    webHw = NULL;
+#endif
+
     /* If the avatar is dead Lord British resurrects them! */
     if (p0->getStatus() == STAT_DEAD) {
         soundSpeakLine(VOICE_LB, LINE_LIVE_AGAIN);
-        screenMessage("%s, Thou shalt live again!\n", pcName.c_str());
+        message("%s, Thou shalt live again!\n", pcName.c_str());
         p0->setStatus(STAT_GOOD);
         p0->heal(HT_FULLHEAL);
         gameSpellEffect('r', -1, SOUND_LBHEAL);
@@ -312,17 +434,19 @@ static void runTalkLordBritish(const U4TalkLordBritish* lb)
 
         switch (party->size()) {
             case 1:
-                message("%s%s!\n", welcome, pcName.c_str());
+                message(welcome);
+                message("%s!\n", pcName.c_str());
                 soundSpeakLine(VOICE_LB, LINE_WELCOME, true);
                 break;
             case 2:
-                message("%s%s and thee also %s!\n", welcome, pcName.c_str(),
+                message(welcome);
+                message("%s and thee also %s!\n", pcName.c_str(),
                         party->member(1)->getName());
                 soundSpeakLine(VOICE_LB, LINE_WELCOME, true);
                 break;
             default:
-                message("%s%s and thy worthy Adventurers!\n",
-                        welcome, pcName.c_str());
+                message(welcome);
+                message("%s and thy worthy Adventurers!\n", pcName.c_str());
                 soundSpeakLine(VOICE_LB, LINE_WELCOME_ADV, true);
                 break;
         }
@@ -359,8 +483,10 @@ static void runTalkLordBritish(const U4TalkLordBritish* lb)
         if (input.empty() || strncasecmp("bye", in, 3) == 0) {
             int plural = (c->party->size() > 1) ? 1 : 0;
             soundSpeakLine(VOICE_LB, LINE_FAREWELL + plural);
-            message("\nLord British says: Fare thee well my friend%s!\n",
-                    plural ? "s" : "");
+            if (plural)
+                message("\nLord British says: Fare thee well my friends!\n");
+            else
+                message("\nLord British says: Fare thee well my friend!\n");
             break;
         }
 
@@ -373,6 +499,7 @@ static void runTalkLordBritish(const U4TalkLordBritish* lb)
             int l = lbKeyLine[k];
             if (l < LINE_WELCOME)
                 soundSpeakLine(VOICE_LB, l);
+            u4WebTalkId("%s", "avatar.exe:lordBritishText", k);
             messageParts(strings + lb->text[k]);
         } else if (inputEq("help")) {
             lordBritishHelp();
@@ -399,6 +526,11 @@ static void runTalkHawkwind(const U4TalkHawkwind* hw)
     const char* in;
     int prompt = HW_PROMPT_FIRST;
     int v;
+
+#ifdef __EMSCRIPTEN__
+    webHw = hw;
+    webLb = NULL;
+#endif
 
 #define HW_STRING(V)    strings + hw->text[V]
 

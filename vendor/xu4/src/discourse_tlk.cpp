@@ -4,6 +4,7 @@
 #include "party.h"
 #include "screen.h"
 #include "utils.h"
+#include "web_talk.h"
 
 enum DialogueString {
     DS_NAME,
