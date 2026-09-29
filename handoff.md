@@ -1308,3 +1308,10 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 - 제품 결정: 한국어 오버레이 표시 중 해당 영역 불투명 배경; 긴 대사는 패널에 문단 전체 표시.
 - F3 중간: Firefox 1차 8/10, 실패 2건은 내가 준 `--trace on`이 스펙 자체 `context.tracing.start`와 충돌("Tracing has been already started") — Firefox 문제 아님, 옵션 없이 재실행 중.
 - `verify:release`: branch `todo-release-verify` `ddef2a2`(병렬 fork, unit 6/6 TDD, dry-run 0, ULTIMA4_DATA 없으면 exit 2). 남은 문제: fresh clone에서 unit test(qa-native-baseline)가 `task-3/bad-zip.log`를 만들어 verify:release-docs가 `task-3/full-qa-native-baseline.log` 부재로 실패.
+
+## Todo 26 진행 기록 (브랜치 todo-26-korean-intro-overlay, main 미병합)
+
+- 구현: `Module.u4View.show/hide` 웹 전용 view 채널(`vendor/xu4/src/intro.cpp`, `menu.cpp` 후크, `menuitem.*` `getFormat/getWebValue`), JS 수신기 `src/overlay/intro-view.ts`, `ViewBridgeEvent.rect`(선택), 불투명 배경 규칙 `hasOpaqueBacking`(menu/textview만; status 제외), `ui:intro:56..85` 인벤토리+번역(기존 0..55 해시 불변), `GENERATED_INTRO_TEMPLATES`.
+- 게이트(worktree, exit code): `npm ci` 0, `npm run test:unit` 0, `verify:repo-sources` 0, `typecheck` 0, `build` 0, `i18n:check -- --strict` 0, `audit:dist -- --require-engine` 0, `git diff --check` 0. 증거: `.omo/evidence/ultima-web/task-26/`(gates.log 등).
+- e2e(chromium, 실제 ultima4.zip): `korean-intro-overlay` 0, `configure-menu-no-abort` 0, `save-reload` 0, `korean-npc-alias` 0.
+- 미검증: 네이티브 빌드(`npm run test:native`는 이 worktree에 build/native가 없어 실행 못 함; 변경은 `__EMSCRIPTEN__` 밖에서는 menuitem 접근자뿐), enum 값(Normal 등)과 About 화면 오버레이의 육안 확인.
