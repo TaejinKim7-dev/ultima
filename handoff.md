@@ -1344,3 +1344,11 @@ merge 60c1004 (코드 트리는 26 브랜치 53bd3aa와 동일, handoff.md만 �
 ### Todo 25: main(dc5764d) 병합 후 게이트 (2026-09-29, branch todo-25-korean-shop)
 - 충돌 해소: `scripts/i18n-generate.mjs`(Todo 26 intro 템플릿 + Todo 25 vendor 표 양쪽 유지), `handoff.md`(양쪽), `vendor/source-manifest.json`(main 값 취한 뒤 summarizeSourceTree로 재계산: fileCount 412). `i18n:inventory` 후 `module.json`은 '% s' placeholder churn뿐이라 되돌림, `i18n:generate` 재생성. Todo 23 screenMessage 훅·억제 플래그·Todo 24 castle 채널(`u4_web_talk_line`)은 별개 경로라 이중 방출 없음(억제 플래그는 web_hash 훅만 건너뜀).
 - exit: build:wasm 0, test:unit 0, verify:repo-sources 0, typecheck 0, build 0, i18n:check --strict 0, build:native 0, test:native 0, audit:dist --require-engine 0, git diff --check 0. e2e(PLAYWRIGHT_PORT=4425): korean-shop 0, korean-game-messages 0, korean-castle-output 0, korean-intro-overlay 0. (`task-25/gates-merge.log`)
+
+## ⏸ 세션 중단 기록 (2026-09-29, 사용자 지시)
+- 상태: 23/31 ✅. main 로컬 HEAD `c4cdbf5`(Todo 25 merge, **미push**; origin/main `dc5764d`). 24(`8c4edbb`)·26(`dc5764d`)는 push됨, 코드상 main 포함.
+- 게이트(main `c4cdbf5`, 이번 세션 직접 실행): build:wasm 0, test:unit 0, verify:repo-sources 0, typecheck 0, build 0, build:site 0, audit:dist --require-engine 0, git diff --check 0. 전체 e2e는 중단되어 **미실행**(24·25·26 ✅ 보류 사유).
+- 개별 e2e(에이전트/본인 실행): 23 전체 41/41(27.2분, 23 시점), 24+23+22 3/3(8.8분, merged 24), 26 4 spec, 25 korean-shop 2/2 + 병합 후 4 spec(에이전트 보고).
+- 중단한 작업: 통합 전체 e2e(백그라운드, 종료), Todo 27 에이전트(branch `todo-27-korean-status` `8023dce`, main 합류 후 검증 전). 잔여 Chromium/vite 프로세스 종료 확인(0개).
+- 리뷰(superpowers:requesting-code-review) 결과 반영: 26 네이티브 ifdef·오버레이 안전장치 수정, 25 억제 플래그·ㄹ받침·중복 기호 수정. 미처리 항목은 plan.md '중단 기록' 참고.
+- 재개: plan.md '재개 순서' ①~④.
