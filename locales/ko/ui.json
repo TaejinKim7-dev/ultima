@@ -3181,6 +3181,140 @@
       "translation": "도보에서만 가능!\n",
       "status": "ready"
     },
+    "ui:shrine:0": {
+      "sourceHash": "sha256:253069a73b7376991f01b301c136a7f4aa033e8b06eb7d782379a0c79a15f5a2",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "그대는 입장의 룬을 지니지 않았도다! 이상한 힘이 그대를 막고 있다!\n",
+      "status": "ready"
+    },
+    "ui:shrine:1": {
+      "sourceHash": "sha256:c44cea5b123c9cc6dfefb9a9bb89a8192ed91398b553f1466b612915017ff180",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "그대는 고대의 신단에 들어가 제단 앞에 앉는다...",
+      "status": "ready"
+    },
+    "ui:shrine:10": {
+      "sourceHash": "sha256:cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": ".",
+      "status": "ready",
+      "category": "passthrough"
+    },
+    "ui:shrine:11": {
+      "sourceHash": "sha256:0cca0e281bd3bfad2e65243826d7a45ef24d5726e0973fb5c2fad7552a2e84b2",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "\n진언: ",
+      "status": "ready"
+    },
+    "ui:shrine:12": {
+      "sourceHash": "sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "\n",
+      "status": "ready",
+      "category": "passthrough"
+    },
+    "ui:shrine:13": {
+      "sourceHash": "sha256:e75628c25f0230b2a8252149ff5f8c6cbbd5c19582b5b9f9a87f2666745de4e9",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "그대는 그 진언으로는 생각을 집중할 수 없도다!\n",
+      "status": "ready"
+    },
+    "ui:shrine:14": {
+      "sourceHash": "sha256:a332815dca96bf0271e152505c824256f93619fec45dde9bd4175b1035948d7e",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "\n그대는 %s의 미덕에서 부분적인 아바타의 경지를 이루었도다\n",
+      "status": "ready"
+    },
+    "ui:shrine:15": {
+      "sourceHash": "sha256:444147192dfd6c4a8ff985d3dd70206247878ed16c84c8599a81a736971a0afb",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "\n그대의 생각이 맑도다. 그대에게 환영이 내려지노라!\n",
+      "status": "ready"
+    },
+    "ui:shrine:16": {
+      "sourceHash": "sha256:1876f41d2f302b9ee673cc5b155fc0d56ff4a49b808f3b0db018d9623631178e",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "\n그대에게 환영이 내려지노라!\n",
+      "status": "ready"
+    },
+    "ui:shrine:17": {
+      "sourceHash": "sha256:d3b4d21186e707c9659e2249b712414b99f8c159bb4e77f196e5c24f43581db2",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "\n%s",
+      "status": "ready",
+      "category": "passthrough"
+    },
+    "ui:shrine:2": {
+      "sourceHash": "sha256:0e1091842425a902b45ab8b962e7283033addf01643cefe4d89491ff08c8a459",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "\n어느 미덕에 대해 명상하려는가?\n",
+      "status": "ready"
+    },
+    "ui:shrine:3": {
+      "sourceHash": "sha256:d6baa48e0274931cfdc26ad43e8c71cf024295bc62e1db2966e0a220bccee85b",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "\n\n몇 주기 동안 (0-3)? ",
+      "status": "ready"
+    },
+    "ui:shrine:4": {
+      "sourceHash": "sha256:75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "\n\n",
+      "status": "ready",
+      "category": "passthrough"
+    },
+    "ui:shrine:5": {
+      "sourceHash": "sha256:67a5912558a1b77e49fb95790b5f9b46ad0cd21ebf52198e65063c1608d1659a",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "그대는 이 주제에 생각을 집중할 수 없도다!\n",
+      "status": "ready"
+    },
+    "ui:shrine:6": {
+      "sourceHash": "sha256:9ce297024b4ab9585a2341f50dfb9954630155c1118a706d398ba5147a8165c0",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "명상을 시작한다\n",
+      "status": "ready"
+    },
+    "ui:shrine:7": {
+      "sourceHash": "sha256:49ddb7ababfe76e9c66db3619e26d59c18359c5e2daf2b7c2af3a5f351e50301",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "그대의 정신은 지난 명상으로 아직 지쳐 있도다!\n",
+      "status": "ready"
+    },
+    "ui:shrine:8": {
+      "sourceHash": "sha256:9da16e0242474cd3c6ec0ab2d1f2e2ec5c07f671757a5f198b3a39c42b9e0146",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "고대의\n신단에\n다가간다...\n",
+      "status": "ready"
+    },
+    "ui:shrine:9": {
+      "sourceHash": "sha256:f5cdb4223559a4d7453ab4616027fb02adeb5d9bb192f095110fbe24efb76adf",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/shrine.cpp",
+      "translation": "\n...그리고 제단 앞에 무릎을 꿇는다.\n",
+      "status": "ready"
+    },
     "ui:spell:0": {
       "sourceHash": "sha256:abdc6d05edb199473fcb0646e11a23f8f328e9eac8b602c5415f8f494910061f",
       "placeholders": [],

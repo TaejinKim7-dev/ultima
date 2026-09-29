@@ -1308,3 +1308,9 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 - 제품 결정: 한국어 오버레이 표시 중 해당 영역 불투명 배경; 긴 대사는 패널에 문단 전체 표시.
 - F3 중간: Firefox 1차 8/10, 실패 2건은 내가 준 `--trace on`이 스펙 자체 `context.tracing.start`와 충돌("Tracing has been already started") — Firefox 문제 아님, 옵션 없이 재실행 중.
 - `verify:release`: branch `todo-release-verify` `ddef2a2`(병렬 fork, unit 6/6 TDD, dry-run 0, ULTIMA4_DATA 없으면 exit 2). 남은 문제: fresh clone에서 unit test(qa-native-baseline)가 `task-3/bad-zip.log`를 만들어 verify:release-docs가 `task-3/full-qa-native-baseline.log` 부재로 실패.
+
+## Todo 23 진행 기록 (branch todo-23-korean-game-messages, 2026-09-29, 미merge)
+- 프로토콜: 계획의 "format 리터럴 전송"과 달리 **format의 FNV-1a 해시만** 전송(castle/codex가 AVATAR.EXE 문장을 format으로 넘기므로 원본 유출 방지). 의도적 편차. JS는 미매핑 해시를 조용히 폐기(console 출력 없음).
+- RED→GREEN: ui-message-compose 유닛(모듈 없음→10/10), screen-hash-parity(호스트 cc로 web_hash.h 컴파일, JS fnv1a32와 일치), e2e korean-game-messages RED(Pass 0건)→GREEN 1/1 2.3분(`task-23/e2e-green.log`).
+- 게이트(exit): test:unit 0, verify:repo-sources 0, typecheck 0, build 0, build:site 0, audit:dist --require-engine 0, i18n:check --strict 0, build:wasm 0, wasm-symbols 8/8, git diff --check 0.
+- 미실행: 전체 e2e 스위트(Chromium 40개), merge. shrine.cpp 18건 번역 추가(4447 entries). 순서 변경으로 제외된 항목은 전부 vendors(module) 26건 — Todo 25 대상.

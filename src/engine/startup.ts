@@ -97,7 +97,7 @@ export interface EngineModule {
   u4TextPrompt?: TextPromptReceiver
   /**
    * Todo 22: receiver for vendor/xu4/src/discourse_tlk.cpp's talk-line
-   * EM_JS hooks (`Module.u4Text.talk(...)` / `.input(...)`). Assigned by
+   * EM_JS hooks (`Module.u4Text.talk(...)` / `.input(...)`; Todo 23 adds `.message(...)` from screen.cpp). Assigned by
    * startEngine() before callMain(), like u4Audio.
    */
   u4Text?: TalkTextReceiver
@@ -111,6 +111,13 @@ export interface EngineModule {
 export interface TalkTextReceiver {
   talk(format: string, arg0: string | null, arg1: string | null): void
   input(text: string): void
+  /**
+   * Todo 23: one screenMessage() call from vendor/xu4/src/screen.cpp -- the
+   * FNV-1a hash of its format (never the text) and the engine's own
+   * pre-formatted string for each printf conversion; see
+   * src/dialogue/ui-message-compose.ts.
+   */
+  message(hash: string, args: string[]): void
 }
 
 /** Todo 18: native text-prompt lifecycle, see src/i18n/text-prompt-gate.ts. */
