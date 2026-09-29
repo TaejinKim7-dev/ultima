@@ -139,6 +139,23 @@ export interface OverlayEntry {
 }
 
 /**
+ * Todo 26 (user decision, 2026-09-27): while a Korean overlay is shown over
+ * the intro's menu/text areas it must hide the English raster text the
+ * native engine still draws underneath, so those roles get an opaque
+ * backing. "status" deliberately stays transparent: its avatar-aura glyph
+ * cell lives in the raster just below it (AVATAR_AURA_GLYPH_RECT) and the
+ * in-game status overlay (Todo 27) decides its own backing.
+ */
+const OPAQUE_BACKING_ROLES: ReadonlySet<OverlayRole> = new Set<OverlayRole>(["menu", "textview"])
+
+export function hasOpaqueBacking(role: OverlayRole, entry: OverlayEntry): boolean {
+  if (!OPAQUE_BACKING_ROLES.has(role)) {
+    return false
+  }
+  return (entry.rows?.length ?? 0) > 0 || (entry.text ?? "") !== ""
+}
+
+/**
  * "menu" and "textview" are mutually exclusive, not just "usually" disjoint:
  * their default rects (`menuArea`/`extendedMenuArea`) genuinely overlap in
  * raw geometry (see this module's own overlap test), so the registry itself

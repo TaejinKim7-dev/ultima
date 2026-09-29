@@ -17,6 +17,7 @@ import {
 import {
   DEFAULT_VIEW_RECTS,
   OverlayRegistry,
+  hasOpaqueBacking,
   computeContentRect,
   computeOverlayCellPx,
   computeOverlayFontPx,
@@ -26,6 +27,7 @@ import {
   type OverlayRole
 } from "./overlay/overlay-layout.ts"
 import { buildAliasTable, resolveInput, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
+import { createIntroViewReceiver, type IntroViewReceiver } from "./overlay/intro-view.ts"
 import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
 import {
   resolveDisplayText,
@@ -84,6 +86,11 @@ export interface UltimaBridgeApi {
     /** Todo 25: vendors.b web-say calls (template hash + symbol/value pairs). */
     vendor(hash: string, pairs: string[]): void
   }
+  /**
+   * Todo 26: pass to startEngine()'s `introView` option -- the intro's
+   * menus/prompts/story text as Korean DOM overlays (src/overlay/intro-view.ts).
+   */
+  readonly introViewReceiver: IntroViewReceiver
 }
 
 declare global {
@@ -311,7 +318,9 @@ export function createShell(doc: Document): UltimaBridgeApi {
       return
     }
     const entry: OverlayEntry = {
-      rect: DEFAULT_VIEW_RECTS[event.region],
+      // Todo 26: the intro draws into TextViews of different geometry under
+      // the same role, so the engine may send the exact rect.
+      rect: event.rect ?? DEFAULT_VIEW_RECTS[event.region],
       text: event.text,
       ...(event.rows !== undefined ? { rows: event.rows } : {}),
       ...(event.selectedIndex !== undefined ? { selectedIndex: event.selectedIndex } : {})
@@ -326,6 +335,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
       removeOverlayElement(evictedRole)
     }
     const element = ensureOverlayElement(event.region)
+    element.classList.toggle("overlay-backed", hasOpaqueBacking(event.region, entry))
     renderOverlayContent(element, entry)
     layoutOverlayElement(element, entry)
   }
@@ -401,6 +411,9 @@ export function createShell(doc: Document): UltimaBridgeApi {
         return
       case "runtime-error":
         hidePromptMarker()
+        if (event.fatal) {
+          clearAllOverlays() // Todo 26: no stale intro overlay over a dead engine
+        }
         appendWholeLine(`[오류] ${event.message}`)
         renderPanel()
         return
@@ -681,6 +694,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
       opened: (id) => textPromptGate.opened(id),
       closed: (id) => textPromptGate.closed(id)
     },
+    introViewReceiver: createIntroViewReceiver({ dispatch }),
     talkTextReceiver: {
       talk: (format, arg0, arg1) => {
         const text = composeTalkLine(format, [arg0, arg1], talkDeps)

@@ -81,4 +81,21 @@ describe("wasm: required exports exist in release build", () => {
       expect(log).not.toContain(bad)
     }
   })
+
+  // Todo 24: the castle/codex web talk channel. Ids only -- these are engine
+  // format strings for AVATAR.EXE table lookups, not original text.
+  it("wasm binary contains the castle/codex talk-channel id formats and code literals", () => {
+    const data = readFileSync(wasmWasmPath).toString("latin1")
+    for (const needle of [
+      "avatar.exe:lordBritishText",
+      "avatar.exe:hawkwindText:%d",
+      "avatar.exe:virtueQuestions",
+      "avatar.exe:endgameText1",
+      "avatar.exe:endgameText2",
+      "@avatar.exe:hawkwindText:%d",
+      "@%s:%d"
+    ]) {
+      expect(data.includes(needle), needle).toBe(true)
+    }
+  })
 })

@@ -70,7 +70,10 @@ export const CPP_UI_FILES = [
   // Todo 22: the U4 talk template lines (runTalkDialogue/talkYNResponse).
   "vendor/xu4/src/discourse_tlk.cpp",
   // Todo 23: shrine meditation/vision/mantra messages.
-  "vendor/xu4/src/shrine.cpp"
+  "vendor/xu4/src/shrine.cpp",
+  // Todo 24: Lord British / Hawkwind and the Codex / endgame code literals.
+  "vendor/xu4/src/discourse_castle.cpp",
+  "vendor/xu4/src/codex.cpp"
 ]
 
 // Per-file extractor options (see scripts/lib/cpp-strings.mjs). Only
@@ -80,10 +83,30 @@ export const CPP_UI_FILES = [
 // file keeps the original extraction so its existing ids/hashes don't move.
 export const CPP_UI_FILE_OPTIONS = {
   "vendor/xu4/src/discourse_tlk.cpp": { extraCallNames: ["message", "TALK_MSG"], joinAdjacent: true },
+  // Todo 26: the intro's own screens draw through TextView::textAt*; every
+  // such literal comes after the last Configure-menu `.add(...)`, so the
+  // existing ui:intro:0..55 ids keep their positions.
+  "vendor/xu4/src/intro.cpp": { textAtCalls: true, setTitleCalls: true },
   // shrine.cpp is new to the inventory, so joining its one two-literal
   // "Thy thoughts are pure. " "Thou art granted a vision!" call moves no
   // existing hash.
-  "vendor/xu4/src/shrine.cpp": { joinAdjacent: true }
+  "vendor/xu4/src/shrine.cpp": { joinAdjacent: true },
+  // Todo 24: `message` (castleMessage), the nine lordBritishHelp() `text =`
+  // assignments and the `welcome` literal; codex.cpp's pausedMessage(sec, msg)
+  // literals and its /*i18n*/-marked xu4 ending. Format-only strings
+  // ("%s%s%s", "\n\n%s\n") carry nothing to translate.
+  "vendor/xu4/src/discourse_castle.cpp": {
+    extraCallNames: ["message"],
+    assignNames: ["text", "welcome"],
+    joinAdjacent: true,
+    skipFormatOnly: true
+  },
+  "vendor/xu4/src/codex.cpp": {
+    secondArgCallNames: ["pausedMessage"],
+    markerComments: true,
+    joinAdjacent: true,
+    skipFormatOnly: true
+  }
 }
 
 const TLK_MAPS = [

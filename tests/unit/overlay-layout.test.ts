@@ -11,6 +11,7 @@ import {
   computeOverlayCellPx,
   computeOverlayFontPx,
   computeScale,
+  hasOpaqueBacking,
   rectsOverlap,
   toCssRect,
   type LogicalRect
@@ -286,5 +287,20 @@ describe("OverlayRegistry (Todo 12: registration/lifecycle)", () => {
     ]
     registry.register("status", { rect: DEFAULT_VIEW_RECTS.status, rows, selectedIndex: 1 })
     expect(registry.get("status")).toEqual({ rect: DEFAULT_VIEW_RECTS.status, rows, selectedIndex: 1 })
+  })
+})
+
+describe("hasOpaqueBacking (Todo 26: opaque overlay backing rule, user decision 2026-09-27)", () => {
+  it("menu and textview overlays with content hide the English raster underneath", () => {
+    expect(hasOpaqueBacking("menu", { rect: DEFAULT_VIEW_RECTS.menu, rows: [{ label: "x" }] })).toBe(true)
+    expect(hasOpaqueBacking("textview", { rect: DEFAULT_VIEW_RECTS.textview, text: "x" })).toBe(true)
+  })
+
+  it("an entry with no content has no backing (it is removed anyway)", () => {
+    expect(hasOpaqueBacking("menu", { rect: DEFAULT_VIEW_RECTS.menu, text: "", rows: [] })).toBe(false)
+  })
+
+  it("the status overlay stays transparent so the avatar-aura glyph beneath it remains visible (Todo 27 owns its backing)", () => {
+    expect(hasOpaqueBacking("status", { rect: DEFAULT_VIEW_RECTS.status, rows: [{ label: "x" }] })).toBe(false)
   })
 })

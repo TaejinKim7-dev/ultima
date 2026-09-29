@@ -121,6 +121,22 @@ export interface ViewBridgeEvent extends BridgeEventBase {
   readonly text: string
   readonly rows?: readonly OverlayRow[]
   readonly selectedIndex?: number
+  /**
+   * Todo 26 (additive, optional): the native TextView's own geometry in the
+   * 320x200 logical raster (x/y/width/height in pixels). The intro draws
+   * into several different TextViews (menuArea, extendedMenuArea,
+   * questionArea, a two-row name prompt) that share a region role but not
+   * a rectangle; when absent the region's DEFAULT_VIEW_RECTS entry is used.
+   */
+  readonly rect?: ViewRect
+}
+
+/** A rect in the native 320x200 logical raster; see `ViewBridgeEvent.rect`. */
+export interface ViewRect {
+  readonly x: number
+  readonly y: number
+  readonly width: number
+  readonly height: number
 }
 
 /** Persistence lifecycle states the shell surfaces to the user. */
@@ -155,6 +171,23 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function isString(value: unknown): value is string {
   return typeof value === "string"
+}
+
+function isViewRect(value: unknown): value is ViewRect {
+  if (!isRecord(value)) {
+    return false
+  }
+  const { x, y, width, height } = value
+  return (
+    Number.isInteger(x) &&
+    Number.isInteger(y) &&
+    Number.isInteger(width) &&
+    Number.isInteger(height) &&
+    (x as number) >= 0 &&
+    (y as number) >= 0 &&
+    (width as number) > 0 &&
+    (height as number) > 0
+  )
 }
 
 function isBoolean(value: unknown): value is boolean {
@@ -218,6 +251,10 @@ export function isBridgeEvent(candidate: unknown): candidate is BridgeEvent {
             return false
           }
         }
+      }
+      const rect = candidate["rect"]
+      if (rect !== undefined && !isViewRect(rect)) {
+        return false
       }
       const selectedIndex = candidate["selectedIndex"]
       if (

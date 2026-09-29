@@ -29,6 +29,153 @@
       "translation": "\n한밤중에 산책을 나갔다가...\n\n",
       "status": "ready"
     },
+    "ui:codex:0": {
+      "sourceHash": "sha256:d010f6f68d718c626c5be374ccb59d24229f3cbb60aa3ef2eee71189e4220a7a",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n 턴 만에 끝냈다! 이 공적을\n XU4 팀에게\nSourceForge.net에서\n알려라!",
+      "status": "ready"
+    },
+    "ui:codex:1": {
+      "sourceHash": "sha256:27940e72a03320dbcb418a3cf7617c3def3f5863e46aa1f451306481fccf3962",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n\n\n\n갑자기 어둠이 내리더니, 그대는 텅 빈 방에 홀로 서 있다.\n",
+      "status": "ready"
+    },
+    "ui:codex:10": {
+      "sourceHash": "sha256:c98baed407b6a78c4ed56a306c6e3b17c13a6eac4ad1ea4f33ef47e01bf155d8",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n그대는 우주의 참된 본질을 알지 못한다.\n\n",
+      "status": "ready"
+    },
+    "ui:codex:11": {
+      "sourceHash": "sha256:51f501f8a65f53aaef82a818823f7c1d30f544791dd56606011b511129d771e8",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n이런, 게임을 거의 끝낼 뻔했군요.\n나쁜 아바타!\n",
+      "status": "ready"
+    },
+    "ui:codex:12": {
+      "sourceHash": "sha256:3bb76c2bee4e7df67be93dadec53bfc972757edc8cf4ead211b7a38eb8c699a1",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n그대의 생각은 순수하지 않다.\n다시 묻겠다.\n",
+      "status": "ready"
+    },
+    "ui:codex:13": {
+      "sourceHash": "sha256:205ca163e7e1c59b7fcb94b36cda1b0a3168f4d9531f5936289e09633d6fd6d1",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n어떤 목소리가 울려 퍼진다:\n",
+      "status": "ready"
+    },
+    "ui:codex:14": {
+      "sourceHash": "sha256:e4330c7794c3ea2d519453accd1ebff23681baa5b2c6ab882d923475a47aeef2",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\"통행의 말은 무엇인가?\"\n\n",
+      "status": "ready"
+    },
+    "ui:codex:15": {
+      "sourceHash": "sha256:b47b5297cb3d537b58dcf684362f1ece6952775b8ce8b77f3210fd73ad6fce79",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n통행이 허락되었다.\n",
+      "status": "ready"
+    },
+    "ui:codex:16": {
+      "sourceHash": "sha256:59ca469fb051be5d51f064ec0b20f56111c751906236b9b41cc822be266641d1",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n\n목소리가 묻는다:\n",
+      "status": "ready"
+    },
+    "ui:codex:17": {
+      "sourceHash": "sha256:68357cd98cd448565b5e8257799a16124c662b5bf4437347dd17e059c7348911",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n\n그대는 아바타의 덕목에 통달했다.\n",
+      "status": "ready"
+    },
+    "ui:codex:18": {
+      "sourceHash": "sha256:6e79d1fef2936c1658fba5875af1cc82b736c477c9b5ec7aa9c6ae79472b9582",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n\n발밑에서 땅이 울린다.\n",
+      "status": "ready"
+    },
+    "ui:codex:19": {
+      "sourceHash": "sha256:6513b4893cd7051af449c75e51984e28ca1fb2487baac2b41a0029b40e7398d6",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n소음 너머로 목소리가 묻는다:\n\n아바타의 여덟 덕목이 진실, 사랑, 용기라는 세 원리로 합쳐지고 그로부터 비롯된다면...",
+      "status": "ready"
+    },
+    "ui:codex:2": {
+      "sourceHash": "sha256:4163d07c14ef8a5c7b9bf7d151149b06d7051d8334b04c7b533d15f3c83a0699",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n그대는 세 조각의 열쇠를 사용한다.\n",
+      "status": "ready"
+    },
+    "ui:codex:20": {
+      "sourceHash": "sha256:8b1b0019cbaf86abcc017e2af0501aaa1a3304effa0ee777f4e35dadfe9bde53",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n\n그렇다면 부인할 수 없는 진실, 끝없는 사랑, 굽히지 않는 용기의 전부를 아우르며 그 모두인 단 하나는 무엇인가?\n\n",
+      "status": "ready"
+    },
+    "ui:codex:3": {
+      "sourceHash": "sha256:1b7d8b2f33f4d3281b85bdc6f80916e0702898342945f47963fcb58d07e300ba",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n그대에게는 세 조각의 열쇠가 없다.\n\n",
+      "status": "ready"
+    },
+    "ui:codex:4": {
+      "sourceHash": "sha256:baf93d039757bd886815712d6bae740b1baedd27bd4a8ad5d53dd98dd19b9d7b",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n그대는 여덟 덕목 모두에서 지도력을 증명하지 못했다.\n\n",
+      "status": "ready"
+    },
+    "ui:codex:5": {
+      "sourceHash": "sha256:eca83adbe348a77c3abfe65db70b3124e8d935b6faf465fd799ad3fcf5c569a2",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n통행은 허락되지 않는다.\n\n",
+      "status": "ready"
+    },
+    "ui:codex:6": {
+      "sourceHash": "sha256:76f7da96f7f58209a127438bb24490d08f3cac778423c438ab4550373521ca78",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n그대는 준비되지 않았다.\n",
+      "status": "ready"
+    },
+    "ui:codex:7": {
+      "sourceHash": "sha256:eca83adbe348a77c3abfe65db70b3124e8d935b6faf465fd799ad3fcf5c569a2",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n통행은 허락되지 않는다.\n\n",
+      "status": "ready"
+    },
+    "ui:codex:8": {
+      "sourceHash": "sha256:eca83adbe348a77c3abfe65db70b3124e8d935b6faf465fd799ad3fcf5c569a2",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n통행은 허락되지 않는다.\n\n",
+      "status": "ready"
+    },
+    "ui:codex:9": {
+      "sourceHash": "sha256:94a3f2c247bab803ebfb46b6b40c1f2f4c66bffd8dd59c806e820d556819c794",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/codex.cpp",
+      "translation": "\n그대의 여정은 아직 끝나지 않았다.\n\n",
+      "status": "ready"
+    },
     "ui:combat:0": {
       "sourceHash": "sha256:26f79f20bd5227c57a28f9ba2e4918dda1328ab69e8b165b53d9d33fb377361b",
       "placeholders": [
@@ -519,6 +666,190 @@
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
       "translation": "%s 경미한 부상!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:0": {
+      "sourceHash": "sha256:650ff5a96f567ad38152ca8b4ca9f65ddba1671ab9032c2abe3215039d689a97",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "이 험난한 땅에서 살아남으려면 먼저 그대 자신을 알아야 한다! 무기와 마법 능력을 갈고닦도록 하라!\n\n브리타니아에서의 첫 여행길에서는 각별히 조심하라.\n\n자신을 충분히 알기 전에는 마을의 안전한 곳에서 멀리 떠나지 말라!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:1": {
+      "sourceHash": "sha256:7b653fe8e4cc3ca32d072d1f87a3f96a1bab4ca8383f40fae02b0d5a5b157d51",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "열린 땅을 홀로 여행하지 말라. 여러 마을에는 그대와 함께할 만한 훌륭한 이들이 많으니 합류를 청하는 것이 현명하다!\n\n일행을 여덟 명의 여행자로 채우라. 참된 지도자만이 이 여정을 이룰 수 있다!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:10": {
+      "sourceHash": "sha256:520ec30753ae77eca739039320d6bed936a36c78df9b0e156e7250ab9b67a69e",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "\n\n그가 말한다: 잘되었군.\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:11": {
+      "sourceHash": "sha256:b86eef35f5c365595631262c6c5b257f1be15d4cc1a12d6d4aa75b5db283f6a3",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "\n\n그가 말한다: 그대의 상처를 치유해 주겠다!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:12": {
+      "sourceHash": "sha256:7b7fdb62d6cd0c9a8014ac2179244ec9500a6e66c06dbd7d9a6d2f07a455fb56",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "%s, 그대는 다시 살아날 것이다!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:13": {
+      "sourceHash": "sha256:8c99db5d78326a50eee13157d9be178a58d10de7253460e9ae04b1d5756984c8",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "\n\n\n로드 브리티시가 말한다:  환영하오 ",
+      "status": "ready"
+    },
+    "ui:discourse_castle:14": {
+      "sourceHash": "sha256:a1d64e01064aeb9e45fe1751afdeeeedaea249d4e8361bf7a7bd7f0a7d11ec6d",
+      "placeholders": [
+        "%s",
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "%s님, 그리고 %s님도 함께 오셨구려!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:15": {
+      "sourceHash": "sha256:0ecde69a390849b734d59726c9cd6b9f62a024b0e6d72f93ba85b88fbf9189b0",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "%s님과 그대의 훌륭한 모험가들이여!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:16": {
+      "sourceHash": "sha256:98bbee529f9c20e385a4a96aabfcd0c11c9e172bafb83e50cad2ccdcf592f93e",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "\n나에게 무엇을 묻고 싶은가?\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:17": {
+      "sourceHash": "sha256:6e40147ef0771dba50b998c003059254efea37a0404cc0259bc2c631b52a3b4f",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "\n\n\n로드 브리티시가 일어나 말한다: 마침내!\n%s여, 그대가 왔구나!  우리는 아주 오랫동안 기다렸노라...\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:18": {
+      "sourceHash": "sha256:563c5307c07961789f5b6d3f6a67094b77e7bd776f752724e355b6cd24fffa82",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "\n\n로드 브리티시가 앉으며 말한다: 브리타니아에 새 시대가 열렸다. 위대한 악의 군주들은 사라졌으나 백성에게는 방향과 삶의 목적이 없구나...\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:19": {
+      "sourceHash": "sha256:3fa8a85963cc920cc2cb954902c3c016c6d82841583f259de59f05963adc22ca",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "덕의 챔피언이 필요하다. 그대가 그 챔피언일 수도 있으나 그것은 시간만이 알려줄 것이다.  내 힘이 닿는 한 그대를 돕겠노라!\n무엇을 도와줄까?\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:2": {
+      "sourceHash": "sha256:920b24b1816594ec82214b09343f6f15d75d18bbf6ee5907630f7f3d683165ce",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "덕목의 길을 배우라. 여덟 사원에 들어가도록 힘쓰라!\n\n각 사원에 들어가는 데 필요한 룬을 찾고, 명상을 모으는 데 쓰는 진언, 곧 \"만트라\"를 익히라.\n\n사원 안에서 그대의 내면의 덕 또는 악을 드러내는 행위가 무엇인지 배우게 될 것이다!\n\n길을 현명하게 택하라. 그대의 선악 모든 행위는 기억되며 그대를 가로막으러 돌아올 수 있다!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:20": {
+      "sourceHash": "sha256:e4fb8a1873b1923ce63e3d1fe950645a72e94160b1dbf6c8ea63d5acb5ddb283",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "\n로드 브리티시가 말한다: 잘 가시게, 벗들이여!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:21": {
+      "sourceHash": "sha256:e212ca0e709f75174dc63ff4414e5af3f294034d0e66612197af7ed03a436705",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "\n로드 브리티시가 말한다: 잘 가시게, 벗이여!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:22": {
+      "sourceHash": "sha256:676797706a3805ad3d19e9bc8c511fc91fdae39438f39540e5bce6fade9a26cc",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "\n\n\n\n\n\n그가 말한다: 나는\n잘 지내네, 고맙군.\n\n그가 묻는다: 그대는 건강한가? ",
+      "status": "ready"
+    },
+    "ui:discourse_castle:23": {
+      "sourceHash": "sha256:26448aac307d0f35d922134d731e29f8a15db0c24eba8d643dcae64069c1ef39",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "\n그가 말한다: 그것은 도와줄 수 없구나.\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:24": {
+      "sourceHash": "sha256:adf9d0adf7f0b8d7d77e48d66331c140f2035a7d868057034d661f347e23d978",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "\n그밖에 또 무엇이 있는가?\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:3": {
+      "sourceHash": "sha256:e173589e98e0c0d6eac2b9112734c8879e75bafcdd8339d7b782445bea15f97d",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "예언자 호크윈드를 자주 찾아가 그의 지혜로 그대의 덕을 증명하라.\n\n준비가 되면 호크윈드가 한 덕목에서 부분 아바타의 경지에 오르도록 권할 것이다.\n\n여덟 덕목 모두에서 부분 아바타가 되도록 힘쓰라. 그때에야 비로소 코덱스를 찾을 준비가 될 것이다!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:4": {
+      "sourceHash": "sha256:43431409fd0e342b2c31e95c23ed6c8fb99a2c49b1a4bb902bc710b5bcfbd226",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "이제 던전 깊은 곳으로 들어가라. 그곳 홀의 제단 받침대에서 8개의 색 돌을 되찾으라.\n\n이 돌들의 쓰임을 찾으라. 심연에서 그대를 도울 것이다!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:5": {
+      "sourceHash": "sha256:52f3a22620c6a7171acff9a6d3a411d9d1a1927fe3d850253becc097b460c90a",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "그대는 아바타의 길에서 아주 잘하고 있다! 여덟 덕목 모두에서 승격을 이루도록 힘쓰라!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:6": {
+      "sourceHash": "sha256:16e084ae9650c8005cba793650cdacad5a464269b2fe0c74d3d23ed5a4ef1d7c",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "종, 책, 촛불을 찾으라! 이 세 가지가 있어야 거대한 스티지아 심연에 들어갈 수 있다!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:7": {
+      "sourceHash": "sha256:8ad3f723b75d15da20ad846b86cb7ab212a5833c91adc860c45241fb01455e1e",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "심연에 들어가기 전에 그대에게는 세 조각의 열쇠와 통행의 말이 필요하다.\n\n그러면 궁극의 지혜의 코덱스가 있는 방에 들어갈 수 있을 것이다!\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:8": {
+      "sourceHash": "sha256:64c0341e16059280b698c7fa1bca85213d82129d52729b2ccf894d85259cf049",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "그대는 이제 어두운 심연으로의 마지막 여정을 떠날 준비가 된 듯하다! 여덟 명의 일행과 함께 가라!\n\n행운을 빈다. 선의 힘이 이 위험천만한 과업에서 그대를 지켜주기를!\n\n브리타니아 모든 이의 마음과 영혼이 이제 그대와 함께한다. 몸조심하게, 나의 벗이여.\n",
+      "status": "ready"
+    },
+    "ui:discourse_castle:9": {
+      "sourceHash": "sha256:d851a26171f9da39c0089a41f0620037dae0d48c14fbc8599224a93f6384048f",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/discourse_castle.cpp",
+      "translation": "\n그가 말한다: ",
       "status": "ready"
     },
     "ui:discourse_tlk:0": {
@@ -2882,11 +3213,115 @@
       "translation": "\b 취소",
       "status": "ready"
     },
+    "ui:intro:56": {
+      "sourceHash": "sha256:baf8054c4e2ee2950a005dc4298970ecf52475ce6902f21f71069b88af4ae145",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "다른 세계, 다가올 시대에.",
+      "status": "ready"
+    },
+    "ui:intro:57": {
+      "sourceHash": "sha256:367431fd664bb686d9ffd213339b1382fd8e1509c21fcdc87fabf68bd16f1333",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "선택:",
+      "status": "ready"
+    },
+    "ui:intro:58": {
+      "sourceHash": "sha256:6d4077db687a068fe6a29b8541eaecdb1967367b8f67bee0d6ee71f7c2cb9a16",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "풍경으로 돌아가기",
+      "status": "ready"
+    },
+    "ui:intro:59": {
+      "sourceHash": "sha256:1d82c29de624600a89bc3a52d3a406d98e6607849dff30c464388b05eff90c2e",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "여정을 계속하다",
+      "status": "ready"
+    },
     "ui:intro:6": {
       "sourceHash": "sha256:c4df0e131bf2267fdb90620a073acb61823f38078f79b74321ec555b05dfcc45",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
       "translation": "\b 인터페이스 개선 옵션",
+      "status": "ready"
+    },
+    "ui:intro:60": {
+      "sourceHash": "sha256:e21a1ec394309bc6686e102a88a08848fc0edd6acad633b4fb5e446bfbee74c2",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "새 게임 시작",
+      "status": "ready"
+    },
+    "ui:intro:61": {
+      "sourceHash": "sha256:6defafa2caa65304173956e3fbc26b6947c50bc769c08c3da32c1032fa6519d4",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "설정",
+      "status": "ready"
+    },
+    "ui:intro:62": {
+      "sourceHash": "sha256:4efca0d10c5feb8e9b35eb1d994f2905bb71714e6a271f511d713b539ea5faa1",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "정보",
+      "status": "ready"
+    },
+    "ui:intro:63": {
+      "sourceHash": "sha256:6bda084ff84287f8a302bffec83dc4e28767c69bb8724b9fa9332d6ac570de02",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "그대는 어떤 이름으로 불리려는가",
+      "status": "ready"
+    },
+    "ui:intro:64": {
+      "sourceHash": "sha256:31d107dd4713edcbb4e87318d960f30d02739e5fa6b865bc5a0f4dd391372b60",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "이 세계, 이 시대에서?",
+      "status": "ready"
+    },
+    "ui:intro:65": {
+      "sourceHash": "sha256:f39e4f7b0ef76074614c7cf52f7306380110024fb2e152b9f18dcbb46610f5d1",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "그대는 남성인가, 여성인가?",
+      "status": "ready"
+    },
+    "ui:intro:66": {
+      "sourceHash": "sha256:9fe319d893f28053a640b95a948f026db5419737e0cc0d900821478fb8171801",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "%s, 그리고",
+      "status": "ready"
+    },
+    "ui:intro:67": {
+      "sourceHash": "sha256:bfb2bf2882d5763e2c17d858f972c4c3b10f6a5bb03c2504e31436c5a2e89759",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": " %s. 그녀가 말한다",
+      "status": "ready"
+    },
+    "ui:intro:68": {
+      "sourceHash": "sha256:2c92d09d477fcc51c46a8269937a0d9841c09251ea9bbb71fa6e8133435dd34b",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "\"이것을 생각해 보라:\"",
+      "status": "ready"
+    },
+    "ui:intro:69": {
+      "sourceHash": "sha256:f86767b47773639debbb32d9dbf6dad32019c22ef03b048e735190f1cc172525",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "XU4 %s",
       "status": "ready"
     },
     "ui:intro:7": {
@@ -2896,11 +3331,123 @@
       "translation": "\u000f 메인 메뉴",
       "status": "ready"
     },
+    "ui:intro:70": {
+      "sourceHash": "sha256:36b0fb3d7e99f61ff4691ed62b4d8d94217f4921873e075a048faa6280692aae",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "xu4는 자유 소프트웨어입니다. 자유 소프트웨어",
+      "status": "ready"
+    },
+    "ui:intro:71": {
+      "sourceHash": "sha256:6a4c507d00050e145c6c8878b12314246664c11ec5b7247099e84db5b53179db",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "재단이 발행한 GNU GPL 조건에 따라",
+      "status": "ready"
+    },
+    "ui:intro:72": {
+      "sourceHash": "sha256:af7594bb451224a8707642ddd190381e371c855988013e3570746ab929467aee",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "재배포하거나 수정할 수 있습니다.",
+      "status": "ready"
+    },
+    "ui:intro:73": {
+      "sourceHash": "sha256:c02e7acf8d2dd4daab77bcc57d3f3724e1872b636da95875f5211a4203b972ec",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "COPYING 파일을 참조하십시오.",
+      "status": "ready"
+    },
+    "ui:intro:74": {
+      "sourceHash": "sha256:c305a8303a0c2ef680d969488ef92b53265ca4c3021ad531492d8ab69d34dd94",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "저작권 \t 2002-2025, xu4 팀",
+      "status": "ready"
+    },
+    "ui:intro:75": {
+      "sourceHash": "sha256:42aa1c7c51317c274d02b2097e8b9efb5ef51e3a1a84d0fc0bacd09266e01177",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "저작권 \t 1987, 로드 브리티시",
+      "status": "ready"
+    },
+    "ui:intro:76": {
+      "sourceHash": "sha256:230dbb745d3993f649dfa9ec4a1b10bc6779f08b2aae890d0b91bc358fb4392b",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "마우스 옵션:",
+      "status": "ready"
+    },
+    "ui:intro:77": {
+      "sourceHash": "sha256:f99a94cafd61a20fc2efbe11559eb352873af9b21dee1fc8eaa694498bb2ef16",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "  (열기, 자물쇠 따기 등)",
+      "status": "ready"
+    },
+    "ui:intro:78": {
+      "sourceHash": "sha256:ab804661fba848cf72b40107e77a4c3cb33f451b358f472a24a99ae835971b22",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "XU4 설정:",
+      "status": "ready"
+    },
+    "ui:intro:79": {
+      "sourceHash": "sha256:05622211a4e371fd5cb4c96d0eb331360726affd4455ce3d2641b814068d00b9",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "영상 옵션:",
+      "status": "ready"
+    },
     "ui:intro:8": {
       "sourceHash": "sha256:02b6eaa93306e722f3939fd3ebdc2c8f5224b6bb5620fdb506fb326992311b70",
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/intro.cpp",
       "translation": "\b 그래픽 옵션",
+      "status": "ready"
+    },
+    "ui:intro:80": {
+      "sourceHash": "sha256:3550a3c89e739e2845c149fd4037ff3df8fc656cb69a776c5e52df40b7757112",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "게임 그래픽 옵션",
+      "status": "ready"
+    },
+    "ui:intro:81": {
+      "sourceHash": "sha256:9129ff98e8da02f77e4d63e39645557cf33df9e066dd8ed1f09d9f4a63b7c138",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "음향 옵션:",
+      "status": "ready"
+    },
+    "ui:intro:82": {
+      "sourceHash": "sha256:c4d6ff16a37c716f4b3ff28b2cf27802a2448eb9b628b2c81c16380aea7c188d",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "키보드 옵션:",
+      "status": "ready"
+    },
+    "ui:intro:83": {
+      "sourceHash": "sha256:fe7221c4bbf615892f76d2ec5ed64db6c3e4f86a676f9473cce0af23803f4245",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "속도 옵션:",
+      "status": "ready"
+    },
+    "ui:intro:84": {
+      "sourceHash": "sha256:e7fc69d8bc7832d9036fcb56f327e2b086d8078f7a0dfee5fe4c47e65ebf5c8e",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "게임플레이 개선 옵션:",
+      "status": "ready"
+    },
+    "ui:intro:85": {
+      "sourceHash": "sha256:5dfaa942edae2e4a87b1392fcf786d99b287ed976f92893fa0cece6115e1d317",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/intro.cpp",
+      "translation": "인터페이스 개선 옵션:",
       "status": "ready"
     },
     "ui:intro:9": {
