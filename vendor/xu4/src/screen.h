@@ -133,6 +133,11 @@ void screenCrLf();
 void screenMessage(const char *fmt, ...) PRINTF_LIKE(1, 2);
 void screenMessageCenter(const char* text, int newlines);
 void screenMessageN(const char* buffer, int buflen);
+#ifdef __EMSCRIPTEN__
+#include <stddef.h>
+bool screenWebVendorSay(const char* text, size_t len, int argc, const char** argv);
+void screenWebSuppress(bool on);
+#endif
 void screenPrompt(void);
 void screenRedrawMapArea(void);
 void screenShake(int iterations);

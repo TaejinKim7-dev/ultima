@@ -292,6 +292,91 @@ CFUNC(cf_screenMessage)
     else if (ur_is(a1, UT_CHAR)) {
         screenMessage("%c", (int) ur_char(a1));
     }
+#ifdef __EMSCRIPTEN__
+    screenWebSuppress(false);   // Only the one print after web-say is skipped.
+#endif
+    ur_setId(res, UT_UNSET);
+    return UR_OK;
+}
+
+/*-cf-
+    web-say
+        msg     string!
+        data    block!
+    return: unset!
+
+    Web build only (a no-op natively): announce the unsubstituted template
+    `msg` and the evaluated (symbol value ...) pairs of `data` to the shell
+    so it can show the line in Korean, and skip the shell hook for the `>>`
+    that prints the substituted text. The canvas output is unchanged.
+*/
+CFUNC(cf_webSay)
+{
+#ifdef __EMSCRIPTEN__
+    enum { MaxPairs = 8, PoolSize = 1024 };
+    USeriesIter si;
+    UBlockIt bi;
+    char pool[PoolSize];
+    const char* argv[MaxPairs * 2];
+    int argc = 0;
+    size_t used = 0;
+    bool ok = true;
+
+    ur_seriesSlice(ut, &si, a1);
+    if (ur_strIsUcs2(si.buf))
+        ok = false;
+
+    ur_blockIt(ut, &bi, a1+1);
+    for (; ok && bi.it != bi.end; ++bi.it) {
+        char* dst = pool + used;
+        const size_t room = PoolSize - used;
+        int len = -1;
+
+        if (argc >= MaxPairs * 2) {
+            ok = false;
+            break;
+        }
+        if (argc & 1) {
+            // Value: none (skipped by construct), char, int or string.
+            if (ur_is(bi.it, UT_CHAR)) {
+                len = snprintf(dst, room, "%c", (int) ur_char(bi.it));
+            } else if (ur_is(bi.it, UT_INT)) {
+                len = snprintf(dst, room, "%d", (int) ur_int(bi.it));
+            } else if (ur_is(bi.it, UT_STRING)) {
+                USeriesIter vi;
+                ur_seriesSlice(ut, &vi, bi.it);
+                if (! ur_strIsUcs2(vi.buf)) {
+                    int n = vi.end - vi.it;
+                    if (n >= 0 && (size_t) n < room) {
+                        memcpy(dst, vi.buf->ptr.c + vi.it, n);
+                        dst[n] = '\0';
+                        len = n;
+                    }
+                }
+            } else {
+                dst[0] = '\0';
+                len = 0;
+            }
+        } else if (ur_is(bi.it, UT_CHAR)) {
+            len = snprintf(dst, room, "%c", (int) ur_char(bi.it));
+        }
+        if (len < 0 || (size_t) len >= room) {
+            ok = false;
+            break;
+        }
+        argv[argc++] = dst;
+        used += (size_t) len + 1;
+    }
+
+    if (ok && (argc & 1) == 0) {
+        if (screenWebVendorSay(si.buf->ptr.c + si.it, si.end - si.it,
+                               argc, argv))
+            screenWebSuppress(true);
+    }
+#else
+    (void) ut;
+    (void) a1;
+#endif
     ur_setId(res, UT_UNSET);
     return UR_OK;
 }
@@ -863,7 +948,8 @@ static const BoronCFunc pfFuncs[] = {
     cf_pay,
     cf_addItem,
     cf_addItems,
-    cf_removeItems
+    cf_removeItems,
+    cf_webSay
 };
 
 static const char pfFuncSpecs[] =
@@ -888,7 +974,8 @@ static const char pfFuncSpecs[] =
     "pay price int! quant int! a block! b block!\n"
     "add-item item word!\n"
     "add-items item word! n int!\n"
-    "remove-items item word! n int!\n";
+    "remove-items item word! n int!\n"
+    "web-say msg string! data block!\n";
 
 static void enumItems(UBuffer* ctx, const UAtom* atoms,
                       int itemClass, int itemIndex, int count )

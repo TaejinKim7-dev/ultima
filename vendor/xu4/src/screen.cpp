@@ -430,6 +430,42 @@ EM_JS(void, u4_web_message, (const char* hash, int argc, const char** argv), {
 });
 
 /*
+ * Todo 25: vendors.b's `web-say` (script_boron.cpp) announces the template
+ * it is about to print, unsubstituted, with the `construct` symbol/value
+ * pairs (`@` shop, `%` owner, `$` price, `#` quantity, `=` item name). The
+ * template is sent as the hash of its runtime bytes; the pairs are open-
+ * source module text or numbers. While suppressed, the substituted `>>` that
+ * follows is not sent to the shell again (the canvas output is unchanged);
+ * cf_screenMessage clears the flag after that one print.
+ */
+static bool webSuppressMessage = false;
+
+EM_JS(void, u4_web_vendor, (const char* hash, int argc, const char** argv), {
+    var receiver = Module.u4Text;
+    if (! receiver || ! receiver.vendor)
+        return;
+    var pairs = [];
+    for (var i = 0; i < argc; ++i)
+        pairs.push(UTF8ToString(HEAPU32[(argv >> 2) + i]));
+    try {
+        receiver.vendor(UTF8ToString(hash), pairs);
+    } catch (e) {
+        // Never unwind the wasm game loop from a display hook.
+    }
+});
+
+bool screenWebVendorSay(const char* text, size_t len, int argc, const char** argv) {
+    char hash[9];
+    webBytesHash(text, len, hash);
+    u4_web_vendor(hash, argc, argv);
+    return true;
+}
+
+void screenWebSuppress(bool on) {
+    webSuppressMessage = on;
+}
+
+/*
  * Send one screenMessage() call to the shell. Conversions the shell cannot
  * mirror (length modifiers, '*', floats, pointers, too many/long arguments)
  * skip the call rather than misread the argument list.
@@ -441,6 +477,9 @@ static void webScreenMessage(const char* fmt, va_list args) {
     char hash[9];
     int argc = 0;
     size_t used = 0;
+
+    if (webSuppressMessage)
+        return;
 
     for (const char* cp = fmt; *cp; ++cp) {
         if (*cp != '%')

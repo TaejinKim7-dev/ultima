@@ -118,6 +118,13 @@ export interface TalkTextReceiver {
    * src/dialogue/ui-message-compose.ts.
    */
   message(hash: string, args: string[]): void
+  /**
+   * Todo 25: one vendors.b `web-say` call (vendor/xu4/src/script_boron.cpp) --
+   * the FNV-1a hash of the unsubstituted template and the flat
+   * [symbol, value, symbol, value, ...] list `construct` will apply; see
+   * src/dialogue/vendor-compose.ts.
+   */
+  vendor(hash: string, pairs: string[]): void
 }
 
 /** Todo 18: native text-prompt lifecycle, see src/i18n/text-prompt-gate.ts. */
