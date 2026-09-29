@@ -38,7 +38,7 @@ const ROW_SEPARATOR = "\n"
 const SEGMENT_SEPARATOR = "\x1e"
 const FIELD_SEPARATOR = "\x1f"
 const VALUE_SEPARATOR = "\x1d"
-const FORMAT_TOKEN = /%[-+ 0#]*\d*[sd]/g
+const FORMAT_TOKEN = /%[-+ 0#]*\d*[csd]/g
 const LAYOUT_PREFIX = "="
 const VERBATIM_PREFIX = "'"
 const ID_PREFIX = "@"

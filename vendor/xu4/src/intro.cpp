@@ -103,6 +103,7 @@ static void webViewShow(const char* region, const TextView& v, int rowOffset,
 static void webViewHideAll() {
     u4_web_view_hide("menu");
     u4_web_view_hide("textview");
+    u4_web_view_hide("status");     // Todo 27: an in-game status overlay must not outlive the game
 }
 
 static int questionIndex(int v1, int v2);

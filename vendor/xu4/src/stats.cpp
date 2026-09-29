@@ -14,6 +14,148 @@
 #include "u4.h"
 #include "xu4.h"
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#include <string>
+
+/*
+ * Todo 27: web view channel for the status column. StatsArea::redraw()
+ * rasterizes the party/Ztats/inventory views in English into its TextViews;
+ * the web shell (src/overlay/status-view.ts) overlays a Korean rendering on
+ * the same rectangle. Each redraw sends the view as rows of "template
+ * [+ args]": xu4's own literals verbatim, engine-composed layout as "=text"
+ * templates, player names as "'name" (user data, never interpreted), and
+ * weapon/armour/class names as "=kind:English" (open-source module config).
+ * Wire format: rows joined by '\n'; a row is "label [0x1D value]"; each part
+ * is segments joined by 0x1E; a segment is fields joined by 0x1F =
+ * [template, args...]. Output only -- keys still go through GLFW. The shell
+ * dedupes identical payloads, so flash/highlight redraws cost nothing.
+ */
+EM_JS(void, u4_web_status_show, (int x, int y, int w, int h, int selected,
+                                 const char* payload), {
+    if (Module.u4View)
+        Module.u4View.show("status", x, y, w, h, selected,
+                           UTF8ToString(payload));
+});
+EM_JS(void, u4_web_status_hide, (), {
+    if (Module.u4View)
+        Module.u4View.hide("status");
+});
+
+namespace {
+
+const int WEB_ROWS = STATS_AREA_HEIGHT + 1;     // title row + main rows
+
+struct WebStatus {
+    std::string label[WEB_ROWS];
+    std::string value[WEB_ROWS];
+    bool hasValue[WEB_ROWS];
+    int lastRow;
+    bool titled;
+    bool suppressed;
+    int selected;
+
+    void begin() {
+        for (int i = 0; i < WEB_ROWS; ++i) {
+            label[i].clear();
+            value[i].clear();
+            hasValue[i] = false;
+        }
+        lastRow = -1;
+        titled = false;
+        suppressed = false;
+        selected = -1;
+    }
+
+    // Player names may come from an imported save; keep control bytes out
+    // of the wire format.
+    static std::string user(const char* text) {
+        std::string out("'");
+        for (const char* p = text; *p; ++p)
+            out += ((unsigned char) *p < 0x20) ? '?' : *p;
+        return out;
+    }
+
+    static std::string num(const char* fmt, int n) {
+        char buf[16];
+        snprintf(buf, sizeof(buf), fmt, n);
+        return buf;
+    }
+
+    static std::string letter(int ch) {
+        return std::string(1, (char) ch);
+    }
+
+    static std::string seg(const char* tmpl) {
+        return tmpl;
+    }
+    static std::string seg(const char* tmpl, const std::string& a0) {
+        return std::string(tmpl) + '\x1f' + a0;
+    }
+    static std::string seg(const char* tmpl, const std::string& a0,
+                           const std::string& a1) {
+        return seg(tmpl, a0) + '\x1f' + a1;
+    }
+    static std::string seg(const char* tmpl, const std::string& a0,
+                           const std::string& a1, const std::string& a2) {
+        return seg(tmpl, a0, a1) + '\x1f' + a2;
+    }
+
+    void title(const std::string& inner) {
+        titled = true;
+        label[0] = "=\xe2\x97\x82\x1e" + inner + "\x1e=\xe2\x96\xb8";
+        if (lastRow < 0)
+            lastRow = 0;
+    }
+
+    // Appends a segment to main-area row y (a second column gets a gap).
+    void add(int y, const std::string& segment) {
+        int i = y + (titled ? 1 : 0);
+        if (i < 0 || i >= WEB_ROWS)
+            return;
+        if (! label[i].empty())
+            label[i] += "\x1e=  \x1e";
+        label[i] += segment;
+        if (i > lastRow)
+            lastRow = i;
+    }
+
+    void setValue(int y, const std::string& segment) {
+        int i = y + (titled ? 1 : 0);
+        if (i < 0 || i >= WEB_ROWS)
+            return;
+        value[i] = segment;
+        hasValue[i] = true;
+    }
+
+    void flush(const TextView& mainArea) {
+        if (suppressed) {
+            u4_web_status_hide();
+            return;
+        }
+        std::string payload;
+        for (int i = 0; i <= lastRow; ++i) {
+            if (i)
+                payload += '\n';
+            payload += label[i];
+            if (hasValue[i])
+                payload += '\x1d' + value[i];
+        }
+        if (titled)
+            u4_web_status_show(mainArea.x, mainArea.y - CHAR_HEIGHT,
+                               mainArea.width, mainArea.height + CHAR_HEIGHT,
+                               selected, payload.c_str());
+        else
+            u4_web_status_show(mainArea.x, mainArea.y, mainArea.width,
+                               mainArea.height, selected, payload.c_str());
+    }
+};
+
+WebStatus webStatus;
+
+} // namespace
+#endif
+
 enum RedrawMode {
     REDRAW_NONE = 0,
     REDRAW_ALL  = 1,
@@ -49,6 +191,9 @@ StatsArea::StatsArea() :
 }
 
 StatsArea::~StatsArea() {
+#ifdef __EMSCRIPTEN__
+    u4_web_status_hide();
+#endif
     gs_unplug(listenerId);
 }
 
@@ -111,6 +256,10 @@ void StatsArea::redraw() {
         return;
     }
 
+#ifdef __EMSCRIPTEN__
+    webStatus.begin();
+#endif
+
     // Clear Areas.
     for (int i = 0; i < STATS_AREA_WIDTH; i++)
         title.drawChar(CHARSET_HORIZBAR, i, 0);
@@ -156,6 +305,10 @@ void StatsArea::redraw() {
         showReagents(true);
         break;
     }
+
+#ifdef __EMSCRIPTEN__
+    webStatus.flush(mainArea);
+#endif
 
     /*
      * update the lower stats box (food, gold, etc.)
@@ -268,7 +421,21 @@ void StatsArea::showPartyView() {
                            (i==activePlayer) ? CHARSET_BULLET : '-',
                            p->getName(), p->getHp(),
                            mainArea.colorizeStatus(p->getStatus()).c_str());
+#ifdef __EMSCRIPTEN__
+        {
+            std::string name = WebStatus::user(p->getName()).substr(0, 9);
+            webStatus.add(i, WebStatus::seg("=%s%s%s", WebStatus::num("%d", i+1),
+                                            (i==activePlayer) ? "=mark:1" : "=mark:0",
+                                            name));
+            webStatus.setValue(i, WebStatus::seg("=%s %s", WebStatus::num("%d", p->getHp()),
+                                                 "=status:" + WebStatus::letter(p->getStatus())));
+        }
+#endif
     }
+
+#ifdef __EMSCRIPTEN__
+    webStatus.selected = focusPlayer;
+#endif
 
     if (focusPlayer >= 0) {
         mainArea.setHighlight(0, focusPlayer * CHAR_HEIGHT,
@@ -288,6 +455,22 @@ void StatsArea::showPlayerDetails() {
     setTitle(p->getName());
     mainArea.textAtFmt(0, 0, "%c             %c", p->getSex(), p->getStatus());
     const char* classStr = getClassName(p->getClass());
+#ifdef __EMSCRIPTEN__
+    webStatus.title(WebStatus::seg("=%s", WebStatus::user(p->getName())));
+    webStatus.add(0, WebStatus::seg("=%s %s", "=sex:" + WebStatus::num("%d", p->getSex()),
+                                    std::string("=class:") + classStr));
+    webStatus.setValue(0, WebStatus::seg("=%s", "=status:" + WebStatus::letter(p->getStatus())));
+    webStatus.add(2, WebStatus::seg(" MP:%02d  LV:%d", WebStatus::num("%02d", p->getMp()),
+                                    WebStatus::num("%d", p->getRealLevel())));
+    webStatus.add(3, WebStatus::seg("STR:%02d  HP:%04d", WebStatus::num("%02d", p->getStr()),
+                                    WebStatus::num("%04d", p->getHp())));
+    webStatus.add(4, WebStatus::seg("DEX:%02d  HM:%04d", WebStatus::num("%02d", p->getDex()),
+                                    WebStatus::num("%04d", p->getMaxHp())));
+    webStatus.add(5, WebStatus::seg("INT:%02d  EX:%04d", WebStatus::num("%02d", p->getInt()),
+                                    WebStatus::num("%04d", p->getExp())));
+    webStatus.add(6, WebStatus::seg("W:%s", std::string("=weapon:") + p->getWeapon()->getName()));
+    webStatus.add(7, WebStatus::seg("A:%s", std::string("=armor:") + p->getArmor()->getName()));
+#endif
     int classStart = (STATS_AREA_WIDTH / 2) - (strlen(classStr) / 2);
     mainArea.textAt(classStart, 0, classStr);
     mainArea.textAtFmt(0, 2, " MP:%02d  LV:%d", p->getMp(), p->getRealLevel());
@@ -303,6 +486,11 @@ void StatsArea::showPlayerDetails() {
  */
 void StatsArea::showWeapons() {
     setTitle("Weapons");
+#ifdef __EMSCRIPTEN__
+    webStatus.title(WebStatus::seg("Weapons"));
+    webStatus.add(0, WebStatus::seg("A-%s", std::string("=weapon:") +
+                  xu4.config->weapon(WEAP_HANDS)->getName()));
+#endif
 
     int line = 0;
     int col = 0;
@@ -314,6 +502,12 @@ void StatsArea::showWeapons() {
         if (n >= 1) {
             const char *format = (n >= 10) ? "%c%d-%s" : "%c-%d-%s";
 
+#ifdef __EMSCRIPTEN__
+            webStatus.add(line, WebStatus::seg((n >= 10) ? "=%s%s-%s" : "=%s-%s-%s",
+                          WebStatus::letter(w - WEAP_HANDS + 'A'), WebStatus::num("%d", n),
+                          std::string("=weaponAbbrev:") +
+                          xu4.config->weapon((WeaponType) w)->getAbbrev()));
+#endif
             mainArea.textAtFmt(col, line++, format, w - WEAP_HANDS + 'A', n, xu4.config->weapon((WeaponType) w)->getAbbrev());
             if (line >= (STATS_AREA_HEIGHT)) {
                 line = 0;
@@ -328,6 +522,10 @@ void StatsArea::showWeapons() {
  */
 void StatsArea::showArmor() {
     setTitle("Armour");
+#ifdef __EMSCRIPTEN__
+    webStatus.title(WebStatus::seg("Armour"));
+    webStatus.add(0, WebStatus::seg("A  -No Armour"));
+#endif
 
     int line = 0;
     mainArea.textAt(0, line++, "A  -No Armour");
@@ -336,6 +534,12 @@ void StatsArea::showArmor() {
             const char *format = (c->saveGame->armor[a] >= 10) ? "%c%d-%s"
                                                                : "%c-%d-%s";
 
+#ifdef __EMSCRIPTEN__
+            webStatus.add(line, WebStatus::seg((c->saveGame->armor[a] >= 10) ? "=%s%s-%s" : "=%s-%s-%s",
+                          WebStatus::letter(a - ARMR_NONE + 'A'),
+                          WebStatus::num("%d", c->saveGame->armor[a]),
+                          std::string("=armor:") + xu4.config->armor((ArmorType) a)->getName()));
+#endif
             mainArea.textAtFmt(0, line++, format, a - ARMR_NONE + 'A',
                     c->saveGame->armor[a],
                     xu4.config->armor((ArmorType) a)->getName());
@@ -348,6 +552,14 @@ void StatsArea::showArmor() {
  */
 void StatsArea::showEquipment() {
     setTitle("Equipment");
+#ifdef __EMSCRIPTEN__
+    webStatus.title(WebStatus::seg("Equipment"));
+    webStatus.add(0, WebStatus::seg("%2d Torches", WebStatus::num("%2d", c->saveGame->torches)));
+    webStatus.add(1, WebStatus::seg("%2d Gems", WebStatus::num("%2d", c->saveGame->gems)));
+    webStatus.add(2, WebStatus::seg("%2d Keys", WebStatus::num("%2d", c->saveGame->keys)));
+    if (c->saveGame->sextants > 0)
+        webStatus.add(3, WebStatus::seg("%2d Sextants", WebStatus::num("%2d", c->saveGame->sextants)));
+#endif
 
     int line = 0;
     mainArea.textAtFmt(0, line++, "%2d Torches", c->saveGame->torches);
@@ -365,6 +577,10 @@ void StatsArea::showItems() {
     char buffer[17];
 
     setTitle("Items");
+#ifdef __EMSCRIPTEN__
+    webStatus.title(WebStatus::seg("Items"));
+    int webLine = 0;
+#endif
 
     int line = 0;
     if (c->saveGame->stones != 0) {
@@ -374,6 +590,9 @@ void StatsArea::showItems() {
                 buffer[j++] = getStoneName((Virtue) i)[0];
         }
         buffer[j] = '\0';
+#ifdef __EMSCRIPTEN__
+        webStatus.add(webLine++, WebStatus::seg("Stones:%s", WebStatus::user(buffer)));
+#endif
         mainArea.textAtFmt(0, line++, "Stones:%s", buffer);
     }
     if (c->saveGame->runes != 0) {
@@ -383,9 +602,28 @@ void StatsArea::showItems() {
                 buffer[j++] = getVirtueName((Virtue) i)[0];
         }
         buffer[j] = '\0';
+#ifdef __EMSCRIPTEN__
+        webStatus.add(webLine++, WebStatus::seg("Runes:%s", WebStatus::user(buffer)));
+#endif
         mainArea.textAtFmt(0, line++, "Runes:%s", buffer);
     }
     if (c->saveGame->items & (ITEM_CANDLE | ITEM_BOOK | ITEM_BELL)) {
+#ifdef __EMSCRIPTEN__
+        {
+            std::string row;
+            const struct { Item item; const char* word; } trio[3] = {
+                { ITEM_BELL, "=item:Bell" }, { ITEM_BOOK, "=item:Book" },
+                { ITEM_CANDLE, "=item:Candle" } };
+            for (int k = 0; k < 3; ++k) {
+                if (c->saveGame->items & trio[k].item) {
+                    if (! row.empty())
+                        row += "\x1e=\x20\x1e";
+                    row += WebStatus::seg("=%s", trio[k].word);
+                }
+            }
+            webStatus.add(webLine++, row);
+        }
+#endif
         buffer[0] = '\0';
         if (c->saveGame->items & ITEM_BELL) {
             strcat(buffer, getItemName(ITEM_BELL));
@@ -410,8 +648,19 @@ void StatsArea::showItems() {
         if (c->saveGame->items & ITEM_KEY_C)
             buffer[j++] = getItemName(ITEM_KEY_C)[0];
         buffer[j] = '\0';
+#ifdef __EMSCRIPTEN__
+        webStatus.add(webLine++, WebStatus::seg("3 Part Key:%s", WebStatus::user(buffer)));
+#endif
         mainArea.textAtFmt(0, line++, "3 Part Key:%s", buffer);
     }
+#ifdef __EMSCRIPTEN__
+    if (c->saveGame->items & ITEM_HORN)
+        webStatus.add(webLine++, WebStatus::seg("=%s", "=item:Horn"));
+    if (c->saveGame->items & ITEM_WHEEL)
+        webStatus.add(webLine++, WebStatus::seg("=%s", "=item:Wheel"));
+    if (c->saveGame->items & ITEM_SKULL)
+        webStatus.add(webLine++, WebStatus::seg("=%s", "=item:Skull"));
+#endif
     if (c->saveGame->items & ITEM_HORN)
         mainArea.textAt(0, line++, getItemName(ITEM_HORN));
     if (c->saveGame->items & ITEM_WHEEL)
@@ -426,6 +675,11 @@ void StatsArea::showItems() {
 void StatsArea::showReagents(bool active)
 {
     setTitle("Reagents");
+#ifdef __EMSCRIPTEN__
+    // Reagent names and the mixing menu's live selection stay in the native
+    // raster (English) -- see Todo 27's scope note.
+    webStatus.suppressed = true;
+#endif
 
     Menu::MenuItemList::iterator i;
     int line = 0,
@@ -455,6 +709,9 @@ void StatsArea::showReagents(bool active)
  */
 void StatsArea::showMixtures() {
     setTitle("Mixtures");
+#ifdef __EMSCRIPTEN__
+    webStatus.title(WebStatus::seg("Mixtures"));
+#endif
 
     int line = 0;
     int col = 0;
@@ -463,6 +720,10 @@ void StatsArea::showMixtures() {
         if (n >= 100)
             n = 99;
         if (n >= 1) {
+#ifdef __EMSCRIPTEN__
+            webStatus.add(line, WebStatus::seg("%c-%02d", WebStatus::letter(s + 'A'),
+                                               WebStatus::num("%02d", n)));
+#endif
             mainArea.textAtFmt(col, line++, "%c-%02d", s + 'A', n);
             if (line >= (STATS_AREA_HEIGHT)) {
                 if (col >= 10)
