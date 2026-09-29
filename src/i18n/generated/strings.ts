@@ -2114,6 +2114,158 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "떠나는 중...\n",
     "placeholders": []
   },
+  "ui:stats:0": {
+    "translation": "음식:%04d  선체:%02d",
+    "placeholders": [
+      "%02d",
+      "%04d"
+    ]
+  },
+  "ui:stats:1": {
+    "translation": "음식:%04d  금:%04d",
+    "placeholders": [
+      "%04d",
+      "%04d"
+    ]
+  },
+  "ui:stats:10": {
+    "translation": "무기",
+    "placeholders": []
+  },
+  "ui:stats:11": {
+    "translation": "A-%s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:stats:12": {
+    "translation": "갑옷",
+    "placeholders": []
+  },
+  "ui:stats:13": {
+    "translation": "A  -갑옷 없음",
+    "placeholders": []
+  },
+  "ui:stats:14": {
+    "translation": "장비",
+    "placeholders": []
+  },
+  "ui:stats:15": {
+    "translation": "%2d 횃불",
+    "placeholders": [
+      "%2d"
+    ]
+  },
+  "ui:stats:16": {
+    "translation": "%2d 보석",
+    "placeholders": [
+      "%2d"
+    ]
+  },
+  "ui:stats:17": {
+    "translation": "%2d 열쇠",
+    "placeholders": [
+      "%2d"
+    ]
+  },
+  "ui:stats:18": {
+    "translation": "%2d 육분의",
+    "placeholders": [
+      "%2d"
+    ]
+  },
+  "ui:stats:19": {
+    "translation": "물품",
+    "placeholders": []
+  },
+  "ui:stats:2": {
+    "translation": "%c%s%c",
+    "placeholders": [
+      "%c",
+      "%c",
+      "%s"
+    ]
+  },
+  "ui:stats:20": {
+    "translation": "스톤:%s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:stats:21": {
+    "translation": "룬:%s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:stats:22": {
+    "translation": "3부 열쇠:%s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:stats:23": {
+    "translation": "시약",
+    "placeholders": []
+  },
+  "ui:stats:24": {
+    "translation": "혼합물",
+    "placeholders": []
+  },
+  "ui:stats:25": {
+    "translation": "%c-%02d",
+    "placeholders": [
+      "%02d",
+      "%c"
+    ]
+  },
+  "ui:stats:3": {
+    "translation": "%c             %c",
+    "placeholders": [
+      "%c",
+      "%c"
+    ]
+  },
+  "ui:stats:4": {
+    "translation": " 마력:%02d  레벨:%d",
+    "placeholders": [
+      "%02d",
+      "%d"
+    ]
+  },
+  "ui:stats:5": {
+    "translation": "힘:%02d  체력:%04d",
+    "placeholders": [
+      "%02d",
+      "%04d"
+    ]
+  },
+  "ui:stats:6": {
+    "translation": "민첩:%02d  최대체력:%04d",
+    "placeholders": [
+      "%02d",
+      "%04d"
+    ]
+  },
+  "ui:stats:7": {
+    "translation": "지능:%02d  경험:%04d",
+    "placeholders": [
+      "%02d",
+      "%04d"
+    ]
+  },
+  "ui:stats:8": {
+    "translation": "무기:%s",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:stats:9": {
+    "translation": "갑옷:%s",
+    "placeholders": [
+      "%s"
+    ]
+  },
   "module:U4-Upgrade:config:0": {
     "translation": "{\n        Upgrade 및 Remastered 프로젝트의 향상된 그래픽을 사용하는\n        울티마 4.  http://www.moongates.com/u4/upgrade/Upgrade.htm 에서\n        u4upgrad.zip이 필요합니다.\n    }",
     "placeholders": []
@@ -18379,6 +18531,96 @@ export const GENERATED_INTRO_TEMPLATES: Readonly<Record<string, string>> = {
   "Speed Options:": "ui:intro:83",
   "Enhanced Gameplay Options:": "ui:intro:84",
   "Enhanced Interface Options:": "ui:intro:85"
+}
+
+// Todo 27: exact stats.cpp literal (status column labels/titles) -> ui id.
+export const GENERATED_STATUS_TEMPLATES: Readonly<Record<string, string>> = {
+  "F:%04d   SHP:%02d": "ui:stats:0",
+  "F:%04d   G:%04d": "ui:stats:1",
+  "%c%s%c": "ui:stats:2",
+  "%c             %c": "ui:stats:3",
+  " MP:%02d  LV:%d": "ui:stats:4",
+  "STR:%02d  HP:%04d": "ui:stats:5",
+  "DEX:%02d  HM:%04d": "ui:stats:6",
+  "INT:%02d  EX:%04d": "ui:stats:7",
+  "W:%s": "ui:stats:8",
+  "A:%s": "ui:stats:9",
+  "Weapons": "ui:stats:10",
+  "A-%s": "ui:stats:11",
+  "Armour": "ui:stats:12",
+  "A  -No Armour": "ui:stats:13",
+  "Equipment": "ui:stats:14",
+  "%2d Torches": "ui:stats:15",
+  "%2d Gems": "ui:stats:16",
+  "%2d Keys": "ui:stats:17",
+  "%2d Sextants": "ui:stats:18",
+  "Items": "ui:stats:19",
+  "Stones:%s": "ui:stats:20",
+  "Runes:%s": "ui:stats:21",
+  "3 Part Key:%s": "ui:stats:22",
+  "Reagents": "ui:stats:23",
+  "Mixtures": "ui:stats:24",
+  "%c-%02d": "ui:stats:25"
+}
+
+// Todo 27: field (armor/weapon/weaponAbbrev/class) -> English name -> module config id.
+export const GENERATED_STATUS_NAMES: Readonly<Record<string, Readonly<Record<string, string>>>> = {
+  "armor": {
+    "Skin": "module:Ultima-IV:config:3",
+    "Cloth": "module:Ultima-IV:config:4",
+    "Leather": "module:Ultima-IV:config:5",
+    "Chain Mail": "module:Ultima-IV:config:6",
+    "Plate Mail": "module:Ultima-IV:config:7",
+    "Magic Chain": "module:Ultima-IV:config:8",
+    "Magic Plate": "module:Ultima-IV:config:9",
+    "Mystic Robe": "module:Ultima-IV:config:10"
+  },
+  "weapon": {
+    "Hands": "module:Ultima-IV:config:12",
+    "Staff": "module:Ultima-IV:config:14",
+    "Dagger": "module:Ultima-IV:config:16",
+    "Sling": "module:Ultima-IV:config:18",
+    "Mace": "module:Ultima-IV:config:20",
+    "Axe": "module:Ultima-IV:config:22",
+    "Sword": "module:Ultima-IV:config:24",
+    "Bow": "module:Ultima-IV:config:26",
+    "Crossbow": "module:Ultima-IV:config:28",
+    "Flaming Oil": "module:Ultima-IV:config:30",
+    "Halberd": "module:Ultima-IV:config:32",
+    "Magic Axe": "module:Ultima-IV:config:34",
+    "Magic Sword": "module:Ultima-IV:config:36",
+    "Magic Bow": "module:Ultima-IV:config:38",
+    "Magic Wand": "module:Ultima-IV:config:40",
+    "Mystic Sword": "module:Ultima-IV:config:42"
+  },
+  "weaponAbbrev": {
+    "HND": "module:Ultima-IV:config:11",
+    "STF": "module:Ultima-IV:config:13",
+    "DAG": "module:Ultima-IV:config:15",
+    "SLN": "module:Ultima-IV:config:17",
+    "MAC": "module:Ultima-IV:config:19",
+    "AXE": "module:Ultima-IV:config:21",
+    "SWD": "module:Ultima-IV:config:23",
+    "BOW": "module:Ultima-IV:config:25",
+    "XBO": "module:Ultima-IV:config:27",
+    "OIL": "module:Ultima-IV:config:29",
+    "HAL": "module:Ultima-IV:config:31",
+    "+AX": "module:Ultima-IV:config:33",
+    "+SW": "module:Ultima-IV:config:35",
+    "+BO": "module:Ultima-IV:config:37",
+    "WND": "module:Ultima-IV:config:39",
+    "^SW": "module:Ultima-IV:config:41"
+  },
+  "class": {
+    "Mage": "module:Ultima-IV:config:45",
+    "Bard": "module:Ultima-IV:config:46",
+    "Fighter": "module:Ultima-IV:config:47",
+    "Druid": "module:Ultima-IV:config:48",
+    "Tinker": "module:Ultima-IV:config:49",
+    "Paladin": "module:Ultima-IV:config:50",
+    "Ranger": "module:Ultima-IV:config:51",
+    "Shepherd": "module:Ultima-IV:config:52"
+  }
 }
 
 export const GENERATED_I18N_META = "ultima-web/i18n-generated/v1" as const

@@ -112,7 +112,7 @@ describe("status region on the view receiver", () => {
         abiVersion: 1,
         type: "view",
         region: "status",
-        text: "1●Avatar 150 양호",
+        text: "1●Avatar",
         rows: [{ label: "1●Avatar", value: "150 양호" }],
         selectedIndex: 0,
         rect: { x: 192, y: 8, width: 120, height: 64 }

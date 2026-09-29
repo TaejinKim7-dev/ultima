@@ -22,7 +22,7 @@
 // `char name[16]`).
 
 import type { GeneratedI18nEntry } from "./generated/strings.ts"
-import { GENERATED_ALIASES, GENERATED_I18N_ENTRIES, GENERATED_INTRO_TEMPLATES, GENERATED_TALK_TEMPLATES } from "./generated/strings.ts"
+import { GENERATED_ALIASES, GENERATED_I18N_ENTRIES, GENERATED_INTRO_TEMPLATES, GENERATED_STATUS_NAMES, GENERATED_STATUS_TEMPLATES, GENERATED_TALK_TEMPLATES } from "./generated/strings.ts"
 
 /** One localization table entry as seen by this runtime (generated rows share this shape). */
 export interface LocalizationEntry {
@@ -101,6 +101,38 @@ export function resolveIntroTemplateId(
   table: Readonly<Record<string, string>> = GENERATED_INTRO_TEMPLATES
 ): string | undefined {
   return Object.hasOwn(table, literal) ? table[literal] : undefined
+}
+
+/**
+ * Todo 27: maps an exact stats.cpp literal (status column title/label) to its
+ * `ui:stats:<n>` semantic ID, or `undefined` when it is not a known literal.
+ */
+export function resolveStatusTemplateId(
+  literal: string,
+  table: Readonly<Record<string, string>> = GENERATED_STATUS_TEMPLATES
+): string | undefined {
+  return Object.hasOwn(table, literal) ? table[literal] : undefined
+}
+
+/**
+ * Todo 27: the Korean name of a weapon / weapon abbreviation / armour / class
+ * (`kind` = "weapon" | "weaponAbbrev" | "armor" | "class"), from the module
+ * config translations. `undefined` when the English name is not mapped or its
+ * translation is not ready -- the caller falls back to the (open-source)
+ * English module string.
+ */
+export function resolveStatusName(
+  kind: string,
+  english: string,
+  names: Readonly<Record<string, Readonly<Record<string, string>>>> = GENERATED_STATUS_NAMES,
+  table: LocalizationTable = GENERATED_I18N_ENTRIES
+): string | undefined {
+  const byKind = Object.hasOwn(names, kind) ? names[kind] : undefined
+  const id = byKind !== undefined && Object.hasOwn(byKind, english) ? byKind[english] : undefined
+  if (id === undefined || !hasTranslation(id, table)) {
+    return undefined
+  }
+  return resolveDisplayText(id, english, table)
 }
 
 const PLACEHOLDER_PATTERN = /%[-+ 0#]*\d*(?:\.\d+)?[a-zA-Z%]|\{\d+\}/g

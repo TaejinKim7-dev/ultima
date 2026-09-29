@@ -142,11 +142,12 @@ export interface OverlayEntry {
  * Todo 26 (user decision, 2026-09-27): while a Korean overlay is shown over
  * the intro's menu/text areas it must hide the English raster text the
  * native engine still draws underneath, so those roles get an opaque
- * backing. "status" deliberately stays transparent: its avatar-aura glyph
- * cell lives in the raster just below it (AVATAR_AURA_GLYPH_RECT) and the
- * in-game status overlay (Todo 27) decides its own backing.
+ * backing. Todo 27 applies the same rule to "status": its avatar-aura glyph
+ * cell lives in the summary row just BELOW the status box (the status rect,
+ * even with the title row the engine adds, ends at y=72; the glyph starts
+ * at AVATAR_AURA_GLYPH_RECT.y=80), so covering the status box never hides it.
  */
-const OPAQUE_BACKING_ROLES: ReadonlySet<OverlayRole> = new Set<OverlayRole>(["menu", "textview"])
+const OPAQUE_BACKING_ROLES: ReadonlySet<OverlayRole> = new Set<OverlayRole>(["menu", "textview", "status"])
 
 export function hasOpaqueBacking(role: OverlayRole, entry: OverlayEntry): boolean {
   if (!OPAQUE_BACKING_ROLES.has(role)) {

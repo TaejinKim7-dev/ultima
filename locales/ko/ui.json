@@ -3410,6 +3410,236 @@
       "sourceFile": "vendor/xu4/src/spell.cpp",
       "translation": "떠나는 중...\n",
       "status": "ready"
+    },
+    "ui:stats:0": {
+      "sourceHash": "sha256:62fd920703177005b813d33665820feebec9357007ad0a09e05a9fbcfd6695d1",
+      "placeholders": [
+        "%02d",
+        "%04d"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "음식:%04d  선체:%02d",
+      "status": "ready"
+    },
+    "ui:stats:1": {
+      "sourceHash": "sha256:780a42302d12b91630a0567a3709ef155dbdf8a550af53f397a7d30faa0e76a8",
+      "placeholders": [
+        "%04d",
+        "%04d"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "음식:%04d  금:%04d",
+      "status": "ready"
+    },
+    "ui:stats:10": {
+      "sourceHash": "sha256:aafc7b0e9b9e48bdd9f860937e6e80ea5a9a02942e9cdc42e8135210212a89aa",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "무기",
+      "status": "ready"
+    },
+    "ui:stats:11": {
+      "sourceHash": "sha256:b56345cf54d23092f3789447b5332fd1b84f670806f6e284ed3582b6937f453e",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "A-%s",
+      "status": "ready"
+    },
+    "ui:stats:12": {
+      "sourceHash": "sha256:642ebd131f30be5b973a52d37a00de5775c91ad789c3ed874571c08d4251aaf2",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "갑옷",
+      "status": "ready"
+    },
+    "ui:stats:13": {
+      "sourceHash": "sha256:5e2cd7672520ac27b712c439d6b158d80b05809b4b617cc5cc4120551e59688d",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "A  -갑옷 없음",
+      "status": "ready"
+    },
+    "ui:stats:14": {
+      "sourceHash": "sha256:7f2465ac7cefab2766e6ee0714647089df9364b0ff09858c84b21b8a436a845d",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "장비",
+      "status": "ready"
+    },
+    "ui:stats:15": {
+      "sourceHash": "sha256:a27575f08177388096763499996fd5225a28d65ab1f94bfd97027156ab7ff7ca",
+      "placeholders": [
+        "%2d"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "%2d 횃불",
+      "status": "ready"
+    },
+    "ui:stats:16": {
+      "sourceHash": "sha256:be0b5bc68ac39312875016885cd17bd9e69072e8182b2afc2794a8dc8cbe5026",
+      "placeholders": [
+        "%2d"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "%2d 보석",
+      "status": "ready"
+    },
+    "ui:stats:17": {
+      "sourceHash": "sha256:bdad1e589d3f405fe7be8d396d6a77ed877ac6bbc4b42c9a981f4a1cbd9b2059",
+      "placeholders": [
+        "%2d"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "%2d 열쇠",
+      "status": "ready"
+    },
+    "ui:stats:18": {
+      "sourceHash": "sha256:6c487cdbf0b24a8f3245d06103648d21252460db7559f13b4ee5c85e446bfea7",
+      "placeholders": [
+        "%2d"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "%2d 육분의",
+      "status": "ready"
+    },
+    "ui:stats:19": {
+      "sourceHash": "sha256:fb8e7a1a3cb7b25d262793159145759e97eb540a2b61dbbdf8f58841a81cf1a8",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "물품",
+      "status": "ready"
+    },
+    "ui:stats:2": {
+      "sourceHash": "sha256:ff93532b91cc457eccd96e6701f82a50c5893059eaf1d98d03784cbfe3a8fdc8",
+      "placeholders": [
+        "%c",
+        "%c",
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "%c%s%c",
+      "status": "ready"
+    },
+    "ui:stats:20": {
+      "sourceHash": "sha256:ebf457e86edad340406851752a241e166ed211d2741fa0e5bf911c7132e6a513",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "스톤:%s",
+      "status": "ready"
+    },
+    "ui:stats:21": {
+      "sourceHash": "sha256:fa52f38f3083caf8829ed82705c7faea39c1703da3764ba49c9d25eb4abfe831",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "룬:%s",
+      "status": "ready"
+    },
+    "ui:stats:22": {
+      "sourceHash": "sha256:7da0c515b5be3b6115b5ed9a141d59da51b05a60f1cb09e4c52bddcde60dbdf0",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "3부 열쇠:%s",
+      "status": "ready"
+    },
+    "ui:stats:23": {
+      "sourceHash": "sha256:58df89bb861fac9adf0b5caddf6e651daf0c727a9a896b92e5b0abfba1ecad97",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "시약",
+      "status": "ready"
+    },
+    "ui:stats:24": {
+      "sourceHash": "sha256:524e5f15de678bacc64f61b2245f15860d6a965d8001fa72560f449693818cb6",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "혼합물",
+      "status": "ready"
+    },
+    "ui:stats:25": {
+      "sourceHash": "sha256:c282e05b48927f285bc4ef5178b4cb86ead6ae93e5e2c7a73d1bd05f81a69088",
+      "placeholders": [
+        "%02d",
+        "%c"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "%c-%02d",
+      "status": "ready"
+    },
+    "ui:stats:3": {
+      "sourceHash": "sha256:26d45a556164dcc92705ef023169144301161205ac37643d1d3e8d6f7393c346",
+      "placeholders": [
+        "%c",
+        "%c"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "%c             %c",
+      "status": "ready"
+    },
+    "ui:stats:4": {
+      "sourceHash": "sha256:b52f98a0506ed8bb84e3d8c24e5816de466ee96679cc47427327a480bf59234e",
+      "placeholders": [
+        "%02d",
+        "%d"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": " 마력:%02d  레벨:%d",
+      "status": "ready"
+    },
+    "ui:stats:5": {
+      "sourceHash": "sha256:f8f0dec0172f8e8370e4b93cfa0b75c5e4bda15af3d6f4c3b5e5aded26211c1b",
+      "placeholders": [
+        "%02d",
+        "%04d"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "힘:%02d  체력:%04d",
+      "status": "ready"
+    },
+    "ui:stats:6": {
+      "sourceHash": "sha256:5a09c2625be203f8148ff0a911dbd668d7d212b2899e8838c40a1c0790835500",
+      "placeholders": [
+        "%02d",
+        "%04d"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "민첩:%02d  최대체력:%04d",
+      "status": "ready"
+    },
+    "ui:stats:7": {
+      "sourceHash": "sha256:f707364ffb2e27d4a39fb4e5fe7007eee1cf740a059453b0b98ccb0fced97514",
+      "placeholders": [
+        "%02d",
+        "%04d"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "지능:%02d  경험:%04d",
+      "status": "ready"
+    },
+    "ui:stats:8": {
+      "sourceHash": "sha256:c5f4aacd7ad632253e7772cdbbec7c1c7e58f61d18b28f92137afbb54ed6144d",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "무기:%s",
+      "status": "ready"
+    },
+    "ui:stats:9": {
+      "sourceHash": "sha256:8646316b887602d48a6bdf120e753c64279cfcdb2b8921ee200e78f70ba79304",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/stats.cpp",
+      "translation": "갑옷:%s",
+      "status": "ready"
     }
   }
 }

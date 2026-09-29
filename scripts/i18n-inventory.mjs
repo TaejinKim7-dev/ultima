@@ -81,7 +81,11 @@ export const CPP_UI_FILE_OPTIONS = {
   // Todo 26: the intro's own screens draw through TextView::textAt*; every
   // such literal comes after the last Configure-menu `.add(...)`, so the
   // existing ui:intro:0..55 ids keep their positions.
-  "vendor/xu4/src/intro.cpp": { textAtCalls: true, setTitleCalls: true }
+  "vendor/xu4/src/intro.cpp": { textAtCalls: true, setTitleCalls: true },
+  // Todo 27: the status column draws through TextView::textAt* and the bare
+  // StatsArea::setTitle("Weapons") member call (no leading `.`). stats.cpp had
+  // no ui ids before, so file order is free.
+  "vendor/xu4/src/stats.cpp": { textAtCalls: true, extraCallNames: ["setTitle"] }
 }
 
 const TLK_MAPS = [

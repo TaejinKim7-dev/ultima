@@ -104,9 +104,10 @@ body {
 /*
  * Todo 26 (user decision, 2026-09-27): an intro menu/text overlay shows a
  * Korean translation of text the native engine still rasterizes in English
- * underneath, so while such an overlay has content it is opaque. The
- * "status" role never gets this class (its avatar-aura glyph stays
- * visible); see overlay-layout.ts's hasOpaqueBacking.
+ * underneath, so while such an overlay has content it is opaque. Todo 27
+ * extends this to the "status" role: its avatar-aura glyph lives in the
+ * summary row below the status box, so it stays visible; see
+ * overlay-layout.ts's hasOpaqueBacking.
  */
 .overlay-role.overlay-backed {
   background: #000;

@@ -22,6 +22,7 @@
 
 import { BRIDGE_ABI_VERSION, VIEW_REGIONS, type BridgeEvent, type OverlayRow, type ViewRegion } from "../bridge/types.ts"
 import { hasTranslation, resolveDisplayText, resolveIntroTemplateId } from "../i18n/localization.ts"
+import { DEFAULT_STATUS_VIEW_DEPS, composeStatusRows, type StatusViewDeps } from "./status-view.ts"
 
 /** Shown for an @id with no ready translation (the English original is never available here). */
 export const MISSING_INTRO_TRANSLATION = "[미번역]"
@@ -141,6 +142,8 @@ export interface IntroViewReceiver {
 export interface IntroViewReceiverOptions {
   readonly dispatch: (event: BridgeEvent) => boolean
   readonly deps?: IntroViewDeps
+  /** Todo 27: composition deps for the in-game "status" region (stats.cpp). */
+  readonly statusDeps?: StatusViewDeps
 }
 
 function isViewRegion(region: string): region is ViewRegion {
@@ -149,6 +152,11 @@ function isViewRegion(region: string): region is ViewRegion {
 
 export function createIntroViewReceiver(options: IntroViewReceiverOptions): IntroViewReceiver {
   const deps = options.deps ?? DEFAULT_INTRO_VIEW_DEPS
+  const statusDeps = options.statusDeps ?? DEFAULT_STATUS_VIEW_DEPS
+  // Todo 27: StatsArea::redraw() re-sends identical rows on every flash /
+  // highlight cycle; only a changed status payload is worth a DOM update.
+  // hide() clears it so a re-show after a hide is never swallowed.
+  let lastStatus: string | undefined
   return {
     show(region, x, y, width, height, selectedIndex, payload) {
       if (!isViewRegion(region)) {
@@ -157,7 +165,14 @@ export function createIntroViewReceiver(options: IntroViewReceiverOptions): Intr
       if (![x, y, width, height].every((value) => Number.isInteger(value))) {
         return
       }
-      const rows = composeIntroRows(payload, deps)
+      if (region === "status") {
+        const key = [x, y, width, height, selectedIndex, payload].join("|")
+        if (key === lastStatus) {
+          return
+        }
+        lastStatus = key
+      }
+      const rows: OverlayRow[] = region === "status" ? composeStatusRows(payload, statusDeps) : composeIntroRows(payload, deps)
       options.dispatch({
         abiVersion: BRIDGE_ABI_VERSION,
         type: "view",
@@ -171,6 +186,9 @@ export function createIntroViewReceiver(options: IntroViewReceiverOptions): Intr
     hide(region) {
       if (!isViewRegion(region)) {
         return
+      }
+      if (region === "status") {
+        lastStatus = undefined
       }
       options.dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "view", region, text: "" })
     }

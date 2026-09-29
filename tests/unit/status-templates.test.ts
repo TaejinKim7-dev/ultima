@@ -91,7 +91,7 @@ describe("locales/ko/ui.json: status translations", () => {
     expect(entries.length).toBeGreaterThanOrEqual(STATS_LITERALS.length)
     for (const [id, entry] of entries) {
       expect(entry.status, id).toBe("ready")
-      expect((entry.translation.match(/%[-0-9]*[sd]/g) ?? []).length, id).toBe(entry.placeholders.length)
+      expect((entry.translation.match(/%[-0-9]*[csd]/g) ?? []).length, id).toBe(entry.placeholders.length)
     }
     const hangul = entries.filter(([, entry]) => /\p{Script=Hangul}/u.test(entry.translation))
     expect(hangul.length).toBeGreaterThanOrEqual(STATS_LITERALS.length - 3)
@@ -117,7 +117,7 @@ describe("GENERATED_STATUS_NAMES + resolveStatusName", () => {
     const expected: Record<string, Record<string, number>> = {
       armor: { Skin: 3, Cloth: 4, "Chain Mail": 6, "Mystic Robe": 10 },
       weapon: { Hands: 12, Staff: 14, Dagger: 16, "Flaming Oil": 30, "Magic Wand": 40, "Mystic Sword": 42 },
-      weaponAbbrev: { HND: 11, STF: 13, DAG: 15, OIL: 29, "+AX": 33, "^^SW": 41 },
+      weaponAbbrev: { HND: 11, STF: 13, DAG: 15, OIL: 29, "+AX": 33, "^SW": 41 },
       class: { Mage: 45, Bard: 46, Fighter: 47, Shepherd: 52 }
     }
     const moduleEntries = entriesOf("module")
