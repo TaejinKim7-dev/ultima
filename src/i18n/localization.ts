@@ -22,7 +22,7 @@
 // `char name[16]`).
 
 import type { GeneratedI18nEntry } from "./generated/strings.ts"
-import { GENERATED_ALIASES, GENERATED_I18N_ENTRIES, GENERATED_TALK_TEMPLATES } from "./generated/strings.ts"
+import { GENERATED_ALIASES, GENERATED_I18N_ENTRIES, GENERATED_INTRO_TEMPLATES, GENERATED_TALK_TEMPLATES } from "./generated/strings.ts"
 
 /** One localization table entry as seen by this runtime (generated rows share this shape). */
 export interface LocalizationEntry {
@@ -87,6 +87,18 @@ export function resolveDisplayText(
 export function resolveTalkTemplateId(
   literal: string,
   table: Readonly<Record<string, string>> = GENERATED_TALK_TEMPLATES
+): string | undefined {
+  return Object.hasOwn(table, literal) ? table[literal] : undefined
+}
+
+/**
+ * Todo 26: maps an exact intro.cpp literal (Configure menu label/title,
+ * main-menu line, name/sex prompt, gypsy glue line) to its `ui:intro:<n>`
+ * semantic ID, or `undefined` when it is not a known intro literal.
+ */
+export function resolveIntroTemplateId(
+  literal: string,
+  table: Readonly<Record<string, string>> = GENERATED_INTRO_TEMPLATES
 ): string | undefined {
   return Object.hasOwn(table, literal) ? table[literal] : undefined
 }

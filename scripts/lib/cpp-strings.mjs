@@ -52,10 +52,27 @@ function joinAdjacentLiterals(source, endIndex, raw) {
   return text
 }
 
-function callPatterns(extraCallNames) {
+// Todo 26: TextView::textAt/textAtKey/textAtFmt(x, y, "literal", ...) --
+// the intro's own screens (vendor/xu4/src/intro.cpp) draw through these,
+// not screenMessage. The x/y arguments may be expressions such as
+// `virtue1.size() + 4` (one level of parentheses, no commas). Opt-in only,
+// like the Todo 22 options, so no other file's ids move.
+const TEXT_AT_ARG = String.raw`(?:[^,()"]|\([^()]*\))+`
+const TEXT_AT_PATTERN = String.raw`\.textAt(?:Key|Fmt)?\s*\(\s*${TEXT_AT_ARG},\s*${TEXT_AT_ARG},\s*"((?:[^"\\]|\\.)*)"`
+
+function callPatterns(extraCallNames, textAtCalls) {
   const extra = extraCallNames.map((name) => new RegExp(`\\b${name}\\s*\\(\\s*"((?:[^"\\\\]|\\\\.)*)"`, "g"))
-  return [...CALL_PATTERNS, ...extra]
+  const textAt = textAtCalls ? [new RegExp(TEXT_AT_PATTERN, "g")] : []
+  return [...CALL_PATTERNS, ...extra, ...textAt]
 }
+
+// Todo 26: `menu.setTitle("XU4 Configuration:", 0, 0)` -- the Configure
+// menus' heading lines. They sit between the `.add(...)` calls in file
+// order, so extracting them in file order would shift the existing
+// ui:intro:0..55 ids; opt-in `setTitleCalls` therefore lists them AFTER
+// every other literal of the file (see the base offset below).
+const SET_TITLE_PATTERN = /\.setTitle\s*\(\s*"((?:[^"\\]|\\.)*)"/g
+const TRAILING_GROUP_OFFSET = 1e9
 
 /**
  * Extract candidate display strings from one C++ source file's text.
@@ -68,18 +85,24 @@ function callPatterns(extraCallNames) {
  *   - `extraCallNames`: extra call names whose first literal argument is
  *     display text (discourse_tlk.cpp's `#define message screenMessage`).
  *   - `joinAdjacent`: join compile-time-concatenated adjacent literals.
+ *   - `textAtCalls` (Todo 26): also capture TextView textAt/textAtKey/
+ *     textAtFmt literals (intro.cpp).
+ *   - `setTitleCalls` (Todo 26): also capture Menu::setTitle literals,
+ *     listed after all other literals so earlier ids don't move.
  */
 export function extractCppLiterals(source, options = {}) {
-  const { extraCallNames = [], joinAdjacent = false } = options ?? {}
+  const { extraCallNames = [], joinAdjacent = false, textAtCalls = false, setTitleCalls = false } = options ?? {}
   const literals = []
-  for (const pattern of callPatterns(extraCallNames)) {
+  const groups = callPatterns(extraCallNames, textAtCalls).map((pattern) => ({ pattern, base: 0 }))
+  if (setTitleCalls) groups.push({ pattern: new RegExp(SET_TITLE_PATTERN.source, "g"), base: TRAILING_GROUP_OFFSET })
+  for (const { pattern, base } of groups) {
     pattern.lastIndex = 0
     let match
     while ((match = pattern.exec(source)) !== null) {
       const raw = joinAdjacent ? joinAdjacentLiterals(source, pattern.lastIndex, match[1]) : match[1]
       const text = unescapeCLiteral(raw)
       if (text.length === 0) continue
-      literals.push({ offset: match.index, text })
+      literals.push({ offset: base + match.index, text })
     }
   }
   literals.sort((left, right) => left.offset - right.offset)
