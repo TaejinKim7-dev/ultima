@@ -79,9 +79,10 @@ static void castleWebEmit(const char* fmt, va_list args) {
     const char* arg[8];
     int argc = 0;
 
-    if (castleWebArg(fmt, id[0], sizeof(id[0])) != fmt) {
+    const char* direct = castleWebArg(fmt, id[0], sizeof(id[0]));
+    if (direct != fmt) {
         // A loaded text printed directly as the format (message(HW_STRING(n))).
-        u4_web_talk_line("%s", id[0], NULL);
+        u4_web_talk_line("%s", direct, NULL);
         return;
     }
     for (const char* cp = fmt; *cp; ++cp) {
