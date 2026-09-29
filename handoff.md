@@ -1332,3 +1332,6 @@ merge 후 충돌(inventory 옵션 병합, generated 재생성, manifest fileCoun
 - exit code: `build:wasm` 0, `test:unit` 0(381), `verify:repo-sources` 0, `typecheck` 0, `build` 0, `i18n:check --strict` 0, `audit:dist --require-engine` 0.
 - e2e(PLAYWRIGHT_PORT=4426): `korean-intro-overlay` 0, `korean-game-messages` 0, `korean-castle-output` 0, `korean-npc-output` 0.
 - Todo 23 screenMessage 후크는 `if (!c) return;` 뒤에 있어 인트로(c 없음)에서는 발화하지 않는다 -> 인트로 오버레이와 이중 출력 없음(코드 확인 + 위 e2e 통과).
+
+### Todo 26 main merge (2026-09-29)
+merge 60c1004 (코드 트리는 26 브랜치 53bd3aa와 동일, handoff.md만 충돌 해결). 에이전트 보고 게이트: unit 381, verify, typecheck, build, i18n strict, audit, diff-check 전부 0; e2e korean-intro-overlay/game-messages/castle-output/npc-output 통과. 리뷰 지적(네이티브 ifdef, 오버레이 안전장치) 수정 반영. 전체 e2e는 통합 1회 예정.
