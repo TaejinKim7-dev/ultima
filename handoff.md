@@ -1314,3 +1314,6 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 - RED→GREEN: ui-message-compose 유닛(모듈 없음→10/10), screen-hash-parity(호스트 cc로 web_hash.h 컴파일, JS fnv1a32와 일치), e2e korean-game-messages RED(Pass 0건)→GREEN 1/1 2.3분(`task-23/e2e-green.log`).
 - 게이트(exit): test:unit 0, verify:repo-sources 0, typecheck 0, build 0, build:site 0, audit:dist --require-engine 0, i18n:check --strict 0, build:wasm 0, wasm-symbols 8/8, git diff --check 0.
 - 미실행: 전체 e2e 스위트(Chromium 40개), merge. shrine.cpp 18건 번역 추가(4447 entries). 순서 변경으로 제외된 항목은 전부 vendors(module) 26건 — Todo 25 대상.
+
+### Todo 23 main merge 게이트 (2026-09-29, worktree agent-ad52…, 전부 exit 0)
+npm run test:unit / verify:repo-sources / typecheck / build / build:site / audit:dist --require-engine / i18n:check --strict / build:wasm / wasm-symbols 8/8 / git diff --check = 0; 전체 e2e Chromium 41 passed (27.2분, `task-23/e2e-full.log`); cmp 계획서 두 벌 0. merge `1f7dfd0`.
