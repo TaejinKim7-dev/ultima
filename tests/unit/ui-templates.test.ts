@@ -123,7 +123,9 @@ describe("i18n:generate uiTemplates / moduleNames (real locales/ko)", () => {
     expect(shrine.length).toBeGreaterThanOrEqual(10)
     for (const [id, row] of shrine) {
       expect(row.status, id).toBe("ready")
-      expect(/\p{Script=Hangul}/u.test(row.translation) || !/[A-Za-z]/.test(row.translation), id).toBe(true)
+      // Letters inside a printf conversion (`%s`) are not English text.
+      const withoutConversions = row.translation.replace(/%[-+ 0#]*\d*(?:\.\d+)?[a-zA-Z%]/g, "")
+      expect(/\p{Script=Hangul}/u.test(row.translation) || !/[A-Za-z]/.test(withoutConversions), id).toBe(true)
     }
   })
 })

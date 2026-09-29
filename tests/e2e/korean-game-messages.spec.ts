@@ -109,6 +109,10 @@ test.describe("Todo 23: in-game screen messages shown in Korean in the dialogue 
     const zipPath = process.env["ULTIMA4_DATA"]
     test.skip(!zipPath || !existsSync(zipPath), "ULTIMA4_DATA not set to a verified original ultima4.zip")
     const buffer = readFileSync(zipPath!)
+    // Every unmapped screenMessage() the engine makes (key echoes, castle/codex
+    // lines, ...) must be dropped silently: no uncaught page error.
+    const pageErrors: string[] = []
+    page.on("pageerror", (error) => pageErrors.push(error.message))
 
     await bootAndSelectZip(page, buffer)
     expect(await createCharacterAndWaitForSave(page), "character creation never reported 저장 완료").toBe(true)
@@ -157,5 +161,6 @@ test.describe("Todo 23: in-game screen messages shown in Korean in the dialogue 
     )
     expect(enterBefore, "fixture: ui:portal:1 must start with its %s argument").toBe("")
     expect(afterEnter, "entering Moonglow never showed the Korean Enter %s! line").toContain(enterAfter)
+    expect(pageErrors, "the screenMessage hook must never surface an uncaught error").toEqual([])
   })
 })

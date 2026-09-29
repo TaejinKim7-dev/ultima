@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest"
+import { describe, expect, it, vi } from "vitest"
 import { composeUiMessage, createUiMessageHandler, type UiMessageDeps } from "../../src/dialogue/ui-message-compose.ts"
 
 // Todo 23: vendor/xu4/src/screen.cpp's web build sends each screenMessage()
@@ -69,5 +69,20 @@ describe("createUiMessageHandler", () => {
     )
     expect(() => handle("aaaa0001", [])).not.toThrow()
     expect(failures).toHaveLength(1)
+  })
+
+  it("drops an unmapped call without emitting, throwing or writing any console output (its args may be original game data)", () => {
+    const spies = (["log", "info", "warn", "error", "debug"] as const).map((level) => vi.spyOn(console, level).mockImplementation(() => {}))
+    const lines: string[] = []
+    const failures: unknown[] = []
+    const handle = createUiMessageHandler(deps, (text) => lines.push(text), (error) => failures.push(error))
+    // A castle/codex-style call: unknown format hash, argument stands in for original AVATAR.EXE text.
+    handle("0badf00d", ["ORIGINAL-DATA-SENTINEL"])
+    expect(lines).toEqual([])
+    expect(failures).toEqual([])
+    for (const spy of spies) {
+      expect(spy).not.toHaveBeenCalled()
+      spy.mockRestore()
+    }
   })
 })

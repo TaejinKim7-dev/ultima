@@ -74,12 +74,16 @@ export const CPP_UI_FILES = [
 ]
 
 // Per-file extractor options (see scripts/lib/cpp-strings.mjs). Only
-// discourse_tlk.cpp opts in: it prints through `#define message
+// discourse_tlk.cpp and (Todo 23) shrine.cpp opt in. discourse_tlk.cpp prints through `#define message
 // screenMessage` (and, since Todo 22, `TALK_MSG`, the web talk-channel
 // wrapper) and has one compile-time-concatenated literal. Every other
 // file keeps the original extraction so its existing ids/hashes don't move.
 export const CPP_UI_FILE_OPTIONS = {
-  "vendor/xu4/src/discourse_tlk.cpp": { extraCallNames: ["message", "TALK_MSG"], joinAdjacent: true }
+  "vendor/xu4/src/discourse_tlk.cpp": { extraCallNames: ["message", "TALK_MSG"], joinAdjacent: true },
+  // shrine.cpp is new to the inventory, so joining its one two-literal
+  // "Thy thoughts are pure. " "Thou art granted a vision!" call moves no
+  // existing hash.
+  "vendor/xu4/src/shrine.cpp": { joinAdjacent: true }
 }
 
 const TLK_MAPS = [

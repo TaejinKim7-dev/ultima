@@ -396,6 +396,112 @@ static const uint8_t nonWordChars[32] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#include "web_hash.h"
+
+/*
+ * Todo 23: the web shell shows in-game messages in Korean in its HTML
+ * dialogue panel (src/dialogue/ui-message-compose.ts). Each screenMessage()
+ * call is sent as the FNV-1a hash of its format bytes plus the engine's own
+ * pre-formatted string for every printf conversion -- never the format text,
+ * because a few callers (castle/codex) pass original game data as the
+ * format. The shell drops any hash it has no translation for. The canvas
+ * output is unchanged. web_hash.h must hash exactly like
+ * scripts/lib/ui-templates.mjs fnv1a32 (tests/unit/screen-hash-parity).
+ */
+EM_JS(void, u4_web_message, (const char* hash, int argc, const char** argv), {
+    var receiver = Module.u4Text;
+    if (! receiver || ! receiver.message)
+        return;
+    var args = [];
+    for (var i = 0; i < argc; ++i) {
+        // Latin-1: the engine's charset is 8-bit, never UTF-8.
+        var p = HEAPU32[(argv >> 2) + i], text = '', ch;
+        while ((ch = HEAPU8[p++]))
+            text += String.fromCharCode(ch);
+        args.push(text);
+    }
+    try {
+        receiver.message(UTF8ToString(hash), args);
+    } catch (e) {
+        // Never unwind the wasm game loop from a display hook.
+    }
+});
+
+/*
+ * Send one screenMessage() call to the shell. Conversions the shell cannot
+ * mirror (length modifiers, '*', floats, pointers, too many/long arguments)
+ * skip the call rather than misread the argument list.
+ */
+static void webScreenMessage(const char* fmt, va_list args) {
+    enum { MaxArgs = 8, PoolSize = 2048 };
+    char pool[PoolSize];
+    const char* argv[MaxArgs];
+    char hash[9];
+    int argc = 0;
+    size_t used = 0;
+
+    for (const char* cp = fmt; *cp; ++cp) {
+        if (*cp != '%')
+            continue;
+        if (cp[1] == '%') {
+            ++cp;
+            continue;
+        }
+
+        char spec[24];
+        size_t n = 0;
+        spec[n++] = '%';
+        ++cp;
+        while (*cp && strchr("-+ 0#", *cp) && n < 16)
+            spec[n++] = *cp++;
+        while (*cp >= '0' && *cp <= '9' && n < 20)
+            spec[n++] = *cp++;
+        if (*cp == '.') {
+            spec[n++] = *cp++;
+            while (*cp >= '0' && *cp <= '9' && n < 20)
+                spec[n++] = *cp++;
+        }
+        const char conv = *cp;
+        if (! conv || argc >= MaxArgs || n >= 20)
+            return;
+        spec[n++] = conv;
+        spec[n] = '\0';
+
+        char* dst = pool + used;
+        const size_t room = PoolSize - used;
+        int len;
+        switch (conv) {
+            case 'c':
+            case 'd':
+            case 'i':
+                len = snprintf(dst, room, spec, va_arg(args, int));
+                break;
+            case 'u':
+            case 'x':
+            case 'X':
+            case 'o':
+                len = snprintf(dst, room, spec, va_arg(args, unsigned int));
+                break;
+            case 's': {
+                const char* str = va_arg(args, const char*);
+                len = snprintf(dst, room, spec, str ? str : "(null)");
+            } break;
+            default:
+                return;
+        }
+        if (len < 0 || (size_t) len >= room)
+            return;
+        argv[argc++] = dst;
+        used += (size_t) len + 1;
+    }
+
+    webFormatHash(fmt, hash);
+    u4_web_message(hash, argc, argv);
+}
+#endif
+
 void screenMessage(const char *fmt, ...) {
     char* buffer = XU4_SCREEN->msgBuffer;
     int buflen;
@@ -405,8 +511,17 @@ void screenMessage(const char *fmt, ...) {
 
     va_list args;
     va_start(args, fmt);
+#ifdef __EMSCRIPTEN__
+    va_list webArgs;
+    va_copy(webArgs, args);
+#endif
     buflen = vsnprintf(buffer, MsgBufferSize, fmt, args);
     va_end(args);
+#ifdef __EMSCRIPTEN__
+    if (buflen > 0)
+        webScreenMessage(fmt, webArgs);
+    va_end(webArgs);
+#endif
     if (buflen < 1)
         return;
 
