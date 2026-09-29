@@ -5,7 +5,8 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { afterEach, describe, expect, it } from "vitest"
-import { GENERATED_TALK_TEMPLATES } from "../../src/i18n/generated/strings.ts"
+import { composeTalkLine, MISSING_TLK_TRANSLATION, type TalkComposeDeps } from "../../src/dialogue/talk-compose.ts"
+import { GENERATED_I18N_ENTRIES, GENERATED_TALK_TEMPLATES } from "../../src/i18n/generated/strings.ts"
 
 // Todo 24 (data side): Lord British / Hawkwind (vendor/xu4/src/
 // discourse_castle.cpp) and the Codex / endgame (vendor/xu4/src/codex.cpp)
@@ -168,5 +169,52 @@ describe("locales/ko/ui.json: castle/codex translations + GENERATED_TALK_TEMPLAT
     expect(GENERATED_TALK_TEMPLATES[HELP_TO_SURVIVE]).toMatch(/^ui:discourse_castle:\d+$/)
     expect(GENERATED_TALK_TEMPLATES["\n\n\nLord British says:  Welcome "]).toMatch(/^ui:discourse_castle:\d+$/)
     expect(GENERATED_TALK_TEMPLATES[XU4_ENDING]).toMatch(/^ui:codex:\d+$/)
+  })
+})
+
+describe("panel fragment composition for castle/codex (real generated tables)", () => {
+  const deps: TalkComposeDeps = {
+    templateId: (literal) => GENERATED_TALK_TEMPLATES[literal],
+    resolve: (id, fallback) => GENERATED_I18N_ENTRIES[id]?.translation ?? fallback
+  }
+  const compose = (format: string, ...args: (string | null)[]) => composeTalkLine(format, args, deps)
+  const koreanOf = (id: string) => GENERATED_I18N_ENTRIES[id]!.translation
+
+  it("Hawkwind greeting: hawkwindText:43 + player name + hawkwindText:44, in that order", () => {
+    const fragments = [
+      compose("%s", "@avatar.exe:hawkwindText:43"),
+      compose("%s", "Avatar"),
+      compose("%s", "@avatar.exe:hawkwindText:44")
+    ]
+    expect(fragments.join("")).toBe(`${koreanOf("avatar.exe:hawkwindText:43")}Avatar${koreanOf("avatar.exe:hawkwindText:44")}`)
+    expect(fragments[0]).toMatch(/\p{Script=Hangul}/u)
+  })
+
+  it("Lord British keyword reply and the help text are Korean, from ids and from the code literal", () => {
+    expect(compose("%s", "@avatar.exe:lordBritishText:0")).toBe(koreanOf("avatar.exe:lordBritishText:0"))
+    expect(compose(HELP_TO_SURVIVE)).toMatch(/\p{Script=Hangul}/u)
+    expect(compose(HELP_TO_SURVIVE)).not.toContain("hostile")
+  })
+
+  it("Lord British welcome: translated code literal, then the name fragment", () => {
+    const welcome = compose("\n\n\nLord British says:  Welcome ")
+    expect(welcome).toMatch(/\p{Script=Hangul}/u)
+    expect(welcome).not.toContain("Welcome")
+    expect(compose("%s and thee also %s!\n", "Avatar", "Iolo")).toMatch(/Avatar.*Iolo/su)
+  })
+
+  it("Codex question ids and endgame text resolve to Korean; the move count is plain digits", () => {
+    expect(compose("\n%s\n\n", "@avatar.exe:virtueQuestions:3")).toBe(`\n${koreanOf("avatar.exe:virtueQuestions:3")}\n\n`)
+    expect(compose("\n\n%s", "@avatar.exe:endgameText1:0")).toBe(`\n\n${koreanOf("avatar.exe:endgameText1:0")}`)
+    const ending = [compose("%s", "@avatar.exe:endgameText2:3"), compose("%s", "1234"), compose(XU4_ENDING)].join("")
+    expect(ending).toContain("1234")
+    expect(ending).toMatch(/\p{Script=Hangul}/u)
+    expect(ending).not.toContain("Report")
+  })
+
+  it("a binary id with no ready translation shows the marker, never English, and composition continues", () => {
+    const line = compose("%s", "@avatar.exe:hawkwindText:9999")
+    expect(line).toBe(MISSING_TLK_TRANSLATION)
+    expect(line).not.toContain("avatar")
   })
 })
