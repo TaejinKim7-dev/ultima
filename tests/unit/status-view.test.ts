@@ -75,6 +75,12 @@ describe("composeStatusRows", () => {
     expect(composeStatusRows("W:%s\x1f=weapon:Hands", deps)).toEqual([{ label: "무기:맨손" }])
   })
 
+  it("substitutes %c tokens too (mixtures rows: letter + count)", () => {
+    TEMPLATES["%c-%02d"] = "ui:stats:25"
+    TABLE["ui:stats:25"] = "%c-%02d"
+    expect(composeStatusRows("%c-%02d\x1fA\x1f07", deps)).toEqual([{ label: "A-07" }])
+  })
+
   it("keeps empty rows as slots and item names local to the xu4 name table", () => {
     expect(composeStatusRows("=%s\x1f=item:Bell\n\n=%s\x1f=sex:12", deps)).toEqual([
       { label: "종" },
