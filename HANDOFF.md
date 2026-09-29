@@ -1,56 +1,55 @@
 # HANDOFF
-작성 시각: 2026-09-27 22:00 KST
+작성 시각: 2026-09-29 (사용자 지시로 진행 중단 시점)
 
 ## 1. 목표 (What we're building)
-- xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식 + 한국어화. 진행 기준 `plan.md`(25단계).
-- 최종 목표는 **한국어로 실제 플레이하는 웹 기반 울티마 4**. 실제 NPC 응답이 한국어여야 하는데 아직 영어 — 출시 차단(아래 6절, `.omo/drafts/korean-output-gap-design.md`).
-- 이번 세션: Todo 18 완료·merge·push(19/25) → Todo 19 진행 중, 병렬로 Todo 20 검증기 준비 + 한국어 출력 gap 조사.
+- xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식하고 한국어로 실제 플레이 가능하게 한다. 진행 기준은 `plan.md`(분모 31 = Todo 1~27 + F1~F4).
+- 이번 세션 범위: Todo 23~27(한국어 표시 확장)을 병렬 구현·리뷰·merge.
 
 ## 2. 현재 상태 (Current state)
-- 진행률 **22/26 = 84.6%** — Todo 22, Todo 20 ✅ main merge/push. 남은 것 F1~F4(F2 APPROVE, F4 REJECT=사용자 결정 필요, F3 브라우저 준비, F1 대기). main `703919a`까지 origin 동기. Pages 실제 배포 확인 완료(run `36316708881`).
-- **Todo 22 진행 중 (branch `todo-22-korean-npc-output`, 미커밋 작업 + Fork A merge `39730db`)**:
-  - 설계: 웹 빌드에서만 `runTalkDialogue`의 모든 출력을 `talkMessage()`로 가로채 EM_JS `Module.u4Text.talk(format, a0, a1)`로 보냄. TLK를 가리키는 인자/응답은 `@MAP:npcIndex:field` id로만 보내므로 영어 TLK 원문은 엔진 밖으로 안 나감. 틀 문장은 xu4 코드 리터럴 그대로 → JS가 `resolveTalkTemplateId`로 id 찾고 `resolveDisplayText`로 한국어. 플레이어 입력은 `u4Text.input` → "> health".
-  - `Discourse`에 `webTlkName`(웹 전용, "moonglow.tlk"→"MOONGLOW"), `TalkState`에 web 필드. Boron 대화는 `webStrings=NULL`로 비활성. `discourse_castle.cpp`용으로 `message` 매크로를 `screenMessage`로 복원.
-  - 확인(직접 실행): e2e RED `korean-npc-output.spec.ts` exit 1(패널에 Calabrini look/health/name 한국어 0건, `task-22/e2e-red.log`, `panel-observation.log`); unit `talk-compose` RED(모듈 없음)→9/9, `startup-sequence` Todo 22 RED 1 failed→11/11; `g++`/`em++ -fsyntax-only` discourse.cpp 0; `verify:repo-sources` 0(xu4 treeSha256 `5a864e41…5e88`); `npm run build:wasm` 0, `wasm-symbols` 8/8; `npm run build` 0; typecheck 0.
-  - Fork A(`39730db`, merge됨): `discourse_tlk.cpp` 틀 문장 18개 inventory+번역(`ui:discourse_tlk:0..17`), `GENERATED_TALK_TEMPLATES`, `resolveTalkTemplateId`, i18n:check --strict 0(4429 entries, fork 보고).
-  - e2e GREEN(커밋 `458ef4d`): 1차 실행은 health 응답 0건으로 실패 → 스크린샷 확인 결과 Calabrini의 topic2가 "HEAL"이라 `U4Talk_dialogue`가 health 필드보다 먼저 response2로 응답(캔버스도 동일). 테스트 기대 필드를 response2로 정정(주석에 근거) → 2차 1/1 통과 2.7분: look 한국어, response2 영어 입력 1회→alias 후 2회, name 한국어(`task-22/e2e-green.log`, `panel-observation.log`, `korean-npc-output.png`, 1차 로그 `e2e-green-run1-wrong-field.log`). fallback 증거 `task-22/fallback.log`(unit).
-  - 전체 e2e 40/40(22.0분). 게이트 1차에서 talk-templates 유닛 RED(추출기가 `TALK_MSG` 미인식) → `f92aa2f`로 수정, 2차 게이트 전부 0.
-  - Fork B 문서 초안(worktree)에 Todo 22 범위 반영(미커밋): 마을 주민 NPC 대사 한국어, castle/상점/인트로/상태창은 영어, corpus 4429.
-- **Todo 20 초안 (Fork B)**: worktree `.claude/worktrees/agent-ac0eaf00f74c3c95a`, branch `todo-20-release-docs-draft` (`dcaeebc` verifier cherry-pick, `53adc2d` 문서). README/docs/WEB_PORT.md/docs/GITHUB_PAGES.md 작성, `verify:release-docs` 0, unit 300/300(fork 보고). handoff.md는 검사 대상에서 제외(역사 기록). 미확인: fresh-clone QA, emsdk 설치 명령 실행. Todo 22 완료 후 한계 절 갱신 필요.
+- 진행률 **23/31 (74.2%)**. ✅는 Todo 1~23.
+- **main 로컬 HEAD `391db3a`**(문서 커밋) ← `c4cdbf5`(Todo 25 merge). **origin/main은 `dc5764d`**: Todo 24(`8c4edbb`)·26(`dc5764d`)는 push됨, **Todo 25 merge와 이 문서 커밋은 미push**.
+- Todo 24·25·26: 코드는 main에 merge됐지만 계획의 "전체 e2e 스위트" 통합 확인 전이라 **✅ 보류**.
+- main(`c4cdbf5`) 통합 게이트는 이번 세션에서 직접 실행해 전부 exit 0: build:wasm, test:unit, verify:repo-sources, typecheck, build, build:site, audit:dist --require-engine, git diff --check (`.omo/evidence/ultima-web/integration/gates.log`). **전체 e2e는 시작 직후 중단 — 미실행.**
+- Todo 27(`todo-27-korean-status` `8023dce`, worktree `.claude/worktrees/todo-27-status`): 구현 커밋 4개 + main merge까지 있으나 main 합류 후 wasm 재빌드·게이트·e2e·리뷰 **미완료**(에이전트를 중단시킴). 에이전트 보고 게이트는 merge 이전 트리 기준이라 **확인 필요**.
+- 개별 e2e 증거(직접 확인): Todo 23 전체 41/41(27.2분, 23 시점), merged main의 castle+game-messages+npc-output 3/3(8.8분). Todo 25·26 e2e 통과는 에이전트 보고(직접 재실행 안 함).
 
 ## 3. 변경한 파일 (Files changed)
-- (Todo 19, `0b0ea35`) `.github/workflows/pages.yml`, `scripts/audit-dist.mjs`, `scripts/workflow-verifier.mjs`, `tests/unit/audit-dist.test.ts`, `tests/unit/workflow.test.ts`(기존 YAML-name 테스트 fixture를 바뀐 step 이름으로 갱신, 변형 로직 동일), `tests/e2e/pages-static-smoke.spec.ts`(신규).
-- (Todo 18, main merge `f936e74`) 이전 판 참고: `event.cpp` prompt 훅, `text-prompt-gate.ts`, `startup.ts`, `shell.ts`, `main.ts` 등.
-- untracked: `.omo/drafts/korean-output-gap-design.md`(Fork B), `.omo/boulder.json`, `.omo/start-work/`, `.omo/lazycodex-executor-verify/`, `.claude/`(worktree 포함).
+- Todo 23: `vendor/xu4/src/screen.cpp`(screenMessage 웹 훅, format FNV-1a 해시+사전 포맷 인자 전송), `vendor/xu4/src/web_hash.h`, `scripts/lib/ui-templates.mjs`, `src/dialogue/ui-message-compose.ts`, `src/shell.ts`·`src/engine/startup.ts`·`src/i18n/localization.ts`(수신기), shrine.cpp 18건 번역(`locales/ko/ui.json`), 생성 테이블.
+- Todo 24(에이전트): castle/codex id 채널(`web_talk.h`, `discourse_castle.cpp`, `codex.cpp`), `cpp-strings.mjs` 옵션, 46건 번역.
+- Todo 26(에이전트): `src/overlay/intro-view.ts`, `intro.cpp`/`menu.cpp`/`menuitem.*` 웹 훅(`__EMSCRIPTEN__` 한정), 인트로 번역.
+- Todo 25(에이전트): `script_boron.cpp` `web-say`, `vendors.b`, `src/dialogue/vendor-compose.ts`, `scripts/lib/vendor-templates.mjs`.
+- 문서: `plan.md`(중단 기록·재개 순서), `handoff.md`(중단 기록), 계획서 두 벌(23 체크 `[x]`, cmp 일치).
+- 메인 체크아웃 `/home/taejin/ultima`(branch `f3-real-browser-qa`)에는 이 세션과 무관한 미커밋 `HANDOFF.md`/`handoff.md`/`playwright.config.ts`(F3 브라우저 QA 작업)가 있음 — 건드리지 않았음.
 
 ## 4. 주요 결정과 근거 (Key decisions)
-- Pages smoke는 `vite preview`가 아닌 plain static server(`/ultima/`만 서빙, SPA fallback 없음) — preview 미들웨어가 dist/engine 누락을 가리기 때문.
-- `--require-engine`은 opt-in 플래그: 엔진 없이 빌드한 로컬 dist도 leak audit은 가능해야 해서. CI에서는 verify:workflow가 플래그 사용을 강제.
-- CI 엔진 빌드를 위해 apt(`libpulse-dev libvorbis-dev libflac-dev`) 설치: `deps:host`가 faun도 빌드하고 faun 링크에 필요.
-- 한국어 출력 구현은 새 Todo(분모 변경)라 착수하지 않고 설계 메모만.
+- 계획의 "format 리터럴 전송" 대신 **format 해시만 전송**(castle/codex가 AVATAR.EXE 원문을 format으로 넘기므로 유출 방지). 미매핑 해시는 JS가 조용히 폐기(console 출력 없음). 상점 미번역 템플릿도 같은 정책(영어 fallback 아님) — 계획 대비 의도적 편차, handoff.md 기록됨.
+- 병렬: 24/26은 기존 worktree 재개, 25/27은 선행 브랜치 위 새 worktree. 읽기 전용 리뷰 에이전트(superpowers:requesting-code-review)로 24/25/26 검토 → 26 네이티브 `#ifdef`·오버레이 안전장치, 25 억제 플래그·ㄹ받침·중복 기호 수정 반영.
+- 24·25·26 ✅ 보류: 계획 acceptance의 전체 e2e를 통합 상태에서 1회 확인하기로 함(개별 spec만으로 ✅ 처리하지 않음).
+- 충돌 파일(`strings.ts`, `u4_i18n_table.inc`, manifest 해시)은 손 병합 대신 재생성.
 
 ## 5. 다음 할 일 (Next steps)
-- [x] Todo 22 ✅ main merge `65569fa` + push (21/26).
-- [ ] **Todo 20 진행 중** (branch `todo-20-release-docs` @ `be813f4` = draft를 main 위로 rebase; 이전 verifier 전용 worktree/브랜치는 cherry-pick돼 제거). `verify:release-docs` main checkout에서 0, `missing-pin.log` exit 1(의도). **진행 중**: fresh-clone QA(`task-20/fresh-clone.log`, emsdk는 기존 설치 symlink — 문서화된 편차).
-- [ ] 병렬 진행 중(결과 미확인): Todo 22 main 배포 감시(run `36319477157`), F2 코드 품질 리뷰 에이전트, F4 범위 충실도 에이전트(둘 다 `.omo/evidence/ultima-web/final/`에만 기록).
-- [ ] Todo 20 게이트 → ✅ 22/26 → merge/push. 이후 F1(계획 준수, Todo 20 이후), F3(Firefox/WebKit 미설치 — `~/.cache/ms-playwright`엔 chromium만; 설치는 큰 다운로드라 사용자 확인 필요).
+- [ ] `git push origin main` (Todo 25 merge + 문서 커밋; 사용자는 이번 세션 push 승인 완료).
+- [ ] main에서 전체 e2e 1회: `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip PLAYWRIGHT_PORT=4405 npx playwright test --project=chromium --workers=1` (다른 e2e 동시 실행 금지, 약 30분). 통과 시 24·25·26 ✅ → 26/31, 계획서 두 벌 `[x]`+cmp, handoff.md 게이트 기록. 타이밍 flake는 해당 spec 단독 재실행.
+- [ ] Todo 27 재개: worktree에서 `build:wasm`→게이트→e2e(`PLAYWRIGHT_PORT=4427`)→코드 리뷰→main merge→27/31.
+- [ ] 미처리 리뷰 항목: 24 C++ 채널 동작 테스트·영어 부재 negative assert; 25 실제 construct throw 재현 테스트·무기/방어구/시약/여관 e2e; 26 About·집시 화면 시각 검증.
+- [ ] F1~F4 (F3: WebKit은 사용자가 `sudo npx playwright install-deps webkit` 필요; 메인 체크아웃의 f3 브랜치 작업 참고).
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
-- Pages Source 설정은 사용자만 가능. 미설정이면 main의 deploy job은 계속 실패.
-- 한국어 NPC 출력 미구현 — 출시 차단. 계획 체크박스 ✅가 이를 대신하지 않음.
-- 이번 세션 작업 디렉터리가 실수로 Fork A worktree로 바뀜(`cd` 부작용). 메인 저장소 작업은 절대경로/`git -C /home/taejin/ultima` 사용.
-- e2e 동시 실행 시 다른 `PLAYWRIGHT_PORT` 필수. NPC 접근 스펙끼리는 동시 실행 자제.
-- `memory-smoke`는 JS heap만 측정.
-- `pkill -f "<패턴>"`은 자기 셸까지 죽임 — `"[p]laywright ..."` 대괄호 트릭.
+- Pages Source 설정은 사용자만 가능.
+- e2e는 CPU 타이밍에 민감(NPC 접근 sweep) — 동시 실행 자제, 포트 분리 필수(`PLAYWRIGHT_PORT`).
+- `npm run i18n:inventory`는 `locales/ko/module.json`의 `% s` 수동 수정을 되돌림 → 실행 후 `git checkout locales/ko/module.json`.
+- vendor 수정 시 `vendor/source-manifest.json`의 xu4 `treeSha256`/`fileCount`(현재 412)를 같은 커밋에서 `summarizeSourceTree`로 재계산.
+- `main`은 이 worktree(`.claude/worktrees/agent-ad52af6bd293aab90`)에 체크아웃되어 있음 — 다른 곳에서 main 체크아웃 불가.
+- 에이전트 성공 보고는 diff/게이트로 재확인할 것(25·26·27은 재확인 안 됨).
 
 ## 7. 재개 방법 (How to resume)
 ```bash
-cd /home/taejin/ultima
-git checkout todo-19-pages-release && git status -sb
+cd /home/taejin/ultima/.claude/worktrees/agent-ad52af6bd293aab90   # main 체크아웃
 export PATH="$HOME/.local/opt/node22/bin:$PATH"
 export ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip
-gh run view 36315000683
-npm run build:site -- --base=/ultima/ && npm run audit:dist -- --require-engine && npm run verify:workflow
-PLAYWRIGHT_PORT=4248 npx playwright test tests/e2e/pages-static-smoke.spec.ts --project=chromium --workers=1
+source .emsdk/emsdk_env.sh
+git status -sb && git push origin main
+npm run build:wasm && npm run test:unit && npm run verify:repo-sources && npm run typecheck && npm run build && npm run build:site -- --base=/ultima/ && npm run audit:dist -- --require-engine && git diff --check
+PLAYWRIGHT_PORT=4405 npx playwright test --project=chromium --workers=1
 ```
-- 상세: `handoff.md`, 진행 순서 `plan.md` "바로 다음 순서".
+- 상세: `plan.md` "⏸ 중단 기록", `handoff.md` 말미 "세션 중단 기록", 증거 `.omo/evidence/ultima-web/{task-23..27,integration}/`.
