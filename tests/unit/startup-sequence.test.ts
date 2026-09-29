@@ -397,4 +397,36 @@ describe("startEngine", () => {
     expect(receiverAtMainCall).toBe(talkText)
     expect(seen).toEqual(["talk:%s|@MOONGLOW:12:health|null", "input:health"])
   })
+  it("Todo 26: attaches the intro view receiver to module.u4View before callMain()", async () => {
+    const { module, calls } = makeFakeModule()
+    const { factory } = makeFactory(module)
+    const seen: string[] = []
+    const introView = {
+      show: (region: string, x: number, y: number, w: number, h: number, selected: number, payload: string) =>
+        seen.push(`show:${region}|${x},${y},${w},${h}|${selected}|${payload}`),
+      hide: (region: string) => seen.push(`hide:${region}`)
+    }
+    let receiverAtMainCall: unknown
+    module.callMain = () => {
+      calls.mainCalled += 1
+      receiverAtMainCall = module.u4View
+      module.u4View?.show("menu", 8, 104, 304, 88, 2, "Journey Onward")
+      module.u4View?.hide("menu")
+    }
+
+    const result = await startEngine({
+      factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
+      zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
+      dispatch: () => true,
+      unlockAudio: async () => {},
+      audioContext: null,
+      introView
+    })
+
+    expect(result.started).toBe(true)
+    expect(receiverAtMainCall).toBe(introView)
+    expect(seen).toEqual(["show:menu|8,104,304,88|2|Journey Onward", "hide:menu"])
+  })
 })

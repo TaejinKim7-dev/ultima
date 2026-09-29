@@ -194,6 +194,16 @@ describe("bridge ABI contract (C ABI version 1)", () => {
     expect(isBridgeEvent(nonNumeric)).toBe(false)
   })
 
+  it("Todo 26: accepts an optional logical rect on a view event (the TextView's own geometry) and rejects a malformed one", () => {
+    const base = { abiVersion: 1, type: "view", region: "textview", text: "" }
+    expect(isBridgeEvent({ ...base, rect: { x: 0, y: 152, width: 320, height: 48 } })).toBe(true)
+    expect(isBridgeEvent({ ...base, rect: { x: 0, y: 152, width: 320 } })).toBe(false)
+    expect(isBridgeEvent({ ...base, rect: { x: 0, y: 152, width: 0, height: 48 } })).toBe(false)
+    expect(isBridgeEvent({ ...base, rect: { x: -1, y: 152, width: 320, height: 48 } })).toBe(false)
+    expect(isBridgeEvent({ ...base, rect: { x: 0.5, y: 152, width: 320, height: 48 } })).toBe(false)
+    expect(isBridgeEvent({ ...base, rect: "0,152,320,48" })).toBe(false)
+  })
+
   it("rejects an event of an unknown/undefined type instead of silently accepting it", () => {
     const unknownType: unknown = { abiVersion: 1, type: "teleport", x: 1, y: 2 }
     const noType: unknown = { abiVersion: 1 }
