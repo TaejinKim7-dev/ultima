@@ -155,7 +155,10 @@ export function createIntroViewReceiver(options: IntroViewReceiverOptions): Intr
   const statusDeps = options.statusDeps ?? DEFAULT_STATUS_VIEW_DEPS
   // Todo 27: StatsArea::redraw() re-sends identical rows on every flash /
   // highlight cycle; only a changed status payload is worth a DOM update.
-  // hide() clears it so a re-show after a hide is never swallowed.
+  // hide() clears it so a re-show after a hide is never swallowed. Hazard: only
+  // hide() resets this, and no emitter sends `type:"clear"` yet -- wiring one up
+  // without resetting lastStatus here would permanently swallow the next
+  // identical status payload, dropping the status overlay entirely.
   let lastStatus: string | undefined
   return {
     show(region, x, y, width, height, selectedIndex, payload) {

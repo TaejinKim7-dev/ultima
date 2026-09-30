@@ -16,7 +16,7 @@ import { fileURLToPath } from "node:url"
 // `sourceHash` locales/ko/ui.json records), weapon/armour names by their
 // `module:Ultima-IV:config:<n>` ids -- never from original game data.
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
-const evidenceDir = "/home/taejin/ultima/.omo/evidence/ultima-web/task-27"
+const evidenceDir = join(repoRoot, ".omo/evidence/ultima-web/task-27")
 
 type Entry = { sourceHash?: string; translation: string }
 function entries(file: string): Record<string, Entry> {

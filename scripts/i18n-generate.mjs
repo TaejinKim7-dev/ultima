@@ -66,6 +66,18 @@ const INTRO_TEMPLATE_SOURCE = "vendor/xu4/src/intro.cpp"
 const STATUS_TEMPLATE_SOURCE = "vendor/xu4/src/stats.cpp"
 const STATUS_NAME_SOURCE = "vendor/xu4/module/Ultima-IV/config.b"
 
+// Todo 27: stats.cpp draws the status column through the web view channel
+// (EM_JS -> `Module.u4View.show("status", ...)`), never screenMessage(). Its
+// literals are payload templates ("F:%04d   G:%04d", "Stones:%s") for that
+// channel, so they belong in GENERATED_STATUS_TEMPLATES and must stay out of
+// buildUiTemplateMap(): a `ui:stats:<n>` id in GENERATED_UI_TEMPLATES would be
+// reachable from the screenMessage path too and any call site passing such a
+// literal would draw it twice -- one dialogue panel line plus one overlay row
+// (the Todo 23 -> 26 double-output bug). The file stays in CPP_UI_FILES and
+// CPP_UI_FILE_OPTIONS so i18n:inventory keeps numbering its `ui:stats:` ids and
+// GENERATED_STATUS_TEMPLATES keeps extracting them.
+const UI_TEMPLATE_SOURCES = CPP_UI_FILES.filter((relativePath) => relativePath !== STATUS_TEMPLATE_SOURCE)
+
 const TRANSLATABLE_FILES = ["ui", "module", "binary", "tlk", "glossary"]
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
@@ -76,8 +88,8 @@ function fileIdOf(relativePath) {
 
 // Same id scheme (and extractor options) as i18n-inventory.mjs's
 // extractUiEntries(): `ui:<file>:<literal index>`.
-function cppUiSources() {
-  return CPP_UI_FILES.map((relativePath) => ({
+function cppUiSources(files = CPP_UI_FILES) {
+  return files.map((relativePath) => ({
     idPrefix: `ui:${fileIdOf(relativePath)}`,
     literals: extractCppLiterals(
       readFileSync(resolve(repoRoot, relativePath), "utf8"),
@@ -177,7 +189,7 @@ export function generateI18nTables(schemaDir) {
 
   const moduleEntries = loadSchemaFile(resolve(schemaDir, "module.json"), "module").entries
   const { templates: uiTemplates, excluded: uiTemplateExclusions } = buildUiTemplateMap(
-    [...cppUiSources(), ...moduleSources(MODULE_BORON_FILES)],
+    [...cppUiSources(UI_TEMPLATE_SOURCES), ...moduleSources(MODULE_BORON_FILES)],
     { ...uiEntries, ...moduleEntries }
   )
   const moduleNames = buildModuleNameMap(moduleSources([MODULE_NAME_SOURCE]), moduleEntries)
