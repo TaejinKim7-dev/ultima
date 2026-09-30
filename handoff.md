@@ -1369,3 +1369,24 @@ merge 60c1004 (코드 트리는 26 브랜치 53bd3aa와 동일, handoff.md만 �
 - **다음 액션**: ① `korean-shop.spec.ts`의 `talkAcrossCounter`에 실패 지점 진단 캡처(패널 덤프+스크린샷)를 추가하고 4방향 전부 시도 패턴으로 확장 → ② spec 단독 재실행 → ③ 통과 시 **전체 e2e 1회 재실행**(약 40분) → ④ 그때 Todo 24·25·26 ✅ → 26/31, 계획서 두 벌 `[x]` + `cmp` 0. Todo 27(`.claude/worktrees/todo-27-status` `8023dce`, main 합류 후 검증 미완)은 그 뒤.
 - **F1 신규 발견(읽기 전용 조사, exp-1)**: HANDOFF.md가 지목한 3개 갭(task-10 trace·task-14 증거·Y/N)은 `verify:release-docs`를 깨지 않는다. 대신 **worktree에 evidence 6개 파일이 없어 지금 `verify:release-docs`는 실제로 실패한다** — task-3 `full-qa-native-baseline.log`, task-15 `i18n-strict.log`, task-18 `security-audit.log`·`dist-leak-rejected.log`, task-19 `live-pages-smoke.json`·`pages-static-smoke-ci-artifact.json`. 6개 모두 상위 트리 `/home/taejin/ultima/.omo/evidence/`에는 존재하므로 복사로 해결된다. 또 **Y/N 한국어 답은 증거 공백이 아니라 런타임 배선 부재**다 — `src/shell.ts:603`이 유일한 호출부이고 `resolveInput("text", …)`로 하드코딩, 프롬프트 종류를 알리는 bridge 이벤트가 없다(shell.ts:544-548). 문서화로 닫히지 않으므로 신규 Todo가 필요할 수 있다(사용자 결정).
 - **미해결/미실행**: `git push origin main`은 **하지 않았다**(사용자 승인 필요 — 이번 세션에서 승인 요청 안 함). Todo 27 검증, F1~F4 재검토, F3 WebKit은 미실행.
+
+### 2026-09-30 22:00 — korean-shop 실패 원인 확정(오래된 모듈) + Todo 28 재발 방지 (branch `todo-28-build-freshness`, main 미merge)
+
+**1. 원인 확정 (관측 기반)**
+- 증상: 통합 e2e에서 `korean-shop.spec.ts` 2건이 `nobody answered across the counter`로 실패(단독 재실행에서도 재현).
+- 실패 지점 진단 캡처를 추가한 뒤 1회 실행(`task-25/shop-failure-ArrowDown.log/.png`): 시도 #1에서 `대화: 방향?` 뒤로 패널 출력이 끊김. 캔버스에는 `Talk: South / Welcome unto The Healer / Harmony says: Peace and Joy be with you friend. Are you in need of help?`(영어) → **상인은 응답했지만 한국어 vendor 훅(web-say)이 한 번도 호출되지 않음.** 이전 세션의 1순위 가설 "NPC 접근 실패"는 틀림.
+- 근본 원인: 통합 환경의 `build/host/modules/Ultima-IV.mod`가 09-27 22:34 빌드(`web-say` 0건). Todo 25의 `vendors.b` 변경(09-29 21:58, `63163ed`)보다 오래됨. 통과했던 todo-25 worktree 모듈(09-29 23:27)은 `web-say` 1건. 통합 게이트는 `build:wasm`만 재실행하고 `build:modules`를 빠뜨림. 추가로 `scripts/build-wasm.mjs`가 `build/host/modules`를 `build/wasm-release/modules`로 **복사**하고 그 복사본이 실제 서빙되므로, 모듈만 재빌드해도 wasm 단계를 다시 안 돌리면 여전히 옛 모듈이 서빙됨(이번 세션에서 실제로 한 번 겪음 → 해당 run 중단).
+- 해결: 모듈 재빌드 + wasm-release로 재복사 → `korean-shop` **2/2 통과(5.5분)**, 테스트 접근 로직 변경 없음. 진단 캡처 커밋 `08c333c`(branch `todo-25-shop-approach`).
+
+**2. Todo 28 (신규, 사용자 지시 "stamp 강제 + 보조책 전부 적용") — 커밋 `adb5aa6`**
+- `scripts/lib/build-stamp.mjs` + `npm run check:build-fresh`: `build:modules`/`build:wasm`이 소스 해시 stamp(`.build-stamp.json`) 기록. 소스가 바뀌었거나, stamp가 없거나(기존 빌드), `wasm-release/modules` 복사본이 새 모듈과 다르면 실패 + 고칠 명령 안내. 강제 지점: `build:site`(모든 e2e 경유, vite 실행 전 실패), `vite dev`(vitest에서는 제외), `build:wasm`(오래된 모듈 복사 거부).
+- `npm run verify:integration`: build:modules → build:wasm → check:build-fresh → test:unit → verify:repo-sources → typecheck → build → i18n:check --strict → build:site --base=/ultima/ → audit:dist --require-engine → plan cmp → git diff --check → e2e(chromium, workers=1). 첫 실패에서 중단, exit code를 `.omo/evidence/ultima-web/integration/verify-integration.log`에 추가. `--skip=e2e` 지원.
+- `tests/e2e/fixtures.ts`: 모든 실패 e2e에 `failure-panel.txt`(패널 + 포커스 요소) + `failure-screen.png` 자동 첨부. 22개 spec 전부 import 교체, `tests/unit/e2e-failure-capture.test.ts`가 강제.
+- `AGENTS.md`/`docs/TESTING_POLICY.md`: 관측 먼저·`build/` 전체 비교·check:build-fresh 우회 금지·통합은 verify:integration으로만. merge 게이트에 `npm run check:build-fresh` 추가. 분모 31→32.
+- 유닛 RED→GREEN: `build-stamp` 8, `verify-integration` 4, `e2e-failure-capture` 23 (로그 `task-28/red-*.log`, `green-all.log`).
+
+**3. 진행 중**: 두 브랜치 합친 트리(`da10ae1` + 문서)에서 `npm run verify:integration`(분리 프로세스, PLAYWRIGHT_PORT=4570). 게이트 전부 exit 0 확인(build:modules · build:wasm · check:build-fresh · test:unit 37 files/443 · verify:repo-sources · typecheck · build · i18n:check --strict 4523 · build:site · audit:dist --require-engine · plan cmp · git diff --check). 전체 e2e 진행 중(22:00 기준 11번째까지 실패 없음). **결과 미확인.**
+
+**4. 다음**: verify:integration PASS → Todo 24·25·26·28 ✅(27/32) + 계획서 `[x]`·cmp + main merge/push. FAIL → 자동 첨부 캡처부터 확인. 이후 Todo 28 실패 시나리오 증거(`task-28/stale-rejected.log`), Todo 27, F1~F4.
+
+**주의**: 기존 빌드는 전부 stamp가 없으므로 처음 한 번은 `build:modules` + `build:wasm` 재실행 필요(wasm 전 `source .emsdk/emsdk_env.sh`). 새 worktree에서는 `node_modules`·`.emsdk` 심볼릭 링크, `build/host`·`build/wasm-deps` 복사가 필요했다(gitignore 대상, 커밋 금지).
