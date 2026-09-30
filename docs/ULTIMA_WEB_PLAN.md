@@ -384,6 +384,14 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: `.omo/evidence/ultima-web/task-27/status-overlay.png`; failure: a config name missing from the map falls back to the English module string (open source) without breaking the view, `.omo/evidence/ultima-web/task-27/fallback.log`.
   Commit: Y | feat(i18n): show the status area in Korean via overlays
 
+- [ ] 28. Enforce build-artifact freshness and a single ordered integration gate
+  What to do / Must NOT do: after an integration e2e ran against a stale `build/host/modules/Ultima-IV.mod` (built 2026-09-27, before Todo 25 changed `vendors.b`; the gate re-ran only `build:wasm`) and was misdiagnosed, make staleness impossible to miss. `build:modules`/`build:wasm` write source-hash stamps; `build:site` and `vite dev` refuse stale artifacts (including `build/wasm-release/modules` copies that differ from `build/host/modules`); `npm run verify:integration` runs the whole gate in a fixed order; every e2e spec auto-attaches the dialogue panel, focused element and a screenshot on failure. Must not weaken any existing test or let a stale-artifact failure be bypassed.
+  Parallelization: Wave 6 | Blocked by: 25 (incident) | Blocks: F1-F4
+  References: `scripts/lib/build-stamp.mjs`, `scripts/check-build-fresh.mjs`, `scripts/verify-integration.mjs`, `tests/e2e/fixtures.ts`; `scripts/build-wasm.mjs` module copy step; handoff.md 2026-09-30 shop incident.
+  Acceptance criteria: unit tests `build-stamp`, `verify-integration`, `e2e-failure-capture` (RED then GREEN); `npm run verify:integration` passes end to end on the merged tree; the merge gates in AGENTS.md include `npm run check:build-fresh`.
+  QA scenarios: happy: `.omo/evidence/ultima-web/integration/verify-integration.log` PASS; failure: editing a module source after `build:modules` makes `check:build-fresh` and `build:site` exit 1 naming `npm run build:modules`, evidence `.omo/evidence/ultima-web/task-28/stale-rejected.log`.
+  Commit: Y | build: enforce build-artifact freshness and one ordered integration gate
+
 ## Final verification wave
 > Runs in parallel after ALL todos. ALL must APPROVE. Surface results and wait for the user's explicit okay before declaring complete.
 - [ ] F1. Plan compliance audit

@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
-import { expect, test } from "@playwright/test"
+import { expect, test } from "./fixtures.ts"
 
 // Step 8 focused browser QA: the shell's real input queue (bundled from
 // src/bridge/input-queue.ts) is driven with genuine DOM keydown and IME

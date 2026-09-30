@@ -2,6 +2,8 @@ import { copyFileSync, createReadStream, existsSync, mkdirSync, readdirSync, sta
 import { resolve } from "node:path"
 import type { Plugin } from "vite"
 import { configDefaults, defineConfig } from "vitest/config"
+// @ts-expect-error -- plain .mjs build helper, no type declarations
+import { assertFresh } from "./scripts/lib/build-stamp.mjs"
 
 // Serves/copies the generated (git-ignored) wasm build output --
 // build/wasm-release/{xu4.mjs, xu4.wasm, modules/*} -- under a fixed
@@ -50,6 +52,9 @@ function wasmEngineAssets(): Plugin {
   return {
     name: "wasm-engine-assets",
     configureServer(server) {
+      // Todo 28: `vite dev` serves build/ directly, so enforce freshness here
+      // too (build:site enforces it for `vite build`/preview/e2e).
+      if (process.env["VITEST"] === undefined) assertFresh(__dirname)
       server.middlewares.use(urlPrefix, (req, res, next) => {
         const relative = (req.url ?? "").replace(/^\/+/, "").split("?")[0] ?? ""
         const filePath = resolveAllowedPath(relative)

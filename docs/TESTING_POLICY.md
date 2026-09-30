@@ -55,6 +55,13 @@ npm run verify:release
 
 각 작업 Todo는 필요한 더 좁은 명령도 지정한다. 예를 들어 `npm run test:unit -- tests/unit/input-queue.test.ts`처럼 특정 컴포넌트 테스트를 직접 실행할 수 있어야 한다.
 
+## Build Freshness And Failure Evidence (Todo 28)
+
+- `build:modules` and `build:wasm` write `.build-stamp.json` source hashes; `build:site` (every e2e run) and `vite dev` refuse artifacts older than their sources, including module copies under `build/wasm-release/modules` that differ from `build/host/modules`. Never bypass `npm run check:build-fresh`.
+- Run the integration gate only as `npm run verify:integration` (fixed order, e2e last; `--skip=e2e` for a quick gate). Each step's exit code is appended to `.omo/evidence/ultima-web/integration/verify-integration.log`.
+- Every e2e spec takes `test` from `tests/e2e/fixtures.ts`, which attaches `failure-panel.txt` (dialogue panel + focused element) and `failure-screen.png` to every failing test. `tests/unit/e2e-failure-capture.test.ts` enforces this.
+- Diagnose from those observations before proposing a cause; when claiming two builds are identical, compare every artifact under `build/`, not one file.
+
 ## Completion Rule
 
 작업 하나가 완료되려면 다음이 모두 필요하다.

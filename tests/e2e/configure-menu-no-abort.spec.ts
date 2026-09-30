@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test"
+import { expect, test } from "./fixtures.ts"
 import { existsSync, readFileSync } from "node:fs"
 
 // Regression spec for a WASM-only Aborted(RuntimeError: unreachable) crash

@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
-import { expect, test } from "@playwright/test"
+import { expect, test } from "./fixtures.ts"
 
 const evidenceDir = fileURLToPath(new URL("../../.omo/evidence/ultima-web/task-5/", import.meta.url))
 
