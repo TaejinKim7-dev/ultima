@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
-import { expect, test, type Page } from "@playwright/test"
+import { expect, test, type Page } from "./fixtures.ts"
 import { REQUIRED_ULTIMA4_ENTRIES } from "../../src/engine/zip.ts"
 import { buildStoreZip } from "../lib/test-zip.ts"
 

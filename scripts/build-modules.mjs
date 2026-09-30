@@ -3,6 +3,7 @@ import { createHash } from "node:crypto"
 import { existsSync, mkdirSync, readFileSync, rmSync, statSync } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
+import { MODULES_STAMP, writeStamp } from "./lib/build-stamp.mjs"
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const boronBin = process.env.BORON_BIN ?? resolve(repoRoot, "build/host/boron/boron")
@@ -51,7 +52,8 @@ function main() {
     console.log(`  ${module.label}: ${statSync(outputPath).size} bytes, sha256 ${sha256(outputPath)}`)
   }
 
-  console.log(`Modules written to ${outDir}`)
+  writeStamp(repoRoot, MODULES_STAMP)
+  console.log(`Modules written to ${outDir} (freshness stamp recorded)`)
 }
 
 try {

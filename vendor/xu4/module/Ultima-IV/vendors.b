@@ -2,7 +2,10 @@ vendors: [
 
 random/seed 'clock
 
-=>: func [msg data] [>> construct msg data]
+=>: func [msg data] [
+    web-say msg reduce data
+    >> construct msg data
+]
 
 talk-to: func [vendor locale /extern voice] [
     voice: none
@@ -47,6 +50,7 @@ input-shop: func [msg choices] [
     ; Trim trailing newline (allows double braced strings to be used).
     if eq? '^/' last msg [msg: slice msg -1]
 
+    web-say msg reduce shop-vars
     >> construct msg shop-vars
     input-choice choices
 ]

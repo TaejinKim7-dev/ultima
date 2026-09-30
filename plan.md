@@ -24,7 +24,7 @@
 - **제품 목표 재확인 (2026-09-27)**: 한국어로 실제 플레이할 수 있는 웹 기반 Ultima IV가 목표다. 아래 수치는 계획 항목 승인률이며 한글판 제품 완성률이 아니다. 이번 NPC alias 재검증 스크린샷의 실제 대화는 영어였다. Step 11/12/14에 기록된 실제 엔진 출력 연결 gap을 해소하고 한국어 인트로·대화·상태/메뉴를 실제 플레이에서 검증하기 전에는 출시 완료로 판정하지 않는다.
 - **정정된 플레이 요구사항**: 플레이어는 영어 keyword 또는 한국어 alias를 입력할 수 있어야 하며, 실제 게임에 표시되는 NPC 응답은 한국어여야 한다. 현재 검증된 것은 한국어 alias 입력 동작뿐이고, Calabrini의 실제 NPC 응답은 영어였다. 따라서 한국어 NPC 출력은 아직 미완료이며 출시를 막는다.
 - **세션 운영 제한**: 이 세션의 한도는 5시간이다. 남은 시간·컨텍스트·예산 중 하나라도 5% 미만이 되면 active work를 중단하고 현재 상태를 `plan.md`와 `handoff.md`에 기록한다.
-- **승인 기준: 23 / 31 = 74.2%** (Step 1~23 ✅ — Todo 23 완료 2026-09-29: screenMessage 훅(format FNV-1a 해시만 전송, 미매핑 폐기), shrine.cpp 18건 번역, 전체 e2e 41/41. 24·25·26은 브랜치 구현 완료·미merge, 27은 26 merge 후. 2026-09-27 사용자 결정으로 Todo 23~27 추가, 분모 26→31. 추가 직전 값은 22/26 = 84.6%).
+- **승인 기준: 27 / 32 = 84.4%** (2026-09-30: Todo 24·25·26·28 ✅ — `npm run verify:integration` PASS, 13단계 전부 exit 0, 전체 e2e 45/45 34.5분. Todo 28 추가로 분모 31→32). 이전 기록: (Step 1~23 ✅ — Todo 23 완료 2026-09-29: screenMessage 훅(format FNV-1a 해시만 전송, 미매핑 폐기), shrine.cpp 18건 번역, 전체 e2e 41/41. 24·25·26은 브랜치 구현 완료·미merge, 27은 26 merge 후. 2026-09-27 사용자 결정으로 Todo 23~27 추가, 분모 26→31. 추가 직전 값은 22/26 = 84.6%).
 - **Step 20 완료 (2026-09-27, branch `todo-20-release-docs` → main)**: `README.md` 갱신, `docs/WEB_PORT.md`·`docs/GITHUB_PAGES.md` 신규(병렬 Fork가 초안, Todo 22 범위 반영), `npm run verify:release-docs`(TDD, handoff.md는 역사 기록이라 검사 제외). fresh-clone QA: 문서대로 clean clone에서 npm ci → deps:host → build:modules → emsdk → deps:wasm → build:wasm → build:site → audit --require-engine 전부 0, CI와 같은 정적 서버 smoke 통과(`task-20/fresh-clone.log`; emsdk는 기존 4.0.23 설치를 symlink — 재다운로드 생략). 이 QA가 verifier 버그를 찾음: quickstart가 `task-6/` 빌드 로그를 만들어 clean clone에서 verify:release-docs가 실패 → 과제 디렉터리 단위로 검사하도록 수정(RED→GREEN). 실패 QA `missing-pin.log`(exit 1). 게이트 `npm ci`·unit 318/318·verify·typecheck·build·build:site·audit·verify:workflow·verify:release-docs·diff-check·cmp 전부 0.
 - **Step 22 완료 (2026-09-27, branch `todo-22-korean-npc-output` → main)**: 웹 빌드에서 `runTalkDialogue`의 모든 출력을 EM_JS `Module.u4Text`로 보냄(`vendor/xu4/src/discourse_tlk.cpp`, `__EMSCRIPTEN__` 한정). TLK를 가리키는 인자·응답은 `@MAP:npcIndex:field` id로만 전달해 영어 TLK 원문은 엔진 밖으로 안 나감. 셸이 `src/dialogue/talk-compose.ts`로 한국어 줄을 조립해 대화 패널에 표시. 대화 틀 문장 18개 inventory+번역(병렬 Fork A). 증거: `korean-npc-output.spec.ts` RED(패널 한국어 0) → GREEN(Calabrini look·HEAL 응답(response2, 영어 입력+`건강` alias)·이름 한국어), 전체 e2e 40/40(22.0분), 게이트 `npm ci`·unit 300/300·verify·typecheck·i18n strict·build·build:site·audit --require-engine·verify:workflow·diff-check·cmp 전부 exit 0. 범위 밖(영어 유지): Lord British/Hawkwind, 상점, 인트로, 상태창, 기타 screenMessage, 캔버스 글자.
 - **Todo 22 신설 (2026-09-27, 사용자 결정)**: 실제 엔진 NPC 대화를 한국어로 DOM 패널에 표시. 근거는 `.omo/drafts/korean-output-gap-design.md` — 번역 lookup이 wasm에 없고, 엔진→JS 텍스트 경로가 없으며, `korean-progression.spec.ts`는 `ultimaI18n.resolve`만 검사. 범위는 U4 TLK NPC 대화(응답 필드 + 대화 틀 문장). Todo 20은 22에 의존하도록 변경.
@@ -96,10 +96,11 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 | 20 | README/사용자 가이드/증거 인덱스/handoff | ✅ | — | 19,22 — fresh-clone QA 통과, `verify:release-docs` 0 |
 | 22 | 실제 엔진 NPC 대화 → 한국어 DOM 패널 표시 (2026-09-27 신규) | ✅ | ✅ | 13,14,15,21 — 마을 주민 TLK 대화만(castle/상점/인트로/상태창은 영어). e2e `korean-npc-output` |
 | 23 | 게임 내 C++ screenMessage → 한국어 대화 패널 (2026-09-27 신규) | ⬜ | ⬜ | 22 |
-| 24 | Lord British/Hawkwind/Codex·엔딩 → 한국어 대화 패널 (2026-09-27 신규) | ⬜ | ⬜ | 22 |
-| 25 | 상점(vendor) 대화 → 한국어 (2026-09-27 신규) | ⬜ | ⬜ | 22,23 |
-| 26 | 인트로(타이틀 메뉴·이야기·집시 질문·캐릭터 생성·Configure) → 한국어 오버레이 (2026-09-27 신규) | ⬜ | ⬜ | 12,14,15,21,22 |
+| 24 | Lord British/Hawkwind/Codex·엔딩 → 한국어 대화 패널 (2026-09-27 신규) | ✅ | ⬜ | 22 |
+| 25 | 상점(vendor) 대화 → 한국어 (2026-09-27 신규) | ✅ | ⬜ | 22,23 |
+| 26 | 인트로(타이틀 메뉴·이야기·집시 질문·캐릭터 생성·Configure) → 한국어 오버레이 (2026-09-27 신규) | ✅ | ⬜ | 12,14,15,21,22 |
 | 27 | 상태창·메뉴(파티·Ztats·무기/방어구/아이템) → 한국어 오버레이 (2026-09-27 신규) | ⬜ | ⬜ | 12,14,15,21,22,26 |
+| 28 | 빌드 산출물 신선도 강제 + `verify:integration` 단일 게이트 + e2e 실패 자동 캡처 (2026-09-30 신규, shop 오진 사고 재발 방지) | ✅ | — | 25 |
 
 ### Final — 독립 검증 (F1~F4 = 진행률 28~31번째)
 | # | 단계 | 상태 |
@@ -241,7 +242,51 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 - `tlk.json`(3072건): `TOWN:NPC번호:필드` 구조, 16개 마을 × NPC 16명 × 12필드(name/pronoun/look/job/health/question/yes/no/response1/response2/topic1/topic2). `topic1`/`topic2`(512건)는 discourse가 대화 주제로 직접 매칭하는 4글자 코드(예: "PLAY","COMP")라 `lordBritishKeyword`와 같은 이유로 영어 그대로 pass-through 처리. 나머지 10필드(2560건)도 16/16 마을 전부 완료. 마지막 YEW 160건은 `.omo/drafts/tlk-yew-translation-draft.json`에서 적용했고, worker 독립 검증으로 draft key 누락 0·non-YEW 변경 0·changedEntryCount 160 확인.
 - 게이트: `npm run i18n:check`와 `npm run i18n:check -- --strict` 모두 4411 entries, pending 0, exit 0. `npm run i18n:generate`로 4388 translated entries + 9 aliases를 `src/i18n/generated/strings.ts`, `native/i18n/u4_i18n_table.inc`, `native/i18n/ko-overlay.b`에 반영. 새 `tests/e2e/korean-progression.spec.ts`는 실제 `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip`로 2/2 통과(1.6분): semantic Korean coverage + 실제 저장/재로드, strict failure fixture. Generator가 Boron overlay line-ending whitespace를 내던 문제를 RED→GREEN(`tests/unit/localization-boundaries.test.ts`)로 고치고 `git diff --check` exit 0 확인.
 
-## 바로 다음 순서 (2026-09-29 갱신 — 23/31)
+## 바로 다음 순서 (2026-09-30 22:42 갱신 — **27/32 = 84.4%**, Todo 24·25·26·28 ✅ main merge)
+1. **Todo 27 재개**: worktree `.claude/worktrees/todo-27-status`(`8023dce`)에 이전 에이전트의 미커밋 WIP 4파일(stats.cpp 리터럴을 screenMessage UI 템플릿에서 제외 — 이중 출력 방지) 검토·커밋 → 최신 main merge(Todo 25·28 포함; 겹치는 파일 4개는 생성 테이블 재생성·manifest 해시 갱신) → 신규 `korean-status-overlay.spec.ts`를 `./fixtures.ts` import로 전환 → `npm run verify:integration` → main merge → 28/32.
+2. **F1~F4**: F1 사전 점검 발견 — `verify:release-docs`가 gitignore된 증거에 의존해 fresh clone/worktree에서 구조적으로 실패(결정 필요). 기존 F1/F4 지적(Y/N 한국어 답 런타임 배선 없음 등)은 아래 기존 기록 참고.
+3. 운영: 통합 검증은 `npm run verify:integration`만 사용(AGENTS.md). 첫 실행 전 모든 기존 빌드는 stamp가 없으므로 `build:modules`+`build:wasm` 재실행이 강제된다.
+
+(이하 이전 기록)
+### 이전 순서 (2026-09-30 22:00 갱신 — 23/32, Todo 28 추가, 통합 검증 실행 중)
+**✅ `korean-shop.spec.ts` 실패 원인 확정·해결 (이 세션 직접 실행)**
+- 원인은 **테스트/코드가 아니라 오래된 빌드 산출물**: 통합 e2e가 쓴 `build/host/modules/Ultima-IV.mod`(및 이를 복사한 `build/wasm-release/modules/`)는 09-27 22:34 빌드로, Todo 25가 `vendors.b`에 web-say 호출을 넣은 09-29 21:58보다 오래됨(web-say 0건 vs 통과 브랜치 1건). 통합 게이트는 `build:wasm`만 재실행하고 `build:modules`를 빠뜨렸고, 이전 조사는 `xu4.wasm`만 비교해 놓쳤다.
+- 증거: 실패 지점 진단 캡처(`task-25/shop-failure-ArrowDown.log/.png`) — 캔버스에는 `Welcome unto The Healer / Harmony says: ...`(영어, 상인은 응답함), 패널에는 한국어 0줄. 이전 1순위 가설 "NPC 접근 실패"는 **틀림**.
+- 해결: 모듈 재빌드만으로 `korean-shop` **2/2 통과**(5.5분), 테스트 접근 로직 변경 없음. 진단 캡처는 커밋 `08c333c`(branch `todo-25-shop-approach`).
+- **재발 방지 = 신규 Todo 28** (branch `todo-28-build-freshness`, `adb5aa6`): stamp 기반 산출물 신선도 강제(`check:build-fresh`, `build:site`·`vite dev`에서 강제), `npm run verify:integration` 단일 순서 게이트, 모든 e2e 실패 자동 캡처(`tests/e2e/fixtures.ts`), AGENTS.md/TESTING_POLICY 조사 규칙. 유닛 35개 RED→GREEN.
+- **실행 중**: 두 브랜치를 합친 트리에서 `npm run verify:integration`(PLAYWRIGHT_PORT=4570). 게이트 전부 통과(build:modules·build:wasm·check:build-fresh·unit 443/443·verify·typecheck·build·i18n --strict 4523·build:site·audit:dist --require-engine·plan cmp·diff-check), 전체 e2e 진행 중.
+
+1. `verify:integration` 결과 확인(로그 `.omo/evidence/ultima-web/integration/verify-integration.log`). **PASS면** Todo 24·25·26·28 ✅ → **27/32**, 계획서 두 벌 `[x]` + cmp, handoff.md 게이트 기록, main merge + push. **FAIL이면** 자동 첨부된 `failure-panel.txt`/`failure-screen.png`부터 확인.
+2. Todo 28 QA 실패 시나리오 증거(`task-28/stale-rejected.log`: 모듈 소스 수정 후 `check:build-fresh`·`build:site` exit 1) 생성.
+3. Todo 27 재개(worktree `.claude/worktrees/todo-27-status` `8023dce`) — 이제 `verify:integration`으로 검증.
+4. F1~F4 (아래 기존 기록의 F1 신규 발견 포함).
+5. 주의: 기존 빌드는 전부 stamp가 없어 **처음 한 번은 `build:modules` + `build:wasm` 재실행이 필수**(check:build-fresh가 이를 강제). wasm 빌드 전 `source .emsdk/emsdk_env.sh`.
+
+## 바로 다음 순서 (2026-09-30 갱신 — 23/31, **Todo 24·25·26 ✅ 보류 사유가 "미실행"에서 "실패"로 변경**)
+**⛔ 통합 e2e 실행 완료 · 실패 (2026-09-30, 이 세션 직접 실행)**
+- `main`(`fb583a6`) 게이트 **전부 exit 0**: `build:wasm` · `test:unit`(34 files/408 tests) · `verify:repo-sources` · `typecheck` · `build` · `i18n:check --strict`(4523 entries) · `build:site --base=/ultima/` · `audit:dist --require-engine` · `git diff --check` · 계획서 2벌 `cmp` 0. 증거 `.omo/evidence/ultima-web/integration/gate-2026-09-30.log`.
+- 전체 e2e(Chromium, 실제 `ultima4.zip`, workers=1, `PLAYWRIGHT_PORT=4470`): **43 passed / 2 failed (40.0분)**. 증거 `integration/e2e-full-2026-09-30.log`.
+- 실패 2건은 **모두 `tests/e2e/korean-shop.spec.ts`(Todo 25)**: `healer (input-shop)`(spec:250)·`food vendor (=>)`(spec:288) → 둘 다 `talkAcrossCounter`에서 `nobody answered across the counter (ArrowDown/ArrowUp)` (spec:201 throw).
+- **격리 재실행으로 재현 확인**: 이 스펙만 단독 실행(`PLAYWRIGHT_PORT=4471`) → **동일 2건 실패**. 따라서 **flake가 아니라 재현 가능한 실제 실패**다. 증거 `integration/e2e-shop-rerun-2026-09-30.log`. → AGENTS.md(테스트 삭제·약화 금지)에 따라 **Todo 24·25·26은 ✅ 처리하지 않는다. 진행률은 23/31로 유지.**
+- **원인 조사(읽기 전용, @oracle) 결과 — 4개 가설 중 3개는 기각**:
+  - **wasm 불일치 기각(결정적)**: main의 `xu4.wasm`와 23:28에 통과했던 브랜CH 바이너리는 **정확히 2바이트만** 다르고 그 값이 빌드 날짜 문자열(`"30"` vs `"29"`)이다. `dist/engine/`은 매 실행마다 `build/wasm-release/`에서 재복사되므로 staleness 경로 없음.
+  - **merge/생성 손실 기각**: healer·food의 템플릿 6개(`vendors:210/218/109/113/112/115`)와 이름 4개(`The Healer`·`Harmony`·`The Sage Deli`·`Shaman`)가 main 생성 테이블에 **모두 존재**하고 번역도 비어있지 않다.
+  - **vendor 훅 배선 기각(강함)**: `cf_webSay` → `u4_web_vendor` → `src/shell.ts` receiver → `vendor-compose.ts` 배선 6중 확인. healer 4쌍/food 2~4쌍은 bail-out 한도(>8쌍·UCS-2·pool 1024) 미달.
+  - **유력(1순위, 단 미확정)**: **vendor NPC 타일 접근 실패**. `scripts/qa-native-baseline.mjs:23-31`이 **같은 실패 모드("Funny, no response!")**를 이미 문서화하며 해법으로 "매 스텝 4방향 전부 시도"를 쓰고 있다. 통과한 `korean-npc-output.spec.ts:106-113`은 그 해법(`npcTalkDirs` 4방향)을 쓰고, 실패한 이 스펙은 **단일 방향만** 시도한다(`spec:185-202`). NPC가 `MOVEMENT_WANDER`면(`location.cpp:223-228` + `xu4.cpp:293` seed=time) 위치가 실행마다 달라진다.
+  - **확인 필요**: healer/food vendor의 실제 `movement` 값(브라우저가 사용자 zip에서 추출하는 원본 데이터라 repo에 검사할 artifact가 없고 커밋도 금지), 그리고 실패 시 패널에 `"대화: "`(`game.cpp:2492`→`ui:game:141`)가 있었는지 `"이상하게, 반응이 없다!"`(`game.cpp:2513`→`ui:game:143`)가 있었는지 — **현재 스펙은 실패 지점의 패널을 한 번도 기록하지 않아**(성공 뒤에만 `shop-observation.log` 작성) 이 둘을 구분할 관측값이 디스크에 없다.
+- **따라서 재개 순서가 바뀐다**: 다음은 ①~②가 아니라 아래 1번부터.
+
+1. **`korean-shop.spec.ts` 실패 원인 확정(테스트 약화 아님 — 진단 캡처 추가)**: `talkAcrossCounter`(spec:185-202)의 `throw` 직전에 패널 덤프 + 스크린샷을 `shop-failure-<talkKey>.log`로 남기고, `"대화: "` / `"이상하게, 반응이 없다!"` 유무를 명시해 원인을 판정한다. 동시에 접근을 `korean-npc-output.spec.ts:106-113`의 **4방향 전부 시도** 패턴으로 확장(프로젝트에 이미 문서화된 해법, 실패 모드 동일 — 확률적 실패를 확률적으로 시도하는 것이지 검사를 약화하는 것이 아니다).
+2. 위 확정 후 `korean-shop.spec.ts` 단독 재실행 → 통과 시 **전체 e2e 1회 재실행**(약 40분) → 그때 Todo 24·25·26 ✅ → **26/31**, 계획서 두 벌 체크박스 `[x]` + `cmp` 0.
+3. Todo 27 재개(worktree `.claude/worktrees/todo-27-status` `8023dce`에서 build:wasm→게이트→e2e→리뷰) → main merge → 27/31.
+4. F1~F4. **F1 신규 발견(읽기 전용 조사)**: HANDOFF.md가 지목한 3개 갭(task-10 trace·task-14 증거·Y/N)은 `verify:release-docs`를 깨지 않지만, **worktree에 evidence 6개 파일이 없어 지금 `verify:release-docs`가 실제로 실패**한다(task-3 `full-qa-native-baseline.log`, task-15 `i18n-strict.log`, task-18 `security-audit.log`·`dist-leak-rejected.log`, task-19 `live-pages-smoke.json`·`pages-static-smoke-ci-artifact.json` — 모두 상위 트리 `/home/taejin/ultima/.omo/evidence/`에는 존재, worktree에 미복제). 또 **Y/N 한국어 답은 "증거만 없는" 게 아니라 런타임 배선 자체가 없다** — `src/shell.ts:603`이 유일한 호출부이고 `resolveInput("text", …)`로 하드코딩이며, 프롬프트 종류를 알려주는 bridge 이벤트가 없다(shell.ts:544-548 주석). 문서화로 닫히지 않으니 신규 Todo가 필요할 수 있다(사용자 결정).
+
+**⏸ 이전 중단 기록 (2026-09-29, 사용자 지시로 진행 중단 — 아래는superseded)**
+- 진행률 **23/31 (74.2%)** 유지. ✅ = Todo 1~23. Todo 24·25·26은 코드가 main에 merge되었으나(24 `8c4edbb` push됨, 26 `dc5764d` push됨, 25 merge `c4cdbf5` **로컬만·미push**, origin/main=`dc5764d`) 계획의 '전체 e2e 스위트' 통합 확인 전이라 ✅ 보류.
+- 통합 검증 중단 지점: main(`c4cdbf5`) 게이트는 exit 0 (build:wasm, test:unit, verify:repo-sources, typecheck, build, build:site, audit:dist --require-engine, git diff --check; `.omo/evidence/ultima-web/integration/gates.log`). **전체 e2e(Chromium 42+개)는 시작 직후 중단 — 미실행.**
+- Todo 27: branch `todo-27-korean-status` (`8023dce`, worktree `.claude/worktrees/todo-27-status`)에 구현 커밋 4개(RED→web→engine→e2e)+main merge까지 있으나, main 합류 후 wasm 재빌드·게이트·e2e·리뷰는 **미완료**(에이전트 중단). 에이전트 보고 게이트는 merge 이전 트리 기준.
+- 미처리 리뷰 항목: 24 — C++ 채널 동작 테스트 부재(e2e 의존), 영어 부재 negative assert 약함; 25 — 실제 construct throw 재현 테스트 없음(소스 패턴 테스트만), 무기/방어구/시약/여관 e2e 없음; 26 — About·집시 화면 시각 검증 없음.
+- **재개 순서**: ① `git push origin main`(25 merge 포함, 사용자 push 승인은 이미 받음) ② main에서 전체 e2e 1회(`PLAYWRIGHT_PORT` 별도, 다른 e2e 동시 실행 금지) → 통과 시 Todo 24·25·26 ✅ → 26/31, 계획서 두 벌 체크박스 `[x]`+cmp ③ Todo 27 재개(worktree에서 build:wasm→게이트→e2e→리뷰) → main merge → 27/31 ④ F1~F4.
 0. **Todo 24 merged (main, 미push→push 예정), ✅ 보류**: 개별 e2e(castle·game-messages·npc-output) 3/3, unit 355, 게이트 exit 0. 계획 acceptance의 '전체 e2e 스위트'는 24·26·25 merge 후 통합 1회로 확인한 뒤 ✅(24/31...). Todo 26도 main merge(`60c1004`, 리뷰 수정+main 합류 후 unit 381·게이트·e2e 4 spec 통과 — 에이전트 보고, 코드는 26 브랜치 검증 트리와 동일), ✅ 보류(통합 전체 스위트 대기). 25는 리뷰 수정 중, 27은 구현 중.
 1. **다음 단계: Todo 24·25·26 merge(브랜치 구현 완료, 충돌 정리: manifest 해시·strings.ts 재생성) → 27**. (원래 항목:) Todo 23~27 (사용자 결정 "후속 Todo로 추가", 설계 `.omo/drafts/korean-surface-*.md`). 서로 다른 파일을 건드려 병렬 가능: 23(screen.cpp 일반 메시지)·24(discourse_castle/codex)·26(인트로 오버레이)을 먼저 병렬로, 25(상점, 23 필요)·27(상태창, 26의 가림 규칙 필요)은 그 뒤. 공통 충돌 지점(`vendor/source-manifest.json` 해시, 생성 테이블, `src/shell.ts`, `src/engine/startup.ts`)은 merge 때 재생성·정리.
 2. **제품 결정(2026-09-27)**: 한국어 오버레이는 표시 중 그 영역을 불투명 배경으로 가림; 긴 대사는 패널에 문단 전체를 한 번에 표시.

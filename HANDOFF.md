@@ -1,56 +1,54 @@
 # HANDOFF
-작성 시각: 2026-09-27 22:00 KST
+작성 시각: 2026-09-30 22:42 KST
 
 ## 1. 목표 (What we're building)
-- xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식 + 한국어화. 진행 기준 `plan.md`(25단계).
-- 최종 목표는 **한국어로 실제 플레이하는 웹 기반 울티마 4**. 실제 NPC 응답이 한국어여야 하는데 아직 영어 — 출시 차단(아래 6절, `.omo/drafts/korean-output-gap-design.md`).
-- 이번 세션: Todo 18 완료·merge·push(19/25) → Todo 19 진행 중, 병렬로 Todo 20 검증기 준비 + 한국어 출력 gap 조사.
+- xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식하고 실제 플레이 화면을 한국어화. 진행 기준 `plan.md`.
+- 이번 세션: `korean-shop.spec.ts`(Todo 25) 통합 실패 원인 확정 → 재발 방지용 Todo 28 신설·구현.
 
 ## 2. 현재 상태 (Current state)
-- 진행률 **22/26 = 84.6%** — Todo 22, Todo 20 ✅ main merge/push. 남은 것 F1~F4(F2 APPROVE, F4 REJECT=사용자 결정 필요, F3 브라우저 준비, F1 대기). main `703919a`까지 origin 동기. Pages 실제 배포 확인 완료(run `36316708881`).
-- **Todo 22 진행 중 (branch `todo-22-korean-npc-output`, 미커밋 작업 + Fork A merge `39730db`)**:
-  - 설계: 웹 빌드에서만 `runTalkDialogue`의 모든 출력을 `talkMessage()`로 가로채 EM_JS `Module.u4Text.talk(format, a0, a1)`로 보냄. TLK를 가리키는 인자/응답은 `@MAP:npcIndex:field` id로만 보내므로 영어 TLK 원문은 엔진 밖으로 안 나감. 틀 문장은 xu4 코드 리터럴 그대로 → JS가 `resolveTalkTemplateId`로 id 찾고 `resolveDisplayText`로 한국어. 플레이어 입력은 `u4Text.input` → "> health".
-  - `Discourse`에 `webTlkName`(웹 전용, "moonglow.tlk"→"MOONGLOW"), `TalkState`에 web 필드. Boron 대화는 `webStrings=NULL`로 비활성. `discourse_castle.cpp`용으로 `message` 매크로를 `screenMessage`로 복원.
-  - 확인(직접 실행): e2e RED `korean-npc-output.spec.ts` exit 1(패널에 Calabrini look/health/name 한국어 0건, `task-22/e2e-red.log`, `panel-observation.log`); unit `talk-compose` RED(모듈 없음)→9/9, `startup-sequence` Todo 22 RED 1 failed→11/11; `g++`/`em++ -fsyntax-only` discourse.cpp 0; `verify:repo-sources` 0(xu4 treeSha256 `5a864e41…5e88`); `npm run build:wasm` 0, `wasm-symbols` 8/8; `npm run build` 0; typecheck 0.
-  - Fork A(`39730db`, merge됨): `discourse_tlk.cpp` 틀 문장 18개 inventory+번역(`ui:discourse_tlk:0..17`), `GENERATED_TALK_TEMPLATES`, `resolveTalkTemplateId`, i18n:check --strict 0(4429 entries, fork 보고).
-  - e2e GREEN(커밋 `458ef4d`): 1차 실행은 health 응답 0건으로 실패 → 스크린샷 확인 결과 Calabrini의 topic2가 "HEAL"이라 `U4Talk_dialogue`가 health 필드보다 먼저 response2로 응답(캔버스도 동일). 테스트 기대 필드를 response2로 정정(주석에 근거) → 2차 1/1 통과 2.7분: look 한국어, response2 영어 입력 1회→alias 후 2회, name 한국어(`task-22/e2e-green.log`, `panel-observation.log`, `korean-npc-output.png`, 1차 로그 `e2e-green-run1-wrong-field.log`). fallback 증거 `task-22/fallback.log`(unit).
-  - 전체 e2e 40/40(22.0분). 게이트 1차에서 talk-templates 유닛 RED(추출기가 `TALK_MSG` 미인식) → `f92aa2f`로 수정, 2차 게이트 전부 0.
-  - Fork B 문서 초안(worktree)에 Todo 22 범위 반영(미커밋): 마을 주민 NPC 대사 한국어, castle/상점/인트로/상태창은 영어, corpus 4429.
-- **Todo 20 초안 (Fork B)**: worktree `.claude/worktrees/agent-ac0eaf00f74c3c95a`, branch `todo-20-release-docs-draft` (`dcaeebc` verifier cherry-pick, `53adc2d` 문서). README/docs/WEB_PORT.md/docs/GITHUB_PAGES.md 작성, `verify:release-docs` 0, unit 300/300(fork 보고). handoff.md는 검사 대상에서 제외(역사 기록). 미확인: fresh-clone QA, emsdk 설치 명령 실행. Todo 22 완료 후 한계 절 갱신 필요.
+- 진행률 **27/32 = 84.4%** — Todo 24·25·26·28 ✅ (`verify:integration` PASS, e2e 45/45 34.5분). main에 merge·push됨. 남은 것: Todo 27, F1~F4.
+- branch `todo-28-build-freshness`(origin push됨): Todo 28 `adb5aa6` + `todo-25-shop-approach`(`08c333c`) merge `da10ae1` + 문서 커밋. **main 미merge.**
+- worktree: `/home/taejin/ultima/.claude/worktrees/todo-28-build-freshness` (루트 checkout `f3-real-browser-qa`는 오래된 상태, 다른 세션의 미커밋 변경 있음 — 건드리지 않음).
+- **실행 중**: 위 worktree에서 `npm run verify:integration`(분리 프로세스 `setsid nohup`, PLAYWRIGHT_PORT=4570, 로그 `/tmp/claude-1000/-home-taejin-ultima/918e074e-6ba3-4ac3-9375-fc1c0d98b92b/scratchpad/verify-integration.log`, 최종 결과는 `.omo/evidence/ultima-web/integration/verify-integration.log`). e2e 이전 게이트 12단계 전부 exit 0 확인, 전체 e2e 진행 중 — **결과 확인 필요**.
+- 확인된 것: `korean-shop` 2/2 통과(모듈 재빌드만, 테스트 로직 무변경), 신규 유닛 35개 RED→GREEN, unit 443/443.
 
 ## 3. 변경한 파일 (Files changed)
-- (Todo 19, `0b0ea35`) `.github/workflows/pages.yml`, `scripts/audit-dist.mjs`, `scripts/workflow-verifier.mjs`, `tests/unit/audit-dist.test.ts`, `tests/unit/workflow.test.ts`(기존 YAML-name 테스트 fixture를 바뀐 step 이름으로 갱신, 변형 로직 동일), `tests/e2e/pages-static-smoke.spec.ts`(신규).
-- (Todo 18, main merge `f936e74`) 이전 판 참고: `event.cpp` prompt 훅, `text-prompt-gate.ts`, `startup.ts`, `shell.ts`, `main.ts` 등.
-- untracked: `.omo/drafts/korean-output-gap-design.md`(Fork B), `.omo/boulder.json`, `.omo/start-work/`, `.omo/lazycodex-executor-verify/`, `.claude/`(worktree 포함).
+- `scripts/lib/build-stamp.mjs`, `scripts/check-build-fresh.mjs`(신규) — 소스 해시 stamp와 신선도 검사.
+- `scripts/build-modules.mjs`, `scripts/build-wasm.mjs` — stamp 기록, build:wasm은 오래된 모듈 복사 거부.
+- `scripts/build-site.mjs`, `vite.config.ts` — vite 실행/dev 서버 전에 신선도 강제.
+- `scripts/verify-integration.mjs`(신규), `package.json`(`check:build-fresh`, `verify:integration`).
+- `tests/e2e/fixtures.ts`(신규) + e2e 22개 import 교체 — 실패 시 패널·포커스·스크린샷 자동 첨부.
+- `tests/unit/build-stamp.test.ts`, `verify-integration.test.ts`, `e2e-failure-capture.test.ts`(신규).
+- `tests/e2e/korean-shop.spec.ts` — 말 걸기 시도별 패널 출력 + 실패 스크린샷 기록.
+- `AGENTS.md`, `docs/TESTING_POLICY.md` — 조사 규칙, merge 게이트에 `check:build-fresh`, 분모 32.
+- `.omo/plans/ultima-web.md` = `docs/ULTIMA_WEB_PLAN.md`(cmp 0) — Todo 28 추가. `plan.md`, `handoff.md`, 이 파일.
 
 ## 4. 주요 결정과 근거 (Key decisions)
-- Pages smoke는 `vite preview`가 아닌 plain static server(`/ultima/`만 서빙, SPA fallback 없음) — preview 미들웨어가 dist/engine 누락을 가리기 때문.
-- `--require-engine`은 opt-in 플래그: 엔진 없이 빌드한 로컬 dist도 leak audit은 가능해야 해서. CI에서는 verify:workflow가 플래그 사용을 강제.
-- CI 엔진 빌드를 위해 apt(`libpulse-dev libvorbis-dev libflac-dev`) 설치: `deps:host`가 faun도 빌드하고 faun 링크에 필요.
-- 한국어 출력 구현은 새 Todo(분모 변경)라 착수하지 않고 설계 메모만.
+- shop 실패는 테스트가 아니라 **오래된 `Ultima-IV.mod`** 탓(09-27 빌드, Todo 25 `vendors.b` 변경은 09-29). 통합 게이트가 `build:modules`를 빠뜨렸고, 이전 조사는 wasm만 비교했다. 실패 지점 캡처 1회로 확정 → 추측 기반 수정(4방향 접근 등)은 하지 않음.
+- `build-wasm.mjs`가 모듈을 `build/wasm-release/modules`로 복사해 그 복사본이 서빙되므로, 신선도 검사는 복사본까지 비교한다.
+- 산출물이 하나도 없으면 통과(엔진 없는 로컬 dist도 audit 가능해야 함), 있으면 반드시 stamp 일치.
 
 ## 5. 다음 할 일 (Next steps)
-- [x] Todo 22 ✅ main merge `65569fa` + push (21/26).
-- [ ] **Todo 20 진행 중** (branch `todo-20-release-docs` @ `be813f4` = draft를 main 위로 rebase; 이전 verifier 전용 worktree/브랜치는 cherry-pick돼 제거). `verify:release-docs` main checkout에서 0, `missing-pin.log` exit 1(의도). **진행 중**: fresh-clone QA(`task-20/fresh-clone.log`, emsdk는 기존 설치 symlink — 문서화된 편차).
-- [ ] 병렬 진행 중(결과 미확인): Todo 22 main 배포 감시(run `36319477157`), F2 코드 품질 리뷰 에이전트, F4 범위 충실도 에이전트(둘 다 `.omo/evidence/ultima-web/final/`에만 기록).
-- [ ] Todo 20 게이트 → ✅ 22/26 → merge/push. 이후 F1(계획 준수, Todo 20 이후), F3(Firefox/WebKit 미설치 — `~/.cache/ms-playwright`엔 chromium만; 설치는 큰 다운로드라 사용자 확인 필요).
+- [x] `verify:integration` PASS → Todo 24·25·26·28 ✅, main merge + push.
+- [x] Todo 28 실패 시나리오 증거 `task-28/stale-rejected.log`.
+- [ ] Todo 27 재개(worktree `.claude/worktrees/todo-27-status` `8023dce`) → `verify:integration`으로 검증.
+- [ ] F1~F4.
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
-- Pages Source 설정은 사용자만 가능. 미설정이면 main의 deploy job은 계속 실패.
-- 한국어 NPC 출력 미구현 — 출시 차단. 계획 체크박스 ✅가 이를 대신하지 않음.
-- 이번 세션 작업 디렉터리가 실수로 Fork A worktree로 바뀜(`cd` 부작용). 메인 저장소 작업은 절대경로/`git -C /home/taejin/ultima` 사용.
-- e2e 동시 실행 시 다른 `PLAYWRIGHT_PORT` 필수. NPC 접근 스펙끼리는 동시 실행 자제.
-- `memory-smoke`는 JS heap만 측정.
-- `pkill -f "<패턴>"`은 자기 셸까지 죽임 — `"[p]laywright ..."` 대괄호 트릭.
+- 기존 모든 빌드는 stamp가 없음 → 처음 한 번 `build:modules` + `build:wasm` 필수(check:build-fresh가 강제). wasm 전 `source .emsdk/emsdk_env.sh`.
+- 새 worktree 준비: `node_modules`·`.emsdk` 심볼릭 링크, `build/host`·`build/wasm-deps` 복사(모두 gitignore, 커밋 금지).
+- 긴 작업(>10분)은 Bash 도구 제한에 끊길 수 있어 `setsid nohup` 분리 프로세스로 실행.
+- e2e 동시 실행 시 다른 `PLAYWRIGHT_PORT` 필수, NPC 접근 스펙끼리는 동시 실행 자제.
+- `pkill -f "<패턴>"`은 자기 셸까지 죽임 → `"[p]attern"` 대괄호 트릭.
 
 ## 7. 재개 방법 (How to resume)
 ```bash
-cd /home/taejin/ultima
-git checkout todo-19-pages-release && git status -sb
-export PATH="$HOME/.local/opt/node22/bin:$PATH"
-export ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip
-gh run view 36315000683
-npm run build:site -- --base=/ultima/ && npm run audit:dist -- --require-engine && npm run verify:workflow
-PLAYWRIGHT_PORT=4248 npx playwright test tests/e2e/pages-static-smoke.spec.ts --project=chromium --workers=1
+cd /home/taejin/ultima/.claude/worktrees/todo-28-build-freshness
+git status -sb && git log --oneline -4
+tail -5 .omo/evidence/ultima-web/integration/verify-integration.log
+# 재실행이 필요하면:
+source .emsdk/emsdk_env.sh
+export PATH="$HOME/.local/opt/node22/bin:$PATH" ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip PLAYWRIGHT_PORT=4570
+npm run verify:integration
 ```
-- 상세: `handoff.md`, 진행 순서 `plan.md` "바로 다음 순서".
+- 상세: `handoff.md` 마지막 절 "2026-09-30 22:00 — korean-shop 실패 원인 확정". 순서: `plan.md` "바로 다음 순서".

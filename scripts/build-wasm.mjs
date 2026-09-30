@@ -29,6 +29,7 @@ import {
 } from "node:fs"
 import { resolve, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
+import { checkFreshness, MODULES_STAMP, WASM_STAMP, writeStamp } from "./lib/build-stamp.mjs"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -340,7 +341,13 @@ async function main() {
     log(`Warning: expected WASM file missing: ${wasmFile}`)
   }
 
-  // Copy module assets
+  // Copy module assets. Todo 28: refuse to copy modules that are older than
+  // their sources -- the copy under build/wasm-release/modules is what ships.
+  const moduleProblems = checkFreshness(repoRoot).problems.filter((p) => p.startsWith(MODULES_STAMP.artifactDir))
+  if (moduleProblems.length > 0) {
+    log(`Refusing to copy stale modules:\n  - ${moduleProblems.join("\n  - ")}`)
+    process.exit(1)
+  }
   const modulesDir = resolve(repoRoot, "build/host/modules")
   const outModules = resolve(xu4Build, "modules")
   mkdirSync(outModules, { recursive: true })
@@ -376,6 +383,8 @@ async function main() {
   }
   writeFileSync(releaseLog, releaseLines.join("\n") + "\n")
   log(`Wrote release log: ${releaseLog}`)
+  writeStamp(repoRoot, WASM_STAMP)
+  log("Recorded freshness stamp")
 }
 
 main().catch((e) => {

@@ -1322,6 +1322,11 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 - 게이트(exit): test:unit 0, verify:repo-sources 0, typecheck 0, build 0, build:site 0, audit:dist --require-engine 0, i18n:check --strict 0, build:wasm 0, wasm-symbols 8/8, git diff --check 0.
 - 미실행: 전체 e2e 스위트(Chromium 40개), merge. shrine.cpp 18건 번역 추가(4447 entries). 순서 변경으로 제외된 항목은 전부 vendors(module) 26건 — Todo 25 대상.
 
+## Todo 25 진행 기록 (branch todo-25-korean-shop, 2026-09-29, 미merge)
+- 구현: `web-say msg data` cfunc(native no-op) + `vendors.b` `=>`/`input-shop` 호출, 템플릿 런타임 바이트의 FNV-1a 해시 + (기호,값) 쌍을 `Module.u4Text.vendor`로 전송, 셸이 한국어 템플릿(`GENERATED_VENDOR_TEMPLATES`)에 기호를 치환(`GENERATED_VENDOR_NAMES`로 상점/주인/품목 번역, 조사 처리). 코드 리뷰 반영: 억제 플래그를 cf_webSay 시작·bail-out·`discourse.cpp` 대화 종료 시 해제, ㄹ받침+(으)로→로, 중복 기호는 첫 쌍 사용(construct와 동일).
+- **의도적 편차**: 미매핑/미번역 상점 템플릿은 패널에서 조용히 폐기(Todo 23과 동일, 영어 원문은 엔진 밖으로 나가지 않음 — 프로토콜이 해시만 보냄). 계획의 "영어 module 텍스트로 fallback"은 적용하지 않음. 캔버스에는 영어가 그대로 출력되고 구매 흐름은 영향 없음(`task-25/fallback.log`, 유닛 테스트로 명시).
+- 게이트 exit(수정 후 재실행, `task-25/gates2.log`): test:unit 0, verify:repo-sources 0, typecheck 0, build 0, i18n:check --strict 0, build:native 0, test:native 0 (4/4), qa:native-baseline 0 (ULTIMA4_DATA), audit:dist --require-engine 0, git diff --check 0. e2e `korean-shop.spec.ts` 2/2 통과(`e2e-shop-run11.log`; 복도 끝 앵커가 NPC에 막혀 1회 flake → 재시도 로직 추가). RED 로그: `red-unit.log`, `red-review-fixes.log`.
+- 미실행: 전체 e2e 스위트, 무기/방어구/시약/여관 상점 e2e(생성기 테스트로 `{{ }}` 템플릿 전체만 검증), merge.
 ### Todo 23 main merge 게이트 (2026-09-29, worktree agent-ad52…, 전부 exit 0)
 npm run test:unit / verify:repo-sources / typecheck / build / build:site / audit:dist --require-engine / i18n:check --strict / build:wasm / wasm-symbols 8/8 / git diff --check = 0; 전체 e2e Chromium 41 passed (27.2분, `task-23/e2e-full.log`); cmp 계획서 두 벌 0. merge `1f7dfd0`.
 
@@ -1335,3 +1340,65 @@ merge 후 충돌(inventory 옵션 병합, generated 재생성, manifest fileCoun
 
 ### Todo 26 main merge (2026-09-29)
 merge 60c1004 (코드 트리는 26 브랜치 53bd3aa와 동일, handoff.md만 충돌 해결). 에이전트 보고 게이트: unit 381, verify, typecheck, build, i18n strict, audit, diff-check 전부 0; e2e korean-intro-overlay/game-messages/castle-output/npc-output 통과. 리뷰 지적(네이티브 ifdef, 오버레이 안전장치) 수정 반영. 전체 e2e는 통합 1회 예정.
+
+### Todo 25: main(dc5764d) 병합 후 게이트 (2026-09-29, branch todo-25-korean-shop)
+- 충돌 해소: `scripts/i18n-generate.mjs`(Todo 26 intro 템플릿 + Todo 25 vendor 표 양쪽 유지), `handoff.md`(양쪽), `vendor/source-manifest.json`(main 값 취한 뒤 summarizeSourceTree로 재계산: fileCount 412). `i18n:inventory` 후 `module.json`은 '% s' placeholder churn뿐이라 되돌림, `i18n:generate` 재생성. Todo 23 screenMessage 훅·억제 플래그·Todo 24 castle 채널(`u4_web_talk_line`)은 별개 경로라 이중 방출 없음(억제 플래그는 web_hash 훅만 건너뜀).
+- exit: build:wasm 0, test:unit 0, verify:repo-sources 0, typecheck 0, build 0, i18n:check --strict 0, build:native 0, test:native 0, audit:dist --require-engine 0, git diff --check 0. e2e(PLAYWRIGHT_PORT=4425): korean-shop 0, korean-game-messages 0, korean-castle-output 0, korean-intro-overlay 0. (`task-25/gates-merge.log`)
+
+## ⏸ 세션 중단 기록 (2026-09-29, 사용자 지시)
+- 상태: 23/31 ✅. main 로컬 HEAD `c4cdbf5`(Todo 25 merge, **미push**; origin/main `dc5764d`). 24(`8c4edbb`)·26(`dc5764d`)는 push됨, 코드상 main 포함.
+- 게이트(main `c4cdbf5`, 이번 세션 직접 실행): build:wasm 0, test:unit 0, verify:repo-sources 0, typecheck 0, build 0, build:site 0, audit:dist --require-engine 0, git diff --check 0. 전체 e2e는 중단되어 **미실행**(24·25·26 ✅ 보류 사유).
+- 개별 e2e(에이전트/본인 실행): 23 전체 41/41(27.2분, 23 시점), 24+23+22 3/3(8.8분, merged 24), 26 4 spec, 25 korean-shop 2/2 + 병합 후 4 spec(에이전트 보고).
+- 중단한 작업: 통합 전체 e2e(백그라운드, 종료), Todo 27 에이전트(branch `todo-27-korean-status` `8023dce`, main 합류 후 검증 전). 잔여 Chromium/vite 프로세스 종료 확인(0개).
+- 리뷰(superpowers:requesting-code-review) 결과 반영: 26 네이티브 ifdef·오버레이 안전장치 수정, 25 억제 플래그·ㄹ받침·중복 기호 수정. 미처리 항목은 plan.md '중단 기록' 참고.
+- 재개: plan.md '재개 순서' ①~④.
+
+## 2026-09-30: 통합 게이트 + 전체 e2e 실행 (Todo 24·25·26 ✅ 보류, 진행률 23/31 유지)
+
+- 작업 위치: `main`(`fb583a6`)은 worktree `/home/taejin/ultima/.claude/worktrees/agent-ad52af6bd293aab90`에 체크아웃돼 있다. **저장소 루트 `/home/taejin/ultima`는 stale 브랜치 `f3-real-browser-qa`(`6462af3`)이다** — 그쪽 `git diff`/`HEAD`를 기준으로 비교하면 잘못된 결론이 나온다(이번 세션에 실제로 한 번 그 함정에 빠짐). main 작업은 반드시 위 worktree에서.
+- merge 게이트 전부 실제 실행, **전부 exit 0** (`integration/gate-2026-09-30.log`): `npm run build:wasm` 0 · `test:unit` 0 (34 files/408 tests) · `verify:repo-sources` 0 · `typecheck` 0 · `build` 0 · `i18n:check -- --strict` 0 (4523 entries) · `build:site -- --base=/ultima/` 0 · `audit:dist -- --require-engine` 0 · `git diff --check` 0 · 계획서 두 벌 `cmp` 0.
+- **전체 e2e 실행(중단 지점이었던 것)**: Chromium, 실제 `ultima4.zip`, `--workers=1`, `PLAYWRIGHT_PORT=4470` → **43 passed / 2 failed, 40.0분** (`integration/e2e-full-2026-09-30.log`).
+- 실패 2건 = `tests/e2e/korean-shop.spec.ts`(Todo 25)의 `healer (input-shop)`(spec:250), `food vendor (=>)`(spec:288). 둘 다 `talkAcrossCounter`가 `nobody answered across the counter`로 throw(spec:201).
+- **격리 재실행으로 재현 확인**(spec 단독, `PLAYWRIGHT_PORT=4471`): 동일 2건 실패(`integration/e2e-shop-rerun-2026-09-30.log`). **flake 아님.** AGENTS.md의 "실패 테스트 삭제·약화 금지"에 따라 Todo 24·25·26은 ✅ 처리하지 않고 진행률 23/31 유지, 계획서 체크박스도 `[ ]` 유지.
+- **원인 조사(읽기 전용 병렬 에이전트 2개: 리뷰 finding 역추적 + F1 증거 인벤토리, 이후 동일 세션으로 원인 진단)**
+  - 기각: **wasm 불일치**. main `04286f2f…`와 23:28 통과 브랜치 `ef025658…`는 **정확히 2바이트**만 다르고 값이 빌드 날짜 문자열(`'3''0'` vs `'2''9'`)이다. `playwright.config.ts:31`이 매 invocation마다 `build:site`를 돌려 `dist/engine/`이 항상 `build/wasm-release/`에서 재복사되므로 staleness 경로 없음.
+  - 기각: **merge/생성 손실**. healer/food 템플릿 6개(`vendors:210/218/109/113/112/115`)·이름 4개(`The Healer`/`Harmony`/`The Sage Deli`/`Shaman`)가 main 생성 테이블에 모두 존재하고 번역이 비어있지 않다.
+  - 기각(강함): **vendor 훅 배선**. `cf_webSay`(`script_boron.cpp:313-377`) → `screenWebVendorSay` → `u4_web_vendor` → `src/shell.ts` talkText receiver → `vendor-compose.ts`. healer 4쌍/food 2~4쌍은 bail-out 한도(>8쌍, UCS-2, pool 1024) 미달.
+  - **유력 1순위(미확정)**: **vendor NPC 타일 접근 실패**. `scripts/qa-native-baseline.mjs:23-31`이 **같은 실패 모드("Funny, no response!")**를 이미 문서화하며 해법으로 "매 스텝 4방향 전부 시도"를 기록. 통과한 `korean-npc-output.spec.ts:106-113`은 그 4방향 패턴(`npcTalkDirs`)을 쓰고, 실패한 이 스펙은 **단일 방향만** 시도한다(spec:185-202). `location.cpp:223-228` + `xu4.cpp:293`(seed=time)이면 NPC가 `MOVEMENT_WANDER`인 한 위치가 실행마다 다르다.
+  - **확인 필요**: (a) healer/food vendor의 실제 `movement` 값 — 브라우저가 사용자 zip에서 추출하는 원본 데이터라 repo에 검사할 artifact가 없고 커밋도 금지. (b) 실패 시 패널에 `"대화: "`(`game.cpp:2492`→`ui:game:141`)가 있었는지, `"이상하게, 반응이 없다!"`(`game.cpp:2513`→`ui:game:143`)가 있었는지 — **현재 스펙은 실패 지점의 패널을 전혀 기록하지 않는다**(성공 뒤에만 `shop-observation.log` 작성). 이 둘이 구분하는 판별 근거가 디스크에 없다.
+- **다음 액션**: ① `korean-shop.spec.ts`의 `talkAcrossCounter`에 실패 지점 진단 캡처(패널 덤프+스크린샷)를 추가하고 4방향 전부 시도 패턴으로 확장 → ② spec 단독 재실행 → ③ 통과 시 **전체 e2e 1회 재실행**(약 40분) → ④ 그때 Todo 24·25·26 ✅ → 26/31, 계획서 두 벌 `[x]` + `cmp` 0. Todo 27(`.claude/worktrees/todo-27-status` `8023dce`, main 합류 후 검증 미완)은 그 뒤.
+- **F1 신규 발견(읽기 전용 조사, exp-1)**: HANDOFF.md가 지목한 3개 갭(task-10 trace·task-14 증거·Y/N)은 `verify:release-docs`를 깨지 않는다. 대신 **worktree에 evidence 6개 파일이 없어 지금 `verify:release-docs`는 실제로 실패한다** — task-3 `full-qa-native-baseline.log`, task-15 `i18n-strict.log`, task-18 `security-audit.log`·`dist-leak-rejected.log`, task-19 `live-pages-smoke.json`·`pages-static-smoke-ci-artifact.json`. 6개 모두 상위 트리 `/home/taejin/ultima/.omo/evidence/`에는 존재하므로 복사로 해결된다. 또 **Y/N 한국어 답은 증거 공백이 아니라 런타임 배선 부재**다 — `src/shell.ts:603`이 유일한 호출부이고 `resolveInput("text", …)`로 하드코딩, 프롬프트 종류를 알리는 bridge 이벤트가 없다(shell.ts:544-548). 문서화로 닫히지 않으므로 신규 Todo가 필요할 수 있다(사용자 결정).
+- **미해결/미실행**: `git push origin main`은 **하지 않았다**(사용자 승인 필요 — 이번 세션에서 승인 요청 안 함). Todo 27 검증, F1~F4 재검토, F3 WebKit은 미실행.
+
+### 2026-09-30 22:00 — korean-shop 실패 원인 확정(오래된 모듈) + Todo 28 재발 방지 (branch `todo-28-build-freshness`, main 미merge)
+
+**1. 원인 확정 (관측 기반)**
+- 증상: 통합 e2e에서 `korean-shop.spec.ts` 2건이 `nobody answered across the counter`로 실패(단독 재실행에서도 재현).
+- 실패 지점 진단 캡처를 추가한 뒤 1회 실행(`task-25/shop-failure-ArrowDown.log/.png`): 시도 #1에서 `대화: 방향?` 뒤로 패널 출력이 끊김. 캔버스에는 `Talk: South / Welcome unto The Healer / Harmony says: Peace and Joy be with you friend. Are you in need of help?`(영어) → **상인은 응답했지만 한국어 vendor 훅(web-say)이 한 번도 호출되지 않음.** 이전 세션의 1순위 가설 "NPC 접근 실패"는 틀림.
+- 근본 원인: 통합 환경의 `build/host/modules/Ultima-IV.mod`가 09-27 22:34 빌드(`web-say` 0건). Todo 25의 `vendors.b` 변경(09-29 21:58, `63163ed`)보다 오래됨. 통과했던 todo-25 worktree 모듈(09-29 23:27)은 `web-say` 1건. 통합 게이트는 `build:wasm`만 재실행하고 `build:modules`를 빠뜨림. 추가로 `scripts/build-wasm.mjs`가 `build/host/modules`를 `build/wasm-release/modules`로 **복사**하고 그 복사본이 실제 서빙되므로, 모듈만 재빌드해도 wasm 단계를 다시 안 돌리면 여전히 옛 모듈이 서빙됨(이번 세션에서 실제로 한 번 겪음 → 해당 run 중단).
+- 해결: 모듈 재빌드 + wasm-release로 재복사 → `korean-shop` **2/2 통과(5.5분)**, 테스트 접근 로직 변경 없음. 진단 캡처 커밋 `08c333c`(branch `todo-25-shop-approach`).
+
+**2. Todo 28 (신규, 사용자 지시 "stamp 강제 + 보조책 전부 적용") — 커밋 `adb5aa6`**
+- `scripts/lib/build-stamp.mjs` + `npm run check:build-fresh`: `build:modules`/`build:wasm`이 소스 해시 stamp(`.build-stamp.json`) 기록. 소스가 바뀌었거나, stamp가 없거나(기존 빌드), `wasm-release/modules` 복사본이 새 모듈과 다르면 실패 + 고칠 명령 안내. 강제 지점: `build:site`(모든 e2e 경유, vite 실행 전 실패), `vite dev`(vitest에서는 제외), `build:wasm`(오래된 모듈 복사 거부).
+- `npm run verify:integration`: build:modules → build:wasm → check:build-fresh → test:unit → verify:repo-sources → typecheck → build → i18n:check --strict → build:site --base=/ultima/ → audit:dist --require-engine → plan cmp → git diff --check → e2e(chromium, workers=1). 첫 실패에서 중단, exit code를 `.omo/evidence/ultima-web/integration/verify-integration.log`에 추가. `--skip=e2e` 지원.
+- `tests/e2e/fixtures.ts`: 모든 실패 e2e에 `failure-panel.txt`(패널 + 포커스 요소) + `failure-screen.png` 자동 첨부. 22개 spec 전부 import 교체, `tests/unit/e2e-failure-capture.test.ts`가 강제.
+- `AGENTS.md`/`docs/TESTING_POLICY.md`: 관측 먼저·`build/` 전체 비교·check:build-fresh 우회 금지·통합은 verify:integration으로만. merge 게이트에 `npm run check:build-fresh` 추가. 분모 31→32.
+- 유닛 RED→GREEN: `build-stamp` 8, `verify-integration` 4, `e2e-failure-capture` 23 (로그 `task-28/red-*.log`, `green-all.log`).
+
+**3. 진행 중**: 두 브랜치 합친 트리(`da10ae1` + 문서)에서 `npm run verify:integration`(분리 프로세스, PLAYWRIGHT_PORT=4570). 게이트 전부 exit 0 확인(build:modules · build:wasm · check:build-fresh · test:unit 37 files/443 · verify:repo-sources · typecheck · build · i18n:check --strict 4523 · build:site · audit:dist --require-engine · plan cmp · git diff --check). 전체 e2e 진행 중(22:00 기준 11번째까지 실패 없음). **결과 미확인.**
+
+**4. 다음**: verify:integration PASS → Todo 24·25·26·28 ✅(27/32) + 계획서 `[x]`·cmp + main merge/push. FAIL → 자동 첨부 캡처부터 확인. 이후 Todo 28 실패 시나리오 증거(`task-28/stale-rejected.log`), Todo 27, F1~F4.
+
+**주의**: 기존 빌드는 전부 stamp가 없으므로 처음 한 번은 `build:modules` + `build:wasm` 재실행 필요(wasm 전 `source .emsdk/emsdk_env.sh`). 새 worktree에서는 `node_modules`·`.emsdk` 심볼릭 링크, `build/host`·`build/wasm-deps` 복사가 필요했다(gitignore 대상, 커밋 금지).
+
+**e2e 대기 중 병행 작업 (2026-09-30 22:08, CPU 가벼운 작업만 — 타이밍 민감한 e2e 보호)**
+- **Todo 28 실패 시나리오 증거 생성**: 실제 빌드의 임시 복사본에서 `vendors.b`에 한 줄 추가 → `check:build-fresh` exit 1, `build:site` exit 1(vite 실행 전 거부), 둘 다 `run "npm run build:modules"` 안내. baseline(수정 전)은 exit 0. 로그 `.omo/evidence/ultima-web/task-28/stale-rejected.log`, 임시 복사본 삭제.
+- **Todo 27 재개 준비(읽기 전용)**: worktree `.claude/worktrees/todo-27-status` HEAD `8023dce`(main의 23·24·26만 merge됨). origin/main 대비 뒤처진 것: Todo 25 전부(`63163ed`,`cc6c02d`,`13b03bd`,`c4cdbf5`)와 문서 3개. 겹치는 파일 4개: `scripts/i18n-generate.mjs`, `src/i18n/generated/strings.ts`, `src/i18n/localization.ts`, `vendor/source-manifest.json` → 재merge 시 생성 테이블 재생성·manifest 해시 갱신 필요. 그 worktree에 **이전 에이전트의 미커밋 WIP 4파일**(i18n-generate.mjs: stats.cpp 리터럴을 screenMessage UI 템플릿에서 제외해 패널+오버레이 이중 출력 방지, strings.ts, intro-view.ts, korean-status-overlay.spec.ts) — 건드리지 않음, 재개 시 검토 후 커밋. Todo 28 merge 후에는 신규 `korean-status-overlay.spec.ts`도 `./fixtures.ts`에서 `test`를 import해야 한다(`e2e-failure-capture` 유닛이 강제).
+- **F1 사전 점검(읽기 전용)**: 이 worktree에서 `npm run verify:release-docs` → 3건 실패(`task-3/full-qa-native-baseline.log`, `task-18/security-audit.log`, `task-18/dist-leak-rejected.log`가 로컬 `.omo/evidence`에 없음). 원인: 증거가 gitignore 대상이라 새 worktree/clone에는 없음 → 이 검증기는 fresh clone에서 구조적으로 실패. F1에서 결정 필요(증거 요약만 추적 대상으로 두거나, 검증기를 "로컬에 있으면 확인"으로 바꿀지). 확인 필요.
+
+### 2026-09-30 22:40 — ✅ Todo 24·25·26·28 완료, main merge (27/32 = 84.4%)
+- **`npm run verify:integration` PASS** (branch `todo-28-build-freshness`, Chromium, 실제 `ultima4.zip`, PLAYWRIGHT_PORT=4570): build:modules 0 · build:wasm 0 · check:build-fresh 0 · test:unit 0 (37 files / 443 tests) · verify:repo-sources 0 · typecheck 0 · build 0 · i18n:check --strict 0 (4523) · build:site --base=/ultima/ 0 · audit:dist --require-engine 0 · plan cmp 0 · git diff --check 0 · **e2e 0 — 45/45 passed (34.5분)**. 이전 통합 실행(43/45)에서 실패하던 `korean-shop` 2건 통과. 기록 `.omo/evidence/ultima-web/integration/verify-integration.log`.
+- merge 게이트 보충: `npm ci` exit 0 (심볼릭 링크 대신 자체 node_modules 설치) 후 `npm run verify:integration -- --skip=e2e` 재실행 → 12단계 전부 exit 0.
+- 근본 원인 요약(재기록): 통합 e2e가 쓴 `Ultima-IV.mod`가 Todo 25의 `vendors.b` 변경보다 오래됨 — 게이트가 `build:modules`를 빠뜨렸고, `build-wasm.mjs`가 `build/host/modules`를 `build/wasm-release/modules`로 복사해 그 복사본이 서빙되므로 두 단계 모두 필요. Todo 28이 이를 stamp로 강제.
+- Todo 28 QA 증거: happy `integration/verify-integration.log` PASS, failure `task-28/stale-rejected.log`.
+- 계획서 두 벌 24·25·26·28 `[x]`, cmp 0.

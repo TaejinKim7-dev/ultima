@@ -1,6 +1,6 @@
 import { mkdirSync } from "node:fs"
 import { fileURLToPath } from "node:url"
-import { expect, test, type Page } from "@playwright/test"
+import { expect, test, type Page } from "./fixtures.ts"
 
 // Todo 12: status/menu/short in-game text as DOM overlays. Exactly like
 // Todo 11's dialogue panel, the real xu4 engine emits no C++->JS bridge

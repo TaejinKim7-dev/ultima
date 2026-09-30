@@ -9,6 +9,7 @@
   "scripts": {
     "build": "vite build",
     "build:site": "node scripts/build-site.mjs",
+    "check:build-fresh": "node scripts/check-build-fresh.mjs",
     "check:base-path": "node scripts/check-base-path.mjs",
     "dev": "vite",
     "preview": "vite preview",
@@ -23,6 +24,7 @@
     "typecheck": "tsc --noEmit",
     "verify:repo-sources": "node scripts/verify-repo-sources.mjs",
     "audit:dist": "node scripts/audit-dist.mjs",
+    "verify:integration": "node scripts/verify-integration.mjs",
     "verify:workflow": "node scripts/verify-workflow.mjs",
     "verify:release-docs": "node scripts/verify-release-docs.mjs",
     "deps:host": "node scripts/deps-host.mjs",

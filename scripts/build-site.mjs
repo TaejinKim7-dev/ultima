@@ -1,6 +1,7 @@
 import { spawnSync } from "node:child_process"
 import { fileURLToPath } from "node:url"
 import { checkBasePath } from "./check-base-path.mjs"
+import { assertFresh } from "./lib/build-stamp.mjs"
 
 // `npm run build:site -- --base=/ultima/` forwards its extra args to this
 // whole script invocation, not to an arbitrary command inside a compound
@@ -26,6 +27,15 @@ function parseBase(argv) {
 }
 
 const base = parseBase(process.argv.slice(2))
+
+// Todo 28: never build a site (and so never run e2e) from artifacts older
+// than their sources. U4_BUILD_ROOT exists only for the unit test fixture.
+try {
+  assertFresh(process.env["U4_BUILD_ROOT"] ?? fileURLToPath(new URL("..", import.meta.url)))
+} catch (error) {
+  console.error(`build:site refused: ${error instanceof Error ? error.message : String(error)}`)
+  process.exit(1)
+}
 const viteBin = fileURLToPath(new URL("../node_modules/vite/bin/vite.js", import.meta.url))
 
 const buildResult = spawnSync(process.execPath, [viteBin, "build", `--base=${base}`], {

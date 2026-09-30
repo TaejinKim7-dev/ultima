@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs"
-import { expect, test } from "@playwright/test"
+import { expect, test } from "./fixtures.ts"
 
 // Todo 14: localized-flow. Proves the runtime boundary end to end: intro,
 // status, NPC talk, and a shrine/codex sample display Korean while game
