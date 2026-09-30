@@ -120,6 +120,22 @@ struct WebStatus {
             lastRow = i;
     }
 
+    // Appends the next entry of a view whose native rows wrap into a second
+    // column (line = 0; col += N). The web status column is single-column, so
+    // its cursor must NOT follow that reset: with 9+ weapons (or 9+ mixtures)
+    // the first wrapped entry would land back on an already-used row and two
+    // native columns would collapse into one overlay row. `cursor` therefore
+    // advances monotonically -- one entry per row, never a repeated row -- and
+    // past the last row add()'s gap-join keeps the overflow on that row, so no
+    // entry is silently dropped by the WEB_ROWS bounds check above.
+    void addNext(int& cursor, const std::string& segment) {
+        const int last = STATS_AREA_HEIGHT - 1;
+        const int row = cursor < last ? cursor : last;
+        add(row, segment);
+        if (row == cursor)
+            ++cursor;
+    }
+
     void setValue(int y, const std::string& segment) {
         int i = y + (titled ? 1 : 0);
         if (i < 0 || i >= WEB_ROWS)
@@ -490,6 +506,10 @@ void StatsArea::showWeapons() {
     webStatus.title(WebStatus::seg("Weapons"));
     webStatus.add(0, WebStatus::seg("A-%s", std::string("=weapon:") +
                   xu4.config->weapon(WEAP_HANDS)->getName()));
+    // Row 0 is the bare-hands row, so the web cursor starts at 1; it is
+    // separate from `line`/`col` because those wrap into a second native
+    // column (see WebStatus::addNext).
+    int webLine = 1;
 #endif
 
     int line = 0;
@@ -503,7 +523,7 @@ void StatsArea::showWeapons() {
             const char *format = (n >= 10) ? "%c%d-%s" : "%c-%d-%s";
 
 #ifdef __EMSCRIPTEN__
-            webStatus.add(line, WebStatus::seg((n >= 10) ? "=%s%s-%s" : "=%s-%s-%s",
+            webStatus.addNext(webLine, WebStatus::seg((n >= 10) ? "=%s%s-%s" : "=%s-%s-%s",
                           WebStatus::letter(w - WEAP_HANDS + 'A'), WebStatus::num("%d", n),
                           std::string("=weaponAbbrev:") +
                           xu4.config->weapon((WeaponType) w)->getAbbrev()));
@@ -711,6 +731,9 @@ void StatsArea::showMixtures() {
     setTitle("Mixtures");
 #ifdef __EMSCRIPTEN__
     webStatus.title(WebStatus::seg("Mixtures"));
+    // Separate from `line`/`col` below: those wrap into a second native
+    // column (see WebStatus::addNext), the web column never wraps.
+    int webLine = 0;
 #endif
 
     int line = 0;
@@ -721,7 +744,7 @@ void StatsArea::showMixtures() {
             n = 99;
         if (n >= 1) {
 #ifdef __EMSCRIPTEN__
-            webStatus.add(line, WebStatus::seg("%c-%02d", WebStatus::letter(s + 'A'),
+            webStatus.addNext(webLine, WebStatus::seg("%c-%02d", WebStatus::letter(s + 'A'),
                                                WebStatus::num("%02d", n)));
 #endif
             mainArea.textAtFmt(col, line++, "%c-%02d", s + 'A', n);

@@ -5,6 +5,10 @@
 .local/
 .cache/
 .emsdk/
+# Same toolchain, but a SYMLINK in a git worktree -- `.emsdk/` (with the
+# trailing slash) does not match a symlink, so that line alone leaves it
+# untracked and one `git add -A` away from being committed.
+.emsdk
 .emscripten_cache/
 .tmp/
 tmp/
