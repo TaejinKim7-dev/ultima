@@ -1,12 +1,12 @@
 # HANDOFF
-작성 시각: 2026-09-30 22:05 KST
+작성 시각: 2026-09-30 22:42 KST
 
 ## 1. 목표 (What we're building)
 - xu4(Ultima IV)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식하고 실제 플레이 화면을 한국어화. 진행 기준 `plan.md`.
 - 이번 세션: `korean-shop.spec.ts`(Todo 25) 통합 실패 원인 확정 → 재발 방지용 Todo 28 신설·구현.
 
 ## 2. 현재 상태 (Current state)
-- 진행률 **23/32 = 71.9%** (Todo 28 추가로 분모 31→32). Todo 24·25·26·28은 `verify:integration` 결과 대기로 ✅ 보류.
+- 진행률 **27/32 = 84.4%** — Todo 24·25·26·28 ✅ (`verify:integration` PASS, e2e 45/45 34.5분). main에 merge·push됨. 남은 것: Todo 27, F1~F4.
 - branch `todo-28-build-freshness`(origin push됨): Todo 28 `adb5aa6` + `todo-25-shop-approach`(`08c333c`) merge `da10ae1` + 문서 커밋. **main 미merge.**
 - worktree: `/home/taejin/ultima/.claude/worktrees/todo-28-build-freshness` (루트 checkout `f3-real-browser-qa`는 오래된 상태, 다른 세션의 미커밋 변경 있음 — 건드리지 않음).
 - **실행 중**: 위 worktree에서 `npm run verify:integration`(분리 프로세스 `setsid nohup`, PLAYWRIGHT_PORT=4570, 로그 `/tmp/claude-1000/-home-taejin-ultima/918e074e-6ba3-4ac3-9375-fc1c0d98b92b/scratchpad/verify-integration.log`, 최종 결과는 `.omo/evidence/ultima-web/integration/verify-integration.log`). e2e 이전 게이트 12단계 전부 exit 0 확인, 전체 e2e 진행 중 — **결과 확인 필요**.
@@ -29,9 +29,8 @@
 - 산출물이 하나도 없으면 통과(엔진 없는 로컬 dist도 audit 가능해야 함), 있으면 반드시 stamp 일치.
 
 ## 5. 다음 할 일 (Next steps)
-- [ ] `verify:integration` 결과 확인. PASS → Todo 24·25·26·28 ✅(27/32), 계획서 두 벌 `[x]` + cmp, handoff.md 게이트 기록, `todo-28-build-freshness` → main merge + push.
-- [ ] FAIL → 자동 첨부 `failure-panel.txt`/`failure-screen.png`(test-results/port-4570)부터 확인 후 진단.
-- [ ] Todo 28 실패 시나리오 증거 `task-28/stale-rejected.log`(모듈 소스 수정 후 check:build-fresh·build:site exit 1).
+- [x] `verify:integration` PASS → Todo 24·25·26·28 ✅, main merge + push.
+- [x] Todo 28 실패 시나리오 증거 `task-28/stale-rejected.log`.
 - [ ] Todo 27 재개(worktree `.claude/worktrees/todo-27-status` `8023dce`) → `verify:integration`으로 검증.
 - [ ] F1~F4.
 
