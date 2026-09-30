@@ -120,6 +120,8 @@ function fixedFragments(template: string): string[] {
 
 const SLOW = squash(uiKorean("ui:game:118"))
 const BLOCKED = squash(uiKorean("ui:game:121"))
+const TALK_PROMPT = squash(uiKorean("ui:game:141"))
+const NO_RESPONSE = squash(uiKorean("ui:game:143"))
 
 function uiKorean(id: string): string {
   const ui = JSON.parse(readFileSync(join(repoRoot, "locales/ko/ui.json"), "utf8")) as { entries: Record<string, Entry> }
@@ -186,18 +188,35 @@ async function talkAcrossCounter(page: Page, talkKey: string, sweep: readonly [s
   const seen = occurrences(await panelText(page), shopName)
   let offset = 0
   let forward = true
+  // Failure evidence: what each talk attempt actually printed, so a failure
+  // tells "talked to nobody" (NO_RESPONSE) apart from "never got a talk
+  // prompt" or "talked to someone else".
+  const attempts: string[] = []
   for (let attempt = 0; attempt < 40; attempt++) {
+    const before = await panelText(page)
     await pressKey(page, "t", 400)
     await pressKey(page, talkKey, 1500)
-    if (occurrences(await panelText(page), shopName) > seen) {
+    const after = await panelText(page)
+    if (occurrences(after, shopName) > seen) {
       return
     }
+    attempts.push(`#${attempt} offset=${offset}: ${JSON.stringify(after.startsWith(before) ? after.slice(before.length) : after.slice(-160))}`)
     if (forward ? offset === span : offset === 0) {
       forward = !forward
     }
     await walk(page, forward ? sweep[0] : sweep[1], 1)
     offset += forward ? 1 : -1
   }
+  const panel = await panelText(page)
+  writeFileSync(
+    join(evidenceDir, `shop-failure-${talkKey}.log`),
+    [
+      `talk prompt "${TALK_PROMPT}" occurrences: ${occurrences(panel, TALK_PROMPT)}`,
+      `no-response "${NO_RESPONSE}" occurrences: ${occurrences(panel, NO_RESPONSE)}`,
+      ...attempts
+    ].join("\n") + "\n"
+  )
+  await page.screenshot({ path: join(evidenceDir, `shop-failure-${talkKey}.png`) })
   throw new Error(`nobody answered across the counter (${talkKey})`)
 }
 
