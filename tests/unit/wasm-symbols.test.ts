@@ -98,4 +98,16 @@ describe("wasm: required exports exist in release build", () => {
       expect(data.includes(needle), needle).toBe(true)
     }
   })
+
+  // Todo 29: the shrine meditation advice goes over the same talk channel as
+  // an id, so the table name must survive into the compiled engine. Only the
+  // id does: the advice text is read at runtime from the player's own
+  // AVATAR.EXE and the Korean text is resolved shell-side, so the wasm carries
+  // no `ui:*` id and no Hangul either.
+  it("wasm binary carries the shrineAdvice talk id but none of the panel text", () => {
+    const data = readFileSync(wasmWasmPath).toString("latin1")
+    expect(data.includes("avatar.exe:shrineAdvice"), "avatar.exe:shrineAdvice").toBe(true)
+    expect(data.includes("ui:shrine"), "ui:shrine").toBe(false)
+    expect(/[가-힯]/.test(data), "Hangul in the engine binary").toBe(false)
+  })
 })

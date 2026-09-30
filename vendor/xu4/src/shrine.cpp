@@ -14,6 +14,7 @@
 #include "settings.h"
 #include "tileset.h"
 #include "u4.h"
+#include "web_talk.h"
 #include "xu4.h"
 
 /**
@@ -194,6 +195,17 @@ void Shrine::showVision(bool elevated) {
         screenDrawImageInMapArea(visionImageNames[virtue & 7]);
     } else {
         ShrineState* ss = &c->shrineState;
+        // Todo 29: the vision advice is original AVATAR.EXE data (read from
+        // offset 93682 above), so the web dialogue panel gets it as an
+        // "avatar.exe:shrineAdvice:<n>" id -- never as text, exactly like the
+        // codex/endgame lines. The advice index is the same one that picks
+        // the string below: three advice lines per virtue, one per completed
+        // meditation cycle, so virtue * 3 + (cycles - 1) covers 0-23 exactly
+        // once. The "\n%s" format is placeholder-only and stays out of
+        // GENERATED_UI_TEMPLATES, so the screenMessage hash path drops this
+        // line and the panel draws it exactly once. Compiled away in native
+        // builds (web_talk.h).
+        u4WebTalkId("\n%s", "avatar.exe:shrineAdvice", virtue * 3 + ss->completedCycles - 1);
         screenMessage("\n%s", ss->advice[virtue * 3 + ss->completedCycles - 1].c_str());
     }
 }
