@@ -115,7 +115,15 @@ export type OverlayRole = ViewRegion
 export const DEFAULT_VIEW_RECTS: Readonly<Record<OverlayRole, LogicalRect>> = {
   status: { x: 192, y: 8, width: 120, height: 64 },
   menu: { x: 8, y: 104, width: 304, height: 88 },
-  textview: { x: 16, y: 80, width: 288, height: 104 }
+  textview: { x: 16, y: 80, width: 288, height: 104 },
+  // Todo 31: `StatsArea::summary` (stats.cpp:187) -- the food/gold row, which
+  // is a SEPARATE native TextView one blank row below the party box:
+  //   (STATS_AREA_X*8, (STATS_AREA_Y+STATS_AREA_HEIGHT+1)*8, 15*8, 1*8)
+  //     = (192, 80, 120, 8)
+  // It needs its own role (not an extra "status" row) because overlay
+  // elements are 1:1 with a role (src/shell.ts's ensureOverlayElement) and
+  // both rows are on screen at the same time.
+  statussummary: { x: 192, y: 80, width: 120, height: 8 }
 }
 
 /**
@@ -124,9 +132,16 @@ export const DEFAULT_VIEW_RECTS: Readonly<Record<OverlayRole, LogicalRect>> = {
  * mask)` (stats.cpp:205; the aura glyph at stats.cpp:198 shares the same
  * cell). Column `STATS_AREA_WIDTH/2` = 15/2 = 7 (integer division) within
  * the `summary` TextView at (192, 80, 120, 8) -> absolute cell (248, 80, 8,
- * 8). This must stay in the WebGL raster canvas, uncovered by any opaque
- * DOM overlay -- see this module's own test asserting `DEFAULT_VIEW_RECTS
- * .status` (which stops at y=72, before summary's y=80) never overlaps it.
+ * 8). It must stay visible in the WebGL raster canvas, so no OPAQUE DOM
+ * overlay may cover it.
+ *
+ * Todo 31: `statussummary`'s rect DOES geometrically span this cell -- it is
+ * the very row the glyph lives in. That is safe because stats.cpp stops
+ * rasterizing the English food/gold line in the web build (the DOM renders it
+ * in Korean instead) while `redrawAura()`'s masked glyph still goes to the
+ * canvas, so the `statussummary` box is deliberately NOT opaque-backed and
+ * the glyph shows through. See OPAQUE_BACKING_ROLES and the module's own
+ * "no opaque role's rect may overlap the aura glyph cell" test.
  */
 export const AVATAR_AURA_GLYPH_RECT: LogicalRect = { x: 248, y: 80, width: 8, height: 8 }
 
@@ -146,6 +161,13 @@ export interface OverlayEntry {
  * cell lives in the summary row just BELOW the status box (the status rect,
  * even with the title row the engine adds, ends at y=72; the glyph starts
  * at AVATAR_AURA_GLYPH_RECT.y=80), so covering the status box never hides it.
+ *
+ * Todo 31 adds "statussummary" and deliberately leaves it OUT of this set.
+ * Its rect IS the summary row -- the one row that contains
+ * AVATAR_AURA_GLYPH_RECT -- so an opaque black box there would hide the
+ * masked aura glyph. This role stays transparent and relies on stats.cpp
+ * suppressing the native English line under __EMSCRIPTEN__ (so there is no
+ * English left to hide) while redrawAura()'s glyph still reaches the canvas.
  */
 const OPAQUE_BACKING_ROLES: ReadonlySet<OverlayRole> = new Set<OverlayRole>(["menu", "textview", "status"])
 

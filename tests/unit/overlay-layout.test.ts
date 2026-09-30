@@ -193,6 +193,10 @@ describe("DEFAULT_VIEW_RECTS (Todo 12: fixed native logical rects per overlay ro
     expect(DEFAULT_VIEW_RECTS.textview).toEqual({ x: 16, y: 80, width: 288, height: 104 })
   })
 
+  it("matches StatsArea::summary exactly (stats.cpp:187) -- the food/gold row's default", () => {
+    expect(DEFAULT_VIEW_RECTS.statussummary).toEqual({ x: 192, y: 80, width: 120, height: 8 })
+  })
+
   it("never overlaps the raster-drawn avatar aura glyph cell (stats.cpp:198/205, StatsArea::summary column 7)", () => {
     // (248,80,8,8): the one cell native code draws with a masked glyph
     // (drawCharMasked), not text -- it must stay in the WebGL raster canvas,
@@ -310,5 +314,44 @@ describe("hasOpaqueBacking (Todo 26: opaque overlay backing rule, user decision 
     const titled = { x: 192, y: 0, width: 120, height: 72 } // title row + 8 main rows, as stats.cpp sends it
     expect(DEFAULT_VIEW_RECTS.status.y + DEFAULT_VIEW_RECTS.status.height).toBeLessThanOrEqual(AVATAR_AURA_GLYPH_RECT.y)
     expect(titled.y + titled.height).toBeLessThanOrEqual(AVATAR_AURA_GLYPH_RECT.y)
+  })
+
+  // Todo 31: the food/gold summary row shares its native row with the aura
+  // glyph (column 7 of the same TextView), so unlike "status" it CANNOT be
+  // opaque. stats.cpp stops rasterizing the English line in the web build and
+  // redrawAura()'s masked glyph stays on the canvas, so a transparent box is
+  // what lets the Korean line and the glyph share one row.
+  it("the statussummary overlay is deliberately TRANSPARENT (Todo 31) -- it shares its native row with the aura glyph", () => {
+    expect(hasOpaqueBacking("statussummary", { rect: DEFAULT_VIEW_RECTS.statussummary, text: "x" })).toBe(false)
+    expect(hasOpaqueBacking("statussummary", { rect: DEFAULT_VIEW_RECTS.statussummary, rows: [{ label: "x" }] })).toBe(false)
+  })
+
+  // The generalized form of the invariant the tests above encode
+  // case-by-case, scoped to the roles that are actually ON SCREEN together
+  // with the status column: an OPAQUE box there may never sit on the glyph.
+  // ("menu"/"textview" are intro-only screens -- never shown while the status
+  // column and its aura are up -- and their default rects genuinely do span
+  // the glyph cell; asserting otherwise would be asserting a falsehood, so
+  // they are deliberately out of scope here rather than silently ignored.)
+  it("no opaque role co-visible with the status column overlaps the aura glyph cell (Todo 31)", () => {
+    for (const role of ["status", "statussummary"] as const) {
+      const rect = DEFAULT_VIEW_RECTS[role]
+      if (hasOpaqueBacking(role, { rect, text: "x" })) {
+        expect(rectsOverlap(rect, AVATAR_AURA_GLYPH_RECT), role).toBe(false)
+      }
+    }
+    // The one role that DOES span the glyph must not be opaque-backed -- that
+    // transparency is precisely what keeps the glyph visible.
+    expect(rectsOverlap(DEFAULT_VIEW_RECTS.statussummary, AVATAR_AURA_GLYPH_RECT)).toBe(true)
+    expect(hasOpaqueBacking("statussummary", { rect: DEFAULT_VIEW_RECTS.statussummary, text: "x" })).toBe(false)
+  })
+
+  it("statussummary and status are independent, simultaneously visible regions (Todo 31)", () => {
+    const registry = new OverlayRegistry()
+    registry.register("status", { rect: DEFAULT_VIEW_RECTS.status, rows: [{ label: "party" }] })
+    expect(registry.register("statussummary", { rect: DEFAULT_VIEW_RECTS.statussummary, text: "음식:0500  금:0300" })).toBeNull()
+    expect(registry.get("status")?.rows?.[0]?.label).toBe("party")
+    expect(registry.register("status", { rect: DEFAULT_VIEW_RECTS.status, rows: [{ label: "party2" }] })).toBeNull()
+    expect(registry.get("statussummary")?.text).toBe("음식:0500  금:0300")
   })
 })

@@ -155,3 +155,57 @@ describe("status region on the view receiver", () => {
     expect(events).toHaveLength(2)
   })
 })
+
+// Todo 31: the food/gold summary row and the reagents title.
+describe("statussummary region (Todo 31)", () => {
+  const SUMMARY_TEMPLATES: Record<string, string> = {
+    "F:%04d   G:%04d": "ui:stats:1",
+    "F:%04d   SHP:%02d": "ui:stats:0",
+    Reagents: "ui:stats:23"
+  }
+  const SUMMARY_TABLE: Record<string, string> = {
+    "ui:stats:1": "음식:%04d  금:%04d",
+    "ui:stats:0": "음식:%04d  선체:%02d",
+    "ui:stats:23": "시약"
+  }
+  const summaryDeps: StatusViewDeps = {
+    templateId: (literal) => SUMMARY_TEMPLATES[literal],
+    resolve: (id, fallback) => SUMMARY_TABLE[id] ?? fallback,
+    name: () => undefined
+  }
+
+  it("composes the food/gold summary into Korean, substituting both numbers in order", () => {
+    expect(composeStatusRows("F:%04d   G:%04d\x1f0500\x1f0300", summaryDeps)).toEqual([
+      { label: "음식:0500  금:0300" }
+    ])
+  })
+
+  it("composes the ship-hull variant of the summary too", () => {
+    expect(composeStatusRows("F:%04d   SHP:%02d\x1f0500\x1f30", summaryDeps)).toEqual([
+      { label: "음식:0500  선체:30" }
+    ])
+  })
+
+  it("composes the reagents title into Korean (ui:stats:23)", () => {
+    expect(composeStatusRows("Reagents", summaryDeps)).toEqual([{ label: "시약" }])
+  })
+
+  it("routes the statussummary region through the STATUS composer, not the intro one", () => {
+    const events: BridgeEvent[] = []
+    const receiver = createIntroViewReceiver({
+      dispatch: (event: BridgeEvent) => {
+        events.push(event)
+        return true
+      }
+    })
+    receiver.show("statussummary", 192, 80, 120, 8, -1, "F:%04d   G:%04d\x1f0500\x1f0300")
+    const view = events.at(-1)
+    expect(view?.type).toBe("view")
+    if (view?.type !== "view") {
+      throw new Error("expected a view event")
+    }
+    expect(view.region).toBe("statussummary")
+    expect(view.rows).toEqual([{ label: "음식:0500  금:0300" }])
+    expect(view.rect).toEqual({ x: 192, y: 80, width: 120, height: 8 })
+  })
+})

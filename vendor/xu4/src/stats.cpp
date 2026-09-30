@@ -42,6 +42,26 @@ EM_JS(void, u4_web_status_hide, (), {
         Module.u4View.hide("status");
 });
 
+/*
+ * Todo 31: the food/gold summary row is a separate native TextView
+ * (StatsArea::summary) that stays on screen at the same time as the party
+ * box, so it needs its own region -- overlay elements are 1:1 with a region.
+ * Its box is deliberately NOT opaque (see overlay-layout.ts's
+ * OPAQUE_BACKING_ROLES): the same row holds the masked avatar-aura glyph,
+ * which must stay visible in the raster canvas, so the English line below is
+ * skipped entirely in the web build instead of being covered.
+ */
+EM_JS(void, u4_web_status_summary_show, (int x, int y, int w, int h,
+                                         const char* payload), {
+    if (Module.u4View)
+        Module.u4View.show("statussummary", x, y, w, h, -1,
+                           UTF8ToString(payload));
+});
+EM_JS(void, u4_web_status_summary_hide, (), {
+    if (Module.u4View)
+        Module.u4View.hide("statussummary");
+});
+
 namespace {
 
 const int WEB_ROWS = STATS_AREA_HEIGHT + 1;     // title row + main rows
@@ -54,6 +74,9 @@ struct WebStatus {
     bool titled;
     bool suppressed;
     int selected;
+    std::string summaryLabel;   // Todo 31: food/gold, its own region
+    bool hasSummary;
+    bool titleOnlyMode;
 
     void begin() {
         for (int i = 0; i < WEB_ROWS; ++i) {
@@ -65,6 +88,9 @@ struct WebStatus {
         titled = false;
         suppressed = false;
         selected = -1;
+        summaryLabel.clear();
+        hasSummary = false;
+        titleOnlyMode = false;
     }
 
     // Player names may come from an imported save; keep control bytes out
@@ -144,9 +170,40 @@ struct WebStatus {
         hasValue[i] = true;
     }
 
+    // Todo 31: the food/gold summary line, sent on its own region because the
+    // summary row is on screen at the same time as the party box.
+    void summary(const std::string& segment) {
+        summaryLabel = segment;
+        hasSummary = true;
+    }
+
+    void flushSummary(const TextView& summary) {
+        if (hasSummary)
+            u4_web_status_summary_show(summary.x, summary.y, summary.width,
+                                       summary.height, summaryLabel.c_str());
+        else
+            u4_web_status_summary_hide();
+    }
+
+    // Todo 31: a view whose ROWS stay in the native raster (English) but whose
+    // title should be Korean (showReagents -- the 8 reagent names have no
+    // Korean translation, so inventing one is out of scope). Sending the whole
+    // box would let the opaque overlay cover those English rows, so only the
+    // 1-row title strip is sent, at the title TextView's own rect.
+    void titleOnly() {
+        titleOnlyMode = true;
+    }
+
     void flush(const TextView& mainArea) {
         if (suppressed) {
             u4_web_status_hide();
+            return;
+        }
+        // Todo 31: title-strip-only mode (see titleOnly()).
+        if (titleOnlyMode) {
+            u4_web_status_show(mainArea.x, mainArea.y - CHAR_HEIGHT,
+                               mainArea.width, CHAR_HEIGHT, selected,
+                               label[0].c_str());
             return;
         }
         std::string payload;
@@ -323,9 +380,24 @@ void StatsArea::redraw() {
     }
 
 #ifdef __EMSCRIPTEN__
+    /*
+     * Todo 31: the food/gold line goes out on its own region instead of
+     * being rasterized. The native textAtFmt calls stay for non-web builds
+     * exactly as before; skipping them here is what lets the transparent
+     * "statussummary" box show Korean with the aura glyph visible through it
+     * (no English underneath to hide, and an opaque box would hide the glyph).
+     */
+    if (c->transportContext == TRANSPORT_SHIP)
+        webStatus.summary(WebStatus::seg("F:%04d   SHP:%02d",
+                                         WebStatus::num("%04d", c->saveGame->food / 100),
+                                         WebStatus::num("%02d", c->saveGame->shiphull)));
+    else
+        webStatus.summary(WebStatus::seg("F:%04d   G:%04d",
+                                         WebStatus::num("%04d", c->saveGame->food / 100),
+                                         WebStatus::num("%04d", c->saveGame->gold)));
     webStatus.flush(mainArea);
-#endif
-
+    webStatus.flushSummary(summary);
+#else
     /*
      * update the lower stats box (food, gold, etc.)
      */
@@ -335,6 +407,7 @@ void StatsArea::redraw() {
     else
         summary.textAtFmt(0, 0, "F:%04d   G:%04d",
                           c->saveGame->food / 100, c->saveGame->gold);
+#endif
 
     redrawAura();
 
@@ -696,9 +769,14 @@ void StatsArea::showReagents(bool active)
 {
     setTitle("Reagents");
 #ifdef __EMSCRIPTEN__
-    // Reagent names and the mixing menu's live selection stay in the native
-    // raster (English) -- see Todo 27's scope note.
-    webStatus.suppressed = true;
+    // Todo 31: the title is now Korean (ui:stats:23 = "시약") instead of
+    // dropping the whole overlay. The 8 reagent ROWS stay in the native
+    // raster in English on purpose: getReagentName() lives in names.cpp and
+    // has no Korean entry in locales/ko/ui.json, and inventing translations
+    // is out of scope for this stage. titleOnly() keeps the opaque box down to
+    // the single title row so those English rows are not covered.
+    webStatus.title(WebStatus::seg("Reagents"));
+    webStatus.titleOnly();
 #endif
 
     Menu::MenuItemList::iterator i;

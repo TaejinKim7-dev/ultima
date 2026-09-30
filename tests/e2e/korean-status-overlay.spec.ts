@@ -135,6 +135,19 @@ test.describe("Todo 27: the status column in Korean via the status overlay", () 
     log.push(`status overlay bottom ${geometry.overlayBottom.toFixed(1)}px <= aura glyph row top ${geometry.auraTop.toFixed(1)}px`)
     expect(geometry.overlayBottom).toBeLessThanOrEqual(geometry.auraTop + 0.5)
 
+    // --- Todo 31: the food/gold summary, on its own region. ---
+    const summary = squash(await page.locator('#overlay-layer [data-role="statussummary"]').innerText())
+    const summaryPattern = squash(koreanForStatsLiteral("F:%04d   G:%04d")).replace(/%04d|%02d/g, "\\d+")
+    expect(summary, "the food/gold summary must render in Korean").toMatch(new RegExp(summaryPattern))
+    expect(summary, "the native English food/gold line must be gone").not.toMatch(/F:\d|G:\d/)
+    // The summary row shares its native row with the masked avatar-aura glyph,
+    // so this box must NOT be opaque-backed -- that is what keeps the glyph visible.
+    expect(
+      await page.locator('#overlay-layer [data-role="statussummary"].overlay-backed').count(),
+      "the statussummary overlay must stay transparent so the aura glyph is not covered"
+    ).toBe(0)
+    log.push(`summary overlay: ${summary}`)
+
     // --- Ztats details (player 1). ---
     await pressKey(page, "z", 1500)
     const details = await statusText(page)
@@ -170,10 +183,24 @@ test.describe("Todo 27: the status column in Korean via the status overlay", () 
     await pressKey(page, "ArrowRight", 1200)
     const items = await statusText(page)
     expect(items).toContain(squash(koreanForStatsLiteral("Items")))
-    // Reagents keep the native raster (English): the overlay is removed, not stale.
+    // Reagents (Todo 31): the title is Korean now, and the overlay covers ONLY
+    // the 1-row title strip -- the 8 reagent rows have no Korean translation
+    // (getReagentName() lives in names.cpp), so they must stay in the native
+    // raster and must NOT be covered by the opaque title box.
     await pressKey(page, "ArrowRight", 1200)
-    expect(await page.locator('#overlay-layer [data-role="status"]').count(), "the reagents view must drop the overlay").toBe(0)
-    log.push("views: weapons/armour/equipment/items overlays ok, reagents view drops the overlay")
+    const reagentsTitle = await statusText(page)
+    expect(reagentsTitle).toContain(squash(koreanForStatsLiteral("Reagents")))
+    expect(reagentsTitle).not.toContain("Reagents")
+    const titleBox = await page.evaluate(() => {
+      const overlay = document.querySelector('#overlay-layer [data-role="status"]')!.getBoundingClientRect()
+      const canvas = document.querySelector("#game-canvas")!.getBoundingClientRect()
+      return { ratio: overlay.height / canvas.height }
+    })
+    // one native row out of the 200px-tall logical screen (8px), never the
+    // full 8-row status box that would black out the English reagent rows.
+    expect(titleBox.ratio).toBeLessThan(0.1)
+    await page.screenshot({ path: join(evidenceDir, "status-reagents.png") })
+    log.push("views: weapons/armour/equipment/items overlays ok, reagents view shows the Korean title only")
 
     // --- Back to the party overview. ---
     await pressKey(page, "Escape", 1500)
