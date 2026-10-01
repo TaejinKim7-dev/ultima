@@ -30,6 +30,30 @@ afterEach(() => {
 
 type FixtureFiles = Record<string, string | null>
 
+// F1: the canonical plan and its byte-identical mirror. Both are tracked, so
+// a fresh clone always has them and the verifier hard-requires them.
+const PLAN_TEXT = `# Ultima IV web port plan
+
+## Verification strategy
+
+| command | contract |
+|---|---|
+| \`npm run test:unit\` | every component unit test |
+| \`npm run build:site -- --base=/ultima/\` | Pages artifact |
+| \`npm run audit:dist\` | artifact audit |
+`
+
+// Every tracked artifact `verify:release-docs` hard-requires (F1 decision):
+// they exist in a fresh clone because git tracks them.
+const TRACKED_ARTIFACTS = [
+  ".omo/plans/ultima-web.md",
+  "docs/ULTIMA_WEB_PLAN.md",
+  "docs/WEB_PORT.md",
+  ".github/workflows/pages.yml",
+  "docs/TESTING_POLICY.md",
+  "docs/AI_AGENT_HANDOFF.md"
+] as const
+
 const BASE_FILES: FixtureFiles = {
   "package.json": JSON.stringify({ scripts: { "build:site": "x", "test:unit": "x", "audit:dist": "x" } }),
   "vendor/source-manifest.json": JSON.stringify({
@@ -39,16 +63,24 @@ const BASE_FILES: FixtureFiles = {
     ]
   }),
   "scripts/build-site.mjs": "",
+  ".github/workflows/pages.yml": "name: pages\non: [push]\n",
+  "docs/TESTING_POLICY.md": "# Testing policy\n\nEvery component has its own unit test.\n",
+  "docs/AI_AGENT_HANDOFF.md": "# Handoff format\n\nRecord the verification commands and their exit codes.\n",
   "README.md": "# Ultima\n\nRun `npm ci` then `npm run build:site -- --base=/ultima/`. See [the port notes](docs/WEB_PORT.md).\n",
   "docs/WEB_PORT.md": `# Web port\n\nPins: xu4 \`${XU4_REV}\`, boron \`${BORON_REV}\`. Build script: \`scripts/build-site.mjs\`.\n`,
   "docs/GITHUB_PAGES.md": "# Pages\n\nSet Source to GitHub Actions, then `npm run audit:dist`.\n",
   "handoff.md": "# Handoff\n\n`npm run test:unit` passed.\n"
 }
 
-function fixtureRoot(overrides: FixtureFiles = {}): string {
+function fixtureRoot(overrides: FixtureFiles = {}, plan: string = PLAN_TEXT): string {
   const root = mkdtempSync(join(tmpdir(), "verify-release-docs-"))
   createdDirs.push(root)
-  const files = { ...BASE_FILES, ...overrides }
+  const files: FixtureFiles = {
+    ...BASE_FILES,
+    ".omo/plans/ultima-web.md": plan,
+    "docs/ULTIMA_WEB_PLAN.md": plan,
+    ...overrides
+  }
   for (const [path, content] of Object.entries(files)) {
     if (content === null) continue
     const full = join(root, path)
@@ -129,44 +161,113 @@ describe("verify:release-docs", () => {
   })
 
   it("rejects a backticked tracked-repo path that does not exist", () => {
-    const result = run(fixtureRoot({ "docs/GITHUB_PAGES.md": "# Pages\n\nWorkflow: `.github/workflows/pages.yml`.\n" }))
+    // `.github/workflows/pages.yml` is tracked and now part of the fixture, so
+    // this uses a sibling workflow path: a doc pointing at a tracked repo path
+    // that no longer exists must still fail.
+    const result = run(fixtureRoot({ "docs/GITHUB_PAGES.md": "# Pages\n\nWorkflow: `.github/workflows/deploy.yml`.\n" }))
 
     expect(result.status).toBe(1)
-    expect(result.stderr).toContain(".github/workflows/pages.yml")
+    expect(result.stderr).toContain(".github/workflows/deploy.yml")
   })
 
-  it("checks .omo/evidence paths only when that task's local evidence directory exists (git-ignored; absent in a fresh clone)", () => {
-    const doc = "# Handoff\n\nEvidence: `.omo/evidence/ultima-web/task-19/pages-static-smoke.json`.\n"
+  // ---------------------------------------------------------------------------
+  // F1 spec change (approved by the user): requirements split in two.
+  //   TRACKED artifacts are hard requirements -- they are in git, so a fresh
+  //   clone must have them, and a missing/diverged one is a failure.
+  //   LOCAL-ONLY evidence (`.omo/evidence/**`, git-ignored) can never be a hard
+  //   requirement in a fresh clone, so it is a soft check: an absent path is
+  //   SKIPPED with a visible warning naming the path -- never a silent pass,
+  //   never a failure.
+  // ---------------------------------------------------------------------------
+
+  it("TRACKED: hard-requires every tracked release artifact a fresh clone has", () => {
+    for (const path of TRACKED_ARTIFACTS) {
+      const result = run(fixtureRoot({ [path]: null }))
+      expect(result.status, path).toBe(1)
+      expect(result.stderr, path).toContain(path)
+    }
+  })
+
+  it("TRACKED: docs/ULTIMA_WEB_PLAN.md must stay byte-identical to .omo/plans/ultima-web.md", () => {
+    const drifted = run(fixtureRoot({ "docs/ULTIMA_WEB_PLAN.md": `${PLAN_TEXT}\n<!-- one byte of drift -->\n` }))
+    expect(drifted.status).toBe(1)
+    expect(drifted.stderr).toContain("byte-identical")
+    expect(drifted.stderr).toContain(".omo/plans/ultima-web.md")
+
+    const identical = run(fixtureRoot())
+    expect(identical.status, identical.stderr).toBe(0)
+  })
+
+  it("TRACKED: every `npm run` command the canonical plan lists must exist in package.json", () => {
+    const result = run(fixtureRoot({}, PLAN_TEXT.replace("npm run audit:dist", "npm run audit:everything")))
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("audit:everything")
+  })
+
+  it("LOCAL-ONLY: evidence absent in a fresh clone is skipped with a visible warning naming the path", () => {
+    const doc = "# Pages\n\nEvidence: `.omo/evidence/ultima-web/task-19/pages-static-smoke.json`.\n"
 
     const freshClone = run(fixtureRoot({ "docs/GITHUB_PAGES.md": doc }))
     expect(freshClone.status, freshClone.stderr).toBe(0)
-
-    const withTaskDir = run(fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/task-19/README": "" }))
-    expect(withTaskDir.status).toBe(1)
-    expect(withTaskDir.stderr).toContain("pages-static-smoke.json")
-
-    const present = run(
-      fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/task-19/pages-static-smoke.json": "{}" })
-    )
-    expect(present.status, present.stderr).toBe(0)
+    expect(freshClone.stdout).toContain(".omo/evidence/ultima-web/task-19/pages-static-smoke.json")
+    expect(freshClone.stdout).toMatch(/skipped/i)
   })
 
-  it("Todo 20 fresh-clone QA: a clean clone that ran the quickstart (deps:wasm/build:wasm write only task-6 build logs) still passes", () => {
+  it("LOCAL-ONLY: a sibling file in the same task dir does NOT make a missing documented file a failure", () => {
+    // This is the F1 defect: the old verifier keyed the check on the task
+    // directory existing, so any local evidence in task-19 turned a
+    // git-ignored, never-committed path into a hard failure.
+    const doc = "# Pages\n\nEvidence: `.omo/evidence/ultima-web/task-19/pages-static-smoke.json`.\n"
+
+    const result = run(fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/task-19/other.log": "" }))
+    expect(result.status, result.stderr).toBe(0)
+    expect(result.stdout).toContain("pages-static-smoke.json")
+  })
+
+  it("LOCAL-ONLY: integration/ and final/ evidence is skipped the same way", () => {
+    const doc =
+      "# Pages\n\nSee `.omo/evidence/ultima-web/integration/verify-integration.log` and " +
+      "`.omo/evidence/ultima-web/final/F1-plan-compliance.md`.\n"
+
+    const result = run(fixtureRoot({ "docs/GITHUB_PAGES.md": doc }))
+    expect(result.status, result.stderr).toBe(0)
+    expect(result.stdout).toContain("integration/verify-integration.log")
+    expect(result.stdout).toContain("final/F1-plan-compliance.md")
+  })
+
+  it("LOCAL-ONLY: evidence present on this machine is reported as present, not as skipped", () => {
+    const doc = "# Pages\n\nEvidence: `.omo/evidence/ultima-web/task-19/pages-static-smoke.json`.\n"
+
+    const result = run(
+      fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/task-19/pages-static-smoke.json": "{}" })
+    )
+    expect(result.status, result.stderr).toBe(0)
+    expect(result.stdout).not.toContain("pages-static-smoke.json")
+  })
+
+  it("reports tracked requirements and skipped local evidence as visibly different outcomes", () => {
+    const doc = "# Pages\n\nEvidence: `.omo/evidence/ultima-web/task-19/pages-static-smoke.json`.\n"
+
+    const result = run(fixtureRoot({ "docs/GITHUB_PAGES.md": doc }))
+    expect(result.status, result.stderr).toBe(0)
+    // "tracked ... satisfied" vs "local-only evidence ... skipped": a reader
+    // must be able to tell the two apart without reading the source.
+    expect(result.stdout).toMatch(/tracked/i)
+    expect(result.stdout).toMatch(/local-only/i)
+    expect(result.stdout).toMatch(/skipped/i)
+  })
+
+  it("F1 fresh-clone QA: the documented quickstart writing only task-6 build logs still passes", () => {
     // Found by the real fresh-clone QA (.omo/evidence/ultima-web/task-20/fresh-clone.log):
-    // the documented build writes .omo/evidence/ultima-web/task-6/*.log, so an
+    // the documented build writes .omo/evidence/ultima-web/task-6/*.log, so a local
     // evidence tree exists even though none of the documented evidence does.
     const doc = "# Pages\n\nEvidence: `.omo/evidence/ultima-web/task-19/pages-static-smoke.json`.\n"
+
     const afterQuickstart = run(
       fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/task-6/build.log": "build" })
     )
     expect(afterQuickstart.status, afterQuickstart.stderr).toBe(0)
-
-    // A task directory that exists locally is still checked file by file.
-    const taskDirWithoutFile = run(
-      fixtureRoot({ "docs/GITHUB_PAGES.md": doc, ".omo/evidence/ultima-web/task-19/other.log": "" })
-    )
-    expect(taskDirWithoutFile.status).toBe(1)
-    expect(taskDirWithoutFile.stderr).toContain("pages-static-smoke.json")
+    expect(afterQuickstart.stdout).toContain("pages-static-smoke.json")
   })
 
   it("rejects stale placeholder text (TODO / TBD / FIXME / placeholder / <fill / lorem)", () => {
