@@ -1465,3 +1465,39 @@ merge 60c1004 (코드 트리는 26 브랜치 53bd3aa와 동일, handoff.md만 �
 - **F2의 기존 F-01/F-11 finding은 위양양성(false positive)**이었다. 관련 게이트 산출물은 `.omo/evidence/ultima-web/task-27/`에 존재한다(`fallback.log`, `gates.log`, `task27-unit-red.log`, `task27-unit-green.log`, 회귀 e2e 로그 8종, `native.log`, 스크린샷 4종). evidence는 로컬 전용이라 이 worktree에는 `fallback.log` 하나만 복제돼 있다.
 - **F4 증거 공백**: 보고된 APPROVE_WITH_DEVIATIONS(blocking 0 / non-blocking 6) 판정을 담은 파일을 찾지 못했다. 로컬 `.omo/evidence/ultima-web/final/F4-scope-fidelity.md`는 **2026-09-27의 REJECT 감사본**이다. 그 판정과 "계획서 두 벌 byte-identical 아님"(=`cmp` exit 0이므로 위양양성) 발견을 담은 산출물은 **확인 필요**.
 - **worktree 함정**: 저장소 루트 `/home/taejin/ultima`는 stale한 `f3-real-browser-qa`(`6462af3`)에 있고 dirty다 — 거기서 `git log`/`git diff`를 보면 잘못된 결론이 나온다. main 작업은 반드시 `.claude/worktrees/agent-ad52af6bd293aab90`에서 한다.
+
+### 2026-10-01 후속 — e2e webServer blocker 조사 + F3 레인 잔여 상태 (main `f08f4b1` 이후)
+
+> 위 절("2026-10-01 통합 merge + 게이트 상태")은 그대로 두고 여기만 추가한다. **통합 main은 여전히 gate-green이 아니다.**
+
+**1. 호스트 참고**: 8코어 / RAM 28GiB 전체 / available 약 20GiB / swap 16GiB 전부 미사용.
+
+**2. `verify:integration` e2e 실패 조사 — 확정된 것과 기각된 것**
+- 실패 실행은 그대로 `/tmp/opencode/main-integration.log`(main `361b638`, **21 failed / 25 passed, 26.7m**, 21건 전부 `page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4588/`, **assertion 실패 0건**).
+- **OOM 기각.** 호스트 스펙은 2번 참고. `dmesg -T`·`journalctl -k`·`/var/log/kern.log`·`/var/log/syslog` 모두 해당 시간대에 `oom-kill` / `Out of memory` / `Killed process` 항목이 없다.
+- **`tests/e2e/pages-static-smoke.spec.ts` 기각.** 이 스펙은 자기 `node:http` 서버를 **ephemeral 포트**로 연다(`server.listen(0, "127.0.0.1", …)` — `pages-static-smoke.spec.ts:60`)하고 **같은 서버만** 닫는다(74행). 4588을 건드리지 않고 외부 프로세스를 spawn/kill 하지 않는다.
+- **충돌 경계가 정확하다.** 로그상 마지막 **통과** 테스트는 #30 `tests/e2e/pages-static-smoke.spec.ts` "Todo 19: Pages artifact static smoke"(3.1s, `main-integration.log:362`). 그 뒤 21건이 전부 connection-refused.
+- **남은 가설 — 미확정.** 병행 레인 또는 취소된 F3 태스크의 프로세스 teardown이 공유 `vite preview`(4588)를 죽였을 가능성이 현재 가장 유력하지만 **증명되지 않았다**. 이 저장소의 `webServer` 명령은 `node scripts/build-site.mjs --base=/ultima/ && node node_modules/vite/bin/vite.js preview --base=/ultima/ --port <port> --strictPort`이고 `reuseExistingServer: false`라 그 node 프로세스 하나가 죽으면 이후 모든 `page.goto`가 connection-refused가 되고 테스트는 assertion까지 도달하지 못한다.
+
+**3. 단독 재실행 실험 — ⛔ 완주하지 못했다. green 아니다**
+- main `f08f4b1`에서 `npm run verify:integration` **단독** 실행 시도(병행 작업 일부러 없암). `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip`, `PLAYWRIGHT_PORT=4601`, `DEBUG=pw:webserver`. 스크립트 `/tmp/opencode/solo-integration.sh`, 로그 `/tmp/opencode/solo-integration.log`.
+- e2e 이전 12단계 전부 exit 0 통과 → e2e 진입. **사용자가 완주 전에 중단했다.**
+- 로그 끝 시점 실측: **통과 19개(`✓ 1`~`✓ 19`, 전부 `[chromium]` e2e) / 실패 0건 / `ERR_CONNECTION_REFUSED` 0건.** 직전 실패 실행이 죽은 지점(25 passed)을 넘어 진행됐다.
+- **⚠️ 통과한 게이트가 아니다**: Playwright 요약 줄(`N passed (Xm)`)이 없고, 게이트는 `FAIL at e2e` + `e2e: exit 1`로 끝났고, 스크립트 자신의 `EXIT=$?` 에코 줄도 없다 → **최종 exit code 없음.** 게이트 verdict는 FAIL.
+- **증거 가치의 한계**: "이전 실행이 죽은 지점을 넘어쳤다"는 사실은 병행 가설과 **일치할 뿐 증명하지 않는다.** 로그만으로는 "사용자 중단"과 "webServer가 또 죽었다"를 구분할 수 없다.
+- **결론: 통합 main은 여전히 NOT gate-green이고 push해서는 안 된다.**
+- ⚠️ **정정**: 이 실험을 지시받은 브리프는 "65 passed"라고 적었으나, 실제로 존재하는 유일한 로그(`/tmp/opencode/solo-integration.log`, 20706 bytes)의 번호 붙은 e2e 통과는 **19개가 전부**다. 기록값은 실측(19)을 따랐다.
+
+**4. F3 레인 잔여 상태 (작업물이지 쓰레기가 아니다)**
+- worktree `/home/taejin/ultima/.claude/worktrees/f3-browser-qa`, 브랜치 `f3-browser-qa` `781a789`(부모 `361b638`).
+- 실제 크로스브라우저 구현: `playwright.config.ts`(+24, firefox/webkit 프로젝트 추가), `tests/e2e/audio.spec.ts`(+25), `tests/e2e/gameplay-progression.spec.ts`(+18), `tests/e2e/memory-smoke.spec.ts`(+22).
+- **⛔ 치명적 함정**: 이 브랜치는 `361b638`에서 갈라졌고 그건 handoff 문서 커밋 `f08f4b1` **이전**이다. 그래서 **그대로 merge하면 `plan.md` diff가 handoff 문서 업데이트를 되돌린다(REVERT).** **merge 전에 `f08f4b1` 위로 rebase가 필수다.**
+- 미커밋: `playwright.config.ts`가 modified.
+- 미추적 throwaway 진단 스크립트 **15개는 커밋 금지하고 버린다**: `f3probe.tmp.mjs`, `f3probe2`~`f3probe6.tmp.mjs`, `f3isolate.tmp.mjs`, `f3alsa.tmp.mjs`, `f3alsa2.tmp.mjs`, `f3audio.tmp.mjs`, `f3ctx.tmp.mjs`, `f3flag.tmp.mjs`, `f3null.tmp.mjs`, `f3prefs.tmp.mjs`, `f3prefs2.tmp.mjs`. (probe 스크린샷·로그 잔여물은 repo 밖 `/tmp/opencode/f3/`.)
+- `c9cde1e`는 부모가 `8c3086f`인 **구버전** salvage 사본이고, `781a789`가 이를 대체한다.
+- main의 `playwright.config.ts`은 여전히 `projects: [{ name: "chromium" }]` 하나뿐 — **F3는 한 번도 실행된 적 없다.**
+
+**5. 이번에 남긴 규칙/문서 변경**
+- `AGENTS.md` 개발 방식에 "**통합 게이트는 단독으로 실행한다**" 규칙 추가(원인은 의심 단계로 표현, 확정 사실로 쓰지 않음).
+- `plan.md`: BLOCKER 절에 조사 결과(기각 2건 + 충돌 경계 + 가설)와 단독 재실행 실험의 미완주 상태 추가. "바로 다음 순서" 1번 = 단독 완주로 진짜 exit code 확보, F3 항목 = rebase-before-merge + probe 15개 폐기.
+- 진행률 headline `28 / 32 = 87.5%`는 **변경하지 않았다** — 이번 라운드에 계획서 체크박스 변경이 없기 때문이다.

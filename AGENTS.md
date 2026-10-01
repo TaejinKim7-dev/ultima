@@ -29,6 +29,7 @@
 - **실패 원인은 추측 전에 관측한다**: e2e 실패 시 자동 첨부되는 `failure-panel.txt`(패널·포커스)·`failure-screen.png`를 먼저 본다. 가설은 관측으로 확인한 뒤에만 수정 근거로 쓴다.
 - **산출물이 같다고 결론 낼 때는 `build/` 전체(wasm·`.mod`·`render.pak`과 그 복사본)를 비교**한다. 한 파일만 보고 "빌드 동일"이라 판단하지 않는다.
 - **e2e webServer 죽음은 제품 회귀가 아니라 인프라 실패다**: `ERR_CONNECTION_REFUSED` / `ECONNREFUSED`로 실패한 e2e는 webServer(`scripts/build-site.mjs` + `vite preview --strictPort`)가 죽은 것이지 assertion 실패가 아니다. 스위트를 중간에 재시작하지 말고, 서버가 죽은 시각과 어느 시점까지 통과했는지 먼저 기록한 뒤 단독 재실행으로 재현· isolating 한다. 서로 다른 port로도 CPU 경합은 남으므로 `tests/e2e`의 실시간 민감 스펙은 여전히 직렬 실행이 안전하다.
+- **통합 게이트는 단독으로 실행한다**: `npm run verify:integration`을 돌리는 동안에는 다른 레인·에이전트·워크트리를 동시에 굴리지 않는다. 이 게이트의 `webServer`는 Playwright가 띄운 `vite preview` 프로세스 하나이며, 그 프로세스가 죽으면 이후 모든 테스트가 assertion 실패가 아니라 `ERR_CONNECTION_REFUSED`로 죽는다. 병행 작업이 원인인지 확인하려면 게이트를 완전히 단독으로 재실행해야 하고, 그 재실행이 완주할 때까지 결과를 확정하지 않는다.
 
 ## Git 작업 방식
 

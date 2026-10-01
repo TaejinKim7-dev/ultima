@@ -44,11 +44,24 @@
 ## 🔴 통합 merge 상태 (2026-10-01, main `361b638`) — 게이트 blocker 있음
 
 ### ⛔ 최상위 BLOCKER: 통합 main의 `npm run verify:integration`은 **NOT GREEN**
-- `main`(`361b638`)에서 실행한 `npm run verify:integration`이 `git diff --check`까지 전 단계 exit 0으로 통과한 뒤 **e2e 단계에서 실패했다.**
-  - 결과: **21 failed / 25 passed (26.7m)**.
-  - 21건 전부 동일 서명: `page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4588/` — 즉 playwright webServer가 실행 도중 죽었다는 뜻이며 assertion 실패가 아니다.
-  - 로그: `/tmp/opencode/main-integration.log` (스크립트 머리 `=== MAIN verify:integration start 2026-10-01T19:07:10+09:00 at 361b638 ===`, 꼬리 `verify:integration ... FAIL at e2e`, `e2e: exit 1`, `=== MAIN verify:integration EXIT=1 2026-10-01T19:34:37+09:00 ===`).
-- **원인은 아직 확정되지 않았다.** 로그에 vite/server 자신의 stderr 출력이 없고, dmesg에도 OOM 기록이 없다. 서버가 죽은 시각·어느 스펙까지 통과했는지를 먼저 기록하고 단독 재실행으로 재현·격리해야 한다(AGENTS.md "e2e webServer 죽음" 규칙).
+- 실패한 실행: `main`(`361b638`)에서 `npm run verify:integration` → `git diff --check`까지 전 단계 exit 0으로 통과한 뒤 **e2e 단계에서 실패**.
+  - 결과: **21 failed / 25 passed (26.7m)**. 로그 `/tmp/opencode/main-integration.log`(머리 `MAIN verify:integration start 2026-10-01T19:07:10+09:00 at 361b638`, 꼬리 `e2e: exit 1`, `MAIN verify:integration EXIT=1 2026-10-01T19:34:37+09:00`).
+  - 21건 전부 동일 서명: `page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4588/`. **assertion 실패는 0건.**
+
+#### 조사에서 확정된 것 (기각 포함)
+- **OOM 기각.** 호스트는 8코어 / RAM 28GiB 전체 / available 약 20GiB / swap 16GiB 전부 미사용(`free -g`로 확인: available 20, swap used 0). `dmesg -T`·`journalctl -k`·`/var/log/kern.log`·`/var/log/syslog` 모두 해당 시간대 `oom-kill` / `Out of memory` / `Killed process` 항목이 없다.
+- **`tests/e2e/pages-static-smoke.spec.ts` 기각.** 이 스펙은 자기만의 `node:http` 서버를 **ephemeral 포트**로 연다 — `server.listen(0, "127.0.0.1", ...)`(`pages-static-smoke.spec.ts:60`) — 그리고 **같은 서버**만 `server.close()`로 닫는다(74행). 4588을 건드리지 않고, 외부 프로세스를 spawn/kill 하지 않는다.
+- **충돌 경계가 정확하다.** 로그상 마지막으로 **통과**한 테스트는 #30 `tests/e2e/pages-static-smoke.spec.ts` "Todo 19: Pages artifact static smoke"(3.1s, `main-integration.log:362`). 그 뒤의 21건이 전부 connection-refused다.
+
+#### 남아 있는 가설 — **미확정**
+- 병행 레인, 또는 취소된 F3 태스크의 **프로세스 teardown**이 Playwright `webServer`가 띄운 공유 `vite preview`(4588)를 죽였을 가능성이 **현재 가장 유력하지만 증명되지 않았다**. 이 저장소의 `webServer` 명령은 `node scripts/build-site.mjs --base=/ultima/ && node node_modules/vite/bin/vite.js preview --base=/ultima/ --port <port> --strictPort`이고 `reuseExistingServer: false`라, 그 node 프로세스 하나가 죽으면 이후 모든 `page.goto`가 connection-refused가 되고 테스트는 assertion까지 도달하지 못한다.
+
+#### 단독 재실행 실험 — **완주하지 못했다. green이 아니다**
+- main `f08f4b1`에서 `npm run verify:integration` **단독** 실행을 시도했다(병행 작업 일부러 없앰). `ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip`, `PLAYWRIGHT_PORT=4601`, `DEBUG=pw:webserver`(vite가 또 죽으면 자체 stderr가 잡히도록). 스크립트 `/tmp/opencode/solo-integration.sh`, 로그 `/tmp/opencode/solo-integration.log`.
+- e2e 이전 12단계는 전부 exit 0으로 통과했고 e2e에 진입했다. **사용자가 완주 전에 중단했다.** 로그가 끝나는 시점의 실측 상태: **통과 19개(`✓ 1` ~ `✓ 19`, 전부 `[chromium]` e2e), 실패 0건, `ERR_CONNECTION_REFUSED` 0건** — 직전 실행이 죽은 지점(25 passed)을 훨씬 넘겨 진행됐다.
+- **⚠️ 이건 통과한 게이트가 아니다.** Playwright 요약 줄(`N passed (Xm)`)이 없고, 게이트는 `FAIL at e2e` + `e2e: exit 1`로 끝났으며, 스크립트 자신의 `EXIT=$?` 에코 줄도 없다 → **최종 exit code가 없다.** 게이트 verdict는 여전히 FAIL이고 **통합 main은 여전히 gate-green이 아니며 push해서는 안 된다.**
+- **증거 가치의 한계**: "이전 실행이 죽은 지점을 넘어쳤다"는 사실은 병행 가설과 **일치할 뿐 증명하지 않는다.** 로그만으로는 "사용자가 중단"과 "webServer가 또 죽었다"를 구분할 수 없다.
+
 - **따라서 통합 main을 gate-green으로 기록하지 않는다.** 진행률 28/32는 Todo 27의 개별 게이트와 위의 개별 단계 exit 0에 근거한 것이지, 통합 게이트 통과에 근거한 것이 아니다.
 
 ### 이번 세션에 로컬 main에 merge된 것 (branch → 커밋)
@@ -356,9 +369,9 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 
 > 아래 2개 블록(2026-09-30 22:42, 2026-09-30)은 **과거 기록**이다. 위 "통합 merge 상태"의 BLOCKER와 아래 목록 1번이 현재 유효한 다음 단계다.
 
-1. **⛔ 통합 main의 e2e webServer 죽음 원인 확정 (최우선, 나머지 전부가 이 뒤에 온다)**. 통합 main(`361b638`)에서 `npm run verify:integration`을 **혼자** 다시 돌리되, vite webServer(`scripts/build-site.mjs` + `vite preview --strictPort`) 자신의 stderr가 보이게 하고, ① 서버가 죽은 시각 ② 그 직전까지 통과한 스펙 ③ 아무 스펙도 시작 못 한 건지 를 먼저 기록한다. 현재 상태는 `21 failed / 25 passed`, 전부 `page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4588/`(로그 `/tmp/opencode/main-integration.log`)이고 **원인은 아직 미확정**(server stderr 없음, dmesg OOM 없음). **e2e가 완전히 green이 될 때까지 이 작업을 완료로 보지 않는다.** 스위트를 중간에 끊고 재시작하지 말 것(AGENTS.md "e2e webServer 죽음" 규칙).
+1. **⛔ 통합 main의 `verify:integration`을 끝까지 완주시켜 진짜 exit code를 얻는다 (최우선, 나머지 전부가 이 뒤에 온다)**. `main`에서 `npm run verify:integration`을 **완전히 단독으로** 돌려 **시작부터 끝까지** 마친다(병행 레인·에이전트·워크트리 없음 — AGENTS.md "통합 게이트는 단독으로 실행한다"). 재사용 스크립트 `/tmp/opencode/solo-integration.sh`(`ULTIMA4_DATA=…`, `PLAYWRIGHT_PORT=4601`, `DEBUG=pw:webserver`). **webServer가 또 죽으면 추측하지 말고 `/tmp/opencode/solo-integration.log`에서 vite 자체 stderr를 읽는다** — `DEBUG=pw:webserver`가 이미 켜져 있으므로 그쪽에 잡힌다. OOM과 `pages-static-smoke`는 이미 기각됐으므로 다시 조사하지 않는다. **완주하지 못한 실행은 통과로 쓰지 않는다**(현재 상태는 위 "통합 merge 상태"의 단독 재실행 실험 참조 — 19 passed에서 사용자 중단, exit code 없음, green 아님).
 2. **F2 네이티브 게이트**: `npm run cmake:configure` → `npm run cmake:build` → `npm run test:native`. **통합 main에서 한 번도 실행된 적 없다.** 기존 F2의 F-01/F-11 finding은 위양양성(false positive)로 정리됐고, task-27 게이트 산출물은 `.omo/evidence/ultima-web/task-27/`에 존재한다(`fallback.log`, `gates.log`, `task27-unit-red.log`, `task27-unit-green.log`, 회귀 e2e 로그 8종, `native.log`, 스크린샷 4종). evidence는 로컬 전용·gitignore라 worktree에는 `fallback.log` 하나만 복제돼 있다.
-3. **F3**: `playwright.config.ts`에 firefox/webkit 프로젝트가 없다(현재 `projects: [{ name: "chromium" }]`). 브라우저는 이미 설치돼 있다(chromium-1169, firefox-1482, webkit-2158) — 더 이상 blocker가 아니다. 두 프로젝트 추가 후 실제 `ultima4.zip`으로 두 스위트 모두 실행. worktree `.claude/worktrees/f3-browser-qa`(브랜치 `f3-browser-qa`)는 main 기준 위에서 다시 정리한 뒤 재사용한다 — 현재 `playwright.config.ts`가 dirty고 임시 `.tmp.mjs` 파일이 잔류해 있다.
+3. **F3**: ⚠️ **merge 전에 `f3-browser-qa`(`781a789`)를 `f08f4b1` 위로 rebase해야 한다.** 이 브랜치는 `361b638`에서 갈라졌고 그건 handoff 문서 커밋 `f08f4b1` **이전**이라, 그대로 merge하면 `plan.md` diff가 handoff 문서 업데이트를 **되돌린다(REVERT)** — 조용히 날아간다. 이 레인에는 **실제 크로스브라우저 구현이 있다(쓰레기가 아니다)**: `playwright.config.ts`(+24, firefox/webkit 프로젝트 추가), `tests/e2e/audio.spec.ts`(+25), `tests/e2e/gameplay-progression.spec.ts`(+18), `tests/e2e/memory-smoke.spec.ts`(+22). 순서: 미커밋 `playwright.config.ts` 변경 정리 → rebase → **미추적 `f3*.tmp.mjs` 진단 스크립트 15개는 커밋하지 말고 버린다**(`f3probe`, `f3probe2`~`6`, `f3isolate`, `f3alsa`, `f3alsa2`, `f3audio`, `f3ctx`, `f3flag`, `f3null`, `f3prefs`, `f3prefs2`). 참고: `c9cde1e`는 부모가 `8c3086f`인 **구버전** salvage 사본이고 `781a789`가 이를 대체한다. merge 후 실제 `ultima4.zip`으로 firefox/webkit 스위트를 모두 실행한다. main의 `playwright.config.ts`은 지금 `projects: [{ name: "chromium" }]` 하나뿐 — **F3는 아직 한 번도 실행되지 않았다.** 브라우저는 설치 완료(chromium-1169, firefox-1482, webkit-2158). probe 잔여물은 `/tmp/opencode/f3/`(repo 밖, 커밋 금지).
 4. **F4 최종 재감사**: 1~3이 끝난 뒤 재실행. **분모 산술은 원본 계획서 파일(`.omo/plans/ultima-web.md`)에서 다시 유도한다** — 기존 F4 감사의 분모 계산은 틀렸고, "계획서 두 벌이 byte-identical이 아니다"는 발견은 위양양성(false positive)다(`cmp` exit 0).
 5. **사용자 결정 필요**: Todo 29~33을 원본 계획서에 편입할지, 편입한다면 분모를 32로 둘지 37로 둘지. **지금 코드는 main에 있는데 계획서에는 없어서 진행률이 실제보다 낮게 보인다.** 이 결정 없이는 100%에 도달할 수 없다.
 6. **main push**: 1~3의 게이트가 green이 된 **뒤에만** `git push origin main` (현재 origin/main `42fa93c`보다 27커밋 앞서 있으나 미push).
