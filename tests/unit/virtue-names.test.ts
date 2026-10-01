@@ -12,7 +12,7 @@ import {
 import { extractBoronLiterals } from "../../scripts/lib/boron-strings.mjs"
 import { sourceHash } from "../../scripts/lib/hash.mjs"
 import { fnv1a32 } from "../../scripts/lib/ui-templates.mjs"
-import { generateI18nTables } from "../../scripts/i18n-generate.mjs"
+import { generateI18nTables, virtueNameModuleEntries } from "../../scripts/i18n-generate.mjs"
 import moduleSchema from "../../locales/ko/module.json" with { type: "json" }
 import uiSchema from "../../locales/ko/ui.json" with { type: "json" }
 
@@ -131,6 +131,19 @@ describe("the eight virtue names reach the Korean runtime path", () => {
       expect(entry, `${name} -> ${id} missing from locales/ko/module.json`).toBeDefined()
       expect(entry!.status, `${name} -> ${id}`).toBe("ready")
       expect(entry!.translation, `${name} -> ${id}`).toMatch(/\p{Script=Hangul}/u)
+    }
+  })
+
+  it("has the eight rows the GENERATOR emits, not a hand-edited artifact", () => {
+    // The generator is the source of truth. GENERATED_MODULE_NAMES used to
+    // carry the eight virtue rows as a hand-edit on top of a generator that
+    // only ever read config.b, so the next `npm run i18n:generate` silently
+    // dropped them. This drives the real generator and requires the eight rows
+    // to come out of it.
+    const generated = generateI18nTables(join(projectRoot, "locales/ko")).moduleNames
+    for (const name of VIRTUE_NAMES) {
+      const mapsIndex = mapsLiterals.findIndex((literal) => literal.text === name)
+      expect(generated[name], `${name} is not produced by i18n-generate.mjs`).toBe(`module:Ultima-IV:maps:${mapsIndex}`)
     }
   })
 
@@ -292,5 +305,47 @@ describe("every shrine.cpp literal has a deliberate disposition", () => {
       const withoutConversions = uiEntries[id]!.translation.replace(/%[-+ 0#]*\d*(?:\.\d+)?[a-zA-Z%]/g, "")
       expect(withoutConversions, `${id} leaks English`).not.toMatch(/[A-Za-z]/)
     }
+  })
+})
+
+// Todo 32 follow-up: the generated artifact must be exactly what the generator
+// produces. The eight virtue rows were once hand-appended to
+// src/i18n/generated/strings.ts, which meant `npm run i18n:generate` dropped
+// them on the next run -- a silent regression this whole suite would have
+// caught only if it compared the *generator's* output with the *committed*
+// table. This is that check, over the whole module-name map rather than the
+// eight virtues, so any future hand-edit of a generated table fails here.
+describe("the committed generated tables are generator-pure", () => {
+  it("admits exactly the eight shrine virtue rows of maps.b, never its file names", () => {
+    // The generator fix is scoped on purpose: maps.b is 161 literals, and all
+    // but eight are file names (`shrine.con`, `lcb.tlk`, ...) or whole
+    // sentences (`into Dungeon Deceit\n`). Admitting those would let a
+    // filename or a full sentence win a `%s` substitution, so the filter
+    // below must keep the eight `virtue:` rows and drop the other 153.
+    const admitted = virtueNameModuleEntries(moduleEntries)
+    const admittedMapsIds = Object.keys(admitted).filter((id) => id.startsWith("module:Ultima-IV:maps:"))
+    expect(admittedMapsIds).toHaveLength(VIRTUE_NAMES.length)
+    for (const name of VIRTUE_NAMES) {
+      const index = mapsLiterals.findIndex((literal) => literal.text === name)
+      expect(admittedMapsIds, `${name} is not admitted`).toContain(`module:Ultima-IV:maps:${index}`)
+    }
+    // Every config.b row must stay admitted: the weapon/armour/creature names
+    // other lanes depend on cannot be collateral damage of this fix.
+    expect(Object.keys(admitted).filter((id) => id.startsWith("module:Ultima-IV:config:")).length).toBeGreaterThan(0)
+    expect(admittedMapsIds.some((id) => /\.(con|tlk|ult|dng|map)$/.test(admitted[id]!.translation)), "a maps.b file name leaked into the name map").toBe(false)
+  })
+
+  it("reproduces GENERATED_MODULE_NAMES from the locale, with no extra or missing rows", () => {
+    const generated = generateI18nTables(join(projectRoot, "locales/ko")).moduleNames
+    const committed = GENERATED_MODULE_NAMES as Readonly<Record<string, string>>
+    const extraInArtifact = Object.keys(committed).filter((key) => generated[key] !== committed[key])
+    const missingFromArtifact = Object.keys(generated).filter((key) => committed[key] !== generated[key])
+    expect({ extraInArtifact, missingFromArtifact }, "src/i18n/generated/strings.ts is not what i18n-generate.mjs emits").toEqual({
+      extraInArtifact: [],
+      missingFromArtifact: []
+    })
+    // The eight virtues are a strict subset of the map, not the whole of it:
+    // config.b's weapon/armour/creature names must all survive untouched.
+    expect(Object.keys(generated).length).toBeGreaterThan(VIRTUE_NAMES.length)
   })
 })
