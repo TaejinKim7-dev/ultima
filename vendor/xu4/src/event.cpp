@@ -30,8 +30,29 @@
 // submission whose native text prompt has already closed. Every
 // readInt/readString/readStringView (intro name prompt, NPC talk, ...)
 // goes through ReadStringController, so its lifetime is the prompt epoch.
-EM_JS(void, u4_web_text_prompt_opened, (int id), {
-    if (Module.u4TextPrompt) Module.u4TextPrompt.opened(id);
+//
+// Todo 30: a native readChoice() prompt is a prompt epoch too. Without it the
+// shell's Korean answer field could never reach a choice prompt at all, so
+// every progression-critical question asked through readChoice() -- Lord
+// British's "Art thou well?" (discourse_castle.cpp), the intro sex prompt and
+// the gypsy's A)/B) virtue question (intro.cpp) -- rejected Korean input.
+// The epoch id space is shared by both controllers on purpose: the shell
+// keys its open-prompt stack by id, so two independent counters would hand
+// the same id to a string prompt and a choice prompt and a close() would pop
+// the wrong one.
+enum {
+    U4_WEB_PROMPT_TEXT  = 0,   // ReadStringController
+    U4_WEB_PROMPT_CHOICE = 1   // ReadChoiceController
+};
+
+static int nextWebPromptId = 1;
+
+static int allocWebPromptId() {
+    return nextWebPromptId++;
+}
+
+EM_JS(void, u4_web_text_prompt_opened, (int id, int kind), {
+    if (Module.u4TextPrompt) Module.u4TextPrompt.opened(id, kind);
 });
 EM_JS(void, u4_web_text_prompt_closed, (int id), {
     if (Module.u4TextPrompt) Module.u4TextPrompt.closed(id);
@@ -570,9 +591,8 @@ ReadStringController::ReadStringController(int maxlen, int screenX, int screenY,
     }
 
 #ifdef __EMSCRIPTEN__
-    static int nextWebPromptId = 1;
-    webPromptId = nextWebPromptId++;
-    u4_web_text_prompt_opened(webPromptId);
+    webPromptId = allocWebPromptId();
+    u4_web_text_prompt_opened(webPromptId, U4_WEB_PROMPT_TEXT);
 #endif
 }
 
@@ -643,22 +663,53 @@ class ReadChoiceController : public WaitableController<int> {
 public:
     ReadChoiceController(const string &choices);
     virtual bool keyPressed(int key);
+#ifdef __EMSCRIPTEN__
+    virtual ~ReadChoiceController() {
+        u4_web_text_prompt_closed(webPromptId);
+    }
+#endif
 
 protected:
     string choices;
+#ifdef __EMSCRIPTEN__
+    int webPromptId;
+#endif
 };
 
 ReadChoiceController::ReadChoiceController(const string &choices) {
     this->choices = choices;
+#ifdef __EMSCRIPTEN__
+    // Todo 30: a choice prompt is a prompt epoch, so the web shell's Korean
+    // answer field can reach it exactly like an NPC keyword prompt.
+    webPromptId = allocWebPromptId();
+    u4_web_text_prompt_opened(webPromptId, U4_WEB_PROMPT_CHOICE);
+#endif
 }
 
 bool ReadChoiceController::keyPressed(int key) {
+    /* Todo 30: `choices` is a plain ASCII byte set at every readChoice() call
+     * site (xu4 passes "yn \n\033", "mf", "ab", "abcdefgh...\033\n\r", ...),
+     * so a key that is not a single ASCII byte -- a multi-byte Korean code
+     * point, or a GLFW modifier/keypad code above 0xFF -- can never be one of
+     * the accepted choices. Compare the whole int explicitly instead of
+     * letting find_first_of() narrow it: truncating would let 320 (GLFW's
+     * GLFW_KEY_KP_0) masquerade as '@' and answer a choice it never was.
+     *
+     * HOW A KOREAN ANSWER REACHES A CHOICE: the native key path can only ever
+     * carry single bytes (see ReadStringController's ASCII accepted-chars
+     * bitset too), so a Korean answer is resolved to the canonical English
+     * choice key ('y'/'n' for "yn", 'm'/'f' for "mf", 'a'/'b' for "ab") by
+     * src/i18n/korean-aliases.ts and arrives here as the very same keystroke
+     * a player pressing that key would produce. The English keys, the command
+     * keys and the comparison values above are untouched. */
+    const bool singleByteKey = (key >= 0) && (key <= 0x7F);
+
     // isupper() accepts 1-byte characters, yet the modifier keys
     // (ALT, SHIFT, ETC) produce values beyond 255
-    if ((key <= 0x7F) && (isupper(key)))
+    if (singleByteKey && isupper(key))
         key = tolower(key);
 
-    if (choices.empty() || choices.find_first_of(key) < choices.length()) {
+    if (choices.empty() || (singleByteKey && choices.find_first_of(static_cast<char>(key)) < choices.length())) {
         // If the value is printable, display it
         const ScreenState* ss = screenState();
         if (ss->cursorVisible && key > ' ' && key <= 0x7F)

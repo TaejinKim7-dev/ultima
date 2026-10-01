@@ -26,7 +26,7 @@ import {
   type OverlayEntry,
   type OverlayRole
 } from "./overlay/overlay-layout.ts"
-import { buildAliasTable, resolveInput, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
+import { buildAliasTable, resolveChoiceInput, resolveInput, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
 import { createIntroViewReceiver, type IntroViewReceiver } from "./overlay/intro-view.ts"
 import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
 import {
@@ -44,6 +44,17 @@ import { createVendorHandler } from "./dialogue/vendor-compose.ts"
 // project's own translation strings. Vite/TS both support importing JSON
 // modules directly; see tsconfig.json's `resolveJsonModule`.
 import koreanAliasesSchema from "../locales/ko/aliases.json" with { type: "json" }
+
+/**
+ * Todo 30: the two native prompt-epoch kinds reported by
+ * vendor/xu4/src/event.cpp's `u4_web_text_prompt_opened` EM_JS hook
+ * (`U4_WEB_PROMPT_TEXT`/`U4_WEB_PROMPT_CHOICE` in the same file). Mirrored
+ * here rather than imported -- the engine's enum is not visible to the
+ * TypeScript runtime, and `tests/unit/readchoice-korean-answer.test.ts`
+ * asserts the C++ and these constants cannot drift apart.
+ */
+const U4_WEB_PROMPT_TEXT = 0
+const U4_WEB_PROMPT_CHOICE = 1
 
 /**
  * The intended integration seam for the future (Todo 6+) WASM engine: it
@@ -71,8 +82,16 @@ export interface UltimaBridgeApi {
    * Todo 18: pass to startEngine()'s `textPrompt` option -- the native
    * ReadStringController open/close lifecycle that gates the Korean
    * keyword field (see src/i18n/text-prompt-gate.ts).
+   *
+   * Todo 30: `opened` also receives the native prompt epoch KIND
+   * (`U4_WEB_PROMPT_TEXT`/`U4_WEB_PROMPT_CHOICE` from
+   * vendor/xu4/src/event.cpp), because a `readChoice()` epoch is now
+   * reported too and answers a different question of the same Korean field:
+   * one key without Enter, instead of a keyword plus Enter. `kind` is
+   * optional so this stays assignable to startup.ts's
+   * narrower `TextPromptReceiver`.
    */
-  readonly textPromptReceiver: { opened(id: number): void; closed(id: number): void }
+  readonly textPromptReceiver: { opened(id: number, kind?: number): void; closed(id: number): void }
   /**
    * Todo 22: pass to startEngine()'s `talkText` option -- real NPC talk
    * lines from vendor/xu4/src/discourse_tlk.cpp, shown in Korean in the
@@ -541,12 +560,12 @@ export function createShell(doc: Document): UltimaBridgeApi {
   // cannot: ReadStringController::keyPressed only ever accepts key codes
   // below 128).
   //
-  // This box is hardcoded to the "text" (NPC free-answer) prompt kind: no
-  // bridge event today carries which prompt kind is currently open (the
-  // real engine doesn't yet emit `prompt` events at all -- see Todo 11's
-  // known-limitations note), so there is no live signal this shell could
-  // use to gate the box per prompt kind. It is a dedicated "talk to an NPC
-  // in Korean" control, not a general-purpose Korean input method.
+  // This box is hardcoded to the "text" (NPC free-answer) prompt kind when a
+  // native TEXT prompt is open: no bridge event carries which prompt kind is
+  // currently open (the real engine doesn't emit `prompt` events at all --
+  // see Todo 11's known-limitations note), so there is no live signal this
+  // shell could use to gate the box per prompt kind. It is a dedicated "talk
+  // to an NPC in Korean" control, not a general-purpose Korean input method.
   //
   // Todo 18: it IS gated on whether a native text prompt is open at all
   // (any ReadStringController, reported by the real engine through
@@ -554,12 +573,26 @@ export function createShell(doc: Document): UltimaBridgeApi {
   // or with text last edited while an already-closed prompt was open, is
   // rejected with a notice instead of being synthesized as top-level
   // command keystrokes.
+  //
+  // Todo 30: the real engine now also reports a `readChoice()` epoch and its
+  // KIND, so a progression-critical choice question (Lord British's heal
+  // question, the intro sex prompt, the gypsy virtue question) can be
+  // answered in Korean here too. The kind only selects WHICH resolver runs;
+  // the staleness decision is still the gate's, unchanged.
   const koreanAliasTable: AliasTable = buildAliasTable(
     (koreanAliasesSchema as { entries: Record<string, AliasSourceEntry> }).entries
   )
   const gameWindow = doc.defaultView ?? window
   const textPromptGate = createTextPromptGate()
   koreanKeywordInput.addEventListener("input", () => textPromptGate.noteInput())
+
+  // The kind of the innermost open native prompt epoch. The top of the gate's
+  // open-prompt stack is by construction the most recently opened one, so this
+  // is the kind of `currentPromptId()` -- and it is only ever read after the
+  // gate has confirmed a prompt is still open. `closed` deliberately does not
+  // reset it: a submission is only accepted while a prompt is open, and the
+  // next `opened` overwrites it.
+  let openPromptKind: number = U4_WEB_PROMPT_TEXT
 
   function charToKeyCode(ch: string): number {
     if (ch === " ") {
@@ -569,18 +602,24 @@ export function createShell(doc: Document): UltimaBridgeApi {
   }
 
   // Synthesizes the same 'keydown'/'keyup' pairs a physical keyboard
-  // produces for each ASCII character of `text`, followed by Enter --
-  // the only path a real player's keystrokes reach the engine (GLFW's
-  // Emscripten port listens on `window`; see the guard below). `keyCode`
-  // is set with `Object.defineProperty` rather than the constructor's
-  // init dict: `KeyboardEvent`'s `keyCode`/`which` are legacy
-  // getter-backed properties that some browsers ignore in the
-  // constructor dict, but a fresh own property on the instance always
-  // shadows the prototype getter. Marked `__ultimaSynthetic` so the guard
-  // below never re-intercepts its own output.
-  function synthesizeKeystrokes(text: string): void {
+  // produces for each ASCII character of `text` -- the only path a real
+  // player's keystrokes reach the engine (GLFW's Emscripten port listens
+  // on `window`; see the guard below). `keyCode` is set with
+  // `Object.defineProperty` rather than the constructor's init dict:
+  // `KeyboardEvent`'s `keyCode`/`which` are legacy getter-backed properties
+  // that some browsers ignore in the constructor dict, but a fresh own
+  // property on the instance always shadows the prototype getter. Marked
+  // `__ultimaSynthetic` so the guard below never re-intercepts its own output.
+  //
+  // Todo 30: `terminate` appends Enter, which a free-text prompt needs to
+  // submit its buffer. A `readChoice()` prompt consumes ONE key and is done,
+  // so Enter there is not a terminator but a stray keystroke that would be
+  // delivered to whatever prompt comes next.
+  function synthesizeKeystrokes(text: string, terminate: boolean): void {
     const keyCodes = [...text].map(charToKeyCode)
-    keyCodes.push(13) // Enter -- submits the native interest-prompt buffer we just filled
+    if (terminate) {
+      keyCodes.push(13) // Enter -- submits the native interest-prompt buffer we just filled
+    }
     for (const keyCode of keyCodes) {
       for (const type of ["keydown", "keyup"] as const) {
         const event = new KeyboardEvent(type, { bubbles: true, cancelable: true })
@@ -600,9 +639,17 @@ export function createShell(doc: Document): UltimaBridgeApi {
       dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text: `[한글 입력 거부] ${promptDecision.message}\n` })
       return
     }
-    const result = resolveInput("text", raw, koreanAliasTable)
+    // A choice epoch answers with one key and no Enter; a text epoch answers
+    // with a keyword and an Enter. Both go through the real keystroke path --
+    // see src/i18n/korean-aliases.ts's resolveChoiceInput doc comment for why
+    // the Korean word must become the canonical English key before it reaches
+    // the single-byte native key path.
+    const isChoiceEpoch = openPromptKind === U4_WEB_PROMPT_CHOICE
+    const result = isChoiceEpoch
+      ? resolveChoiceInput(raw, koreanAliasTable)
+      : resolveInput("text", raw, koreanAliasTable)
     if (result.ok) {
-      synthesizeKeystrokes(result.text)
+      synthesizeKeystrokes(result.text, !isChoiceEpoch)
       return
     }
     // A UI-authored rejection notice, never a fragment of the engine's own
@@ -691,7 +738,12 @@ export function createShell(doc: Document): UltimaBridgeApi {
       realSaveHandlers = handlers
     },
     textPromptReceiver: {
-      opened: (id) => textPromptGate.opened(id),
+      // Todo 30: the kind rides along with the open so a `readChoice()` epoch
+      // can be answered with a single key; the gate itself is unchanged.
+      opened: (id, kind) => {
+        openPromptKind = kind ?? U4_WEB_PROMPT_TEXT
+        textPromptGate.opened(id)
+      },
       closed: (id) => textPromptGate.closed(id)
     },
     introViewReceiver: createIntroViewReceiver({ dispatch }),

@@ -18691,6 +18691,22 @@ export const GENERATED_ALIASES: Record<string, GeneratedAliasEntry> = {
   "alias:no": {
     "alias": "아니오",
     "canonical": "no"
+  },
+  "alias:choice-male": {
+    "alias": "남성",
+    "canonical": "male"
+  },
+  "alias:choice-female": {
+    "alias": "여성",
+    "canonical": "female"
+  },
+  "alias:choice-a": {
+    "alias": "가",
+    "canonical": "choiceA"
+  },
+  "alias:choice-b": {
+    "alias": "나",
+    "canonical": "choiceB"
   }
 }
 
