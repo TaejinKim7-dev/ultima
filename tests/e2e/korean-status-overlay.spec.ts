@@ -25,6 +25,30 @@ function entries(file: string): Record<string, Entry> {
 }
 const uiEntries = entries("ui.json")
 const moduleEntries = entries("module.json")
+const glossaryEntries = entries("glossary.json")
+
+/**
+ * Todo 33: the eight reagent names exactly as vendor/xu4/src/names.cpp's
+ * getReagentName() `reagentNames[]` table spells them, in table order.
+ */
+const REAGENT_NAMES = [
+  "Sulfur Ash",
+  "Ginseng",
+  "Garlic",
+  "Spider Silk",
+  "Blood Moss",
+  "Black Pearl",
+  "Nightshade",
+  "Mandrake"
+] as const
+
+/** Korean reagent term, located by the sha256 of the names.cpp string. */
+function koreanReagentName(english: string): string {
+  const hash = `sha256:${createHash("sha256").update(english, "utf8").digest("hex")}`
+  const found = Object.entries(glossaryEntries).find(([, entry]) => entry.sourceHash === hash)
+  if (found === undefined) throw new Error(`fixture: reagent name not inventoried: ${JSON.stringify(english)}`)
+  return found[1].translation
+}
 
 function koreanForStatsLiteral(literal: string): string {
   const hash = `sha256:${createHash("sha256").update(literal, "utf8").digest("hex")}`
@@ -183,24 +207,45 @@ test.describe("Todo 27: the status column in Korean via the status overlay", () 
     await pressKey(page, "ArrowRight", 1200)
     const items = await statusText(page)
     expect(items).toContain(squash(koreanForStatsLiteral("Items")))
-    // Reagents (Todo 31): the title is Korean now, and the overlay covers ONLY
-    // the 1-row title strip -- the 8 reagent rows have no Korean translation
-    // (getReagentName() lives in names.cpp), so they must stay in the native
-    // raster and must NOT be covered by the opaque title box.
+    // Reagents (Todo 31 + 33): the title is Korean. Todo 33 inventoried and
+    // translated the eight reagent NAMES too -- their authoritative English is
+    // vendor/xu4/src/names.cpp getReagentName()'s reagentNames[] table, and
+    // they resolve through GENERATED_STATUS_NAMES' `reagent` field to the
+    // `reagent-*` glossary terms in locales/ko/glossary.json (유황재/인삼/마늘/
+    // 거미줄/핏빛이끼/흑진주/벨라도나/맨드레이크 -- the Korean this corpus
+    // already used in vendors.b and the TLK dialogue, not invented here). So a
+    // row may never reach the overlay with its English name: assert that for
+    // all eight, which is what fails the moment stats.cpp starts sending the
+    // rows as `=kind:reagent:<English>` without the generator wiring in place.
+    //
+    // The rows themselves are still drawn by the native raster: showReagents()
+    // calls titleOnly() and never sends them, so the Korean *title* box is
+    // deliberately 1 row tall and the eight English rows show through below it.
+    // That half (stats.cpp sending the rows + dropping titleOnly()) needs a C++
+    // change and a wasm rebuild; until then this box stays a title strip.
     await pressKey(page, "ArrowRight", 1200)
     const reagentsTitle = await statusText(page)
     expect(reagentsTitle).toContain(squash(koreanForStatsLiteral("Reagents")))
     expect(reagentsTitle).not.toContain("Reagents")
+    for (const english of REAGENT_NAMES) {
+      // Every name must have a ready Korean term, or the guard beside it
+      // would be guarding nothing at all.
+      expect(squash(koreanReagentName(english)), english).toMatch(/\p{Script=Hangul}/u)
+      expect(reagentsTitle, `English reagent name leaked into the overlay: ${english}`).not.toContain(english)
+    }
     const titleBox = await page.evaluate(() => {
       const overlay = document.querySelector('#overlay-layer [data-role="status"]')!.getBoundingClientRect()
       const canvas = document.querySelector("#game-canvas")!.getBoundingClientRect()
       return { ratio: overlay.height / canvas.height }
     })
     // one native row out of the 200px-tall logical screen (8px), never the
-    // full 8-row status box that would black out the English reagent rows.
+    // full 8-row status box that would black out the still-native reagent rows.
     expect(titleBox.ratio).toBeLessThan(0.1)
     await page.screenshot({ path: join(evidenceDir, "status-reagents.png") })
-    log.push("views: weapons/armour/equipment/items overlays ok, reagents view shows the Korean title only")
+    log.push(
+      `views: weapons/armour/equipment/items overlays ok, reagents view shows the Korean title only ` +
+        `(8 English reagent names absent from the overlay; rows still native raster pending the C++ step)`
+    )
 
     // --- Back to the party overview. ---
     await pressKey(page, "Escape", 1500)

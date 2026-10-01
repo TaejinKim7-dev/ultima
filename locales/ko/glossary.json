@@ -19,6 +19,54 @@
       "translation": "진실",
       "status": "ready"
     },
+    "reagent-black-pearl": {
+      "sourceHash": "sha256:5c77edc9daaed4547719ab814cbfd56bc593651b853c2a94edb0f3b5abbadfd5",
+      "placeholders": [],
+      "translation": "흑진주",
+      "status": "ready"
+    },
+    "reagent-blood-moss": {
+      "sourceHash": "sha256:8e12e2b49c17c23f5a083c4ced6acfc086c31ae9d00a362eba2b163f2000fa6f",
+      "placeholders": [],
+      "translation": "핏빛이끼",
+      "status": "ready"
+    },
+    "reagent-garlic": {
+      "sourceHash": "sha256:4e7bcd0c8d5b25bdb683b29be3304f89cf6a516eada88f227fe04018b876fdfb",
+      "placeholders": [],
+      "translation": "마늘",
+      "status": "ready"
+    },
+    "reagent-ginseng": {
+      "sourceHash": "sha256:5b4b6ecb08f8d33370f4b06d76091e0deec431fdf8d9f67d4456cb25a2b74521",
+      "placeholders": [],
+      "translation": "인삼",
+      "status": "ready"
+    },
+    "reagent-mandrake": {
+      "sourceHash": "sha256:9b853e863db1800352686929f42567f2bfbbef1597b5b7b7d1bd3aec03fa0df4",
+      "placeholders": [],
+      "translation": "맨드레이크",
+      "status": "ready"
+    },
+    "reagent-nightshade": {
+      "sourceHash": "sha256:4fcb8b80d2997cd4008e7bdd5718f86c9d7991ad53de3547ecd1d923886f7baa",
+      "placeholders": [],
+      "translation": "벨라도나",
+      "status": "ready"
+    },
+    "reagent-spider-silk": {
+      "sourceHash": "sha256:20d165a9c353ff57ce0fe89448386935e137746fa80ba0e9385694197255329d",
+      "placeholders": [],
+      "translation": "거미줄",
+      "status": "ready"
+    },
+    "reagent-sulfur-ash": {
+      "sourceHash": "sha256:add0ee4f2f692e79e63ddf34ab5f2776c9f832b8aa3ebeec3c287b4050808056",
+      "placeholders": [],
+      "translation": "유황재",
+      "status": "ready"
+    },
     "term-avatar": {
       "sourceHash": "sha256:ca8e826d9c2ec401e9ac82cd0aa710cf234d5cac4e6ee967b3588c63fce9681b",
       "placeholders": [],

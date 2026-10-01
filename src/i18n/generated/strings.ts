@@ -18593,6 +18593,38 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "진실",
     "placeholders": []
   },
+  "reagent-black-pearl": {
+    "translation": "흑진주",
+    "placeholders": []
+  },
+  "reagent-blood-moss": {
+    "translation": "핏빛이끼",
+    "placeholders": []
+  },
+  "reagent-garlic": {
+    "translation": "마늘",
+    "placeholders": []
+  },
+  "reagent-ginseng": {
+    "translation": "인삼",
+    "placeholders": []
+  },
+  "reagent-mandrake": {
+    "translation": "맨드레이크",
+    "placeholders": []
+  },
+  "reagent-nightshade": {
+    "translation": "벨라도나",
+    "placeholders": []
+  },
+  "reagent-spider-silk": {
+    "translation": "거미줄",
+    "placeholders": []
+  },
+  "reagent-sulfur-ash": {
+    "translation": "유황재",
+    "placeholders": []
+  },
   "term-avatar": {
     "translation": "아바타",
     "placeholders": []
@@ -18927,6 +18959,16 @@ export const GENERATED_STATUS_NAMES: Readonly<Record<string, Readonly<Record<str
     "Paladin": "module:Ultima-IV:config:50",
     "Ranger": "module:Ultima-IV:config:51",
     "Shepherd": "module:Ultima-IV:config:52"
+  },
+  "reagent": {
+    "Sulfur Ash": "reagent-sulfur-ash",
+    "Ginseng": "reagent-ginseng",
+    "Garlic": "reagent-garlic",
+    "Spider Silk": "reagent-spider-silk",
+    "Blood Moss": "reagent-blood-moss",
+    "Black Pearl": "reagent-black-pearl",
+    "Nightshade": "reagent-nightshade",
+    "Mandrake": "reagent-mandrake"
   }
 }
 

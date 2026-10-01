@@ -6,6 +6,7 @@ export interface GeneratedTables {
   uiTemplates: Record<string, string>
   uiTemplateExclusions: { id: string; reason: string }[]
   moduleNames: Record<string, string>
+  statusNames: Record<string, Record<string, string>>
   vendorTemplates: Record<string, string>
   vendorTemplateExclusions: { id: string; reason: string }[]
   vendorNames: Record<string, string>
