@@ -35,5 +35,44 @@ export default defineConfig({
   },
   // Step 7: the WebGL2 renderer test selects this project explicitly
   // (`--project=chromium`); headless Chromium renders via SwiftShader.
-  projects: [{ name: "chromium" }],
+  //
+  // F3 (real-browser QA; plan Must-have 2: "지원 검증은 Chromium(Chrome/Edge
+  // 계열), Firefox, WebKit 계열의 현재 데스크톱 버전이다") runs the whole
+  // suite on all three engines, so an engine-specific regression is visible
+  // without editing per-spec skip lists.
+  //
+  // NOT a widening of the default gate. Every gate/verification entry point
+  // names `--project=chromium` explicitly, so they still run Chromium only:
+  //   - scripts/verify-integration.mjs:32  e2e step
+  //   - scripts/verify-release.mjs:55      test:e2e step
+  //   - docs/WEB_PORT.md:68, docs/ULTIMA_WEB_PLAN.md's per-Todo acceptance
+  //     criteria (which are byte-identical to .omo/plans/ultima-web.md)
+  // A bare `npm run test:e2e` (no --project) is the ONLY invocation that
+  // widens, and that is intentional: it is the F3 multi-engine entry point.
+  //
+  // Per-project settings: browserName is the ONLY difference. testDir,
+  // baseURL, outputDir, webServer and every other `use` option are inherited
+  // from the top level, so all three engines exercise the identical
+  // `/ultima/`-based `vite preview` artifact built from the same dist/. This
+  // matches the central integration gate's proven-working Chromium settings;
+  // no timeout, viewport, device-scale-factor or launch-flag override was
+  // needed for Firefox/WebKit (each engine inherits Chromium's 30 s default
+  // and the per-test `test.setTimeout()` budgets the specs already set).
+  //
+  // Deliberately NOT set per project:
+  //   - `retries`: left at Playwright's default 0, same as before F3, so a
+  //     flaky-on-another-engine result is reported rather than papered over.
+  //   - `workers`: left unset. The gate passes `--workers=1` on the CLI, and
+  //     so does the F3 run, so a failure is never masked by parallelism.
+  //   - GPU flags: the repo never passes `--enable-unsafe-swiftshader`,
+  //     `--use-gl=swiftshader` or `--disable-gpu` to Chromium; all three
+  //     engines resolve their own software WebGL2 (measured: chromium
+  //     ANGLE/SwiftShader, firefox "Generic Renderer", webkit software) so
+  //     adding per-engine GPU flags would only make the three runs
+  //     non-comparable.
+  projects: [
+    { name: "chromium" },
+    { name: "firefox", use: { browserName: "firefox" } },
+    { name: "webkit", use: { browserName: "webkit" } }
+  ],
 })
