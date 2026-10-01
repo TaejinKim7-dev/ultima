@@ -28,6 +28,7 @@
 - **통합 검증은 `npm run verify:integration` 하나로만** 실행한다(`build:modules → build:wasm → check:build-fresh → … → e2e` 순서 고정). 명령을 손으로 나열해 일부만 돌리지 않는다.
 - **실패 원인은 추측 전에 관측한다**: e2e 실패 시 자동 첨부되는 `failure-panel.txt`(패널·포커스)·`failure-screen.png`를 먼저 본다. 가설은 관측으로 확인한 뒤에만 수정 근거로 쓴다.
 - **산출물이 같다고 결론 낼 때는 `build/` 전체(wasm·`.mod`·`render.pak`과 그 복사본)를 비교**한다. 한 파일만 보고 "빌드 동일"이라 판단하지 않는다.
+- **e2e webServer 죽음은 제품 회귀가 아니라 인프라 실패다**: `ERR_CONNECTION_REFUSED` / `ECONNREFUSED`로 실패한 e2e는 webServer(`scripts/build-site.mjs` + `vite preview --strictPort`)가 죽은 것이지 assertion 실패가 아니다. 스위트를 중간에 재시작하지 말고, 서버가 죽은 시각과 어느 시점까지 통과했는지 먼저 기록한 뒤 단독 재실행으로 재현· isolating 한다. 서로 다른 port로도 CPU 경합은 남으므로 `tests/e2e`의 실시간 민감 스펙은 여전히 직렬 실행이 안전하다.
 
 ## Git 작업 방식
 
@@ -46,15 +47,16 @@
   ```
   - Todo별로 추가된 명령(예: `npm run cmake:*`, `npm run deps:host`, `npm run test:native` 등)이 있으면 그 Todo의 검증 명령도 동일하게 실행한다.
 - 로컬 검증 결과(실행한 명령과 exit code)는 merge 전에 `handoff.md`에 기록한다.
+- **게이트 실패는 숨기지 않는다**: 통합 게이트의 어떤 단계든 exit 0이 아니면 merge/push를 금지하고, 실패한 단계와 exit code를 `handoff.md`에 그대로 남긴다. 인프라 실패(위 e2e bullet)도 통과로 기록하지 않는다.
 - merge 후 GitHub Pages 배포가 가능해야 한다.
 
 ## 진행 관리
 
-- 진행 기준 문서는 루트 `plan.md`다. 전체 단계 수는 `.omo/plans/ultima-web.md`의 Todo 개수(현재 28) + F1~F4다 — 새 Todo가 추가되면 이 수도 늘어난다. 진행률은 ✅ 단계 수 ÷ 전체 단계 수로 계산한다. 부분 진행(🟡)은 0으로 센다.
+- 진행 기준 문서는 루트 `plan.md`다. 전체 단계 수는 `.omo/plans/ultima-web.md`의 Todo 개수 + F1~F4다 — 새 Todo가 추가되면 이 수도 늘어난다. 진행률은 ✅ 단계 수 ÷ 전체 단계 수로 계산한다. 부분 진행(🟡)은 0으로 센다.
 - 단계 번호와 세부 정의(References/Acceptance/QA)의 원본은 `.omo/plans/ultima-web.md`다. `docs/ULTIMA_WEB_PLAN.md`는 그와 byte-identical하게 유지한다(`cmp`로 확인).
 - "다음 단계 진행"을 요청받으면 `plan.md`의 "바로 다음 순서"에서 가장 앞에 있는 미완료 단계 하나를 진행한다.
 - 단계가 완료 기준(acceptance criteria + merge 전 검증 게이트)을 통과하면 아래를 함께 갱신한다.
-  1. `plan.md`: 상태(✅), 현재 진행률(n/32), "바로 다음 순서"
+  1. `plan.md`: 상태(✅), 현재 진행률(n/N), "바로 다음 순서"
   2. 계획서 두 벌의 해당 체크박스 `[x]`
   3. `handoff.md`: merge 게이트 명령과 exit code
 - 작은 단계(의미 있는 조사 결론, 테스트 RED/GREEN, 커밋 등)가 끝날 때마다 `handoff` 스킬로 루트 `HANDOFF.md`를 갱신한다. `HANDOFF.md`는 세션 재개용 요약이고, 소문자 `handoff.md`는 공식 인계 기록이다. 둘은 다른 파일이다.

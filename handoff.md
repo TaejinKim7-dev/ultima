@@ -1402,3 +1402,66 @@ merge 60c1004 (코드 트리는 26 브랜치 53bd3aa와 동일, handoff.md만 �
 - 근본 원인 요약(재기록): 통합 e2e가 쓴 `Ultima-IV.mod`가 Todo 25의 `vendors.b` 변경보다 오래됨 — 게이트가 `build:modules`를 빠뜨렸고, `build-wasm.mjs`가 `build/host/modules`를 `build/wasm-release/modules`로 복사해 그 복사본이 서빙되므로 두 단계 모두 필요. Todo 28이 이를 stamp로 강제.
 - Todo 28 QA 증거: happy `integration/verify-integration.log` PASS, failure `task-28/stale-rejected.log`.
 - 계획서 두 벌 24·25·26·28 `[x]`, cmp 0.
+
+## 2026-10-01 통합 merge + 게이트 상태 (main 361b638)
+
+> 이 절은 append만 한다. 위의 어떤 절도 재작성·재정렬하지 않았다.
+
+### 1. 현재 목표와 범위
+- 원본 계획서(`.omo/plans/ultima-web.md`)를 100%까지 채우고 → F1~F4를 완주하고 → 그 다음에 main을 origin에 push한다.
+- 현재 진행률 **28/32 = 87.5%** (`[x]` 28개 = Todo 1~26 + 27 + 28, `[ ]` 4개 = F1~F4).
+- 범위: 웹 기반 Ultima IV 한국어판 정적 호스팅(GitHub Pages). 원본 데이터는 사용자가 직접 고르는 zip이며 저장소에 절대 넣지 않는다.
+
+### 2. 이미 확정된 기술/제품 결정
+- **WebKit 호스트 의존성 + 브라우저 설치 완료**: chromium-1169, firefox-1482, webkit-2158. WebKit은 더 이상 blocker가 아니다(설치는 이미 끝났음).
+- **F1의 tracked-hard / local-soft 분리**: `.omo/evidence/ultima-web/**`는 전부 로컬 전용(gitignore)이므로 추적 대상이 아니다. 추적해야 하는 것만 하드 게이트로 두고, 로컬 전용 경로는 **경로를 명시한 `SKIPPED` 줄을 반드시 출력**한다. 조용히 통과시키지 않는다.
+- **S4 (reagent) 편차는 사용자 승인됨**: 캔버스에 glyph가 없는 자리는 title-only / placeholder 렌더링으로 처리하고, 그 자리에만 영어가 남는다. **이 예외는 문서화 상태로 유지한다.** "고치지" 말 것. 어떤 문서도 이 예외 없이 "한국어 커버리지 완료"라고 주장하지 말 것.
+- **corpus 크기를 문서에 숫자로 고정하지 않는다.** `npm run i18n:check -- --strict`가 그 수치를 출력하면서 동시에 검증하는 단일 소스다.
+- **main merge/push는 별도 확인 프롬프트 없이 진행한다**(사용자의 상시 지시).
+- merge 전 미커밋 상태는 `salvage/pre-merge-main-2026-10-01`(`c5b01af`)에 보존돼 있다.
+
+### 3. 현재 작업 상태
+- **백그라운드 에이전트 0개 실행 중. 활성 세션도 미해결 세션도 없다.**
+- main에 이번 세션에 merge된 것 (branch → 커밋):
+  - `todo-27-korean-status` → `8c3086f` (fast-forward). **이 Todo 자체 게이트는 PASS**(아래).
+  - `todo-29-shrine` → `1b7ee62`, `9eb5b65`, `1e58f44`
+  - `todo-30-readchoice` → `cfb1f71` (merge 커밋 `238ca39`)
+  - `todo-31-status-summary` → `f894265`, `c65f768`, `e9a7267` (merge 커밋 `27797e6`)
+  - `f1-release-docs` → `c69690e`, `a0c541e`, `f1b2296`, `cf9879a`, `0ff8ffa`
+  - main 위 직접 커밋: `7592d4c` (vendor xu4 tree 해시 재계산), `7dded25` (i18n-generate.d.mts 중복 statusNames 선언 수정)
+- main은 `origin/main`(`42fa93c`)보다 **27커밋 앞섬. 아직 push하지 않았다.**
+- **실제로 관측된 green 게이트 (통합 main)**: `npm ci` 0 · `build:modules` 0 · `build:wasm` 0 · `check:build-fresh` 0 · `test:unit` 0 (46 files / **569** tests) · `verify:repo-sources` 0 (4 pinned components, xu4 fileCount 412) · `typecheck` 0 · `build` 0 · `i18n:check -- --strict` 0 (4561 entries) · `build:site --base=/ultima/` 0 · `audit:dist -- --require-engine` 0 · 계획서 두 벌 `cmp` 0 · `git diff --check` 0 · `npm run i18n:generate` 후 `git diff --exit-code src/i18n/generated/strings.ts` = CLEAN(생성기가 no-op).
+- **실패했던 게이트 단계: `typecheck` exit 2.** `scripts/i18n-generate.d.mts`가 `statusNames`를 두 번 선언(좁은 4-kind + 넓은 `Record`)했고 좁은 쪽이 이겨서 `statusNames["reagent"]`가 TS7053. `7dded25`에서 좁은 중복 선언을 삭제 → 이후 exit 0.
+- **⛔ `npm run verify:integration` on integrated main은 NOT GREEN.** `git diff --check`까지 전 단계 exit 0으로 통과한 뒤 e2e에서 실패: **21 failed / 25 passed (26.7m)**, 21건 전부 `page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4588/` — playwright webServer가 실행 도중 죽었다(로그는 `/tmp/opencode/main-integration.log`, `MAIN verify:integration EXIT=1 2026-10-01T19:34:37+09:00`). **원인은 아직 미확정**(로그에 server stderr 없음, dmesg OOM 없음). **통합 main을 gate-green으로 기록하지 않는다.**
+- **Todo 27 자체 게이트는 PASS** (개별 실행): `/tmp/opencode/todo27-integration.log`, `verify:integration EXIT=0`, e2e **46 passed (35.7m)**, `git diff --check`까지 13단계 전부 exit 0.
+- 이 문서 마지막 커밋 시점의 계획서 변경: Todo 27 체크박스 `[ ]` → `[x]` 한 줄뿐. `docs/ULTIMA_WEB_PLAN.md`는 미러라 plain copy로 동기화했고 `cmp` exit 0이다.
+
+### 4. 구현 내용 요약 (Todo 29~33 — 원본 계획서에 없는 항목들)
+- **Todo 29 (신단)**: `Shrine::showVision()`(`vendor/xu4/src/shrine.cpp:207-226`)이 24개의 `avatar.exe:shrineAdvice` id를 `u4WebTalkId()`로 보낸다. id 인덱스는 `virtue * 3 + completedCycles - 1`이고 이 식이 0~23을 정확히 덮는다. 텍스트가 아니라 id만 나간다. **정정 사실**: `"\nThy thoughts are pure. "`는 인접 리터럴 연결(`shrine.cpp:197`)이고 이미 `ui:shrine:15`로 매핑돼 있으므로 새 locale 항목이 필요 없었다 — 추정이 아니라 테스트로 증명됐다.
+- **Todo 32 (원본 계획서에 미편입)**: 미덕 이름 8종. 생성기가 `maps.b`의 `virtue:` 선언 **정확히 8개만** `virtueNameModuleEntries()`(`scripts/i18n-generate.mjs:153-167`)로 받아들이고 source-hash 가드 뒤에 넣는다. 생성기를 재실행하는 것은 순수(idempotent)하다.
+- **Todo 30 (ReadChoiceController)**: 웹 prompt epoch을 open/close하고 canonical alias를 매핑한다 — yes/no(`readChoice("yn \n\033")`), male/female(`intro.cpp:999`의 `"mf"`), choiceA/choiceB(`"ab"`).
+- **Todo 31**: 상태창 요약의 food/silver 행을 연결했다. 웹 빌드는 네이티브 영어 줄을 억제한다. 불투명 박스 바닥이 y=72이므로 y=80의 aura glyph는 가려지지 않는다(`src/overlay/overlay-layout.ts:162` 주석).
+- **Todo 33 (원본 계획서에 미편입)**: `showReagents()`가 실제 시약 8행을 방출하고, `titleOnly()`는 **삭제**됐다(테스트가 `tests/unit/reagent-emission.test.ts`에서 부재를 강제). 생성기는 `extractReagentNames()`(`scripts/i18n-generate.mjs:345`)으로 reagent glossary를 얻는다.
+
+### 5. 다음 에이전트가 바로 실행할 작업
+1. **⛔ 통합 main의 e2e webServer 죽음 원인 확정 (최우선)**. `main`(`361b638`)에서 `npm run verify:integration`을 **혼자** 다시 돌리되 vite webServer(`scripts/build-site.mjs` + `vite preview --strictPort`) 자신의 stderr가 보이게 한다. 먼저 기록: ① 서버가 죽은 시각 ② 그 직전까지 통과한 스펙 ③ 아무 스펙도 시작 못 한 건지. e2e가 완전히 green이 될 때까지 완료로 보지 않는다. 스위트를 중간에 끊고 재시작하지 말 것.
+2. **F2 네이티브 게이트**: `npm run cmake:configure` → `npm run cmake:build` → `npm run test:native`.
+3. **F3**: `playwright.config.ts`(`playwright.config.ts:38` — 현재 `projects: [{ name: "chromium" }]`)에 firefox + webkit 프로젝트를 추가하고 실제 `ultima4.zip`으로 두 스위트 모두 실행. 브라우저는 이미 설치돼 있다.
+4. **F4 최종 재감사**(1~3 이후). 분모 산술을 **원본 계획서 파일에서 다시 유도**할 것.
+5. **사용자 결정**: Todo 29~33을 원본 계획서에 편입할지, 분모를 32로 둘지 37로 둘지.
+6. **push**: 1~3이 green이 된 뒤에만 `git push origin main`.
+
+### 6. 금지사항과 검증 명령
+- **절대 금지**(AGENTS.md): 원본 Ultima IV 게임 데이터를 커밋하지 않는다 — `ultima4.zip`, 원본 `.EXE`/`.TLK`/`.MAP`/`.EGA`/`.SAV`, 추출 원문 corpus, 사용자 save, secret. 임시 검증에 원본을 썼다면 repo 밖 임시 경로에 두고 산출물·로그·artifact에 넣지 않는다. **실패 테스트를 삭제하거나 약화해서 green으로 만들지 않는다.**
+- 원본 데이터 위치는 `/home/taejin/ultima4-original-data/ultima4.zip`이며, **repo에도 어떤 artifact(evidence·로그·trace·test-results)에도 절대 넣지 않는다.**
+- **통합 검증은 `npm run verify:integration` 하나뿐이다.** 손으로 명령을 나열해 일부만 돌리지 않는다(AGENTS.md). 어떤 단계든 exit 0이 아니면 merge/push 금지.
+- 게이트 단계별 exit code는 `handoff.md`에 그대로 남긴다. 인프라 실패(e2e webServer 죽음)도 통과로 기록하지 않는다.
+
+### 7. 남은 위험 / blocker / 아직 검증하지 않은 사실
+- **🔴 BLOCKER: 통합 main의 `verify:integration` e2e가 빨갛다.** 21 failed / 25 passed, 전부 `ERR_CONNECTION_REFUSED`, webServer 죽음, **원인 미확정**. 로그 `/tmp/opencode/main-integration.log`.
+- **통합 main에서 실행되지 않은 것**: `npm run test:native` / cmake configure+build (F2), F3의 firefox/webkit, 새 18단계 목록으로 `npm run verify:release` 전체 완주(F1의 근거가 아직 없다).
+- **미검증(추측 금지)**: Todo 30의 prompt-epoch 작업이 알려진 UX 버그 — 한국어 입력창을 쓴 뒤 화살표 키와 명령 키가 무시되는 문제 — 를 실제로 고쳤는지. **고정됐다고 가정하지 말고 재현부터 해라.**
+- **F3는 시작 전 취소됐다**: worktree `.claude/worktrees/f3-browser-qa`의 브랜치 `f3-browser-qa`는 `781a789`(취소된 레인의 4파일 salvage: `playwright.config.ts`, `tests/e2e/audio.spec.ts`, `gameplay-progression.spec.ts`, `memory-smoke.spec.ts`)이고 그 부모가 `361b638`다. 같은 内容의 이전 커밋 `c9cde1e`는 부모가 `8c3086f`다. worktree는 `playwright.config.ts`가 dirty이고 임시 `f3*.tmp.mjs` 파일이 잔류해 있어 **재사용 전 정리가 필요하다**.
+- **F2의 기존 F-01/F-11 finding은 위양양성(false positive)**이었다. 관련 게이트 산출물은 `.omo/evidence/ultima-web/task-27/`에 존재한다(`fallback.log`, `gates.log`, `task27-unit-red.log`, `task27-unit-green.log`, 회귀 e2e 로그 8종, `native.log`, 스크린샷 4종). evidence는 로컬 전용이라 이 worktree에는 `fallback.log` 하나만 복제돼 있다.
+- **F4 증거 공백**: 보고된 APPROVE_WITH_DEVIATIONS(blocking 0 / non-blocking 6) 판정을 담은 파일을 찾지 못했다. 로컬 `.omo/evidence/ultima-web/final/F4-scope-fidelity.md`는 **2026-09-27의 REJECT 감사본**이다. 그 판정과 "계획서 두 벌 byte-identical 아님"(=`cmp` exit 0이므로 위양양성) 발견을 담은 산출물은 **확인 필요**.
+- **worktree 함정**: 저장소 루트 `/home/taejin/ultima`는 stale한 `f3-real-browser-qa`(`6462af3`)에 있고 dirty다 — 거기서 `git log`/`git diff`를 보면 잘못된 결론이 나온다. main 작업은 반드시 `.claude/worktrees/agent-ad52af6bd293aab90`에서 한다.

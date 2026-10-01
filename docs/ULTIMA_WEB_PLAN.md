@@ -376,7 +376,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: `.omo/evidence/ultima-web/task-26/intro-overlay.png`; failure: an id with no ready translation shows a marked fallback in the overlay without breaking menu navigation, `.omo/evidence/ultima-web/task-26/fallback.log`.
   Commit: Y | feat(i18n): show the intro in Korean via overlays
 
-- [ ] 27. Show the in-game status area and menus (party, Ztats, weapons/armour/equipment/items) in Korean via the status overlay
+- [x] 27. Show the in-game status area and menus (party, Ztats, weapons/armour/equipment/items) in Korean via the status overlay
   What to do / Must NOT do: `StatsArea::redraw()` (`vendor/xu4/src/stats.cpp:94-174`, called from `screenUpdate()` `screen.cpp:765`, early-out on `REDRAW_NONE`) is the single redraw point. In the web build, each `showXxx()` also records structured rows (label id, value) and sends one `status` `view` event per redraw (JS dedupes identical rows). Player names are user data — pass through untranslated. Weapon/armour/class/item names come from module config (`vendor/xu4/module/Ultima-IV/config.b`): generate an English->`module:Ultima-IV:config:<n>` map per field (full name vs abbreviation); titles/labels (`setTitle("Weapons")`, `"%2d Torches"`, `MP/LV/STR...`) become inventoried literals. Use Todo 26's opaque-backing rule. Must NOT translate player names or alter `.SAV` fields; must NOT add per-frame event traffic (dedupe); native builds unchanged.
   Parallelization: Wave 5 | Blocked by: 12,14,15,21,22,26 (backing rule) | Blocks: F1-F4 | Can run alongside: 23, 24, 25
   References: `.omo/drafts/korean-surface-intro-status.md`; `vendor/xu4/src/stats.cpp`, `stats.h`; `tests/e2e/gameplay-progression.spec.ts:218-222` (Ztats); `locales/ko/module.json`.
