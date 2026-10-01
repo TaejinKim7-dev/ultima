@@ -15,11 +15,14 @@ export interface GeneratedTables {
   uiTemplates: Record<string, string>
   uiTemplateExclusions: { id: string; reason: string }[]
   statusTemplates: Record<string, string>
-  statusNames: { armor: Record<string, string>; weapon: Record<string, string>; weaponAbbrev: Record<string, string>; class: Record<string, string> }
+  // Todo 33: `reagent` was added to statusNames by extractReagentNames(), so
+  // this map is keyed by an open set of kinds. It used to be declared twice
+  // here -- once as the exact four kinds and once as an open record -- and the
+  // narrow declaration won, which made `statusNames["reagent"]` a type error.
+  statusNames: Record<string, Record<string, string>>
   // Todo 32: the eight virtue names now come from here, not from a hand-edit
   // of src/i18n/generated/strings.ts.
   moduleNames: Record<string, string>
-  statusNames: Record<string, Record<string, string>>
   vendorTemplates: Record<string, string>
   vendorTemplateExclusions: { id: string; reason: string }[]
   vendorNames: Record<string, string>
