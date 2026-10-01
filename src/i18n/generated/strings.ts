@@ -19989,7 +19989,15 @@ export const GENERATED_MODULE_NAMES: Readonly<Record<string, string>> = {
   "Water": "module:Ultima-IV:config:100",
   "Ankh": "module:Ultima-IV:config:101",
   "Standard": "module:Ultima-IV:config:103",
-  "Full Viewport": "module:Ultima-IV:config:104"
+  "Full Viewport": "module:Ultima-IV:config:104",
+  "Honesty": "module:Ultima-IV:maps:123",
+  "Compassion": "module:Ultima-IV:maps:125",
+  "Valor": "module:Ultima-IV:maps:127",
+  "Justice": "module:Ultima-IV:maps:129",
+  "Sacrifice": "module:Ultima-IV:maps:131",
+  "Honor": "module:Ultima-IV:maps:133",
+  "Spirituality": "module:Ultima-IV:maps:135",
+  "Humility": "module:Ultima-IV:maps:137"
 }
 
 // Todo 25: FNV-1a hash of a vendors.b template's runtime bytes (web-say) -> Korean runtime text.
