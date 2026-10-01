@@ -36,3 +36,6 @@ tmp/
 
 # Keep generated evidence local unless a later policy explicitly tracks summaries.
 .omo/evidence/
+
+# Deepwork session state (local only)
+.slim/

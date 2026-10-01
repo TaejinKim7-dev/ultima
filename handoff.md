@@ -1501,3 +1501,145 @@ merge 60c1004 (코드 트리는 26 브랜치 53bd3aa와 동일, handoff.md만 �
 - `AGENTS.md` 개발 방식에 "**통합 게이트는 단독으로 실행한다**" 규칙 추가(원인은 의심 단계로 표현, 확정 사실로 쓰지 않음).
 - `plan.md`: BLOCKER 절에 조사 결과(기각 2건 + 충돌 경계 + 가설)와 단독 재실행 실험의 미완주 상태 추가. "바로 다음 순서" 1번 = 단독 완주로 진짜 exit code 확보, F3 항목 = rebase-before-merge + probe 15개 폐기.
 - 진행률 headline `28 / 32 = 87.5%`는 **변경하지 않았다** — 이번 라운드에 계획서 체크박스 변경이 없기 때문이다.
+
+---
+
+## 2026-10-01 22:10 — plan.md 순서 1·2번 완료: 통합 게이트 GREEN + F2 네이티브 게이트 GREEN (main 9872f4b)
+
+> 이 절은 append만 한다. 위의 어떤 절도 재작성·재정렬하지 않았다. 위 "2026-10-01 통합 merge + 게이트 상태 (main 361b638)" 절의
+> "⛔ verify:integration NOT GREEN" 판정과 "충돌 경계가 정확하다" 진단은 **아래 §1에서 정정·대체된다.**
+
+### 1. 현재 목표와 범위
+- 원본 계획서(`.omo/plans/ultima-web.md`) 100% → F1~F4 완주 → main push. 범위 변화 없음.
+- 진행률 **28/32 = 87.5%** 유지. 2026-10-01 22:05에 계획서 체크박스를 재집계해 확인: 총 32개 / `[x]` 28 / `[ ]` 4(F1~F4). 이번 라운드에 **체크박스 변경은 없다**(F1~F4는 감사·QA 단계라 Todo와 성격이 다르다).
+- 작업 트리 `/home/taejin/ultima/.claude/worktrees/agent-ad52af6bd293aab90`, main `9872f4b`, origin보다 29커밋 앞섬. **push하지 않았다.**
+
+### 2. plan.md 순서 1번 — ✅ 통합 main `verify:integration` 완주, 진짜 exit code = 0 (GREEN)
+
+merge 게이트 명령과 exit code (2026-10-01 21:06:29 → 21:43:00 KST, 36.5m):
+```
+npm run verify:integration                      # 0  ← 완료 (스크립트 /tmp/opencode/p0-solo-gate.sh)
+# → # verify:integration 2026-10-01T12:43:00.036Z PASS
+build:modules        # 0   (70/70 소스, freshness stamp)
+build:wasm           # 0   (70/70 소스)
+check:build-fresh    # 0   every built artifact matches its sources
+test:unit            # 0   46 files / 569 tests
+verify:repo-sources  # 0   4 pinned components
+typecheck            # 0
+build                # 0
+i18n:check --strict  # 0   4561 entries, 0 pending
+build:site --base=/ultima/   # 0
+audit:dist --require-engine  # 0   9 files, no leaks
+plan cmp             # 0   .omo/plans/ultima-web.md ≡ docs/ULTIMA_WEB_PLAN.md
+git diff --check     # 0
+e2e                  # 0   46 passed (35.8m)   ← ERR_CONNECTION_REFUSED 0건
+```
+- 스크립트 자체 `=== P0 SOLO verify:integration EXIT=0 ===` 확인. 로그 `/tmp/opencode/p0-solo-gate.log`, evidence `.omo/evidence/ultima-web/integration/verify-integration.log`.
+- **완전 단독 실행**(병행 레인·에이전트·워크트리 0). 실행 전 고아 vite preview(pid 504904, 32분째 4601 점유)를 제거했다 — `--strictPort`라 방치하면 다음 실행이 즉시 죽는다.
+- Playwright 요약 줄 `46 passed (35.8m)`이 **실제로 존재** → 완주 확정. AGENTS.md "완주하지 못한 실행은 통과로 쓰지 않는다" 충족.
+- **직전 실패 런이 죽었던 정확한 지점인 #25 `korean-shop.spec.ts:269` healer가 2.7m에 통과.**
+
+### 3. 🔍 앞 절의 진단 정정 2건 (사실관계)
+
+**정정 A — "마지막 통과 = #30 pages-static-smoke"는 틀렸다.**
+- **사실**: 실패 런 46건 중 #30은 **실패 블록 한가운데서 통과했다**(`main-integration.log:362`, 3.1s). 통과 25 / 실패 21로 총계는 맞지만, #30은 "그 뒤 21건"이 아니라 통과 목록에 있다.
+- **#30의 통과는 4588 생존의 증거가 될 수 없다**: `tests/e2e/pages-static-smoke.spec.ts:60`이 `server.listen(0, "127.0.0.1", ...)`로 **자체 ephemeral 포트**를 열고 70행에서 **자기 포트**로만 navigate한다. 4588을 전혀 쓰지 않는다. 즉 그 통과가 실패들 사이에 끼어 있는 게 우연이 아니라 구조 때문이다.
+- → 앞 절의 "기각: pages-static-smoke"과 "충돌 경계가 정확하다(#30이 마지막 통과)"는 **서로 모순**이었다. 둘 다 이 정정으로 대체된다.
+
+**정정 B — 사망 지점은 "테스트 경계"가 아니라 #25 도중이다.**
+- 첫 실패는 **#25**(1.5m 소요). 뒤의 #26~#29·#31~#46이 2.1s짜리 refused다. (거의 모든 실패가 2.1s인 것과 #25만 1.5m인 점이 결정적이었다.)
+- 스택이 지점을 못박는다: #25는 `korean-shop.spec.ts:237`, #26은 `:235`. 스펙은 `:235`(첫 `bootAndSelectZip`) → `:236`(`expect(createCharacterAndWaitForSave)`) → `:237`(두 번째 `bootAndSelectZip`) → `:49`(`page.goto("/")`) 순서다.
+- 따라서 **#25는 첫 부팅 성공 + 실제 엔진 1.5m 캐릭터 생성 성공 → 그 뒤 두 번째 goto에서 refused**였고, vite preview는 **#25 도중에 죽었다**.
+
+### 4. ⚠️ 원인 미확정 — infra 이슈이지 제품 결함이 아니다
+- **green은 "단독 실행 시 관측"이고, "병행 실행이 원인"은 증명되지 않았다. 순위를 매기지 않는다.**
+- 저장소엔 임의의 PID나 포트를 죽이는 코드가 없다. `pkill`/`killall`/`process.kill`/`taskkill`은 `scripts/`·`tests/`에 0건. **`scripts/qa-native-baseline.mjs:114,133`의 `.kill("SIGKILL")`은 자기 자신이 spawn한 Xvfb·xu4 자식 한정**이라 vite preview를 못 죽인다(앞 절이 "grep 0건"이라고 적으면 다음 세션이 모순에 걸리므로 여기서 정정한다).
+- **"4588 고아 preview" 가설은 배제된다**: `playwright.config.ts`가 `reuseExistingServer: false` + `--strictPort`이므로 4588을 점유하는 프로세스가 있으면 Playwright는 부팅 단계에서 즉시 실패한다. 실제로 24개가 통과했다.
+- 실패 런은 **한참 버티다 죽었다**(테스트 경계가 아니라 도중에). 이건 리소스 소진 가설과도 맞물린다. 병행 teardown·리소스 소진·그 외 외적 신호가 구분되지 않는다.
+- **증거 공백(원인 미확정의 직접 원인)**: 실패 런에 `DEBUG=pw:webserver`가 없어 vite 자체 stderr가 캡처되지 않았다. 포렌식 물량 `test-results/port-4588/`(21개 실패 디렉터리 + `.last-run.json`, 288K) 보존.
+- **재현은 유일한 수단이 아니다**(의도적 병행 재현은 앞 절 3의 중단→exit code 없음으로 이미 실패했다). **다음 발생 시 `DEBUG=pw:webserver`를 반드시 켜고 `lsof -i :4588` 스냅샷을 남길 것.**
+- **실무 결론: 통합 게이트는 계속 단독 실행한다.** AGENTS.md에 추가된 그 규칙이 정답이었다.
+
+### 5. plan.md 순서 2번 — ✅ F2 네이티브 게이트, main에서 처음 실행, GREEN (2026-10-01 22:04~22:05)
+
+```
+npm run build:native      # 0   ← 선행 단계 (front 절의 F2 목록에 없던 것)
+/tmp/opencode/f2-native-gate2.sh
+npm run cmake:configure   # 0
+npm run cmake:build       # 0
+npm run test:native       # 0   ctest 4/4 통과
+```
+- **첫 실행은 `test:native` exit 8로 실패했다**(로그 `/tmp/opencode/f2-native-gate.log`). 원인은 **제품 결함이 아니라 F2 명령 목록에 빠진 선행 단계**였다.
+  - `native/CMakeLists.txt:51-61`이 명시한다: "전체 엔진 빌드는 이 CMake 프로젝트 소속이 아니다. 네이티브 GLFW+Faun xu4 바이너리는 `npm run build:native`(`scripts/build-native.mjs`)가 **별도로** 빌드한다."
+  - `native-baseline-negative`가 `build/host/xu4-src/src/xu4` 부재를 이유로 실패했고, ctest 메시지가 "run \"npm run build:native\" first"를 직접 알려줬다. 나머지 3테스트는 통과.
+- 선행 단계 포함 시 **4/4 green**. 실제 엔진 컴파일·링크가 일어났음을 확인했다(로그 232줄의 실제 `g++` 호출, `build/host/xu4-src/src/xu4`가 22:04에 생성된 ELF 64-bit PIE).
+- green 로그 `/tmp/opencode/f2-native-gate2.log`.
+- **규칙화**: F2 네이티브 게이트는 `build:native` 선행이 **필수**다. 누락하면 exit 8로 죽고, 이는 제품 결함이 아니라 명령 목록 결함이다.
+
+### 6. 순서를 F2 먼저로 뒤집은 근거 (의도적 결정)
+- F2는 **네이티브 C++만** 건드린다. F3 브랜치가 만지는 건 `playwright.config.ts` + e2e 스펙 3개다. → **F3 merge는 F2 결과를 무효화하지 않는다.**
+- 반대로 chromium e2e 게이트(35.8m)는 F3 merge로 **무효화**된다(프로젝트 추가 → 전체 재실행 필요).
+- 따라서 F2를 먼저 돌리는 것은 되돌릴 일이 없는 일이고, F3 merge 전에 새 정보를 하나 갖고 있는 편이 낫다. F3는 rebase+폐기+merge를 포함하는 가장 위험한 작업이다.
+
+### 7. 다음 에이전트가 바로 실행할 작업
+1. **F3 (최우선)**: ⚠️ `f3-browser-qa`(`781a789`, 부모 `361b638`)를 **main `9872f4b` 위로 rebase** → 미커밋 `playwright.config.ts` 정리 → 미추적 `f3*.tmp.mjs` **15개 폐기**(커밋 금지) → merge → 실제 `ultima4.zip`으로 **firefox/webkit 스위트 실제 실행**(지금까지 한 번도 없음). merge 직전엔 `npm ci` 별도 실행(`verify:integration` 13단계에 `npm ci`가 없다). **사용자 승인 정지 지점.**
+2. **F3 merge 후 통합 게이트 재실행** (§6 참조 — F3가 2번의 chromium e2e green을 무효화한다).
+3. **F4 재감사**: 1·2 뒤. 분모 산술은 원본 계획서 파일에서 재유도. **F4 승인 판정 파일 미발견**(로컬 `final/F4-scope-fidelity.md`는 2026-09-27 REJECT 감사본) → 새로 작성.
+4. **F1**: `verify:release`의 새 18단계 목록 전량 완주 실행한 적 없다. **코드 merge ≠ F1 통과.**
+5. **사용자 결정**: Todo 29~33을 원본 계획서에 편입할지, 분모를 32로 둘지 35/37로 둘지. Todo 29~33은 main에 구현·merge·검증까지 끝났으나 계획서에 항목이 없다(확인: 계획서 체크박스 총 32개). 이 결정 없이는 100%에 도달할 수 없다.
+6. **push**: F3 게이트 green 뒤에만.
+
+### 8. 금지사항과 검증 명령
+- **원본 데이터 커밋 금지**: `ultima4.zip`, 원본 `.EXE`/`.TLK`/`.MAP`/`.EGA`/`.SAV`, 추출 원문 corpus, 사용자 save, secret. 원본은 `/home/taejin/ultima4-original-data/ultima4.zip`에 있고 repo/artifact에 절대 넣지 않는다.
+- **실패 테스트 삭제·약화 금지.** 인프라 실패도 통과로 기록하지 않는다.
+- **통합 검증은 `npm run verify:integration` 하나뿐.** 손으로 나열해 일부만 돌리지 않는다. exit 0이 아니면 merge/push 금지.
+- **통합 게이트는 단독 실행 + `DEBUG=pw:webserver`.**
+- **F2는 `build:native` 선행 필수.**
+- **S4(reagent) 편차는 사용자 승인된 문서화 예외** — 고치지 말 것. 어떤 문서도 이 예외 없이 "한국어 커버리지 완료"라고 주장하지 말 것.
+- **corpus 크기를 문서에 숫자로 고정하지 않는다** — `npm run i18n:check -- --strict`가 단일 소스.
+- 재사용 스크립트: `/tmp/opencode/p0-solo-gate.sh`(통합 게이트 36.5m), `/tmp/opencode/f2-native-gate2.sh`(F2, 선행 포함).
+
+### 9. 남은 위험 / blocker / 미검증 사실
+- **webServer 비자발 사망의 원인 미확정** (§4). 제품 결함 아님. 어떤 단계도 gate하지 않는다.
+- **F3 firefox/webkit 스위트**: 실제 실행된 적 없다. 브라우저는 설치돼 있으나 통과 근거가 없다.
+- **F1**: `verify:release` 18단계 전량 완주 미실행.
+- **F4**: 승인 판정 파일 미발견.
+- **Todo 30이 실제 UX 버그를 고쳤는지 미검증** — 한국어 입력창을 쓴 뒤 화살표/명령 키가 조용히 무시되던 문제. 고쳤다고 가정하지 말고 재현부터.
+- **green 관측의 조건**: 포트 4601, working tree에 미커밋 `.gitignore` 1줄(`.slim/` 추가, 빌드 무영향)이 있었음. "main `9872f4b`이 green"은 이 조건들을 포함하는 문장이다.
+
+### 10. 이번에 남긴 규칙/문서 변경
+- `plan.md`: 진행률 문구의 **거짓 문구**("이 87.5%는 green 게이트 근거가 아니다")를 **green 근거로 교체**. "통합 merge 상태" 절을 `🔴`→`✅`(blocker 해소)로 바꾸고 **정정 절**(§3 A·B)을 추가, 원본 조사 기록은 `<details>`로 보존. "바로 다음 순서"를 2026-10-01 22:05 갱신으로 교체해 1·2번을 ✅로 표시하고 F3를 다음 최우선으로确立.
+- `HANDOFF.md`: 3차 갱신(전체 재작성 — 상태가 크게 바뀌었음). **주의: `HANDOFF.md`(대문자)는 재작성하지만 `handoff.md`(소문자)는 append만 한다.**
+- `.gitignore`: `.slim/`(deepwork 세션 상태) 추가.
+
+---
+
+## 2026-10-01 22:25 — 위 절(22:10)의 F3 관련 단언 2건 정정 (Oracle Gate 2 리뷰 + 직접 재검증)
+
+> 이 절은 append만 한다. 위 절 §7의 "F3를 main `9872f4b` 위로 rebase"는 **불필요하지만 해롭지 않다**. 그 절의 근거로 적힌 "문서 업데이트가 REVERT된다"는 **사실과 반대**였으므로 여기서 정정한다.
+
+### 정정 A — "F3 merge가 문서를 되돌린다(치명적 함정)"는 ⚠️ **허위 위험 경보**였다
+- 이전 handoff와 위 22:10 절이 "`f3-browser-qa`(`781a789`)의 부모 `361b638`가 handoff 문서 커밋 `f08f4b1` **이전**이라, 그대로 merge하면 `plan.md` diff가 문서 업데이트를 되돌린다(REVERT) — 조용히 날아간다"라고 적었다. **이건 틀렸다.**
+- 직접 재검증 (`git diff --stat`) 결과:
+  - `git diff --stat 361b638 781a789` → **`playwright.config.ts`, `tests/e2e/audio.spec.ts`, `tests/e2e/gameplay-progression.spec.ts`, `tests/e2e/memory-smoke.spec.ts` 4개뿐.** `plan.md`·`handoff.md`·`HANDOFF.md`를 **한 줄도 건드리지 않았다.**
+  - `git diff --stat 361b638 9872f4b -- <위 4개 파일>` → **빈 출력.** main도 그 4개를 건드리지 않았다.
+- git 3-way merge는 **병합 브랜치가 실제로 수정한 파일만** 되돌린다. F3는 plan 문서를 건드리지 않았으므로 되돌릴 것도 없다 → **충돌 없음, rebase 불필요.**
+- **피해**: 이 허위 경보가 남았으면 다음 세션이 정당한 rebase를 우회하거나 plan.md 문서 복원을 시작할 수 있었다. `plan.md:404`·`HANDOFF.md` §6은 이미 정정 완료.
+
+### 정정 B — "F3 merge가 chromium e2e green을 무효화한다"는 과대 주장이다
+- 위 22:10 절 §6이 "F3 merge는 위 1번의 chromium e2e 게이트를 무효화한다(`playwright.config.ts`에 프로젝트가 추가되므로 전체 재실행 필요)"라고 적었다. **절차 결론(재실행)은 맞지만 "green이 무효화된다"는 표현은 틀렸다.**
+- 재검증:
+  - `scripts/verify-integration.mjs:32` = `npx playwright test --project=chromium --workers=1` → **chromium만 실행**된다.
+  - `playwright.config.ts` diff의 신규 주석도 "every existing gate/verification command names `--project=chromium` explicitly … so `npm run verify:integration` still runs Chromium only"라고 명시.
+  - `audio.spec.ts`·`memory-smoke.spec.ts`는 chromium 전용 launch 플래그를 `browserName === "chromium"`일 때만 적용하도록 fixture를 함수형으로 바꾼 것 → chromium launch args 동일.
+  - `gameplay-progression.spec.ts`는 기존 테스트에 `test.setTimeout(180_000)` 추가, **신규 테스트 0** → chromium 46건 유지.
+- → chromium 경로는 **보존된다.** 병합 후 재실행은 AGENTS.md merge 게이트 규칙(`verify:integration` 하나로만)상 여전히 필수이고 fixture API refactor 실린 만큼 실질 검증 가치도 있다. **표현만 "병합 트리에서 새 green을 확정한다"로 바꿨다.**
+
+### Oracle Gate 2 판정: PASS_WITH_NOTES (커밋 가능, 위 2건 정정을 조건으로)
+- ✅ 확인: 인용 규약(`cmp` 두 계획서 exit 0, 원본 계획서 미변경), 정정 A/B의 논리 정합성(실제 파일 대조), F2 체크박스 `[ ]` 유지 정당성(원본 계획서 F2는 "Code quality review" + `final/F2-code-quality.md` 필수인데 해당 디렉터리 미존재 → 체크박스 유예가 규칙에 맞음), F2 exit 8이 "제품 결함 아님" 판정(`native/tests/native_baseline_test.c:6-14`가 이 실패를 설계된 loud-fail로 명시), 인과 framing의 과소/과대 아님.
+- **AGENTS.md merge 게이트 목록에 `build:native` 선행이 없다** — Oracle 지적. F2 exit 8 재발을 막으려면 `AGENTS.md`의 merge 게이트 예시에 `npm run build:native` 선행 조건을 넣는 것이 근본 해결. (이번 라운드 범위 밖이면 "미결"로 명시.)
+
+### ⛔ 빠진 위험 (이번 라운드 최고 위험 — Oracle 발견)
+**루트 `AGENTS.md`가 stale하며 harness가 그 사본을 주입한다.**
+- `/home/taejin/ultima`(루트)는 `f3-real-browser-qa` `6462af3`에 있고 그 `AGENTS.md`는 main의 커밋된 사본보다 **6줄 짧다.** 빠진 것: "통합 게이트는 단독으로 실행한다", "e2e webServer 죽음은 인프라 실패다", "통합 검증은 `verify:integration` 하나로만", merge 게이트의 `check:build-fresh`·"게이트 실패는 숨기지 않는다". 숫자도 낡았다(`현재 22`, `n/26`).
+- **이번 리뷰의 system prompt가 루트 `/home/taejin/ultima/AGENTS.md`에서 주입됐다.** 즉 리뷰가 처음부터 **판단 근거 핵심 룰을 놓친 상태**로 시작했다. `HANDOFF.md`가 루트를 "stale, 쓰지 말 것"으로 표시하는 것으로는 부족하다 — AGENTS.md 주입 경로는 HANDOFF가 통제할 수 없는 harness 레벨이다. **`HANDOFF.md` §11에 명시 완료.**

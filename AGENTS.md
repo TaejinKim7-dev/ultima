@@ -47,6 +47,7 @@
   git diff --check
   ```
   - Todo별로 추가된 명령(예: `npm run cmake:*`, `npm run deps:host`, `npm run test:native` 등)이 있으면 그 Todo의 검증 명령도 동일하게 실행한다.
+  - **F2 네이티브 게이트는 `npm run build:native`가 선행이다**: `native/CMakeLists.txt:51-61`이 "전체 엔진 빌드는 이 CMake 프로젝트 소속이 아니며, 네이티브 xu4 바이너리는 `npm run build:native`가 **별도로** 빌드한다"라고 명시한다. 이 선행 단계를 빼면 `cmake:configure`→`cmake:build`는 통과해도 `test:native`가 **exit 8**로 죽는다(`native-baseline-negative`가 `build/host/xu4-src/src/xu4` 부재로 실패). 이는 **제품 결함이 아니라 명령 목록 결함**이며, 그 실패는 설계된 loud-fail다(`native/tests/native_baseline_test.c:6-14`가 skip이 아니라 fail이라고 명시). 순서: `build:native` → `cmake:configure` → `cmake:build` → `test:native`.
 - 로컬 검증 결과(실행한 명령과 exit code)는 merge 전에 `handoff.md`에 기록한다.
 - **게이트 실패는 숨기지 않는다**: 통합 게이트의 어떤 단계든 exit 0이 아니면 merge/push를 금지하고, 실패한 단계와 exit code를 `handoff.md`에 그대로 남긴다. 인프라 실패(위 e2e bullet)도 통과로 기록하지 않는다.
 - merge 후 GitHub Pages 배포가 가능해야 한다.
