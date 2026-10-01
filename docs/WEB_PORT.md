@@ -68,6 +68,7 @@ npm run i18n:check -- --strict
 npm run test:e2e -- --project=chromium
 ```
 
+- 한 번에 전부: `ULTIMA4_DATA=/절대/경로/ultima4.zip npm run verify:release` — typecheck, unit, native, `i18n:check --strict`, repo-sources, `build:site --base=/ultima/`, `audit:dist --require-engine`, workflow, release-docs, Chromium e2e를 순서대로 돌리고 첫 실패에서 그 exit code로 멈춥니다. `ULTIMA4_DATA`가 없으면 실행을 거부합니다(`--allow-skip-real-data`로 강행 가능, 경고 출력). `--dry-run`은 단계만 출력합니다.
 - 실제 엔진을 쓰는 e2e는 `ULTIMA4_DATA`가 없으면 skip됩니다. 예: `ULTIMA4_DATA=/절대/경로/ultima4.zip npm run test:e2e -- tests/e2e/boot-sequence.spec.ts --project=chromium`
 - 여러 spec 파일을 동시에 돌릴 때는 `PLAYWRIGHT_PORT`를 서로 다르게 줍니다(`playwright.config.ts`). NPC 접근처럼 실시간 타이밍에 민감한 spec(`tests/e2e/korean-npc-alias.spec.ts`, `tests/e2e/gameplay-progression.spec.ts`)은 동시에 돌리지 않는 것이 안전합니다.
 - 10분 메모리 스모크: `MEMORY_SMOKE_MINUTES=10 npm run test:memory-smoke`
@@ -91,8 +92,15 @@ WebGL2와 Web Audio가 필요합니다.
 
 ## 알려진 한계
 
-- **실제 게임 텍스트의 한국어 표시 범위**: 마을 주민(U4 .TLK) NPC 대화는 대화 패널(`#dialogue-history`)에 한국어로 나옵니다(Todo 22: 만남·응답·이름·틀 문장). 엔진은 TLK 문장을 `MAP:npcIndex:field` id로만 넘기고 영어 원문은 엔진 밖으로 보내지 않습니다. Lord British·Hawkwind(`discourse_castle.cpp`), 상점, 인트로, 상태창과 그 밖의 게임 메시지는 아직 영어입니다. 캔버스에 그려지는 게임 글자는 모두 영어로 남습니다(두 곳 표시).
-- 번역 corpus는 inventory 기준 4429/4429입니다(Todo 22에서 `discourse_tlk.cpp` 대화 틀 문장 18개 추가). 이 inventory가 화면에 나오는 모든 문장을 담지는 않습니다. `getVirtueAdjective()` 같은 코드 인자는 번역 틀 안에서 영어로 나옵니다.
+- **실제 게임 텍스트의 한국어 표시 범위**: 마을 주민(U4 .TLK) NPC 대화는 대화 패널(`#dialogue-history`)에 한국어로 나옵니다(Todo 22: 만남·응답·이름·틀 문장). 엔진은 TLK 문장을 `MAP:npcIndex:field` id로만 넘기고 영어 원문은 엔진 밖으로 보내지 않습니다. 그 밖의 게임 텍스트도 한국어입니다.
+  - Lord British·Hawkwind·Codex/엔딩 문장: `discourse_castle.cpp`·`codex.cpp`가 원문 포인터가 아니라 문장 id로 넘겨 대화 패널에 한국어로 표시합니다(Todo 24).
+  - 상점: `script_boron.cpp`의 `web-say`가 치환 전 템플릿 해시와 심볼/값 쌍을 보내고 `src/dialogue/vendor-compose.ts`가 Boron의 `construct` 규칙 그대로 한국어 한 줄을 조립합니다(Todo 25).
+  - 인트로: `intro.cpp`의 각 화면을 `src/overlay/intro-view.ts`가 불투명 배경 한국어 DOM 오버레이로 덮습니다(Todo 26).
+  - 상태창(파티·Ztats·인벤토리)과 메뉴: `stats.cpp`가 `src/overlay/status-view.ts`로 보내 한국어 DOM 오버레이로 덮습니다(Todo 27, Todo 12의 status/menu/TextView 오버레이 계약).
+  - 인게임 `screenMessage()` 문장(전투·던전·제단·아이템 등): 포맷 해시와 엔진이 미리 채운 인자를 보내 한국어로 다시 조립해 대화 패널에 붙입니다(Todo 23). 매핑에 없는 형식은 영어로 되돌리지 않고 조용히 버립니다(원본 데이터일 수 있어서).
+  - 지도·아바타·룬 같은 픽셀 그래프는 번역 대상이 아니라 그대로 캔버스에 그립니다.
+  - 남는 영어: 번역 id 경로가 없는 원본 데이터(TLK의 NPC 대사가 아닌 레코드, TITLE.EXE 바이너리 문자열 일부)와 `getVirtueAdjective()` 같은 코드 인자. 화면에 아직 어떤 영어가 남는지 전수 계측한 것은 아닙니다.
+- 번역 corpus는 inventory 기준 4549/4549입니다(`npm run i18n:check -- --strict`가 이 수를 검증합니다. Todo 22의 TLK 대화 틀 18개를 시작으로 Todo 23~27이 표면을 계속 늘렸습니다). 이 inventory가 화면에 나오는 모든 문장을 담지는 않습니다. `getVirtueAdjective()` 같은 코드 인자는 번역 틀 안에서 영어로 나옵니다.
 - 한국어 입력창을 쓴 뒤에는 포커스가 입력창을 벗어날 때까지 화살표·명령 키가 게임으로 가지 않습니다.
 - 한국어 입력창은 네이티브 텍스트 입력 요청(NPC 대화 등)이 열려 있을 때만 제출됩니다. 요청이 없거나 이미 닫혔으면 거부 메시지를 띄웁니다(Todo 18).
 - 메모리 스모크는 JS heap만 측정하고 wasm linear memory는 포함하지 않습니다.
@@ -114,6 +122,8 @@ WebGL2와 Web Audio가 필요합니다.
 ## 증거 인덱스 (로컬 전용)
 
 `.omo/evidence/`는 git-ignored이며 개발 머신에만 있습니다. clean clone에는 없습니다.
+
+`npm run verify:release-docs`는 두 종류를 구분합니다. tracked 산출물(`.omo/plans/ultima-web.md`, `docs/ULTIMA_WEB_PLAN.md`의 byte 동일성, 이 문서, `.github/workflows/pages.yml`, `docs/TESTING_POLICY.md`, `docs/AI_AGENT_HANDOFF.md`, package.json의 스크립트)은 fresh clone에도 있으므로 **hard requirement**로 실패합니다. 아래 표처럼 `.omo/evidence/**`는 커밋되지 않으므로 **soft**입니다: 로컬에 있으면 존재로 집계하고, 없으면 경로를 이름까지 출력해 건너뜁니다(silent pass도 실패도 아님). 그래서 clean clone에서도 이 명령은 통과하면서 무엇이 없는지 보여 줍니다.
 
 | 단계 | 주요 증거 |
 |---|---|
