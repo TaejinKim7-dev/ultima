@@ -31,7 +31,7 @@ xu4(Ultima IV 엔진)를 Emscripten으로 빌드해 브라우저에서 돌리는
 
 ## 빌드 (clean clone 기준)
 
-CI(`.github/workflows/pages.yml`)와 같은 순서입니다. 2026-09-27에 clean clone에서 전 단계 exit 0을 확인했습니다.
+CI(`.github/workflows/pages.yml`)와 같은 순서입니다. 2026-10-01 clean clone(`git worktree add --detach`로 만든 별도 worktree) 검증에서 `npm ci`와 검증 단계(`typecheck`, `i18n:check --strict`, `verify:repo-sources`, `verify:workflow`, `verify:release-docs`)는 전부 exit 0이었습니다. 빌드 단계(`deps:host`, `deps:wasm`, `build:wasm`, `build:native`, `cmake:configure`, `cmake:build`)는 CPU 비용이 커서 매 라운드마다 다시 돌리지 않고, [검증](#검증) 절의 `npm run verify:release`이 빌드부터 e2e까지 한 번에 실행합니다. 로그: `.omo/evidence/ultima-web/final/F1-followup-clean-clone-proof.log`.
 
 ```bash
 npm ci
@@ -68,7 +68,9 @@ npm run i18n:check -- --strict
 npm run test:e2e -- --project=chromium
 ```
 
-- 한 번에 전부: `ULTIMA4_DATA=/절대/경로/ultima4.zip npm run verify:release` — typecheck, unit, native, `i18n:check --strict`, repo-sources, `build:site --base=/ultima/`, `audit:dist --require-engine`, workflow, release-docs, Chromium e2e를 순서대로 돌리고 첫 실패에서 그 exit code로 멈춥니다. `ULTIMA4_DATA`가 없으면 실행을 거부합니다(`--allow-skip-real-data`로 강행 가능, 경고 출력). `--dry-run`은 단계만 출력합니다.
+- 한 번에 전부: `ULTIMA4_DATA=/절대/경로/ultima4.zip npm run verify:release` — **게이트가 필요한 산출물을 먼저 만들고**(아래 8단계), 그 위에서 typecheck, unit, native, `i18n:check --strict`, repo-sources, `build:site --base=/ultima/`, `audit:dist --require-engine`, workflow, release-docs, Chromium e2e를 순서대로 돌리고 첫 실패에서 그 exit code로 멈춥니다. `ULTIMA4_DATA`가 없으면 실행을 거부합니다(`--allow-skip-real-data`로 강행 가능, 경고 출력). `--dry-run`은 단계만 출력합니다.
+  - 빌드 8단계: `deps:host`, `build:modules`, `deps:wasm`, `build:wasm`, `build:native`, `check:build-fresh`, `cmake:configure`, `cmake:build`. 이게 있어야 clean clone에서 게이트가 도중에 죽지 않습니다. `test:unit`은 `build/wasm-release`를 읽고(`tests/unit/wasm-symbols.test.ts`), `test:native`은 `build/native` 디렉터리(`ctest --test-dir`)와 `build:native`가 만든 GLFW 실행 파일(`native/tests/native_baseline_test.c`는 그게 없으면 skip이 아니라 **fail**)이 필요하고, `build:site`는 `build/wasm-release`가 있을 때만 `dist/engine/`에 엔진을 복사해 `audit:dist --require-engine`이 통과합니다.
+  - 클론에서 만들 수 없는 전제조건은 호스트 C 툴체인, 위의 apt 헤더, PATH에 잡힌 emsdk뿐입니다(`source .emsdk/emsdk_env.sh`). 이 중 하나가 없으면 해당 단계가 명확한 메시지와 함께 실패합니다.
 - 실제 엔진을 쓰는 e2e는 `ULTIMA4_DATA`가 없으면 skip됩니다. 예: `ULTIMA4_DATA=/절대/경로/ultima4.zip npm run test:e2e -- tests/e2e/boot-sequence.spec.ts --project=chromium`
 - 여러 spec 파일을 동시에 돌릴 때는 `PLAYWRIGHT_PORT`를 서로 다르게 줍니다(`playwright.config.ts`). NPC 접근처럼 실시간 타이밍에 민감한 spec(`tests/e2e/korean-npc-alias.spec.ts`, `tests/e2e/gameplay-progression.spec.ts`)은 동시에 돌리지 않는 것이 안전합니다.
 - 10분 메모리 스모크: `MEMORY_SMOKE_MINUTES=10 npm run test:memory-smoke`
@@ -100,7 +102,7 @@ WebGL2와 Web Audio가 필요합니다.
   - 인게임 `screenMessage()` 문장(전투·던전·제단·아이템 등): 포맷 해시와 엔진이 미리 채운 인자를 보내 한국어로 다시 조립해 대화 패널에 붙입니다(Todo 23). 매핑에 없는 형식은 영어로 되돌리지 않고 조용히 버립니다(원본 데이터일 수 있어서).
   - 지도·아바타·룬 같은 픽셀 그래프는 번역 대상이 아니라 그대로 캔버스에 그립니다.
   - 남는 영어: 번역 id 경로가 없는 원본 데이터(TLK의 NPC 대사가 아닌 레코드, TITLE.EXE 바이너리 문자열 일부)와 `getVirtueAdjective()` 같은 코드 인자. 화면에 아직 어떤 영어가 남는지 전수 계측한 것은 아닙니다.
-- 번역 corpus는 inventory 기준 4549/4549입니다(`npm run i18n:check -- --strict`가 이 수를 검증합니다. Todo 22의 TLK 대화 틀 18개를 시작으로 Todo 23~27이 표면을 계속 늘렸습니다). 이 inventory가 화면에 나오는 모든 문장을 담지는 않습니다. `getVirtueAdjective()` 같은 코드 인자는 번역 틀 안에서 영어로 나옵니다.
+- 번역 corpus는 inventory 기준 전량 번역 완료(pending 0)입니다. 정확한 entry 수는 이 문서에 고정하지 않습니다 — `npm run i18n:check -- --strict`가 매 실행마다 그 수를 출력하며 pending 0인지 함께 검증하는 단일 출처이기 때문입니다(Todo 22의 TLK 대화 틀 18개를 시작으로 Todo 23~27이 표면을 계속 늘렸습니다). 이 inventory가 화면에 나오는 모든 문장을 담지는 않습니다. `getVirtueAdjective()` 같은 코드 인자는 번역 틀 안에서 영어로 나옵니다.
 - 한국어 입력창을 쓴 뒤에는 포커스가 입력창을 벗어날 때까지 화살표·명령 키가 게임으로 가지 않습니다.
 - 한국어 입력창은 네이티브 텍스트 입력 요청(NPC 대화 등)이 열려 있을 때만 제출됩니다. 요청이 없거나 이미 닫혔으면 거부 메시지를 띄웁니다(Todo 18).
 - 메모리 스모크는 JS heap만 측정하고 wasm linear memory는 포함하지 않습니다.

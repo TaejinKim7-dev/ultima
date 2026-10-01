@@ -16,7 +16,7 @@ Ultima IV를 웹 브라우저에서 실행할 수 있도록 포팅하고, 한국
 - 새로 작성되는 코드는 TDD로 구현하고, 각 컴포넌트는 Unit Test로 독립 검증합니다.
 - 원본 게임 데이터와 비밀 값만 제외하고, 계획/코드/번역 원천/테스트 정책/배포 workflow는 공개합니다.
 
-## 현재 상태 (2026-09-27)
+## 현재 상태 (2026-10-01)
 
 브라우저에서 실제 xu4 엔진이 원본 데이터로 돌아갑니다. GitHub Pages에도 올라가 있습니다.
 
@@ -28,13 +28,13 @@ Verified deployment: https://taejinkim7-dev.github.io/ultima/ (Actions run 36316
 - 새 게임(캐릭터 생성), 필드 이동, 마을·NPC 대화, 던전·신단 진입, 저장/재로드, 세이브 export/import
 - Web Audio 음악과 효과음
 - 한국어 셸 UI, 한국어 NPC 키워드 alias 입력(예: `건강` → `health`)
-- 마을 주민 NPC 대사를 대화 패널에 한국어로 표시(Todo 22)
+- 한국어 게임 텍스트를 대화 패널과 한국어 DOM 오버레이로 표시: 마을 주민 NPC 대화, 전투·던전·제단·아이템 인게임 메시지, Lord British·Hawkwind·코드엑스·엔딩 문장, 상점 문구, 인트로 화면, 파티·Ztats·인벤토리 상태창과 메뉴 (Todo 22~27)
 - 원본 데이터가 배포 산출물에 섞이지 않도록 하는 검사(`npm run audit:dist`)
 
 아직 안 된 것:
 
-- 마을 주민 외의 게임 텍스트(Lord British, 상점, 인트로, 상태창 등)는 아직 영어입니다. 캔버스의 글자는 모두 영어이고, 한국어 NPC 대사는 아래 대화 패널에 나옵니다.
-- Firefox/WebKit 수동 QA, 최종 독립 검증(F1~F4)
+- 화면에 남는 영어는 전수 계측하지 않았습니다. 번역 id 경로가 없는 원본 데이터 레코드, `TITLE.EXE` 바이너리 문자열 일부, `getVirtueAdjective()`처럼 번역 틀 안에서 영어로 나오는 코드 인자가 남아 있습니다. 지도·아바타·룬 같은 픽셀 그래프는 번역 대상이 아닙니다.
+- Firefox/WebKit 수동 QA와 최종 독립 검증 라운드(F1~F4)가 남았습니다. F1의 계획 준수 검사는 `npm run verify:release-docs`와 `npm run verify:release`로 자동화되어 있습니다.
 
 자세한 한계는 [웹 포팅 문서](docs/WEB_PORT.md#알려진-한계)에 있습니다.
 
@@ -53,6 +53,8 @@ npm run build:site -- --base=/ultima/
 npm run audit:dist -- --require-engine
 ULTIMA4_DATA=/절대/경로/ultima4.zip npm run dev
 ```
+
+위 순서 대신 빌드와 검증을 한 번에 돌리려면 `ULTIMA4_DATA=/절대/경로/ultima4.zip npm run verify:release`을 실행하세요. 필요한 산출물(`build/wasm-release`, `build/native`, `build/host`)을 게이트가 직접 만들고, 그 위에서 unit·native·e2e까지 모두 돌린 뒤 첫 실패에서 멈춥니다. `--dry-run`은 단계만 출력합니다.
 
 ## 문서
 
