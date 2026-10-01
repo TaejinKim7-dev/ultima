@@ -19,6 +19,7 @@ export interface GeneratedTables {
   // Todo 32: the eight virtue names now come from here, not from a hand-edit
   // of src/i18n/generated/strings.ts.
   moduleNames: Record<string, string>
+  statusNames: Record<string, Record<string, string>>
   vendorTemplates: Record<string, string>
   vendorTemplateExclusions: { id: string; reason: string }[]
   vendorNames: Record<string, string>

@@ -25,6 +25,30 @@ function entries(file: string): Record<string, Entry> {
 }
 const uiEntries = entries("ui.json")
 const moduleEntries = entries("module.json")
+const glossaryEntries = entries("glossary.json")
+
+/**
+ * Todo 33: the eight reagent names exactly as vendor/xu4/src/names.cpp's
+ * getReagentName() `reagentNames[]` table spells them, in table order.
+ */
+const REAGENT_NAMES = [
+  "Sulfur Ash",
+  "Ginseng",
+  "Garlic",
+  "Spider Silk",
+  "Blood Moss",
+  "Black Pearl",
+  "Nightshade",
+  "Mandrake"
+] as const
+
+/** Korean reagent term, located by the sha256 of the names.cpp string. */
+function koreanReagentName(english: string): string {
+  const hash = `sha256:${createHash("sha256").update(english, "utf8").digest("hex")}`
+  const found = Object.entries(glossaryEntries).find(([, entry]) => entry.sourceHash === hash)
+  if (found === undefined) throw new Error(`fixture: reagent name not inventoried: ${JSON.stringify(english)}`)
+  return found[1].translation
+}
 
 function koreanForStatsLiteral(literal: string): string {
   const hash = `sha256:${createHash("sha256").update(literal, "utf8").digest("hex")}`
@@ -135,6 +159,19 @@ test.describe("Todo 27: the status column in Korean via the status overlay", () 
     log.push(`status overlay bottom ${geometry.overlayBottom.toFixed(1)}px <= aura glyph row top ${geometry.auraTop.toFixed(1)}px`)
     expect(geometry.overlayBottom).toBeLessThanOrEqual(geometry.auraTop + 0.5)
 
+    // --- Todo 31: the food/gold summary, on its own region. ---
+    const summary = squash(await page.locator('#overlay-layer [data-role="statussummary"]').innerText())
+    const summaryPattern = squash(koreanForStatsLiteral("F:%04d   G:%04d")).replace(/%04d|%02d/g, "\\d+")
+    expect(summary, "the food/gold summary must render in Korean").toMatch(new RegExp(summaryPattern))
+    expect(summary, "the native English food/gold line must be gone").not.toMatch(/F:\d|G:\d/)
+    // The summary row shares its native row with the masked avatar-aura glyph,
+    // so this box must NOT be opaque-backed -- that is what keeps the glyph visible.
+    expect(
+      await page.locator('#overlay-layer [data-role="statussummary"].overlay-backed').count(),
+      "the statussummary overlay must stay transparent so the aura glyph is not covered"
+    ).toBe(0)
+    log.push(`summary overlay: ${summary}`)
+
     // --- Ztats details (player 1). ---
     await pressKey(page, "z", 1500)
     const details = await statusText(page)
@@ -170,10 +207,51 @@ test.describe("Todo 27: the status column in Korean via the status overlay", () 
     await pressKey(page, "ArrowRight", 1200)
     const items = await statusText(page)
     expect(items).toContain(squash(koreanForStatsLiteral("Items")))
-    // Reagents keep the native raster (English): the overlay is removed, not stale.
+    // Reagents (Todo 31 + 33): the title AND the rows are Korean. The eight
+    // reagent NAMES are inventoried and translated -- their authoritative
+    // English is vendor/xu4/src/names.cpp getReagentName()'s reagentNames[]
+    // table, and they resolve through GENERATED_STATUS_NAMES' `reagent` field
+    // to the `reagent-*` glossary terms in locales/ko/glossary.json
+    // (유황재/인삼/마늘/거미줄/핏빛이끼/흑진주/벨라도나/맨드레이크 -- the Korean
+    // this corpus already used in vendors.b and the TLK dialogue, not invented
+    // here). A row may never reach the overlay with its English name: assert
+    // that for all eight, which is what fails the moment stats.cpp sends the
+    // rows as `=kind:reagent:<English>` without the generator wiring in place.
+    //
+    // Todo 33 also dropped showReagents()'s titleOnly(), so this is no longer a
+    // 1-row title strip: the titled flush sends the whole mainArea box,
+    // (192,0,120,72), and the opaque overlay covers the English rows the
+    // native raster still draws. It stops 8px above the avatar-aura glyph
+    // cell, which the unit suite pins for every opaque role.
     await pressKey(page, "ArrowRight", 1200)
-    expect(await page.locator('#overlay-layer [data-role="status"]').count(), "the reagents view must drop the overlay").toBe(0)
-    log.push("views: weapons/armour/equipment/items overlays ok, reagents view drops the overlay")
+    const reagentsTitle = await statusText(page)
+    expect(reagentsTitle).toContain(squash(koreanForStatsLiteral("Reagents")))
+    expect(reagentsTitle).not.toContain("Reagents")
+    for (const english of REAGENT_NAMES) {
+      // Every name must have a ready Korean term, or the guard beside it
+      // would be guarding nothing at all.
+      expect(squash(koreanReagentName(english)), english).toMatch(/\p{Script=Hangul}/u)
+      expect(reagentsTitle, `English reagent name leaked into the overlay: ${english}`).not.toContain(english)
+    }
+    const reagentBox = await page.evaluate(() => {
+      const overlay = document.querySelector('#overlay-layer [data-role="status"]')!.getBoundingClientRect()
+      const canvas = document.querySelector("#game-canvas")!.getBoundingClientRect()
+      return { ratio: overlay.height / canvas.height }
+    })
+    // The full 8-row + title status box: 72px of the 200px-tall logical
+    // screen. A fresh Fighter owns no reagents, so there are no row LABELS to
+    // read here (the Korean names above are asserted for the vocabulary and
+    // tests/unit/reagent-emission.test.ts covers the emitted rows); what this
+    // pins is that the box is no longer a 1-row title strip and still does not
+    // grow past the aura glyph.
+    expect(reagentBox.ratio).toBeGreaterThan(0.3)
+    expect(reagentBox.ratio).toBeLessThanOrEqual(72 / 200)
+    await page.screenshot({ path: join(evidenceDir, "status-reagents.png") })
+    log.push(
+      `views: weapons/armour/equipment/items overlays ok, reagents view sends the Korean title and ` +
+        `the full status box (8 English reagent names absent from the overlay; the row emission ` +
+        `itself is covered by tests/unit/reagent-emission.test.ts -- a fresh Fighter has none)`
+    )
 
     // --- Back to the party overview. ---
     await pressKey(page, "Escape", 1500)

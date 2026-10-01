@@ -103,6 +103,22 @@ describe("bridge ABI contract (C ABI version 1)", () => {
     expect(isBridgeEvent(invalidView)).toBe(false)
   })
 
+  // Todo 31: the food/gold summary needs its own region because overlay
+  // elements are 1:1 with a region (src/shell.ts's ensureOverlayElement), and
+  // the summary row is also visible while the party box is up.
+  it("accepts the statussummary view region (Todo 31) and still rejects an unknown one", () => {
+    const summaryView: unknown = {
+      abiVersion: 1,
+      type: "view",
+      region: "statussummary",
+      text: "음식:0500  금:0300",
+      rect: { x: 192, y: 80, width: 120, height: 8 }
+    }
+
+    expect(isBridgeEvent(summaryView)).toBe(true)
+    expect(isBridgeEvent({ ...(summaryView as object), region: "not-a-real-region" })).toBe(false)
+  })
+
   it("accepts a well-formed save-state event with and without an optional message", () => {
     const saved: unknown = { abiVersion: 1, type: "save-state", status: "saved" }
     const failed: unknown = {

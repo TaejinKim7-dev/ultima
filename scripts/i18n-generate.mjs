@@ -86,6 +86,18 @@ const INTRO_TEMPLATE_SOURCE = "vendor/xu4/src/intro.cpp"
 const STATUS_TEMPLATE_SOURCE = "vendor/xu4/src/stats.cpp"
 const STATUS_NAME_SOURCE = "vendor/xu4/module/Ultima-IV/config.b"
 
+// Todo 33: the reagent names getReagentName() returns (vendor/xu4/src/names.cpp
+// `reagentNames[]`). That English is open-source xu4 code, but it is neither a
+// screenMessage/Menu::add call-site literal (no `ui:<file>:<n>` id exists for
+// a static array) nor a Boron module literal -- and vendors.b, the only module
+// file that names them, stocks just six of the eight. So each name is a
+// glossary term (`reagent-<english-slug>` in locales/ko/glossary.json, the same
+// place virtue/term/principle names live), and this generator maps them into
+// GENERATED_STATUS_NAMES as the `reagent` field. A status row then carries the
+// name as `=kind:reagent:<English>` and resolves to Korean through the ordinary
+// named-object path (resolveStatusName), not a new overlay code path.
+const REAGENT_NAME_SOURCE = "vendor/xu4/src/names.cpp"
+
 // Todo 27: stats.cpp draws the status column through the web view channel
 // (EM_JS -> `Module.u4View.show("status", ...)`), never screenMessage(). Its
 // literals are payload templates ("F:%04d   G:%04d", "Stones:%s") for that
@@ -251,6 +263,10 @@ export function generateI18nTables(schemaDir) {
     virtueNameModuleEntries(moduleEntries)
   )
   const statusNames = extractStatusNames(moduleEntries)
+  // Todo 33: glossary ids, not module: ids -- see REAGENT_NAME_SOURCE.
+  statusNames.reagent = extractReagentNames(
+    loadSchemaFile(resolve(schemaDir, "glossary.json"), "glossary").entries
+  )
 
   // Todo 25: vendors.b templates (web-say) and the shop/owner/item names.
   const vendorSource = {
@@ -314,6 +330,30 @@ export function extractStatusNames(moduleEntries) {
     const quoteAt = match.index + match[0].length - match[2].length - 2
     const index = literals.findIndex((literal) => literal.offset === quoteAt)
     if (index >= 0) add("class", literals[index], index)
+  }
+  return names
+}
+
+/**
+ * Todo 33: the English reagent names, read out of vendor/xu4/src/names.cpp's
+ * `reagentNames[]` table (getReagentName's only data), in table order. Returns
+ * English -> `reagent-*` glossary id, and only for a name whose recorded
+ * sourceHash still equals the sha256 of the names.cpp literal -- the same
+ * drifted-hash guard the talk/intro/status templates use, so a renamed table
+ * entry is skipped rather than silently mapped to a stale translation.
+ */
+export function extractReagentNames(glossaryEntries) {
+  const source = readFileSync(resolve(repoRoot, REAGENT_NAME_SOURCE), "utf8")
+  const table = /reagentNames\s*\[\s*\]\s*=\s*\{([^}]*)\}/.exec(source)
+  if (table === null) {
+    throw new Error(`${REAGENT_NAME_SOURCE}: getReagentName()'s reagentNames[] table not found`)
+  }
+  const names = {}
+  for (const [, english] of table[1].matchAll(/"([^"]*)"/g)) {
+    const id = `reagent-${english.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
+    if (glossaryEntries[id]?.sourceHash === sourceHash(english) && names[english] === undefined) {
+      names[english] = id
+    }
   }
   return names
 }

@@ -42,6 +42,26 @@ EM_JS(void, u4_web_status_hide, (), {
         Module.u4View.hide("status");
 });
 
+/*
+ * Todo 31: the food/gold summary row is a separate native TextView
+ * (StatsArea::summary) that stays on screen at the same time as the party
+ * box, so it needs its own region -- overlay elements are 1:1 with a region.
+ * Its box is deliberately NOT opaque (see overlay-layout.ts's
+ * OPAQUE_BACKING_ROLES): the same row holds the masked avatar-aura glyph,
+ * which must stay visible in the raster canvas, so the English line below is
+ * skipped entirely in the web build instead of being covered.
+ */
+EM_JS(void, u4_web_status_summary_show, (int x, int y, int w, int h,
+                                         const char* payload), {
+    if (Module.u4View)
+        Module.u4View.show("statussummary", x, y, w, h, -1,
+                           UTF8ToString(payload));
+});
+EM_JS(void, u4_web_status_summary_hide, (), {
+    if (Module.u4View)
+        Module.u4View.hide("statussummary");
+});
+
 namespace {
 
 const int WEB_ROWS = STATS_AREA_HEIGHT + 1;     // title row + main rows
@@ -54,6 +74,8 @@ struct WebStatus {
     bool titled;
     bool suppressed;
     int selected;
+    std::string summaryLabel;   // Todo 31: food/gold, its own region
+    bool hasSummary;
 
     void begin() {
         for (int i = 0; i < WEB_ROWS; ++i) {
@@ -65,6 +87,8 @@ struct WebStatus {
         titled = false;
         suppressed = false;
         selected = -1;
+        summaryLabel.clear();
+        hasSummary = false;
     }
 
     // Player names may come from an imported save; keep control bytes out
@@ -144,6 +168,25 @@ struct WebStatus {
         hasValue[i] = true;
     }
 
+    // Todo 31: the food/gold summary line, sent on its own region because the
+    // summary row is on screen at the same time as the party box.
+    void summary(const std::string& segment) {
+        summaryLabel = segment;
+        hasSummary = true;
+    }
+
+    void flushSummary(const TextView& summary) {
+        if (hasSummary)
+            u4_web_status_summary_show(summary.x, summary.y, summary.width,
+                                       summary.height, summaryLabel.c_str());
+        else
+            u4_web_status_summary_hide();
+    }
+
+    // Todo 31's titleOnly() -- a 1-row title strip for a view whose rows stayed
+    // in the native raster -- is gone as of Todo 33: showReagents() now emits
+    // its rows, so the titled branch below sends the whole mainArea box and
+    // the opaque overlay covers the English rows.
     void flush(const TextView& mainArea) {
         if (suppressed) {
             u4_web_status_hide();
@@ -323,9 +366,24 @@ void StatsArea::redraw() {
     }
 
 #ifdef __EMSCRIPTEN__
+    /*
+     * Todo 31: the food/gold line goes out on its own region instead of
+     * being rasterized. The native textAtFmt calls stay for non-web builds
+     * exactly as before; skipping them here is what lets the transparent
+     * "statussummary" box show Korean with the aura glyph visible through it
+     * (no English underneath to hide, and an opaque box would hide the glyph).
+     */
+    if (c->transportContext == TRANSPORT_SHIP)
+        webStatus.summary(WebStatus::seg("F:%04d   SHP:%02d",
+                                         WebStatus::num("%04d", c->saveGame->food / 100),
+                                         WebStatus::num("%02d", c->saveGame->shiphull)));
+    else
+        webStatus.summary(WebStatus::seg("F:%04d   G:%04d",
+                                         WebStatus::num("%04d", c->saveGame->food / 100),
+                                         WebStatus::num("%04d", c->saveGame->gold)));
     webStatus.flush(mainArea);
-#endif
-
+    webStatus.flushSummary(summary);
+#else
     /*
      * update the lower stats box (food, gold, etc.)
      */
@@ -335,6 +393,7 @@ void StatsArea::redraw() {
     else
         summary.textAtFmt(0, 0, "F:%04d   G:%04d",
                           c->saveGame->food / 100, c->saveGame->gold);
+#endif
 
     redrawAura();
 
@@ -696,9 +755,14 @@ void StatsArea::showReagents(bool active)
 {
     setTitle("Reagents");
 #ifdef __EMSCRIPTEN__
-    // Reagent names and the mixing menu's live selection stay in the native
-    // raster (English) -- see Todo 27's scope note.
-    webStatus.suppressed = true;
+    // Todo 31 sent only the Korean title here (webStatus.titleOnly()) and kept
+    // the eight reagent rows in the native raster in English, because
+    // getReagentName() had no Korean entry and inventing one was out of
+    // scope. Todo 33 added the `reagent` field to the generated status-name
+    // map, so the rows go out too and the whole box is sent below: the
+    // opaque overlay covers the English rows, and the native ones stay
+    // untouched for the non-web build.
+    webStatus.title(WebStatus::seg("Reagents"));
 #endif
 
     Menu::MenuItemList::iterator i;
@@ -716,6 +780,24 @@ void StatsArea::showReagents(bool active)
         {
             // Insert the reagent menu item shortcut character
             shortcut[0] = 'A'+r;
+#ifdef __EMSCRIPTEN__
+            // Todo 33: the same row, as the web build's layout template. It
+            // follows the native `line` exactly -- the loop walks the VISIBLE
+            // items in menu order, one row each -- and reuses `r`, the
+            // absolute reagent index, so the letters stay 'A'+r and not the
+            // visible row number (owning only Sulfur Ash and Garlic is "A-"
+            // and "C-"). The name goes out as a `=reagent:<English>` named
+            // object, resolved by the shell through the generated status-name
+            // map exactly like `=weapon:` / `=armor:`; the count is the one
+            // IntMenuItem's getText() substitutes for its "%s", unpadded
+            // because the web column is a grid and does not align columns.
+            webStatus.add(line, WebStatus::seg("%s-%s %s",
+                                               WebStatus::letter('A'+r),
+                                               std::string("=reagent:") +
+                                               getReagentName((Reagent)r),
+                                               WebStatus::num("%d",
+                                                            c->saveGame->reagents[r])));
+#endif
             if (active)
                 mainArea.textAtKey(0, line++, shortcut, 0);
             else

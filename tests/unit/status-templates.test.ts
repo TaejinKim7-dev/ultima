@@ -5,6 +5,7 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { afterEach, describe, expect, it } from "vitest"
+import { generateI18nTables } from "../../scripts/i18n-generate.mjs"
 import { GENERATED_STATUS_NAMES, GENERATED_STATUS_TEMPLATES } from "../../src/i18n/generated/strings.ts"
 import { resolveStatusName, resolveStatusTemplateId } from "../../src/i18n/localization.ts"
 
@@ -43,6 +44,16 @@ function statsEntries(entries: Record<string, Entry>): [string, Entry][] {
   return Object.entries(entries)
     .filter(([key]) => key.startsWith("ui:stats:"))
     .sort(([a], [b]) => Number(a.split(":")[2]) - Number(b.split(":")[2]))
+}
+
+/**
+ * Todo 33: the locale file that OWNS a generated name id. `module:` ids are
+ * Boron module literals (locales/ko/module.json); everything else in
+ * GENERATED_STATUS_NAMES is a glossary term (locales/ko/glossary.json), whose
+ * sourceHash is likewise the sha256 of the exact English string it names.
+ */
+function sourceEntryFor(id: string): Entry | undefined {
+  return id.startsWith("module:") ? entriesOf("module")[id] : entriesOf("glossary")[id]
 }
 
 const STATS_LITERALS = [
@@ -120,7 +131,6 @@ describe("GENERATED_STATUS_NAMES + resolveStatusName", () => {
       weaponAbbrev: { HND: 11, STF: 13, DAG: 15, OIL: 29, "+AX": 33, "^SW": 41 },
       class: { Mage: 45, Bard: 46, Fighter: 47, Shepherd: 52 }
     }
-    const moduleEntries = entriesOf("module")
     for (const [kind, names] of Object.entries(expected)) {
       for (const [english, index] of Object.entries(names)) {
         expect(GENERATED_STATUS_NAMES[kind]?.[english], `${kind}:${english}`).toBe(`module:Ultima-IV:config:${index}`)
@@ -128,7 +138,13 @@ describe("GENERATED_STATUS_NAMES + resolveStatusName", () => {
     }
     for (const [kind, names] of Object.entries(GENERATED_STATUS_NAMES)) {
       for (const [english, id] of Object.entries(names)) {
-        expect(moduleEntries[id]?.sourceHash, `${kind}:${english}`).toBe(sha256(english))
+        // Todo 33: two id families share this map. armor/weapon/weaponAbbrev/
+        // class come from the module config (vendor/xu4/module/Ultima-IV/
+        // config.b); reagent comes from xu4's own reagentNames[] table
+        // (vendor/xu4/src/names.cpp) and is a glossary term instead, because
+        // that English string is neither a screenMessage call-site literal nor
+        // a Boron module literal.
+        expect(sourceEntryFor(id)?.sourceHash, `${kind}:${english} -> ${id}`).toBe(sha256(english))
       }
     }
   })
@@ -141,5 +157,87 @@ describe("GENERATED_STATUS_NAMES + resolveStatusName", () => {
     expect(resolveStatusName("armor", "Skin")).toBe("맨몸")
     expect(resolveStatusName("weapon", "Not A Weapon")).toBeUndefined()
     expect(resolveStatusName("bogus", "Dagger")).toBeUndefined()
+  })
+})
+
+// Todo 33: the eight reagent names the Ztats Reagents view draws. Their
+// authoritative English source is vendor/xu4/src/names.cpp's `reagentNames[]`
+// table inside getReagentName() (open-source xu4 code) -- NOT vendors.b, which
+// only stocks six of them, and not a screenMessage call-site literal, so they
+// have no `ui:` or `module:` inventory id. They are glossary terms instead
+// (`reagent-<english-slug>`, sourceHash = sha256 of the names.cpp string), and
+// the generator maps them into GENERATED_STATUS_NAMES as the `reagent` field so
+// a status row's `=kind:reagent:<English>` argument resolves to Korean the same
+// way `=kind:weapon:` does.
+const REAGENT_IDS = [
+  ["Sulfur Ash", "reagent-sulfur-ash"],
+  ["Ginseng", "reagent-ginseng"],
+  ["Garlic", "reagent-garlic"],
+  ["Spider Silk", "reagent-spider-silk"],
+  ["Blood Moss", "reagent-blood-moss"],
+  ["Black Pearl", "reagent-black-pearl"],
+  ["Nightshade", "reagent-nightshade"],
+  ["Mandrake", "reagent-mandrake"]
+] as const
+
+// The Korean this project already uses for these reagents -- NOT invented here.
+// The first six are vendors.b's own reagent `name:` fields
+// (module:Ultima-IV:vendors:189-194); the last two only appear inside the
+// vendors.b/TLK dialogue ("Of Nightshade I know but this..." -> 벨라도나,
+// "any Mandrake was an old alchemist" -> 맨드레이크).
+const REAGENT_KOREAN = [
+  ["Sulfur Ash", "유황재"],
+  ["Ginseng", "인삼"],
+  ["Garlic", "마늘"],
+  ["Spider Silk", "거미줄"],
+  ["Blood Moss", "핏빛이끼"],
+  ["Black Pearl", "흑진주"],
+  ["Nightshade", "벨라도나"],
+  ["Mandrake", "맨드레이크"]
+] as const
+
+describe("GENERATED_STATUS_NAMES.reagent (Todo 33)", () => {
+  it("maps exactly the eight names.cpp reagent names, in table order, to their glossary ids", () => {
+    expect(Object.keys(GENERATED_STATUS_NAMES["reagent"] ?? {})).toEqual(REAGENT_IDS.map(([english]) => english))
+    for (const [english, id] of REAGENT_IDS) {
+      expect(GENERATED_STATUS_NAMES["reagent"]?.[english], english).toBe(id)
+    }
+  })
+
+  it("hashes each reagent id from the exact names.cpp literal, so a rename cannot drift", () => {
+    const glossary = entriesOf("glossary")
+    for (const [english, id] of REAGENT_IDS) {
+      expect(glossary[id]?.sourceHash, id).toBe(sha256(english))
+    }
+  })
+
+  it("resolves every reagent name to Korean, with no English left to leak", () => {
+    for (const [english, korean] of REAGENT_KOREAN) {
+      expect(resolveStatusName("reagent", english), english).toBe(korean)
+    }
+    expect(resolveStatusName("reagent", "Sulphurous Ash")).toBeUndefined()
+    expect(resolveStatusName("reagent", "Reagent")).toBeUndefined()
+  })
+
+  it("agrees with the terminology the Korean corpus already uses for these reagents", () => {
+    const moduleEntries = entriesOf("module")
+    const vendored: [string, number][] = [
+      ["Sulfur Ash", 189],
+      ["Ginseng", 190],
+      ["Garlic", 191],
+      ["Spider Silk", 192],
+      ["Blood Moss", 193],
+      ["Black Pearl", 194]
+    ]
+    for (const [english, index] of vendored) {
+      expect(resolveStatusName("reagent", english), english).toBe(
+        moduleEntries[`module:Ultima-IV:vendors:${index}`]?.translation
+      )
+    }
+  })
+
+  it("matches a live generator run -- the generated table is never hand-edited", () => {
+    const { statusNames } = generateI18nTables("locales/ko")
+    expect(statusNames["reagent"]).toEqual(GENERATED_STATUS_NAMES["reagent"])
   })
 })

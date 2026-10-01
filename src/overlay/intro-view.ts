@@ -29,6 +29,17 @@ export const MISSING_INTRO_TRANSLATION = "[미번역]"
 /** Prefixed to an open-source xu4 literal that has no ready Korean translation. */
 export const UNTRANSLATED_LITERAL_MARK = "[영문] "
 
+/**
+ * Regions whose payload is `vendor/xu4/src/stats.cpp` output and so speaks
+ * the status wire grammar (see `status-view.ts`'s header), not the intro one.
+ * Todo 31 adds "statussummary" -- the food/gold row is emitted by the same
+ * EM_JS channel with the same literal-and-args grammar, so it must be
+ * composed by `composeStatusRows`; routing it to `composeIntroRows` would
+ * resolve its literals through the intro template table and render them as
+ * untranslated.
+ */
+const STATUS_GRAMMAR_REGIONS: ReadonlySet<string> = new Set(["status", "statussummary"])
+
 const ROW_SEPARATOR = "\n"
 const SEGMENT_SEPARATOR = "\x1e"
 const FIELD_SEPARATOR = "\x1f"
@@ -175,7 +186,9 @@ export function createIntroViewReceiver(options: IntroViewReceiverOptions): Intr
         }
         lastStatus = key
       }
-      const rows: OverlayRow[] = region === "status" ? composeStatusRows(payload, statusDeps) : composeIntroRows(payload, deps)
+      const rows: OverlayRow[] = STATUS_GRAMMAR_REGIONS.has(region)
+        ? composeStatusRows(payload, statusDeps)
+        : composeIntroRows(payload, deps)
       options.dispatch({
         abiVersion: BRIDGE_ABI_VERSION,
         type: "view",
