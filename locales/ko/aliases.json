@@ -2,7 +2,8 @@
   "$schema": "ultima-web/i18n-schema/aliases/v1",
   "$notes": [
     "Entries map a Korean input word (`alias`) to the canonical English NPC-discourse keyword xu4 already matches internally (`canonical`). The canonical keyword itself is never renamed -- see vendor/xu4/src/discourse_tlk.cpp:93,129,131,136,157 for where each canonical keyword below is actually matched, plus the per-NPC `topic1`/`topic2` keywords already inventoried per-record in tlk.json (those are NPC-specific, not global, so they are not scaffolded here).",
-    "Todo 13 filled in each `alias` below (status now \"ready\"). `src/i18n/korean-aliases.ts`'s resolveInput() is the runtime consumer: it NFC-normalizes a player's Korean input, exact-matches it against these aliases, and -- on a match -- synthesizes the canonical English keyword as keystrokes toward the real (unmodified) native prefix matcher. It never rewrites, shortens, or bypasses a canonical keyword; see tests/unit/korean-aliases.test.ts's invariant test asserting every canonical here is pure ASCII and fits the native 16-byte interest-prompt buffer (discourse_tlk.cpp's gameGetInput(16))."
+    "Todo 13 filled in each `alias` below (status now \"ready\"). `src/i18n/korean-aliases.ts`'s resolveInput() is the runtime consumer: it NFC-normalizes a player's Korean input, exact-matches it against these aliases, and -- on a match -- synthesizes the canonical English keyword as keystrokes toward the real (unmodified) native prefix matcher. It never rewrites, shortens, or bypasses a canonical keyword; see tests/unit/korean-aliases.test.ts's invariant test asserting every canonical here is pure ASCII and fits the native 16-byte interest-prompt buffer (discourse_tlk.cpp's gameGetInput(16)).",
+    "Todo 30 added the `alias:choice-*` entries for the readChoice() path. A native readChoice() prompt reads exactly ONE key and compares it against an ASCII choice set (discourse_castle.cpp's \"yn \\n\\033\" heal question, intro.cpp's \"mf\" sex prompt and \"ab\" gypsy virtue question), so these canonicals are deliberately NOT NPC-discourse keywords: their FIRST CHARACTER is the answer key, and `src/i18n/korean-aliases.ts`'s `CHOICE_ANSWER_CANONICALS` is the exact, closed list of canonicals allowed to answer a choice prompt. `alias:yes`/`alias:no` (예/아니오) double as the y/n answers. The gypsy question is NOT a yes/no question -- its two answers are two different virtues and the Korean question text labels them literally \"A)\"/\"B)\" -- so 가/나 (the Korean option labels for that A/B pair) map to a/b; 예/아니오 would be a category error there."
   ],
   "entries": {
     "alias:bye": { "alias": "안녕", "canonical": "bye", "status": "ready" },
@@ -13,6 +14,10 @@
     "alias:job": { "alias": "직업", "canonical": "job", "status": "ready" },
     "alias:health": { "alias": "건강", "canonical": "health", "status": "ready" },
     "alias:yes": { "alias": "예", "canonical": "yes", "status": "ready" },
-    "alias:no": { "alias": "아니오", "canonical": "no", "status": "ready" }
+    "alias:no": { "alias": "아니오", "canonical": "no", "status": "ready" },
+    "alias:choice-male": { "alias": "남성", "canonical": "male", "status": "ready" },
+    "alias:choice-female": { "alias": "여성", "canonical": "female", "status": "ready" },
+    "alias:choice-a": { "alias": "가", "canonical": "choiceA", "status": "ready" },
+    "alias:choice-b": { "alias": "나", "canonical": "choiceB", "status": "ready" }
   }
 }

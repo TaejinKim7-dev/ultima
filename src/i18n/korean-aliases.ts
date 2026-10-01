@@ -33,6 +33,13 @@
 //     later `strcpy`'d into `savegame.h`'s fixed `char name[16]` on-disk
 //     field (never Korean/UTF-8 -- see the "Must not accept Korean in
 //     avatar name save field" rule).
+//   - `event.cpp`'s `ReadChoiceController` (behind
+//     `EventHandler::readChoice`): reads exactly ONE key and compares it
+//     against the caller's ASCII choice set -- "yn \n\033" (Lord British's
+//     "Art thou well?", `discourse_castle.cpp:510`), "mf" (the intro sex
+//     prompt, `intro.cpp:999`, `if (sexChoice == 'm')`), "ab" (the gypsy's
+//     virtue question, `intro.cpp:1254`, `doQuestion(choice == 'a' ? 0 :
+//     1)`). See `resolveChoiceInput`/`CHOICE_ANSWER_CANONICALS` below.
 //
 // Because every alias this module can ever produce is fed back through the
 // SAME native prefix matcher, aliasing must produce the *canonical* English
@@ -115,7 +122,15 @@ export const NPC_INTEREST_MAX_BYTES = 16 as const
 export const AVATAR_NAME_MAX_CHARS = 12 as const
 
 /** Why a `resolveInput` call was rejected. */
-export type RejectReason = "korean-not-allowed" | "unknown-keyword" | "too-long" | "invalid-charset"
+export type RejectReason =
+  | "korean-not-allowed"
+  | "unknown-keyword"
+  | "too-long"
+  | "invalid-charset"
+  /** Todo 30: the word is a real alias, but its canonical keyword is not a single-key choice answer. */
+  | "not-a-choice-answer"
+  /** Todo 30: nothing was submitted; synthesizing a bare Enter would pick one of several readChoice sets' own answers. */
+  | "empty-answer"
 
 export interface ResolvedOk {
   readonly ok: true
@@ -255,10 +270,127 @@ export function resolveInput(kind: ResolveKind, raw: string, table: AliasTable):
       // Native reads a single accepted key directly
       // (`ReadChoiceController`/`AlphaActionController`) -- same rationale
       // as "direction".
+      //
+      // Todo 30: the readChoice() PROMPTS that a player must be able to
+      // answer in Korean (the Lord British heal question, the intro sex
+      // prompt, the gypsy virtue question) are NOT handled here: they are
+      // reported by the engine as their own prompt epoch kind, and go
+      // through `resolveChoiceInput` instead. This kind stays exactly as
+      // Todo 13 defined it.
       if (!isAscii(raw)) {
         return reject("korean-not-allowed", KOREAN_REJECT_MESSAGES.command)
       }
       return ok(raw)
     }
   }
+}
+
+// ---------------------------------------------------------------------------
+// Todo 30: the readChoice() path (single-key choice prompts).
+// ---------------------------------------------------------------------------
+
+/**
+ * The exact, closed set of `locales/ko/aliases.json` canonical keywords that
+ * may answer a native `readChoice()` prompt, and the single key each one
+ * stands for.
+ *
+ * A canonical is on this list only when a real xu4 call site asks a
+ * progression-critical question that this answer is one of, read from source:
+ *   - "yes" -> 'y' / "no" -> 'n': `discourse_castle.cpp:510`
+ *     `readChoice("yn \n\033")`, answered by `lordBritishHeal(...)`.
+ *   - "male" -> 'm' / "female" -> 'f': `intro.cpp:999` `readChoice("mf")`,
+ *     answered by `if (sexChoice == 'm')`.
+ *   - "choiceA" -> 'a' / "choiceB" -> 'b': `intro.cpp:1254`
+ *     `readChoice("ab")`, answered by `doQuestion(choice == 'a' ? 0 : 1)`.
+ *
+ * The keys are written out rather than derived from each canonical's first
+ * character on purpose: only `ReadChoiceController`'s call site decides what a
+ * choice key is, and the engine must never be second-guessed from a keyword's
+ * spelling (that is what made the "first letter of any canonical" idea wrong
+ * in the first place).
+ *
+ * The gypsy question is NOT a yes/no question -- its two answers are two
+ * different virtues, and the Korean question text labels them literally
+ * "A)"/"B)" -- so 가/나 (the Korean option labels for that same A/B pair) map
+ * to a/b and not 예/아니오.
+ *
+ * Being a closed set is the point: an alias that belongs to a *different*
+ * prompt kind (안녕 -> "bye", 건강 -> "health") must never be truncated to
+ * its first letter and pressed as a choice. Typing 안녕 during the gypsy's
+ * question would otherwise silently answer "B)" and change the avatar's
+ * class. See `choiceAnswerKeys` and the invariant test in
+ * `tests/unit/readchoice-korean-answer.test.ts`.
+ */
+export const CHOICE_ANSWER_KEYS: Readonly<Record<string, string>> = {
+  yes: "y",
+  no: "n",
+  male: "m",
+  female: "f",
+  choiceA: "a",
+  choiceB: "b"
+}
+
+/** The canonicals allowed to answer a choice prompt -- the keys of {@link CHOICE_ANSWER_KEYS}. */
+export const CHOICE_ANSWER_CANONICALS: readonly string[] = Object.keys(CHOICE_ANSWER_KEYS)
+
+const CHOICE_ANSWER_MESSAGE = "이 단어는 예/아니오, 남성/여성, 또는 선택지 답에 해당하지 않습니다. 화면에 표시된 선택지를 입력하세요."
+const CHOICE_UNKNOWN_MESSAGE = "이 낱말에 대응하는 선택지 답을 찾을 수 없습니다: 화면에 표시된 선택지를 입력하세요."
+const CHOICE_EMPTY_MESSAGE = "답을 입력하세요."
+
+/**
+ * The single answer key a canonical keyword stands for on a choice prompt, or
+ * `undefined` when the canonical is not a choice answer at all. Only one key is
+ * ever returned, because that is all `ReadChoiceController` compares.
+ */
+export function choiceAnswerKey(canonical: string): string | undefined {
+  return CHOICE_ANSWER_KEYS[canonical]
+}
+
+/** Every key a Korean word can press on a choice prompt, from this table, sorted. */
+export function choiceAnswerKeys(table: AliasTable): string[] {
+  const keys = new Set<string>()
+  for (const canonical of table.byNormalizedAlias.values()) {
+    const key = choiceAnswerKey(canonical)
+    if (key !== undefined) {
+      keys.add(key)
+    }
+  }
+  return [...keys].sort()
+}
+
+/**
+ * Resolves raw input for a native `readChoice()` prompt: one keystroke, one
+ * accepted key, no trailing Enter.
+ *
+ * Why a Korean answer can never be a multi-byte key all the way down: the
+ * engine's key path is single-byte by construction --
+ * `ReadStringController::keyPressed` only accepts keys below `MAX_BITS`
+ * (128) through an ASCII accepted-chars bitset, and
+ * `ReadChoiceController::keyPressed` compares one key against an ASCII
+ * choice set. GLFW reports key *codes*, so an IME-composed Hangul syllable
+ * has no key code to report in the first place. The narrow, correct solution
+ * is therefore to resolve the Korean word to the canonical English choice key
+ * HERE, in the input path, and deliver that key as a real keystroke toward
+ * the real controller -- never a panel-side cosmetic translation, and never a
+ * change to the engine's comparison values.
+ */
+export function resolveChoiceInput(raw: string, table: AliasTable): ResolveResult {
+  if (raw.length === 0) {
+    return reject("empty-answer", CHOICE_EMPTY_MESSAGE)
+  }
+  // ASCII is xu4's own business, exactly as on the "text" path: an upper-case
+  // 'Y' is folded by the controller itself, and a multi-character ASCII
+  // answer is accepted or re-prompted on by the controller itself.
+  if (isAscii(raw)) {
+    return ok(raw)
+  }
+  const canonical = table.byNormalizedAlias.get(normalizeAliasText(raw))
+  if (canonical === undefined) {
+    return reject("unknown-keyword", CHOICE_UNKNOWN_MESSAGE)
+  }
+  const answerKey = choiceAnswerKey(canonical)
+  if (answerKey === undefined) {
+    return reject("not-a-choice-answer", CHOICE_ANSWER_MESSAGE)
+  }
+  return ok(answerKey)
 }
