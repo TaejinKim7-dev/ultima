@@ -27,7 +27,27 @@ import { fileURLToPath } from "node:url"
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
 const evidenceDir = join(repoRoot, ".omo/evidence/ultima-web/task-18")
 
-test.use({ launchOptions: { args: ["--enable-precise-memory-info"] } })
+// `--enable-precise-memory-info` is a CHROMIUM-only switch, so F3 scoped it
+// to the chromium project rather than handing it to every engine. Observed
+// on Playwright 1.52 / WebKit 18.4: WebKit's launcher rejects the whole
+// command line and this test died before any page existed --
+// "[err] Cannot parse arguments: Unknown option --enable-precise-memory-info
+//   Error: browserType.launch: Target page, context or browser has been closed"
+// -- so WebKit got ZERO memory-smoke coverage. Firefox ignored the unknown
+// flag. Scoping it keeps the chromium samples byte-for-byte identical and
+// lets firefox/webkit actually run the engine-liveness half of this test
+// (their `performance.memory` is undefined, which the verdict below already
+// handles explicitly by recording the skip reason rather than a fake ratio).
+test.use(
+  async (
+    { browserName }: { browserName: "chromium" | "firefox" | "webkit" },
+    use: (options: { launchOptions?: { args?: string[] } }) => Promise<void>
+  ) => {
+    await use({
+      launchOptions: browserName === "chromium" ? { args: ["--enable-precise-memory-info"] } : {}
+    })
+  }
+)
 
 // Real ultima4.zip is small and the loop body is cheap key presses, so a
 // short default keeps this runnable in every normal dev pass; the

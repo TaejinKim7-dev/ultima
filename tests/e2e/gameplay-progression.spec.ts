@@ -352,6 +352,24 @@ test.describe("Todo 17: browser gameplay-progression QA (real engine, real ultim
   })
 
   test("failure path: an intentionally wrong Korean alias would resolve to the wrong canonical keyword, invalidating this spec's own 'same effect as English' dialogue assertion", () => {
+    // F3: this test's BODY is pure Node -- it asserts over the real
+    // locales/ko/aliases.json + the real resolveInput() and never touches the
+    // page, so it used to inherit Playwright's 30s DEFAULT timeout. That
+    // default only ever had to cover the assertions (~600ms measured), but
+    // tests/e2e/fixtures.ts's AUTO `failureCapture` fixture requests `page`
+    // for every test in every spec, so the setup still pays for a real
+    // `browserContext.newPage`. Measured on the same host/port/artifacts:
+    //   chromium -> 43ms    (fits in the 30s default comfortably)
+    //   firefox  -> 51.2s   (exceeds the 30s default AFTER the 6-minute
+    //                         real-engine happy path above has run in the
+    //                         same worker, so the pass only surfaced once
+    //                         playwright.config.ts grew a firefox project)
+    // Observed failure was NOT an assertion failure:
+    //   Error: browserContext.newPage: Test timeout of 30000ms exceeded.
+    // Budget only -- no assertion, skip, or tolerance is changed, and the
+    // chromium run is unaffected (it already finished in 43ms).
+    test.setTimeout(180_000)
+
     // This is Todo 17's negative-control QA scenario. It does not re-drive
     // the real browser (the happy path above already proves the WIRING
     // from #korean-keyword-input to the real native input path end to

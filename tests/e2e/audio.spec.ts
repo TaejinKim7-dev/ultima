@@ -67,7 +67,30 @@ function buildSilentWavBase64(seconds: number): string {
 // (advisor-reviewed concern during this Todo's design pass). Playwright
 // requires `test.use()` with `launchOptions` at the top level of a test
 // file, not nested inside a describe group.
-test.use({ launchOptions: { args: ["--autoplay-policy=user-gesture-required"] } })
+//
+// F3: `--autoplay-policy=...` is a CHROMIUM-only switch, so it is now scoped
+// to the chromium project instead of being handed to every engine. Observed
+// during F3 on Playwright 1.52 / WebKit 18.4: WebKit's launcher rejects the
+// whole command line and both tests in this file died before any page
+// existed --"
+// [err] Cannot parse arguments: Unknown option --autoplay-policy=user-gesture-required
+//   Error: browserType.launch: Target page, context or browser has been closed"
+// -- which hid the actual Web Audio coverage on WebKit entirely. Firefox
+// silently ignored the unknown flag, which is why this only surfaced once a
+// webkit project existed. Scoping the flag to chromium keeps the chromium
+// run byte-for-byte identical and simply stops feeding a Chromium switch to
+// engines that have no equivalent. (`test.use` accepts an options FIXTURE, so
+// `browserName` can be read here at file scope.)
+test.use(
+  async (
+    { browserName }: { browserName: "chromium" | "firefox" | "webkit" },
+    use: (options: { launchOptions?: { args?: string[] } }) => Promise<void>
+  ) => {
+    await use({
+      launchOptions: browserName === "chromium" ? { args: ["--autoplay-policy=user-gesture-required"] } : {}
+    })
+  }
+)
 
 test.describe("Todo 16: Web Audio music, effects, RFX generation", () => {
   test.beforeAll(() => {

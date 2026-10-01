@@ -35,5 +35,27 @@ export default defineConfig({
   },
   // Step 7: the WebGL2 renderer test selects this project explicitly
   // (`--project=chromium`); headless Chromium renders via SwiftShader.
-  projects: [{ name: "chromium" }],
+  //
+  // F3 (real browser QA, plan requirement "Chromium/Firefox/WebKit 계열의
+  // 현재 데스크톱 버전") also runs the suite on Firefox and WebKit, so a
+  // single-engine regression on any of the three is visible without
+  // editing per-spec skip lists. These are extra projects, NOT a widening
+  // of the default gate: every existing gate/verification command names
+  // `--project=chromium` explicitly (docs/WEB_PORT.md, scripts/
+  // verify-integration.mjs, and each Todo's acceptance criteria in
+  // .omo/plans/ultima-web.md), so `npm run verify:integration` still runs
+  // Chromium only.
+  //
+  // The projects deliberately differ ONLY in browserName. testDir, baseURL,
+  // outputDir, webServer and every `use` option are inherited from the
+  // top level, so each engine exercises the identical `/ultima/`-based
+  // `vite preview` artifact; retries and workers stay unset (Playwright
+  // defaults: 0 retries, host-core-count workers), which is the same policy
+  // the Chromium-only config had -- the multi-engine runs pass
+  // `--workers=1` on the CLI so a failure is never masked by parallelism.
+  projects: [
+    { name: "chromium" },
+    { name: "firefox", use: { browserName: "firefox" } },
+    { name: "webkit", use: { browserName: "webkit" } }
+  ],
 })
