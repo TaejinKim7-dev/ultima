@@ -52,6 +52,21 @@ const TALK_TEMPLATE_SOURCES = [
 // (weapon/armour/creature names), see scripts/lib/ui-templates.mjs.
 const MODULE_NAME_SOURCE = "vendor/xu4/module/Ultima-IV/config.b"
 
+// Todo 32: the eight shrine virtue names. maps.b declares them as
+// `shrine (virtue: "Honesty" mantra: ahm)`, so locales/ko already holds a
+// ready Korean `module:Ultima-IV:maps:<n>` row for each -- but nothing fed
+// maps.b to the module-name map, and vendor/xu4/src/names.cpp's
+// getVirtueName() sends exactly these eight English words to the dialogue
+// panel as the `%s` of shrine.cpp's elevation line. That left "Honesty" & co.
+// untranslated inside an otherwise Korean sentence.
+//
+// Only the eight `virtue:` declarations are admitted, NOT all of maps.b: the
+// rest of that file is map/room file names (`shrine.con`, `lcb.tlk`, ...)
+// and whole sentences (`into Dungeon Deceit\n`). Admitting those would turn
+// a filename or an entire sentence into a candidate `%s` substitution, which
+// is a mistranslation waiting for whichever call site happens to pass one.
+const MAPS_NAME_SOURCE = "vendor/xu4/module/Ultima-IV/maps.b"
+
 // Todo 25: vendors.b templates (web-say) and the shop/owner/item names that
 // fill their substitution symbols.
 const VENDOR_FILE = "vendor/xu4/module/Ultima-IV/vendors.b"
@@ -110,6 +125,40 @@ function moduleSources(files) {
     idPrefix: `module:${relativePath.includes("U4-Upgrade") ? "U4-Upgrade" : "Ultima-IV"}:${fileIdOf(relativePath)}`,
     literals: extractBoronLiterals(readFileSync(resolve(repoRoot, relativePath), "utf8")).map((literal) => literal.text)
   }))
+}
+
+/**
+ * The module entries buildModuleNameMap() is allowed to resolve: every
+ * config.b row, plus exactly the shrine `virtue:` rows of maps.b (Todo 32).
+ *
+ * buildModuleNameMap() drops a literal whose id is absent from the entries it
+ * is handed, so filtering the entries -- rather than slicing the source array --
+ * is what keeps maps.b's 101 file-name and dungeon-entrance literals out of
+ * the `%s` substitution table while preserving the ids: the id is still
+ * `module:Ultima-IV:maps:<i>` for the *maps.b* literal index `i`, the same
+ * number i18n:inventory assigned and the locale row is hashed against.
+ */
+export function virtueNameModuleEntries(moduleEntries) {
+  const source = readFileSync(resolve(repoRoot, MAPS_NAME_SOURCE), "utf8")
+  const literals = extractBoronLiterals(source)
+  const kept = {}
+  for (const match of source.matchAll(/\(virtue:\s*"([^"]*)"/g)) {
+    // The literal's offset is the quote itself: one byte past `virtue:`'s open
+    // quote, i.e. match[0].length - 2 - match[1].length. Same lookup
+    // extractStatusNames() does for the class names in config.b.
+    const quoteAt = match.index + match[0].length - match[1].length - 2
+    const index = literals.findIndex((literal) => literal.offset === quoteAt)
+    if (index < 0) continue
+    const id = `module:Ultima-IV:maps:${index}`
+    // Keep the row only if the locale row really is this virtue name, so a
+    // mis-numbered maps.b cannot put an unrelated translation under "Honesty".
+    if (moduleEntries[id]?.sourceHash === sourceHash(match[1])) kept[id] = moduleEntries[id]
+  }
+  return Object.fromEntries(
+    Object.entries(moduleEntries).filter(
+      ([id]) => !id.startsWith("module:Ultima-IV:maps:") || kept[id] !== undefined
+    )
+  )
 }
 
 function isReady(entry) {
@@ -197,7 +246,10 @@ export function generateI18nTables(schemaDir) {
     [...cppUiSources(UI_TEMPLATE_SOURCES), ...moduleSources(MODULE_BORON_FILES)],
     { ...uiEntries, ...moduleEntries }
   )
-  const moduleNames = buildModuleNameMap(moduleSources([MODULE_NAME_SOURCE]), moduleEntries)
+  const moduleNames = buildModuleNameMap(
+    moduleSources([MODULE_NAME_SOURCE, MAPS_NAME_SOURCE]),
+    virtueNameModuleEntries(moduleEntries)
+  )
   const statusNames = extractStatusNames(moduleEntries)
 
   // Todo 25: vendors.b templates (web-say) and the shop/owner/item names.

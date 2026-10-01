@@ -14,6 +14,7 @@
 #include "settings.h"
 #include "tileset.h"
 #include "u4.h"
+#include "web_talk.h"
 #include "xu4.h"
 
 /**
@@ -29,6 +30,16 @@ bool shrineCanEnter(const Portal *p) {
 }
 
 const char* Shrine::getName() const {
+    // Todo 32: deliberately NOT inventoried for translation. This is a
+    // std::string builder, not a screenMessage() literal, so it never enters
+    // the ui:* screenMessage inventory. Its only callers are the cheat menu
+    // ("Goto: <name>" and "Location: <name>" in vendor/xu4/src/cheat.cpp, which
+    // game.cpp pushes explicitly) and DISCOURSE_VENDOR -- and a shrine never
+    // hosts a vendor, because the one "vendors" discourse is a town-NPC
+    // resource loaded in game.cpp. No normal player ever sees this string, so
+    // adding a translation entry would be an unreachable phantom row.
+    // tests/unit/virtue-names.test.ts asserts the cheat-only reachability and
+    // that "Shrine of " stays out of every generated template table.
     std::string& str = c->shrineState.shrineName;
     str = "Shrine of ";
     str += getVirtueName(virtue);
@@ -172,6 +183,13 @@ void Shrine::askMantra() {
 
         bool elevated = ss->completedCycles == 3 && c->party->attemptElevation(virtue);
         if (elevated) {
+            // Todo 32: the `%s` is getVirtueName(virtue), i.e. English engine
+            // text, so the web shell translates it as a `%s` argument through
+            // GENERATED_MODULE_NAMES: the eight virtue names resolve to the
+            // ready Korean module:Ultima-IV:maps:* rows that maps.b already
+            // declares (`shrine (virtue: "Honesty" ...)`) and locales/ko has
+            // already translated. tests/unit/virtue-names.test.ts proves this
+            // line composes to pure Hangul for all eight virtues.
             screenMessage("\nThou hast achieved partial Avatarhood in the Virtue of %s\n",
                           getVirtueName(virtue));
             gameSpellEffect(-1, -1, SOUND_ELEVATE);
@@ -194,6 +212,17 @@ void Shrine::showVision(bool elevated) {
         screenDrawImageInMapArea(visionImageNames[virtue & 7]);
     } else {
         ShrineState* ss = &c->shrineState;
+        // Todo 29: the vision advice is original AVATAR.EXE data (read from
+        // offset 93682 above), so the web dialogue panel gets it as an
+        // "avatar.exe:shrineAdvice:<n>" id -- never as text, exactly like the
+        // codex/endgame lines. The advice index is the same one that picks
+        // the string below: three advice lines per virtue, one per completed
+        // meditation cycle, so virtue * 3 + (cycles - 1) covers 0-23 exactly
+        // once. The "\n%s" format is placeholder-only and stays out of
+        // GENERATED_UI_TEMPLATES, so the screenMessage hash path drops this
+        // line and the panel draws it exactly once. Compiled away in native
+        // builds (web_talk.h).
+        u4WebTalkId("\n%s", "avatar.exe:shrineAdvice", virtue * 3 + ss->completedCycles - 1);
         screenMessage("\n%s", ss->advice[virtue * 3 + ss->completedCycles - 1].c_str());
     }
 }
