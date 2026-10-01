@@ -76,7 +76,6 @@ struct WebStatus {
     int selected;
     std::string summaryLabel;   // Todo 31: food/gold, its own region
     bool hasSummary;
-    bool titleOnlyMode;
 
     void begin() {
         for (int i = 0; i < WEB_ROWS; ++i) {
@@ -90,7 +89,6 @@ struct WebStatus {
         selected = -1;
         summaryLabel.clear();
         hasSummary = false;
-        titleOnlyMode = false;
     }
 
     // Player names may come from an imported save; keep control bytes out
@@ -185,25 +183,13 @@ struct WebStatus {
             u4_web_status_summary_hide();
     }
 
-    // Todo 31: a view whose ROWS stay in the native raster (English) but whose
-    // title should be Korean (showReagents -- the 8 reagent names have no
-    // Korean translation, so inventing one is out of scope). Sending the whole
-    // box would let the opaque overlay cover those English rows, so only the
-    // 1-row title strip is sent, at the title TextView's own rect.
-    void titleOnly() {
-        titleOnlyMode = true;
-    }
-
+    // Todo 31's titleOnly() -- a 1-row title strip for a view whose rows stayed
+    // in the native raster -- is gone as of Todo 33: showReagents() now emits
+    // its rows, so the titled branch below sends the whole mainArea box and
+    // the opaque overlay covers the English rows.
     void flush(const TextView& mainArea) {
         if (suppressed) {
             u4_web_status_hide();
-            return;
-        }
-        // Todo 31: title-strip-only mode (see titleOnly()).
-        if (titleOnlyMode) {
-            u4_web_status_show(mainArea.x, mainArea.y - CHAR_HEIGHT,
-                               mainArea.width, CHAR_HEIGHT, selected,
-                               label[0].c_str());
             return;
         }
         std::string payload;
@@ -769,14 +755,14 @@ void StatsArea::showReagents(bool active)
 {
     setTitle("Reagents");
 #ifdef __EMSCRIPTEN__
-    // Todo 31: the title is now Korean (ui:stats:23 = "시약") instead of
-    // dropping the whole overlay. The 8 reagent ROWS stay in the native
-    // raster in English on purpose: getReagentName() lives in names.cpp and
-    // has no Korean entry in locales/ko/ui.json, and inventing translations
-    // is out of scope for this stage. titleOnly() keeps the opaque box down to
-    // the single title row so those English rows are not covered.
+    // Todo 31 sent only the Korean title here (webStatus.titleOnly()) and kept
+    // the eight reagent rows in the native raster in English, because
+    // getReagentName() had no Korean entry and inventing one was out of
+    // scope. Todo 33 added the `reagent` field to the generated status-name
+    // map, so the rows go out too and the whole box is sent below: the
+    // opaque overlay covers the English rows, and the native ones stay
+    // untouched for the non-web build.
     webStatus.title(WebStatus::seg("Reagents"));
-    webStatus.titleOnly();
 #endif
 
     Menu::MenuItemList::iterator i;
@@ -794,6 +780,24 @@ void StatsArea::showReagents(bool active)
         {
             // Insert the reagent menu item shortcut character
             shortcut[0] = 'A'+r;
+#ifdef __EMSCRIPTEN__
+            // Todo 33: the same row, as the web build's layout template. It
+            // follows the native `line` exactly -- the loop walks the VISIBLE
+            // items in menu order, one row each -- and reuses `r`, the
+            // absolute reagent index, so the letters stay 'A'+r and not the
+            // visible row number (owning only Sulfur Ash and Garlic is "A-"
+            // and "C-"). The name goes out as a `=reagent:<English>` named
+            // object, resolved by the shell through the generated status-name
+            // map exactly like `=weapon:` / `=armor:`; the count is the one
+            // IntMenuItem's getText() substitutes for its "%s", unpadded
+            // because the web column is a grid and does not align columns.
+            webStatus.add(line, WebStatus::seg("%s-%s %s",
+                                               WebStatus::letter('A'+r),
+                                               std::string("=reagent:") +
+                                               getReagentName((Reagent)r),
+                                               WebStatus::num("%d",
+                                                            c->saveGame->reagents[r])));
+#endif
             if (active)
                 mainArea.textAtKey(0, line++, shortcut, 0);
             else

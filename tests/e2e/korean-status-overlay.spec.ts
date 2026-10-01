@@ -207,22 +207,22 @@ test.describe("Todo 27: the status column in Korean via the status overlay", () 
     await pressKey(page, "ArrowRight", 1200)
     const items = await statusText(page)
     expect(items).toContain(squash(koreanForStatsLiteral("Items")))
-    // Reagents (Todo 31 + 33): the title is Korean. Todo 33 inventoried and
-    // translated the eight reagent NAMES too -- their authoritative English is
-    // vendor/xu4/src/names.cpp getReagentName()'s reagentNames[] table, and
-    // they resolve through GENERATED_STATUS_NAMES' `reagent` field to the
-    // `reagent-*` glossary terms in locales/ko/glossary.json (유황재/인삼/마늘/
-    // 거미줄/핏빛이끼/흑진주/벨라도나/맨드레이크 -- the Korean this corpus
-    // already used in vendors.b and the TLK dialogue, not invented here). So a
-    // row may never reach the overlay with its English name: assert that for
-    // all eight, which is what fails the moment stats.cpp starts sending the
+    // Reagents (Todo 31 + 33): the title AND the rows are Korean. The eight
+    // reagent NAMES are inventoried and translated -- their authoritative
+    // English is vendor/xu4/src/names.cpp getReagentName()'s reagentNames[]
+    // table, and they resolve through GENERATED_STATUS_NAMES' `reagent` field
+    // to the `reagent-*` glossary terms in locales/ko/glossary.json
+    // (유황재/인삼/마늘/거미줄/핏빛이끼/흑진주/벨라도나/맨드레이크 -- the Korean
+    // this corpus already used in vendors.b and the TLK dialogue, not invented
+    // here). A row may never reach the overlay with its English name: assert
+    // that for all eight, which is what fails the moment stats.cpp sends the
     // rows as `=kind:reagent:<English>` without the generator wiring in place.
     //
-    // The rows themselves are still drawn by the native raster: showReagents()
-    // calls titleOnly() and never sends them, so the Korean *title* box is
-    // deliberately 1 row tall and the eight English rows show through below it.
-    // That half (stats.cpp sending the rows + dropping titleOnly()) needs a C++
-    // change and a wasm rebuild; until then this box stays a title strip.
+    // Todo 33 also dropped showReagents()'s titleOnly(), so this is no longer a
+    // 1-row title strip: the titled flush sends the whole mainArea box,
+    // (192,0,120,72), and the opaque overlay covers the English rows the
+    // native raster still draws. It stops 8px above the avatar-aura glyph
+    // cell, which the unit suite pins for every opaque role.
     await pressKey(page, "ArrowRight", 1200)
     const reagentsTitle = await statusText(page)
     expect(reagentsTitle).toContain(squash(koreanForStatsLiteral("Reagents")))
@@ -233,18 +233,24 @@ test.describe("Todo 27: the status column in Korean via the status overlay", () 
       expect(squash(koreanReagentName(english)), english).toMatch(/\p{Script=Hangul}/u)
       expect(reagentsTitle, `English reagent name leaked into the overlay: ${english}`).not.toContain(english)
     }
-    const titleBox = await page.evaluate(() => {
+    const reagentBox = await page.evaluate(() => {
       const overlay = document.querySelector('#overlay-layer [data-role="status"]')!.getBoundingClientRect()
       const canvas = document.querySelector("#game-canvas")!.getBoundingClientRect()
       return { ratio: overlay.height / canvas.height }
     })
-    // one native row out of the 200px-tall logical screen (8px), never the
-    // full 8-row status box that would black out the still-native reagent rows.
-    expect(titleBox.ratio).toBeLessThan(0.1)
+    // The full 8-row + title status box: 72px of the 200px-tall logical
+    // screen. A fresh Fighter owns no reagents, so there are no row LABELS to
+    // read here (the Korean names above are asserted for the vocabulary and
+    // tests/unit/reagent-emission.test.ts covers the emitted rows); what this
+    // pins is that the box is no longer a 1-row title strip and still does not
+    // grow past the aura glyph.
+    expect(reagentBox.ratio).toBeGreaterThan(0.3)
+    expect(reagentBox.ratio).toBeLessThanOrEqual(72 / 200)
     await page.screenshot({ path: join(evidenceDir, "status-reagents.png") })
     log.push(
-      `views: weapons/armour/equipment/items overlays ok, reagents view shows the Korean title only ` +
-        `(8 English reagent names absent from the overlay; rows still native raster pending the C++ step)`
+      `views: weapons/armour/equipment/items overlays ok, reagents view sends the Korean title and ` +
+        `the full status box (8 English reagent names absent from the overlay; the row emission ` +
+        `itself is covered by tests/unit/reagent-emission.test.ts -- a fresh Fighter has none)`
     )
 
     // --- Back to the party overview. ---
