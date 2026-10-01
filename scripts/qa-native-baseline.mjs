@@ -8,7 +8,14 @@ const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const xu4Bin = resolve(repoRoot, "build/host/xu4-src/src/xu4")
 const modulesDir = resolve(repoRoot, "build/host/modules")
 const runDir = resolve(repoRoot, "build/native-run")
-const evidenceDir = resolve(repoRoot, ".omo/evidence/ultima-web/task-3/native-baseline")
+// QA_NATIVE_EVIDENCE_DIR lets callers keep this script's evidence out of the
+// repo's .omo/evidence/ tree -- see tests/unit/qa-native-baseline.test.ts, which
+// points it at a temp dir so that a plain `npm run test:unit` never fabricates
+// local evidence. Unset, the default below is unchanged: a real
+// `npm run qa:native-baseline` run still writes task-3 evidence where
+// docs/WEB_PORT.md's evidence index says it does.
+const evidenceRoot = process.env.QA_NATIVE_EVIDENCE_DIR ?? resolve(repoRoot, ".omo/evidence/ultima-web/task-3")
+const evidenceDir = resolve(evidenceRoot, "native-baseline")
 const profile = "qabaseline"
 // Root cause of the earlier movement-based approach's flakiness: overworld/
 // town tiles apply a random "Slow progress!" chance per step
@@ -61,7 +68,7 @@ const ultima4Data = process.env.ULTIMA4_DATA
 // release can be pinned without editing this script.
 const expectedSha256 = process.env.ULTIMA4_DATA_SHA256 ??
   "94aa748cfa1d0e7aa2e518abebb994f3c18acf7edb78c3bd37cd0a4404e6ba74"
-const badZipLog = resolve(repoRoot, ".omo/evidence/ultima-web/task-3/bad-zip.log")
+const badZipLog = resolve(evidenceRoot, "bad-zip.log")
 
 function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms))
