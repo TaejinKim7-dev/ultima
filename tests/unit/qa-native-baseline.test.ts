@@ -1,4 +1,6 @@
 import { spawnSync } from "node:child_process"
+import { existsSync, mkdtempSync } from "node:fs"
+import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { describe, expect, it } from "vitest"
@@ -6,9 +8,16 @@ import { describe, expect, it } from "vitest"
 const projectRoot = fileURLToPath(new URL("../../", import.meta.url))
 const scriptPath = join(projectRoot, "scripts/qa-native-baseline.mjs")
 
+// Unit runs must not create .omo/evidence/ in the repo: a fresh clone that only
+// ran `npm run test:unit` would otherwise have a task-3/ evidence directory
+// holding a fabricated bad-zip.log, which verify:release-docs' local-only
+// evidence tally then counts as real evidence produced by real QA.
+const unitEvidenceDir = mkdtempSync(join(tmpdir(), "qa-native-evidence-"))
+
 function run(env: Record<string, string>) {
   const combined: Record<string, string> = { ...(process.env as Record<string, string>) }
   delete combined["ULTIMA4_DATA"]
+  combined["QA_NATIVE_EVIDENCE_DIR"] = unitEvidenceDir
   Object.assign(combined, env)
   return spawnSync("node", [scriptPath], { cwd: projectRoot, encoding: "utf8", env: combined })
 }
@@ -60,5 +69,14 @@ describe("qa:native-baseline", () => {
     expect(result.status).toBe(1)
     expect(result.stderr).toContain("ULTIMA4_DATA sha256 mismatch")
     expect(result.stderr).toContain("expected " + "a".repeat(64))
+  })
+  it("writes its evidence under QA_NATIVE_EVIDENCE_DIR when set, so unit runs never create repo evidence", () => {
+    const dir = mkdtempSync(join(tmpdir(), "qa-native-evidence-own-"))
+    const wrongFile = join(projectRoot, "package.json")
+
+    const result = run({ ULTIMA4_DATA: wrongFile, ULTIMA4_DATA_SHA256: "a".repeat(64), QA_NATIVE_EVIDENCE_DIR: dir })
+
+    expect(result.status).toBe(1)
+    expect(existsSync(join(dir, "bad-zip.log")), result.stderr).toBe(true)
   })
 })

@@ -1,9 +1,30 @@
 import { spawnSync } from "node:child_process"
 
 // `npm run verify:release` -- the Verification strategy's one release gate
-// (.omo/plans/ultima-web.md): production build, unit/native/e2e, i18n, and
-// artifact checks, in order, stopping at the first nonzero exit and
-// exiting with it.
+// (.omo/plans/ultima-web.md): builds every artifact the gate reads, then
+// unit/native/e2e, i18n, and artifact checks, in order, stopping at the first
+// nonzero exit and exiting with it.
+//
+// SELF-SUFFICIENCY (F1 follow-up): the gate now builds what it needs instead of
+// inheriting a lucky pre-built tree. As first ported it could never pass in a
+// fresh clone, because two of its steps read artifacts nothing in the list
+// produced:
+//   - `test:unit` -- tests/unit/wasm-symbols.test.ts throws "WASM not built"
+//     unless build/wasm-release/{xu4.mjs,xu4.wasm} exists (from build:wasm,
+//     which needs deps:wasm).
+//   - `test:native` -- `ctest --test-dir build/native` needs the directory to
+//     exist (cmake:configure + cmake:build), and its native-baseline-negative
+//     case execs the GLFW binary from build:native, which FAILS rather than
+//     skips when it is absent.
+// `build:site` also copies the engine into dist/engine/ only when
+// build/wasm-release exists, so `audit:dist --require-engine` needs build:wasm
+// before it, and the e2e suite runs against dist/, so build:site must precede
+// it. Those are the dependencies tests/unit/verify-release.test.ts pins.
+//
+// EXTERNAL PREREQUISITES (not buildable from a clone): the host C toolchain,
+// the apt headers listed in docs/WEB_PORT.md, and emsdk 4.0.23 on PATH
+// (`source .emsdk/emsdk_env.sh`). The first missing one to bite fails its
+// step loudly rather than being skipped.
 //
 // Must be run WITH `ULTIMA4_DATA` pointing at a verified original
 // ultima4.zip: without it every real-engine e2e spec skips and the gate
@@ -12,6 +33,16 @@ import { spawnSync } from "node:child_process"
 // `--dry-run` prints the steps and runs nothing.
 
 export const RELEASE_STEPS = [
+  // ---- artifacts every later step reads ----
+  ["deps:host"],
+  ["build:modules"],
+  ["deps:wasm"],
+  ["build:wasm"],
+  ["build:native"],
+  ["check:build-fresh"],
+  ["cmake:configure"],
+  ["cmake:build"],
+  // ---- checks ----
   ["typecheck"],
   ["test:unit"],
   ["test:native"],
