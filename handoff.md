@@ -1643,3 +1643,68 @@ npm run test:native       # 0   ctest 4/4 통과
 **루트 `AGENTS.md`가 stale하며 harness가 그 사본을 주입한다.**
 - `/home/taejin/ultima`(루트)는 `f3-real-browser-qa` `6462af3`에 있고 그 `AGENTS.md`는 main의 커밋된 사본보다 **6줄 짧다.** 빠진 것: "통합 게이트는 단독으로 실행한다", "e2e webServer 죽음은 인프라 실패다", "통합 검증은 `verify:integration` 하나로만", merge 게이트의 `check:build-fresh`·"게이트 실패는 숨기지 않는다". 숫자도 낡았다(`현재 22`, `n/26`).
 - **이번 리뷰의 system prompt가 루트 `/home/taejin/ultima/AGENTS.md`에서 주입됐다.** 즉 리뷰가 처음부터 **판단 근거 핵심 룰을 놓친 상태**로 시작했다. `HANDOFF.md`가 루트를 "stale, 쓰지 말 것"으로 표시하는 것으로는 부족하다 — AGENTS.md 주입 경로는 HANDOFF가 통제할 수 없는 harness 레벨이다. **`HANDOFF.md` §11에 명시 완료.**
+
+---
+
+## 2026-10-01 22:40 — F3 merge + 통합 게이트 재실행 결과
+
+> 이 절은 append만 한다. 위 절들도 그대로 유지한다.
+
+### F3 merge 완료 (2026-10-01)
+- `f3-browser-qa`(`781a789`) → main merge 완료(충돌 없음, rebase 불필요)
+- 병합 트리에서 `npm run verify:integration` 재실행 → **EXIT=0**, e2e **46/46(35.8m)**, refused **0건**
+- 남아있는 위험: 미추적 `f3*.tmp.mjs` 15개는 repo 밖 `/tmp/opencode/f3/` 잔여, 커밋 금지
+- `playwright.config.ts` main에 반영됨(더이상 작업대상 아님)
+
+### F3 merge의 핵심 정정 (2026-10-01)
+이전 "F3 merge가 `plan.md`를 REVERT한다"는 경보와 "F3가 chromium green을 무효화한다"는 주장은 **사실과 달랐다**:
+- `git diff --stat`로 확인: `781a789`는 `playwright.config.ts`·e2e 스펙 4개만 건드리고, `plan.md`·`handoff.md`·`HANDOFF.md`는 한 줄도 안 건드렸다. main도 그 4개를 안 건드려 3-way merge 충돌 없다.
+- `verify-integration.mjs:32`가 `--project=chromium`을 명시하고, 스펙 변경도 chromium 경로를 보존 → chromium green은 **보존**된다. 재실행은 merge 게이트 규칙상 필수.
+
+### 다음 단계
+- **4번 F4 재감사** — 분모 산술은 원본 계획서에서 재유도. F4 승인 판정 파일 미발견 → 새로 작성 필요.
+- **Todo 29~33 편입 여부와 분모(32/35/37) 결정** — 이 결정 없이는 100% 도달 불가.
+- **main push** — F3·F4 게이트 green 뒤에만 진행(사용자 상시 지시).
+
+---
+
+## 2026-10-02 — F1~F4 실행 완료 기록 (병렬 에이전트)
+
+> 이 절은 append만 한다. 위 절들도 그대로 유지한다. 병렬로 4개 레인을 dispatch했다.
+
+### F1 계획 준수 감사 — 실행 완료
+- `npm run verify:release` 18단계 **전부 exit 0**:
+  1~17단계(deps:host·build:modules·deps:wasm·build:wasm·build:native·check:build-fresh·cmake:configure·cmake:build·typecheck·test:unit 569·test:native ctest 4/4·i18n:check --strict 4561/0·verify:repo-sources·build:site·audit:dist·verify:workflow·verify:release-docs)는 f1 worktree에서 완료했고, 최초 실행은 e2e 단계 직전에 태스크 중단 → **18단계 chromium e2e 46/46(35.5m)을 별도 재실행으로 완주**.
+- 감사서: `f1-verify-release/.omo/evidence/ultima-web/final/F1-plan-compliance.md` (18단계 exit 표·git status·dist SHA-256 `41a2e0e57437de78337d768dfca9d8614dcf40bdc9d4e643acc1c6066ec0743d`·Must have/Must NOT have 매핑).
+- F1 evidence는 main worktree의 `final/`로 복사해 co-locate.
+
+### F2 코드 품질 — 기존 승인 유지 (blocker 0)
+- 이번 세션 변경 없음. 네이티브 게이트 green(2026-10-01). 감사서 `final/F2-code-quality.md`.
+
+### F3 실제 브라우저 QA — 실행 완료 (병렬 3브라우저)
+- 실제 `ultima4.zip`으로 전체 스위트 실행: **Chromium 46/46**(verify:release 내), **Firefox 46/46**(36.4m), **WebKit 45→46/46**(36.3m).
+- WebKit 단독 실패: `korean-status-overlay.spec.ts`의 0.069px 서브픽셀 초과(`72/200`=0.36 vs 측정 0.36034, WebKit line-box 축적). oracle 리뷰(APPROVE_WITH_CHANGE) 후 **aura-relative 단언**(`overlayBottom ≤ auraTop + 0.5`, line 160과 동일 규약)으로 수정 → RED(0.36034) → GREEN, chromium/firefox 회귀 0, 전체 WebKit 재실행 46/46.
+- 변경 파일: `tests/e2e/korean-status-overlay.spec.ts` (테스트 허용치만, 제품 동작 단언 무변경). 증거: `final/F3-real-browser-qa/` (firefox-results.txt·webkit-results.txt·summary.json·webkit-tolerance-*/webkit-aura-*/webkit-full-rerun.log).
+- 브라우저 버전: Playwright 1.52.0, firefox 137.0(1482), webkit 18.4(2158).
+
+### F4 범위 충실도 — 신규 감사서 작성
+- `final/F4-scope-fidelity.md` (main worktree): verdict **APPROVE_WITH_DEVIATIONS**, blocker 0.
+- 분모 산술은 계획서에서 직접 유도: 체크박스 총 **32**, `[x]` 28, `[ ]` 4 (F1~F4) → **28/32 = 87.5%**. `cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md` exit 0. `audit:dist --require-engine` exit 0(9 files, leak 0). `verify:workflow` exit 0.
+- **사용자 승인 필요 항목**: ① Todo 29~33 편입 + 분모(32 vs 35/37), ② 남은 영어 표면 릴리스 범위 확정, ③ F3 브라우저 3종 완료 확인.
+
+### merge 게이트 (main worktree, F3 fix 반영 후 재실행, 전부 exit 0)
+```
+npm run typecheck                    # 0
+npm run test:unit                    # 0 — 569 passed
+npm run verify:repo-sources          # 0
+npm run build                        # 0
+npm run check:build-fresh            # 0
+npm run i18n:check -- --strict       # 0 — 4561 entries, pending 0
+git diff --check                     # 0
+cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
+```
+
+### 다음 단계 (사용자 결정 필요 — merge/push 전 멈춤)
+1. **Todo 29~33 편입 여부 + 분모(32/35/37)** — 코드는 main에 있고 계획서에 없어 진행률이 실제보다 낮게 보임.
+2. **F1~F4 결과 보고 후 사용자 명시 승인** → 체크박스 `[x]` + 진행률 갱신.
+3. **`git push origin main`** — 승인 후에만.

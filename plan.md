@@ -394,24 +394,16 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 
 ---
 
-## 🆕 바로 다음 순서 (2026-10-01 22:05 갱신 — **28/32 = 87.5%**, main `9872f4b`, **1·2번 완료**) ← 최신
+## 🆕 바로 다음 순서 (2026-10-02 갱신 — **28/32 = 87.5%**, main `dd0c933`, F1~F4 전부 실행 완료, 사용자 승인 대기) ← 최신
 
-> 1·2번은 아래에서 ✅로 표시했고 앞으로 남은 유효 항목은 **3번 F3가 최우선**이다. (2026-09-30 22:42·2026-09-30 블록은 과거 기록이다.)
+> F1~F4 실행/감사는 모두 완료됐다. 계획서 체크박스(`[ ]` F1~F4)와 최종 진행률 확정은 **사용자 명시 승인 후** 처리한다(아래 4·5·6).
 
-1. ✅ **통합 main의 `verify:integration` 완주 → 진짜 exit code** — **완료 (2026-10-01 21:06~21:43, `EXIT=0`, PASS, e2e 46/46 35.8m, refused 0)**. 위 "✅ 통합 merge 상태"의 해소 근거와 정정 기록 참고. green은 **단독 실행 관측**이고 **원인은 미확정**이며, infra 이슈이지 제품 결함이 아니다. **다음 발생 시 `DEBUG=pw:webserver` + `lsof -i :4588` 스냅샷을 남길 것**(이번엔 vite stderr가 없어 원인 규명이 불가능했던 직접 원인).
-2. ✅ **F2 네이티브 게이트** — **완료 (2026-10-01 22:04~22:05)**. main `9872f4b`에서 **처음 실행**해 `build:native`(선행) → `cmake:configure` → `cmake:build` → `test:native` **4단계 전부 exit 0, ctest 4/4 통과**. 첫 실행은 `test:native` exit 8로 실패했으나 원인은 **제품 결함이 아니라 F2 명령 목록에 빠진 선행 단계**였다(`native/CMakeLists.txt:51-61`이 네이티브 xu4를 `build:native`가 별도 빌드한다고 명시). 로그 `/tmp/opencode/f2-native-gate2.log`, 첫 실패 실행 `/tmp/opencode/f2-native-gate.log`.
-3. **F3 (다음 최우선)**: worktree `.claude/worktrees/f3-browser-qa`, 브랜치 `f3-browser-qa` **`781a789`**(부모 `361b638`). **실제 크로스브라우저 구현이 있다(쓰레기가 아니다)**: `playwright.config.ts`(+24, firefox/webkit 프로젝트 추가), `tests/e2e/audio.spec.ts`(+25), `tests/e2e/gameplay-progression.spec.ts`(+18), `tests/e2e/memory-smoke.spec.ts`(+22) — **딱 이 4개 파일만** 건드린다.
-   - ✅ **rebase는 필요 없다(2026-10-01 검증으로 정정). 이전 절의 "⛔ 치명적 함정 — merge하면 `plan.md`가 REVERT된다"는 ⚠️ 허위 위험 경보였다. 근거 2가지: (a) `git diff --stat 361b638 781a789`가 위 4개 파일만 나온다 — **`plan.md`·`handoff.md`·`HANDOFF.md`를 한 줄도 건드리지 않았다.** (b) `git diff --stat 361b638 9872f4b -- <위 4개 파일>`이 **빈 출력** — main도 이 4개를 건드리지 않았다. git 3-way merge는 병합 브랜치가 실제로 수정한 파일만 되돌린다. → **충돌 없고 문서는 되돌려지지 않는다.** rebase는 해롭지 않으나 불필요하다.
-   - **실제 남은 위험은 두 가지뿐이다**: ① **미추적 `f3*.tmp.mjs` 진단 스크립트 15개를 커밋하지 말고 버린다**(`f3probe`, `f3probe2`~`6`, `f3isolate`, `f3alsa`, `f3alsa2`, `f3audio`, `f3ctx`, `f3flag`, `f3null`, `f3prefs`, `f3prefs2` — probe 스크린샷·로그 잔여물은 repo 밖 `/tmp/opencode/f3/`). ② **`f3-browser-qa` worktree의 미커밋 `playwright.config.ts`를 정리한다**(루트 `f3-real-browser-qa`의 M은 쓰지 말 것 — §11).
-   - 참고: `c9cde1e`는 부모가 `8c3086f`인 **구버전** salvage 사본이고 `781a789`가 이를 대체한다.
-   - merge 후 실제 `ultima4.zip`으로 **firefox/webkit 스위트를 모두 실행한다**. main의 `playwright.config.ts`은 지금 `projects: [{ name: "chromium" }]` 하나뿐 — **F3는 아직 한 번도 실행되지 않았다.** 브라우저는 설치 완료(chromium-1169, firefox-1482, webkit-2158).
-   - ⚠️ **병합 트리에서 통합 게이트를 다시 돌려 새 green을 확정한다** — 이전 절의 "chromium green을 무효화한다"는 표현은 과대다(아래 정정). **정정**: `scripts/verify-integration.mjs:32`가 `--project=chromium`을 명시하고, `audio.spec.ts`·`memory-smoke.spec.ts`는 chromium 전용 플래그를 `browserName === "chromium"`일 때만 적용하도록 바꿨고, `gameplay-progression.spec.ts`는 `test.setTimeout(180_000)` 추가뿐 신규 테스트가 없다 → **chromium 경로는 보존된다.** 그래도 AGENTS.md merge 게이트 규칙상 병합 후 재실행은 필수이고(`gate.html` = `npm run verify:integration` 하나로만), fixture API refactor가 실린 만큼 실질 검증 가치도 있다.
-   - ⚠️ **merge 직전에는 `npm ci`를 별도로 돌린다** — `verify:integration` 13단계 목록에 `npm ci`가 없다. F3는 사용자 승인이 필요한 정지 지점이다.
-   - **왜 F2를 먼저 돌렸나**: F2는 **네이티브 C++만** 건드려 F3 merge에 무관하다. 반대로 F3는 위 e2e 스펙을 건드린다. 그래서 되돌릴 일이 없는 일부터 끝내고, 위험한 F3에 새 정보를 하나 갖고 들어간다.
-
-4. **F4 최종 재감사**: 3이 끝난 뒤 재실행. **분모 산술은 원본 계획서 파일(`.omo/plans/ultima-web.md`)에서 다시 유도한다** — 기존 F4 감사의 분모 계산은 틀렸고, "계획서 두 벌이 byte-identical이 아니다"는 발견은 위양양성(false positive)다(`cmp` exit 0). **F4 승인 파일 미발견** — 보고된 APPROVE_WITH_DEVIATIONS 판정 파일이 없고 로컬 `final/F4-scope-fidelity.md`는 2026-09-27 REJECT 감사본이므로 새로 작성해야 한다.
+1. ✅ **F1 계획 준수 감사 실행 완료 (2026-10-02)**: `npm run verify:release` 18단계 **전부 exit 0** (1~17단계: deps:host·build:modules·deps:wasm·build:wasm·build:native·check:build-fresh·cmake:configure·cmake:build·typecheck·test:unit(569)·test:native(4/4)·i18n:check --strict(4561·pending 0)·verify:repo-sources·build:site·audit:dist·verify:workflow·verify:release-docs — 최초 실행 중 e2e 단계 직전 중단, **18단계 chromium e2e 46/46(35.5m) 별도 재실행으로 완주**). 감사서 `final/F1-plan-compliance.md`(18단계 exit 표·git status·dist SHA-256 `41a2e0e5…0743d`·Must have/Must NOT have 매핑). 증거: `final/F1-verify-release.log`.
+2. ✅ **F2 코드 품질/네이티브 게이트** — 이전 승인(blocker 0) + 네이티브 게이트 green (2026-10-01). 감사서 `final/F2-code-quality.md`.
+3. ✅ **F3 실제 브라우저 QA 실행 완료 (2026-10-02)**: 전체 스위트를 실제 `ultima4.zip`으로 **Chromium(46/46, verify:release)·Firefox(46/46, 36.4m)·WebKit(45→46/46)** 실행. WebKit에서 `korean-status-overlay.spec.ts`가 0.069px 서브픽셀 초과(72/200=0.36 vs 측정 0.36034)로 1건 실패 → oracle 리뷰(APPROVE_WITH_CHANGE) 후 **aura-relative 단언**(`overlayBottom ≤ auraTop + 0.5`, line 160과 동일 규약)으로 수정, 단독 재실행으로 WebKit·Chromium·Firefox 각각 green 확정 + 전체 WebKit 재실행 46/46. 증거: `final/F3-real-browser-qa/`(browser version: Playwright 1.52.0, firefox 137.0, webkit 18.4).
+4. **F4 최종 재감사 완료 (2026-10-02)**: 새 감사서 `final/F4-scope-fidelity.md` 작성 — verdict **APPROVE_WITH_DEVIATIONS**, 분모 산술은 계획서에서 직접 유도(체크박스 총 32, `[x]` 28, `[ ]` 4 → 28/32=87.5%), `cmp` exit 0, `audit:dist --require-engine` exit 0(9 files, leak 0), `verify:workflow` exit 0. **사용자 승인 필요 항목**: ① Todo 29~33 편입 + 분모(32 vs 35/37), ② 남은 영어 표면의 릴리스 범위 확정, ③ (F3 승인 포함) 브라우저 3종 완료 확인.
 5. **사용자 결정 필요**: Todo 29~33을 원본 계획서에 편입할지, 편입한다면 분모를 32로 둘지 35/37로 둘지. **지금 코드는 main에 있는데 계획서에는 없어서 진행률이 실제보다 낮게 보인다.** 이 결정 없이는 100%에 도달할 수 없다. (2026-10-01 재확인: 계획서 체크박스 총 32개, `[x]` 28, `[ ]` 4 = F1~F4.)
-6. **main push**: 3의 게이트가 green이 된 **뒤에만** `git push origin main` (현재 origin/main보다 29커밋 앞서 있으나 미push). **F1**도 미완료 — `verify:release`의 새 18단계 목록을 끝까지 완주 실행한 적이 없다(코드 merge ≠ F1 통과).
+6. **main push**: F1~F4 결과를 사용자에게 보고하고 명시 승인을 받은 **뒤에만** `git push origin main` (현재 origin/main보다 앞서 있으나 미push). 사용자 승인 후 F1~F4 체크박스 `[x]` + 진행률 갱신 + push 순서로 진행한다.
 
 ## 목적 달성 가능성 판단
 - **가능하다, 그리고 크리티컬 패스(Todo 21)는 이제 끝났다.** 근거: 같은 xu4 소스가 native에서도(Step 3), 이제 브라우저에서도(Todo 21, 2026-09-25) 원본 데이터로 실제로 돈다 — 실제 타이틀 화면 렌더 + 실제 키 입력으로 `IntroController` 상태 전이까지 확인됨. 남은 일은 대부분 한국어화(11~15)와 배포(17~20)로, 엔진 자체의 미지수는 이제 거의 없다.
