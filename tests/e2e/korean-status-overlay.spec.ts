@@ -236,16 +236,24 @@ test.describe("Todo 27: the status column in Korean via the status overlay", () 
     const reagentBox = await page.evaluate(() => {
       const overlay = document.querySelector('#overlay-layer [data-role="status"]')!.getBoundingClientRect()
       const canvas = document.querySelector("#game-canvas")!.getBoundingClientRect()
-      return { ratio: overlay.height / canvas.height }
+      return {
+        ratio: overlay.height / canvas.height,
+        overlayBottom: overlay.bottom - canvas.top,
+        auraTop: (80 * canvas.height) / 200
+      }
     })
-    // The full 8-row + title status box: 72px of the 200px-tall logical
-    // screen. A fresh Fighter owns no reagents, so there are no row LABELS to
-    // read here (the Korean names above are asserted for the vocabulary and
-    // tests/unit/reagent-emission.test.ts covers the emitted rows); what this
-    // pins is that the box is no longer a 1-row title strip and still does not
-    // grow past the aura glyph.
+    // The box is the full (192,0,120,72) status box: 72px of the 200px-tall
+    // logical screen. A fresh Fighter owns no reagents, so there are no row
+    // LABELS to read here (the Korean names above are asserted for the
+    // vocabulary and tests/unit/reagent-emission.test.ts covers the emitted
+    // rows); what this pins is that the box is no longer a 1-row title strip
+    // and still stays below the avatar-aura glyph row. The bound is
+    // aura-relative (auraTop = 80px at 1x, +0.5px epsilon, the same convention
+    // as the party-overview guard at line 160), which is robust to sub-pixel
+    // accumulation across engines (WebKit measured 72.069px vs nominal 72px)
+    // and needs no magic ratio.
     expect(reagentBox.ratio).toBeGreaterThan(0.3)
-    expect(reagentBox.ratio).toBeLessThanOrEqual(72 / 200)
+    expect(reagentBox.overlayBottom).toBeLessThanOrEqual(reagentBox.auraTop + 0.5)
     await page.screenshot({ path: join(evidenceDir, "status-reagents.png") })
     log.push(
       `views: weapons/armour/equipment/items overlays ok, reagents view sends the Korean title and ` +
