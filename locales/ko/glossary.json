@@ -13,6 +13,12 @@
       "translation": "사랑",
       "status": "ready"
     },
+    "principle-pride": {
+      "sourceHash": "sha256:8c574c9b9ad6fe8745c3a26d9cc3e3026100cfc4cb33ae11f75b174009b27b2d",
+      "placeholders": [],
+      "translation": "오만",
+      "status": "ready"
+    },
     "principle-truth": {
       "sourceHash": "sha256:cc3a062a97bf2935e0e12e1aee3bed944a81e1f4e4ca21eaa03b07be38628686",
       "placeholders": [],
@@ -67,10 +73,28 @@
       "translation": "유황재",
       "status": "ready"
     },
+    "term-abyss": {
+      "sourceHash": "sha256:b7ca5de6b407cd955e504cd1df08c0a7fef48d0ba0d9143d2a65514751558adb",
+      "placeholders": [],
+      "translation": "심연",
+      "status": "ready"
+    },
+    "term-ankh": {
+      "sourceHash": "sha256:0ed33f15d180df180421f2671155f4e8f8be3c60ede0cbc13949d5c6bd58911d",
+      "placeholders": [],
+      "translation": "앙크",
+      "status": "ready"
+    },
     "term-avatar": {
       "sourceHash": "sha256:ca8e826d9c2ec401e9ac82cd0aa710cf234d5cac4e6ee967b3588c63fce9681b",
       "placeholders": [],
       "translation": "아바타",
+      "status": "ready"
+    },
+    "term-britannia": {
+      "sourceHash": "sha256:9334669e7365a1d14768988f5213d46006fe64d0d2d926e9a1e4d4f73124d98c",
+      "placeholders": [],
+      "translation": "브리타니아",
       "status": "ready"
     },
     "term-codex": {
@@ -85,10 +109,46 @@
       "translation": "동료",
       "status": "ready"
     },
+    "term-exodus": {
+      "sourceHash": "sha256:8bcdca3051ab63ed9da538d764b009269b47622a3499960d2eb04ec43c2bd546",
+      "placeholders": [],
+      "translation": "엑소더스",
+      "status": "ready"
+    },
+    "term-heal": {
+      "sourceHash": "sha256:421acf13c1cb044e40e0fe1c1e88656e604113be888d92b2ecbb136252023b17",
+      "placeholders": [],
+      "translation": "치유",
+      "status": "ready"
+    },
+    "term-help": {
+      "sourceHash": "sha256:b79cac926e0b2e347e72cc91d5174037c9e17ae7733fd7bdb570f71b10cd7bfc",
+      "placeholders": [],
+      "translation": "도움",
+      "status": "ready"
+    },
     "term-mantra": {
       "sourceHash": "sha256:39a4918ef5e31791b54fac998321df0672213cd2596d47f4645e1d223c71b980",
       "placeholders": [],
       "translation": "진언",
+      "status": "ready"
+    },
+    "term-minax": {
+      "sourceHash": "sha256:ea9e43f6e27848d4580865ac7ede47807757ce1a187da9f163654a4cda7f59e3",
+      "placeholders": [],
+      "translation": "미낙스",
+      "status": "ready"
+    },
+    "term-mondain": {
+      "sourceHash": "sha256:d37f23c815bbb8e0f34bf993f9dac8a0df638dd04aaf66e53d739e58e18da154",
+      "placeholders": [],
+      "translation": "몬데인",
+      "status": "ready"
+    },
+    "term-quest": {
+      "sourceHash": "sha256:233259128db1f0c07dcf68f001d34b46cb58f436bb4565bf9f6441b87d8b86d8",
+      "placeholders": [],
+      "translation": "사명",
       "status": "ready"
     },
     "term-rune": {

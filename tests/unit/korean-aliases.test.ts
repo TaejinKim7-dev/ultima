@@ -1,13 +1,16 @@
+import { createHash } from "node:crypto"
 import { describe, expect, it } from "vitest"
 import {
   AVATAR_NAME_MAX_CHARS,
   NPC_INTEREST_MAX_BYTES,
   buildAliasTable,
   mergeAliasTables,
+  resolveChoiceInput,
   resolveInput,
   type AliasTable
 } from "../../src/i18n/korean-aliases.ts"
 import aliasesSchema from "../../locales/ko/aliases.json" with { type: "json" }
+import glossarySchema from "../../locales/ko/glossary.json" with { type: "json" }
 
 // Todo 13: context-aware Korean alias mapping to the canonical English NPC
 // keywords/answers xu4's own prefix matcher already expects, plus
@@ -224,5 +227,108 @@ describe("korean-aliases: invariant over the real locales/ko/aliases.json conten
       expect(/^[\x00-\x7f]*$/.test(entry.canonical)).toBe(true)
       expect(new TextEncoder().encode(entry.canonical).length).toBeLessThanOrEqual(NPC_INTEREST_MAX_BYTES)
     }
+  })
+})
+
+// Todo 37: Korean aliases for Lord British's topic keywords and Hawkwind's
+// virtue names. vendor/xu4/src/discourse_castle.cpp:254-258 lists the 24 topic
+// keywords; :495 matches only the first 4 letters of the INPUT, and :504-506
+// add help/heal; Hawkwind compares against getVirtueName() full names (:569).
+// A Korean alias resolves to the FULL canonical English word, so the native
+// 4-letter prefix rule is applied to that word, never to Korean text.
+const LORD_BRITISH_TOPICS: ReadonlyArray<{
+  readonly canonical: string
+  readonly alias: string
+  readonly glossaryId: string
+  readonly english: string
+}> = [
+  { canonical: "truth", alias: "진실", glossaryId: "principle-truth", english: "Truth" },
+  { canonical: "love", alias: "사랑", glossaryId: "principle-love", english: "Love" },
+  { canonical: "courage", alias: "용기", glossaryId: "principle-courage", english: "Courage" },
+  { canonical: "honesty", alias: "정직", glossaryId: "virtue-honesty", english: "Honesty" },
+  { canonical: "compassion", alias: "자비", glossaryId: "virtue-compassion", english: "Compassion" },
+  { canonical: "valor", alias: "용맹", glossaryId: "virtue-valor", english: "Valor" },
+  { canonical: "justice", alias: "정의", glossaryId: "virtue-justice", english: "Justice" },
+  { canonical: "sacrifice", alias: "희생", glossaryId: "virtue-sacrifice", english: "Sacrifice" },
+  { canonical: "honor", alias: "명예", glossaryId: "virtue-honor", english: "Honor" },
+  { canonical: "spirituality", alias: "영성", glossaryId: "virtue-spirituality", english: "Spirituality" },
+  { canonical: "humility", alias: "겸손", glossaryId: "virtue-humility", english: "Humility" },
+  { canonical: "virtue", alias: "미덕", glossaryId: "term-virtue", english: "Virtue" },
+  { canonical: "pride", alias: "오만", glossaryId: "principle-pride", english: "Pride" },
+  { canonical: "avatar", alias: "아바타", glossaryId: "term-avatar", english: "Avatar" },
+  { canonical: "quest", alias: "사명", glossaryId: "term-quest", english: "Quest" },
+  { canonical: "britannia", alias: "브리타니아", glossaryId: "term-britannia", english: "Britannia" },
+  { canonical: "ankh", alias: "앙크", glossaryId: "term-ankh", english: "Ankh" },
+  { canonical: "abyss", alias: "심연", glossaryId: "term-abyss", english: "Abyss" },
+  { canonical: "mondain", alias: "몬데인", glossaryId: "term-mondain", english: "Mondain" },
+  { canonical: "minax", alias: "미낙스", glossaryId: "term-minax", english: "Minax" },
+  { canonical: "exodus", alias: "엑소더스", glossaryId: "term-exodus", english: "Exodus" },
+  { canonical: "help", alias: "도움", glossaryId: "term-help", english: "Help" },
+  { canonical: "heal", alias: "치유", glossaryId: "term-heal", english: "Heal" }
+]
+
+type AliasFileEntry = { alias: string; canonical: string; status: string }
+const REAL_ALIAS_ENTRIES = (aliasesSchema as { entries: Record<string, AliasFileEntry> }).entries
+const GLOSSARY_ENTRIES = (glossarySchema as { entries: Record<string, { sourceHash: string; translation: string }> })
+  .entries
+
+describe("korean-aliases: Todo 37 Lord British / Hawkwind topic keywords (real locales/ko/aliases.json)", () => {
+  const realTable = buildAliasTable(REAL_ALIAS_ENTRIES)
+
+  it.each(LORD_BRITISH_TOPICS)("resolves $alias to the full canonical keyword $canonical on a text prompt", (topic) => {
+    expect(resolveInput("text", topic.alias, realTable)).toEqual({ ok: true, text: topic.canonical })
+  })
+
+  it("registers each new topic as a ready alias:<id> entry with the expected canonical", () => {
+    for (const topic of LORD_BRITISH_TOPICS) {
+      const entry = REAL_ALIAS_ENTRIES[`alias:${topic.canonical}`]
+      expect(entry, topic.canonical).toEqual({ alias: topic.alias, canonical: topic.canonical, status: "ready" })
+    }
+  })
+
+  it("keeps alias text identical to the glossary translation, and the glossary hash equal to the English term's sha256", () => {
+    for (const topic of LORD_BRITISH_TOPICS) {
+      const term = GLOSSARY_ENTRIES[topic.glossaryId]
+      expect(term, topic.glossaryId).toBeDefined()
+      expect(term?.translation, topic.glossaryId).toBe(topic.alias)
+      expect(term?.sourceHash, topic.glossaryId).toBe(
+        `sha256:${createHash("sha256").update(Buffer.from(topic.english, "utf8")).digest("hex")}`
+      )
+    }
+  })
+
+  it("has no duplicate normalized alias text, and no alias text shared by two different canonicals", () => {
+    const seen = new Map<string, string>()
+    for (const entry of Object.values(REAL_ALIAS_ENTRIES)) {
+      const normalized = entry.alias.normalize("NFC").trim().toLowerCase()
+      if (normalized.length === 0) {
+        continue
+      }
+      expect(seen.has(normalized), `duplicate alias ${normalized}`).toBe(false)
+      seen.set(normalized, entry.canonical)
+    }
+  })
+
+  it("never lets two topic canonicals collide on the native 4-letter prefix (strncasecmp(...,4))", () => {
+    const prefixes = new Map<string, string>()
+    for (const topic of LORD_BRITISH_TOPICS) {
+      const prefix = topic.canonical.slice(0, 4)
+      expect(prefixes.has(prefix), `${topic.canonical} collides with ${prefixes.get(prefix)}`).toBe(false)
+      prefixes.set(prefix, topic.canonical)
+    }
+  })
+
+  it("keeps the existing NPC keywords and rejects an unknown Korean word as before", () => {
+    expect(resolveInput("text", "직업", realTable)).toEqual({ ok: true, text: "job" })
+    const unknown = resolveInput("text", "없는낱말", realTable)
+    expect(unknown.ok).toBe(false)
+    expect(unknown.ok === false && unknown.reason).toBe("unknown-keyword")
+  })
+
+  it("does not let a topic alias answer a yes/no prompt or a single-key choice prompt", () => {
+    const yesno = resolveInput("yesno", "진실", realTable)
+    expect(yesno.ok).toBe(false)
+    const choice = resolveChoiceInput("정직", realTable)
+    expect(choice.ok === false && choice.reason).toBe("not-a-choice-answer")
   })
 })

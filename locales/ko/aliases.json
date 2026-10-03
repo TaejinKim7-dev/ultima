@@ -3,7 +3,8 @@
   "$notes": [
     "Entries map a Korean input word (`alias`) to the canonical English NPC-discourse keyword xu4 already matches internally (`canonical`). The canonical keyword itself is never renamed -- see vendor/xu4/src/discourse_tlk.cpp:93,129,131,136,157 for where each canonical keyword below is actually matched, plus the per-NPC `topic1`/`topic2` keywords already inventoried per-record in tlk.json (those are NPC-specific, not global, so they are not scaffolded here).",
     "Todo 13 filled in each `alias` below (status now \"ready\"). `src/i18n/korean-aliases.ts`'s resolveInput() is the runtime consumer: it NFC-normalizes a player's Korean input, exact-matches it against these aliases, and -- on a match -- synthesizes the canonical English keyword as keystrokes toward the real (unmodified) native prefix matcher. It never rewrites, shortens, or bypasses a canonical keyword; see tests/unit/korean-aliases.test.ts's invariant test asserting every canonical here is pure ASCII and fits the native 16-byte interest-prompt buffer (discourse_tlk.cpp's gameGetInput(16)).",
-    "Todo 30 added the `alias:choice-*` entries for the readChoice() path. A native readChoice() prompt reads exactly ONE key and compares it against an ASCII choice set (discourse_castle.cpp's \"yn \\n\\033\" heal question, intro.cpp's \"mf\" sex prompt and \"ab\" gypsy virtue question), so these canonicals are deliberately NOT NPC-discourse keywords: their FIRST CHARACTER is the answer key, and `src/i18n/korean-aliases.ts`'s `CHOICE_ANSWER_CANONICALS` is the exact, closed list of canonicals allowed to answer a choice prompt. `alias:yes`/`alias:no` (예/아니오) double as the y/n answers. The gypsy question is NOT a yes/no question -- its two answers are two different virtues and the Korean question text labels them literally \"A)\"/\"B)\" -- so 가/나 (the Korean option labels for that A/B pair) map to a/b; 예/아니오 would be a category error there."
+    "Todo 30 added the `alias:choice-*` entries for the readChoice() path. A native readChoice() prompt reads exactly ONE key and compares it against an ASCII choice set (discourse_castle.cpp's \"yn \\n\\033\" heal question, intro.cpp's \"mf\" sex prompt and \"ab\" gypsy virtue question), so these canonicals are deliberately NOT NPC-discourse keywords: their FIRST CHARACTER is the answer key, and `src/i18n/korean-aliases.ts`'s `CHOICE_ANSWER_CANONICALS` is the exact, closed list of canonicals allowed to answer a choice prompt. `alias:yes`/`alias:no` (예/아니오) double as the y/n answers. The gypsy question is NOT a yes/no question -- its two answers are two different virtues and the Korean question text labels them literally \"A)\"/\"B)\" -- so 가/나 (the Korean option labels for that A/B pair) map to a/b; 예/아니오 would be a category error there.",
+    "Todo 37 added the Lord British / Hawkwind topic aliases (truth love courage, the 8 virtue names, virtue pride avatar quest britannia ankh abyss mondain minax exodus help heal). Each alias text equals the matching locales/ko/glossary.json translation and resolves to the FULL canonical English word, so xu4's 4-letter prefix matcher (discourse_castle.cpp:495) compares the English word, never Korean text. The Korean forms reuse the corpus spellings already in ui/binary/tlk.json (pride is 오만 as in the corpus, not 교만; Mondain/Minax/Exodus/Ankh as the corpus writes them). `quest` is 사명: the corpus has no single translation of it, and 퀘스트 is a game-UI loanword that does not suit the narrative register (소명 is already used for 'calling' in the justice text)."
   ],
   "entries": {
     "alias:bye": { "alias": "안녕", "canonical": "bye", "status": "ready" },
@@ -18,6 +19,29 @@
     "alias:choice-male": { "alias": "남성", "canonical": "male", "status": "ready" },
     "alias:choice-female": { "alias": "여성", "canonical": "female", "status": "ready" },
     "alias:choice-a": { "alias": "가", "canonical": "choiceA", "status": "ready" },
-    "alias:choice-b": { "alias": "나", "canonical": "choiceB", "status": "ready" }
+    "alias:choice-b": { "alias": "나", "canonical": "choiceB", "status": "ready" },
+    "alias:truth": { "alias": "진실", "canonical": "truth", "status": "ready" },
+    "alias:love": { "alias": "사랑", "canonical": "love", "status": "ready" },
+    "alias:courage": { "alias": "용기", "canonical": "courage", "status": "ready" },
+    "alias:honesty": { "alias": "정직", "canonical": "honesty", "status": "ready" },
+    "alias:compassion": { "alias": "자비", "canonical": "compassion", "status": "ready" },
+    "alias:valor": { "alias": "용맹", "canonical": "valor", "status": "ready" },
+    "alias:justice": { "alias": "정의", "canonical": "justice", "status": "ready" },
+    "alias:sacrifice": { "alias": "희생", "canonical": "sacrifice", "status": "ready" },
+    "alias:honor": { "alias": "명예", "canonical": "honor", "status": "ready" },
+    "alias:spirituality": { "alias": "영성", "canonical": "spirituality", "status": "ready" },
+    "alias:humility": { "alias": "겸손", "canonical": "humility", "status": "ready" },
+    "alias:virtue": { "alias": "미덕", "canonical": "virtue", "status": "ready" },
+    "alias:pride": { "alias": "오만", "canonical": "pride", "status": "ready" },
+    "alias:avatar": { "alias": "아바타", "canonical": "avatar", "status": "ready" },
+    "alias:quest": { "alias": "사명", "canonical": "quest", "status": "ready" },
+    "alias:britannia": { "alias": "브리타니아", "canonical": "britannia", "status": "ready" },
+    "alias:ankh": { "alias": "앙크", "canonical": "ankh", "status": "ready" },
+    "alias:abyss": { "alias": "심연", "canonical": "abyss", "status": "ready" },
+    "alias:mondain": { "alias": "몬데인", "canonical": "mondain", "status": "ready" },
+    "alias:minax": { "alias": "미낙스", "canonical": "minax", "status": "ready" },
+    "alias:exodus": { "alias": "엑소더스", "canonical": "exodus", "status": "ready" },
+    "alias:help": { "alias": "도움", "canonical": "help", "status": "ready" },
+    "alias:heal": { "alias": "치유", "canonical": "heal", "status": "ready" }
   }
 }
