@@ -392,24 +392,64 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: `.omo/evidence/ultima-web/integration/verify-integration.log` PASS; failure: editing a module source after `build:modules` makes `check:build-fresh` and `build:site` exit 1 naming `npm run build:modules`, evidence `.omo/evidence/ultima-web/task-28/stale-rejected.log`.
   Commit: Y | build: enforce build-artifact freshness and one ordered integration gate
 
+- [x] 29. Show shrine meditation advice in Korean in the dialogue panel
+  What to do / Must NOT do: the 24 `avatar.exe:shrineAdvice:0-23` translations already exist in `locales/ko/binary.json` and the static artifact, but `shrine.cpp` had no `web_talk` hook, so `showVision()`'s `screenMessage("\n%s", ss->advice[...])` never reached the dialogue panel (the `screenMessage` hash path drops the placeholder-only format `"\n%s"`). Add a shrine talk-channel hook so the advice renders in Korean via the existing id-based `u4WebTalkId` path. Must not alter shrine game logic or the native build.
+  Parallelization: Wave 5 | Blocked by: 22 (talk channel) | Blocks: 32, F1-F4
+  References: `vendor/xu4/src/shrine.cpp`; `locales/ko/binary.json` (`avatar.exe:shrineAdvice`); Todo 22's `u4Text` talk channel.
+  Acceptance criteria: `npm run i18n:check -- --strict`; an e2e drives a shrine meditation and asserts a Korean advice line in `#dialogue-history`; `korean-*` regression specs still pass.
+  QA scenarios: happy: `.omo/evidence/ultima-web/task-29/shrine-korean.png`; failure: a missing advice id falls back to a clearly marked English-fallback line without breaking meditation, `.omo/evidence/ultima-web/task-29/fallback.log`.
+  Commit: Y | feat(i18n): route shrine meditation advice to the Korean talk channel
+
+- [x] 30. Support Korean `readChoice` answers and add prompt epoch kinds
+  What to do / Must NOT do: the engine's multiple-choice controller (`ReadChoiceController`) needs a shared prompt id + `U4_WEB_PROMPT_*` kinds, and the shell needs a closed canonical set (`yes/no/male/female/choiceA/choiceB`) so Korean aliases (`예/아니오`, `남성/여성`, `가/나`) map to the right key. Add `resolveChoiceInput`, track the open prompt kind, and synthesize keys without a trailing Enter for choice epochs (text epochs keep Enter). Must not change avatar-name or numeric prompts, and must not alter `.SAV` fields.
+  Parallelization: Wave 5 | Blocked by: 13,22 | Blocks: F1-F4
+  References: `vendor/xu4/src/event.cpp` (`ReadChoiceController`); `src/i18n/localization.ts`; `locales/ko/aliases.json`.
+  Acceptance criteria: unit tests `readchoice-korean-answer` (engine/shell wiring + regression guards); e2e drives a choice prompt and answers with a Korean alias reaching the same game state as the English key; `i18n:check -- --strict`.
+  QA scenarios: happy: `.omo/evidence/ultima-web/task-30/readchoice-korean.png`; failure: Korean input in a numeric prompt is rejected with the prompt-specific message, `.omo/evidence/ultima-web/task-30/prompt-reject.log`.
+  Commit: Y | feat(i18n): Korean readChoice answers + prompt epoch kind
+
+- [x] 31. Show the food/gold summary and reagents title in Korean via the status overlay
+  What to do / Must NOT do: `stats.cpp` renders the native English `F-xx G-xxxx` summary row. In the web build, send it on a new `statussummary` overlay region (JS dedupes identical rows) and skip the native `textAtFmt` only under `__EMSCRIPTEN__`; non-web builds stay byte-identical. The summary shares its native row with the masked avatar-aura glyph at (248,80,8,8), so the new box must be deliberately NOT opaque-backed. Must not cover the aura glyph or change native rendering.
+  Parallelization: Wave 5 | Blocked by: 27 | Blocks: 33, F1-F4
+  References: `vendor/xu4/src/stats.cpp`; `src/overlay/`; `tests/e2e/korean-status-overlay.spec.ts` (statussummary assertions).
+  Acceptance criteria: unit tests for the statussummary region; e2e shows the Korean food/gold summary in the overlay while the aura glyph stays visible (opaque-backed count 0 for the summary region); `korean-status-overlay` passes.
+  QA scenarios: happy: `.omo/evidence/ultima-web/task-31/statussummary-korean.png`; failure: the summary region accidentally becomes opaque and hides the aura glyph, caught by the overlay assertion, `.omo/evidence/ultima-web/task-31/opaque-regression.log`.
+  Commit: Y | feat(status): Korean food/gold summary + reagents title
+
+- [x] 32. Translate the eight virtue names so `ui:shrine:14` is fully Korean, generated not hand-added
+  What to do / Must NOT do: Todo 29 exposed that `ui:shrine:14` (`shrine.cpp:183-184`) is a ready Korean line whose `%s` is `getVirtueName(virtue)`, and none of the eight virtue names were translated. Translate the eight virtue names AND make `i18n-generate` emit the virtue-name rows from the corpus rather than hand-appending them to `src/i18n/generated/strings.ts` (hand-added rows would be lost on regeneration). Must not hand-edit the generated table.
+  Parallelization: Wave 5 | Blocked by: 29 | Blocks: F1-F4
+  References: `vendor/xu4/src/shrine.cpp`; `scripts/i18n-generate.mjs`; `src/i18n/generated/strings.ts`; `locales/ko/ui.json`.
+  Acceptance criteria: `npm run i18n:check -- --strict`; regenerating the i18n tables preserves the eight virtue-name rows (idempotent generator); a shrine e2e shows the fully Korean `ui:shrine:14` line.
+  QA scenarios: happy: `.omo/evidence/ultima-web/task-32/shrine-virtue-names-korean.png`; failure: editing the generated table directly is detected or overwritten by regeneration, `.omo/evidence/ultima-web/task-32/generator-purity.log`.
+  Commit: Y | fix(i18n): translate the eight virtue names via the generator
+
+- [x] 33. Send the Ztats Reagents rows to the status overlay with Korean names
+  What to do / Must NOT do: Todo 31 wired the Reagents sub-view title (`ui:stats:23`) but its eight rows stayed in the native English raster because `getReagentName()` had no web path. Put the eight reagent names into `GENERATED_STATUS_NAMES` as a `reagent` field and send the rows over the status view channel; the overlay renders the Korean names. A fresh Fighter owns no reagents — cover row emission with a unit test (`reagent-emission.test.ts`) and the vocabulary with the e2e. Must not alter the reagent gameplay data.
+  Parallelization: Wave 5 | Blocked by: 31 | Blocks: F1-F4
+  References: `vendor/xu4/src/names.cpp` (`getReagentName`/`reagentNames[]`); `src/i18n/generated/strings.ts`; `tests/unit/reagent-emission.test.ts`; `tests/e2e/korean-status-overlay.spec.ts` (reagents view).
+  Acceptance criteria: unit tests `reagent-emission` (RED then GREEN); e2e reagents view shows the Korean title and no English reagent name leaks; `korean-status-overlay` passes.
+  QA scenarios: happy: `.omo/evidence/ultima-web/task-33/reagents-korean.png`; failure: a reagent name missing from `GENERATED_STATUS_NAMES` leaks its English name into the overlay, caught by the leak assertion, `.omo/evidence/ultima-web/task-33/leak.log`.
+  Commit: Y | feat(status): send the Ztats Reagents rows to the overlay in Korean
+
 ## Final verification wave
 > Runs in parallel after ALL todos. ALL must APPROVE. Surface results and wait for the user's explicit okay before declaring complete.
-- [ ] F1. Plan compliance audit
+- [x] F1. Plan compliance audit
   Scope: verify every Must have and Must NOT have item maps to completed task evidence; verify no placeholder remains, no original data is tracked, and every command listed in Verification strategy exists and was run.
   Required evidence: `.omo/evidence/ultima-web/final/F1-plan-compliance.md`; include `git status --short`, task row checklist, and SHA-256 of `dist/`.
   Verdict: APPROVE only if all mapped requirements have concrete evidence paths and all failed attempts are either fixed or recorded as pre-existing/external blockers.
 
-- [ ] F2. Code quality review
+- [x] F2. Code quality review
   Scope: inspect changed C/C++/TS/build files for minimality, ownership boundaries, memory/pointer lifetime, Asyncify safety, WebGL/WebAudio portability, type safety, and production/test separation.
   Required evidence: `.omo/evidence/ultima-web/final/F2-code-quality.md`; include commands `npm run typecheck`, `npm run test:unit`, `npm run test:native`, and build logs.
   Verdict: APPROVE only if no blocker findings remain and all warnings are either fixed or explicitly documented as non-blocking with evidence.
 
-- [ ] F3. Real manual QA
+- [x] F3. Real manual QA
   Scope: use the built site the way a player would: open static site, select original ZIP, start game, create/load save, move, talk, enter Korean aliases, hear audio, reload, export/import save. Run Chromium, Firefox, and WebKit projects where supported.
   Required evidence: `.omo/evidence/ultima-web/final/F3-real-browser-qa/` with screenshots, Playwright traces, browser versions, and observed results.
   Verdict: APPROVE only if observable browser behavior satisfies the user-facing request; skipped browsers require exact environment reason.
 
-- [ ] F4. Scope fidelity
+- [x] F4. Scope fidelity
   Scope: compare final product to this plan and the user's direction: web 기반, GitHub Pages 연결 가능, TDD, Korean pretranslation, no external translation tool, no server/cloud save, original data not bundled.
   Required evidence: `.omo/evidence/ultima-web/final/F4-scope-fidelity.md`; include `npm run audit:dist`, workflow validation, and a Pages-readiness checklist.
   Verdict: APPROVE only if the release artifact can be hosted as static HTML/WASM/JS/assets and every deviation is approved by the user.

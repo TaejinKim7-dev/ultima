@@ -14,18 +14,20 @@
 - 정리 작업: merge된 worktree 8개 제거(브랜치는 유지, 로컬 evidence는 main의 `.omo/evidence/`로 먼저 복사), Node 22 LTS(v22.23.3)를 사용자 홈에 설치해 전환(`~/.local/opt/node22`, `~/.profile`/`~/.bashrc` PATH) — Node 22에서 유닛 13 files/99 tests·typecheck·build·verify·e2e 8개 전부 통과, EBADENGINE 경고 사라짐.
 
 ## 진행률 계산법
-- **전체 32단계 = 구현 Todo 1~28 + 최종 검증 F1~F4.** 2026-10-01 기준 원본 계획서 `.omo/plans/ultima-web.md`에는 체크박스 항목이 **정확히 32개** 있다(Todo 1~28 = 28개, F1~F4 = 4개). 단계마다 가중치 동일.
-- **⚠️ Todo 29~33은 원본 계획서에 존재하지 않는다.** 이 다섯 Todo의 코드는 main에 구현·merge되어 있고 검증도 통과했지만(아래 "통합 merge 상태" 참조), `.omo/plans/ultima-web.md`에는 항목 자체가 없다. 즉 **분모는 32다**(35나 37이 아니다). 사용자가 승인하면 분모가 바뀐다 — 미결 사용자 결정으로 남겨둔다.
-- **승인 기준 진행률** = 완료(✅) 단계 수 ÷ 32. 부분 진행(🟡)은 0.
+- **전체 37단계 = 구현 Todo 1~33 + 최종 검증 F1~F4.** 2026-10-02 사용자 결정으로 Todo 29~33을 원본 계획서에 편입해 체크박스 총 32개 → **37개**. (Todo 1~33 = 33개, F1~F4 = 4개). 단계마다 가중치 동일.
+- **승인 기준 진행률** = 완료(✅) 단계 수 ÷ 37. 부분 진행(🟡)은 0.
 - **"실제 게임에서 확인"** = 그 단계의 기능이 *브라우저에서 실제 xu4 엔진이 돌 때* 동작함을 확인했는가(✅/⬜, 엔진과 무관한 단계는 —). 진행률 숫자에는 안 들어가고, 현실 체크용이다.
 - 완료 기준 = acceptance criteria 통과 + `main` merge 전 로컬 검증 게이트 통과(AGENTS.md).
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률
+- **2026-10-02 완료: 37 / 37 = 100%.** Todo 1~33 전부 ✅ + F1~F4 전부 ✅ (사용자 명시 승인, 분모 37 확정). 계획서 체크박스 37/37 `[x]`, `[ ]` 0. 아래는 이 완료로 이어지는 과거 기록.
 - **제품 목표 재확인 (2026-09-27)**: 한국어로 실제 플레이할 수 있는 웹 기반 Ultima IV가 목표다. 아래 수치는 계획 항목 승인률이며 한글판 제품 완성률이 아니다. 이번 NPC alias 재검증 스크린샷의 실제 대화는 영어였다. Step 11/12/14에 기록된 실제 엔진 출력 연결 gap을 해소하고 한국어 인트로·대화·상태/메뉴를 실제 플레이에서 검증하기 전에는 출시 완료로 판정하지 않는다.
 - **정정된 플레이 요구사항**: 플레이어는 영어 keyword 또는 한국어 alias를 입력할 수 있어야 하며, 실제 게임에 표시되는 NPC 응답은 한국어여야 한다. 현재 검증된 것은 한국어 alias 입력 동작뿐이고, Calabrini의 실제 NPC 응답은 영어였다. 따라서 한국어 NPC 출력은 아직 미완료이며 출시를 막는다.
 - **세션 운영 제한**: 이 세션의 한도는 5시간이다. 남은 시간·컨텍스트·예산 중 하나라도 5% 미만이 되면 active work를 중단하고 현재 상태를 `plan.md`와 `handoff.md`에 기록한다.
-- **승인 기준: 28 / 32 = 87.5%** (2026-10-01). 산술: `[x]` 28개(Todo 1~26 + Todo 27 + Todo 28) ÷ 체크박스 총 32개(Todo 1~28 + F1~F4) = 87.5%. 남은 `[ ]` 4개는 F1·F2·F3·F4.
+- **승인 기준: 37 / 37 = 100%** (2026-10-02). 산술: `[x]` 37개(Todo 1~33 + F1~F4) ÷ 체크박스 총 37개 = 100%. 분모는 2026-10-02 사용자 결정으로 32→37.
+  - **✅ F1~F4 완료 (2026-10-02)**: F1 `npm run verify:release` 18단계 전부 exit 0(e2e 46/46, 569 unit, dist SHA-256 `41a2e0e5…0743d`, 감사서 `final/F1-plan-compliance.md`). F2 blocker 0 승인 + 네이티브 게이트 green. F3 실제 3브라우저 전체 스위트: Chromium 46/46·Firefox 46/46·WebKit 46/46(WebKit 1건 서브픽셀 허용치 → aura-relative 단언으로 수정, `final/F3-real-browser-qa/`). F4 `final/F4-scope-fidelity.md` APPROVE_WITH_DEVIATIONS(cmp·audit:dist·verify:workflow exit 0).
+  - **✅ Todo 29~33 완료 (2026-10-02 편입·확정)**: 코드는 main에 이미 merge돼 있고 검증도 통과했음. 편입 항목: 29 신단 조언 한국어 talk 채널, 30 readChoice 한국어 답 + prompt epoch, 31 statussummary 한국어(food/gold+시약 제목), 32 미덕 8종 이름 생성기 순수, 33 Ztats Reagents 행 한국어.
   - **✅ green 게이트 근거 (2026-10-01 21:06~21:43)**: main `9872f4b`에서 `npm run verify:integration`을 **완전 단독** 실행해 **처음부터 끝까지 완주, exit 0**. `# verify:integration 2026-10-01T12:43:00.036Z PASS`, 13단계 전부 exit 0, e2e **46/46 (35.8m)**, `ERR_CONNECTION_REFUSED` **0건**(직전 실패 런은 21건). `test:unit` 46 files/569 tests · `i18n:check --strict` 4561 entries/0 pending · `audit:dist --require-engine` no leaks · 계획서 두 벌 `cmp` exit 0. 로그 `/tmp/opencode/p0-solo-gate.log`, evidence `.omo/evidence/ultima-web/integration/verify-integration.log`. **이 문단은 이전의 "green 게이트 근거가 아니다"를 대체한다.**
   - **⚠️ 단독 실행 관측이다**: 포트 4601에서 관측됐고, working tree에 미커밋 `.gitignore` 1줄(`.slim/`, 빌드 무영향)이 있었다. green의 **원인은 미확정** — 아래 "통합 merge 상태"의 정정 참고.
   - **✅ F2 네이티브 게이트 (2026-10-01 22:04~22:05)**: main `9872f4b`에서 **처음 실행**. `build:native`(선행) → `cmake:configure` → `cmake:build` → `test:native` **4단계 전부 exit 0, ctest 4/4 통과**. 첫 실행은 `test:native` exit 8로 실패했으나 원인은 **제품 결함이 아니라 F2 명령 목록에 빠진 선행 단계**였다 — `native/CMakeLists.txt:51-61`이 "네이티브 xu4는 `npm run build:native`가 별도로 빌드한다"고 명시하는데 그게 목록에 없었음. 선행 단계 포함 시 4/4 green. 로그 `/tmp/opencode/f2-native-gate2.log`.
@@ -193,18 +195,21 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 | 26 | 인트로(타이틀 메뉴·이야기·집시 질문·캐릭터 생성·Configure) → 한국어 오버레이 (2026-09-27 신규) | ✅ | ⬜ | 12,14,15,21,22 |
 | 27 | 상태창·메뉴(파티·Ztats·무기/방어구/아이템) → 한국어 오버레이 (2026-09-27 신규) | ✅ | ⬜ | 12,14,15,21,22,26 — 2026-10-01 `8c3086f`로 main에 merge, 자체 게이트 PASS(로그 `/tmp/opencode/todo27-integration.log`, `verify:integration EXIT=0`, e2e 46/46 35.7분). 단 **통합 main의 e2e는 별개로 빨간 상태**(위 "통합 merge 상태" BLOCKER) |
 | 28 | 빌드 산출물 신선도 강제 + `verify:integration` 단일 게이트 + e2e 실패 자동 캡처 (2026-09-30 신규, shop 오진 사고 재발 방지) | ✅ | — | 25 |
+| 29 | 신단 명상 조언 → 한국어 talk 채널 (2026-10-02 편입) | ✅ | ✅ | 22 — `1b7ee62`, 24개 `avatar.exe:shrineAdvice` |
+| 30 | readChoice 한국어 답 + prompt epoch kind (2026-10-02 편입) | ✅ | ✅ | 13,22 — `cfb1f71`, 예/아니오·남성/여성·가/나 |
+| 31 | food/gold 요약 + 시약 제목 → 한국어 오버레이 (2026-10-02 편입) | ✅ | ✅ | 27 — `f894265`, statussummary region, aura 글리프 비차폐 |
+| 32 | 미덕 8종 이름 번역 + 생성기 순수 (2026-10-02 편입) | ✅ | ✅ | 29 — `9eb5b65`·`1e58f44`, `ui:shrine:14` 완전 한국어 |
+| 33 | Ztats Reagents 행 → 한국어 오버레이 (2026-10-02 편입) | ✅ | ✅ | 31 — `e9a7267`·`c65f768`, `reagent-emission.test.ts` |
 
-### Final — 독립 검증 (F1~F4 = 진행률 29~32번째)
+### Final — 독립 검증 (F1~F4 = 진행률 34~37번째)
 | # | 단계 | 상태 |
 |---|---|---|
-| F1 | 계획 준수 감사 | ⬜ |
-| F2 | 코드 품질 리뷰 | ⬜ |
-| F3 | 실제 브라우저 수동 QA (Chromium/Firefox/WebKit) | ⬜ |
-| F4 | 범위 충실도 (정적 호스팅, 원본 데이터 미포함) | ⬜ |
+| F1 | 계획 준수 감사 | ✅ — 2026-10-02: `verify:release` 18단계 전부 exit 0, `final/F1-plan-compliance.md` |
+| F2 | 코드 품질 리뷰 | ✅ — blocker 0 (2026-09-30 재검토) + 네이티브 게이트 green (2026-10-01) |
+| F3 | 실제 브라우저 QA (Chromium/Firefox/WebKit) | ✅ — 2026-10-02: 3브라우저 전체 스위트 46/46, `final/F3-real-browser-qa/` |
+| F4 | 범위 충실도 (정적 호스팅, 원본 데이터 미포함) | ✅ — 2026-10-02: `final/F4-scope-fidelity.md` APPROVE_WITH_DEVIATIONS |
 
-- F1이 `⬜`인 이유: 관련 코드와 문서 정정은 main에 merge됐지만(`c69690e` … `0ff8ffa`), **`verify:release`의 새 18단계 목록을 끝까지 한 번도 완주 실행한 적이 없다.** 코드 merge ≠ F1 통과다.
-- F2/F3/F4도 `⬜` — F2의 네이티브 게이트는 통합 main에서 한 번도 실행되지 않았고, F3는 시작 전 취소됐으며, F4는 아래 재감사가 필요하다.
-- **F4 관련 주의 (2026-10-01)**: F4 감사가 **APPROVE_WITH_DEVIATIONS(blocking 0건 / non-blocking 6건)** 를 반환했다고 보고되었다. 동시에 그 감사의 **분모 산술이 틀렸고**, **"계획서 두 벌이 byte-identical이 아니다"는 발견은 위양양성(false positive)다** — `cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md`는 exit 0이다. ⚠️ 로컬 `.omo/evidence/ultima-web/final/F4-scope-fidelity.md`에 남아 있는 산출물은 **2026-09-27의 REJECT 감사본**이고, 위 APPROVE_WITH_DEVIATIONS 판정을 담은 파일은 확인 필요(evidence 로컬 전용이라 이 worktree에는 없다). F4 재감사는 분모 산술을 **원본 계획서 파일에서 다시 유도해서** 해야 한다.
+- **F1~F4 완료 (2026-10-02)**: F1은 `npm run verify:release` 18단계를 전부 실행해 exit 0을 확인했다(감사서 `final/F1-plan-compliance.md`, dist SHA-256 `41a2e0e5…0743d`). F3은 실제 `ultima4.zip`으로 Chromium·Firefox·WebKit 전체 스위트를 각각 46/46으로 완주했다(WebKit 1건 서브픽셀 허용치를 aura-relative 단언으로 수정, `final/F3-real-browser-qa/`). F4는 새 감사서에서 분모를 계획서에서 직접 유도했다(37/33/4, `cmp` exit 0, `audit:dist --require-engine` exit 0, `verify:workflow` exit 0) — verdict APPROVE_WITH_DEVIATIONS, 승인 항목은 2026-10-02 사용자 승인으로 해소.
 
 ## 완료 기록 (시간순)
 
@@ -394,16 +399,16 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 
 ---
 
-## 🆕 바로 다음 순서 (2026-10-02 갱신 — **28/32 = 87.5%**, main `dd0c933`, F1~F4 전부 실행 완료, 사용자 승인 대기) ← 최신
+## 🆕 바로 다음 순서 (2026-10-02 갱신 — **37/37 = 100%**, main `b870b85`, F1~F4 승인 + Todo 29~33 편입 완료) ← 최신
 
-> F1~F4 실행/감사는 모두 완료됐다. 계획서 체크박스(`[ ]` F1~F4)와 최종 진행률 확정은 **사용자 명시 승인 후** 처리한다(아래 4·5·6).
+> 전 단계 완료. 남은 것은 배포/인수 단계뿐이다: push·Pages 확인·handoff 최종본.
 
 1. ✅ **F1 계획 준수 감사 실행 완료 (2026-10-02)**: `npm run verify:release` 18단계 **전부 exit 0** (1~17단계: deps:host·build:modules·deps:wasm·build:wasm·build:native·check:build-fresh·cmake:configure·cmake:build·typecheck·test:unit(569)·test:native(4/4)·i18n:check --strict(4561·pending 0)·verify:repo-sources·build:site·audit:dist·verify:workflow·verify:release-docs — 최초 실행 중 e2e 단계 직전 중단, **18단계 chromium e2e 46/46(35.5m) 별도 재실행으로 완주**). 감사서 `final/F1-plan-compliance.md`(18단계 exit 표·git status·dist SHA-256 `41a2e0e5…0743d`·Must have/Must NOT have 매핑). 증거: `final/F1-verify-release.log`.
 2. ✅ **F2 코드 품질/네이티브 게이트** — 이전 승인(blocker 0) + 네이티브 게이트 green (2026-10-01). 감사서 `final/F2-code-quality.md`.
 3. ✅ **F3 실제 브라우저 QA 실행 완료 (2026-10-02)**: 전체 스위트를 실제 `ultima4.zip`으로 **Chromium(46/46, verify:release)·Firefox(46/46, 36.4m)·WebKit(45→46/46)** 실행. WebKit에서 `korean-status-overlay.spec.ts`가 0.069px 서브픽셀 초과(72/200=0.36 vs 측정 0.36034)로 1건 실패 → oracle 리뷰(APPROVE_WITH_CHANGE) 후 **aura-relative 단언**(`overlayBottom ≤ auraTop + 0.5`, line 160과 동일 규약)으로 수정, 단독 재실행으로 WebKit·Chromium·Firefox 각각 green 확정 + 전체 WebKit 재실행 46/46. 증거: `final/F3-real-browser-qa/`(browser version: Playwright 1.52.0, firefox 137.0, webkit 18.4).
-4. **F4 최종 재감사 완료 (2026-10-02)**: 새 감사서 `final/F4-scope-fidelity.md` 작성 — verdict **APPROVE_WITH_DEVIATIONS**, 분모 산술은 계획서에서 직접 유도(체크박스 총 32, `[x]` 28, `[ ]` 4 → 28/32=87.5%), `cmp` exit 0, `audit:dist --require-engine` exit 0(9 files, leak 0), `verify:workflow` exit 0. **사용자 승인 필요 항목**: ① Todo 29~33 편입 + 분모(32 vs 35/37), ② 남은 영어 표면의 릴리스 범위 확정, ③ (F3 승인 포함) 브라우저 3종 완료 확인.
-5. **사용자 결정 필요**: Todo 29~33을 원본 계획서에 편입할지, 편입한다면 분모를 32로 둘지 35/37로 둘지. **지금 코드는 main에 있는데 계획서에는 없어서 진행률이 실제보다 낮게 보인다.** 이 결정 없이는 100%에 도달할 수 없다. (2026-10-01 재확인: 계획서 체크박스 총 32개, `[x]` 28, `[ ]` 4 = F1~F4.)
-6. **main push**: F1~F4 결과를 사용자에게 보고하고 명시 승인을 받은 **뒤에만** `git push origin main` (현재 origin/main보다 앞서 있으나 미push). 사용자 승인 후 F1~F4 체크박스 `[x]` + 진행률 갱신 + push 순서로 진행한다.
+4. ✅ **F4 최종 재감사 완료 (2026-10-02)**: 새 감사서 `final/F4-scope-fidelity.md` 작성 — verdict **APPROVE_WITH_DEVIATIONS**, 분모 산술은 계획서에서 직접 유도(2026-10-02 승인 후 체크박스 총 37, `[x]` 37 → 37/37=100%), `cmp` exit 0, `audit:dist --require-engine` exit 0(9 files, leak 0), `verify:workflow` exit 0.
+5. ✅ **사용자 결정 완료 (2026-10-02)**: Todo 29~33 편입 + 분모 **37** 확정. 계획서 체크박스 37/37 `[x]`, F1~F4 승인.
+6. **남은 것 (사용자/외부)**: ① `git push origin main`(사용자 승인 완료 — 실행 예정), ② GitHub Pages 배포 확인(Settings Source="GitHub Actions"는 사용자만 가능, CI가 push 후 자동 배포), ③ `handoff.md` 최종본·`HANDOFF.md` 갱신.
 
 ## 목적 달성 가능성 판단
 - **가능하다, 그리고 크리티컬 패스(Todo 21)는 이제 끝났다.** 근거: 같은 xu4 소스가 native에서도(Step 3), 이제 브라우저에서도(Todo 21, 2026-09-25) 원본 데이터로 실제로 돈다 — 실제 타이틀 화면 렌더 + 실제 키 입력으로 `IntroController` 상태 전이까지 확인됨. 남은 일은 대부분 한국어화(11~15)와 배포(17~20)로, 엔진 자체의 미지수는 이제 거의 없다.
