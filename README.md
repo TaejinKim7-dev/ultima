@@ -16,7 +16,7 @@ Ultima IV를 웹 브라우저에서 실행할 수 있도록 포팅하고, 한국
 - 새로 작성되는 코드는 TDD로 구현하고, 각 컴포넌트는 Unit Test로 독립 검증합니다.
 - 원본 게임 데이터와 비밀 값만 제외하고, 계획/코드/번역 원천/테스트 정책/배포 workflow는 공개합니다.
 
-## 현재 상태 (2026-10-01)
+## 현재 상태 (2026-10-03)
 
 브라우저에서 실제 xu4 엔진이 원본 데이터로 돌아갑니다. GitHub Pages에도 올라가 있습니다.
 
@@ -34,7 +34,8 @@ Verified deployment: https://taejinkim7-dev.github.io/ultima/ (Actions run 36316
 아직 안 된 것:
 
 - 화면에 남는 영어는 전수 계측하지 않았습니다. 번역 id 경로가 없는 원본 데이터 레코드, `TITLE.EXE` 바이너리 문자열 일부, `getVirtueAdjective()`처럼 번역 틀 안에서 영어로 나오는 코드 인자가 남아 있습니다. 지도·아바타·룬 같은 픽셀 그래프는 번역 대상이 아닙니다.
-- Firefox/WebKit 수동 QA와 최종 독립 검증 라운드(F1~F4)가 남았습니다. F1의 계획 준수 검사는 `npm run verify:release-docs`와 `npm run verify:release`로 자동화되어 있습니다.
+- macOS Safari 실기 검증은 하지 않았습니다. Chromium·Firefox·WebKit은 Playwright 자동화로 전체 e2e를 통과했습니다(F3, 2026-10-02).
+- 남은 작업(한국어 입력 후 키보드 포커스, 번역문 인자 순서, 성 주제어 alias, 잔여 영어 계측과 표면 번역, 클라이맥스 실관측, 저장소 정리, 개조 범위)은 [plan.md](plan.md)의 Todo 34~44에 있습니다(갭 목록은 [goal 대비 갭 감사](docs/GOAL_GAP_AUDIT.md)).
 
 자세한 한계는 [웹 포팅 문서](docs/WEB_PORT.md#알려진-한계)에 있습니다.
 
@@ -63,6 +64,7 @@ ULTIMA4_DATA=/절대/경로/ultima4.zip npm run dev
 - [웹 포팅 실행 계획](docs/ULTIMA_WEB_PLAN.md)
 - [진행 현황](plan.md)
 - [소스 고정 revision](docs/SOURCE_PINS.md)
+- [번역 공개 정책](docs/TRANSLATION_POLICY.md)
 - [GitHub 업로드 및 Pages 대상](docs/GITHUB_UPLOAD.md)
 - [TDD 및 컴포넌트 테스트 정책](docs/TESTING_POLICY.md)
 - [AI 코딩 에이전트 인계 규칙](docs/AI_AGENT_HANDOFF.md)
@@ -97,6 +99,16 @@ AI 코딩 에이전트가 이 저장소를 이어받을 때는 먼저 [AGENTS.md
 최종 웹 앱도 원본 데이터를 배포하지 않습니다. 사용자가 합법적으로 가진 원본 데이터를 브라우저에서 직접 선택하는 방식으로 동작해야 합니다.
 
 반대로 이 저장소에서 작성되는 구현 코드, 한국어 번역 원천 JSON, 테스트 정책, GitHub Actions workflow, 개발 문서는 공개를 기본값으로 둡니다.
+
+## 번역 고지
+
+이 저장소와 배포 사이트의 한국어 번역은 **비공식 팬 번역**입니다. Ultima IV의 권리자(Electronic Arts 등)나 Origin Systems와 관련이 없고, 권리자의 승인을 받지 않았습니다.
+
+- 번역 원천(`locales/ko/*.json`)은 한국어 번역문과 원문의 SHA-256 해시만 담습니다. 영어 원문과 원본 게임 데이터는 포함하지 않습니다.
+- 게임을 하려면 각자 합법적으로 가진 원본 `ultima4.zip`이 필요합니다.
+- 권리자의 요청이 있으면 해당 번역을 저장소와 배포 사이트에서 내립니다.
+
+번역을 공개하기로 한 결정과 근거는 [번역 공개 정책](docs/TRANSLATION_POLICY.md)에 있습니다.
 
 ## 배포
 

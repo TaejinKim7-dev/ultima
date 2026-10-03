@@ -1738,3 +1738,48 @@ git push origin main   # dd0c933..fd31e9b  main -> main  (exit 0)
 - GitHub Pages 실제 배포 확인: push 후 CI(run)가 Pages artifact를 배포하는지 확인 필요 — Settings > Pages > Source="GitHub Actions"는 사용자만 설정 가능.
 - 제품 품질 항목(계획 진행률 아님): F4 감사서의 non-blocking deviations(남은 영어 표면 inventory, 상점/캐슬 등 일부 표면 범위)는 사용자 승인된 릴리스 범위로 남음.
 - `HANDOFF.md` 최종 갱신(다음 세션용).
+
+---
+
+## 2026-10-03 — 번역 공개 결정 기록 + 완료 후 웨이브(Todo 34~44) 계획 편입
+
+> 이 절은 append만 한다. 문서·계획 작업만 했고 제품 코드는 바꾸지 않았다.
+
+### 1. 현재 목표와 범위
+- 37/37 완료 뒤 goal.md 기준으로 다시 점검했다. 남은 일을 다른 AI가 그대로 따라갈 수 있는 계획서 Todo로 만들었다.
+- 사용자 지시는 순서대로 세 번이었다. "A안으로 가자. 번역 공개. 그리고 2~5 진행해" → "지금 결정한 방향에 대해 문서화해. 그리고 2~5번도 plan 문서로 만들어서 다른 AI가 따라 갈수 있도록" → "docs/GOAL_GAP_AUDIT.md 의견도 같이 반영해서 plan 방향 정해".
+
+### 2. 확정된 결정
+- **번역 공개 유지** (사용자 결정, 2026-10-03). 결정 기록은 `docs/TRANSLATION_POLICY.md`다. goal.md §5·§8의 "번역 결과물 배포 금지"는 이 결정으로 대체됐다. 영어 원문 corpus·원본 데이터 금지는 그대로다. README에 비공식 팬 번역 고지를 넣었다.
+- **완료 후 웨이브 Todo 34~44 편입**. 분모는 37 → **48**, 진행률은 **37/48 = 77.1%**다. 근거는 goal.md 재점검(저장소 정리·계측·품질·개조)과 `docs/GOAL_GAP_AUDIT.md` 갭 9건이다. 감사 주장은 코드로 확인했다. 갭 #2·#4·#5·#6은 확인됐고, #7은 재현이 필요하다.
+- 순서: 34 정리 → 35 포커스(#1) → 36 placeholder 순서(#4) → 37 LB alias(#2) → 38 계측(#9) → 39 형용사·크리처(#3·#7) → 40 죽음·주문·입장(#5·#6) → 41 Codex·상점 실관측(#8) → 42 wasm 메모리·Safari → 44 재검증. 43(개조 범위 제안)은 언제든 할 수 있고 사용자 결정이 필요하다.
+
+### 3. 작업 상태
+- 브랜치 `chore-translation-policy-a`(main `6ee20fd`에서 분기). worktree는 `.claude/worktrees/agent-ad52af6bd293aab90`다.
+- 변경 파일:
+  - 신규: `goal.md`(루트에만 있던 파일을 편입하고 §5·§8 수정), `docs/TRANSLATION_POLICY.md`, `docs/GOAL_GAP_AUDIT.md`(다른 에이전트 작성본에 결정 반영과 §10 Todo 매핑 추가).
+  - 수정: `README.md`, `.omo/plans/ultima-web.md` + `docs/ULTIMA_WEB_PLAN.md`(Todo 34~44, 의존성 행, byte-identical), `plan.md`.
+
+### 4. 다음 에이전트가 바로 할 일
+- `plan.md` "🆕 바로 다음 순서 (2026-10-03)"의 **Todo 34**(로컬 저장소 정리)부터 시작한다. 세부 정의는 계획서 Todo 34~44와 그 머리말에 있다.
+
+### 5. 금지사항과 검증
+- merge 게이트 (이 브랜치, 2026-10-03):
+```
+npm ci                                                 # 0
+npm run test:unit                                      # 0
+npm run verify:repo-sources                            # 0
+npm run typecheck                                      # 0
+npm run build                                          # 0
+npm run check:build-fresh                              # 0
+git diff --check                                       # 0
+npm run verify:release-docs                            # 0 (첫 실행 1: README의 "placeholder" 단어가 stale 검사에 걸림 → 문구 수정 후 0)
+cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md   # 0
+```
+- 문서만 바꿔서 `verify:integration`(e2e)은 실행하지 않았다. Todo 35부터는 merge 전 단독 실행이 필수다.
+
+### 6. 남은 위험 / 미검증
+- F1~F4 승인은 37단계 범위 기준이다. 34~44 범위 재검증은 Todo 44가 맡는다.
+- 갭 #7(크리처 이름 영어)은 `module.json`에 Rat·Mage 번역이 있어 실제 노출 경로가 **확인 필요**다.
+- Todo 35의 포커스 반환 지연값은 close→reopen 간격을 실측한 뒤 정한다(확인 필요).
+- 루트 `/home/taejin/ultima`는 여전히 stale `f3-real-browser-qa`다. Todo 34 전까지 거기서 작업하지 않는다.

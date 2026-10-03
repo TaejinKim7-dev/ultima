@@ -155,6 +155,17 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 | 25 | 22,23 | F1–F4 | 26,27 (2026-09-27 신규 — 상점 대화 한국어) |
 | 26 | 12,14,15,21,22 | F1–F4 | 23,24,25 (2026-09-27 신규 — 인트로 한국어 오버레이) |
 | 27 | 12,14,15,21,22,26(오버레이 가림 규칙) | F1–F4 | 23,24,25 (2026-09-27 신규 — 상태창·메뉴 한국어 오버레이) |
+| 34 | 없음 | 35–42,44 | 43 (2026-10-03 신규 — 로컬 저장소·worktree 정리) |
+| 35 | 34 | 44 | 36,37,41,43 — 38·42와 직렬(`src/shell.ts`) (2026-10-03 신규 — 한국어 입력 후 키보드 포커스, 갭 #1) |
+| 36 | 34 | 39,40,44 | 35,37,41,43 — 39·40과 직렬(i18n 생성기) (2026-10-03 신규 — placeholder 순서 정합성, 갭 #4) |
+| 37 | 34 | 44 | 35,36,41,43 (2026-10-03 신규 — LB/Hawkwind 주제 키워드 한국어 alias, 갭 #2) |
+| 38 | 34 (35·36 이후 권장) | 39,40,44 | 37,41,43 — 35·42와 직렬 (2026-10-03 신규 — 잔여 영어·누락 텍스트 계측, 갭 #9) |
+| 39 | 36,38 | 44 | 41,43 — 36·40과 직렬 (2026-10-03 신규 — 미덕 형용사·크리처 이름 인자, 갭 #3·#7) |
+| 40 | 36,38 | 44 | 41,43 — 36·39와 직렬 (2026-10-03 신규 — 죽음·주문 실패·입장 메시지, 갭 #5·#6) |
+| 41 | 34 | 44 | 36,37,43 (2026-10-03 신규 — Codex/엔딩·상점 4종 실세션 관측, 갭 #8) |
+| 42 | 34 | 44 | 36,37,41,43 — 35·38과 직렬 (2026-10-03 신규 — wasm 메모리 측정·Safari 기록) |
+| 43 | 없음 | 개조 신규 Todo | 전부 (2026-10-03 신규 — 개조 범위 제안, 사용자 결정) |
+| 44 | 34–42, 43(결정 기록 또는 보류) | 없음 | 없음 (2026-10-03 신규 — 이 웨이브 이후 릴리스 재검증) |
 
 ## Todos
 > Implementation + Test = ONE todo. Never separate.
@@ -431,6 +442,300 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   Acceptance criteria: unit tests `reagent-emission` (RED then GREEN); e2e reagents view shows the Korean title and no English reagent name leaks; `korean-status-overlay` passes.
   QA scenarios: happy: `.omo/evidence/ultima-web/task-33/reagents-korean.png`; failure: a reagent name missing from `GENERATED_STATUS_NAMES` leaks its English name into the overlay, caught by the leak assertion, `.omo/evidence/ultima-web/task-33/leak.log`.
   Commit: Y | feat(status): send the Ztats Reagents rows to the overlay in Korean
+
+> **2026-10-03 post-completion wave (Todos 34–44).** These Todos were added after the 37/37 completion, on the user's instruction. The instruction came in steps: "2~5 진행해", then "2~5번도 plan 문서로 만들어서 다른 AI가 따라 갈수 있도록", then "docs/GOAL_GAP_AUDIT.md 의견도 같이 반영해서 plan 방향 정해".
+>
+> - **Sources.** (a) The post-completion review against `goal.md`, which covered repository cleanup, remaining-English measurement, quality gaps and modding scope. (b) `docs/GOAL_GAP_AUDIT.md`, nine user-facing translation gaps. Gap numbers below refer to that file. The audit's claims were spot-checked against the code on 2026-10-03:
+>   - gap #2: `aliases.json` has 13 entries.
+>   - gap #4: `scripts/lib/placeholders.mjs` compares placeholders as a sorted multiset, while `ui-message-compose.ts` substitutes them in order.
+>   - gap #5: `deathMsgs[]` is not in `locales/ko/ui.json`.
+>   - gap #6: `screenMessageCenter` calls `screenMessageN` directly and so bypasses the `screenMessage` web hook.
+>   - Gap #7 is only partly confirmed: `Rat` and `Mage` already have translations, so the exposure path must be reproduced.
+> - **Already decided, not a Todo.** The audit's §7 question about publishing translations was settled on 2026-10-03: translations stay public (`docs/TRANSLATION_POLICY.md`).
+> - **Direction.** Restore core keyboard UX first. Then fix correctness, because wrong text is worse than English text. Then measure, so that later translation work follows evidence rather than guesses. Then close the known English surfaces, observe the climax in a real session, and re-verify. Modding (goal priority 5) is only a proposal for the user and does not block the release.
+> - **Order.** 34 → 35 → 36 → 37 → 38 → 39 → 40 → 41 → 42 → 44. 43 can run at any time.
+> - **Serialization.** These pairs edit the same files and must not run in parallel: 35, 38 and 42 (`src/shell.ts`); 36, 39 and 40 (`scripts/i18n-*.mjs` and `src/i18n/generated/`).
+> - **Rules for every Todo.** Work on a `todo-<n>-<topic>` branch. Write the RED log before GREEN. Pass the AGENTS.md merge gate, and run `npm run verify:integration` completely solo before merging to `main`. Never put English original text (TLK or binary) or raw `%s` arguments into JSON, generated tables, logs or evidence.
+
+- [ ] 34. Clean up the local repository state (root checkout, retired worktrees, stale drafts)
+  What to do / Must NOT do: snapshot on 2026-10-03.
+  - The root checkout `/home/taejin/ultima` sits on the stale branch `f3-real-browser-qa`, 76 commits behind `origin/main`.
+  - Its tracked changes are old copies: `handoff.md` and `playwright.config.ts` differ from `main`, and the other modified files are byte-identical to `main`.
+  - Its untracked files:
+    - `goal.md`: now committed on `main`.
+    - `ultima-web.md`: a byte-identical copy of this plan.
+    - `.omo/drafts/korean-surface-*.md`: 2026-09-27 research, superseded by Todos 23–27.
+    - `.omo/boulder.json`: still names Todo 18 as active.
+    - `.omo/lazycodex-executor-verify/`, `.omo/start-work/`, `.omo/teams/`.
+  - About 28 worktrees under `.claude/worktrees/` are left over from finished Todos.
+  - `main` itself is checked out in one worktree (`agent-ad52af6bd293aab90`), so the root cannot switch to `main` until that worktree is retired.
+  Steps:
+  (1) Before changing anything, capture `git worktree list`, `git status --short` for each worktree, and the file count of every `.omo/evidence/` directory into `.omo/evidence/ultima-web/task-34/before.log`.
+  (2) Preserve the root's tracked changes on a new branch `salvage/root-stale-2026-10-03`, using a temporary commit (precedent: `salvage/pre-merge-main-2026-10-01`). Move the root's superseded untracked files into the git-ignored `.omo/research/archive-2026-10-03/` so they are kept but out of the way.
+  (3) For each worktree other than the one holding `main`:
+    - If `git status --porcelain` is empty and its branch (or detached HEAD) is an ancestor of `main`: copy its `.omo/evidence/` into the root's `.omo/evidence/` with `rsync -a --ignore-existing`, then run `git worktree remove <path>` without `--force`.
+    - If it is dirty: first commit the dirty state to `salvage/<branch>-2026-10-03`, then remove it.
+    - If it holds commits that are not on `main`: do NOT remove it.
+    - Snapshot on 2026-10-03:
+      - Not merged: `agent-afa23aeeee7d82f43` (`todo-release-verify`) has 2 commits not on `main`. Compare them against `npm run verify:release` on `main` and record whether they are superseded.
+      - Dirty but merged: `agent-a6c1b05c1afa82520`, `agent-adacbf8590c248140`, `agent-ae063aa7954ffec81`, `agent-ae9f912f4bc3e84eb`, `todo-25-shop`, `todo-25-shop-approach`, `todo-28-build-freshness`.
+  (4) Last, retire the worktree that holds `main`. Run this from the root, never from inside that worktree:
+    - Copy its evidence the same way.
+    - Run `git worktree remove`.
+    - Run `git -C /home/taejin/ultima switch main`, then `git pull --ff-only`.
+    - The root becomes the single `main` checkout, which is what AGENTS.md assumes.
+  Must NOT:
+  - Delete any branch, or force-push.
+  - Use `git worktree remove --force` on a dirty tree.
+  - Delete any `.omo/evidence/` content.
+  - Delete the root's `.claude/` directory. It holds the worktrees and local settings.
+  - Touch `/home/taejin/ultima4-original-data/`.
+  - Use a bare `git stash`. The stash is shared with other sessions.
+  Parallelization: Wave 6 | Blocked by: none | Blocks: 35–42, 44
+  References: `git worktree list`; `plan.md` "재계획 요약" (the 2026-09-24 copy-evidence-then-remove precedent); `salvage/pre-merge-main-2026-10-01`; AGENTS.md "Git 작업 방식".
+  Acceptance criteria:
+  - `git worktree list` shows the root on `main`, plus only the worktrees that were deliberately kept, each with a recorded reason.
+  - The root's `git status --short` is clean, and `git rev-parse main origin/main` match.
+  - Every salvage branch exists.
+  - The evidence file count after cleanup is at least the before count.
+  - The AGENTS.md merge gate exits 0 in the root.
+  QA scenarios:
+  - happy: `.omo/evidence/ultima-web/task-34/cleanup.log`, with the before and after worktree lists and evidence counts.
+  - failure: plain `git worktree remove` on a dirty worktree is refused with a non-zero exit, and that worktree is salvaged instead. Recorded in `.omo/evidence/ultima-web/task-34/dirty-refused.log`.
+  Commit: Y (docs only: `plan.md`, `handoff.md`) | chore(repo): retire merged worktrees and realign the root checkout
+
+- [ ] 35. Return keyboard control to the game after Korean input (GOAL_GAP_AUDIT gap #1, P1)
+  What to do / Must NOT do: `docs/WEB_PORT.md` "알려진 한계" states the problem. After the player uses the Korean keyword input, arrow and command keys stop reaching the game until focus leaves the input. This breaks Must have 2 (desktop keyboard play).
+  - Cause: the capture-phase `keydown` guard in `src/shell.ts` swallows every key while `doc.activeElement === koreanKeywordInput`.
+  - `handoff.md` says Todo 30's prompt-epoch work was never shown to fix this, so reproduce it first in a RED e2e. Do not assume it is fixed.
+  Fix:
+  - When the native text prompt closes (`textPromptReceiver.closed` → `src/i18n/text-prompt-gate.ts`) and no prompt reopens within a short window, move focus from the input back to `#game-canvas`.
+  - Escape in the input returns focus immediately.
+  - A talk conversation opens a new prompt for each keyword. Blurring on every submit, or on every close without the reopen check, would therefore break typing several Korean keywords in a row.
+  - Measure the real close→reopen gap with `korean-npc-alias.spec.ts` before choosing the window (확인 필요).
+  Must NOT: change engine input semantics, the alias rules, or the prompt gate's rejection behavior (Todo 18).
+  Parallelization: Wave 6 | Blocked by: 34 | Blocks: 44 | Serialize with: 38, 42
+  References: `src/shell.ts` (search `koreanKeywordInput`, `textPromptReceiver`); `src/i18n/text-prompt-gate.ts`; `tests/e2e/korean-npc-alias.spec.ts`; `tests/e2e/failure-boundaries.spec.ts`; `handoff.md` (search "재현부터").
+  Acceptance criteria:
+  - RED e2e first: type a Korean alias, the prompt closes, then an arrow key moves the avatar with no manual click. It fails before the fix and passes after it in Chromium, Firefox and WebKit.
+  - A unit test, RED first, covers a pure focus-return decision helper that takes the close and reopen timing and the active element.
+  - `korean-npc-alias` and `failure-boundaries` pass.
+  QA scenarios:
+  - happy: `.omo/evidence/ultima-web/task-35/focus-return.png`.
+  - failure: when a second prompt reopens inside the window, focus stays in the Korean input. Recorded in `.omo/evidence/ultima-web/task-35/reopen-keeps-focus.log`.
+  Commit: Y | fix(shell): return keyboard focus to the game after Korean input
+
+- [ ] 36. Make placeholder order safe in translations (GOAL_GAP_AUDIT gap #4, P2 correctness)
+  What to do / Must NOT do: two pieces of code disagree about order.
+  - `scripts/lib/placeholders.mjs` deliberately compares placeholders as a sorted multiset, so that Korean word order may differ.
+  - `src/dialogue/ui-message-compose.ts` (and the other composers) substitute the engine's arguments strictly in order.
+  - Result: a translation that reorders two conversions swaps the arguments. A gold amount can land in a name slot, or a `%d` can receive a string, and `i18n:check --strict` still passes.
+  Steps:
+  (1) Audit the whole corpus (`locales/ko/*.json`) for entries whose conversion order differs from the source. The source order comes from the inventory placeholder signature, not from English text. Record the count.
+  (2) Choose the minimal fix:
+    - Either require identical conversion order in `i18n:check` and rewrite the offending translations,
+    - Or support explicit positional conversions (`%1$s`) in every composer (ui, talk, vendor, status, intro), with the checker validating them.
+    - Record the choice and its reason in the commit and the plan.
+  (3) Fix the offending entries and regenerate the tables.
+  Must NOT: weaken the checker, hand-edit `src/i18n/generated/*`, or change the English inventory.
+  Parallelization: Wave 6 | Blocked by: 34 | Blocks: 39, 40, 44 | Serialize with: 39, 40
+  References: `scripts/lib/placeholders.mjs`; `scripts/i18n-check.mjs:55-58`; `src/dialogue/{ui-message-compose,talk-compose,vendor-compose}.ts`; `src/overlay/{status-view,intro-view}.ts`; `scripts/i18n-generate.mjs`.
+  Acceptance criteria:
+  - Unit tests, RED first:
+    - A reordered `%s … %d` translation is rejected, or rendered correctly with positional conversions.
+    - The audit script reports 0 offending entries after the fix.
+  - `npm run i18n:check -- --strict` exits 0.
+  - The `korean-game-messages`, `korean-shop` and `korean-status-overlay` e2e specs pass.
+  QA scenarios:
+  - happy: `.omo/evidence/ultima-web/task-36/order-audit.log`, with the before and after counts.
+  - failure: a planted reordered translation fails `i18n:check`. Recorded in `.omo/evidence/ultima-web/task-36/reorder-rejected.log`.
+  Commit: Y | fix(i18n): keep translated placeholder order consistent with argument order
+
+- [ ] 37. Korean aliases for the Lord British and Hawkwind topic keywords (GOAL_GAP_AUDIT gap #2, P1)
+  What to do / Must NOT do: `locales/ko/aliases.json` has only 13 aliases: bye, look, name, give, join, job, health, yes, no and four choice answers. Lord British accepts 24 topic keywords (`vendor/xu4/src/discourse_castle.cpp:254-258` `lbKeyLine`): name, look, job, truth, love, courage, the 8 virtues, spirituality, humility, pride, avatar, quest, britannia, ankh, abyss, mondain, minax, exodus, virtue. They are matched on the first 4 letters (`strncasecmp(..., 4)`, line 495). Lord British and Hawkwind also accept the 8 virtue names through `getVirtueName()` (line 569).
+  Steps:
+  - Add Korean aliases for these keywords. Reuse the glossary terms so that alias and display stay consistent: for example the virtue names translated in Todo 32.
+  - Check the 4-letter prefix rule for collisions: two Korean aliases must not resolve to English keywords that share a 4-letter prefix in a way that changes meaning.
+  - Extend `korean-castle-output.spec.ts`: ask Lord British about one virtue and one principle in Korean, and assert the same response id as with the English keyword.
+  Must NOT: change the English keywords or the matching logic.
+  Parallelization: Wave 6 | Blocked by: 34 | Blocks: 44 | Can run alongside: 36
+  References: `vendor/xu4/src/discourse_castle.cpp`; `locales/ko/aliases.json`; `locales/ko/glossary.json`; `src/i18n/korean-aliases.ts`; `tests/e2e/korean-castle-output.spec.ts`.
+  Acceptance criteria:
+  - Unit tests, RED first: alias resolution for every new keyword, and a check for collisions and duplicates.
+  - `npm run i18n:check -- --strict` exits 0.
+  - The castle e2e shows the Korean-alias and English answers producing the same Korean response.
+  QA scenarios:
+  - happy: `.omo/evidence/ultima-web/task-37/lb-virtue-alias.png`.
+  - failure: an alias that maps to an unknown keyword is rejected by the alias loader. Recorded in `.omo/evidence/ultima-web/task-37/bad-alias.log`.
+  Commit: Y | feat(i18n): Korean aliases for Lord British and Hawkwind topics
+
+- [ ] 38. Measure the English and dropped text that remains in the Korean display (GOAL_GAP_AUDIT gap #9)
+  What to do / Must NOT do: `docs/WEB_PORT.md` "알려진 한계" admits that nobody has measured which English still reaches the screen. Every engine-to-JS text channel drops or falls back silently, and nothing counts it:
+  - `handleUiMessage` in `src/shell.ts`: `composeUiMessage` returns null for an unknown screenMessage format hash. The panel shows nothing, while the canvas still draws English.
+  - `handleVendorLine`: drops unknown template hashes.
+  - `composeTalkLine`: returns "" for unknown talk templates.
+  - `resolveDisplayText` (`src/i18n/localization.ts:81`): returns the English fallback. The intro and status overlays go through this.
+  - In `composeUiMessage`, a `%s` argument that `moduleNameId` does not map is passed through raw. This is the `getVirtueAdjective()` class.
+  Steps:
+  (1) Write a pure `src/i18n/coverage.ts` (`createCoverageRecorder()`). It records these kinds:
+    - `ui-unmapped` (format hash)
+    - `vendor-unmapped` (template hash)
+    - `talk-unmapped` (FNV-1a hash of the literal)
+    - `resolve-fallback` (i18n id)
+    - `arg-passthrough` (template id + argument position + FNV-1a hash of the argument)
+    It provides `snapshot()`, which returns sorted counts.
+  (2) Wire it in through optional `onMiss` callbacks, so that the composers stay pure and nothing visible changes.
+  (3) Expose a read-only `window.ultimaI18nCoverage.snapshot()`. Either add it to `TEST_HOOK_ALLOWLIST` (`scripts/audit-dist.mjs:106`) with a justification, or gate it behind a query flag. Confirm that `audit:dist -- --require-engine` passes either way.
+  (4) In `tests/e2e/fixtures.ts`, attach `i18n-coverage.json` for every spec, like `failure-panel.txt`. One full Chromium run then measures every path the suite already plays.
+  (5) Add `scripts/i18n-coverage-report.mjs`. It merges the attachments and reverse-maps the hashes, using the same FNV-1a as `scripts/i18n-generate.mjs:411`:
+    - ui hashes: over the open-source screenMessage format literals in `vendor/xu4/src`.
+    - vendor hashes: over the `vendors.b` templates.
+    It writes `.omo/evidence/ultima-web/task-38/coverage-report.md` with:
+    - counts per kind;
+    - `file:line` for each reverse-mapped miss;
+    - an "unknown hash" list. Since Todo 24, castle and codex text arrives as ids, so an unknown hash is a possible bug;
+    - the blind spots: canvas-only paths that have no hook (`screenMessageCenter`, `textAt*`) and screens no spec reaches.
+  (6) Check the report against gaps #3, #5, #6 and #7. Feed the confirmed clusters into Todos 39 and 40. Add new Todos (45+) for clusters the audit did not know about. Record the user's scope decision for those in `plan.md`.
+  Must NOT:
+  - Record English text or raw arguments anywhere. Only hashes and ids are allowed.
+  - Add console output. Todo 18's console-noise spec would fail.
+  - Change what the player sees, or change native builds.
+  Parallelization: Wave 6 | Blocked by: 34 (best after 35, 36) | Blocks: 39, 40, 44 | Serialize with: 35, 42
+  References: `src/shell.ts`; `src/dialogue/*.ts`; `src/i18n/localization.ts`; `vendor/xu4/src/screen.cpp` (`u4_web_message`, ~line 413/540; `screenMessageCenter`, ~line 573); `scripts/i18n-generate.mjs`; `scripts/audit-dist.mjs`; `tests/e2e/fixtures.ts`; `tests/e2e/failure-boundaries.spec.ts`.
+  Acceptance criteria:
+  - Unit tests, RED first:
+    - `tests/unit/i18n-coverage.test.ts`: record and dedupe, argument hashing, and rejection of non-id/non-hash keys.
+    - `tests/unit/i18n-coverage-report.test.ts`: reverse-mapping on a fixture.
+  - A new `tests/e2e/i18n-coverage.spec.ts` boots the real engine, calls `Module.u4Text.message` with an unknown hash, and asserts that it was recorded and that the snapshot contains no English words.
+  - `failure-boundaries` passes, and `audit:dist -- --require-engine` exits 0.
+  - The full Chromium run produces the report.
+  QA scenarios:
+  - happy: `coverage-report.md`.
+  - failure: a key that contains an English word is rejected, not stored. Recorded in `.omo/evidence/ultima-web/task-38/no-english.log`.
+  Commit: Y | feat(i18n): measure dropped and fallback text in the Korean display
+
+- [ ] 39. Translate the name arguments that still print in English: virtue adjectives and creature names (GOAL_GAP_AUDIT gaps #3, #7)
+  What to do / Must NOT do: the problem is English inside otherwise Korean lines.
+  - Gap #3: the eight `getVirtueAdjective()` adjectives (`docs/WEB_PORT.md`: "번역 틀 안에서 영어로 나옵니다") still print in English inside Korean lines.
+  - Gap #7: creature names reported in English in combat lines. `module:Ultima-IV:config:68` (Rat) and `:45`/`:88` (Mage) already have translations, so first reproduce why they leak, for example "Giant Rat" being a different string or a `moduleNameId` miss (확인 필요). Use the Todo 38 report as evidence.
+  Steps:
+  - Use the generator pattern of Todos 32 and 33: names live in the corpus and are emitted by `scripts/i18n-generate.mjs`.
+  - Map the `%s` arguments through the existing name maps.
+  Must NOT: hand-edit generated tables, or translate player names.
+  Parallelization: Wave 6 | Blocked by: 36, 38 | Blocks: 44 | Serialize with: 36, 40
+  References: `vendor/xu4/src/names.cpp`; `src/dialogue/ui-message-compose.ts` (`moduleNameId`); `scripts/i18n-generate.mjs`; Todos 32 and 33.
+  Acceptance criteria:
+  - Unit tests, RED first, for the new name rows and the argument mapping.
+  - `npm run i18n:check -- --strict` exits 0.
+  - The relevant `arg-passthrough` counts in the Todo 38 report drop to 0 on a re-run.
+  - `korean-game-messages` passes.
+  QA scenarios:
+  - happy: `.omo/evidence/ultima-web/task-39/names-korean.png`.
+  - failure: a regenerated table keeps the rows (generator purity). Recorded in `task-39/generator-purity.log`.
+  Commit: Y | fix(i18n): translate virtue adjectives and creature-name arguments
+
+- [ ] 40. Korean for death messages, spell errors and centered entry messages (GOAL_GAP_AUDIT gaps #5, #6)
+  What to do / Must NOT do:
+  - Gap #5: `deathMsgs[]` (`vendor/xu4/src/death.cpp:84`, used at line 108) and `spellErrorMsgs[]` (`spell.cpp`) are static array literals. The inventory extractor (`scripts/i18n-inventory.mjs`) does not collect them, so their hashes are unmapped. The canvas shows English and the panel stays silent. Extend the extractor to static string-array initializers that feed `screenMessage`, then translate the new entries.
+  - Gap #6: `screenMessageCenter()` (`screen.cpp:573`) calls `screenMessageN` directly and never reaches the web hook. Town, shrine and dungeon entry text therefore has no Korean path. Add a web hook there, the same way `screenMessage` hashes its format. Also add glossary terms for the `cityTypeStr()` values (towne, castle, village, …).
+  Must NOT: put English original data into the corpus. These are open-source xu4 literals, but verify each one and exclude any that come from AVATAR.EXE. Native builds must stay byte-identical outside `__EMSCRIPTEN__`.
+  Parallelization: Wave 6 | Blocked by: 36, 38 | Blocks: 44 | Serialize with: 36, 39
+  References: `vendor/xu4/src/death.cpp`; `vendor/xu4/src/spell.cpp`; `vendor/xu4/src/screen.cpp`; `scripts/i18n-inventory.mjs`; `locales/ko/{ui,glossary}.json`; `vendor/source-manifest.json` (update treeSha256 in the same commit, as the vendor-edit precedent requires).
+  Acceptance criteria:
+  - Unit tests, RED first: the extractor finds the array literals, and the center hook sends a hash.
+  - `npm run i18n:check -- --strict` exits 0.
+  - An e2e enters a town (Debug Mode goto, as in `gameplay-progression`) and asserts the Korean entry line.
+  - A death or spell-error line is shown in Korean, through e2e or a deterministic cheat path. If neither is reachable, record that as 확인 필요 and cover it with a unit test.
+  - `verify:repo-sources` exits 0.
+  QA scenarios:
+  - happy: `.omo/evidence/ultima-web/task-40/entry-korean.png`.
+  - failure: an array literal that the extractor misses shows up as `ui-unmapped` in the Todo 38 report. Recorded in `task-40/coverage-diff.log`.
+  Commit: Y | feat(i18n): Korean death, spell-error and entry messages
+
+- [ ] 41. Observe the climax and the untested shops in a real session (GOAL_GAP_AUDIT gap #8 + audit §5)
+  What to do / Must NOT do: two areas have never been observed with real data.
+  - Codex and ending text was checked by unit tests and artifact inspection only. No real session has reached the Abyss/Codex. The `virtueQuestions 8..10 ↔ codexHandleInfinity` risk is still open.
+  - Only the healer and food shops have e2e coverage. Weapons, armour, reagent and inn shops have none.
+  Steps:
+  - Reach the Codex with the real `ultima4.zip` through the original Debug Mode cheat menu (deterministic goto, the same approach as Todo 17). Record the Korean Codex questions and ending lines, then close the open risk or file a bug Todo.
+  - Extend `korean-shop.spec.ts` to the other four vendor types.
+  Must NOT: bypass game logic outside the original cheat menu, or log English original data.
+  Parallelization: Wave 6 | Blocked by: 34 | Blocks: 44 | Can run alongside: 36, 37
+  References: `vendor/xu4/src/codex.cpp`; `vendor/xu4/src/cheat.cpp`; `tests/e2e/gameplay-progression.spec.ts`; `tests/e2e/korean-castle-output.spec.ts`; `tests/e2e/korean-shop.spec.ts`; `.omo/drafts/korean-surface-castle-ending.md` "Open risks".
+  Acceptance criteria:
+  - An e2e, or a recorded manual session if the Codex cannot be automated, shows the Korean Codex question and ending text. The reason for choosing manual is recorded.
+  - `korean-shop` covers 6 vendor types.
+  - The F3 notes are updated.
+  QA scenarios:
+  - happy: `.omo/evidence/ultima-web/task-41/codex-korean.png`.
+  - failure: a wrong virtue answer at the Codex yields the Korean rejection line. Recorded in `task-41/codex-wrong-answer.log`.
+  Commit: Y | test(e2e): observe the Codex/ending and all shop types in Korean
+
+- [ ] 42. Measure wasm memory in the memory smoke and record the Safari status
+  What to do / Must NOT do:
+  - (a) Memory. `tests/e2e/memory-smoke.spec.ts` samples only the JS heap.
+    - Add `HEAPU8` to `EXPORTED_RUNTIME_METHODS` (`scripts/build-wasm.mjs:81`).
+    - Read `Module.HEAPU8.buffer.byteLength` again on every sample, because growth replaces the buffer.
+    - Record it next to the JS heap and assert a documented upper bound. Wasm memory never shrinks, so check growth against a cap; it cannot be checked for a return to baseline.
+  - (b) Safari. Record in `docs/WEB_PORT.md` and `README.md` that real macOS Safari testing cannot be done in this environment (WSL2 Linux). WebKit Playwright results are not Safari evidence (Must have 2).
+  Must NOT: drop any existing memory-smoke assertion, or claim that Safari was verified.
+  Parallelization: Wave 6 | Blocked by: 34 | Blocks: 44 | Serialize with: 35, 38
+  References: `tests/e2e/memory-smoke.spec.ts`; `scripts/build-wasm.mjs`; `tests/unit/wasm-symbols.test.ts`; `docs/WEB_PORT.md` "알려진 한계".
+  Acceptance criteria:
+  - The memory-smoke log shows wasm memory samples.
+  - `npm run check:build-fresh` exits 0 after the rebuild.
+  - `wasm-symbols` and `audit:dist -- --require-engine` pass.
+  - The docs state the Safari limitation.
+  QA scenarios:
+  - happy: `.omo/evidence/ultima-web/task-42/memory-smoke.json`.
+  - failure: a planted cap below the observed size fails the spec. Recorded in `task-42/cap-exceeded.log`.
+  Commit: Y | test(memory): include wasm linear memory in the memory smoke
+
+- [ ] 43. Propose the scope of `goal.md` priority 5 ("입맛대로 개조", modding) for a user decision
+  What to do / Must NOT do: `goal.md` §1 lists modding as priority 5 but never defines it, so there is no recommended default.
+  - Write `.omo/drafts/mod-scope.md` with at least four candidates. For each, give the user-visible result, the code entry points (verified by opening the files), a rough size, the risks (original-data and licensing rules included) and a test approach.
+  - Candidates to evaluate:
+    - An optional VGA upgrade from a user-supplied `u4upgrad.zip`. `vendor/xu4/src/u4file.cpp:248` and `imagemgr.cpp:657` already look for it; the shell would need a second picker, and the zip must never be bundled.
+    - A Korean settings panel for xu4's own options (game speed, battle speed, enhancements).
+    - Toggles for xu4 gameplay enhancements and original-bug fixes.
+    - Touch or mobile input.
+    - Korean font and text-size choices.
+    - An in-browser translation-correction flow.
+  - End with a recommendation and the questions the user must answer.
+  - This Todo is complete when the user's choice is recorded in `plan.md` and the chosen items are added as new Todos. Implementation is out of scope.
+  Must NOT: implement a mod, bundle `u4upgrad.zip`, or pick the scope without the user.
+  Parallelization: Wave 6 | Blocked by: none | Blocks: new mod Todos | Can run alongside: any
+  References: `goal.md` §1, §7 Phase 5; `vendor/xu4/src/{u4file,settings,imagemgr}.cpp`; `src/shell.ts`.
+  Acceptance criteria: the draft lists ≥4 candidates with real `file:line` references, and the user's decision (or "보류") is recorded in `plan.md`.
+  QA scenarios:
+  - happy: the draft plus the recorded decision.
+  - failure: a candidate whose referenced code does not exist is caught during verification and marked as such in the draft.
+  Commit: Y (docs) | docs(plan): propose the modding scope
+
+- [ ] 44. Re-verify the release after Todos 34–42 (integration gate + F1/F4 addendum)
+  What to do / Must NOT do: F1–F4 were approved for the 37-step scope on 2026-10-02. Do not carry them over silently to cover this wave. Steps:
+  (1) Run `npm run verify:integration` completely solo (AGENTS.md).
+  (2) Run `ULTIMA4_DATA=<path> npm run verify:release`.
+  (3) Write `final/F1-addendum-2026-10.md`, mapping Todos 34–43 to their evidence.
+  (4) Write `final/F4-addendum-2026-10.md`. It records:
+    - the translation-publication deviation, resolved by `docs/TRANSLATION_POLICY.md`;
+    - F4 deviation 2 ("remaining English not measured"), replaced by the Todo 38 report and what Todos 39 and 40 closed;
+    - the Safari status (Todo 42);
+    - the modding decision status (Todo 43).
+  (5) Re-run Firefox and WebKit for the specs this wave changed or added, and record the browser versions.
+  (6) Update `docs/GOAL_GAP_AUDIT.md` with the final status of each gap.
+  Must NOT: count an interrupted run, or a run with `ERR_CONNECTION_REFUSED`, as passing (AGENTS.md infrastructure-failure rule).
+  Parallelization: Wave 6 | Blocked by: 34–42 (43 needs only its decision recorded or "보류") | Blocks: none
+  References: AGENTS.md; `.omo/evidence/ultima-web/final/`; `docs/GOAL_GAP_AUDIT.md`.
+  Acceptance criteria:
+  - `verify:integration` and `verify:release` both exit 0 in completed runs.
+  - Both addenda exist.
+  - `handoff.md` records every command with its exit code.
+  - `docs/GOAL_GAP_AUDIT.md` shows every gap as closed, or as deferred with a reason.
+  QA scenarios:
+  - happy: `.omo/evidence/ultima-web/final/F1-addendum-2026-10.md`.
+  - failure: an e2e run that dies with `ERR_CONNECTION_REFUSED` is recorded as an infrastructure failure and re-run solo, not counted. Recorded in `.omo/evidence/ultima-web/task-44/infra-failure.log` if it happens.
+  Commit: Y (docs) | docs(release): re-verify after the post-completion wave
 
 ## Final verification wave
 > Runs in parallel after ALL todos. ALL must APPROVE. Surface results and wait for the user's explicit okay before declaring complete.
