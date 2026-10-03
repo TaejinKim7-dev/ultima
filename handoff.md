@@ -1931,3 +1931,16 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
 - 부작용(문서화됨): 단독 `\n`은 패널로 전달하지 않는다. 줄 바꿈 모양에 영향이 있을 수 있어 사용자 확인 필요.
 - 미검증: 에이전트 e2e의 `korean-shop` 첫 실행은 포트 충돌로 멈췄고 `-g reagent` 재실행으로 확인했으나, 통합 게이트의 전체 스위트 통과로 보완됨. `79843a19` 잔여 1회의 출처는 미규명(플레이어 이름 에코 또는 디버그 추정).
 - 다음: **Todo 44**(최종 재검증). 43은 사용자 결정 대기.
+
+---
+
+## 2026-10-03 — Todo 44 중간 기록 (최종 재검증 진행 중: verify:release PASS, Firefox 15/15, WebKit 진행 중)
+
+> append만 한다. Todo 44는 WebKit 완료 전이라 **완료로 세지 않는다**(진행률 48/50 유지).
+
+- **`ULTIMA4_DATA=<zip> npm run verify:release`(완전 단독, main `e1625af`, 포트 4710)**: 18단계 전부 exit 0, `EXIT=0`. 단계: deps:host · build:modules · deps:wasm · build:wasm · build:native · check:build-fresh · cmake:configure · cmake:build · typecheck · test:unit(55 files/675 tests) · test:native(4/4) · i18n:check --strict(4634) · verify:repo-sources · build:site · audit:dist --require-engine · verify:workflow · verify:release-docs · test:e2e chromium **55 passed (55.3m)**, 연결 거부 0건. 로컬 증거 `final/F1-addendum-verify-release.log`.
+- **Firefox**: 이번 웨이브에서 바꾸거나 추가한 스펙 7개(`korean-focus-return`, `korean-castle-output`, `korean-shop`, `korean-codex`, `korean-game-messages`, `i18n-coverage`, `korean-npc-alias`) **15 passed (35.5m)**, 실패 0건.
+- **WebKit**: 같은 7개 스펙 실행 중(결과 미확정). 끝나면 아래에 이어 적는다.
+- 로컬 증거 `final/F1-addendum-2026-10.md`(Todo 34~46 증거 표, 한계 포함)를 작성했다. `.omo/evidence/`는 git에 올리지 않는다.
+- `docs/GOAL_GAP_AUDIT.md` §11에 갭 9건의 최종 상태와 검증 수준(단위/e2e/사람 확인 필요)을 기록했다.
+- 남은 것: WebKit 결과 확인 → F4 보강 문서 → Todo 44 완료 표시(49/50) → Todo 43은 사용자 결정 대기.
