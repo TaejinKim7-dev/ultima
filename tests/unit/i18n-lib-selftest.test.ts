@@ -77,9 +77,24 @@ describe("binary-strings: resource:table:index key shape", () => {
 })
 
 describe("placeholder signature matching", () => {
-  it("accepts a translation whose placeholders are reordered but match in count and kind", () => {
-    const { equal } = runJson("placeholder-match", "%s has %d gold", "%d 골드를 %s 가 가지고 있다")
+  it("extracts placeholders in source order, not sorted", () => {
+    const { sourcePlaceholders } = runJson("placeholder-match", "%s has %d gold", "%s 금 %d")
+    expect(sourcePlaceholders).toEqual(["%s", "%d"])
+  })
+
+  it("accepts a translation whose placeholders keep the source order", () => {
+    const { equal } = runJson("placeholder-match", "%s has %d gold", "%s 는 금 %d 를 가지고 있다")
     expect(equal).toBe(true)
+  })
+
+  it("rejects a translation that swaps the order of %s and %d (arguments are substituted in order)", () => {
+    const { equal } = runJson("placeholder-match", "%s has %d gold", "%d 골드를 %s 가 가지고 있다")
+    expect(equal).toBe(false)
+  })
+
+  it("does not treat the Boron vendor-name macro followed by a word as a printf conversion", () => {
+    const { sourcePlaceholders } = runJson("placeholder-match", "% says: welcome", "%(이)가 말한다")
+    expect(sourcePlaceholders).toEqual([])
   })
 
   it("rejects a translation missing a placeholder the source has", () => {

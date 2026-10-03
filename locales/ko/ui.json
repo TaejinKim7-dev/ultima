@@ -200,10 +200,10 @@
     "ui:combat:10": {
       "sourceHash": "sha256:a487168bf4f5940a2cfcd8dad5bcda66e9f7fa2a3c0d801b5782bf788f8dc160",
       "placeholders": [
-        "%c",
+        "%s",
         "%c",
         "%s",
-        "%s"
+        "%c"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
       "translation": "\n%s %c%s 명중%c!\n",
@@ -400,11 +400,11 @@
       "placeholders": [
         "%.1X",
         "%.1X",
+        "%.3d",
         "%.1X",
         "%.1X",
         "%.1X",
-        "%.1X",
-        "%.3d"
+        "%.1X"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
       "translation": "  %.1X%.1X  %.3d %.1X%.1X %.1X%.1X\n",
@@ -525,8 +525,8 @@
       "sourceHash": "sha256:fd8b82bb2ad6b18567ff1d14093e4f98260df4526cfd42ccf9859e0cbbbbdbb8",
       "placeholders": [
         "%c",
-        "%c",
-        "%s"
+        "%s",
+        "%c"
       ],
       "sourceFile": "vendor/xu4/src/combat.cpp",
       "translation": "\n%c%s 처치!%c\n",
@@ -582,8 +582,8 @@
       "sourceHash": "sha256:bc426c71ce869213ae54c4f07ae22899f405c114619dcb6131d9cdc6b139428f",
       "placeholders": [
         "%c",
-        "%c",
-        "%s"
+        "%s",
+        "%c"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
       "translation": "\n%c%s 도주!%c\n",
@@ -602,9 +602,9 @@
       "sourceHash": "sha256:2c9b24929486a3de56d13d86c8b9af1ca9671f2534209aae9f8a4d95b5300b4f",
       "placeholders": [
         "%c",
+        "%s",
         "%c",
-        "%d",
-        "%s"
+        "%d"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
       "translation": "%c%s 처치!%c\n경험치 %d\n",
@@ -614,8 +614,8 @@
       "sourceHash": "sha256:72cf40ab9d2f5257174164ec3ed7413e233fe9032e40ef32ff236b1c155e5212",
       "placeholders": [
         "%c",
-        "%c",
-        "%s"
+        "%s",
+        "%c"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
       "translation": "%c%s 처치!%c\n",
@@ -625,8 +625,8 @@
       "sourceHash": "sha256:f6ed654c17b9391d0e60e71c0dd6327304eb885770b5beb2e31d52d783065eb1",
       "placeholders": [
         "%c",
-        "%c",
-        "%s"
+        "%s",
+        "%c"
       ],
       "sourceFile": "vendor/xu4/src/creature.cpp",
       "translation": "%c%s 도주 중!%c\n",
@@ -1589,10 +1589,10 @@
       "sourceHash": "sha256:fb28d1c3e4943743caea20f5e71c3ec5283a4072d3b16a9fc1d203aba55c750f",
       "placeholders": [
         "%c",
-        "%c",
         "%s",
         "%s",
-        "%s"
+        "%s",
+        "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
       "translation": "\n%c%s은(는) %s %s을(를) 사용할 수 없다%c\n",
@@ -1859,9 +1859,9 @@
       "sourceHash": "sha256:aac648bc878ad7987ce95909124633e5d8137ded49edf37f849225170bf82a30",
       "placeholders": [
         "%c",
-        "%c",
         "%s",
-        "%s"
+        "%s",
+        "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
       "translation": "\n%c%s은(는) %s을(를) 사용할 수 없다%c\n",
@@ -2013,8 +2013,8 @@
       "sourceHash": "sha256:087e1685f63f3c6dea0907b3bb3851d5eefe54366868838dc4f5eaa9117f6916",
       "placeholders": [
         "%c",
-        "%c",
-        "%d"
+        "%d",
+        "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
       "translation": "\n%c주문 %d개를 조합할 재료가 부족하다!%c\n",
@@ -2493,8 +2493,8 @@
       "sourceHash": "sha256:98dee79b8f35c502363dd454c815017fc172d59255aed1ee36b857c51e346ccf",
       "placeholders": [
         "%c",
-        "%c",
-        "%d"
+        "%d",
+        "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
       "translation": "\n%c%d개만 있으면 된다!%c\n",
@@ -2513,9 +2513,9 @@
       "sourceHash": "sha256:6459ad3ad3002cd6fb9dc99fe914a2d42e407ed05d3075d57fc161158e82a038",
       "placeholders": [
         "%c",
-        "%c",
+        "%s",
         "%d",
-        "%s"
+        "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
       "translation": "\n%c%s\n그대는 이제 레벨 %d이다%c\n",
@@ -2525,8 +2525,8 @@
       "sourceHash": "sha256:087e1685f63f3c6dea0907b3bb3851d5eefe54366868838dc4f5eaa9117f6916",
       "placeholders": [
         "%c",
-        "%c",
-        "%d"
+        "%d",
+        "%c"
       ],
       "sourceFile": "vendor/xu4/src/game.cpp",
       "translation": "\n%c주문 %d개를 조합할 재료가 부족하다!%c\n",
@@ -3879,8 +3879,8 @@
     "ui:stats:0": {
       "sourceHash": "sha256:62fd920703177005b813d33665820feebec9357007ad0a09e05a9fbcfd6695d1",
       "placeholders": [
-        "%02d",
-        "%04d"
+        "%04d",
+        "%02d"
       ],
       "sourceFile": "vendor/xu4/src/stats.cpp",
       "translation": "음식:%04d  선체:%02d",
@@ -3980,8 +3980,8 @@
       "sourceHash": "sha256:ff93532b91cc457eccd96e6701f82a50c5893059eaf1d98d03784cbfe3a8fdc8",
       "placeholders": [
         "%c",
-        "%c",
-        "%s"
+        "%s",
+        "%c"
       ],
       "sourceFile": "vendor/xu4/src/stats.cpp",
       "translation": "%c%s%c",
@@ -4031,8 +4031,8 @@
     "ui:stats:25": {
       "sourceHash": "sha256:c282e05b48927f285bc4ef5178b4cb86ead6ae93e5e2c7a73d1bd05f81a69088",
       "placeholders": [
-        "%02d",
-        "%c"
+        "%c",
+        "%02d"
       ],
       "sourceFile": "vendor/xu4/src/stats.cpp",
       "translation": "%c-%02d",

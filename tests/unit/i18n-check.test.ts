@@ -141,6 +141,34 @@ describe("i18n:check failure: placeholder mismatch", () => {
   })
 })
 
+describe("i18n:check placeholder order", () => {
+  function orderedSchema(translation: string) {
+    const schema = baseSchema()
+    schema.ui.entries["ui:game:1"].placeholders = ["%s", "%d"]
+    schema.ui.entries["ui:game:1"].translation = translation
+    return schema
+  }
+
+  it("rejects a translation that swaps the recorded placeholder order", () => {
+    const result = runCheck(writeFixture(orderedSchema("%d 골드 %s")))
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("ui:game:1")
+    expect(result.stderr).toContain("placeholder mismatch")
+  })
+
+  it("accepts a translation with the recorded placeholder order", () => {
+    const result = runCheck(writeFixture(orderedSchema("%s 금 %d")))
+    expect(result.status, result.stderr).toBe(0)
+  })
+})
+
+describe("committed locales: placeholder order", () => {
+  it("every recorded placeholder signature is ordered and every translation matches it (no .local needed)", () => {
+    const result = spawnSync("node", [scriptPath, "--strict"], { cwd: projectRoot, encoding: "utf8" })
+    expect(result.status, result.stderr).toBe(0)
+  })
+})
+
 describe("i18n:check failure: over-wide status string", () => {
   it("fails with the exact key when a status-line translation exceeds the column budget", () => {
     const schema = baseSchema()

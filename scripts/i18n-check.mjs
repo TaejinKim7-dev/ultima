@@ -55,7 +55,7 @@ function checkTranslatableFile(fileId, data, strict, failures) {
     const placeholders = Array.isArray(entry.placeholders) ? entry.placeholders : []
     if (placeholders.length > 0 && !placeholdersEqual(placeholders, translation)) {
       failures.push(
-        `${label}: placeholder mismatch -- source expects [${placeholders.join(", ")}], ` +
+        `${label}: placeholder mismatch -- source expects (in order) [${placeholders.join(", ")}], ` +
           `translation has [${extractPlaceholders(translation).join(", ")}]`
       )
       continue

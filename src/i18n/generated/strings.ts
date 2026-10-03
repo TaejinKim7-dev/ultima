@@ -133,10 +133,10 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
   "ui:combat:10": {
     "translation": "\n%s %c%s 명중%c!\n",
     "placeholders": [
-      "%c",
+      "%s",
       "%c",
       "%s",
-      "%s"
+      "%c"
     ]
   },
   "ui:combat:11": {
@@ -264,11 +264,11 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "placeholders": [
       "%.1X",
       "%.1X",
+      "%.3d",
       "%.1X",
       "%.1X",
       "%.1X",
-      "%.1X",
-      "%.3d"
+      "%.1X"
     ]
   },
   "ui:combat:32": {
@@ -341,8 +341,8 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "\n%c%s 처치!%c\n",
     "placeholders": [
       "%c",
-      "%c",
-      "%s"
+      "%s",
+      "%c"
     ]
   },
   "ui:combat:6": {
@@ -372,8 +372,8 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "\n%c%s 도주!%c\n",
     "placeholders": [
       "%c",
-      "%c",
-      "%s"
+      "%s",
+      "%c"
     ]
   },
   "ui:creature:2": {
@@ -386,25 +386,25 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "%c%s 처치!%c\n경험치 %d\n",
     "placeholders": [
       "%c",
+      "%s",
       "%c",
-      "%d",
-      "%s"
+      "%d"
     ]
   },
   "ui:creature:4": {
     "translation": "%c%s 처치!%c\n",
     "placeholders": [
       "%c",
-      "%c",
-      "%s"
+      "%s",
+      "%c"
     ]
   },
   "ui:creature:5": {
     "translation": "%c%s 도주 중!%c\n",
     "placeholders": [
       "%c",
-      "%c",
-      "%s"
+      "%s",
+      "%c"
     ]
   },
   "ui:creature:6": {
@@ -1003,10 +1003,10 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "\n%c%s은(는) %s %s을(를) 사용할 수 없다%c\n",
     "placeholders": [
       "%c",
-      "%c",
       "%s",
       "%s",
-      "%s"
+      "%s",
+      "%c"
     ]
   },
   "ui:game:141": {
@@ -1164,9 +1164,9 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "\n%c%s은(는) %s을(를) 사용할 수 없다%c\n",
     "placeholders": [
       "%c",
-      "%c",
       "%s",
-      "%s"
+      "%s",
+      "%c"
     ]
   },
   "ui:game:171": {
@@ -1261,8 +1261,8 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "\n%c주문 %d개를 조합할 재료가 부족하다!%c\n",
     "placeholders": [
       "%c",
-      "%c",
-      "%d"
+      "%d",
+      "%c"
     ]
   },
   "ui:game:189": {
@@ -1548,8 +1548,8 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "\n%c%d개만 있으면 된다!%c\n",
     "placeholders": [
       "%c",
-      "%c",
-      "%d"
+      "%d",
+      "%c"
     ]
   },
   "ui:game:69": {
@@ -1562,17 +1562,17 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "\n%c%s\n그대는 이제 레벨 %d이다%c\n",
     "placeholders": [
       "%c",
-      "%c",
+      "%s",
       "%d",
-      "%s"
+      "%c"
     ]
   },
   "ui:game:70": {
     "translation": "\n%c주문 %d개를 조합할 재료가 부족하다!%c\n",
     "placeholders": [
       "%c",
-      "%c",
-      "%d"
+      "%d",
+      "%c"
     ]
   },
   "ui:game:71": {
@@ -2380,8 +2380,8 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
   "ui:stats:0": {
     "translation": "음식:%04d  선체:%02d",
     "placeholders": [
-      "%02d",
-      "%04d"
+      "%04d",
+      "%02d"
     ]
   },
   "ui:stats:1": {
@@ -2445,8 +2445,8 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "%c%s%c",
     "placeholders": [
       "%c",
-      "%c",
-      "%s"
+      "%s",
+      "%c"
     ]
   },
   "ui:stats:20": {
@@ -2478,8 +2478,8 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
   "ui:stats:25": {
     "translation": "%c-%02d",
     "placeholders": [
-      "%02d",
-      "%c"
+      "%c",
+      "%02d"
     ]
   },
   "ui:stats:3": {
