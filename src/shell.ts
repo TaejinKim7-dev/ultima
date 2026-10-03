@@ -34,7 +34,7 @@ import {
   hasTranslation,
   isCommandKeyId,
   resolveDisplayText,
-  resolveModuleNameId,
+  resolveNameArgumentId,
   resolveTalkTemplateId,
   resolveUiTemplateId,
   resolveVendorNameId,
@@ -718,6 +718,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
   const onMiss = (miss: CoverageMiss): void => sharedCoverage.record(miss)
   const talkDeps: TalkComposeDeps = {
     templateId: (literal) => resolveTalkTemplateId(literal),
+    nameId: resolveNameArgumentId,
     resolve: measuredResolve,
     onMiss
   }
@@ -732,7 +733,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
     {
       templateId: resolveUiTemplateId,
       resolve: measuredResolve,
-      moduleNameId: resolveModuleNameId,
+      moduleNameId: resolveNameArgumentId,
       onMiss
     },
     (text) => {

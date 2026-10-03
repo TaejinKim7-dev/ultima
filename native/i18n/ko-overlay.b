@@ -2390,6 +2390,7 @@ ko-translations: [
 물어보게,
 더 많이
 안다네!"
+  join-fallback-experienced: "경험"
   LCB:0:health: "좋다네."
   LCB:0:job: "나는 도울 수
 있다네."
@@ -5860,6 +5861,7 @@ M'F\"에서
 알았네."
   principle-courage: "용기"
   principle-love: "사랑"
+  principle-pride: "오만"
   principle-truth: "진실"
   reagent-black-pearl: "흑진주"
   reagent-blood-moss: "핏빛이끼"
@@ -6644,10 +6646,19 @@ L'A\"에서
   SKARA:9:yes: "마법 화살은
 재 1조각만
 필요하다네!"
+  term-abyss: "심연"
+  term-ankh: "앙크"
   term-avatar: "아바타"
+  term-britannia: "브리타니아"
   term-codex: "코덱스"
   term-companion: "동료"
+  term-exodus: "엑소더스"
+  term-heal: "치유"
+  term-help: "도움"
   term-mantra: "진언"
+  term-minax: "미낙스"
+  term-mondain: "몬데인"
+  term-quest: "사명"
   term-rune: "룬"
   term-shrine: "신단"
   term-virtue: "미덕"
@@ -8866,6 +8877,14 @@ A-P로 표시된
 잘 비추지
 못할
 걸세!"
+  virtue-adjective-compassionate: "자비로움"
+  virtue-adjective-honest: "정직함"
+  virtue-adjective-honorable: "명예로움"
+  virtue-adjective-humble: "겸손함"
+  virtue-adjective-just: "공정함"
+  virtue-adjective-sacrificial: "희생적임"
+  virtue-adjective-spiritual: "영적임"
+  virtue-adjective-valiant: "용맹함"
   virtue-compassion: "자비"
   virtue-honesty: "정직"
   virtue-honor: "명예"

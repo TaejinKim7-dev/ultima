@@ -1,6 +1,12 @@
 {
   "$schema": "ultima-web/i18n-schema/glossary/v1",
   "entries": {
+    "join-fallback-experienced": {
+      "sourceHash": "sha256:3d486fe5bc88e9b66c18509b0d8b17bdc16e5d8e426a4afb5e3c16c7c7be97be",
+      "placeholders": [],
+      "translation": "경험",
+      "status": "ready"
+    },
     "principle-courage": {
       "sourceHash": "sha256:c2bd645a5905bf7c47c926982cff59e2d49a592bb0d073c80ee273b9d827ef8c",
       "placeholders": [],
@@ -167,6 +173,54 @@
       "sourceHash": "sha256:d755c96e2fd4711c78a16d0bdd30ac2e5bc064046b692aca388c7b97ea61fadf",
       "placeholders": [],
       "translation": "미덕",
+      "status": "ready"
+    },
+    "virtue-adjective-compassionate": {
+      "sourceHash": "sha256:22ed0a6501b892bf2657ffdf2a009d503cfd234fa5227b19bb5af1ae9e0a76ce",
+      "placeholders": [],
+      "translation": "자비로움",
+      "status": "ready"
+    },
+    "virtue-adjective-honest": {
+      "sourceHash": "sha256:bf5b6382c2ea46ede3117c0250a9abf431ddf38fca4d50462e5834d09b1b33ef",
+      "placeholders": [],
+      "translation": "정직함",
+      "status": "ready"
+    },
+    "virtue-adjective-honorable": {
+      "sourceHash": "sha256:6c1970d8d12c4c1f859340061043059baaea6d2b6feaffbd7a2b38fd03a64f25",
+      "placeholders": [],
+      "translation": "명예로움",
+      "status": "ready"
+    },
+    "virtue-adjective-humble": {
+      "sourceHash": "sha256:851d3fcf9fe60976956b0b644f56f852045435b42cc1797d5a4cc347e40bfae3",
+      "placeholders": [],
+      "translation": "겸손함",
+      "status": "ready"
+    },
+    "virtue-adjective-just": {
+      "sourceHash": "sha256:b2c66dfd45dd07f58d2246b695660b220ee429c6a8ba95f27e4c57f02e9d6ac8",
+      "placeholders": [],
+      "translation": "공정함",
+      "status": "ready"
+    },
+    "virtue-adjective-sacrificial": {
+      "sourceHash": "sha256:6e468193424cce4028c3b365033b709c506e26cde868df2e9dc003a3273b475c",
+      "placeholders": [],
+      "translation": "희생적임",
+      "status": "ready"
+    },
+    "virtue-adjective-spiritual": {
+      "sourceHash": "sha256:908d6f7546387f24934e1f48b28941872264f6719cb940cc43b0cc439a1edcbe",
+      "placeholders": [],
+      "translation": "영적임",
+      "status": "ready"
+    },
+    "virtue-adjective-valiant": {
+      "sourceHash": "sha256:80910374ca91ed92c61643d514585b5ee28e23f480be994e55c85947ec8f00f1",
+      "placeholders": [],
+      "translation": "용맹함",
       "status": "ready"
     },
     "virtue-compassion": {

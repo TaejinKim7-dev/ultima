@@ -18581,12 +18581,20 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "죽음을\n맛봐라,\n쓰레기\n같은 놈!",
     "placeholders": []
   },
+  "join-fallback-experienced": {
+    "translation": "경험",
+    "placeholders": []
+  },
   "principle-courage": {
     "translation": "용기",
     "placeholders": []
   },
   "principle-love": {
     "translation": "사랑",
+    "placeholders": []
+  },
+  "principle-pride": {
+    "translation": "오만",
     "placeholders": []
   },
   "principle-truth": {
@@ -18625,8 +18633,20 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "유황재",
     "placeholders": []
   },
+  "term-abyss": {
+    "translation": "심연",
+    "placeholders": []
+  },
+  "term-ankh": {
+    "translation": "앙크",
+    "placeholders": []
+  },
   "term-avatar": {
     "translation": "아바타",
+    "placeholders": []
+  },
+  "term-britannia": {
+    "translation": "브리타니아",
     "placeholders": []
   },
   "term-codex": {
@@ -18637,8 +18657,32 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "동료",
     "placeholders": []
   },
+  "term-exodus": {
+    "translation": "엑소더스",
+    "placeholders": []
+  },
+  "term-heal": {
+    "translation": "치유",
+    "placeholders": []
+  },
+  "term-help": {
+    "translation": "도움",
+    "placeholders": []
+  },
   "term-mantra": {
     "translation": "진언",
+    "placeholders": []
+  },
+  "term-minax": {
+    "translation": "미낙스",
+    "placeholders": []
+  },
+  "term-mondain": {
+    "translation": "몬데인",
+    "placeholders": []
+  },
+  "term-quest": {
+    "translation": "사명",
     "placeholders": []
   },
   "term-rune": {
@@ -18651,6 +18695,38 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
   },
   "term-virtue": {
     "translation": "미덕",
+    "placeholders": []
+  },
+  "virtue-adjective-compassionate": {
+    "translation": "자비로움",
+    "placeholders": []
+  },
+  "virtue-adjective-honest": {
+    "translation": "정직함",
+    "placeholders": []
+  },
+  "virtue-adjective-honorable": {
+    "translation": "명예로움",
+    "placeholders": []
+  },
+  "virtue-adjective-humble": {
+    "translation": "겸손함",
+    "placeholders": []
+  },
+  "virtue-adjective-just": {
+    "translation": "공정함",
+    "placeholders": []
+  },
+  "virtue-adjective-sacrificial": {
+    "translation": "희생적임",
+    "placeholders": []
+  },
+  "virtue-adjective-spiritual": {
+    "translation": "영적임",
+    "placeholders": []
+  },
+  "virtue-adjective-valiant": {
+    "translation": "용맹함",
     "placeholders": []
   },
   "virtue-compassion": {
@@ -18739,6 +18815,98 @@ export const GENERATED_ALIASES: Record<string, GeneratedAliasEntry> = {
   "alias:choice-b": {
     "alias": "나",
     "canonical": "choiceB"
+  },
+  "alias:truth": {
+    "alias": "진실",
+    "canonical": "truth"
+  },
+  "alias:love": {
+    "alias": "사랑",
+    "canonical": "love"
+  },
+  "alias:courage": {
+    "alias": "용기",
+    "canonical": "courage"
+  },
+  "alias:honesty": {
+    "alias": "정직",
+    "canonical": "honesty"
+  },
+  "alias:compassion": {
+    "alias": "자비",
+    "canonical": "compassion"
+  },
+  "alias:valor": {
+    "alias": "용맹",
+    "canonical": "valor"
+  },
+  "alias:justice": {
+    "alias": "정의",
+    "canonical": "justice"
+  },
+  "alias:sacrifice": {
+    "alias": "희생",
+    "canonical": "sacrifice"
+  },
+  "alias:honor": {
+    "alias": "명예",
+    "canonical": "honor"
+  },
+  "alias:spirituality": {
+    "alias": "영성",
+    "canonical": "spirituality"
+  },
+  "alias:humility": {
+    "alias": "겸손",
+    "canonical": "humility"
+  },
+  "alias:virtue": {
+    "alias": "미덕",
+    "canonical": "virtue"
+  },
+  "alias:pride": {
+    "alias": "오만",
+    "canonical": "pride"
+  },
+  "alias:avatar": {
+    "alias": "아바타",
+    "canonical": "avatar"
+  },
+  "alias:quest": {
+    "alias": "사명",
+    "canonical": "quest"
+  },
+  "alias:britannia": {
+    "alias": "브리타니아",
+    "canonical": "britannia"
+  },
+  "alias:ankh": {
+    "alias": "앙크",
+    "canonical": "ankh"
+  },
+  "alias:abyss": {
+    "alias": "심연",
+    "canonical": "abyss"
+  },
+  "alias:mondain": {
+    "alias": "몬데인",
+    "canonical": "mondain"
+  },
+  "alias:minax": {
+    "alias": "미낙스",
+    "canonical": "minax"
+  },
+  "alias:exodus": {
+    "alias": "엑소더스",
+    "canonical": "exodus"
+  },
+  "alias:help": {
+    "alias": "도움",
+    "canonical": "help"
+  },
+  "alias:heal": {
+    "alias": "치유",
+    "canonical": "heal"
   }
 }
 
@@ -20056,6 +20224,19 @@ export const GENERATED_MODULE_NAMES: Readonly<Record<string, string>> = {
   "Honor": "module:Ultima-IV:maps:133",
   "Spirituality": "module:Ultima-IV:maps:135",
   "Humility": "module:Ultima-IV:maps:137"
+}
+
+// Todo 39: English `%s` argument word that is not a module name (virtue adjectives, ...) -> glossary id.
+export const GENERATED_ARGUMENT_NAMES: Readonly<Record<string, string>> = {
+  "honest": "virtue-adjective-honest",
+  "compassionate": "virtue-adjective-compassionate",
+  "valiant": "virtue-adjective-valiant",
+  "just": "virtue-adjective-just",
+  "sacrificial": "virtue-adjective-sacrificial",
+  "honorable": "virtue-adjective-honorable",
+  "spiritual": "virtue-adjective-spiritual",
+  "humble": "virtue-adjective-humble",
+  "experienced": "join-fallback-experienced"
 }
 
 // Todo 25: FNV-1a hash of a vendors.b template's runtime bytes (web-say) -> Korean runtime text.

@@ -21,16 +21,29 @@ export interface TalkComposeDeps {
   templateId(literal: string): string | undefined
   /** Resolves an id to Korean, returning `fallback` when no translation is ready. */
   resolve(id: string, fallback: string): string
+  /**
+   * Todo 39: maps an English non-TLK `%s` argument (a virtue adjective, the
+   * join refusal's fallback word) to its translation id. Optional: without it
+   * such an argument passes through as-is.
+   */
+  nameId?(text: string): string | undefined
   /** Todo 38: optional measurement hook (hashes/ids only); never changes the composed text. */
   onMiss?: (miss: CoverageMiss) => void
 }
 
-function resolveArgument(arg: string | null, deps: TalkComposeDeps): string {
+function resolveArgument(arg: string | null, position: number, templateId: string | undefined, deps: TalkComposeDeps): string {
   if (arg === null) {
     return ""
   }
   if (arg.startsWith(TLK_ID_PREFIX)) {
     return deps.resolve(arg.slice(TLK_ID_PREFIX.length), MISSING_TLK_TRANSLATION)
+  }
+  const nameId = deps.nameId?.(arg)
+  if (nameId !== undefined) {
+    return deps.resolve(nameId, arg)
+  }
+  if (arg !== "" && templateId !== undefined) {
+    deps.onMiss?.({ kind: "arg-passthrough", id: templateId, position, argHash: hashText(arg) })
   }
   return arg
 }
@@ -49,7 +62,7 @@ export function composeTalkLine(format: string, args: readonly (string | null)[]
   const template = id === undefined ? format : deps.resolve(id, format)
   return substitute(
     template,
-    args.map((arg) => resolveArgument(arg, deps))
+    args.map((arg, position) => resolveArgument(arg, position, id, deps))
   )
 }
 
