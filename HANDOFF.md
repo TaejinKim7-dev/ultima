@@ -1,11 +1,11 @@
 # HANDOFF
-작성 시각: 2026-10-03 KST (12차 — Todo 44 완료, 49/50) · 세션 재개용 요약
+작성 시각: 2026-10-03 KST (13차 — Todo 47 완료, 50/51) · 세션 재개용 요약
 
 ## 1. 목표 (What we're building)
 - Ultima IV(xu4)를 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식한다. 사용자가 원본 `ultima4.zip`을 직접 선택하고, 실제 플레이 화면은 한국어로 나온다. 진행 기준은 `plan.md`, 세부 정의 원본은 `.omo/plans/ultima-web.md`다.
 
 ## 2. 현재 상태 (Current state)
-- 37/37 완료 뒤 Todo 34~44를 추가해 **진행률 49/50 = 98.0%**다. 계획서 체크박스는 `[x]` 37, `[ ]` 11이다(직접 grep으로 셈).
+- 37/37 완료 뒤 Todo 34~44를 추가해 **진행률 50/51 = 98.0%**다. 계획서 체크박스는 `[x]` 37, `[ ]` 11이다(직접 grep으로 셈).
 - 배포 확인(이번 세션 직접 관측): `origin/main` `6ee20fd` 기준 Pages CI run `37083380136`의 build와 deploy가 success였다. `https://taejinkim7-dev.github.io/ultima/`와 `/engine/xu4.wasm`이 둘 다 HTTP 200이다. Pages API의 `build_type`은 `workflow`다(이전 HANDOFF의 "Pages 설정 확인 필요"는 해소됨).
 - 이번 세션은 **문서·계획만** 바꿨다. 제품 코드 변경은 0이다.
 - 브랜치: `chore-translation-policy-a`(`b373110`)를 main에 fast-forward했다. main은 origin보다 1커밋 앞선다(push는 이 HANDOFF 커밋과 함께 진행).
@@ -64,3 +64,5 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integ
 - **테스트 실행 규칙(사용자 지시)**: 모든 테스트·게이트는 `model: haiku` 서브에이전트에 시키고 보고를 읽는다. 메모리 `feedback_tests_via_haiku`, AGENTS.md 참고.
 
 - 증거 요약 문서는 `docs/release-evidence/`(색인 README)에 있다. 스크린샷·전체 로그는 로컬 `.omo/evidence/`에만 있다.
+
+- 2026-10-04: Todo 47(사용자 요청) 완료 — 넓은 화면에서 한국어 대화 패널·입력창이 게임 오른쪽 컬럼, 커서키가 페이지/패널을 스크롤하지 않음. 통합 게이트 61/61, Firefox·WebKit 14/14. 남은 것은 Todo 43(사용자 결정)뿐.

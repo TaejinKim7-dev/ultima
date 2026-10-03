@@ -1963,3 +1963,25 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
 - 사용자 요청("모두 올려")으로 로컬 전용이던 증거 중 **영어 원문·원본 데이터가 없는 문서**를 `docs/release-evidence/`로 옮겼다: F1·F4 보강 문서, Todo 38 계측 보고서, Todo 45 재측정 보고서와 호출 지점 분류, 작은 측정 로그 묶음(`task-metrics.md`), 색인 `README.md`. 올리기 전 따옴표로 둘러싼 영어 구절을 검색해 xu4 프롬프트 한 곳을 설명문으로 바꿨고, 나머지는 해시·`file:line`·카운트·내가 쓴 설명뿐임을 확인했다.
 - **올리지 않은 것**: 스크린샷, Playwright trace, 전체 e2e/게이트 로그, RED/GREEN 로그(로컬 `.omo/evidence/`), 비공개 영어 인벤토리(`.local/`). `.omo/evidence/`는 계속 git-ignored.
 - 에이전트 상태 메모: `ListAgents`에 서브에이전트 2개(`completed`)가 보이나 실제 테스트·서버 프로세스는 없음(확인함).
+
+---
+
+## 2026-10-04 — Todo 47 완료: 한국어 대화 패널을 오른쪽 컬럼으로 + 커서키 스크롤 차단 (50/51 = 98.0%)
+
+> append만 한다. 증거(로컬) `.omo/evidence/ultima-web/task-47/`.
+
+- **사용자 요청 (2026-10-03)**: 웹에서 테스트해 보니 게임 창 아래 한국어 내용이 커서키에 따라 보였다 안 보였다 함 → 오른쪽 컬럼으로 옮겨 달라.
+- **원인 (확인함)**: Emscripten GLFW(`emsdk src/lib/libglfw.js` onKeydown)는 Backspace·Tab만 `preventDefault()`한다. 그래서 커서키가 게임에 전달되는 동시에 브라우저 기본 동작으로 페이지(캔버스 최소 640×400 + 아래 패널로 창보다 큼)를 스크롤했고, 프롬프트 마커에 포커스가 있으면 패널 자체를 스크롤했다. e2e RED에서 실측: ↓ 키가 페이지를 120px, ↑ 키가 패널을 120px 스크롤.
+- **수정 (`7addd9a`)**:
+  - 화면 폭 1000px 이상: `#dialogue-panel`과 한글 입력창을 `#side-column`(오른쪽 컬럼)으로. 높이는 게임 화면과 같음(`contain: size` + stretch), 긴 기록은 패널 안에서 스크롤. 1000px 미만은 기존처럼 아래에 쌓임. `src/shell.css`, `index.html`.
+  - `src/input/scroll-keys.ts`(순수 함수) + `src/shell.ts` window 캡처 리스너: 편집 가능한 요소 밖에서 커서키 4개의 기본 동작만 막음. 전파는 막지 않아 게임은 키를 그대로 받고, 한글 입력창 안에서는 커서 이동 유지.
+  - 계획서 Must have 4에 사용자 결정 주석, Todo 47 신설(분모 51).
+- **검증 (테스트는 Haiku 실행)**:
+  - 단위 `scroll-keys` RED(모듈 없음) → GREEN, 전체 56 files/680 tests.
+  - e2e `dialogue-side-column` RED(4 fail/2 pass) → GREEN 6/6. `dialogue-panel`·`status-overlay` 포함 14/14.
+  - 실제 엔진 회귀(`korean-focus-return`·`korean-npc-alias`·`korean-status-overlay`) 4/4 — 커서키로 아바타 이동 유지 확인.
+  - **통합 게이트 `npm run verify:integration`(완전 단독, 포트 4740)**: 13단계 전부 exit 0, e2e **61 passed (55.6m)**, `ERR_CONNECTION_REFUSED` 0건, `# verify:integration 2026-10-03T15:13:43Z PASS`, `EXIT=0`.
+  - Firefox 14/14 (8.4s), WebKit 14/14 (8.1s).
+  - 레이아웃 스크린샷(로컬) `task-47/side-column-1280x720.png`을 직접 열어 오른쪽 컬럼 배치를 확인.
+- 막지 않은 키: Space(게임 명령이라 keydown 기본 동작을 막으면 keypress가 사라짐), PageUp/PageDown/Home/End. 이 키들은 여전히 페이지를 스크롤할 수 있다.
+- 남은 것: Todo 43(개조 범위, 사용자 결정). 사용자 확인: 배포본에서 오른쪽 컬럼 배치와 커서키 동작.
