@@ -1783,3 +1783,35 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md   # 0
 - 갭 #7(크리처 이름 영어)은 `module.json`에 Rat·Mage 번역이 있어 실제 노출 경로가 **확인 필요**다.
 - Todo 35의 포커스 반환 지연값은 close→reopen 간격을 실측한 뒤 정한다(확인 필요).
 - 루트 `/home/taejin/ultima`는 여전히 stale `f3-real-browser-qa`다. Todo 34 전까지 거기서 작업하지 않는다.
+
+---
+
+## 2026-10-03 — Todo 34 완료: 로컬 저장소·worktree 정리 (38/48 = 79.2%)
+
+> append만 한다. 제품 코드 변경 없음. 증거 `.omo/evidence/ultima-web/task-34/{before,after,removal,dirty-refused}.log`.
+
+### 한 일 (실제 실행·관측)
+- **worktree 27개 → 2개**: 제거 25개(전부 clean이거나 salvage 후), 남김 2개(main 작업용 `agent-ad52af6bd293aab90`, `agent-afa23aeeee7d82f43`=`todo-release-verify`). 후자는 해시 기준 main에 없는 커밋 2개지만 내용은 main의 `c69690e`·`cf9879a`로 반영돼 있다(보존).
+- **evidence 보존**: 27개 worktree의 `.omo/evidence/`를 루트로 합쳤다(경로별 최신본이 승, 다른 내용은 `.omo/research/archive-2026-10-03/evidence-variants/`에 553개 보관). 전체 sha256 합집합 1183개 중 누락 0. 루트 evidence 678개(675 + task-34 로그 3).
+- **dirty worktree 4개**는 `salvage/<branch>-2026-10-03` 브랜치에 커밋 후 제거(todo-12, 13, 24, 26). `.emsdk`·`node_modules` 심볼릭 링크 5개는 링크만 제거(대상은 보존).
+- **루트**: tracked 변경은 `salvage/root-stale-2026-10-03`(`eaecea8`)에 커밋, untracked(`goal.md`, `ultima-web.md`, `boulder.json`, 초안 3개, `.omo/{lazycodex-executor-verify,start-work,teams}`)는 `.omo/research/archive-2026-10-03/root-untracked/`로 이동. 루트 `.claude/settings.json`은 그대로 둠. 이후 루트를 `main`으로 전환·`pull --ff-only` → `fbc3b09`, origin과 일치.
+- **QA 실패 시나리오**: clean이 아닌 worktree의 `git worktree remove`가 exit 128로 거부됨(`dirty-refused.log`).
+- **룰 추가**: AGENTS.md에 "진행 → 저장 → 기록 → 확인" 단계 룰과 "테스트는 Haiku 서브에이전트가 실행" 지시를 명시.
+
+### merge 게이트 (Haiku 에이전트가 이 worktree에서 실행, 보고 기준)
+```
+npm ci                         # 0
+npm run test:unit              # 0 — 46 files / 569 tests
+npm run verify:repo-sources    # 0
+npm run typecheck              # 0
+npm run build                  # 0
+npm run check:build-fresh      # 0
+git diff --check               # 0 (직접 재확인도 0)
+npm run verify:release-docs    # 0
+cmp 계획서 두 벌                # 0 (직접 재확인도 0)
+```
+
+### 남은 것
+- 이 worktree(`agent-ad52af6bd293aab90`)는 main 병합 뒤 제거할 대상이지만, 새 작업 위치가 필요하다. Todo 35부터는 **루트 `/home/taejin/ultima`(main)** 에서 `todo-35-*` 브랜치로 작업한다.
+- 남긴 worktree `agent-afa23aeeee7d82f43`은 필요 없어지면 제거 가능(clean, 내용 반영됨).
+- 다음: Todo 35.

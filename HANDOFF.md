@@ -1,11 +1,11 @@
 # HANDOFF
-작성 시각: 2026-10-03 KST (6차 — 번역 공개 결정 기록 + 완료 후 웨이브 Todo 34~44 계획 편입) · 세션 재개용 요약
+작성 시각: 2026-10-03 KST (7차 — Todo 34 완료, 38/48) · 세션 재개용 요약
 
 ## 1. 목표 (What we're building)
 - Ultima IV(xu4)를 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식한다. 사용자가 원본 `ultima4.zip`을 직접 선택하고, 실제 플레이 화면은 한국어로 나온다. 진행 기준은 `plan.md`, 세부 정의 원본은 `.omo/plans/ultima-web.md`다.
 
 ## 2. 현재 상태 (Current state)
-- 37/37 완료 뒤 Todo 34~44를 추가해 **진행률 37/48 = 77.1%**다. 계획서 체크박스는 `[x]` 37, `[ ]` 11이다(직접 grep으로 셈).
+- 37/37 완료 뒤 Todo 34~44를 추가해 **진행률 38/48 = 79.2%**다. 계획서 체크박스는 `[x]` 37, `[ ]` 11이다(직접 grep으로 셈).
 - 배포 확인(이번 세션 직접 관측): `origin/main` `6ee20fd` 기준 Pages CI run `37083380136`의 build와 deploy가 success였다. `https://taejinkim7-dev.github.io/ultima/`와 `/engine/xu4.wasm`이 둘 다 HTTP 200이다. Pages API의 `build_type`은 `workflow`다(이전 HANDOFF의 "Pages 설정 확인 필요"는 해소됨).
 - 이번 세션은 **문서·계획만** 바꿨다. 제품 코드 변경은 0이다.
 - 브랜치: `chore-translation-policy-a`(`b373110`)를 main에 fast-forward했다. main은 origin보다 1커밋 앞선다(push는 이 HANDOFF 커밋과 함께 진행).
@@ -32,12 +32,13 @@
 - 개조(goal 우선순위 5)는 추천 기본값이 없다. 그래서 Todo 43은 제안서와 사용자 결정까지만 다룬다.
 
 ## 5. 다음 할 일 (Next steps)
-- [ ] **Todo 34** 로컬 저장소 정리. 루트를 main으로 옮기고, merge된 worktree를 회수한다(evidence를 `rsync --ignore-existing`로 보존, 브랜치 유지, dirty는 salvage 브랜치에 커밋). 미merge인 `todo-release-verify`는 남긴다. main을 잡은 `agent-ad52af6bd293aab90`은 마지막에 루트에서 제거한다.
-- [ ] Todo 35: 한국어 입력 후 포커스 반환(재현 RED부터) → 36 placeholder 순서 → 37 LB/Hawkwind alias → 38 계측 → 39 → 40 → 41 → 42 → 44 재검증. 43은 언제든 할 수 있다.
+- [x] **Todo 34** 로컬 저장소 정리 (완료 2026-10-03; 루트는 이제 main, worktree 27→2). 루트를 main으로 옮기고, merge된 worktree를 회수한다(evidence를 `rsync --ignore-existing`로 보존, 브랜치 유지, dirty는 salvage 브랜치에 커밋). 미merge인 `todo-release-verify`는 남긴다. main을 잡은 `agent-ad52af6bd293aab90`은 마지막에 루트에서 제거한다.
+- [ ] **다음: Todo 35**(루트 `/home/taejin/ultima`에서 `todo-35-*` 브랜치): 한국어 입력 후 포커스 반환(재현 RED부터) → 36 placeholder 순서 → 37 LB/Hawkwind alias → 38 계측 → 39 → 40 → 41 → 42 → 44 재검증. 43은 언제든 할 수 있다.
 - 세부 정의(What to do / Must NOT / References / Acceptance / QA)는 `.omo/plans/ultima-web.md` Todo 34~44에 있다.
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
-- 루트 `/home/taejin/ultima`는 **stale**이다. `f3-real-browser-qa`, origin/main보다 76커밋 뒤에 있고 dirty다. Todo 34 전까지 거기서 작업하거나 판단하지 않는다. 루트의 `.claude/`는 worktree 저장소이므로 지우면 안 된다.
+- (해소됨, Todo 34) 예전에 루트는 stale이었다. 지금은 main이며 clean이다. 이전 상태는 `salvage/root-stale-2026-10-03`.
+- ~~루트 `/home/taejin/ultima`는 **stale**이다. `f3-real-browser-qa`, origin/main보다 76커밋 뒤에 있고 dirty다. Todo 34 전까지 거기서 작업하거나 판단하지 않는다. 루트의 `.claude/`는 worktree 저장소이므로 지우면 안 된다.
 - main은 worktree `agent-ad52af6bd293aab90`에 체크아웃돼 있어서 루트에서 `git switch main`이 안 된다.
 - F1~F4 승인은 37단계 범위 기준이다. 34~44 범위 재검증은 Todo 44가 맡는다. 체크마크를 그대로 이어받지 않는다.
 - 이번 변경은 문서뿐이라 `verify:integration`(e2e)은 실행하지 않았다. Todo 35부터는 merge 전 **단독** 실행이 필수다.
@@ -59,3 +60,5 @@ sed -n '/^- \[ \] 34\./,/^- \[ \] 35\./p' .omo/plans/ultima-web.md
 source .emsdk/emsdk_env.sh
 ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integration
 ```
+
+- **테스트 실행 규칙(사용자 지시)**: 모든 테스트·게이트는 `model: haiku` 서브에이전트에 시키고 보고를 읽는다. 메모리 `feedback_tests_via_haiku`, AGENTS.md 참고.

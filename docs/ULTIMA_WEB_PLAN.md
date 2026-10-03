@@ -457,7 +457,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 > - **Serialization.** These pairs edit the same files and must not run in parallel: 35, 38 and 42 (`src/shell.ts`); 36, 39 and 40 (`scripts/i18n-*.mjs` and `src/i18n/generated/`).
 > - **Rules for every Todo.** Work on a `todo-<n>-<topic>` branch. Write the RED log before GREEN. Pass the AGENTS.md merge gate, and run `npm run verify:integration` completely solo before merging to `main`. Never put English original text (TLK or binary) or raw `%s` arguments into JSON, generated tables, logs or evidence.
 
-- [ ] 34. Clean up the local repository state (root checkout, retired worktrees, stale drafts)
+- [x] 34. Clean up the local repository state (root checkout, retired worktrees, stale drafts)
   What to do / Must NOT do: snapshot on 2026-10-03.
   - The root checkout `/home/taejin/ultima` sits on the stale branch `f3-real-browser-qa`, 76 commits behind `origin/main`.
   - Its tracked changes are old copies: `handoff.md` and `playwright.config.ts` differ from `main`, and the other modified files are byte-identical to `main`.

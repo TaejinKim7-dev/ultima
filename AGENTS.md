@@ -60,7 +60,7 @@
 
 1. **저장**: 작업을 커밋으로 남긴다(feature branch). 작업 트리에만 있는 변경은 저장된 것이 아니다. 끝까지 못 간 작업도 WIP 커밋이나 salvage 브랜치로 남긴다.
 2. **기록**: 무엇을 했고 무엇을 관측했는지 적는다. 작은 단계마다 `HANDOFF.md`를 갱신한다(`handoff` 스킬). 단계가 끝나면 `plan.md`(상태·진행률·바로 다음 순서), 계획서 두 벌 체크박스, `handoff.md`(실행한 명령과 exit code)를 갱신한다.
-3. **확인**: 기록한 내용이 사실인지 실제 명령으로 검증한다. 테스트·게이트의 exit code, `git status`/`git log`, `cmp` 같은 관측 결과가 근거다. 검증하지 못한 것은 "확인 필요"로 남기고 완료로 쓰지 않는다.
+3. **확인**: 기록한 내용이 사실인지 실제 명령으로 검증한다. **테스트·게이트 실행은 항상 Haiku 모델 서브에이전트(`model: "haiku"`)에게 시킨다(사용자 지시, 2026-10-03).** 메인 모델은 그 보고(exit code, 실패 출력)를 읽고 의심스러우면 `git status` 같은 관측으로 재확인한다. 테스트·게이트의 exit code, `git status`/`git log`, `cmp` 같은 관측 결과가 근거다. 검증하지 못한 것은 "확인 필요"로 남기고 완료로 쓰지 않는다.
 
 - 진행 기준 문서는 루트 `plan.md`다. 전체 단계 수는 `.omo/plans/ultima-web.md`의 Todo 개수 + F1~F4다 — 새 Todo가 추가되면 이 수도 늘어난다. 진행률은 ✅ 단계 수 ÷ 전체 단계 수로 계산한다. 부분 진행(🟡)은 0으로 센다.
 - 단계 번호와 세부 정의(References/Acceptance/QA)의 원본은 `.omo/plans/ultima-web.md`다. `docs/ULTIMA_WEB_PLAN.md`는 그와 byte-identical하게 유지한다(`cmp`로 확인).
