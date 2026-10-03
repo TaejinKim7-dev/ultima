@@ -54,7 +54,7 @@ function unescapeC(raw) {
 /**
  * @param {{ cppSources: { file: string, text: string }[], vendorSource?: { file: string, text: string },
  *           moduleSources?: { file: string, text: string }[] }} input
- * @returns {{ ui: Map<string, {file:string,line:number}[]>, literal: Map<string, {file:string,line:number}[]>,
+ * @returns {{ formatOnly: Set<string>, ui: Map<string, {file:string,line:number}[]>, literal: Map<string, {file:string,line:number}[]>,
  *             vendor: Map<string, {file:string,line:number}[]> }}
  *   ui: screenMessage-style format literals; literal: any C/Boron string literal; vendor: vendors.b templates
  */
@@ -62,6 +62,7 @@ export function buildReverseMaps({ cppSources, vendorSource, moduleSources = [] 
   const ui = new Map()
   const literal = new Map()
   const vendor = new Map()
+  const formatOnly = new Set()
   for (const { file, text } of cppSources) {
     for (const entry of extractCppLiterals(text, REPORT_CPP_OPTIONS)) {
       pushUnique(ui, fnv1a32(entry.text), { file, line: lineOf(text, entry.offset) })
@@ -70,7 +71,11 @@ export function buildReverseMaps({ cppSources, vendorSource, moduleSources = [] 
     let match
     while ((match = ANY_C_LITERAL.exec(text)) !== null) {
       const value = unescapeC(match[1])
-      if (value.length > 0) pushUnique(literal, fnv1a32(value), { file, line: lineOf(text, match.index) })
+      if (value.length > 0) {
+        pushUnique(literal, fnv1a32(value), { file, line: lineOf(text, match.index) })
+        // "%s", "%c", "%s\n", "\n": nothing translatable in the format itself; the text rides in the arguments.
+        if (!/[A-Za-z]/.test(value.replace(/%[-+ #0-9.]*[a-zA-Z%]/g, ""))) formatOnly.add(fnv1a32(value))
+      }
     }
   }
   if (vendorSource !== undefined) {
@@ -87,7 +92,7 @@ export function buildReverseMaps({ cppSources, vendorSource, moduleSources = [] 
       if (entry.text.length > 0) pushUnique(literal, fnv1a32(entry.text), { file, line: lineOf(text, entry.offset) })
     }
   }
-  return { ui, literal, vendor }
+  return { ui, literal, vendor, formatOnly }
 }
 
 /** Sums snapshot counts per kind and key; `rejected` is summed too. */
@@ -135,7 +140,7 @@ function argHits(key, maps) {
 const GAPS = [
   { id: "#3", title: "virtue adjectives (getVirtueAdjective)", files: ["vendor/xu4/src/names.cpp"] },
   { id: "#5", title: "death / spell-failure messages", files: ["vendor/xu4/src/death.cpp", "vendor/xu4/src/spell.cpp"] },
-  { id: "#6", title: "entry messages (screenMessageCenter, cityTypeStr)", files: ["vendor/xu4/src/portal.cpp"] },
+  { id: "#6", title: "entry messages (screenMessageCenter, cityTypeStr)", files: [], idPrefix: "ui:portal:" },
   { id: "#7", title: "creature names in combat lines", files: ["vendor/xu4/module/Ultima-IV/config.b", "vendor/xu4/module/U4-Upgrade/config.b"] }
 ]
 
@@ -156,7 +161,14 @@ function gapRows(merged, maps) {
     for (const kind of ["ui-unmapped", "talk-unmapped"]) {
       for (const { key, count } of merged[kind]) consider(lookup(kind, key, maps)?.hits, count)
     }
-    for (const { key, count } of merged["arg-passthrough"]) consider(argHits(key, maps), count)
+    for (const { key, count } of merged["arg-passthrough"]) {
+      consider(argHits(key, maps), count)
+      if (gap.idPrefix !== undefined && key.startsWith(gap.idPrefix)) {
+        hits += 1
+        total += count
+        where.add(key)
+      }
+    }
     rows.push({ gap, hits, total, where: [...where].sort() })
   }
   return rows
@@ -190,7 +202,8 @@ export function renderReport(merged, maps, { specCount = 0, unavailableCount = 0
           unknown.push({ kind, key, count })
           out.push(`| ${key} | ${count} | UNKNOWN |`)
         } else {
-          out.push(`| ${key} | ${count} | ${locs(found.hits)} (${found.via}) |`)
+          const note = maps.formatOnly?.has(key) ? "; FORMAT-ONLY: the text rides in unmeasured args" : ""
+          out.push(`| ${key} | ${count} | ${locs(found.hits.slice(0, 4))}${found.hits.length > 4 ? ` (+${found.hits.length - 4} more)` : ""} (${found.via}${note}) |`)
         }
       }
       out.push("")
@@ -252,6 +265,8 @@ export function renderReport(merged, maps, { specCount = 0, unavailableCount = 0
     "- Screens no spec reaches: anything past what the e2e suite plays (late dungeons, Abyss, Codex, most combat).",
     "- `arg-passthrough` only sees `%s` arguments of known templates; text inside an unmapped template is counted once per hash, not per word.",
     "- A spec that opens a second page or reloads loses the earlier page's counters (one snapshot per test, taken at its end).",
+    "- A hash match is equality with an open-source literal; a short player-chosen name can coincide with one (so a match is a hint, not proof).",
+    "- Talk-channel (`composeTalkLine`) `%s` arguments that are not TLK ids (for example the virtue adjective) are not instrumented, so gap #3 is unobservable here.",
     "- Counts depend on which keys the suite happens to press; absence of a key is not proof of full Korean coverage.",
     ""
   )
