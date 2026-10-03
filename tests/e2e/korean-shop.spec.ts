@@ -347,3 +347,249 @@ test.describe("Todo 25: shop conversations shown in Korean in the dialogue panel
     expect(pageErrors, "the vendor hook must never surface an uncaught error").toEqual([])
   })
 })
+
+// ---------------------------------------------------------------------------
+// Todo 41: the remaining four vendor types (weapons, armour, reagents, inn).
+//
+// Shopkeeper roles come from vendor/xu4/module/Ultima-IV/maps.b (role N is
+// ULT NPC slot N-1) and the (x,y) positions from the original town maps, which
+// were inspected locally and never copied into the repo:
+//   Moonglow: reagents slot 23 at (5,25), pacing row 25 behind the sign rows
+//             24/26 -> talk Up from row 27;
+//             innkeeper slot 29 at (18,1), pacing row 1 behind sign row 2
+//             -> talk Up from row 3.
+//   Britain:  weapons slot 28 at (5,2) behind sign row 3 -> talk Up from row 4;
+//             armour slot 27 at (5,8) behind sign row 7 -> talk Down from row 6.
+// A town is entered at (1,15) (maps.b portals), so every route is dead
+// reckoning from there. Debug Mode "collision off" (the real Ctrl-C c cheat,
+// as in korean-castle-output.spec.ts) lets the route cross walls in straight
+// lines; the Ctrl-C i cheat gives gold so the buy flow is deterministic.
+// No test-only hooks: everything goes through the real keyboard.
+// ---------------------------------------------------------------------------
+const evidenceDir41 = join(repoRoot, ".omo/evidence/ultima-web/task-41")
+
+async function cheatKey(page: Page, key: string): Promise<void> {
+  await page.keyboard.down("Control")
+  await page.keyboard.press("c")
+  await page.keyboard.up("Control")
+  await page.waitForTimeout(800)
+  await pressKey(page, key, 800)
+}
+
+async function enterTownNoCollision(page: Page, townSubstring: string): Promise<void> {
+  await cheatKey(page, "i") // gold, so every buy offer takes the "how many" branch
+  await cheatKey(page, "g")
+  await typeAscii(page, townSubstring, 100)
+  await pressKey(page, "Enter", 1500)
+  await pressKey(page, "e", 2500)
+  await cheatKey(page, "c") // collision off
+}
+
+/** Korean translation of the vendors.b literal containing every fragment. */
+function koreanContainingAll(...fragments: string[]): string {
+  const literal = vendorLiterals.find((row) => fragments.every((fragment) => row.text.includes(fragment)))
+  if (literal === undefined) {
+    throw new Error(`fixture: no vendors.b literal contains all of ${JSON.stringify(fragments)}`)
+  }
+  return korean(literal.text)
+}
+
+// English vendors.b text that must never reach the panel. This module file is
+// open-source module text (not original game data); the fragments are derived
+// at run time and never written to a log.
+const englishVendorFragments: Array<{ fragment: string; literalIndex: number }> = []
+vendorLiterals.forEach((literal, literalIndex) => {
+  for (const raw of literal.text.split(/[@%$#=\n]/)) {
+    const fragment = raw.replace(/[{}]/g, "").replace(/\s+/g, "").toLowerCase()
+    if (fragment.length >= 8 && (fragment.match(/[a-z]/g) ?? []).length >= 6) {
+      englishVendorFragments.push({ fragment, literalIndex })
+    }
+  }
+})
+
+/** Indices (into vendors.b's literal list) of English fragments present in `delta`; the text itself is never logged. */
+function leakedEnglish(delta: string): number[] {
+  const lowered = delta.toLowerCase()
+  const indices = englishVendorFragments.filter(({ fragment }) => lowered.includes(fragment)).map(({ literalIndex }) => literalIndex)
+  return Array.from(new Set(indices)).sort((a, b) => a - b)
+}
+
+type VendorFlow = {
+  /** Evidence file stem. */
+  name: string
+  town: string
+  /** Walks from the town entry (1,15) to the first spot for talking. */
+  approach: Array<[key: string, steps: number]>
+  talkKey: string
+  sweep: readonly [string, string]
+  span: number
+  shopEnglish: string
+  ownerEnglish: string
+  welcomeFragment: string
+  /**
+   * vendors.b literal indices whose English is KNOWN to reach the panel today
+   * (an open bug, pinned exactly so a fix makes the test say "remove this").
+   */
+  knownLeaks?: number[]
+  /** Drives the shop dialogue after the welcome; returns the Korean templates that must have appeared. */
+  drive: (page: Page) => Promise<Array<{ label: string; template: string; numbers?: RegExp }>>
+}
+
+async function runVendorFlow(page: Page, flow: VendorFlow): Promise<void> {
+  const zipPath = process.env["ULTIMA4_DATA"]
+  test.skip(!zipPath || !existsSync(zipPath), "ULTIMA4_DATA not set to a verified original ultima4.zip")
+  const buffer = readFileSync(zipPath!)
+  const pageErrors: string[] = []
+  page.on("pageerror", (error) => pageErrors.push(error.message))
+
+  await startRealGame(page, buffer)
+  await enterTownNoCollision(page, flow.town)
+  for (const [key, steps] of flow.approach) {
+    await walk(page, key, steps)
+  }
+  await page.screenshot({ path: join(evidenceDir41, `${flow.name}-approach.png`) })
+
+  const base = await panelText(page)
+  await talkAcrossCounter(page, flow.talkKey, flow.sweep, flow.span, squash(korean(flow.shopEnglish)))
+  const sections = await flow.drive(page)
+  const full = await panelText(page)
+  await page.screenshot({ path: join(evidenceDir41, `${flow.name}-end.png`) })
+  expect(full.startsWith(base), "dialogue panel history was rewritten while the shop ran").toBe(true)
+  const delta = full.slice(base.length)
+
+  const log: string[] = []
+  const shop = squash(korean(flow.shopEnglish))
+  const owner = squash(korean(flow.ownerEnglish))
+  log.push(`shop name present: ${delta.includes(shop)}`)
+  log.push(`owner name present: ${delta.includes(owner)}`)
+  const expected = [{ label: "welcome", template: koreanContaining(flow.welcomeFragment) }, ...sections]
+  const failures: string[] = []
+  if (!delta.includes(shop)) failures.push("shop name not shown in Korean")
+  if (!delta.includes(owner)) failures.push("owner name not shown in Korean")
+  for (const section of expected) {
+    const parts = fixedFragments(section.template)
+    const missing = parts.filter((part) => !delta.includes(part))
+    log.push(`${section.label}: ${parts.length - missing.length}/${parts.length} Korean fragments present`)
+    if (missing.length > 0) failures.push(`${section.label}: missing Korean fragments ${JSON.stringify(missing)}`)
+    if ("numbers" in section && section.numbers !== undefined && !section.numbers.test(delta)) {
+      failures.push(`${section.label}: price numbers missing`)
+    }
+  }
+  const leaked = leakedEnglish(delta)
+  log.push(`english vendors.b fragments leaked into the panel: ${leaked.length} (vendors.b literal indices: ${leaked.join(",")})`)
+  writeFileSync(join(evidenceDir41, `${flow.name}.log`), log.join("\n") + "\n")
+  expect(failures, "Korean vendor lines missing from #dialogue-history").toEqual([])
+  expect(leaked, "engine-original English reached the dialogue panel (vendors.b literal indices)").toEqual(flow.knownLeaks ?? [])
+  expect(pageErrors, "the vendor hook must never surface an uncaught error").toEqual([])
+}
+
+test.describe("Todo 41: weapons, armour, reagent and inn vendors in Korean", () => {
+  test.beforeAll(() => {
+    mkdirSync(evidenceDir, { recursive: true })
+    mkdirSync(evidenceDir41, { recursive: true })
+  })
+
+  test("weapons vendor (Britain): welcome, priced line with the number, farewell", async ({ page }) => {
+    test.setTimeout(900_000)
+    await runVendorFlow(page, {
+      name: "weapons",
+      town: "britain",
+      approach: [["ArrowUp", 11], ["ArrowRight", 1]], // (1,15) -> (2,4)
+      talkKey: "ArrowUp",
+      sweep: ["ArrowRight", "ArrowLeft"],
+      span: 7,
+      shopEnglish: "Windsor Weaponry",
+      ownerEnglish: "Winston",
+      welcomeFragment: "Art thou here to",
+      drive: async (page) => {
+        await pressKey(page, "b", 2500) // Buy -> inventory
+        await pressKey(page, "b", 2500) // Staff (20 gp): the priced description
+        await pressKey(page, "Enter", 2500) // empty quantity
+        await pressKey(page, "n", 3000) // "anything else?" -> no -> farewell
+        return [
+          { label: "staff offer", template: koreanContaining("We are the only staff makers"), numbers: /20/ },
+          { label: "farewell", template: koreanContaining("Fare thee well!") }
+        ]
+      }
+    })
+  })
+
+  test("armour vendor (Britain): welcome, priced line with the number, farewell", async ({ page }) => {
+    test.setTimeout(900_000)
+    await runVendorFlow(page, {
+      name: "armour",
+      town: "britain",
+      approach: [["ArrowUp", 9], ["ArrowRight", 1]], // (1,15) -> (2,6)
+      talkKey: "ArrowDown",
+      sweep: ["ArrowRight", "ArrowLeft"],
+      span: 7,
+      shopEnglish: "Winsdor Armour",
+      ownerEnglish: "Winston",
+      welcomeFragment: "Want to Buy or",
+      drive: async (page) => {
+        await pressKey(page, "b", 2500) // Buy -> inventory
+        await pressKey(page, "b", 2500) // Cloth (50 gp): the priced description
+        await pressKey(page, "Enter", 2500)
+        await pressKey(page, "n", 3000)
+        return [
+          { label: "cloth offer", template: koreanContaining("Cloth Armour is good"), numbers: /50/ },
+          { label: "farewell", template: koreanContainingAll("Good Bye.", "says") }
+        ]
+      }
+    })
+  })
+
+  test("reagent vendor (Moonglow): welcome, priced line with the number, farewell", async ({ page }) => {
+    test.setTimeout(900_000)
+    await runVendorFlow(page, {
+      name: "reagents",
+      town: "moonglow",
+      approach: [["ArrowDown", 12], ["ArrowRight", 8]], // (1,15) -> (9,27)
+      talkKey: "ArrowUp",
+      sweep: ["ArrowLeft", "ArrowRight"],
+      span: 7,
+      shopEnglish: "Magical Herbs",
+      ownerEnglish: "Margot",
+      welcomeFragment: "Are you in need of Reagents",
+      // BUG found by this test (Todo 41), not fixed here (src/ is out of scope):
+      // the reagent inventory list (vendors.b literal 188) reaches the panel
+      // with its FIRST line in English while lines B..F are Korean. Unverified
+      // hypothesis: that line is looked up by item name, and vendors.b spells
+      // the item two ways. Remove this when the first line is translated.
+      knownLeaks: [188],
+      drive: async (page) => {
+        await pressKey(page, "y", 2500) // "Are you in need of Reagents?" -> inventory
+        await pressKey(page, "a", 2500) // first reagent, 2 gp: the priced offer
+        await pressKey(page, "Enter", 2500) // empty quantity
+        await pressKey(page, "n", 3000)
+        return [
+          { label: "reagent offer", template: koreanContaining("Very well, we sell"), numbers: /2/ },
+          { label: "farewell", template: koreanContaining("Perhaps another time") }
+        ]
+      }
+    })
+  })
+
+  test("inn (Moonglow): welcome, room offer with the price, and the Korean decline", async ({ page }) => {
+    test.setTimeout(900_000)
+    await runVendorFlow(page, {
+      name: "inn",
+      town: "moonglow",
+      approach: [["ArrowRight", 14], ["ArrowUp", 12]], // (1,15) -> (15,3)
+      talkKey: "ArrowUp",
+      sweep: ["ArrowRight", "ArrowLeft"],
+      span: 6,
+      shopEnglish: "The Honest Inn",
+      ownerEnglish: "Scatu",
+      welcomeFragment: "Are you in need of lodging",
+      drive: async (page) => {
+        await pressKey(page, "y", 2500) // lodging -> the room offer (2 beds, 20 gp)
+        await pressKey(page, "n", 3000) // decline: no sleeping, no RNG
+        return [
+          { label: "room offer", template: koreanContaining("We have a room with 2 beds"), numbers: /2.*20/ },
+          { label: "decline", template: koreanContaining("better deal") }
+        ]
+      }
+    })
+  })
+})
