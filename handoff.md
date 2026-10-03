@@ -1863,3 +1863,19 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
 ### 남은 것
 - 다음: Todo 38(잔여 영어 계측) → 39·40(38 결과 기반) → 41(Codex·상점 실관측) → 44(재검증). Todo 43(개조 범위)은 `.omo/drafts/mod-scope.md`까지 완료, 사용자 결정 대기.
 - 사용자 웹 확인 대기: Todo 35(한국어 입력 후 화살표), Todo 37(성 주제어 한국어 입력).
+
+---
+
+## 2026-10-03 — Todo 38 구현 완료(미병합) + Todo 45 신설 (분모 48→49, 42/49 = 85.7%)
+
+> append만 한다. Todo 38은 브랜치 `todo-38-i18n-coverage`(`ca0151c`, `356410e`)에 있으며 아직 main에 병합·통합 게이트를 거치지 않았다. 따라서 진행률은 38을 ✅로 세지 않는다.
+
+- **측정 결과** (Chromium 전체 e2e 50 passed 41.0m, 에이전트가 직접 실행. 규칙은 Haiku지만 45분짜리 장시간 실행이라 에이전트가 `nohup`으로 직접 돌렸다고 스스로 보고했다. 로그 `task-38/full-e2e.log`는 내가 확인). 스냅샷 46개(2개는 셸 미부팅으로 제외), 키만 기록(영어·원문 인자 없음, 거부 0건).
+  - ui-unmapped 6종 1018회, talk-unmapped 2종 39회, arg-passthrough 4종 152회, vendor-unmapped·resolve-fallback 0.
+  - 약 970회가 **형식만 있는 템플릿**(`%c`, `%s`, `%s\n`, `\n`)이다. 문장이 인자로 오므로 해시 조회로는 번역할 수 없다. 호출 지점 대부분이 cheat/debug 출력(`cheat.cpp`)이거나 UI 장식으로 보이나, player-visible 여부는 **확인 필요**.
+  - **미확인 해시 `8c19a815` 71회**(`korean-npc-alias`에서만): 어떤 오픈소스 리터럴과도 불일치. 런타임에 만든 형식이거나 id 채널을 우회한 텍스트일 수 있어 **잠재 버그**.
+  - 감사 갭 교차: #6 입장 메시지는 **관측됨**(`ui:portal:1`의 `%s`에 영어 도시 종류가 그대로 들어감, 8회). #3·#5·#7은 e2e가 그 상황에 도달하지 않아 **미관측**(관측 안 됨 ≠ 문제없음). 갭 #3은 talk 채널 `%s` 인자를 계측하지 않아 구조적으로 관측 불가.
+  - `arg-passthrough` `223449c4`(144회)는 테스트 아바타 이름 "avatar"와 해시가 같아 플레이어 이름일 가능성이 높다(유출로 보지 않음).
+- **구현**: `src/i18n/coverage.ts`(id/8-hex 외 키 거부), 컴포저 3종에 선택적 `onMiss`, `window.ultimaI18nCoverage`(audit-dist 허용 목록에 근거와 함께 추가), `tests/e2e/fixtures.ts`가 `i18n-coverage.json`을 항상 첨부(`I18N_COVERAGE_DIR` 지정 시 파일로 기록), `scripts/i18n-coverage-report.mjs`. 게이트(Haiku 실행, 보고 기준): test:unit 627, i18n:check, typecheck, build, check:build-fresh, verify:repo-sources, audit:dist, diff-check 전부 0.
+- **계획 변경**: Todo 45 신설(미확인 해시·형식만 있는 템플릿 조사). 분모 49. 39·40은 병렬 에이전트가 `todo-39-40-english-surfaces`에서 진행 중, 41은 `todo-41-codex-shops`에서 진행 중.
+- 미검증: 해시 일치는 오픈소스 리터럴과의 동일성일 뿐 증거가 아니다. 계측은 e2e가 누른 키 범위에 한정된다.

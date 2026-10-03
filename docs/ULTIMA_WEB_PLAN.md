@@ -165,7 +165,8 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 | 41 | 34 | 44 | 36,37,43 (2026-10-03 신규 — Codex/엔딩·상점 4종 실세션 관측, 갭 #8) |
 | 42 | 34 | 44 | 36,37,41,43 — 35·38과 직렬 (2026-10-03 신규 — wasm 메모리 측정·Safari 기록) |
 | 43 | 없음 | 개조 신규 Todo | 전부 (2026-10-03 신규 — 개조 범위 제안, 사용자 결정) |
-| 44 | 34–42, 43(결정 기록 또는 보류) | 없음 | 없음 (2026-10-03 신규 — 이 웨이브 이후 릴리스 재검증) |
+| 44 | 34–42, 45, 43(결정 기록 또는 보류) | 없음 | 없음 (2026-10-03 신규 — 이 웨이브 이후 릴리스 재검증) |
+| 45 | 38,39,40 | 44 | 39·40과 직렬 (2026-10-03 신규 — Todo 38 보고서의 미확인 해시·형식만 있는 템플릿) |
 
 ## Todos
 > Implementation + Test = ONE todo. Never separate.
@@ -736,6 +737,17 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - happy: `.omo/evidence/ultima-web/final/F1-addendum-2026-10.md`.
   - failure: an e2e run that dies with `ERR_CONNECTION_REFUSED` is recorded as an infrastructure failure and re-run solo, not counted. Recorded in `.omo/evidence/ultima-web/task-44/infra-failure.log` if it happens.
   Commit: Y (docs) | docs(release): re-verify after the post-completion wave
+
+- [ ] 45. Explain the unknown screenMessage hash and the format-only templates found by the Todo 38 coverage report
+  What to do / Must NOT do: the Todo 38 report (`.omo/evidence/ultima-web/task-38/coverage-report.md`, 2026-10-03) measured 1018 unmapped screenMessage occurrences in the Chromium e2e suite and left two things unexplained.
+  (a) One hash, `8c19a815` (71 occurrences, only during `korean-npc-alias`), matches no open-source format literal. It is probably a format built at run time or text that bypassed an id channel (castle/codex/talk lines should arrive as ids since Todo 24), so treat it as a possible bug. Find the call site: log a hash-only trace of which engine call sends it (for example the nearest preceding mapped hashes in the snapshot order), then reproduce it in an e2e and decide: map it, route it through an id channel, or document it as intentionally dropped.
+  (b) Format-only templates (`%c`, `%s`, `%s\n`, `\n`; hashes `36b9b7f9`, `79843a19`, `aae692d1`, `0f0c6cdd`, `46b9d129`) account for about 970 of the occurrences. Their text travels in arguments, so a hash lookup can never translate them. Classify each call site (`file:line` is in the report): debug/cheat-only, UI chrome, or player-visible game text. Only player-visible game text needs a fix; for those, add an id-based channel at the call site (the Todo 22/24 pattern) or a typed argument map, and write down why the rest is out of scope.
+  Must NOT: record English text or raw arguments anywhere (hashes and ids only), change native behaviour outside `__EMSCRIPTEN__`, or translate cheat/debug-only output.
+  Parallelization: Wave 6 | Blocked by: 38, 39, 40 | Blocks: 44 | Serialize with: 39, 40 (shared generator and `screen.cpp`)
+  References: `.omo/evidence/ultima-web/task-38/coverage-report.md`; `vendor/xu4/src/screen.cpp` (`u4_web_message`, `webFormatHash`); `src/dialogue/ui-message-compose.ts`; `src/i18n/coverage.ts`.
+  Acceptance criteria: unit tests for any new mapping; an e2e (or recorded manual session if the sender cannot be reached) that makes `8c19a815` either disappear from the snapshot or be explained in `docs/WEB_PORT.md` "알려진 한계"; the report is re-measured and attached; `i18n:check --strict` and `audit:dist --require-engine` exit 0.
+  QA scenarios: happy: `.omo/evidence/ultima-web/task-45/coverage-report-after.md`; failure: a call site classified as debug-only that is actually reachable in normal play is caught by a normal-play e2e snapshot, recorded in `.omo/evidence/ultima-web/task-45/misclassified.log`.
+  Commit: Y | fix(i18n): route the remaining player-visible screenMessage text through id channels
 
 ## Final verification wave
 > Runs in parallel after ALL todos. ALL must APPROVE. Surface results and wait for the user's explicit okay before declaring complete.
