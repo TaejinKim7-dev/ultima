@@ -38,7 +38,7 @@
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
 - (해소됨, Todo 34) 예전에 루트는 stale이었다. 지금은 main이며 clean이다. 이전 상태는 `salvage/root-stale-2026-10-03`.
-- ~~루트 `/home/taejin/ultima`는 **stale**이다. `f3-real-browser-qa`, origin/main보다 76커밋 뒤에 있고 dirty다. Todo 34 전까지 거기서 작업하거나 판단하지 않는다. 루트의 `.claude/`는 worktree 저장소이므로 지우면 안 된다.
+- ~~루트 `/home/taejin/ultima`는 **stale**이다. `f3-real-browser-qa`, origin/main보다 76커밋 뒤에 있고 dirty다. Todo 34 전까지 거기서 작업하거나 판단하지 않는다. 루트의 `.claude/`는 worktree 저장소이므로 지우면 안 된다.~~
 - main은 worktree `agent-ad52af6bd293aab90`에 체크아웃돼 있어서 루트에서 `git switch main`이 안 된다.
 - F1~F4 승인은 37단계 범위 기준이다. 34~44 범위 재검증은 Todo 44가 맡는다. 체크마크를 그대로 이어받지 않는다.
 - 이번 변경은 문서뿐이라 `verify:integration`(e2e)은 실행하지 않았다. Todo 35부터는 merge 전 **단독** 실행이 필수다.
