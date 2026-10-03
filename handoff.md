@@ -1726,9 +1726,10 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 
 ### main push
 ```
-git push origin main   # dd0c933..9bb1b6d  main -> main  (exit 0)
+git push origin main   # dd0c933..fd31e9b  main -> main  (exit 0)
+                     # (4차 handoff 커밋까지 dd0c933..9bb1b6d, 5차 추가 handoff로 fd31e9b까지 push)
 ```
-- `main` HEAD `9bb1b6d`, origin과 동기. 브랜치: `todo-f3-final`(5c80d0b) → main merge `b870b85`, 이어서 `dfb9995`(HANDOFF.md)·`9bb1b6d`(계획서).
+- `main` HEAD `fd31e9b`, origin과 동기. 브랜치: `todo-f3-final`(5c80d0b) → main merge `b870b85`, 이어서 `dfb9995`(HANDOFF.md)·`9bb1b6d`(계획서)·`794ca6d`(4차 handoff)·`fd31e9b`(5차 최종 handoff).
 
 ### 최종 진행률
 - **37/37 = 100%** (Todo 1~33 + F1~F4 전부 ✅). 계획서 체크박스 집계: `[x]` 37, `[ ]` 0.

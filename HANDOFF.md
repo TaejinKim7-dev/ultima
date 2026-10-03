@@ -5,9 +5,9 @@
 Ultima IV(xu4)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식하고 실제 플레이 화면을 한국어로 만든다. 진행 기준 `plan.md`, 세부 정의 원본은 `.omo/plans/ultima-web.md`.
 
 ## 2. 현재 상태 — **계획 100% 완료, push 완료**
-- 작업 트리 `/home/taejin/ultima/.claude/worktrees/agent-ad52af6bd293aab90`, main tip **`794ca6d`**, origin과 동기 (push 완료).
+- 작업 트리 `/home/taejin/ultima/.claude/worktrees/agent-ad52af6bd293aab90`, main tip **`fd31e9b`**, origin과 동기 (push 완료).
 - **진행률 37/37 = 100%** (2026-10-02 사용자 결정: Todo 29~33 편입 + 분모 37 확정, F1~F4 전부 승인). 계획서 체크박스 37/37 `[x]`, `[ ]` 0.
-- main 커밋: `5c80d0b`(F3 fix+기록) → `b870b85`(merge) → `dfb9995`(HANDOFF) → `9bb1b6d`(계획서 37/37) → `794ca6d`(handoff 최종).
+- main 커밋: `5c80d0b`(F3 fix+기록) → `b870b85`(merge) → `dfb9995`(HANDOFF) → `9bb1b6d`(계획서 37/37) → `794ca6d`(handoff 4차) → `fd31e9b`(handoff 최종).
 
 ## 3. 이번 세션(2026-10-02) 실행 요약
 - **F1**: `npm run verify:release` 18단계 전부 exit 0 (chromium e2e 46/46은 중단된 run의 18단계만 재실행으로 완주). `final/F1-plan-compliance.md` + `F1-verify-release.log`.
@@ -15,7 +15,7 @@ Ultima IV(xu4)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHu
 - **F3**: 실제 `ultima4.zip`으로 Chromium 46/46 · Firefox 46/46 · WebKit 46/46. WebKit 1건(0.069px 서브픽셀) → oracle 리뷰 후 `korean-status-overlay.spec.ts`를 **aura-relative 단언**(`overlayBottom ≤ auraTop + 0.5`)으로 수정, RED→GREEN. 증거 `final/F3-real-browser-qa/`.
 - **F4**: `final/F4-scope-fidelity.md` 신규 — APPROVE_WITH_DEVIATIONS, 분모는 계획서에서 직접 유도.
 - **사용자 결정 3건 접수**: Todo 29~33 편입(분모 37) · F1~F4 승인 · push 승인.
-- **push 완료**: `dd0c933..794ca6d main -> main`.
+- **push 완료**: `dd0c933..fd31e9b main -> main` (5차 갱신으로 `794ca6d → fd31e9b`까지 push).
 
 ## 4. 변경한 파일 (main)
 - `tests/e2e/korean-status-overlay.spec.ts` — aura-relative 오버레이 하한 단언 (WebKit 서브픽셀 허용).
@@ -38,7 +38,7 @@ Ultima IV(xu4)를 원본 `ultima4.zip`을 사용자가 직접 선택하는 GitHu
 ## 7. 재개 방법
 ```bash
 cd /home/taejin/ultima/.claude/worktrees/agent-ad52af6bd293aab90
-git status -sb && git log --oneline -3        # main 794ca6d, origin 동기
+git status -sb && git log --oneline -3        # main fd31e9b, origin 동기
 # CI Pages 배포 확인:
 gh run list --limit 3                          # push 트리거 run
 # 사용자: Settings > Pages > Source="GitHub Actions" (미설정 시)
