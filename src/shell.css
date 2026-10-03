@@ -166,7 +166,8 @@ body {
 
 /*
  * Long dialogue never overlays the game screen -- it renders in this
- * scrolling HTML panel below the canvas.
+ * scrolling HTML panel, beside the canvas on wide windows and below it on
+ * narrow ones (Todo 47, see the two-column rules at the end of this file).
  */
 .dialogue-panel {
   border: 2px solid var(--ultima-border);
@@ -256,4 +257,53 @@ body {
 #save-status {
   font-size: 0.85rem;
   opacity: 0.85;
+}
+
+/*
+ * Todo 47 (user request 2026-10-03): the dialogue panel and the Korean
+ * keyword input form a right-hand column next to the game. Below the
+ * two-column width (game floor 640px + column floor 18rem + gap + page
+ * padding) they keep the stacked layout above.
+ */
+.side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 1000px) {
+  #app {
+    display: grid;
+    grid-template-columns: minmax(640px, 1fr) minmax(18rem, 26rem);
+    align-items: start;
+    max-width: 1400px;
+  }
+
+  #game-viewport {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /*
+   * The column is exactly as tall as the game: size containment keeps a long
+   * dialogue history from growing the row, and stretch fills it to the
+   * game's height. The history then scrolls inside the panel (newest line
+   * pinned by src/shell.ts) instead of lengthening the page.
+   */
+  .side-column {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: stretch;
+    contain: size;
+  }
+
+  .side-column .dialogue-panel {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .data-controls {
+    grid-column: 1 / -1;
+  }
 }

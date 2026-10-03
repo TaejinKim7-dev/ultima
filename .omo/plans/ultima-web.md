@@ -28,7 +28,7 @@ Your next move: 이 계획을 실행하려면 별도 worker 세션에서 `$start
 1. `xu4-engine/u4`를 기반으로 원작 Ultima IV 전체를 웹으로 이식한다. GLFW + Emscripten + WebGL2를 사용한다. DOS 기본 EGA 그래픽과 게임 규칙을 보존한다.
 2. 데스크톱 키보드 플레이. 지원 검증은 Chromium(Chrome/Edge 계열), Firefox, WebKit 계열의 현재 데스크톱 버전이다. 실제 버전을 검증 기록에 남긴다. WebKit 자동화 결과만으로 macOS Safari 실기 검증을 했다고 쓰지 않는다.
 3. 원본 `ultima4.zip`은 사용자가 선택한다. 게임 파일은 브라우저 밖으로 업로드하지 않는다. 게임 진행/설정은 브라우저에 영속 저장하며 백업 내보내기/복원을 제공한다.
-4. 긴 메시지·대화·서사는 화면 아래 HTML 패널. 상태·장비·메뉴 정보는 기존 게임 화면 위치를 유지하는 고해상도 text overlay로 표시한다. 320×200 world raster는 그대로 둔다.
+4. 긴 메시지·대화·서사는 화면 아래 HTML 패널(2026-10-03 사용자 결정, Todo 47: 넓은 화면에서는 게임 화면 오른쪽 컬럼, 좁은 화면에서는 아래). 상태·장비·메뉴 정보는 기존 게임 화면 위치를 유지하는 고해상도 text overlay로 표시한다. 320×200 world raster는 그대로 둔다.
 5. 한국어 번역을 개발 담당 AI가 사전에 전부 작성한다. C++/Boron/TLK뿐 아니라 TITLE.EXE와 AVATAR.EXE에서 읽는 표시 문자열도 포함한다. 번역은 정적 배포물에 포함한다.
 6. 한국어/영어 NPC 키워드와 한국어로 표시되는 진행 필수 질문의 답을 지원한다. 원본 영문 키워드, 명령키, 내부 ID/비교값은 보존한다.
 7. 최종 산출물은 실제 배경음악/효과음이 나야 한다. 초기 무음 target은 이식 중간 단계일 뿐 완료 상태가 아니다.
@@ -168,6 +168,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 | 44 | 34–42, 45, 43(결정 기록 또는 보류) | 없음 | 없음 (2026-10-03 신규 — 이 웨이브 이후 릴리스 재검증) |
 | 45 | 38,39,40 | 44 | 39·40과 직렬 (2026-10-03 신규 — Todo 38 보고서의 미확인 해시·형식만 있는 템플릿) |
 | 46 | 없음 | 44 | 전부 (2026-10-03 신규 — 세이브 가져오기 파일 선택창이 내보낸 `.dat`을 숨기는 문제) |
+| 47 | 없음 | 없음 | 전부 (2026-10-03 신규, 사용자 요청 — 한국어 대화 패널을 오른쪽 컬럼으로, 커서키 스크롤 차단) |
 
 ## Todos
 > Implementation + Test = ONE todo. Never separate.
@@ -758,6 +759,14 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   Acceptance criteria: the unit test `save-import-accept` fails before the fix (RED log `.omo/evidence/ultima-web/task-46/unit-red.log`) and passes after; `npm run test:unit`, `typecheck`, `build`, `check:build-fresh` exit 0; the integration gate passes with it. A person should confirm in a real browser that the chooser lists the exported `.dat` file (an automated test cannot open the OS dialog).
   QA scenarios: happy: `.omo/evidence/ultima-web/task-46/unit-green.log`; failure: the unit test fails if the export filename and the accept list drift apart again (`unit-red.log`).
   Commit: Y | fix(shell): accept the exported save file extension in the import chooser
+
+- [ ] 47. Move the Korean dialogue panel and keyword input to a right-hand column, and stop arrow keys from scrolling the page
+  What to do / Must NOT do: user request 2026-10-03 after testing the live site: the Korean text under the game appeared and disappeared as the arrow keys were pressed. Cause (verified): Emscripten's GLFW port calls preventDefault() only for Backspace and Tab (emsdk `src/lib/libglfw.js` onKeydown), so each arrow key also scrolled the page, which is taller than the window because the panel sat below a canvas of at least 640x400; with focus on the prompt marker inside the panel, arrows scrolled the panel instead. Fix both: (1) on windows at least 1000px wide, put `#dialogue-panel` and the Korean keyword input in a `#side-column` to the right of the game, exactly as tall as the game, with the history scrolling inside the panel; narrower windows keep the stacked layout; (2) prevent only the default action of the four arrow keys outside editable controls (never stop propagation, so GLFW still receives them; arrows inside the Korean input still move the caret). Must not change overlay positioning, the engine, or which keys reach the game.
+  Parallelization: Wave 6 | Blocked by: none | Blocks: none
+  References: `index.html`; `src/shell.css`; `src/shell.ts` (keydown listeners); `src/input/scroll-keys.ts`; `tests/unit/scroll-keys.test.ts`; `tests/e2e/dialogue-side-column.spec.ts`; `tests/e2e/status-overlay.spec.ts` (narrow viewport).
+  Acceptance criteria: unit `scroll-keys` RED (module missing) then GREEN; e2e `dialogue-side-column` RED before the change (ArrowDown scrolled the page by 120px, ArrowUp scrolled the panel by 120px, no side column) and GREEN after, in Chromium, Firefox and WebKit; `dialogue-panel`, `status-overlay`, `korean-status-overlay`, `korean-focus-return` and `korean-npc-alias` still pass; `npm run verify:integration` passes solo.
+  QA scenarios: happy: `.omo/evidence/ultima-web/task-47/side-column-1280x720.png`; failure: the RED run in `.omo/evidence/ultima-web/task-47/e2e-red.log`.
+  Commit: Y | feat(shell): put the Korean dialogue beside the game and stop arrow-key scrolling
 
 ## Final verification wave
 > Runs in parallel after ALL todos. ALL must APPROVE. Surface results and wait for the user's explicit okay before declaring complete.

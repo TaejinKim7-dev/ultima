@@ -26,42 +26,51 @@
       </div>
 
       <!--
-        Dialogue panel: scrolling HTML panel below the canvas for long
-        conversation text (per the confirmed requirement -- long dialogue
-        is never overlaid on the game screen).
+        Todo 47 (user request 2026-10-03): the Korean dialogue panel and the
+        Korean keyword input share a right-hand column next to the game on
+        wide windows (src/shell.css), so walking with the arrow keys never
+        pushes the Korean text out of view; narrow windows keep them stacked
+        below the game.
       -->
-      <section id="dialogue-panel" class="dialogue-panel" aria-live="polite">
-        <div id="dialogue-history" class="dialogue-history"></div>
+      <div id="side-column" class="side-column">
         <!--
-          Prompt focus marker (Todo 11): shown/focused when a `prompt`
-          bridge event arrives, so keyboard focus visibly lands in the
-          dialogue panel. It carries no text of its own (nothing to
-          escape) and never intercepts real key delivery -- the GLFW input
-          port listens on `window` at the capture phase regardless of
-          which element has focus (verified in emsdk's library_glfw.js).
+          Dialogue panel: scrolling HTML panel beside (wide) or below (narrow)
+          the canvas for long conversation text -- long dialogue is never
+          overlaid on the game screen.
         -->
-        <div id="dialogue-prompt-marker" class="dialogue-prompt-marker" tabindex="-1" hidden></div>
-      </section>
+        <section id="dialogue-panel" class="dialogue-panel" aria-live="polite">
+          <div id="dialogue-history" class="dialogue-history"></div>
+          <!--
+            Prompt focus marker (Todo 11): shown/focused when a `prompt`
+            bridge event arrives, so keyboard focus visibly lands in the
+            dialogue panel. It carries no text of its own (nothing to
+            escape) and never intercepts real key delivery -- the GLFW input
+            port listens on `window` at the capture phase regardless of
+            which element has focus (verified in emsdk's library_glfw.js).
+          -->
+          <div id="dialogue-prompt-marker" class="dialogue-prompt-marker" tabindex="-1" hidden></div>
+        </section>
 
-      <!--
-        Todo 13: Korean NPC-keyword input. The real xu4 engine can never
-        receive Korean text directly -- vendor/xu4/src/event.cpp's
-        ReadStringController::keyPressed() only ever accepts key codes
-        below 128 (plain ASCII), for every prompt kind, no exception. This
-        control lets a Korean-speaking player type an aliased Korean word
-        while talking to an NPC; src/shell.ts resolves it
-        (src/i18n/korean-aliases.ts) to the exact canonical English
-        keyword xu4's own prefix matcher already understands, then
-        synthesizes that as real keystrokes toward the same input path a
-        physical keyboard uses (see shell.ts's own comment on the
-        window-capture guard this requires). An unresolved word is
-        rejected with a message in the dialogue panel above; nothing is
-        ever injected in that case.
-      -->
-      <section class="korean-keyword-control">
-        <label for="korean-keyword-input">한글 대화 키워드 입력 (NPC와 대화 중 Enter로 제출)</label>
-        <input type="text" id="korean-keyword-input" autocomplete="off" />
-      </section>
+        <!--
+          Todo 13: Korean NPC-keyword input. The real xu4 engine can never
+          receive Korean text directly -- vendor/xu4/src/event.cpp's
+          ReadStringController::keyPressed() only ever accepts key codes
+          below 128 (plain ASCII), for every prompt kind, no exception. This
+          control lets a Korean-speaking player type an aliased Korean word
+          while talking to an NPC; src/shell.ts resolves it
+          (src/i18n/korean-aliases.ts) to the exact canonical English
+          keyword xu4's own prefix matcher already understands, then
+          synthesizes that as real keystrokes toward the same input path a
+          physical keyboard uses (see shell.ts's own comment on the
+          window-capture guard this requires). An unresolved word is
+          rejected with a message in the dialogue panel above; nothing is
+          ever injected in that case.
+        -->
+        <section class="korean-keyword-control">
+          <label for="korean-keyword-input">한글 대화 키워드 입력 (NPC와 대화 중 Enter로 제출)</label>
+          <input type="text" id="korean-keyword-input" autocomplete="off" />
+        </section>
+      </div>
 
       <!--
         Original game data is never bundled and never uploaded anywhere --

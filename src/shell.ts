@@ -30,6 +30,7 @@ import { buildAliasTable, resolveChoiceInput, resolveInput, type AliasSourceEntr
 import { createIntroViewReceiver, type IntroViewReceiver } from "./overlay/intro-view.ts"
 import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
 import { createFocusReturn } from "./i18n/focus-return.ts"
+import { shouldSuppressScrollKey } from "./input/scroll-keys.ts"
 import {
   hasTranslation,
   isCommandKeyId,
@@ -702,6 +703,26 @@ export function createShell(doc: Document): UltimaBridgeApi {
       }
       if (keyboardEvent.key === "Enter" && !keyboardEvent.isComposing) {
         submitKoreanKeyword()
+      }
+    },
+    true
+  )
+
+  // Todo 47: arrow keys move the avatar, but GLFW leaves their default
+  // action alone, so the browser also scrolled the page (or the dialogue
+  // panel when the prompt marker had focus) and the Korean text slid in and
+  // out of view. Prevent only that default action -- never propagation, so
+  // GLFW's own window listener still gets the key -- and never inside an
+  // editable control (see src/input/scroll-keys.ts).
+  gameWindow.addEventListener(
+    "keydown",
+    (event: Event) => {
+      const keyboardEvent = event as KeyboardEvent
+      const target = keyboardEvent.target
+      const keyTarget =
+        typeof target === "object" && target !== null && "tagName" in target ? (target as HTMLElement) : null
+      if (shouldSuppressScrollKey(keyboardEvent.key, keyTarget)) {
+        keyboardEvent.preventDefault()
       }
     },
     true
