@@ -1,7 +1,10 @@
 import { expect, test, type Page } from "./fixtures.ts"
+import { createHash } from "node:crypto"
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { fileURLToPath } from "node:url"
+import { hashText } from "../../src/i18n/coverage.ts"
+import { GENERATED_UI_TEMPLATES } from "../../src/i18n/generated/strings.ts"
 
 // Todo 23: in-game C++ screenMessage() output shown in Korean in the HTML
 // dialogue panel, driven against the REAL running engine with the user's
@@ -18,6 +21,7 @@ import { fileURLToPath } from "node:url"
 // per this project's per-spec helper convention.
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
 const evidenceDir = join(repoRoot, ".omo/evidence/ultima-web/task-23")
+const task40Dir = join(repoRoot, ".omo/evidence/ultima-web/task-40")
 const PASS_ID = "ui:game:15"
 const ENTER_TOWN_ID = "ui:portal:1"
 
@@ -26,6 +30,36 @@ const uiEntries = (
     entries: Record<string, { translation: string }>
   }
 ).entries
+
+// Todo 40: the entry line is "<Korean city type> + the Korean template" and the
+// centred name line is the maps.b name's own Korean row. Both lookups are by
+// sourceHash (sha256 of the engine's literal), so no English is restated here.
+const sha = (text: string): string => `sha256:${createHash("sha256").update(text, "utf8").digest("hex")}`
+const moduleEntries = (
+  JSON.parse(readFileSync(join(repoRoot, "locales/ko/module.json"), "utf8")) as {
+    entries: Record<string, { sourceHash: string; translation: string; status: string }>
+  }
+).entries
+const glossaryEntries = (
+  JSON.parse(readFileSync(join(repoRoot, "locales/ko/glossary.json"), "utf8")) as {
+    entries: Record<string, { sourceHash: string; translation: string }>
+  }
+).entries
+const TOWN_NAME = "Moonglow" // maps.b: city (name: "Moonglow" type: towne ...)
+const TOWN_TYPE = "towne"
+const SPELL_NOMIX_ID = "ui:spell:2" // spellErrorMsgs[CASTERR_NOMIX]
+
+function koreanTownName(): string {
+  const row = Object.values(moduleEntries).find((entry) => entry.sourceHash === sha(TOWN_NAME) && entry.status === "ready")
+  if (row === undefined) throw new Error("fixture: no ready Korean module row for the town name")
+  return row.translation
+}
+
+function koreanTownType(): string {
+  const row = glossaryEntries[`city-type-${TOWN_TYPE}`]
+  if (row === undefined || row.sourceHash !== sha(TOWN_TYPE)) throw new Error("fixture: no Korean glossary row for the city type")
+  return row.translation
+}
 
 function korean(id: string): string {
   const entry = uiEntries[id]
@@ -141,6 +175,27 @@ test.describe("Todo 23: in-game screen messages shown in Korean in the dialogue 
     await pressKey(page, "e", 2500)
     const afterEnter = await panelText(page)
     await page.screenshot({ path: join(evidenceDir, "pass-and-enter.png") })
+    mkdirSync(task40Dir, { recursive: true })
+    await page.screenshot({ path: join(task40Dir, "entry-korean.png") })
+    // Todo 40: the whole entry line (template with the Korean city type) and the centred town name.
+    const entryLine = squash(korean(ENTER_TOWN_ID).replace("%s", koreanTownType()))
+    const nameLine = squash(koreanTownName())
+    const coverage = await page.evaluate(() => window.ultimaI18nCoverage?.snapshot() ?? null)
+    writeFileSync(join(task40Dir, "coverage-after-enter.json"), `${JSON.stringify(coverage)}\n`)
+
+    // Todo 40: a real spell-error line. A new character has mixed nothing, so casting
+    // (c, player 1, spell a) must print the "none mixed" error: spellErrorMsgs[] -> Korean.
+    await pressKey(page, "c", 1500)
+    await pressKey(page, "1", 1500)
+    await pressKey(page, "a", 2000)
+    const afterCast = await panelText(page)
+    await page.screenshot({ path: join(task40Dir, "spell-error-korean.png") })
+    const coverageAfterCast = await page.evaluate(() => window.ultimaI18nCoverage?.snapshot() ?? null)
+    writeFileSync(join(task40Dir, "coverage-after-cast.json"), `${JSON.stringify(coverageAfterCast)}\n`)
+    // The hashes that map to the spell error's ui id (looked up in the generated table, not typed).
+    const nomixHashes = Object.entries(GENERATED_UI_TEMPLATES)
+      .filter(([, id]) => id === SPELL_NOMIX_ID)
+      .map(([hash]) => hash)
 
     // The Korean template with its %s (city type, a Boron symbol with no
     // translation id) removed: what must appear around the argument.
@@ -161,6 +216,23 @@ test.describe("Todo 23: in-game screen messages shown in Korean in the dialogue 
     )
     expect(enterBefore, "fixture: ui:portal:1 must start with its %s argument").toBe("")
     expect(afterEnter, "entering Moonglow never showed the Korean Enter %s! line").toContain(enterAfter)
+    // Todo 40: gap #6 -- the Korean city type inside the line, the centred Korean name right after it,
+    // and no engine English between them (one contiguous run, so no ASCII letter can sit inside it).
+    expect(afterEnter, "the entry line + Korean town name must be one contiguous run").toContain(entryLine + nameLine)
+    // Everything the panel gained after the last Pass line (the goto and entry region) holds no
+    // ASCII-letter run: a single letter is the "h = help" command hint, an engine word would be 2+.
+    const entryRegion = afterEnter.slice(afterEnter.lastIndexOf(pass) + pass.length)
+    expect(entryRegion, "panel region after the last Pass line is empty").not.toBe("")
+    expect(entryRegion, "an engine ASCII word reached the entry region of the panel").not.toMatch(/[A-Za-z]{2,}/)
+    expect(coverage, "Module.u4Text coverage snapshot missing").not.toBeNull()
+    const entryPassthrough = (coverage?.["arg-passthrough"] ?? []).filter((row) => row.key.startsWith(`${ENTER_TOWN_ID}|`))
+    expect(entryPassthrough, "the entry line's %s still received a raw engine word").toEqual([])
+    const unmapped = new Set((coverage?.["ui-unmapped"] ?? []).map((row) => row.key))
+    expect(unmapped.has(hashText(TOWN_NAME)), "the centred town name has no Korean path (ui-unmapped)").toBe(false)
+    // Spell error (observed in a real session, see the evidence screenshot).
+    expect(nomixHashes, "fixture: the none-mixed error has no screenMessage hash in GENERATED_UI_TEMPLATES").toHaveLength(1)
+    expect((coverageAfterCast?.["ui-unmapped"] ?? []).some((row) => nomixHashes.includes(row.key)), "the spell error hash is ui-unmapped").toBe(false)
+    expect(afterCast, "casting with no mixtures never showed the Korean spell error").toContain(squash(korean(SPELL_NOMIX_ID)))
     expect(pageErrors, "the screenMessage hook must never surface an uncaught error").toEqual([])
   })
 })

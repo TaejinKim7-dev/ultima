@@ -431,6 +431,40 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
       "%s"
     ]
   },
+  "ui:death:0": {
+    "translation": "\n\n\n모든 것이 어둠에 잠긴다...\n",
+    "placeholders": []
+  },
+  "ui:death:1": {
+    "translation": "\n그러나 잠깐...\n",
+    "placeholders": []
+  },
+  "ui:death:2": {
+    "translation": "여기가 어디지?...\n",
+    "placeholders": []
+  },
+  "ui:death:3": {
+    "translation": "내가 죽었나?...\n",
+    "placeholders": []
+  },
+  "ui:death:4": {
+    "translation": "저승인가?...\n",
+    "placeholders": []
+  },
+  "ui:death:5": {
+    "translation": "들려오는 소리:\n%s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:death:6": {
+    "translation": "움직임이 느껴진다...\n",
+    "placeholders": []
+  },
+  "ui:death:7": {
+    "translation": "\n로드 브리티시가 말한다: 내가 그대의 영혼과 소지품 일부를 허공에서 끌어냈노라. 앞으로는 더 조심하라!\n",
+    "placeholders": []
+  },
   "ui:discourse_castle:0": {
     "translation": "이 험난한 땅에서 살아남으려면 먼저 그대 자신을 알아야 한다! 무기와 마법 능력을 갈고닦도록 하라!\n\n브리타니아에서의 첫 여행길에서는 각별히 조심하라.\n\n자신을 충분히 알기 전에는 마을의 안전한 곳에서 멀리 떠나지 말라!\n",
     "placeholders": []
@@ -2375,6 +2409,34 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
   },
   "ui:spell:1": {
     "translation": "떠나는 중...\n",
+    "placeholders": []
+  },
+  "ui:spell:2": {
+    "translation": "조합된 것이 없다!\n",
+    "placeholders": []
+  },
+  "ui:spell:3": {
+    "translation": "마력이 부족하다!\n",
+    "placeholders": []
+  },
+  "ui:spell:4": {
+    "translation": "실패!\n",
+    "placeholders": []
+  },
+  "ui:spell:5": {
+    "translation": "여기선 안 됨!\n",
+    "placeholders": []
+  },
+  "ui:spell:6": {
+    "translation": "전투 중에만 가능!\n실패!\n",
+    "placeholders": []
+  },
+  "ui:spell:7": {
+    "translation": "던전에서만 가능!\n실패!\n",
+    "placeholders": []
+  },
+  "ui:spell:8": {
+    "translation": "야외에서만 가능!\n실패!\n",
     "placeholders": []
   },
   "ui:stats:0": {
@@ -18581,12 +18643,36 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "죽음을\n맛봐라,\n쓰레기\n같은 놈!",
     "placeholders": []
   },
+  "city-type-castle": {
+    "translation": "성",
+    "placeholders": []
+  },
+  "city-type-ruins": {
+    "translation": "폐허",
+    "placeholders": []
+  },
+  "city-type-towne": {
+    "translation": "마을",
+    "placeholders": []
+  },
+  "city-type-village": {
+    "translation": "촌락",
+    "placeholders": []
+  },
+  "join-fallback-experienced": {
+    "translation": "경험",
+    "placeholders": []
+  },
   "principle-courage": {
     "translation": "용기",
     "placeholders": []
   },
   "principle-love": {
     "translation": "사랑",
+    "placeholders": []
+  },
+  "principle-pride": {
+    "translation": "오만",
     "placeholders": []
   },
   "principle-truth": {
@@ -18625,8 +18711,52 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "유황재",
     "placeholders": []
   },
+  "shrine-name-compassion": {
+    "translation": "자비의 신단",
+    "placeholders": []
+  },
+  "shrine-name-honesty": {
+    "translation": "정직의 신단",
+    "placeholders": []
+  },
+  "shrine-name-honor": {
+    "translation": "명예의 신단",
+    "placeholders": []
+  },
+  "shrine-name-humility": {
+    "translation": "겸손의 신단",
+    "placeholders": []
+  },
+  "shrine-name-justice": {
+    "translation": "정의의 신단",
+    "placeholders": []
+  },
+  "shrine-name-sacrifice": {
+    "translation": "희생의 신단",
+    "placeholders": []
+  },
+  "shrine-name-spirituality": {
+    "translation": "영성의 신단",
+    "placeholders": []
+  },
+  "shrine-name-valor": {
+    "translation": "용맹의 신단",
+    "placeholders": []
+  },
+  "term-abyss": {
+    "translation": "심연",
+    "placeholders": []
+  },
+  "term-ankh": {
+    "translation": "앙크",
+    "placeholders": []
+  },
   "term-avatar": {
     "translation": "아바타",
+    "placeholders": []
+  },
+  "term-britannia": {
+    "translation": "브리타니아",
     "placeholders": []
   },
   "term-codex": {
@@ -18637,8 +18767,32 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "동료",
     "placeholders": []
   },
+  "term-exodus": {
+    "translation": "엑소더스",
+    "placeholders": []
+  },
+  "term-heal": {
+    "translation": "치유",
+    "placeholders": []
+  },
+  "term-help": {
+    "translation": "도움",
+    "placeholders": []
+  },
   "term-mantra": {
     "translation": "진언",
+    "placeholders": []
+  },
+  "term-minax": {
+    "translation": "미낙스",
+    "placeholders": []
+  },
+  "term-mondain": {
+    "translation": "몬데인",
+    "placeholders": []
+  },
+  "term-quest": {
+    "translation": "사명",
     "placeholders": []
   },
   "term-rune": {
@@ -18651,6 +18805,38 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
   },
   "term-virtue": {
     "translation": "미덕",
+    "placeholders": []
+  },
+  "virtue-adjective-compassionate": {
+    "translation": "자비로움",
+    "placeholders": []
+  },
+  "virtue-adjective-honest": {
+    "translation": "정직함",
+    "placeholders": []
+  },
+  "virtue-adjective-honorable": {
+    "translation": "명예로움",
+    "placeholders": []
+  },
+  "virtue-adjective-humble": {
+    "translation": "겸손함",
+    "placeholders": []
+  },
+  "virtue-adjective-just": {
+    "translation": "공정함",
+    "placeholders": []
+  },
+  "virtue-adjective-sacrificial": {
+    "translation": "희생적임",
+    "placeholders": []
+  },
+  "virtue-adjective-spiritual": {
+    "translation": "영적임",
+    "placeholders": []
+  },
+  "virtue-adjective-valiant": {
+    "translation": "용맹함",
     "placeholders": []
   },
   "virtue-compassion": {
@@ -18739,6 +18925,98 @@ export const GENERATED_ALIASES: Record<string, GeneratedAliasEntry> = {
   "alias:choice-b": {
     "alias": "나",
     "canonical": "choiceB"
+  },
+  "alias:truth": {
+    "alias": "진실",
+    "canonical": "truth"
+  },
+  "alias:love": {
+    "alias": "사랑",
+    "canonical": "love"
+  },
+  "alias:courage": {
+    "alias": "용기",
+    "canonical": "courage"
+  },
+  "alias:honesty": {
+    "alias": "정직",
+    "canonical": "honesty"
+  },
+  "alias:compassion": {
+    "alias": "자비",
+    "canonical": "compassion"
+  },
+  "alias:valor": {
+    "alias": "용맹",
+    "canonical": "valor"
+  },
+  "alias:justice": {
+    "alias": "정의",
+    "canonical": "justice"
+  },
+  "alias:sacrifice": {
+    "alias": "희생",
+    "canonical": "sacrifice"
+  },
+  "alias:honor": {
+    "alias": "명예",
+    "canonical": "honor"
+  },
+  "alias:spirituality": {
+    "alias": "영성",
+    "canonical": "spirituality"
+  },
+  "alias:humility": {
+    "alias": "겸손",
+    "canonical": "humility"
+  },
+  "alias:virtue": {
+    "alias": "미덕",
+    "canonical": "virtue"
+  },
+  "alias:pride": {
+    "alias": "오만",
+    "canonical": "pride"
+  },
+  "alias:avatar": {
+    "alias": "아바타",
+    "canonical": "avatar"
+  },
+  "alias:quest": {
+    "alias": "사명",
+    "canonical": "quest"
+  },
+  "alias:britannia": {
+    "alias": "브리타니아",
+    "canonical": "britannia"
+  },
+  "alias:ankh": {
+    "alias": "앙크",
+    "canonical": "ankh"
+  },
+  "alias:abyss": {
+    "alias": "심연",
+    "canonical": "abyss"
+  },
+  "alias:mondain": {
+    "alias": "몬데인",
+    "canonical": "mondain"
+  },
+  "alias:minax": {
+    "alias": "미낙스",
+    "canonical": "minax"
+  },
+  "alias:exodus": {
+    "alias": "엑소더스",
+    "canonical": "exodus"
+  },
+  "alias:help": {
+    "alias": "도움",
+    "canonical": "help"
+  },
+  "alias:heal": {
+    "alias": "치유",
+    "canonical": "heal"
   }
 }
 
@@ -19225,7 +19503,20 @@ export const GENERATED_UI_TEMPLATES: Readonly<Record<string, string>> = {
   "129192ed": "ui:portal:2",
   "ab6fcf4a": "ui:portal:3",
   "bbe4bc0f": "ui:portal:4",
+  "8cae81dc": "ui:death:0",
+  "bed5cf21": "ui:death:1",
+  "e615523a": "ui:death:2",
+  "880f501f": "ui:death:3",
+  "8bc61568": "ui:death:4",
+  "f46ce512": "ui:death:5",
+  "5fc86f4e": "ui:death:6",
+  "56a09915": "ui:death:7",
   "538f1157": "ui:spell:0",
+  "55f0a50f": "ui:spell:2",
+  "752c1438": "ui:spell:3",
+  "e863260c": "ui:spell:6",
+  "87905e68": "ui:spell:7",
+  "8fdc031f": "ui:spell:8",
   "e160fd2a": "ui:intro:0",
   "e7658b52": "ui:intro:1",
   "5712c6e9": "ui:intro:2",
@@ -20056,6 +20347,31 @@ export const GENERATED_MODULE_NAMES: Readonly<Record<string, string>> = {
   "Honor": "module:Ultima-IV:maps:133",
   "Spirituality": "module:Ultima-IV:maps:135",
   "Humility": "module:Ultima-IV:maps:137"
+}
+
+// Todo 39: English `%s` argument word that is not a module name (virtue adjectives, ...) -> glossary id.
+export const GENERATED_ARGUMENT_NAMES: Readonly<Record<string, string>> = {
+  "honest": "virtue-adjective-honest",
+  "compassionate": "virtue-adjective-compassionate",
+  "valiant": "virtue-adjective-valiant",
+  "just": "virtue-adjective-just",
+  "sacrificial": "virtue-adjective-sacrificial",
+  "honorable": "virtue-adjective-honorable",
+  "spiritual": "virtue-adjective-spiritual",
+  "humble": "virtue-adjective-humble",
+  "experienced": "join-fallback-experienced",
+  "castle": "city-type-castle",
+  "towne": "city-type-towne",
+  "ruins": "city-type-ruins",
+  "village": "city-type-village",
+  "Shrine of Honesty": "shrine-name-honesty",
+  "Shrine of Compassion": "shrine-name-compassion",
+  "Shrine of Valor": "shrine-name-valor",
+  "Shrine of Justice": "shrine-name-justice",
+  "Shrine of Sacrifice": "shrine-name-sacrifice",
+  "Shrine of Honor": "shrine-name-honor",
+  "Shrine of Spirituality": "shrine-name-spirituality",
+  "Shrine of Humility": "shrine-name-humility"
 }
 
 // Todo 25: FNV-1a hash of a vendors.b template's runtime bytes (web-say) -> Korean runtime text.

@@ -98,6 +98,50 @@ const STATUS_NAME_SOURCE = "vendor/xu4/module/Ultima-IV/config.b"
 // named-object path (resolveStatusName), not a new overlay code path.
 const REAGENT_NAME_SOURCE = "vendor/xu4/src/names.cpp"
 
+// Todo 39: English words the engine passes as a `%s` ARGUMENT that are neither
+// config.b module names (GENERATED_MODULE_NAMES) nor TLK text: the eight
+// getVirtueAdjective() words (names.cpp `virtueAdjectives[]`) and the literal
+// "experienced" that discourse_tlk.cpp's join refusal substitutes for them.
+// All are xu4's own open-source literals. Each is a glossary term
+// (`<idPrefix>-<english-slug>`) mapped into GENERATED_ARGUMENT_NAMES, a table
+// kept SEPARATE from the module-name map: short everyday words such as "just"
+// or "humble" must only ever be translated as a `%s` argument, never matched
+// against anything else. `pattern` captures the text holding the quoted literals.
+const ARGUMENT_NAME_SOURCES = [
+  {
+    file: "vendor/xu4/src/names.cpp",
+    pattern: /virtueAdjectives\s*\[\s*\]\s*=\s*\{([^}]*)\}/,
+    idPrefix: "virtue-adjective"
+  },
+  {
+    file: "vendor/xu4/src/discourse_tlk.cpp",
+    pattern: /getVirtueAdjective\(virt\)\s*:\s*("[^"]*")/,
+    idPrefix: "join-fallback"
+  },
+  // Todo 40: City::cityTypeStr() is the symbol name of a maps.b `city (... type: <symbol>`
+  // declaration (towne, castle, village, ruins) and is the `%s` of portal.cpp's
+  // "Enter %s!" line. `symbols` marks an unquoted word captured by group 1.
+  {
+    file: "vendor/xu4/module/Ultima-IV/maps.b",
+    symbols: /\bcity\s*\([^)]*?\btype:\s*([a-z]+)/g,
+    idPrefix: "city-type"
+  }
+]
+
+// Todo 40: portal.cpp's shrine branch prints screenMessage("Enter the %s!\n\n",
+// destination->getName()) and Shrine::getName() (shrine.cpp) returns a prefix
+// literal followed by getVirtueName(): "<prefix><Virtue>". That composed string
+// is in no other table, so each of the eight is a glossary term
+// (`shrine-name-<virtue>`, sourceHash over the composed string), built from the
+// two engine sources so a changed prefix or virtue name drops the row.
+const SHRINE_NAME_SOURCE = {
+  prefixFile: "vendor/xu4/src/shrine.cpp",
+  prefixPattern: /str = "([^"]*)";\s*\n\s*str \+= getVirtueName\(virtue\)/,
+  virtuesFile: "vendor/xu4/src/names.cpp",
+  virtuesPattern: /virtueNames\[\]\s*=\s*\{([^}]*)\}/,
+  idPrefix: "shrine-name"
+}
+
 // Todo 27: stats.cpp draws the status column through the web view channel
 // (EM_JS -> `Module.u4View.show("status", ...)`), never screenMessage(). Its
 // literals are payload templates ("F:%04d   G:%04d", "Stones:%s") for that
@@ -279,6 +323,11 @@ export function generateI18nTables(schemaDir) {
   )
   const vendorNames = buildModuleNameMap(moduleSources([VENDOR_FILE, MODULE_NAME_SOURCE]), moduleEntries)
 
+  // Todo 39: glossary-backed `%s` argument words (virtue adjectives, ...).
+  const argumentNames = extractArgumentNames(
+    loadSchemaFile(resolve(schemaDir, "glossary.json"), "glossary").entries
+  )
+
   return {
     entries,
     aliases,
@@ -287,6 +336,7 @@ export function generateI18nTables(schemaDir) {
     uiTemplates,
     uiTemplateExclusions,
     moduleNames,
+    argumentNames,
     statusTemplates,
     statusNames,
     vendorTemplates,
@@ -358,6 +408,48 @@ export function extractReagentNames(glossaryEntries) {
   return names
 }
 
+/**
+ * Todo 39: English `%s`-argument word -> glossary id, read out of the engine
+ * sources listed in ARGUMENT_NAME_SOURCES. Like extractReagentNames(), a word is
+ * only mapped while the glossary row's sourceHash still equals the sha256 of
+ * the engine literal, so a renamed literal is skipped, never mis-mapped.
+ */
+export function extractArgumentNames(glossaryEntries) {
+  const names = {}
+  for (const { file, pattern, symbols, idPrefix } of ARGUMENT_NAME_SOURCES) {
+    const source = readFileSync(resolve(repoRoot, file), "utf8")
+    let words
+    if (symbols !== undefined) {
+      words = [...source.matchAll(symbols)].map((match) => match[1])
+    } else {
+      const table = pattern.exec(source)
+      words = table === null ? [] : [...table[1].matchAll(/"([^"]*)"/g)].map((match) => match[1])
+    }
+    if (words.length === 0) {
+      throw new Error(`${file}: the argument-name words for ${idPrefix} were not found`)
+    }
+    for (const english of words) {
+      const id = `${idPrefix}-${english.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
+      if (glossaryEntries[id]?.sourceHash === sourceHash(english) && names[english] === undefined) {
+        names[english] = id
+      }
+    }
+  }
+  const { prefixFile, prefixPattern, virtuesFile, virtuesPattern, idPrefix } = SHRINE_NAME_SOURCE
+  const prefix = prefixPattern.exec(readFileSync(resolve(repoRoot, prefixFile), "utf8"))?.[1]
+  const virtues = virtuesPattern.exec(readFileSync(resolve(repoRoot, virtuesFile), "utf8"))?.[1]
+  if (prefix === undefined || virtues === undefined) {
+    throw new Error(`${prefixFile} / ${virtuesFile}: the shrine-name literals were not found`)
+  }
+  for (const [, virtue] of virtues.matchAll(/"([^"]*)"/g)) {
+    const english = prefix + virtue
+    const id = `${idPrefix}-${virtue.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
+    if (glossaryEntries[id]?.sourceHash === sourceHash(english) && names[english] === undefined) {
+      names[english] = id
+    }
+  }
+  return names
+}
 
 function renderTypeScript({
   entries,
@@ -366,6 +458,7 @@ function renderTypeScript({
   introTemplates,
   uiTemplates,
   moduleNames,
+  argumentNames,
   statusTemplates,
   statusNames,
   vendorTemplates,
@@ -414,6 +507,9 @@ function renderTypeScript({
     `// Todo 23: English module config name (a screenMessage %s argument) -> module id.\n` +
     `export const GENERATED_MODULE_NAMES: Readonly<Record<string, string>> = ` +
     `${JSON.stringify(moduleNames, null, 2)}\n\n` +
+    `// Todo 39: English \`%s\` argument word that is not a module name (virtue adjectives, ...) -> glossary id.\n` +
+    `export const GENERATED_ARGUMENT_NAMES: Readonly<Record<string, string>> = ` +
+    `${JSON.stringify(argumentNames, null, 2)}\n\n` +
     `// Todo 25: FNV-1a hash of a vendors.b template's runtime bytes (web-say) -> Korean runtime text.\n` +
     `export const GENERATED_VENDOR_TEMPLATES: Readonly<Record<string, string>> = ` +
     `${JSON.stringify(vendorTemplates, null, 2)}\n\n` +

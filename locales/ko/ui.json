@@ -668,6 +668,64 @@
       "translation": "%s 경미한 부상!\n",
       "status": "ready"
     },
+    "ui:death:0": {
+      "sourceHash": "sha256:879218cc27d6f69d20f46edd32382ea867d71f02abbb3d923356ae311c647e65",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/death.cpp",
+      "translation": "\n\n\n모든 것이 어둠에 잠긴다...\n",
+      "status": "ready"
+    },
+    "ui:death:1": {
+      "sourceHash": "sha256:8cb1570f066f30574dfac75cee5d3e85f3d1337188eff919fdb1113004636417",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/death.cpp",
+      "translation": "\n그러나 잠깐...\n",
+      "status": "ready"
+    },
+    "ui:death:2": {
+      "sourceHash": "sha256:5f5a0b0380fd5e5cace51c5e43dad9bdf0ccc6cfba66e73d776419605ca0fe8f",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/death.cpp",
+      "translation": "여기가 어디지?...\n",
+      "status": "ready"
+    },
+    "ui:death:3": {
+      "sourceHash": "sha256:23454586d4facfe14e612d8245dab180549fa32231dbfbd75d6e63196641a6d6",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/death.cpp",
+      "translation": "내가 죽었나?...\n",
+      "status": "ready"
+    },
+    "ui:death:4": {
+      "sourceHash": "sha256:a1fdf63dd8d2307cd7a18e3f319c0369cadc2552f5173fd1a9e44f4c5165daf4",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/death.cpp",
+      "translation": "저승인가?...\n",
+      "status": "ready"
+    },
+    "ui:death:5": {
+      "sourceHash": "sha256:4b71d74265fc144de15c6ba5b3b09b7d9dab42fff5df009d6b1975a2da51ceb7",
+      "placeholders": [
+        "%s"
+      ],
+      "sourceFile": "vendor/xu4/src/death.cpp",
+      "translation": "들려오는 소리:\n%s\n",
+      "status": "ready"
+    },
+    "ui:death:6": {
+      "sourceHash": "sha256:7ff6124ed496ce62c4c1f28dcbe7bdf9e8dc5bd146402a4d980f2f13357ffc19",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/death.cpp",
+      "translation": "움직임이 느껴진다...\n",
+      "status": "ready"
+    },
+    "ui:death:7": {
+      "sourceHash": "sha256:710a8bacee95923f70bad41b156494c71b23e4b693614b0daf909be67946bddc",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/death.cpp",
+      "translation": "\n로드 브리티시가 말한다: 내가 그대의 영혼과 소지품 일부를 허공에서 끌어냈노라. 앞으로는 더 조심하라!\n",
+      "status": "ready"
+    },
     "ui:discourse_castle:0": {
       "sourceHash": "sha256:650ff5a96f567ad38152ca8b4ca9f65ddba1671ab9032c2abe3215039d689a97",
       "placeholders": [],
@@ -3874,6 +3932,55 @@
       "placeholders": [],
       "sourceFile": "vendor/xu4/src/spell.cpp",
       "translation": "떠나는 중...\n",
+      "status": "ready"
+    },
+    "ui:spell:2": {
+      "sourceHash": "sha256:7a18d76245f8e45f8b94a420cc00cf2d1b0db7299db947b8ed25d2174346f959",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/spell.cpp",
+      "translation": "조합된 것이 없다!\n",
+      "status": "ready"
+    },
+    "ui:spell:3": {
+      "sourceHash": "sha256:3805aa9e42623d49df70c9e6a45a9b00807eae2159020d509f5948ea2ec7675e",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/spell.cpp",
+      "translation": "마력이 부족하다!\n",
+      "status": "ready"
+    },
+    "ui:spell:4": {
+      "sourceHash": "sha256:ac48a2a783e943bce2e7c2b6cd37329927d602f6542d81a8910d8c7720ca3b62",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/spell.cpp",
+      "translation": "실패!\n",
+      "status": "ready"
+    },
+    "ui:spell:5": {
+      "sourceHash": "sha256:8aa9f18f6461c6cab8f3da10eca5a8d1a159df4ef88a25e2596a961f25ac2895",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/spell.cpp",
+      "translation": "여기선 안 됨!\n",
+      "status": "ready"
+    },
+    "ui:spell:6": {
+      "sourceHash": "sha256:fbb5c67cea388963849943b44a071c691af7b0c755bfe478b801018e4b405dc6",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/spell.cpp",
+      "translation": "전투 중에만 가능!\n실패!\n",
+      "status": "ready"
+    },
+    "ui:spell:7": {
+      "sourceHash": "sha256:8cc46dfd6296e2e843b49b7153266fa8ce4e2710e87e90cf77b6d49dcf5f48c3",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/spell.cpp",
+      "translation": "던전에서만 가능!\n실패!\n",
+      "status": "ready"
+    },
+    "ui:spell:8": {
+      "sourceHash": "sha256:6cf4377e03ffc1273dd7faccf47d780b49cc2b38f722658924dd2a8e077f67f3",
+      "placeholders": [],
+      "sourceFile": "vendor/xu4/src/spell.cpp",
+      "translation": "야외에서만 가능!\n실패!\n",
       "status": "ready"
     },
     "ui:stats:0": {

@@ -394,6 +394,7 @@ describe("startEngine", () => {
       talk: (format: string, a0: string | null, a1: string | null) => seen.push(`talk:${format}|${a0}|${a1}`),
       input: (text: string) => seen.push(`input:${text}`),
       message: (hash: string, args: string[]) => seen.push(`message:${hash}|${args.join(",")}`),
+      center: (hash: string, newlines: number) => seen.push(`center:${hash}|${newlines}`),
       vendor: (hash: string, pairs: string[]) => seen.push(`vendor:${hash}|${pairs.join(",")}`)
     }
     let receiverAtMainCall: unknown
@@ -403,6 +404,7 @@ describe("startEngine", () => {
       module.u4Text?.talk("%s", "@MOONGLOW:12:health", null)
       module.u4Text?.input("health")
       module.u4Text?.message("deadbeef", ["a", "b"])
+      module.u4Text?.center("deadbeef", 2)
       module.u4Text?.vendor("cafef00d", ["@", "Shop"])
     }
 
@@ -419,7 +421,7 @@ describe("startEngine", () => {
 
     expect(result.started).toBe(true)
     expect(receiverAtMainCall).toBe(talkText)
-    expect(seen).toEqual(["talk:%s|@MOONGLOW:12:health|null", "input:health", "message:deadbeef|a,b", "vendor:cafef00d|@,Shop"])
+    expect(seen).toEqual(["talk:%s|@MOONGLOW:12:health|null", "input:health", "message:deadbeef|a,b", "center:deadbeef|2", "vendor:cafef00d|@,Shop"])
   })
   it("Todo 26: attaches the intro view receiver to module.u4View before callMain()", async () => {
     const { module, calls } = makeFakeModule()

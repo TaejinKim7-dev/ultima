@@ -23,6 +23,8 @@ export interface GeneratedTables {
   // Todo 32: the eight virtue names now come from here, not from a hand-edit
   // of src/i18n/generated/strings.ts.
   moduleNames: Record<string, string>
+  // Todo 39: glossary-backed `%s` argument words (virtue adjectives, ...).
+  argumentNames: Record<string, string>
   vendorTemplates: Record<string, string>
   vendorTemplateExclusions: { id: string; reason: string }[]
   vendorNames: Record<string, string>
@@ -35,3 +37,5 @@ export function generateI18nTables(schemaDir: string): GeneratedTables
  */
 export function virtueNameModuleEntries(moduleEntries: Record<string, { sourceHash: string; translation: string; status: string }>): Record<string, { sourceHash: string; translation: string; status: string }>
 export function extractStatusNames(moduleEntries: Record<string, { sourceHash: string }>): { armor: Record<string, string>; weapon: Record<string, string>; weaponAbbrev: Record<string, string>; class: Record<string, string> }
+/** Todo 39: English `%s`-argument word -> glossary id (drift-guarded by sourceHash). */
+export function extractArgumentNames(glossaryEntries: Record<string, { sourceHash: string }>): Record<string, string>

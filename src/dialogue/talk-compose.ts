@@ -9,6 +9,8 @@
 //
 // Pure (no DOM, no engine): the shell injects the real lookups.
 
+import { hashText, type CoverageMiss } from "../i18n/coverage.ts"
+
 /** Shown in place of a TLK line that has no Korean translation (the English original is never available here). */
 export const MISSING_TLK_TRANSLATION = "[미번역 대사]"
 
@@ -19,14 +21,29 @@ export interface TalkComposeDeps {
   templateId(literal: string): string | undefined
   /** Resolves an id to Korean, returning `fallback` when no translation is ready. */
   resolve(id: string, fallback: string): string
+  /**
+   * Todo 39: maps an English non-TLK `%s` argument (a virtue adjective, the
+   * join refusal's fallback word) to its translation id. Optional: without it
+   * such an argument passes through as-is.
+   */
+  nameId?(text: string): string | undefined
+  /** Todo 38: optional measurement hook (hashes/ids only); never changes the composed text. */
+  onMiss?: (miss: CoverageMiss) => void
 }
 
-function resolveArgument(arg: string | null, deps: TalkComposeDeps): string {
+function resolveArgument(arg: string | null, position: number, templateId: string | undefined, deps: TalkComposeDeps): string {
   if (arg === null) {
     return ""
   }
   if (arg.startsWith(TLK_ID_PREFIX)) {
     return deps.resolve(arg.slice(TLK_ID_PREFIX.length), MISSING_TLK_TRANSLATION)
+  }
+  const nameId = deps.nameId?.(arg)
+  if (nameId !== undefined) {
+    return deps.resolve(nameId, arg)
+  }
+  if (arg !== "" && templateId !== undefined) {
+    deps.onMiss?.({ kind: "arg-passthrough", id: templateId, position, argHash: hashText(arg) })
   }
   return arg
 }
@@ -39,10 +56,13 @@ function substitute(template: string, args: readonly string[]): string {
 
 export function composeTalkLine(format: string, args: readonly (string | null)[], deps: TalkComposeDeps): string {
   const id = deps.templateId(format)
+  if (id === undefined) {
+    deps.onMiss?.({ kind: "talk-unmapped", hash: hashText(format) })
+  }
   const template = id === undefined ? format : deps.resolve(id, format)
   return substitute(
     template,
-    args.map((arg) => resolveArgument(arg, deps))
+    args.map((arg, position) => resolveArgument(arg, position, id, deps))
   )
 }
 

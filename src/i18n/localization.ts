@@ -24,6 +24,7 @@
 import type { GeneratedI18nEntry } from "./generated/strings.ts"
 import {
   GENERATED_ALIASES,
+  GENERATED_ARGUMENT_NAMES,
   GENERATED_I18N_ENTRIES,
   GENERATED_INTRO_TEMPLATES,
   GENERATED_MODULE_NAMES,
@@ -133,6 +134,26 @@ export function resolveModuleNameId(
   table: Readonly<Record<string, string>> = GENERATED_MODULE_NAMES
 ): string | undefined {
   return Object.hasOwn(table, text) ? table[text] : undefined
+}
+
+/**
+ * Todo 39: maps an English `%s` argument word that is not a module name (a
+ * virtue adjective, the join refusal's fallback word, ...) to its glossary id.
+ */
+export function resolveArgumentNameId(
+  text: string,
+  table: Readonly<Record<string, string>> = GENERATED_ARGUMENT_NAMES
+): string | undefined {
+  return Object.hasOwn(table, text) ? table[text] : undefined
+}
+
+/**
+ * Todo 39: the `%s`-argument lookup the dialogue channels share. A module name
+ * (weapon/creature/virtue name) wins; the scoped argument-word table is only
+ * consulted when it misses.
+ */
+export function resolveNameArgumentId(text: string): string | undefined {
+  return resolveModuleNameId(text) ?? resolveArgumentNameId(text)
 }
 
 /**

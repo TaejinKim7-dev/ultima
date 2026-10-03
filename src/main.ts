@@ -1,6 +1,7 @@
 import "./shell.css"
 import { createInputQueue, type InputQueue } from "./bridge/input-queue.ts"
 import { createShell } from "./shell.ts"
+import { sharedCoverage, type CoverageSnapshot } from "./i18n/coverage.ts"
 import type { AudioBridge } from "./engine/audio.ts"
 import { startEngine, type EngineModuleFactory } from "./engine/startup.ts"
 import {
@@ -27,6 +28,8 @@ declare global {
     ultimaI18n?: UltimaI18nApi | undefined
     /** Todo 42: read-only wasm linear-memory size for the memory smoke e2e. */
     ultimaWasmMemory?: { bytes(): number } | undefined
+    /** Todo 38: read-only snapshot of dropped/fallback text counters (hashes and ids only). */
+    ultimaI18nCoverage?: { snapshot(): CoverageSnapshot } | undefined
   }
 }
 
@@ -61,6 +64,7 @@ window.ultimaI18n = {
 // listeners never dispatch to game controllers and never preventDefault.
 const inputQueue = createInputQueue()
 window.ultimaInput = inputQueue
+window.ultimaI18nCoverage = { snapshot: () => sharedCoverage.snapshot() }
 document.addEventListener("keydown", (event: KeyboardEvent) => {
   inputQueue.enqueueKeyFromDom({
     key: event.key,

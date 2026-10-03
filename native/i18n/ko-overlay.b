@@ -855,6 +855,10 @@ ko-translations: [
   BRITAIN:9:topic1: "LEAR"
   BRITAIN:9:topic2: "COMP"
   BRITAIN:9:yes: "좋아요."
+  city-type-castle: "성"
+  city-type-ruins: "폐허"
+  city-type-towne: "마을"
+  city-type-village: "촌락"
   COVE:0:health: "난 괜찮아요."
   COVE:0:job: "나는 어비스에
 들어가는 법을
@@ -2390,6 +2394,7 @@ ko-translations: [
 물어보게,
 더 많이
 안다네!"
+  join-fallback-experienced: "경험"
   LCB:0:health: "좋다네."
   LCB:0:job: "나는 도울 수
 있다네."
@@ -5860,6 +5865,7 @@ M'F\"에서
 알았네."
   principle-courage: "용기"
   principle-love: "사랑"
+  principle-pride: "오만"
   principle-truth: "진실"
   reagent-black-pearl: "흑진주"
   reagent-blood-moss: "핏빛이끼"
@@ -6251,6 +6257,14 @@ L'A\"에서
 삶에
 의미가
 있군!"
+  shrine-name-compassion: "자비의 신단"
+  shrine-name-honesty: "정직의 신단"
+  shrine-name-honor: "명예의 신단"
+  shrine-name-humility: "겸손의 신단"
+  shrine-name-justice: "정의의 신단"
+  shrine-name-sacrifice: "희생의 신단"
+  shrine-name-spirituality: "영성의 신단"
+  shrine-name-valor: "용맹의 신단"
   SKARA:0:health: "나는 잘
 지낸다네."
   SKARA:0:job: "나는 내면의
@@ -6644,10 +6658,19 @@ L'A\"에서
   SKARA:9:yes: "마법 화살은
 재 1조각만
 필요하다네!"
+  term-abyss: "심연"
+  term-ankh: "앙크"
   term-avatar: "아바타"
+  term-britannia: "브리타니아"
   term-codex: "코덱스"
   term-companion: "동료"
+  term-exodus: "엑소더스"
+  term-heal: "치유"
+  term-help: "도움"
   term-mantra: "진언"
+  term-minax: "미낙스"
+  term-mondain: "몬데인"
+  term-quest: "사명"
   term-rune: "룬"
   term-shrine: "신단"
   term-virtue: "미덕"
@@ -7604,6 +7627,28 @@ z:%d
 "
   ui:creature:9: "%s 경미한 부상!
 "
+  ui:death:0: "
+
+
+모든 것이 어둠에 잠긴다...
+"
+  ui:death:1: "
+그러나 잠깐...
+"
+  ui:death:2: "여기가 어디지?...
+"
+  ui:death:3: "내가 죽었나?...
+"
+  ui:death:4: "저승인가?...
+"
+  ui:death:5: "들려오는 소리:
+%s
+"
+  ui:death:6: "움직임이 느껴진다...
+"
+  ui:death:7: "
+로드 브리티시가 말한다: 내가 그대의 영혼과 소지품 일부를 허공에서 끌어냈노라. 앞으로는 더 조심하라!
+"
   ui:discourse_castle:0: "이 험난한 땅에서 살아남으려면 먼저 그대 자신을 알아야 한다! 무기와 마법 능력을 갈고닦도록 하라!
 
 브리타니아에서의 첫 여행길에서는 각별히 조심하라.
@@ -8426,6 +8471,23 @@ A-P로 표시된
 "
   ui:spell:1: "떠나는 중...
 "
+  ui:spell:2: "조합된 것이 없다!
+"
+  ui:spell:3: "마력이 부족하다!
+"
+  ui:spell:4: "실패!
+"
+  ui:spell:5: "여기선 안 됨!
+"
+  ui:spell:6: "전투 중에만 가능!
+실패!
+"
+  ui:spell:7: "던전에서만 가능!
+실패!
+"
+  ui:spell:8: "야외에서만 가능!
+실패!
+"
   ui:stats:0: "음식:%04d  선체:%02d"
   ui:stats:1: "음식:%04d  금:%04d"
   ui:stats:10: "무기"
@@ -8866,6 +8928,14 @@ A-P로 표시된
 잘 비추지
 못할
 걸세!"
+  virtue-adjective-compassionate: "자비로움"
+  virtue-adjective-honest: "정직함"
+  virtue-adjective-honorable: "명예로움"
+  virtue-adjective-humble: "겸손함"
+  virtue-adjective-just: "공정함"
+  virtue-adjective-sacrificial: "희생적임"
+  virtue-adjective-spiritual: "영적임"
+  virtue-adjective-valiant: "용맹함"
   virtue-compassion: "자비"
   virtue-honesty: "정직"
   virtue-honor: "명예"

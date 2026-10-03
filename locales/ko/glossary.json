@@ -1,6 +1,36 @@
 {
   "$schema": "ultima-web/i18n-schema/glossary/v1",
   "entries": {
+    "city-type-castle": {
+      "sourceHash": "sha256:913a53d7df2fad651bed414afb045378c3495b23d5174bead8091dcc8cdef8ff",
+      "placeholders": [],
+      "translation": "성",
+      "status": "ready"
+    },
+    "city-type-ruins": {
+      "sourceHash": "sha256:61e759cfb63ee070a9b202315be7bd3c1b445e0bc5910a4baacde97f0c2b2001",
+      "placeholders": [],
+      "translation": "폐허",
+      "status": "ready"
+    },
+    "city-type-towne": {
+      "sourceHash": "sha256:61f3aef5104fbe6504a769e3aadb8c0b0b19bc9796ba713189197af5f78363d5",
+      "placeholders": [],
+      "translation": "마을",
+      "status": "ready"
+    },
+    "city-type-village": {
+      "sourceHash": "sha256:05cfbe283381aab8902e93d508ff031c0bcd3f95501c59ee28ac34b21b240fa3",
+      "placeholders": [],
+      "translation": "촌락",
+      "status": "ready"
+    },
+    "join-fallback-experienced": {
+      "sourceHash": "sha256:3d486fe5bc88e9b66c18509b0d8b17bdc16e5d8e426a4afb5e3c16c7c7be97be",
+      "placeholders": [],
+      "translation": "경험",
+      "status": "ready"
+    },
     "principle-courage": {
       "sourceHash": "sha256:c2bd645a5905bf7c47c926982cff59e2d49a592bb0d073c80ee273b9d827ef8c",
       "placeholders": [],
@@ -71,6 +101,54 @@
       "sourceHash": "sha256:add0ee4f2f692e79e63ddf34ab5f2776c9f832b8aa3ebeec3c287b4050808056",
       "placeholders": [],
       "translation": "유황재",
+      "status": "ready"
+    },
+    "shrine-name-compassion": {
+      "sourceHash": "sha256:383e2a9843a5c17259d9cc9e8035197f6566bf82818884b93486460e58c605df",
+      "placeholders": [],
+      "translation": "자비의 신단",
+      "status": "ready"
+    },
+    "shrine-name-honesty": {
+      "sourceHash": "sha256:7c92045ac6cc8c7da02f434db6e6b07a748144dce1907642c43ea1aefbd65a8a",
+      "placeholders": [],
+      "translation": "정직의 신단",
+      "status": "ready"
+    },
+    "shrine-name-honor": {
+      "sourceHash": "sha256:9f5ab3f078450b23f508481416f7c86aac1efda079035e1c0b4723c2966e6a4e",
+      "placeholders": [],
+      "translation": "명예의 신단",
+      "status": "ready"
+    },
+    "shrine-name-humility": {
+      "sourceHash": "sha256:82fc9eccff81fdbc555522cd655b3999534d023d382e3a335bf1e431f8e193a0",
+      "placeholders": [],
+      "translation": "겸손의 신단",
+      "status": "ready"
+    },
+    "shrine-name-justice": {
+      "sourceHash": "sha256:3296a37a538b2a7d31d9c30d45007c486543ca5f67ee3f1365d6cfd8559bc4ae",
+      "placeholders": [],
+      "translation": "정의의 신단",
+      "status": "ready"
+    },
+    "shrine-name-sacrifice": {
+      "sourceHash": "sha256:656ed2631dce2053dc2a6cd51e94bbd3f0b74a21981ba3e86d89de9ac16bb511",
+      "placeholders": [],
+      "translation": "희생의 신단",
+      "status": "ready"
+    },
+    "shrine-name-spirituality": {
+      "sourceHash": "sha256:7eacddbe63e195799bf2c971b554a77bda8889855bf52dea7960526c684ca79e",
+      "placeholders": [],
+      "translation": "영성의 신단",
+      "status": "ready"
+    },
+    "shrine-name-valor": {
+      "sourceHash": "sha256:71bec57fd0aa851c9197a3931b9528bea1fcd5b7434ab58c263fd27f52f50402",
+      "placeholders": [],
+      "translation": "용맹의 신단",
       "status": "ready"
     },
     "term-abyss": {
@@ -167,6 +245,54 @@
       "sourceHash": "sha256:d755c96e2fd4711c78a16d0bdd30ac2e5bc064046b692aca388c7b97ea61fadf",
       "placeholders": [],
       "translation": "미덕",
+      "status": "ready"
+    },
+    "virtue-adjective-compassionate": {
+      "sourceHash": "sha256:22ed0a6501b892bf2657ffdf2a009d503cfd234fa5227b19bb5af1ae9e0a76ce",
+      "placeholders": [],
+      "translation": "자비로움",
+      "status": "ready"
+    },
+    "virtue-adjective-honest": {
+      "sourceHash": "sha256:bf5b6382c2ea46ede3117c0250a9abf431ddf38fca4d50462e5834d09b1b33ef",
+      "placeholders": [],
+      "translation": "정직함",
+      "status": "ready"
+    },
+    "virtue-adjective-honorable": {
+      "sourceHash": "sha256:6c1970d8d12c4c1f859340061043059baaea6d2b6feaffbd7a2b38fd03a64f25",
+      "placeholders": [],
+      "translation": "명예로움",
+      "status": "ready"
+    },
+    "virtue-adjective-humble": {
+      "sourceHash": "sha256:851d3fcf9fe60976956b0b644f56f852045435b42cc1797d5a4cc347e40bfae3",
+      "placeholders": [],
+      "translation": "겸손함",
+      "status": "ready"
+    },
+    "virtue-adjective-just": {
+      "sourceHash": "sha256:b2c66dfd45dd07f58d2246b695660b220ee429c6a8ba95f27e4c57f02e9d6ac8",
+      "placeholders": [],
+      "translation": "공정함",
+      "status": "ready"
+    },
+    "virtue-adjective-sacrificial": {
+      "sourceHash": "sha256:6e468193424cce4028c3b365033b709c506e26cde868df2e9dc003a3273b475c",
+      "placeholders": [],
+      "translation": "희생적임",
+      "status": "ready"
+    },
+    "virtue-adjective-spiritual": {
+      "sourceHash": "sha256:908d6f7546387f24934e1f48b28941872264f6719cb940cc43b0cc439a1edcbe",
+      "placeholders": [],
+      "translation": "영적임",
+      "status": "ready"
+    },
+    "virtue-adjective-valiant": {
+      "sourceHash": "sha256:80910374ca91ed92c61643d514585b5ee28e23f480be994e55c85947ec8f00f1",
+      "placeholders": [],
+      "translation": "용맹함",
       "status": "ready"
     },
     "virtue-compassion": {

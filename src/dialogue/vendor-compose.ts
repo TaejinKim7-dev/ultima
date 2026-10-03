@@ -9,6 +9,8 @@
 //
 // Pure (no DOM, no engine): the shell injects the real lookups.
 
+import type { CoverageMiss } from "../i18n/coverage.ts"
+
 export interface VendorComposeDeps {
   /** Korean runtime template for a template hash (8 lowercase hex digits), if translated. */
   template(hash: string): string | undefined
@@ -16,6 +18,8 @@ export interface VendorComposeDeps {
   nameId(text: string): string | undefined
   /** Resolves an id to Korean, returning `fallback` when no translation is ready. */
   resolve(id: string, fallback: string): string
+  /** Todo 38: optional measurement hook (hashes/ids only); never changes the composed text. */
+  onMiss?: (miss: CoverageMiss) => void
 }
 
 /** True when the last syllable of `text` ends in ㄹ (which takes 로, not 으로). */
@@ -102,6 +106,7 @@ function translateValue(raw: string, deps: VendorComposeDeps): string {
 export function composeVendorLine(hash: string, pairs: readonly string[], deps: VendorComposeDeps): string | null {
   const template = deps.template(hash)
   if (template === undefined || template === "") {
+    deps.onMiss?.({ kind: "vendor-unmapped", hash })
     return null
   }
   const values = new Map<string, string>()
