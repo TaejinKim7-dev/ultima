@@ -1832,3 +1832,34 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
 - **미해결/확인 필요**: 실제 한국어 IME 입력은 자동 e2e가 완전히 재현하지 못한다(`fill`+`press`). 사용자가 웹에서 직접 확인할 항목(순서: ZIP → 새 게임 → NPC 대화 → `건강`, `안녕` → 클릭 없이 화살표).
 - **부수 산출물**: `.omo/drafts/mod-scope.md`(Todo 43 초안: 후보 6개, 사용자 질문 4개). Todo 43은 사용자 결정 대기.
 - 다음: Todo 36(placeholder 순서)·37(LB alias). 사전 조사 결과: 실제 영어 원문 순서와 번역을 비교하면 순서가 바뀐 번역은 **0건**이다. 갭 #4는 현재 피해가 아니라 검사기가 순서를 강제하지 않는 잠재 위험이므로 Todo 36 범위를 "공개 JSON에 순서 보존 서명 저장 + `i18n-check` 순서 강제"로 줄인다.
+
+---
+
+## 2026-10-03 — Todo 36·37·42 완료 (병렬 worktree 3개 → 합친 트리 통합 게이트 PASS) — 42/48 = 87.5%
+
+> append만 한다. 증거 `.omo/evidence/ultima-web/task-{36,37,42}/`, 통합 게이트 `integration/verify-integration-wave6.log`.
+
+### 방식
+- Todo 36·37·42는 서로 다른 파일을 건드려 격리 worktree 3개에서 병렬 구현(Sonnet 에이전트, 테스트는 각자 Haiku 서브에이전트가 실행, e2e 포트 4651/4652/4653 분리). 병합은 `wave6-combined` 브랜치에서 `main` 위에 36→37→42 순으로 **충돌 없이** 합침. 통합 게이트는 합친 트리에서 **완전 단독**(포트 4660)으로 한 번 실행.
+- **통합 게이트 `npm run verify:integration`**: 13단계 전부 exit 0(build:modules·build:wasm·check:build-fresh·test:unit·verify:repo-sources·typecheck·build·i18n:check·build:site·audit:dist·plan cmp·git diff --check·e2e), 단위 47 files/**611** tests, `i18n:check` 4594 entries, e2e **48 passed (41.0m)**, `ERR_CONNECTION_REFUSED` 0건, `# verify:integration 2026-10-03T04:42:23Z PASS`, `EXIT=0`.
+
+### Todo 36 (`dbd761f`): placeholder 순서
+- 비공개 `.local` 원문 순서와 번역을 직접 비교: 다중 placeholder 95개(앞선 조사는 84개로 보고) 중 **순서가 다른 번역 0건**. 즉 현재 피해는 없고 검사기가 순서를 강제하지 않는 잠재 위험이었다.
+- `scripts/lib/placeholders.mjs`가 소스 순서 그대로 토큰을 기록하고 `placeholdersEqual`이 순서까지 비교. 공백을 printf 플래그로 보지 않도록 패턴 수정(보정 안 하면 재인벤토리 시 `module.json`에 오탐 26건 재발). `locales/ko/ui.json`·`src/i18n/generated/strings.ts`는 순서 서명으로 재생성(번역문 변경 없음). 위치 지정 `%1$s`는 범위 밖.
+- 증거: `unit-red.log`, `order-audit.log`, `reorder-rejected.log`(바꿔치기한 번역이 `i18n:check`에서 exit 1, 복원 후 exit 0).
+- 미검증: `test:native` 미실행(C 테이블 불변). C 런타임 검사 `u4_i18n_placeholders_match`는 여전히 정렬 서명 비교.
+
+### Todo 37 (`d9d09af`): LB/Hawkwind 주제 alias
+- `aliases.json`에 alias 23개(진실·사랑·용기·미덕 8종·오만·아바타·사명·브리타니아·앙크·심연·몬데인·미낙스·엑소더스·도움·치유 등), `glossary.json`에 10개 용어. 표기는 말뭉치의 기존 표기를 재사용(pride=오만, quest=사명).
+- e2e `korean-castle-output.spec.ts` 신규 케이스: 영어 키워드 후 한국어 alias가 같은 응답 줄을 한 번 더 출력함을 확인(truth·honesty). 회귀 `korean-npc-alias` 2/2 PASS.
+- 미검증: Hawkwind의 미덕 이름 매칭은 단위 테스트만(e2e 미구동). 로더 단계에서 "알 수 없는 canonical을 가리키는 alias" 거부는 추가하지 않음(런타임 unknown-keyword 거부로만 커버).
+
+### Todo 42 (`fec715e`): wasm 메모리
+- `HEAPU8` export, `window.ultimaWasmMemory.bytes()`(읽기 전용, `TEST_HOOK_ALLOWLIST`에 근거와 함께 추가). 매 샘플마다 `HEAPU8.buffer.byteLength`를 새로 읽는다(growth가 버퍼를 교체).
+- 측정: 16,973,824 bytes(16.2 MiB) 고정, 13 샘플. 상한 64 MiB. Chromium 136·Firefox 137·WebKit 18.4 모두 통과. 상한을 100만으로 낮춘 실패 시나리오(`cap-exceeded.log`) 확인.
+- 문서: `docs/WEB_PORT.md`·`README.md`에 "macOS Safari 실기 검증은 이 환경(WSL2)에서 불가, WebKit 자동화는 Safari 증거가 아님" 명시.
+- 미검증: 1분 스모크만(장시간 미실행). Chromium JS heap이 39.6MB로 고정으로 보이는 점은 미조사.
+
+### 남은 것
+- 다음: Todo 38(잔여 영어 계측) → 39·40(38 결과 기반) → 41(Codex·상점 실관측) → 44(재검증). Todo 43(개조 범위)은 `.omo/drafts/mod-scope.md`까지 완료, 사용자 결정 대기.
+- 사용자 웹 확인 대기: Todo 35(한국어 입력 후 화살표), Todo 37(성 주제어 한국어 입력).

@@ -525,7 +525,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - failure: when a second prompt reopens inside the window, focus stays in the Korean input. Recorded in `.omo/evidence/ultima-web/task-35/reopen-keeps-focus.log`.
   Commit: Y | fix(shell): return keyboard focus to the game after Korean input
 
-- [ ] 36. Make placeholder order safe in translations (GOAL_GAP_AUDIT gap #4, P2 correctness)
+- [x] 36. Make placeholder order safe in translations (GOAL_GAP_AUDIT gap #4, P2 correctness)
   What to do / Must NOT do: two pieces of code disagree about order.
   - `scripts/lib/placeholders.mjs` deliberately compares placeholders as a sorted multiset, so that Korean word order may differ.
   - `src/dialogue/ui-message-compose.ts` (and the other composers) substitute the engine's arguments strictly in order.
@@ -551,7 +551,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - failure: a planted reordered translation fails `i18n:check`. Recorded in `.omo/evidence/ultima-web/task-36/reorder-rejected.log`.
   Commit: Y | fix(i18n): keep translated placeholder order consistent with argument order
 
-- [ ] 37. Korean aliases for the Lord British and Hawkwind topic keywords (GOAL_GAP_AUDIT gap #2, P1)
+- [x] 37. Korean aliases for the Lord British and Hawkwind topic keywords (GOAL_GAP_AUDIT gap #2, P1)
   What to do / Must NOT do: `locales/ko/aliases.json` has only 13 aliases: bye, look, name, give, join, job, health, yes, no and four choice answers. Lord British accepts 24 topic keywords (`vendor/xu4/src/discourse_castle.cpp:254-258` `lbKeyLine`): name, look, job, truth, love, courage, the 8 virtues, spirituality, humility, pride, avatar, quest, britannia, ankh, abyss, mondain, minax, exodus, virtue. They are matched on the first 4 letters (`strncasecmp(..., 4)`, line 495). Lord British and Hawkwind also accept the 8 virtue names through `getVirtueName()` (line 569).
   Steps:
   - Add Korean aliases for these keywords. Reuse the glossary terms so that alias and display stay consistent: for example the virtue names translated in Todo 32.
@@ -671,7 +671,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - failure: a wrong virtue answer at the Codex yields the Korean rejection line. Recorded in `task-41/codex-wrong-answer.log`.
   Commit: Y | test(e2e): observe the Codex/ending and all shop types in Korean
 
-- [ ] 42. Measure wasm memory in the memory smoke and record the Safari status
+- [x] 42. Measure wasm memory in the memory smoke and record the Safari status
   What to do / Must NOT do:
   - (a) Memory. `tests/e2e/memory-smoke.spec.ts` samples only the JS heap.
     - Add `HEAPU8` to `EXPORTED_RUNTIME_METHODS` (`scripts/build-wasm.mjs:81`).
