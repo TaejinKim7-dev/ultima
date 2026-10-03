@@ -151,7 +151,7 @@ describe("audit:dist", () => {
     const dir = makeCleanDist()
     writeFileSync(
       join(dir, "assets", "hooks.js"),
-      `window.ultimaBridge = bridge; window.ultimaInput = queue; window.ultimaAudio = audio; window.ultimaI18n = i18n; document.body.setAttribute("data-bridge-ready", "true")`
+      `window.ultimaBridge = bridge; window.ultimaInput = queue; window.ultimaAudio = audio; window.ultimaI18n = i18n; window.ultimaWasmMemory = mem; document.body.setAttribute("data-bridge-ready", "true")`
     )
 
     // When: the dist artifact audit runs.

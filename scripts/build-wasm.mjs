@@ -78,7 +78,7 @@ const EMCC_FLAGS = [
   // settings file, all fopen'd relative to getUserPath()) lands inside
   // the Todo 10 IDBFS mount at /persist instead of Emscripten's default
   // /home/web_user.
-  '-sEXPORTED_RUNTIME_METHODS=["FS","IDBFS","callMain","ENV"]',
+  '-sEXPORTED_RUNTIME_METHODS=["FS","IDBFS","callMain","ENV","HEAPU8"]',
   "-DUSE_BORON",
   "-DCONF_MODULE",
   // spawnSync passes argv directly with no shell, so this string reaches

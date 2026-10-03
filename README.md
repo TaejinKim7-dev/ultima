@@ -34,7 +34,7 @@ Verified deployment: https://taejinkim7-dev.github.io/ultima/ (Actions run 36316
 아직 안 된 것:
 
 - 화면에 남는 영어는 전수 계측하지 않았습니다. 번역 id 경로가 없는 원본 데이터 레코드, `TITLE.EXE` 바이너리 문자열 일부, `getVirtueAdjective()`처럼 번역 틀 안에서 영어로 나오는 코드 인자가 남아 있습니다. 지도·아바타·룬 같은 픽셀 그래프는 번역 대상이 아닙니다.
-- macOS Safari 실기 검증은 하지 않았습니다. Chromium·Firefox·WebKit은 Playwright 자동화로 전체 e2e를 통과했습니다(F3, 2026-10-02).
+- macOS Safari 실기 검증은 하지 않았습니다(이 환경은 WSL2 Linux라 할 수 없고, Playwright WebKit 결과는 Safari 증거가 아닙니다). Chromium·Firefox·WebKit은 Playwright 자동화로 전체 e2e를 통과했습니다(F3, 2026-10-02).
 - 남은 작업(한국어 입력 후 키보드 포커스, 번역문 인자 순서, 성 주제어 alias, 잔여 영어 계측과 표면 번역, 클라이맥스 실관측, 저장소 정리, 개조 범위)은 [plan.md](plan.md)의 Todo 34~44에 있습니다(갭 목록은 [goal 대비 갭 감사](docs/GOAL_GAP_AUDIT.md)).
 
 자세한 한계는 [웹 포팅 문서](docs/WEB_PORT.md#알려진-한계)에 있습니다.

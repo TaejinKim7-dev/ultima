@@ -29,6 +29,7 @@ function makeFakeModule(syncfsError: Error | null = null): {
     // any preRun callback runs (see src/engine/startup.ts's doc comment);
     // this fake starts empty so the preRun callback is what fills it in.
     ENV: {},
+    HEAPU8: new Uint8Array(65536),
     FS: {
       trackingDelegate: {},
       mkdirTree(path: string) {
@@ -88,6 +89,25 @@ function fakeModuleAsset(label: string): Blob {
 }
 
 describe("startEngine", () => {
+  it("Todo 42: wasmMemoryBytes() re-reads Module.HEAPU8.buffer on every call (growth replaces the buffer)", async () => {
+    const { module } = makeFakeModule()
+    const { factory } = makeFactory(module)
+    const result = await startEngine({
+      factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
+      zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
+      dispatch: () => true,
+      unlockAudio: async () => {}
+    })
+    expect(result.started).toBe(true)
+    if (!result.started) throw new Error("unreachable")
+    expect(result.wasmMemoryBytes()).toBe(65536)
+    // Emscripten's memory growth swaps in a new, larger HEAPU8 view.
+    ;(module as { HEAPU8: Uint8Array }).HEAPU8 = new Uint8Array(131072)
+    expect(result.wasmMemoryBytes()).toBe(131072)
+  })
+
   it("on success: mounts IDBFS, syncs, writes the zip, calls main exactly once, dispatches a success message", async () => {
     const { module, calls } = makeFakeModule()
     const { factory } = makeFactory(module)
