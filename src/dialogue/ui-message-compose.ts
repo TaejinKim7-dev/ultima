@@ -9,6 +9,8 @@
 //
 // Pure (no DOM, no engine): the shell injects the real lookups.
 
+import { hashText, type CoverageMiss } from "../i18n/coverage.ts"
+
 /** Matches one printf conversion; `%%` is the literal percent sign. */
 const CONVERSION = /%[-+ 0#]*\d*(?:\.\d+)?[a-zA-Z%]/g
 
@@ -19,6 +21,8 @@ export interface UiMessageDeps {
   resolve(id: string, fallback: string): string
   /** Maps an English module config name (e.g. "Dagger") used as a `%s` argument to its module id. */
   moduleNameId(text: string): string | undefined
+  /** Todo 38: optional measurement hook (hashes/ids only); never changes the composed text. */
+  onMiss?: (miss: CoverageMiss) => void
 }
 
 /**
@@ -29,6 +33,7 @@ export interface UiMessageDeps {
 export function composeUiMessage(hash: string, args: readonly string[], deps: UiMessageDeps): string | null {
   const id = deps.templateId(hash)
   if (id === undefined) {
+    deps.onMiss?.({ kind: "ui-unmapped", hash })
     return null
   }
   const template = deps.resolve(id, "")
@@ -40,11 +45,15 @@ export function composeUiMessage(hash: string, args: readonly string[], deps: Ui
     if (conversion === "%%") {
       return "%"
     }
-    const arg = args[next++] ?? ""
+    const position = next++
+    const arg = args[position] ?? ""
     if (conversion.endsWith("s")) {
       const nameId = deps.moduleNameId(arg)
       if (nameId !== undefined) {
         return deps.resolve(nameId, arg)
+      }
+      if (arg !== "") {
+        deps.onMiss?.({ kind: "arg-passthrough", id, position, argHash: hashText(arg) })
       }
     }
     return arg

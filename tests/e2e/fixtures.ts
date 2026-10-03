@@ -1,4 +1,7 @@
 import { test as base, expect, type Page } from "@playwright/test"
+import { mkdirSync, writeFileSync } from "node:fs"
+import { createHash } from "node:crypto"
+import { join } from "node:path"
 
 export { expect, type Page }
 
@@ -11,6 +14,21 @@ export const test = base.extend<{ failureCapture: void }>({
   failureCapture: [
     async ({ page }, use, testInfo) => {
       await use()
+      // Todo 38: always attach the i18n coverage snapshot (hashes and ids only,
+      // never text). A page where the shell never booted has no hook.
+      const coverage = await page
+        .evaluate(() => window.ultimaI18nCoverage?.snapshot() ?? null)
+        .catch(() => null)
+      const coverageJson = JSON.stringify(coverage ?? { unavailable: true })
+      await testInfo.attach("i18n-coverage.json", { body: coverageJson, contentType: "application/json" })
+      // Measurement runs (I18N_COVERAGE_DIR set) also leave the snapshot in a deterministic place.
+      const coverageDir = process.env["I18N_COVERAGE_DIR"]
+      if (coverageDir !== undefined && coverageDir !== "") {
+        const spec = testInfo.file.replace(/^.*[\\/]/, "").replace(/\.spec\.ts$/, "")
+        const id = createHash("sha256").update(testInfo.titlePath.join("\u0000")).digest("hex").slice(0, 8)
+        mkdirSync(coverageDir, { recursive: true })
+        writeFileSync(join(coverageDir, `${spec}-${id}-r${testInfo.retry}.coverage.json`), coverageJson)
+      }
       if (testInfo.status === testInfo.expectedStatus) {
         return
       }

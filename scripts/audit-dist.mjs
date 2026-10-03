@@ -125,6 +125,10 @@ export const TEST_HOOK_ALLOWLIST = [
     reason: "src/main.ts deliberate Todo-42 read-only wasm linear-memory size probe (bytes()) for the memory-smoke e2e"
   },
   {
+    hook: "window.ultimaI18nCoverage",
+    reason: "src/main.ts deliberate Todo-38 read-only snapshot() of dropped/fallback text counters (hashes and ids only, never text) for the i18n-coverage e2e and measurement run"
+  },
+  {
     hook: "data-bridge-ready",
     reason: "src/main.ts shell-ready signal consumed by QA/e2e tooling and the engine startup sequence"
   }

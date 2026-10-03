@@ -31,6 +31,8 @@ import { createIntroViewReceiver, type IntroViewReceiver } from "./overlay/intro
 import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
 import { createFocusReturn } from "./i18n/focus-return.ts"
 import {
+  hasTranslation,
+  isCommandKeyId,
   resolveDisplayText,
   resolveModuleNameId,
   resolveTalkTemplateId,
@@ -39,6 +41,7 @@ import {
   resolveVendorTemplate
 } from "./i18n/localization.ts"
 import { composeTalkInput, composeTalkLine, type TalkComposeDeps } from "./dialogue/talk-compose.ts"
+import { createRecordingResolve, sharedCoverage, type CoverageMiss } from "./i18n/coverage.ts"
 import { createUiMessageHandler } from "./dialogue/ui-message-compose.ts"
 import { createVendorHandler } from "./dialogue/vendor-compose.ts"
 // Real Korean alias data (Todo 13), never original game data -- just this
@@ -706,9 +709,17 @@ export function createShell(doc: Document): UltimaBridgeApi {
   // fragments of the engine's own message stream (a TLK reply has no
   // trailing newline; the separate "\n" line event supplies it), so they
   // go through the normal "message" event path, not appendWholeLine.
+  // Todo 38: every channel's misses are counted (hashes/ids only) in sharedCoverage.
+  const measuredResolve = createRecordingResolve(
+    (id, fallback) => resolveDisplayText(id, fallback),
+    (id) => hasTranslation(id) || isCommandKeyId(id),
+    sharedCoverage
+  )
+  const onMiss = (miss: CoverageMiss): void => sharedCoverage.record(miss)
   const talkDeps: TalkComposeDeps = {
     templateId: (literal) => resolveTalkTemplateId(literal),
-    resolve: (id, fallback) => resolveDisplayText(id, fallback)
+    resolve: measuredResolve,
+    onMiss
   }
 
   // Todo 23: every screenMessage() the engine makes arrives as a format hash
@@ -720,8 +731,9 @@ export function createShell(doc: Document): UltimaBridgeApi {
   const handleUiMessage = createUiMessageHandler(
     {
       templateId: resolveUiTemplateId,
-      resolve: (id, fallback) => resolveDisplayText(id, fallback),
-      moduleNameId: resolveModuleNameId
+      resolve: measuredResolve,
+      moduleNameId: resolveModuleNameId,
+      onMiss
     },
     (text) => {
       dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text })
@@ -736,7 +748,8 @@ export function createShell(doc: Document): UltimaBridgeApi {
     {
       template: resolveVendorTemplate,
       nameId: resolveVendorNameId,
-      resolve: (id, fallback) => resolveDisplayText(id, fallback)
+      resolve: measuredResolve,
+      onMiss
     },
     (text) => {
       dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text })

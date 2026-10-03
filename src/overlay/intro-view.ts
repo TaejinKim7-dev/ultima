@@ -22,6 +22,7 @@
 
 import { BRIDGE_ABI_VERSION, VIEW_REGIONS, type BridgeEvent, type OverlayRow, type ViewRegion } from "../bridge/types.ts"
 import { hasTranslation, resolveDisplayText, resolveIntroTemplateId } from "../i18n/localization.ts"
+import { sharedCoverage } from "../i18n/coverage.ts"
 import { DEFAULT_STATUS_VIEW_DEPS, composeStatusRows, type StatusViewDeps } from "./status-view.ts"
 
 /** Shown for an @id with no ready translation (the English original is never available here). */
@@ -56,7 +57,12 @@ export interface IntroViewDeps {
 
 export const DEFAULT_INTRO_VIEW_DEPS: IntroViewDeps = {
   templateId: (literal) => resolveIntroTemplateId(literal),
-  resolve: (id, fallback) => (hasTranslation(id) ? resolveDisplayText(id, fallback) : fallback)
+  resolve: (id, fallback) => {
+    if (hasTranslation(id)) return resolveDisplayText(id, fallback)
+    // Todo 38: an overlay line that stays English (hash/id only, measurement).
+    sharedCoverage.record({ kind: "resolve-fallback", id })
+    return fallback
+  }
 }
 
 // Menu value strings xu4 draws through %s (BoolMenuItem's On/Off, the video

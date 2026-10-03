@@ -30,6 +30,7 @@
 // Pure apart from the injected dispatch: no DOM, no engine.
 
 import { resolveStatusName, resolveStatusTemplateId, hasTranslation, resolveDisplayText } from "../i18n/localization.ts"
+import { sharedCoverage } from "../i18n/coverage.ts"
 
 /** Prefixed to an open-source stats.cpp literal that has no ready Korean translation. */
 export const UNTRANSLATED_STATUS_MARK = "[영문] "
@@ -54,7 +55,12 @@ export interface StatusViewDeps {
 
 export const DEFAULT_STATUS_VIEW_DEPS: StatusViewDeps = {
   templateId: (literal) => resolveStatusTemplateId(literal),
-  resolve: (id, fallback) => (hasTranslation(id) ? resolveDisplayText(id, fallback) : fallback),
+  resolve: (id, fallback) => {
+    if (hasTranslation(id)) return resolveDisplayText(id, fallback)
+    // Todo 38: an overlay line that stays English (hash/id only, measurement).
+    sharedCoverage.record({ kind: "resolve-fallback", id })
+    return fallback
+  },
   name: (kind, english) => resolveStatusName(kind, english)
 }
 
