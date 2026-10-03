@@ -29,6 +29,7 @@ import {
 import { buildAliasTable, resolveChoiceInput, resolveInput, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
 import { createIntroViewReceiver, type IntroViewReceiver } from "./overlay/intro-view.ts"
 import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
+import { createFocusReturn } from "./i18n/focus-return.ts"
 import {
   resolveDisplayText,
   resolveModuleNameId,
@@ -584,6 +585,14 @@ export function createShell(doc: Document): UltimaBridgeApi {
   )
   const gameWindow = doc.defaultView ?? window
   const textPromptGate = createTextPromptGate()
+  // Todo 35: hand keyboard control back to the game once the conversation is
+  // over (the guard below swallows every key while the input has focus).
+  const focusReturn = createFocusReturn({
+    isFocusInInput: () => doc.activeElement === koreanKeywordInput,
+    leaveInput: () => koreanKeywordInput.blur(),
+    setTimer: (fn, ms) => gameWindow.setTimeout(fn, ms),
+    clearTimer: (id) => gameWindow.clearTimeout(id as number)
+  })
   koreanKeywordInput.addEventListener("input", () => textPromptGate.noteInput())
 
   // The kind of the innermost open native prompt epoch. The top of the gate's
@@ -682,6 +691,10 @@ export function createShell(doc: Document): UltimaBridgeApi {
         return
       }
       keyboardEvent.stopImmediatePropagation()
+      if (keyboardEvent.key === "Escape" && !keyboardEvent.isComposing) {
+        focusReturn.escapePressed()
+        return
+      }
       if (keyboardEvent.key === "Enter" && !keyboardEvent.isComposing) {
         submitKoreanKeyword()
       }
@@ -743,8 +756,12 @@ export function createShell(doc: Document): UltimaBridgeApi {
       opened: (id, kind) => {
         openPromptKind = kind ?? U4_WEB_PROMPT_TEXT
         textPromptGate.opened(id)
+        focusReturn.promptOpened()
       },
-      closed: (id) => textPromptGate.closed(id)
+      closed: (id) => {
+        textPromptGate.closed(id)
+        focusReturn.promptClosed()
+      }
     },
     introViewReceiver: createIntroViewReceiver({ dispatch }),
     talkTextReceiver: {
