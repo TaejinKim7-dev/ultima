@@ -714,7 +714,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - failure: a candidate whose referenced code does not exist is caught during verification and marked as such in the draft.
   Commit: Y (docs) | docs(plan): propose the modding scope
 
-- [ ] 44. Re-verify the release after Todos 34–42 (integration gate + F1/F4 addendum)
+- [x] 44. Re-verify the release after Todos 34–42 (integration gate + F1/F4 addendum)
   What to do / Must NOT do: F1–F4 were approved for the 37-step scope on 2026-10-02. Do not carry them over silently to cover this wave. Steps:
   (1) Run `npm run verify:integration` completely solo (AGENTS.md).
   (2) Run `ULTIMA4_DATA=<path> npm run verify:release`.

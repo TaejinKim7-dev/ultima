@@ -1944,3 +1944,14 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
 - 로컬 증거 `final/F1-addendum-2026-10.md`(Todo 34~46 증거 표, 한계 포함)를 작성했다. `.omo/evidence/`는 git에 올리지 않는다.
 - `docs/GOAL_GAP_AUDIT.md` §11에 갭 9건의 최종 상태와 검증 수준(단위/e2e/사람 확인 필요)을 기록했다.
 - 남은 것: WebKit 결과 확인 → F4 보강 문서 → Todo 44 완료 표시(49/50) → Todo 43은 사용자 결정 대기.
+
+---
+
+## 2026-10-03 — Todo 44 완료 (최종 재검증) — 49/50 = 98.0%
+
+> append만 한다. 위 "Todo 44 중간 기록"을 이 절이 완결한다.
+
+- **WebKit**: 이번 웨이브 스펙 7개 **15 passed (34.5m)**, `WEBKIT_EXIT=0`, 실패 0건, 연결 거부 0건. **Firefox 15 passed (35.5m)**, `FIREFOX_EXIT=0`. Playwright 1.52.0 / Firefox 137.0 / WebKit 18.4. 로그(로컬) `final/F3-addendum-firefox-webkit.log`.
+- 최종 트리 요약: `verify:release` 18/18 exit 0(chromium e2e 55 passed 55.3m), `verify:integration` 13/13 exit 0(e2e 55 passed 55.4m), 네이티브 `test:native` 4/4, 단위 55 files/675 tests, `i18n:check --strict` 4634 entries.
+- 로컬 증거(`.omo/evidence/`, git 미포함): `final/F1-addendum-2026-10.md`(Todo 34~46 증거 표와 한계), `F4-addendum-2026-10.md`(verdict APPROVE_WITH_DEVIATIONS, blocking 0), `F1-addendum-verify-release.log`, `F3-addendum-firefox-webkit.log`.
+- **남은 것**: Todo 43(개조 범위, 사용자 결정). 사용자 확인 필요: 한국어 IME 입력 감각(Todo 35·37), 세이브 가져오기 파일 선택창(Todo 46), 엔딩 패널 표시 방식(문단 vs 페이지), Safari 실기. 죽음 메시지·미덕 형용사는 단위 테스트만.

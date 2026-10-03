@@ -1,11 +1,11 @@
 # HANDOFF
-작성 시각: 2026-10-03 KST (11차 — Todo 45 완료, 48/50) · 세션 재개용 요약
+작성 시각: 2026-10-03 KST (12차 — Todo 44 완료, 49/50) · 세션 재개용 요약
 
 ## 1. 목표 (What we're building)
 - Ultima IV(xu4)를 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식한다. 사용자가 원본 `ultima4.zip`을 직접 선택하고, 실제 플레이 화면은 한국어로 나온다. 진행 기준은 `plan.md`, 세부 정의 원본은 `.omo/plans/ultima-web.md`다.
 
 ## 2. 현재 상태 (Current state)
-- 37/37 완료 뒤 Todo 34~44를 추가해 **진행률 48/50 = 96.0%**다. 계획서 체크박스는 `[x]` 37, `[ ]` 11이다(직접 grep으로 셈).
+- 37/37 완료 뒤 Todo 34~44를 추가해 **진행률 49/50 = 98.0%**다. 계획서 체크박스는 `[x]` 37, `[ ]` 11이다(직접 grep으로 셈).
 - 배포 확인(이번 세션 직접 관측): `origin/main` `6ee20fd` 기준 Pages CI run `37083380136`의 build와 deploy가 success였다. `https://taejinkim7-dev.github.io/ultima/`와 `/engine/xu4.wasm`이 둘 다 HTTP 200이다. Pages API의 `build_type`은 `workflow`다(이전 HANDOFF의 "Pages 설정 확인 필요"는 해소됨).
 - 이번 세션은 **문서·계획만** 바꿨다. 제품 코드 변경은 0이다.
 - 브랜치: `chore-translation-policy-a`(`b373110`)를 main에 fast-forward했다. main은 origin보다 1커밋 앞선다(push는 이 HANDOFF 커밋과 함께 진행).
@@ -33,7 +33,7 @@
 
 ## 5. 다음 할 일 (Next steps)
 - [x] **Todo 34** 로컬 저장소 정리 (완료 2026-10-03; 루트는 이제 main, worktree 27→2). 루트를 main으로 옮기고, merge된 worktree를 회수한다(evidence를 `rsync --ignore-existing`로 보존, 브랜치 유지, dirty는 salvage 브랜치에 커밋). 미merge인 `todo-release-verify`는 남긴다. main을 잡은 `agent-ad52af6bd293aab90`은 마지막에 루트에서 제거한다.
-- [x] Todo 35 완료(2026-10-03, 통합 게이트 47/47 PASS; 사용자 웹 확인 대기). Todo 36~42·46도 완료(2026-10-03, 합친 트리 통합 게이트 55/55 PASS + 네이티브 4/4). Todo 45도 완료(통합 게이트 55/55 PASS). **다음: Todo 44**(최종 재검증, 루트에서 `todo-44-*`). 43은 사용자 결정 대기(`.omo/drafts/mod-scope.md`). 이미 끝난 이전 항목: 한국어 입력 후 포커스 반환(재현 RED부터) → 36 placeholder 순서 → 37 LB/Hawkwind alias → 38 계측 → 39 → 40 → 41 → 42 → 44 재검증. 43은 언제든 할 수 있다.
+- [x] Todo 35 완료(2026-10-03, 통합 게이트 47/47 PASS; 사용자 웹 확인 대기). Todo 36~42·46도 완료(2026-10-03, 합친 트리 통합 게이트 55/55 PASS + 네이티브 4/4). Todo 45도 완료(통합 게이트 55/55 PASS). Todo 44(최종 재검증)도 완료: `verify:release` 18/18, Firefox 15/15, WebKit 15/15. **남은 것은 Todo 43(개조 범위)뿐이며 사용자 결정이 필요하다.** 43은 사용자 결정 대기(`.omo/drafts/mod-scope.md`). 이미 끝난 이전 항목: 한국어 입력 후 포커스 반환(재현 RED부터) → 36 placeholder 순서 → 37 LB/Hawkwind alias → 38 계측 → 39 → 40 → 41 → 42 → 44 재검증. 43은 언제든 할 수 있다.
 - 세부 정의(What to do / Must NOT / References / Acceptance / QA)는 `.omo/plans/ultima-web.md` Todo 34~44에 있다.
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
