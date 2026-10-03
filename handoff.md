@@ -1879,3 +1879,40 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
 - **구현**: `src/i18n/coverage.ts`(id/8-hex 외 키 거부), 컴포저 3종에 선택적 `onMiss`, `window.ultimaI18nCoverage`(audit-dist 허용 목록에 근거와 함께 추가), `tests/e2e/fixtures.ts`가 `i18n-coverage.json`을 항상 첨부(`I18N_COVERAGE_DIR` 지정 시 파일로 기록), `scripts/i18n-coverage-report.mjs`. 게이트(Haiku 실행, 보고 기준): test:unit 627, i18n:check, typecheck, build, check:build-fresh, verify:repo-sources, audit:dist, diff-check 전부 0.
 - **계획 변경**: Todo 45 신설(미확인 해시·형식만 있는 템플릿 조사). 분모 49. 39·40은 병렬 에이전트가 `todo-39-40-english-surfaces`에서 진행 중, 41은 `todo-41-codex-shops`에서 진행 중.
 - 미검증: 해시 일치는 오픈소스 리터럴과의 동일성일 뿐 증거가 아니다. 계측은 e2e가 누른 키 범위에 한정된다.
+
+---
+
+## 2026-10-03 — Todo 38·39·40·41·46 완료 (병렬 worktree → 합친 트리 통합 게이트 PASS) — 47/50 = 94.0%
+
+> append만 한다. 증거 `.omo/evidence/ultima-web/task-{38,39,40,41,46}/`, 통합 게이트 `integration/verify-integration-wave7.log`, 네이티브 게이트 `task-40/native-gate.log`.
+
+### 방식
+- 38(`todo-38-i18n-coverage`), 39·40(`todo-39-40-english-surfaces`, 38 위에 구축), 41(`todo-41-codex-shops`), 46(`todo-46-save-import-accept`)을 격리 worktree/브랜치에서 구현하고 `wave7-combined`에서 `main` 위에 **충돌 없이** 합침(44개 파일). 테스트는 각 에이전트가 Haiku 서브에이전트로 실행, e2e 포트는 4670/4671/4672로 분리.
+- **통합 게이트 `npm run verify:integration`(완전 단독, 포트 4680)**: 13단계 전부 exit 0, 단위 54 files/**665** tests, `i18n:check` 4630 entries, e2e **55 passed (55.6m)**, `ERR_CONNECTION_REFUSED` 0건, `# verify:integration 2026-10-03T07:28:19Z PASS`, `EXIT=0`.
+- **네이티브 게이트(Haiku 실행)**: `build:native` → `cmake:configure` → `cmake:build` → `test:native` 전부 exit 0, ctest **4/4**(module-package, native-baseline-negative, input-queue, localization-boundaries). Todo 40이 `native/i18n/u4_i18n_table.inc`를 바꿨기 때문에 실행했다.
+
+### Todo 38 (`ca0151c`, `356410e`): 잔여 영어 계측
+- `src/i18n/coverage.ts`(id/8-hex 외 키 거부), 컴포저 3종 `onMiss`, `window.ultimaI18nCoverage`(audit-dist 허용 목록), fixtures가 `i18n-coverage.json` 첨부, `scripts/i18n-coverage-report.mjs`. 영어·원문 인자 기록 0.
+- 보고서 요약: ui-unmapped 6종 1018회, talk-unmapped 2종 39회, arg-passthrough 4종 152회. **미확인 해시 `8c19a815` 71회**(잠재 버그), 약 970회는 형식만 있는 템플릿. 이 둘을 Todo 45로 넘김.
+
+### Todo 39 (`80ea737`): 미덕 형용사·크리처 이름
+- 갭 #3: `getVirtueAdjective()` 단어와 fallback이 talk 채널에 raw `%s` 인자로 나가던 것을 글로서리 용어 → 생성기 `GENERATED_ARGUMENT_NAMES`(sourceHash drift 보호)로 매핑. **단위 테스트로만 검증**, e2e로 관측하지 못함.
+- 갭 #7: **재현해 보니 크리처 이름은 이미 번역돼 있었다**(감사 문서 주장은 사실 아님). 모든 크리처·전투 형식을 단위 테스트로 고정.
+
+### Todo 40 (`9439ab5`): 죽음·주문 실패·입장 메시지
+- 정적 배열 추출기 확장(`deathMsgs[]`, `spellErrorMsgs[]`, ui 15행 번역), `screen.cpp`에 `screenMessageCenter` 웹 전용 훅(네이티브 불변, `vendor/source-manifest.json` 갱신), `cityTypeStr()` 값과 신단 이름 8종 글로서리 매핑.
+- e2e: Moonglow 입장 줄·가운데 정렬 이름·실제 주문 실패 문구를 `korean-game-messages`에서 확인. **죽음 메시지는 e2e로 도달하지 못해 단위 테스트만.**
+
+### Todo 41 (`26fb785`, `8f55d3d`): 상점·Codex
+- 상점 4종(무기·방어구 Britain, 시약·여관 Moonglow) 총 6종 e2e. 치트 메뉴 Debug Mode만 사용.
+- **Codex 실세션 관측 성공**: 질문 11개(id 0~10)·엔딩 11 id 전부 한국어 패널에 표시, 오답 시 한국어 거절 줄. `virtueQuestions` 8..10 매핑 위험 해소(id 8·9·10 정상). 증거 로그에 영어 게임 텍스트 없음(내가 직접 확인). 치트 순서 주의: `j` 전에 `f`.
+- **발견(미수정)**: Moonglow 시약상점 첫 목록 줄(`vendors.b` 리터럴 188)이 영어. 테스트가 `knownLeaks: [188]`로 고정. Todo 45에 편입.
+- 사용자 결정 필요: 엔딩이 패널에는 문단 단위, 캔버스에는 페이지 단위로 나온다.
+
+### Todo 46 (`f1d59d2`): 세이브 가져오기 파일 선택창
+- 세이브 질문에 답하다 발견: 내보내기는 `ultima4-save.dat`인데 가져오기 입력은 `.json,.sav`만 받아 파일 선택창이 `.dat`을 숨김(e2e는 `setInputFiles`로 우회해서 못 잡음). `.dat` 추가, 단위 테스트 RED→GREEN. **실제 OS 파일 선택창은 사용자 확인 필요.**
+
+### 미검증/남은 것
+- 에이전트들이 보고한 e2e 일부(Todo 38의 전체 e2e)는 에이전트가 직접 실행했다(규칙은 Haiku). 로그는 내가 확인.
+- Todo 39 에이전트의 최종 본문 보고는 도착하지 않아 갭별 결과는 **커밋 메시지와 diff를 직접 읽어** 확인했다.
+- 다음: Todo 45 → 44. 43은 사용자 결정 대기.

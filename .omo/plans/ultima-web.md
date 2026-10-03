@@ -571,7 +571,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - failure: an alias that maps to an unknown keyword is rejected by the alias loader. Recorded in `.omo/evidence/ultima-web/task-37/bad-alias.log`.
   Commit: Y | feat(i18n): Korean aliases for Lord British and Hawkwind topics
 
-- [ ] 38. Measure the English and dropped text that remains in the Korean display (GOAL_GAP_AUDIT gap #9)
+- [x] 38. Measure the English and dropped text that remains in the Korean display (GOAL_GAP_AUDIT gap #9)
   What to do / Must NOT do: `docs/WEB_PORT.md` "알려진 한계" admits that nobody has measured which English still reaches the screen. Every engine-to-JS text channel drops or falls back silently, and nothing counts it:
   - `handleUiMessage` in `src/shell.ts`: `composeUiMessage` returns null for an unknown screenMessage format hash. The panel shows nothing, while the canvas still draws English.
   - `handleVendorLine`: drops unknown template hashes.
@@ -616,7 +616,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - failure: a key that contains an English word is rejected, not stored. Recorded in `.omo/evidence/ultima-web/task-38/no-english.log`.
   Commit: Y | feat(i18n): measure dropped and fallback text in the Korean display
 
-- [ ] 39. Translate the name arguments that still print in English: virtue adjectives and creature names (GOAL_GAP_AUDIT gaps #3, #7)
+- [x] 39. Translate the name arguments that still print in English: virtue adjectives and creature names (GOAL_GAP_AUDIT gaps #3, #7)
   What to do / Must NOT do: the problem is English inside otherwise Korean lines.
   - Gap #3: the eight `getVirtueAdjective()` adjectives (`docs/WEB_PORT.md`: "번역 틀 안에서 영어로 나옵니다") still print in English inside Korean lines.
   - Gap #7: creature names reported in English in combat lines. `module:Ultima-IV:config:68` (Rat) and `:45`/`:88` (Mage) already have translations, so first reproduce why they leak, for example "Giant Rat" being a different string or a `moduleNameId` miss (확인 필요). Use the Todo 38 report as evidence.
@@ -636,7 +636,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - failure: a regenerated table keeps the rows (generator purity). Recorded in `task-39/generator-purity.log`.
   Commit: Y | fix(i18n): translate virtue adjectives and creature-name arguments
 
-- [ ] 40. Korean for death messages, spell errors and centered entry messages (GOAL_GAP_AUDIT gaps #5, #6)
+- [x] 40. Korean for death messages, spell errors and centered entry messages (GOAL_GAP_AUDIT gaps #5, #6)
   What to do / Must NOT do:
   - Gap #5: `deathMsgs[]` (`vendor/xu4/src/death.cpp:84`, used at line 108) and `spellErrorMsgs[]` (`spell.cpp`) are static array literals. The inventory extractor (`scripts/i18n-inventory.mjs`) does not collect them, so their hashes are unmapped. The canvas shows English and the panel stays silent. Extend the extractor to static string-array initializers that feed `screenMessage`, then translate the new entries.
   - Gap #6: `screenMessageCenter()` (`screen.cpp:573`) calls `screenMessageN` directly and never reaches the web hook. Town, shrine and dungeon entry text therefore has no Korean path. Add a web hook there, the same way `screenMessage` hashes its format. Also add glossary terms for the `cityTypeStr()` values (towne, castle, village, …).
@@ -654,7 +654,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - failure: an array literal that the extractor misses shows up as `ui-unmapped` in the Todo 38 report. Recorded in `task-40/coverage-diff.log`.
   Commit: Y | feat(i18n): Korean death, spell-error and entry messages
 
-- [ ] 41. Observe the climax and the untested shops in a real session (GOAL_GAP_AUDIT gap #8 + audit §5)
+- [x] 41. Observe the climax and the untested shops in a real session (GOAL_GAP_AUDIT gap #8 + audit §5)
   What to do / Must NOT do: two areas have never been observed with real data.
   - Codex and ending text was checked by unit tests and artifact inspection only. No real session has reached the Abyss/Codex. The `virtueQuestions 8..10 ↔ codexHandleInfinity` risk is still open.
   - Only the healer and food shops have e2e coverage. Weapons, armour, reagent and inn shops have none.
@@ -751,7 +751,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: `.omo/evidence/ultima-web/task-45/coverage-report-after.md`; failure: a call site classified as debug-only that is actually reachable in normal play is caught by a normal-play e2e snapshot, recorded in `.omo/evidence/ultima-web/task-45/misclassified.log`.
   Commit: Y | fix(i18n): route the remaining player-visible screenMessage text through id channels
 
-- [ ] 46. Let the save-import file chooser accept the file the export button produces
+- [x] 46. Let the save-import file chooser accept the file the export button produces
   What to do / Must NOT do: the "세이브 내보내기" button downloads `ultima4-save.dat` (`src/shell.ts`), but the "세이브 가져오기" input accepted only `.json,.sav` (`index.html`), so a browser file chooser hides the exported file. The e2e specs fill the input with `setInputFiles()`, which bypasses `accept`, so nothing caught it (found 2026-10-03 while answering the user's question about how saving works). Add `.dat` to the accept list and keep `.json` (the pre-engine placeholder export) and `.sav`. Must not change the archive format or the import logic.
   Parallelization: Wave 6 | Blocked by: none | Blocks: 44
   References: `index.html` (`#save-import`); `src/shell.ts` (`downloadBlob(... "ultima4-save.dat")`); `tests/e2e/save-reload.spec.ts`; `tests/unit/save-import-accept.test.ts`.
