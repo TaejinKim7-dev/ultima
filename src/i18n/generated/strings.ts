@@ -18659,6 +18659,22 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "촌락",
     "placeholders": []
   },
+  "direction-east": {
+    "translation": "동쪽",
+    "placeholders": []
+  },
+  "direction-north": {
+    "translation": "북쪽",
+    "placeholders": []
+  },
+  "direction-south": {
+    "translation": "남쪽",
+    "placeholders": []
+  },
+  "direction-west": {
+    "translation": "서쪽",
+    "placeholders": []
+  },
   "join-fallback-experienced": {
     "translation": "경험",
     "placeholders": []
@@ -20359,6 +20375,10 @@ export const GENERATED_ARGUMENT_NAMES: Readonly<Record<string, string>> = {
   "honorable": "virtue-adjective-honorable",
   "spiritual": "virtue-adjective-spiritual",
   "humble": "virtue-adjective-humble",
+  "West": "direction-west",
+  "North": "direction-north",
+  "East": "direction-east",
+  "South": "direction-south",
   "experienced": "join-fallback-experienced",
   "castle": "city-type-castle",
   "towne": "city-type-towne",

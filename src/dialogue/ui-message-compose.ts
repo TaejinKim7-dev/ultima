@@ -14,6 +14,16 @@ import { hashText, type CoverageMiss } from "../i18n/coverage.ts"
 /** Matches one printf conversion; `%%` is the literal percent sign. */
 const CONVERSION = /%[-+ 0#]*\d*(?:\.\d+)?[a-zA-Z%]/g
 
+/**
+ * Todo 45: text-free formats whose text rides in the first `%s` argument
+ * (`"%s\n"` after a direction or weapon prompt, `"%s"`), each with what the
+ * format itself adds after the argument. Keyed by the format's hash.
+ */
+export const FORMAT_ONLY_HASHES: Readonly<Record<string, string>> = {
+  [hashText("%s\n")]: "\n",
+  [hashText("%s")]: ""
+}
+
 export interface UiMessageDeps {
   /** Maps a format hash (8 lowercase hex digits) to its ui/module id, if inventoried. */
   templateId(hash: string): string | undefined
@@ -33,6 +43,15 @@ export interface UiMessageDeps {
 export function composeUiMessage(hash: string, args: readonly string[], deps: UiMessageDeps): string | null {
   const id = deps.templateId(hash)
   if (id === undefined) {
+    const suffix = FORMAT_ONLY_HASHES[hash]
+    if (suffix !== undefined) {
+      // The format carries no text; the argument is the text. Translate it by name, or drop it.
+      const nameId = deps.moduleNameId(args[0] ?? "")
+      const name = nameId === undefined ? "" : deps.resolve(nameId, "")
+      if (name !== "") {
+        return name + suffix
+      }
+    }
     deps.onMiss?.({ kind: "ui-unmapped", hash })
     return null
   }

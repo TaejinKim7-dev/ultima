@@ -113,6 +113,13 @@ const ARGUMENT_NAME_SOURCES = [
     pattern: /virtueAdjectives\s*\[\s*\]\s*=\s*\{([^}]*)\}/,
     idPrefix: "virtue-adjective"
   },
+  // Todo 45: getDirectionName() is the `%s` of the text-free "%s\n" format that
+  // echoes a movement or aim direction.
+  {
+    file: "vendor/xu4/src/names.cpp",
+    pattern: /directionNames\s*\[\s*\]\s*=\s*\{([^}]*)\}/,
+    idPrefix: "direction"
+  },
   {
     file: "vendor/xu4/src/discourse_tlk.cpp",
     pattern: /getVirtueAdjective\(virt\)\s*:\s*("[^"]*")/,

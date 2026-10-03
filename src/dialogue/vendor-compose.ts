@@ -9,7 +9,7 @@
 //
 // Pure (no DOM, no engine): the shell injects the real lookups.
 
-import type { CoverageMiss } from "../i18n/coverage.ts"
+import { hashText, type CoverageMiss } from "../i18n/coverage.ts"
 
 export interface VendorComposeDeps {
   /** Korean runtime template for a template hash (8 lowercase hex digits), if translated. */
@@ -88,6 +88,14 @@ function translateValue(raw: string, deps: VendorComposeDeps): string {
   }
   if (!raw.includes("\n")) {
     return raw
+  }
+  // A static inventory block (vendors.b `{{ }}` literal) has its own Korean
+  // translation keyed by the hash of its runtime text. Prefer it: the listing
+  // may spell an item differently from the item table, so per-line name
+  // lookups can miss (the first reagent line).
+  const block = deps.template(hashText(raw))
+  if (block !== undefined && block !== "") {
+    return block
   }
   return raw
     .split("\n")

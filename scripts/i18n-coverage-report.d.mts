@@ -7,6 +7,8 @@ export interface ReverseMaps {
   ui: Map<string, Location[]>
   literal: Map<string, Location[]>
   vendor: Map<string, Location[]>
+  formatOnly?: Set<string>
+  controlOnly?: Set<string>
 }
 export interface CoverageRow {
   key: string

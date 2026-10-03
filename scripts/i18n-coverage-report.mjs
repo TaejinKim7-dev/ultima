@@ -47,6 +47,11 @@ function unescapeC(raw) {
     .replace(/\\([0-7]{1,3})/g, (_m, octal) => String.fromCharCode(parseInt(octal, 8)))
     .replace(/\\n/g, "\n")
     .replace(/\\t/g, "\t")
+    .replace(/\\b/g, "\b")
+    .replace(/\\a/g, "\x07")
+    .replace(/\\f/g, "\f")
+    .replace(/\\r/g, "\r")
+    .replace(/\\v/g, "\v")
     .replace(/\\"/g, '"')
     .replace(/\\\\/g, "\\")
 }
@@ -63,6 +68,7 @@ export function buildReverseMaps({ cppSources, vendorSource, moduleSources = [] 
   const literal = new Map()
   const vendor = new Map()
   const formatOnly = new Set()
+  const controlOnly = new Set()
   for (const { file, text } of cppSources) {
     for (const entry of extractCppLiterals(text, REPORT_CPP_OPTIONS)) {
       pushUnique(ui, fnv1a32(entry.text), { file, line: lineOf(text, entry.offset) })
@@ -74,7 +80,11 @@ export function buildReverseMaps({ cppSources, vendorSource, moduleSources = [] 
       if (value.length > 0) {
         pushUnique(literal, fnv1a32(value), { file, line: lineOf(text, match.index) })
         // "%s", "%c", "%s\n", "\n": nothing translatable in the format itself; the text rides in the arguments.
-        if (!/[A-Za-z]/.test(value.replace(/%[-+ #0-9.]*[a-zA-Z%]/g, ""))) formatOnly.add(fnv1a32(value))
+        if (!/[A-Za-z]/.test(value.replace(/%[-+ #0-9.]*[a-zA-Z%]/g, ""))) {
+          // Todo 45: no conversion at all (cursor erase, a bare newline) means no argument carries text either.
+          if (/%[-+ #0-9.]*[a-zA-Z]/.test(value.replace(/%%/g, ""))) formatOnly.add(fnv1a32(value))
+          else controlOnly.add(fnv1a32(value))
+        }
       }
     }
   }
@@ -92,7 +102,7 @@ export function buildReverseMaps({ cppSources, vendorSource, moduleSources = [] 
       if (entry.text.length > 0) pushUnique(literal, fnv1a32(entry.text), { file, line: lineOf(text, entry.offset) })
     }
   }
-  return { ui, literal, vendor, formatOnly }
+  return { ui, literal, vendor, formatOnly, controlOnly }
 }
 
 /** Sums snapshot counts per kind and key; `rejected` is summed too. */
@@ -202,7 +212,11 @@ export function renderReport(merged, maps, { specCount = 0, unavailableCount = 0
           unknown.push({ kind, key, count })
           out.push(`| ${key} | ${count} | UNKNOWN |`)
         } else {
-          const note = maps.formatOnly?.has(key) ? "; FORMAT-ONLY: the text rides in unmeasured args" : ""
+          const note = maps.formatOnly?.has(key)
+            ? "; FORMAT-ONLY: the text rides in unmeasured args"
+            : maps.controlOnly?.has(key)
+              ? "; CONTROL-ONLY: no text, no arguments (line break or cursor control)"
+              : ""
           out.push(`| ${key} | ${count} | ${locs(found.hits.slice(0, 4))}${found.hits.length > 4 ? ` (+${found.hits.length - 4} more)` : ""} (${found.via}${note}) |`)
         }
       }

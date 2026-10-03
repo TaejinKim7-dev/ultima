@@ -551,12 +551,9 @@ test.describe("Todo 41: weapons, armour, reagent and inn vendors in Korean", () 
       shopEnglish: "Magical Herbs",
       ownerEnglish: "Margot",
       welcomeFragment: "Are you in need of Reagents",
-      // BUG found by this test (Todo 41), not fixed here (src/ is out of scope):
-      // the reagent inventory list (vendors.b literal 188) reaches the panel
-      // with its FIRST line in English while lines B..F are Korean. Unverified
-      // hypothesis: that line is looked up by item name, and vendors.b spells
-      // the item two ways. Remove this when the first line is translated.
-      knownLeaks: [188],
+      // Todo 45: the inventory block (vendors.b literal 188) spelled its first item
+      // differently from the item table, so the per-line name lookup missed it.
+      // It is now translated as a whole block; no known leak remains.
       drive: async (page) => {
         await pressKey(page, "y", 2500) // "Are you in need of Reagents?" -> inventory
         await pressKey(page, "a", 2500) // first reagent, 2 gp: the priced offer

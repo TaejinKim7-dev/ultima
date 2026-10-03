@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from "vitest"
+import { hashText } from "../../src/i18n/coverage.ts"
 import { composeVendorLine, createVendorHandler, type VendorComposeDeps } from "../../src/dialogue/vendor-compose.ts"
 
 // Todo 25: the shell receives (template hash, [symbol, value, symbol, value...])
@@ -47,6 +48,18 @@ describe("composeVendorLine", () => {
 
   it("translates an inventory listing (one `K name` line per item) line by line, keeping the key letters", () => {
     expect(composeVendorLine("aaaa0005", ["+", "B Dagger\nC Unknown\n"], deps)).toBe("가진 것:\nB 단검\nC Unknown\n")
+  })
+
+  it("translates a static inventory block through its own template when an item is spelled differently from its name (Todo 45)", () => {
+    // The listing spells the first item one way and the item table another, so no per-line name lookup can match it.
+    const block = "A-Spelling One\nB-Dagger\n"
+    const withBlock: VendorComposeDeps = {
+      ...deps,
+      template: (hash) => (hash === hashText(block) ? "A-첫째\nB-단검\n" : TEMPLATES[hash])
+    }
+    expect(composeVendorLine("aaaa0005", ["+", block], withBlock)).toBe("가진 것:\nA-첫째\nB-단검\n")
+    // an unknown block still falls back to the line-by-line translation
+    expect(composeVendorLine("aaaa0005", ["+", "B-Dagger\n"], withBlock)).toBe("가진 것:\nB-단검\n")
   })
 
   it("drops a symbol whose value is empty (none), like construct", () => {

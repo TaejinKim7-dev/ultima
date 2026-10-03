@@ -730,6 +730,10 @@ const U4I18nEntry U4_I18N_STATIC_TABLE[] = {
     { "DEN:9:topic1", "IT  ", "", 0, 0 },
     { "DEN:9:topic2", "A   ", "", 0, 0 },
     { "DEN:9:yes", "그럼 해!", "", 0, 0 },
+    { "direction-east", "동쪽", "", 0, 0 },
+    { "direction-north", "북쪽", "", 0, 0 },
+    { "direction-south", "남쪽", "", 0, 0 },
+    { "direction-west", "서쪽", "", 0, 0 },
     { "EMPATH:0:health", "아주 좋다네.", "", 0, 0 },
     { "EMPATH:0:job", "나는 이 지방을\n다스린다네.", "", 0, 0 },
     { "EMPATH:0:look", "위엄있는 남작", "", 0, 0 },
@@ -4581,4 +4585,4 @@ const U4I18nEntry U4_I18N_STATIC_TABLE[] = {
     { "YEW:9:topic2", "PEOP", "", 0, 0 },
     { "YEW:9:yes", "죽음을\n맛봐라,\n쓰레기\n같은 놈!", "", 0, 0 },
 };
-const int U4_I18N_STATIC_COUNT = 4578;
+const int U4_I18N_STATIC_COUNT = 4582;

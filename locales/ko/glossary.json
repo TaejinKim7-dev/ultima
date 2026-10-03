@@ -25,6 +25,30 @@
       "translation": "촌락",
       "status": "ready"
     },
+    "direction-east": {
+      "sourceHash": "sha256:4e2cd851cfdab8b554b71408d984989127f1db0430f647c711863c42d20f39e7",
+      "placeholders": [],
+      "translation": "동쪽",
+      "status": "ready"
+    },
+    "direction-north": {
+      "sourceHash": "sha256:43f853bbb592860098a76140c1770ee2add66f4720453d64dcf225178e238e57",
+      "placeholders": [],
+      "translation": "북쪽",
+      "status": "ready"
+    },
+    "direction-south": {
+      "sourceHash": "sha256:0dd2dae4dd83ae3085cd80ac1bfc28e8d76ba51ddfd972c269fe9f98a85c099a",
+      "placeholders": [],
+      "translation": "남쪽",
+      "status": "ready"
+    },
+    "direction-west": {
+      "sourceHash": "sha256:41a6741e9a0faee34fec1fce082d6c634d48b44aee0d15bee819d12917073df8",
+      "placeholders": [],
+      "translation": "서쪽",
+      "status": "ready"
+    },
     "join-fallback-experienced": {
       "sourceHash": "sha256:3d486fe5bc88e9b66c18509b0d8b17bdc16e5d8e426a4afb5e3c16c7c7be97be",
       "placeholders": [],

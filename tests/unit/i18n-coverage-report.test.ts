@@ -63,3 +63,30 @@ describe("buildReverseMaps + renderReport", () => {
     expect(md).not.toContain("Hello")
   })
 })
+
+// Todo 45 (a): the hash that matched no literal was screenMessage("\b\b\b\b"),
+// the cursor-erase after the "Dir?" prompt. The report's own unescape did not
+// know the C escapes \b \a \f \r \v, so the literal hashed differently from
+// what the engine sends. It is control characters only (no text to translate).
+describe("C escape handling in the reverse map (Todo 45)", () => {
+  const ESCAPES = `void g() {
+  screenMessage("\\b\\b\\b\\b");
+  screenMessage("a\\rb\\fc\\vd\\ae");
+}
+`
+  const escMaps = buildReverseMaps({ cppSources: [{ file: "vendor/xu4/src/game.cpp", text: ESCAPES }] })
+
+  it("hashes \\b \\a \\f \\r \\v literals the way the engine's bytes hash", () => {
+    expect(escMaps.literal.get(fnv1a32("\b\b\b\b"))).toEqual([{ file: "vendor/xu4/src/game.cpp", line: 2 }])
+    expect(escMaps.literal.get(fnv1a32("a\rb\fc\vd\x07e"))).toEqual([{ file: "vendor/xu4/src/game.cpp", line: 3 }])
+  })
+
+  it("reports a control-only literal as not translatable, not as an unknown hash or an args-carrying format", () => {
+    const merged = mergeSnapshots([{ "ui-unmapped": [{ key: fnv1a32("\b\b\b\b"), count: 7 }] }])
+    const md = renderReport(merged, escMaps, { specCount: 1 })
+    expect(md).toContain("vendor/xu4/src/game.cpp:2")
+    expect(md).toContain("CONTROL-ONLY")
+    expect(md).not.toContain("UNKNOWN")
+    expect(md).not.toContain("FORMAT-ONLY")
+  })
+})

@@ -1610,6 +1610,10 @@ ko-translations: [
   DEN:9:topic1: "IT  "
   DEN:9:topic2: "A   "
   DEN:9:yes: "그럼 해!"
+  direction-east: "동쪽"
+  direction-north: "북쪽"
+  direction-south: "남쪽"
+  direction-west: "서쪽"
   EMPATH:0:health: "아주 좋다네."
   EMPATH:0:job: "나는 이 지방을
 다스린다네."
