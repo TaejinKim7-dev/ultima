@@ -86,6 +86,8 @@
 
 ## 6. 권장 작업 순서 (사용자 결정 대기)
 
+> **⚠️ 2026-10-03 대체됨**: 실제 진행 순서는 아래 §10과 `plan.md` "🆕 바로 다음 순서"(계획서 Todo 34~44)를 따른다. 이 표는 감사 당시의 제안으로 보존한다.
+
 > AGENTS.md "merge 전 검증 게이트"는 그대로 적용. 각 작업은 `<100 LOC` 단위로 새 branch(`todo-<n>-...`, 번호는 아래 §10)에서 TDD RED → 그린 → main 머지.
 
 | 순서 | 작업 | 의존 | LOC | 목표 |
@@ -125,7 +127,7 @@
 - F4 감사서: `.omo/evidence/ultima-web/final/F4-scope-fidelity.md` (13KB)
 - 사용자 가이드: `docs/WEB_PORT.md:104-107`(잔여 영어/입력창 이슈)
 - 핸드오프: `handoff.md:1463`(갭 #1), `:1607`(Todo 30 미검증)
-- 설계안: `.omo/drafts/korean-output-gap-design.md`, `korean-surface-{intro-status,shops-messages,castle-ending}.md`
+- 설계안: `.omo/drafts/korean-output-gap-design.md`, `korean-surface-{intro-status,shops-messages,castle-ending}.md` (주의: `korean-surface-*`는 git에 커밋된 적 없는 로컬 초안이다. Codex 관련 미해결 위험은 계획서 Todo 41 본문에 옮겨 적었다)
 
 ### 병렬 검증 agent 5건 결과 요약
 

@@ -471,7 +471,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - `main` itself is checked out in one worktree (`agent-ad52af6bd293aab90`), so the root cannot switch to `main` until that worktree is retired.
   Steps:
   (1) Before changing anything, capture `git worktree list`, `git status --short` for each worktree, and the file count of every `.omo/evidence/` directory into `.omo/evidence/ultima-web/task-34/before.log`.
-  (2) Preserve the root's tracked changes on a new branch `salvage/root-stale-2026-10-03`, using a temporary commit (precedent: `salvage/pre-merge-main-2026-10-01`). Move the root's superseded untracked files into the git-ignored `.omo/research/archive-2026-10-03/` so they are kept but out of the way.
+  (2) Preserve the root's tracked changes on a new branch `salvage/root-stale-2026-10-03`, using a temporary commit (precedent: `salvage/pre-merge-main-2026-10-01`). Move the root's superseded untracked files into the git-ignored `.omo/research/archive-2026-10-03/` so they are kept but out of the way. This must include `goal.md` and `ultima-web.md`, because `main` tracks files at those paths and `git switch main` in step (4) refuses to run while untracked files there would be overwritten. The root's `goal.md` is the user's unedited original: archive it, never delete it. It differs from `main`'s copy only in §5/§8 and the header note.
   (3) For each worktree other than the one holding `main`:
     - If `git status --porcelain` is empty and its branch (or detached HEAD) is an ancestor of `main`: copy its `.omo/evidence/` into the root's `.omo/evidence/` with `rsync -a --ignore-existing`, then run `git worktree remove <path>` without `--force`.
     - If it is dirty: first commit the dirty state to `salvage/<branch>-2026-10-03`, then remove it.
@@ -661,7 +661,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - Extend `korean-shop.spec.ts` to the other four vendor types.
   Must NOT: bypass game logic outside the original cheat menu, or log English original data.
   Parallelization: Wave 6 | Blocked by: 34 | Blocks: 44 | Can run alongside: 36, 37
-  References: `vendor/xu4/src/codex.cpp`; `vendor/xu4/src/cheat.cpp`; `tests/e2e/gameplay-progression.spec.ts`; `tests/e2e/korean-castle-output.spec.ts`; `tests/e2e/korean-shop.spec.ts`; `.omo/drafts/korean-surface-castle-ending.md` "Open risks".
+  References: `vendor/xu4/src/codex.cpp`; `vendor/xu4/src/cheat.cpp`; `tests/e2e/gameplay-progression.spec.ts`; `tests/e2e/korean-castle-output.spec.ts`; `tests/e2e/korean-shop.spec.ts`; the open risks from the 2026-09-27 castle/ending research (a draft that was never committed; its items are copied here): (a) `virtueQuestions` indexes 8..10 must match 1:1 the `current` values used at `codex.cpp:311` (`codexHandleInfinity` path); (b) the empty index 24 of `lordBritishKeyword` must match the inventory's handling of empty strings; (c) the panel shows a whole paragraph at once while the canvas still pages -- confirm with the user that this is acceptable.
   Acceptance criteria:
   - An e2e, or a recorded manual session if the Codex cannot be automated, shows the Korean Codex question and ending text. The reason for choosing manual is recorded.
   - `korean-shop` covers 6 vendor types.
