@@ -855,6 +855,10 @@ ko-translations: [
   BRITAIN:9:topic1: "LEAR"
   BRITAIN:9:topic2: "COMP"
   BRITAIN:9:yes: "좋아요."
+  city-type-castle: "성"
+  city-type-ruins: "폐허"
+  city-type-towne: "마을"
+  city-type-village: "촌락"
   COVE:0:health: "난 괜찮아요."
   COVE:0:job: "나는 어비스에
 들어가는 법을
@@ -6253,6 +6257,14 @@ L'A\"에서
 삶에
 의미가
 있군!"
+  shrine-name-compassion: "자비의 신단"
+  shrine-name-honesty: "정직의 신단"
+  shrine-name-honor: "명예의 신단"
+  shrine-name-humility: "겸손의 신단"
+  shrine-name-justice: "정의의 신단"
+  shrine-name-sacrifice: "희생의 신단"
+  shrine-name-spirituality: "영성의 신단"
+  shrine-name-valor: "용맹의 신단"
   SKARA:0:health: "나는 잘
 지낸다네."
   SKARA:0:job: "나는 내면의
@@ -7615,6 +7627,28 @@ z:%d
 "
   ui:creature:9: "%s 경미한 부상!
 "
+  ui:death:0: "
+
+
+모든 것이 어둠에 잠긴다...
+"
+  ui:death:1: "
+그러나 잠깐...
+"
+  ui:death:2: "여기가 어디지?...
+"
+  ui:death:3: "내가 죽었나?...
+"
+  ui:death:4: "저승인가?...
+"
+  ui:death:5: "들려오는 소리:
+%s
+"
+  ui:death:6: "움직임이 느껴진다...
+"
+  ui:death:7: "
+로드 브리티시가 말한다: 내가 그대의 영혼과 소지품 일부를 허공에서 끌어냈노라. 앞으로는 더 조심하라!
+"
   ui:discourse_castle:0: "이 험난한 땅에서 살아남으려면 먼저 그대 자신을 알아야 한다! 무기와 마법 능력을 갈고닦도록 하라!
 
 브리타니아에서의 첫 여행길에서는 각별히 조심하라.
@@ -8436,6 +8470,23 @@ A-P로 표시된
   ui:spell:0: "떠나는 중...
 "
   ui:spell:1: "떠나는 중...
+"
+  ui:spell:2: "조합된 것이 없다!
+"
+  ui:spell:3: "마력이 부족하다!
+"
+  ui:spell:4: "실패!
+"
+  ui:spell:5: "여기선 안 됨!
+"
+  ui:spell:6: "전투 중에만 가능!
+실패!
+"
+  ui:spell:7: "던전에서만 가능!
+실패!
+"
+  ui:spell:8: "야외에서만 가능!
+실패!
 "
   ui:stats:0: "음식:%04d  선체:%02d"
   ui:stats:1: "음식:%04d  금:%04d"

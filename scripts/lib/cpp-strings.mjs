@@ -89,6 +89,63 @@ function isFormatOnly(text) {
 const SET_TITLE_PATTERN = /\.setTitle\s*\(\s*"((?:[^"\\]|\\.)*)"/g
 const TRAILING_GROUP_OFFSET = 1e9
 
+// Todo 40: static string-array initialisers whose elements reach
+// screenMessage() through a variable (death.cpp's `deathMsgs[]`, spell.cpp's
+// `spellErrorMsgs[]` of `{ ENUM, "literal" }` rows), so no call-site pattern
+// sees them. Opt-in by array NAME (spell.cpp's spells[] sits right after its
+// error table and must not be swept in), scanned within the array's own braces,
+// skipping // and block comments (the rows quote other wording there), and
+// joining adjacent literals like C does. Listed AFTER every other literal of
+// the file, so the ids of everything already inventoried never move.
+const STATIC_ARRAY_GROUP_OFFSET = 2e9
+
+function skipBlank(source, from) {
+  let i = from
+  for (;;) {
+    if (/\s/.test(source[i] ?? "")) i++
+    else if (source.startsWith("//", i)) i = source.indexOf("\n", i) + 1 || source.length
+    else if (source.startsWith("/*", i)) i = source.indexOf("*/", i) + 2 || source.length
+    else return i
+  }
+}
+
+function scanStaticArray(source, name) {
+  const head = new RegExp(String.raw`\b${name}\s*\[\s*\]\s*=\s*\{`).exec(source)
+  if (head === null) {
+    throw new Error(`static string array "${name}" not found`)
+  }
+  const found = []
+  let depth = 1
+  let i = head.index + head[0].length
+  while (i < source.length && depth > 0) {
+    const ch = source[i]
+    if (source.startsWith("//", i) || source.startsWith("/*", i)) {
+      i = skipBlank(source, i)
+    } else if (ch === "{") {
+      depth++
+      i++
+    } else if (ch === "}") {
+      depth--
+      i++
+    } else if (ch === "'") {
+      i = source.indexOf("'", source[i + 1] === "\\" ? i + 3 : i + 2) + 1
+    } else if (ch === '"') {
+      const start = i
+      let raw = ""
+      while (source[i] === '"') {
+        const match = /^"((?:[^"\\]|\\.)*)"/.exec(source.slice(i))
+        if (match === null) throw new Error(`unterminated literal in static string array "${name}"`)
+        raw += match[1]
+        i = skipBlank(source, i + match[0].length)
+      }
+      found.push({ offset: STATIC_ARRAY_GROUP_OFFSET + start, text: unescapeCLiteral(raw) })
+    } else {
+      i++
+    }
+  }
+  return found
+}
+
 /**
  * Extract candidate display strings from one C++ source file's text.
  * Returns entries in file order with the 0-based occurrence index per
@@ -105,6 +162,8 @@ const TRAILING_GROUP_OFFSET = 1e9
  * `skipFormatOnly`.
  *   - `textAtCalls` (Todo 26): also capture TextView textAt/textAtKey/
  *     textAtFmt literals (intro.cpp).
+ *   - `staticArrays` (Todo 40): names of static string-array initialisers
+ *     whose elements are printed through a variable; see scanStaticArray().
  *   - `setTitleCalls` (Todo 26): also capture Menu::setTitle literals,
  *     listed after all other literals so earlier ids don't move.
  */
@@ -117,7 +176,8 @@ export function extractCppLiterals(source, options = {}) {
     markerComments = false,
     skipFormatOnly = false,
     textAtCalls = false,
-    setTitleCalls = false
+    setTitleCalls = false,
+    staticArrays = []
   } = options ?? {}
   const literals = []
   const groups = callPatterns({ extraCallNames, secondArgCallNames, assignNames, markerComments, textAtCalls }).map(
@@ -133,6 +193,11 @@ export function extractCppLiterals(source, options = {}) {
       if (text.length === 0) continue
       if (skipFormatOnly && isFormatOnly(text)) continue
       literals.push({ offset: base + match.index, text })
+    }
+  }
+  for (const name of staticArrays ?? []) {
+    for (const entry of scanStaticArray(source, name)) {
+      if (entry.text.length > 0) literals.push(entry)
     }
   }
   literals.sort((left, right) => left.offset - right.offset)

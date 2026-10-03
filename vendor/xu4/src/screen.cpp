@@ -430,6 +430,25 @@ EM_JS(void, u4_web_message, (const char* hash, int argc, const char** argv), {
 });
 
 /*
+ * Todo 40: screenMessageCenter() (the town / castle / dungeon NAME of an
+ * entry message) draws through screenMessageN() directly, so it never reaches
+ * the screenMessage hook above. It gets its own: the FNV-1a hash of the text
+ * (a map name from the open-source module's maps.b, hashed like a format) and
+ * the number of newlines the engine appends. The shell shows the Korean name
+ * for a hash it knows and drops anything else. The canvas output is unchanged.
+ */
+EM_JS(void, u4_web_message_center, (const char* hash, int newlines), {
+    var receiver = Module.u4Text;
+    if (! receiver || ! receiver.center)
+        return;
+    try {
+        receiver.center(UTF8ToString(hash), newlines);
+    } catch (e) {
+        // Never unwind the wasm game loop from a display hook.
+    }
+});
+
+/*
  * Todo 25: vendors.b's `web-say` (script_boron.cpp) announces the template
  * it is about to print, unsubstituted, with the `construct` symbol/value
  * pairs (`@` shop, `%` owner, `$` price, `#` quantity, `=` item name). The
@@ -577,6 +596,14 @@ void screenMessageCenter(const char* text, int newlines) {
     char* cp = start;
     char* endOfLine = NULL;
     int ch, lineLen;
+
+#ifdef __EMSCRIPTEN__
+    if (! webSuppressMessage) {
+        char hash[9];
+        webFormatHash(text, hash);
+        u4_web_message_center(hash, newlines);
+    }
+#endif
 
     memset(buffer, ' ', half);
     while ((ch = *text++)) {

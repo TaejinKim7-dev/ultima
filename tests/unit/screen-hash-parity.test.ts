@@ -22,6 +22,7 @@ const FORMATS = [
   "foobar",
   "Pass\n",
   "Enter %s!\n\n",
+  "Moonglow",
   "%cSlow progress!%c\n",
   "\nThou hast achieved partial Avatarhood in the Virtue of %s\n",
   "%s says: I am %s\n",

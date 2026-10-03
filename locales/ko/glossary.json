@@ -1,6 +1,30 @@
 {
   "$schema": "ultima-web/i18n-schema/glossary/v1",
   "entries": {
+    "city-type-castle": {
+      "sourceHash": "sha256:913a53d7df2fad651bed414afb045378c3495b23d5174bead8091dcc8cdef8ff",
+      "placeholders": [],
+      "translation": "성",
+      "status": "ready"
+    },
+    "city-type-ruins": {
+      "sourceHash": "sha256:61e759cfb63ee070a9b202315be7bd3c1b445e0bc5910a4baacde97f0c2b2001",
+      "placeholders": [],
+      "translation": "폐허",
+      "status": "ready"
+    },
+    "city-type-towne": {
+      "sourceHash": "sha256:61f3aef5104fbe6504a769e3aadb8c0b0b19bc9796ba713189197af5f78363d5",
+      "placeholders": [],
+      "translation": "마을",
+      "status": "ready"
+    },
+    "city-type-village": {
+      "sourceHash": "sha256:05cfbe283381aab8902e93d508ff031c0bcd3f95501c59ee28ac34b21b240fa3",
+      "placeholders": [],
+      "translation": "촌락",
+      "status": "ready"
+    },
     "join-fallback-experienced": {
       "sourceHash": "sha256:3d486fe5bc88e9b66c18509b0d8b17bdc16e5d8e426a4afb5e3c16c7c7be97be",
       "placeholders": [],
@@ -77,6 +101,54 @@
       "sourceHash": "sha256:add0ee4f2f692e79e63ddf34ab5f2776c9f832b8aa3ebeec3c287b4050808056",
       "placeholders": [],
       "translation": "유황재",
+      "status": "ready"
+    },
+    "shrine-name-compassion": {
+      "sourceHash": "sha256:383e2a9843a5c17259d9cc9e8035197f6566bf82818884b93486460e58c605df",
+      "placeholders": [],
+      "translation": "자비의 신단",
+      "status": "ready"
+    },
+    "shrine-name-honesty": {
+      "sourceHash": "sha256:7c92045ac6cc8c7da02f434db6e6b07a748144dce1907642c43ea1aefbd65a8a",
+      "placeholders": [],
+      "translation": "정직의 신단",
+      "status": "ready"
+    },
+    "shrine-name-honor": {
+      "sourceHash": "sha256:9f5ab3f078450b23f508481416f7c86aac1efda079035e1c0b4723c2966e6a4e",
+      "placeholders": [],
+      "translation": "명예의 신단",
+      "status": "ready"
+    },
+    "shrine-name-humility": {
+      "sourceHash": "sha256:82fc9eccff81fdbc555522cd655b3999534d023d382e3a335bf1e431f8e193a0",
+      "placeholders": [],
+      "translation": "겸손의 신단",
+      "status": "ready"
+    },
+    "shrine-name-justice": {
+      "sourceHash": "sha256:3296a37a538b2a7d31d9c30d45007c486543ca5f67ee3f1365d6cfd8559bc4ae",
+      "placeholders": [],
+      "translation": "정의의 신단",
+      "status": "ready"
+    },
+    "shrine-name-sacrifice": {
+      "sourceHash": "sha256:656ed2631dce2053dc2a6cd51e94bbd3f0b74a21981ba3e86d89de9ac16bb511",
+      "placeholders": [],
+      "translation": "희생의 신단",
+      "status": "ready"
+    },
+    "shrine-name-spirituality": {
+      "sourceHash": "sha256:7eacddbe63e195799bf2c971b554a77bda8889855bf52dea7960526c684ca79e",
+      "placeholders": [],
+      "translation": "영성의 신단",
+      "status": "ready"
+    },
+    "shrine-name-valor": {
+      "sourceHash": "sha256:71bec57fd0aa851c9197a3931b9528bea1fcd5b7434ab58c263fd27f52f50402",
+      "placeholders": [],
+      "translation": "용맹의 신단",
       "status": "ready"
     },
     "term-abyss": {

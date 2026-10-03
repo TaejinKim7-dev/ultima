@@ -110,7 +110,12 @@ export const CPP_UI_FILE_OPTIONS = {
   // Todo 27: the status column draws through TextView::textAt* and the bare
   // StatsArea::setTitle("Weapons") member call (no leading `.`). stats.cpp had
   // no ui ids before, so file order is free.
-  "vendor/xu4/src/stats.cpp": { textAtCalls: true, extraCallNames: ["setTitle"] }
+  "vendor/xu4/src/stats.cpp": { textAtCalls: true, extraCallNames: ["setTitle"] },
+  // Todo 40: the death scene and the spell-error messages are static array
+  // elements printed through a variable. They are open-source xu4 literals
+  // (death.cpp / spell.cpp), appended after each file's existing literals.
+  "vendor/xu4/src/death.cpp": { staticArrays: ["deathMsgs"] },
+  "vendor/xu4/src/spell.cpp": { staticArrays: ["spellErrorMsgs"] }
 }
 
 const TLK_MAPS = [

@@ -81,3 +81,33 @@ export function createUiMessageHandler(
     }
   }
 }
+
+/**
+ * Todo 40: the Korean line for one `screenMessageCenter()` call (the town /
+ * castle / dungeon name after an entry message). The engine sends the hash of
+ * the name's bytes (a maps.b literal, which GENERATED_UI_TEMPLATES maps like
+ * any other) and the number of newlines it appends after it. Null when the name
+ * is not one we translate (never fall back to English).
+ */
+export function composeCenterMessage(hash: string, newlines: number, deps: UiMessageDeps): string | null {
+  const text = composeUiMessage(hash, [], deps)
+  return text === null ? null : text + "\n".repeat(Math.max(0, Math.min(newlines, 8)))
+}
+
+/** The EM_JS call site's wrapper for composeCenterMessage; contains every failure like createUiMessageHandler. */
+export function createCenterHandler(
+  deps: UiMessageDeps,
+  emit: (text: string) => void,
+  onError: (error: unknown) => void = () => {}
+): (hash: string, newlines: number) => void {
+  return (hash, newlines) => {
+    try {
+      const text = composeCenterMessage(hash, newlines, deps)
+      if (text !== null) {
+        emit(text)
+      }
+    } catch (error) {
+      onError(error)
+    }
+  }
+}

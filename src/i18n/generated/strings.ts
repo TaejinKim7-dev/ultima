@@ -431,6 +431,40 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
       "%s"
     ]
   },
+  "ui:death:0": {
+    "translation": "\n\n\n모든 것이 어둠에 잠긴다...\n",
+    "placeholders": []
+  },
+  "ui:death:1": {
+    "translation": "\n그러나 잠깐...\n",
+    "placeholders": []
+  },
+  "ui:death:2": {
+    "translation": "여기가 어디지?...\n",
+    "placeholders": []
+  },
+  "ui:death:3": {
+    "translation": "내가 죽었나?...\n",
+    "placeholders": []
+  },
+  "ui:death:4": {
+    "translation": "저승인가?...\n",
+    "placeholders": []
+  },
+  "ui:death:5": {
+    "translation": "들려오는 소리:\n%s\n",
+    "placeholders": [
+      "%s"
+    ]
+  },
+  "ui:death:6": {
+    "translation": "움직임이 느껴진다...\n",
+    "placeholders": []
+  },
+  "ui:death:7": {
+    "translation": "\n로드 브리티시가 말한다: 내가 그대의 영혼과 소지품 일부를 허공에서 끌어냈노라. 앞으로는 더 조심하라!\n",
+    "placeholders": []
+  },
   "ui:discourse_castle:0": {
     "translation": "이 험난한 땅에서 살아남으려면 먼저 그대 자신을 알아야 한다! 무기와 마법 능력을 갈고닦도록 하라!\n\n브리타니아에서의 첫 여행길에서는 각별히 조심하라.\n\n자신을 충분히 알기 전에는 마을의 안전한 곳에서 멀리 떠나지 말라!\n",
     "placeholders": []
@@ -2375,6 +2409,34 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
   },
   "ui:spell:1": {
     "translation": "떠나는 중...\n",
+    "placeholders": []
+  },
+  "ui:spell:2": {
+    "translation": "조합된 것이 없다!\n",
+    "placeholders": []
+  },
+  "ui:spell:3": {
+    "translation": "마력이 부족하다!\n",
+    "placeholders": []
+  },
+  "ui:spell:4": {
+    "translation": "실패!\n",
+    "placeholders": []
+  },
+  "ui:spell:5": {
+    "translation": "여기선 안 됨!\n",
+    "placeholders": []
+  },
+  "ui:spell:6": {
+    "translation": "전투 중에만 가능!\n실패!\n",
+    "placeholders": []
+  },
+  "ui:spell:7": {
+    "translation": "던전에서만 가능!\n실패!\n",
+    "placeholders": []
+  },
+  "ui:spell:8": {
+    "translation": "야외에서만 가능!\n실패!\n",
     "placeholders": []
   },
   "ui:stats:0": {
@@ -18581,6 +18643,22 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "죽음을\n맛봐라,\n쓰레기\n같은 놈!",
     "placeholders": []
   },
+  "city-type-castle": {
+    "translation": "성",
+    "placeholders": []
+  },
+  "city-type-ruins": {
+    "translation": "폐허",
+    "placeholders": []
+  },
+  "city-type-towne": {
+    "translation": "마을",
+    "placeholders": []
+  },
+  "city-type-village": {
+    "translation": "촌락",
+    "placeholders": []
+  },
   "join-fallback-experienced": {
     "translation": "경험",
     "placeholders": []
@@ -18631,6 +18709,38 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
   },
   "reagent-sulfur-ash": {
     "translation": "유황재",
+    "placeholders": []
+  },
+  "shrine-name-compassion": {
+    "translation": "자비의 신단",
+    "placeholders": []
+  },
+  "shrine-name-honesty": {
+    "translation": "정직의 신단",
+    "placeholders": []
+  },
+  "shrine-name-honor": {
+    "translation": "명예의 신단",
+    "placeholders": []
+  },
+  "shrine-name-humility": {
+    "translation": "겸손의 신단",
+    "placeholders": []
+  },
+  "shrine-name-justice": {
+    "translation": "정의의 신단",
+    "placeholders": []
+  },
+  "shrine-name-sacrifice": {
+    "translation": "희생의 신단",
+    "placeholders": []
+  },
+  "shrine-name-spirituality": {
+    "translation": "영성의 신단",
+    "placeholders": []
+  },
+  "shrine-name-valor": {
+    "translation": "용맹의 신단",
     "placeholders": []
   },
   "term-abyss": {
@@ -19393,7 +19503,20 @@ export const GENERATED_UI_TEMPLATES: Readonly<Record<string, string>> = {
   "129192ed": "ui:portal:2",
   "ab6fcf4a": "ui:portal:3",
   "bbe4bc0f": "ui:portal:4",
+  "8cae81dc": "ui:death:0",
+  "bed5cf21": "ui:death:1",
+  "e615523a": "ui:death:2",
+  "880f501f": "ui:death:3",
+  "8bc61568": "ui:death:4",
+  "f46ce512": "ui:death:5",
+  "5fc86f4e": "ui:death:6",
+  "56a09915": "ui:death:7",
   "538f1157": "ui:spell:0",
+  "55f0a50f": "ui:spell:2",
+  "752c1438": "ui:spell:3",
+  "e863260c": "ui:spell:6",
+  "87905e68": "ui:spell:7",
+  "8fdc031f": "ui:spell:8",
   "e160fd2a": "ui:intro:0",
   "e7658b52": "ui:intro:1",
   "5712c6e9": "ui:intro:2",
@@ -20236,7 +20359,19 @@ export const GENERATED_ARGUMENT_NAMES: Readonly<Record<string, string>> = {
   "honorable": "virtue-adjective-honorable",
   "spiritual": "virtue-adjective-spiritual",
   "humble": "virtue-adjective-humble",
-  "experienced": "join-fallback-experienced"
+  "experienced": "join-fallback-experienced",
+  "castle": "city-type-castle",
+  "towne": "city-type-towne",
+  "ruins": "city-type-ruins",
+  "village": "city-type-village",
+  "Shrine of Honesty": "shrine-name-honesty",
+  "Shrine of Compassion": "shrine-name-compassion",
+  "Shrine of Valor": "shrine-name-valor",
+  "Shrine of Justice": "shrine-name-justice",
+  "Shrine of Sacrifice": "shrine-name-sacrifice",
+  "Shrine of Honor": "shrine-name-honor",
+  "Shrine of Spirituality": "shrine-name-spirituality",
+  "Shrine of Humility": "shrine-name-humility"
 }
 
 // Todo 25: FNV-1a hash of a vendors.b template's runtime bytes (web-say) -> Korean runtime text.

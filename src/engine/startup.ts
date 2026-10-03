@@ -132,6 +132,12 @@ export interface TalkTextReceiver {
    */
   message(hash: string, args: string[]): void
   /**
+   * Todo 40: one screenMessageCenter() call (vendor/xu4/src/screen.cpp) -- the
+   * FNV-1a hash of the centred name (a map name) and the newline count the
+   * engine appends; see composeCenterMessage in src/dialogue/ui-message-compose.ts.
+   */
+  center(hash: string, newlines: number): void
+  /**
    * Todo 25: one vendors.b `web-say` call (vendor/xu4/src/script_boron.cpp) --
    * the FNV-1a hash of the unsubstituted template and the flat
    * [symbol, value, symbol, value, ...] list `construct` will apply; see
