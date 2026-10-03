@@ -167,6 +167,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 | 43 | 없음 | 개조 신규 Todo | 전부 (2026-10-03 신규 — 개조 범위 제안, 사용자 결정) |
 | 44 | 34–42, 45, 43(결정 기록 또는 보류) | 없음 | 없음 (2026-10-03 신규 — 이 웨이브 이후 릴리스 재검증) |
 | 45 | 38,39,40 | 44 | 39·40과 직렬 (2026-10-03 신규 — Todo 38 보고서의 미확인 해시·형식만 있는 템플릿) |
+| 46 | 없음 | 44 | 전부 (2026-10-03 신규 — 세이브 가져오기 파일 선택창이 내보낸 `.dat`을 숨기는 문제) |
 
 ## Todos
 > Implementation + Test = ONE todo. Never separate.
@@ -749,6 +750,14 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   Acceptance criteria: unit tests for any new mapping; an e2e (or recorded manual session if the sender cannot be reached) that makes `8c19a815` either disappear from the snapshot or be explained in `docs/WEB_PORT.md` "알려진 한계"; the report is re-measured and attached; `i18n:check --strict` and `audit:dist --require-engine` exit 0.
   QA scenarios: happy: `.omo/evidence/ultima-web/task-45/coverage-report-after.md`; failure: a call site classified as debug-only that is actually reachable in normal play is caught by a normal-play e2e snapshot, recorded in `.omo/evidence/ultima-web/task-45/misclassified.log`.
   Commit: Y | fix(i18n): route the remaining player-visible screenMessage text through id channels
+
+- [ ] 46. Let the save-import file chooser accept the file the export button produces
+  What to do / Must NOT do: the "세이브 내보내기" button downloads `ultima4-save.dat` (`src/shell.ts`), but the "세이브 가져오기" input accepted only `.json,.sav` (`index.html`), so a browser file chooser hides the exported file. The e2e specs fill the input with `setInputFiles()`, which bypasses `accept`, so nothing caught it (found 2026-10-03 while answering the user's question about how saving works). Add `.dat` to the accept list and keep `.json` (the pre-engine placeholder export) and `.sav`. Must not change the archive format or the import logic.
+  Parallelization: Wave 6 | Blocked by: none | Blocks: 44
+  References: `index.html` (`#save-import`); `src/shell.ts` (`downloadBlob(... "ultima4-save.dat")`); `tests/e2e/save-reload.spec.ts`; `tests/unit/save-import-accept.test.ts`.
+  Acceptance criteria: the unit test `save-import-accept` fails before the fix (RED log `.omo/evidence/ultima-web/task-46/unit-red.log`) and passes after; `npm run test:unit`, `typecheck`, `build`, `check:build-fresh` exit 0; the integration gate passes with it. A person should confirm in a real browser that the chooser lists the exported `.dat` file (an automated test cannot open the OS dialog).
+  QA scenarios: happy: `.omo/evidence/ultima-web/task-46/unit-green.log`; failure: the unit test fails if the export filename and the accept list drift apart again (`unit-red.log`).
+  Commit: Y | fix(shell): accept the exported save file extension in the import chooser
 
 ## Final verification wave
 > Runs in parallel after ALL todos. ALL must APPROVE. Surface results and wait for the user's explicit okay before declaring complete.
