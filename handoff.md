@@ -1815,3 +1815,20 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
 - 이 worktree(`agent-ad52af6bd293aab90`)는 main 병합 뒤 제거할 대상이지만, 새 작업 위치가 필요하다. Todo 35부터는 **루트 `/home/taejin/ultima`(main)** 에서 `todo-35-*` 브랜치로 작업한다.
 - 남긴 worktree `agent-afa23aeeee7d82f43`은 필요 없어지면 제거 가능(clean, 내용 반영됨).
 - 다음: Todo 35.
+
+---
+
+## 2026-10-03 — Todo 35 완료: 한국어 입력 뒤 키보드 포커스 반환 (39/48 = 81.3%)
+
+> append만 한다. 증거 `.omo/evidence/ultima-web/task-35/`(`unit-red.log`, `unit-green.log`, `unit-all-rerun.log`, `e2e-red.log`, `e2e-green.log`, `e2e-regression.log`, `verify-integration.log`).
+
+- **원인**: `src/shell.ts` capture-phase keydown 가드가 `#korean-keyword-input`에 포커스가 있는 동안 모든 키를 막는다. 대화가 끝나도 포커스가 남아 화살표 키가 게임에 가지 않았다(기존 e2e는 `blur()` 수동 호출로 우회하고 있었다).
+- **수정** (`71eb6a2`): 순수 헬퍼 `src/i18n/focus-return.ts`(`createFocusReturn`, 지연 400ms) + `shell.ts` 연결. 네이티브 prompt가 닫히고 지연 안에 다시 열리지 않으면 입력창을 `blur()`, 다시 열리면 취소(같은 대화의 다음 키워드), Esc는 즉시 이탈.
+- **TDD**: 단위 `tests/unit/focus-return.test.ts` RED(모듈 없음, exit 1) → GREEN 5/5. e2e `tests/e2e/korean-focus-return.spec.ts`(수동 blur 없이 `건강`→`안녕`→화살표 이동): **수정 전 코드에서 FAIL(exit 1), 수정 후 PASS(2.6m)** — Haiku가 `git show HEAD:src/shell.ts`로 되돌려 확인.
+- **회귀**: `korean-npc-alias` + `failure-boundaries` 6/6 PASS.
+- **게이트(Haiku 실행, 보고 기준)**: `check:build-fresh` · `test:unit`(47 files/575 tests) · `verify:repo-sources` · `typecheck` · `build` · `i18n:check --strict` · `audit:dist --require-engine` · `git diff --check` 전부 exit 0.
+- **통합 게이트 `npm run verify:integration`(완전 단독, 포트 4640)**: 13단계 전부 exit 0, e2e **47 passed (38.0m)**, `ERR_CONNECTION_REFUSED` 0건, `# verify:integration ... PASS`. 로그 `verify-integration.log`. (Haiku 래퍼의 `EXIT=` 줄은 에이전트가 먼저 종료해 찍히지 않았으나, 스크립트 자신의 단계별 `exit 0` 13줄과 PASS 줄이 있다.)
+- **정정 기록**: Haiku의 첫 `test:unit`은 2건 실패(`wasm-symbols`)로 보고됐고 "기존 실패"라고 적었다. 사실이 아니었다 — 같은 에이전트가 그 뒤 wasm을 재빌드했고, **낡은 wasm 상태에서 먼저 단위를 돌린 순서 문제**였다(루트 `build/`가 정리 전 stale). 재빌드 후 재실행 575/575 PASS로 확인.
+- **미해결/확인 필요**: 실제 한국어 IME 입력은 자동 e2e가 완전히 재현하지 못한다(`fill`+`press`). 사용자가 웹에서 직접 확인할 항목(순서: ZIP → 새 게임 → NPC 대화 → `건강`, `안녕` → 클릭 없이 화살표).
+- **부수 산출물**: `.omo/drafts/mod-scope.md`(Todo 43 초안: 후보 6개, 사용자 질문 4개). Todo 43은 사용자 결정 대기.
+- 다음: Todo 36(placeholder 순서)·37(LB alias). 사전 조사 결과: 실제 영어 원문 순서와 번역을 비교하면 순서가 바뀐 번역은 **0건**이다. 갭 #4는 현재 피해가 아니라 검사기가 순서를 강제하지 않는 잠재 위험이므로 Todo 36 범위를 "공개 JSON에 순서 보존 서명 저장 + `i18n-check` 순서 강제"로 줄인다.

@@ -504,7 +504,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - failure: plain `git worktree remove` on a dirty worktree is refused with a non-zero exit, and that worktree is salvaged instead. Recorded in `.omo/evidence/ultima-web/task-34/dirty-refused.log`.
   Commit: Y (docs only: `plan.md`, `handoff.md`) | chore(repo): retire merged worktrees and realign the root checkout
 
-- [ ] 35. Return keyboard control to the game after Korean input (GOAL_GAP_AUDIT gap #1, P1)
+- [x] 35. Return keyboard control to the game after Korean input (GOAL_GAP_AUDIT gap #1, P1)
   What to do / Must NOT do: `docs/WEB_PORT.md` "알려진 한계" states the problem. After the player uses the Korean keyword input, arrow and command keys stop reaching the game until focus leaves the input. This breaks Must have 2 (desktop keyboard play).
   - Cause: the capture-phase `keydown` guard in `src/shell.ts` swallows every key while `doc.activeElement === koreanKeywordInput`.
   - `handoff.md` says Todo 30's prompt-epoch work was never shown to fix this, so reproduce it first in a RED e2e. Do not assume it is fixed.
