@@ -1916,3 +1916,18 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
 - 에이전트들이 보고한 e2e 일부(Todo 38의 전체 e2e)는 에이전트가 직접 실행했다(규칙은 Haiku). 로그는 내가 확인.
 - Todo 39 에이전트의 최종 본문 보고는 도착하지 않아 갭별 결과는 **커밋 메시지와 diff를 직접 읽어** 확인했다.
 - 다음: Todo 45 → 44. 43은 사용자 결정 대기.
+
+---
+
+## 2026-10-03 — Todo 45 완료 (통합 게이트 PASS) — 48/50 = 96.0%
+
+> append만 한다. 증거 `.omo/evidence/ultima-web/task-45/`, 통합 게이트 `integration/verify-integration-wave8.log`.
+
+- **통합 게이트 `npm run verify:integration`(완전 단독, 포트 4700, 브랜치 `wave8-combined` = main + `ea3bd8d`)**: 13단계 전부 exit 0, 단위 55 files/**675** tests, `i18n:check` 4634 entries, e2e **55 passed (55.4m)**, `ERR_CONNECTION_REFUSED` 0건, `# verify:integration 2026-10-03T09:29:14Z PASS`, `EXIT=0`. 에이전트가 완료하지 못한 `korean-npc-output`도 이 게이트에서 통과.
+- **네이티브 게이트**(에이전트가 Haiku로 실행, 보고 기준): `build:native` → `cmake:configure` → `cmake:build` → `test:native` 전부 exit 0. (에이전트 보고: 복사해 간 `build/native`의 CMake 캐시가 메인 체크아웃 경로를 가리켜 첫 configure가 실패, 폴더 삭제 후 통과.) 이번 최종 트리에서 네이티브 게이트를 별도로 재실행하지는 않았다 — Todo 44에서 `verify:release`가 포함한다.
+- **(a) `8c19a815`**: `game.cpp:1475`의 `screenMessage("\b\b\b\b")`(방향 입력 뒤 커서 지우기) 해시. 내가 FNV-1a를 직접 계산해 일치를 확인했다. 엔진 버그가 아니고 제어 문자뿐이라 번역할 것이 없다. 보고서 도구(`scripts/i18n-coverage-report.mjs`)의 C 이스케이프 해석이 `\b \a \f \r \v`를 처리하지 못해 UNKNOWN으로 보였던 것 — 도구를 고치고 단위 테스트 추가, 보고서는 CONTROL-ONLY로 표시.
+- **(b) 형식만 있는 템플릿**: 호출 지점 전수 분류(`classification.md`). 플레이어에게 보이는 것(방향 에코 `game.cpp:2197`·`1482`, `combat.cpp:894`·`1148`, 무기·방어구 에코 `game.cpp:2468`·`2803`)은 `FORMAT_ONLY_HASHES`로 인자 이름 단위 번역(방향 4개 글로서리 추가). `79843a19`는 알파 스펙에서 24→0, 합친 측정에서 1회(Todo 38 보고서 505회). 디버그/죽은 코드/제어 문자/플레이어 데이터 에코는 번역하지 않고 `docs/WEB_PORT.md`에 근거를 적음. 파티원 이름 에코(`game.cpp:1456`)는 플레이어 데이터라 패널에서 버려진다.
+- **(c) 시약상점 188번 줄**: 원인 확정 — `vendors.b`는 첫 항목을 "Sulfurous Ash"로, 아이템 표는 "Sulfur Ash"로 적어 줄 단위 이름 조회가 빗나감. 여러 줄 값은 먼저 블록 단위 템플릿 해시로 조회하도록 `vendor-compose.ts` 수정(번역은 이미 있었음). `korean-shop.spec.ts`의 `knownLeaks: [188]` 제거 후 통과.
+- 부작용(문서화됨): 단독 `\n`은 패널로 전달하지 않는다. 줄 바꿈 모양에 영향이 있을 수 있어 사용자 확인 필요.
+- 미검증: 에이전트 e2e의 `korean-shop` 첫 실행은 포트 충돌로 멈췄고 `-g reagent` 재실행으로 확인했으나, 통합 게이트의 전체 스위트 통과로 보완됨. `79843a19` 잔여 1회의 출처는 미규명(플레이어 이름 에코 또는 디버그 추정).
+- 다음: **Todo 44**(최종 재검증). 43은 사용자 결정 대기.
