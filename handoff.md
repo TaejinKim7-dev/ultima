@@ -1708,3 +1708,32 @@ cmp .omo/plans/ultima-web.md docs/ULTIMA_WEB_PLAN.md  # 0
 1. **Todo 29~33 편입 여부 + 분모(32/35/37)** — 코드는 main에 있고 계획서에 없어 진행률이 실제보다 낮게 보임.
 2. **F1~F4 결과 보고 후 사용자 명시 승인** → 체크박스 `[x]` + 진행률 갱신.
 3. **`git push origin main`** — 승인 후에만.
+
+---
+
+## 2026-10-02 — 사용자 결정 완료 + 37/37 확정 + push (최종)
+
+> 이 절은 append만 한다. 위 절들도 그대로 유지한다. 사용자 승인 3건 전부 접수됨.
+
+### 사용자 결정 (AskUserQuestion, 2026-10-02)
+1. **Todo 29~33 편입 + 분모 37** — 원본 계획서(`.omo/plans/ultima-web.md`)에 Todo 29~33 항목 추가(각각 자체 References/Acceptance/QA 서술). 체크박스 총 32 → **37**.
+2. **F1~F4 전부 승인** — 계획서 체크박스 F1~F4 `[x]` 전환.
+3. **main push 승인** — 실행 완료.
+
+### 변경 파일 (main 커밋 `9bb1b6d`)
+- `.omo/plans/ultima-web.md` + `docs/ULTIMA_WEB_PLAN.md`(byte-identical, cmp exit 0): Todo 29~33 추가, F1~F4 `[x]`. 체크박스 37/37 `[x]`, `[ ]` 0.
+- `plan.md`: 진행률 계산법 37단계로, 현재 진행률 **37/37 = 100%**, 단계 목록에 Todo 29~33 + Final 표 ✅, "바로 다음 순서" 완료 상태로 갱신.
+
+### main push
+```
+git push origin main   # dd0c933..9bb1b6d  main -> main  (exit 0)
+```
+- `main` HEAD `9bb1b6d`, origin과 동기. 브랜치: `todo-f3-final`(5c80d0b) → main merge `b870b85`, 이어서 `dfb9995`(HANDOFF.md)·`9bb1b6d`(계획서).
+
+### 최종 진행률
+- **37/37 = 100%** (Todo 1~33 + F1~F4 전부 ✅). 계획서 체크박스 집계: `[x]` 37, `[ ]` 0.
+
+### 남은 것 (제품/배포, 계획 진행률과 분리)
+- GitHub Pages 실제 배포 확인: push 후 CI(run)가 Pages artifact를 배포하는지 확인 필요 — Settings > Pages > Source="GitHub Actions"는 사용자만 설정 가능.
+- 제품 품질 항목(계획 진행률 아님): F4 감사서의 non-blocking deviations(남은 영어 표면 inventory, 상점/캐슬 등 일부 표면 범위)는 사용자 승인된 릴리스 범위로 남음.
+- `HANDOFF.md` 최종 갱신(다음 세션용).
