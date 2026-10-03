@@ -20,6 +20,7 @@ import { fileURLToPath } from "node:url"
 // translation data (binary.json / ui.json), never original English.
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
 const evidenceDir = join(repoRoot, ".omo/evidence/ultima-web/task-24")
+const evidenceDir37 = join(repoRoot, ".omo/evidence/ultima-web/task-37")
 
 const binary = (
   JSON.parse(readFileSync(join(repoRoot, "locales/ko/binary.json"), "utf8")) as {
@@ -105,6 +106,20 @@ async function askEnglishKeyword(page: Page, word: string): Promise<void> {
   }
   await typeAscii(page, word, 150)
   await pressKey(page, "Enter", 2000)
+}
+
+/** Submits a Korean word through the real shell UI box (same path as korean-npc-alias.spec.ts), then returns focus to the game. */
+async function askKoreanKeyword(page: Page, word: string): Promise<void> {
+  const input = page.locator("#korean-keyword-input")
+  await input.click()
+  await input.fill(word)
+  await input.press("Enter")
+  await page.waitForTimeout(2000)
+  await input.blur()
+}
+
+function occurrences(haystack: string, needle: string): number {
+  return needle === "" ? 0 : haystack.split(needle).length - 1
 }
 
 async function panelText(page: Page): Promise<string> {
@@ -233,5 +248,63 @@ test.describe("Todo 24: Lord British and Hawkwind shown in Korean in the dialogu
     expect(afterName, "Lord British name reply (lordBritishText:0) not in Korean").toContain(lbName)
     expect(afterHelp, "Lord British help text not in Korean").toContain(lbHelp)
     expect(afterBye, "Lord British farewell not in Korean").toContain(lbBye)
+  })
+
+  // Todo 37: the same topic asked in English and then in Korean must print the
+  // same Korean response line (same avatar.exe:lordBritishText:<k> id). k is the
+  // keyword's index in Lord British's list (discourse_castle.cpp:254-258):
+  // truth = 3, honesty = 6.
+  test("Todo 37: Lord British answers the Korean alias of a principle and of a virtue with the same line as the English keyword", async ({
+    page
+  }) => {
+    test.setTimeout(900_000)
+    mkdirSync(evidenceDir37, { recursive: true })
+    const zipPath = process.env["ULTIMA4_DATA"]
+    test.skip(!zipPath || !existsSync(zipPath), "ULTIMA4_DATA not set to a verified original ultima4.zip")
+    const buffer = readFileSync(zipPath!)
+
+    await bootAndSelectZip(page, buffer)
+    expect(await createCharacterAndWaitForSave(page), "character creation never reported 저장 완료").toBe(true)
+
+    await bootAndSelectZip(page, buffer)
+    await page.waitForTimeout(2500)
+    await pressKey(page, "Enter")
+    await pressKey(page, "Enter")
+    await enableDebugMode(page)
+    await pressKey(page, "j", 2500)
+
+    await cheat(page, "g")
+    await typeAscii(page, "britannia", 100)
+    await pressKey(page, "Enter", 1500)
+    await pressKey(page, "e", 2500)
+    await cheat(page, "c")
+
+    await gotoStairs(page)
+    await pressKey(page, "k", 2500)
+    await walk(page, "ArrowRight", 15)
+    await walk(page, "ArrowDown", 4)
+    await talk(page, "ArrowRight")
+    for (let i = 0; i < 2; i++) await pressKey(page, "Enter", 1500)
+
+    const topics = [
+      { english: "truth", korean: "진실", id: "avatar.exe:lordBritishText:3" },
+      { english: "honesty", korean: "정직", id: "avatar.exe:lordBritishText:6" }
+    ]
+    const log: string[] = []
+    for (const topic of topics) {
+      const head = squash(binaryKorean(topic.id)).slice(0, 14)
+      const before = occurrences(await panelText(page), head)
+      await askEnglishKeyword(page, topic.english)
+      const afterEnglish = occurrences(await panelText(page), head)
+      await askKoreanKeyword(page, topic.korean)
+      const afterKorean = occurrences(await panelText(page), head)
+      log.push(`${topic.id}: occurrences before=${before} afterEnglish=${afterEnglish} afterKorean=${afterKorean}`)
+      if (topic.english === "honesty") {
+        await page.screenshot({ path: join(evidenceDir37, "lb-virtue-alias.png") })
+      }
+      expect(afterEnglish, `English "${topic.english}" did not print ${topic.id}`).toBe(before + 1)
+      expect(afterKorean, `Korean "${topic.korean}" did not print the same line ${topic.id}`).toBe(afterEnglish + 1)
+    }
+    writeFileSync(join(evidenceDir37, "lb-alias-observation.log"), log.join("\n") + "\n")
   })
 })
