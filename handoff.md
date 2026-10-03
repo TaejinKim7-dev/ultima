@@ -1955,3 +1955,11 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
 - 최종 트리 요약: `verify:release` 18/18 exit 0(chromium e2e 55 passed 55.3m), `verify:integration` 13/13 exit 0(e2e 55 passed 55.4m), 네이티브 `test:native` 4/4, 단위 55 files/675 tests, `i18n:check --strict` 4634 entries.
 - 로컬 증거(`.omo/evidence/`, git 미포함): `final/F1-addendum-2026-10.md`(Todo 34~46 증거 표와 한계), `F4-addendum-2026-10.md`(verdict APPROVE_WITH_DEVIATIONS, blocking 0), `F1-addendum-verify-release.log`, `F3-addendum-firefox-webkit.log`.
 - **남은 것**: Todo 43(개조 범위, 사용자 결정). 사용자 확인 필요: 한국어 IME 입력 감각(Todo 35·37), 세이브 가져오기 파일 선택창(Todo 46), 엔딩 패널 표시 방식(문단 vs 페이지), Safari 실기. 죽음 메시지·미덕 형용사는 단위 테스트만.
+
+---
+
+## 2026-10-03 — 증거 요약을 repo로 이전 (`docs/release-evidence/`)
+
+- 사용자 요청("모두 올려")으로 로컬 전용이던 증거 중 **영어 원문·원본 데이터가 없는 문서**를 `docs/release-evidence/`로 옮겼다: F1·F4 보강 문서, Todo 38 계측 보고서, Todo 45 재측정 보고서와 호출 지점 분류, 작은 측정 로그 묶음(`task-metrics.md`), 색인 `README.md`. 올리기 전 따옴표로 둘러싼 영어 구절을 검색해 xu4 프롬프트 한 곳을 설명문으로 바꿨고, 나머지는 해시·`file:line`·카운트·내가 쓴 설명뿐임을 확인했다.
+- **올리지 않은 것**: 스크린샷, Playwright trace, 전체 e2e/게이트 로그, RED/GREEN 로그(로컬 `.omo/evidence/`), 비공개 영어 인벤토리(`.local/`). `.omo/evidence/`는 계속 git-ignored.
+- 에이전트 상태 메모: `ListAgents`에 서브에이전트 2개(`completed`)가 보이나 실제 테스트·서버 프로세스는 없음(확인함).

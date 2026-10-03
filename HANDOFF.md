@@ -62,3 +62,5 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integ
 ```
 
 - **테스트 실행 규칙(사용자 지시)**: 모든 테스트·게이트는 `model: haiku` 서브에이전트에 시키고 보고를 읽는다. 메모리 `feedback_tests_via_haiku`, AGENTS.md 참고.
+
+- 증거 요약 문서는 `docs/release-evidence/`(색인 README)에 있다. 스크린샷·전체 로그는 로컬 `.omo/evidence/`에만 있다.
