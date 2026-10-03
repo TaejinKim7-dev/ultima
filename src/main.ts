@@ -25,6 +25,8 @@ declare global {
     ultimaAudio?: AudioBridge | undefined
     /** Todo 14: localization runtime boundary for e2e/manual QA only. */
     ultimaI18n?: UltimaI18nApi | undefined
+    /** Todo 42: read-only wasm linear-memory size for the memory smoke e2e. */
+    ultimaWasmMemory?: { bytes(): number } | undefined
   }
 }
 
@@ -139,6 +141,7 @@ romPickerElement?.addEventListener("change", () => {
       if (result.started) {
         bridge.attachSaveHandlers(result.saveHandlers)
         window.ultimaAudio = result.audioBridge
+        window.ultimaWasmMemory = { bytes: result.wasmMemoryBytes }
         document.body.setAttribute("data-audio-bridge-ready", String(result.audioBridge !== undefined))
       } else {
         document.body.setAttribute("data-engine-start-reason", result.reason)

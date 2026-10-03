@@ -105,7 +105,8 @@ WebGL2와 Web Audio가 필요합니다.
 - 번역 corpus는 inventory 기준 전량 번역 완료(pending 0)입니다. 정확한 entry 수는 이 문서에 고정하지 않습니다 — `npm run i18n:check -- --strict`가 매 실행마다 그 수를 출력하며 pending 0인지 함께 검증하는 단일 출처이기 때문입니다(Todo 22의 TLK 대화 틀 18개를 시작으로 Todo 23~27이 표면을 계속 늘렸습니다). 이 inventory가 화면에 나오는 모든 문장을 담지는 않습니다. `getVirtueAdjective()` 같은 코드 인자는 번역 틀 안에서 영어로 나옵니다.
 - 한국어 입력창을 쓴 뒤에는 포커스가 입력창을 벗어날 때까지 화살표·명령 키가 게임으로 가지 않습니다.
 - 한국어 입력창은 네이티브 텍스트 입력 요청(NPC 대화 등)이 열려 있을 때만 제출됩니다. 요청이 없거나 이미 닫혔으면 거부 메시지를 띄웁니다(Todo 18).
-- 메모리 스모크는 JS heap만 측정하고 wasm linear memory는 포함하지 않습니다.
+- 메모리 스모크(`tests/e2e/memory-smoke.spec.ts`)는 샘플마다 JS heap(Chromium 전용 `performance.memory`)과 wasm linear memory(`Module.HEAPU8.buffer.byteLength`, 성장 시 버퍼가 교체되므로 매번 새로 읽음)를 함께 기록하고, wasm 쪽은 상한(cap) 이하인지 검사합니다. wasm 메모리는 줄지 않으므로 기준선 복귀가 아니라 상한으로만 검증합니다. 기본 실행은 짧은 구간이라 장시간 누수를 보장하지 않습니다.
+- macOS Safari 실기 테스트는 이 개발 환경(WSL2 Linux)에서 할 수 없어 하지 않았습니다. Playwright WebKit 결과는 Safari 검증 증거가 아닙니다.
 
 ## 소스 pin
 

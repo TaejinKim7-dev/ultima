@@ -121,6 +121,10 @@ export const TEST_HOOK_ALLOWLIST = [
     reason: "src/main.ts deliberate Todo-14 localization observability hook (resolve/checkPlaceholders), available for e2e/manual QA independent of engine start"
   },
   {
+    hook: "window.ultimaWasmMemory",
+    reason: "src/main.ts deliberate Todo-42 read-only wasm linear-memory size probe (bytes()) for the memory-smoke e2e"
+  },
+  {
     hook: "data-bridge-ready",
     reason: "src/main.ts shell-ready signal consumed by QA/e2e tooling and the engine startup sequence"
   }

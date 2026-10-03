@@ -82,6 +82,12 @@ export interface EngineModule {
   readonly IDBFS: unknown
   /** Exported via EXPORTED_RUNTIME_METHODS; see the ENV.HOME note above. */
   readonly ENV: Record<string, string>
+  /**
+   * Todo 42: exported via EXPORTED_RUNTIME_METHODS so the shell can read the
+   * wasm linear-memory size. Emscripten REPLACES this view (and its
+   * `.buffer`) whenever memory grows, so never cache either one.
+   */
+  readonly HEAPU8: Uint8Array
   callMain(args?: readonly string[]): void
   /**
    * Todo 16: the Web Audio bridge vendor/xu4/src/sound_web.cpp's EM_JS
@@ -191,6 +197,8 @@ export type StartEngineResult =
       readonly saveHandlers: SaveHandlers
       /** Todo 16: undefined when no AudioContext was available (see audioContext's doc comment above). */
       readonly audioBridge: AudioBridge | undefined
+      /** Todo 42: current wasm linear-memory size in bytes, read fresh on every call. */
+      readonly wasmMemoryBytes: () => number
     }
   | { readonly started: false; readonly reason: "corrupted" | "missing-files" | "oversized" | "idbfs-sync-failed" | "engine-error"; readonly detail: string }
 
@@ -385,5 +393,5 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
     export: () => exportSaveArchive(module.FS, PERSISTENCE_PATHS, persistence),
     import: (archive) => importSaveArchive(module.FS, PERSISTENCE_PATHS, persistence, archive)
   }
-  return { started: true, saveHandlers, audioBridge }
+  return { started: true, saveHandlers, audioBridge, wasmMemoryBytes: () => module.HEAPU8.buffer.byteLength }
 }

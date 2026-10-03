@@ -26,6 +26,7 @@ import { fileURLToPath } from "node:url"
 // real allocation, making any ratio computed from them meaningless.
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
 const evidenceDir = join(repoRoot, ".omo/evidence/ultima-web/task-18")
+const evidenceDirTask42 = join(repoRoot, ".omo/evidence/ultima-web/task-42")
 
 // `--enable-precise-memory-info` is a CHROMIUM-only switch, so F3 scoped it
 // to the chromium project rather than handing it to every engine. Observed
@@ -60,9 +61,21 @@ const SAMPLE_INTERVAL_MS = 5_000
 // between the settled early samples and the settled late samples.
 const GROWTH_RATIO_THRESHOLD = 3
 
+// Todo 42 wasm linear-memory cap (bytes). Measured on Chromium 136, 1-minute
+// run (13 samples): wasm linear memory was flat at 16,973,824 bytes (16.2 MiB)
+// from the first to the last sample. The cap is 64 MiB (67,108,864), about
+// 4x the measured max, so normal allocator growth passes while a runaway
+// engine-side leak fails. Wasm memory never shrinks, so this is an absolute
+// cap on the maximum, not a return-to-baseline check. Override with
+// MEMORY_SMOKE_WASM_CAP_BYTES (the failure-path proof plants a tiny cap).
+const DEFAULT_WASM_MEMORY_CAP_BYTES = 67_108_864
+
+const WASM_MEMORY_CAP_BYTES = Number(process.env["MEMORY_SMOKE_WASM_CAP_BYTES"] ?? DEFAULT_WASM_MEMORY_CAP_BYTES)
+
 interface MemorySample {
   readonly atMs: number
   readonly usedJSHeapSize: number | null
+  readonly wasmMemoryBytes: number | null
 }
 
 async function pressKey(page: Page, key: string, delayMs = 800): Promise<void> {
@@ -133,7 +146,9 @@ test.describe("Todo 18: memory-growth smoke", () => {
         const mem = (performance as unknown as { memory?: { usedJSHeapSize: number } }).memory
         return mem ? mem.usedJSHeapSize : null
       })
-      samples.push({ atMs: Date.now() - start, usedJSHeapSize })
+      // Fresh read every time -- never cache the buffer or its length.
+      const wasmMemoryBytes = await page.evaluate(() => window.ultimaWasmMemory?.bytes() ?? null)
+      samples.push({ atMs: Date.now() - start, usedJSHeapSize, wasmMemoryBytes })
     }
 
     await sample()
@@ -173,14 +188,30 @@ test.describe("Todo 18: memory-growth smoke", () => {
       verdict = `earlyAvg=${Math.round(earlyAvg)} lateAvg=${Math.round(lateAvg)} ratio=${ratio.toFixed(3)} (threshold ${GROWTH_RATIO_THRESHOLD})`
     }
 
+    const wasmSamples = samples.filter((s): s is MemorySample & { wasmMemoryBytes: number } => s.wasmMemoryBytes !== null)
+    const wasmMax = wasmSamples.reduce((max, s) => Math.max(max, s.wasmMemoryBytes), 0)
+    const wasmFirst = wasmSamples[0]?.wasmMemoryBytes ?? null
+    const wasmVerdict = `wasm linear memory: first=${wasmFirst} max=${wasmMax} cap=${WASM_MEMORY_CAP_BYTES} samples=${wasmSamples.length}/${samples.length}`
+
     writeFileSync(
       join(evidenceDir, "memory-smoke.log"),
       `browser: ${browserName} ${browserVersion}\nduration: ${minutes} minute(s) (MEMORY_SMOKE_MINUTES=${minutes})\n` +
-        `caveat: usedJSHeapSize covers the JS heap only, not wasm linear memory.\n` +
-        `samples: ${JSON.stringify(samples)}\nverdict: ${verdict}\n`
+        `caveat: usedJSHeapSize covers the JS heap only; wasm linear memory is sampled separately as wasmMemoryBytes.\n` +
+        `samples: ${JSON.stringify(samples)}\nverdict: ${verdict}\n${wasmVerdict}\n`
+    )
+    mkdirSync(evidenceDirTask42, { recursive: true })
+    writeFileSync(
+      join(evidenceDirTask42, `memory-smoke-${browserName}.json`),
+      JSON.stringify(
+        { browser: browserName, version: browserVersion, minutes, wasmMemoryCapBytes: WASM_MEMORY_CAP_BYTES, wasmMemoryMaxBytes: wasmMax, jsHeapRatio: ratio, samples },
+        null,
+        2
+      ) + "\n"
     )
     if (ratio !== null) {
       expect(ratio, `possible unbounded heap growth: ${verdict}`).toBeLessThan(GROWTH_RATIO_THRESHOLD)
     }
+    expect(wasmSamples.length, `wasm memory must be readable on every sample: ${wasmVerdict}`).toBe(samples.length)
+    expect(wasmMax, `wasm linear memory exceeded its cap: ${wasmVerdict}`).toBeLessThanOrEqual(WASM_MEMORY_CAP_BYTES)
   })
 })
