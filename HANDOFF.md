@@ -66,3 +66,7 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integ
 - 증거 요약 문서는 `docs/release-evidence/`(색인 README)에 있다. 스크린샷·전체 로그는 로컬 `.omo/evidence/`에만 있다.
 
 - 2026-10-04: Todo 47(사용자 요청) 완료 — 넓은 화면에서 한국어 대화 패널·입력창이 게임 오른쪽 컬럼, 커서키가 페이지/패널을 스크롤하지 않음. 통합 게이트 61/61, Firefox·WebKit 14/14. 남은 것은 Todo 43(사용자 결정)뿐.
+
+## 2026-10-04 중단 (사용자 지시로 모든 에이전트 정지)
+- 승인된 다음 계획과 문서 정리 WIP는 브랜치 **`docs-consolidation`**(`7f8632d`, origin에 push됨)에 있다. 그 브랜치의 `docs/plans/2026-10-04-in-game-korean.md`(승인 계획)와 `docs/HANDOFF.md` 마지막 절(중단 기록·재개 할 일)을 먼저 읽을 것.
+- main은 변경 없음(Todo 47까지 배포, 진행률 50/54). Todo 48·49 에이전트는 코드 변경 전에 정지(커밋 0).
