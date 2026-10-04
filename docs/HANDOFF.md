@@ -67,6 +67,14 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integ
 
 - 2026-10-04: Todo 47(사용자 요청) 완료 — 넓은 화면에서 한국어 대화 패널·입력창이 게임 오른쪽 컬럼, 커서키가 페이지/패널을 스크롤하지 않음. 통합 게이트 61/61, Firefox·WebKit 14/14. 남은 것은 Todo 43(사용자 결정)뿐.
 
-## 2026-10-04 중단 (사용자 지시로 모든 에이전트 정지)
-- 승인된 다음 계획과 문서 정리 WIP는 브랜치 **`docs-consolidation`**(`7f8632d`, origin에 push됨)에 있다. 그 브랜치의 `docs/plans/2026-10-04-in-game-korean.md`(승인 계획)와 `docs/HANDOFF.md` 마지막 절(중단 기록·재개 할 일)을 먼저 읽을 것.
-- main은 변경 없음(Todo 47까지 배포, 진행률 50/54). Todo 48·49 에이전트는 코드 변경 전에 정지(커밋 0).
+## 2026-10-04 중단 기록 (사용자 지시: "하던 작업 정리해. 모든 에이전트 그만하게 해")
+
+- **승인된 계획**: `docs/plans/2026-10-04-in-game-korean.md` (plan mode 승인본, 원본 `~/.claude/plans/parsed-nibbling-widget.md`). Stage 0·0b 문서 정리 → Stage 1 Todo 48(대화 키워드 메뉴) ∥ Stage 2 Todo 49 Phase A(엔진 연결) → Stage 3 Todo 49 Phase B(게임 화면 안 한국어 덮개) → Stage 4 Todo 50(Neo둥근모 전체 적용).
+- **이 브랜치(`docs-consolidation`)의 상태 = WIP, main에 병합하지 않음**:
+  - 완료: `git mv`로 `plan.md`→`docs/plan.md`, `handoff.md`→`docs/handoff.md`, `HANDOFF.md`→`docs/HANDOFF.md`, `goal.md`→`docs/GOAL.md`, `project.md`→`docs/PROJECT_NOTES.md`, `.omo/drafts/mod-scope.md`→`docs/plans/mod-scope-proposal.md`, `docs/NEXT_FIVE_STEPS.md`→`docs/archive/`, 승인 계획 사본 추가.
+  - **미완료(재개 시 할 일)**: 옛 경로 참조 갱신(AGENTS.md 3·51·62·67·69·71·72·79행, README.md 65·71·72행 링크 — `verify:release-docs`가 검사, docs/*.md, 코드·테스트 주석), `docs/README.md`·`docs/plans/README.md` 신규 작성, AGENTS.md에 `docs/README.md`·Haiku 규칙·`docs/HANDOFF.md` 위치 명시, `docs/archive/NEXT_FIVE_STEPS.md` 맨 위 "역사 기록" 표시, 계획서 두 벌 Todo 49 본문 수정, `.claude/settings.json` Stop 훅 경로를 `docs/HANDOFF.md`로. 검증은 Haiku로 `verify:release-docs`·`cmp`·`test:unit`·`git diff --check`·옛 경로 `git grep`.
+- **멈춘 에이전트 (변경 없음, 커밋 0)**:
+  - Todo 48: worktree `.claude/worktrees/agent-ab34f9739e0dbb906`, 브랜치 `todo-48-talk-keywords`(main `15de1cf` 기준). 그 에이전트의 상세 계획은 `~/.claude/plans/parsed-nibbling-widget-agent-ab34f9739e0dbb906.md`(주제어 뜻 초안 표 포함; ABYS=심연으로 고칠 것).
+  - Todo 49 Phase A: worktree `.claude/worktrees/agent-a2c29640c4f177e6b`, 브랜치 `todo-49a-message-area-engine`, 아직 파일 수정 전에 멈춤.
+- main은 `e4f40d5` 이후 문서 커밋까지 push된 상태(origin과 동기, Todo 47까지 배포됨). 진행률 50/54.
+>>>>>>> 7f8632d (wip(docs): move record docs into docs/ (references not yet updated)):docs/HANDOFF.md
