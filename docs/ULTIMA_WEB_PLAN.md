@@ -171,6 +171,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 | 47 | 없음 | 없음 | 전부 (2026-10-03 신규, 사용자 요청 — 한국어 대화 패널을 오른쪽 컬럼으로, 커서키 스크롤 차단) |
 | 48 | 47 | 없음 | 43 (2026-10-04 신규, 사용자 요청 — 대화 중 쓸 수 있는 키워드를 눌러서 쓰는 칩으로 표시) |
 | 49 | 48 | 없음 | 43 (2026-10-04 신규, 사용자 요청 — 게임 화면 메시지 영역에 한국어 직접 표시) |
+| 50 | 49 | 없음 | 43 (2026-10-04 신규, 사용자 결정 — 게임 안 한국어 전체에 고정폭 픽셀 글꼴 Neo둥근모) |
 
 ## Todos
 > Implementation + Test = ONE todo. Never separate.
@@ -806,7 +807,9 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
     The typed keyword must echo in the overlay.
   (4) A visible toggle "게임 화면에 한국어 표시" (default on, remembered per viewer in localStorage with try/catch). Off restores today's behaviour.
   (5) The right-hand panel stays as scrollback plus the Todo 48 keyword menu.
-  (6) Optional Korean pixel font, after a licence check. Start with the system Korean font.
+  (6) Font (user decision 2026-10-04: "한글 폰트를 좀더 fixed 된 형식으로"): use the fixed-width Korean pixel font Neo둥근모. Use `neodgm.woff2` v1.601 from github.com/neodgm/neodgm, about 44 KB, SIL OFL 1.1 with Reserved Font Names (verified in its `LICENSE.txt`).
+    - Ship it unmodified, with its licence text next to it in the artifact. Make sure `audit:dist` allows the font and licence files.
+    - Hangul is 16x16 and Latin 8x16. Keep the font size at 16 px times an integer, so it stays pixel-crisp, and derive the overlay's columns and rows from the box size. At exactly 2x display one Hangul fills one original 8x8 cell.
   Must NOT: put English source text into JS or evidence; hide the map, status, or other raster areas; add console output.
   Parallelization: Wave 7 | Blocked by: 48 (shared `src/shell.ts`) | Blocks: none
   References: `vendor/xu4/src/u4.h`; `vendor/xu4/src/screen.cpp` (`screenMessage`, `screenEraseTextArea`, `screenShowCursor`); `vendor/xu4/src/event.cpp` (ReadStringController); `src/overlay/overlay-layout.ts` (`OPAQUE_BACKING_ROLES`); `src/shell.ts`; `src/dialogue/message-tokens.ts`; `.omo/evidence/ultima-web/task-38/coverage-report.md` (lines with no translation path are hidden under the overlay).
@@ -819,6 +822,25 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - A person confirms the feel in a real browser.
   QA scenarios: happy: `.omo/evidence/ultima-web/task-49/in-game-korean.png`; failure: with the toggle off, the English canvas text is visible again (`task-49/toggle-off.png`).
   Commit: Y | feat(overlay): show Korean messages inside the game's message area
+
+- [ ] 50. Use the fixed-width Korean pixel font (Neo둥근모) for every in-game Korean text
+  What to do / Must NOT do: user decision 2026-10-04: a fixed-width Korean font looks more like a game. Todo 49 introduces Neo둥근모 (`neodgm.woff2` v1.601, SIL OFL 1.1, about 44 KB) for the message area. Apply the same font to the other Korean surfaces:
+  - the existing in-game overlays: status, statussummary, Ztats/inventory, intro, menus;
+  - the right-hand dialogue panel and the Todo 48 keyword menu.
+  Web controls (file pickers, save buttons) keep the system font.
+  Size it at 16 px times an integer so it stays crisp. For overlays whose box is one native row (8 logical px) tall, pick the largest 16 px multiple that fits the row at the current scale. Keep the Todo 26/27 opaque-cover and aura rules intact.
+  Must NOT: modify or subset the font (Reserved Font Name), drop the licence file from the artifact, or let any overlay text overflow its box.
+  Parallelization: Wave 7 | Blocked by: 49 (font asset introduced there) | Blocks: none
+  References: `src/shell.css` (`.overlay-role`, `.dialogue-panel`); `src/overlay/overlay-layout.ts` (`computeOverlayCellPx`, `OVERLAY_MIN_FONT_PX`); `tests/e2e/status-overlay.spec.ts`; `tests/e2e/korean-status-overlay.spec.ts`; `tests/e2e/korean-intro-overlay.spec.ts`.
+  Acceptance criteria:
+  - Unit tests RED first for the font-size rule.
+  - The e2e overlay specs still pass; their no-overflow assertions hold.
+  - The computed font-family of each Korean surface is Neo둥근모 (and loaded, verified via `document.fonts`).
+  - Passes in Chromium, Firefox and WebKit.
+  - `audit:dist -- --require-engine` and `verify:integration` pass.
+  - A person confirms the look.
+  QA scenarios: happy: `.omo/evidence/ultima-web/task-50/pixel-font.png`; failure: if the font file fails to load, the overlays fall back to the system Korean font without clipping, recorded in `task-50/font-fallback.png`.
+  Commit: Y | feat(shell): fixed-width Korean pixel font for in-game text
 
 ## Final verification wave
 > Runs in parallel after ALL todos. ALL must APPROVE. Surface results and wait for the user's explicit okay before declaring complete.
