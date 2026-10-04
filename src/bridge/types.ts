@@ -37,7 +37,7 @@ interface BridgeEventBase {
 /**
  * Long-form game text routed to the HTML dialogue panel below the canvas
  * (never overlaid on the game screen -- see the confirmed requirement in
- * `handoff.md`). Control tokens embedded in `text` (newline/backspace/
+ * `docs/handoff.md`). Control tokens embedded in `text` (newline/backspace/
  * right/color/prompt) are parsed client-side by
  * `src/dialogue/message-tokens.ts`'s `tokenizeMessage` (Todo 11) -- the
  * native `screenMessageN` buffer already carries these as literal control

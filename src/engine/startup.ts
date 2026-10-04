@@ -17,7 +17,7 @@
 // events the running engine would use).
 //
 // Todo 21.2 path choices, verified empirically against the real engine
-// (see handoff.md's Todo 21.2 record for the exact probe commands/output),
+// (see docs/handoff.md's Todo 21.2 record for the exact probe commands/output),
 // not guessed from reading the source alone:
 //  - u4find_path() (vendor/xu4/src/u4file.cpp) checks the bare filename
 //    relative to the process cwd before anything else, and Emscripten's

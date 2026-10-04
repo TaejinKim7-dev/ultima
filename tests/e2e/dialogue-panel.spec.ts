@@ -6,7 +6,7 @@ import { buildStoreZip } from "../lib/test-zip.ts"
 
 // Todo 11: HTML dialogue panel. The real xu4 engine does not yet emit
 // per-fragment `message` bridge events (screenMessage() draws straight to
-// its own WebGL2 raster; see handoff.md's Todo 21 record and
+// its own WebGL2 raster; see docs/handoff.md's Todo 21 record and
 // `.omo/drafts/step-11-13-korean-ui-design.md`), so most of this spec
 // drives the panel through `window.ultimaBridge.dispatch(...)` with
 // synthetic events that are structurally modeled on real call-site

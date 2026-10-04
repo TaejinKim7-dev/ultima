@@ -8,13 +8,13 @@ const wasmDir = join(projectRoot, "build/wasm-release")
 const wasmJsPath = join(wasmDir, "xu4.js")
 const wasmWasmPath = join(wasmDir, "xu4.wasm")
 
-// Required exports per plan.md Verification strategy
+// Required exports per docs/plan.md Verification strategy
 const REQUIRED_EXPORTS = [
   // Emscripten runtime
   "FS",
   "IDBFS",
   "callMain",
-  // Bridge symbols (plan.md bridge contract)
+  // Bridge symbols (docs/plan.md bridge contract)
   "u4_web_enqueue_key",
   "u4_web_submit_text",
   // Module init

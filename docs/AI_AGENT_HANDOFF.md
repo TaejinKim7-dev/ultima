@@ -1,12 +1,12 @@
 # AI 코딩 에이전트 인계 규칙
 
-이 문서는 이 프로젝트를 다른 AI 코딩 에이전트가 자연스럽게 이어받기 위한 공통 인계 규칙이다. `handoff.md`는 항상 이 문서의 포맷을 따라 최신 상태를 기록한다.
+이 문서는 이 프로젝트를 다른 AI 코딩 에이전트가 자연스럽게 이어받기 위한 공통 인계 규칙이다. `docs/handoff.md`는 항상 이 문서의 포맷을 따라 최신 상태를 기록한다.
 
 ## 핵심 원칙
 
-`handoff.md`는 대화 요약이 아니라 재현 가능한 작업 지시서여야 한다.
+`docs/handoff.md`는 대화 요약이 아니라 재현 가능한 작업 지시서여야 한다.
 
-다음 에이전트는 이전 대화를 보지 않아도 `README.md`, `AGENTS.md`, `handoff.md`, `docs/ULTIMA_WEB_PLAN.md`, `docs/TESTING_POLICY.md`만 읽고 바로 작업을 시작할 수 있어야 한다.
+다음 에이전트는 이전 대화를 보지 않아도 `README.md`, `AGENTS.md`, `docs/README.md`(읽는 순서 색인), `docs/handoff.md`(가장 최근 절), `docs/ULTIMA_WEB_PLAN.md`, `docs/TESTING_POLICY.md`만 읽고 바로 작업을 시작할 수 있어야 한다.
 
 ## 필수 포함 항목
 
@@ -98,7 +98,7 @@ npm run build
 
 ## 갱신 시점
 
-`handoff.md`는 다음 시점마다 갱신한다.
+`docs/handoff.md`는 다음 시점마다 갱신한다.
 
 - Todo를 시작할 때
 - Todo를 완료했을 때

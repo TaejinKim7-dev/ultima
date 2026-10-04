@@ -290,5 +290,5 @@ test.describe("Todo 18: failure boundaries (real engine where noted, synthetic Z
   // unit coverage while reading as a real-engine proof it isn't -- this
   // project's own "실제 게임에서 확인" honesty convention (plan.md)
   // argues against writing that test. This finding is instead recorded
-  // in plan.md/handoff.md as an explicit, uncovered gap.
+  // in docs/plan.md/docs/handoff.md as an explicit, uncovered gap.
 })

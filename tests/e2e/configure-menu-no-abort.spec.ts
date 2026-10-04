@@ -2,7 +2,7 @@ import { expect, test } from "./fixtures.ts"
 import { existsSync, readFileSync } from "node:fs"
 
 // Regression spec for a WASM-only Aborted(RuntimeError: unreachable) crash
-// found while working on Todo 13. Root cause (see handoff.md's "wasm 입력
+// found while working on Todo 13. Root cause (see docs/handoff.md's "wasm 입력
 // 이벤트 재진입 버그" section for the full diagnostic trail): under
 // Emscripten, GLFW's key/mouse callbacks (vendor/xu4/src/screen_glfw.cpp)
 // are invoked directly and synchronously from the browser's own DOM event

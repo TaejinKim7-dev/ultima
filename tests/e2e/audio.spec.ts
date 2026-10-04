@@ -14,7 +14,7 @@ import { fileURLToPath } from "node:url"
 //
 // Every fact this spec's comments assert about *why* a given key produces
 // a given sound was verified by reading the real engine source during this
-// Todo's investigation (see handoff.md's "Todo 16" record for the full
+// Todo's investigation (see docs/handoff.md's "Todo 16" record for the full
 // trail), not assumed:
 //   - vendor/xu4/src/intro.cpp's IntroController::timerFired() calls
 //     musicPlay(introMusic) automatically once the title animation ends

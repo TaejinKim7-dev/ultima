@@ -38,7 +38,7 @@ const gotoDestination = "moonglow"
 // probe, so the timing/RNG profile matches the one observed success.
 const npcApproachSteps = 6
 const npcTalkDirs = ["Right", "Up", "Down", "Left"]
-// Guard against "Your Interest:" buffer pollution (plan.md 3.3): any talk
+// Guard against "Your Interest:" buffer pollution (docs/plan.md 3.3): any talk
 // attempt made AFTER a dialogue already opened types its `t` into the open
 // discourse string prompt instead of starting a new talk (observed as
 // "Your Interest: tttttt"). Discourse keyword matching compares the FIRST
@@ -64,7 +64,7 @@ const npcKeywords = ["name", "health"]
 
 const ultima4Data = process.env.ULTIMA4_DATA
 // The specific verified PC-version zip this project develops against (see
-// handoff.md's "원본 데이터 검증 기록"). Overridable so a different verified
+// docs/handoff.md's "원본 데이터 검증 기록"). Overridable so a different verified
 // release can be pinned without editing this script.
 const expectedSha256 = process.env.ULTIMA4_DATA_SHA256 ??
   "94aa748cfa1d0e7aa2e518abebb994f3c18acf7edb78c3bd37cd0a4404e6ba74"

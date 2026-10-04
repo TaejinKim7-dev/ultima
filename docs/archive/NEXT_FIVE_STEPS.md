@@ -1,5 +1,7 @@
 # Todo 1 이후 바로 할 일 (Todo 2 ~ 6)
 
+> **역사 기록** — 2026-09 초반(Todo 2~6 시기)의 빠른 시작 문서. 이 Todo들은 모두 완료(2026-09-20~25)되었고 더 이상 진행 기준으로 쓰지 않는다. 현재 진행률은 [`docs/plan.md`](../plan.md) "바로 다음 순서"를 본다.
+
 각 Todo는 `.omo/plans/ultima-web.md`의 canonical 정의를 요약한 것이다. 실행 전 그 문서의 해당 Todo 항목(References/Acceptance criteria/QA scenarios 전체)을 반드시 원문으로 확인한다. 이 문서는 빠른 시작점일 뿐, 세부 계약이 충돌하면 canonical plan이 우선한다.
 
 Git 작업 방식은 `AGENTS.md`의 "Git 작업 방식"을 따른다: PR 없이 `todo-<n>-<topic>` 브랜치에서 작업하고, `main` merge 전 로컬 검증(해당 Todo의 검증 명령 전부 exit 0)을 통과해야 하며 결과를 `handoff.md`에 기록한다.

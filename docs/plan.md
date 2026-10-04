@@ -21,11 +21,12 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률
-- **2026-10-04: 50 / 54 = 92.6%** (사용자 결정으로 Todo 50 추가, 분모 53→54: 게임 안 한국어 전체를 고정폭 픽셀 글꼴 Neo둥근모로. 이하 직전 기록: 사용자 요청으로 Todo 49 추가, 분모 52→53: 게임 화면 메시지 영역에 한국어 직접 표시. 이하 직전 기록: 사용자 요청으로 Todo 48 추가, 분모 51→52: 대화 중 쓸 수 있는 키워드를 칩으로 표시. 추가 직전 값 50/51 = 98.0%. 이하 직전 기록: Todo 47 ✅: 통합 게이트 61/61, Firefox·WebKit 각 14/14. 이전 값 49/51 = 96.1%. 이하 직전 기록: 사용자 요청으로 Todo 47 추가, 분모 50→51: 한국어 대화 패널을 오른쪽 컬럼으로 옮기고 커서키 스크롤 차단. 추가 직전 값 49/50 = 98.0%. 이하 직전 기록: Todo 44 ✅ 확정, 남은 1개는 Todo 43 사용자 결정; 이전 값 48/50. 이하 직전 기록: Todo 45 ✅ 추가 확정; 이전 값 47/50 = 94.0%. 이하 직전 기록: Todo 34~42·46 ✅ 중 43 제외; 38·39·40·41·46은 합친 트리 통합 게이트 PASS로 확정; Todo 45·46 추가로 분모 48→50. 45는 Todo 38 보고서의 미확인 해시 조사, 46은 세이브 가져오기 파일 필터). 추가 직전 값 42/48 = 87.5%. 37/37 완료 뒤 사용자 지시로 완료 후 웨이브 Todo 34~44(11개)를 추가했다. 근거는 goal.md 대비 재점검과 `docs/GOAL_GAP_AUDIT.md`(번역 체감 갭 9건)다. 계획서 체크박스 `[x]` 50 / `[ ]` 4 (남은 것: Todo 48 진행 중 → 49 → 50, Todo 43 개조 범위 — 사용자 결정 대기). 같은 날 번역 공개 여부를 결정했다(**공개 유지**, `docs/TRANSLATION_POLICY.md`). 이 결정은 Todo가 아니라 결정 기록이다.
+- **2026-10-04: 50 / 54 = 92.6%** (사용자 결정으로 Todo 50 추가, 분모 53→54: 게임 안 한국어 전체를 고정폭 픽셀 글꼴 Neo둥근모로. 이하 직전 기록: 사용자 요청으로 Todo 49 추가, 분모 52→53: 게임 화면 메시지 영역에 한국어 직접 표시. 이하 직전 기록: 사용자 요청으로 Todo 48 추가, 분모 51→52: 대화 중 쓸 수 있는 키워드를 칩으로 표시. 추가 직전 값 50/51 = 98.0%. 이하 직전 기록: Todo 47 ✅: 통합 게이트 61/61, Firefox·WebKit 각 14/14. 이전 값 49/51 = 96.1%. 이하 직전 기록: 사용자 요청으로 Todo 47 추가, 분모 50→51: 한국어 대화 패널을 오른쪽 컬럼으로 옮기고 커서키 스크롤 차단. 추가 직전 값 49/50 = 98.0%. 이하 직전 기록: Todo 44 ✅ 확정, 남은 1개는 Todo 43 사용자 결정; 이전 값 48/50. 이하 직전 기록: Todo 45 ✅ 추가 확정; 이전 값 47/50 = 94.0%. 이하 직전 기록: Todo 34~42·46 ✅ 중 43 제외; 38·39·40·41·46은 합친 트리 통합 게이트 PASS로 확정; Todo 45·46 추가로 분모 48→50. 45는 Todo 38 보고서의 미확인 해시 조사, 46은 세이브 가져오기 파일 필터). 추가 직전 값 42/48 = 87.5%. 37/37 완료 뒤 사용자 지시로 완료 후 웨이브 Todo 34~44(11개)를 추가했다. 근거는 `docs/GOAL.md` 대비 재점검과 `docs/GOAL_GAP_AUDIT.md`(번역 체감 갭 9건)다. 계획서 체크박스 `[x]` 50 / `[ ]` 4 (남은 것: Todo 48 진행 중 → 49 → 50, Todo 43 개조 범위 — 사용자 결정 대기). 같은 날 번역 공개 여부를 결정했다(**공개 유지**, `docs/TRANSLATION_POLICY.md`). 이 결정은 Todo가 아니라 결정 기록이다.
+- **2026-10-04: Stage 0·0b 완료(문서 정리 — Todo 진행률 외)**: 모든 기록·방향 문서를 `docs/`로 옮기고, AI 시작점 `docs/README.md`·계획 색인 `docs/plans/README.md`를 신규 작성, AGENTS.md와 README.md의 옛 경로 링크를 갱신, `.claude/settings.json` Stop 훅 경로를 `docs/HANDOFF.md`로 옮겼다. `verify:release-docs`에 `APPEND_ONLY_LOGS`를 추가해 `docs/handoff.md`(그리고 역사적 root `handoff.md`)를 명시적 스킵 경로로 등록, 관련 테스트 1개 추가. 계획서 두 벌의 Todo 49 본문을 `docs/plans/2026-10-04-in-game-korean.md`의 Stage 2·3 설계에 맞춰 수정(localStorage 금지, 디바이스 픽셀 16배수, play/pause·modal·CR/LF 훅 추가, "▼" 페이지 큐, References에 `event.cpp:715`·`game.cpp:130/115`·`screenSetLayer`). 게이트 `npm run test:unit` 56/56 suites, 681/681 tests · `verify:repo-sources` 4/4 · `typecheck` · `build` · `check:build-fresh` · `git diff --check` · `cmp` 계획서 두 벌 · `verify:release-docs` 전부 exit 0. **이 작업은 main에 push하지 않았다**(사용자 결정 필요).
 - **2026-10-02 완료: 37 / 37 = 100%.** Todo 1~33 전부 ✅ + F1~F4 전부 ✅ (사용자 명시 승인, 분모 37 확정). 계획서 체크박스 37/37 `[x]`, `[ ]` 0. 아래는 이 완료로 이어지는 과거 기록.
 - **제품 목표 재확인 (2026-09-27)**: 한국어로 실제 플레이할 수 있는 웹 기반 Ultima IV가 목표다. 아래 수치는 계획 항목 승인률이며 한글판 제품 완성률이 아니다. 이번 NPC alias 재검증 스크린샷의 실제 대화는 영어였다. Step 11/12/14에 기록된 실제 엔진 출력 연결 gap을 해소하고 한국어 인트로·대화·상태/메뉴를 실제 플레이에서 검증하기 전에는 출시 완료로 판정하지 않는다.
 - **정정된 플레이 요구사항**: 플레이어는 영어 keyword 또는 한국어 alias를 입력할 수 있어야 하며, 실제 게임에 표시되는 NPC 응답은 한국어여야 한다. 현재 검증된 것은 한국어 alias 입력 동작뿐이고, Calabrini의 실제 NPC 응답은 영어였다. 따라서 한국어 NPC 출력은 아직 미완료이며 출시를 막는다.
-- **세션 운영 제한**: 이 세션의 한도는 5시간이다. 남은 시간·컨텍스트·예산 중 하나라도 5% 미만이 되면 active work를 중단하고 현재 상태를 `plan.md`와 `handoff.md`에 기록한다.
+- **세션 운영 제한**: 이 세션의 한도는 5시간이다. 남은 시간·컨텍스트·예산 중 하나라도 5% 미만이 되면 active work를 중단하고 현재 상태를 `docs/plan.md`와 `docs/handoff.md`에 기록한다.
 - **승인 기준: 37 / 37 = 100%** (2026-10-02). 산술: `[x]` 37개(Todo 1~33 + F1~F4) ÷ 체크박스 총 37개 = 100%. 분모는 2026-10-02 사용자 결정으로 32→37.
   - **✅ F1~F4 완료 (2026-10-02)**: F1 `npm run verify:release` 18단계 전부 exit 0(e2e 46/46, 569 unit, dist SHA-256 `41a2e0e5…0743d`, 감사서 `final/F1-plan-compliance.md`). F2 blocker 0 승인 + 네이티브 게이트 green. F3 실제 3브라우저 전체 스위트: Chromium 46/46·Firefox 46/46·WebKit 46/46(WebKit 1건 서브픽셀 허용치 → aura-relative 단언으로 수정, `final/F3-real-browser-qa/`). F4 `final/F4-scope-fidelity.md` APPROVE_WITH_DEVIATIONS(cmp·audit:dist·verify:workflow exit 0).
   - **✅ Todo 29~33 완료 (2026-10-02 편입·확정)**: 코드는 main에 이미 merge돼 있고 검증도 통과했음. 편입 항목: 29 신단 조언 한국어 talk 채널, 30 readChoice 한국어 답 + prompt epoch, 31 statussummary 한국어(food/gold+시약 제목), 32 미덕 8종 이름 생성기 순수, 33 Ztats Reagents 행 한국어.
@@ -33,7 +34,7 @@
   - **⚠️ 단독 실행 관측이다**: 포트 4601에서 관측됐고, working tree에 미커밋 `.gitignore` 1줄(`.slim/`, 빌드 무영향)이 있었다. green의 **원인은 미확정** — 아래 "통합 merge 상태"의 정정 참고.
   - **✅ F2 네이티브 게이트 (2026-10-01 22:04~22:05)**: main `9872f4b`에서 **처음 실행**. `build:native`(선행) → `cmake:configure` → `cmake:build` → `test:native` **4단계 전부 exit 0, ctest 4/4 통과**. 첫 실행은 `test:native` exit 8로 실패했으나 원인은 **제품 결함이 아니라 F2 명령 목록에 빠진 선행 단계**였다 — `native/CMakeLists.txt:51-61`이 "네이티브 xu4는 `npm run build:native`가 별도로 빌드한다"고 명시하는데 그게 목록에 없었음. 선행 단계 포함 시 4/4 green. 로그 `/tmp/opencode/f2-native-gate2.log`.
   - 이전 기록: **27/32 = 84.4%** (2026-09-30: Todo 24·25·26·28 ✅ — `npm run verify:integration` PASS, 13단계 전부 exit 0, 전체 e2e 45/45 34.5분. Todo 28 추가로 분모 31→32). 그 이전: (Step 1~23 ✅ — Todo 23 완료 2026-09-29: screenMessage 훅(format FNV-1a 해시만 전송, 미매핑 폐기), shrine.cpp 18건 번역, 전체 e2e 41/41. 24·25·26은 브랜치 구현 완료·미merge, 27은 26 merge 후. 2026-09-27 사용자 결정으로 Todo 23~27 추가, 분모 26→31. 추가 직전 값은 22/26 = 84.6%).
-- **Step 20 완료 (2026-09-27, branch `todo-20-release-docs` → main)**: `README.md` 갱신, `docs/WEB_PORT.md`·`docs/GITHUB_PAGES.md` 신규(병렬 Fork가 초안, Todo 22 범위 반영), `npm run verify:release-docs`(TDD, handoff.md는 역사 기록이라 검사 제외). fresh-clone QA: 문서대로 clean clone에서 npm ci → deps:host → build:modules → emsdk → deps:wasm → build:wasm → build:site → audit --require-engine 전부 0, CI와 같은 정적 서버 smoke 통과(`task-20/fresh-clone.log`; emsdk는 기존 4.0.23 설치를 symlink — 재다운로드 생략). 이 QA가 verifier 버그를 찾음: quickstart가 `task-6/` 빌드 로그를 만들어 clean clone에서 verify:release-docs가 실패 → 과제 디렉터리 단위로 검사하도록 수정(RED→GREEN). 실패 QA `missing-pin.log`(exit 1). 게이트 `npm ci`·unit 318/318·verify·typecheck·build·build:site·audit·verify:workflow·verify:release-docs·diff-check·cmp 전부 0.
+- **Step 20 완료 (2026-09-27, branch `todo-20-release-docs` → main)**: `README.md` 갱신, `docs/WEB_PORT.md`·`docs/GITHUB_PAGES.md` 신규(병렬 Fork가 초안, Todo 22 범위 반영), `npm run verify:release-docs`(TDD, docs/handoff.md는 역사 기록이라 검사 제외). fresh-clone QA: 문서대로 clean clone에서 npm ci → deps:host → build:modules → emsdk → deps:wasm → build:wasm → build:site → audit --require-engine 전부 0, CI와 같은 정적 서버 smoke 통과(`task-20/fresh-clone.log`; emsdk는 기존 4.0.23 설치를 symlink — 재다운로드 생략). 이 QA가 verifier 버그를 찾음: quickstart가 `task-6/` 빌드 로그를 만들어 clean clone에서 verify:release-docs가 실패 → 과제 디렉터리 단위로 검사하도록 수정(RED→GREEN). 실패 QA `missing-pin.log`(exit 1). 게이트 `npm ci`·unit 318/318·verify·typecheck·build·build:site·audit·verify:workflow·verify:release-docs·diff-check·cmp 전부 0.
 - **Step 22 완료 (2026-09-27, branch `todo-22-korean-npc-output` → main)**: 웹 빌드에서 `runTalkDialogue`의 모든 출력을 EM_JS `Module.u4Text`로 보냄(`vendor/xu4/src/discourse_tlk.cpp`, `__EMSCRIPTEN__` 한정). TLK를 가리키는 인자·응답은 `@MAP:npcIndex:field` id로만 전달해 영어 TLK 원문은 엔진 밖으로 안 나감. 셸이 `src/dialogue/talk-compose.ts`로 한국어 줄을 조립해 대화 패널에 표시. 대화 틀 문장 18개 inventory+번역(병렬 Fork A). 증거: `korean-npc-output.spec.ts` RED(패널 한국어 0) → GREEN(Calabrini look·HEAL 응답(response2, 영어 입력+`건강` alias)·이름 한국어), 전체 e2e 40/40(22.0분), 게이트 `npm ci`·unit 300/300·verify·typecheck·i18n strict·build·build:site·audit --require-engine·verify:workflow·diff-check·cmp 전부 exit 0. 범위 밖(영어 유지): Lord British/Hawkwind, 상점, 인트로, 상태창, 기타 screenMessage, 캔버스 글자.
 - **Todo 22 신설 (2026-09-27, 사용자 결정)**: 실제 엔진 NPC 대화를 한국어로 DOM 패널에 표시. 근거는 `.omo/drafts/korean-output-gap-design.md` — 번역 lookup이 wasm에 없고, 엔진→JS 텍스트 경로가 없으며, `korean-progression.spec.ts`는 `ultimaI18n.resolve`만 검사. 범위는 U4 TLK NPC 대화(응답 필드 + 대화 틀 문장). Todo 20은 22에 의존하도록 변경.
 - **Step 19 완료 (2026-09-27, branch `todo-19-pages-release` → main)**: 기존 CI는 wasm 엔진을 빌드하지 않아 Pages artifact가 셸만 담고 있었음(`vite preview`의 `/engine/` 미들웨어가 로컬 e2e에서 이를 가림). `pages.yml`이 이제 apt 오디오 헤더 → `deps:host` → `build:modules` → `deps:wasm` → `build:wasm` → wasm-symbols(hard gate) → `build:site --base=/ultima/` → `audit:dist -- --require-engine` → `.nojekyll` → upload. `verify:workflow`가 엔진 빌드 순서·`--require-engine`·continue-on-error 금지를 강제. 증거: CI run `36315000683`(branch dispatch) build 성공 → 다운로드한 artifact에 `.nojekyll`+`engine/*` 확인 → `tests/e2e/pages-static-smoke.spec.ts`(plain static server `/ultima/`, `/`는 404)가 **CI artifact 자체**로 실제 엔진 부팅(1/1). workflow 변형 3종 실패 로그, SSH 인증 확인. QA의 "`/`에서 서빙" 절반: base `/` 빌드(`npm run build`)를 plain static server `/`에 올려 같은 spec(`PAGES_PREFIX=/`)으로 실제 엔진 부팅 1/1. **실제 배포는 아직 없음**: GitHub Pages 미설정(API 404) — Settings > Pages > Source="GitHub Actions"는 사용자만 가능.
@@ -151,7 +152,7 @@ Step 3 완료 (2026-09-24):
 - 3.2 ✅ NPC 접근: 매 스텝 4방향 talk sweep + Backspace 16회 clear 가드, 6×Right→Calabrini 대화 완주
 - 3.3 ✅ `e` 직후·talk sweep 직후 CHECKPOINT(Enter towne!/You meet) 로그, greeting 없으면 실행 폐기
 - 3.4 ✅ name/health/bye 키워드 응답 스크린샷 확보, save+reload 검증
-- 3.5 ✅ main(Todo 4/5 4커밋) 병합 + 충돌 해결(pacakge.json/handoff.md/계획서)
+- 3.5 ✅ main(Todo 4/5 4커밋) 병합 + 충돌 해결(pacakge.json/docs/handoff.md/계획서)
 - 3.6 ✅ clean 전체 게이트 재실행(rm -rf build 후 전체 파이프라인) + handoff 기록 + 체크박스 동기화
 
 ### Wave 2 — WASM 이식 (6~10, 21)
@@ -240,7 +241,7 @@ Step 7·8 main merge 완료 (2026-09-24):
 - 8 ✅ merge `6b97d8e Merge todo-08-input-queue: browser-safe input queues` (구현 `af13814`)
 - `vendor/source-manifest.json` treeSha256 충돌 → 합친 vendor로 재계산 resolve: xu4 **fileCount 409**, treeSha256 `e65f0d9b616f9e28923a5e6dfd61b481848832ac3a5f2ce3b0f2169d73b25b49` (`match:true`)
 - worktree evidence는 main `.omo/evidence/ultima-web/task-{7,8}/`로 복사(git-ignored, local-only)
-- 상세 acceptance·QA·RED/GREEN은 `handoff.md` "Todo 7/8 main merge 완료 기록" 참고
+- 상세 acceptance·QA·RED/GREEN은 `docs/handoff.md` "Todo 7/8 main merge 완료 기록" 참고
 
 merge 게이트 (2026-09-24, main, 전부 실제 실행 · exit 0):
 ```
@@ -270,7 +271,7 @@ Step 9 main merge 완료 (2026-09-24):
 - e2e 5개 시나리오(happy/missing-files/corrupted/sha-mismatch-allow/reload) 전부 실제 실행·통과, happy path는 실제 검증된 `ULTIMA4_DATA`(529099 bytes)로 확인. 스크린샷 `.omo/evidence/ultima-web/task-9/startup-title.png`.
 - **정직하게 남기는 한계**: `scripts/web-main.cpp`의 `main()`은 여전히 Step 6의 placeholder(즉시 return 0)라서, 지금 "엔진 시작" 성공은 화면에 실제 타이틀 화면을 그리는 게 아니다(스크린샷 캔버스는 검은 화면). 실제 xu4 부팅 시퀀스(servicesInit/config/screen/이벤트 루프) 이식은 이 Todo의 파일 범위 밖(빌드 스크립트 주석에 명시)이며 후속 통합 작업이다.
 - **로컬 merge만 완료, origin push는 아직 안 함** — 사용자 확인 대기 중(아래 "바로 다음 순서" 참고). 이전 Step 7/8까지는 매번 push 전 사용자 승인을 받는 절차였는데, 이번엔 로컬 merge까지 진행한 뒤에야 확인 요청으로 넘어갔다 — AGENTS.md 진행 관리 규칙("merge는 멈추고 물어봐")과 어긋난 처리였다는 점을 다음 세션을 위해 남겨둔다.
-- 상세 acceptance·QA·RED/GREEN은 `handoff.md` "Todo 9 main merge 완료 기록" 참고
+- 상세 acceptance·QA·RED/GREEN은 `docs/handoff.md` "Todo 9 main merge 완료 기록" 참고
 - 병렬로 Step 10/16/11-13 설계 조사 메모 작성 완료(읽기 전용, 코드 미변경): `.omo/drafts/step-10-idbfs-design.md`, `.omo/drafts/step-16-web-audio-design.md`, `.omo/drafts/step-11-13-korean-ui-design.md`
 
 merge 게이트 (2026-09-24, main, Step 9 merge 후 전부 재실행 · exit 0):
@@ -297,7 +298,7 @@ Step 10 main merge 완료, 부분 (2026-09-24):
 - `tests/unit/persistence.test.ts`: RED(모듈 없음) → GREEN, **12 tests**. 설계 메모의 RED 후보 항목(단일/동시 close 합치기, 무관 경로 필터, saving→saved 순서, sync 실패 시 "saved" 오보 안 함, flush 무대기, 아카이브 왕복, 손상 아카이브는 throw 대신 error 상태) 전부 커버.
 - **아직 안 한 것(의도적, 다음 결정 필요)**: `src/shell.ts`의 `save-export`/`save-import` placeholder를 실제 `exportSaveArchive`/`importSaveArchive`로 연결하지 않았다 — `startEngine()`이 FS/module 참조를 호출자에게 안 넘겨줘서 연결할 대상이 없고, 실제 세이브 데이터도 없어서 지금 연결해도 빈 아카이브만 오간다. e2e(`tests/e2e/save-reload.spec.ts`)도 아직 없다.
 - 전체 게이트(main, merge 후 재실행): `npm run test:unit`(13 files/99 tests) · `verify:repo-sources` · `typecheck` · `build` · `git diff --check` · `cmp` 계획서 두 벌 — 전부 exit 0. `npx playwright test --project=chromium`(기존 8개, 무회귀) exit 0.
-- 상세는 `handoff.md` "Todo 10 main merge 완료 기록(부분)" 참고.
+- 상세는 `docs/handoff.md` "Todo 10 main merge 완료 기록(부분)" 참고.
 
 Todo 21 신규 추가 완료 (2026-09-24, 사용자 지시 "main() 이식은 별도 Todo로 새로 만들어"):
 - `.omo/plans/ultima-web.md` + `docs/ULTIMA_WEB_PLAN.md`에 Todo 21("Port the real xu4 boot sequence into the web entry point")을 Todo 20 뒤, Final verification wave 앞에 추가(byte-identical, cmp 확인). 기존 Todo 1~20 번호/내용은 안 건드림(관례상 "헤더 재작성 금지" 유지, append만 함).
@@ -311,7 +312,7 @@ Todo 21 완료 (2026-09-25, branch `todo-21-real-engine`, main에는 아직 merg
 - `vendor/xu4/src/gpu_opengl.cpp`·`support/getTicks.c` 직접 수정 + `vendor/source-manifest.json` treeSha256 갱신(Todo 7/8이 세운 전례를 따름, 같은 커밋).
 - 신규 `tests/e2e/boot-sequence.spec.ts`: 실제 `ultima4.zip`으로 타이틀 화면 비검은색 렌더 + 키 입력 2회로 `IntroController` 실제 상태 전이(INTRO_TITLES→INTRO_MAP→INTRO_MENU) 확인. 실패 경로: `render.pak` 404 → `runtime-error` 이벤트(이 과정에서 `main.ts`의 모듈 fetch가 `response.ok`를 안 보던 버그도 발견·수정). 증거: `.omo/evidence/ultima-web/task-21/title-render.png`, `boot-failure.log`.
 - 검증 게이트 전부 exit 0: `npm run test:unit`(13 files/99 tests) · `verify:repo-sources`(4 components) · `typecheck` · `build` · `git diff --check` · 전체 e2e 스위트(10/10, Chromium).
-- 상세 조사 과정(각 버그를 어떻게 찾았는지, advisor 상담 내용 포함)은 `handoff.md` "Todo 21 완료 기록" 참고.
+- 상세 조사 과정(각 버그를 어떻게 찾았는지, advisor 상담 내용 포함)은 `docs/handoff.md` "Todo 21 완료 기록" 참고.
 
 Todo 21 main merge + Todo 10 저장/재로드 증명 (2026-09-25):
 - `todo-21-real-engine`(`542ce34`, `70d14db`, `23cbbd4`) → main `ce88bc1`로 merge, `origin/main`에 push 완료.
@@ -340,7 +341,7 @@ Todo 19 골격 작업 (2026-09-25, branch `todo-19-pages-workflow`, 백그라운
 - 신규 `npm run audit:dist`(`scripts/audit-dist.mjs`): dist artifact에서 원본 게임 데이터 확장자(zip/sav/ega/map/tlk/exe)와 개발용 tooling 파일(`scripts/check-base-path.mjs`의 `FORBIDDEN_BASENAMES`/`FORBIDDEN_EXTENSIONS` 재사용) 유출을 검사. Todo 18이 test-hook/cheat-API/XSS 등으로 이 audit을 더 넓힐 예정임을 주석에 명시.
 - 신규 `npm run verify:workflow`(`scripts/workflow-verifier.mjs` + `scripts/verify-workflow.mjs`): YAML 파서 없이 텍스트 기반으로 HTTPS URL·SSH remote·Pages URL·`--base=/ultima/`·`pages: write`·`id-token: write`·artifact root(`path: dist`)·`.nojekyll`·모든 `uses:`의 SHA 고정 여부·`node-version` 정확한 버전·`audit:dist`가 upload보다 먼저 실행되는지·`git push` 부재·원본 데이터 확장자 부재를 검사.
 - TDD: `tests/unit/audit-dist.test.ts`(4개), `tests/unit/workflow.test.ts`(13개) 전부 RED(스크립트/워크플로우 파일 없음, 17/17 실패) 확인 후 구현 → GREEN(17/17 통과). 과정에서 워크플로우 헤더 주석에 우연히 `audit:dist` 문자열이 두 번 나와(주석+실제 스텝) 순서 검사 테스트가 첫 위양성으로 실패한 것을 실제로 잡아 주석 문구를 고쳐 재통과시킴(진짜 RED→GREEN 사이클).
-- **실제로 발견한, 아직 안 풀린 문제**: 완전히 새로 clone한 저장소(`build/` 없음)에서 `npm run test:unit`을 실제로 실행해보니 `tests/unit/wasm-symbols.test.ts`가 실패한다(다른 14개 파일/108개 테스트는 통과 — 이 수치는 최초 발견 시점 실측값; `workflow.test.ts`가 이후 더 늘어서 브랜치 tip에서는 다른 숫자다, `handoff.md` "Todo 19 후속 수정 2" 참고). 원인: wasm 엔진 빌드에 필요한 pinned emsdk(4.0.23, `docs/SOURCE_PINS.md`)가 어떤 npm 스크립트로도 자동 설치되지 않고, 지금까지 전부 로컬 1회성 수동 설치였음(`handoff.md` Node 22 절 참고) — CI 러너는 당연히 이게 없다. 이번 세션 자체 worktree도 처음엔 `build/wasm-release`가 없어서 똑같이 실패하는 것을 실측(클린 clone 시뮬레이션과 동일 증상) → 메인 체크아웃의 기존 빌드 산출물(`build/wasm-release`, 27MB, 원본 데이터 없음 확인 후)을 복사해 로컬 게이트만 통과시킴. **테스트를 고치거나 약화하지 않았고**, CI 워크플로우는 `wasm-symbols.test.ts`만 별도 스텝으로 분리해 `continue-on-error`로 두고(주석으로 이유 명시), 나머지는 그대로 하드 게이트 — advisor 리뷰에서 "전체를 continue-on-error로 두면 진짜 회귀도 배포를 못 막는다"는 지적을 받고 이렇게 좁혔다. 그 결과 CI가 만드는 `dist/`에는 `/engine/`이 없다(셸만 배포, 2026-09-24 재계획이 허용한 범위와 일치). emsdk를 CI에 자동 설치하는 일은 Todo 19의 범위 밖으로 남겨둠(별도 결정 필요).
+- **실제로 발견한, 아직 안 풀린 문제**: 완전히 새로 clone한 저장소(`build/` 없음)에서 `npm run test:unit`을 실제로 실행해보니 `tests/unit/wasm-symbols.test.ts`가 실패한다(다른 14개 파일/108개 테스트는 통과 — 이 수치는 최초 발견 시점 실측값; `workflow.test.ts`가 이후 더 늘어서 브랜치 tip에서는 다른 숫자다, `docs/handoff.md` "Todo 19 후속 수정 2" 참고). 원인: wasm 엔진 빌드에 필요한 pinned emsdk(4.0.23, `docs/SOURCE_PINS.md`)가 어떤 npm 스크립트로도 자동 설치되지 않고, 지금까지 전부 로컬 1회성 수동 설치였음(`docs/handoff.md` Node 22 절 참고) — CI 러너는 당연히 이게 없다. 이번 세션 자체 worktree도 처음엔 `build/wasm-release`가 없어서 똑같이 실패하는 것을 실측(클린 clone 시뮬레이션과 동일 증상) → 메인 체크아웃의 기존 빌드 산출물(`build/wasm-release`, 27MB, 원본 데이터 없음 확인 후)을 복사해 로컬 게이트만 통과시킴. **테스트를 고치거나 약화하지 않았고**, CI 워크플로우는 `wasm-symbols.test.ts`만 별도 스텝으로 분리해 `continue-on-error`로 두고(주석으로 이유 명시), 나머지는 그대로 하드 게이트 — advisor 리뷰에서 "전체를 continue-on-error로 두면 진짜 회귀도 배포를 못 막는다"는 지적을 받고 이렇게 좁혔다. 그 결과 CI가 만드는 `dist/`에는 `/engine/`이 없다(셸만 배포, 2026-09-24 재계획이 허용한 범위와 일치). emsdk를 CI에 자동 설치하는 일은 Todo 19의 범위 밖으로 남겨둠(별도 결정 필요).
 - 검증 게이트 전부 실제 실행, 전부 exit 0: `npm ci` · `npm run test:unit`(15 files/118 tests) · `npm run verify:repo-sources`(4 components) · `npm run typecheck` · `npm run build` · `git diff --check` · `npm run build:site -- --base=/ultima/` · `npm run audit:dist`(9 files) · `npm run verify:workflow` · `cmp` 계획서 2벌. CI가 실제로 돌릴 하드 게이트도 완전히 새로 clone한 저장소에서 직접 실행(계산 아님): `npx vitest run --exclude tests/unit/wasm-symbols.test.ts` → exit 0, 14 files/110 tests; `npx vitest run tests/unit/wasm-symbols.test.ts` → exit 1, 8 skipped(continue-on-error라 job은 안 막힘, 의도된 동작).
 - advisor 리뷰 2회로 추가 발견·수정한 것(전부 커밋 전에 잡음, main엔 한 번도 push 안 됨): (1) `verify:workflow`의 구조 검사(permission/artifact-root/`.nojekyll`)가 헤더 주석 문구만으로도 통과하던 실제 버그 — 주석이 아닌 줄만 앵커된 정규식으로 검사하도록 수정, `include-hidden-files` 검사 추가; (2) workflow-level `concurrency`를 `deploy` job으로 좁힘(PR용 `build`가 대기 중인 main 배포를 치환하지 못하게); (3) 의존성 매트릭스 19번 행을 처음에 빠뜨렸다가 추가 반영; (4) `- name: Unit tests: wasm engine suite (...)`가 인용 안 된 plain YAML scalar에 `: `를 포함해 **GitHub가 워크플로우 파일 전체를 파싱조차 못 하고 거부했을 실제 문법 오류** — `verify:workflow`는 YAML 파서가 아니라서 못 잡았고, 시스템의 PyYAML로 실제 파싱해서 확인/수정, 같은 버그 클래스를 잡는 검사(`checkNameValuesAreYamlSafe`)도 추가.
 - 완료 판정: 여전히 15,16,18 이후. 체크박스는 의도적으로 `[ ]` 유지.
@@ -355,7 +356,7 @@ Todo 16 완료 (2026-09-26, branch `todo-16-web-audio` 커밋 `541d6ca`, main에
 - 신규 테스트: `tests/unit/audio-manifest.test.ts`(15), `tests/unit/audio-bridge.test.ts`(14, generation-race 포함), `tests/unit/startup-sequence.test.ts`(+2), `tests/e2e/audio.spec.ts`(2 시나리오, 실제 `ultima4.zip`) — 전부 RED→GREEN 확인.
 - 검증 게이트 전부 exit 0: `npm ci` · `npm run test:unit`(15 files/130 tests) · `verify:repo-sources`(4 components) · `typecheck` · `build` · `git diff --check` · `npm run deps:wasm` · `npm run build:wasm -- --debug`(70/70 소스) · `npm run test:e2e -- tests/e2e/audio.spec.ts --project=chromium`(2/2) · 전체 e2e 스위트(12/12, Chromium) · `npm run build:native` · `ctest --test-dir build/native`(3/3, native 무회귀).
 - 증거: `.omo/evidence/ultima-web/task-16/{red.log,green-manifest.log,green-unit.log,audio-summary.json,audio-generation-race.log}`.
-- 남은 것: `soundSpeakLine()`의 stream sub-range 재생은 미구현(이 모듈에 `voice:` 데이터가 전혀 없어 실질적으로 도달 불가함을 확인) — 정직하게 문서화만 하고 구현은 보류. 상세는 `handoff.md` "Todo 16 완료 기록" 참고.
+- 남은 것: `soundSpeakLine()`의 stream sub-range 재생은 미구현(이 모듈에 `voice:` 데이터가 전혀 없어 실질적으로 도달 불가함을 확인) — 정직하게 문서화만 하고 구현은 보류. 상세는 `docs/handoff.md` "Todo 16 완료 기록" 참고.
 
 Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 - `glossary.json`(18) 완료: 울티마 4 정경 용어(8미덕·3원칙·아바타/룬/신단/진언/코덱스/동료/미덕) — 이후 모든 파일이 참조하는 용어집이라 가장 먼저 함.
@@ -379,7 +380,7 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 - **재발 방지 = 신규 Todo 28** (branch `todo-28-build-freshness`, `adb5aa6`): stamp 기반 산출물 신선도 강제(`check:build-fresh`, `build:site`·`vite dev`에서 강제), `npm run verify:integration` 단일 순서 게이트, 모든 e2e 실패 자동 캡처(`tests/e2e/fixtures.ts`), AGENTS.md/TESTING_POLICY 조사 규칙. 유닛 35개 RED→GREEN.
 - **실행 중**: 두 브랜치를 합친 트리에서 `npm run verify:integration`(PLAYWRIGHT_PORT=4570). 게이트 전부 통과(build:modules·build:wasm·check:build-fresh·unit 443/443·verify·typecheck·build·i18n --strict 4523·build:site·audit:dist --require-engine·plan cmp·diff-check), 전체 e2e 진행 중.
 
-1. `verify:integration` 결과 확인(로그 `.omo/evidence/ultima-web/integration/verify-integration.log`). **PASS면** Todo 24·25·26·28 ✅ → **27/32**, 계획서 두 벌 `[x]` + cmp, handoff.md 게이트 기록, main merge + push. **FAIL이면** 자동 첨부된 `failure-panel.txt`/`failure-screen.png`부터 확인.
+1. `verify:integration` 결과 확인(로그 `.omo/evidence/ultima-web/integration/verify-integration.log`). **PASS면** Todo 24·25·26·28 ✅ → **27/32**, 계획서 두 벌 `[x]` + cmp, docs/handoff.md 게이트 기록, main merge + push. **FAIL이면** 자동 첨부된 `failure-panel.txt`/`failure-screen.png`부터 확인.
 2. Todo 28 QA 실패 시나리오 증거(`task-28/stale-rejected.log`: 모듈 소스 수정 후 `check:build-fresh`·`build:site` exit 1) 생성.
 3. Todo 27 재개(worktree `.claude/worktrees/todo-27-status` `8023dce`) — 이제 `verify:integration`으로 검증.
 4. F1~F4 (아래 기존 기록의 F1 신규 발견 포함).
@@ -402,7 +403,7 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 1. **`korean-shop.spec.ts` 실패 원인 확정(테스트 약화 아님 — 진단 캡처 추가)**: `talkAcrossCounter`(spec:185-202)의 `throw` 직전에 패널 덤프 + 스크린샷을 `shop-failure-<talkKey>.log`로 남기고, `"대화: "` / `"이상하게, 반응이 없다!"` 유무를 명시해 원인을 판정한다. 동시에 접근을 `korean-npc-output.spec.ts:106-113`의 **4방향 전부 시도** 패턴으로 확장(프로젝트에 이미 문서화된 해법, 실패 모드 동일 — 확률적 실패를 확률적으로 시도하는 것이지 검사를 약화하는 것이 아니다).
 2. 위 확정 후 `korean-shop.spec.ts` 단독 재실행 → 통과 시 **전체 e2e 1회 재실행**(약 40분) → 그때 Todo 24·25·26 ✅ → **26/31**, 계획서 두 벌 체크박스 `[x]` + `cmp` 0.
 3. Todo 27 재개(worktree `.claude/worktrees/todo-27-status` `8023dce`에서 build:wasm→게이트→e2e→리뷰) → main merge → 27/31.
-4. F1~F4. **F1 신규 발견(읽기 전용 조사)**: HANDOFF.md가 지목한 3개 갭(task-10 trace·task-14 증거·Y/N)은 `verify:release-docs`를 깨지 않지만, **worktree에 evidence 6개 파일이 없어 지금 `verify:release-docs`가 실제로 실패**한다(task-3 `full-qa-native-baseline.log`, task-15 `i18n-strict.log`, task-18 `security-audit.log`·`dist-leak-rejected.log`, task-19 `live-pages-smoke.json`·`pages-static-smoke-ci-artifact.json` — 모두 상위 트리 `/home/taejin/ultima/.omo/evidence/`에는 존재, worktree에 미복제). 또 **Y/N 한국어 답은 "증거만 없는" 게 아니라 런타임 배선 자체가 없다** — `src/shell.ts:603`이 유일한 호출부이고 `resolveInput("text", …)`로 하드코딩이며, 프롬프트 종류를 알려주는 bridge 이벤트가 없다(shell.ts:544-548 주석). 문서화로 닫히지 않으니 신규 Todo가 필요할 수 있다(사용자 결정).
+4. F1~F4. **F1 신규 발견(읽기 전용 조사)**: docs/HANDOFF.md가 지목한 3개 갭(task-10 trace·task-14 증거·Y/N)은 `verify:release-docs`를 깨지 않지만, **worktree에 evidence 6개 파일이 없어 지금 `verify:release-docs`가 실제로 실패**한다(task-3 `full-qa-native-baseline.log`, task-15 `i18n-strict.log`, task-18 `security-audit.log`·`dist-leak-rejected.log`, task-19 `live-pages-smoke.json`·`pages-static-smoke-ci-artifact.json` — 모두 상위 트리 `/home/taejin/ultima/.omo/evidence/`에는 존재, worktree에 미복제). 또 **Y/N 한국어 답은 "증거만 없는" 게 아니라 런타임 배선 자체가 없다** — `src/shell.ts:603`이 유일한 호출부이고 `resolveInput("text", …)`로 하드코딩이며, 프롬프트 종류를 알려주는 bridge 이벤트가 없다(shell.ts:544-548 주석). 문서화로 닫히지 않으니 신규 Todo가 필요할 수 있다(사용자 결정).
 
 **⏸ 이전 중단 기록 (2026-09-29, 사용자 지시로 진행 중단 — 아래는superseded)**
 - 진행률 **23/31 (74.2%)** 유지. ✅ = Todo 1~23. Todo 24·25·26은 코드가 main에 merge되었으나(24 `8c4edbb` push됨, 26 `dc5764d` push됨, 25 merge `c4cdbf5` **로컬만·미push**, origin/main=`dc5764d`) 계획의 '전체 e2e 스위트' 통합 확인 전이라 ✅ 보류.
@@ -414,7 +415,7 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 1. **다음 단계: Todo 24·25·26 merge(브랜치 구현 완료, 충돌 정리: manifest 해시·strings.ts 재생성) → 27**. (원래 항목:) Todo 23~27 (사용자 결정 "후속 Todo로 추가", 설계 `.omo/drafts/korean-surface-*.md`). 서로 다른 파일을 건드려 병렬 가능: 23(screen.cpp 일반 메시지)·24(discourse_castle/codex)·26(인트로 오버레이)을 먼저 병렬로, 25(상점, 23 필요)·27(상태창, 26의 가림 규칙 필요)은 그 뒤. 공통 충돌 지점(`vendor/source-manifest.json` 해시, 생성 테이블, `src/shell.ts`, `src/engine/startup.ts`)은 merge 때 재생성·정리.
 2. **제품 결정(2026-09-27)**: 한국어 오버레이는 표시 중 그 영역을 불투명 배경으로 가림; 긴 대사는 패널에 문단 전체를 한 번에 표시.
 3. **F단계**: F2 APPROVE, F1·F4 REJECT(→ 23~27로 해소 예정 + 누락 증거 보충), F3 진행 중(branch `f3-real-browser-qa`: Chromium 전체 40/40, Firefox 8/10 + trace 옵션 충돌 2개 재실행 중, WebKit은 사용자가 `sudo npx playwright install-deps webkit` 설치 후). `verify:release`는 branch `todo-release-verify` `ddef2a2`에 구현됨(미merge; fresh clone에서 unit test가 `task-3/` 증거를 만들어 verify:release-docs를 깨는 문제 남음).
-7. **Todo 17 거짓 통과 이력 주의**: 한국어 입력창 포커스 때문에 던전·신단·중간 저장 구간이 원래 한 번도 실행되지 않았음 → 이번 브랜치에서 수정·재검증 완료(2/2, 스크린샷으로 실제 진입 확인). 자세한 내용은 handoff.md "Todo 18 진행 중 — 세션 중단 기록".
+7. **Todo 17 거짓 통과 이력 주의**: 한국어 입력창 포커스 때문에 던전·신단·중간 저장 구간이 원래 한 번도 실행되지 않았음 → 이번 브랜치에서 수정·재검증 완료(2/2, 스크린샷으로 실제 진입 확인). 자세한 내용은 docs/handoff.md "Todo 18 진행 중 — 세션 중단 기록".
 8. UX 이슈(미수정): 실제 사용자도 한글 입력창 사용 후 화살표/명령키가 조용히 무시됨 → F3 또는 제품 결정.
 9. 이후: 19 완료(골격·emsdk CI·audit 확장 이미 병합) → 20 → F1~F4. Pages Source="GitHub Actions" 설정은 사용자만 가능.
 10. **출시 필수 미완료 작업**: 실제 엔진 출력과 한국어 번역/DOM 표시 연결(Step 11/12/14의 실제 게임 확인 ⬜). alias 입력/정적 번역 테이블 통과와 한국어 플레이는 다르다. 현재 계획의 승인 체크박스가 이 연결 완료를 대신하지 않으며, 출시 전에 실제 한국어 화면으로 검증해야 한다.
@@ -454,7 +455,7 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 3. ✅ **F3 실제 브라우저 QA 실행 완료 (2026-10-02)**: 전체 스위트를 실제 `ultima4.zip`으로 **Chromium(46/46, verify:release)·Firefox(46/46, 36.4m)·WebKit(45→46/46)** 실행. WebKit에서 `korean-status-overlay.spec.ts`가 0.069px 서브픽셀 초과(72/200=0.36 vs 측정 0.36034)로 1건 실패 → oracle 리뷰(APPROVE_WITH_CHANGE) 후 **aura-relative 단언**(`overlayBottom ≤ auraTop + 0.5`, line 160과 동일 규약)으로 수정, 단독 재실행으로 WebKit·Chromium·Firefox 각각 green 확정 + 전체 WebKit 재실행 46/46. 증거: `final/F3-real-browser-qa/`(browser version: Playwright 1.52.0, firefox 137.0, webkit 18.4).
 4. ✅ **F4 최종 재감사 완료 (2026-10-02)**: 새 감사서 `final/F4-scope-fidelity.md` 작성 — verdict **APPROVE_WITH_DEVIATIONS**, 분모 산술은 계획서에서 직접 유도(2026-10-02 승인 후 체크박스 총 37, `[x]` 37 → 37/37=100%), `cmp` exit 0, `audit:dist --require-engine` exit 0(9 files, leak 0), `verify:workflow` exit 0.
 5. ✅ **사용자 결정 완료 (2026-10-02)**: Todo 29~33 편입 + 분모 **37** 확정. 계획서 체크박스 37/37 `[x]`, F1~F4 승인.
-6. **남은 것 (사용자/외부)**: ① `git push origin main`(사용자 승인 완료 — 실행 예정), ② GitHub Pages 배포 확인(Settings Source="GitHub Actions"는 사용자만 가능, CI가 push 후 자동 배포), ③ `handoff.md` 최종본·`HANDOFF.md` 갱신.
+6. **남은 것 (사용자/외부)**: ① `git push origin main`(사용자 승인 완료 — 실행 예정), ② GitHub Pages 배포 확인(Settings Source="GitHub Actions"는 사용자만 가능, CI가 push 후 자동 배포), ③ `docs/handoff.md` 최종본·`docs/HANDOFF.md` 갱신.
 
 ## 목적 달성 가능성 판단
 - **가능하다, 그리고 크리티컬 패스(Todo 21)는 이제 끝났다.** 근거: 같은 xu4 소스가 native에서도(Step 3), 이제 브라우저에서도(Todo 21, 2026-09-25) 원본 데이터로 실제로 돈다 — 실제 타이틀 화면 렌더 + 실제 키 입력으로 `IntroController` 상태 전이까지 확인됨. 남은 일은 대부분 한국어화(11~15)와 배포(17~20)로, 엔진 자체의 미지수는 이제 거의 없다.
@@ -468,7 +469,7 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 
 ## 공통 규칙 (AGENTS.md 요약)
 - 브랜치 `todo-<n>-<topic>`, PR 없이 main 직접 merge. merge 전 `npm ci`, `npm run test:unit`, `npm run verify:repo-sources`,
-  `npm run typecheck`, `npm run build`, `git diff --check` + 해당 단계 추가 명령 전부 통과 후 `handoff.md`에 기록.
+  `npm run typecheck`, `npm run build`, `git diff --check` + 해당 단계 추가 명령 전부 통과 후 `docs/handoff.md`에 기록.
 - TDD: RED 로그 → GREEN. 테스트 삭제/약화 금지.
 - 원본 ZIP/EXE/TLK/MAP/EGA/SAV, 추출 원문 corpus, 사용자 save, secret 커밋 금지.
 - 단계 완료 시 이 파일의 상태·진행률을 갱신한다.

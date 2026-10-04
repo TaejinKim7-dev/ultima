@@ -17,7 +17,7 @@
 // entirely through the PersistenceFS interface below, so unit tests can
 // drive it with a fake filesystem. Wiring it to a real EngineModule's FS
 // happens in the caller (src/main.ts, once the real engine boot sequence
-// exists -- see HANDOFF.md's Step 9 "placeholder main()" caveat).
+// exists -- see docs/HANDOFF.md's Step 9 "placeholder main()" caveat).
 
 import { BRIDGE_ABI_VERSION, type BridgeEvent, type SaveStateBridgeEvent } from "../bridge/types.ts"
 

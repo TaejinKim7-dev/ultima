@@ -14,7 +14,7 @@ import { buildAliasTable, resolveInput, type AliasSourceEntry } from "../../src/
 //   - enabling Debug Mode via the real Configure menu (never a test hook --
 //     Todo 18 audits for those) + the cheat menu's deterministic 'g' Goto
 //     (zero RNG -- vendor/xu4/src/cheat.cpp): tests/e2e/korean-npc-alias.spec.ts,
-//     handoff.md's "Todo 3 E2E 보강"
+//     docs/handoff.md's "Todo 3 E2E 보강"
 //   - NPC approach-and-talk sweep proven to reliably reach a live NPC:
 //     tests/e2e/korean-npc-alias.spec.ts
 //   - Web Audio continuity counters (window.ultimaAudio.stats()):
@@ -119,7 +119,7 @@ async function gotoAndEnter(page: Page, destinationSubstring: string): Promise<v
   await pressKey(page, "e", 2000) // Enter!
 }
 
-/** Cheat menu's 'x' (Exit Map): deterministically returns to the parent (world) map from anywhere inside a town/dungeon/shrine -- vendor/xu4/src/cheat.cpp case 'x', reused from handoff.md's Todo 3 investigation. */
+/** Cheat menu's 'x' (Exit Map): deterministically returns to the parent (world) map from anywhere inside a town/dungeon/shrine -- vendor/xu4/src/cheat.cpp case 'x', reused from docs/handoff.md's Todo 3 investigation. */
 async function cheatExitMap(page: Page): Promise<void> {
   await openCheatMenu(page)
   await pressKey(page, "x", 2000) // X-it!

@@ -1,7 +1,7 @@
 /**
  * Best-effort extractor for player-visible C++ literal strings.
  *
- * Scope decision (documented in handoff.md "Todo 4 완료 기록"): we do not
+ * Scope decision (documented in docs/handoff.md "Todo 4 완료 기록"): we do not
  * scan all ~76 files under vendor/xu4/src/. We scan a curated list of
  * files that are the actual call sites for player-visible text --
  * screenMessage(...) calls (status/combat/command feedback) and

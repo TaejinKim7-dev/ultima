@@ -6,8 +6,8 @@ import { fileURLToPath } from "node:url"
 import { afterEach, describe, expect, it } from "vitest"
 
 // Todo 20: `npm run verify:release-docs` checks the release docs (README.md,
-// docs/WEB_PORT.md, docs/GITHUB_PAGES.md -- not the append-only handoff.md
-// session log, see the last test) for commands that
+// docs/WEB_PORT.md, docs/GITHUB_PAGES.md -- not the append-only handoff.md /
+// docs/handoff.md session log, see the last tests) for commands that
 // don't exist, missing source pins, dead evidence/repo links, stale
 // placeholder text, and deployment claims nobody verified. Every case here
 // runs against a throwaway fixture repo root, never the real docs (those
@@ -69,7 +69,8 @@ const BASE_FILES: FixtureFiles = {
   "README.md": "# Ultima\n\nRun `npm ci` then `npm run build:site -- --base=/ultima/`. See [the port notes](docs/WEB_PORT.md).\n",
   "docs/WEB_PORT.md": `# Web port\n\nPins: xu4 \`${XU4_REV}\`, boron \`${BORON_REV}\`. Build script: \`scripts/build-site.mjs\`.\n`,
   "docs/GITHUB_PAGES.md": "# Pages\n\nSet Source to GitHub Actions, then `npm run audit:dist`.\n",
-  "handoff.md": "# Handoff\n\n`npm run test:unit` passed.\n"
+  "handoff.md": "# Handoff\n\n`npm run test:unit` passed.\n",
+  "docs/handoff.md": "# Handoff\n\n`npm run test:unit` passed.\n"
 }
 
 function fixtureRoot(overrides: FixtureFiles = {}, plan: string = PLAN_TEXT): string {
@@ -325,6 +326,13 @@ describe("verify:release-docs", () => {
   it("does not scan handoff.md: it is an append-only historical log whose old paths/placeholders are history, not release docs", () => {
     const result = run(
       fixtureRoot({ "handoff.md": "# Handoff\n\nOld run: `npm run verify:gone`, `scripts/removed.mjs`, TODO from 2026-09-24.\n" })
+    )
+
+    expect(result.status, result.stderr).toBe(0)
+  })
+  it("does not scan docs/handoff.md either: it is the append-only session log moved under docs/", () => {
+    const result = run(
+      fixtureRoot({ "docs/handoff.md": "# Handoff\n\nOld run: `npm run verify:gone`, `scripts/removed.mjs`, TODO from 2026-09-24.\n" })
     )
 
     expect(result.status, result.stderr).toBe(0)

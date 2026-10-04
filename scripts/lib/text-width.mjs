@@ -5,7 +5,7 @@
  * (vendor/xu4/src/stats.h:13, `#define STATS_AREA_WIDTH 15`) drawn with an
  * 8x8 bitmap font -- see vendor/xu4/src/stats.cpp (STATS_AREA_WIDTH used
  * throughout for centering/clearing the status column). The web port keeps
- * the original status area position and size (see handoff.md requirement
+ * the original status area position and size (see docs/handoff.md requirement
  * #3), so a Korean status-line translation must still fit in that budget.
  *
  * Hangul syllables (and other East-Asian "wide" characters) render at

@@ -32,7 +32,7 @@ const REAL_OGG_LONG = `${repoRoot}vendor/xu4/module/Ultima-IV/music/minstrel/wan
 /** Builds a minimal but structurally valid CDI pak: header + TOC + chunks,
  *  in the exact layout vendor/xu4/src/support/cdi.c's cdi_openPak()/
  *  cdi_loadPakTOC() read (verified against a real built Ultima-IV.mod in
- *  this Todo's investigation -- see handoff.md). */
+ *  this Todo's investigation -- see docs/handoff.md). */
 function buildFakePak(chunks: ReadonlyArray<{ cdi: number; appId: number; data: Uint8Array }>): Uint8Array {
   const tocOffset = 16
   const tocBytes = chunks.length * 16
@@ -170,7 +170,7 @@ describe("audio-manifest: WAV duration", () => {
 
   it("matches a real committed xu4 sound asset's actual duration (walk_normal_c64.wav)", () => {
     const bytes = readFileSync(REAL_WAV)
-    // Verified independently (this Todo's investigation, see handoff.md):
+    // Verified independently (this Todo's investigation, see docs/handoff.md):
     // 3724 bytes of 16-bit mono 44100Hz data => byteRate 88200 => ~42ms.
     expect(computeWavDurationMs(bytes)).toBe(Math.round((3724 * 1000) / 88200))
     expect(computeWavDurationMs(bytes)).toBeGreaterThan(0)

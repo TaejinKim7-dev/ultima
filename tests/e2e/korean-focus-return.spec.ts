@@ -85,7 +85,7 @@ async function createCharacterAndWaitForSave(page: Page): Promise<boolean> {
  *
  * This path used to reliably abort the WASM runtime with
  * `Aborted(RuntimeError: unreachable)` -- see tests/e2e/configure-menu-no-
- * abort.spec.ts and handoff.md's "wasm 입력 이벤트 재진입 버그" section for
+ * abort.spec.ts and docs/handoff.md's "wasm 입력 이벤트 재진입 버그" section for
  * the root cause (GLFW's web callbacks re-entering the engine while an
  * Asyncify sleep was already pending) and the fix
  * (vendor/xu4/src/screen_glfw.cpp's input queue). Fixed on `main`; this
@@ -127,7 +127,7 @@ async function enableDebugMode(page: Page): Promise<void> {
  * see vendor/xu4/src/cheat.cpp's 'g' case), then walks in and does the
  * exact NPC-approach sweep scripts/qa-native-baseline.mjs proved reliably
  * meets the mage "Calabrini" (real, human-reviewed evidence recorded in
- * handoff.md's "Todo 3 E2E 보강" -- east one step, then attempt `t`+each of
+ * docs/handoff.md's "Todo 3 E2E 보강" -- east one step, then attempt `t`+each of
  * 4 directions per step, repeated).
  */
 async function gotoMoonglowAndApproachNpc(page: Page): Promise<void> {

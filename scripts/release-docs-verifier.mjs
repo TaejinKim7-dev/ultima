@@ -43,13 +43,21 @@ import { dirname, join, normalize } from "node:path"
 
 export class ReleaseDocsVerificationError extends Error {}
 
-//   - handoff.md is NOT a release doc for this check: it is the project's
-//     append-only session log (AGENTS.md), so its old commands, removed
-//     paths and quoted placeholders are accurate history, not stale docs.
-//     Current instructions live in README.md / docs/WEB_PORT.md /
-//     docs/GITHUB_PAGES.md, which README links handoff.md from.
+//   - docs/handoff.md (and the historical root handoff.md) are NOT release
+//     docs for this check: they are the project's append-only session logs
+//     (AGENTS.md), so their old commands, removed paths and quoted
+//     placeholders are accurate history, not stale docs. Current
+//     instructions live in README.md / docs/WEB_PORT.md /
+//     docs/GITHUB_PAGES.md, which README links docs/handoff.md from.
 export const RELEASE_DOCS = ["README.md", "docs/WEB_PORT.md", "docs/GITHUB_PAGES.md"]
 export const PIN_DOCS = ["docs/SOURCE_PINS.md", "docs/WEB_PORT.md"]
+
+// AGENTS.md: handoff.md is the append-only session log. The repo used to
+// keep it at the root and now keeps it at docs/handoff.md; both paths are
+// explicitly skipped even when a stale-placeholder scan would otherwise
+// hit them. (The historical root path is kept here because the same fixture
+// patterns are still exercised in tests/unit/release-docs.test.ts.)
+export const APPEND_ONLY_LOGS = ["handoff.md", "docs/handoff.md"]
 
 // F1 (user decision): the TRACKED half of the plan-compliance check. Every one
 // of these is committed to git, so a fresh clone is required to have it --
@@ -101,8 +109,10 @@ export function checkReleaseDocs(input) {
   const warnings = []
   const evidence = { documented: 0, present: 0, skipped: 0 }
   const scripts = new Set(input.scripts)
+  const appendOnlySet = new Set(input.appendOnlyPaths ?? APPEND_ONLY_LOGS)
 
   for (const doc of input.docs) {
+    if (appendOnlySet.has(doc.path)) continue
     for (const match of doc.text.matchAll(NPM_RUN_PATTERN)) {
       const name = match[1]
       if (match[2] !== "") continue // a glob/template like `npm run cmake:*`, not one script
@@ -263,7 +273,8 @@ export function verifyReleaseDocs(
     pinDocs,
     scripts,
     components,
-    pathExists: exists
+    pathExists: exists,
+    appendOnlyPaths: APPEND_ONLY_LOGS
   })
   problems.push(...checked.problems)
   warnings.push(...checked.warnings)

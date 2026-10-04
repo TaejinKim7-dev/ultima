@@ -12,7 +12,7 @@ import uiSchema from "../../locales/ko/ui.json" with { type: "json" }
 // screenMessage format-hash -> id table, whose ids reach the dialogue panel.
 // A stats literal reaching that table would be drawn twice: once as a dialogue
 // panel line and once as an overlay row (the Todo 23 -> 26 double-output bug,
-// handoff.md). stats.cpp must stay *inventoried* (its ids exist in
+// docs/handoff.md). stats.cpp must stay *inventoried* (its ids exist in
 // locales/ko/ui.json and in GENERATED_STATUS_TEMPLATES) but must not feed
 // buildUiTemplateMap. Everything here is data-driven: over the ui:stats ids
 // locales/ko/ui.json actually records, never a hardcoded count.

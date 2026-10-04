@@ -21,7 +21,7 @@ import { fileURLToPath } from "node:url"
 // and startQuestions()'s per-round card-draw animation
 // (EventHandler::wait_msecs(1000) x2 before its own waitAnyKey()) both
 // silently swallow a keypress that arrives before the right controller
-// is active. This was measured empirically (see handoff.md's Todo 10
+// is active. This was measured empirically (see docs/handoff.md's Todo 10
 // record): press-and-poll with generous, asymmetric delays, capped well
 // above the nominal round count (7), rather than a fixed key sequence.
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))

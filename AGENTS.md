@@ -1,6 +1,6 @@
 # AI Coding Agent Rules
 
-이 저장소를 이어받는 AI 코딩 에이전트는 작업 전에 이 파일과 `plan.md`, `HANDOFF.md`, `handoff.md`를 먼저 읽는다.
+이 저장소를 이어받는 AI 코딩 에이전트는 작업 전에 이 파일과 [`docs/README.md`](docs/README.md)를 먼저 읽는다. 거기에 적힌 순서대로 `docs/plan.md` "바로 다음 순서", `docs/plans/README.md`의 "진행 중" 계획, `docs/handoff.md` 마지막 절을 읽는다.
 
 ## 프로젝트 목표
 
@@ -48,8 +48,8 @@
   ```
   - Todo별로 추가된 명령(예: `npm run cmake:*`, `npm run deps:host`, `npm run test:native` 등)이 있으면 그 Todo의 검증 명령도 동일하게 실행한다.
   - **F2 네이티브 게이트는 `npm run build:native`가 선행이다**: `native/CMakeLists.txt:51-61`이 "전체 엔진 빌드는 이 CMake 프로젝트 소속이 아니며, 네이티브 xu4 바이너리는 `npm run build:native`가 **별도로** 빌드한다"라고 명시한다. 이 선행 단계를 빼면 `cmake:configure`→`cmake:build`는 통과해도 `test:native`가 **exit 8**로 죽는다(`native-baseline-negative`가 `build/host/xu4-src/src/xu4` 부재로 실패). 이는 **제품 결함이 아니라 명령 목록 결함**이며, 그 실패는 설계된 loud-fail다(`native/tests/native_baseline_test.c:6-14`가 skip이 아니라 fail이라고 명시). 순서: `build:native` → `cmake:configure` → `cmake:build` → `test:native`.
-- 로컬 검증 결과(실행한 명령과 exit code)는 merge 전에 `handoff.md`에 기록한다.
-- **게이트 실패는 숨기지 않는다**: 통합 게이트의 어떤 단계든 exit 0이 아니면 merge/push를 금지하고, 실패한 단계와 exit code를 `handoff.md`에 그대로 남긴다. 인프라 실패(위 e2e bullet)도 통과로 기록하지 않는다.
+- 로컬 검증 결과(실행한 명령과 exit code)는 merge 전에 `docs/handoff.md`에 기록한다.
+- **게이트 실패는 숨기지 않는다**: 통합 게이트의 어떤 단계든 exit 0이 아니면 merge/push를 금지하고, 실패한 단계와 exit code를 `docs/handoff.md`에 그대로 남긴다. 인프라 실패(위 e2e bullet)도 통과로 기록하지 않는다.
 - merge 후 GitHub Pages 배포가 가능해야 한다.
 
 ## 진행 관리
@@ -59,24 +59,24 @@
 한 단계(Todo 하나, 또는 그 안의 의미 있는 작은 단계)를 진행하면 다음으로 넘어가기 전에 반드시 아래 셋을 끝낸다. 셋 중 하나라도 빠지면 그 단계는 끝난 것이 아니다.
 
 1. **저장**: 작업을 커밋으로 남긴다(feature branch). 작업 트리에만 있는 변경은 저장된 것이 아니다. 끝까지 못 간 작업도 WIP 커밋이나 salvage 브랜치로 남긴다.
-2. **기록**: 무엇을 했고 무엇을 관측했는지 적는다. 작은 단계마다 `HANDOFF.md`를 갱신한다(`handoff` 스킬). 단계가 끝나면 `plan.md`(상태·진행률·바로 다음 순서), 계획서 두 벌 체크박스, `handoff.md`(실행한 명령과 exit code)를 갱신한다.
+2. **기록**: 무엇을 했고 무엇을 관측했는지 적는다. 작은 단계마다 `docs/HANDOFF.md`를 갱신한다(`handoff` 스킬). 단계가 끝나면 `docs/plan.md`(상태·진행률·바로 다음 순서), 계획서 두 벌 체크박스, `docs/handoff.md`(실행한 명령과 exit code)를 갱신한다.
 3. **확인**: 기록한 내용이 사실인지 실제 명령으로 검증한다. **테스트·게이트 실행은 항상 Haiku 모델 서브에이전트(`model: "haiku"`)에게 시킨다(사용자 지시, 2026-10-03).** 메인 모델은 그 보고(exit code, 실패 출력)를 읽고 의심스러우면 `git status` 같은 관측으로 재확인한다. 테스트·게이트의 exit code, `git status`/`git log`, `cmp` 같은 관측 결과가 근거다. 검증하지 못한 것은 "확인 필요"로 남기고 완료로 쓰지 않는다.
 
-- 진행 기준 문서는 루트 `plan.md`다. 전체 단계 수는 `.omo/plans/ultima-web.md`의 Todo 개수 + F1~F4다 — 새 Todo가 추가되면 이 수도 늘어난다. 진행률은 ✅ 단계 수 ÷ 전체 단계 수로 계산한다. 부분 진행(🟡)은 0으로 센다.
+- 진행 기준 문서는 `docs/plan.md`다. 전체 단계 수는 `.omo/plans/ultima-web.md`의 Todo 개수 + F1~F4다 — 새 Todo가 추가되면 이 수도 늘어난다. 진행률은 ✅ 단계 수 ÷ 전체 단계 수로 계산한다. 부분 진행(🟡)은 0으로 센다.
 - 단계 번호와 세부 정의(References/Acceptance/QA)의 원본은 `.omo/plans/ultima-web.md`다. `docs/ULTIMA_WEB_PLAN.md`는 그와 byte-identical하게 유지한다(`cmp`로 확인).
-- "다음 단계 진행"을 요청받으면 `plan.md`의 "바로 다음 순서"에서 가장 앞에 있는 미완료 단계 하나를 진행한다.
+- "다음 단계 진행"을 요청받으면 `docs/plan.md`의 "바로 다음 순서"에서 가장 앞에 있는 미완료 단계 하나를 진행한다.
 - 단계가 완료 기준(acceptance criteria + merge 전 검증 게이트)을 통과하면 아래를 함께 갱신한다.
-  1. `plan.md`: 상태(✅), 현재 진행률(n/N), "바로 다음 순서"
+  1. `docs/plan.md`: 상태(✅), 현재 진행률(n/N), "바로 다음 순서"
   2. 계획서 두 벌의 해당 체크박스 `[x]`
-  3. `handoff.md`: merge 게이트 명령과 exit code
-- 작은 단계(의미 있는 조사 결론, 테스트 RED/GREEN, 커밋 등)가 끝날 때마다 `handoff` 스킬로 루트 `HANDOFF.md`를 갱신한다. `HANDOFF.md`는 세션 재개용 요약이고, 소문자 `handoff.md`는 공식 인계 기록이다. 둘은 다른 파일이다.
+  3. `docs/handoff.md`: merge 게이트 명령과 exit code
+- 작은 단계(의미 있는 조사 결론, 테스트 RED/GREEN, 커밋 등)가 끝날 때마다 `handoff` 스킬로 `docs/HANDOFF.md`를 갱신한다. `docs/HANDOFF.md`는 세션 재개용 요약이고, `docs/handoff.md`는 공식 인계 기록이다. 둘은 다른 파일이다.
 - 실제로 실행하거나 관찰한 것만 완료로 적는다. 불확실하면 "확인 필요"로 남긴다.
 - 사용자 결정이 필요한 작업(패키지/SDK 설치, 큰 다운로드, push, `main` merge)은 진행 전에 멈추고 묻는다.
 - 단계 작업이 끝나면 진행률 변화와 다음 단계만 짧게 보고한다.
 
 ## 인계 규칙
 
-다른 AI 에이전트에게 넘기기 전 `handoff.md`를 갱신한다. 인계 내용은 다음 항목을 반드시 포함한다.
+다른 AI 에이전트에게 넘기기 전 `docs/handoff.md`를 갱신한다. 인계 내용은 다음 항목을 반드시 포함한다.
 
 1. 현재 목표와 범위
 2. 이미 확정된 기술/제품 결정
@@ -85,4 +85,4 @@
 5. 금지사항과 검증 명령
 6. 남은 위험, blocker, 아직 검증하지 않은 사실
 
-상세 포맷은 `docs/AI_AGENT_HANDOFF.md`를 따른다.
+상세 포맷은 `docs/AI_AGENT_HANDOFF.md`를 따른다. (인계 계획은 이 문서를 따른다.)

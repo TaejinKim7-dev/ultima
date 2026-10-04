@@ -803,16 +803,19 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   (2) Feed it the same composed Korean lines as the dialogue panel (ui-message, talk, vendor channels), keeping its own line buffer with the newest line at the bottom and older lines scrolling off. Mirror pause/awaitKey and colours the way the panel does.
   (3) Add web-only engine hooks, native byte-identical outside `__EMSCRIPTEN__`, with the `vendor/source-manifest.json` treeSha256 updated:
     - the text-prompt input echo and cursor (`vendor/xu4/src/event.cpp` ReadStringController ~613-643 draws typed characters with `screenTextAt` and the cursor with `screenShowCursor`; neither reaches JS today, so typed letters and the blinking cursor would be hidden under the overlay);
-    - message-area clears (`screenEraseTextArea`, `vendor/xu4/src/screen.cpp:1716`), so the overlay never shows stale text.
-    The typed keyword must echo in the overlay.
-  (4) A visible toggle "게임 화면에 한국어 표시" (default on, remembered per viewer in localStorage with try/catch). Off restores today's behaviour.
+    - message-area input echo and choice-key echo (`vendor/xu4/src/event.cpp:715`), so the overlay shows them;
+    - the overlay backlight on play begin/end (`vendor/xu4/src/game.cpp:130` / `:115`), so the overlay is hidden outside play;
+    - the modal screen signal (`screenSetLayer` for `LAYER_TOP_MENU`), so the overlay hides on ESC / pause menus;
+    - CR/LF from `screenCrLf` at the end, disabled inside `talkCrLf` so the existing dialogue paging signal is not changed.
+  (4) A visible toggle "게임 화면에 한국어 표시" (default on, scoped to the session, also stored in the URL `?screen-ko=0` so refresh keeps it -- no localStorage, which would violate `audit:dist`). Off restores today's behaviour.
   (5) The right-hand panel stays as scrollback plus the Todo 48 keyword menu.
   (6) Font (user decision 2026-10-04: "한글 폰트를 좀더 fixed 된 형식으로"): use the fixed-width Korean pixel font Neo둥근모. Use `neodgm.woff2` v1.601 from github.com/neodgm/neodgm, about 44 KB, SIL OFL 1.1 with Reserved Font Names (verified in its `LICENSE.txt`).
     - Ship it unmodified, with its licence text next to it in the artifact. Make sure `audit:dist` allows the font and licence files.
-    - Hangul is 16x16 and Latin 8x16. Keep the font size at 16 px times an integer, so it stays pixel-crisp, and derive the overlay's columns and rows from the box size. At exactly 2x display one Hangul fills one original 8x8 cell.
-  Must NOT: put English source text into JS or evidence; hide the map, status, or other raster areas; add console output.
+    - Hangul is 16x16 and Latin 8x16. Keep the font size at device-pixel multiples of 16, so it stays pixel-crisp, and derive the overlay's columns and rows from the box size. At exactly 2x display one Hangul fills one original 8x8 cell.
+  (7) Page-mode long answers: Lord British / Hawkwind / Codex answers longer than one screen pause on the last visible row and wait for a key (the "▼" cue).
+  Must NOT: put English source text into JS or evidence; hide the map, status, or other raster areas; add console output; use localStorage for the toggle (it would violate `audit:dist`).
   Parallelization: Wave 7 | Blocked by: 48 (shared `src/shell.ts`) | Blocks: none
-  References: `vendor/xu4/src/u4.h`; `vendor/xu4/src/screen.cpp` (`screenMessage`, `screenEraseTextArea`, `screenShowCursor`); `vendor/xu4/src/event.cpp` (ReadStringController); `src/overlay/overlay-layout.ts` (`OPAQUE_BACKING_ROLES`); `src/shell.ts`; `src/dialogue/message-tokens.ts`; `.omo/evidence/ultima-web/task-38/coverage-report.md` (lines with no translation path are hidden under the overlay).
+  References: `vendor/xu4/src/u4.h`; `vendor/xu4/src/screen.cpp` (`screenMessage`, `screenCrLf`, `screenSetLayer`, `screenShowCursor`); `vendor/xu4/src/event.cpp` (ReadStringController, choice-key echo at ~:715); `vendor/xu4/src/game.cpp` (play begin ~:130, play end ~:115); `src/overlay/overlay-layout.ts` (`OPAQUE_BACKING_ROLES`); `src/shell.ts`; `src/dialogue/message-tokens.ts`; `.omo/evidence/ultima-web/task-38/coverage-report.md` (lines with no translation path are hidden under the overlay).
   Acceptance criteria:
   - Unit tests RED first: overlay line buffer (scroll, pause, clear, colours), toggle persistence, rect maths.
   - Real-engine e2e that captures several frames each while walking, talking (including typing a keyword), in combat and on a screen change. It asserts that the overlay box is opaque and non-empty in every frame during play, that the typed keyword and a caret are visible while a prompt is open, that the overlay clears when the engine clears, and that the toggle restores the English canvas.

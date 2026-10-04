@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url"
 // override with the MEMORY_SMOKE_MINUTES env var for a real, longer
 // overnight run (e.g. `MEMORY_SMOKE_MINUTES=10 npm run test:memory-smoke`).
 // Like every other long-running real-engine spec in this suite (see
-// handoff.md's "e2e는 --workers=1로 긴 스펙 분리 실행" convention), run
+// docs/handoff.md's "e2e는 --workers=1로 긴 스펙 분리 실행" convention), run
 // this individually rather than as part of a blind `npm run test:e2e`
 // sweep.
 //

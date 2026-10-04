@@ -77,4 +77,47 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integ
   - Todo 48: worktree `.claude/worktrees/agent-ab34f9739e0dbb906`, 브랜치 `todo-48-talk-keywords`(main `15de1cf` 기준). 그 에이전트의 상세 계획은 `~/.claude/plans/parsed-nibbling-widget-agent-ab34f9739e0dbb906.md`(주제어 뜻 초안 표 포함; ABYS=심연으로 고칠 것).
   - Todo 49 Phase A: worktree `.claude/worktrees/agent-a2c29640c4f177e6b`, 브랜치 `todo-49a-message-area-engine`, 아직 파일 수정 전에 멈춤.
 - main은 `e4f40d5` 이후 문서 커밋까지 push된 상태(origin과 동기, Todo 47까지 배포됨). 진행률 50/54.
->>>>>>> 7f8632d (wip(docs): move record docs into docs/ (references not yet updated)):docs/HANDOFF.md
+
+---
+
+## 2026-10-04 — Stage 0·0b 완료 (docs-consolidation 브랜치에 WIP, main 미병합)
+
+> 사용자가 2026-10-04 중단을 풀고 "OMO-Slim skill로 최대한 병렬로 개발진행해"라 지시해 Stage 0·0b를 끝냈다. 제품 코드는 건드리지 않았다.
+
+### 작업 위치
+- worktree `/home/taejin/ultima/.claude/worktrees/agent-stage0-docs` (브랜치 `docs-consolidation` = main `ad9414d`에서 분기 후 `7f8632d` 작업 이어받기)
+
+### 한 일
+1. **`docs/README.md` 신규**: AI 시작점. 읽는 순서(AGENTS.md → docs/plan.md "바로 다음 순서" → docs/plans/README.md → docs/handoff.md 마지막 절), 개발 룰, 절대 금지, 환경, 새 세션 프롬프트(짧은/자세한) 포함.
+2. **`docs/plans/README.md` 신규**: 구현 계획 색인. 현재 표에 `2026-10-04-in-game-korean.md`(Todo 48·49·50, 진행 중)·`mod-scope-proposal.md`(Todo 43, 사용자 결정 대기) 두 행. 상태 의미(✅/🟡/⛔/📦)와 추가 방법 포함.
+3. **`AGENTS.md` 경로 갱신**: 첫 문단이 docs/README.md를 가리키게, 11곳의 옛 경로 참조(`plan.md`·`HANDOFF.md`·`handoff.md`)를 `docs/` 프리픽스로 갱신.
+4. **`README.md` 링크 갱신**: 5곳의 옛 경로 링크, "문서" 색인에 AI 시작점·구현 계획 색인 두 링크 추가, 안내 문단을 docs/README.md로 교체.
+5. **`.claude/settings.json` Stop 훅**: `[ -f HANDOFF.md ]` → `[ -f docs/HANDOFF.md ]`, 알림 텍스트도 `docs/HANDOFF.md`로. statusMessage은 의도적으로 둠.
+7. **`scripts/release-docs-verifier.mjs`**: `APPEND_ONLY_LOGS = ["handoff.md", "docs/handoff.md"]` 추가. `checkReleaseDocs`/`verifyReleaseDocs` 양쪽에 `appendOnlyPaths` 인자 전달. 주석도 옮긴 사실 반영.
+8. **`tests/unit/release-docs.test.ts`**: BASE_FILES에 `docs/handoff.md` fixture 추가, 새 테스트(`does not scan docs/handoff.md either`) 1개 추가.
+9. **`docs/ULTIMA_WEB_PLAN.md` + `.omo/plans/ultima-web.md` Todo 49 본문 수정**(두 파일 byte-identical 유지, `cmp` exit 0):
+   - (3) 엔진 훅: `screenEraseTextArea` 대신 message-area input echo·choice-key echo·play begin/end·modal signal·CR/LF 추가, `talkCrLf` 안에서는 CR/LF 끄기.
+   - (4) 토글: localStorage 금지(세션 한정 + URL `?screen-ko=0`).
+   - (6) 글꼴 크기: "16px 정수배" → "device-pixel multiples of 16".
+   - (7) 신규: 긴 대답 페이지 큐("▼").
+   - Must NOT: localStorage 금지 항목 추가.
+   - References: `event.cpp:715`·`game.cpp:130/115`·`screenSetLayer` 추가.
+10. **`docs/archive/NEXT_FIVE_STEPS.md`** 맨 위에 "역사 기록" 표시 추가.
+11. **코드·테스트 주석 갱신**: `src/bridge/types.ts`, `src/engine/startup.ts`, `src/engine/persistence.ts`, `scripts/lib/{cpp-strings,text-width}.mjs`, `scripts/qa-native-baseline.mjs`, `tests/unit/{wasm-symbols,ui-template-source-scope,audio-manifest}.test.ts`, `tests/e2e/{audio,configure-menu-no-abort,dialogue-panel,failure-boundaries,gameplay-progression,korean-focus-return,korean-npc-alias,memory-smoke,save-reload}.spec.ts` — 옛 경로 참조를 docs/ 프리픽스로 갱신.
+12. **`docs/plan.md` 진행률 절**: Stage 0·0b 완료 사실 추가, `goal.md` → `docs/GOAL.md`, `plan.md`/`handoff.md`/`HANDOFF.md` 옛 참조 정리.
+
+### merge 게이트 (worktree에서 직접, emsdk·wasm 빌드 후)
+- `npm run deps:host` · `npm run build:modules` · `npm run deps:wasm` · `npm run build:wasm` (wasm 1239515 bytes, fresh stamp): exit 0
+- `npm run test:unit` 56/56 suites, 681/681 tests: exit 0
+- `npm run verify:repo-sources` 4/4: exit 0
+- `npm run typecheck`: exit 0
+- `npm run build`: exit 0
+- `npm run check:build-fresh`: exit 0
+- `git diff --check`: exit 0
+- `cmp` 계획서 두 벌: exit 0
+- `npm run verify:release-docs`: exit 0 (soft SKIPPED 17건은 .omo/evidence/ 부재로 의도된 동작)
+
+### 남은 것
+- **commit + push + main merge**: 사용자 승인 필요. push하지 않았다.
+- **다음 진행**: Stage 1(Todo 48, worktree `agent-ab34f9739e0dbb906`·브랜치 `todo-48-talk-keywords`) ∥ Stage 2(Todo 49 Phase A, worktree `agent-a2c29640c4f177e6b`·브랜치 `todo-49a-message-area-engine`) 병렬.
+- AGENTS.md의 "통합 게이트는 단독 실행" 규칙 때문에 Stage 3 이전에 `verify:integration`을 **단독으로** 한 번 더 돌려야 한다.
