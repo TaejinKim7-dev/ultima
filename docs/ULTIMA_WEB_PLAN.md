@@ -169,6 +169,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 | 45 | 38,39,40 | 44 | 39·40과 직렬 (2026-10-03 신규 — Todo 38 보고서의 미확인 해시·형식만 있는 템플릿) |
 | 46 | 없음 | 44 | 전부 (2026-10-03 신규 — 세이브 가져오기 파일 선택창이 내보낸 `.dat`을 숨기는 문제) |
 | 47 | 없음 | 없음 | 전부 (2026-10-03 신규, 사용자 요청 — 한국어 대화 패널을 오른쪽 컬럼으로, 커서키 스크롤 차단) |
+| 48 | 47 | 없음 | 43 (2026-10-04 신규, 사용자 요청 — 대화 중 쓸 수 있는 키워드를 눌러서 쓰는 칩으로 표시) |
 
 ## Todos
 > Implementation + Test = ONE todo. Never separate.
@@ -767,6 +768,29 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   Acceptance criteria: unit `scroll-keys` RED (module missing) then GREEN; e2e `dialogue-side-column` RED before the change (ArrowDown scrolled the page by 120px, ArrowUp scrolled the panel by 120px, no side column) and GREEN after, in Chromium, Firefox and WebKit; `dialogue-panel`, `status-overlay`, `korean-status-overlay`, `korean-focus-return` and `korean-npc-alias` still pass; `npm run verify:integration` passes solo.
   QA scenarios: happy: `.omo/evidence/ultima-web/task-47/side-column-1280x720.png`; failure: the RED run in `.omo/evidence/ultima-web/task-47/e2e-red.log`.
   Commit: Y | feat(shell): put the Korean dialogue beside the game and stop arrow-key scrolling
+
+- [ ] 48. Show the usable talk keywords during a conversation as clickable chips
+  What to do / Must NOT do: user request 2026-10-04: "대화를 할때 어떤 키워드를 쓸수 있는지 보여줬으면 좋겠어. 대화를 쉽게 이어가기 위해서". Why it matters (verified): each town NPC has two topic keywords (`topic1`/`topic2` in `locales/ko/tlk.json`, stored as the 4-letter English matching key, e.g. `MOONGLOW:0:topic1` = `ADVE`, 257 distinct keywords plus the unused marker `A`). In the original game the player guesses them from words inside the NPC's English answers; the Korean translation removed those word hints, so a Korean player cannot tell what to ask.
+  (1) Data: add a Korean gloss for every distinct topic keyword to `locales/ko/glossary.json` (id scheme chosen by the implementer, e.g. `npc-topic-<sanitized keyword>`, unique even for `BEH`/`BEH.`; `sourceHash` = sha256 of the keyword, like the existing glossary terms). Derive each gloss from the full English word the keyword prefixes in that NPC's own lines, reading the private, git-ignored `.local/i18n-inventory/tlk.json` only; reuse existing Korean terms from the corpus/glossary where the same word is already translated. Never commit English sentences; the keyword itself is already public. Have `scripts/i18n-generate.mjs` emit a keyword→gloss table (never hand-edit `src/i18n/generated/*`); `npm run i18n:check -- --strict` must cover it.
+  (2) Pure module (e.g. `src/dialogue/talk-keywords.ts`): conversation state from the talk channel. The current NPC is known from any `@MAP:npcIndex:field` talk argument (Todo 22). The castle conversations use `@avatar.exe:lordBritishText:*` and `@avatar.exe:hawkwindText:*` ids (verify in `vendor/xu4/src/discourse_castle.cpp`). A question is pending after the NPC's `question` line. The conversation ends when the native text prompt closes and does not reopen (the Todo 35 close/reopen signal in `src/i18n/focus-return.ts`). It produces the chip list:
+    - common keywords from `locales/ko/aliases.json`: 이름 · 직업 · 건강 · 외모 · 합류 · 기부 · 안녕;
+    - this NPC's topic1/topic2 as Korean gloss with the keyword as secondary text;
+    - 예/아니오 while a question is pending;
+    - for Lord British and Hawkwind, the Todo 37 topic aliases.
+    Chips already asked in this conversation are marked.
+  (3) Korean input: while a TLK conversation is active, a typed Korean gloss of the current NPC's topic resolves to that NPC's keyword before the global aliases (extend `src/i18n/korean-aliases.ts` resolution with the per-NPC list; the global alias rules and the text-prompt gate are unchanged).
+  (4) Shell: a `#talk-keywords` region in `#side-column` between `#dialogue-panel` and the Korean input, hidden when no conversation is active. Each chip is a button that submits exactly like typing its label into the Korean input and pressing Enter (same gate, same rejection message when no native prompt is open). Chips must not take focus (`mousedown` preventDefault, `tabindex=-1`), so a later Enter/arrow still goes to the game and never re-clicks a chip. Use `createElement`/`textContent` only (Todo 11 rule).
+  Must NOT: put English TLK sentences in any tracked file, log, evidence or report (keywords only); change engine matching or the canonical keywords; add console output; change native builds.
+  Parallelization: Wave 7 | Blocked by: 47 (side column) | Blocks: none
+  References: `vendor/xu4/src/discourse_tlk.cpp` (`webTalkArg`, topic matching ~line 480); `vendor/xu4/src/discourse_castle.cpp`; `src/shell.ts` (`talkTextReceiver`, `submitKoreanKeyword`, `textPromptReceiver`); `src/dialogue/talk-compose.ts`; `src/i18n/korean-aliases.ts`; `src/i18n/focus-return.ts`; `locales/ko/{tlk,glossary,aliases}.json`; `scripts/i18n-generate.mjs`; `tests/e2e/korean-npc-alias.spec.ts` (Moonglow NPC approach); `tests/e2e/korean-castle-output.spec.ts`.
+  Acceptance criteria:
+  - Unit tests RED first: chip list per state (common, topics with gloss, question pending, castle, asked marking, cleared at end); per-NPC Korean gloss resolution, with priority over global aliases; generator emits the gloss table (purity); every distinct topic keyword except `A` has a ready gloss (`i18n:check --strict`).
+  - e2e with the real `ultima4.zip`, as a new spec: talk to a Moonglow NPC and see the chips with that NPC's two Korean topic glosses. Clicking 직업 adds the Korean job line to the panel. Clicking a topic chip adds that topic's Korean response. Typing the Korean gloss gives the same response. After 안녕 the chips hide and an arrow key moves the avatar. A castle case shows Lord British chips.
+  - Regressions `korean-npc-alias`, `korean-focus-return`, `korean-castle-output`, `dialogue-side-column` pass.
+  - The new spec passes in Firefox and WebKit.
+  - `npm run verify:integration` passes solo.
+  QA scenarios: happy: `.omo/evidence/ultima-web/task-48/talk-keywords.png`; failure: clicking a chip while no native prompt is open shows the existing rejection message and sends no keystrokes, recorded in `.omo/evidence/ultima-web/task-48/no-prompt.log`.
+  Commit: Y | feat(dialogue): show the usable talk keywords as clickable chips
 
 ## Final verification wave
 > Runs in parallel after ALL todos. ALL must APPROVE. Surface results and wait for the user's explicit okay before declaring complete.
