@@ -485,4 +485,78 @@ describe("startEngine", () => {
     opts.onAbort("boom")
     expect(seen).toEqual(["hide:menu", "hide:textview", "hide:menu", "hide:textview"])
   })
+  it("Todo 49: attaches the screen receiver to module.u4Screen before callMain()", async () => {
+    const { module, calls } = makeFakeModule()
+    const { factory } = makeFactory(module)
+    const seen: string[] = []
+    const screen = {
+      input: (id: number, text: string) => seen.push(`input:${id}:${text}`),
+      choice: (ch: string) => seen.push(`choice:${ch}`),
+      cursor: (on: boolean) => seen.push(`cursor:${on}`),
+      play: (on: boolean) => seen.push(`play:${on}`),
+      modal: (on: boolean) => seen.push(`modal:${on}`),
+      crlf: () => seen.push(`crlf`)
+    }
+    let receiverAtMainCall: unknown
+    module.callMain = () => {
+      calls.mainCalled += 1
+      receiverAtMainCall = module.u4Screen
+      module.u4Screen?.input(1, "hej")
+      module.u4Screen?.choice("A")
+      module.u4Screen?.cursor(true)
+      module.u4Screen?.play(true)
+      module.u4Screen?.modal(true)
+      module.u4Screen?.crlf()
+    }
+
+    const result = await startEngine({
+      factory,
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
+      zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
+      dispatch: () => true,
+      unlockAudio: async () => {},
+      audioContext: null,
+      screen
+    })
+
+    expect(result.started).toBe(true)
+    expect(receiverAtMainCall).toBe(screen) // attached before callMain(), not after
+    expect(seen).toEqual(["input:1:hej", "choice:A", "cursor:true", "play:true", "modal:true", "crlf"])
+  })
+  it("Todo 49: reports play(false) when the engine exits or aborts", async () => {
+    const { module, calls } = makeFakeModule()
+    const { factory } = makeFactory(module)
+    const captured: Record<string, unknown>[] = []
+    const seen: string[] = []
+    const screen = {
+      input: () => {},
+      choice: () => {},
+      cursor: () => {},
+      play: (on: boolean) => seen.push(`play:${on}`),
+      modal: () => {},
+      crlf: () => {}
+    }
+    module.callMain = () => {
+      calls.mainCalled += 1
+    }
+    await startEngine({
+      factory: (opts) => {
+        captured.push(opts)
+        return factory(opts)
+      },
+      renderPak: fakeModuleAsset("render.pak"),
+      gameModule: fakeModuleAsset("Ultima-IV.mod"),
+      zipFile: fakeZipFile(REQUIRED_ULTIMA4_ENTRIES),
+      dispatch: () => true,
+      unlockAudio: async () => {},
+      audioContext: null,
+      screen
+    })
+    const opts = captured[0] as { onExit: (code: number) => void; onAbort: (reason: unknown) => void }
+    opts.onExit(0)
+    opts.onAbort("boom")
+    // Both the exit path and the abort path must drop the overlay: play(0).
+    expect(seen).toEqual(["play:false", "play:false"])
+  })
 })

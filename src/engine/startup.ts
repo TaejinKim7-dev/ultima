@@ -114,6 +114,37 @@ export interface EngineModule {
    * before callMain(), like u4Audio.
    */
   u4View?: IntroViewReceiver
+  /**
+   * Todo 49: receiver for the web-only screen signal hooks the engine sends
+   * for the in-game Korean message-area overlay (`Module.u4Screen`):
+   * vendor/xu4/src/event.cpp (typed input echo / choice echo),
+   * vendor/xu4/src/screen.cpp (cursor, modal, crlf) and vendor/xu4/src/
+   * game.cpp (play begin/end). Assigned by startEngine() before callMain(),
+   * like u4Audio.
+   */
+  u4Screen?: ScreenReceiver
+}
+
+/**
+ * Todo 49: the engine's web-only screen signals that drive the Korean
+ * message-area overlay (src/overlay/message-area-view.ts). Each EM_JS hook
+ * on the C++ side guards with `Module.u4Screen &&`, so a missing receiver
+ * degrades to no-ops; see tests/unit/message-area-engine-hooks.test.ts for
+ * the exact native call sites.
+ */
+export interface ScreenReceiver {
+  /** One typed character changed the ReadStringController value (ESC erases -> empty text). */
+  input(id: number, text: string): void
+  /** A ReadChoiceController prompt accepted one key -- the choice echo. */
+  choice(ch: string): void
+  /** The message-area cursor became visible/hidden (screenShowCursor). */
+  cursor(on: boolean): void
+  /** Play began (game.cpp:130) or ended (game.cpp:115). */
+  play(on: boolean): void
+  /** A top-menu modal (ESC pause / game browser) opened or closed. */
+  modal(on: boolean): void
+  /** The engine did a direct CR/LF in the message area (screenCrLf). */
+  crlf(): void
 }
 
 /**
@@ -195,6 +226,12 @@ export interface StartEngineOptions {
   readonly talkText?: TalkTextReceiver
   /** Todo 26: attached to `module.u4View` before callMain() (src/shell.ts's introViewReceiver). */
   readonly introView?: IntroViewReceiver
+  /**
+   * Todo 49: attached to `module.u4Screen` before callMain() (the shell's
+   * message-area receiver). Omitted: nothing is attached and the EM_JS
+   * hooks' `Module.u4Screen &&` guard makes them no-ops.
+   */
+  readonly screen?: ScreenReceiver
 }
 
 export type StartEngineResult =
@@ -280,9 +317,12 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
   // Todo 26 safety net: whatever ends the engine, no Korean intro overlay
   // may stay on screen over a dead canvas (the C++ side clears them in
   // IntroController::conclude(), but an abort/exit never gets there).
+  // Todo 49: the message-area overlay is play-scoped, so any exit/abort
+  // must also drop it (play(0)).
   const clearIntroOverlays = () => {
     options.introView?.hide("menu")
     options.introView?.hide("textview")
+    options.screen?.play(false)
   }
   factoryOptions["onExit"] = (code: number) => {
     clearIntroOverlays()
@@ -378,6 +418,9 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
   }
   if (options.introView !== undefined) {
     module.u4View = options.introView
+  }
+  if (options.screen !== undefined) {
+    module.u4Screen = options.screen
   }
   armAutoResumeOnGesture()
 

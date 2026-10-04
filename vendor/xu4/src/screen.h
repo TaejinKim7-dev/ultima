@@ -137,6 +137,8 @@ void screenMessageN(const char* buffer, int buflen);
 #include <stddef.h>
 bool screenWebVendorSay(const char* text, size_t len, int argc, const char** argv);
 void screenWebSuppress(bool on);
+/* Todo 49: suppress the crlf() screen signal (talkCrLf sets it around its screenCrLf call). */
+void screenWebSuppressCrLf(bool on);
 #endif
 void screenPrompt(void);
 void screenRedrawMapArea(void);

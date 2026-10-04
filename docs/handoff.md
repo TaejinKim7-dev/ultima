@@ -2034,6 +2034,21 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 ---
 
+## 2026-10-05 — Todo 49 Phase A 완료: 한국어 메시지 영역 엔진 연결 + 순수 모듈 (todo-49a-message-area-engine)
+
+> append만 한다. 증거(로컬) `.omo/evidence/ultima-web/task-49a/` (RED 12 / GREEN 64).
+
+- **작업 위치**: worktree `agent-todo-49a`, 브랜치 `todo-49a-message-area-engine`, main `88c142c` 기반.
+- **모듈 3종 신규** (`message-area-layout.ts`·`message-area-view.ts`·`control-formats.ts`), `PanelCell.kind` 추가, `ScreenReceiver` 부착, 엔진 훅 6종 (`Module.u4Screen`: input/choice/cursor/modal/crlf/play).
+- **vendor/source-manifest.json treeSha256 갱신**: `23defbde60c9cfc0fbd5da06be4fe87c672665a9980eae7d8f9f2d4f73367302` (fileCount 412).
+- **게이트 전부 exit 0**: `test:unit` 60 files / **731 passed** · `verify:repo-sources` **4/4** · `typecheck` · `build` · `check:build-fresh` · `build:wasm` **1239926 bytes** (fresh stamp 기록) · 네이티브 게이트(`build:native` → `cmake:configure` → `cmake:build` → `test:native`) **4/4 exit 0**.
+- **미실행(스코프 밖)**: `verify:integration`/e2e는 Stage 3 전에 wave8 통합 게이트로.
+- **다음**: orchestrator가 Stage 1·2 wave8 통합 머지 → main → push. Stage 3 착수.
+- **commit `git rev-parse HEAD`**: `31c89ba3ecdfe67a588380780d20d083cee5be5f` (feat(overlay): Korean message area engine hooks + pure modules (Todo 49 Phase A)).
+- 절대 커밋 안 함 (orchestrator) — 이 한 일 append도 함께 커밋.
+
+---
+
 ## 2026-10-04 — wave9 Stage 1·2 main 머지·push
 
 - **작업**: `git branch -f wave9-combined main`, `git merge todo-48-talk-keywords --no-ff`, `git merge todo-49a-message-area-engine --no-ff` (docs/handoff.md 충돌 1건, append-only 로그라 두 절 다 살림), `npm run verify:integration` 단독 실행.

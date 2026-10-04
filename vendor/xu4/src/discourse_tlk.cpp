@@ -144,7 +144,13 @@ static void talkMessage(const TalkState* ts, const char* fmt, ...) {
 }
 
 static void talkCrLf(const TalkState* ts) {
+    /* Todo 49: the talk channel already sends its own "\n" line signal via
+     * u4_web_talk_line below, so the generic crlf() screen signal (which
+     * screenCrLf fires) must be suppressed here -- otherwise the overlay
+     * would advance a line twice for every talk newline. */
+    screenWebSuppressCrLf(true);
     screenCrLf();
+    screenWebSuppressCrLf(false);
     if (ts->webStrings)
         u4_web_talk_line("\n", NULL, NULL);
 }
