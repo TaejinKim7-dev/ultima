@@ -1,5 +1,5 @@
 # Ultima IV 웹 한글판 — 진행 계획
-기준 시각: 2026-10-03 KST · 기준 main: `6ee20fd` (origin과 동기화) · **2026-10-03 완료 후 웨이브(Todo 34~44) 추가 — 진행률 50/54**
+기준 시각: 2026-10-03 KST · 기준 main: `88c142c` (origin과 동기화) · **2026-10-03 완료 후 웨이브(Todo 34~44) 추가 — 진행률 50/54**
 
 ## 목표
 원본 `ultima4.zip`을 사용자가 브라우저에서 직접 선택해 플레이하는, 한국어 UI/대화/NPC 키워드 alias와
@@ -22,7 +22,7 @@
 
 ## 현재 진행률
 - **2026-10-04: 50 / 54 = 92.6%** (사용자 결정으로 Todo 50 추가, 분모 53→54: 게임 안 한국어 전체를 고정폭 픽셀 글꼴 Neo둥근모로. 이하 직전 기록: 사용자 요청으로 Todo 49 추가, 분모 52→53: 게임 화면 메시지 영역에 한국어 직접 표시. 이하 직전 기록: 사용자 요청으로 Todo 48 추가, 분모 51→52: 대화 중 쓸 수 있는 키워드를 칩으로 표시. 추가 직전 값 50/51 = 98.0%. 이하 직전 기록: Todo 47 ✅: 통합 게이트 61/61, Firefox·WebKit 각 14/14. 이전 값 49/51 = 96.1%. 이하 직전 기록: 사용자 요청으로 Todo 47 추가, 분모 50→51: 한국어 대화 패널을 오른쪽 컬럼으로 옮기고 커서키 스크롤 차단. 추가 직전 값 49/50 = 98.0%. 이하 직전 기록: Todo 44 ✅ 확정, 남은 1개는 Todo 43 사용자 결정; 이전 값 48/50. 이하 직전 기록: Todo 45 ✅ 추가 확정; 이전 값 47/50 = 94.0%. 이하 직전 기록: Todo 34~42·46 ✅ 중 43 제외; 38·39·40·41·46은 합친 트리 통합 게이트 PASS로 확정; Todo 45·46 추가로 분모 48→50. 45는 Todo 38 보고서의 미확인 해시 조사, 46은 세이브 가져오기 파일 필터). 추가 직전 값 42/48 = 87.5%. 37/37 완료 뒤 사용자 지시로 완료 후 웨이브 Todo 34~44(11개)를 추가했다. 근거는 `docs/GOAL.md` 대비 재점검과 `docs/GOAL_GAP_AUDIT.md`(번역 체감 갭 9건)다. 계획서 체크박스 `[x]` 50 / `[ ]` 4 (남은 것: Todo 48 진행 중 → 49 → 50, Todo 43 개조 범위 — 사용자 결정 대기). 같은 날 번역 공개 여부를 결정했다(**공개 유지**, `docs/TRANSLATION_POLICY.md`). 이 결정은 Todo가 아니라 결정 기록이다.
-- **2026-10-04: Stage 0·0b 완료(문서 정리 — Todo 진행률 외)**: 모든 기록·방향 문서를 `docs/`로 옮기고, AI 시작점 `docs/README.md`·계획 색인 `docs/plans/README.md`를 신규 작성, AGENTS.md와 README.md의 옛 경로 링크를 갱신, `.claude/settings.json` Stop 훅 경로를 `docs/HANDOFF.md`로 옮겼다. `verify:release-docs`에 `APPEND_ONLY_LOGS`를 추가해 `docs/handoff.md`(그리고 역사적 root `handoff.md`)를 명시적 스킵 경로로 등록, 관련 테스트 1개 추가. 계획서 두 벌의 Todo 49 본문을 `docs/plans/2026-10-04-in-game-korean.md`의 Stage 2·3 설계에 맞춰 수정(localStorage 금지, 디바이스 픽셀 16배수, play/pause·modal·CR/LF 훅 추가, "▼" 페이지 큐, References에 `event.cpp:715`·`game.cpp:130/115`·`screenSetLayer`). 게이트 `npm run test:unit` 56/56 suites, 681/681 tests · `verify:repo-sources` 4/4 · `typecheck` · `build` · `check:build-fresh` · `git diff --check` · `cmp` 계획서 두 벌 · `verify:release-docs` 전부 exit 0. **이 작업은 main에 push하지 않았다**(사용자 결정 필요).
+- **2026-10-04: Stage 0·0b 완료(문서 정리 — Todo 진행률 외)**: 모든 기록·방향 문서를 `docs/`로 옮기고, AI 시작점 `docs/README.md`·계획 색인 `docs/plans/README.md`를 신규 작성, AGENTS.md와 README.md의 옛 경로 링크를 갱신, `.claude/settings.json` Stop 훅 경로를 `docs/HANDOFF.md`로 옮겼다. `verify:release-docs`에 `APPEND_ONLY_LOGS`를 추가해 `docs/handoff.md`(그리고 역사적 root `handoff.md`)를 명시적 스킵 경로로 등록, 관련 테스트 1개 추가. 계획서 두 벌의 Todo 49 본문을 `docs/plans/2026-10-04-in-game-korean.md`의 Stage 2·3 설계에 맞춰 수정(localStorage 금지, 디바이스 픽셀 16배수, play/pause·modal·CR/LF 훅 추가, "▼" 페이지 큐, References에 `event.cpp:715`·`game.cpp:130/115`·`screenSetLayer`). 게이트 `npm run test:unit` 56/56 suites, 681/681 tests · `verify:repo-sources` 4/4 · `typecheck` · `build` · `check:build-fresh` · `git diff --check` · `cmp` 계획서 두 벌 · `verify:release-docs` 전부 exit 0. **이 작업은 2026-10-04 사용자 지시로 main `88c142c`에 fast-forward merge + origin push 완료. 진행률 50/54 유지.**
 - **2026-10-02 완료: 37 / 37 = 100%.** Todo 1~33 전부 ✅ + F1~F4 전부 ✅ (사용자 명시 승인, 분모 37 확정). 계획서 체크박스 37/37 `[x]`, `[ ]` 0. 아래는 이 완료로 이어지는 과거 기록.
 - **제품 목표 재확인 (2026-09-27)**: 한국어로 실제 플레이할 수 있는 웹 기반 Ultima IV가 목표다. 아래 수치는 계획 항목 승인률이며 한글판 제품 완성률이 아니다. 이번 NPC alias 재검증 스크린샷의 실제 대화는 영어였다. Step 11/12/14에 기록된 실제 엔진 출력 연결 gap을 해소하고 한국어 인트로·대화·상태/메뉴를 실제 플레이에서 검증하기 전에는 출시 완료로 판정하지 않는다.
 - **정정된 플레이 요구사항**: 플레이어는 영어 keyword 또는 한국어 alias를 입력할 수 있어야 하며, 실제 게임에 표시되는 NPC 응답은 한국어여야 한다. 현재 검증된 것은 한국어 alias 입력 동작뿐이고, Calabrini의 실제 NPC 응답은 영어였다. 따라서 한국어 NPC 출력은 아직 미완료이며 출시를 막는다.
@@ -439,12 +439,31 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 | 7 | ~~40~~ ✅ | 죽음·주문 실패·입장 메시지 한국어 완료 | #5, #6 |
 | 8 | ~~41~~ ✅ | Codex/엔딩 관측 + 상점 4종 e2e 완료 | #8 |
 | 9 | ~~42~~ ✅ | wasm 메모리 + Safari 미검증 명시 완료(2026-10-03) | — |
-| 언제든 | 43 | 개조 범위 제안서 `.omo/drafts/mod-scope.md` → 사용자 결정 | — |
+| 언제든 | 43 | 개조 범위 제안서 `docs/plans/mod-scope-proposal.md` → 사용자 결정 | — |
 | 마지막 | 44 | `verify:integration`(단독) + `verify:release` + F1/F4 addendum + 감사 문서 갱신 | 전체 |
 
 - 직렬화: 35·38·42(`src/shell.ts`), 36·39·40(i18n 생성기)은 동시에 진행하지 않는다.
-- 다음 에이전트가 "다음 단계 진행"을 받으면 Todo 47(대화 패널 오른쪽 컬럼, 커서키 스크롤 차단)은 2026-10-04 완료. **Todo 48**(사용자 요청: 대화 키워드 칩)을 진행 중이고, 이어서 **Todo 49**(게임 화면 메시지 영역에 한국어 직접 표시: 입력 글자·커서·지우기 엔진 연결, 켜기/끄기 스위치 포함)를 하고, 이어서 **Todo 50**(Neo둥근모를 상태창·인트로·메뉴·패널 전체에 적용)을 한다. 그 밖에 남은 것은 **Todo 43**(개조 범위)이며 사용자 결정이 필요하다(`.omo/drafts/mod-scope.md`의 후보 6개와 질문 4개). 결정되면 선택한 항목을 새 Todo로 추가한다. 그 외 사용자 확인 항목: 한국어 입력 감각, 세이브 가져오기 파일 선택창, 엔딩 패널 표시 방식, Safari 실기.
+- 다음 에이전트가 "다음 단계 진행"을 받으면 Todo 47(대화 패널 오른쪽 컬럼, 커서키 스크롤 차단)은 2026-10-04 완료. **Todo 48**(사용자 요청: 대화 키워드 칩)을 진행 중이고, 이어서 **Todo 49**(게임 화면 메시지 영역에 한국어 직접 표시: 입력 글자·커서·지우기 엔진 연결, 켜기/끄기 스위치 포함)를 하고, 이어서 **Todo 50**(Neo둥근모를 상태창·인트로·메뉴·패널 전체에 적용)을 한다. 그 밖에 남은 것은 **Todo 43**(개조 범위)이며 사용자 결정이 필요하다(`docs/plans/mod-scope-proposal.md`의 후보 6개와 질문 4개). 결정되면 선택한 항목을 새 Todo로 추가한다. 그 외 사용자 확인 항목: 한국어 입력 감각, 세이브 가져오기 파일 선택창, 엔딩 패널 표시 방식, Safari 실기.
 - **테스트 실행 규칙(사용자 지시 2026-10-03)**: 모든 테스트·게이트는 `model: haiku` 서브에이전트에게 시키고, 메인 모델은 exit code 보고만 읽고 `git status`/로그로 재확인한다. 단계 룰은 AGENTS.md "진행 → 저장 → 기록 → 확인".
+
+## 진행률 (2026-10-04 갱신 — **50/54 = 92.6%**, Stage 0·0b 완료, Stage 1+2 병렬 진행) ← 최신
+
+> 세부 정의는 `docs/plans/2026-10-04-in-game-korean.md`가 원본이다. 본 Todo 항목 자체의 상세는 `.omo/plans/ultima-web.md` Todo 48~50.
+
+**Stage 0·0b (문서 정리) 완료 (2026-10-04)**:
+- main `88c142c` 머지 + origin push 완료.
+- `docs/README.md`(AI 시작점), `docs/plans/README.md`(계획 색인) 신규.
+- 모든 기록·방향 문서를 `docs/`로 옮기고 참조 갱신. `verify:release-docs`에 `APPEND_ONLY_LOGS` 추가.
+- 계획서 두 벌 Todo 49 본문 수정(글꼴 device-pixel 16배수, play begin/end·modal·CR/LF 엔진 훅, "▼" 페이지 큐, localStorage 금지).
+- 게이트 모두 exit 0.
+
+**진행 중 (병렬)**:
+- **Stage 1 — Todo 48 (대화 키워드 칩)**: worktree `agent-todo-48` / 브랜치 `todo-48-talk-keywords`. 키워드 257개 한국어 뜻, `src/dialogue/talk-keywords.ts`, `#talk-keywords` UI, `tests/e2e/talk-keywords.spec.ts`.
+- **Stage 2 — Todo 49 Phase A (엔진 연결)**: worktree `agent-todo-49a` / 브랜치 `todo-49a-message-area-engine`. `src/overlay/message-area-{layout,view}.ts`, `src/dialogue/control-formats.ts`, 5개 엔진 훅(`Module.u4Screen`), `vendor/source-manifest.json` 갱신.
+
+**순서**: Stage 3(Todo 49 Phase B: 셸 + 게임 화면 덮개, Stage 1·2 머지 후) → Stage 4(Todo 50: 고정폭 글꼴 Neo둥근모 전체 적용). Todo 43(개조 범위)은 사용자 결정 대기.
+
+**통합 게이트**: Stage 1·2 머지 직전, AGENTS.md 규칙대로 **단독 실행**. 진행률 변화: Stage 1·2 완료 시 52/54 → 53/54 (Stage 3) → 54/54 = 100% (Stage 4). Todo 43 결정되면 Todo로 추가.
 
 ## 바로 다음 순서 (2026-10-02 갱신 — **37/37 = 100%**, main `b870b85`, F1~F4 승인 + Todo 29~33 편입 완료)
 

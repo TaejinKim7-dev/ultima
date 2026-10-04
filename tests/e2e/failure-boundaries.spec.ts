@@ -288,7 +288,7 @@ test.describe("Todo 18: failure boundaries (real engine where noted, synthetic Z
   // `window.ultimaInput.submitText(staleId, ...)` is rejected on a live
   // page would only re-prove `tests/unit/input-queue.test.ts`'s existing
   // unit coverage while reading as a real-engine proof it isn't -- this
-  // project's own "실제 게임에서 확인" honesty convention (plan.md)
+  // project's own "실제 게임에서 확인" honesty convention (docs/plan.md)
   // argues against writing that test. This finding is instead recorded
   // in docs/plan.md/docs/handoff.md as an explicit, uncovered gap.
 })

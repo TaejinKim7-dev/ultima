@@ -1,5 +1,5 @@
 # HANDOFF
-작성 시각: 2026-10-03 KST (13차 — Todo 47 완료, 50/51) · 세션 재개용 요약
+작성 시각: 2026-10-04 KST (14차 — Stage 0·0b 완료, main 88c142c 머지·push; Todo 47까지 50/51) · 세션 재개용 요약
 
 ## 1. 목표 (What we're building)
 - Ultima IV(xu4)를 GitHub Pages 정적 웹 앱(WASM/WebGL2/Web Audio)으로 이식한다. 사용자가 원본 `ultima4.zip`을 직접 선택하고, 실제 플레이 화면은 한국어로 나온다. 진행 기준은 `plan.md`, 세부 정의 원본은 `.omo/plans/ultima-web.md`다.
@@ -33,7 +33,7 @@
 
 ## 5. 다음 할 일 (Next steps)
 - [x] **Todo 34** 로컬 저장소 정리 (완료 2026-10-03; 루트는 이제 main, worktree 27→2). 루트를 main으로 옮기고, merge된 worktree를 회수한다(evidence를 `rsync --ignore-existing`로 보존, 브랜치 유지, dirty는 salvage 브랜치에 커밋). 미merge인 `todo-release-verify`는 남긴다. main을 잡은 `agent-ad52af6bd293aab90`은 마지막에 루트에서 제거한다.
-- [x] Todo 35 완료(2026-10-03, 통합 게이트 47/47 PASS; 사용자 웹 확인 대기). Todo 36~42·46도 완료(2026-10-03, 합친 트리 통합 게이트 55/55 PASS + 네이티브 4/4). Todo 45도 완료(통합 게이트 55/55 PASS). Todo 44(최종 재검증)도 완료: `verify:release` 18/18, Firefox 15/15, WebKit 15/15. **남은 것은 Todo 43(개조 범위)뿐이며 사용자 결정이 필요하다.** 43은 사용자 결정 대기(`.omo/drafts/mod-scope.md`). 이미 끝난 이전 항목: 한국어 입력 후 포커스 반환(재현 RED부터) → 36 placeholder 순서 → 37 LB/Hawkwind alias → 38 계측 → 39 → 40 → 41 → 42 → 44 재검증. 43은 언제든 할 수 있다.
+- [x] Todo 35 완료(2026-10-03, 통합 게이트 47/47 PASS; 사용자 웹 확인 대기). Todo 36~42·46도 완료(2026-10-03, 합친 트리 통합 게이트 55/55 PASS + 네이티브 4/4). Todo 45도 완료(통합 게이트 55/55 PASS). Todo 44(최종 재검증)도 완료: `verify:release` 18/18, Firefox 15/15, WebKit 15/15. **남은 것은 Todo 43(개조 범위)뿐이며 사용자 결정이 필요하다.** 43은 사용자 결정 대기(`docs/plans/mod-scope-proposal.md`). 이미 끝난 이전 항목: 한국어 입력 후 포커스 반환(재현 RED부터) → 36 placeholder 순서 → 37 LB/Hawkwind alias → 38 계측 → 39 → 40 → 41 → 42 → 44 재검증. 43은 언제든 할 수 있다.
 - 세부 정의(What to do / Must NOT / References / Acceptance / QA)는 `.omo/plans/ultima-web.md` Todo 34~44에 있다.
 
 ## 6. 막힌 부분 / 주의사항 (Blockers & gotchas)
@@ -70,7 +70,7 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integ
 ## 2026-10-04 중단 기록 (사용자 지시: "하던 작업 정리해. 모든 에이전트 그만하게 해")
 
 - **승인된 계획**: `docs/plans/2026-10-04-in-game-korean.md` (plan mode 승인본, 원본 `~/.claude/plans/parsed-nibbling-widget.md`). Stage 0·0b 문서 정리 → Stage 1 Todo 48(대화 키워드 메뉴) ∥ Stage 2 Todo 49 Phase A(엔진 연결) → Stage 3 Todo 49 Phase B(게임 화면 안 한국어 덮개) → Stage 4 Todo 50(Neo둥근모 전체 적용).
-- **이 브랜치(`docs-consolidation`)의 상태 = WIP, main에 병합하지 않음**:
+- **이전: docs-consolidation WIP였음. 2026-10-04 main `88c142c`로 fast-forward merge + origin push 완료**:
   - 완료: `git mv`로 `plan.md`→`docs/plan.md`, `handoff.md`→`docs/handoff.md`, `HANDOFF.md`→`docs/HANDOFF.md`, `goal.md`→`docs/GOAL.md`, `project.md`→`docs/PROJECT_NOTES.md`, `.omo/drafts/mod-scope.md`→`docs/plans/mod-scope-proposal.md`, `docs/NEXT_FIVE_STEPS.md`→`docs/archive/`, 승인 계획 사본 추가.
   - **미완료(재개 시 할 일)**: 옛 경로 참조 갱신(AGENTS.md 3·51·62·67·69·71·72·79행, README.md 65·71·72행 링크 — `verify:release-docs`가 검사, docs/*.md, 코드·테스트 주석), `docs/README.md`·`docs/plans/README.md` 신규 작성, AGENTS.md에 `docs/README.md`·Haiku 규칙·`docs/HANDOFF.md` 위치 명시, `docs/archive/NEXT_FIVE_STEPS.md` 맨 위 "역사 기록" 표시, 계획서 두 벌 Todo 49 본문 수정, `.claude/settings.json` Stop 훅 경로를 `docs/HANDOFF.md`로. 검증은 Haiku로 `verify:release-docs`·`cmp`·`test:unit`·`git diff --check`·옛 경로 `git grep`.
 - **멈춘 에이전트 (변경 없음, 커밋 0)**:
@@ -81,6 +81,8 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integ
 ---
 
 ## 2026-10-04 — Stage 0·0b 완료 (docs-consolidation 브랜치에 WIP, main 미병합)
+
+→ 2026-10-04 main `88c142c`로 머지 완료. **2026-10-04 같은 날**: 사용자 지시("테스트 통과하면 push와 main merge 해")로 main 88c142c로 fast-forward merge + origin push 완료.
 
 > 사용자가 2026-10-04 중단을 풀고 "OMO-Slim skill로 최대한 병렬로 개발진행해"라 지시해 Stage 0·0b를 끝냈다. 제품 코드는 건드리지 않았다.
 
@@ -118,6 +120,6 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integ
 - `npm run verify:release-docs`: exit 0 (soft SKIPPED 17건은 .omo/evidence/ 부재로 의도된 동작)
 
 ### 남은 것
-- **commit + push + main merge**: 사용자 승인 필요. push하지 않았다.
+- **2026-10-04**: 사용자 지시('테스트 통과하면 push와 main merge 해')로 **main `88c142c` 머지 + origin push 완료**.
 - **다음 진행**: Stage 1(Todo 48, worktree `agent-ab34f9739e0dbb906`·브랜치 `todo-48-talk-keywords`) ∥ Stage 2(Todo 49 Phase A, worktree `agent-a2c29640c4f177e6b`·브랜치 `todo-49a-message-area-engine`) 병렬.
 - AGENTS.md의 "통합 게이트는 단독 실행" 규칙 때문에 Stage 3 이전에 `verify:integration`을 **단독으로** 한 번 더 돌려야 한다.

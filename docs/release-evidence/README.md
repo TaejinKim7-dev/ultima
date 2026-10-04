@@ -1,6 +1,6 @@
 # 릴리스 증거 요약 (Todo 34~46, 2026-10-03)
 
-`.omo/evidence/`는 원본 게임 데이터가 섞이지 않도록 git에 올리지 않는 로컬 폴더다(AGENTS.md). 이 폴더는 그중 **영어 원문과 원본 데이터가 없는 요약 문서만** repo로 옮긴 것이다. 번역 공개 정책은 [TRANSLATION_POLICY.md](../TRANSLATION_POLICY.md), 갭별 최종 상태는 [GOAL_GAP_AUDIT.md](../GOAL_GAP_AUDIT.md) §11, 명령과 exit code의 전체 기록은 [handoff.md](../../handoff.md)에 있다.
+`.omo/evidence/`는 원본 게임 데이터가 섞이지 않도록 git에 올리지 않는 로컬 폴더다(AGENTS.md). 이 폴더는 그중 **영어 원문과 원본 데이터가 없는 요약 문서만** repo로 옮긴 것이다. 번역 공개 정책은 [TRANSLATION_POLICY.md](../TRANSLATION_POLICY.md), 갭별 최종 상태는 [GOAL_GAP_AUDIT.md](../GOAL_GAP_AUDIT.md) §11, 명령과 exit code의 전체 기록은 [handoff.md](../handoff.md)에 있다.
 
 | 문서 | 내용 |
 |---|---|

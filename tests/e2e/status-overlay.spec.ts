@@ -187,7 +187,7 @@ test.describe("Todo 12: narrow viewport", () => {
       })
     ).toBe(true)
 
-    // The game area holds its >=2x floor (plan.md line 119: "desktop 기본
+    // The game area holds its >=2x floor (docs/plan.md line 119: "desktop 기본
     // 최소 2× 표시") instead of shrinking below readability, so the PAGE
     // scrolls horizontally rather than the canvas/overlays clipping.
     const overflow = await page.evaluate(() => ({

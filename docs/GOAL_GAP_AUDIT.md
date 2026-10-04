@@ -190,6 +190,6 @@
 
 **아직 남은 것**
 - 갭 #3·#5의 죽음 메시지: e2e 관측 없음(단위만).
-- 개조 범위(Todo 43): 선택지는 `.omo/drafts/mod-scope.md`, 사용자 결정 대기.
+- 개조 범위(Todo 43): 선택지는 `docs/plans/mod-scope-proposal.md`, 사용자 결정 대기.
 - Safari 실기 검증: 이 환경(WSL2)에서 불가. WebKit 자동화는 Safari 증거가 아니다.
 - 한국어 입력 감각, 세이브 파일 선택창: 사람이 실제 브라우저에서 확인해야 한다.

@@ -1985,3 +1985,30 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
   - 레이아웃 스크린샷(로컬) `task-47/side-column-1280x720.png`을 직접 열어 오른쪽 컬럼 배치를 확인.
 - 막지 않은 키: Space(게임 명령이라 keydown 기본 동작을 막으면 keypress가 사라짐), PageUp/PageDown/Home/End. 이 키들은 여전히 페이지를 스크롤할 수 있다.
 - 남은 것: Todo 43(개조 범위, 사용자 결정). 사용자 확인: 배포본에서 오른쪽 컬럼 배치와 커서키 동작.
+
+---
+
+## 2026-10-04 — Stage 0·0b main 머지·push (docs-consolidation → main `88c142c`)
+
+> 이전: docs-consolidation 브랜치에 WIP. 사용자 지시('테스트 통과하면 push와 main merge 해')로 fast-forward merge + origin push 완료.
+
+### 작업
+- rebase `docs-consolidation` onto main `ff6ed02` (HANDOFF.md 충돌 1개, docs/HANDOFF.md를 정본으로 유지).
+- root `/home/taejin/ultima` (main)에서 `git merge docs-consolidation --ff-only`.
+- `git push origin main` → `ff6ed02..88c142c main -> main`.
+
+### 게이트 (worktree에서 직접 실행, 전부 exit 0)
+- `npm ci` — 미실행(의존 변경 없음, 알려진 사실)
+- `npm run deps:host` · `npm run build:modules` · `npm run deps:wasm` · `npm run build:wasm` (1239515 bytes, fresh stamp)
+- `npm run test:unit` 56/56 suites 681/681 tests
+- `npm run verify:repo-sources` 4/4 · `npm run typecheck` · `npm run build` · `npm run check:build-fresh`
+- `git diff --check` · `cmp` 계획서 두 벌 · `npm run verify:release-docs`
+- `npm run verify:integration` — Stage 0는 docs-only 변경이라 미실행, Stage 3 전 단독 실행 예정.
+
+### 다음
+- Stage 1 (Todo 48) · Stage 2 (Todo 49 Phase A) 병렬 진행 (이미 완료, 두 worktree에 unstaged 변경 있음, 곧 wave8 통합 머지).
+- Stage 3 (Todo 49 Phase B) — 셸 연결 + 게임 화면 덮개.
+- Stage 4 (Todo 50) — Neo둥근모 전체 적용.
+- Todo 43 (개조 범위) — 사용자 결정 대기.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
