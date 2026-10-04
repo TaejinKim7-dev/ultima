@@ -2053,13 +2053,14 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 - **작업**: `git branch -f wave9-combined main`, `git merge todo-48-talk-keywords --no-ff`, `git merge todo-49a-message-area-engine --no-ff` (docs/handoff.md 충돌 1건, append-only 로그라 두 절 다 살림), `npm run verify:integration` 단독 실행.
 - **머지 게이트 exit code (orchestrator가 wave9 머지 후 채움)**:
-  - `npm run test:unit`: `TODO_EXIT_CODES`
-  - `npm run verify:repo-sources`: `TODO_EXIT_CODES`
-  - `npm run typecheck`: `TODO_EXIT_CODES`
-  - `npm run build`: `TODO_EXIT_CODES`
-  - `npm run check:build-fresh`: `TODO_EXIT_CODES`
-  - `npm run audit:dist --require-engine`: `TODO_EXIT_CODES`
-  - `npm run verify:release-docs`: `TODO_EXIT_CODES`
-  - `npm run verify:integration`: `TODO_EXIT_CODES`
-  - `git diff --check`: `TODO_EXIT_CODES`
+  - `npm run test:unit`: 0 (63 files / 789 passed)
+  - `npm run verify:repo-sources`: 0 (4/4)
+  - `npm run typecheck`: 0
+  - `npm run build`: 0
+  - `npm run check:build-fresh`: 0
+  - `npm run audit:dist --require-engine`: 0
+  - `npm run verify:release-docs`: 0
+  - `npm run verify:integration`: `ORCHESTRATOR_RUNS_SOLO_AFTER_COMMIT`
+  - `git diff --check`: 0
+  - `npm ci`: `NOT_RUN_NO_DEPS_CHANGED` (의존 변경 0 — package.json/package-lock.json diff 없음)
 - **다음**: `git checkout main && git merge wave9-combined --ff-only && git push origin main`.
