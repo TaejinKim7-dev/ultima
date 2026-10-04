@@ -2012,3 +2012,20 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
 - Todo 43 (개조 범위) — 사용자 결정 대기.
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+---
+
+## 2026-10-04 — wave9 Stage 1·2 main 머지·push
+
+- **작업**: `git branch -f wave9-combined main`, `git merge todo-48-talk-keywords --no-ff`, `git merge todo-49a-message-area-engine --no-ff` (docs/handoff.md 충돌 1건, append-only 로그라 두 절 다 살림), `npm run verify:integration` 단독 실행.
+- **머지 게이트 exit code (orchestrator가 wave9 머지 후 채움)**:
+  - `npm run test:unit`: `TODO_EXIT_CODES`
+  - `npm run verify:repo-sources`: `TODO_EXIT_CODES`
+  - `npm run typecheck`: `TODO_EXIT_CODES`
+  - `npm run build`: `TODO_EXIT_CODES`
+  - `npm run check:build-fresh`: `TODO_EXIT_CODES`
+  - `npm run audit:dist --require-engine`: `TODO_EXIT_CODES`
+  - `npm run verify:release-docs`: `TODO_EXIT_CODES`
+  - `npm run verify:integration`: `TODO_EXIT_CODES`
+  - `git diff --check`: `TODO_EXIT_CODES`
+- **다음**: `git checkout main && git merge wave9-combined --ff-only && git push origin main`.

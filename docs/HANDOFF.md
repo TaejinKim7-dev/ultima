@@ -123,3 +123,15 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integ
 - **2026-10-04**: 사용자 지시('테스트 통과하면 push와 main merge 해')로 **main `88c142c` 머지 + origin push 완료**.
 - **다음 진행**: Stage 1(Todo 48, worktree `agent-ab34f9739e0dbb906`·브랜치 `todo-48-talk-keywords`) ∥ Stage 2(Todo 49 Phase A, worktree `agent-a2c29640c4f177e6b`·브랜치 `todo-49a-message-area-engine`) 병렬.
 - AGENTS.md의 "통합 게이트는 단독 실행" 규칙 때문에 Stage 3 이전에 `verify:integration`을 **단독으로** 한 번 더 돌려야 한다.
+
+---
+
+## 2026-10-04 — wave9 Stage 1·2 통합 머지 완료 (Todo 48 + Todo 49 Phase A)
+
+- **작업 위치**: root `/home/taejin/ultima`, wave9-combined → main fast-forward.
+- **Stage 1·2 커밋**:
+  - `todo-48-talk-keywords` @ `3e01277` (23 files, +5802/-11)
+  - `todo-49a-message-area-engine` @ `efe509d` (17 files, +1369/-5)
+- **통합 게이트 (wave9에서 단독 실행 예정, exit code는 orchestrator가 채움)**:
+  - 게이트 9종 (test:unit, verify:repo-sources, typecheck, build, check:build-fresh, audit:dist --require-engine, verify:release-docs, verify:integration, git diff --check): `TODO_EXIT_CODES`
+- **다음**: wave9 → main → push, Stage 3 착수.
