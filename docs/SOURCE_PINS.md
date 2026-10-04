@@ -10,6 +10,17 @@ This file records the source snapshots prepared for the future web port.
 | Boron | `vendor/boron` | `https://git.code.sf.net/p/urlan/boron/code` | `84e7a81f68aa7588419f7b164e94e096a1c3fa07` |
 | emsdk | not vendored | `https://github.com/emscripten-core/emsdk.git` | tag `4.0.23`, tag commit `c0bb220cb6e6f4e0fabb6f6db9efd53390ef5e56` |
 
+## Third-Party Fonts
+
+| Name | Local path | Source | Revision | sha256 | License |
+|---|---|---|---|---|---|
+| neodgm | `public/fonts/neodgm.woff2` | `https://github.com/neodgm/neodgm` | `v1.601` | `0c0ca9cd73f692a5da5d7fb39737902aa9ea312537237779972a9d81ef0a33bf` | SIL OFL 1.1 |
+
+The font (`neodgm.woff2`) and its `LICENSE.txt` are vendored unmodified;
+`public/fonts/SHA256` records both files' hashes. The OFL's Reserved Font
+Names ("Neo둥근모", "Neo둥근모 Code", "NeoDunggeunmo", "NeoDunggeunmo Code")
+are preserved by shipping the license verbatim.
+
 ## Original Game Data Policy
 
 Original Ultima IV data is not included in this repository.

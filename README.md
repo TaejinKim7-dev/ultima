@@ -86,6 +86,15 @@ AI 코딩 에이전트가 이 저장소를 이어받을 때는 먼저 [AGENTS.md
 
 각 소스의 revision은 [SOURCE_PINS.md](docs/SOURCE_PINS.md)에 있고, `npm run verify:repo-sources`가 트리 해시를 검사합니다.
 
+## 포함된 글꼴
+
+이 저장소는 [Neo둥근모](https://github.com/neodgm/neodgm)를 포함합니다.
+
+- `public/fonts/neodgm.woff2` (v1.601, SIL OFL 1.1, 약 44 KB)
+- `public/fonts/LICENSE.txt` (SIL OFL 1.1, Reserved Font Name "Neo둥근모" 포함)
+
+글꼴과 `LICENSE.txt`는 원본 그대로 수정 없이 배포합니다. `public/fonts/SHA256`에 두 파일의 sha256을 기록하고, 출처·revision·sha256 요약은 [docs/SOURCE_PINS.md](docs/SOURCE_PINS.md)의 Third-Party Fonts 표에 있습니다. 게임 화면 한국어 오버레이(`@font-face: "NeoDunggeunmo"`)에 사용합니다.
+
 ## 포함하지 않는 것
 
 이 저장소는 원본 Ultima IV 게임 데이터를 포함하지 않습니다.

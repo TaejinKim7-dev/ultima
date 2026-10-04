@@ -1,3 +1,17 @@
+/*
+ * Stage 3 Step 7: Neo둥근모 (neodgm.woff2 v1.601, SIL OFL 1.1) -- the
+ * game-screen Korean overlay's monospace pixel font, vendored unmodified
+ * under public/fonts/ (see docs/SOURCE_PINS.md and README.md's font
+ * notice). Vite rewrites `url("/fonts/neodgm.woff2")` to the deployed
+ * base (`/ultima/fonts/`); `font-display: block` keeps the game screen
+ * from flashing a fallback face before the font arrives.
+ */
+@font-face {
+  font-family: "NeoDunggeunmo";
+  src: url("/fonts/neodgm.woff2") format("woff2");
+  font-display: block;
+}
+
 :root {
   color-scheme: dark;
   --ultima-bg: #0b0b12;
@@ -14,7 +28,10 @@ body {
   margin: 0;
   background: var(--ultima-bg);
   color: var(--ultima-text);
-  font-family: "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  /* NeoDunggeunmo first: the fixed-pitch Korean pixel font now backs every
+   * UI text it covers; the system stack stays as a fallback for glyphs the
+   * font lacks (and for environments that never receive the woff2). */
+  font-family: "NeoDunggeunmo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
 }
 
 #app {
@@ -40,7 +57,17 @@ body {
   min-width: 640px;
   aspect-ratio: 320 / 200;
   background: #000;
-  border: 2px solid var(--ultima-border);
+  /*
+   * Stage 3 Step 6: the 2px ring is an `outline`, not a `border` -- under
+   * `* { box-sizing: border-box }` the old border shrank the content box
+   * to 636x396 at the 640px floor. Outline never participates in layout,
+   * so at the floor the displayed game area is exactly 640x400 (2x of the
+   * 320x200 raster: one Korean glyph in the message-area overlay = one
+   * original 8x8 cell at 16 device px). `outline-offset: -2px` keeps the
+   * ring inside the border-box edge, visually identical to the old border.
+   */
+  outline: 2px solid var(--ultima-border);
+  outline-offset: -2px;
   overflow: hidden;
 }
 

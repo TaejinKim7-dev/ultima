@@ -32,7 +32,9 @@ const CONTENT_TYPES: Record<string, string> = {
   ".wasm": "application/wasm",
   ".json": "application/json",
   ".svg": "image/svg+xml",
-  ".png": "image/png"
+  ".png": "image/png",
+  ".woff2": "font/woff2",
+  ".txt": "text/plain; charset=utf-8"
 }
 
 function startStaticPagesServer(): Promise<Server> {
@@ -143,5 +145,36 @@ test.describe(`Todo 19: Pages artifact static smoke (plain static server at ${PR
     }
     expect(startReason).toBeNull()
     expect(engineStarted).toBe("true")
+  })
+
+  test("Stage 3 Step 7: the vendored NeoDunggeunmo woff2 + its OFL LICENSE.txt are served 200 with the right content types, and the family really loads in the browser", async ({
+    page
+  }) => {
+    // The font check is independent of original game data -- the shell
+    // page alone is enough -- so it does not skip when ULTIMA4_DATA is
+    // unset (unlike the engine-boot happy path above).
+    await page.goto(`${origin}${PREFIX}`)
+    await page.waitForFunction(() => document.body.dataset["bridgeReady"] === "true")
+
+    // Explicit fetches of the two vendored files through the artifact
+    // server (GitHub Pages has no dev-server magic: the font must be a
+    // plain static asset under the prefix).
+    const woff2Response = await page.request.get(`${origin}${PREFIX}fonts/neodgm.woff2`)
+    const licenseResponse = await page.request.get(`${origin}${PREFIX}fonts/LICENSE.txt`)
+    expect(woff2Response.status()).toBe(200)
+    expect(woff2Response.headers()["content-type"]).toBe("font/woff2")
+    expect(licenseResponse.status()).toBe(200)
+    expect(licenseResponse.headers()["content-type"]).toBe("text/plain; charset=utf-8")
+
+    // R2b watchdog: the page's @font-face must resolve to a *loaded*
+    // family, not just a served file -- a dangling url() would pass every
+    // fetch check above while every Korean glyph silently falls back.
+    // document.fonts.load() resolves once the face is loaded (or fails);
+    // check() must then report it available at the game overlay's 16px.
+    const loaded = await page.evaluate(async () => {
+      await document.fonts.load("16px NeoDunggeunmo")
+      return document.fonts.check("16px NeoDunggeunmo")
+    })
+    expect(loaded).toBe(true)
   })
 })

@@ -2064,3 +2064,52 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
   - `git diff --check`: 0
   - `npm ci`: `NOT_RUN_NO_DEPS_CHANGED` (의존 변경 0 — package.json/package-lock.json diff 없음)
 - **다음**: `git checkout main && git merge wave9-combined --ff-only && git push origin main`.
+
+---
+
+## 2026-10-04 — Stage 3 worktree 생성 (todo-49b-message-area-shell)
+
+- **작업 위치**: worktree `agent-todo-49b`, 브랜치 `todo-49b-message-area-shell`, main `52a4fa3` 기반.
+- **환경 셋업**: npm ci / deps:host / build:modules / deps:wasm / build:wasm 완료.
+- **다음**: 사용자 결정 대기 (폰트 다운로드 + Step 8 변경) — 결정 후 Stage 3 구현 시작.
+- 절대 커밋 안 함.
+
+---
+
+## 2026-10-04 — Stage 3 Lane A (Step 6·7) 완료
+
+> worktree `agent-todo-49b`, 브랜치 `todo-49b-message-area-shell`.
+
+### Step 6: .viewport border→outline
+- src/shell.css 변경. 캔버스 정확히 640x400.
+
+### Step 7: Neo둥근모 v1.601 (사용자 승인 후 다운로드·sha256 pin)
+- woff2 sha256: `0c0ca9cd73f692a5da5d7fb39737902aa9ea312537237779972a9d81ef0a33bf` (44,352 bytes, HTTP 200 via `https://github.com/neodgm/neodgm/releases/download/v1.601/neodgm.woff2`)
+- LICENSE.txt: SIL OFL 1.1 (Copyright (c) 2017-2021 Eunbin Jeong (Dalgona.), Reserved Font Name "Neo둥근모" / "Neo둥근모 Code" / "NeoDunggeunmo" / "NeoDunggeunmo Code"), sha256 `c1997f54b659ff8bbe2addf4e7f03fb823db7d1b81b043fb2633183b1fc0c2f0`, 4,556 bytes
+- public/fonts/SHA256 두 파일 sha256 기록
+- docs/SOURCE_PINS.md: Neo둥근모 행 추가 (Third-Party Fonts 표, sha256·license 포함)
+- src/shell.css @font-face 추가 (`"NeoDunggeunmo"`, `font-display: block`, line 1~17) + body font-family 우선 적용
+- tests/e2e/pages-static-smoke.spec.ts: CONTENT_TYPES (.woff2/.txt) + 폰트 200·content-type·document.fonts.check() 단언 추가
+- README.md: "## 포함된 글꼴" 고지 절 추가
+- src/main.ts: `document.fonts.load("16px NeoDunggeunmo")` fire-and-forget 프리로드
+
+### 단위 테스트 (TDD RED→GREEN)
+- `tests/unit/viewport-outline.test.ts` 신규 (4 assertions, CSS 정적 분석 + 박스 모델 재계산)
+- RED: `.omo/evidence/ultima-web/task-49b/lane-a-unit-red.log` (2 failed — border 존재, content box 636×396)
+- GREEN: `.omo/evidence/ultima-web/task-49b/lane-a-unit-green.log` (4 passed, exit 0)
+
+### 게이트 (preflight)
+- npm run test:unit: 0 (64 files / 793 passed — viewport-outline 4개 포함)
+- npm run verify:repo-sources: 0 (4/4)
+- npm run typecheck: 0
+- npm run build: 0
+- npm run check:build-fresh: 0
+- npm run audit:dist -- --require-engine: 0 (12 file(s))
+- npm run verify:release-docs: 0
+- npm run build:wasm: 0 (no vendor 변경)
+- npm run build:site -- --base=/ultima/: 0 — dist/fonts/neodgm.woff2 + LICENSE.txt 복사 확인, 빌드 CSS url(/ultima/fonts/neodgm.woff2)
+- e2e (chromium, ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip): `status-overlay.spec.ts` 5/5 통과 (narrow viewport 360×640 회귀 포함), `pages-static-smoke.spec.ts` 2/2 통과 (엔진 부팅 + 폰트 200·content-type·document.fonts.check true)
+
+### 다음
+- Lane B (Step 8·9·10·11): control-formats 연결, 셸 연결, 덮개 화면, 페이지 넘김 — 동일 worktree에서 다음 커밋.
+- wave9 통합 머지 전 verify:integration 단독 실행 (Stage 3·4 통합 게이트).

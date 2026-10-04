@@ -79,6 +79,15 @@ document.addEventListener("compositionend", () => {
   inputQueue.setComposing(false)
 })
 
+// Stage 3 Step 7: eagerly preload the game-screen pixel font so the first
+// frame any NeoDunggeunmo-backed overlay (message area, status) draws
+// already has the @font-face family loaded. Fire-and-forget: shell
+// readiness and engine startup must not wait on the font, and a failed
+// load only degrades to the system-font fallback -- the page still boots.
+void document.fonts.load("16px NeoDunggeunmo").catch(() => {
+  // No action: a missing font is a cosmetic degradation, never a boot error.
+})
+
 // Signal to QA/e2e tooling -- and to the future WASM engine's own startup
 // sequence -- that the shell's DOM wiring and bridge object are ready.
 document.body.setAttribute("data-bridge-ready", "true")
