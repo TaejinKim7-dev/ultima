@@ -1,4 +1,5 @@
 import { spawnSync } from "node:child_process"
+import { createHash } from "node:crypto"
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
@@ -222,5 +223,79 @@ describe("i18n:check --strict", () => {
     expect(strict.status).toBe(1)
     expect(strict.stderr).toContain("ui:game:0")
     expect(strict.stderr).toContain("pending")
+  })
+})
+
+describe("i18n:check topic glosses (Todo 48)", () => {
+  const sha = (text: string) => `sha256:${createHash("sha256").update(text, "utf8").digest("hex")}`
+
+  function topicSchema(): ReturnType<typeof baseSchema> {
+    const schema = baseSchema()
+    ;(schema.tlk.entries as Record<string, unknown>)["BRITAIN:0:topic1"] = {
+      sourceHash: sha("PLAY"),
+      placeholders: [],
+      translation: "PLAY",
+      status: "ready"
+    }
+    return schema
+  }
+
+  it("fails --strict on a missing gloss and passes without it", () => {
+    const dir = writeFixture(topicSchema())
+    expect(runCheck(dir).status, runCheck(dir).stderr).toBe(0)
+    const strict = runCheck(dir, "--strict")
+    expect(strict.status).toBe(1)
+    expect(strict.stderr).toContain("npc-topic gloss missing")
+    expect(strict.stderr).toContain("BRITAIN:0:topic1")
+  })
+
+  it("fails on a duplicate gloss within one NPC", () => {
+    const schema = topicSchema()
+    ;(schema.tlk.entries as Record<string, unknown>)["BRITAIN:0:topic2"] = {
+      sourceHash: sha("PLAY"),
+      placeholders: [],
+      translation: "PLAY",
+      status: "ready"
+    }
+    ;(schema.glossary.entries as Record<string, unknown>)["npc-topic-play"] = {
+      sourceHash: sha("PLAY"),
+      translation: "연주",
+      status: "ready",
+      category: "npc-topic"
+    }
+    const result = runCheck(writeFixture(schema))
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("duplicate gloss")
+  })
+
+  it("fails on a reserved-alias collision", () => {
+    const schema = topicSchema()
+    ;(schema.tlk.entries as Record<string, unknown>)["BRITAIN:0:topic1"] = {
+      sourceHash: sha("NAME"),
+      placeholders: [],
+      translation: "NAME",
+      status: "ready"
+    }
+    ;(schema.glossary.entries as Record<string, unknown>)["npc-topic-name"] = {
+      sourceHash: sha("NAME"),
+      translation: "이름",
+      status: "ready",
+      category: "npc-topic"
+    }
+    const result = runCheck(writeFixture(schema))
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("reserved common alias")
+  })
+
+  it("accepts a fully-glossed topic fixture", () => {
+    const schema = topicSchema()
+    ;(schema.glossary.entries as Record<string, unknown>)["npc-topic-play"] = {
+      sourceHash: sha("PLAY"),
+      translation: "연주",
+      status: "ready",
+      category: "npc-topic"
+    }
+    const result = runCheck(writeFixture(schema))
+    expect(result.status, result.stderr).toBe(0)
   })
 })

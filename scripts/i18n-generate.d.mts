@@ -28,6 +28,10 @@ export interface GeneratedTables {
   vendorTemplates: Record<string, string>
   vendorTemplateExclusions: { id: string; reason: string }[]
   vendorNames: Record<string, string>
+  // Todo 48: raw talk keyword (with padding) -> npc-topic gloss id, and the
+  // per-slot overrides ("MAP:n:topicN" -> override id).
+  topicGlosses: Record<string, string>
+  topicGlossOverrides: Record<string, string>
 }
 export function generateI18nTables(schemaDir: string): GeneratedTables
 /**

@@ -270,3 +270,29 @@ export function toRuns(line: PanelLine): PanelRun[] {
   }
   return runs
 }
+
+/**
+ * Todo 48: removes `text` from the end of the current line, but only when
+ * the line really ends with it. The engine erases a just-printed prompt
+ * with raw backspace bytes (`gameGetDirection()`'s "\b\b\b\b" after "Dir?"),
+ * which the panel never receives as cells; the composed Korean prompt
+ * ("방향?") is what needs to disappear. Counts by the Korean text -- never
+ * by the 4 English backspace bytes. Returns the state unchanged when the
+ * current line does not end with `text`.
+ */
+export function eraseTrailingText(state: PanelState, text: string): PanelState {
+  const chars = [...text]
+  const cells = state.currentLine
+  if (chars.length === 0 || cells.length < chars.length) {
+    return state
+  }
+  for (let index = 0; index < chars.length; index++) {
+    const expected = chars[chars.length - 1 - index]
+    const actual = cells[cells.length - 1 - index]
+    if (expected === undefined || actual === undefined || actual.char !== expected) {
+      return state
+    }
+  }
+  const currentLine = cells.slice(0, cells.length - chars.length)
+  return { ...state, currentLine, cursor: currentLine.length }
+}

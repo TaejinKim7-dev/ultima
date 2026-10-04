@@ -24,6 +24,19 @@ export const FORMAT_ONLY_HASHES: Readonly<Record<string, string>> = {
   [hashText("%s")]: ""
 }
 
+/**
+ * Todo 48: control-only erases that should remove the previous line text
+ * from the panel. gameGetDirection() (vendor/xu4/src/game.cpp:1471-1475)
+ * prints "Dir?" (hash "7ab7b051" -> `ui:game:63` "방향?") and then erases
+ * it with screenMessage("\b\b\b\b") (hash "8c19a815", unmapped and
+ * dropped). Each key maps the erase hash to the prompt hash that must have
+ * immediately preceded it. The hashes are written as values so no English
+ * literal leaks into the source; a unit test pins them against game.cpp.
+ */
+export const PROMPT_ERASE_HASHES: Readonly<Record<string, string>> = {
+  [hashText("\b\b\b\b")]: "7ab7b051"
+}
+
 export interface UiMessageDeps {
   /** Maps a format hash (8 lowercase hex digits) to its ui/module id, if inventoried. */
   templateId(hash: string): string | undefined
@@ -83,18 +96,33 @@ export function composeUiMessage(hash: string, args: readonly string[], deps: Ui
  * Wraps composeUiMessage for the EM_JS call site. An exception thrown here
  * would unwind the wasm game loop, so every failure is contained and
  * reported through `onError` (never console output for a dropped call).
+ *
+ * Todo 48: an optional `erase` callback removes a previous line's trailing
+ * text when the current call is a control-only erase of it (see
+ * PROMPT_ERASE_HASHES). The previous call's hash and composed text are
+ * remembered, so the Korean prompt "방향?" -- not the 4 English backspace
+ * bytes -- is what gets removed.
  */
 export function createUiMessageHandler(
   deps: UiMessageDeps,
   emit: (text: string) => void,
-  onError: (error: unknown) => void = () => {}
+  onError: (error: unknown) => void = () => {},
+  erase?: (text: string) => void
 ): (hash: string, args: readonly string[]) => void {
+  let prevHash: string | null = null
+  let prevText: string | null = null
   return (hash, args) => {
     try {
+      const erasedPromptHash = PROMPT_ERASE_HASHES[hash]
+      if (erase !== undefined && erasedPromptHash !== undefined && prevHash === erasedPromptHash && prevText !== null) {
+        erase(prevText)
+      }
       const text = composeUiMessage(hash, args, deps)
       if (text !== null) {
         emit(text)
       }
+      prevHash = hash
+      prevText = text
     } catch (error) {
       onError(error)
     }

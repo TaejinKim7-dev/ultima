@@ -52,6 +52,21 @@
         </section>
 
         <!--
+          Todo 48 (user request 2026-10-04): the usable talk keywords as
+          clickable chips, directly under the dialogue history. src/shell.ts
+          fills #talk-keyword-groups from src/dialogue/talk-keywords.ts's
+          view() (common / "이 사람에게 물어볼 것" / "대답"), hidden while no
+          conversation is active. Each chip is a <button tabindex=-1> that
+          submits exactly like typing its label into #korean-keyword-input and
+          pressing Enter -- same gate, same rejection message -- but never
+          takes DOM focus, so a later Enter/arrow still reaches the game.
+        -->
+        <section id="talk-keywords" class="talk-keywords" hidden aria-label="대화 키워드">
+          <h2>대화 키워드</h2>
+          <div id="talk-keyword-groups"></div>
+        </section>
+
+        <!--
           Todo 13: Korean NPC-keyword input. The real xu4 engine can never
           receive Korean text directly -- vendor/xu4/src/event.cpp's
           ReadStringController::keyPressed() only ever accepts key codes

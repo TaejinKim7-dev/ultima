@@ -18679,6 +18679,1381 @@ export const GENERATED_I18N_ENTRIES: Record<string, GeneratedI18nEntry> = {
     "translation": "경험",
     "placeholders": []
   },
+  "npc-topic-abbe": {
+    "translation": "수도원",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-abys": {
+    "translation": "심연",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-adve": {
+    "translation": "모험",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-advi": {
+    "translation": "조언",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-alch": {
+    "translation": "연금술사",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-ale": {
+    "translation": "에일",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-alta": {
+    "translation": "제단",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-armo": {
+    "translation": "갑옷",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-arts": {
+    "translation": "마법술",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-axe": {
+    "translation": "도끼",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-axio": {
+    "translation": "공리",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-baby": {
+    "translation": "아기",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-bard": {
+    "translation": "음유시인",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-batt": {
+    "translation": "전투",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-beg": {
+    "translation": "구걸",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-begg": {
+    "translation": "거지",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-beh": {
+    "translation": "베",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-beh-dot": {
+    "translation": "베.",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-bein": {
+    "translation": "존재",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-beli": {
+    "translation": "믿음",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-bell": {
+    "translation": "종",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-bone": {
+    "translation": "뼈",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-book": {
+    "translation": "책",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-borr": {
+    "translation": "빌리기",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-brav": {
+    "translation": "용감함",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-brew": {
+    "translation": "맥주",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-brid": {
+    "translation": "다리",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-brit": {
+    "translation": "브리타니아",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-bull": {
+    "translation": "황소",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-calu": {
+    "translation": "칼럼니",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-cand": {
+    "translation": "초",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-care": {
+    "translation": "보살핌",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-cast": {
+    "translation": "성",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-cham": {
+    "translation": "방",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-chil": {
+    "translation": "아이들",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-clev": {
+    "translation": "영리함",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-clue": {
+    "translation": "단서",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-code": {
+    "translation": "코덱스",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-comb": {
+    "translation": "조합",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-comp": {
+    "translation": "자비",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-cons": {
+    "translation": "의식",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-cook": {
+    "translation": "요리",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-corr": {
+    "translation": "부패",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-coun": {
+    "translation": "조언",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-coun--lcb-11": {
+    "translation": "나라",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-coun--yew-13": {
+    "translation": "의회",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-cour": {
+    "translation": "용기",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-cour--yew-1": {
+    "translation": "법정",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-crim": {
+    "translation": "범죄",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-danc": {
+    "translation": "춤",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-dang": {
+    "translation": "위험",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-die": {
+    "translation": "죽음",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-dign": {
+    "translation": "존엄",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-doom": {
+    "translation": "파멸",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-dung": {
+    "translation": "던전",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-durh": {
+    "translation": "더럼",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-eart": {
+    "translation": "지구",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-ente": {
+    "translation": "여흥",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-evil": {
+    "translation": "악",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-fabr": {
+    "translation": "직물",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-fait": {
+    "translation": "충직",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-felo": {
+    "translation": "중범죄",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-felo--yew-8": {
+    "translation": "중죄인",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-fiel": {
+    "translation": "들판",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-flow": {
+    "translation": "꽃",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-food": {
+    "translation": "음식",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-fort": {
+    "translation": "운세",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-four": {
+    "translation": "넷",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-frie": {
+    "translation": "친구",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-funn": {
+    "translation": "재미",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-gara": {
+    "translation": "개럼",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-gate": {
+    "translation": "문",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-gate--cove-3": {
+    "translation": "게이트",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-gate--cove-7": {
+    "translation": "게이트",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-gold": {
+    "translation": "금",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-grov": {
+    "translation": "숲",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-guar": {
+    "translation": "경비병",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-hand": {
+    "translation": "손",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-hang": {
+    "translation": "교수형",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-haun": {
+    "translation": "출몰",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-heal": {
+    "translation": "치유사",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-hear": {
+    "translation": "마음",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-hear--minoc-6": {
+    "translation": "들은 것",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-help": {
+    "translation": "도움",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-hide": {
+    "translation": "숨기",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-ho-e": {
+    "translation": "호 에요",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-home": {
+    "translation": "집",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-hone": {
+    "translation": "정직",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-hono": {
+    "translation": "명예",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-horn": {
+    "translation": "나팔",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-hors": {
+    "translation": "말",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-hour": {
+    "translation": "시간",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-hous": {
+    "translation": "가정부",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-humb": {
+    "translation": "겸손함",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-humi": {
+    "translation": "겸손",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-hung": {
+    "translation": "배고픔",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-hyth": {
+    "translation": "히스로스",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-info": {
+    "translation": "정보",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-inn": {
+    "translation": "여관",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-it": {
+    "translation": "그것",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-item": {
+    "translation": "물품",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-jest": {
+    "translation": "광대",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-jest--moonglow-13": {
+    "translation": "농담",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-jone": {
+    "translation": "존스",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-jour": {
+    "translation": "여정",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-jour--skara-5": {
+    "translation": "일지",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-juli": {
+    "translation": "줄리오",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-just": {
+    "translation": "정의",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-keep": {
+    "translation": "관리자",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-key": {
+    "translation": "열쇠",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-kill": {
+    "translation": "살생",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-kind": {
+    "translation": "친절",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-know": {
+    "translation": "지식",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-lady": {
+    "translation": "마님",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-land": {
+    "translation": "땅",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-lead": {
+    "translation": "지도자",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-lear": {
+    "translation": "배움",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-libr": {
+    "translation": "사서",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-lieg": {
+    "translation": "주군",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-life": {
+    "translation": "삶",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-life--minoc-15": {
+    "translation": "목숨",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-ligh": {
+    "translation": "빛",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-lord": {
+    "translation": "영주",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-love": {
+    "translation": "사랑",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-lumb": {
+    "translation": "나무꾼",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-mach": {
+    "translation": "기계",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-mage": {
+    "translation": "마법사",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-magi": {
+    "translation": "마법",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-magi--britain-14": {
+    "translation": "매긴시아",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-magi--magincia-15": {
+    "translation": "매긴시아",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-mand": {
+    "translation": "맨드레이크",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-mant": {
+    "translation": "진언",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-mast": {
+    "translation": "스승",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-medi": {
+    "translation": "명상",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-merc": {
+    "translation": "상인",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-misd": {
+    "translation": "경범죄",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-mix": {
+    "translation": "섞기",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-mond": {
+    "translation": "몬데인",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-mone": {
+    "translation": "돈",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-moon": {
+    "translation": "달",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-mumb": {
+    "translation": "중얼거림",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-myst": {
+    "translation": "신비",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-nate": {
+    "translation": "네이트",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-natu": {
+    "translation": "본질",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-nige": {
+    "translation": "나이젤",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-nigh": {
+    "translation": "벨라도나",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-nobl": {
+    "translation": "귀족",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-nobl--skara-6": {
+    "translation": "고귀함",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-noth": {
+    "translation": "아무것도",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-nowh": {
+    "translation": "아무 데도",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-oak": {
+    "translation": "참나무",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-om": {
+    "translation": "옴",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-one": {
+    "translation": "하나",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-orbs": {
+    "translation": "구슬",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-palm": {
+    "translation": "손금",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-part": {
+    "translation": "부분",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-pass": {
+    "translation": "통로",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-path": {
+    "translation": "길",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-peac": {
+    "translation": "평화",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-peop": {
+    "translation": "사람들",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-peri": {
+    "translation": "위험",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-phil": {
+    "translation": "철학",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-pira": {
+    "translation": "해적",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-play": {
+    "translation": "연주",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-poor": {
+    "translation": "가난",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-powe": {
+    "translation": "힘",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-preg": {
+    "translation": "임신",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-prid": {
+    "translation": "오만",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-pris": {
+    "translation": "죄수",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-prob": {
+    "translation": "문제",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-prov": {
+    "translation": "지방",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-ques": {
+    "translation": "여정",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-raid": {
+    "translation": "약탈",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-rang": {
+    "translation": "레인저",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-rati": {
+    "translation": "식량",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-reag": {
+    "translation": "재료",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-reas": {
+    "translation": "이유",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-reca": {
+    "translation": "귀환",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-recl": {
+    "translation": "은둔자",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-red": {
+    "translation": "붉은색",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-rede": {
+    "translation": "속죄",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-regr": {
+    "translation": "후회",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-rela": {
+    "translation": "관계",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-reso": {
+    "translation": "공명",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-rest": {
+    "translation": "휴식",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-ridd": {
+    "translation": "수수께끼",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-rive": {
+    "translation": "강",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-room": {
+    "translation": "방",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-rule": {
+    "translation": "통치",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-rum": {
+    "translation": "럼주",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-rumo": {
+    "translation": "소문",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-rune": {
+    "translation": "룬",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-sacr": {
+    "translation": "희생",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-sail": {
+    "translation": "선원",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-salv": {
+    "translation": "구원",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-sand": {
+    "translation": "샌드위치",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-seas": {
+    "translation": "바다",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-secr": {
+    "translation": "비밀",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-sent": {
+    "translation": "센트리",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-serf": {
+    "translation": "농노",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-serv": {
+    "translation": "서비스",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-serv--paws-13": {
+    "translation": "시중",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-sext": {
+    "translation": "육분의",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-shee": {
+    "translation": "양",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-shep": {
+    "translation": "목자",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-shhh": {
+    "translation": "쉿",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-ship": {
+    "translation": "배",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-ship--serpent-2": {
+    "translation": "난파선",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-shop": {
+    "translation": "상점",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-show": {
+    "translation": "보여줄 것",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-shri": {
+    "translation": "신단",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-sick": {
+    "translation": "병",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-sine": {
+    "translation": "죄",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-sing": {
+    "translation": "노래하기",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-skar": {
+    "translation": "스카라 브레이",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-skel": {
+    "translation": "유골",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-skul": {
+    "translation": "해골",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-slee": {
+    "translation": "수면",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-smit": {
+    "translation": "스미스",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-smok": {
+    "translation": "담배",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-some": {
+    "translation": "무언가",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-song": {
+    "translation": "노래",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-spel": {
+    "translation": "주문",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-spir": {
+    "translation": "영성",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-spir--magincia-1": {
+    "translation": "영혼",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-spir--skara-10": {
+    "translation": "영혼",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-spoi": {
+    "translation": "상한 것",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-stab": {
+    "translation": "마구간",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-star": {
+    "translation": "굶주림",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-ston": {
+    "translation": "보석",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-stor": {
+    "translation": "이야기",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-stro": {
+    "translation": "강함",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-stud": {
+    "translation": "연구",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-sun": {
+    "translation": "해",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-surv": {
+    "translation": "생존자",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-teac": {
+    "translation": "가르침",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-tele": {
+    "translation": "망원경",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-thie": {
+    "translation": "도둑",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-thin": {
+    "translation": "생각",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-thin--lcb-5": {
+    "translation": "물건",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-this": {
+    "translation": "이것",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-thro": {
+    "translation": "왕좌",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-tink": {
+    "translation": "땜장이",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-toug": {
+    "translation": "힘셈",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-towe": {
+    "translation": "탑",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-trai": {
+    "translation": "훈련",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-trav": {
+    "translation": "여행",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-trea": {
+    "translation": "보물",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-trou": {
+    "translation": "말썽",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-trut": {
+    "translation": "진실",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-ug": {
+    "translation": "우그",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-unde": {
+    "translation": "이해",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-unha": {
+    "translation": "불행",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-use": {
+    "translation": "쓰임새",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-valo": {
+    "translation": "용맹",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-valu": {
+    "translation": "가치",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-vesp": {
+    "translation": "베스퍼",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-vill": {
+    "translation": "악당",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-vint": {
+    "translation": "빈티지",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-virt": {
+    "translation": "미덕",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-warl": {
+    "translation": "군주",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-warn": {
+    "translation": "경고",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-warr": {
+    "translation": "전사",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-wate": {
+    "translation": "물",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-weap": {
+    "translation": "무기",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-welc": {
+    "translation": "환영",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-whee": {
+    "translation": "타륜",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-wine": {
+    "translation": "와인",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-wisd": {
+    "translation": "지혜",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-word": {
+    "translation": "통행의 말",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-work": {
+    "translation": "일",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-worl": {
+    "translation": "세상",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-woun": {
+    "translation": "상처",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-writ": {
+    "translation": "작가",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
+  "npc-topic-yew": {
+    "translation": "유",
+    "placeholders": [],
+    "category": "npc-topic"
+  },
   "principle-courage": {
     "translation": "용기",
     "placeholders": []
@@ -20969,6 +22344,289 @@ export const GENERATED_VENDOR_NAMES: Readonly<Record<string, string>> = {
   "Ankh": "module:Ultima-IV:config:101",
   "Standard": "module:Ultima-IV:config:103",
   "Full Viewport": "module:Ultima-IV:config:104"
+}
+
+// Todo 48: raw talk keyword (with its padding, e.g. "ALE ") -> npc-topic gloss id.
+export const GENERATED_TOPIC_GLOSSES: Readonly<Record<string, string>> = {
+  "PLAY": "npc-topic-play",
+  "COMP": "npc-topic-comp",
+  "DANC": "npc-topic-danc",
+  "BEGG": "npc-topic-begg",
+  "CHIL": "npc-topic-chil",
+  "SECR": "npc-topic-secr",
+  "MOND": "npc-topic-mond",
+  "JULI": "npc-topic-juli",
+  "NATU": "npc-topic-natu",
+  "MAGI": "npc-topic-magi",
+  "PRID": "npc-topic-prid",
+  "STAR": "npc-topic-star",
+  "BEG ": "npc-topic-beg",
+  "SING": "npc-topic-sing",
+  "HO E": "npc-topic-ho-e",
+  "BRID": "npc-topic-brid",
+  "GUAR": "npc-topic-guar",
+  "BARD": "npc-topic-bard",
+  "RUNE": "npc-topic-rune",
+  "ORBS": "npc-topic-orbs",
+  "STON": "npc-topic-ston",
+  "RUM ": "npc-topic-rum",
+  "SHHH": "npc-topic-shhh",
+  "MANT": "npc-topic-mant",
+  "LEAR": "npc-topic-lear",
+  "ABYS": "npc-topic-abys",
+  "SHIP": "npc-topic-ship",
+  "WISD": "npc-topic-wisd",
+  "PEAC": "npc-topic-peac",
+  "LOVE": "npc-topic-love",
+  "HEAR": "npc-topic-hear",
+  "RIVE": "npc-topic-rive",
+  "WORD": "npc-topic-word",
+  "CODE": "npc-topic-code",
+  "COMB": "npc-topic-comb",
+  "STUD": "npc-topic-stud",
+  "KEY ": "npc-topic-key",
+  "AXIO": "npc-topic-axio",
+  "PART": "npc-topic-part",
+  "RECL": "npc-topic-recl",
+  "ARTS": "npc-topic-arts",
+  "GATE": "npc-topic-gate",
+  "CHAM": "npc-topic-cham",
+  "PROB": "npc-topic-prob",
+  "WORL": "npc-topic-worl",
+  "RELA": "npc-topic-rela",
+  "HUNG": "npc-topic-hung",
+  "ITEM": "npc-topic-item",
+  "WARN": "npc-topic-warn",
+  "DOOM": "npc-topic-doom",
+  "ARMO": "npc-topic-armo",
+  "NOWH": "npc-topic-nowh",
+  "WINE": "npc-topic-wine",
+  "VINT": "npc-topic-vint",
+  "TINK": "npc-topic-tink",
+  "MACH": "npc-topic-mach",
+  "HIDE": "npc-topic-hide",
+  "SOME": "npc-topic-some",
+  "SAIL": "npc-topic-sail",
+  "LIFE": "npc-topic-life",
+  "PIRA": "npc-topic-pira",
+  "RAID": "npc-topic-raid",
+  "THIE": "npc-topic-thie",
+  "CLEV": "npc-topic-clev",
+  "TRAV": "npc-topic-trav",
+  "SKUL": "npc-topic-skul",
+  "SLEE": "npc-topic-slee",
+  "SERV": "npc-topic-serv",
+  "HYTH": "npc-topic-hyth",
+  "MIX ": "npc-topic-mix",
+  "IT  ": "npc-topic-it",
+  "PROV": "npc-topic-prov",
+  "RULE": "npc-topic-rule",
+  "JUST": "npc-topic-just",
+  "SACR": "npc-topic-sacr",
+  "SPIR": "npc-topic-spir",
+  "BEIN": "npc-topic-bein",
+  "MUMB": "npc-topic-mumb",
+  "SALV": "npc-topic-salv",
+  "QUES": "npc-topic-ques",
+  "HORN": "npc-topic-horn",
+  "CAND": "npc-topic-cand",
+  "LADY": "npc-topic-lady",
+  "RESO": "npc-topic-reso",
+  "PASS": "npc-topic-pass",
+  "DANG": "npc-topic-dang",
+  "ABBE": "npc-topic-abbe",
+  "SONG": "npc-topic-song",
+  "GROV": "npc-topic-grov",
+  "OAK ": "npc-topic-oak",
+  "COUN": "npc-topic-coun",
+  "WARR": "npc-topic-warr",
+  "BATT": "npc-topic-batt",
+  "LIGH": "npc-topic-ligh",
+  "YEW ": "npc-topic-yew",
+  "HOUS": "npc-topic-hous",
+  "ROOM": "npc-topic-room",
+  "RED ": "npc-topic-red",
+  "VALO": "npc-topic-valo",
+  "BRAV": "npc-topic-brav",
+  "PREG": "npc-topic-preg",
+  "SHEE": "npc-topic-shee",
+  "DUNG": "npc-topic-dung",
+  "EVIL": "npc-topic-evil",
+  "KILL": "npc-topic-kill",
+  "SHRI": "npc-topic-shri",
+  "TOWE": "npc-topic-towe",
+  "CRIM": "npc-topic-crim",
+  "HELP": "npc-topic-help",
+  "RIDD": "npc-topic-ridd",
+  "ONE ": "npc-topic-one",
+  "WATE": "npc-topic-wate",
+  "WOUN": "npc-topic-woun",
+  "JEST": "npc-topic-jest",
+  "CLUE": "npc-topic-clue",
+  "TREA": "npc-topic-trea",
+  "PERI": "npc-topic-peri",
+  "LIEG": "npc-topic-lieg",
+  "FOOD": "npc-topic-food",
+  "COOK": "npc-topic-cook",
+  "THIN": "npc-topic-thin",
+  "PRIS": "npc-topic-pris",
+  "CAST": "npc-topic-cast",
+  "ALTA": "npc-topic-alta",
+  "LIBR": "npc-topic-libr",
+  "TRUT": "npc-topic-trut",
+  "ENTE": "npc-topic-ente",
+  "UNHA": "npc-topic-unha",
+  "VALU": "npc-topic-valu",
+  "SPEL": "npc-topic-spel",
+  "RECA": "npc-topic-reca",
+  "SICK": "npc-topic-sick",
+  "HOUR": "npc-topic-hour",
+  "SHOW": "npc-topic-show",
+  "TELE": "npc-topic-tele",
+  "KNOW": "npc-topic-know",
+  "BOOK": "npc-topic-book",
+  "THRO": "npc-topic-thro",
+  "ADVI": "npc-topic-advi",
+  "REAS": "npc-topic-reas",
+  "WELC": "npc-topic-welc",
+  "FOUR": "npc-topic-four",
+  "MEDI": "npc-topic-medi",
+  "SURV": "npc-topic-surv",
+  "MERC": "npc-topic-merc",
+  "POWE": "npc-topic-powe",
+  "SHOP": "npc-topic-shop",
+  "SPOI": "npc-topic-spoi",
+  "REGR": "npc-topic-regr",
+  "HUMB": "npc-topic-humb",
+  "HUMI": "npc-topic-humi",
+  "NOBL": "npc-topic-nobl",
+  "HAUN": "npc-topic-haun",
+  "HANG": "npc-topic-hang",
+  "BONE": "npc-topic-bone",
+  "CARE": "npc-topic-care",
+  "POOR": "npc-topic-poor",
+  "WEAP": "npc-topic-weap",
+  "MYST": "npc-topic-myst",
+  "THIS": "npc-topic-this",
+  "DIE ": "npc-topic-die",
+  "CONS": "npc-topic-cons",
+  "REDE": "npc-topic-rede",
+  "SKAR": "npc-topic-skar",
+  "FLOW": "npc-topic-flow",
+  "KIND": "npc-topic-kind",
+  "VIRT": "npc-topic-virt",
+  "ADVE": "npc-topic-adve",
+  "WRIT": "npc-topic-writ",
+  "SMOK": "npc-topic-smok",
+  "SUN ": "npc-topic-sun",
+  "MOON": "npc-topic-moon",
+  "PALM": "npc-topic-palm",
+  "FORT": "npc-topic-fort",
+  "INN ": "npc-topic-inn",
+  "HEAL": "npc-topic-heal",
+  "HONE": "npc-topic-hone",
+  "SAND": "npc-topic-sand",
+  "USE ": "npc-topic-use",
+  "FRIE": "npc-topic-frie",
+  "NIGE": "npc-topic-nige",
+  "CORR": "npc-topic-corr",
+  "ALCH": "npc-topic-alch",
+  "REAG": "npc-topic-reag",
+  "TROU": "npc-topic-trou",
+  "STAB": "npc-topic-stab",
+  "SMIT": "npc-topic-smit",
+  "KEEP": "npc-topic-keep",
+  "BRIT": "npc-topic-brit",
+  "EART": "npc-topic-eart",
+  "LUMB": "npc-topic-lumb",
+  "AXE ": "npc-topic-axe",
+  "ALE ": "npc-topic-ale",
+  "BREW": "npc-topic-brew",
+  "MAST": "npc-topic-mast",
+  "FAIT": "npc-topic-fait",
+  "RATI": "npc-topic-rati",
+  "LAND": "npc-topic-land",
+  "GARA": "npc-topic-gara",
+  "DURH": "npc-topic-durh",
+  "HAND": "npc-topic-hand",
+  "INFO": "npc-topic-info",
+  "BELL": "npc-topic-bell",
+  "SEAS": "npc-topic-seas",
+  "SENT": "npc-topic-sent",
+  "WHEE": "npc-topic-whee",
+  "TRAI": "npc-topic-trai",
+  "LORD": "npc-topic-lord",
+  "COUR": "npc-topic-cour",
+  "STOR": "npc-topic-stor",
+  "OM  ": "npc-topic-om",
+  "PHIL": "npc-topic-phil",
+  "NIGH": "npc-topic-nigh",
+  "MONE": "npc-topic-mone",
+  "JOUR": "npc-topic-jour",
+  "TEAC": "npc-topic-teac",
+  "PATH": "npc-topic-path",
+  "BELI": "npc-topic-beli",
+  "LEAD": "npc-topic-lead",
+  "HONO": "npc-topic-hono",
+  "FIEL": "npc-topic-fiel",
+  "WARL": "npc-topic-warl",
+  "REST": "npc-topic-rest",
+  "SKEL": "npc-topic-skel",
+  "STRO": "npc-topic-stro",
+  "NOTH": "npc-topic-noth",
+  "SEXT": "npc-topic-sext",
+  "DIGN": "npc-topic-dign",
+  "BULL": "npc-topic-bull",
+  "RUMO": "npc-topic-rumo",
+  "MAND": "npc-topic-mand",
+  "VESP": "npc-topic-vesp",
+  "TOUG": "npc-topic-toug",
+  "UG  ": "npc-topic-ug",
+  "FUNN": "npc-topic-funn",
+  "NATE": "npc-topic-nate",
+  "MAGE": "npc-topic-mage",
+  "CALU": "npc-topic-calu",
+  "BORR": "npc-topic-borr",
+  "HORS": "npc-topic-hors",
+  "SERF": "npc-topic-serf",
+  "WORK": "npc-topic-work",
+  "SHEP": "npc-topic-shep",
+  "GOLD": "npc-topic-gold",
+  "UNDE": "npc-topic-unde",
+  "HOME": "npc-topic-home",
+  "RANG": "npc-topic-rang",
+  "JONE": "npc-topic-jone",
+  "BABY": "npc-topic-baby",
+  "MISD": "npc-topic-misd",
+  "FELO": "npc-topic-felo",
+  "FABR": "npc-topic-fabr",
+  "BEH.": "npc-topic-beh-dot",
+  "BEH ": "npc-topic-beh",
+  "SINE": "npc-topic-sine",
+  "VILL": "npc-topic-vill",
+  "PEOP": "npc-topic-peop"
+}
+
+// Todo 48: per-slot topic gloss overrides ("MAP:n:topicN" -> npc-topic override id).
+export const GENERATED_TOPIC_GLOSS_OVERRIDES: Readonly<Record<string, string>> = {
+  "BRITAIN:14:topic1": "npc-topic-magi--britain-14",
+  "COVE:3:topic2": "npc-topic-gate--cove-3",
+  "COVE:7:topic2": "npc-topic-gate--cove-7",
+  "LCB:11:topic2": "npc-topic-coun--lcb-11",
+  "LCB:5:topic2": "npc-topic-thin--lcb-5",
+  "MAGINCIA:1:topic2": "npc-topic-spir--magincia-1",
+  "MAGINCIA:15:topic1": "npc-topic-magi--magincia-15",
+  "MINOC:15:topic2": "npc-topic-life--minoc-15",
+  "MINOC:6:topic1": "npc-topic-hear--minoc-6",
+  "MOONGLOW:13:topic2": "npc-topic-jest--moonglow-13",
+  "PAWS:13:topic1": "npc-topic-serv--paws-13",
+  "SERPENT:2:topic1": "npc-topic-ship--serpent-2",
+  "SKARA:10:topic2": "npc-topic-spir--skara-10",
+  "SKARA:5:topic1": "npc-topic-jour--skara-5",
+  "SKARA:6:topic2": "npc-topic-nobl--skara-6",
+  "YEW:1:topic2": "npc-topic-cour--yew-1",
+  "YEW:13:topic1": "npc-topic-coun--yew-13",
+  "YEW:8:topic2": "npc-topic-felo--yew-8"
 }
 
 export const GENERATED_I18N_META = "ultima-web/i18n-generated/v1" as const
