@@ -447,7 +447,7 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 - 다음 에이전트가 "다음 단계 진행"을 받으면 Todo 47(대화 패널 오른쪽 컬럼, 커서키 스크롤 차단)은 2026-10-04 완료. **Todo 48**(사용자 요청: 대화 키워드 칩)을 진행 중이고, 이어서 **Todo 49**(게임 화면 메시지 영역에 한국어 직접 표시: 입력 글자·커서·지우기 엔진 연결, 켜기/끄기 스위치 포함)를 하고, 이어서 **Todo 50**(Neo둥근모를 상태창·인트로·메뉴·패널 전체에 적용)을 한다. 그 밖에 남은 것은 **Todo 43**(개조 범위)이며 사용자 결정이 필요하다(`docs/plans/mod-scope-proposal.md`의 후보 6개와 질문 4개). 결정되면 선택한 항목을 새 Todo로 추가한다. 그 외 사용자 확인 항목: 한국어 입력 감각, 세이브 가져오기 파일 선택창, 엔딩 패널 표시 방식, Safari 실기.
 - **테스트 실행 규칙(사용자 지시 2026-10-03)**: 모든 테스트·게이트는 `model: haiku` 서브에이전트에게 시키고, 메인 모델은 exit code 보고만 읽고 `git status`/로그로 재확인한다. 단계 룰은 AGENTS.md "진행 → 저장 → 기록 → 확인".
 
-## 진행률 (2026-10-04 갱신 — **50/54 = 92.6%**, Stage 0·0b 완료, Stage 1+2 병렬 진행) ← 최신
+## 진행률 (2026-10-04 갱신 — **51/54 = 94.4%**, Stage 0·0b 완료, Stage 1·2 main 머지 완료) ← 최신
 
 > 세부 정의는 `docs/plans/2026-10-04-in-game-korean.md`가 원본이다. 본 Todo 항목 자체의 상세는 `.omo/plans/ultima-web.md` Todo 48~50.
 
@@ -459,13 +459,13 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 - 게이트 모두 exit 0.
 
 **진행 중**:
-- **Stage 1 (Todo 48) ✅ 완료** — `todo-48-talk-keywords` (`3e01277`, 23 files +5802/-11). 키워드 257개 한국어 뜻, `src/dialogue/talk-keywords.ts`, `#talk-keywords` UI, `tests/e2e/talk-keywords.spec.ts`. 통합 게이트 단독(포트 8765, e2e 63/63, 1.0h, REFUSED 0), 3브라우저 PASS, 회귀 15/15.
-- **Stage 2 (Todo 49 Phase A) ✅ 완료 (Phase B 남음)** — `todo-49a-message-area-engine` (`efe509d`, 17 files +1369/-5). `src/overlay/message-area-{layout,view}.ts`, `src/dialogue/control-formats.ts`, 5개 엔진 훅(`Module.u4Screen`), `vendor/source-manifest.json` 갱신.
-- **→ Stage 3 (Todo 49 Phase B: 셸 연결 + 게임 화면 덮개)**.
+- **Stage 1 (Todo 48) ✅ main merge** — wave9 통합 머지 후 main `52a4fa3`에 반영 + origin push 완료.
+- **Stage 2 (Todo 49 Phase A) ✅ main merge (Phase B 남음)** — wave9 통합 머지 후 main `52a4fa3`에 반영 + origin push 완료.
+- **→ Stage 3 사용자 결정 대기 (폰트 다운로드 + Step 8 변경)**.
 
 **순서**: Stage 3(Todo 49 Phase B: 셸 + 게임 화면 덮개, Stage 1·2 머지 후) → Stage 4(Todo 50: 고정폭 글꼴 Neo둥근모 전체 적용). Todo 43(개조 범위)은 사용자 결정 대기.
 
-**통합 게이트**: Stage 1·2 게이트는 단독 실행 완료(포트 8765, e2e 63/63, 1.0h, REFUSED 0). wave9 main 머지 후 다시 단독 실행. 진행률 변화: Stage 1·2 완료 시 52/54 → 53/54 (Stage 3) → 54/54 = 100% (Stage 4). Todo 43 결정되면 Todo로 추가.
+**통합 게이트**: Stage 1·2 게이트는 단독 실행 완료(포트 8765, e2e 63/63, 1.0h, REFUSED 0). wave9 main 머지 후 단독 실행 완료(port 8804, `# verify:integration 2026-10-04T17:58:20.717Z PASS`, e2e 63/63, REFUSED 0). 진행률 변화: Stage 1·2 완료 시 52/54 → 53/54 (Stage 3) → 54/54 = 100% (Stage 4). Todo 43 결정되면 Todo로 추가.
 
 ## 바로 다음 순서 (2026-10-02 갱신 — **37/37 = 100%**, main `b870b85`, F1~F4 승인 + Todo 29~33 편입 완료)
 

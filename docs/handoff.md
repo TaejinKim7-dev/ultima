@@ -2060,7 +2060,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
   - `npm run check:build-fresh`: 0
   - `npm run audit:dist --require-engine`: 0
   - `npm run verify:release-docs`: 0
-  - `npm run verify:integration`: `ORCHESTRATOR_RUNS_SOLO_AFTER_COMMIT`
+  - `npm run verify:integration`: 0 (단독 실행, port 8804 — `# verify:integration 2026-10-04T17:58:20.717Z PASS`, e2e 63/63, REFUSED 0)
   - `git diff --check`: 0
   - `npm ci`: `NOT_RUN_NO_DEPS_CHANGED` (의존 변경 0 — package.json/package-lock.json diff 없음)
-- **다음**: `git checkout main && git merge wave9-combined --ff-only && git push origin main`.
+- **완료**: `git checkout main && git merge wave9-combined --ff-only && git push origin main` — `ce8684e..52a4fa3 main -> main` (main `52a4fa3`).

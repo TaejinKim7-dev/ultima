@@ -132,6 +132,21 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integ
 - **Stage 1·2 커밋**:
   - `todo-48-talk-keywords` @ `3e01277` (23 files, +5802/-11)
   - `todo-49a-message-area-engine` @ `efe509d` (17 files, +1369/-5)
-- **통합 게이트 (wave9에서 단독 실행 예정, exit code는 orchestrator가 채움)**:
-  - 게이트 9종 (test:unit, verify:repo-sources, typecheck, build, check:build-fresh, audit:dist --require-engine, verify:release-docs, verify:integration, git diff --check): `TODO_EXIT_CODES`
+- **통합 게이트 (wave9에서 단독 실행, port 8804, exit code 채움)**:
+  - 게이트 9종 (test:unit, verify:repo-sources, typecheck, build, check:build-fresh, audit:dist --require-engine, verify:release-docs, verify:integration, git diff --check): **전부 exit 0** — test:unit 789/789 · verify:integration 단독 `# verify:integration 2026-10-04T17:58:20.717Z PASS`, e2e 63/63 + 12 non-e2e 단계 exit 0, REFUSED 0
 - **다음**: wave9 → main → push, Stage 3 착수.
+
+---
+
+## 2026-10-04 — wave9 Stage 1+2 main 머지·push 완료 (Todo 48 + Todo 49 Phase A)
+
+- **작업 위치**: root `/home/taejin/ultima`, main.
+- **작업**:
+  - wave9-combined @ `52a4fa3` (Stage 1+2 통합 머지) → main fast-forward + origin push
+  - `git push origin main`: `ce8684e..52a4fa3 main -> main`
+- **통합 게이트 (단독 실행, port 8804)**:
+  - `# verify:integration 2026-10-04T17:58:20.717Z PASS`
+  - 12 non-e2e 게이트 + e2e 63/63 모두 exit 0
+  - REFUSED 0건, e2e 시간 약 1h
+- **다음**: Stage 3 (Todo 49 Phase B) — 사용자 결정 대기 (폰트 다운로드 + Step 8 변경).
+- Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
