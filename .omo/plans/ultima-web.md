@@ -170,6 +170,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
 | 46 | 없음 | 44 | 전부 (2026-10-03 신규 — 세이브 가져오기 파일 선택창이 내보낸 `.dat`을 숨기는 문제) |
 | 47 | 없음 | 없음 | 전부 (2026-10-03 신규, 사용자 요청 — 한국어 대화 패널을 오른쪽 컬럼으로, 커서키 스크롤 차단) |
 | 48 | 47 | 없음 | 43 (2026-10-04 신규, 사용자 요청 — 대화 중 쓸 수 있는 키워드를 눌러서 쓰는 칩으로 표시) |
+| 49 | 48 | 없음 | 43 (2026-10-04 신규, 사용자 요청 — 게임 화면 메시지 영역에 한국어 직접 표시) |
 
 ## Todos
 > Implementation + Test = ONE todo. Never separate.
@@ -792,6 +793,32 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   - `npm run verify:integration` passes solo.
   QA scenarios: happy: `.omo/evidence/ultima-web/task-48/talk-keywords.png`; failure: clicking a chip while no native prompt is open shows the existing rejection message and sends no keystrokes, recorded in `.omo/evidence/ultima-web/task-48/no-prompt.log`.
   Commit: Y | feat(dialogue): show the usable talk keywords as clickable chips
+
+- [ ] 49. Show the Korean messages inside the game screen's message area (in-place overlay)
+  What to do / Must NOT do: user request 2026-10-04: the game screen's message area still shows English while the Korean text only appears in the right-hand panel. The user's original intent was in-game translation, with the game's font made smaller.
+  Rendering Hangul inside the engine is not viable. The message area is `TEXT_AREA` 16x12 cells of 8x8 px (`vendor/xu4/src/u4.h:62-65`, 128x96 px of the 320x200 raster). Hangul is unreadable at 8x8, and at 16x16 the area holds 8 characters x 6 lines.
+  Instead, cover that area with a high-resolution, opaque Korean DOM overlay, the same technique the intro and status overlays already use (Todos 26, 27). At the displayed 2.5-3x scale the area is about 330x250 CSS px, so a 13-14 px Korean font fits 20+ characters x 12+ lines.
+  (1) Add a new overlay role for rect {x:192, y:96, width:128, height:96} (verify against `TEXT_AREA_*`) in `src/overlay/overlay-layout.ts`. It is opaque-backed and always visible during play: never toggled per message, or the English underneath flashes.
+  (2) Feed it the same composed Korean lines as the dialogue panel (ui-message, talk, vendor channels), keeping its own line buffer with the newest line at the bottom and older lines scrolling off. Mirror pause/awaitKey and colours the way the panel does.
+  (3) Add web-only engine hooks, native byte-identical outside `__EMSCRIPTEN__`, with the `vendor/source-manifest.json` treeSha256 updated:
+    - the text-prompt input echo and cursor (`vendor/xu4/src/event.cpp` ReadStringController ~613-643 draws typed characters with `screenTextAt` and the cursor with `screenShowCursor`; neither reaches JS today, so typed letters and the blinking cursor would be hidden under the overlay);
+    - message-area clears (`screenEraseTextArea`, `vendor/xu4/src/screen.cpp:1716`), so the overlay never shows stale text.
+    The typed keyword must echo in the overlay.
+  (4) A visible toggle "게임 화면에 한국어 표시" (default on, remembered per viewer in localStorage with try/catch). Off restores today's behaviour.
+  (5) The right-hand panel stays as scrollback plus the Todo 48 keyword menu.
+  (6) Optional Korean pixel font, after a licence check. Start with the system Korean font.
+  Must NOT: put English source text into JS or evidence; hide the map, status, or other raster areas; add console output.
+  Parallelization: Wave 7 | Blocked by: 48 (shared `src/shell.ts`) | Blocks: none
+  References: `vendor/xu4/src/u4.h`; `vendor/xu4/src/screen.cpp` (`screenMessage`, `screenEraseTextArea`, `screenShowCursor`); `vendor/xu4/src/event.cpp` (ReadStringController); `src/overlay/overlay-layout.ts` (`OPAQUE_BACKING_ROLES`); `src/shell.ts`; `src/dialogue/message-tokens.ts`; `.omo/evidence/ultima-web/task-38/coverage-report.md` (lines with no translation path are hidden under the overlay).
+  Acceptance criteria:
+  - Unit tests RED first: overlay line buffer (scroll, pause, clear, colours), toggle persistence, rect maths.
+  - Real-engine e2e that captures several frames each while walking, talking (including typing a keyword), in combat and on a screen change. It asserts that the overlay box is opaque and non-empty in every frame during play, that the typed keyword and a caret are visible while a prompt is open, that the overlay clears when the engine clears, and that the toggle restores the English canvas.
+  - Passes in Chromium, Firefox and WebKit.
+  - A re-run coverage report attached.
+  - `verify:integration` passes solo.
+  - A person confirms the feel in a real browser.
+  QA scenarios: happy: `.omo/evidence/ultima-web/task-49/in-game-korean.png`; failure: with the toggle off, the English canvas text is visible again (`task-49/toggle-off.png`).
+  Commit: Y | feat(overlay): show Korean messages inside the game's message area
 
 ## Final verification wave
 > Runs in parallel after ALL todos. ALL must APPROVE. Surface results and wait for the user's explicit okay before declaring complete.
