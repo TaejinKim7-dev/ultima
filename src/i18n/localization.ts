@@ -31,6 +31,8 @@ import {
   GENERATED_STATUS_NAMES,
   GENERATED_STATUS_TEMPLATES,
   GENERATED_TALK_TEMPLATES,
+  GENERATED_TOPIC_GLOSSES,
+  GENERATED_TOPIC_GLOSS_OVERRIDES,
   GENERATED_UI_TEMPLATES,
   GENERATED_VENDOR_NAMES,
   GENERATED_VENDOR_TEMPLATES
@@ -266,6 +268,46 @@ export function allowsKoreanInField(field: LocalizedField | string): boolean {
 
 /** The generated alias pairs, re-exported so UI wiring reads the same IDs as the Todo 13 resolver. */
 export const GENERATED_ALIAS_ENTRIES = GENERATED_ALIASES
+
+/**
+ * Todo 48: one talkable NPC topic: the raw English matching keyword (with
+ * its trailing padding trimmed) and its Korean gloss. The keyword is what
+ * xu4's native prefix matcher compares (discourse_tlk.cpp ~482-496); the
+ * gloss is what the keyword menu and the Korean input alias resolution
+ * show/accept.
+ */
+export interface NpcTopic {
+  readonly keyword: string
+  readonly gloss: string
+}
+
+/**
+ * Todo 48: the two usable topic keywords of one NPC (`npcKey` is the
+ * `MAP:npcIndex` shape of a `@MAP:npcIndex:field` talk argument). Returns
+ * them in native matching order (topic1 then topic2). Deliberately drops:
+ *   - the unused-keyword marker "A   ";
+ *   - keywords whose raw form fails `^[A-Za-z0-9 ]+$` -- this removes
+ *     "BEH." (YEW:6), whose '.' cannot be typed into the native prompt;
+ *   - keywords with no ready gloss (a data gap would show a dead chip).
+ * The gloss comes from the per-slot override row when one exists, else the
+ * default `npc-topic-*` row.
+ */
+export function resolveNpcTopics(npcKey: string): NpcTopic[] {
+  const topics: NpcTopic[] = []
+  for (const field of ["topic1", "topic2"] as const) {
+    const entry = GENERATED_I18N_ENTRIES[`${npcKey}:${field}`]
+    const raw = entry?.translation
+    if (raw === undefined) continue
+    if (raw.trim() === "A") continue
+    if (!/^[A-Za-z0-9 ]+$/.test(raw)) continue
+    const overrideId = GENERATED_TOPIC_GLOSS_OVERRIDES[`${npcKey}:${field}`]
+    const glossId = overrideId ?? GENERATED_TOPIC_GLOSSES[raw]
+    const gloss = glossId === undefined ? "" : resolveDisplayText(glossId, "")
+    if (gloss === "") continue
+    topics.push({ keyword: raw.trim(), gloss })
+  }
+  return topics
+}
 
 /** Type guard keeping the generated table assignable to {@link LocalizationTable}. */
 export function generatedEntriesAreLocalizationTable(

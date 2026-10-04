@@ -26,16 +26,18 @@ import {
   type OverlayEntry,
   type OverlayRole
 } from "./overlay/overlay-layout.ts"
-import { buildAliasTable, resolveChoiceInput, resolveInput, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
+import { buildAliasTable, resolveChoiceInput, resolveInput, withTopicAliases, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
 import { createIntroViewReceiver, type IntroViewReceiver } from "./overlay/intro-view.ts"
 import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
 import { createFocusReturn } from "./i18n/focus-return.ts"
 import { shouldSuppressScrollKey } from "./input/scroll-keys.ts"
+import { createTalkKeywords, type TalkKeywords } from "./dialogue/talk-keywords.ts"
 import {
   hasTranslation,
   isCommandKeyId,
   resolveDisplayText,
   resolveNameArgumentId,
+  resolveNpcTopics,
   resolveTalkTemplateId,
   resolveUiTemplateId,
   resolveVendorNameId,
@@ -45,6 +47,7 @@ import { composeTalkInput, composeTalkLine, type TalkComposeDeps } from "./dialo
 import { createRecordingResolve, sharedCoverage, type CoverageMiss } from "./i18n/coverage.ts"
 import { createCenterHandler, createUiMessageHandler } from "./dialogue/ui-message-compose.ts"
 import { createVendorHandler } from "./dialogue/vendor-compose.ts"
+import { eraseTrailingText } from "./dialogue/message-tokens.ts"
 // Real Korean alias data (Todo 13), never original game data -- just this
 // project's own translation strings. Vite/TS both support importing JSON
 // modules directly; see tsconfig.json's `resolveJsonModule`.
@@ -153,6 +156,8 @@ export function createShell(doc: Document): UltimaBridgeApi {
   const saveImportInput = requireElement<HTMLInputElement>(doc, "#save-import")
   const saveStatus = requireElement<HTMLElement>(doc, "#save-status")
   const koreanKeywordInput = requireElement<HTMLInputElement>(doc, "#korean-keyword-input")
+  const talkKeywordsRegion = requireElement<HTMLElement>(doc, "#talk-keywords")
+  const talkKeywordGroups = requireElement<HTMLDivElement>(doc, "#talk-keyword-groups")
 
   // Todo 11: the dialogue panel's full render state. It persists across
   // `dispatch` calls (not reset per event) because native message output
@@ -601,6 +606,108 @@ export function createShell(doc: Document): UltimaBridgeApi {
   })
   koreanKeywordInput.addEventListener("input", () => textPromptGate.noteInput())
 
+  // Todo 48: the usable talk-keyword chips (see src/dialogue/talk-keywords.ts).
+  // The common-group labels come from the committed aliases.json (canonical
+  // keyword -> Korean alias), exactly the same data the resolver uses.
+  const aliasLabelByCanonical = new Map<string, string>()
+  for (const entry of Object.values((koreanAliasesSchema as { entries: Record<string, AliasSourceEntry> }).entries)) {
+    if (entry.alias.length > 0 && !aliasLabelByCanonical.has(entry.canonical)) {
+      aliasLabelByCanonical.set(entry.canonical, entry.alias)
+    }
+  }
+  let lastTalkKeywordsSignature = ""
+  const tk: TalkKeywords = createTalkKeywords({
+    npcTopics: resolveNpcTopics,
+    aliasFor: (canonical) => aliasLabelByCanonical.get(canonical),
+    setTimer: (fn, ms) => gameWindow.setTimeout(fn, ms),
+    clearTimer: (id) => gameWindow.clearTimeout(id as number),
+    onChange: renderTalkKeywords
+  })
+
+  // Renders tk.view() into #talk-keywords using createElement/textContent
+  // only (Todo 11 rule), skipping a re-render when nothing changed. The
+  // chips must never take focus, so a later Enter/arrow still reaches the
+  // game (mousedown preventDefault + tabindex=-1).
+  function renderTalkKeywords(): void {
+    const view = tk.view()
+    const signature = JSON.stringify(view)
+    if (signature === lastTalkKeywordsSignature) {
+      return
+    }
+    lastTalkKeywordsSignature = signature
+    talkKeywordsRegion.hidden = !view.active
+    if (!view.active) {
+      talkKeywordsRegion.removeAttribute("data-speaker")
+      talkKeywordsRegion.removeAttribute("data-npc")
+      talkKeywordGroups.replaceChildren()
+      return
+    }
+    talkKeywordsRegion.dataset["speaker"] = view.speaker ?? ""
+    if (view.npcKey !== null) {
+      talkKeywordsRegion.dataset["npc"] = view.npcKey
+    } else {
+      talkKeywordsRegion.removeAttribute("data-npc")
+    }
+    const fragment = doc.createDocumentFragment()
+    for (const group of view.groups) {
+      const section = doc.createElement("div")
+      section.className = "talk-keyword-group"
+      const title = doc.createElement("div")
+      title.className = "talk-keyword-group-title"
+      title.textContent = group.title
+      section.appendChild(title)
+      const chips = doc.createElement("div")
+      chips.className = "talk-keyword-chips"
+      for (const chip of group.chips) {
+        const button = doc.createElement("button")
+        button.type = "button"
+        button.tabIndex = -1
+        button.className = "talk-keyword-chip"
+        button.dataset["label"] = chip.label
+        button.dataset["keyword"] = chip.keyword
+        button.dataset["asked"] = String(chip.asked)
+        const label = doc.createElement("span")
+        label.className = "talk-keyword-label"
+        label.textContent = chip.label // textContent only -- never innerHTML for game text.
+        button.appendChild(label)
+        if (chip.secondary !== undefined) {
+          const secondary = doc.createElement("span")
+          secondary.className = "talk-keyword-secondary"
+          secondary.textContent = chip.secondary
+          button.appendChild(secondary)
+        }
+        chips.appendChild(button)
+      }
+      section.appendChild(chips)
+      fragment.appendChild(section)
+    }
+    talkKeywordGroups.replaceChildren(fragment)
+  }
+
+  // A chip click submits exactly like typing its label into the Korean
+  // input and pressing Enter: same text-prompt gate, same resolver, same
+  // rejection message when no native prompt is open. The click never takes
+  // focus (mousedown is prevented above), so a later Enter/arrow still goes
+  // to the game and never re-clicks a chip.
+  talkKeywordGroups.addEventListener("mousedown", (event: MouseEvent) => {
+    event.preventDefault()
+  })
+  talkKeywordGroups.addEventListener("click", (event: MouseEvent) => {
+    const target = event.target
+    const button =
+      target instanceof Element ? target.closest<HTMLButtonElement>("button.talk-keyword-chip") : null
+    if (button === null) {
+      return
+    }
+    const label = button.dataset["label"]
+    if (label === undefined) {
+      return
+    }
+    koreanKeywordInput.value = label
+    textPromptGate.noteInput()
+    submitKoreanKeyword()
+  })
+
   // The kind of the innermost open native prompt epoch. The top of the gate's
   // open-prompt stack is by construction the most recently opened one, so this
   // is the kind of `currentPromptId()` -- and it is only ever read after the
@@ -659,11 +766,17 @@ export function createShell(doc: Document): UltimaBridgeApi {
     // see src/i18n/korean-aliases.ts's resolveChoiceInput doc comment for why
     // the Korean word must become the canonical English key before it reaches
     // the single-byte native key path.
+    //
+    // Todo 48: while a TLK conversation is active, the current NPC's own
+    // topic glosses resolve before the global aliases (withTopicAliases).
+    // The Lord British / Hawkwind aliases are already global, so their
+    // topics need no overlay.
     const isChoiceEpoch = openPromptKind === U4_WEB_PROMPT_CHOICE
     const result = isChoiceEpoch
       ? resolveChoiceInput(raw, koreanAliasTable)
-      : resolveInput("text", raw, koreanAliasTable)
+      : resolveInput("text", raw, withTopicAliases(koreanAliasTable, tk.topicAliases()))
     if (result.ok) {
+      tk.submitted(result.text)
       synthesizeKeystrokes(result.text, !isChoiceEpoch)
       return
     }
@@ -764,7 +877,15 @@ export function createShell(doc: Document): UltimaBridgeApi {
   // A genuine failure (not a dropped, unmapped call): never rethrow into the wasm loop.
   const onUiMessageError = (error: unknown): void =>
     console.error("[ultima] screenMessage hook failed:", error instanceof Error ? error.message : "unknown")
-  const handleUiMessage = createUiMessageHandler(uiMessageDeps, emitMessage, onUiMessageError)
+  // Todo 48: gameGetDirection() erases its "Dir?" prompt with a control-only
+  // "\b\b\b\b" (never a panel line); the handler calls back with the Korean
+  // "방향?" it composed, and this removes it from the current panel line so
+  // the talk line reads "대화: <direction>" with no leftover "방향?".
+  const onUiMessageErase = (text: string): void => {
+    panelState = eraseTrailingText(panelState, text)
+    renderPanel()
+  }
+  const handleUiMessage = createUiMessageHandler(uiMessageDeps, emitMessage, onUiMessageError, onUiMessageErase)
   // Todo 40: screenMessageCenter()'s town / castle / dungeon name, same tables.
   const handleCenterMessage = createCenterHandler(uiMessageDeps, emitMessage, onUiMessageError)
 
@@ -792,25 +913,30 @@ export function createShell(doc: Document): UltimaBridgeApi {
     textPromptReceiver: {
       // Todo 30: the kind rides along with the open so a `readChoice()` epoch
       // can be answered with a single key; the gate itself is unchanged.
+      // Todo 48: the keyword menu follows the same open/close lifecycle.
       opened: (id, kind) => {
         openPromptKind = kind ?? U4_WEB_PROMPT_TEXT
         textPromptGate.opened(id)
         focusReturn.promptOpened()
+        tk.promptOpened(kind ?? U4_WEB_PROMPT_TEXT)
       },
       closed: (id) => {
         textPromptGate.closed(id)
         focusReturn.promptClosed()
+        tk.promptClosed()
       }
     },
     introViewReceiver: createIntroViewReceiver({ dispatch }),
     talkTextReceiver: {
       talk: (format, arg0, arg1) => {
+        tk.talkLine(resolveTalkTemplateId(format), [arg0, arg1])
         const text = composeTalkLine(format, [arg0, arg1], talkDeps)
         if (text !== "") {
           dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text })
         }
       },
       input: (text) => {
+        tk.inputEcho(text)
         dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text: composeTalkInput(text) })
       },
       message: handleUiMessage,

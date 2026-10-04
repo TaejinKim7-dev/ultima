@@ -1985,3 +1985,22 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
   - 레이아웃 스크린샷(로컬) `task-47/side-column-1280x720.png`을 직접 열어 오른쪽 컬럼 배치를 확인.
 - 막지 않은 키: Space(게임 명령이라 keydown 기본 동작을 막으면 keypress가 사라짐), PageUp/PageDown/Home/End. 이 키들은 여전히 페이지를 스크롤할 수 있다.
 - 남은 것: Todo 43(개조 범위, 사용자 결정). 사용자 확인: 배포본에서 오른쪽 컬럼 배치와 커서키 동작.
+
+---
+
+## 2026-10-04 — Stage 1 (Todo 48) 완료: 대화 키워드 칩 표시
+
+> append만 한다. 작업 위치: worktree `agent-todo-48`, 브랜치 `todo-48-talk-keywords`, main `88c142c` 기반.
+
+- **데이터**: `locales/ko/glossary.json` `npc-topic-*` 275행(257 base + 18 per-NPC overrides, `ABYS=심연`, `FELO=중죄인`).
+- **모듈/UI/엔진 연결/e2e 작업 완료**: `talk-keywords.ts`(순수 모듈 — NPC/Lord British/Hawkwind 화자 감지, 세션 수명주기, 대기 질문/선택, `view()` 칩, `topicAliases()`), `topic-glosses.mjs`, `i18n-generate.mjs`(GENERATED_TOPIC_GLOSSES + 네이티브 테이블 제외), `i18n-check.mjs`(topicGlossProblems), `localization.ts`(resolveNpcTopics), `korean-aliases.ts`(withTopicAliases), `ui-message-compose.ts`(PROMPT_ERASE_HASHES, erase 콜백), `message-tokens.ts`(eraseTrailingText), `shell.ts`(tk 렌더 + 칩 클릭 = 동일 submit + 방향 프롬프트 erase), `shell.css`+`index.html`(`#talk-keywords`, 대화 패널 아래, 와이드 50% 캡 + 스크롤). e2e `talk-keywords.spec.ts` Moonglow + Lord British 2케이스.
+- **게이트 (전부 exit 0)**:
+  - `test:unit` 59 files / **739 passed** · `i18n:check --strict` **4909 entries / 0 pending**
+  - `typecheck` · `build` · `check:build-fresh` · `audit:dist --require-engine` · `verify:release-docs`
+  - **`verify:integration`(완전 단독, 포트 8765)**: 13단계 전부 exit 0, e2e **63/63 (1.0h)**, `ERR_CONNECTION_REFUSED` 0건.
+  - e2e `talk-keywords` 2/2 · Regression 15/15(npc-alias, focus-return, castle-output, side-column, dialogue-panel, game-messages).
+  - **Firefox/WebKit PASS**.
+  - 로그(로컬, git 미포함): `.omo/evidence/ultima-web/task-48/`(unit-red, unit-green, verify-integration, 스크린샷).
+- **커밋**: `fc5f056` (head of `todo-48-talk-keywords`; 이 handoff 포함 단일 커밋).
+- **다음**: orchestrator가 Stage 1 merge → main → push(Stage 2와 wave8로 통합 머지 권장). Stage 2 동시 진행 중. Stage 3 착수 예정.
+- 절대 커밋 안 함(orchestrator) — 이 handoff append도 함께 커밋한다.

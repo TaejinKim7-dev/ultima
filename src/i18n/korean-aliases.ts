@@ -115,6 +115,37 @@ export function mergeAliasTables(base: AliasTable, overlay: AliasTable): AliasTa
   return { byNormalizedAlias: new Map([...base.byNormalizedAlias, ...overlay.byNormalizedAlias]) }
 }
 
+/**
+ * Todo 48: an NPC topic list entry as `withTopicAliases` consumes it
+ * (src/i18n/localization.ts's `NpcTopic`; declared here so this module
+ * stays free of any generated-table dependency).
+ */
+export interface TopicAliasEntry {
+  readonly keyword: string
+  readonly gloss: string
+}
+
+/**
+ * Todo 48: merges the current NPC's topic-gloss aliases over the global
+ * table, so typing a Korean topic gloss while talking to that NPC resolves
+ * to that NPC's own topic keyword (which wins over any global alias with
+ * the same text). The two topic rows of one NPC are guaranteed distinct,
+ * so per-NPC entries cannot collide with each other; a per-NPC entry with
+ * the same text as a global alias intentionally shadows it (the engine
+ * effect is identical when the alias's canonical starts with the keyword --
+ * enforced by `npm run i18n:check`).
+ */
+export function withTopicAliases(base: AliasTable, topics: readonly TopicAliasEntry[]): AliasTable {
+  const perNpc: Record<string, AliasSourceEntry> = {}
+  for (const topic of topics) {
+    if (topic.keyword.length === 0 || topic.gloss.length === 0) {
+      continue
+    }
+    perNpc[`npc-topic:${topic.keyword}`] = { alias: topic.gloss, canonical: topic.keyword }
+  }
+  return mergeAliasTables(base, buildAliasTable(perNpc))
+}
+
 /** Native `discourse_tlk.cpp`'s `gameGetInput(16)` -- the NPC "Your Interest:" prompt's max buffer size, in bytes. */
 export const NPC_INTEREST_MAX_BYTES = 16 as const
 

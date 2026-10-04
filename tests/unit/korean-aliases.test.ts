@@ -7,6 +7,7 @@ import {
   mergeAliasTables,
   resolveChoiceInput,
   resolveInput,
+  withTopicAliases,
   type AliasTable
 } from "../../src/i18n/korean-aliases.ts"
 import aliasesSchema from "../../locales/ko/aliases.json" with { type: "json" }
@@ -330,5 +331,42 @@ describe("korean-aliases: Todo 37 Lord British / Hawkwind topic keywords (real l
     expect(yesno.ok).toBe(false)
     const choice = resolveChoiceInput("정직", realTable)
     expect(choice.ok === false && choice.reason).toBe("not-a-choice-answer")
+  })
+})
+
+describe("korean-aliases: withTopicAliases (Todo 48 per-NPC topic glosses)", () => {
+  const realTable = buildAliasTable(REAL_ALIAS_ENTRIES)
+
+  it("resolves the current NPC's topic gloss to that NPC's own keyword", () => {
+    // "심연" is the global alias for abyss; at an NPC whose topic is ABYS it
+    // must resolve to the NPC's keyword instead.
+    const overlaid = withTopicAliases(realTable, [{ keyword: "ABYS", gloss: "심연" }])
+    expect(resolveInput("text", "심연", overlaid)).toEqual({ ok: true, text: "ABYS" })
+  })
+
+  it("lets a per-NPC entry win over a global alias with the same text", () => {
+    // "자비" is the global alias for compassion; at an NPC whose topic is
+    // COMP it resolves to COMP.
+    const overlaid = withTopicAliases(realTable, [{ keyword: "COMP", gloss: "자비" }])
+    expect(resolveInput("text", "자비", overlaid)).toEqual({ ok: true, text: "COMP" })
+  })
+
+  it("keeps the global aliases working for words that are not this NPC's topics", () => {
+    const overlaid = withTopicAliases(realTable, [{ keyword: "ABYS", gloss: "심연" }])
+    expect(resolveInput("text", "직업", overlaid)).toEqual({ ok: true, text: "job" })
+    expect(resolveInput("text", "진실", overlaid)).toEqual({ ok: true, text: "truth" })
+  })
+
+  it("still rejects a different NPC's topic gloss (not in the overlay)", () => {
+    const overlaid = withTopicAliases(realTable, [{ keyword: "ABYS", gloss: "심연" }])
+    const other = resolveInput("text", "모험", overlaid) // ADVE's gloss belongs to another NPC
+    expect(other.ok).toBe(false)
+  })
+
+  it("adds nothing for an empty topic list (the overlay is the global table unchanged)", () => {
+    const overlaid = withTopicAliases(realTable, [])
+    expect(resolveInput("text", "직업", overlaid)).toEqual({ ok: true, text: "job" })
+    const unknown = resolveInput("text", "모험", overlaid)
+    expect(unknown.ok).toBe(false)
   })
 })

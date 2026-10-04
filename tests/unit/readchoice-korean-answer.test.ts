@@ -256,8 +256,9 @@ describe("resolveChoiceInput: Korean answers for the progression-critical choice
 describe("readChoice wiring: the shell reaches the choice handler with a real keystroke (src/shell.ts)", () => {
   it("resolves the submission against the kind of prompt epoch the engine reports", () => {
     expect(shellTs).toMatch(/resolveChoiceInput\(/)
-    // The TLK/NPC path must still be the "text" kind, chosen explicitly.
-    expect(shellTs).toMatch(/resolveInput\("text", raw, koreanAliasTable\)/)
+    // The TLK/NPC path must still be the "text" kind, chosen explicitly, and
+    // (Todo 48) must resolve through the per-NPC topic-gloss overlay.
+    expect(shellTs).toMatch(/resolveInput\("text", raw, withTopicAliases\(koreanAliasTable, tk\.topicAliases\(\)\)\)/)
   })
 
   it("forwards the epoch kind from the engine hook into the receiver", () => {

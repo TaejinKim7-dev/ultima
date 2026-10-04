@@ -55,6 +55,1931 @@
       "translation": "경험",
       "status": "ready"
     },
+    "npc-topic-abbe": {
+      "sourceHash": "sha256:72db6f588743f15b72609c2944640a195e6058d313c2e7f76287357365a08e24",
+      "placeholders": [],
+      "translation": "수도원",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-abys": {
+      "sourceHash": "sha256:1dd8a33c917d1e27436508ba1893c4af066da633c98555c5cc946d5e5270555f",
+      "placeholders": [],
+      "translation": "심연",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-adve": {
+      "sourceHash": "sha256:8195a2950156bb74f9aad3031c9a3e9cc5e358435c296403ee5aa2c77a01ea2c",
+      "placeholders": [],
+      "translation": "모험",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-advi": {
+      "sourceHash": "sha256:8423f854ef1fc1b026cd209b411e8212355755ca80146cc2eebc7bb7c68a9b10",
+      "placeholders": [],
+      "translation": "조언",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-alch": {
+      "sourceHash": "sha256:04a416747a9a055d1ecef5bfa48543474c208dfe3385974fb5c03add76669b3b",
+      "placeholders": [],
+      "translation": "연금술사",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-ale": {
+      "sourceHash": "sha256:58fdd6ad84f87605115a3339f3a9d075ca0fbd92fbf872197163f1187b0936ed",
+      "placeholders": [],
+      "translation": "에일",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-alta": {
+      "sourceHash": "sha256:4bfe72d56f5d38ccb23abbb24fb61357f0940e134cf5946a8c0aea23e412e6d5",
+      "placeholders": [],
+      "translation": "제단",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-armo": {
+      "sourceHash": "sha256:3bbdaa475d160e496e891e69eba5e8afcefbd827facfcee38772e4600e91a7a7",
+      "placeholders": [],
+      "translation": "갑옷",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-arts": {
+      "sourceHash": "sha256:c961b0e0b6d160d011d64624e1ab183715686fd2b4b2a6d3e0d6084ad4124254",
+      "placeholders": [],
+      "translation": "마법술",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-axe": {
+      "sourceHash": "sha256:9c7cd93c45558990e43023ffbe0b800dd1027e809eaf617958d1775c3ae641ff",
+      "placeholders": [],
+      "translation": "도끼",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-axio": {
+      "sourceHash": "sha256:33dd96fae138d635aafb3d86f11a109f7b03cfa3fa1bd0056ed2fd1e12d38bbd",
+      "placeholders": [],
+      "translation": "공리",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-baby": {
+      "sourceHash": "sha256:2f22e15622cd32d7154e0441e0c9dcbf4489aa4e7ba200bbe5e6272e19be0f1e",
+      "placeholders": [],
+      "translation": "아기",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-bard": {
+      "sourceHash": "sha256:a99e817c5479ab3a3d7d3e5444bfcbd410347a437fff40b347dd846c1383dab5",
+      "placeholders": [],
+      "translation": "음유시인",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-batt": {
+      "sourceHash": "sha256:4b79ec2b00f6f06b88d21f08653670e0139ba0da615b03f383c1a55582a1d18a",
+      "placeholders": [],
+      "translation": "전투",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-beg": {
+      "sourceHash": "sha256:dc2b628bfb4b9d9e8cbec2c12df6b32df5cce05a6cf430569b9f93c9ec4ed8d4",
+      "placeholders": [],
+      "translation": "구걸",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-begg": {
+      "sourceHash": "sha256:401cff5f3dc091b6f3d4cb362e75fd95882b22d5ae32e4d2ba3029e9f27adae7",
+      "placeholders": [],
+      "translation": "거지",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-beh": {
+      "sourceHash": "sha256:fab63f1b3e906ec62f238fafd121246c05ee0b588daa11bc09ea952fbdd523d5",
+      "placeholders": [],
+      "translation": "베",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-beh-dot": {
+      "sourceHash": "sha256:869e20b1c57a95ec32d3e1320f7d9793f7a44c4e1f4bc90819bc08d293881591",
+      "placeholders": [],
+      "translation": "베.",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-bein": {
+      "sourceHash": "sha256:1899b8ff0250deff232fb3678d398173415614afa28a2900dd85a949e1069d2f",
+      "placeholders": [],
+      "translation": "존재",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-beli": {
+      "sourceHash": "sha256:e2a8a09e14aee97daeab724d54dc88c35337703dcee89b2fbdd13b9369d1fa7b",
+      "placeholders": [],
+      "translation": "믿음",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-bell": {
+      "sourceHash": "sha256:90c80fb505156cc4670475c6859333700983a009140f337d6a7dab7bac832001",
+      "placeholders": [],
+      "translation": "종",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-bone": {
+      "sourceHash": "sha256:68161bb0cf0e08c3dc9012577b1fe10b11124873d7a674b88df5314742bc73d3",
+      "placeholders": [],
+      "translation": "뼈",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-book": {
+      "sourceHash": "sha256:acf179bbd4f8c0becab1c5e0767f22b87d3fb91be4ce02803b5eb5bae2a82aff",
+      "placeholders": [],
+      "translation": "책",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-borr": {
+      "sourceHash": "sha256:228351f9650ac377f85a62cbe8663906bebdb0e06ca9c3ae09afb0033251e0e4",
+      "placeholders": [],
+      "translation": "빌리기",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-brav": {
+      "sourceHash": "sha256:0cd99017a680f51ee22b3000f9010f93da4c3930eb5da57c0c4274d41a5de443",
+      "placeholders": [],
+      "translation": "용감함",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-brew": {
+      "sourceHash": "sha256:e72ba8dd24e3758ed488d837d9ab91102bf20bcd9bd91eb74da9643656a2ef46",
+      "placeholders": [],
+      "translation": "맥주",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-brid": {
+      "sourceHash": "sha256:20e3c680e9251987fc0ea4304437b3ed1e110b4704faf4bb8d6f281459502f4b",
+      "placeholders": [],
+      "translation": "다리",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-brit": {
+      "sourceHash": "sha256:5b0a6467cb7f0e36882c49059aba07ddc8bd653b59def7594f2d05af97cad341",
+      "placeholders": [],
+      "translation": "브리타니아",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-bull": {
+      "sourceHash": "sha256:799fb4343489825aa45e50c8b9c1760e2ecac67c0942cfe3626736d2a4d64e62",
+      "placeholders": [],
+      "translation": "황소",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-calu": {
+      "sourceHash": "sha256:83f1da8f59a295413e97baa55e21f6c20c03b1131585a41c1a0565f3d4effff9",
+      "placeholders": [],
+      "translation": "칼럼니",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-cand": {
+      "sourceHash": "sha256:93a7b1fdeb46ee231ff3759c513fff893dc5aba4f2ca6a57de7c0d64654dc4be",
+      "placeholders": [],
+      "translation": "초",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-care": {
+      "sourceHash": "sha256:802dd397fc861f077255373747169b759f9d714d2ef5535a8dbe22df5760cb80",
+      "placeholders": [],
+      "translation": "보살핌",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-cast": {
+      "sourceHash": "sha256:a27c22d415c22457f26798f87c72ea86380b3a8206a9f9874b1ca15f673c57b3",
+      "placeholders": [],
+      "translation": "성",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-cham": {
+      "sourceHash": "sha256:4a0f0b2706b272f32878e189e3cec2629f7a817344002a2f97c30011e2b66cea",
+      "placeholders": [],
+      "translation": "방",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-chil": {
+      "sourceHash": "sha256:fe3caf1eabfd842adbd62bbe2d37e1585039acc72ff0f9049ca64930df456ef6",
+      "placeholders": [],
+      "translation": "아이들",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-clev": {
+      "sourceHash": "sha256:a4292b7c40810712ef0ffb7d9cc1a2a2ea6ee6c8351c37949398e452de3c6bf5",
+      "placeholders": [],
+      "translation": "영리함",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-clue": {
+      "sourceHash": "sha256:ccdaeee41b3ee9ccf893828125848952f50b50264af7c75d809b30b929f85e90",
+      "placeholders": [],
+      "translation": "단서",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-code": {
+      "sourceHash": "sha256:07a9d7b4a9a23915a61bc89bb0357bf47b348cf4174eb965bb1df8fbfa18b0b5",
+      "placeholders": [],
+      "translation": "코덱스",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-comb": {
+      "sourceHash": "sha256:63cd922cfacd65d4ee4506997ea700d407762ea0c9f6211b304ee5c672e9f361",
+      "placeholders": [],
+      "translation": "조합",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-comp": {
+      "sourceHash": "sha256:c1cf93fb1a4683edaa42b12ddabb5459945ad1971730fabb9db9e7978c19ec6c",
+      "placeholders": [],
+      "translation": "자비",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-cons": {
+      "sourceHash": "sha256:1f1be85e3a3c39ef91aa444de0f7d91a5d202fd30a22b564674ed2a02b070270",
+      "placeholders": [],
+      "translation": "의식",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-cook": {
+      "sourceHash": "sha256:0ba34cc38ed89e228fcaad11e54d9ade0799bd893b994b36e041e2ac17cc7f6e",
+      "placeholders": [],
+      "translation": "요리",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-corr": {
+      "sourceHash": "sha256:26fc0b6e8217b655b0b15423fc9a84957905800daa1f0383b9ed563d18b37211",
+      "placeholders": [],
+      "translation": "부패",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-coun": {
+      "sourceHash": "sha256:f4573f4833e6746e927626048d52240c96032a20ec2aceb99f6998b6a4dee555",
+      "placeholders": [],
+      "translation": "조언",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-coun--lcb-11": {
+      "sourceHash": "sha256:f4573f4833e6746e927626048d52240c96032a20ec2aceb99f6998b6a4dee555",
+      "placeholders": [],
+      "translation": "나라",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-coun--yew-13": {
+      "sourceHash": "sha256:f4573f4833e6746e927626048d52240c96032a20ec2aceb99f6998b6a4dee555",
+      "placeholders": [],
+      "translation": "의회",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-cour": {
+      "sourceHash": "sha256:8af3ee6a1927cd34f434623462c758299bbc5ba277ef656e473409fcbcefc623",
+      "placeholders": [],
+      "translation": "용기",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-cour--yew-1": {
+      "sourceHash": "sha256:8af3ee6a1927cd34f434623462c758299bbc5ba277ef656e473409fcbcefc623",
+      "placeholders": [],
+      "translation": "법정",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-crim": {
+      "sourceHash": "sha256:f3e7a878f5367aff3342b490702903ff231b5693e757c258db9fc1917c8474c0",
+      "placeholders": [],
+      "translation": "범죄",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-danc": {
+      "sourceHash": "sha256:dbb882154f408af7e3fe2467765ae7dce18ee3ae6ab137d1f03ae4baf4a1c54f",
+      "placeholders": [],
+      "translation": "춤",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-dang": {
+      "sourceHash": "sha256:3c83e16d04a45dc96728ae917c379eac31c8c167c110dde484357dd8e1141188",
+      "placeholders": [],
+      "translation": "위험",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-die": {
+      "sourceHash": "sha256:43fbe5bed636024f27cf95dd141ad837a356dc88cfbe43439dab39772f4c5b0d",
+      "placeholders": [],
+      "translation": "죽음",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-dign": {
+      "sourceHash": "sha256:fc9e2d8715a3a3652dc9b18d344bf37a72aeb77a8da7a2e4536fefe802b16bb8",
+      "placeholders": [],
+      "translation": "존엄",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-doom": {
+      "sourceHash": "sha256:a0eb3ddfa5807780a562b9c313b2537f1e8dc621e9a524f8c1ffcf07a79e35c7",
+      "placeholders": [],
+      "translation": "파멸",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-dung": {
+      "sourceHash": "sha256:684fc07dbf5e31802e239f43f4c04e2ecb644c96d4adef3397d67db51cde7dce",
+      "placeholders": [],
+      "translation": "던전",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-durh": {
+      "sourceHash": "sha256:892d6be64890351d30079e64a6254c0d48bd5af445a0fe47aa6044db55b76e02",
+      "placeholders": [],
+      "translation": "더럼",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-eart": {
+      "sourceHash": "sha256:aa4264f669a89d8bafc860eda1b6df54a6ab44f3c0ac2d4b4893d9d5339cecd3",
+      "placeholders": [],
+      "translation": "지구",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-ente": {
+      "sourceHash": "sha256:9bf937890ae5b51f18f58359c468e6d6df203a6cba28115d1a3f7f90a553e2d9",
+      "placeholders": [],
+      "translation": "여흥",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-evil": {
+      "sourceHash": "sha256:a4cae81b6d0480d3ab6b52a6dfb5eae63346252bd00c4df5e27fcf96851bb84e",
+      "placeholders": [],
+      "translation": "악",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-fabr": {
+      "sourceHash": "sha256:3d21641fa68e6cf6f510c76841038b003146e838d0d0e7df9218a154efcea51c",
+      "placeholders": [],
+      "translation": "직물",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-fait": {
+      "sourceHash": "sha256:065710a1d05bb6cdbcdd4f2298fc750c07b61ec17489ff80d8e7837cc7f3780f",
+      "placeholders": [],
+      "translation": "충직",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-felo": {
+      "sourceHash": "sha256:428ad015e0c9c03b33ba02aaff703d900152bd176d9d326651c5d9ead1017a8a",
+      "placeholders": [],
+      "translation": "중범죄",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-felo--yew-8": {
+      "sourceHash": "sha256:428ad015e0c9c03b33ba02aaff703d900152bd176d9d326651c5d9ead1017a8a",
+      "placeholders": [],
+      "translation": "중죄인",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-fiel": {
+      "sourceHash": "sha256:f485c139fbe4b8be54ae52752496f6cee633a802566572f61c85d989b7b8cbe7",
+      "placeholders": [],
+      "translation": "들판",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-flow": {
+      "sourceHash": "sha256:59c05f1edb2ba5bb9cb44be3ccd0d081c228bf44480c39ee77c474df7c188e00",
+      "placeholders": [],
+      "translation": "꽃",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-food": {
+      "sourceHash": "sha256:c296849c776bc901618fbd756103890ec4a8dd1529bb2bcdeba968ce9b7b93fc",
+      "placeholders": [],
+      "translation": "음식",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-fort": {
+      "sourceHash": "sha256:b2fb517ecd3df3a1adccdd04e3b1ece6a2ee2e642f47ec6c82c3159e6ed742fc",
+      "placeholders": [],
+      "translation": "운세",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-four": {
+      "sourceHash": "sha256:edf9e3630fb7305a562d35bf4cb20afb879c8d4dcf16e2c21fa05107999c7f6c",
+      "placeholders": [],
+      "translation": "넷",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-frie": {
+      "sourceHash": "sha256:8fa1335f9f09c05fb699adbef65ae67d09351f12e9509d6cf7f3efa1744a5a74",
+      "placeholders": [],
+      "translation": "친구",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-funn": {
+      "sourceHash": "sha256:ed54ea485cbff06d16d3f16e7f80f103a8941b9402e3eb341f4468dcb00e7cd2",
+      "placeholders": [],
+      "translation": "재미",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-gara": {
+      "sourceHash": "sha256:57cb69e9b36aa7d9bf8bde2c2da57b854e05e96d4e9d2783311cec3a314d84b0",
+      "placeholders": [],
+      "translation": "개럼",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-gate": {
+      "sourceHash": "sha256:dd3bfe5f7da1dd252da75ad13a4ec8c5ff78a68aa1677a1adae1e934f1a76057",
+      "placeholders": [],
+      "translation": "문",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-gate--cove-3": {
+      "sourceHash": "sha256:dd3bfe5f7da1dd252da75ad13a4ec8c5ff78a68aa1677a1adae1e934f1a76057",
+      "placeholders": [],
+      "translation": "게이트",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-gate--cove-7": {
+      "sourceHash": "sha256:dd3bfe5f7da1dd252da75ad13a4ec8c5ff78a68aa1677a1adae1e934f1a76057",
+      "placeholders": [],
+      "translation": "게이트",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-gold": {
+      "sourceHash": "sha256:fb5b8ae0fd37258b8ce25ead2fa261f362b00d861735431a12209aa6d5095cae",
+      "placeholders": [],
+      "translation": "금",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-grov": {
+      "sourceHash": "sha256:1b320275a98faf55f6bb99ce53633f6daad35cf176aa6ed72876c510a59c1d81",
+      "placeholders": [],
+      "translation": "숲",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-guar": {
+      "sourceHash": "sha256:754c4fe7457bb465c18380ede2c92098b8f9b59ded21f4fdc90a19b8847a3d02",
+      "placeholders": [],
+      "translation": "경비병",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-hand": {
+      "sourceHash": "sha256:53c7e3bfe50d2301d0d400141dd17038abff8ab923756afbe2da910c3662f210",
+      "placeholders": [],
+      "translation": "손",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-hang": {
+      "sourceHash": "sha256:b1432642907bf9ece49a1ea6cb8c54bebd9f1e5ca2df66bfd995cf6a7a6f73c9",
+      "placeholders": [],
+      "translation": "교수형",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-haun": {
+      "sourceHash": "sha256:0c2ecf3fa9d8ad94989f5eb3e371786cf6f529ab539ffaeb348d9b5107d6196e",
+      "placeholders": [],
+      "translation": "출몰",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-heal": {
+      "sourceHash": "sha256:065bfee3ef924d28c3bb3dee839cc631f2f2546056af141d06a0e90b4fd9f99a",
+      "placeholders": [],
+      "translation": "치유사",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-hear": {
+      "sourceHash": "sha256:1f0f6c30d28d4444fbadf37f875a3d690b3b4b8fe1291eb7ba311a98fc05bf83",
+      "placeholders": [],
+      "translation": "마음",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-hear--minoc-6": {
+      "sourceHash": "sha256:1f0f6c30d28d4444fbadf37f875a3d690b3b4b8fe1291eb7ba311a98fc05bf83",
+      "placeholders": [],
+      "translation": "들은 것",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-help": {
+      "sourceHash": "sha256:37a6760fa43caf5b1ea02f22251b1456c39e060a4918ba3e963dbde336f16148",
+      "placeholders": [],
+      "translation": "도움",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-hide": {
+      "sourceHash": "sha256:0c944fca9b62a9a163cf17603a8c44c3b7dcd2dd8186fd09e3ba007bb02bba18",
+      "placeholders": [],
+      "translation": "숨기",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-ho-e": {
+      "sourceHash": "sha256:a4443d9a3ae48e477f098d6bdb7d7e0b9b42a7f6ddd459ca1c43bf0f11a7e0ce",
+      "placeholders": [],
+      "translation": "호 에요",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-home": {
+      "sourceHash": "sha256:36e65c39f83b8df92770b95b8cdad4947ebd58cc410ac6e8bbac7a21e8ce941c",
+      "placeholders": [],
+      "translation": "집",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-hone": {
+      "sourceHash": "sha256:3d7ec727a64f9105ec55e61366df78e82763d86cba08cf0b52bdff2117d78c9b",
+      "placeholders": [],
+      "translation": "정직",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-hono": {
+      "sourceHash": "sha256:1bcf8d34f8887d68ebfd4f5987a77f0e4ca6a785315caa495982a4ee605ef82e",
+      "placeholders": [],
+      "translation": "명예",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-horn": {
+      "sourceHash": "sha256:24f5cf515f93bccc65ac8728c8caa2755f97b0ae426e68aba142ac12a139ceec",
+      "placeholders": [],
+      "translation": "나팔",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-hors": {
+      "sourceHash": "sha256:1af0cd5e42b48047a556ddbc5498e6b46d68bb7dc3dee358efa8b16b4a9c7ee6",
+      "placeholders": [],
+      "translation": "말",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-hour": {
+      "sourceHash": "sha256:faa9decb5dce3d4283a997013e6815abdc80811e9acd23631d126db027653f7e",
+      "placeholders": [],
+      "translation": "시간",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-hous": {
+      "sourceHash": "sha256:282ca94ba9c6f598a7c54d7524283aa62a0ca36e78211a25a50ee2173cca57bc",
+      "placeholders": [],
+      "translation": "가정부",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-humb": {
+      "sourceHash": "sha256:ab11b05317f3e77956e6901b4fe3a4b78291fa5391fa5129c46b7e7fd5476983",
+      "placeholders": [],
+      "translation": "겸손함",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-humi": {
+      "sourceHash": "sha256:24f6aeb78d36b2714d40ccc433956028a025616ac02ae907b1faddf60c3656b3",
+      "placeholders": [],
+      "translation": "겸손",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-hung": {
+      "sourceHash": "sha256:0b5388034693d5f18d5c91fcc45f4e386043655ac129027aa39204bd3920724f",
+      "placeholders": [],
+      "translation": "배고픔",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-hyth": {
+      "sourceHash": "sha256:934aa7ad0f95f7604be9d6753d13f98f3068eef574e569b6d74a0f04e708980c",
+      "placeholders": [],
+      "translation": "히스로스",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-info": {
+      "sourceHash": "sha256:cda14d0b2d954643c80cf0a1ee7ea1896bbe27cffc52c0c554eadc5432984d8b",
+      "placeholders": [],
+      "translation": "정보",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-inn": {
+      "sourceHash": "sha256:05ee2a21ed6bc4b8d008a81d0de6903f1b539f162c74e778745e688c9c8ed9c3",
+      "placeholders": [],
+      "translation": "여관",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-it": {
+      "sourceHash": "sha256:1dcb86de4e525b320688b4084d369aa7369e30a972afa8f3696134691916ca62",
+      "placeholders": [],
+      "translation": "그것",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-item": {
+      "sourceHash": "sha256:8550f340539484c0a7d9425bd20e5bfe51e0c49b123d04ca527614b250880953",
+      "placeholders": [],
+      "translation": "물품",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-jest": {
+      "sourceHash": "sha256:1b5cda4b987daf45875fa9fd9fa4c95022ec5713cfcb527394a0e4cb82a6089c",
+      "placeholders": [],
+      "translation": "광대",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-jest--moonglow-13": {
+      "sourceHash": "sha256:1b5cda4b987daf45875fa9fd9fa4c95022ec5713cfcb527394a0e4cb82a6089c",
+      "placeholders": [],
+      "translation": "농담",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-jone": {
+      "sourceHash": "sha256:d3de7321d7c21ab71d9fc1a5ad62c2cba04c897c4c5fafcd47e4648f2f74c524",
+      "placeholders": [],
+      "translation": "존스",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-jour": {
+      "sourceHash": "sha256:8bc390e57f6d074b003945ad085affd0063cce1fe79154d66d21f704d4201a93",
+      "placeholders": [],
+      "translation": "여정",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-jour--skara-5": {
+      "sourceHash": "sha256:8bc390e57f6d074b003945ad085affd0063cce1fe79154d66d21f704d4201a93",
+      "placeholders": [],
+      "translation": "일지",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-juli": {
+      "sourceHash": "sha256:bcb73c5dadb1090654f2763a784cf25c3d51806763f4a7af1246df46fd911c23",
+      "placeholders": [],
+      "translation": "줄리오",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-just": {
+      "sourceHash": "sha256:9c80e3e4f07b52561aecc2cf4adeca0303b88103eab354a2a76dcda01183be23",
+      "placeholders": [],
+      "translation": "정의",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-keep": {
+      "sourceHash": "sha256:1dd17190a2f261044d8e04d099db4ebe2754ff402e5c2b8b759498176ddd343a",
+      "placeholders": [],
+      "translation": "관리자",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-key": {
+      "sourceHash": "sha256:dd8c19420802444be8fecc95e56ea83bc8465f7a468f47c0c7b6003047d99e92",
+      "placeholders": [],
+      "translation": "열쇠",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-kill": {
+      "sourceHash": "sha256:448dd87e377473d5decb412ee66a1bfb6cb5a07051d1978638aafee79af838e0",
+      "placeholders": [],
+      "translation": "살생",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-kind": {
+      "sourceHash": "sha256:ae97bccd529278e7c12624025e56b3034e5afca568f579f6ef5e04f900fef2bb",
+      "placeholders": [],
+      "translation": "친절",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-know": {
+      "sourceHash": "sha256:9c97a48a4bc18e156ab42229dac74bfa7bf14f221478db0c5486efaa42dceed9",
+      "placeholders": [],
+      "translation": "지식",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-lady": {
+      "sourceHash": "sha256:334b1555cc81bd28a063197821ec7f755b25f6a0f2ca395473cac4e5a279a9a7",
+      "placeholders": [],
+      "translation": "마님",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-land": {
+      "sourceHash": "sha256:10d4ae679adf6e1f1835d40be65068ae4c1c0b5bef99522abd8884affcb2a095",
+      "placeholders": [],
+      "translation": "땅",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-lead": {
+      "sourceHash": "sha256:76db2a917414f2dba5926fcb8d2559bc22b522a03ff3ea2f26cc964b30034e99",
+      "placeholders": [],
+      "translation": "지도자",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-lear": {
+      "sourceHash": "sha256:453a5802a6976122812ca8f988ce58fe808cf27cbdc323c725ea1ab18bf228f9",
+      "placeholders": [],
+      "translation": "배움",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-libr": {
+      "sourceHash": "sha256:cf20a86fcb91e67ac73a12c6f4df6f5cdbeb43c68e8bab4c4554af2dc0937a51",
+      "placeholders": [],
+      "translation": "사서",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-lieg": {
+      "sourceHash": "sha256:97252b6cb20ff5d5520705ebddf04aa16af13f8a34ee1690c6b67a7cfc0686ee",
+      "placeholders": [],
+      "translation": "주군",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-life": {
+      "sourceHash": "sha256:0c23e3138346c4611f1b981f2aeaf658b6130461a53d13dd9a005a88578e7310",
+      "placeholders": [],
+      "translation": "삶",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-life--minoc-15": {
+      "sourceHash": "sha256:0c23e3138346c4611f1b981f2aeaf658b6130461a53d13dd9a005a88578e7310",
+      "placeholders": [],
+      "translation": "목숨",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-ligh": {
+      "sourceHash": "sha256:72cd4902f6338cba2173834f079837149d698df03ebf20852dd8e8dbd94fe308",
+      "placeholders": [],
+      "translation": "빛",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-lord": {
+      "sourceHash": "sha256:ef10a4b296ed8574cc0476d4c93d5727f6a1773bb2b409c3607553c80f4f4931",
+      "placeholders": [],
+      "translation": "영주",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-love": {
+      "sourceHash": "sha256:86c019bd75e878270f75b8af41523e1ee789128aa9b188e3f819b3a4ad5011e5",
+      "placeholders": [],
+      "translation": "사랑",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-lumb": {
+      "sourceHash": "sha256:fddbbb1f016789d9c08894058dee4befdc70e54e957f30bc76fa969fe2e32aae",
+      "placeholders": [],
+      "translation": "나무꾼",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-mach": {
+      "sourceHash": "sha256:b7eb3d28ff8fa196ac1907ed7f062fdc89e17c272160cf38170f8eb9d2537817",
+      "placeholders": [],
+      "translation": "기계",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-mage": {
+      "sourceHash": "sha256:ce61ead3f70a7d9091ed75d2fc7c22fbc7b2cc427f2a2fc4fdcc853eabc720ce",
+      "placeholders": [],
+      "translation": "마법사",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-magi": {
+      "sourceHash": "sha256:717df8504486485ff295eeb50734767b0c0cc1b98a7d3ab8d9f669fc84291c25",
+      "placeholders": [],
+      "translation": "마법",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-magi--britain-14": {
+      "sourceHash": "sha256:717df8504486485ff295eeb50734767b0c0cc1b98a7d3ab8d9f669fc84291c25",
+      "placeholders": [],
+      "translation": "매긴시아",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-magi--magincia-15": {
+      "sourceHash": "sha256:717df8504486485ff295eeb50734767b0c0cc1b98a7d3ab8d9f669fc84291c25",
+      "placeholders": [],
+      "translation": "매긴시아",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-mand": {
+      "sourceHash": "sha256:e2736e4d3419e35a359465d8a01f69f64f1897f31f77858f1c36ee9ad230fbb4",
+      "placeholders": [],
+      "translation": "맨드레이크",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-mant": {
+      "sourceHash": "sha256:18f0480988aad06db2c3fe0620abb681493f5b2278409599257304714b1d30b4",
+      "placeholders": [],
+      "translation": "진언",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-mast": {
+      "sourceHash": "sha256:45ff86da72476f32127c097c629e5418092c008cf567f214db848f46bd84301c",
+      "placeholders": [],
+      "translation": "스승",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-medi": {
+      "sourceHash": "sha256:0001c4b8f7552a5fb32a5d474996de7b6599ad356d76e20a2a2933105feb7e25",
+      "placeholders": [],
+      "translation": "명상",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-merc": {
+      "sourceHash": "sha256:e82505a88fabc50a9abd77706a4837e585b1eeb7bf6e3492b08a5dbc35778334",
+      "placeholders": [],
+      "translation": "상인",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-misd": {
+      "sourceHash": "sha256:1993e98363b8b13d389496251f9842afdc2f9a93e4d851aa6ed80c4c74727f27",
+      "placeholders": [],
+      "translation": "경범죄",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-mix": {
+      "sourceHash": "sha256:6c800781013da52dfa43d0be46ea81dd56226e3a4723fb58194b2a89c3507999",
+      "placeholders": [],
+      "translation": "섞기",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-mond": {
+      "sourceHash": "sha256:ca908b13b427f30fa8b6e118be3eb9cc4290332a142b227edaf36a796448daaf",
+      "placeholders": [],
+      "translation": "몬데인",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-mone": {
+      "sourceHash": "sha256:551ba8b5768aa5cb4b458dea76ac932e33216a2732d49937fd01ce91af8a6ead",
+      "placeholders": [],
+      "translation": "돈",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-moon": {
+      "sourceHash": "sha256:addf9430f1392c9bed3315724ca7157afa8bb3dbb59763cf6082328fe2af05d1",
+      "placeholders": [],
+      "translation": "달",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-mumb": {
+      "sourceHash": "sha256:11594ff643726c409bc44c7f6e71a10dd23dd8eba00b69ceefcce8d74481f6d8",
+      "placeholders": [],
+      "translation": "중얼거림",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-myst": {
+      "sourceHash": "sha256:9c50aee3590cc917d9dd95eb546748040928e958f9f6058ba7310bc4f31d6b66",
+      "placeholders": [],
+      "translation": "신비",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-nate": {
+      "sourceHash": "sha256:f77b2fd9abdf8358de094cbcc1db57f790fba387f1db51ad1ed71beb34e12a0f",
+      "placeholders": [],
+      "translation": "네이트",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-natu": {
+      "sourceHash": "sha256:069ff0abe2a0e8c0668aca1c0965a31f5184fcc39f46c67eea58a9e96a1c2614",
+      "placeholders": [],
+      "translation": "본질",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-nige": {
+      "sourceHash": "sha256:d9fb60ac2db059c5290f281cea43e2cf743dd010506aaa869f53940f7b4ebed9",
+      "placeholders": [],
+      "translation": "나이젤",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-nigh": {
+      "sourceHash": "sha256:f979fb9a5bcc2f1f25dc713c35d1bcfcb6c78d48e61f96de2049c3c086eca94f",
+      "placeholders": [],
+      "translation": "벨라도나",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-nobl": {
+      "sourceHash": "sha256:16ec0e4394ab7cd3a5589f9df671827dd2bb2d8154da5455718d391cc315c9fe",
+      "placeholders": [],
+      "translation": "귀족",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-nobl--skara-6": {
+      "sourceHash": "sha256:16ec0e4394ab7cd3a5589f9df671827dd2bb2d8154da5455718d391cc315c9fe",
+      "placeholders": [],
+      "translation": "고귀함",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-noth": {
+      "sourceHash": "sha256:f468dc8cf9a67f19523f21c4e357d56dc42cc8a7a1d3dee7267496853ba00a3d",
+      "placeholders": [],
+      "translation": "아무것도",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-nowh": {
+      "sourceHash": "sha256:32acd5df6b4f9c3980651ba36f9384c711e4cdcf150b81990dee5e63c5c1395c",
+      "placeholders": [],
+      "translation": "아무 데도",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-oak": {
+      "sourceHash": "sha256:83f91416862d79a4b0c441458cdbbc97a9c4591973b6ff04e0364224579f5a78",
+      "placeholders": [],
+      "translation": "참나무",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-om": {
+      "sourceHash": "sha256:d8b66a9205e5624310f5a5feee90ab4f2ba0ebbed1177eaab6bb5cc582a853ea",
+      "placeholders": [],
+      "translation": "옴",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-one": {
+      "sourceHash": "sha256:917f867e78d0d48a7fc2a8a279c1dd526dcd3c5b31b5f89617a89169668bd58c",
+      "placeholders": [],
+      "translation": "하나",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-orbs": {
+      "sourceHash": "sha256:5d71c4df3018c673380a5ad80f3c8f320e61e8c0e4e9afeac65e8cfc776e9e62",
+      "placeholders": [],
+      "translation": "구슬",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-palm": {
+      "sourceHash": "sha256:d0a60d14dfe244f081cac2593f2c1fc83f570822bc8d2dcb7ee5835e312ceef6",
+      "placeholders": [],
+      "translation": "손금",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-part": {
+      "sourceHash": "sha256:05aa3ac8d365559e81f8ad1b62918aedeabeaebab553e7b129ae95d9acdb77cc",
+      "placeholders": [],
+      "translation": "부분",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-pass": {
+      "sourceHash": "sha256:2f9acb02faa121bb2a3621951f57b4c690655337edee2e5ac350be2b3be88ea8",
+      "placeholders": [],
+      "translation": "통로",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-path": {
+      "sourceHash": "sha256:d4db71eecc1adeeae61a48d9a283751048b92e46fa4a99d7aea7228d02cbd523",
+      "placeholders": [],
+      "translation": "길",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-peac": {
+      "sourceHash": "sha256:beaf3e335fc7f83996f3f2dab670c283c694e8040bfb4b7a196092601dfd0cbc",
+      "placeholders": [],
+      "translation": "평화",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-peop": {
+      "sourceHash": "sha256:16ff99dc18737fcea8b628b8b51663b51ec93d3ca29c3581eb7df7cdd8e03874",
+      "placeholders": [],
+      "translation": "사람들",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-peri": {
+      "sourceHash": "sha256:99cea00fbdf4704975bceaf3320e95bbe3acd96c0fd8d7802df5b489b621e411",
+      "placeholders": [],
+      "translation": "위험",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-phil": {
+      "sourceHash": "sha256:bdfe7af9ba29d74b199342b8fead7ef8d5b164c200a811beca45823d564536bb",
+      "placeholders": [],
+      "translation": "철학",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-pira": {
+      "sourceHash": "sha256:e05dcbb897f7809219a0db03d4d960b71467fa9210194ec3a7aadf57661ef2f0",
+      "placeholders": [],
+      "translation": "해적",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-play": {
+      "sourceHash": "sha256:f53a7ab988e2f4624beb96812afd0bc56a8f1743e97d5ac7b33a85c0be131471",
+      "placeholders": [],
+      "translation": "연주",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-poor": {
+      "sourceHash": "sha256:2d4b35a5867905081458f9bef1959c06dfc473e402329c5d0207ef4526e6563e",
+      "placeholders": [],
+      "translation": "가난",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-powe": {
+      "sourceHash": "sha256:9a4b81f9b1babed8fbc9c1484130a916e26ce245691439f3e165db97fbf79209",
+      "placeholders": [],
+      "translation": "힘",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-preg": {
+      "sourceHash": "sha256:fdf2a94c3a3e0c9ca3f639a3f8f77378175b65349461ebf98f14d5678c0fc79c",
+      "placeholders": [],
+      "translation": "임신",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-prid": {
+      "sourceHash": "sha256:46b1136f89af1bed417226e373418993066c69c8aa089729af0e46d3c6cc98a7",
+      "placeholders": [],
+      "translation": "오만",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-pris": {
+      "sourceHash": "sha256:9e18b00697fe28db46c654e93ee179e2be4aa14aa9bd3ea0018920a4babc29b7",
+      "placeholders": [],
+      "translation": "죄수",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-prob": {
+      "sourceHash": "sha256:9b2f9b94d13396a5cb7c00f6a1614e014d070e9d5132378e6091348db6c33970",
+      "placeholders": [],
+      "translation": "문제",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-prov": {
+      "sourceHash": "sha256:5029af19eafc8e0cf42b8bb6b2d05e7fb8c106e5926a2a03e541916e3f8812aa",
+      "placeholders": [],
+      "translation": "지방",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-ques": {
+      "sourceHash": "sha256:00029651dce90c33f38ba845807a3b716c85bc81240a889b3b1f85b337e377bc",
+      "placeholders": [],
+      "translation": "여정",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-raid": {
+      "sourceHash": "sha256:fc0459fef3893d2fc2d113ed43432ca4176c13e00fe14548a0ad9d5f4b16a6db",
+      "placeholders": [],
+      "translation": "약탈",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-rang": {
+      "sourceHash": "sha256:32934953bc806f01679f94cfad72e29a0480ea907779d391b3eb7a79258679cd",
+      "placeholders": [],
+      "translation": "레인저",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-rati": {
+      "sourceHash": "sha256:28f0ccff13abe6b20c3ef1beb28311852278d0cd2a160ad5b9bf760bc4884365",
+      "placeholders": [],
+      "translation": "식량",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-reag": {
+      "sourceHash": "sha256:5e98b8133f80511dd754493fd836fc6e67bbc040dc5ecf15372db353cbb510b3",
+      "placeholders": [],
+      "translation": "재료",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-reas": {
+      "sourceHash": "sha256:1d308eae8465e20f3e687bac032baa0756c791bcc1cbd441546ccf51f94a4373",
+      "placeholders": [],
+      "translation": "이유",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-reca": {
+      "sourceHash": "sha256:89bbae50345c9d103458385088279e43720e0473a4fe434232df629e429358f4",
+      "placeholders": [],
+      "translation": "귀환",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-recl": {
+      "sourceHash": "sha256:9e1cd3563ac16c9885eadc143a17157323dfc974d2f042d59f004ecfea2387ce",
+      "placeholders": [],
+      "translation": "은둔자",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-red": {
+      "sourceHash": "sha256:e103660a4196db01d5234f705545482b1324b4608769446086402c72f8ed1e05",
+      "placeholders": [],
+      "translation": "붉은색",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-rede": {
+      "sourceHash": "sha256:84cd62b527977ef65f3789a2a772da8bb268717b5b81028bb99f7bd58846670a",
+      "placeholders": [],
+      "translation": "속죄",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-regr": {
+      "sourceHash": "sha256:389b0bc669e7efdca6e9249aeaa5d9f7e1dd6c18ba0b70057421ca5cb2e2ed10",
+      "placeholders": [],
+      "translation": "후회",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-rela": {
+      "sourceHash": "sha256:079fc698414baba399ba1bace9264a566384add5e3b9dbf48f948b0e7a0727b3",
+      "placeholders": [],
+      "translation": "관계",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-reso": {
+      "sourceHash": "sha256:13c74334b5243b701a978c1beb5ac0de6a5100bc97dc32a14d3d63089e3d3b36",
+      "placeholders": [],
+      "translation": "공명",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-rest": {
+      "sourceHash": "sha256:fecd5681dc5dc6e2f413b28ce95e50f6aa2ce9fbef201fa3c11844af5799b2e3",
+      "placeholders": [],
+      "translation": "휴식",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-ridd": {
+      "sourceHash": "sha256:c90ed0af64d71a618b6642d147b1e20c079465c2063eb1019ec3237f9d9d732d",
+      "placeholders": [],
+      "translation": "수수께끼",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-rive": {
+      "sourceHash": "sha256:fde83e7b84fef451065ad4d2131590b357f36432a6caf520bd1799c60cbc29c9",
+      "placeholders": [],
+      "translation": "강",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-room": {
+      "sourceHash": "sha256:577fba0b80d791636e583ebc868cf72baf53b9c32e18d501355f2a4fca8820cd",
+      "placeholders": [],
+      "translation": "방",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-rule": {
+      "sourceHash": "sha256:44d0ee0fee34f569267cfe8572a56013fa51b2bc5ceb370cde890824cc616919",
+      "placeholders": [],
+      "translation": "통치",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-rum": {
+      "sourceHash": "sha256:22d67dde4654a06bab07b22eca2f323a0a2ab01134c454139094867f14389ec6",
+      "placeholders": [],
+      "translation": "럼주",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-rumo": {
+      "sourceHash": "sha256:243cb5f77605ab8d0caadd2e9d22d1f9e094caf3df1fb16387ddf405e9a13c9a",
+      "placeholders": [],
+      "translation": "소문",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-rune": {
+      "sourceHash": "sha256:47d195d01ccdc8870bdad90647c0fc253716bdbf35e7ad0de5a6d1507f2a1631",
+      "placeholders": [],
+      "translation": "룬",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-sacr": {
+      "sourceHash": "sha256:19cf613426ed05f030bf8d50114b7fcdd1533cabc353121fce35e48c5eefa010",
+      "placeholders": [],
+      "translation": "희생",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-sail": {
+      "sourceHash": "sha256:c00a30cc96ef801029a574b700a1a3f9b7d3ea85212d89461f7e757085360252",
+      "placeholders": [],
+      "translation": "선원",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-salv": {
+      "sourceHash": "sha256:748f41387b5a88a4f13db8c28d9ac03f9f21af6fa09af87530795cf6df4aa9fb",
+      "placeholders": [],
+      "translation": "구원",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-sand": {
+      "sourceHash": "sha256:be5acdb407b32609f15d954571aa3b09afe70ccf0b34d4b63144c3a262ee628d",
+      "placeholders": [],
+      "translation": "샌드위치",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-seas": {
+      "sourceHash": "sha256:43b753c3eabc3b44badda42b1b60cb5337b695694dadbd92b5e62061e3c72884",
+      "placeholders": [],
+      "translation": "바다",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-secr": {
+      "sourceHash": "sha256:3df48ffb85c2d269613d2ee36c3227c1babdcf8691cb5fb6aad103877cd9236a",
+      "placeholders": [],
+      "translation": "비밀",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-sent": {
+      "sourceHash": "sha256:608dbf6658949749073a8a81d63ef150997eac28b12e12bcccaecfbc14b802fb",
+      "placeholders": [],
+      "translation": "센트리",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-serf": {
+      "sourceHash": "sha256:95f8d02778e98f21635961b09bc6940e108ae1a8d44b85d5099b8c1e1969fed9",
+      "placeholders": [],
+      "translation": "농노",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-serv": {
+      "sourceHash": "sha256:3712fb058b5672b8f9eb69fdb1ef0a16e80e7013aedc6b2e6920fde28d52e013",
+      "placeholders": [],
+      "translation": "서비스",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-serv--paws-13": {
+      "sourceHash": "sha256:3712fb058b5672b8f9eb69fdb1ef0a16e80e7013aedc6b2e6920fde28d52e013",
+      "placeholders": [],
+      "translation": "시중",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-sext": {
+      "sourceHash": "sha256:f666db1a51e4a0a93916e0ce873da458adad9063025d9dcebcf879fdab217a1e",
+      "placeholders": [],
+      "translation": "육분의",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-shee": {
+      "sourceHash": "sha256:38c4c2a04cb28af200da5712ea255ba98ceba1c85ead94578d8ce4ed4c4466cf",
+      "placeholders": [],
+      "translation": "양",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-shep": {
+      "sourceHash": "sha256:05a4f2477e510381f1627d420f1a233005de8173d7ee1522d7d64f45bf0bf21d",
+      "placeholders": [],
+      "translation": "목자",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-shhh": {
+      "sourceHash": "sha256:ba131337a45adc2041642774e0911ef4067edb3412c95274df9fddb1194677dd",
+      "placeholders": [],
+      "translation": "쉿",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-ship": {
+      "sourceHash": "sha256:39e1775d82d2eb9cf0d2862d6e2d59c5b7a1e85c543d89a8fe0594b51115f427",
+      "placeholders": [],
+      "translation": "배",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-ship--serpent-2": {
+      "sourceHash": "sha256:39e1775d82d2eb9cf0d2862d6e2d59c5b7a1e85c543d89a8fe0594b51115f427",
+      "placeholders": [],
+      "translation": "난파선",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-shop": {
+      "sourceHash": "sha256:1ed8f0748b4186f626eb3a830be164dedfe2e11e11c342d6b4af467c1b48921d",
+      "placeholders": [],
+      "translation": "상점",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-show": {
+      "sourceHash": "sha256:45ea7f3cadc6e817e9634eca10c403866a7fdb95d94a7384c154dca588c58f00",
+      "placeholders": [],
+      "translation": "보여줄 것",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-shri": {
+      "sourceHash": "sha256:fb42dc1af393c2ea7537c1857cc5c590a56e57d3f3d249a018883dc32526d92a",
+      "placeholders": [],
+      "translation": "신단",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-sick": {
+      "sourceHash": "sha256:06184e6cdf72570c5c598aa50961d0332cb8b265cd1aff5807442986d945e25f",
+      "placeholders": [],
+      "translation": "병",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-sine": {
+      "sourceHash": "sha256:444d64991df7a52d94d5b4e885f7116ac56dafc3fd9406370a40011a97ec4050",
+      "placeholders": [],
+      "translation": "죄",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-sing": {
+      "sourceHash": "sha256:4f38a44cd879cbbff175fc6f5146fcc6b6f331a1d104b5b9aabbcda52a526043",
+      "placeholders": [],
+      "translation": "노래하기",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-skar": {
+      "sourceHash": "sha256:d7fb7348d2947d769ea5f188221b3d92c60e8adcac0194c13978546c3d1c5eca",
+      "placeholders": [],
+      "translation": "스카라 브레이",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-skel": {
+      "sourceHash": "sha256:8687a9d0e692a2908bc7d2d7fa9ec96bbec96496a46a4373c41a8af0760e1243",
+      "placeholders": [],
+      "translation": "유골",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-skul": {
+      "sourceHash": "sha256:9e4cab9ad297041ceb025f6e10b3f46c60ac295c340d4b51474eb33542ce8e18",
+      "placeholders": [],
+      "translation": "해골",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-slee": {
+      "sourceHash": "sha256:71f2a6dc222040fd91df57b3a0fef5de03d2d964c35c17f52326583e1b292586",
+      "placeholders": [],
+      "translation": "수면",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-smit": {
+      "sourceHash": "sha256:7deee3931255197f3472066a4ac328a7f86b241d0f213be3b23eee121117415e",
+      "placeholders": [],
+      "translation": "스미스",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-smok": {
+      "sourceHash": "sha256:61ca8cafabfa43de768031fb5756019f280b34fa09b9e4a26e957ba3e2ecadd8",
+      "placeholders": [],
+      "translation": "담배",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-some": {
+      "sourceHash": "sha256:8f4735353435f2c56ee4ddbf1762be265ef101460d733e894b32e34b726f7eb7",
+      "placeholders": [],
+      "translation": "무언가",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-song": {
+      "sourceHash": "sha256:cfc48a68a8f88ffc417a418c4d12cdc04a68a85aaf9bca50dcfbe11b3cfb96b1",
+      "placeholders": [],
+      "translation": "노래",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-spel": {
+      "sourceHash": "sha256:60bc44e9ee349cbbfe42fa6c1c3383f26cff006fa4e859dd002245bd1b59fdcb",
+      "placeholders": [],
+      "translation": "주문",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-spir": {
+      "sourceHash": "sha256:aa8702b33bca8d7ad34caf59cfff06baff044582a66cb5c1757657fed5d8e5c2",
+      "placeholders": [],
+      "translation": "영성",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-spir--magincia-1": {
+      "sourceHash": "sha256:aa8702b33bca8d7ad34caf59cfff06baff044582a66cb5c1757657fed5d8e5c2",
+      "placeholders": [],
+      "translation": "영혼",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-spir--skara-10": {
+      "sourceHash": "sha256:aa8702b33bca8d7ad34caf59cfff06baff044582a66cb5c1757657fed5d8e5c2",
+      "placeholders": [],
+      "translation": "영혼",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-spoi": {
+      "sourceHash": "sha256:ee15cc72e74726ccf2a263dce3e2c9d61836e21cb2499b53cb52cda2599c50ce",
+      "placeholders": [],
+      "translation": "상한 것",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-stab": {
+      "sourceHash": "sha256:092e325740f8ba581c114225d8a824287d4293aba46095feec31970909a25651",
+      "placeholders": [],
+      "translation": "마구간",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-star": {
+      "sourceHash": "sha256:8b39ed188dbfe8dc4ae80567aea7e1f18d05845a2d6217492a57583316a194d6",
+      "placeholders": [],
+      "translation": "굶주림",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-ston": {
+      "sourceHash": "sha256:982f10a970a8453caf16f4e1b2bf6488b8402ff0e179775cd1c335ade4127113",
+      "placeholders": [],
+      "translation": "보석",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-stor": {
+      "sourceHash": "sha256:514bba2c1c76697e1985da62cb6d9ec6855607bb9038475d30f7ae0a6ac61f76",
+      "placeholders": [],
+      "translation": "이야기",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-stro": {
+      "sourceHash": "sha256:0b9e21fd806d0a8c68ad187f94611594e94dc2edab5a2772cbceaed49604cdae",
+      "placeholders": [],
+      "translation": "강함",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-stud": {
+      "sourceHash": "sha256:a91952b74e72da3f6149d4b25a957c6aa918e9ab6fabaa62484195bd8a674c14",
+      "placeholders": [],
+      "translation": "연구",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-sun": {
+      "sourceHash": "sha256:3e6ebfc49a1d63a80a380a95ffffdbf8a7e41c5524bdc369433e6c9f8c672058",
+      "placeholders": [],
+      "translation": "해",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-surv": {
+      "sourceHash": "sha256:e704b459f1eec3b1c92ed6af62746111aa18874b7df1711b840d99f2f0e8cfcd",
+      "placeholders": [],
+      "translation": "생존자",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-teac": {
+      "sourceHash": "sha256:ad9acbbce1309f8d6dbc5fdf36a6b9fc93606c86e585cff9c96cbedb5f651083",
+      "placeholders": [],
+      "translation": "가르침",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-tele": {
+      "sourceHash": "sha256:75eaf0b7d18818087658da7031970d6826a8ad93021741427750612511fd20cc",
+      "placeholders": [],
+      "translation": "망원경",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-thie": {
+      "sourceHash": "sha256:a89e4c291fd9fd1be2e4688b9d5ee41168c8b2f23d8645321b5f7660506af623",
+      "placeholders": [],
+      "translation": "도둑",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-thin": {
+      "sourceHash": "sha256:e8755ffb007cbdaffa6c3d4c3bbd5230b97513044e8f8f2aa9adba4f1063707f",
+      "placeholders": [],
+      "translation": "생각",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-thin--lcb-5": {
+      "sourceHash": "sha256:e8755ffb007cbdaffa6c3d4c3bbd5230b97513044e8f8f2aa9adba4f1063707f",
+      "placeholders": [],
+      "translation": "물건",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-this": {
+      "sourceHash": "sha256:679eaac16659c013675081e715f7ef761bdd183f1d7f55d079eb46ad6e322ac5",
+      "placeholders": [],
+      "translation": "이것",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-thro": {
+      "sourceHash": "sha256:37588a71cdf19886b5e44328c4bba94a6dc5c9e2ac76a55eaaaec940868d90fa",
+      "placeholders": [],
+      "translation": "왕좌",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-tink": {
+      "sourceHash": "sha256:2d4811260a34fda4c7e4157da19f2f587eda2cf9ee2727e5cf3bdc3ea128620e",
+      "placeholders": [],
+      "translation": "땜장이",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-toug": {
+      "sourceHash": "sha256:3c8849371afafbbce6c6067befb357989a5c93ab3ca19a553d6729b9bf181bfe",
+      "placeholders": [],
+      "translation": "힘셈",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-towe": {
+      "sourceHash": "sha256:b54e4630238e4e7b2fab0447e1eb5ec3113f6aec2d269313e7723b5a9c8e2778",
+      "placeholders": [],
+      "translation": "탑",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-trai": {
+      "sourceHash": "sha256:81f4c5e48da569848ea6dc98d348432824b7b5b6dbb72941eb7cfbbf71ad5ff4",
+      "placeholders": [],
+      "translation": "훈련",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-trav": {
+      "sourceHash": "sha256:6ec8f20fd3d779da92e85b518eacfe8aadac031f2f4a683bc65a9f1f36b1e548",
+      "placeholders": [],
+      "translation": "여행",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-trea": {
+      "sourceHash": "sha256:84e3287553df0e939700be6d49aff5a10afbb5941a51431dad33320b570c2773",
+      "placeholders": [],
+      "translation": "보물",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-trou": {
+      "sourceHash": "sha256:3baf6e9cdf3e6ad26570155bda77598735ec015629ca24ba68e1b7ad2513dc18",
+      "placeholders": [],
+      "translation": "말썽",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-trut": {
+      "sourceHash": "sha256:e23de1af79db44fb8048563383845a0925b7d1f4cbafa753b9a9f1a9f91bc804",
+      "placeholders": [],
+      "translation": "진실",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-ug": {
+      "sourceHash": "sha256:8235634f3f1729e904774f9a7552c4a0dc755cfdb78a810518b3263b9da90c14",
+      "placeholders": [],
+      "translation": "우그",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-unde": {
+      "sourceHash": "sha256:692f8f2462dba26c4a63c9679ea624a0b2f39f7e31ea1d26df37dd0226e84f16",
+      "placeholders": [],
+      "translation": "이해",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-unha": {
+      "sourceHash": "sha256:35768dbc6504000b4f2e879b53e70d5740c17b08f19d409911de885c5e86d11a",
+      "placeholders": [],
+      "translation": "불행",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-use": {
+      "sourceHash": "sha256:bba23cb65d8096811643430d3bf8e5f1e26f783b14f07665f92ef7c28b7a19b6",
+      "placeholders": [],
+      "translation": "쓰임새",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-valo": {
+      "sourceHash": "sha256:edc61772be45be9269c974bc664bb09db8ba18c4e91401408ce7bf51b9d0f51a",
+      "placeholders": [],
+      "translation": "용맹",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-valu": {
+      "sourceHash": "sha256:484ca41a955e34375f491e7a8fdb4a3f5dbe61d869040e3eaad416daed5ec9f7",
+      "placeholders": [],
+      "translation": "가치",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-vesp": {
+      "sourceHash": "sha256:1e3514bbbff6526e5361b4f8545bc8afeaf6e234f256ae89a8288e03ce26b93c",
+      "placeholders": [],
+      "translation": "베스퍼",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-vill": {
+      "sourceHash": "sha256:0b18bee654c22bf7f18742813292613c0eba45b51abed984771aef7aec304c09",
+      "placeholders": [],
+      "translation": "악당",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-vint": {
+      "sourceHash": "sha256:cbb594d311f1844c5292377fef2ef9f8b874ce0614158f743e51a244e7545726",
+      "placeholders": [],
+      "translation": "빈티지",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-virt": {
+      "sourceHash": "sha256:b19fdc727e8eec54fd7e1d732a3d8f6a97e72a15b4c5144715b09a9f8fd22731",
+      "placeholders": [],
+      "translation": "미덕",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-warl": {
+      "sourceHash": "sha256:e494e031a8698152abe2dba5338d8a62a2c12cc04abbccaea048bd9c70c451f6",
+      "placeholders": [],
+      "translation": "군주",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-warn": {
+      "sourceHash": "sha256:1440a7f63a8dd416f66e8fad0d5067962f726d9185c237d08401b54d42b56bed",
+      "placeholders": [],
+      "translation": "경고",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-warr": {
+      "sourceHash": "sha256:6a9ee329462e9d8dcc78ef44920501ed6fe2b5eb38f65a329c5568f52de9b291",
+      "placeholders": [],
+      "translation": "전사",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-wate": {
+      "sourceHash": "sha256:6d37562166b64b4408b83d0a8a46ac30dfce306c84a4d11d3c48587632ce8ac0",
+      "placeholders": [],
+      "translation": "물",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-weap": {
+      "sourceHash": "sha256:a390d0c9d0db31b1bdfc2b5893d259d85b314f7bab428e293cfc8dcf7df6c05e",
+      "placeholders": [],
+      "translation": "무기",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-welc": {
+      "sourceHash": "sha256:db707d2f9eea6fc3fc6275f0cc5b47b82c4664b5927b0ac6cf54ac03b0828e3d",
+      "placeholders": [],
+      "translation": "환영",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-whee": {
+      "sourceHash": "sha256:01a466fcaa228cd6cf1c049e182e27457ad34183dc712364b494de8584f11bcf",
+      "placeholders": [],
+      "translation": "타륜",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-wine": {
+      "sourceHash": "sha256:828d1c77fc49e6fbd4879f17fbd13fb2a67eaef6ffdcbb74ec9a6f6db8932c83",
+      "placeholders": [],
+      "translation": "와인",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-wisd": {
+      "sourceHash": "sha256:b0922b0419bc3459bacceb605a95372f3a0e2475f365ace4d20cf66eba5cf915",
+      "placeholders": [],
+      "translation": "지혜",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-word": {
+      "sourceHash": "sha256:cb2df9a0081dc2de50afb86e0bd43752dc6983d13c411271a75302194aba4316",
+      "placeholders": [],
+      "translation": "통행의 말",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-work": {
+      "sourceHash": "sha256:00b82880b6ad692d02575e5f5102601f23ebb2086bbab357bdfeb1ab84b8e95a",
+      "placeholders": [],
+      "translation": "일",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-worl": {
+      "sourceHash": "sha256:5eec0c99690774144b41927559c3c9a5a94a885a7f97f900466b8d91cf4bcb39",
+      "placeholders": [],
+      "translation": "세상",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-woun": {
+      "sourceHash": "sha256:0993295423957417ff3fef3dbcb1cfe7615462edeb2e9c02d9ca1a6f59c03776",
+      "placeholders": [],
+      "translation": "상처",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-writ": {
+      "sourceHash": "sha256:f22b5b81b56d5dfd74f98bfad06cfd4b953583e8a8029f8910b73e14af8e6e21",
+      "placeholders": [],
+      "translation": "작가",
+      "status": "ready",
+      "category": "npc-topic"
+    },
+    "npc-topic-yew": {
+      "sourceHash": "sha256:4a3b9d2060c9361c8dafe066df99b314ed46c0e41185dda406740bb9b7d36b5e",
+      "placeholders": [],
+      "translation": "유",
+      "status": "ready",
+      "category": "npc-topic"
+    },
     "principle-courage": {
       "sourceHash": "sha256:c2bd645a5905bf7c47c926982cff59e2d49a592bb0d073c80ee273b9d827ef8c",
       "placeholders": [],
@@ -367,5 +2292,8 @@
       "translation": "용맹",
       "status": "ready"
     }
-  }
+  },
+  "$notes": [
+    "Todo 48: npc-topic-* 행은 대화 주제어(topic1/topic2)의 한국어 뜻이다. raw 키워드(뒤 공백 포함)의 sha256이 sourceHash이며, tlk.json의 같은 키워드 행과 같다. 뜻은 각 NPC 자신의 한국어 대사에서 찾은 낱말을 우선 사용했고, 한 NPC 안에서 두 주제어의 뜻이 겹치지 않게 했다. per-NPC 예외는 npc-topic-<slug>--<map>-<n> 꼴이다. category는 \"npc-topic\"이고 네이티브 테이블(u4_i18n_table.inc, ko-overlay.b)에는 내보내지 않는다."
+  ]
 }

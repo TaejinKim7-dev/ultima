@@ -19,6 +19,7 @@ import { extractPlaceholders, placeholdersEqual } from "./lib/placeholders.mjs"
 import { displayWidth, STATUS_AREA_WIDTH_COLUMNS } from "./lib/text-width.mjs"
 import { findAliasCollisions } from "./lib/alias-check.mjs"
 import { loadSchemaFile } from "./lib/schema-io.mjs"
+import { topicGlossProblems } from "./lib/topic-glosses.mjs"
 
 const TRANSLATABLE_FILES = ["ui", "module", "binary", "tlk", "glossary"]
 
@@ -107,6 +108,14 @@ export function runI18nCheck(schemaDir, { strict = false } = {}) {
   const aliasData = loadSchemaFile(resolve(schemaDir, "aliases.json"), "aliases")
   entryCount += Object.keys(aliasData.entries).length
   checkAliasFile(aliasData, failures)
+
+  // Todo 48: every NPC talk topic keyword needs a ready Korean gloss, and
+  // the glosses must be safe to resolve (per-NPC unique, no reserved-alias
+  // collision, same native effect as the alias they equal, no orphan rows).
+  const tlkData = loadSchemaFile(resolve(schemaDir, "tlk.json"), "tlk")
+  const glossaryData = loadSchemaFile(resolve(schemaDir, "glossary.json"), "glossary")
+  const topicProblems = topicGlossProblems(tlkData.entries, glossaryData.entries, aliasData, { strict })
+  for (const problem of topicProblems) failures.push(problem)
 
   return { failures, entryCount, pendingCount }
 }

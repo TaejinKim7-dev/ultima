@@ -239,6 +239,79 @@ body {
   padding: 0.25rem 0.4rem;
 }
 
+/*
+ * Todo 48 (user request 2026-10-04): the usable talk keywords as clickable
+ * chips, directly under the dialogue history. Hidden while no conversation
+ * is active. Chips must never take focus (mousedown preventDefault +
+ * tabindex=-1 in src/shell.ts), so a later Enter/arrow still reaches the
+ * game and never re-clicks a chip.
+ */
+.talk-keywords[hidden] {
+  display: none;
+}
+
+.talk-keywords {
+  border: 2px solid var(--ultima-border);
+  background: var(--ultima-panel-bg);
+  padding: 0.5rem 0.75rem;
+}
+
+.talk-keywords h2 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.talk-keyword-group {
+  margin-bottom: 0.5rem;
+}
+
+.talk-keyword-group:last-child {
+  margin-bottom: 0;
+}
+
+.talk-keyword-group-title {
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.talk-keyword-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.talk-keyword-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--ultima-border);
+  border-radius: 0.35rem;
+  background: var(--ultima-bg);
+  color: var(--ultima-text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.talk-keyword-chip:focus-visible {
+  outline: 2px dashed var(--ultima-border);
+  outline-offset: 2px;
+}
+
+.talk-keyword-chip[data-asked="true"] {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.talk-keyword-secondary {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
 .data-controls {
   display: flex;
   flex-direction: column;
@@ -301,6 +374,18 @@ body {
     flex: 1 1 auto;
     min-height: 0;
     max-height: none;
+  }
+
+  /*
+   * Todo 48: the keyword menu shares the column with the history: it can
+   * grow (a castle list is long), so it caps at half the column and
+   * scrolls internally instead of pushing the game out of view.
+   */
+  .side-column .talk-keywords {
+    flex: 0 1 auto;
+    min-height: 0;
+    max-height: 50%;
+    overflow-y: auto;
   }
 
   .data-controls {
