@@ -33,6 +33,20 @@
 #include "weapon.h"
 #include "xu4.h"
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+
+/*
+ * Todo 49: the Korean message-area overlay is play-scoped -- it shows only
+ * from play begin (GameController::initScreenWithoutReloadingState,
+ * game.cpp:130) to play end (GameController::conclude, game.cpp:115).
+ * Native builds never compile this block.
+ */
+EM_JS(void, u4_web_screen_play, (int on), {
+    if (Module.u4Screen) Module.u4Screen.play(!!on);
+});
+#endif
+
 /*-----------------*/
 /* Functions BEGIN */
 
@@ -118,6 +132,10 @@ void GameController::conclude() {
     mapArea.clear();
     xu4.eventHandler->popMouseAreaSet();
     screenSetMouseCursor(MC_DEFAULT);
+#ifdef __EMSCRIPTEN__
+    /* Todo 49: play ended -- the Korean message-area overlay hides. */
+    u4_web_screen_play(0);
+#endif
 }
 
 void GameController::renderHud(ScreenState* ss, void* data)
@@ -129,6 +147,12 @@ void GameController::renderHud(ScreenState* ss, void* data)
 
 void GameController::initScreenWithoutReloadingState()
 {
+#ifdef __EMSCRIPTEN__
+    /* Todo 49: play began -- the Korean message-area overlay shows (the
+     * signal is idempotent, so repeated runs are harmless). */
+    u4_web_screen_play(1);
+#endif
+
     musicPlayLocale();
 
     borderAttr = xu4.config->newDrawList(BKGD_BORDERS, &borderAttrLen);

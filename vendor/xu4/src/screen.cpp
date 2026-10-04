@@ -28,6 +28,37 @@
 
 using std::vector;
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+
+/*
+ * Todo 49: web-only screen signal hooks for the Korean in-game message-area
+ * overlay (src/overlay/message-area-view.ts). Each call is guarded by
+ * `Module.u4Screen &&` so a shell without the receiver degrades to no-ops.
+ * Native builds never compile this block, so the native raster path stays
+ * byte-identical.
+ */
+EM_JS(void, u4_web_screen_cursor, (int on), {
+    if (Module.u4Screen) Module.u4Screen.cursor(!!on);
+});
+EM_JS(void, u4_web_screen_crlf, (), {
+    if (Module.u4Screen) Module.u4Screen.crlf();
+});
+EM_JS(void, u4_web_screen_modal, (int on), {
+    if (Module.u4Screen) Module.u4Screen.modal(!!on);
+});
+
+/*
+ * Todo 49: talkCrLf (discourse_tlk.cpp) suppresses the crlf() signal around
+ * its screenCrLf() call so the existing talk-line "\n" signal is not doubled.
+ */
+static bool webSuppressCrLf = false;
+
+void screenWebSuppressCrLf(bool on) {
+    webSuppressCrLf = on;
+}
+#endif
+
 static const int MsgBufferSize = 1024;
 
 struct RenderLayer {
@@ -344,6 +375,16 @@ void screenSetLayer(int layer, void (*renderFunc)(ScreenState*, void*),
     RenderLayer* rl = screen->layers + layer;
     rl->func = renderFunc;
     rl->data = data;
+#ifdef __EMSCRIPTEN__
+    /*
+     * Todo 49: the ESC / pause / game-browser screens must hide the whole
+     * Korean overlay layer (user decision 2026-10-04). LAYER_TOP_MENU is set
+     * for exactly those screens (event.cpp runPause, gamebrowser.cpp), so a
+     * non-null renderFunc there opens the modal and a null one closes it.
+     */
+    if (layer == LAYER_TOP_MENU)
+        u4_web_screen_modal(renderFunc != NULL);
+#endif
 }
 
 bool screenLayerUsed(int layer) {
@@ -386,6 +427,15 @@ void screenCrLf() {
         screenScrollMessageArea();
     }
     screenSetCursorPos(TEXT_AREA_X + c->col, TEXT_AREA_Y + c->line);
+#ifdef __EMSCRIPTEN__
+    /*
+     * Todo 49: a direct CR/LF advances the message-area overlay's line
+     * buffer. Disabled inside talkCrLf (discourse_tlk.cpp), which sends its
+     * own "\n" through the talk channel.
+     */
+    if (! webSuppressCrLf)
+        u4_web_screen_crlf();
+#endif
 }
 
 // whitespace & color codes: " \b\t\n\r\023\024\025\026\027\030\031"
@@ -1229,6 +1279,17 @@ void screenDumpCursor() {
 
 void screenShowCursor(bool on) {
     XU4_SCREEN->state.cursorVisible = on;
+#ifdef __EMSCRIPTEN__
+    /*
+     * Todo 49: report cursor visibility to the message-area overlay, only
+     * when it actually changed (the native raster path is unchanged).
+     */
+    static bool webCursorShown = false;
+    if (webCursorShown != on) {
+        webCursorShown = on;
+        u4_web_screen_cursor(on);
+    }
+#endif
 }
 
 void screenSetCursorPos(int x, int y) {

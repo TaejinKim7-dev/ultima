@@ -136,9 +136,19 @@ export function tokenizeMessage(raw: string): MessageToken[] {
 }
 
 /** One fixed-position character cell in a panel line -- a column in the native message-area grid, minus the fixed width (see the module doc comment on word wrap). */
+export type PanelCellKind = "text" | "prompt" | "input"
+
 export interface PanelCell {
   readonly char: string
   readonly color: PanelColor
+  /**
+   * Todo 49: what produced this cell -- ordinary message text, the idle
+   * prompt glyph (the 0x10 CHARSET_PROMPT byte), or a character typed into
+   * the current prompt (the engine's `Module.u4Screen.input` echo; see
+   * src/overlay/message-area-view.ts). The message-area overlay renders the
+   * three kinds differently (e.g. "▶" for prompt, a cursor after input).
+   */
+  readonly kind: PanelCellKind
 }
 
 /** One committed (newline-terminated) line of the dialogue panel. */
@@ -187,7 +197,7 @@ function writeCell(state: PanelState, cell: PanelCell): PanelState {
     // current end of the line -- matches the native fixed-grid cursor,
     // which can be positioned anywhere before anything is drawn there.
     while (cells.length < state.cursor) {
-      cells.push({ char: " ", color: state.activeColor })
+      cells.push({ char: " ", color: state.activeColor, kind: "text" })
     }
     cells.push(cell)
   }
@@ -204,7 +214,7 @@ export function applyToken(state: PanelState, token: MessageToken): PanelState {
     case "text": {
       let next = state
       for (const ch of token.value) {
-        next = writeCell(next, { char: ch, color: next.activeColor })
+        next = writeCell(next, { char: ch, color: next.activeColor, kind: "text" })
       }
       return { ...next, awaitingPrompt: false }
     }
@@ -229,11 +239,11 @@ export function applyToken(state: PanelState, token: MessageToken): PanelState {
         // nothing).
         return { ...state, cursor: state.cursor + 1 }
       }
-      return writeCell(state, { char: " ", color: state.activeColor }) // pads past the end
+      return writeCell(state, { char: " ", color: state.activeColor, kind: "text" }) // pads past the end
     case "color":
       return { ...state, activeColor: token.code }
     case "prompt":
-      return { ...writeCell(state, { char: "▮", color: state.activeColor }), awaitingPrompt: true }
+      return { ...writeCell(state, { char: "▮", color: state.activeColor, kind: "prompt" }), awaitingPrompt: true }
   }
 }
 

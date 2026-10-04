@@ -57,6 +57,20 @@ EM_JS(void, u4_web_text_prompt_opened, (int id, int kind), {
 EM_JS(void, u4_web_text_prompt_closed, (int id), {
     if (Module.u4TextPrompt) Module.u4TextPrompt.closed(id);
 });
+
+/*
+ * Todo 49: the in-game message-area overlay echoes what the player is typing
+ * at the current native prompt. ReadStringController's value is always ASCII
+ * here (its accepted-chars bitset is single-byte), so UTF8ToString over the C
+ * string is exact. ESC erases the whole value, which is sent as empty text so
+ * the overlay clears its echo.
+ */
+EM_JS(void, u4_web_screen_input, (int id, const char* text), {
+    if (Module.u4Screen) Module.u4Screen.input(id, text ? UTF8ToString(text) : "");
+});
+EM_JS(void, u4_web_screen_choice, (const char* ch), {
+    if (Module.u4Screen) Module.u4Screen.choice(ch ? UTF8ToString(ch) : "");
+});
 #endif
 
 using std::string;
@@ -608,6 +622,10 @@ bool ReadStringController::keyPressed(int key) {
             if (len > 0) {
                 /* remove the last character */
                 value.erase(len - 1, 1);
+#ifdef __EMSCRIPTEN__
+                /* Todo 49: the overlay echoes the current value after the erase. */
+                u4_web_screen_input(webPromptId, value.c_str());
+#endif
 
                 if (view) {
                     view->textAt(screenX + len - 1, screenY, " ");
@@ -626,11 +644,19 @@ bool ReadStringController::keyPressed(int key) {
         }
         else if (key == U4_ESC) {
             value.erase(0, value.length());
+#ifdef __EMSCRIPTEN__
+            /* Todo 49: ESC clears the input -- the overlay must drop its echo. */
+            u4_web_screen_input(webPromptId, "");
+#endif
             doneWaiting();
         }
         else if (len < maxlen) {
             /* add a character to the end */
             value += key;
+#ifdef __EMSCRIPTEN__
+            /* Todo 49: the overlay echoes the typed character as part of the value. */
+            u4_web_screen_input(webPromptId, value.c_str());
+#endif
 
             if (view) {
                 view->textAtFmt(screenX + len, screenY, "%c", key);
@@ -714,6 +740,17 @@ bool ReadChoiceController::keyPressed(int key) {
         const ScreenState* ss = screenState();
         if (ss->cursorVisible && key > ' ' && key <= 0x7F)
             screenShowChar(toupper(key), ss->cursorX, ss->cursorY);
+#ifdef __EMSCRIPTEN__
+        /*
+         * Todo 49: the message-area overlay echoes the accepted choice key
+         * as a temporary cell, matching the native display condition above
+         * (printable and cursor visible) so nothing extra appears.
+         */
+        if (ss->cursorVisible && key > ' ' && key <= 0x7F) {
+            char echo = (char) toupper(key);
+            u4_web_screen_choice(&echo);
+        }
+#endif
         value = key;
         doneWaiting();
         return true;
