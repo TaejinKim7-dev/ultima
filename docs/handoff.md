@@ -2273,3 +2273,7 @@ Todo 50: 게임 안 한국어 전체(상태창·statussummary·Ztats·인트로�
 - `npm run verify:integration` → `# verify:integration 2026-10-05T07:10:48.715Z PASS`, **EXIT=0**, e2e **73 passed (1.2h)**, 실패·ECONNREFUSED 0. `/tmp/todo50-integration-7.log`
 - 단계별: build:modules 0 · build:wasm 0 · check:build-fresh 0 · test:unit 0 · verify:repo-sources 0 · typecheck 0 · build 0 · i18n:check 0 · build:site 0 · audit:dist(--require-engine) 0 · plan cmp 0 · git diff --check 0 · e2e 0.
 - `korean-castle-output` Hawkwind 테스트도 이번엔 통과.
+
+### 8. merge 게이트 (2026-10-05, 브랜치 todo-50-pixel-font, Haiku 실행·메인이 `/tmp/todo50-merge-gate.log`로 확인)
+- `npm ci` 0 · `npm run test:unit` 0 (846 tests) · `npm run verify:repo-sources` 0 · `npm run typecheck` 0 · `npm run build` 0 · `npm run check:build-fresh` 0 · `git diff --check` 0.
+- 네이티브(위 4번) 5단계 0, Firefox·WebKit 각 29/29, 최종 통합 게이트 73/73 PASS → `main`에 `--no-ff` merge 후 push. 사람의 화면 확인은 사용자 확인 필요.
