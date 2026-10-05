@@ -323,3 +323,26 @@ describe("keyword menu during a native key wait", () => {
     expect(h.tk.view().active).toBe(false)
   })
 })
+
+// User report 2026-10-05 (Sage Deli): while the engine waits for a one-key
+// yes/no choice, clicking a topic chip ("보석") was rejected with
+// "[한글 입력 거부] 이 낱말에 대응하는 선택지 답을 찾을 수 없습니다". During a
+// choice prompt only the answer chips make sense.
+describe("keyword menu during a one-key choice prompt", () => {
+  it("shows only the answer chips (예/아니오), not topics or common words", () => {
+    const h = harness()
+    openNpcConversation(h.tk)
+    h.tk.promptOpened(PROMPT_KIND_CHOICE)
+    const titles = h.tk.view().groups.map((g) => g.title)
+    expect(titles).toEqual(["대답"])
+  })
+
+  it("brings the topic chips back once the choice prompt closes and a text prompt opens", () => {
+    const h = harness()
+    openNpcConversation(h.tk)
+    h.tk.promptOpened(PROMPT_KIND_CHOICE)
+    h.tk.promptClosed()
+    h.tk.promptOpened(0)
+    expect(h.tk.view().groups.map((g) => g.title)).toContain("공통")
+  })
+})

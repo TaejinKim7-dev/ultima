@@ -268,6 +268,12 @@ export function createTalkKeywords(deps: TalkKeywordDeps): TalkKeywords {
       return { active: false, speaker: null, npcKey: null, groups: [] }
     }
     const groups: TalkKeywordGroup[] = []
+    // User report 2026-10-05 (Sage Deli): a one-key yes/no prompt accepts only
+    // its answer, so offering topic chips there just produced rejections.
+    if (session.choicePending) {
+      groups.push(answerGroup())
+      return { active: true, speaker: session.speaker, npcKey: session.npcKey, groups }
+    }
     if (session.speaker === "npc") {
       groups.push(commonGroup(NPC_COMMON_KEYWORDS))
       groups.push(topicChips([], session.topics))
