@@ -2208,3 +2208,17 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 - 실패 1건: `korean-castle-output.spec.ts:158` Hawkwind 인사(5.2m 타임아웃, 아바타가 Hawkwind에 도달 못함). status-overlay 3 dpr(61~63번)는 통과 — 폰트 넘침 없음.
 - 같은 스펙 단독 재실행(포트 8811, `/tmp/todo50-castle-rerun.log`): 2 passed, exit 0. 원인은 관측으로 확정하지 못함(실시간 의존 flaky 의심 — 확인 필요). **이 게이트는 통과로 기록하지 않는다**; 공식 게이트는 opencode 브랜치 merge 후 단독 재실행 결과로 한다.
 - 다음: `todo-50-wind-e2e` 커밋 확인 → merge → 보고서 읽기 → 단독 게이트·3브라우저.
+
+---
+
+## 2026-10-05 — Todo 50 게이트 2~5차와 opencode 보고서 반영 (브랜치 todo-50-pixel-font)
+
+- 게이트 2차(`/tmp/todo50-integration-3.log`): opencode 스펙 `korean-wind-heading.spec.ts`의 타입 오류 5건으로 **typecheck exit 2 → EXIT=1**. 스펙 타입만 수정(`e9c96e1`).
+- 게이트 3차(`/tmp/todo50-integration-4.log`): typecheck 포함 비-e2e 단계 전부 exit 0, **e2e exit 1, 68 passed / 2 failed**(바람 스펙 47·48번 — 스펙 단언 오류, 제품 코드 무관). 1차에서 실패한 `korean-castle-output` Hawkwind는 이번엔 통과.
+- 게이트 4차(`/tmp/todo50-integration-5.log`): 제가 의도적으로 중단(SIGTERM, EXIT=143) — opencode의 수정 커밋 `be4353c` 확인 후 합친 트리로 다시 돌리려고. 인프라 실패도 제품 실패도 아님; 통과로 세지 않는다.
+- opencode `REPORT.md`(`/home/taejin/ultima-opencode/.omo/evidence/ultima-web/task-50/opencode/`, git 비추적) 인용:
+  - 네이티브 게이트(opencode worktree): `build:native` **exit 1**(`deps:host` 선행 누락), `cmake:configure` 0, `cmake:build` 0, `test:native` **exit 8**(`native-baseline-negative`: `build/host/xu4-src/src/xu4` 부재). 명령 목록 결함(설계된 loud-fail)이며 **통과가 아님**. 권장 순서 `deps:host → build:native → cmake:configure → cmake:build → test:native`로 재실행은 아직 안 함(확인 필요).
+  - e2e: 자기 worktree에서 바람 스펙 2/2 PASS(포트 8831). 스펙 결함 5건은 단언 정상화(약화 아님).
+- 합친 커밋: opencode `be4353c`를 merge, 스펙은 opencode 버전(Exit Map 단계로 오버월드 '바람' 확인)에 타입 수정만 얹음. 바람 스펙 단독 실행(수정본 c1f4f63 기준)은 2/2 통과였으나 최종 merge 파일로는 아직 안 돌림.
+- Stage 3 main 머지 상태: opencode 조사 — main/origin/main HEAD는 `ca3cd6d`, `22527c7`·`7cca398`은 main에 없음(위 4b65817 기록과 일치, 이전 "main merge·push 완료" 문구는 사실과 다름). 이번 Todo 50 main merge 때 함께 들어간다.
+- 다음: 합친 트리에서 단독 `verify:integration` → 3브라우저 → 문서 갱신 → main merge·push.
