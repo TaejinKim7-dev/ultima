@@ -14,6 +14,7 @@ export interface DriveModule {
   readonly DriveAuthError: new (message?: string) => Error
   requestAccessToken(doc: Document, clientId: string, prompt?: "" | "consent"): Promise<AccessToken>
   revokeAccessToken(doc: Document, token: string): void
+  preloadGoogleSignIn(doc: Document): Promise<void>
   createDriveClient(options: DriveClientOptions): DriveClient
 }
 
@@ -25,6 +26,8 @@ export interface CloudSyncState {
 
 export interface CloudSync {
   state(): Promise<CloudSyncState>
+  /** Loads the Drive code and Google's sign-in script before the click (hover/focus of the button). */
+  prepare(): Promise<void>
   /** Must run from a click (Google's sign-in popup). */
   connect(): Promise<void>
   disconnect(): void
@@ -135,6 +138,24 @@ export function createCloudSync(options: CloudSyncOptions): CloudSync {
     trace("cloud-pull", { slotId: entry.slotId })
   }
 
+  let preparing: Promise<void> | null = null
+  function prepare(): Promise<void> {
+    if (preparing === null) {
+      preparing = options
+        .loadDrive()
+        .then(async (module) => {
+          drive = module
+          await module.preloadGoogleSignIn(options.doc)
+          trace("cloud-prepared", {})
+        })
+        .catch((error: unknown) => {
+          preparing = null
+          throw error
+        })
+    }
+    return preparing
+  }
+
   slots.onCaptured((slotId) => {
     if (!connected()) return
     pending = pending.then(async () => {
@@ -147,8 +168,10 @@ export function createCloudSync(options: CloudSyncOptions): CloudSync {
     async state() {
       return { connected: connected(), busy, entries }
     },
+    prepare,
     async connect() {
-      drive = await options.loadDrive()
+      await prepare()
+      if (drive === null) throw new Error("Google Drive 기능을 불러오지 못했습니다.")
       token = await drive.requestAccessToken(options.doc, options.clientId)
       client = drive.createDriveClient({ fetch: options.fetch, getToken: () => token?.token ?? "" })
       trace("cloud-connected", {})

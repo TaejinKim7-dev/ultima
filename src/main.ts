@@ -1,3 +1,5 @@
+import { createCloudSync } from "./cloud/cloud-sync.ts"
+import { GOOGLE_CLIENT_ID } from "./cloud/config.ts"
 import { createSlotController, type EngineAdapter } from "./saves/slot-controller.ts"
 import { createIndexedDbSlotStore } from "./saves/slot-store.ts"
 import { mountSlotPanel } from "./saves/slot-panel.ts"
@@ -175,12 +177,25 @@ function mountSaveSlots(engine: EngineAdapter): void {
     }
   })
   bridge.onPlayChange((on) => controller.setPlaying(on))
+  // Todo 53: optional Google Drive sync. drive-client.ts is imported only on
+  // "연결" (its own chunk -- the only shipped file allowed to reach Google).
+  const cloud = createCloudSync({
+    slots: controller,
+    loadDrive: () => import("./cloud/drive-client.ts"),
+    clientId: GOOGLE_CLIENT_ID,
+    doc: document,
+    fetch: (input, init) => window.fetch(input, init),
+    confirm: (text) => window.confirm(text),
+    notify,
+    trace: (event, data) => debugLog.log(event, data)
+  })
   void controller.init().then(
     () => {
       debugLog.log("slots-init", {})
       mountSlotPanel({
         host,
         controller,
+        cloud,
         notify,
         download: (bytes, filename) => {
           const url = URL.createObjectURL(new Blob([bytes], { type: "application/octet-stream" }))

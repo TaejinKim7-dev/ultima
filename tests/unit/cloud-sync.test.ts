@@ -30,6 +30,7 @@ function fakeDrive() {
       return { token: "tok", expiresAt: Date.now() + 3_600_000 }
     },
     revokeAccessToken() {},
+    async preloadGoogleSignIn() {},
     createDriveClient() {
       return {
         async listSlots() {

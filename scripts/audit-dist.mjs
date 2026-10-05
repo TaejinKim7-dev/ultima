@@ -384,6 +384,10 @@ function auditShippedContent(distDir, files) {
       }
     }
     for (const secret of SECRET_NAMES) {
+      // Todo 53: the Drive client must send "Authorization: Bearer <token>"
+      // (a short-lived OAuth access token obtained at run time, never baked
+      // in); only that chunk may contain the word.
+      if (secret.label === "bearer" && isCloudSyncChunk(distDir, filePath)) continue
       if (secret.pattern.test(content)) {
         throw new DistAuditError(
           `dist artifact contains secret-like name "${secret.label}" in ${filePath}`

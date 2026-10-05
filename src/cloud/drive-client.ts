@@ -142,6 +142,11 @@ function loadGis(doc: Document): Promise<void> {
   })
 }
 
+/** Loads Google's sign-in script ahead of the click, so the popup opens inside the click's user activation. */
+export function preloadGoogleSignIn(doc: Document): Promise<void> {
+  return loadGis(doc)
+}
+
 export interface AccessToken {
   readonly token: string
   readonly expiresAt: number

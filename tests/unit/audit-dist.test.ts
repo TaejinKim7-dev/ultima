@@ -407,3 +407,18 @@ describe("audit:dist cloud-sync chunk", () => {
     expect(result.stderr).toContain("sendBeacon")
   })
 })
+
+describe("audit:dist cloud-sync chunk: OAuth Authorization header", () => {
+  it("allows the 'Bearer' Authorization scheme only inside the drive-client chunk", () => {
+    const header = `headers.set("Authorization", \`Bearer \${token}\`)`
+    const ok = makeCleanDist()
+    writeFileSync(join(ok, "assets", "drive-client-h1.js"), header)
+    expect(run(ok).status, run(ok).stderr).toBe(0)
+
+    const bad = makeCleanDist()
+    writeFileSync(join(bad, "assets", "index-h1.js"), header)
+    const result = run(bad)
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("bearer")
+  })
+})

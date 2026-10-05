@@ -600,6 +600,28 @@ body {
   font-weight: 600;
 }
 
+/* Todo 53: the optional Google Drive bar inside the slot panel. */
+.slot-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px dashed var(--ultima-border);
+  border-radius: 0.35rem;
+}
+
+.slot-cloud-label {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  flex: 1 1 18rem;
+}
+
+.slot-remote {
+  border-style: dashed;
+}
+
 .slot-detail {
   font-size: 0.8rem;
   opacity: 0.8;

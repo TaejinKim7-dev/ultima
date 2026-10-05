@@ -3,6 +3,8 @@
 
 import { describeSlot } from "./slot-panel-text.ts"
 import type { SlotController } from "./slot-controller.ts"
+import type { CloudSync } from "../cloud/cloud-sync.ts"
+import { cloudBadge } from "../cloud/cloud-labels.ts"
 
 export interface SlotPanelOptions {
   readonly host: HTMLElement
@@ -10,6 +12,8 @@ export interface SlotPanelOptions {
   /** Shows a short Korean notice (the dialogue panel). */
   readonly notify: (text: string) => void
   readonly download: (bytes: Uint8Array, filename: string) => void
+  /** Todo 53: optional Google Drive sync; the panel shows its controls when given. */
+  readonly cloud?: CloudSync
 }
 
 function button(doc: Document, label: string, onClick: () => void, disabled: boolean): HTMLButtonElement {
@@ -35,7 +39,11 @@ export function mountSlotPanel(options: SlotPanelOptions): void {
   toolbar.className = "slot-toolbar"
   const list = doc.createElement("ul")
   list.className = "slot-list"
-  host.append(title, note, toolbar, list)
+  const cloudBar = doc.createElement("div")
+  cloudBar.className = "slot-cloud"
+  const remoteList = doc.createElement("ul")
+  remoteList.className = "slot-list slot-remote-list"
+  host.append(title, note, toolbar, cloudBar, list, remoteList)
 
   const importInput = doc.createElement("input")
   importInput.type = "file"
@@ -56,7 +64,52 @@ export function mountSlotPanel(options: SlotPanelOptions): void {
     )
   }
 
+  async function renderCloud(): Promise<Map<string, { text: string; action: "push" | "pull" | null }>> {
+    const badges = new Map<string, { text: string; action: "push" | "pull" | null }>()
+    cloudBar.replaceChildren()
+    remoteList.replaceChildren()
+    const cloud = options.cloud
+    if (cloud === undefined) return badges
+    const state = await cloud.state()
+    const label = doc.createElement("span")
+    label.className = "slot-cloud-label"
+    if (!state.connected) {
+      label.textContent = "Google Drive (선택): 다른 기기에서 이어하려면 연결하세요. 저장 파일만 본인 Drive에 올라가며 원본 게임 데이터는 올리지 않습니다."
+      const connectButton = button(doc, "Google Drive 연결", () => run(() => cloud.connect()), state.busy)
+      // Load Google's sign-in script before the click so its popup is not blocked.
+      const warm = () => void cloud.prepare().catch(report)
+      connectButton.addEventListener("pointerenter", warm)
+      connectButton.addEventListener("focus", warm)
+      cloudBar.append(label, connectButton)
+      return badges
+    }
+    label.textContent = state.busy ? "Google Drive 연결됨 — 동기화 중…" : "Google Drive 연결됨 — 저장(Q)하면 자동으로 올라갑니다."
+    cloudBar.append(
+      label,
+      button(doc, "모두 동기화", () => run(() => cloud.syncAll(), "Google Drive와 동기화했습니다."), state.busy),
+      button(doc, "새로 고침", () => run(() => cloud.refresh()), state.busy),
+      button(doc, "연결 해제", () => cloud.disconnect(), state.busy)
+    )
+    for (const entry of state.entries) {
+      const badge = cloudBadge(entry.state)
+      badges.set(entry.slotId, badge)
+      if (entry.state !== "remote-only") continue
+      const row = doc.createElement("li")
+      row.className = "slot-row slot-remote"
+      const name = doc.createElement("div")
+      name.className = "slot-name"
+      name.textContent = `${entry.name} (Drive에만 있음)`
+      const actions = doc.createElement("div")
+      actions.className = "slot-actions"
+      actions.append(button(doc, "이 브라우저로 받기", () => run(() => cloud.pull(entry.slotId), "Drive에서 슬롯을 받았습니다."), state.busy))
+      row.append(name, actions)
+      remoteList.appendChild(row)
+    }
+    return badges
+  }
+
   async function render(): Promise<void> {
+    const badges = await renderCloud()
     const state = await controller.state()
     note.textContent = state.playing
       ? "플레이 중에는 슬롯을 바꿀 수 없습니다. 저장(Q)하면 지금 슬롯에 저장됩니다."
@@ -74,7 +127,8 @@ export function mountSlotPanel(options: SlotPanelOptions): void {
       name.textContent = `${slot.active ? "▶ " : ""}${slot.name}${slot.active ? " (사용 중)" : ""}`
       const detail = doc.createElement("div")
       detail.className = "slot-detail"
-      detail.textContent = `${describeSlot(slot.summary)} · ${new Date(slot.updatedAt).toLocaleString("ko-KR")}`
+      const badge = badges.get(slot.id)
+      detail.textContent = `${describeSlot(slot.summary)} · ${new Date(slot.updatedAt).toLocaleString("ko-KR")}${badge !== undefined && badge.text !== "" ? ` · ${badge.text}` : ""}`
       const actions = doc.createElement("div")
       actions.className = "slot-actions"
       actions.append(
@@ -106,6 +160,12 @@ export function mountSlotPanel(options: SlotPanelOptions): void {
           state.playing && slot.active
         )
       )
+      const cloud = options.cloud
+      if (cloud !== undefined && badge?.action === "push") {
+        actions.append(button(doc, "Drive에 올리기", () => run(() => cloud.push(slot.id), "Drive에 올렸습니다."), false))
+      } else if (cloud !== undefined && badge?.action === "pull") {
+        actions.append(button(doc, "Drive에서 받기", () => run(() => cloud.pull(slot.id), "Drive에서 받았습니다."), state.playing && slot.active))
+      }
       row.append(name, detail, actions)
       list.appendChild(row)
     }
@@ -119,6 +179,9 @@ export function mountSlotPanel(options: SlotPanelOptions): void {
   })
 
   controller.subscribe(() => {
+    void render().catch(report)
+  })
+  options.cloud?.subscribe(() => {
     void render().catch(report)
   })
   void render().catch(report)
