@@ -72,3 +72,44 @@ describe("applySlotFiles", () => {
     expect([...files.keys()].map((key) => key.split("/").pop())).toEqual(["xu4rc"])
   })
 })
+
+// User report 2026-10-05: "저장 중 / 저장 종료" kept flickering. Emscripten's
+// FS.readFile opens and closes the file, and every close fires
+// trackingDelegate.onCloseFile -- so reading the working copy (to capture it
+// into a slot) looked like a new save, which synced, which captured, again.
+describe("reading the working copy must not look like a save", () => {
+  it("does not fire the save tracking hook while reading, and restores it afterwards", () => {
+    const { fs, files } = fakeFs({ "party.sav": [1], "monsters.sav": [2] })
+    const closes: string[] = []
+    const realRead = fs.readFile.bind(fs)
+    const hook = (path: string) => closes.push(path)
+    fs.trackingDelegate.onCloseFile = hook
+    fs.readFile = (path: string) => {
+      fs.trackingDelegate.onCloseFile?.(path) // what Emscripten's FS.close does
+      return realRead(path)
+    }
+    readWorkingFiles(fs, PATHS)
+    expect(closes).toEqual([])
+    expect(fs.trackingDelegate.onCloseFile).toBe(hook)
+    expect(files.size).toBe(2)
+  })
+
+  it("capturing after one real save syncs exactly once (no feedback loop)", async () => {
+    const { fs, calls } = fakeFs({ "party.sav": [1] })
+    const realRead = fs.readFile.bind(fs)
+    fs.readFile = (path: string) => {
+      fs.trackingDelegate.onCloseFile?.(path)
+      return realRead(path)
+    }
+    const coordinator = createPersistenceCoordinator()
+    coordinator.attach(fs as PersistenceFS, PATHS, () => true)
+    coordinator.onSaved(() => {
+      readWorkingFiles(fs, PATHS)
+    })
+    fs.trackingDelegate.onCloseFile?.("/persist/.xu4/party.sav") // the engine's own save
+    await coordinator.flush()
+    await Promise.resolve()
+    await coordinator.flush()
+    expect(calls.filter((call) => call === "syncfs")).toHaveLength(1)
+  })
+})

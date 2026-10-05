@@ -58,6 +58,8 @@ export interface SlotControllerOptions extends SlotEnv {
   readonly engine: EngineAdapter
   /** A capture or apply that fails (IndexedDB gone, ...) is reported here instead of throwing into the game. */
   readonly onError?: (error: unknown) => void
+  /** Key-point trace (src/debug-log.ts) for tracing a reported issue. */
+  readonly trace?: (event: string, data?: unknown) => void
 }
 
 export function createSlotController(options: SlotControllerOptions): SlotController {
@@ -82,12 +84,16 @@ export function createSlotController(options: SlotControllerOptions): SlotContro
     options.onError?.(error)
   }
 
+  const trace = options.trace ?? (() => undefined)
+
   function capture(): void {
+    trace("slot-saved-signal", { applying })
     if (applying) return
     pending = pending
       .then(async () => {
         if (applying) return
-        await captureIntoSlot(store, engine.readWorking(), env)
+        const result = await captureIntoSlot(store, engine.readWorking(), env)
+        trace("slot-capture", { slot: result.slotId, backup: result.backupId ?? null })
         changed()
       })
       .catch(fail)
@@ -95,6 +101,7 @@ export function createSlotController(options: SlotControllerOptions): SlotContro
 
   async function apply(files: readonly SlotFile[]): Promise<void> {
     applying = true
+    trace("slot-apply", { files: files.map((file) => `${file.path}:${file.data.length}`) })
     try {
       await engine.apply(files)
     } finally {
@@ -110,7 +117,8 @@ export function createSlotController(options: SlotControllerOptions): SlotContro
 
   return {
     async init() {
-      await migrateInitialSlot(store, engine.readWorking(), env)
+      const migrated = await migrateInitialSlot(store, engine.readWorking(), env)
+      trace("slot-init", { migrated })
       engine.onSaved(capture)
       changed()
     },

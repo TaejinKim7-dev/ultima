@@ -168,6 +168,7 @@ function mountSaveSlots(engine: EngineAdapter): void {
     engine,
     now: () => Date.now(),
     newId: () => crypto.randomUUID(),
+    trace: (event, data) => debugLog.log(event, data),
     onError: (error) => {
       debugLog.log("slot-error", { message: error instanceof Error ? error.message : String(error) })
       notify("[슬롯 오류] 저장 슬롯에 기록하지 못했습니다.\n")
