@@ -39,3 +39,6 @@ tmp/
 
 # Deepwork session state (local only)
 .slim/
+
+# OAuth client downloads contain a client secret -- never commit (2026-10-05).
+client_secret_*.json*

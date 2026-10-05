@@ -1,3 +1,10 @@
+import { createCloudSync } from "./cloud/cloud-sync.ts"
+import { GOOGLE_CLIENT_ID } from "./cloud/config.ts"
+import { createSlotController, type EngineAdapter } from "./saves/slot-controller.ts"
+import { createIndexedDbSlotStore } from "./saves/slot-store.ts"
+import { mountSlotPanel } from "./saves/slot-panel.ts"
+import { createIndexedDbZipStore, forgetZip, rememberZip, restoreCachedZip, type ZipStore } from "./engine/zip-cache.ts"
+import { createDebugLog, debugEnabledFromUrl, type DebugLog, type DebugLogEntry } from "./debug-log.ts"
 import "./shell.css"
 import { createInputQueue, type InputQueue } from "./bridge/input-queue.ts"
 import { createShell } from "./shell.ts"
@@ -30,6 +37,8 @@ declare global {
     ultimaWasmMemory?: { bytes(): number } | undefined
     /** Todo 38: read-only snapshot of dropped/fallback text counters (hashes and ids only). */
     ultimaI18nCoverage?: { snapshot(): CoverageSnapshot } | undefined
+    /** User request 2026-10-05: key-point trace (console output only with ?debug=1). */
+    ultimaDebugLog?: DebugLog | undefined
   }
 }
 
@@ -46,7 +55,31 @@ if (applicationRoot === null) {
   throw new MissingApplicationRootError()
 }
 
-const bridge = createShell(document)
+// `import.meta.env.DEV` is false in `vite build`, so this whole block (and the
+// /__dev-log URL) is removed from the shipped bundle. Under `vite dev` the
+// entries are batched to the dev server's file log (see vite.config.ts).
+let devLogSink: ((entry: DebugLogEntry) => void) | undefined
+if (import.meta.env.DEV) {
+  let pending: DebugLogEntry[] = []
+  let flushTimer: number | undefined
+  devLogSink = (entry) => {
+    pending.push(entry)
+    if (flushTimer === undefined) {
+      flushTimer = window.setTimeout(() => {
+        const batch = pending
+        pending = []
+        flushTimer = undefined
+        void fetch(`${import.meta.env.BASE_URL}__dev-log`, { method: "POST", body: JSON.stringify(batch), keepalive: true }).catch(() => undefined)
+      }, 150)
+    }
+  }
+}
+const debugLog = createDebugLog({
+  enabled: debugEnabledFromUrl(window.location.href),
+  ...(devLogSink !== undefined ? { sink: devLogSink } : {})
+})
+window.ultimaDebugLog = debugLog
+const bridge = createShell(document, debugLog)
 window.ultimaBridge = bridge
 
 // Todo 14: expose the static localization table for e2e/manual QA only.
@@ -101,13 +134,95 @@ document.body.setAttribute("data-bridge-abi-version", String(bridge.abiVersion))
 // romPicker listener in shell.ts still shows its lightweight
 // name/size acknowledgement message independently of this.
 let engineStartAttempted = false
+// User decision 2026-10-05: the player's own zip is remembered in this
+// browser after a successful start and restored on the next page load.
+const zipStore: ZipStore | null = typeof indexedDB === "undefined" ? null : createIndexedDbZipStore(indexedDB)
 const romPickerElement = document.querySelector<HTMLInputElement>("#rom-picker")
 romPickerElement?.addEventListener("change", () => {
   const file = romPickerElement.files?.[0]
-  if (file === undefined || engineStartAttempted) {
+  if (file !== undefined) startWithZip(file, "picker")
+})
+
+document.querySelector<HTMLButtonElement>("#rom-forget")?.addEventListener("click", () => {
+  if (zipStore === null) return
+  void forgetZip(zipStore).then(
+    () => notify("저장된 원본 데이터를 지웠습니다. 다음에는 ultima4.zip을 다시 선택해야 합니다.\n"),
+    () => notify("저장된 원본 데이터를 지우지 못했습니다.\n")
+  )
+})
+
+if (zipStore !== null) {
+  void restoreCachedZip(zipStore).then((file) => {
+    debugLog.log("zip-cache-restore", { found: file !== null, ...(file !== null ? { bytes: file.size } : {}) })
+    if (file === null || engineStartAttempted) return
+    notify(`저장된 원본 데이터로 시작합니다: ${file.name} (${file.size} bytes)\n`)
+    startWithZip(file, "cache")
+  })
+}
+
+// Todo 51: the slot list needs the engine's file system, so it appears once the
+// engine has started. Slots live in this browser only (IndexedDB), never uploaded.
+function mountSaveSlots(engine: EngineAdapter): void {
+  const host = document.querySelector<HTMLElement>("#slot-panel")
+  if (host === null || typeof indexedDB === "undefined") return
+  const controller = createSlotController({
+    store: createIndexedDbSlotStore(indexedDB),
+    engine,
+    now: () => Date.now(),
+    newId: () => crypto.randomUUID(),
+    trace: (event, data) => debugLog.log(event, data),
+    onError: (error) => {
+      debugLog.log("slot-error", { message: error instanceof Error ? error.message : String(error) })
+      notify("[슬롯 오류] 저장 슬롯에 기록하지 못했습니다.\n")
+    }
+  })
+  bridge.onPlayChange((on) => controller.setPlaying(on))
+  // Todo 53: optional Google Drive sync. drive-client.ts is imported only on
+  // "연결" (its own chunk -- the only shipped file allowed to reach Google).
+  const cloud = createCloudSync({
+    slots: controller,
+    loadDrive: () => import("./cloud/drive-client.ts"),
+    clientId: GOOGLE_CLIENT_ID,
+    doc: document,
+    fetch: (input, init) => window.fetch(input, init),
+    confirm: (text) => window.confirm(text),
+    notify,
+    trace: (event, data) => debugLog.log(event, data)
+  })
+  void controller.init().then(
+    () => {
+      debugLog.log("slots-init", {})
+      mountSlotPanel({
+        host,
+        controller,
+        cloud,
+        notify,
+        download: (bytes, filename) => {
+          const url = URL.createObjectURL(new Blob([bytes], { type: "application/octet-stream" }))
+          const link = document.createElement("a")
+          link.href = url
+          link.download = filename
+          link.click()
+          URL.revokeObjectURL(url)
+        }
+      })
+    },
+    (error) => {
+      debugLog.log("slots-init-failed", { message: error instanceof Error ? error.message : String(error) })
+    }
+  )
+}
+
+function notify(text: string): void {
+  bridge.dispatch({ abiVersion: bridge.abiVersion, type: "message", text })
+}
+
+function startWithZip(file: File, source: "picker" | "cache"): void {
+  if (engineStartAttempted) {
     return
   }
   engineStartAttempted = true
+  debugLog.log("engine-start", { source, name: file.name, bytes: file.size })
   document.body.setAttribute("data-engine-starting", "true")
 
   const engineBaseUrl = `${import.meta.env.BASE_URL}engine/`
@@ -152,8 +267,15 @@ romPickerElement?.addEventListener("change", () => {
     )
     .then((result) => {
       document.body.setAttribute("data-engine-started", String(result.started))
+      debugLog.log("engine-start-result", { source, started: result.started, ...(result.started ? {} : { reason: result.reason }) })
+      if (zipStore !== null) {
+        // Remember a zip that started; forget a remembered one that did not.
+        if (result.started && source === "picker") void rememberZip(zipStore, file).catch(() => undefined)
+        if (!result.started && source === "cache") void forgetZip(zipStore).catch(() => undefined)
+      }
       if (result.started) {
         bridge.attachSaveHandlers(result.saveHandlers)
+        mountSaveSlots(result.slotEngine)
         window.ultimaAudio = result.audioBridge
         window.ultimaWasmMemory = { bytes: result.wasmMemoryBytes }
         document.body.setAttribute("data-audio-bridge-ready", String(result.audioBridge !== undefined))
@@ -173,4 +295,4 @@ romPickerElement?.addEventListener("change", () => {
         fatal: true
       })
     })
-})
+}

@@ -27,8 +27,10 @@ import {
   type OverlayRole
 } from "./overlay/overlay-layout.ts"
 import { buildAliasTable, resolveChoiceInput, resolveInput, withTopicAliases, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
-import { createIntroViewReceiver, type IntroViewReceiver } from "./overlay/intro-view.ts"
-import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
+import { createIntroViewReceiver, markSelectedLabel, type IntroViewReceiver } from "./overlay/intro-view.ts"
+import { createTextPromptGate, routeKoreanEnter } from "./i18n/text-prompt-gate.ts"
+import { createDebugLog, type DebugLog } from "./debug-log.ts"
+import { COMMAND_GROUPS, commandAvailable } from "./ui/command-list.ts"
 import { createFocusReturn } from "./i18n/focus-return.ts"
 import { shouldSuppressScrollKey } from "./input/scroll-keys.ts"
 import { createTalkKeywords, type TalkKeywords } from "./dialogue/talk-keywords.ts"
@@ -92,6 +94,8 @@ export interface UltimaBridgeApi {
    * per engine start.
    */
   attachSaveHandlers(handlers: ShellSaveHandlers): void
+  /** Todo 51: tells the save-slot panel when play starts/ends (slots can only be switched before play). */
+  onPlayChange(listener: (on: boolean) => void): void
   /**
    * Todo 18: pass to startEngine()'s `textPrompt` option -- the native
    * ReadStringController open/close lifecycle that gates the Korean
@@ -105,7 +109,7 @@ export interface UltimaBridgeApi {
    * optional so this stays assignable to startup.ts's
    * narrower `TextPromptReceiver`.
    */
-  readonly textPromptReceiver: { opened(id: number, kind?: number): void; closed(id: number): void }
+  readonly textPromptReceiver: { opened(id: number, kind?: number): void; closed(id: number): void; keyWait(on: boolean): void }
   /**
    * Todo 22: pass to startEngine()'s `talkText` option -- real NPC talk
    * lines from vendor/xu4/src/discourse_tlk.cpp, shown in Korean in the
@@ -157,7 +161,7 @@ function requireElement<T extends Element>(doc: Document, selector: string): T {
 }
 
 /** Builds and wires the static shell against `doc`, returning the bridge API. */
-export function createShell(doc: Document): UltimaBridgeApi {
+export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({ enabled: false })): UltimaBridgeApi {
   const dialogueHistory = requireElement<HTMLDivElement>(doc, "#dialogue-history")
   const dialoguePanel = requireElement<HTMLElement>(doc, "#dialogue-panel")
   const promptMarker = requireElement<HTMLElement>(doc, "#dialogue-prompt-marker")
@@ -296,6 +300,10 @@ export function createShell(doc: Document): UltimaBridgeApi {
         if (entry.selectedIndex === index) {
           label.classList.add("selected")
           value.classList.add("selected")
+          // Intro/Configure menus: a "▶" marker on the selected item (user request 2026-10-05).
+          if (element.dataset["role"] === "menu" || element.dataset["role"] === "textview") {
+            label.textContent = markSelectedLabel(row.label)
+          }
         }
         grid.appendChild(label)
         grid.appendChild(value)
@@ -572,6 +580,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
   })
 
   let realSaveHandlers: ShellSaveHandlers | null = null
+  const playListeners: Array<(on: boolean) => void> = []
 
   // Save export: a local Blob download only, never uploaded. Before the
   // engine has started (or if it fails to), there is nothing real to
@@ -704,7 +713,8 @@ export function createShell(doc: Document): UltimaBridgeApi {
     aliasFor: (canonical) => aliasLabelByCanonical.get(canonical),
     setTimer: (fn, ms) => gameWindow.setTimeout(fn, ms),
     clearTimer: (id) => gameWindow.clearTimeout(id as number),
-    onChange: renderTalkKeywords
+    onChange: renderTalkKeywords,
+    trace: (event, data) => debugLog.log(event, data)
   })
 
   // Renders tk.view() into #talk-keywords using createElement/textContent
@@ -718,6 +728,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
       return
     }
     lastTalkKeywordsSignature = signature
+    debugLog.log("tk-view", { active: view.active, speaker: view.speaker, groups: view.groups.map((group) => group.title), keyWaiting: tk.keyWaiting() })
     talkKeywordsRegion.hidden = !view.active
     if (!view.active) {
       talkKeywordsRegion.removeAttribute("data-speaker")
@@ -786,10 +797,102 @@ export function createShell(doc: Document): UltimaBridgeApi {
     if (label === undefined) {
       return
     }
+    debugLog.log("chip-click", { label, prompt: textPromptGate.currentPromptId(), kind: openPromptKind, keyWaiting: tk.keyWaiting() })
+    // User report 2026-10-05: right after a reply the engine can be waiting
+    // for a key (no prompt open yet). Rejecting the click was a dead end, so
+    // the click continues the conversation and the word is sent as soon as
+    // the next prompt opens.
+    if (textPromptGate.currentPromptId() === null && tk.keyWaiting()) {
+      debugLog.log("chip-continue", { label })
+      pendingChipLabel = label
+      // Drop it if no prompt opens soon (the conversation ended instead).
+      gameWindow.setTimeout(() => {
+        if (pendingChipLabel === label) pendingChipLabel = null
+      }, 3000)
+      synthesizeKeystrokes("", true)
+      return
+    }
     koreanKeywordInput.value = label
     textPromptGate.noteInput()
     submitKoreanKeyword()
   })
+
+  // A chip clicked during a key wait, submitted when the next prompt opens.
+  let pendingChipLabel: string | null = null
+  function submitPendingChip(): void {
+    const label = pendingChipLabel
+    pendingChipLabel = null
+    if (label === null) return
+    gameWindow.setTimeout(() => {
+      debugLog.log("chip-pending-submit", { label })
+      koreanKeywordInput.value = label
+      textPromptGate.noteInput()
+      submitKoreanKeyword()
+    }, 0)
+  }
+
+  // Todo 52: the Korean command list. Buttons are built once; their enabled
+  // state follows play / prompt / modal. A click sends the key through the same
+  // synthesized-keystroke path the Korean keyword field uses, and never takes
+  // focus (mousedown is prevented), so the keyboard keeps going to the game.
+  const commandGroupsHost = requireElement<HTMLElement>(doc, "#command-groups")
+  let commandPlaying = false
+  let commandModal = false
+  const commandButtons: HTMLButtonElement[] = []
+  for (const group of COMMAND_GROUPS) {
+    const section = doc.createElement("div")
+    const title = doc.createElement("div")
+    title.className = "command-group-title"
+    title.textContent = group.title
+    const chips = doc.createElement("div")
+    chips.className = "command-chips"
+    for (const command of group.commands) {
+      const button = doc.createElement("button")
+      button.type = "button"
+      button.tabIndex = -1
+      button.className = "command-chip"
+      button.dataset["key"] = command.key
+      button.title = command.hint
+      const keyBadge = doc.createElement("span")
+      keyBadge.className = "command-chip-key"
+      keyBadge.textContent = command.key.toUpperCase()
+      const label = doc.createElement("span")
+      label.textContent = command.label
+      button.appendChild(keyBadge)
+      button.appendChild(label)
+      chips.appendChild(button)
+      commandButtons.push(button)
+    }
+    section.appendChild(title)
+    section.appendChild(chips)
+    commandGroupsHost.appendChild(section)
+  }
+  function commandsEnabled(): boolean {
+    return commandAvailable({ playing: commandPlaying, promptOpen: textPromptGate.currentPromptId() !== null, modal: commandModal })
+  }
+  function updateCommandPanel(): void {
+    const enabled = commandsEnabled()
+    for (const button of commandButtons) {
+      button.setAttribute("aria-disabled", String(!enabled))
+    }
+  }
+  commandGroupsHost.addEventListener("mousedown", (event: MouseEvent) => {
+    event.preventDefault()
+  })
+  commandGroupsHost.addEventListener("click", (event: MouseEvent) => {
+    const target = event.target
+    const button = target instanceof Element ? target.closest<HTMLButtonElement>("button.command-chip") : null
+    const key = button?.dataset["key"]
+    if (key === undefined) {
+      return
+    }
+    debugLog.log("command-click", { key, enabled: commandsEnabled() })
+    if (!commandsEnabled()) {
+      return
+    }
+    synthesizeKeystrokes(key, false)
+  })
+  updateCommandPanel()
 
   // The kind of the innermost open native prompt epoch. The top of the gate's
   // open-prompt stack is by construction the most recently opened one, so this
@@ -840,6 +943,13 @@ export function createShell(doc: Document): UltimaBridgeApi {
     const raw = koreanKeywordInput.value
     koreanKeywordInput.value = ""
     const promptDecision = textPromptGate.consumeSubmit()
+    debugLog.log("korean-submit", {
+      raw,
+      prompt: textPromptGate.currentPromptId(),
+      kind: openPromptKind,
+      ok: promptDecision.ok,
+      ...(promptDecision.ok ? {} : { reason: promptDecision.message })
+    })
     if (!promptDecision.ok) {
       dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text: `[한글 입력 거부] ${promptDecision.message}\n` })
       return
@@ -858,6 +968,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
     const result = isChoiceEpoch
       ? resolveChoiceInput(raw, koreanAliasTable)
       : resolveInput("text", raw, withTopicAliases(koreanAliasTable, tk.topicAliases()))
+    debugLog.log("korean-resolve", { raw, ok: result.ok, ...(result.ok ? { keys: result.text } : { reason: result.message }) })
     if (result.ok) {
       tk.submitted(result.text)
       // Step 9: the native prompt echoes the synthesized ASCII back through
@@ -894,6 +1005,16 @@ export function createShell(doc: Document): UltimaBridgeApi {
         return // our own synthesized keystrokes must reach the real game
       }
       if (doc.activeElement !== koreanKeywordInput) {
+        return
+      }
+      // User report 2026-10-05 (Lord British): with no text prompt open the
+      // engine is waiting for a key (a paused page), so Enter goes to the game
+      // -- the typed Korean stays in the box for the next prompt.
+      if (keyboardEvent.key === "Enter" && !keyboardEvent.isComposing && routeKoreanEnter(textPromptGate) === "game") {
+        debugLog.log("korean-enter", { route: "game", pageMode: messageArea.isPageMode() })
+        if (messageArea.isPageMode()) {
+          messageArea.nextPage()
+        }
         return
       }
       keyboardEvent.stopImmediatePropagation()
@@ -945,6 +1066,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
         return
       }
       if (messageArea.isPageMode()) {
+        debugLog.log("page-next", { key: keyboardEvent.key })
         messageArea.nextPage()
       }
     },
@@ -1040,13 +1162,19 @@ export function createShell(doc: Document): UltimaBridgeApi {
     attachSaveHandlers(handlers) {
       realSaveHandlers = handlers
     },
+    onPlayChange(listener) {
+      playListeners.push(listener)
+    },
     textPromptReceiver: {
       // Todo 30: the kind rides along with the open so a `readChoice()` epoch
       // can be answered with a single key; the gate itself is unchanged.
       // Todo 48: the keyword menu follows the same open/close lifecycle.
       opened: (id, kind) => {
+        debugLog.log("prompt-opened", { id, kind: kind ?? U4_WEB_PROMPT_TEXT })
         openPromptKind = kind ?? U4_WEB_PROMPT_TEXT
         textPromptGate.opened(id)
+        updateCommandPanel()
+        submitPendingChip()
         focusReturn.promptOpened()
         tk.promptOpened(kind ?? U4_WEB_PROMPT_TEXT)
         // Step 11: a prompt opening means the engine left any waitAnyKey
@@ -1056,8 +1184,14 @@ export function createShell(doc: Document): UltimaBridgeApi {
           panelState = resumePanel(panelState)
         }
       },
+      keyWait: (on) => {
+        debugLog.log("key-wait", { on })
+        tk.keyWait(on)
+      },
       closed: (id) => {
+        debugLog.log("prompt-closed", { id })
         textPromptGate.closed(id)
+        updateCommandPanel()
         focusReturn.promptClosed()
         tk.promptClosed()
         // Step 9: the player's typed keyword (Enter not required) stays on
@@ -1087,6 +1221,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
         }
       },
       input: (text) => {
+        debugLog.log("talk-input-echo", { text })
         tk.inputEcho(text)
         // Step 9: with the message-area overlay visible, the typed keyword is
         // already echoed there (screenReceiver.input + commitEcho on close);
@@ -1111,10 +1246,15 @@ export function createShell(doc: Document): UltimaBridgeApi {
       play: (on) => {
         messageArea.applyPlay(on)
         windOverlay.applyPlay(on)
+        commandPlaying = on
+        updateCommandPanel()
+        for (const listener of playListeners) listener(on)
       },
       modal: (on) => {
         messageArea.applyModal(on)
         windOverlay.applyModal(on)
+        commandModal = on
+        updateCommandPanel()
       },
       crlf: () => messageArea.applyCrlf(),
       wind: (mode, direction) => windOverlay.wind(mode, direction)

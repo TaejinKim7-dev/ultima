@@ -17,7 +17,9 @@ const TABLE: Record<string, string> = {
   "MOONGLOW:12:look": "키 큰 마법사.",
   "MOONGLOW:12:pronoun": "그",
   "MOONGLOW:12:name": "칼라브리니",
-  "MOONGLOW:12:health": "좋다네."
+  "MOONGLOW:12:health": "좋다네.",
+  "BRITAIN:3:inn": "우리에게는\n훌륭한 여관이\n있다네.",
+  "BRITAIN:3:long": "첫 문단\n둘째 줄.\n\n다음 문단."
 }
 const deps: TalkComposeDeps = {
   templateId: (literal) => TEMPLATES[literal],
@@ -70,5 +72,19 @@ describe("composeTalkLine", () => {
 describe("composeTalkInput", () => {
   it("echoes the player's typed keyword as its own line", () => {
     expect(composeTalkInput("health")).toBe("> health\n")
+  })
+})
+
+// User report 2026-10-05: the TLK translations carry line breaks that copy the
+// original 16-column layout, so a short reply showed as three lines on a wide
+// screen. Inside a paragraph a single break becomes a space; a blank line
+// (paragraph / paging chunk) stays.
+describe("composeTalkLine reflows TLK replies", () => {
+  it("joins single line breaks inside a reply with a space", () => {
+    expect(composeTalkLine("%s\n", ["@BRITAIN:3:inn"], deps)).toBe("우리에게는 훌륭한 여관이 있다네.\n")
+  })
+
+  it("keeps blank-line paragraph breaks", () => {
+    expect(composeTalkLine("%s\n", ["@BRITAIN:3:long"], deps)).toBe("첫 문단 둘째 줄.\n\n다음 문단.\n")
   })
 })

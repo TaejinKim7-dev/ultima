@@ -293,3 +293,71 @@ describe("speaker switches", () => {
     expect(TALK_END_DELAY_MS).toBe(400)
   })
 })
+// User report 2026-10-05: during the ask-pause (OP_PAUSE_ASK -> native
+// waitAnyKey) the keyword menu vanished after TALK_END_DELAY_MS and only came
+// back when a click advanced the engine. The engine now reports the key wait.
+describe("keyword menu during a native key wait", () => {
+  it("stays visible while the engine waits for a key after a reply", () => {
+    const h = harness()
+    openNpcConversation(h.tk)
+    h.tk.inputEcho("job")
+    h.tk.promptClosed()
+    h.tk.keyWait(true)
+    h.advance(TALK_END_DELAY_MS * 10)
+    expect(h.tk.view().active).toBe(true)
+  })
+
+  it("ends normally if no prompt reopens after the key wait", () => {
+    const h = harness()
+    openNpcConversation(h.tk)
+    h.tk.promptClosed()
+    h.tk.keyWait(true)
+    h.tk.keyWait(false)
+    h.advance(TALK_END_DELAY_MS)
+    expect(h.tk.view().active).toBe(false)
+  })
+
+  it("ignores key waits when no conversation is open", () => {
+    const h = harness()
+    h.tk.keyWait(true)
+    expect(h.tk.view().active).toBe(false)
+  })
+})
+
+// User report 2026-10-05 (Sage Deli): while the engine waits for a one-key
+// yes/no choice, clicking a topic chip ("보석") was rejected with
+// "[한글 입력 거부] 이 낱말에 대응하는 선택지 답을 찾을 수 없습니다". During a
+// choice prompt only the answer chips make sense.
+describe("keyword menu during a one-key choice prompt", () => {
+  it("shows only the answer chips (예/아니오), not topics or common words", () => {
+    const h = harness()
+    openNpcConversation(h.tk)
+    h.tk.promptOpened(PROMPT_KIND_CHOICE)
+    const titles = h.tk.view().groups.map((g) => g.title)
+    expect(titles).toEqual(["대답"])
+  })
+
+  it("brings the topic chips back once the choice prompt closes and a text prompt opens", () => {
+    const h = harness()
+    openNpcConversation(h.tk)
+    h.tk.promptOpened(PROMPT_KIND_CHOICE)
+    h.tk.promptClosed()
+    h.tk.promptOpened(0)
+    expect(h.tk.view().groups.map((g) => g.title)).toContain("공통")
+  })
+})
+
+// User report 2026-10-05: during the key wait after a reply, a chip click was
+// rejected ("지금은 열린 입력 요청이 없습니다"). The shell needs to know the
+// engine is waiting for a key so a click can continue it instead.
+describe("keyWaiting", () => {
+  it("is true only between keyWait(true) and keyWait(false) of an open conversation", () => {
+    const h = harness()
+    expect(h.tk.keyWaiting()).toBe(false)
+    openNpcConversation(h.tk)
+    h.tk.keyWait(true)
+    expect(h.tk.keyWaiting()).toBe(true)
+    h.tk.keyWait(false)
+    expect(h.tk.keyWaiting()).toBe(false)
+  })
+})

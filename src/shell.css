@@ -399,20 +399,20 @@ body {
 
   .side-column .dialogue-panel {
     flex: 1 1 auto;
-    min-height: 0;
+    min-height: 6rem; /* keeps the history readable while the keyword menu grows */
     max-height: none;
   }
 
   /*
-   * Todo 48: the keyword menu shares the column with the history: it can
-   * grow (a castle list is long), so it caps at half the column and
-   * scrolls internally instead of pushing the game out of view.
+   * Todo 48 / user request 2026-10-05: the keyword menu is never clipped and
+   * never scrolls -- it takes the height of all its chips. The history panel
+   * (flex 1 1 auto, scrolls internally) gives up the space
+   * instead, but keeps a readable floor.
    */
   .side-column .talk-keywords {
-    flex: 0 1 auto;
-    min-height: 0;
-    max-height: 50%;
-    overflow-y: auto;
+    flex: 0 0 auto;
+    max-height: none;
+    overflow: visible;
   }
 
   .data-controls {
@@ -478,9 +478,14 @@ body {
   background: #f2f2f2; /* a solid block caret, readable at any font size */
 }
 
-/* Input echoes (typed keyword / accepted choice key) are slightly dimmer. */
-.ma-input {
-  opacity: 0.85;
+/*
+ * The player's own words (typed keyword / accepted choice key, live and
+ * committed) get their own colour so they read apart from what the NPC says
+ * (user request 2026-10-05). `.messagearea` raises specificity above the
+ * `.ma-color-*` classes on the same span.
+ */
+.messagearea .ma-input {
+  color: #7fd8ff;
 }
 
 /*
@@ -545,4 +550,158 @@ body {
 
 .windheading[hidden] {
   display: none;
+}
+
+/* Todo 51: the save-slot list. */
+.slot-panel {
+  border: 1px solid var(--ultima-border);
+  background: var(--ultima-panel-bg);
+  padding: 0.5rem 0.75rem;
+}
+
+.slot-panel h2 {
+  margin: 0 0 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.slot-note {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.slot-toolbar,
+.slot-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.slot-list {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.slot-row {
+  border: 1px solid var(--ultima-border);
+  border-radius: 0.35rem;
+  padding: 0.35rem 0.5rem;
+}
+
+.slot-active {
+  background: rgba(214, 194, 74, 0.12);
+}
+
+.slot-name {
+  font-weight: 600;
+}
+
+/* Todo 53: the optional Google Drive bar inside the slot panel. */
+.slot-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px dashed var(--ultima-border);
+  border-radius: 0.35rem;
+}
+
+.slot-cloud-label {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  flex: 1 1 18rem;
+}
+
+.slot-remote {
+  border-style: dashed;
+}
+
+.slot-detail {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin: 0.15rem 0 0.3rem;
+}
+
+@media (min-width: 1000px) {
+  .slot-panel {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Todo 52: the Korean command list for first-time players. */
+.command-panel {
+  border: 1px solid var(--ultima-border);
+  background: var(--ultima-panel-bg);
+  padding: 0.5rem 0.75rem;
+}
+
+.command-panel > summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.command-group-title {
+  margin: 0.6rem 0 0.25rem;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.command-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.command-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--ultima-border);
+  border-radius: 0.35rem;
+  background: var(--ultima-bg);
+  color: var(--ultima-text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.command-chip[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.command-chip-key {
+  font-size: 0.75rem;
+  padding: 0 0.3rem;
+  border: 1px solid var(--ultima-border);
+  border-radius: 0.2rem;
+  opacity: 0.9;
+}
+
+.command-note {
+  margin: 0.6rem 0 0;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+@media (min-width: 1000px) {
+  .command-panel {
+    grid-column: 1 / -1;
+  }
+}
+
+/* User decision 2026-10-05: the original-data notice under the zip picker. */
+.rom-notice {
+  margin: 0.35rem 0 0;
+  font-size: 0.75rem;
+  opacity: 0.75;
+  max-width: 48rem;
 }

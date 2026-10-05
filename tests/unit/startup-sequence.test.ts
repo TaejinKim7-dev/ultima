@@ -47,6 +47,7 @@ function makeFakeModule(syncfsError: Error | null = null): {
       readdir() {
         return []
       },
+      unlink() {},
       syncfs(_populate: boolean, callback: (error: Error | null) => void) {
         callback(syncfsError)
       }

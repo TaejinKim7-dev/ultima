@@ -93,3 +93,38 @@ describe("createTextPromptGate", () => {
     expect(STALE_TEXT_PROMPT_MESSAGE).toContain("입력 요청이 끝났습니다")
   })
 })
+
+// User report 2026-10-05 (Lord British): a long answer pauses between pages
+// (native waitAnyKey, no text prompt open). Enter pressed in the Korean box
+// was swallowed and answered with "[한글 입력 거부]", so the page never
+// advanced. With no prompt open, Enter must go to the game instead.
+import { routeKoreanEnter } from "../../src/i18n/text-prompt-gate.ts"
+
+describe("routeKoreanEnter", () => {
+  it("passes Enter to the game while no text prompt is open (a paused page)", () => {
+    const gate = createTextPromptGate()
+    expect(routeKoreanEnter(gate)).toBe("game")
+  })
+
+  it("submits the Korean keyword while a prompt is open", () => {
+    const gate = createTextPromptGate()
+    gate.opened(7)
+    expect(routeKoreanEnter(gate)).toBe("submit")
+  })
+
+  it("goes back to the game once that prompt closes", () => {
+    const gate = createTextPromptGate()
+    gate.opened(7)
+    gate.closed(7)
+    expect(routeKoreanEnter(gate)).toBe("game")
+  })
+
+  it("still submits (to show the stale notice) text typed for a prompt that has since closed", () => {
+    const gate = createTextPromptGate()
+    gate.opened(7)
+    gate.noteInput()
+    gate.closed(7)
+    expect(routeKoreanEnter(gate)).toBe("submit")
+    expect(gate.consumeSubmit()).toEqual({ ok: false, message: STALE_TEXT_PROMPT_MESSAGE })
+  })
+})

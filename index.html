@@ -88,6 +88,30 @@
       </div>
 
       <!--
+        Todo 51 (user request 2026-10-05): named save slots, kept in this
+        browser (IndexedDB). src/main.ts shows it once the engine has started;
+        src/saves/slot-panel.ts renders it.
+      -->
+      <section id="slot-panel" class="slot-panel" hidden aria-label="저장 슬롯"></section>
+
+      <!--
+        Todo 52 (user request 2026-10-05): the game's one-letter commands in
+        Korean for first-time players. src/shell.ts fills #command-groups from
+        src/ui/command-list.ts; each button sends its key to the game and is
+        disabled while no command can run (not playing, a prompt is open, or
+        the pause menu is up).
+      -->
+      <details id="command-panel" class="command-panel" open>
+        <summary>명령어 도움말 &mdash; 처음이라면 여기서 눌러 보세요</summary>
+        <div id="command-groups"></div>
+        <p class="command-note">
+          방향키로 걷습니다. 명령을 누르면 게임이 방향이나 대상을 물어봅니다. 그때는 키보드로 답하세요
+          (예: 대화 &rarr; 방향키). 주문은 <b>주문 시전</b> &rarr; 파티원 번호(1~8) &rarr; 주문 글자 순서입니다.
+          게임 안 도움말은 Alt+H입니다.
+        </p>
+      </details>
+
+      <!--
         Original game data is never bundled and never uploaded anywhere --
         the user selects their own local ultima4.zip purely through the
         File API. Save export/import are local Blob download/upload only.
@@ -96,6 +120,12 @@
         <div>
           <label for="rom-picker">원본 ultima4.zip 선택 (로컬 파일, 업로드하지 않음)</label>
           <input type="file" id="rom-picker" accept=".zip" />
+          <button id="rom-forget" type="button" title="이 브라우저에 저장해 둔 원본 데이터를 지웁니다">저장된 원본 지우기</button>
+          <p id="rom-notice" class="rom-notice">
+            이 사이트는 Ultima IV 원본 데이터를 제공하지 않으며, 플레이어가 원본 <code>ultima4.zip</code>을 정당하게
+            가지고 있다고 가정합니다. 선택한 파일은 어디에도 업로드되지 않고 이 브라우저 안에만 저장되어, 다음부터는
+            다시 고르지 않아도 됩니다.
+          </p>
         </div>
         <div class="save-controls">
           <button id="save-export" type="button">세이브 내보내기</button>

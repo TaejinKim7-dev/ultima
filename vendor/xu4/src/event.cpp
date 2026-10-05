@@ -57,6 +57,13 @@ EM_JS(void, u4_web_text_prompt_opened, (int id, int kind), {
 EM_JS(void, u4_web_text_prompt_closed, (int id), {
     if (Module.u4TextPrompt) Module.u4TextPrompt.closed(id);
 });
+/*
+ * User report 2026-10-05: the shell must tell a native "press any key" pause
+ * (e.g. discourse_tlk.cpp's OP_PAUSE_ASK) from the end of a conversation.
+ */
+EM_JS(void, u4_web_key_wait, (int on), {
+    if (Module.u4TextPrompt && typeof Module.u4TextPrompt.keyWait === "function") Module.u4TextPrompt.keyWait(on !== 0);
+});
 
 /*
  * Todo 49: the in-game message-area overlay echoes what the player is typing
@@ -1088,7 +1095,13 @@ void EventHandler::waitAnyKey()
 {
 #if 1
     AnyKeyController ctrl;
+#ifdef __EMSCRIPTEN__
+    u4_web_key_wait(1);
+#endif
     ctrl.wait();
+#ifdef __EMSCRIPTEN__
+    u4_web_key_wait(0);
+#endif
 #else
     ReadChoiceController ctrl("");
     xu4.eventHandler->pushController(&ctrl);
@@ -1102,7 +1115,13 @@ void EventHandler::waitAnyKey()
 void EventHandler::waitAnyKeyTimeout()
 {
     AnyKeyController ctrl;
+#ifdef __EMSCRIPTEN__
+    u4_web_key_wait(1);
+#endif
     ctrl.waitTimeout();
+#ifdef __EMSCRIPTEN__
+    u4_web_key_wait(0);
+#endif
 }
 
 /*

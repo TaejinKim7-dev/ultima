@@ -245,3 +245,43 @@ describe("exportSaveArchive / importSaveArchive", () => {
     expect(saveStateEvents.some((e) => e.type === "save-state" && e.status === "error")).toBe(true)
   })
 })
+
+// Todo 51 (save slots): the shell captures the working copy into the active
+// slot after every successful save, so the coordinator reports saves.
+describe("PersistenceCoordinator.onSaved", () => {
+  it("calls the listener after a successful sync, and not after a failed one", async () => {
+    const ok = makeFakeFs()
+    const coordinator = createPersistenceCoordinator()
+    coordinator.attach(ok.fs, PATHS, collectEvents().emit)
+    let saved = 0
+    coordinator.onSaved(() => {
+      saved += 1
+    })
+    ok.fs.trackingDelegate.onCloseFile?.("/persist/profile/party.sav")
+    await coordinator.flush()
+    expect(saved).toBe(1)
+
+    const bad = makeFakeFs(new Error("idb failed"))
+    const failing = createPersistenceCoordinator()
+    failing.attach(bad.fs, PATHS, collectEvents().emit)
+    let failedSaved = 0
+    failing.onSaved(() => {
+      failedSaved += 1
+    })
+    bad.fs.trackingDelegate.onCloseFile?.("/persist/profile/party.sav")
+    await failing.flush()
+    expect(failedSaved).toBe(0)
+  })
+
+  it("ignores a throwing listener", async () => {
+    const { fs } = makeFakeFs()
+    const coordinator = createPersistenceCoordinator()
+    coordinator.attach(fs, PATHS, collectEvents().emit)
+    coordinator.onSaved(() => {
+      throw new Error("listener bug")
+    })
+    fs.trackingDelegate.onCloseFile?.("/persist/profile/party.sav")
+    await expect(coordinator.flush()).resolves.toBeUndefined()
+    expect(coordinator.status).toBe("saved")
+  })
+})
