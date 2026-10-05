@@ -551,3 +551,11 @@ body {
 .windheading[hidden] {
   display: none;
 }
+
+/* User decision 2026-10-05: the original-data notice under the zip picker. */
+.rom-notice {
+  margin: 0.35rem 0 0;
+  font-size: 0.75rem;
+  opacity: 0.75;
+  max-width: 48rem;
+}

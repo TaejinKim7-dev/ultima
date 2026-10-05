@@ -1,3 +1,4 @@
+import { createIndexedDbZipStore, forgetZip, rememberZip, restoreCachedZip, type ZipStore } from "./engine/zip-cache.ts"
 import { createDebugLog, debugEnabledFromUrl, type DebugLog } from "./debug-log.ts"
 import "./shell.css"
 import { createInputQueue, type InputQueue } from "./bridge/input-queue.ts"
@@ -106,13 +107,42 @@ document.body.setAttribute("data-bridge-abi-version", String(bridge.abiVersion))
 // romPicker listener in shell.ts still shows its lightweight
 // name/size acknowledgement message independently of this.
 let engineStartAttempted = false
+// User decision 2026-10-05: the player's own zip is remembered in this
+// browser after a successful start and restored on the next page load.
+const zipStore: ZipStore | null = typeof indexedDB === "undefined" ? null : createIndexedDbZipStore(indexedDB)
 const romPickerElement = document.querySelector<HTMLInputElement>("#rom-picker")
 romPickerElement?.addEventListener("change", () => {
   const file = romPickerElement.files?.[0]
-  if (file === undefined || engineStartAttempted) {
+  if (file !== undefined) startWithZip(file, "picker")
+})
+
+document.querySelector<HTMLButtonElement>("#rom-forget")?.addEventListener("click", () => {
+  if (zipStore === null) return
+  void forgetZip(zipStore).then(
+    () => notify("저장된 원본 데이터를 지웠습니다. 다음에는 ultima4.zip을 다시 선택해야 합니다.\n"),
+    () => notify("저장된 원본 데이터를 지우지 못했습니다.\n")
+  )
+})
+
+if (zipStore !== null) {
+  void restoreCachedZip(zipStore).then((file) => {
+    debugLog.log("zip-cache-restore", { found: file !== null, ...(file !== null ? { bytes: file.size } : {}) })
+    if (file === null || engineStartAttempted) return
+    notify(`저장된 원본 데이터로 시작합니다: ${file.name} (${file.size} bytes)\n`)
+    startWithZip(file, "cache")
+  })
+}
+
+function notify(text: string): void {
+  bridge.dispatch({ abiVersion: bridge.abiVersion, type: "message", text })
+}
+
+function startWithZip(file: File, source: "picker" | "cache"): void {
+  if (engineStartAttempted) {
     return
   }
   engineStartAttempted = true
+  debugLog.log("engine-start", { source, name: file.name, bytes: file.size })
   document.body.setAttribute("data-engine-starting", "true")
 
   const engineBaseUrl = `${import.meta.env.BASE_URL}engine/`
@@ -157,6 +187,12 @@ romPickerElement?.addEventListener("change", () => {
     )
     .then((result) => {
       document.body.setAttribute("data-engine-started", String(result.started))
+      debugLog.log("engine-start-result", { source, started: result.started, ...(result.started ? {} : { reason: result.reason }) })
+      if (zipStore !== null) {
+        // Remember a zip that started; forget a remembered one that did not.
+        if (result.started && source === "picker") void rememberZip(zipStore, file).catch(() => undefined)
+        if (!result.started && source === "cache") void forgetZip(zipStore).catch(() => undefined)
+      }
       if (result.started) {
         bridge.attachSaveHandlers(result.saveHandlers)
         window.ultimaAudio = result.audioBridge
@@ -178,4 +214,4 @@ romPickerElement?.addEventListener("change", () => {
         fatal: true
       })
     })
-})
+}
