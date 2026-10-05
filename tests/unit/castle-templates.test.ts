@@ -5,7 +5,7 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { afterEach, describe, expect, it } from "vitest"
-import { composeTalkLine, MISSING_TLK_TRANSLATION, type TalkComposeDeps } from "../../src/dialogue/talk-compose.ts"
+import { composeTalkLine, MISSING_TLK_TRANSLATION, reflowSoftBreaks, type TalkComposeDeps } from "../../src/dialogue/talk-compose.ts"
 import { GENERATED_I18N_ENTRIES, GENERATED_TALK_TEMPLATES } from "../../src/i18n/generated/strings.ts"
 
 // Todo 24 (data side): Lord British / Hawkwind (vendor/xu4/src/
@@ -191,7 +191,8 @@ describe("panel fragment composition for castle/codex (real generated tables)", 
   })
 
   it("Lord British keyword reply and the help text are Korean, from ids and from the code literal", () => {
-    expect(compose("%s", "@avatar.exe:lordBritishText:0")).toBe(koreanOf("avatar.exe:lordBritishText:0"))
+    // 2026-10-05: TLK replies are reflowed (single line breaks -> spaces) for the wider screen.
+    expect(compose("%s", "@avatar.exe:lordBritishText:0")).toBe(reflowSoftBreaks(koreanOf("avatar.exe:lordBritishText:0")))
     expect(compose(HELP_TO_SURVIVE)).toMatch(/\p{Script=Hangul}/u)
     expect(compose(HELP_TO_SURVIVE)).not.toContain("hostile")
   })

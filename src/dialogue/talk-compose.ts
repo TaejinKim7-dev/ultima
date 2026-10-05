@@ -31,12 +31,22 @@ export interface TalkComposeDeps {
   onMiss?: (miss: CoverageMiss) => void
 }
 
+/**
+ * The TLK translations break lines where the original 16-column screen did
+ * (user report 2026-10-05: a short reply showed as three lines). Inside a
+ * paragraph a single line break becomes a space; a blank line (a paragraph or
+ * a paging chunk) is kept.
+ */
+export function reflowSoftBreaks(text: string): string {
+  return text.replace(/([^\n]) *\n *(?=[^\n])/g, "$1 ")
+}
+
 function resolveArgument(arg: string | null, position: number, templateId: string | undefined, deps: TalkComposeDeps): string {
   if (arg === null) {
     return ""
   }
   if (arg.startsWith(TLK_ID_PREFIX)) {
-    return deps.resolve(arg.slice(TLK_ID_PREFIX.length), MISSING_TLK_TRANSLATION)
+    return reflowSoftBreaks(deps.resolve(arg.slice(TLK_ID_PREFIX.length), MISSING_TLK_TRANSLATION))
   }
   const nameId = deps.nameId?.(arg)
   if (nameId !== undefined) {
