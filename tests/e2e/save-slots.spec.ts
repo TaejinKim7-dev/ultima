@@ -74,7 +74,8 @@ test.describe("Todo 51: save slots", () => {
     await bootAndSelectZip(page, buffer)
     await expect(page.locator("#slot-panel")).toBeVisible({ timeout: 20_000 })
     expect(await createCharacterAndWaitForSave(page), "character creation never reported 저장 완료").toBe(true)
-    await expect.poll(async () => (await slotNames(page)).join("|"), { timeout: 15_000 }).toContain("Avatar")
+    // The engine stores the typed name lower-cased ("avatar").
+    await expect.poll(async () => (await slotNames(page)).join("|"), { timeout: 15_000 }).toMatch(/avatar/i)
     expect((await slotNames(page)).some((name) => name.includes("사용 중"))).toBe(true)
 
     // 2. No feedback loop: after the capture settles, no further "saved"
@@ -89,7 +90,7 @@ test.describe("Todo 51: save slots", () => {
     //    then the first slot can be selected again.
     await bootAndSelectZip(page, buffer)
     await expect(page.locator("#slot-panel")).toBeVisible({ timeout: 20_000 })
-    await expect.poll(async () => (await slotNames(page)).join("|"), { timeout: 15_000 }).toContain("Avatar")
+    await expect.poll(async () => (await slotNames(page)).join("|"), { timeout: 15_000 }).toMatch(/avatar/i)
 
     await page.locator("#slot-panel .slot-toolbar button", { hasText: "새 슬롯" }).click()
     await expect.poll(async () => (await slotNames(page)).length, { timeout: 10_000 }).toBe(2)
@@ -100,7 +101,7 @@ test.describe("Todo 51: save slots", () => {
     expect(applyEmpty.files).toEqual([])
     await expect(emptyRow).toContainText("사용 중")
 
-    const avatarRow = page.locator("#slot-panel .slot-row", { hasText: "Avatar" })
+    const avatarRow = page.locator("#slot-panel .slot-row", { hasText: /avatar/i })
     await avatarRow.locator("button", { hasText: "선택" }).click()
     await expect(avatarRow).toContainText("사용 중", { timeout: 10_000 })
     const applyAvatar = (await debugEntries(page, "slot-apply")).at(-1)!.data as { files: string[] }
