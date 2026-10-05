@@ -2235,3 +2235,36 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 - Playwright 브라우저 설치 확인: `~/.cache/ms-playwright/`에 chromium-1169, firefox-1482, webkit-2158.
 - 네이티브 사전 조건: `libpulse-dev`·`libvorbis-dev`·`libflac-dev` 설치됨(dpkg), `scripts/deps-host.mjs`에 다운로드 없음(apt 안내 문구만) → 사용자 승인 없이 진행 가능. 메인 `build/host`에 `boron`·`faun`·`xu4-src` 존재(재빌드 여부는 deps:host가 결정).
 - 3브라우저 대상 스펙 9개 전부 존재: korean-wind-heading, status-overlay, korean-message-area, korean-intro-overlay, korean-status-overlay, dialogue-panel, dialogue-side-column, pages-static-smoke, talk-keywords (`audio`·`memory-smoke`만 browser 분기 있음).
+
+---
+
+## 2026-10-05 15:10 — Todo 50 마무리: 3브라우저·네이티브 통과, 문서 갱신 (브랜치 todo-50-pixel-font)
+
+### 1. 목표와 범위
+Todo 50: 게임 안 한국어 전체(상태창·statussummary·Ztats·인트로·메뉴·오른쪽 대화 패널·키워드 칩·메시지 영역)에 Neo둥근모 적용 + 바람·던전 방향 줄 한국어 덮개. 이 merge로 Stage 3(Todo 49 Phase B)도 처음 main에 들어간다.
+
+### 2. 확정된 결정
+- 글꼴 크기: `computeOverlayFontPx(scaleY, dpr)` = 행 높이에 들어가는 가장 큰 16 디바이스 px 배수(4c899e3).
+- cheat 메뉴 미번역 해시 3건(`cheat.cpp:119/129/139/335`)은 번역하지 않음 — `docs/WEB_PORT.md:108` 디버그 전용 출력 정책.
+- Hawkwind flake 안정화와 audit-dist 폰트 라이선스 검사는 Todo 50 밖 후속 후보(결정 필요).
+
+### 3. 커밋 (main `ca3cd6d` 이후 이 브랜치)
+- 구현 `4c899e3`; opencode 스펙 `c93e690`·`be4353c`(merge `6d08502`) + 타입 수정 `e9c96e1`; computed font-family e2e `7b7cb44`(merge) + `.talk-keyword-secondary` 단정 보완 `841ef99`. 문서 커밋은 이 절.
+
+### 4. 검증 (Haiku 실행, 메인이 로그의 EXIT 줄로 직접 확인)
+- Firefox: `npx playwright test <Todo 50 관련 10개 스펙> --project=firefox --workers=1` (PLAYWRIGHT_PORT=8840) → **29 passed, EXIT=0** (20.4m) `/tmp/todo50-3browser-firefox.log`
+- WebKit: 같은 10개 `--project=webkit` → **29 passed, EXIT=0** (20.3m) `/tmp/todo50-3browser-webkit.log`
+  - 대상: korean-wind-heading, status-overlay, korean-message-area, korean-intro-overlay, korean-status-overlay, dialogue-panel, dialogue-side-column, pages-static-smoke, talk-keywords, pixel-font-computed.
+- 네이티브(`/tmp/todo50-native.log`): `deps:host` 0 → `build:native` 0 → `cmake:configure` 0 → `cmake:build` 0 → `test:native` 0 (ctest 4/4: module-package, native-baseline-negative, input-queue, localization-boundaries). AGENTS.md F2 bullet에 `deps:host` 선행을 추가.
+- opencode(chromium 단독, 포트 8831, 자체 로그 확인): pixel-font-computed 3/3, korean-wind-heading 2/2, korean-message-area 4/4, talk-keywords 2/2.
+- 최종 단독 `verify:integration`: 이 문서 커밋 뒤 실행 — 결과는 다음 절.
+
+### 5. 사용자 확인 필요 (사람의 화면 확인, Todo 50 acceptance 마지막 항목)
+- [ ] 브라우저 확대 100%·150%·200%에서 Neo둥근모가 흐림 없이 선명한가 (상태창, 메뉴, 인트로, 오른쪽 대화 패널, 키워드 칩과 그 작은 보조 라벨, 게임 화면 메시지 영역).
+- [ ] 아래 테두리 바람 줄이 오버월드에서 `바람 <방향>`, 던전에서 `방향 <방향>`으로 박스 안에 맞게 나오고 넘치거나 잘리지 않는가. ESC 메뉴에서는 사라지는가.
+- [ ] 상태창 옆 아바타 오라 칸이 가려지지 않고(Todo 26/27 규칙), 파일 선택·세이브 버튼은 시스템 글꼴인가.
+- 참고 스크린샷(추적 안 됨): `.omo/evidence/ultima-web/task-50/windheading/01~05*.png`(opencode worktree), `task-50/pixel-font.png`, `task-50/font-fallback.png`. opencode가 만든 긴 체크리스트(`/home/taejin/ultima-opencode/.omo/evidence/ultima-web/task-50/opencode5/HUMAN_CHECK.md`)는 일부 경로·좌표가 부정확해 참고용으로만.
+
+### 6. 남은 위험
+- `korean-castle-output` Hawkwind 테스트: 이번 세션 3회 중 1회 실패(아바타가 NPC에 닿지 못함). NPC 위치 RNG 가설, 확률 미측정.
+- Safari 실기·실제 GPU 환경은 미확인(이전부터).

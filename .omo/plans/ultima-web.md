@@ -826,7 +826,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: `.omo/evidence/ultima-web/task-49/in-game-korean.png`; failure: with the toggle off, the English canvas text is visible again (`task-49/toggle-off.png`).
   Commit: Y | feat(overlay): show Korean messages inside the game's message area
 
-- [ ] 50. Use the fixed-width Korean pixel font (Neo둥근모) for every in-game Korean text
+- [x] 50. Use the fixed-width Korean pixel font (Neo둥근모) for every in-game Korean text
   What to do / Must NOT do: user decision 2026-10-04: a fixed-width Korean font looks more like a game. Todo 49 introduces Neo둥근모 (`neodgm.woff2` v1.601, SIL OFL 1.1, about 44 KB) for the message area. Apply the same font to the other Korean surfaces:
   - the existing in-game overlays: status, statussummary, Ztats/inventory, intro, menus;
   - the right-hand dialogue panel and the Todo 48 keyword menu.

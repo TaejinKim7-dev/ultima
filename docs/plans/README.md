@@ -7,7 +7,7 @@
 
 | 계획 문서 | 대응 Todo | 상태 | 요약 |
 |---|---|---|---|
-| [2026-10-04-in-game-korean.md](2026-10-04-in-game-korean.md) | 48·49·50 | 🟡 진행 중 | 대화 키워드 칩 (Stage 1) ∥ 게임 화면 안 한국어 덮개 (Stage 2·3) → 고정폭 글꼴 Neo둥근모 전체 적용 (Stage 4) |
+| [2026-10-04-in-game-korean.md](2026-10-04-in-game-korean.md) | 48·49·50 | ✅ 완료 (2026-10-05, 사람 화면 확인은 사용자 확인 필요) | 대화 키워드 칩 (Stage 1) ∥ 게임 화면 안 한국어 덮개 (Stage 2·3) → 고정폭 글꼴 Neo둥근모 전체 적용 (Stage 4) |
 | [mod-scope-proposal.md](mod-scope-proposal.md) | 43 | ⛔ 사용자 결정 대기 | 개조(modding) 범위 제안 6개, 사용자 결정 필요 |
 
 ## 상태 의미
