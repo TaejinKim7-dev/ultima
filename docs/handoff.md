@@ -2268,3 +2268,8 @@ Todo 50: 게임 안 한국어 전체(상태창·statussummary·Ztats·인트로�
 ### 6. 남은 위험
 - `korean-castle-output` Hawkwind 테스트: 이번 세션 3회 중 1회 실패(아바타가 NPC에 닿지 못함). NPC 위치 RNG 가설, 확률 미측정.
 - Safari 실기·실제 GPU 환경은 미확인(이전부터).
+
+### 7. 최종 단독 통합 게이트 (2026-10-05, HEAD 99e431c, Haiku 실행·메인이 로그로 확인)
+- `npm run verify:integration` → `# verify:integration 2026-10-05T07:10:48.715Z PASS`, **EXIT=0**, e2e **73 passed (1.2h)**, 실패·ECONNREFUSED 0. `/tmp/todo50-integration-7.log`
+- 단계별: build:modules 0 · build:wasm 0 · check:build-fresh 0 · test:unit 0 · verify:repo-sources 0 · typecheck 0 · build 0 · i18n:check 0 · build:site 0 · audit:dist(--require-engine) 0 · plan cmp 0 · git diff --check 0 · e2e 0.
+- `korean-castle-output` Hawkwind 테스트도 이번엔 통과.
