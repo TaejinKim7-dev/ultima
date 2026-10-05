@@ -55,7 +55,7 @@ function wasmEngineAssets(): Plugin {
       // Todo 28: `vite dev` serves build/ directly, so enforce freshness here
       // too (build:site enforces it for `vite build`/preview/e2e).
       if (process.env["VITEST"] === undefined) assertFresh(__dirname)
-      server.middlewares.use(urlPrefix, (req, res, next) => {
+      const serveEngineAsset = (req: import("node:http").IncomingMessage, res: import("node:http").ServerResponse, next: () => void) => {
         const relative = (req.url ?? "").replace(/^\/+/, "").split("?")[0] ?? ""
         const filePath = resolveAllowedPath(relative)
         if (filePath === null || !existsSync(filePath) || statSync(filePath).isDirectory()) {
@@ -65,7 +65,12 @@ function wasmEngineAssets(): Plugin {
         if (filePath.endsWith(".wasm")) res.setHeader("Content-Type", "application/wasm")
         else if (filePath.endsWith(".mjs") || filePath.endsWith(".js")) res.setHeader("Content-Type", "text/javascript")
         createReadStream(filePath).pipe(res)
-      })
+      }
+      server.middlewares.use(urlPrefix, serveEngineAsset)
+      // With `--base=/ultima/` the app requests `/ultima/engine/...`; without
+      // this mount the SPA fallback answered with index.html (2026-10-05).
+      const base = server.config.base ?? "/"
+      if (base !== "/") server.middlewares.use(`${base.replace(/\/$/, "")}${urlPrefix}`, serveEngineAsset)
     },
     closeBundle() {
       if (!existsSync(sourceDir)) {
