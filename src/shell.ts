@@ -28,7 +28,8 @@ import {
 } from "./overlay/overlay-layout.ts"
 import { buildAliasTable, resolveChoiceInput, resolveInput, withTopicAliases, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
 import { createIntroViewReceiver, markSelectedLabel, type IntroViewReceiver } from "./overlay/intro-view.ts"
-import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
+import { createTextPromptGate, routeKoreanEnter } from "./i18n/text-prompt-gate.ts"
+import { createDebugLog, type DebugLog } from "./debug-log.ts"
 import { createFocusReturn } from "./i18n/focus-return.ts"
 import { shouldSuppressScrollKey } from "./input/scroll-keys.ts"
 import { createTalkKeywords, type TalkKeywords } from "./dialogue/talk-keywords.ts"
@@ -157,7 +158,7 @@ function requireElement<T extends Element>(doc: Document, selector: string): T {
 }
 
 /** Builds and wires the static shell against `doc`, returning the bridge API. */
-export function createShell(doc: Document): UltimaBridgeApi {
+export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({ enabled: false })): UltimaBridgeApi {
   const dialogueHistory = requireElement<HTMLDivElement>(doc, "#dialogue-history")
   const dialoguePanel = requireElement<HTMLElement>(doc, "#dialogue-panel")
   const promptMarker = requireElement<HTMLElement>(doc, "#dialogue-prompt-marker")
@@ -844,6 +845,13 @@ export function createShell(doc: Document): UltimaBridgeApi {
     const raw = koreanKeywordInput.value
     koreanKeywordInput.value = ""
     const promptDecision = textPromptGate.consumeSubmit()
+    debugLog.log("korean-submit", {
+      raw,
+      prompt: textPromptGate.currentPromptId(),
+      kind: openPromptKind,
+      ok: promptDecision.ok,
+      ...(promptDecision.ok ? {} : { reason: promptDecision.message })
+    })
     if (!promptDecision.ok) {
       dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text: `[한글 입력 거부] ${promptDecision.message}\n` })
       return
@@ -862,6 +870,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
     const result = isChoiceEpoch
       ? resolveChoiceInput(raw, koreanAliasTable)
       : resolveInput("text", raw, withTopicAliases(koreanAliasTable, tk.topicAliases()))
+    debugLog.log("korean-resolve", { raw, ok: result.ok, ...(result.ok ? { keys: result.text } : { reason: result.message }) })
     if (result.ok) {
       tk.submitted(result.text)
       // Step 9: the native prompt echoes the synthesized ASCII back through
@@ -898,6 +907,16 @@ export function createShell(doc: Document): UltimaBridgeApi {
         return // our own synthesized keystrokes must reach the real game
       }
       if (doc.activeElement !== koreanKeywordInput) {
+        return
+      }
+      // User report 2026-10-05 (Lord British): with no text prompt open the
+      // engine is waiting for a key (a paused page), so Enter goes to the game
+      // -- the typed Korean stays in the box for the next prompt.
+      if (keyboardEvent.key === "Enter" && !keyboardEvent.isComposing && routeKoreanEnter(textPromptGate) === "game") {
+        debugLog.log("korean-enter", { route: "game", pageMode: messageArea.isPageMode() })
+        if (messageArea.isPageMode()) {
+          messageArea.nextPage()
+        }
         return
       }
       keyboardEvent.stopImmediatePropagation()
@@ -949,6 +968,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
         return
       }
       if (messageArea.isPageMode()) {
+        debugLog.log("page-next", { key: keyboardEvent.key })
         messageArea.nextPage()
       }
     },
@@ -1049,6 +1069,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
       // can be answered with a single key; the gate itself is unchanged.
       // Todo 48: the keyword menu follows the same open/close lifecycle.
       opened: (id, kind) => {
+        debugLog.log("prompt-opened", { id, kind: kind ?? U4_WEB_PROMPT_TEXT })
         openPromptKind = kind ?? U4_WEB_PROMPT_TEXT
         textPromptGate.opened(id)
         focusReturn.promptOpened()
@@ -1061,6 +1082,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
         }
       },
       closed: (id) => {
+        debugLog.log("prompt-closed", { id })
         textPromptGate.closed(id)
         focusReturn.promptClosed()
         tk.promptClosed()

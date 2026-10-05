@@ -1,3 +1,4 @@
+import { createDebugLog, debugEnabledFromUrl, type DebugLog } from "./debug-log.ts"
 import "./shell.css"
 import { createInputQueue, type InputQueue } from "./bridge/input-queue.ts"
 import { createShell } from "./shell.ts"
@@ -30,6 +31,8 @@ declare global {
     ultimaWasmMemory?: { bytes(): number } | undefined
     /** Todo 38: read-only snapshot of dropped/fallback text counters (hashes and ids only). */
     ultimaI18nCoverage?: { snapshot(): CoverageSnapshot } | undefined
+    /** User request 2026-10-05: key-point trace (console output only with ?debug=1). */
+    ultimaDebugLog?: DebugLog | undefined
   }
 }
 
@@ -46,7 +49,9 @@ if (applicationRoot === null) {
   throw new MissingApplicationRootError()
 }
 
-const bridge = createShell(document)
+const debugLog = createDebugLog({ enabled: debugEnabledFromUrl(window.location.href) })
+window.ultimaDebugLog = debugLog
+const bridge = createShell(document, debugLog)
 window.ultimaBridge = bridge
 
 // Todo 14: expose the static localization table for e2e/manual QA only.

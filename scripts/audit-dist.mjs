@@ -129,6 +129,10 @@ export const TEST_HOOK_ALLOWLIST = [
     reason: "src/main.ts deliberate Todo-38 read-only snapshot() of dropped/fallback text counters (hashes and ids only, never text) for the i18n-coverage e2e and measurement run"
   },
   {
+    hook: "window.ultimaDebugLog",
+    reason: "src/main.ts user-requested (2026-10-05) key-point trace: entries() kept in memory, console.warn output only with ?debug=1"
+  },
+  {
     hook: "data-bridge-ready",
     reason: "src/main.ts shell-ready signal consumed by QA/e2e tooling and the engine startup sequence"
   }

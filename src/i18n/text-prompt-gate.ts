@@ -25,6 +25,18 @@ export interface TextPromptGate {
   noteInput(): void
   /** Decides one submission and forgets the captured prompt, so the next entry starts fresh. */
   consumeSubmit(): TextPromptSubmitDecision
+  /** True when the field's text was bound to a prompt that is no longer the open one. */
+  isStale(): boolean
+}
+
+/**
+ * Where an Enter pressed in the Korean field goes (user report 2026-10-05,
+ * Lord British): with no text prompt open the engine is waiting for a key
+ * (a paused page of a long answer), so Enter must reach the game; it is only
+ * a submission while a prompt is open -- or to report a stale entry.
+ */
+export function routeKoreanEnter(gate: TextPromptGate): "submit" | "game" {
+  return gate.currentPromptId() !== null || gate.isStale() ? "submit" : "game"
 }
 
 export function createTextPromptGate(): TextPromptGate {
@@ -48,6 +60,9 @@ export function createTextPromptGate(): TextPromptGate {
       }
     },
     currentPromptId,
+    isStale() {
+      return capturedId !== null && capturedId !== currentPromptId()
+    },
     noteInput() {
       capturedId = currentPromptId()
     },
