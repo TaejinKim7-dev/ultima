@@ -430,6 +430,16 @@ test.describe("Stage 3: in-game Korean message-area overlay", () => {
     await pressKey(page, "Escape", 1500) // leave the menu
     await expect(overlayBox(page)).toBeVisible({ timeout: 10_000 })
     expect(await overlayText(page), "the overlay must be non-empty after leaving the menu").not.toBe("")
+    // Todo 50 acceptance #3 (computed font-family of every Korean surface).
+    expect(
+      await page.evaluate(
+        () =>
+          getComputedStyle(
+            document.querySelector('#game-viewport [data-role="messagearea"]') as HTMLElement
+          ).fontFamily.split(",")[0]!.trim().replace(/^"|"$/g, "")
+      ),
+      ".messagearea must compute font-family to NeoDunggeunmo"
+    ).toBe("NeoDunggeunmo")
     await page.screenshot({ path: join(evidenceDir, "14-after-menu-return.png") })
   })
 })
