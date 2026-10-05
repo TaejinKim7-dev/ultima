@@ -30,6 +30,7 @@ import { buildAliasTable, resolveChoiceInput, resolveInput, withTopicAliases, ty
 import { createIntroViewReceiver, markSelectedLabel, type IntroViewReceiver } from "./overlay/intro-view.ts"
 import { createTextPromptGate, routeKoreanEnter } from "./i18n/text-prompt-gate.ts"
 import { createDebugLog, type DebugLog } from "./debug-log.ts"
+import { COMMAND_GROUPS, commandAvailable } from "./ui/command-list.ts"
 import { createFocusReturn } from "./i18n/focus-return.ts"
 import { shouldSuppressScrollKey } from "./input/scroll-keys.ts"
 import { createTalkKeywords, type TalkKeywords } from "./dialogue/talk-keywords.ts"
@@ -827,6 +828,69 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
     }, 0)
   }
 
+  // Todo 52: the Korean command list. Buttons are built once; their enabled
+  // state follows play / prompt / modal. A click sends the key through the same
+  // synthesized-keystroke path the Korean keyword field uses, and never takes
+  // focus (mousedown is prevented), so the keyboard keeps going to the game.
+  const commandGroupsHost = requireElement<HTMLElement>(doc, "#command-groups")
+  let commandPlaying = false
+  let commandModal = false
+  const commandButtons: HTMLButtonElement[] = []
+  for (const group of COMMAND_GROUPS) {
+    const section = doc.createElement("div")
+    const title = doc.createElement("div")
+    title.className = "command-group-title"
+    title.textContent = group.title
+    const chips = doc.createElement("div")
+    chips.className = "command-chips"
+    for (const command of group.commands) {
+      const button = doc.createElement("button")
+      button.type = "button"
+      button.tabIndex = -1
+      button.className = "command-chip"
+      button.dataset["key"] = command.key
+      button.title = command.hint
+      const keyBadge = doc.createElement("span")
+      keyBadge.className = "command-chip-key"
+      keyBadge.textContent = command.key.toUpperCase()
+      const label = doc.createElement("span")
+      label.textContent = command.label
+      button.appendChild(keyBadge)
+      button.appendChild(label)
+      chips.appendChild(button)
+      commandButtons.push(button)
+    }
+    section.appendChild(title)
+    section.appendChild(chips)
+    commandGroupsHost.appendChild(section)
+  }
+  function commandsEnabled(): boolean {
+    return commandAvailable({ playing: commandPlaying, promptOpen: textPromptGate.currentPromptId() !== null, modal: commandModal })
+  }
+  function updateCommandPanel(): void {
+    const enabled = commandsEnabled()
+    for (const button of commandButtons) {
+      button.setAttribute("aria-disabled", String(!enabled))
+    }
+  }
+  commandGroupsHost.addEventListener("mousedown", (event: MouseEvent) => {
+    event.preventDefault()
+  })
+  commandGroupsHost.addEventListener("click", (event: MouseEvent) => {
+    const target = event.target
+    const button = target instanceof Element ? target.closest<HTMLButtonElement>("button.command-chip") : null
+    const key = button?.dataset["key"]
+    if (key === undefined) {
+      return
+    }
+    debugLog.log("command-click", { key, enabled: commandsEnabled() })
+    if (!commandsEnabled()) {
+      return
+    }
+    synthesizeKeystrokes(key, false)
+  })
+  updateCommandPanel()
+
   // The kind of the innermost open native prompt epoch. The top of the gate's
   // open-prompt stack is by construction the most recently opened one, so this
   // is the kind of `currentPromptId()` -- and it is only ever read after the
@@ -1103,6 +1167,7 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
         debugLog.log("prompt-opened", { id, kind: kind ?? U4_WEB_PROMPT_TEXT })
         openPromptKind = kind ?? U4_WEB_PROMPT_TEXT
         textPromptGate.opened(id)
+        updateCommandPanel()
         submitPendingChip()
         focusReturn.promptOpened()
         tk.promptOpened(kind ?? U4_WEB_PROMPT_TEXT)
@@ -1120,6 +1185,7 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
       closed: (id) => {
         debugLog.log("prompt-closed", { id })
         textPromptGate.closed(id)
+        updateCommandPanel()
         focusReturn.promptClosed()
         tk.promptClosed()
         // Step 9: the player's typed keyword (Enter not required) stays on
@@ -1174,10 +1240,14 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
       play: (on) => {
         messageArea.applyPlay(on)
         windOverlay.applyPlay(on)
+        commandPlaying = on
+        updateCommandPanel()
       },
       modal: (on) => {
         messageArea.applyModal(on)
         windOverlay.applyModal(on)
+        commandModal = on
+        updateCommandPanel()
       },
       crlf: () => messageArea.applyCrlf(),
       wind: (mode, direction) => windOverlay.wind(mode, direction)
