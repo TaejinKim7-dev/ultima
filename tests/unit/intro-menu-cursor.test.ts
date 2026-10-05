@@ -31,3 +31,16 @@ describe("intro main menu cursor", () => {
     expect(intro).toMatch(/keyPressed\(\s*introMenuKeys\[cy - 5\]\s*\)/)
   })
 })
+
+// e2e finding 2026-10-05 (save-slots spec): the intro screens are skipped with
+// Enter, so a second Enter arriving as the menu appears activated "Journey
+// Onward" by accident (error banner = 3 s of dead input, the real 'i' was lost).
+// Enter must only activate the cursor item once the menu has been on screen a moment.
+describe("intro main menu Enter guard", () => {
+  it("records when the menu appeared and ignores Enter right after", () => {
+    expect(intro).toMatch(/extern uint32_t getTicks\(\);/)
+    expect(intro).toMatch(/introMenuShownAt\s*=\s*getTicks\(\)/)
+    const body = introMenuKeyCase()
+    expect(body).toMatch(/getTicks\(\)\s*-\s*introMenuShownAt\s*<\s*INTRO_MENU_ENTER_GUARD_MS/)
+  })
+})

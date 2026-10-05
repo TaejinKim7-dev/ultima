@@ -154,6 +154,17 @@ using namespace std;
  */
 static const char introMenuKeys[] = "rjica";
 static int introMenuCursor = 1;     // "Journey Onward"
+/*
+ * The intro screens are skipped with Enter, so a second Enter arriving just as
+ * the menu appears must not activate the cursor item by accident (it started
+ * "Journey Onward" and lost the next keys to the error banner). Enter only
+ * counts once the menu has been on screen this long.
+ */
+#ifdef __EMSCRIPTEN__
+extern uint32_t getTicks();
+#define INTRO_MENU_ENTER_GUARD_MS 700
+static uint32_t introMenuShownAt = 0;
+#endif
 
 #define INTRO_MAP_HEIGHT 5
 #define INTRO_MAP_WIDTH 19
@@ -569,6 +580,10 @@ bool IntroController::keyPressed(int key) {
             break;
         case U4_ENTER:
         case U4_KEYPAD_ENTER:
+#ifdef __EMSCRIPTEN__
+            if (getTicks() - introMenuShownAt < INTRO_MENU_ENTER_GUARD_MS)
+                break;
+#endif
             keyPressed( introMenuKeys[introMenuCursor] );
             break;
         case 'i':
@@ -887,6 +902,17 @@ void IntroController::drawAbacusBeads(int row, int selectedVirtue, int rejectedV
  */
 void IntroController::updateScreen() {
     screenHideCursor();
+
+#ifdef __EMSCRIPTEN__
+    {
+        // Stamp the moment the main menu FIRST appears (not every redraw: a
+        // cursor move redraws it too), for the Enter guard in keyPressed().
+        static int lastDrawnMode = -1;
+        if (mode == INTRO_MENU && lastDrawnMode != INTRO_MENU)
+            introMenuShownAt = getTicks();
+        lastDrawnMode = mode;
+    }
+#endif
 
     switch (mode) {
     case INTRO_MAP:
