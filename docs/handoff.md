@@ -2277,3 +2277,22 @@ Todo 50: 게임 안 한국어 전체(상태창·statussummary·Ztats·인트로�
 ### 8. merge 게이트 (2026-10-05, 브랜치 todo-50-pixel-font, Haiku 실행·메인이 `/tmp/todo50-merge-gate.log`로 확인)
 - `npm ci` 0 · `npm run test:unit` 0 (846 tests) · `npm run verify:repo-sources` 0 · `npm run typecheck` 0 · `npm run build` 0 · `npm run check:build-fresh` 0 · `git diff --check` 0.
 - 네이티브(위 4번) 5단계 0, Firefox·WebKit 각 29/29, 최종 통합 게이트 73/73 PASS → `main`에 `--no-ff` merge 후 push. 사람의 화면 확인은 사용자 확인 필요.
+
+---
+
+## 2026-10-06 — main 배포: Todo 50 후속 수정 + Todo 51(저장 슬롯) + 52(명령 패널) + 53(Google Drive 선택 동기화)
+
+### 1. 범위 (main `397f776` 이후, 브랜치 todo-50b-message-area-size → todo-52-command-panel → todo-51-save-slots → todo-53-drive-sync)
+- 화면 확인 중 사용자 보고로 고친 것: 메시지 영역 글꼴 2배(상자 대신 캔버스 기준 계산) · 줄 폭 절반(한글 2칸 단위 예산) · 대사 번역문의 16칸 줄바꿈 이어 붙이기 · 내 입력 색 구분 · 대화 키워드 창 스크롤 없이 전부 표시 · Lord British 쪽 넘김 중 한국어 입력칸 Enter가 게임으로 가지 않던 문제 · 대답 뒤 키 대기 중 키워드 창 사라짐(엔진 `u4_web_key_wait` 신호) · 키 대기 중 칩 클릭은 계속 키 + 다음 프롬프트에서 제출 · 예/아니오 프롬프트 중에는 예/아니오 칩만 · 첫 화면 메뉴 화살표 커서와 ▶ 표시(선택 없이 시작, 화살표로 고른 뒤에만 Enter) · 원본 zip을 브라우저에 저장(IndexedDB, 지우기 버튼, 소유 가정 안내) · 개발 서버 엔진 경로(`--base`) 수정 · 디버그 로그(`?debug=1`, `window.ultimaDebugLog`, 개발 서버 `/tmp/u4-debug.log`).
+- Todo 51 저장 슬롯: 여러 슬롯, 저장 시 사용 중 슬롯에 담기, 다른 아바타 덮어쓰기 전 자동 백업, 이름 바꾸기·복제·삭제·내보내기·가져오기, 플레이 중 전환 금지. 깜박임 버그(읽기가 저장 신호로 오인되어 무한 동기화) 수정.
+- Todo 52 명령 패널: 24개 한 글자 명령의 한국어 버튼(키 전송, 엔진 키와 단위 테스트로 대조).
+- Todo 53 Google Drive(선택): 각 사용자 본인 Drive의 appDataFolder(`drive.appdata`), 공개 클라이언트 ID(`src/cloud/config.ts`), 토큰은 메모리만, 저장 후 자동 업로드, 덮어쓰기 전 확인. Drive 코드는 별도 청크(`drive-client-*.js`)이며 audit:dist가 그 파일에서만 Google 주소·POST·Bearer를 허용. 클라이언트 보안 비밀은 저장소 밖(`/home/taejin/ultima-secrets/`)으로 옮기고 `.gitignore`에 추가.
+
+### 2. 검증 (Haiku 실행, 메인이 `/tmp/deploy-gate.log`의 STEP 줄로 확인)
+- `npm ci` 0 · `npm run test:unit` 0 (938 tests) · `npm run verify:repo-sources` 0 · `npm run typecheck` 0 · `npm run build` 0 · `npm run check:build-fresh` 0 · `npm run build:site -- --base=/ultima/` 0 · `npm run audit:dist -- --require-engine` 0 · `git diff --check` 0.
+- e2e: **전체 `verify:integration`은 사용자 결정으로 실행하지 않음**(2026-10-05 "수정하고 E2E 테스트 하지마, 테스트는 내가 한다"; 배포 요청 2026-10-06). 저장 슬롯 전용 `tests/e2e/save-slots.spec.ts`만 실행 → 1 passed, EXIT=0(`/tmp/save-slots-e2e-4.log`).
+- **AGENTS.md의 "main merge 전 verify:integration" 규칙과 다름 — 사용자 지시에 따른 예외로 기록한다.** 의도적으로 동작이 바뀌어 맞지 않게 된 것으로 보이는 기존 e2e(확인 필요): `startup-data.spec.ts:89`(새로고침 시 대기 상태 → 이제 저장된 zip으로 자동 시작), `korean-message-area.spec.ts`의 ▼ 페이지 큐(대사 이어 붙이기로 줄 수 감소), 첫 화면 메뉴 커서에 의존하는 스펙.
+- Google 로그인·Drive 실제 저장은 사용자 Chrome에서 확인 필요(제 환경에는 Google 계정 없음).
+
+### 3. 다음
+- 사용자 화면 확인(슬롯, 명령 패널, Drive 연결). 위 e2e 정비 후 전체 게이트 복구. Drive 쪽 슬롯 삭제, 공개 전 OAuth 동의 화면 게시 여부 결정.
