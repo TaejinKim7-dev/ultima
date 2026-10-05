@@ -159,6 +159,36 @@ export async function importSlotArchive(store: SlotStore, archive: Uint8Array, n
   return id
 }
 
+/** Todo 53: one slot packed for upload (U4SV archive), or null for an empty slot. */
+export async function readSlotForUpload(
+  store: SlotStore,
+  id: string
+): Promise<{ slotId: string; name: string; updatedAt: number; data: Uint8Array } | null> {
+  const record = await store.get(id)
+  if (record === null || record.files.length === 0) return null
+  return { slotId: record.id, name: record.name, updatedAt: record.updatedAt, data: packSaveArchive(record.files.map((file) => ({ path: file.path, data: file.data }))) }
+}
+
+/** Todo 53: writes a slot downloaded from Drive, keeping its id, name and updatedAt. */
+export async function upsertSlotFromArchive(
+  store: SlotStore,
+  meta: { slotId: string; name: string; updatedAt: number },
+  archive: Uint8Array,
+  env: SlotEnv
+): Promise<SlotFile[]> {
+  const files = keepSaveFiles(unpackSaveArchive(archive))
+  if (!files.some((file) => file.path === "party.sav")) throw new Error("Drive의 슬롯 파일에 party.sav가 없습니다.")
+  const existing = await store.get(meta.slotId)
+  await store.put({
+    id: meta.slotId,
+    name: cleanName(meta.name),
+    createdAt: existing?.createdAt ?? env.now(),
+    updatedAt: meta.updatedAt,
+    files
+  })
+  return files
+}
+
 /** Marks a slot as the one the working copy belongs to. */
 export async function setActiveSlot(store: SlotStore, id: string | null): Promise<void> {
   await store.setActive(id)

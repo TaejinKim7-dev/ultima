@@ -15,6 +15,8 @@ import {
   exportSlotArchive,
   importSlotArchive,
   migrateInitialSlot,
+  readSlotForUpload,
+  upsertSlotFromArchive,
   renameSlot,
   setActiveSlot,
   summarizeSlots,
@@ -51,6 +53,14 @@ export interface SlotController {
   subscribe(listener: () => void): void
   /** Resolves when pending captures have finished (tests and shutdown). */
   idle(): Promise<void>
+  /** Todo 53: called after each capture with the slot that changed (auto-upload). */
+  onCaptured(listener: (slotId: string) => void): void
+  /** Todo 53: id / name / updatedAt / hasData for every slot (sync planning). */
+  localInfo(): Promise<Array<{ id: string; name: string; updatedAt: number; hasData: boolean }>>
+  /** Todo 53: one slot packed for upload, or null when it is empty. */
+  readForUpload(id: string): Promise<{ slotId: string; name: string; updatedAt: number; data: Uint8Array } | null>
+  /** Todo 53: stores a slot downloaded from Drive; refreshes the engine when it is the active slot (not while playing). */
+  importRemote(meta: { slotId: string; name: string; updatedAt: number }, archive: Uint8Array): Promise<void>
 }
 
 export interface SlotControllerOptions extends SlotEnv {
@@ -66,6 +76,7 @@ export function createSlotController(options: SlotControllerOptions): SlotContro
   const { store, engine } = options
   const env: SlotEnv = { now: options.now, newId: options.newId }
   const listeners: Array<() => void> = []
+  const capturedListeners: Array<(slotId: string) => void> = []
   let playing = false
   let applying = false
   let pending: Promise<void> = Promise.resolve()
@@ -95,6 +106,13 @@ export function createSlotController(options: SlotControllerOptions): SlotContro
         const result = await captureIntoSlot(store, engine.readWorking(), env)
         trace("slot-capture", { slot: result.slotId, backup: result.backupId ?? null })
         changed()
+        for (const listener of capturedListeners) {
+          try {
+            listener(result.slotId)
+          } catch {
+            // the cloud layer must not break local saving
+          }
+        }
       })
       .catch(fail)
   }
@@ -167,6 +185,22 @@ export function createSlotController(options: SlotControllerOptions): SlotContro
     subscribe(listener) {
       listeners.push(listener)
     },
-    idle: () => pending
+    idle: () => pending,
+    onCaptured(listener) {
+      capturedListeners.push(listener)
+    },
+    async localInfo() {
+      const records = await store.list()
+      return records.map((record) => ({ id: record.id, name: record.name, updatedAt: record.updatedAt, hasData: record.files.length > 0 }))
+    },
+    readForUpload: (id) => readSlotForUpload(store, id),
+    async importRemote(meta, archive) {
+      const isActive = (await store.getActive()) === meta.slotId
+      if (isActive) requireIdle()
+      const files = await upsertSlotFromArchive(store, meta, archive, env)
+      trace("slot-import-remote", { slot: meta.slotId, active: isActive })
+      if (isActive) await apply(files)
+      changed()
+    }
   }
 }

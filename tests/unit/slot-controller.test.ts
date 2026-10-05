@@ -119,3 +119,60 @@ describe("slot controller", () => {
     expect(changes).toBeGreaterThan(0)
   })
 })
+
+// Todo 53 (Drive sync): what the cloud layer needs from the slot controller.
+describe("slot controller cloud hooks", () => {
+  it("reports each capture with the slot id", async () => {
+    const t = setup()
+    await t.controller.init()
+    const captured: string[] = []
+    t.controller.onCaptured((id) => captured.push(id))
+    t.setWorking(files("TJ", 2))
+    t.fireSaved()
+    await t.controller.idle()
+    expect(captured).toHaveLength(1)
+  })
+
+  it("lists slots with hasData and packs a slot for upload", async () => {
+    const t = setup(files("TJ", 4))
+    await t.controller.init()
+    const empty = await t.controller.newSlot("B")
+    const info = await t.controller.localInfo()
+    expect(info.find((slot) => slot.id === empty)).toMatchObject({ hasData: false })
+    const active = info.find((slot) => slot.hasData)!
+    const upload = await t.controller.readForUpload(active.id)
+    expect(upload).toMatchObject({ slotId: active.id, name: "기본 슬롯" })
+    expect(upload!.data.length).toBeGreaterThan(0)
+    expect(await t.controller.readForUpload(empty)).toBeNull()
+  })
+
+  it("imports a remote slot keeping its id, name and updatedAt; into the active slot it also refreshes the engine", async () => {
+    const source = setup(files("TJ", 9))
+    await source.controller.init()
+    const sourceSlot = (await source.controller.localInfo())[0]!
+    const upload = (await source.controller.readForUpload(sourceSlot.id))!
+
+    const t = setup()
+    await t.controller.init()
+    await t.controller.importRemote({ slotId: "remote-1", name: "원격", updatedAt: 5000 }, upload.data)
+    let state = await t.controller.state()
+    expect(state.slots.find((slot) => slot.id === "remote-1")).toMatchObject({ name: "원격", updatedAt: 5000, summary: { moves: 9 } })
+    expect(t.applied).toHaveLength(0)
+
+    await t.controller.select("remote-1")
+    const appliedBefore = t.applied.length
+    await t.controller.importRemote({ slotId: "remote-1", name: "원격", updatedAt: 6000 }, upload.data)
+    expect(t.applied.length).toBe(appliedBefore + 1)
+    state = await t.controller.state()
+    expect(state.slots.find((slot) => slot.id === "remote-1")!.updatedAt).toBe(6000)
+  })
+
+  it("refuses to overwrite the active slot from Drive while playing", async () => {
+    const t = setup(files("TJ"))
+    await t.controller.init()
+    const active = (await t.controller.localInfo())[0]!
+    const upload = (await t.controller.readForUpload(active.id))!
+    t.controller.setPlaying(true)
+    await expect(t.controller.importRemote({ slotId: active.id, name: "x", updatedAt: 99999 }, upload.data)).rejects.toThrow()
+  })
+})
