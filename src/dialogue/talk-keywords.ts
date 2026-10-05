@@ -49,6 +49,8 @@ export interface TalkKeywordDeps {
   clearTimer(id: unknown): void
   /** Fired whenever the view may have changed; the shell re-renders (skipping unchanged signatures). */
   onChange(): void
+  /** Optional trace (src/debug-log.ts): conversation lifecycle events, for tracing a reported issue. */
+  trace?(event: string, data?: unknown): void
 }
 
 /** One clickable chip: its Korean label, the keyword it submits, and whether it was asked already. */
@@ -294,6 +296,7 @@ export function createTalkKeywords(deps: TalkKeywordDeps): TalkKeywords {
 
   function talkLine(templateId: string | undefined, args: readonly (string | null)[]): void {
     const { speaker, npcKey, identified } = detectSpeaker(templateId, args)
+    deps.trace?.("tk-talk-line", { templateId, speaker, npcKey, identified, ...snapshot() })
     if (!identified) {
       // A line with no speaker signal (a bare "\n" CRLF) never starts or
       // resets a conversation; it only carries field args (none here).
@@ -430,7 +433,16 @@ export function createTalkKeywords(deps: TalkKeywordDeps): TalkKeywords {
     deps.onChange()
   }
 
+  function snapshot(): Record<string, unknown> {
+    return {
+      session: session === null ? null : { speaker: session.speaker, npc: session.npcKey, active: session.active, choice: session.choicePending, question: session.questionPending },
+      keyWait: keyWaitOn,
+      timer: timer !== null
+    }
+  }
+
   function promptOpened(kind: number): void {
+    deps.trace?.("tk-prompt-opened", { kind, ...snapshot() })
     cancelTimer()
     if (session === null) {
       deps.onChange()
@@ -448,6 +460,7 @@ export function createTalkKeywords(deps: TalkKeywordDeps): TalkKeywords {
   }
 
   function promptClosed(): void {
+    deps.trace?.("tk-prompt-closed", snapshot())
     if (session === null) {
       deps.onChange()
       return
@@ -458,6 +471,7 @@ export function createTalkKeywords(deps: TalkKeywordDeps): TalkKeywords {
     cancelTimer()
     timer = deps.setTimer(() => {
       timer = null
+      deps.trace?.("tk-end-timer", snapshot())
       if (session !== null) {
         // Soft end: hide the menu, keep the session (the stash) so a later
         // line from the same speaker can restore the asked marks.
@@ -474,6 +488,7 @@ export function createTalkKeywords(deps: TalkKeywordDeps): TalkKeywords {
   let keyWaitOn = false
 
   function keyWait(on: boolean): void {
+    deps.trace?.("tk-key-wait", { on, ...snapshot() })
     if (session === null) {
       keyWaitOn = false
       return

@@ -28,3 +28,18 @@ describe("debug log", () => {
     expect(debugEnabledFromUrl("http://x/ultima/?debug=0")).toBe(false)
   })
 })
+
+describe("debug log sink", () => {
+  it("forwards every entry to the sink (dev server file log), even when console output is off", () => {
+    const sink = vi.fn()
+    const log = createDebugLog({ enabled: false, sink, now: () => 7 })
+    log.log("key-wait", { on: true })
+    expect(sink).toHaveBeenCalledWith({ t: 7, event: "key-wait", data: { on: true } })
+  })
+
+  it("never lets a failing sink break the game", () => {
+    const log = createDebugLog({ enabled: false, sink: () => { throw new Error("offline") } })
+    expect(() => log.log("x")).not.toThrow()
+    expect(log.entries()).toHaveLength(1)
+  })
+})

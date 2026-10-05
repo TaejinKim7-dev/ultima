@@ -1,4 +1,4 @@
-import { copyFileSync, createReadStream, existsSync, mkdirSync, readdirSync, statSync } from "node:fs"
+import { appendFileSync, copyFileSync, createReadStream, existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from "node:fs"
 import { resolve } from "node:path"
 import type { Plugin } from "vite"
 import { configDefaults, defineConfig } from "vitest/config"
@@ -175,8 +175,45 @@ function devAutoLoadOriginalData(): Plugin {
   }
 }
 
+// Local dev only (`apply: "serve"`, never part of `vite build`): the page
+// POSTs its key-point debug log (src/debug-log.ts) here and the lines are
+// appended to U4_DEBUG_LOG (default /tmp/u4-debug.log), so a developer
+// watching a play session can read what happened. Truncated at server start.
+function devDebugLogSink(): Plugin {
+  return {
+    name: "dev-debug-log-sink",
+    apply: "serve",
+    configureServer(server) {
+      const file = process.env["U4_DEBUG_LOG"] ?? "/tmp/u4-debug.log"
+      writeFileSync(file, "")
+      const handler = (req: import("node:http").IncomingMessage, res: import("node:http").ServerResponse) => {
+        if (req.method !== "POST") {
+          res.statusCode = 405
+          res.end()
+          return
+        }
+        const chunks: Buffer[] = []
+        req.on("data", (chunk: Buffer) => chunks.push(chunk))
+        req.on("end", () => {
+          try {
+            const lines = JSON.parse(Buffer.concat(chunks).toString("utf8")) as unknown[]
+            appendFileSync(file, lines.map((line) => JSON.stringify(line)).join("\n") + "\n")
+            res.statusCode = 204
+          } catch {
+            res.statusCode = 400
+          }
+          res.end()
+        })
+      }
+      server.middlewares.use("/__dev-log", handler)
+      const base = server.config.base ?? "/"
+      if (base !== "/") server.middlewares.use(`${base.replace(/\/$/, "")}/__dev-log`, handler)
+    }
+  }
+}
+
 export default defineConfig({
-  plugins: [wasmEngineAssets(), devAutoLoadOriginalData()],
+  plugins: [wasmEngineAssets(), devAutoLoadOriginalData(), devDebugLogSink()],
   test: {
     exclude: [...configDefaults.exclude],
     include: ["tests/unit/**/*.test.ts"]

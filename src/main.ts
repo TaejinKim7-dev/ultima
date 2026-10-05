@@ -1,5 +1,5 @@
 import { createIndexedDbZipStore, forgetZip, rememberZip, restoreCachedZip, type ZipStore } from "./engine/zip-cache.ts"
-import { createDebugLog, debugEnabledFromUrl, type DebugLog } from "./debug-log.ts"
+import { createDebugLog, debugEnabledFromUrl, type DebugLog, type DebugLogEntry } from "./debug-log.ts"
 import "./shell.css"
 import { createInputQueue, type InputQueue } from "./bridge/input-queue.ts"
 import { createShell } from "./shell.ts"
@@ -50,7 +50,29 @@ if (applicationRoot === null) {
   throw new MissingApplicationRootError()
 }
 
-const debugLog = createDebugLog({ enabled: debugEnabledFromUrl(window.location.href) })
+// `import.meta.env.DEV` is false in `vite build`, so this whole block (and the
+// /__dev-log URL) is removed from the shipped bundle. Under `vite dev` the
+// entries are batched to the dev server's file log (see vite.config.ts).
+let devLogSink: ((entry: DebugLogEntry) => void) | undefined
+if (import.meta.env.DEV) {
+  let pending: DebugLogEntry[] = []
+  let flushTimer: number | undefined
+  devLogSink = (entry) => {
+    pending.push(entry)
+    if (flushTimer === undefined) {
+      flushTimer = window.setTimeout(() => {
+        const batch = pending
+        pending = []
+        flushTimer = undefined
+        void fetch(`${import.meta.env.BASE_URL}__dev-log`, { method: "POST", body: JSON.stringify(batch), keepalive: true }).catch(() => undefined)
+      }, 150)
+    }
+  }
+}
+const debugLog = createDebugLog({
+  enabled: debugEnabledFromUrl(window.location.href),
+  ...(devLogSink !== undefined ? { sink: devLogSink } : {})
+})
 window.ultimaDebugLog = debugLog
 const bridge = createShell(document, debugLog)
 window.ultimaBridge = bridge

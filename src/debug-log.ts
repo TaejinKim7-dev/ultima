@@ -23,6 +23,8 @@ export interface DebugLogOptions {
   readonly limit?: number
   readonly warn?: (...args: unknown[]) => void
   readonly now?: () => number
+  /** Receives every entry (the dev server's file log); a throwing sink is ignored. */
+  readonly sink?: (entry: DebugLogEntry) => void
 }
 
 export function createDebugLog(options: DebugLogOptions): DebugLog {
@@ -32,9 +34,15 @@ export function createDebugLog(options: DebugLogOptions): DebugLog {
   const buffer: DebugLogEntry[] = []
   return {
     log(event, data) {
-      buffer.push({ t: now(), event, data })
+      const entry = { t: now(), event, data }
+      buffer.push(entry)
       if (buffer.length > limit) buffer.splice(0, buffer.length - limit)
       if (options.enabled) warn("[u4]", event, data)
+      try {
+        options.sink?.(entry)
+      } catch {
+        // logging must never affect play
+      }
     },
     entries() {
       return buffer.slice()

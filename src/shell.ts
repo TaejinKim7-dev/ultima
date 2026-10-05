@@ -709,7 +709,8 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
     aliasFor: (canonical) => aliasLabelByCanonical.get(canonical),
     setTimer: (fn, ms) => gameWindow.setTimeout(fn, ms),
     clearTimer: (id) => gameWindow.clearTimeout(id as number),
-    onChange: renderTalkKeywords
+    onChange: renderTalkKeywords,
+    trace: (event, data) => debugLog.log(event, data)
   })
 
   // Renders tk.view() into #talk-keywords using createElement/textContent
@@ -723,6 +724,7 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
       return
     }
     lastTalkKeywordsSignature = signature
+    debugLog.log("tk-view", { active: view.active, speaker: view.speaker, groups: view.groups.map((group) => group.title), keyWaiting: tk.keyWaiting() })
     talkKeywordsRegion.hidden = !view.active
     if (!view.active) {
       talkKeywordsRegion.removeAttribute("data-speaker")
@@ -791,6 +793,7 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
     if (label === undefined) {
       return
     }
+    debugLog.log("chip-click", { label, prompt: textPromptGate.currentPromptId(), kind: openPromptKind, keyWaiting: tk.keyWaiting() })
     // User report 2026-10-05: right after a reply the engine can be waiting
     // for a key (no prompt open yet). Rejecting the click was a dead end, so
     // the click continues the conversation and the word is sent as soon as
@@ -1146,6 +1149,7 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
         }
       },
       input: (text) => {
+        debugLog.log("talk-input-echo", { text })
         tk.inputEcho(text)
         // Step 9: with the message-area overlay visible, the typed keyword is
         // already echoed there (screenReceiver.input + commitEcho on close);
