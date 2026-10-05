@@ -399,20 +399,20 @@ body {
 
   .side-column .dialogue-panel {
     flex: 1 1 auto;
-    min-height: 0;
+    min-height: 6rem; /* keeps the history readable while the keyword menu grows */
     max-height: none;
   }
 
   /*
-   * Todo 48: the keyword menu shares the column with the history: it can
-   * grow (a castle list is long), so it caps at half the column and
-   * scrolls internally instead of pushing the game out of view.
+   * Todo 48 / user request 2026-10-05: the keyword menu is never clipped and
+   * never scrolls -- it takes the height of all its chips. The history panel
+   * (flex 1 1 auto, scrolls internally) gives up the space
+   * instead, but keeps a readable floor.
    */
   .side-column .talk-keywords {
-    flex: 0 1 auto;
-    min-height: 0;
-    max-height: 50%;
-    overflow-y: auto;
+    flex: 0 0 auto;
+    max-height: none;
+    overflow: visible;
   }
 
   .data-controls {
