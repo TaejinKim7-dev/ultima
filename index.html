@@ -88,6 +88,23 @@
       </div>
 
       <!--
+        Todo 52 (user request 2026-10-05): the game's one-letter commands in
+        Korean for first-time players. src/shell.ts fills #command-groups from
+        src/ui/command-list.ts; each button sends its key to the game and is
+        disabled while no command can run (not playing, a prompt is open, or
+        the pause menu is up).
+      -->
+      <details id="command-panel" class="command-panel" open>
+        <summary>명령어 도움말 &mdash; 처음이라면 여기서 눌러 보세요</summary>
+        <div id="command-groups"></div>
+        <p class="command-note">
+          방향키로 걷습니다. 명령을 누르면 게임이 방향이나 대상을 물어봅니다. 그때는 키보드로 답하세요
+          (예: 대화 &rarr; 방향키). 주문은 <b>주문 시전</b> &rarr; 파티원 번호(1~8) &rarr; 주문 글자 순서입니다.
+          게임 안 도움말은 Alt+H입니다.
+        </p>
+      </details>
+
+      <!--
         Original game data is never bundled and never uploaded anywhere --
         the user selects their own local ultima4.zip purely through the
         File API. Save export/import are local Blob download/upload only.

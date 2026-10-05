@@ -845,6 +845,40 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: `.omo/evidence/ultima-web/task-50/pixel-font.png`; failure: if the font file fails to load, the overlays fall back to the system Korean font without clipping, recorded in `task-50/font-fallback.png`.
   Commit: Y | feat(shell): fixed-width Korean pixel font for in-game text
 
+- [ ] 51. Local save slots chosen on the web page
+  What to do / Must NOT do: user decision 2026-10-05: the engine has one save (`party.sav`, `monsters.sav`, dungeon `dngmap.sav`/`outmonst.sav`), written only on Q (Quit & Save). Add multiple slots chosen on the page before play starts (the engine reads `party.sav` only at "Journey Onward").
+  (1) Slot store in its own IndexedDB (not the IDBFS mount): record {id, name, createdAt, updatedAt, files[]} plus an active slot id. Summary (name, moves, hp, members, gold, food, location) parsed from `party.sav` by `src/saves/party-summary.ts`.
+  (2) Working copy = the `/persist/.xu4` files except `xu4rc`. Selecting a slot (only while not playing) clears the save files, copies the slot files in and runs syncfs. After every successful sync of a save file the working copy is captured back into the active slot (new `onSaved` on the persistence coordinator).
+  (3) First-run migration: an existing `party.sav` becomes the slot "기본 슬롯"; with no active slot at first capture, auto-create a slot named after the avatar. Safety: if a capture would replace a slot whose avatar name differs from the new `party.sav` (e.g. "Initiate New Game" over an existing slot), first keep an "[자동 백업]" copy.
+  (4) Operations: new empty slot, rename, duplicate, delete (confirm), export one slot / import as a new slot (reuse the U4SV pack/unpack). UI: slot list panel (active marked, summary line, buttons), disabled while playing.
+  Must NOT: touch or upload the original `ultima4.zip`; use localStorage/sessionStorage (`audit:dist` forbids it); modify `vendor/xu4` engine behaviour; lose a slot silently.
+  Parallelization: Wave 8 | Blocked by: none | Blocks: 53
+  References: `docs/plans/2026-10-05-save-slots.md`; `vendor/xu4/src/game.cpp` (`CTX_CAN_SAVE_GAME`); `vendor/xu4/src/savegame.cpp` (`saveGameLoad`); `src/engine/startup.ts` (`PERSISTENCE_PATHS`); `src/engine/persistence.ts`; `src/saves/party-summary.ts`; U4SV export/import code.
+  Acceptance criteria: unit tests RED first then GREEN for summary parsing, slot ops (migration, backup rule, rename/duplicate/delete), engine apply with a fake FS, coordinator `onSaved`; the standard merge gate passes; a person confirms in a real browser.
+  QA scenarios: happy: create two slots, switch between them, confirm each keeps its own progress; failure: "Initiate New Game" over an existing slot leaves an "[자동 백업]" slot. e2e: user decision, deferred (2026-10-05).
+  Commit: Y | feat(saves): local save slots chosen on the web page
+
+- [ ] 52. Korean command panel for first-time players
+  What to do / Must NOT do: user decision 2026-10-05 (A+B): an always-visible Korean command list whose buttons send the matching key to the game, so a first-time player does not need to know the original key commands. In progress by the main agent (`src/ui/`, `tests/unit/command-list.test.ts`, `index.html`, `src/shell.*`); detail to be filled in when finished.
+  Must NOT: put English game text in tracked files; take keyboard focus away from the game (buttons must not steal focus, like the Todo 48 chips); add console output.
+  Parallelization: Wave 8 | Blocked by: none | Blocks: none
+  References: `docs/plans/2026-10-05-save-slots.md`; `src/shell.ts`; `src/shell.css`; `index.html`; `src/ui/`; `tests/unit/command-list.test.ts`.
+  Acceptance criteria: unit tests RED first then GREEN for the command list; the standard merge gate passes; a person confirms in a real browser.
+  QA scenarios: happy: clicking a command button performs the same action as its key; failure: a button pressed while no game prompt accepts it does not break the game. e2e: user decision, deferred (2026-10-05).
+  Commit: Y | feat(ui): Korean command panel for first-time players
+
+- [ ] 53. Google Drive sync of save slots
+  What to do / Must NOT do: user decision 2026-10-05: optional cloud sync with the user's own Google Drive, no backend (GitHub Pages is static). Client-side OAuth (Google Identity Services / PKCE), scope `drive.appdata` only (hidden `appDataFolder`), public client ID with no secret, token kept in memory only (re-login each visit, no refresh token stored).
+  (1) Files: one JSON/bundle per slot plus a small index with `updatedAt`. Push after each save, pull on demand. Per-slot conflict rule: newer `updatedAt` wins but ask before overwriting local data. Offline: keep working locally and retry. A "연결 해제" button.
+  (2) `scripts/audit-dist.mjs`: add only the Google identity/API origins to `SAME_ORIGIN_ALLOWLIST` (exact list confirmed from the audit failure, expected `https://accounts.google.com` and `https://www.googleapis.com`), and a per-file exception for the single Drive client module to `EGRESS_FETCH_METHOD` (POST/PUT); all other egress rules stay.
+  (3) Privacy notice: only save files go to the user's own Drive, never the original game data.
+  Must NOT: upload `ultima4.zip` or any original game data; store a secret or refresh token; use localStorage/sessionStorage; widen the egress allowlist beyond the Google hosts.
+  Parallelization: Wave 8 | Blocked by: 51 | Blocks: none
+  References: `docs/plans/2026-10-05-save-slots.md`; `scripts/audit-dist.mjs` (`SAME_ORIGIN_ALLOWLIST`, `EGRESS_FETCH_METHOD`, `assertAllowedUrls`); Todo 51 slot store. Manual prerequisite: Google Cloud project, consent screen in testing mode, authorized JavaScript origins `https://taejinkim7-dev.github.io` and `http://localhost:8850`.
+  Acceptance criteria: unit tests RED first then GREEN for the audit change (only the Drive module may POST/PUT, only Google hosts allowed), Drive client with a fake fetch, conflict rule, offline retry; `audit:dist` and the standard merge gate pass; a person confirms a round trip between two browsers.
+  QA scenarios: happy: save in browser A, pull in browser B and continue; failure: older remote does not overwrite newer local without asking, and offline keeps local play working. e2e: user decision, deferred (2026-10-05).
+  Commit: Y | feat(cloud): Google Drive appDataFolder sync of save slots
+
 ## Final verification wave
 > Runs in parallel after ALL todos. ALL must APPROVE. Surface results and wait for the user's explicit okay before declaring complete.
 - [x] F1. Plan compliance audit
