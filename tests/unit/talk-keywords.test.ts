@@ -346,3 +346,18 @@ describe("keyword menu during a one-key choice prompt", () => {
     expect(h.tk.view().groups.map((g) => g.title)).toContain("공통")
   })
 })
+
+// User report 2026-10-05: during the key wait after a reply, a chip click was
+// rejected ("지금은 열린 입력 요청이 없습니다"). The shell needs to know the
+// engine is waiting for a key so a click can continue it instead.
+describe("keyWaiting", () => {
+  it("is true only between keyWait(true) and keyWait(false) of an open conversation", () => {
+    const h = harness()
+    expect(h.tk.keyWaiting()).toBe(false)
+    openNpcConversation(h.tk)
+    h.tk.keyWait(true)
+    expect(h.tk.keyWaiting()).toBe(true)
+    h.tk.keyWait(false)
+    expect(h.tk.keyWaiting()).toBe(false)
+  })
+})

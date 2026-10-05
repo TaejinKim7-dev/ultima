@@ -80,6 +80,8 @@ export interface TalkKeywords {
   promptClosed(): void
   /** The engine started (true) / stopped (false) waiting for any key (native waitAnyKey). */
   keyWait(on: boolean): void
+  /** True while the engine waits for a key inside an open conversation. */
+  keyWaiting(): boolean
   view(): TalkKeywordsView
   topicAliases(): readonly NpcTopic[]
 }
@@ -469,8 +471,14 @@ export function createTalkKeywords(deps: TalkKeywordDeps): TalkKeywords {
   // User report 2026-10-05: an ask-pause (OP_PAUSE_ASK -> waitAnyKey) is not
   // the end of a conversation. While the engine waits for a key the end timer
   // is held; when the wait ends, the normal close-delay check runs again.
+  let keyWaitOn = false
+
   function keyWait(on: boolean): void {
-    if (session === null) return
+    if (session === null) {
+      keyWaitOn = false
+      return
+    }
+    keyWaitOn = on
     if (on) {
       if (timer !== null) {
         cancelTimer()
@@ -486,5 +494,15 @@ export function createTalkKeywords(deps: TalkKeywordDeps): TalkKeywords {
     return session !== null && session.speaker === "npc" ? session.topics : []
   }
 
-  return { talkLine, inputEcho, submitted, promptOpened, promptClosed, keyWait, view, topicAliases }
+  return {
+    talkLine,
+    inputEcho,
+    submitted,
+    promptOpened,
+    promptClosed,
+    keyWait,
+    keyWaiting: () => keyWaitOn && session !== null,
+    view,
+    topicAliases
+  }
 }

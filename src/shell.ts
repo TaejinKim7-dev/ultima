@@ -791,10 +791,38 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
     if (label === undefined) {
       return
     }
+    // User report 2026-10-05: right after a reply the engine can be waiting
+    // for a key (no prompt open yet). Rejecting the click was a dead end, so
+    // the click continues the conversation and the word is sent as soon as
+    // the next prompt opens.
+    if (textPromptGate.currentPromptId() === null && tk.keyWaiting()) {
+      debugLog.log("chip-continue", { label })
+      pendingChipLabel = label
+      // Drop it if no prompt opens soon (the conversation ended instead).
+      gameWindow.setTimeout(() => {
+        if (pendingChipLabel === label) pendingChipLabel = null
+      }, 3000)
+      synthesizeKeystrokes("", true)
+      return
+    }
     koreanKeywordInput.value = label
     textPromptGate.noteInput()
     submitKoreanKeyword()
   })
+
+  // A chip clicked during a key wait, submitted when the next prompt opens.
+  let pendingChipLabel: string | null = null
+  function submitPendingChip(): void {
+    const label = pendingChipLabel
+    pendingChipLabel = null
+    if (label === null) return
+    gameWindow.setTimeout(() => {
+      debugLog.log("chip-pending-submit", { label })
+      koreanKeywordInput.value = label
+      textPromptGate.noteInput()
+      submitKoreanKeyword()
+    }, 0)
+  }
 
   // The kind of the innermost open native prompt epoch. The top of the gate's
   // open-prompt stack is by construction the most recently opened one, so this
@@ -1072,6 +1100,7 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
         debugLog.log("prompt-opened", { id, kind: kind ?? U4_WEB_PROMPT_TEXT })
         openPromptKind = kind ?? U4_WEB_PROMPT_TEXT
         textPromptGate.opened(id)
+        submitPendingChip()
         focusReturn.promptOpened()
         tk.promptOpened(kind ?? U4_WEB_PROMPT_TEXT)
         // Step 11: a prompt opening means the engine left any waitAnyKey
