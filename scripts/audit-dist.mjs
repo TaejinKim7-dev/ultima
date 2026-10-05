@@ -362,6 +362,8 @@ function auditShippedContent(distDir, files) {
 
     if (isEngineGlueFile(distDir, filePath)) {
       auditEngineGlueEgress(filePath, content)
+    } else if (isCloudSyncChunk(distDir, filePath)) {
+      auditCloudSyncEgress(filePath, content)
     } else {
       auditAppEgress(filePath, content)
     }
@@ -425,6 +427,38 @@ function assertAllowedUrls(filePath, urls) {
       )
     }
   }
+}
+
+// Todo 53 (Google Drive slot sync, user decision 2026-10-05): the Drive client
+// is its own lazily imported chunk (src/cloud/drive-client.ts ->
+// dist/assets/drive-client-<hash>.js). Only that file may use non-GET fetch
+// methods, and only absolute URLs on Google's sign-in and Drive API origins
+// (or the usual allowlists). Beacons, sockets and event streams stay banned.
+const CLOUD_SYNC_CHUNK = /^drive-client-[A-Za-z0-9_-]+\.js$/
+export const CLOUD_SYNC_ORIGINS = ["https://accounts.google.com", "https://www.googleapis.com"]
+
+function isCloudSyncChunk(distDir, filePath) {
+  const rel = relative(distDir, filePath).split(sep).join("/")
+  const [dir, name, ...rest] = rel.split("/")
+  return dir === "assets" && rest.length === 0 && name !== undefined && CLOUD_SYNC_CHUNK.test(name)
+}
+
+function auditCloudSyncEgress(filePath, content) {
+  for (const primitive of EGRESS_PRIMITIVES) {
+    if (primitive.pattern.test(content)) {
+      throw new DistAuditError(
+        `dist artifact contains network egress primitive "${primitive.label}" in ${filePath}`
+      )
+    }
+  }
+  const urls = (content.match(ABSOLUTE_URL) ?? []).filter((url) => {
+    try {
+      return !CLOUD_SYNC_ORIGINS.includes(new URL(url).origin)
+    } catch {
+      return true
+    }
+  })
+  assertAllowedUrls(filePath, urls)
 }
 
 // Emscripten-glue reading of the egress check: POST/PUT, beacons, and event

