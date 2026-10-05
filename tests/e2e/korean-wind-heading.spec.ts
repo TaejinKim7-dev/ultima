@@ -138,14 +138,7 @@ async function assertBoxInsideWindArea(page: Page): Promise<void> {
     const paddingLeft = a.left + anchor.clientLeft
     const paddingTop = a.top + anchor.clientTop
     const canvasCss = { left: c.left - paddingLeft, top: c.top - paddingTop, width: c.width, height: c.height }
-    const overlayCss = {
-      left: o.left - paddingLeft,
-      top: o.top - paddingTop,
-      width: o.width,
-      height: o.height,
-      right: o.left - paddingLeft + o.width,
-      bottom: o.top - paddingTop + o.height
-    }
+    const overlayCss = { left: o.left - paddingLeft, top: o.top - paddingTop, width: o.width, height: o.height }
     // scale = canvas / 320x200 logical
     const scaleX = canvasCss.width / 320
     const scaleY = canvasCss.height / 200
@@ -159,12 +152,18 @@ async function assertBoxInsideWindArea(page: Page): Promise<void> {
     }
     // The implementation snaps each side independently to 1/dpr CSS px
     // (overlay-layout.ts:282-291), so allow +/- 1 CSS px tolerance at any DPR.
+    // `overlayCss` only carries left/top/width/height; derive right/bottom
+    // from width/height here, never access overlayCss.right/bottom (they are
+    // undefined -- a 1-CSS-px tolerance check on `undefined` is always NaN
+    // and always false).
     const eps = 1
+    const overlayRight = overlayCss.left + overlayCss.width
+    const overlayBottom = overlayCss.top + overlayCss.height
     const inside =
       overlayCss.left + eps >= target.left &&
       overlayCss.top + eps >= target.top &&
-      overlayCss.right - eps <= target.right &&
-      overlayCss.bottom - eps <= target.bottom
+      overlayRight - eps <= target.right &&
+      overlayBottom - eps <= target.bottom
     return {
       scaleX,
       scaleY,
@@ -205,7 +204,14 @@ test.describe("Todo 50: in-game Korean wind / dungeon-heading overlay", () => {
         return document.fonts.check("16px NeoDunggeunmo")
       })
       .catch(() => false)
-    expect(fontReady, "NeoDunggeunmo 16px must be available BEFORE relying on it (src/main.ts:87 preload)").toBe(true) // the preload loads the face before boot, so check() is already true
+    // CSS Font Loading API: document.fonts.check() returns true as soon as the
+    // @font-face declaration is parsed (src/shell.css @font-face "NeoDunggeunmo"
+    // ships with the static HTML). The font face is registered before the JS
+    // engine boots, so even on about:blank the family is "available" by
+    // check()'s definition -- that is what makes this a sanity check, not
+    // a load-state probe. The real load-state proof is the second check
+    // below (after the engine boots + the page has actually painted).
+    expect(fontReady, "the NeoDunggeunmo @font-face must be parsed in the static HTML (src/shell.css @font-face)").toBe(true)
 
     await bootAndSelectZip(page, buffer)
     await page.waitForTimeout(2500)
@@ -303,10 +309,20 @@ test.describe("Todo 50: in-game Korean wind / dungeon-heading overlay", () => {
     expect(await page.locator("#toggle-screen-ko").isChecked()).toBe(false)
     await page.screenshot({ path: join(evidenceDir, "04-toggle-off-english.png") })
     await page.locator("#toggle-screen-ko").click()
+    // Scenario 2 left us inside Dungeon Deceit, whose windheading is mode=2
+    // ("방향 …"). The real switch-on assertion below needs an overland '바람 …'
+    // text, so deterministically return to the world map via the cheat menu's
+    // 'x' Exit Map (vendor/xu4/src/cheat.cpp case 'x') -- the same proven
+    // path gameplay-progression.spec.ts:cheatExitMap uses. Without this
+    // return step the overlay would correctly keep showing '방향동' and the
+    // '바람' expectation below would fail by spec self-contradiction, not
+    // by implementation regression.
+    await openCheatMenu(page)
+    await pressKey(page, "x", 2500) // X-it!
     await expect(overlayBox(page)).toBeVisible({ timeout: 10_000 })
     await expect
       .poll(async () => overlayText(page), { timeout: 10_000 })
-      .toMatch(/^방향(?:서|북|동|남)$/)
+      .toMatch(/^바람(?:서|북|동|남)$/)
     await page.screenshot({ path: join(evidenceDir, "05-toggle-on-korean.png") })
 
     // Diagnostic dump (observability log, never a pass/fail input): record
