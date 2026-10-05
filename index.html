@@ -88,6 +88,13 @@
       </div>
 
       <!--
+        Todo 51 (user request 2026-10-05): named save slots, kept in this
+        browser (IndexedDB). src/main.ts shows it once the engine has started;
+        src/saves/slot-panel.ts renders it.
+      -->
+      <section id="slot-panel" class="slot-panel" hidden aria-label="저장 슬롯"></section>
+
+      <!--
         Todo 52 (user request 2026-10-05): the game's one-letter commands in
         Korean for first-time players. src/shell.ts fills #command-groups from
         src/ui/command-list.ts; each button sends its key to the game and is

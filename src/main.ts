@@ -1,3 +1,6 @@
+import { createSlotController, type EngineAdapter } from "./saves/slot-controller.ts"
+import { createIndexedDbSlotStore } from "./saves/slot-store.ts"
+import { mountSlotPanel } from "./saves/slot-panel.ts"
 import { createIndexedDbZipStore, forgetZip, rememberZip, restoreCachedZip, type ZipStore } from "./engine/zip-cache.ts"
 import { createDebugLog, debugEnabledFromUrl, type DebugLog, type DebugLogEntry } from "./debug-log.ts"
 import "./shell.css"
@@ -155,6 +158,45 @@ if (zipStore !== null) {
   })
 }
 
+// Todo 51: the slot list needs the engine's file system, so it appears once the
+// engine has started. Slots live in this browser only (IndexedDB), never uploaded.
+function mountSaveSlots(engine: EngineAdapter): void {
+  const host = document.querySelector<HTMLElement>("#slot-panel")
+  if (host === null || typeof indexedDB === "undefined") return
+  const controller = createSlotController({
+    store: createIndexedDbSlotStore(indexedDB),
+    engine,
+    now: () => Date.now(),
+    newId: () => crypto.randomUUID(),
+    onError: (error) => {
+      debugLog.log("slot-error", { message: error instanceof Error ? error.message : String(error) })
+      notify("[슬롯 오류] 저장 슬롯에 기록하지 못했습니다.\n")
+    }
+  })
+  bridge.onPlayChange((on) => controller.setPlaying(on))
+  void controller.init().then(
+    () => {
+      debugLog.log("slots-init", {})
+      mountSlotPanel({
+        host,
+        controller,
+        notify,
+        download: (bytes, filename) => {
+          const url = URL.createObjectURL(new Blob([bytes], { type: "application/octet-stream" }))
+          const link = document.createElement("a")
+          link.href = url
+          link.download = filename
+          link.click()
+          URL.revokeObjectURL(url)
+        }
+      })
+    },
+    (error) => {
+      debugLog.log("slots-init-failed", { message: error instanceof Error ? error.message : String(error) })
+    }
+  )
+}
+
 function notify(text: string): void {
   bridge.dispatch({ abiVersion: bridge.abiVersion, type: "message", text })
 }
@@ -217,6 +259,7 @@ function startWithZip(file: File, source: "picker" | "cache"): void {
       }
       if (result.started) {
         bridge.attachSaveHandlers(result.saveHandlers)
+        mountSaveSlots(result.slotEngine)
         window.ultimaAudio = result.audioBridge
         window.ultimaWasmMemory = { bytes: result.wasmMemoryBytes }
         document.body.setAttribute("data-audio-bridge-ready", String(result.audioBridge !== undefined))

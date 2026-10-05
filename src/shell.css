@@ -552,6 +552,66 @@ body {
   display: none;
 }
 
+/* Todo 51: the save-slot list. */
+.slot-panel {
+  border: 1px solid var(--ultima-border);
+  background: var(--ultima-panel-bg);
+  padding: 0.5rem 0.75rem;
+}
+
+.slot-panel h2 {
+  margin: 0 0 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.slot-note {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.slot-toolbar,
+.slot-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.slot-list {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.slot-row {
+  border: 1px solid var(--ultima-border);
+  border-radius: 0.35rem;
+  padding: 0.35rem 0.5rem;
+}
+
+.slot-active {
+  background: rgba(214, 194, 74, 0.12);
+}
+
+.slot-name {
+  font-weight: 600;
+}
+
+.slot-detail {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin: 0.15rem 0 0.3rem;
+}
+
+@media (min-width: 1000px) {
+  .slot-panel {
+    grid-column: 1 / -1;
+  }
+}
+
 /* Todo 52: the Korean command list for first-time players. */
 .command-panel {
   border: 1px solid var(--ultima-border);

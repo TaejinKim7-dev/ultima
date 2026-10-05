@@ -94,6 +94,8 @@ export interface UltimaBridgeApi {
    * per engine start.
    */
   attachSaveHandlers(handlers: ShellSaveHandlers): void
+  /** Todo 51: tells the save-slot panel when play starts/ends (slots can only be switched before play). */
+  onPlayChange(listener: (on: boolean) => void): void
   /**
    * Todo 18: pass to startEngine()'s `textPrompt` option -- the native
    * ReadStringController open/close lifecycle that gates the Korean
@@ -578,6 +580,7 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
   })
 
   let realSaveHandlers: ShellSaveHandlers | null = null
+  const playListeners: Array<(on: boolean) => void> = []
 
   // Save export: a local Blob download only, never uploaded. Before the
   // engine has started (or if it fails to), there is nothing real to
@@ -1159,6 +1162,9 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
     attachSaveHandlers(handlers) {
       realSaveHandlers = handlers
     },
+    onPlayChange(listener) {
+      playListeners.push(listener)
+    },
     textPromptReceiver: {
       // Todo 30: the kind rides along with the open so a `readChoice()` epoch
       // can be answered with a single key; the gate itself is unchanged.
@@ -1242,6 +1248,7 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
         windOverlay.applyPlay(on)
         commandPlaying = on
         updateCommandPanel()
+        for (const listener of playListeners) listener(on)
       },
       modal: (on) => {
         messageArea.applyModal(on)
