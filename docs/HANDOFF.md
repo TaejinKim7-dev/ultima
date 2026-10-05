@@ -135,3 +135,13 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integ
 - **통합 게이트 (wave9에서 단독 실행 예정, exit code는 orchestrator가 채움)**:
   - 게이트 9종 (test:unit, verify:repo-sources, typecheck, build, check:build-fresh, audit:dist --require-engine, verify:release-docs, verify:integration, git diff --check): `TODO_EXIT_CODES`
 - **다음**: wave9 → main → push, Stage 3 착수.
+
+---
+
+## 2026-10-04 — wave9 Stage 3 (Todo 49 Phase B) main 머지·push
+
+- 작업: agent-todo-49b Lane A (22527c7) + Lane B (7cca398) → wave9-combined → main → push.
+- 통합 게이트: orchestrator가 wave9 머지 후 단독 실행 (port <unique>), # verify:integration ... PASS (orchestrator가 채움).
+- 다음: Stage 4 (Todo 50: Neo둥근모 전체 적용). ora-3 설계가 끝남.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>

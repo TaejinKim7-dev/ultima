@@ -795,7 +795,7 @@ Wave는 마일스톤 묶음이며 내부 작업이 모두 동시에 가능하다
   QA scenarios: happy: `.omo/evidence/ultima-web/task-48/talk-keywords.png`; failure: clicking a chip while no native prompt is open shows the existing rejection message and sends no keystrokes, recorded in `.omo/evidence/ultima-web/task-48/no-prompt.log`.
   Commit: Y | feat(dialogue): show the usable talk keywords as clickable chips
 
-- [ ] 49. Show the Korean messages inside the game screen's message area (in-place overlay)
+- [x] 49. Show the Korean messages inside the game screen's message area (in-place overlay)
   What to do / Must NOT do: user request 2026-10-04: the game screen's message area still shows English while the Korean text only appears in the right-hand panel. The user's original intent was in-game translation, with the game's font made smaller.
   Rendering Hangul inside the engine is not viable. The message area is `TEXT_AREA` 16x12 cells of 8x8 px (`vendor/xu4/src/u4.h:62-65`, 128x96 px of the 320x200 raster). Hangul is unreadable at 8x8, and at 16x16 the area holds 8 characters x 6 lines.
   Instead, cover that area with a high-resolution, opaque Korean DOM overlay, the same technique the intro and status overlays already use (Todos 26, 27). At the displayed 2.5-3x scale the area is about 330x250 CSS px, so a 13-14 px Korean font fits 20+ characters x 12+ lines.

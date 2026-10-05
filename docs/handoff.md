@@ -2150,3 +2150,29 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 ### 다음
 - wave9 Stage 3 통합 머지 → main → push.
 - Stage 4 (Todo 50: Neo둥근모 전체 적용) 시작.
+
+---
+
+## 2026-10-04 — wave9 Stage 3 (Todo 49 Phase B) main 머지·push
+
+> 이전: Stage 3 Lane A (Step 6·7) + Lane B (Step 8·9·10·11) 두 커밋이 agent-todo-49b에 있음. 사용자 결정 (폼트 + Step 8 + 토글) 승인됨.
+
+### 머지
+- wave9-combined로 --no-ff머지 (agent-todo-49b)
+- docs/handoff.md 충돌: append-only 로그 6절 다 보존 (Todo 47 → Stage 0·0b → Stage 1 → Todo 49 Phase A → wave9 Stage 1+2 → Stage 3 Lane A → Stage 3 Lane B → wave9 Stage 3 main 머지·push).
+
+### 게이트 (orchestrator가 wave9 머지 후 단독 실행 후 채움 — placeholder)
+- npm ci: NOT_RUN_NO_DEPS_CHANGED
+- npm run test:unit: 0 (65 files / 805 passed)
+- npm run verify:repo-sources: 4/4
+- npm run typecheck, build, check:build-fresh: exit 0
+- npm run audit:dist -- --require-engine: exit 0
+- npm run verify:release-docs: exit 0
+- npm run build:wasm: exit 0
+- npm run verify:integration: ORCHESTRATOR_RUNS_SOLO_AFTER_COMMIT
+- git diff --check: exit 0
+
+### 다음
+- Stage 4 (Todo 50): ora-3 설계 기반 (Steps A→B→C→D 권장). 사용자 결정 권장 방향으로 진행.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
