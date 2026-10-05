@@ -153,18 +153,13 @@ using namespace std;
  * the arrow keys move a cursor over the five items and Enter activates it.
  */
 static const char introMenuKeys[] = "rjica";
-static int introMenuCursor = 1;     // "Journey Onward"
 /*
- * The intro screens are skipped with Enter, so a second Enter arriving just as
- * the menu appears must not activate the cursor item by accident (it started
- * "Journey Onward" and lost the next keys to the error banner). Enter only
- * counts once the menu has been on screen this long.
+ * No item is selected until an arrow key is pressed (-1). The intro screens are
+ * skipped with Enter, and a second Enter reaching a pre-selected menu started
+ * "Journey Onward" by accident (the error banner then swallowed the next keys),
+ * so Enter does nothing until the player has chosen an item with the arrows.
  */
-#ifdef __EMSCRIPTEN__
-extern uint32_t getTicks();
-#define INTRO_MENU_ENTER_GUARD_MS 700
-static uint32_t introMenuShownAt = 0;
-#endif
+static int introMenuCursor = -1;
 
 #define INTRO_MAP_HEIGHT 5
 #define INTRO_MAP_WIDTH 19
@@ -571,19 +566,17 @@ bool IntroController::keyPressed(int key) {
     case INTRO_MENU:
         switch (key) {
         case U4_UP:
-            introMenuCursor = (introMenuCursor + 4) % 5;
+            introMenuCursor = (introMenuCursor <= 0) ? 4 : introMenuCursor - 1;
             updateScreen();
             break;
         case U4_DOWN:
-            introMenuCursor = (introMenuCursor + 1) % 5;
+            introMenuCursor = (introMenuCursor < 0) ? 0 : (introMenuCursor + 1) % 5;
             updateScreen();
             break;
         case U4_ENTER:
         case U4_KEYPAD_ENTER:
-#ifdef __EMSCRIPTEN__
-            if (getTicks() - introMenuShownAt < INTRO_MENU_ENTER_GUARD_MS)
+            if (introMenuCursor < 0)
                 break;
-#endif
             keyPressed( introMenuKeys[introMenuCursor] );
             break;
         case 'i':
@@ -903,17 +896,6 @@ void IntroController::drawAbacusBeads(int row, int selectedVirtue, int rejectedV
 void IntroController::updateScreen() {
     screenHideCursor();
 
-#ifdef __EMSCRIPTEN__
-    {
-        // Stamp the moment the main menu FIRST appears (not every redraw: a
-        // cursor move redraws it too), for the Enter guard in keyPressed().
-        static int lastDrawnMode = -1;
-        if (mode == INTRO_MENU && lastDrawnMode != INTRO_MENU)
-            introMenuShownAt = getTicks();
-        lastDrawnMode = mode;
-    }
-#endif
-
     switch (mode) {
     case INTRO_MAP:
 #ifdef __EMSCRIPTEN__
@@ -969,7 +951,7 @@ void IntroController::updateScreen() {
             rows.add(7, 10, "Initiate New Game");
             rows.add(8, 10, "Configure");
             rows.add(9, 10, "About");
-            webViewShow("menu", menuArea, 0, 5 + introMenuCursor, rows);
+            webViewShow("menu", menuArea, 0, introMenuCursor >= 0 ? 5 + introMenuCursor : -1, rows);
         }
 #endif
         drawBeasties();

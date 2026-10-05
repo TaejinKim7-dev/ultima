@@ -23,7 +23,7 @@ describe("intro main menu cursor", () => {
   })
 
   it("tells the Korean overlay which row is selected (row 5 + cursor)", () => {
-    expect(intro).toMatch(/webViewShow\("menu", menuArea, 0, 5 \+ introMenuCursor, rows\)/)
+    expect(intro).toMatch(/webViewShow\("menu", menuArea, 0, introMenuCursor >= 0 \? 5 \+ introMenuCursor : -1, rows\)/)
   })
 
   it("shares one hotkey table with the mouse handler", () => {
@@ -32,15 +32,25 @@ describe("intro main menu cursor", () => {
   })
 })
 
-// e2e finding 2026-10-05 (save-slots spec): the intro screens are skipped with
-// Enter, so a second Enter arriving as the menu appears activated "Journey
-// Onward" by accident (error banner = 3 s of dead input, the real 'i' was lost).
-// Enter must only activate the cursor item once the menu has been on screen a moment.
-describe("intro main menu Enter guard", () => {
-  it("records when the menu appeared and ignores Enter right after", () => {
-    expect(intro).toMatch(/extern uint32_t getTicks\(\);/)
-    expect(intro).toMatch(/introMenuShownAt\s*=\s*getTicks\(\)/)
+// e2e finding 2026-10-05 (save-slots spec, then a probe): the intro screens are
+// skipped with Enter, and scripted/habitual double Enters reached the freshly
+// shown menu and activated "Journey Onward" (3 s error banner swallowing the
+// next keys). No item is selected until an arrow key is pressed; Enter does
+// nothing until then, so the old Enter-spam flow and the letter hotkeys work.
+describe("intro main menu cursor starts unselected", () => {
+  it("starts with no selected item, and the overlay then gets selected=-1", () => {
+    expect(intro).toMatch(/static int introMenuCursor = -1;/)
+    expect(intro).toMatch(/introMenuCursor >= 0 \? 5 \+ introMenuCursor : -1/)
+  })
+
+  it("Enter does nothing while no item is selected", () => {
     const body = introMenuKeyCase()
-    expect(body).toMatch(/getTicks\(\)\s*-\s*introMenuShownAt\s*<\s*INTRO_MENU_ENTER_GUARD_MS/)
+    expect(body).toMatch(/if \(introMenuCursor < 0\)\s*break;/)
+  })
+
+  it("the first arrow press selects an item (Down: first, Up: last)", () => {
+    const body = introMenuKeyCase()
+    expect(body).toMatch(/introMenuCursor = \(introMenuCursor < 0\) \? 0 : \(introMenuCursor \+ 1\) % 5;/)
+    expect(body).toMatch(/introMenuCursor = \(introMenuCursor <= 0\) \? 4 : introMenuCursor - 1;/)
   })
 })
