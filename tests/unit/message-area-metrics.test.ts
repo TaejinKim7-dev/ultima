@@ -25,3 +25,23 @@ describe("message-area overlay metrics use the message-area box", () => {
     }
   })
 })
+
+// User report 2026-10-05: lines wrapped at half the box width. metrics.columns
+// counts full Hangul glyphs, but the view's budget counts Hangul as 2 units.
+import { messageAreaUnitBudget } from "../../src/overlay/message-area-dom.ts"
+import { computeView, createMessageAreaState } from "../../src/overlay/message-area-view.ts"
+
+describe("message-area wrap budget", () => {
+  it("fits 16 Hangul on one row at an exact 2x canvas", () => {
+    const metrics = messageAreaMetricsForContent({ left: 0, top: 0, width: 640, height: 400 }, 1)
+    const cells = [..."가나다라마바사아자차카타파하가나"].map((char) => ({ char, color: "default" as const, kind: "text" as const }))
+    const state = { ...createMessageAreaState(), playing: true, lines: [{ cells }] }
+    const view = computeView(state, messageAreaUnitBudget(metrics))
+    expect(view.rows.filter((row) => row.cells.length > 0)).toHaveLength(1)
+  })
+
+  it("is twice the Hangul column count (ASCII fills half a Hangul cell)", () => {
+    const metrics = messageAreaMetricsForContent({ left: 0, top: 0, width: 1440, height: 900 }, 1)
+    expect(messageAreaUnitBudget(metrics)).toBe(metrics.columns * 2)
+  })
+})

@@ -478,9 +478,14 @@ body {
   background: #f2f2f2; /* a solid block caret, readable at any font size */
 }
 
-/* Input echoes (typed keyword / accepted choice key) are slightly dimmer. */
-.ma-input {
-  opacity: 0.85;
+/*
+ * The player's own words (typed keyword / accepted choice key, live and
+ * committed) get their own colour so they read apart from what the NPC says
+ * (user request 2026-10-05). `.messagearea` raises specificity above the
+ * `.ma-color-*` classes on the same span.
+ */
+.messagearea .ma-input {
+  color: #7fd8ff;
 }
 
 /*

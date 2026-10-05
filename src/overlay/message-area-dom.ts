@@ -69,7 +69,7 @@ export interface MessageAreaOverlayHandle {
   readonly active: boolean
   /** Step 11: whether a paused long answer is waiting with a "▼" page cue. */
   isPageMode(): boolean
-  /** The full-width column budget currently wrapped to (for the shell's awaitKey decision). */
+  /** The wrap budget in view units (Hangul 2, ASCII 1) -- for the shell's awaitKey decision. */
   columns(): number
   /** Step 11: advance the paused long answer one page. */
   nextPage(): void
@@ -112,6 +112,15 @@ const COLOR_CLASS: Readonly<Record<PanelColor, string>> = {
  */
 export function messageAreaMetricsForContent(content: ContentRect, dpr: number): MessageAreaMetrics {
   return computeMessageAreaMetrics(toCssRect(MESSAGE_AREA_RECT, content, dpr), dpr)
+}
+
+/**
+ * The wrap budget handed to message-area-view.ts, in its units (Hangul = 2,
+ * ASCII = 1). `metrics.columns` counts full Hangul glyphs, so the budget is
+ * twice that (user report 2026-10-05: lines wrapped at half the box width).
+ */
+export function messageAreaUnitBudget(metrics: MessageAreaMetrics): number {
+  return metrics.columns * 2
 }
 
 function devicePixelRatio(win: Window | null): number {
@@ -261,7 +270,7 @@ export function createMessageAreaOverlay(options: MessageAreaOverlayOptions): Me
     const rect = contentRect()
     const dpr = devicePixelRatio(win)
     const boxRect = toCssRect(MESSAGE_AREA_RECT, rect, dpr)
-    const view = computeView(state, metrics.columns)
+    const view = computeView(state, messageAreaUnitBudget(metrics))
     render(view, boxRect)
   }
 
@@ -305,11 +314,11 @@ export function createMessageAreaOverlay(options: MessageAreaOverlayOptions): Me
     isPageMode() {
       state = syncFromPanel(state, options.panelState())
       metrics = currentMetrics()
-      const view = computeView(state, metrics.columns)
+      const view = computeView(state, messageAreaUnitBudget(metrics))
       return view.mode === "page" && view.clippedBelow
     },
     columns() {
-      return currentMetrics().columns
+      return messageAreaUnitBudget(currentMetrics())
     },
     nextPage() {
       // Only page while a paused long answer is actually waiting.
