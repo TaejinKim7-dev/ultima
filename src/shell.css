@@ -419,3 +419,113 @@ body {
     grid-column: 1 / -1;
   }
 }
+
+/*
+ * Stage 3 Lane B (Todo 49 Phase B): the in-game Korean message-area overlay.
+ * A separate DOM box over the native TEXT_AREA rect (192,96,128,96), owned by
+ * src/overlay/message-area-dom.ts -- NOT a child of `#overlay-layer`. Always
+ * opaque while shown so the English raster underneath never flashes; hidden
+ * whenever the switch is off, the engine is outside play, or a top-menu modal
+ * is open (the modal also hides `#overlay-layer` entirely -- see
+ * message-area-dom.ts's applyModal).
+ */
+.messagearea {
+  position: absolute;
+  pointer-events: none; /* the box is display-only; clicks reach the canvas */
+  overflow: hidden;
+  background: #000;
+  color: #f2f2f2;
+  font-family: "NeoDunggeunmo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  font-weight: 400;
+  z-index: 10; /* above #overlay-layer (status/intro), below nothing user-drawn */
+}
+
+.messagearea[hidden] {
+  display: none;
+}
+
+/*
+ * Each of the 12 rows is pre-wrapped to the overlay's own column budget by
+ * message-area-view.ts (Hangul 2 units, ASCII 1), so the browser never
+ * re-wraps: `white-space: pre` + a flex row keeps one native row on one line.
+ */
+.messagearea-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.messagearea-row {
+  display: flex;
+  white-space: pre;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+/* The page cue "▼" (paused long answer, more content below -- Step 11). */
+.messagearea-cue {
+  position: absolute;
+  right: 2px;
+  bottom: 0;
+  color: #ffff00;
+  line-height: 1;
+  padding: 1px 3px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* The typed-input caret, drawn as its own cell after the current position. */
+.ma-cursor {
+  color: #f2f2f2;
+  background: #f2f2f2; /* a solid block caret, readable at any font size */
+}
+
+/* Input echoes (typed keyword / accepted choice key) are slightly dimmer. */
+.ma-input {
+  opacity: 0.85;
+}
+
+/*
+ * Message-area colour classes -- deliberately `.ma-*`, separate from the
+ * dialogue panel's `.dialogue-color-*`, so a future wholesale re-theme of
+ * one never leaks into the other.
+ */
+.ma-color-default { color: #f2f2f2; }
+.ma-color-grey { color: #9a9a9a; }
+.ma-color-blue { color: #4a7fd6; }
+.ma-color-purple { color: #b06fd6; }
+.ma-color-green { color: #4fbf6a; }
+.ma-color-red { color: #d65f5f; }
+.ma-color-yellow { color: #d6c24a; }
+.ma-color-white { color: #ffffff; }
+
+/*
+ * The "게임 화면에 한국어 표시" switch. Keyboard-reachable (tabindex=0) but
+ * never auto-focused (Lane B accessibility decision). `pointer-events: auto`
+ * overrides the overlay layer's none so it is actually clickable; it sits
+ * just below the message-area box (positioned by message-area-dom.ts).
+ */
+.messagearea-toggle {
+  position: absolute;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.7rem;
+  line-height: 1;
+  color: var(--ultima-text);
+  background: rgba(11, 11, 18, 0.82);
+  border: 1px solid var(--ultima-border);
+  border-radius: 0.25rem;
+  padding: 2px 6px;
+  cursor: pointer;
+  z-index: 11;
+  user-select: none;
+}
+
+.messagearea-toggle[hidden] {
+  display: none;
+}
+
+.messagearea-toggle input[type="checkbox"] {
+  margin: 0;
+  accent-color: #d6c24a;
+}

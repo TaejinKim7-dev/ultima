@@ -58,6 +58,7 @@
 // character count per field.
 
 import type { OverlayRow, ViewRegion } from "../bridge/types.ts"
+import { MESSAGE_AREA_RECT } from "./message-area-layout.ts"
 
 /** A rect in the native 320x200 logical screen-space (raster pixels). */
 export interface LogicalRect {
@@ -123,7 +124,12 @@ export const DEFAULT_VIEW_RECTS: Readonly<Record<OverlayRole, LogicalRect>> = {
   // It needs its own role (not an extra "status" row) because overlay
   // elements are 1:1 with a role (src/shell.ts's ensureOverlayElement) and
   // both rows are on screen at the same time.
-  statussummary: { x: 192, y: 80, width: 120, height: 8 }
+  statussummary: { x: 192, y: 80, width: 120, height: 8 },
+  // Stage 3 Lane B (Todo 49 Phase B): the message-area overlay region. Its
+  // DOM element is NOT managed by this module's registry (message-area-dom.ts
+  // owns it), but the ABI documents the region so a future `view` event can
+  // target it -- additive, exactly like "statussummary" (Todo 31).
+  messagearea: MESSAGE_AREA_RECT
 }
 
 /**

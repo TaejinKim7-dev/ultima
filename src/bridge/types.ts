@@ -86,7 +86,7 @@ export interface PromptBridgeEvent extends BridgeEventBase {
 }
 
 /** The overlay regions kept over the original game screen layout. */
-export const VIEW_REGIONS = ["status", "menu", "textview", "statussummary"] as const
+export const VIEW_REGIONS = ["status", "menu", "textview", "statussummary", "messagearea"] as const
 export type ViewRegion = (typeof VIEW_REGIONS)[number]
 
 /**

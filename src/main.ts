@@ -146,7 +146,8 @@ romPickerElement?.addEventListener("change", () => {
         dispatch: bridge.dispatch,
         textPrompt: bridge.textPromptReceiver,
         talkText: bridge.talkTextReceiver,
-        introView: bridge.introViewReceiver
+        introView: bridge.introViewReceiver,
+        screen: bridge.screenReceiver
       })
     )
     .then((result) => {
