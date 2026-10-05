@@ -705,3 +705,20 @@ body {
   opacity: 0.75;
   max-width: 48rem;
 }
+
+/* Todo 53: links required for the Google OAuth consent screen (privacy / terms). */
+.site-footer {
+  font-size: 0.75rem;
+  opacity: 0.75;
+  padding: 0.5rem 0;
+}
+
+.site-footer a {
+  color: inherit;
+}
+
+@media (min-width: 1000px) {
+  .site-footer {
+    grid-column: 1 / -1;
+  }
+}
