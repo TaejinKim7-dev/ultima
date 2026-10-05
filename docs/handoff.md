@@ -2228,5 +2228,10 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 ## 2026-10-05 13:40 — 게이트 6차 중단과 opencode 3차 업무 (브랜치 todo-50-pixel-font, HEAD 693bb9e)
 
 - 게이트 6차(`/tmp/todo50-integration-6.log`)는 e2e 26/70까지 실패 0이었으나 **제가 의도적으로 중단**(SIGTERM). 이유: opencode 2차 보고서(`A_acceptance.md`)가 Todo 50 acceptance "각 한국어 표면의 computed font-family가 Neo둥근모" 단정 테스트가 없음을 확인 → 테스트가 추가되면 트리가 바뀌므로 지금 게이트를 끝까지 돌려도 최종 트리의 증거가 못 된다. 통과로 세지 않는다. 25번 Hawkwind는 6차에서도 통과(26번까지).
-- opencode 2차 결론(읽기 전용): A — acceptance a·b 충족, c·e 부분(audit-dist에 라이선스 단계 없음, computed font-family 단정 없음); B — Hawkwind flake는 Todo 50 diff(`git diff ca3cd6d..HEAD -- src vendor/xu4/src`의 이동·대화·RNG·패널 경로 변경 0건)와 무관, 안정화안은 Todo 50 밖 후속; C — 네이티브 순서 `deps:host → build:native → cmake:configure → cmake:build → test:native`, deps:host는 네트워크 없음; D — cheat 메뉴 3 해시 번역하지 않음(`docs/WEB_PORT.md:108` 정책).
+- opencode 2차 결론(읽기 전용): A — acceptance a·b 충족, c·e 부분(audit-dist에 라이선스 단계 없음, computed font-family 단정 없음); B — Hawkwind flake는 NPC 위치 RNG 의존 가설(`xu4.cpp:293-296` time seed, `location.cpp:223-228` MOVEMENT_WANDER)이며 확률은 미측정. C++ 이동·RNG 경로는 `ca3cd6d..HEAD`에서 변경 없음(vendor 변경은 `screen.cpp` 바람 훅 22줄뿐). 정정: 보고서의 "패널 출력 경로도 0건"은 과장 — `src/dialogue/ui-message-compose.ts` 등은 Stage 3(Todo 49) 변경을 포함한다. 안정화안은 Todo 50 밖 후속; C — 네이티브 순서 `deps:host → build:native → cmake:configure → cmake:build → test:native`, deps:host는 네트워크 없음; D — cheat 메뉴 3 해시 번역하지 않음(`docs/WEB_PORT.md:108` 정책).
 - 다음: opencode가 computed font-family e2e를 작성·단독 검증 → 합친 트리에서 3브라우저(Todo 50 관련 스펙) → 네이티브 게이트 → 최종 단독 `verify:integration` → 문서·main merge.
+
+### 사전 점검 (13:50, 읽기 전용)
+- Playwright 브라우저 설치 확인: `~/.cache/ms-playwright/`에 chromium-1169, firefox-1482, webkit-2158.
+- 네이티브 사전 조건: `libpulse-dev`·`libvorbis-dev`·`libflac-dev` 설치됨(dpkg), `scripts/deps-host.mjs`에 다운로드 없음(apt 안내 문구만) → 사용자 승인 없이 진행 가능. 메인 `build/host`에 `boron`·`faun`·`xu4-src` 존재(재빌드 여부는 deps:host가 결정).
+- 3브라우저 대상 스펙 9개 전부 존재: korean-wind-heading, status-overlay, korean-message-area, korean-intro-overlay, korean-status-overlay, dialogue-panel, dialogue-side-column, pages-static-smoke, talk-keywords (`audio`·`memory-smoke`만 browser 분기 있음).
