@@ -32,8 +32,6 @@ import { fileURLToPath } from "node:url"
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
 const evidenceDir = join(repoRoot, ".omo/evidence/ultima-web/task-50/windheading")
 
-const CARDINAL_RE = /^(?:서|북|동|남)$/
-
 async function bootAndSelectZip(page: Page, buffer: Buffer): Promise<void> {
   await page.goto("/")
   await page.locator("#rom-picker").setInputFiles({ name: "ultima4.zip", mimeType: "application/zip", buffer })
@@ -125,7 +123,6 @@ async function overlayText(page: Page): Promise<string> {
  *  canvas CSS px), so a CSS px range check is the exact counterpart of the
  *  native assertion in the spec description. */
 async function assertBoxInsideWindArea(page: Page): Promise<void> {
-  const box = overlayBox(page)
   const probe = await page.evaluate(() => {
     const canvas = document.querySelector("#game-canvas") as HTMLCanvasElement | null
     const anchor = document.querySelector("#game-viewport") as HTMLElement | null
@@ -141,7 +138,14 @@ async function assertBoxInsideWindArea(page: Page): Promise<void> {
     const paddingLeft = a.left + anchor.clientLeft
     const paddingTop = a.top + anchor.clientTop
     const canvasCss = { left: c.left - paddingLeft, top: c.top - paddingTop, width: c.width, height: c.height }
-    const overlayCss = { left: o.left - paddingLeft, top: o.top - paddingTop, width: o.width, height: o.height }
+    const overlayCss = {
+      left: o.left - paddingLeft,
+      top: o.top - paddingTop,
+      width: o.width,
+      height: o.height,
+      right: o.left - paddingLeft + o.width,
+      bottom: o.top - paddingTop + o.height
+    }
     // scale = canvas / 320x200 logical
     const scaleX = canvasCss.width / 320
     const scaleY = canvasCss.height / 200
@@ -354,7 +358,7 @@ test.describe("Todo 50: in-game Korean wind / dungeon-heading overlay", () => {
       const wind = document.querySelector('#game-viewport [data-role="windheading"]')
       return {
         rootExists: root !== null,
-        rootChildren: root ? Array.from(root.children).map((c) => c.id || c.dataset["role"] || c.tagName) : [],
+        rootChildren: root ? Array.from(root.children).map((c) => c.id || (c as HTMLElement).dataset["role"] || c.tagName) : [],
         overlayLayerExists: overlayLayer !== null,
         messageAreaExists: messageArea !== null,
         messageAreaParent: messageArea?.parentElement?.id ?? null,
