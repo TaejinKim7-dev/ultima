@@ -77,7 +77,7 @@ describe("createUiMessageHandler erase callback", () => {
   it("calls erase with the previous Korean prompt text when the erase follows the prompt hash", () => {
     const erased: string[] = []
     const emitted: string[] = []
-    const handle = createUiMessageHandler(DEPENDENCIES, (text) => emitted.push(text), undefined, (text) => erased.push(text))
+    const handle = createUiMessageHandler(DEPENDENCIES, (text) => emitted.push(text), undefined, undefined, (text) => erased.push(text))
     handle("7ab7b051", []) // "Dir?" -> "방향?"
     handle("8c19a815", []) // "\b\b\b\b" -> control-only erase
     expect(erased).toEqual(["방향?"])
@@ -87,7 +87,7 @@ describe("createUiMessageHandler erase callback", () => {
 
   it("does not erase when the previous call was a different prompt", () => {
     const erased: string[] = []
-    const handle = createUiMessageHandler(DEPENDENCIES, () => {}, undefined, (text) => erased.push(text))
+    const handle = createUiMessageHandler(DEPENDENCIES, () => {}, undefined, undefined, (text) => erased.push(text))
     handle("aaaa0001", []) // some other line
     handle("8c19a815", [])
     expect(erased).toEqual([])
@@ -109,6 +109,7 @@ describe("createUiMessageHandler erase callback", () => {
       DEPENDENCIES,
       () => {},
       (error) => failures.push(error),
+      undefined,
       () => {
         throw new Error("boom")
       }

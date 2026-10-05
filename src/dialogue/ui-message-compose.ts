@@ -10,6 +10,7 @@
 // Pure (no DOM, no engine): the shell injects the real lookups.
 
 import { hashText, type CoverageMiss } from "../i18n/coverage.ts"
+import { controlForHash, type ControlFormat } from "./control-formats.ts"
 
 /** Matches one printf conversion; `%%` is the literal percent sign. */
 const CONVERSION = /%[-+ 0#]*\d*(?:\.\d+)?[a-zA-Z%]/g
@@ -102,11 +103,19 @@ export function composeUiMessage(hash: string, args: readonly string[], deps: Ui
  * PROMPT_ERASE_HASHES). The previous call's hash and composed text are
  * remembered, so the Korean prompt "방향?" -- not the 4 English backspace
  * bytes -- is what gets removed.
+ *
+ * Stage 3 Step 8: an optional `onControl` callback receives the five
+ * control-only formats (src/dialogue/control-formats.ts) -- pure line
+ * breaks, the idle prompt glyph, or a one-key echo -- as ControlFormat
+ * descriptors. They are checked after the erase hash and before the
+ * ordinary compose path, and are NEVER emitted as panel text. The erase
+ * hashes and the control hashes are disjoint, so the order is safe.
  */
 export function createUiMessageHandler(
   deps: UiMessageDeps,
   emit: (text: string) => void,
   onError: (error: unknown) => void = () => {},
+  onControl?: (event: ControlFormat) => void,
   erase?: (text: string) => void
 ): (hash: string, args: readonly string[]) => void {
   let prevHash: string | null = null
@@ -116,6 +125,17 @@ export function createUiMessageHandler(
       const erasedPromptHash = PROMPT_ERASE_HASHES[hash]
       if (erase !== undefined && erasedPromptHash !== undefined && prevHash === erasedPromptHash && prevText !== null) {
         erase(prevText)
+      }
+      // Stage 3 Step 8: a control-only format is consumed here and reported
+      // through onControl -- never composed, never emitted as panel text.
+      // Its args can still be original game data (a %c byte), so the
+      // descriptor carries only the safe, structured meaning.
+      const control = controlForHash(hash, args)
+      if (control !== null) {
+        onControl?.(control)
+        prevHash = hash
+        prevText = null
+        return
       }
       const text = composeUiMessage(hash, args, deps)
       if (text !== null) {

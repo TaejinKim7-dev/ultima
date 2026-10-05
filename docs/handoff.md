@@ -2064,3 +2064,89 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
   - `git diff --check`: 0
   - `npm ci`: `NOT_RUN_NO_DEPS_CHANGED` (의존 변경 0 — package.json/package-lock.json diff 없음)
 - **다음**: `git checkout main && git merge wave9-combined --ff-only && git push origin main`.
+
+---
+
+## 2026-10-04 — Stage 3 worktree 생성 (todo-49b-message-area-shell)
+
+- **작업 위치**: worktree `agent-todo-49b`, 브랜치 `todo-49b-message-area-shell`, main `52a4fa3` 기반.
+- **환경 셋업**: npm ci / deps:host / build:modules / deps:wasm / build:wasm 완료.
+- **다음**: 사용자 결정 대기 (폰트 다운로드 + Step 8 변경) — 결정 후 Stage 3 구현 시작.
+- 절대 커밋 안 함.
+
+---
+
+## 2026-10-04 — Stage 3 Lane A (Step 6·7) 완료
+
+> worktree `agent-todo-49b`, 브랜치 `todo-49b-message-area-shell`.
+
+### Step 6: .viewport border→outline
+- src/shell.css 변경. 캔버스 정확히 640x400.
+
+### Step 7: Neo둥근모 v1.601 (사용자 승인 후 다운로드·sha256 pin)
+- woff2 sha256: `0c0ca9cd73f692a5da5d7fb39737902aa9ea312537237779972a9d81ef0a33bf` (44,352 bytes, HTTP 200 via `https://github.com/neodgm/neodgm/releases/download/v1.601/neodgm.woff2`)
+- LICENSE.txt: SIL OFL 1.1 (Copyright (c) 2017-2021 Eunbin Jeong (Dalgona.), Reserved Font Name "Neo둥근모" / "Neo둥근모 Code" / "NeoDunggeunmo" / "NeoDunggeunmo Code"), sha256 `c1997f54b659ff8bbe2addf4e7f03fb823db7d1b81b043fb2633183b1fc0c2f0`, 4,556 bytes
+- public/fonts/SHA256 두 파일 sha256 기록
+- docs/SOURCE_PINS.md: Neo둥근모 행 추가 (Third-Party Fonts 표, sha256·license 포함)
+- src/shell.css @font-face 추가 (`"NeoDunggeunmo"`, `font-display: block`, line 1~17) + body font-family 우선 적용
+- tests/e2e/pages-static-smoke.spec.ts: CONTENT_TYPES (.woff2/.txt) + 폰트 200·content-type·document.fonts.check() 단언 추가
+- README.md: "## 포함된 글꼴" 고지 절 추가
+- src/main.ts: `document.fonts.load("16px NeoDunggeunmo")` fire-and-forget 프리로드
+
+### 단위 테스트 (TDD RED→GREEN)
+- `tests/unit/viewport-outline.test.ts` 신규 (4 assertions, CSS 정적 분석 + 박스 모델 재계산)
+- RED: `.omo/evidence/ultima-web/task-49b/lane-a-unit-red.log` (2 failed — border 존재, content box 636×396)
+- GREEN: `.omo/evidence/ultima-web/task-49b/lane-a-unit-green.log` (4 passed, exit 0)
+
+### 게이트 (preflight)
+- npm run test:unit: 0 (64 files / 793 passed — viewport-outline 4개 포함)
+- npm run verify:repo-sources: 0 (4/4)
+- npm run typecheck: 0
+- npm run build: 0
+- npm run check:build-fresh: 0
+- npm run audit:dist -- --require-engine: 0 (12 file(s))
+- npm run verify:release-docs: 0
+- npm run build:wasm: 0 (no vendor 변경)
+- npm run build:site -- --base=/ultima/: 0 — dist/fonts/neodgm.woff2 + LICENSE.txt 복사 확인, 빌드 CSS url(/ultima/fonts/neodgm.woff2)
+- e2e (chromium, ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip): `status-overlay.spec.ts` 5/5 통과 (narrow viewport 360×640 회귀 포함), `pages-static-smoke.spec.ts` 2/2 통과 (엔진 부팅 + 폰트 200·content-type·document.fonts.check true)
+
+### 다음
+- Lane B (Step 8·9·10·11): control-formats 연결, 셸 연결, 덮개 화면, 페이지 넘김 — 동일 worktree에서 다음 커밋.
+- wave9 통합 머지 전 verify:integration 단독 실행 (Stage 3·4 통합 게이트).
+
+---
+
+## 2026-10-04 — Stage 3 Lane B (Step 8·9·10·11) 완료
+
+> worktree `agent-todo-49b`, 브랜치 `todo-49b-message-area-shell`.
+
+### 한 일
+- Step 8: control-formats 5개 해시(`0f0c6cdd`/`878f5675`/`8897ac8d`/`36b9b7f9`/`195c9389`)를 `createUiMessageHandler`의 4번째 콜백 `onControl`로 연결(newline은 패널에 `\n` dispatch, prompt-glyph·echo는 덮개로). 기존 erase 콜백은 5번째로 이동.
+- Step 9: 셸 `screenReceiver` 추가(`startEngine`의 `screen` 옵션으로 전달), prompt close 시 입력 확정(`commitEcho`), 한국어 alias 제출 시 한국어 키워드 표시(`pendingKoreanEcho`), `talk.input` 중복 제거(덮개 활성 시 패널 에코 생략), `renderLine`에서 prompt 셀 스킵(패널에 ▶ 미표시).
+- Step 10: `src/overlay/message-area-dom.ts` 신규(data-role=messagearea, `.ma-color-*`, aria-hidden, 스위치 `#toggle-screen-ko` tabindex=0·자동 포커스 안 함, 모달 시 `#overlay-layer` 전체 hidden, rAF 프레임 배칭). `src/bridge/types.ts` VIEW_REGIONS에 `messagearea` 추가(ABI additive), `overlay-layout.ts` DEFAULT_VIEW_RECTS에 messagearea rect 추가. `src/shell.css`에 `.messagearea` 계열 CSS 추가.
+- Step 11: `message-area-view.ts`에 `pageIndex`/`nextPage`/`applyPromptGlyph`/`countWrappedRows` 추가, `computeView` page mode가 pageIndex로 페이지 슬라이스. 셸 keydown 리스너(page mode에서 키 1회 = nextPage, preventDefault 안 함), LB·Hawkwind 긴 대답 talk 라인에 `awaitKey:true`(원본 영어 데이터 기준 messageParts 청크와 정렬).
+
+### 게이트 (preflight)
+- npm run test:unit: 0 (65 files / 805 passed — ui-message-control-formats 4, message-area-view +7, countWrappedRows 1)
+- npm run verify:repo-sources: 0 (4/4)
+- npm run typecheck: 0
+- npm run build: 0
+- npm run check:build-fresh: 0
+- npm run audit:dist -- --require-engine: 0 (12 file(s))
+- npm run verify:release-docs: 0
+- npm run build:wasm: 0 (no vendor 변경)
+- git diff --check: 0
+- e2e (chromium, ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip):
+  - 신규 `korean-message-area.spec.ts` 4/4 (인트로 hidden, Journey 도움말·▶·커서, 걷기 5프레임 ±1px, ESC 모달, 토글, Moonglow 대화·직업 표시, LB '▼' 페이지 큐, 전투·메뉴 모달)
+  - 회귀 63/63: dialogue-panel, side-column, game-messages, status-overlay(3 dpr), intro-overlay, pages-static-smoke, i18n-coverage, boot-sequence, talk-keywords, npc-output, castle-output, shop, codex, focus-return, npc-alias, save-reload, gameplay-progression, audio, configure-menu-no-abort, failure-boundaries, input-queue, korean-progression, localized-flow, shell-ready, startup-data, webgl-render
+- RED/GREEN 로그: `.omo/evidence/ultima-web/task-49b/step8-control-formats-red.log` (3 failed), `step8-control-formats-green.log` (4 passed)
+- (verify:integration은 orchestrator가 wave9 머지 후 단독 실행)
+
+### 발견된 문제
+- Lane A와 `src/shell.css` hunk conflict: 없음 — Lane A 변경(1~17행 @font-face + .viewport outline)과 Lane B 추가(파일 끝 .messagearea 블록)가 겹치지 않아 충돌 없음.
+- Step 11 awaitKey 판정 버그: 처음 `wrapsBeyondOneScreen`이 `\n`을 일반 문자로 세어 긴 대답(paragraph-heavy)의 행 수를 과소평가 → 25열에서 12행으로 오판해 ▼가 안 뜸. `countWrappedRows`(message-area-view.ts)로 추출해 `\n`을 행 분리로 계산하도록 수정.
+- LB '심연'(abyss) 응답은 원본 영어가 1청크라 대기 없이 완료 → e2e는 원본 영어에 `\n\n` 청크가 있는 '브리타니아'(lordBritishText:17)를 사용.
+
+### 다음
+- wave9 Stage 3 통합 머지 → main → push.
+- Stage 4 (Todo 50: Neo둥근모 전체 적용) 시작.

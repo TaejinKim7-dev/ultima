@@ -32,6 +32,7 @@ import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
 import { createFocusReturn } from "./i18n/focus-return.ts"
 import { shouldSuppressScrollKey } from "./input/scroll-keys.ts"
 import { createTalkKeywords, type TalkKeywords } from "./dialogue/talk-keywords.ts"
+import type { ScreenReceiver } from "./engine/startup.ts"
 import {
   hasTranslation,
   isCommandKeyId,
@@ -48,6 +49,10 @@ import { createRecordingResolve, sharedCoverage, type CoverageMiss } from "./i18
 import { createCenterHandler, createUiMessageHandler } from "./dialogue/ui-message-compose.ts"
 import { createVendorHandler } from "./dialogue/vendor-compose.ts"
 import { eraseTrailingText } from "./dialogue/message-tokens.ts"
+import { createMessageAreaState, countWrappedRows } from "./overlay/message-area-view.ts"
+import { MESSAGE_AREA_LINES } from "./overlay/message-area-layout.ts"
+import { createMessageAreaOverlay, type MessageAreaOverlayHandle, type ScreenToggle } from "./overlay/message-area-dom.ts"
+import type { ControlFormat } from "./dialogue/control-formats.ts"
 // Real Korean alias data (Todo 13), never original game data -- just this
 // project's own translation strings. Vite/TS both support importing JSON
 // modules directly; see tsconfig.json's `resolveJsonModule`.
@@ -120,6 +125,13 @@ export interface UltimaBridgeApi {
    * menus/prompts/story text as Korean DOM overlays (src/overlay/intro-view.ts).
    */
   readonly introViewReceiver: IntroViewReceiver
+  /**
+   * Todo 49 (Stage 3): pass to startEngine()'s `screen` option -- the
+   * engine's web-only message-area signals drive the in-game Korean overlay
+   * (src/overlay/message-area-dom.ts): typed input echo, choice echo, cursor,
+   * play begin/end, the ESC/pause modal, and direct CR/LF.
+   */
+  readonly screenReceiver: ScreenReceiver
 }
 
 declare global {
@@ -184,7 +196,11 @@ export function createShell(doc: Document): UltimaBridgeApi {
   function renderLine(cells: PanelState["currentLine"]): HTMLParagraphElement {
     const line = doc.createElement("p")
     line.className = "dialogue-line"
-    for (const run of toRuns({ cells })) {
+    // User decision 2026-10-04: the prompt glyph (▶) is drawn in the game
+    // screen's message-area overlay, never in the right-hand panel -- a panel
+    // prompt cell (kind "prompt") is skipped here but still flows through
+    // PanelState, so the overlay keeps it.
+    for (const run of toRuns({ cells: cells.filter((cell) => cell.kind !== "prompt") })) {
       const span = doc.createElement("span")
       span.textContent = run.text // textContent only -- never innerHTML for game text.
       if (run.color !== "default") {
@@ -341,6 +357,62 @@ export function createShell(doc: Document): UltimaBridgeApi {
     window.addEventListener("resize", () => layoutAllOverlays())
   }
 
+  // Stage 3 Lane B (Todo 49 Phase B): the in-game Korean message-area
+  // overlay. It owns its own DOM (NOT a child of `#overlay-layer`) and its
+  // own render loop; the shell feeds it the engine's web-only screen signals
+  // through `screenReceiver` below and the shared panel state it mirrors.
+  // The toggle is session-scoped and URL-persisted (`?screen-ko=0`), default
+  // on -- never localStorage (audit:dist forbids it).
+  const screenToggle: ScreenToggle = {
+    enabled: new URLSearchParams(doc.defaultView?.location.search ?? "").get("screen-ko") !== "0"
+  }
+  const messageArea: MessageAreaOverlayHandle = createMessageAreaOverlay({
+    state: createMessageAreaState(),
+    panelState: () => panelState,
+    switchToggle: screenToggle,
+    host: gameViewport,
+    overlayLayer,
+    getContentRect: currentContentRect
+  })
+
+  // Step 9: when a Korean alias submission is in flight, the native prompt
+  // echoes the synthesized English keystrokes; the overlay must show what the
+  // player actually typed (the Korean keyword), not the English the engine
+  // echoes back. Cleared when the prompt closes (see screenReceiver.closed).
+  let pendingKoreanEcho: string | null = null
+
+  // Step 9: while the message-area overlay is visible the player's keyword
+  // echo lives in the overlay (screenReceiver.input + commitEcho on prompt
+  // close) -- the panel must not ALSO print "> keyword", or it would be
+  // duplicated. With the toggle off the panel keeps today's behaviour.
+  function koreanInputEchoInPanel(): boolean {
+    return !messageArea.active
+  }
+
+  // Step 11: a composed talk line that wraps past one screen of the message
+  // area is a paged long answer. Only the castle flows (Lord British /
+  // Hawkwind) pause on a real waitAnyKey afterwards -- town NPC responses
+  // scroll like the native game (the engine never blocks on them), so they
+  // must NOT freeze the overlay into page mode. Marking such a line
+  // `awaitKey` pauses the shared panel so the overlay's page mode engages.
+  //
+  // The row estimate must mirror how the panel commits the line: the engine
+  // text carries literal "\n" line breaks, and tokenizeMessage turns each one
+  // into a separate committed panel line (message-area-view.ts then wraps
+  // each committed line independently at the column budget). Treating "\n"
+  // as an ordinary character would badly under-count a paragraph-heavy long
+  // answer.
+  function wrapsBeyondOneScreen(text: string): boolean {
+    if (!messageArea.active) {
+      return false
+    }
+    const speaker = tk.view().speaker
+    if (speaker !== "lordBritish" && speaker !== "hawkwind") {
+      return false
+    }
+    return countWrappedRows(text, messageArea.columns()) > MESSAGE_AREA_LINES
+  }
+
   function applyViewEvent(event: Extract<BridgeEvent, { type: "view" }>): void {
     const hasContent = event.text !== "" || (event.rows !== undefined && event.rows.length > 0)
     if (!hasContent) {
@@ -421,6 +493,9 @@ export function createShell(doc: Document): UltimaBridgeApi {
         panelState = createPanelState()
         renderPanel()
         clearAllOverlays()
+        // Stage 3: a full reset also drops the message-area overlay buffer
+        // (the next engine play(1) re-baselines it to the fresh panel).
+        messageArea.applyPlay(false)
         return
       case "prompt":
         if (panelState.paused) {
@@ -777,6 +852,10 @@ export function createShell(doc: Document): UltimaBridgeApi {
       : resolveInput("text", raw, withTopicAliases(koreanAliasTable, tk.topicAliases()))
     if (result.ok) {
       tk.submitted(result.text)
+      // Step 9: the native prompt echoes the synthesized ASCII back through
+      // screenReceiver.input -- show the Korean the player actually typed
+      // instead ("건강" resolves to "health"; the overlay draws "건강").
+      pendingKoreanEcho = /[^\x00-\x7f]/.test(raw) ? raw : null
       synthesizeKeystrokes(result.text, !isChoiceEpoch)
       return
     }
@@ -841,6 +920,29 @@ export function createShell(doc: Document): UltimaBridgeApi {
     true
   )
 
+  // Step 11: a paused long answer (Lord British / Hawkwind / Codex "▼" page
+  // cue) advances one page on any key. The key must still reach the engine
+  // (the native waitAnyKey consumes it), so this listener never
+  // preventDefault/stopPropagation -- and it stands clear of Todo 47's arrow
+  // guard above (which only ever preventDefaults a scroll action) and of the
+  // Korean-input guard (this returns while that box has focus).
+  gameWindow.addEventListener(
+    "keydown",
+    (event: Event) => {
+      const keyboardEvent = event as KeyboardEvent
+      if ((keyboardEvent as unknown as { __ultimaSynthetic?: boolean }).__ultimaSynthetic === true) {
+        return // our own synthesized keystrokes must reach the real game
+      }
+      if (doc.activeElement === koreanKeywordInput) {
+        return
+      }
+      if (messageArea.isPageMode()) {
+        messageArea.nextPage()
+      }
+    },
+    true
+  )
+
   // Todo 22: real engine talk lines -> Korean panel lines. These arrive as
   // fragments of the engine's own message stream (a TLK reply has no
   // trailing newline; the separate "\n" line event supplies it), so they
@@ -885,7 +987,27 @@ export function createShell(doc: Document): UltimaBridgeApi {
     panelState = eraseTrailingText(panelState, text)
     renderPanel()
   }
-  const handleUiMessage = createUiMessageHandler(uiMessageDeps, emitMessage, onUiMessageError, onUiMessageErase)
+  // Stage 3 Step 8: the five control-only formats (newline / prompt-glyph /
+  // one-key echo) are routed to the message-area overlay, never the panel:
+  //   - newline commits the panel's current line (the engine advanced a row);
+  //   - prompt-glyph draws the "▶" in the overlay;
+  //   - echo draws the accepted choice key in the overlay.
+  const onUiMessageControl = (event: ControlFormat): void => {
+    if (event.kind === "newline") {
+      dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text: "\n" })
+    } else if (event.kind === "prompt-glyph") {
+      messageArea.applyPromptGlyph()
+    } else {
+      messageArea.applyChoice(event.text)
+    }
+  }
+  const handleUiMessage = createUiMessageHandler(
+    uiMessageDeps,
+    emitMessage,
+    onUiMessageError,
+    onUiMessageControl,
+    onUiMessageErase
+  )
   // Todo 40: screenMessageCenter()'s town / castle / dungeon name, same tables.
   const handleCenterMessage = createCenterHandler(uiMessageDeps, emitMessage, onUiMessageError)
 
@@ -919,11 +1041,25 @@ export function createShell(doc: Document): UltimaBridgeApi {
         textPromptGate.opened(id)
         focusReturn.promptOpened()
         tk.promptOpened(kind ?? U4_WEB_PROMPT_TEXT)
+        // Step 11: a prompt opening means the engine left any waitAnyKey
+        // pause behind -- clear the page mode so typed input shows in the
+        // overlay's ordinary scroll view, not a frozen page.
+        if (panelState.paused) {
+          panelState = resumePanel(panelState)
+        }
       },
       closed: (id) => {
         textPromptGate.closed(id)
         focusReturn.promptClosed()
         tk.promptClosed()
+        // Step 9: the player's typed keyword (Enter not required) stays on
+        // the message area as a committed line -- only while the overlay is
+        // shown; with the toggle off the panel's own "> keyword" echo keeps
+        // today's behaviour (and the overlay buffer stays invisible).
+        if (messageArea.active) {
+          messageArea.commitEcho()
+        }
+        pendingKoreanEcho = null
       }
     },
     introViewReceiver: createIntroViewReceiver({ dispatch }),
@@ -932,16 +1068,41 @@ export function createShell(doc: Document): UltimaBridgeApi {
         tk.talkLine(resolveTalkTemplateId(format), [arg0, arg1])
         const text = composeTalkLine(format, [arg0, arg1], talkDeps)
         if (text !== "") {
-          dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text })
+          // Step 11: a talk line longer than the overlay's screen is a paged
+          // long answer -- pause the panel so the "▼" page cue engages.
+          dispatch({
+            abiVersion: BRIDGE_ABI_VERSION,
+            type: "message",
+            text,
+            ...(wrapsBeyondOneScreen(text) ? { awaitKey: true } : {})
+          })
         }
       },
       input: (text) => {
         tk.inputEcho(text)
+        // Step 9: with the message-area overlay visible, the typed keyword is
+        // already echoed there (screenReceiver.input + commitEcho on close);
+        // forwarding it to the panel too would duplicate it. The panel keeps
+        // the echo only when the overlay is off.
+        if (!koreanInputEchoInPanel()) {
+          return
+        }
         dispatch({ abiVersion: BRIDGE_ABI_VERSION, type: "message", text: composeTalkInput(text) })
       },
       message: handleUiMessage,
       center: handleCenterMessage,
       vendor: handleVendorLine
+    },
+    // Stage 3 Lane B (Todo 49 Phase B): the engine's web-only message-area
+    // signals. The overlay is fed directly; nothing here touches the panel
+    // (the panel's own keyword echo is handled by talkTextReceiver.input).
+    screenReceiver: {
+      input: (_id, text) => messageArea.applyInput(pendingKoreanEcho ?? text),
+      choice: (ch) => messageArea.applyChoice(pendingKoreanEcho ?? ch),
+      cursor: (on) => messageArea.setCursor(on),
+      play: (on) => messageArea.applyPlay(on),
+      modal: (on) => messageArea.applyModal(on),
+      crlf: () => messageArea.applyCrlf()
     }
   }
 }
