@@ -39,6 +39,8 @@
 //    object passed into the factory as the live `Module`, so mutating
 //    `factoryOptions.ENV` from inside a `preRun` entry reaches it in time.
 
+import { applySlotFiles, readWorkingFiles } from "./slot-engine.ts"
+import type { EngineAdapter } from "../saves/slot-controller.ts"
 import { BRIDGE_ABI_VERSION, type BridgeEvent } from "../bridge/types.ts"
 import {
   armAutoResumeOnGesture,
@@ -72,6 +74,7 @@ const PERSISTENCE_PATHS = { saveDir: USER_DATA_DIR, settingsFile: `${USER_DATA_D
 
 /** The slice of the Emscripten `FS` API this sequence actually needs. */
 export interface EmscriptenFS extends PersistenceFS {
+  unlink(path: string): void
   mkdirTree(path: string): void
   mount(type: unknown, opts: Record<string, unknown>, mountpoint: string): void
 }
@@ -242,6 +245,8 @@ export type StartEngineResult =
   | {
       readonly started: true
       readonly saveHandlers: SaveHandlers
+      /** Todo 51: the engine side of the save slots. */
+      readonly slotEngine: EngineAdapter
       /** Todo 16: undefined when no AudioContext was available (see audioContext's doc comment above). */
       readonly audioBridge: AudioBridge | undefined
       /** Todo 42: current wasm linear-memory size in bytes, read fresh on every call. */
@@ -446,5 +451,11 @@ export async function startEngine(options: StartEngineOptions): Promise<StartEng
     export: () => exportSaveArchive(module.FS, PERSISTENCE_PATHS, persistence),
     import: (archive) => importSaveArchive(module.FS, PERSISTENCE_PATHS, persistence, archive)
   }
-  return { started: true, saveHandlers, audioBridge, wasmMemoryBytes: () => module.HEAPU8.buffer.byteLength }
+  // Todo 51 (save slots): the slot controller works on the engine's save files through this.
+  const slotEngine: EngineAdapter = {
+    readWorking: () => readWorkingFiles(module.FS, PERSISTENCE_PATHS),
+    apply: (files) => applySlotFiles(module.FS, PERSISTENCE_PATHS, persistence, files),
+    onSaved: (listener) => persistence.onSaved(listener)
+  }
+  return { started: true, saveHandlers, slotEngine, audioBridge, wasmMemoryBytes: () => module.HEAPU8.buffer.byteLength }
 }
