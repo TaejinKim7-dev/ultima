@@ -106,6 +106,14 @@ const COLOR_CLASS: Readonly<Record<PanelColor, string>> = {
   white: "ma-color-white"
 }
 
+/**
+ * The overlay's font/line metrics for the canvas content rect `content`.
+ * Pure, so a unit test pins which box the sizing rule is applied to.
+ */
+export function messageAreaMetricsForContent(content: ContentRect, dpr: number): MessageAreaMetrics {
+  return computeMessageAreaMetrics(toCssRect(MESSAGE_AREA_RECT, content, dpr), dpr)
+}
+
 function devicePixelRatio(win: Window | null): number {
   return win !== null && win.devicePixelRatio > 0 ? win.devicePixelRatio : 1
 }
@@ -177,7 +185,7 @@ export function createMessageAreaOverlay(options: MessageAreaOverlayOptions): Me
   }
 
   function currentMetrics(): MessageAreaMetrics {
-    return computeMessageAreaMetrics(contentRect(), devicePixelRatio(win))
+    return messageAreaMetricsForContent(contentRect(), devicePixelRatio(win))
   }
 
   function renderRow(row: { cells: readonly PanelCell[]; cursorAt?: number }): HTMLDivElement {

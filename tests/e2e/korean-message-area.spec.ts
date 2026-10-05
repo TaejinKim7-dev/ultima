@@ -169,6 +169,19 @@ test.describe("Stage 3: in-game Korean message-area overlay", () => {
     await expect(overlayBox(page)).toContainText("▶", { timeout: 10_000 })
     await page.screenshot({ path: join(evidenceDir, "02-world-entered.png") })
 
+    // User report 2026-10-05: the font was sized from the whole canvas, so only
+    // ~6 of the 12 rows fit. All 12 rows must fit the box, font <= row height.
+    const fit = await overlayBox(page).evaluate((el) => {
+      const style = getComputedStyle(el)
+      return {
+        boxHeight: el.getBoundingClientRect().height,
+        lineHeight: parseFloat(style.lineHeight),
+        fontSize: parseFloat(style.fontSize)
+      }
+    })
+    expect(fit.lineHeight * 12, `12 rows must fit the box: ${JSON.stringify(fit)}`).toBeLessThanOrEqual(fit.boxHeight + 1)
+    expect(fit.fontSize, `font must not exceed the row height: ${JSON.stringify(fit)}`).toBeLessThanOrEqual(fit.lineHeight)
+
     // Scenario 3: walking keeps the box geometry stable across frames
     // (the canvas shakes, the overlay must not) -- capture 5 frames with an
     // arrow press between them, assert left/top stay within 1px.
