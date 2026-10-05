@@ -52,6 +52,7 @@ import { eraseTrailingText } from "./dialogue/message-tokens.ts"
 import { createMessageAreaState, countWrappedRows } from "./overlay/message-area-view.ts"
 import { MESSAGE_AREA_LINES } from "./overlay/message-area-layout.ts"
 import { createMessageAreaOverlay, type MessageAreaOverlayHandle, type ScreenToggle } from "./overlay/message-area-dom.ts"
+import { createWindOverlay, type WindOverlayHandle } from "./overlay/wind-dom.ts"
 import type { ControlFormat } from "./dialogue/control-formats.ts"
 // Real Korean alias data (Todo 13), never original game data -- just this
 // project's own translation strings. Vite/TS both support importing JSON
@@ -327,7 +328,7 @@ export function createShell(doc: Document): UltimaBridgeApi {
     element.style.top = `${cssRect.top}px`
     element.style.width = `${cssRect.width}px`
     element.style.height = `${cssRect.height}px`
-    element.style.fontSize = `${computeOverlayFontPx(scaleY)}px`
+    element.style.fontSize = `${computeOverlayFontPx(scaleY, dpr)}px`
     // Todo 12 advisor-review fix: every rendered row (see src/shell.css's
     // `.overlay-rows`/`.overlay-line`, both keyed off this custom property)
     // is exactly one native TextView row tall -- see
@@ -373,6 +374,13 @@ export function createShell(doc: Document): UltimaBridgeApi {
     host: gameViewport,
     overlayLayer,
     getContentRect: currentContentRect
+  })
+
+  // Todo 50: the Korean wind / dungeon-heading line (same visibility rule).
+  const windOverlay: WindOverlayHandle = createWindOverlay({
+    host: gameViewport,
+    getContentRect: currentContentRect,
+    switchToggle: screenToggle
   })
 
   // Step 9: when a Korean alias submission is in flight, the native prompt
@@ -1100,9 +1108,16 @@ export function createShell(doc: Document): UltimaBridgeApi {
       input: (_id, text) => messageArea.applyInput(pendingKoreanEcho ?? text),
       choice: (ch) => messageArea.applyChoice(pendingKoreanEcho ?? ch),
       cursor: (on) => messageArea.setCursor(on),
-      play: (on) => messageArea.applyPlay(on),
-      modal: (on) => messageArea.applyModal(on),
-      crlf: () => messageArea.applyCrlf()
+      play: (on) => {
+        messageArea.applyPlay(on)
+        windOverlay.applyPlay(on)
+      },
+      modal: (on) => {
+        messageArea.applyModal(on)
+        windOverlay.applyModal(on)
+      },
+      crlf: () => messageArea.applyCrlf(),
+      wind: (mode, direction) => windOverlay.wind(mode, direction)
     }
   }
 }

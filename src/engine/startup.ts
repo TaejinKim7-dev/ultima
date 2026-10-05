@@ -145,6 +145,8 @@ export interface ScreenReceiver {
   modal(on: boolean): void
   /** The engine did a direct CR/LF in the message area (screenCrLf). */
   crlf(): void
+  /** Todo 50: the wind / dungeon-heading line changed (mode 0 none, 1 wind, 2 dungeon; native Direction value). */
+  wind(mode: number, direction: number): void
 }
 
 /**

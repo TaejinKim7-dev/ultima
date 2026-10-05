@@ -47,6 +47,17 @@ EM_JS(void, u4_web_screen_crlf, (), {
 EM_JS(void, u4_web_screen_modal, (int on), {
     if (Module.u4Screen) Module.u4Screen.modal(!!on);
 });
+/*
+ * Todo 50: wind / dungeon-heading signal (mode 0 none, 1 wind, 2 dungeon
+ * orientation; direction is the native Direction enum). A throwing receiver
+ * must not unwind the native game loop.
+ */
+EM_JS(void, u4_web_screen_wind, (int mode, int direction), {
+    try {
+        var receiver = Module.u4Screen;
+        if (receiver && typeof receiver.wind === "function") receiver.wind(mode, direction);
+    } catch (e) {}
+});
 
 /*
  * Todo 49: talkCrLf (discourse_tlk.cpp) suppresses the crlf() signal around
@@ -1261,12 +1272,23 @@ void screenUpdateWind() {
     if (c->location->context == CTX_DUNGEON) {
         screenEraseTextArea(WIND_AREA_X, WIND_AREA_Y, WIND_AREA_W, WIND_AREA_H);
         screenTextAt(WIND_AREA_X, WIND_AREA_Y, "Dir: %5s", getDirectionName((Direction)c->saveGame->orientation));
+#ifdef __EMSCRIPTEN__
+        u4_web_screen_wind(2, c->saveGame->orientation);
+#endif
     }
     /* show the wind direction */
     else if ((c->location->context & CTX_NON_COMBAT) == c->location->context) {
         screenEraseTextArea(WIND_AREA_X, WIND_AREA_Y, WIND_AREA_W, WIND_AREA_H);
         screenTextAt(WIND_AREA_X, WIND_AREA_Y, "Wind %5s", getDirectionName((Direction) c->windDirection));
+#ifdef __EMSCRIPTEN__
+        u4_web_screen_wind(1, c->windDirection);
+#endif
     }
+#ifdef __EMSCRIPTEN__
+    else {
+        u4_web_screen_wind(0, DIR_NONE);
+    }
+#endif
 }
 
 /*

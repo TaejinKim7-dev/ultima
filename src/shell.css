@@ -334,7 +334,7 @@ body {
 }
 
 .talk-keyword-secondary {
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-family: "NeoDunggeunmo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
   font-size: 0.7rem;
   opacity: 0.7;
 }
@@ -528,4 +528,21 @@ body {
 .messagearea-toggle input[type="checkbox"] {
   margin: 0;
   accent-color: #d6c24a;
+}
+
+/* Todo 50: the Korean wind / dungeon-heading line over the native "Wind West" text. */
+.windheading {
+  position: absolute;
+  pointer-events: none;
+  overflow: hidden;
+  white-space: pre;
+  background: #000;
+  color: #f2f2f2;
+  font-family: "NeoDunggeunmo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  font-weight: 400;
+  z-index: 10;
+}
+
+.windheading[hidden] {
+  display: none;
 }
