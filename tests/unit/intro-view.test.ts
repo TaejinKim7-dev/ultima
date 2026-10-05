@@ -33,6 +33,7 @@ const TABLE: Record<string, string> = {
   "ui:intro:66": "%s, 그리고",
   "ui:intro:67": " %s. 그녀가 말한다",
   "title.exe:introText:0": "첫 줄\n둘째 줄\n셋째 줄",
+  "title.exe:introText:1": "  앞 공백.  두 칸 공백\n\n다음 문단 ",
   "title.exe:introGypsy:5": "자비",
   "title.exe:introGypsy:6": "용맹"
 }
@@ -150,5 +151,52 @@ describe("createIntroViewReceiver", () => {
     receiver.show("menu", Number.NaN, 0, 10, 10, 0, "Journey Onward")
     receiver.hide("bogus")
     expect(events).toEqual([])
+  })
+})
+
+// User report 2026-10-06 (character creation): story pages ("@title.exe:..."
+// text blocks) were drawn line by line at the translation's built-in breaks,
+// which copy the original narrow layout, so the Korean sat in the left third of
+// the box. A whole text block is now sent as one reflowed paragraph (single
+// breaks -> spaces, blank lines kept) with no fixed rows, so the overlay wraps
+// it across the full box width.
+describe("whole TITLE.EXE text blocks are reflowed for the box width", () => {
+  function receiverEvents(payload: string) {
+    const events: BridgeEvent[] = []
+    const receiver = createIntroViewReceiver({
+      dispatch: (event) => {
+        events.push(event)
+        return true
+      },
+      deps
+    })
+    receiver.show("textview", 8, 120, 304, 72, -1, payload)
+    return events
+  }
+
+  it("sends a story page as reflowed text without fixed rows", () => {
+    const [event] = receiverEvents("@title.exe:introText:0")
+    expect(event).toMatchObject({ type: "view", region: "textview", text: "첫 줄 둘째 줄 셋째 줄" })
+    expect((event as { rows?: unknown }).rows).toBeUndefined()
+  })
+
+  it("also reflows the gypsy's card line, which the engine assembles from several TITLE.EXE pieces", () => {
+    const [event] = receiverEvents("%s and\x1f@title.exe:introGypsy:5\x1e %s.  She says\x1f@title.exe:introGypsy:6")
+    expect((event as { rows?: unknown[] }).rows).toBeUndefined()
+    expect((event as { text: string }).text).not.toContain("\n")
+  })
+
+  it("keeps rows for screens with no TITLE.EXE text (Configure menus)", () => {
+    const [event] = receiverEvents("Journey Onward\nJourney Onward")
+    expect((event as { rows?: unknown[] }).rows?.length).toBe(2)
+  })
+})
+
+describe("reflowed text blocks are tidied", () => {
+  it("drops leading/trailing spaces and collapses the old two-space sentence gap", () => {
+    const events: BridgeEvent[] = []
+    const receiver = createIntroViewReceiver({ dispatch: (event) => (events.push(event), true), deps })
+    receiver.show("textview", 8, 120, 304, 72, -1, "@title.exe:introText:1")
+    expect(events[0]).toMatchObject({ text: "앞 공백. 두 칸 공백\n\n다음 문단" })
   })
 })

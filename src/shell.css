@@ -146,6 +146,9 @@ body {
 .overlay-backed .overlay-row-label,
 .overlay-backed .overlay-line {
   white-space: pre-wrap;
+  /* A reflowed TITLE.EXE paragraph wraps here (Korean: break at spaces first). */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 /* Structured label/value content (ViewBridgeEvent.rows) -- a CSS grid, not

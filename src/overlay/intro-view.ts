@@ -20,6 +20,7 @@
 //
 // Pure apart from the injected dispatch: no DOM, no engine.
 
+import { reflowSoftBreaks } from "../dialogue/talk-compose.ts"
 import { BRIDGE_ABI_VERSION, VIEW_REGIONS, type BridgeEvent, type OverlayRow, type ViewRegion } from "../bridge/types.ts"
 import { hasTranslation, resolveDisplayText, resolveIntroTemplateId } from "../i18n/localization.ts"
 import { sharedCoverage } from "../i18n/coverage.ts"
@@ -177,6 +178,26 @@ export interface IntroViewReceiverOptions {
   readonly statusDeps?: StatusViewDeps
 }
 
+/**
+ * TITLE.EXE prose (story pages, questions, the gypsy's card lines) in the
+ * textview box. Its translation breaks lines where the original narrow layout
+ * did, so it is sent as one reflowed paragraph for the overlay to wrap across
+ * the full box (user report 2026-10-06: the Korean sat in the left third).
+ * Screens without TITLE.EXE text (the Configure menus) keep their rows.
+ */
+function isProseBlock(region: string, payload: string): boolean {
+  return region === "textview" && payload.includes("@title.exe:")
+}
+
+/** Trims each paragraph and collapses runs of spaces (the original's two-space sentence gap). */
+function tidyTextBlock(text: string): string {
+  return text
+    .split("\n")
+    .map((line) => line.replace(/ {2,}/g, " ").trim())
+    .join("\n")
+    .replace(/^\n+|\n+$/g, "")
+}
+
 function isViewRegion(region: string): region is ViewRegion {
   return (VIEW_REGIONS as readonly string[]).includes(region)
 }
@@ -209,6 +230,17 @@ export function createIntroViewReceiver(options: IntroViewReceiverOptions): Intr
       const rows: OverlayRow[] = STATUS_GRAMMAR_REGIONS.has(region)
         ? composeStatusRows(payload, statusDeps)
         : composeIntroRows(payload, deps)
+      if (isProseBlock(region, payload)) {
+        options.dispatch({
+          abiVersion: BRIDGE_ABI_VERSION,
+          type: "view",
+          region,
+          text: tidyTextBlock(reflowSoftBreaks(rows.map((row) => row.label).join("\n"))),
+          ...(Number.isInteger(selectedIndex) && selectedIndex >= 0 ? { selectedIndex } : {}),
+          rect: { x, y, width, height }
+        })
+        return
+      }
       options.dispatch({
         abiVersion: BRIDGE_ABI_VERSION,
         type: "view",
