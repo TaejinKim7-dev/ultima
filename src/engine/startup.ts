@@ -183,6 +183,8 @@ export interface TalkTextReceiver {
 export interface TextPromptReceiver {
   opened(id: number): void
   closed(id: number): void
+  /** event.cpp waitAnyKey/waitAnyKeyTimeout: the engine waits for any key (true) / stopped waiting (false). */
+  keyWait?(on: boolean): void
 }
 
 export type EngineModuleFactory = (options: Record<string, unknown>) => Promise<EngineModule>

@@ -293,3 +293,33 @@ describe("speaker switches", () => {
     expect(TALK_END_DELAY_MS).toBe(400)
   })
 })
+// User report 2026-10-05: during the ask-pause (OP_PAUSE_ASK -> native
+// waitAnyKey) the keyword menu vanished after TALK_END_DELAY_MS and only came
+// back when a click advanced the engine. The engine now reports the key wait.
+describe("keyword menu during a native key wait", () => {
+  it("stays visible while the engine waits for a key after a reply", () => {
+    const h = harness()
+    openNpcConversation(h.tk)
+    h.tk.inputEcho("job")
+    h.tk.promptClosed()
+    h.tk.keyWait(true)
+    h.advance(TALK_END_DELAY_MS * 10)
+    expect(h.tk.view().active).toBe(true)
+  })
+
+  it("ends normally if no prompt reopens after the key wait", () => {
+    const h = harness()
+    openNpcConversation(h.tk)
+    h.tk.promptClosed()
+    h.tk.keyWait(true)
+    h.tk.keyWait(false)
+    h.advance(TALK_END_DELAY_MS)
+    expect(h.tk.view().active).toBe(false)
+  })
+
+  it("ignores key waits when no conversation is open", () => {
+    const h = harness()
+    h.tk.keyWait(true)
+    expect(h.tk.view().active).toBe(false)
+  })
+})

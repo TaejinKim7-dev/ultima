@@ -106,7 +106,7 @@ export interface UltimaBridgeApi {
    * optional so this stays assignable to startup.ts's
    * narrower `TextPromptReceiver`.
    */
-  readonly textPromptReceiver: { opened(id: number, kind?: number): void; closed(id: number): void }
+  readonly textPromptReceiver: { opened(id: number, kind?: number): void; closed(id: number): void; keyWait(on: boolean): void }
   /**
    * Todo 22: pass to startEngine()'s `talkText` option -- real NPC talk
    * lines from vendor/xu4/src/discourse_tlk.cpp, shown in Korean in the
@@ -1080,6 +1080,10 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
         if (panelState.paused) {
           panelState = resumePanel(panelState)
         }
+      },
+      keyWait: (on) => {
+        debugLog.log("key-wait", { on })
+        tk.keyWait(on)
       },
       closed: (id) => {
         debugLog.log("prompt-closed", { id })
