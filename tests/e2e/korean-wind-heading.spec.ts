@@ -306,7 +306,7 @@ test.describe("Todo 50: in-game Korean wind / dungeon-heading overlay", () => {
     await expect(overlayBox(page)).toBeVisible({ timeout: 10_000 })
     await expect
       .poll(async () => overlayText(page), { timeout: 10_000 })
-      .toMatch(/^바람(?:서|북|동|남)$/)
+      .toMatch(/^방향(?:서|북|동|남)$/)
     await page.screenshot({ path: join(evidenceDir, "05-toggle-on-korean.png") })
 
     // Diagnostic dump (observability log, never a pass/fail input): record
