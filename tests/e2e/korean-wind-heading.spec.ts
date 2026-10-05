@@ -325,6 +325,20 @@ test.describe("Todo 50: in-game Korean wind / dungeon-heading overlay", () => {
       .toMatch(/^바람(?:서|북|동|남)$/)
     await page.screenshot({ path: join(evidenceDir, "05-toggle-on-korean.png") })
 
+    // Todo 50 acceptance #3 (computed font-family of every Korean surface): the
+    // windheading overlay must render in NeoDunggeunmo, not just declare it.
+    // First family token, surrounding quotes stripped (src/shell.css:541 quotes
+    // the name with `"`).
+    expect(
+      await page.evaluate(
+        () =>
+          getComputedStyle(
+            document.querySelector('#game-viewport [data-role="windheading"]') as HTMLElement
+          ).fontFamily.split(",")[0]!.trim().replace(/^"|"$/g, "")
+      ),
+      ".windheading must compute font-family to NeoDunggeunmo"
+    ).toBe("NeoDunggeunmo")
+
     // Diagnostic dump (observability log, never a pass/fail input): record
     // every probe value once at the end of the route so a future failure has
     // a single, identical reference frame to diff against.
