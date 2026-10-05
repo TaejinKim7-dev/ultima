@@ -2222,3 +2222,11 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 - 합친 커밋: opencode `be4353c`를 merge, 스펙은 opencode 버전(Exit Map 단계로 오버월드 '바람' 확인)에 타입 수정만 얹음. 바람 스펙 단독 실행(수정본 c1f4f63 기준)은 2/2 통과였으나 최종 merge 파일로는 아직 안 돌림.
 - Stage 3 main 머지 상태: opencode 조사 — main/origin/main HEAD는 `ca3cd6d`, `22527c7`·`7cca398`은 main에 없음(위 4b65817 기록과 일치, 이전 "main merge·push 완료" 문구는 사실과 다름). 이번 Todo 50 main merge 때 함께 들어간다.
 - 다음: 합친 트리에서 단독 `verify:integration` → 3브라우저 → 문서 갱신 → main merge·push.
+
+---
+
+## 2026-10-05 13:40 — 게이트 6차 중단과 opencode 3차 업무 (브랜치 todo-50-pixel-font, HEAD 693bb9e)
+
+- 게이트 6차(`/tmp/todo50-integration-6.log`)는 e2e 26/70까지 실패 0이었으나 **제가 의도적으로 중단**(SIGTERM). 이유: opencode 2차 보고서(`A_acceptance.md`)가 Todo 50 acceptance "각 한국어 표면의 computed font-family가 Neo둥근모" 단정 테스트가 없음을 확인 → 테스트가 추가되면 트리가 바뀌므로 지금 게이트를 끝까지 돌려도 최종 트리의 증거가 못 된다. 통과로 세지 않는다. 25번 Hawkwind는 6차에서도 통과(26번까지).
+- opencode 2차 결론(읽기 전용): A — acceptance a·b 충족, c·e 부분(audit-dist에 라이선스 단계 없음, computed font-family 단정 없음); B — Hawkwind flake는 Todo 50 diff(`git diff ca3cd6d..HEAD -- src vendor/xu4/src`의 이동·대화·RNG·패널 경로 변경 0건)와 무관, 안정화안은 Todo 50 밖 후속; C — 네이티브 순서 `deps:host → build:native → cmake:configure → cmake:build → test:native`, deps:host는 네트워크 없음; D — cheat 메뉴 3 해시 번역하지 않음(`docs/WEB_PORT.md:108` 정책).
+- 다음: opencode가 computed font-family e2e를 작성·단독 검증 → 합친 트리에서 3브라우저(Todo 50 관련 스펙) → 네이티브 게이트 → 최종 단독 `verify:integration` → 문서·main merge.
