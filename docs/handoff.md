@@ -2198,3 +2198,13 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 - 게이트(Haiku 실행, 보고 기준): test:unit 68 suites/844 tests, verify:repo-sources, typecheck, build:modules, build:wasm, build, check:build-fresh, git diff --check 전부 exit 0.
 - 미확인: 바람 덮개 e2e 없음, `verify:integration` 단독 실행·3브라우저·네이티브 게이트·사람 화면 확인 전(status-overlay 넘침 위험 미검증). 따라서 Todo 50은 ✅ 아님, main merge 금지.
 - 다음: `verify:integration` 단독 실행 → 실패 시 failure-panel/screen 관측 후 열 수 보정, 바람 덮개 e2e 추가.
+
+---
+
+## 2026-10-05 — Todo 50 통합 게이트 1차 (브랜치 todo-50-pixel-font, HEAD 3d21841 기준)
+
+- 첫 `verify:integration` 시도(`/tmp/todo50-integration.log`)는 e2e 17번째 테스트 직후 프로세스가 사라져 멈춤 — 결과 없음, 통과로 세지 않음.
+- 단독 재실행(`/tmp/todo50-integration-2.log`, Haiku 실행): 단위 68 files/844 tests, typecheck, build, i18n:check, build:site, audit:dist, plan cmp, `git diff --check` 모두 exit 0. **e2e는 exit 1 — 67 passed / 1 failed (1.2h)**. 서버 죽음(ECONNREFUSED) 없음.
+- 실패 1건: `korean-castle-output.spec.ts:158` Hawkwind 인사(5.2m 타임아웃, 아바타가 Hawkwind에 도달 못함). status-overlay 3 dpr(61~63번)는 통과 — 폰트 넘침 없음.
+- 같은 스펙 단독 재실행(포트 8811, `/tmp/todo50-castle-rerun.log`): 2 passed, exit 0. 원인은 관측으로 확정하지 못함(실시간 의존 flaky 의심 — 확인 필요). **이 게이트는 통과로 기록하지 않는다**; 공식 게이트는 opencode 브랜치 merge 후 단독 재실행 결과로 한다.
+- 다음: `todo-50-wind-e2e` 커밋 확인 → merge → 보고서 읽기 → 단독 게이트·3브라우저.
