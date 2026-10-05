@@ -16,6 +16,12 @@
 //
 // Pure and side-effect-free: no DOM, no engine. `src/shell.ts` (Phase B)
 // turns the resulting rows into DOM nodes.
+//
+// Phase B (Step 11) adds the page offset: `pageIndex` picks which page of a
+// paused (paged) long answer is shown, and `nextPage()` advances it. Each
+// prompt-close or play-stop resets it through `clearEcho`/`applyPlay`, and
+// leaving the paused state (`syncFromPanel` sees `paused` false) resets it
+// too, so paging never lingers into ordinary scrolling.
 import { MESSAGE_AREA_LINES } from "./message-area-layout.ts"
 import { createPanelState, type PanelCell, type PanelColor, type PanelLine, type PanelState } from "../dialogue/message-tokens.ts"
 
@@ -69,6 +75,21 @@ export interface MessageAreaState {
   readonly choiceEcho: string | null
   /** Engine `cursor(on)` -- whether the blinking cursor is currently shown. */
   readonly cursorVisible: boolean
+  /**
+   * Phase B (Step 8): the standalone control-only prompt-glyph message
+   * (`screenPrompt()`'s `"%c"` with CHARSET_PROMPT) reached the overlay
+   * directly instead of through the shared panel. While true, the live line
+   * starts with a "▶" cell, exactly where the panel would have put a prompt
+   * cell had the format been translatable.
+   */
+  readonly promptGlyph: boolean
+  /**
+   * Phase B (Step 11): which page of a paused (paged) long answer is shown.
+   * Zero means the first page; `computeView` clamps so the last page never
+   * overruns the buffer. Reset by `clearEcho`, `applyPlay` and by leaving
+   * the paused state (see `syncFromPanel`).
+   */
+  readonly pageIndex: number
 }
 
 export function createMessageAreaState(): MessageAreaState {
@@ -83,7 +104,9 @@ export function createMessageAreaState(): MessageAreaState {
     paused: false,
     inputText: "",
     choiceEcho: null,
-    cursorVisible: false
+    cursorVisible: false,
+    promptGlyph: false,
+    pageIndex: 0
   }
 }
 
@@ -95,9 +118,9 @@ export function createMessageAreaState(): MessageAreaState {
  */
 export function applyPlay(state: MessageAreaState, on: boolean, panel: PanelState): MessageAreaState {
   if (!on) {
-    return { ...state, playing: false, lines: [], consumed: 0 }
+    return { ...state, playing: false, lines: [], consumed: 0, pageIndex: 0 }
   }
-  return { ...state, playing: true, lines: [], consumed: panel.historyLines.length }
+  return { ...state, playing: true, lines: [], consumed: panel.historyLines.length, pageIndex: 0 }
 }
 
 /** Alias for `applyPlay(state, false, panel)`; see its doc comment. */
@@ -118,7 +141,10 @@ export function syncFromPanel(state: MessageAreaState, panel: PanelState): Messa
     activeColor: panel.activeColor,
     awaitingPrompt: panel.awaitingPrompt,
     paused: panel.paused,
-    consumed: panel.historyLines.length
+    consumed: panel.historyLines.length,
+    // Leaving the paused state ends any page-mode paging (Step 11): the
+    // next ordinary scroll render starts from the first page again.
+    pageIndex: panel.paused ? state.pageIndex : 0
   }
   if (!state.playing) {
     return next
@@ -142,12 +168,29 @@ export function applyChoice(state: MessageAreaState, ch: string): MessageAreaSta
 
 /** Clears the typed/choice echo and the cursor (a prompt closed, or a new message arrived). */
 export function clearEcho(state: MessageAreaState): MessageAreaState {
-  return { ...state, inputText: "", choiceEcho: null, cursorVisible: false }
+  return { ...state, inputText: "", choiceEcho: null, cursorVisible: false, promptGlyph: false, pageIndex: 0 }
 }
 
 /** Engine `cursor(on)` -- blinking cursor visibility. */
 export function setCursor(state: MessageAreaState, on: boolean): MessageAreaState {
   return { ...state, cursorVisible: on }
+}
+
+/**
+ * Phase B (Step 8): the standalone control-only prompt glyph arrived
+ * (`onControl` with `{ kind: "prompt-glyph" }`). The live line will start
+ * with a "▶" cell until the prompt closes (`clearEcho`).
+ */
+export function applyPromptGlyph(state: MessageAreaState): MessageAreaState {
+  return { ...state, promptGlyph: true, awaitingPrompt: true }
+}
+
+/**
+ * Phase B (Step 11): advance to the next page of a paused (paged) long
+ * answer. `computeView` clamps to the last page, so over-advancing is safe.
+ */
+export function nextPage(state: MessageAreaState): MessageAreaState {
+  return { ...state, pageIndex: state.pageIndex + 1 }
 }
 
 /**
@@ -163,6 +206,33 @@ export function cellUnits(ch: string): number {
 /** Splits one committed line into fixed-width rows of at most `columns` units, never splitting a glyph. */
 export function wrapRow(line: PanelLine, columns: number): readonly PanelLine[] {
   return wrapCells(line.cells, columns)
+}
+
+/**
+ * Phase B (Step 11): the number of wrapped rows `text` would occupy on a
+ * `columns`-wide box. Mirrors how the panel commits the text: each literal
+ * "\n" is its own committed line (message-tokens.ts's newline token), and
+ * each committed line then wraps at the column budget exactly like
+ * `wrapRow` (Hangul 2 units, ASCII 1). The shell uses this to decide whether
+ * a long castle answer needs the "▼" page mode.
+ */
+export function countWrappedRows(text: string, columns: number): number {
+  let used = 0
+  let rows = 1
+  for (const ch of text) {
+    if (ch === "\n") {
+      rows += 1
+      used = 0
+      continue
+    }
+    const units = cellUnits(ch)
+    if (used + units > columns) {
+      rows += 1
+      used = 0
+    }
+    used += units
+  }
+  return rows
 }
 
 function wrapCells(cells: readonly PanelCell[], columns: number): PanelLine[] {
@@ -189,6 +259,11 @@ function wrapCells(cells: readonly PanelCell[], columns: number): PanelLine[] {
 /** The live line the overlay actually draws: the panel's current line plus the engine's choice/input echo and the caret. */
 function mergedLiveLine(state: MessageAreaState): { cells: PanelCell[]; cursorIndex: number | null } {
   const cells = state.currentLine.slice()
+  // The panel's own prompt cell (a synthetic dispatch) OR the standalone
+  // control-only prompt glyph (real engine) -- never both.
+  if (state.promptGlyph && !cells.some((cell) => cell.kind === "prompt")) {
+    cells.push({ char: "▶", color: state.activeColor, kind: "prompt" })
+  }
   if (state.choiceEcho !== null && state.choiceEcho !== "") {
     cells.push({ char: state.choiceEcho, color: state.activeColor, kind: "input" })
   }
@@ -247,11 +322,18 @@ export function computeView(state: MessageAreaState, columns: number): MessageAr
   const pageMode = state.paused && totalRows > maxRows
 
   if (pageMode) {
+    // Phase B (Step 11): `pageIndex` picks the visible page of the paused
+    // long answer. The last page clamps to the buffer end so over-advancing
+    // simply stops on the final page (clippedBelow false -> the cue hides).
+    let start = state.pageIndex * maxRows
+    if (start + maxRows > totalRows) {
+      start = Math.max(0, totalRows - maxRows)
+    }
     return {
-      rows: allRows.slice(0, maxRows),
+      rows: allRows.slice(start, start + maxRows),
       mode: "page",
-      clippedAbove: false,
-      clippedBelow: totalRows > maxRows
+      clippedAbove: start > 0,
+      clippedBelow: start + maxRows < totalRows
     }
   }
 

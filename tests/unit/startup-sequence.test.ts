@@ -495,7 +495,8 @@ describe("startEngine", () => {
       cursor: (on: boolean) => seen.push(`cursor:${on}`),
       play: (on: boolean) => seen.push(`play:${on}`),
       modal: (on: boolean) => seen.push(`modal:${on}`),
-      crlf: () => seen.push(`crlf`)
+      crlf: () => seen.push(`crlf`),
+      wind: () => 0
     }
     let receiverAtMainCall: unknown
     module.callMain = () => {
@@ -535,7 +536,8 @@ describe("startEngine", () => {
       cursor: () => {},
       play: (on: boolean) => seen.push(`play:${on}`),
       modal: () => {},
-      crlf: () => {}
+      crlf: () => {},
+      wind: () => {}
     }
     module.callMain = () => {
       calls.mainCalled += 1

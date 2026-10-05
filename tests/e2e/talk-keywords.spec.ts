@@ -172,6 +172,14 @@ test.describe("Todo 48: talk keywords as clickable chips", () => {
       await expect(chip).toBeVisible()
       await expect(chip.locator(".talk-keyword-label")).toHaveText(topic.gloss)
       await expect(chip.locator(".talk-keyword-secondary")).toHaveText(topic.keyword)
+      // Todo 50 acceptance #3: the secondary label has its own declaration
+      // (src/shell.css .talk-keyword-secondary), and only these topic chips render it.
+      expect(
+        await chip
+          .locator(".talk-keyword-secondary")
+          .evaluate((el) => getComputedStyle(el).fontFamily.split(",")[0]!.trim().replace(/^"|"$/g, "")),
+        ".talk-keyword-secondary must compute font-family to NeoDunggeunmo"
+      ).toBe("NeoDunggeunmo")
     }
     await expect(page.locator('#talk-keywords button.talk-keyword-chip[data-label="직업"]')).toBeVisible()
     await expect(page.locator('#talk-keywords button.talk-keyword-chip[data-label="안녕"]')).toBeVisible()
@@ -328,5 +336,31 @@ test.describe("Todo 48: talk keywords as clickable chips", () => {
     expect(inputBox).not.toBeNull()
     expect(gameBox).not.toBeNull()
     expect(inputBox!.y + inputBox!.height).toBeLessThanOrEqual(gameBox!.y + gameBox!.height + 1)
+
+    // Todo 50 acceptance #3 (computed font-family of every Korean surface):
+    // the chip and its smaller secondary label are two separate declarations
+    // (src/shell.css:321 inherit vs :337 NeoDunggeunmo first) so each gets
+    // its own one-line assertion.
+    expect(
+      await page.evaluate(() => {
+        const el = document.querySelector("#talk-keywords button.talk-keyword-chip") as HTMLElement | null
+        return el === null
+          ? null
+          : getComputedStyle(el).fontFamily.split(",")[0]!.trim().replace(/^"|"$/g, "")
+      }),
+      ".talk-keyword-chip must compute font-family to NeoDunggeunmo (chip inherits body)"
+    ).toBe("NeoDunggeunmo")
+    // .talk-keyword-secondary is rendered ONLY for chips that have a secondary
+    // label (shell.ts:756-761: `if (chip.secondary !== undefined)`). LB's
+    // keyword set has none of those, so the selector resolves to null here --
+    // skip the assertion in that case (the Moonglow case covers the same
+    // selector, so it isn't unobserved).
+    const secondaryFamily = await page.evaluate(() => {
+      const el = document.querySelector("#talk-keywords .talk-keyword-secondary") as HTMLElement | null
+      return el === null ? null : getComputedStyle(el).fontFamily.split(",")[0]!.trim().replace(/^"|"$/g, "")
+    })
+    if (secondaryFamily !== null) {
+      expect(secondaryFamily, ".talk-keyword-secondary must compute font-family to NeoDunggeunmo").toBe("NeoDunggeunmo")
+    }
   })
 })

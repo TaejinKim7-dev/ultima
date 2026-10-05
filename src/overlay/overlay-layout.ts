@@ -58,6 +58,7 @@
 // character count per field.
 
 import type { OverlayRow, ViewRegion } from "../bridge/types.ts"
+import { MESSAGE_AREA_RECT } from "./message-area-layout.ts"
 
 /** A rect in the native 320x200 logical screen-space (raster pixels). */
 export interface LogicalRect {
@@ -123,7 +124,12 @@ export const DEFAULT_VIEW_RECTS: Readonly<Record<OverlayRole, LogicalRect>> = {
   // It needs its own role (not an extra "status" row) because overlay
   // elements are 1:1 with a role (src/shell.ts's ensureOverlayElement) and
   // both rows are on screen at the same time.
-  statussummary: { x: 192, y: 80, width: 120, height: 8 }
+  statussummary: { x: 192, y: 80, width: 120, height: 8 },
+  // Stage 3 Lane B (Todo 49 Phase B): the message-area overlay region. Its
+  // DOM element is NOT managed by this module's registry (message-area-dom.ts
+  // owns it), but the ABI documents the region so a future `view` event can
+  // target it -- additive, exactly like "statussummary" (Todo 31).
+  messagearea: MESSAGE_AREA_RECT
 }
 
 /**
@@ -340,10 +346,21 @@ export const OVERLAY_BASE_FONT_PX = 7
 /** No overlay text renders smaller than this UNLESS the row itself (`computeOverlayCellPx`) is smaller -- the narrow-viewport QA scenario's readability floor. In practice the canvas never goes below 2x (`shell.css`'s `.viewport { min-width: 640px }`), so the cell (>=16px) is always taller than this floor (10px) and the floor always wins; this only yields to the cell cap in a degenerate sub-1.25x scale the app never actually reaches. */
 export const OVERLAY_MIN_FONT_PX = 10
 
-/** Scales `OVERLAY_BASE_FONT_PX` by the content rect's vertical scale factor, applying `OVERLAY_MIN_FONT_PX` as a floor -- but NEVER exceeding one row's own cell height (`computeOverlayCellPx`), since a font taller than its own row would overflow even a correctly-sized row. */
-export function computeOverlayFontPx(scaleY: number): number {
-  const cellPx = computeOverlayCellPx(scaleY)
-  return Math.min(cellPx, Math.max(OVERLAY_MIN_FONT_PX, OVERLAY_BASE_FONT_PX * scaleY))
+/** Neo둥근모 is a 16px pixel font: it is only crisp at whole multiples of 16 *device* pixels. */
+export const PIXEL_FONT_STEP_DEVICE_PX = 16
+
+/**
+ * Todo 50: the largest crisp pixel-font size (CSS px) that fits one overlay
+ * row -- a whole multiple of 16 device pixels (`16/dpr` CSS px per step) not
+ * exceeding `computeOverlayCellPx(scaleY)`. When not even one step fits (a
+ * degenerate scale the app never reaches), the row height itself is used so
+ * text still never overflows its own row.
+ */
+export function computeOverlayFontPx(scaleY: number, dpr = 1): number {
+  const rowPx = computeOverlayCellPx(scaleY)
+  const stepPx = PIXEL_FONT_STEP_DEVICE_PX / dpr
+  const steps = Math.floor(rowPx / stepPx + 1e-9)
+  return steps >= 1 ? steps * stepPx : rowPx
 }
 
 /** True if two logical (or any same-space) rects genuinely overlap on BOTH axes -- rects that only touch at a shared edge are not considered overlapping. */

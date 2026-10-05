@@ -15,11 +15,14 @@ import {
   applyChoice,
   applyInput,
   applyPlay,
+  applyPromptGlyph,
   cellUnits,
   clearEcho,
   clearPlay,
   computeView,
+  countWrappedRows,
   createMessageAreaState,
+  nextPage,
   setCursor,
   syncFromPanel,
   wrapRow
@@ -266,5 +269,111 @@ describe("input echo, choice echo and cursor", () => {
     const row = view.rows[view.rows.length - 1]!
     expect(row.cursorAt).toBeUndefined()
     expect(row.cells.map((c) => c.char)).toEqual(["a", "b"])
+  })
+})
+
+describe("prompt glyph (Stage 3 Step 8)", () => {
+  it("applyPromptGlyph prepends a ▶ prompt cell to the live line, cleared by clearEcho", () => {
+    let s = createMessageAreaState()
+    s = applyPlay(s, true, createPanelState())
+    s = applyPromptGlyph(s)
+    s = applyInput(s, "직업")
+    const view = computeView(s, 20)
+    const row = view.rows[view.rows.length - 1]!
+    expect(row.cells[0]!.kind).toBe("prompt")
+    expect(row.cells[0]!.char).toBe("▶")
+    expect(row.cells.slice(1).map((c) => c.char)).toEqual(["직", "업"])
+    s = clearEcho(s)
+    expect(computeView(s, 20).rows).toEqual([])
+    expect(s.promptGlyph).toBe(false)
+  })
+
+  it("never doubles the prompt cell when the panel line already carries one", () => {
+    let panel = createPanelState()
+    panel = applyTokens(panel, tokenizeMessage(PROMPT_GLYPH))
+    let s = createMessageAreaState()
+    s = applyPlay(s, true, panel)
+    s = syncFromPanel(s, panel)
+    s = applyPromptGlyph(s)
+    const view = computeView(s, 20)
+    const row = view.rows[view.rows.length - 1]!
+    expect(row.cells.filter((c) => c.kind === "prompt")).toHaveLength(1)
+  })
+})
+
+describe("countWrappedRows (Stage 3 Step 11: paged long-answer decision)", () => {
+  it("counts literal \\n line breaks as committed rows, then wraps each line at the column budget", () => {
+    // "그가 말한다:" (7 Hangul = 14 units) + a short line fit one 20-col row each.
+    expect(countWrappedRows("그가 말한다:\n짧은 줄", 20)).toBe(2)
+    // A single long run wraps like wrapRow (Hangul 2 units each).
+    expect(countWrappedRows("가나다라마바사아", 10)).toBe(2) // 5+3
+    // A paragraph-heavy long answer exceeds the 12-row screen.
+    expect(countWrappedRows("한 줄\n".repeat(13) + "마지막", 20)).toBe(14)
+  })
+})
+
+describe("page mode paging (Stage 3 Step 11)", () => {
+  function pausedOverflowingState(lineCount = 36): ReturnType<typeof createMessageAreaState> {
+    let s = createMessageAreaState()
+    s = applyPlay(s, true, createPanelState())
+    let panel = panelWithLines(Array.from({ length: lineCount }, (_, i) => `줄 ${i + 1}`))
+    panel = beginPause(panel)
+    s = syncFromPanel(s, panel)
+    return s
+  }
+
+  it("nextPage advances the visible page; the ▼ cue (clippedBelow) stays until the last page", () => {
+    // 36 rows, 12 per page -> exactly three full pages.
+    let s = pausedOverflowingState()
+    let view = computeView(s, 20)
+    expect(view.mode).toBe("page")
+    expect(view.rows).toHaveLength(MESSAGE_AREA_LINES)
+    expect(view.clippedBelow).toBe(true)
+    expect(rowText(view.rows[0]!)).toBe("줄 1")
+
+    s = nextPage(s)
+    view = computeView(s, 20)
+    expect(rowText(view.rows[0]!)).toBe("줄 13")
+    expect(view.clippedBelow).toBe(true)
+
+    s = nextPage(s)
+    view = computeView(s, 20)
+    expect(rowText(view.rows[0]!)).toBe("줄 25")
+    expect(rowText(view.rows[view.rows.length - 1]!)).toBe("줄 36")
+    expect(view.clippedBelow).toBe(false)
+    expect(view.clippedAbove).toBe(true)
+  })
+
+  it("over-advancing clamps to the last page", () => {
+    let s = pausedOverflowingState()
+    for (let i = 0; i < 10; i++) s = nextPage(s)
+    const view = computeView(s, 20)
+    expect(view.mode).toBe("page")
+    expect(rowText(view.rows[view.rows.length - 1]!)).toBe("줄 36")
+    expect(view.clippedBelow).toBe(false)
+  })
+
+  it("leaving the paused state resets the page index to the first page", () => {
+    let s = pausedOverflowingState()
+    s = nextPage(s)
+    expect(computeView(s, 20).rows[0]!.cells[0]!.char).toBe("줄")
+    // The panel unpauses (the engine continued): the next sync resets paging.
+    let panel = panelWithLines(Array.from({ length: 36 }, (_, i) => `줄 ${i + 1}`))
+    panel = applyTokens(panel, tokenizeMessage("다음 내용\n"))
+    s = syncFromPanel(s, panel)
+    expect(s.paused).toBe(false)
+    expect(s.pageIndex).toBe(0)
+    const view = computeView(s, 20)
+    expect(view.mode).toBe("scroll")
+    expect(rowText(view.rows[view.rows.length - 1]!)).toBe("다음 내용")
+  })
+
+  it("clearEcho and applyPlay(false) reset the page index", () => {
+    let s = pausedOverflowingState()
+    s = nextPage(s)
+    expect(s.pageIndex).toBe(1)
+    expect(clearEcho(s).pageIndex).toBe(0)
+    s = nextPage(s)
+    expect(applyPlay(s, false, createPanelState()).pageIndex).toBe(0)
   })
 })

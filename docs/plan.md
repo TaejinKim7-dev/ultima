@@ -1,5 +1,5 @@
 # Ultima IV 웹 한글판 — 진행 계획
-기준 시각: 2026-10-03 KST · 기준 main: `88c142c` (origin과 동기화) · **2026-10-03 완료 후 웨이브(Todo 34~44) 추가 — 진행률 50/54**
+기준 시각: 2026-10-05 KST · 기준 main: Todo 50 merge 커밋(이전 main `ca3cd6d`) · **진행률 53/54 — 남은 것은 Todo 43(사용자 결정 대기)**
 
 ## 목표
 원본 `ultima4.zip`을 사용자가 브라우저에서 직접 선택해 플레이하는, 한국어 UI/대화/NPC 키워드 alias와
@@ -21,8 +21,10 @@
 - 세부 정의(References/Acceptance/QA)는 `.omo/plans/ultima-web.md`의 같은 번호 항목이 원본이다.
 
 ## 현재 진행률
+- **2026-10-05: 53 / 54 = 98.1%** (Todo 50 ✅: Neo둥근모 전체 적용 + 바람·던전 방향 한국어 덮개. 단독 `verify:integration`, Firefox·WebKit 회귀, 네이티브 게이트 통과 — 명령과 exit code는 `docs/handoff.md` 2026-10-05 절. 이 merge로 Stage 3(Todo 49 Phase B)도 처음 main에 들어간다. **정정**: 아래 2026-10-04 "52/54 · Stage 3 main 머지·push"는 사실과 달랐다 — 그 시점 main=origin/main=`ca3cd6d`에는 Stage 3(`22527c7`·`7cca398`)가 없었고 main 계획서는 `[x]` 51이었다. 사람의 화면 확인은 **사용자 확인 필요**.)
 - **2026-10-04: 50 / 54 = 92.6%** (사용자 결정으로 Todo 50 추가, 분모 53→54: 게임 안 한국어 전체를 고정폭 픽셀 글꼴 Neo둥근모로. 이하 직전 기록: 사용자 요청으로 Todo 49 추가, 분모 52→53: 게임 화면 메시지 영역에 한국어 직접 표시. 이하 직전 기록: 사용자 요청으로 Todo 48 추가, 분모 51→52: 대화 중 쓸 수 있는 키워드를 칩으로 표시. 추가 직전 값 50/51 = 98.0%. 이하 직전 기록: Todo 47 ✅: 통합 게이트 61/61, Firefox·WebKit 각 14/14. 이전 값 49/51 = 96.1%. 이하 직전 기록: 사용자 요청으로 Todo 47 추가, 분모 50→51: 한국어 대화 패널을 오른쪽 컬럼으로 옮기고 커서키 스크롤 차단. 추가 직전 값 49/50 = 98.0%. 이하 직전 기록: Todo 44 ✅ 확정, 남은 1개는 Todo 43 사용자 결정; 이전 값 48/50. 이하 직전 기록: Todo 45 ✅ 추가 확정; 이전 값 47/50 = 94.0%. 이하 직전 기록: Todo 34~42·46 ✅ 중 43 제외; 38·39·40·41·46은 합친 트리 통합 게이트 PASS로 확정; Todo 45·46 추가로 분모 48→50. 45는 Todo 38 보고서의 미확인 해시 조사, 46은 세이브 가져오기 파일 필터). 추가 직전 값 42/48 = 87.5%. 37/37 완료 뒤 사용자 지시로 완료 후 웨이브 Todo 34~44(11개)를 추가했다. 근거는 `docs/GOAL.md` 대비 재점검과 `docs/GOAL_GAP_AUDIT.md`(번역 체감 갭 9건)다. 계획서 체크박스 `[x]` 50 / `[ ]` 4 (남은 것: Todo 48 진행 중 → 49 → 50, Todo 43 개조 범위 — 사용자 결정 대기). 같은 날 번역 공개 여부를 결정했다(**공개 유지**, `docs/TRANSLATION_POLICY.md`). 이 결정은 Todo가 아니라 결정 기록이다.
 - **2026-10-04: Stage 1 (Todo 48) ✅ 완료** — 통합 게이트 단독(포트 8765, e2e 63/63, 1.0h, REFUSED 0), 3브라우저 PASS, 회귀 15/15. (wave9-combined 머지 후 확정, 진행률 반영은 머지 후)
+- **2026-10-04: 52 / 54 = 96.3%** (Stage 3/Todo 49 ✅ main 머지·push, 공식 진행률 = 양본 plan 체크박스 [x] 52개). — *정정(2026-10-05): main 머지·push는 실제로 안 됐다(main=`ca3cd6d`). Todo 50 merge 때 함께 들어감.*
 - **2026-10-04: Stage 0·0b 완료(문서 정리 — Todo 진행률 외)**: 모든 기록·방향 문서를 `docs/`로 옮기고, AI 시작점 `docs/README.md`·계획 색인 `docs/plans/README.md`를 신규 작성, AGENTS.md와 README.md의 옛 경로 링크를 갱신, `.claude/settings.json` Stop 훅 경로를 `docs/HANDOFF.md`로 옮겼다. `verify:release-docs`에 `APPEND_ONLY_LOGS`를 추가해 `docs/handoff.md`(그리고 역사적 root `handoff.md`)를 명시적 스킵 경로로 등록, 관련 테스트 1개 추가. 계획서 두 벌의 Todo 49 본문을 `docs/plans/2026-10-04-in-game-korean.md`의 Stage 2·3 설계에 맞춰 수정(localStorage 금지, 디바이스 픽셀 16배수, play/pause·modal·CR/LF 훅 추가, "▼" 페이지 큐, References에 `event.cpp:715`·`game.cpp:130/115`·`screenSetLayer`). 게이트 `npm run test:unit` 56/56 suites, 681/681 tests · `verify:repo-sources` 4/4 · `typecheck` · `build` · `check:build-fresh` · `git diff --check` · `cmp` 계획서 두 벌 · `verify:release-docs` 전부 exit 0. **이 작업은 2026-10-04 사용자 지시로 main `88c142c`에 fast-forward merge + origin push 완료. 진행률 50/54 유지.**
 - **2026-10-02 완료: 37 / 37 = 100%.** Todo 1~33 전부 ✅ + F1~F4 전부 ✅ (사용자 명시 승인, 분모 37 확정). 계획서 체크박스 37/37 `[x]`, `[ ]` 0. 아래는 이 완료로 이어지는 과거 기록.
 - **제품 목표 재확인 (2026-09-27)**: 한국어로 실제 플레이할 수 있는 웹 기반 Ultima IV가 목표다. 아래 수치는 계획 항목 승인률이며 한글판 제품 완성률이 아니다. 이번 NPC alias 재검증 스크린샷의 실제 대화는 영어였다. Step 11/12/14에 기록된 실제 엔진 출력 연결 gap을 해소하고 한국어 인트로·대화·상태/메뉴를 실제 플레이에서 검증하기 전에는 출시 완료로 판정하지 않는다.
@@ -220,9 +222,9 @@ Todo 21 세부 단계 (각각 자체 게이트, 넷 다 통과해야 Todo 21 완
 | 45 | Todo 38 보고서의 미확인 해시 `8c19a815`·형식만 있는 템플릿 조사/해결 | ✅ | ✅ | 38,39,40 — `ea3bd8d`, `8c19a815`=방향 입력 뒤 백스페이스 4개(제어 문자, 엔진 버그 아님), 형식만 있는 템플릿 분류·방향/무기/방어구 에코 번역, 시약상점 영어 줄 해결. 통합 게이트 55/55 PASS |
 | 46 | 세이브 가져오기 파일 선택창이 내보낸 `.dat`을 받도록 수정 | ✅ | ⬜ | 없음 — `f1d59d2`, 단위 RED→GREEN, 실제 파일 선택창은 사용자 확인 필요 |
 | 47 | 한국어 대화 패널·입력창을 오른쪽 컬럼으로 + 커서키 스크롤 차단 (사용자 요청) | ✅ | ✅ | 없음 — `7addd9a`, e2e RED(↓가 페이지 120px, ↑가 패널 120px 스크롤)→GREEN, 실제 엔진 회귀 4/4, 통합 게이트 61/61, Firefox·WebKit 14/14 |
-| 48 | 대화 중 쓸 수 있는 키워드를 눌러서 쓰는 칩으로 표시 (사용자 요청) | ⬜ | ⬜ | 47 |
-| 49 | 게임 화면 메시지 영역에 한국어 직접 표시 (고해상도 덮개, Neo둥근모, 사용자 요청) | ⬜ | ⬜ | 48 |
-| 50 | 게임 안 한국어 전체·오른쪽 패널에 고정폭 픽셀 글꼴 Neo둥근모 적용 (사용자 결정) | ⬜ | ⬜ | 49 |
+| 48 | 대화 중 쓸 수 있는 키워드를 눌러서 쓰는 칩으로 표시 (사용자 요청) | ✅ | ✅ | 47 |
+| 49 | 게임 화면 메시지 영역에 한국어 직접 표시 (고해상도 덮개, Neo둥근모, 사용자 요청) | ✅ | ✅ | 48 |
+| 50 | 게임 안 한국어 전체·오른쪽 패널에 고정폭 픽셀 글꼴 Neo둥근모 적용 (사용자 결정) | ✅ | ✅ | 49 — 사람의 화면 확인은 사용자 확인 필요 |
 | 44 | 릴리스 재검증 + F1/F4 addendum | ✅ | ✅ | 34~42, 45, 46 — `verify:release` 18/18 exit 0(e2e 55), `verify:integration` 55/55, Firefox 15/15, WebKit 15/15. 로컬 증거 `final/F1-addendum-2026-10.md`, `F4-addendum-2026-10.md` |
 
 ### Final — 독립 검증 (F1~F4 = 진행률 45~48번째. 2026-10-02 승인은 37단계 범위 기준이며, 34~44 범위 재검증은 Todo 44가 맡는다)
@@ -423,7 +425,7 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 
 ---
 
-## 🆕 바로 다음 순서 (2026-10-03 갱신 — **50/54 = 92.6%**, 완료 후 웨이브 Todo 34~44) ← 최신
+## 🆕 바로 다음 순서 (2026-10-03 갱신 — **50/54 = 92.6%**, 완료 후 웨이브 Todo 34~44)
 
 > 세부 정의(What to do / Must NOT / References / Acceptance / QA)는 `.omo/plans/ultima-web.md`의 Todo 34~44와 그 위의 "2026-10-03 post-completion wave" 머리말이 원본이다. 갭 번호는 `docs/GOAL_GAP_AUDIT.md` 기준이다.
 
@@ -447,7 +449,13 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 - 다음 에이전트가 "다음 단계 진행"을 받으면 Todo 47(대화 패널 오른쪽 컬럼, 커서키 스크롤 차단)은 2026-10-04 완료. **Todo 48**(사용자 요청: 대화 키워드 칩)을 진행 중이고, 이어서 **Todo 49**(게임 화면 메시지 영역에 한국어 직접 표시: 입력 글자·커서·지우기 엔진 연결, 켜기/끄기 스위치 포함)를 하고, 이어서 **Todo 50**(Neo둥근모를 상태창·인트로·메뉴·패널 전체에 적용)을 한다. 그 밖에 남은 것은 **Todo 43**(개조 범위)이며 사용자 결정이 필요하다(`docs/plans/mod-scope-proposal.md`의 후보 6개와 질문 4개). 결정되면 선택한 항목을 새 Todo로 추가한다. 그 외 사용자 확인 항목: 한국어 입력 감각, 세이브 가져오기 파일 선택창, 엔딩 패널 표시 방식, Safari 실기.
 - **테스트 실행 규칙(사용자 지시 2026-10-03)**: 모든 테스트·게이트는 `model: haiku` 서브에이전트에게 시키고, 메인 모델은 exit code 보고만 읽고 `git status`/로그로 재확인한다. 단계 룰은 AGENTS.md "진행 → 저장 → 기록 → 확인".
 
-## 진행률 (2026-10-04 갱신 — **51/54 = 94.4%**, Stage 0·0b 완료, Stage 1·2 main 머지 완료) ← 최신
+## 바로 다음 순서 (2026-10-05 갱신 — **53/54 = 98.1%**, Todo 50 ✅) ← 최신
+
+1. **Todo 43(개조 범위)** — 사용자 결정 대기. `docs/plans/mod-scope-proposal.md`의 후보 6개·질문 4개. 결정되면 선택 항목을 새 Todo로 추가한다.
+2. **사용자 확인 필요(Todo 49·50)**: 실제 브라우저에서 Neo둥근모 선명도(100%·150%·200% 확대), 바람·던전 방향 줄 위치·넘침, 상태창·메뉴·인트로·대화 패널·키워드 칩 글꼴 통일. 체크리스트는 `docs/handoff.md` 2026-10-05 절.
+3. **후속 후보(Todo 아님, 결정 필요)**: `korean-castle-output` Hawkwind 테스트 안정화(NPC 위치 RNG 의존 flake 의심, 1/3 실패), `audit:dist`에 폰트 라이선스·해시 검사 추가. 초안은 opencode 보조 레인 로컬 증거(`.omo/evidence/ultima-web/task-50/opencode4/`, 추적 안 됨).
+
+## 진행률 (2026-10-04 갱신 — **52/54 = 96.3%**, Stage 3 (Todo 49) main 머지·push 완료 — *정정 2026-10-05: main 머지·push는 실제로 안 됐음*)
 
 > 세부 정의는 `docs/plans/2026-10-04-in-game-korean.md`가 원본이다. 본 Todo 항목 자체의 상세는 `.omo/plans/ultima-web.md` Todo 48~50.
 
@@ -459,13 +467,14 @@ Todo 15 완료 (2026-09-26, main 작업 중 — 커밋 전):
 - 게이트 모두 exit 0.
 
 **진행 중**:
-- **Stage 1 (Todo 48) ✅ main merge** — wave9 통합 머지 후 main `52a4fa3`에 반영 + origin push 완료.
-- **Stage 2 (Todo 49 Phase A) ✅ main merge (Phase B 남음)** — wave9 통합 머지 후 main `52a4fa3`에 반영 + origin push 완료.
-- **→ Stage 3 사용자 결정 대기 (폰트 다운로드 + Step 8 변경)**.
+- **Stage 1 (Todo 48) ✅** — `todo-48-talk-keywords` (`3e01277`), main 머지·push 완료.
+- **Stage 2 (Todo 49 Phase A) ✅** — `todo-49a-message-area-engine` (`efe509d`), main 머지·push 완료.
+- **Stage 3 (Todo 49 Phase B) ✅ main merge** — wave9 통합 머지 후 main 머지·push 완료. *(정정 2026-10-05: main 미반영이었음 — Todo 50과 함께 merge)*
+- **→ Stage 4 (Todo 50) 사용자 결정 + 진행 (Neo둥근모 전체 적용)**.
 
-**순서**: Stage 3(Todo 49 Phase B: 셸 + 게임 화면 덮개, Stage 1·2 머지 후) → Stage 4(Todo 50: 고정폭 글꼴 Neo둥근모 전체 적용). Todo 43(개조 범위)은 사용자 결정 대기.
+**순서**: Stage 3(Todo 49 Phase B: 셸 + 게임 화면 덮개) ✅ main 머지·push 완료 → Stage 4(Todo 50: 고정폭 글꼴 Neo둥근모 전체 적용) 사용자 결정 + 진행. Todo 43(개조 범위)은 사용자 결정 대기.
 
-**통합 게이트**: Stage 1·2 게이트는 단독 실행 완료(포트 8765, e2e 63/63, 1.0h, REFUSED 0). wave9 main 머지 후 단독 실행 완료(port 8804, `# verify:integration 2026-10-04T17:58:20.717Z PASS`, e2e 63/63, REFUSED 0). 진행률 변화: Stage 1·2 완료 시 52/54 → 53/54 (Stage 3) → 54/54 = 100% (Stage 4). Todo 43 결정되면 Todo로 추가.
+**통합 게이트**: Stage 1·2 게이트는 단독 실행 완료(포트 8765, e2e 63/63, 1.0h, REFUSED 0). wave9 main 머지 후 단독 실행 완료(port 8804, `# verify:integration 2026-10-04T17:58:20.717Z PASS`, e2e 63/63, REFUSED 0). **Stage 3 게이트: wave9 머지 후 단독 실행 — ORCHESTRATOR_RUNS_SOLO_AFTER_COMMIT (orchestrator가 채움)**. 진행률 변화: 51/54 (Stage 1·2 완료) → 52/54 (Stage 3 완료) → 53/54 (Stage 4) → 54/54 = 100% (Todo 43 결정 시). Todo 43 결정되면 Todo로 추가.
 
 ## 바로 다음 순서 (2026-10-02 갱신 — **37/37 = 100%**, main `b870b85`, F1~F4 승인 + Todo 29~33 편입 완료)
 
