@@ -205,7 +205,7 @@ test.describe("Todo 50: in-game Korean wind / dungeon-heading overlay", () => {
         return document.fonts.check("16px NeoDunggeunmo")
       })
       .catch(() => false)
-    expect(fontReady, "NeoDunggeunmo 16px must be available BEFORE relying on it (src/main.ts:87 preload)").toBe(false) // pre-boot the page has no font face yet
+    expect(fontReady, "NeoDunggeunmo 16px must be available BEFORE relying on it (src/main.ts:87 preload)").toBe(true) // the preload loads the face before boot, so check() is already true
 
     await bootAndSelectZip(page, buffer)
     await page.waitForTimeout(2500)
@@ -370,10 +370,10 @@ test.describe("Todo 50: in-game Korean wind / dungeon-heading overlay", () => {
     })
     expect(tree.rootExists, "#game-viewport must exist in the static shell").toBe(true)
     expect(tree.windExists, "the windheading box must live in the static shell from the first render").toBe(true)
-    expect(tree.windParent, "the windheading box must be a child of #game-viewport (wind-dom.ts:36)").toBe("#game-viewport")
+    expect(tree.windParent, "the windheading box must be a child of #game-viewport (wind-dom.ts:36)").toBe("game-viewport")
     expect(tree.windInOverlayLayer, "the windheading box must NOT be inside #overlay-layer").toBe(false)
     expect(tree.messageAreaExists, "the messagearea box must live in the static shell from the first render").toBe(true)
-    expect(tree.messageAreaParent, "the messagearea box must be a child of #game-viewport (message-area-dom.ts)").toBe("#game-viewport")
+    expect(tree.messageAreaParent, "the messagearea box must be a child of #game-viewport (message-area-dom.ts)").toBe("game-viewport")
     expect(tree.messageInOverlayLayer, "the messagearea box must NOT be inside #overlay-layer").toBe(false)
     writeFileSync(join(evidenceDir, "static-tree.json"), `${JSON.stringify(tree, null, 2)}\n`)
   })
