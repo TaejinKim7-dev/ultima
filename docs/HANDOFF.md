@@ -145,3 +145,36 @@ ULTIMA4_DATA=/home/taejin/ultima4-original-data/ultima4.zip npm run verify:integ
 - 다음: Stage 4 (Todo 50: Neo둥근모 전체 적용). ora-3 설계가 끝남.
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+---
+
+## 2026-10-04 — Stage 3 (Todo 49 Phase B) main 머지·push
+
+> 작업 위치: root /home/taejin/ultima, main.
+> worktree `agent-todo-49b`, 브랜치 `todo-49b-message-area-shell` @ Lane A `22527c7` + Lane B `7cca398` → wave9-combined → main → push.
+> 통합 게이트 단독 실행 (port + solo) → # verify:integration ... PASS (orchestrator 후속).
+
+### 변경한 파일
+- **Step 6 (.viewport outline)**: src/shell.css (border 2px → outline 2px)
+- **Step 7 (Neo둥근모 v1.601)**:
+  - public/fonts/{neodgm.woff2 (sha256 0c0ca9cd...0a33bf, 44352B), LICENSE.txt (sha256 c1997f54...0c2f0), SHA256}
+  - src/shell.css @font-face "NeoDunggeunmo" + body font-family
+  - docs/SOURCE_PINS.md: Third-Party Fonts 표 추가
+  - tests/e2e/pages-static-smoke.spec.ts: CONTENT_TYPES .woff2/.txt + fetch + document.fonts.check()
+  - README.md: 제3자 글꼴 고지
+  - src/main.ts: document.fonts.load() preload
+- **Step 8 (control-formats 연결)**: src/dialogue/ui-message-compose.ts + tests/unit/ui-message-control-formats.test.ts
+- **Step 9 (셸 연결)**: src/shell.ts + src/main.ts (screenReceiver)
+- **Step 10 (덮개 화면)**: src/overlay/message-area-dom.ts (신규) + src/bridge/types.ts (VIEW_REGIONS += "messagearea") + src/shell.css
+- **Step 11 (페이지 넘김)**: src/shell.ts 키 리스너
+- **e2e**: tests/e2e/korean-message-area.spec.ts (신규, 4 시나리오)
+
+### 게이트 (orchestrator가 wave9 머지 후 단독 실행 후 채움)
+- npm run test:unit: 805/805 (Stage 3 Lane B 추가)
+- verify:integration: # verify:integration ... PASS (orchestrator 채움)
+
+### 다음
+- Stage 4 (Todo 50: Neo둥근모 전체 적용). ora-3 설계가 끝남 (Steps A→B→C→D 권장).
+- 사용자 결정은 "권장 방향"으로 진행 (이미 받음: 폰트 16px 고정 / "바람 서쪽" 형식 / 사이드 컬럼 16px / ui-monospace → Neo둥근모).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
