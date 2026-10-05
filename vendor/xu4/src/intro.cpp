@@ -147,6 +147,14 @@ static void webIntroMenuShown(Menu* menu, TextView* view) {
 
 using namespace std;
 
+/*
+ * Main-menu cursor (web port, user request 2026-10-05): the menu's hotkeys
+ * are the English first letters, which the Korean overlay does not show, so
+ * the arrow keys move a cursor over the five items and Enter activates it.
+ */
+static const char introMenuKeys[] = "rjica";
+static int introMenuCursor = 1;     // "Journey Onward"
+
 #define INTRO_MAP_HEIGHT 5
 #define INTRO_MAP_WIDTH 19
 #define INTRO_TEXT_X 0
@@ -551,6 +559,18 @@ bool IntroController::keyPressed(int key) {
 
     case INTRO_MENU:
         switch (key) {
+        case U4_UP:
+            introMenuCursor = (introMenuCursor + 4) % 5;
+            updateScreen();
+            break;
+        case U4_DOWN:
+            introMenuCursor = (introMenuCursor + 1) % 5;
+            updateScreen();
+            break;
+        case U4_ENTER:
+        case U4_KEYPAD_ENTER:
+            keyPressed( introMenuKeys[introMenuCursor] );
+            break;
         case 'i':
             initiateNewGame();
             break;
@@ -618,8 +638,8 @@ bool IntroController::inputEvent(const InputEvent* ev) {
             // Matches text position in updateScreen().
             if (cx >= 10 && cx <= 28) {
                 if (cy >= 5 && cy <= 9) {
-                    static const char menuKey[] = "rjica";
-                    keyPressed( menuKey[cy - 5] );
+                    introMenuCursor = cy - 5;
+                    keyPressed( introMenuKeys[cy - 5] );
                 }
             }
         }
@@ -923,7 +943,7 @@ void IntroController::updateScreen() {
             rows.add(7, 10, "Initiate New Game");
             rows.add(8, 10, "Configure");
             rows.add(9, 10, "About");
-            webViewShow("menu", menuArea, 0, -1, rows);
+            webViewShow("menu", menuArea, 0, 5 + introMenuCursor, rows);
         }
 #endif
         drawBeasties();

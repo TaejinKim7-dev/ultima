@@ -27,7 +27,7 @@ import {
   type OverlayRole
 } from "./overlay/overlay-layout.ts"
 import { buildAliasTable, resolveChoiceInput, resolveInput, withTopicAliases, type AliasSourceEntry, type AliasTable } from "./i18n/korean-aliases.ts"
-import { createIntroViewReceiver, type IntroViewReceiver } from "./overlay/intro-view.ts"
+import { createIntroViewReceiver, markSelectedLabel, type IntroViewReceiver } from "./overlay/intro-view.ts"
 import { createTextPromptGate } from "./i18n/text-prompt-gate.ts"
 import { createFocusReturn } from "./i18n/focus-return.ts"
 import { shouldSuppressScrollKey } from "./input/scroll-keys.ts"
@@ -296,6 +296,10 @@ export function createShell(doc: Document): UltimaBridgeApi {
         if (entry.selectedIndex === index) {
           label.classList.add("selected")
           value.classList.add("selected")
+          // Intro/Configure menus: a "▶" marker on the selected item (user request 2026-10-05).
+          if (element.dataset["role"] === "menu" || element.dataset["role"] === "textview") {
+            label.textContent = markSelectedLabel(row.label)
+          }
         }
         grid.appendChild(label)
         grid.appendChild(value)

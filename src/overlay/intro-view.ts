@@ -127,6 +127,20 @@ function composeSegment(segment: string, deps: IntroViewDeps): string {
   return text.replace(FORMAT_TOKEN, () => resolveFieldText(args[next++] ?? "", deps))
 }
 
+/** The marker drawn in front of a selected menu item (user request 2026-10-05). */
+export const SELECTION_MARK = "▶"
+
+/**
+ * Puts SELECTION_MARK in front of a selected label. When the label starts
+ * with engine indent cells, the mark takes the last one, so the text stays put.
+ */
+export function markSelectedLabel(label: string): string {
+  let indent = 0
+  while (label.startsWith(INDENT_CELL, indent)) indent += INDENT_CELL.length
+  if (indent === 0) return `${SELECTION_MARK}${label}`
+  return `${label.slice(0, indent - INDENT_CELL.length)}${SELECTION_MARK}${label.slice(indent)}`
+}
+
 /** Turns one engine payload (see this file's header) into Korean overlay rows. */
 export function composeIntroRows(payload: string, deps: IntroViewDeps = DEFAULT_INTRO_VIEW_DEPS): OverlayRow[] {
   if (payload === "") {
