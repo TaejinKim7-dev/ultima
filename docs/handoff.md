@@ -2013,6 +2013,7 @@ cmp 계획서 두 벌                # 0 (직접 재확인도 0)
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
+
 ---
 
 ## 2026-10-04 — Stage 1 (Todo 48) 완료: 대화 키워드 칩 표시
@@ -2176,3 +2177,24 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 - Stage 4 (Todo 50): ora-3 설계 기반 (Steps A→B→C→D 권장). 사용자 결정 권장 방향으로 진행.
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+---
+
+## 2026-10-05 — Todo 50 착수: 검증 모델 변경과 병렬 구현
+
+- 목표: 승인된 Stage 4의 Neo둥근모 전체 적용 및 바람·던전 방향 한국어 덮개.
+- 사용자 결정: Haiku 대신 GPT-5.6-sol의 낮은 추론 설정으로 모든 테스트·게이트 실행을 승인했다. 구현은 병렬 진행, 통합 게이트는 단독 실행한다.
+- 시작 상태: root 브랜치 `wave9-combined`, HEAD `4b65817`, 추적 파일 변경 없음. `main`/`origin/main`은 로컬 관측상 `ca3cd6d`; 이전 Stage 3의 main 머지·push 완료 문구와 일치하지 않는다. 이전 통합 로그의 마지막 PASS는 `2026-10-04T17:58:20.717Z`이며 Stage 3 게이트 결과는 문서에 placeholder로 남아 있다. Stage 3 완료 주장의 추가 확인 필요.
+- 작업 브랜치: `todo-50-pixel-font` (`4b65817` 기반). 글꼴 계산/CSS와 바람 엔진/셸 연결을 파일 소유권으로 분리했다. 테스트 실행은 별도 GPT-5.6-sol 에이전트만 맡는다.
+- 검증 예정: 단위 RED→GREEN, 필수 로컬 게이트, 네이티브 게이트, 3브라우저, 단독 `npm run verify:integration`. 아직 이번 변경의 통과 결과 없음.
+- 금지: 원본 게임 데이터·영어 원문 corpus·save·secret 커밋, 실패 테스트 삭제/약화, 게이트 실패 상태에서 merge/push.
+- 다음: 각 구현자가 실패 테스트를追加하고 검증 에이전트가 실제 RED를 확인한 뒤 최소 구현한다. main merge/push와 사람의 화면 확인은 별도 승인/확인 필요.
+
+---
+
+## 2026-10-05 — Todo 50 구현 (커밋 4c899e3, 브랜치 todo-50-pixel-font)
+
+- 구현: `computeOverlayFontPx(scaleY, dpr)`를 16 디바이스px 배수 중 행 높이에 들어가는 최대값으로 변경(테스트 pixel-font), 키워드 보조 글꼴 ui-monospace→Neo둥근모, 바람/던전 방향 한국어 덮개(`wind-heading.ts`, `wind-dom.ts`, `screen.cpp` `u4_web_screen_wind` 훅, `ScreenReceiver.wind`), vendor manifest xu4 treeSha256 갱신.
+- 게이트(Haiku 실행, 보고 기준): test:unit 68 suites/844 tests, verify:repo-sources, typecheck, build:modules, build:wasm, build, check:build-fresh, git diff --check 전부 exit 0.
+- 미확인: 바람 덮개 e2e 없음, `verify:integration` 단독 실행·3브라우저·네이티브 게이트·사람 화면 확인 전(status-overlay 넘침 위험 미검증). 따라서 Todo 50은 ✅ 아님, main merge 금지.
+- 다음: `verify:integration` 단독 실행 → 실패 시 failure-panel/screen 관측 후 열 수 보정, 바람 덮개 e2e 추가.

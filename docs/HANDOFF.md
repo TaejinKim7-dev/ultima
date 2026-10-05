@@ -1,4 +1,9 @@
 # HANDOFF
+> 2026-10-05 재개: `todo-50-pixel-font` (`4b65817` 기반)에서 Todo 50 진행 중.
+> 사용자 승인으로 테스트·게이트 실행 모델은 Haiku 대신 **GPT-5.6-sol / low**다.
+> 글꼴 계산/CSS와 바람 엔진/셸을 병렬 구현하고 통합 게이트는 단독 실행한다.
+> 이전 Stage 3 main 머지·push 및 통합 게이트 완료 주장은 확인 필요: 로컬 main/origin/main은 `ca3cd6d`, root 시작 브랜치는 `wave9-combined`였다. 이번 작업의 RED/GREEN은 아직 실행 전.
+
 작성 시각: 2026-10-04 KST (14차 — Stage 0·0b 완료, main 88c142c 머지·push; Todo 47까지 50/51) · 세션 재개용 요약
 
 ## 1. 목표 (What we're building)
