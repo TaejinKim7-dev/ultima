@@ -54,6 +54,12 @@ export interface PersistenceCoordinator {
    * only ever the coordinator's initial state.
    */
   reportStatus(status: Exclude<PersistenceStatus, "idle">, message?: string): void
+  /**
+   * Todo 51 (save slots): `listener` runs after every successful syncfs that a
+   * native save write caused, so the shell can capture the working copy into
+   * the active slot. A throwing listener is ignored.
+   */
+  onSaved(listener: () => void): void
 }
 
 function isUnderSaveDir(path: string, paths: PersistencePaths): boolean {
@@ -73,6 +79,7 @@ export function createPersistenceCoordinator(): PersistenceCoordinator {
   let emitRef: BridgeEmit = () => {}
   let scheduled = false
   let inFlight: Promise<void> | null = null
+  const savedListeners: Array<() => void> = []
 
   function runSync(): Promise<void> {
     const fs = fsRef
@@ -100,6 +107,13 @@ export function createPersistenceCoordinator(): PersistenceCoordinator {
           } else {
             status = "saved"
             emitRef(saveStateEvent("saved"))
+            for (const listener of savedListeners) {
+              try {
+                listener()
+              } catch {
+                // a listener bug must never turn a successful save into an error
+              }
+            }
             resolve()
           }
         })
@@ -137,6 +151,9 @@ export function createPersistenceCoordinator(): PersistenceCoordinator {
     reportStatus(newStatus, message) {
       status = newStatus
       emitRef(saveStateEvent(newStatus, message))
+    },
+    onSaved(listener) {
+      savedListeners.push(listener)
     }
   }
 }
