@@ -62,6 +62,8 @@ export interface MessageAreaOverlayOptions {
   readonly getContentRect: () => ContentRect
   /** Injected so tests can use a stub; defaults to the document of `host`. */
   readonly doc?: Document
+  /** Key-point trace (src/debug-log.ts): content changes and long frame gaps. */
+  readonly trace?: (event: string, data?: unknown) => void
 }
 
 export interface MessageAreaOverlayHandle {
@@ -255,6 +257,11 @@ export function createMessageAreaOverlay(options: MessageAreaOverlayOptions): Me
     }
     lastSignature = signature
     lastVisible = show
+    options.trace?.("ma-render", {
+      rows: view.rows.length,
+      clippedBelow: view.clippedBelow,
+      last: view.rows.length > 0 ? view.rows[view.rows.length - 1]!.cells.map((cell) => cell.char).join("").slice(0, 24) : ""
+    })
 
     rowsHost.replaceChildren()
     const fragment = doc.createDocumentFragment()
@@ -276,7 +283,14 @@ export function createMessageAreaOverlay(options: MessageAreaOverlayOptions): Me
 
   // One frame-batched update loop: sync the shared panel's committed lines
   // into the overlay buffer, then re-render (skipped when nothing changed).
+  let lastFrameAt = 0
   function frame(): void {
+    const now = win?.performance?.now() ?? 0
+    if (lastFrameAt !== 0 && now - lastFrameAt > 500) {
+      // The page could not draw for this long (the main thread was busy or the tab hidden).
+      options.trace?.("ma-frame-gap", { ms: Math.round(now - lastFrameAt) })
+    }
+    lastFrameAt = now
     state = syncFromPanel(state, options.panelState())
     renderNow()
     requestFrame(frame)

@@ -381,7 +381,8 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
     switchToggle: screenToggle,
     host: gameViewport,
     overlayLayer,
-    getContentRect: currentContentRect
+    getContentRect: currentContentRect,
+    trace: (event, data) => debugLog.log(event, data)
   })
 
   // Todo 50: the Korean wind / dungeon-heading line (same visibility rule).
@@ -1209,6 +1210,7 @@ export function createShell(doc: Document, debugLog: DebugLog = createDebugLog({
       talk: (format, arg0, arg1) => {
         tk.talkLine(resolveTalkTemplateId(format), [arg0, arg1])
         const text = composeTalkLine(format, [arg0, arg1], talkDeps)
+        debugLog.log("talk-line", { template: resolveTalkTemplateId(format) ?? null, args: [arg0, arg1], chars: text.length, awaitKey: text !== "" && wrapsBeyondOneScreen(text) })
         if (text !== "") {
           // Step 11: a talk line longer than the overlay's screen is a paged
           // long answer -- pause the panel so the "▼" page cue engages.

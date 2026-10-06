@@ -377,3 +377,37 @@ describe("page mode paging (Stage 3 Step 11)", () => {
     expect(applyPlay(s, false, createPanelState()).pageIndex).toBe(0)
   })
 })
+// Observed 2026-10-06 (Lord British "심연", probe log): when a long answer paused
+// the overlay, page mode showed page 0 of the WHOLE play buffer (old walking
+// lines like "동쪽") instead of the answer, for the ~20 s the engine waited.
+// A paused page starts where the paused answer starts.
+describe("page mode starts at the paused answer", () => {
+  function pausedAfterHistory(historyCount: number, answerLines: number) {
+    let s = createMessageAreaState()
+    s = applyPlay(s, true, createPanelState())
+    const history = Array.from({ length: historyCount }, () => "동쪽")
+    s = syncFromPanel(s, panelWithLines(history))
+    const answer = Array.from({ length: answerLines }, (_, i) => `대답 ${i + 1}`)
+    let panel = panelWithLines([...history, ...answer])
+    panel = beginPause(panel)
+    return syncFromPanel(s, panel)
+  }
+
+  it("shows the answer's first page, not the oldest history", () => {
+    const view = computeView(pausedAfterHistory(30, 20), 20)
+    expect(view.mode).toBe("page")
+    expect(rowText(view.rows[0]!)).toBe("대답 1")
+    expect(view.clippedBelow).toBe(true)
+  })
+
+  it("next page continues inside the answer", () => {
+    const view = computeView(nextPage(pausedAfterHistory(30, 20)), 20)
+    expect(rowText(view.rows[0]!)).toBe("대답 9")
+  })
+
+  it("an answer that fits one screen is just shown (scroll view, bottom-aligned)", () => {
+    const view = computeView(pausedAfterHistory(30, 5), 20)
+    expect(view.mode).toBe("scroll")
+    expect(rowText(view.rows[view.rows.length - 1]!)).toBe("대답 5")
+  })
+})
