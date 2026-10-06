@@ -16,6 +16,18 @@ Ultima IV를 웹 브라우저에서 실행할 수 있도록 포팅하고, 한국
 - 새로 작성되는 코드는 TDD로 구현하고, 각 컴포넌트는 Unit Test로 독립 검증합니다.
 - 원본 게임 데이터와 비밀 값만 제외하고, 계획/코드/번역 원천/테스트 정책/배포 workflow는 공개합니다.
 
+## 게임 화면
+
+브라우저에서 원본 게임 데이터를 직접 선택해 실행한 화면입니다. 게임 데이터 파일은 저장소에 포함하지 않습니다.
+
+<p align="center">
+  <img src="docs/images/screenshots/ultima-iv-intro.png" alt="브라우저에서 실행 중인 Ultima IV 인트로 화면과 한국어 웹 인터페이스" width="100%">
+</p>
+
+<p align="center">
+  <img src="docs/images/screenshots/moonglow-korean-dialogue.png" alt="Moonglow에서 NPC와 한국어로 대화하고 키워드를 고르는 게임 화면" width="100%">
+</p>
+
 ## 현재 상태 (2026-10-03)
 
 브라우저에서 실제 xu4 엔진이 원본 데이터로 돌아갑니다. GitHub Pages에도 올라가 있습니다.
