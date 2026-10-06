@@ -90,6 +90,13 @@ export interface MessageAreaState {
    * the paused state (see `syncFromPanel`).
    */
   readonly pageIndex: number
+  /**
+   * The line index where the paused (paged) answer begins: page mode pages
+   * through the lines from here, not from the start of the play buffer
+   * (observed 2026-10-06: Lord British's long answer showed old walking lines
+   * for the ~20 s the engine waited). Set when the panel becomes paused.
+   */
+  readonly pageAnchor: number
 }
 
 export function createMessageAreaState(): MessageAreaState {
@@ -106,7 +113,8 @@ export function createMessageAreaState(): MessageAreaState {
     choiceEcho: null,
     cursorVisible: false,
     promptGlyph: false,
-    pageIndex: 0
+    pageIndex: 0,
+    pageAnchor: 0
   }
 }
 
@@ -149,11 +157,13 @@ export function syncFromPanel(state: MessageAreaState, panel: PanelState): Messa
   if (!state.playing) {
     return next
   }
+  // The answer that pauses starts after the lines already in the buffer.
+  const anchored = panel.paused && !state.paused ? { ...next, pageAnchor: state.lines.length } : next
   const fresh = panel.historyLines.slice(state.consumed)
   if (fresh.length === 0) {
-    return next
+    return anchored
   }
-  return { ...next, lines: [...state.lines, ...fresh] }
+  return { ...anchored, lines: [...state.lines, ...fresh] }
 }
 
 /** Engine `input(id, text)` -- replace the typed input echo (the engine sends the whole current value on every change, ESC included). */
@@ -304,11 +314,14 @@ function locateCursor(rows: readonly PanelLine[], cursorIndex: number | null): {
  */
 export function computeView(state: MessageAreaState, columns: number): MessageAreaView {
   const allRows: MessageAreaRow[] = []
-  for (const line of state.lines) {
+  let anchorRow = 0
+  state.lines.forEach((line, index) => {
+    if (index === state.pageAnchor) anchorRow = allRows.length
     for (const row of wrapRow(line, columns)) {
       allRows.push({ cells: row.cells })
     }
-  }
+  })
+  if (state.pageAnchor >= state.lines.length) anchorRow = allRows.length
 
   const live = mergedLiveLine(state)
   const liveRows = wrapCells(live.cells, columns)
@@ -319,15 +332,18 @@ export function computeView(state: MessageAreaState, columns: number): MessageAr
 
   const totalRows = allRows.length
   const maxRows = MESSAGE_AREA_LINES
-  const pageMode = state.paused && totalRows > maxRows
+  // Page mode only when the paused answer itself does not fit one screen;
+  // a short paused answer is simply the bottom of the scroll view.
+  const pageMode = state.paused && totalRows - anchorRow > maxRows
 
   if (pageMode) {
     // Phase B (Step 11): `pageIndex` picks the visible page of the paused
-    // long answer. The last page clamps to the buffer end so over-advancing
-    // simply stops on the final page (clippedBelow false -> the cue hides).
-    let start = state.pageIndex * maxRows
+    // long answer, counted from where that answer starts (`pageAnchor`). The
+    // last page clamps to the buffer end so over-advancing simply stops on
+    // the final page (clippedBelow false -> the cue hides).
+    let start = anchorRow + state.pageIndex * maxRows
     if (start + maxRows > totalRows) {
-      start = Math.max(0, totalRows - maxRows)
+      start = Math.max(anchorRow, totalRows - maxRows)
     }
     return {
       rows: allRows.slice(start, start + maxRows),
